@@ -1,0 +1,38 @@
+modLoader="javafml"
+#loaderVersion="[${loader_version},)"
+license="LGPLv3"
+loaderVersion="[31,)"
+issueTrackerURL="https://github.com/GregTech-Intergalactical/GregTech/issues"
+
+[[mods]]
+modId="gt4r"
+#version="${version}"
+version="0.0.1"
+displayName="GT 4 Renewed"
+#updateJSONURL="http://myurl.me/"
+displayURL="https://github.com/GregTech-Intergalactical/GregTech"
+#logoFile="gregtech.png"
+credits="GregoriusTechneticies for his previous versions of GregTech. And the current GregTech community for suggestions and ideas."
+authors="Trinsdar"
+description='''The Approved Continuation. Rewrite. And Re-envisioning of GregTech 4'''
+[[dependencies.gt4r]]
+    modId="antimatter"
+    mandatory=true
+    #versionRange="[${antimatter_version},)"
+    versionRange="0.0.1"
+    ordering="AFTER"
+    side="BOTH"
+[[dependencies.gt4r]]
+    modId="forge"
+    mandatory=true
+    #versionRange="[${forge_version},)"
+    versionRange="31.0.1"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.gt4r]]
+    modId="minecraft"
+    mandatory=true
+    #versionRange="[${minecraft_version}]"
+    versionRange="1.15.2"
+    ordering="NONE"
+    side="BOTH"
