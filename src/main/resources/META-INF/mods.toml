@@ -2,7 +2,7 @@ modLoader="javafml"
 #loaderVersion="[${loader_version},)"
 license="LGPLv3"
 loaderVersion="[31,)"
-issueTrackerURL="https://github.com/GregTech-Intergalactical/GregTech/issues"
+issueTrackerURL="https://github.com/Trinsdar/GT-4-Renewed/issues"
 
 [[mods]]
 modId="gt4r"
@@ -10,11 +10,11 @@ modId="gt4r"
 version="0.0.1"
 displayName="GT 4 Renewed"
 #updateJSONURL="http://myurl.me/"
-displayURL="https://github.com/GregTech-Intergalactical/GregTech"
+displayURL="https://github.com/Trinsdar/GT-4-Renewed"
 #logoFile="gregtech.png"
 credits="GregoriusTechneticies for his previous versions of GregTech. And the current GregTech community for suggestions and ideas."
 authors="Trinsdar"
-description='''The Approved Continuation. Rewrite. And Re-envisioning of GregTech 4'''
+description='''My remake of GregTech 4'''
 [[dependencies.gt4r]]
     modId="antimatter"
     mandatory=true
