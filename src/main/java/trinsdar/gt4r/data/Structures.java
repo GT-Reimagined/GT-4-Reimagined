@@ -13,45 +13,40 @@ public class Structures {
 
     /** Special Case Elements **/
     public static BlockStateElement AIR_OR_LAVA = new BlockStateElement("air_or_lava", (w, p, s) -> s.getBlock().isAir(s, w, p) || s.getBlock() == Blocks.LAVA/* || s.getBlock() == Blocks.FLOWING_LAVA*/);
+    public static BlockStateElement WATER = new BlockStateElement("water", (w, p, s) -> s.getBlock() == Blocks.LAVA);
 
     public static void init() {
         COKE_OVEN.setStructure(b -> b
             .of("CCC", "CCC", "CCC").of("CCC", "CAM", "CCC").of(0)
-            .at("C", CASING_FIRE_BRICK).at("M", COKE_OVEN)
-            .build().offset(2, -1).min(25, CASING_FIRE_BRICK)
+            .at("C", FIRE_BRICKS).at("M", COKE_OVEN)
+            .build().offset(2, -1).min(25, FIRE_BRICKS)
         );
         PRIMITIVE_BLAST_FURNACE.setStructure(b -> b
-            .of("CCC", "CCC", "CCC").of("CCC", "CBM", "CCC").of("CCC", "CBC", "CCC").of("CCC", "CAC", "CCC")
-            .at("C", CASING_FIRE_BRICK).at("B", AIR_OR_LAVA).at("M", PRIMITIVE_BLAST_FURNACE)
-            .build().offset(2, -1).min(32, CASING_FIRE_BRICK)
+            .of("CCC", "CCC", "CCC").of("CCC", "CBM", "CCC").of("CCC", "CBC", "CCC").of(3).of("CCC", "CCC", "CCC")
+            .at("C", FIRE_BRICKS).at("B", AIR_OR_LAVA).at("M", PRIMITIVE_BLAST_FURNACE)
+            .build().offset(2, -1).min(41, FIRE_BRICKS)
         );
         BLAST_FURNACE.setStructure(b -> b
-            .of("CCC", "CCM", "CCC").of("BBB", "BAB", "BBB").of(1).of("CCC", "CCC", "CCC")
-            .at("M", BLAST_FURNACE).at("B", "coil", AntimatterAPI.all(BlockCoil.class)).at("C", CASING_HEAT_PROOF, HATCH_ITEM_I, HATCH_ITEM_O, HATCH_FLUID_I, HATCH_FLUID_O, HATCH_ENERGY)
-            .build().offset(2, 0).min(12, CASING_HEAT_PROOF).min(1, HATCH_ITEM_I, HATCH_ITEM_O, HATCH_ENERGY)
-        );
-        MULTI_SMELTER.setStructure(b -> b
-            .of("CCC", "CCM", "CCC").of("BBB", "BAB", "BBB").of("CCC", "CCC", "CCC")
-            .at("M", MULTI_SMELTER).at("B", "coil", AntimatterAPI.all(BlockCoil.class)).at("C", CASING_HEAT_PROOF, HATCH_ITEM_I, HATCH_ITEM_O, HATCH_ENERGY)
-            .build().offset(2, 0).min(12, CASING_HEAT_PROOF).min(1, HATCH_ITEM_I, HATCH_ITEM_O, HATCH_ENERGY)
+            .of("CCC", "CCCM", "CCC").of("CCC", "CLC", "CCC").of(1).of("CCC", "CCC", "CCC")
+            .at("M", BLAST_FURNACE).at("C", STANDARD_MACHINE_CASING, REINFORCED_MACHINE_CASING, ADVANCED_MACHINE_CASING).at("L", AIR_OR_LAVA)
+            .build().offset(2, 0).min(34, STANDARD_MACHINE_CASING, REINFORCED_MACHINE_CASING, ADVANCED_MACHINE_CASING)
         );
         VACUUM_FREEZER.setStructure(b -> b
-            .of("CCC", "CCC", "CCC").of("CCC", "CAM", "CCC").of(0)
-            .at("M", VACUUM_FREEZER).at("C", CASING_FROST_PROOF, HATCH_ITEM_I, HATCH_ITEM_O, HATCH_FLUID_I, HATCH_ENERGY)
-            .build().offset(2, -1).min(22, CASING_FROST_PROOF).min(1, HATCH_ITEM_I, HATCH_ITEM_O, HATCH_ENERGY)
+            .of("CCC", "CcC", "CCC").of("CcC", "cAc", "CcC").of(0).of("AAA", "AMA", "AAA")
+            .at("M", VACUUM_FREEZER).at("C", REINFORCED_MACHINE_CASING).at("c", ADVANCED_MACHINE_CASING)
+            .build().offset(2, -1).min(20, REINFORCED_MACHINE_CASING).min(6, ADVANCED_MACHINE_CASING)
         );
         IMPLOSION_COMPRESSOR.setStructure(b -> b
-            .of("CCC", "CCC", "CCC").of("CCC", "CAM", "CCC").of(0)
-            .at("M", IMPLOSION_COMPRESSOR).at("C", CASING_SOLID_STEEL, HATCH_ITEM_I, HATCH_ITEM_O, HATCH_ENERGY)
-            .build().offset(2, -1).min(16, CASING_SOLID_STEEL).min(1, HATCH_ITEM_I, HATCH_ITEM_O, HATCH_ENERGY)
+            .of("cCc", "CCC", "cCc").of("CCC", "CAC", "CCC").of(0).of("AAA", "AMA", "AAA")
+            .at("M", IMPLOSION_COMPRESSOR).at("C", REINFORCED_MACHINE_CASING).at("c", STANDARD_MACHINE_CASING)
+            .build().offset(2, -1).min(18, REINFORCED_MACHINE_CASING).min(8, STANDARD_MACHINE_CASING)
         );
-        LARGE_TURBINE.setStructure(b -> b
+        LARGE_STEAM_TURBINE.setStructure(b -> b
             .of("CCCC", "CCCC", "CCCC").of("CHHC", "EAAM", "CHHC").of(0)
-            .at("M", LARGE_TURBINE).at("C", CASING_TURBINE_4).at("H", CASING_TURBINE_4, HATCH_FLUID_I, HATCH_FLUID_O).at("E", HATCH_DYNAMO)
-            .build().offset(3, -1).min(28, CASING_TURBINE_4).min(1, HATCH_FLUID_I, HATCH_FLUID_O)
+            .at("M", LARGE_STEAM_TURBINE).at("C", STANDARD_MACHINE_CASING).at("H", STANDARD_MACHINE_CASING, HATCH_FLUID_I, HATCH_FLUID_O).at("E", HATCH_DYNAMO)
+            .build().offset(3, -1).min(28, STANDARD_MACHINE_CASING).min(1, HATCH_FLUID_I, HATCH_FLUID_O)
         );
-        //TODO Tier sensitive...
-        FUSION_REACTOR.setStructure(Tier.LUV, b -> b
+        FUSION_REACTOR.setStructure(b -> b
             .of(
                 "               ",
                 "      BOB      ",
@@ -69,23 +64,23 @@ public class Structures {
                 "      BOB      ",
                 "               "
             ).of(
-                "      OOO      ",
+                "      HOH      ",
                 "    OOCCCOO    ",
-                "   OCCHOHCCO   ",
-                "  OCEO   OECO  ",
+                "   ECCHOHCCE   ",
+                "  ECEO   OECE  ",
                 " OCE       ECO ",
                 " OCO       OCO ",
-                "OCH         HCO",
-                "OCM         HCO",
-                "OCH         HCO",
+                "HCH         HCH",
+                "OCM         OCO",
+                "HCH         HCH",
                 " OCO       OCO ",
                 " OCE       ECO ",
-                "  OCEO   OECO  ",
-                "   OCCHOHCCO   ",
+                "  ECEO   OECE  ",
+                "   ECCHOHCCE   ",
                 "    OOCCCOO    ",
-                "      OOO      "
+                "      HOH      "
             ).of(0)
-            .at("O", CASING_FUSION_3).at("C", COIL_FUSION).at("M", FUSION_REACTOR).at("B", CASING_FUSION_3, HATCH_FLUID_I).at("H", CASING_FUSION_3, HATCH_FLUID_O).at("E", CASING_FUSION_3, HATCH_ENERGY)
-            .build().offset(2, -1).min(2, HATCH_FLUID_I).min(1, HATCH_FLUID_O, HATCH_ENERGY));
+            .at("O", ADVANCED_MACHINE_CASING).at("C", FUSION_COIL).at("M", FUSION_REACTOR).at("B", ADVANCED_MACHINE_CASING, FUSION_MATERIAL_INJECTOR).at("H", ADVANCED_MACHINE_CASING, FUSION_MATERIAL_EXTRACTOR, FUSION_ENERGY_EXTRACTOR).at("E", ADVANCED_MACHINE_CASING, FUSION_ENERGY_INJECTOR)
+            .build().offset(2, -1).min(2, FUSION_MATERIAL_INJECTOR).min(1, FUSION_MATERIAL_EXTRACTOR).min(4, FUSION_ENERGY_INJECTOR).min(1, FUSION_ENERGY_EXTRACTOR));
     }
 }
