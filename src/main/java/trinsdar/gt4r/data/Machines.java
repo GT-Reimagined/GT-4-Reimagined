@@ -10,10 +10,11 @@ import trinsdar.gt4r.tile.single.TileEntitySteamMachine;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.tile.multi.*;
 
+
 import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.machine.MachineFlag.*;
 import static muramasa.antimatter.machine.MachineFlag.CELL;
-import static trinsdar.gt4r.data.Tiers.*;
+import static muramasa.antimatter.machine.Tier.*;
 import static trinsdar.gt4r.data.RecipeMaps.*;
 
 public class Machines {
