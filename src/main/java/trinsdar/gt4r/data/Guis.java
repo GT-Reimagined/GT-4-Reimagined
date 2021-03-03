@@ -37,9 +37,8 @@ public class Guis {
         //TODO changing slots of a machine in world, will crash from GTItemHandler.validateSlot()
 
         ALLOY_SMELTER.getGui().add(IT_IN, 35, 25).add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(ENERGY,80, 63);
-        ASSEMBLER.getGui().add(IT_IN, 17, 16).add(IT_IN, 35, 16).add(IT_IN, 53, 16).add(IT_IN, 17, 34).add(IT_IN, 35, 34).add(IT_IN, 53, 34).add(IT_OUT, 107, 25)
-                .add(FL_IN,53, 63)
-                .add(ENERGY,80, 63);
+        ASSEMBLER.getGui().add(IT_IN, 35, 25).add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25)
+                .add(ENERGY,8, 62);
         BENDER.getGui().add(ALLOY_SMELTER);
         CANNER.getGui().add(IT_IN, 35, 25).add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(ENERGY,80, 63);
         COMPRESSOR.getGui().add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(ENERGY,80, 63);
@@ -48,10 +47,10 @@ public class Guis {
         EXTRACTOR.getGui().add(COMPRESSOR);
         EXTRUDER.getGui().add(ALLOY_SMELTER);
         LATHE.getGui().add(CUTTER);
-        PULVERIZER.getGui().add(COMPRESSOR);
-        PULVERIZER.getGui().add(HV, PULVERIZER).add(HV, IT_OUT, 125, 25);
-        PULVERIZER.getGui().add(EV, PULVERIZER).add(EV, IT_OUT, 125, 25).add(EV, IT_OUT, 143, 25);
-        PULVERIZER.getGui().add(IV, IT_IN, 53, 25).add(IV, IT_OUT, 107, 16).add(IV, IT_OUT, 125, 16).add(IV, IT_OUT, 107, 34).add(IV, IT_OUT, 125, 34);
+        MACERATOR.getGui().add(COMPRESSOR);
+        MACERATOR.getGui().add(HV, MACERATOR).add(HV, IT_OUT, 125, 25);
+        MACERATOR.getGui().add(EV, MACERATOR).add(EV, IT_OUT, 125, 25).add(EV, IT_OUT, 143, 25);
+        MACERATOR.getGui().add(IV, IT_IN, 53, 25).add(IV, IT_OUT, 107, 16).add(IV, IT_OUT, 125, 16).add(IV, IT_OUT, 107, 34).add(IV, IT_OUT, 125, 34);
         RECYCLER.getGui().add(COMPRESSOR);
         WIRE_MILL.getGui().add(COMPRESSOR);
         CENTRIFUGE.getGui().add(IT_IN, 35, 25).add(IT_IN, 53, 25).add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 142, 16).add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(IT_OUT, 143, 34).add(ENERGY,80, 63).add(FL_OUT, 107, 63);
@@ -85,8 +84,8 @@ public class Guis {
         STEAM_FURNACE.getGui().add(STEEL, FURNACE).add(STEEL, FL_IN, 53, 63);
         STEAM_EXTRACTOR.getGui().add(BRONZE, EXTRACTOR).add(BRONZE, FL_IN, 53, 63);
         STEAM_EXTRACTOR.getGui().add(STEEL, EXTRACTOR).add(STEEL, FL_IN, 53, 63);
-        STEAM_PULVERIZER.getGui().add(BRONZE, PULVERIZER).add(BRONZE, FL_IN, 53, 63);
-        STEAM_PULVERIZER.getGui().add(STEEL, PULVERIZER).add(STEEL, FL_IN, 53, 63);
+        STEAM_MACERATOR.getGui().add(BRONZE, MACERATOR).add(BRONZE, FL_IN, 53, 63);
+        STEAM_MACERATOR.getGui().add(STEEL, MACERATOR).add(STEEL, FL_IN, 53, 63);
         //STEAM_FORGE_HAMMER.getGui().add(BRONZE, FORGE_HAMMER).add(BRONZE, FL_IN, 53, 63);
 
         STEAM_GENERATOR.getGui().add(BASIC_TANK);

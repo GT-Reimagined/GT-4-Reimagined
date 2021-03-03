@@ -184,11 +184,6 @@ public class GregTechData {
     public static ItemBasic<?> ShapeGear = new ItemBasic<>(Ref.ID, "shape_gear").tip("Shape for making Gears");
     public static ItemBasic<?> ShapeBottle = new ItemBasic<>(Ref.ID, "shape_bottle").tip("Shape for making Bottles"); //TODO needed?
 
-    //TODO
-    //public static BlockRubberSapling RUBBER_SAPLING = new BlockRubberSapling();
-    //public static BlockRubberLog RUBBER_LOG = new BlockRubberLog();
-    //public static BlockLeavesBase RUBBER_LEAVES = new BlockLeavesBase("rubber_leaves", RUBBER_SAPLING);
-
     //STONE should be the only non-removable StoneType. It serves as the foundation. It is also used natively by BlockRock
     //TODO move vanilla stone types (and (vanilla) materials) to Antimatter
     public static StoneType STONE = new StoneType(Ref.ID, "stone", Materials.Stone, new Texture("minecraft", "block/stone"), SoundType.STONE, false).setState(Blocks.STONE);
@@ -228,7 +223,7 @@ public class GregTechData {
 
     public static final BlockCoil FUSION_COIL = new BlockCoil(Ref.ID, "coil_fusion", 563); //9008
 
-    public static final Cable<?> CABLE_LEAD = new Cable<>(Ref.ID, Lead, 2, Tier.LV).amps(2).sizes(PipeSize.NORMAL);
+    public static final Cable<?> CABLE_LEAD = new Cable<>(Ref.ID, Lead, 2, Tier.LV).amps(2);
     public static final Cable<?> CABLE_TIN = new Cable<>(Ref.ID, Tin, 1, Tier.LV).amps(1).sizes(PipeSize.NORMAL);
     public static final Cable<?> CABLE_COPPER = new Cable<>(Ref.ID, Copper, HC ? 2 : 3, Tier.MV).amps(1).sizes(PipeSize.NORMAL);
     public static final Cable<?> CABLE_GOLD = new Cable<>(Ref.ID, Gold, HC ? 2 : 6, Tier.HV).amps(3).sizes(PipeSize.NORMAL);
@@ -238,7 +233,7 @@ public class GregTechData {
     public static final Cable<?> CABLE_OSMIUM = new Cable<>(Ref.ID, Osmium, HC ? 2 : 32, Tier.IV).amps(4).sizes(PipeSize.NORMAL);
     public static final Cable<?> CABLE_SUPERCONDUCTOR = new Cable<>(Ref.ID, Superconductor, 0, Tier.MAX).amps(4).sizes(PipeSize.NORMAL); //MAX
 
-    public static final Wire<?> WIRE_LEAD = new Wire<>(Ref.ID, Lead, 4, Tier.LV).amps(2).sizes(PipeSize.NORMAL);
+    public static final Wire<?> WIRE_LEAD = new Wire<>(Ref.ID, Lead, 4, Tier.LV).amps(2);
     public static final Wire<?> WIRE_TIN = new Wire<>(Ref.ID, Tin, 2, Tier.LV).amps(1).sizes(PipeSize.NORMAL);
     public static final Wire<?> WIRE_COPPER = new Wire<>(Ref.ID, Copper, HC ? 4 : 6, Tier.MV).amps(1).sizes(PipeSize.NORMAL);
     public static final Wire<?> WIRE_GOLD = new Wire<>(Ref.ID, Gold, HC ? 4 : 12, Tier.HV).amps(3).sizes(PipeSize.NORMAL);

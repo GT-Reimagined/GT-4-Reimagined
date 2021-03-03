@@ -22,7 +22,7 @@ public class Structures {
             .build().offset(2, -1).min(25, FIRE_BRICKS)
         );
         PRIMITIVE_BLAST_FURNACE.setStructure(b -> b
-            .of("CCC", "CCC", "CCC").of("CCC", "CBM", "CCC").of("CCC", "CBC", "CCC").of(3).of("CCC", "CCC", "CCC")
+            .of("CCC", "CCC", "CCC").of("CCC", "CBM", "CCC").of("CCC", "CBC", "CCC").of(2).of("CCC", "CCC", "CCC")
             .at("C", FIRE_BRICKS).at("B", AIR_OR_LAVA).at("M", PRIMITIVE_BLAST_FURNACE)
             .build().offset(2, -1).min(41, FIRE_BRICKS)
         );
