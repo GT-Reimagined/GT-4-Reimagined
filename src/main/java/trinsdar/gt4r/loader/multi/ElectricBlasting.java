@@ -1,7 +1,9 @@
 package trinsdar.gt4r.loader.multi;
 
+import muramasa.antimatter.material.Material;
 import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
 import muramasa.antimatter.util.Utils;
+import net.minecraft.tags.Tag;
 import trinsdar.gt4r.Ref;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -12,6 +14,7 @@ import static muramasa.antimatter.material.MaterialTag.CALCITE2X;
 import static muramasa.antimatter.material.MaterialTag.CALCITE3X;
 import static trinsdar.gt4r.data.GregTechData.INT_CIRCUITS;
 import static trinsdar.gt4r.data.GregTechData.STONE;
+import static trinsdar.gt4r.data.GregTechData.TungstenGrindHead;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.BLASTING;
 import static muramasa.antimatter.recipe.ingredient.AntimatterIngredient.*;
@@ -21,35 +24,41 @@ public class ElectricBlasting {
 
     public static void init() {
         final int multiplier = 1;
-        CRUSHED.all().forEach(m -> {
-            boolean needsBF = m.needsBlastFurnace() || m.getDirectSmeltInto().needsBlastFurnace();
-            if (!m.has(ORE) || !m.has(INGOT)) return;
-            Item crushed = CRUSHED.get(m);
-            Item dust = DUST.get(m);
-            AntimatterIngredient ore = ORE.get().get(m, STONE).asIngredient();
-            ItemStack ingot = m.hasDirectSmeltInto() ? INGOT.get(m.getDirectSmeltInto(), 1) : INGOT.get(m, 1);
-            ItemStack aIngotSmeltInto = m == m.getSmeltInto() ? ingot : INGOT.get(m.getSmeltInto(), 1);
-            if (needsBF) {
-                long aBlastDuration = Math.max(m.getMass() / 4, 1) * m.getBlastTemp();
-
-                ItemStack blastOut = m.getBlastTemp() > 1750 && m.getSmeltInto().has(INGOT_HOT) ? INGOT_HOT.get(m.getSmeltInto(), 1) : aIngotSmeltInto;
-
-                BLASTING.RB().ii(of(crushed,1), INT_CIRCUITS.get(1)).io(blastOut).add(aBlastDuration, 120, m.getBlastTemp());
-                BLASTING.RB().ii(of(dust,1), INT_CIRCUITS.get(1)).io(blastOut).add(aBlastDuration/4, 120, m.getBlastTemp());
-                BLASTING.RB().ii(CRUSHED_PURIFIED.getIngredient(m, 1),INT_CIRCUITS.get(1)).io(blastOut).add(aBlastDuration, 120, m.getBlastTemp());
-                BLASTING.RB().ii(CRUSHED_CENTRIFUGED.getIngredient(m, 1),INT_CIRCUITS.get(1)).io(blastOut).add(aBlastDuration, 120, m.getBlastTemp());
-                BLASTING.RB().ii(DUST_PURE.getIngredient(m, 1),INT_CIRCUITS.get(1)).io(blastOut).add(aBlastDuration, 120, m.getBlastTemp());
-                BLASTING.RB().ii(DUST_IMPURE.getIngredient(m, 1),INT_CIRCUITS.get(1)).io(blastOut).add(aBlastDuration, 120, m.getBlastTemp());
-            }
-
-            if (m.has(CALCITE3X)) {
-                ItemStack ingotMulti = Utils.mul(multiplier * 3 * m.getSmeltingMulti(), ingot);
-                ItemStack darkAsh = DUST_SMALL.get(DarkAsh, 1);
-                BLASTING.RB().ii(ore, DUST.getIngredient(Calcite, multiplier)).io(ingotMulti, darkAsh).add(ingot.getCount() * 500L, 120, 1500);
-            } else if (m.has(CALCITE2X)) {
-                ItemStack darkAsh = DUST_SMALL.get(DarkAsh, 1);
-                BLASTING.RB().ii(ore, DUST.getIngredient(Calcite, multiplier)).io(Utils.mul(multiplier * mixedOreYield * m.getSmeltingMulti(), ingot), darkAsh).add(ingot.getCount() * 500L, 120, 1500);
-            }
-        });
+        //Tag<Item> rockTag = getForgeItemTag()
+        Material m = Aluminium;
+        BLASTING.RB().ii(of(DUST.get(m,1))).io(INGOT.get(m, 1)).add(600, 120, m.getBlastTemp());
+        m = Silicon;
+        BLASTING.RB().ii(of(DUST.get(m,1))).io(INGOT.get(m, 1)).add(600, 120, m.getBlastTemp());
+        m = Steel;
+        BLASTING.RB().ii(of(DUST.get(m,1))).io(INGOT.get(m, 1)).add(600, 120, m.getBlastTemp());
+        BLASTING.RB().ii(of(INGOT.get(Iron, 1)), of(DUST.get(Carbon, 1))).io(INGOT.get(m, 1)).add(600, 120, m.getBlastTemp());
+        BLASTING.RB().ii(of(INGOT.get(Iron, 1)), of(DUST.get(CoalCoke, 1))).io(INGOT.get(m, 1)).add(600, 120, m.getBlastTemp());
+        m = Titanium;
+        BLASTING.RB().ii(of(DUST.get(m,1))).io(INGOT.get(m, 1)).add(1700, 120, m.getBlastTemp());
+        m = TungstenSteel;
+        BLASTING.RB().ii(of(DUST.get(m,1))).io(INGOT_HOT.get(m, 1)).add(1700, 120, m.getBlastTemp());
+        BLASTING.RB().ii(of(INGOT.get(Tungsten,1)), of(INGOT.get(Steel,1))).io(INGOT_HOT.get(m, 2), DUST.get(DarkAsh, 4)).add(1700, 120, m.getBlastTemp());
+        m = Tungsten;
+        BLASTING.RB().ii(of(DUST.get(m,1))).io(INGOT_HOT.get(m, 1)).add(10000, 120, m.getBlastTemp());
+        m = Iridium;
+        BLASTING.RB().ii(of(DUST.get(m,1))).io(INGOT_HOT.get(m, 1)).add(10000, 120, m.getBlastTemp());
+        m = Galena;
+        BLASTING.RB().ii(of(DUST.get(m,2))).io(INGOT.get(Lead, 1), INGOT.get(Silver, 1)).add(600, 120, 1500);
+        m = Osmium;
+        BLASTING.RB().ii(of(DUST.get(m,1))).io(INGOT_HOT.get(m, 1)).add(10000, 120, m.getBlastTemp());
+        m = Chrome;
+        BLASTING.RB().ii(of(DUST.get(m,1)), INT_CIRCUITS.get(1)).io(INGOT.get(m, 1)).add(1700, 120, m.getBlastTemp());
+        m = Osmiridium;
+        BLASTING.RB().ii(of(DUST.get(m,1))).io(INGOT_HOT.get(m, 1)).add(10000, 120, m.getBlastTemp());
+        BLASTING.RB().ii(of(INGOT.get(Osmium,1)), of(INGOT.get(Iridium, 1))).io(INGOT_HOT.get(m, 2)).add(10000, 120, m.getBlastTemp());
+        m = StainlessSteel;
+        BLASTING.RB().ii(of(DUST.get(m,1))).io(INGOT.get(m, 1)).add(10200, 120, m.getBlastTemp());
+        BLASTING.RB().ii(of(INGOT.get(Iron,6)), of(INGOT.get(Nickel, 1)), of(INGOT.get(Chrome, 1)), of(INGOT.get(Manganese, 1))).io(INGOT.get(m, 9)).add(10200, 120, m.getBlastTemp());
+        m = Kanthal;
+        BLASTING.RB().ii(of(DUST.get(m,1))).io(INGOT_HOT.get(m, 1)).add(5100, 120, m.getBlastTemp());
+        BLASTING.RB().ii(of(INGOT.get(Iron,1)), of(INGOT.get(Aluminium, 1)), of(INGOT.get(Chrome, 1))).io(INGOT_HOT.get(m, 3)).add(5100, 120, m.getBlastTemp());
+        m = Nichrome;
+        BLASTING.RB().ii(of(DUST.get(m,1))).io(INGOT_HOT.get(m, 1)).add(10200, 120, m.getBlastTemp());
+        BLASTING.RB().ii(of(INGOT.get(Nickel,4)), of(INGOT.get(Chrome, 1)), INT_CIRCUITS.get(2)).io(INGOT_HOT.get(m, 5)).add(10200, 120, m.getBlastTemp());
     }
 }
