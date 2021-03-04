@@ -29,7 +29,7 @@ public class Structures {
         BLAST_FURNACE.setStructure(b -> b
             .of("CCC", "CCCM", "CCC").of("CCC", "CLC", "CCC").of(1).of("CCC", "CCC", "CCC")
             .at("M", BLAST_FURNACE).at("C", STANDARD_MACHINE_CASING, REINFORCED_MACHINE_CASING, ADVANCED_MACHINE_CASING).at("L", AIR_OR_LAVA)
-            .build().offset(2, 0).min(34, STANDARD_MACHINE_CASING, REINFORCED_MACHINE_CASING, ADVANCED_MACHINE_CASING)
+            .build().offset(2, 0)
         );
         VACUUM_FREEZER.setStructure(b -> b
             .of("CCC", "CcC", "CCC").of("CcC", "cAc", "CcC").of(0).of("AAA", "AMA", "AAA")
@@ -45,6 +45,11 @@ public class Structures {
             .of("CCCC", "CCCC", "CCCC").of("CHHC", "EAAM", "CHHC").of(0)
             .at("M", LARGE_STEAM_TURBINE).at("C", STANDARD_MACHINE_CASING).at("H", STANDARD_MACHINE_CASING, HATCH_FLUID_I, HATCH_FLUID_O).at("E", HATCH_DYNAMO)
             .build().offset(3, -1).min(28, STANDARD_MACHINE_CASING).min(1, HATCH_FLUID_I, HATCH_FLUID_O)
+        );
+        LARGE_GAS_TURBINE.setStructure(b -> b
+                .of("CCCC", "CCCC", "CCCC").of("CHHC", "EAAM", "CHHC").of(0)
+                .at("M", LARGE_STEAM_TURBINE).at("C", REINFORCED_MACHINE_CASING).at("H", STANDARD_MACHINE_CASING, HATCH_FLUID_I, HATCH_FLUID_O).at("E", HATCH_DYNAMO)
+                .build().offset(3, -1).min(28, STANDARD_MACHINE_CASING).min(1, HATCH_FLUID_I, HATCH_FLUID_O)
         );
         FUSION_REACTOR.setStructure(b -> b
             .of(

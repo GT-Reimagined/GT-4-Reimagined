@@ -24,11 +24,11 @@ public class RecipeMaps {
     public static RecipeMap ALLOY_SMELTING = new RecipeMap<>("alloy_smelting", new AlloySmeltingBuilder());
     public static RecipeMap ASSEMBLING = new RecipeMap<>("assembling", new RecipeBuilder());
     public static RecipeMap AUTOCLAVING = new RecipeMap<>("autoclaving", new RecipeBuilder());
-    public static RecipeMap BENDING = new RecipeMap<>("bending", new RecipeBuilder());
+    public static RecipeMap BENDING = new RecipeMap<>("plate_bending", new RecipeBuilder());
     public static RecipeMap CANNING = new RecipeMap<>("canning", new RecipeBuilder());
     public static RecipeMap CENTRIFUGING = new RecipeMap<>("centrifuging", new RecipeBuilder());
     public static RecipeMap COMPRESSING = new RecipeMap<>("compressing", new CompressingBuilder());
-    public static RecipeMap CUTTING = new RecipeMap<>("cutting", new RecipeBuilder());
+    public static RecipeMap CUTTING = new RecipeMap<>("plate_cutting", new RecipeBuilder());
     public static RecipeMap DISTILLING = new RecipeMap<>("distilling", new RecipeBuilder());
     public static RecipeMap SMELTING = new RecipeMap<>("smelting", new SmeltingBuilder());
     public static RecipeMap EXTRACTING = new RecipeMap<>("extracting", new ExtractingBuilder());
@@ -59,7 +59,7 @@ public class RecipeMaps {
 
     public static RecipeMap COKING = new RecipeMap<>("coking", new RecipeBuilder(), MULTI_DISPLAY);
     public static RecipeMap<BasicBlastingBuilder> BASIC_BLASTING = new RecipeMap<>("basic_blasting", new BasicBlastingBuilder(), MULTI_DISPLAY);
-    public static RecipeMap BLASTING = new RecipeMap<>("elec_blasting", new RecipeBuilder(), MULTI_DISPLAY);
+    public static RecipeMap BLASTING = new RecipeMap<>("industrial_blasting", new RecipeBuilder(), MULTI_DISPLAY);
     public static RecipeMap IMPLOSION_COMPRESSING = new RecipeMap<>("implosion_compressing", new RecipeBuilder(), MULTI_DISPLAY);
     public static RecipeMap INDUSTRIAL_GRINDING = new RecipeMap<>("industrial_grinder", new RecipeBuilder(), MULTI_DISPLAY);
     public static RecipeMap VACUUM_FREEZING = new RecipeMap<>("vacuum_freezing", new RecipeBuilder(), MULTI_DISPLAY);

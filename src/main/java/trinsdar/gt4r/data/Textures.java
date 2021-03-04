@@ -22,6 +22,8 @@ public class Textures {
     public static TextureSet FLINT = new TextureSet(Ref.ID, "flint");
     public static TextureSet LIGNITE = new TextureSet(Ref.ID, "lignite");
 
+    public static final Texture MACHINE_BASE = new Texture(Ref.ID, "block/machine/base/machine_base");
+
     public static final ITextureHandler BOILER_HANDLER = (m, t) -> new Texture[] {
         new Texture(Ref.ID, "block/machine/base/" + t.getId()),
         new Texture(Ref.ID, "block/machine/base/" + t.getId()),

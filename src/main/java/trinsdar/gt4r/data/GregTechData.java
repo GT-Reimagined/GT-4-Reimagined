@@ -213,7 +213,7 @@ public class GregTechData {
     public static StoneType QUARTZITE = new StoneType(Ref.ID, "quartzite", Quartzite, new Texture(Ref.ID, "block/stone/quartzite"), SoundType.STONE, true);
 
 
-    public static final BlockCasing STANDARD_MACHINE_CASING = new BlockCasing(Ref.ID, "standard_machine_casing");
+    public static final BlockFusionCasing STANDARD_MACHINE_CASING = new BlockFusionCasing(Ref.ID, "standard_machine_casing");
     public static final BlockCasing REINFORCED_MACHINE_CASING = new BlockCasing(Ref.ID, "reinforced_machine_casing");
     public static final BlockCasing ADVANCED_MACHINE_CASING = new BlockCasing(Ref.ID, "advanced_machine_casing");
     public static final BlockCasing HIGHLY_ADVANCED_MACHINE_BLOCK = new BlockCasing(Ref.ID, "highly_advanced_machine_block");
@@ -224,24 +224,26 @@ public class GregTechData {
     public static final BlockCoil FUSION_COIL = new BlockCoil(Ref.ID, "coil_fusion", 563); //9008
 
     public static final Cable<?> CABLE_LEAD = new Cable<>(Ref.ID, Lead, 2, Tier.LV).amps(2);
-    public static final Cable<?> CABLE_TIN = new Cable<>(Ref.ID, Tin, 1, Tier.LV).amps(1).sizes(PipeSize.NORMAL);
-    public static final Cable<?> CABLE_COPPER = new Cable<>(Ref.ID, Copper, HC ? 2 : 3, Tier.MV).amps(1).sizes(PipeSize.NORMAL);
-    public static final Cable<?> CABLE_GOLD = new Cable<>(Ref.ID, Gold, HC ? 2 : 6, Tier.HV).amps(3).sizes(PipeSize.NORMAL);
-    public static final Cable<?> CABLE_ELECTRUM = new Cable<>(Ref.ID, Electrum, HC ? 2 : 5, Tier.HV).amps(2).sizes(PipeSize.NORMAL);
-    public static final Cable<?> CABLE_STEEL = new Cable<>(Ref.ID, Steel, HC ? 2 : 16, Tier.EV).amps(2);
-    public static final Cable<?> CABLE_ALUMINIUM = new Cable<>(Ref.ID, Aluminium, HC ? 1 : 8, Tier.EV).amps(1).sizes(PipeSize.NORMAL);
-    public static final Cable<?> CABLE_OSMIUM = new Cable<>(Ref.ID, Osmium, HC ? 2 : 32, Tier.IV).amps(4).sizes(PipeSize.NORMAL);
-    public static final Cable<?> CABLE_SUPERCONDUCTOR = new Cable<>(Ref.ID, Superconductor, 0, Tier.MAX).amps(4).sizes(PipeSize.NORMAL); //MAX
+    public static final Cable<?> CABLE_TIN = new Cable<>(Ref.ID, Tin, 1, Tier.LV).amps(1);
+    public static final Cable<?> CABLE_COPPER = new Cable<>(Ref.ID, Copper, 2, Tier.MV).amps(1);
+    public static final Cable<?> CABLE_NICKEL = new Cable<>(Ref.ID, Nickel, 3, Tier.MV).amps(3);
+    public static final Cable<?> CABLE_GOLD = new Cable<>(Ref.ID, Gold, 2, Tier.HV).amps(3);
+    public static final Cable<?> CABLE_ELECTRUM = new Cable<>(Ref.ID, Electrum, 2, Tier.HV).amps(2);
+    public static final Cable<?> CABLE_STEEL = new Cable<>(Ref.ID, Steel, 2, Tier.EV).amps(2);
+    public static final Cable<?> CABLE_ALUMINIUM = new Cable<>(Ref.ID, Aluminium, 1, Tier.EV).amps(1);
+    public static final Cable<?> CABLE_OSMIUM = new Cable<>(Ref.ID, Osmium, 2, Tier.IV).amps(4);
+    public static final Cable<?> CABLE_SUPERCONDUCTOR = new Cable<>(Ref.ID, Superconductor, 0, Tier.MAX).amps(4); //MAX
 
     public static final Wire<?> WIRE_LEAD = new Wire<>(Ref.ID, Lead, 4, Tier.LV).amps(2);
-    public static final Wire<?> WIRE_TIN = new Wire<>(Ref.ID, Tin, 2, Tier.LV).amps(1).sizes(PipeSize.NORMAL);
-    public static final Wire<?> WIRE_COPPER = new Wire<>(Ref.ID, Copper, HC ? 4 : 6, Tier.MV).amps(1).sizes(PipeSize.NORMAL);
-    public static final Wire<?> WIRE_GOLD = new Wire<>(Ref.ID, Gold, HC ? 4 : 12, Tier.HV).amps(3).sizes(PipeSize.NORMAL);
-    public static final Wire<?> WIRE_ELECTRUM = new Wire<>(Ref.ID, Electrum, HC ? 4 : 10, Tier.HV).amps(2).sizes(PipeSize.NORMAL);
-    public static final Wire<?> WIRE_STEEL = new Wire<>(Ref.ID, Steel, HC ? 4 : 32, Tier.EV).amps(2);
-    public static final Wire<?> WIRE_ALUMINIUM = new Wire<>(Ref.ID, Aluminium, 1, Tier.EV).amps(1).sizes(PipeSize.NORMAL);
-    public static final Wire<?> WIRE_OSMIUM = new Wire<>(Ref.ID, Osmium, HC ? 4 : 64, Tier.IV).amps(4).sizes(PipeSize.NORMAL);
-    public static final Wire<?> WIRE_SUPERCONDUCTOR = new Wire<>(Ref.ID, Superconductor, 1, Tier.MAX).amps(4).sizes(PipeSize.NORMAL); //MAX
+    public static final Wire<?> WIRE_TIN = new Wire<>(Ref.ID, Tin, 2, Tier.LV).amps(1);
+    public static final Wire<?> WIRE_COPPER = new Wire<>(Ref.ID, Copper, 4, Tier.MV).amps(1);
+    public static final Wire<?> WIRE_NICKEL = new Wire<>(Ref.ID, Nickel, 6, Tier.MV).amps(3);
+    public static final Wire<?> WIRE_GOLD = new Wire<>(Ref.ID, Gold, 6, Tier.HV).amps(3);
+    public static final Wire<?> WIRE_ELECTRUM = new Wire<>(Ref.ID, Electrum, 4, Tier.HV).amps(2);
+    public static final Wire<?> WIRE_STEEL = new Wire<>(Ref.ID, Steel, 4, Tier.EV).amps(2);
+    public static final Wire<?> WIRE_ALUMINIUM = new Wire<>(Ref.ID, Aluminium, 1, Tier.EV).amps(1);
+    public static final Wire<?> WIRE_OSMIUM = new Wire<>(Ref.ID, Osmium, 4, Tier.IV).amps(4);
+    public static final Wire<?> WIRE_SUPERCONDUCTOR = new Wire<>(Ref.ID, Superconductor, 1, Tier.MAX).amps(4); //MAX
 
     public static final FluidPipe<?> FLUID_PIPE_BRONZE = new FluidPipe<>(Ref.ID, Bronze, 1000, false).sizes(PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE).caps(10, 10, 30, 60, 60, 60).pressures(400, 400, 400, 400, 400, 400);
     public static final FluidPipe<?> FLUID_PIPE_INVAR = new FluidPipe<>(Ref.ID, Invar, 1300, true).caps(60).pressures(1000);

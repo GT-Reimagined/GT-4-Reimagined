@@ -17,9 +17,9 @@ public abstract class BlockCasingMachine extends BlockCasing {
     protected abstract String getTextureID();
 
     protected Texture[] getConnectedTextures() {
-        Texture[] texes = new Texture[13];
-        for (int i = 0; i <= 12; i++) {
-            texes[i] = new Texture(getRegistryName().getNamespace(), "block/ct/"+getTextureID() + "/" + getId() + "_"+i);
+        Texture[] texes = new Texture[17];
+        for (int i = 0; i <= 16; i++) {
+            texes[i] = new Texture(getRegistryName().getNamespace(), "block/ct/" + getTextureID() + "/" + getId().replaceAll("_casing", "") + "_"+i);
         }
         return texes;
     }
