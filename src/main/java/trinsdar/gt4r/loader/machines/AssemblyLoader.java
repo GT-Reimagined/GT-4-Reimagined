@@ -9,6 +9,9 @@ import muramasa.antimatter.pipe.PipeSize;
 import muramasa.antimatter.pipe.types.Cable;
 import muramasa.antimatter.pipe.types.Wire;
 import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
+import muramasa.antimatter.recipe.ingredient.TagIngredient;
+import net.minecraft.tags.Tag;
+import net.minecraft.util.ResourceLocation;
 import trinsdar.gt4r.block.BlockCasing;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -39,9 +42,13 @@ public class AssemblyLoader {
                 ASSEMBLING.RB().ii(of(wireItem,1), of(INGOT.get(Rubber, size.getCableThickness()))).io(new ItemStack(cableItem,1)).add(size.getCableThickness()* 20L,8);
             });
         });
-        ASSEMBLING.RB().ii(of(Items.STICK, 1), of(Items.COAL, 1)).io(new ItemStack(Items.TORCH, 4)).add(400, 1);
-        ASSEMBLING.RB().ii(of(Items.STRING, 1), of(Items.SLIME_BALL, 1)).io(new ItemStack(Items.LEAD, 2)).add(200, 2);
+        ASSEMBLING.RB().ii(of(getTag("forge", "rods/wooden"), 1), of(getTag("minecraft", "coals"), 1)).io(new ItemStack(Items.TORCH, 4)).add(400, 1);
+        ASSEMBLING.RB().ii(of(getTag("forge", "string"), 1), of(getTag("forge", "slimeballs"), 1)).io(new ItemStack(Items.LEAD, 2)).add(200, 2);
         ASSEMBLING.RB().ii(of(CircuitBoardAdv, 1), of(AdvCircuitParts, 2)).io(new ItemStack(CircuitAdv, 1)).add(1600, 2);
         ASSEMBLING.RB().ii(of(CircuitBoardProcessor, 1), of(CircuitDataStorage, 1)).io(new ItemStack(CircuitDataControl, 2)).add(3200, 4);
+    }
+
+    public static Tag<Item> getTag(String domain, String path){
+        return new Tag<>(new ResourceLocation(domain, path));
     }
 }
