@@ -14,7 +14,7 @@ import javax.annotation.Nullable;
 
 import static muramasa.antimatter.client.AntimatterModelManager.LOADER_DYNAMIC;
 
-public class BlockFusionCasing extends BlockTurbineCasing {
+public class BlockConnectedCasing extends BlockCasingMachine {
 
     @Override
     public ModelConfig getConfig(BlockState state, IBlockReader world, BlockPos.Mutable mut, BlockPos pos) {
@@ -29,22 +29,22 @@ public class BlockFusionCasing extends BlockTurbineCasing {
 
     @Override
     protected String getTextureID() {
-        return "fusion";
+        return "casing";
     }
 
-    public BlockFusionCasing(String domain, String id) {
+    public BlockConnectedCasing(String domain, String id) {
         super(domain, id);
     }
 
     @Override
     public boolean canConnect(IBlockReader world, BlockState state, @Nullable TileEntity tile, BlockPos pos) {
-        return state.getBlock() instanceof BlockFusionCasing;
+        return state.getBlock() == this;
     }
 
     //Default code for connected textures.
     @Override
     public AntimatterBlockModelBuilder buildBlock(Block block, AntimatterBlockStateProvider prov) {
-        AntimatterBlockModelBuilder builder = super.buildBlock(block, prov);
+        AntimatterBlockModelBuilder builder = prov.getBuilder(block);
         return builder.loader(LOADER_DYNAMIC).basicConfig(block, getConnectedTextures());
     }
 }

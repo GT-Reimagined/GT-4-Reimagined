@@ -24,20 +24,10 @@ import java.util.List;
 
 import static muramasa.antimatter.client.AntimatterModelManager.LOADER_DYNAMIC;
 
-public class BlockTurbineCasing extends BlockCasingMachine {
+public class BlockTurbineCasing extends BlockConnectedCasing {
 
     public BlockTurbineCasing(String domain, String id) {
         super(domain, id);
-    }
-
-    @Override
-    protected String getTextureID() {
-        return "turbine";
-    }
-
-    @Override
-    public boolean canConnect(IBlockReader world, BlockState state, @Nullable TileEntity tile, BlockPos pos) {
-        return false;
     }
 
     @Override
@@ -114,7 +104,7 @@ public class BlockTurbineCasing extends BlockCasingMachine {
     public AntimatterBlockModelBuilder buildBlock(Block block, AntimatterBlockStateProvider prov) {
         Texture[] tex = turbineTextures();
         Texture[] inactive = turbineTexturesInactive();
-        AntimatterBlockModelBuilder builder = prov.getBuilder(block);
+        AntimatterBlockModelBuilder builder = super.buildBlock(block, prov);
         for (Direction dir : dirs) {
             for (int i = 0; i < VECS.length; i++) {
                 if (i == 4) continue;

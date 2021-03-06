@@ -1,11 +1,7 @@
 package trinsdar.gt4r.proxy;
 
 import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.machine.BlockMachine;
 import trinsdar.gt4r.block.BlockCasing;
-import trinsdar.gt4r.block.BlockCasingMachine;
-import trinsdar.gt4r.block.BlockFusionCasing;
-import trinsdar.gt4r.block.BlockTurbineCasing;
 import trinsdar.gt4r.data.GregTechData;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;

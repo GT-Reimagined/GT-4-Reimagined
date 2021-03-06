@@ -3,7 +3,6 @@ package trinsdar.gt4r.data;
 import com.google.common.collect.ImmutableMap;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.AntimatterConfig;
-import muramasa.antimatter.client.AntimatterTextureStitcher;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
 import trinsdar.gt4r.block.BlockCasing;
@@ -11,19 +10,16 @@ import trinsdar.gt4r.block.BlockCoil;
 import muramasa.antimatter.cover.Cover;
 import muramasa.antimatter.item.ItemBasic;
 import muramasa.antimatter.item.ItemBattery;
-import muramasa.antimatter.item.ItemCover;
 import muramasa.antimatter.item.ItemFluidCell;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.ore.StoneType;
 import muramasa.antimatter.pipe.PipeSize;
 import muramasa.antimatter.pipe.types.Cable;
 import muramasa.antimatter.pipe.types.FluidPipe;
-import muramasa.antimatter.pipe.types.ItemPipe;
 import muramasa.antimatter.pipe.types.Wire;
 import muramasa.antimatter.texture.Texture;
 import trinsdar.gt4r.Ref;
-import trinsdar.gt4r.block.BlockFusionCasing;
-import trinsdar.gt4r.block.BlockTurbineCasing;
+import trinsdar.gt4r.block.BlockConnectedCasing;
 import trinsdar.gt4r.cover.CoverConveyor;
 import trinsdar.gt4r.cover.CoverPlate;
 import trinsdar.gt4r.cover.CoverPump;
@@ -34,7 +30,6 @@ import trinsdar.gt4r.tree.BlockRubberSapling;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
 
 import static muramasa.antimatter.Data.ROTOR;
 import static trinsdar.gt4r.data.Materials.*;
@@ -213,15 +208,15 @@ public class GregTechData {
     public static StoneType QUARTZITE = new StoneType(Ref.ID, "quartzite", Quartzite, new Texture(Ref.ID, "block/stone/quartzite"), SoundType.STONE, true);
 
 
-    public static final BlockFusionCasing STANDARD_MACHINE_CASING = new BlockFusionCasing(Ref.ID, "standard_machine_casing");
-    public static final BlockCasing REINFORCED_MACHINE_CASING = new BlockCasing(Ref.ID, "reinforced_machine_casing");
-    public static final BlockCasing ADVANCED_MACHINE_CASING = new BlockCasing(Ref.ID, "advanced_machine_casing");
+    public static final BlockConnectedCasing STANDARD_MACHINE_CASING = new BlockConnectedCasing(Ref.ID, "standard_machine_casing");
+    public static final BlockConnectedCasing REINFORCED_MACHINE_CASING = new BlockConnectedCasing(Ref.ID, "reinforced_machine_casing");
+    public static final BlockConnectedCasing ADVANCED_MACHINE_CASING = new BlockConnectedCasing(Ref.ID, "advanced_machine_casing");
     public static final BlockCasing HIGHLY_ADVANCED_MACHINE_BLOCK = new BlockCasing(Ref.ID, "highly_advanced_machine_block");
     public static final BlockCasing ADVANCED_MACHINE_BLOCK = new BlockCasing(Ref.ID, "advanced_machine_block");
 
     public static final BlockCasing FIRE_BRICKS = new BlockCasing(Ref.ID, "fire_bricks");
 
-    public static final BlockCoil FUSION_COIL = new BlockCoil(Ref.ID, "coil_fusion", 563); //9008
+    public static final BlockCasing FUSION_COIL = new BlockCasing(Ref.ID, "fusion_coil");
 
     public static final Cable<?> CABLE_LEAD = new Cable<>(Ref.ID, Lead, 2, Tier.LV).amps(2);
     public static final Cable<?> CABLE_TIN = new Cable<>(Ref.ID, Tin, 1, Tier.LV).amps(1);
