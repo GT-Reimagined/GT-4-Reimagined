@@ -1,5 +1,6 @@
 package trinsdar.gt4r.tile.multi;
 
+import muramasa.antimatter.tile.multi.TileEntityBasicMultiMachine;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import trinsdar.gt4r.block.BlockCoil;
@@ -7,7 +8,7 @@ import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
 import trinsdar.gt4r.data.GregTechData;
 
-public class TileEntityElectricBlastFurnace extends TileEntityMultiMachine {
+public class TileEntityElectricBlastFurnace extends TileEntityBasicMultiMachine {
 
     private int heatingCapacity;
 
