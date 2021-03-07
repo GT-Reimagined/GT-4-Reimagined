@@ -1,12 +1,18 @@
 package trinsdar.gt4r.tile.multi;
 
+import it.unimi.dsi.fastutil.objects.ObjectCollection;
 import muramasa.antimatter.tile.multi.TileEntityBasicMultiMachine;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import trinsdar.gt4r.block.BlockCoil;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
 import trinsdar.gt4r.data.GregTechData;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class TileEntityElectricBlastFurnace extends TileEntityBasicMultiMachine {
 
@@ -46,8 +52,21 @@ public class TileEntityElectricBlastFurnace extends TileEntityBasicMultiMachine 
     @Override
     public boolean onStructureFormed() {
         super.onStructureFormed();
-        heatingCapacity = getStates("coil").stream().mapToInt(s -> (getHeatPerCasing(s.getBlock()))).sum();
+        heatingCapacity = getAllStates().stream().mapToInt(s -> (getHeatPerCasing(s.getBlock()))).sum();
         return true;
+    }
+
+    public List<BlockState> getAllStates() {
+        if (result.isPresent()) {
+            ObjectCollection<List<BlockState>> collection = result.get().states.values();
+            if (collection.isEmpty()){
+                return Collections.emptyList();
+            }
+            List<BlockState> list = new ArrayList<>();
+            collection.forEach(list::addAll);
+            return list;
+        }
+        return Collections.emptyList();
     }
 
     public int getHeatPerCasing(Block block){
