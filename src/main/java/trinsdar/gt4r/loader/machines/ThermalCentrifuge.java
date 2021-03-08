@@ -15,7 +15,7 @@ public class ThermalCentrifuge {
             Material aOreByProduct2 = m.getByProducts().size() >= 2 ? m.getByProducts().get(1) : aOreByProduct1;
             ItemStack stoneDust = DUST.get(Stone, 1);
 
-            THERMAL_CENTRIFUGING.RB().ii(of(CRUSHED_PURIFIED.get(m),1)).io(CRUSHED_CENTRIFUGED.get(m, 1), DUST_TINY.get(aOreByProduct2, 1), stoneDust).add(500, 48,0,2);
+            THERMAL_CENTRIFUGING.RB().ii(of(CRUSHED_PURIFIED.get(m),1)).io(DUST.get(m, 1), DUST_TINY.get(aOreByProduct2, 1), stoneDust).add(500, 48,0,2);
         });
     }
 }

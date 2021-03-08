@@ -51,7 +51,7 @@ public class RecipeMaps {
     public static RecipeMap SIFTING = new RecipeMap<>("sifting", new RecipeBuilder());
 
     public static RecipeMap STEAM_SMELTING = new RecipeMap<>("steam_smelting", new RecipeBuilder(), SteamRecipeInfoRenderer.INSTANCE);
-    public static RecipeMap STEAM_PULVERIZING = new RecipeMap<>("steam_pulverizing", new RecipeBuilder(), SteamRecipeInfoRenderer.INSTANCE);
+    public static RecipeMap STEAM_MACERATING = new RecipeMap<>("steam_macerating", new RecipeBuilder(), SteamRecipeInfoRenderer.INSTANCE);
     public static RecipeMap STEAM_EXTRACTING = new RecipeMap<>("steam_extracting", new RecipeBuilder(), SteamRecipeInfoRenderer.INSTANCE);
     public static RecipeMap STEAM_HAMMERING = new RecipeMap<>("steam_hammering", new RecipeBuilder(), SteamRecipeInfoRenderer.INSTANCE);
     public static RecipeMap STEAM_COMPRESSING = new RecipeMap<>("steam_compressing", new RecipeBuilder(), SteamRecipeInfoRenderer.INSTANCE);

@@ -23,7 +23,7 @@ import static muramasa.antimatter.pipe.PipeSize.*;
 public class WireCablesPlates {
     @SuppressWarnings("unchecked")
     public static void loadRecipes(Consumer<IFinishedRecipe> output, AntimatterRecipeProvider provider) {
-        /*AntimatterAPI.all(Wire.class, wire -> {
+        AntimatterAPI.all(Wire.class, wire -> {
             ImmutableSet<PipeSize> sizes = wire.getSizes();
             Map<PipeSize, Item> wires = sizes.stream().map(s -> new Pair<>(s, wire.getBlockItem(s))).collect(Collectors.toMap(Pair::getFirst, Pair::getSecond));
             PipeSize[] val = values();
@@ -42,7 +42,7 @@ public class WireCablesPlates {
         });
 
         INGOT.all().stream().filter(p -> p.has(PLATE)).forEach(p -> provider.shapeless(output, "ingothammer","plate", "has_hammer", provider.hasItem(HAMMER.getTag()), new ItemStack(PLATE.get(p),1),
-                HAMMER.getTag(), INGOT.get(p), INGOT.get(p)));*/
+                HAMMER.getTag(), INGOT.get(p)));
     }
 
     private static void twoToOne(Map<PipeSize, Item> wires, PipeSize from, PipeSize to, Consumer<IFinishedRecipe> output, AntimatterRecipeProvider provider) {

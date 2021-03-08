@@ -8,7 +8,6 @@ import muramasa.antimatter.AntimatterMod;
 import trinsdar.gt4r.data.*;
 import trinsdar.gt4r.datagen.GregTechBlockTagProvider;
 import trinsdar.gt4r.datagen.GregTechRecipes;
-import trinsdar.gt4r.datagen.ProgressionAdvancements;
 import trinsdar.gt4r.loader.WorldGenLoader;
 import trinsdar.gt4r.loader.machines.*;
 import trinsdar.gt4r.loader.machines.generator.SteamFuels;
@@ -57,6 +56,7 @@ public class GT4Renewed extends AntimatterMod {
         loader.registerRecipeLoader(WasherLoader::init);
         loader.registerRecipeLoader(ElectricBlasting::init);
         loader.registerRecipeLoader(BendingLoader::init);
+        loader.registerRecipeLoader(ForgeHammerLoader::init);
         loader.registerRecipeLoader(AssemblyLoader::init);
         loader.registerRecipeLoader(ChemicalReactorLoader::init);
         loader.registerRecipeLoader(SteamFuels::init);
@@ -69,7 +69,7 @@ public class GT4Renewed extends AntimatterMod {
         loader.registerRecipeLoader(CompressorLoader::init);
         loader.registerRecipeLoader(VacFreezer::init);
         loader.registerRecipeLoader(OreByproducts::init);
-        loader.registerRecipeLoader(PulverizerLoader::init);
+        loader.registerRecipeLoader(MaceratorLoader::init);
         loader.registerRecipeLoader(SiftingLoader::init);
         loader.registerRecipeLoader(ThermalCentrifuge::init);
     }

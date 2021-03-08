@@ -22,7 +22,7 @@ public class RecipeBuilders {
     public static class PulverizingBuilder extends RecipeBuilder {
         @Override
         public Recipe add() {
-            return addRecipeToSteamMap(RecipeMaps.STEAM_PULVERIZING, super.add());
+            return addRecipeToSteamMap(RecipeMaps.STEAM_MACERATING, super.add());
         }
     }
 

@@ -12,7 +12,7 @@ import static trinsdar.gt4r.data.Materials.Stone;
 import static trinsdar.gt4r.data.RecipeMaps.PULVERIZING;
 import static trinsdar.gt4r.data.RecipeMaps.MACERATING;
 
-public class PulverizerLoader {
+public class MaceratorLoader {
     public static void init() {
         CRUSHED.all().forEach(m -> {
             if (!m.has(ORE)) return;
@@ -33,14 +33,6 @@ public class PulverizerLoader {
             if (m.has(CRUSHED_CENTRIFUGED)) {
                 PULVERIZING.RB().ii(AntimatterIngredient.of(CRUSHED_CENTRIFUGED.get(m,1))).io(DUST.get(m.getMacerateInto(), 1), DUST.get(aOreByProduct2, 1)).chances(100, 10).add(400, 2);
             }
-        });
-        GEM_BRITTLE.all().forEach(m -> {
-            if (!m.has(DUST)) return;
-            PULVERIZING.RB().ii(AntimatterIngredient.of(GEM_BRITTLE.get(m),1)).io(DUST_SMALL.get(m,2)).add(40,8);
-        });
-        GEM_POLISHED.all().forEach(m -> {
-            if (!m.has(DUST)) return;
-            PULVERIZING.RB().ii(AntimatterIngredient.of(GEM_BRITTLE.get(m),1)).io(DUST.get(m,2)).add(60,16);
         });
     }
 }
