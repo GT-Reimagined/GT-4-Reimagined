@@ -29,9 +29,9 @@ public class Materials {
     public static Material Beryllium = new Material(Ref.ID, "beryllium", 0x64b464, METALLIC, Be).asMetal(1560, 0);
     public static Material Carbon = new Material(Ref.ID, "carbon", 0x141414, DULL, C).asSolid();
     public static Material Chrome = new Material(Ref.ID, "chrome", 0xffe6e6, SHINY, Cr).asMetal(2180, 1700, PLATE);
-    public static Material Gold = new Material(Ref.ID, "gold", 0xffff1e, SHINY, Au).asMetal(1337, 0, ROD, GEAR, CRUSHED, CRUSHED_PURIFIED);
+    public static Material Gold = new Material(Ref.ID, "gold", 0xffff1e, SHINY, Au).asMetal(1337, 0, ROD, GEAR, CRUSHED, CRUSHED_PURIFIED, CRUSHED_CENTRIFUGED, DUST_IMPURE, DUST_PURE);
     public static Material Iridium = new Material(Ref.ID, "iridium", 0xf0f0f5, DULL, Ir).asMetal(2719, 3000, ORE);
-    public static Material Iron = new Material(Ref.ID, "iron", 0xc8c8c8, METALLIC, Fe).asMetal(1811, 1500, CRUSHED, CRUSHED_PURIFIED).asPlasma().addTools(IRON.getAttackDamage(), IRON.getEfficiency(), IRON.getMaxUses(), IRON.getHarvestLevel());
+    public static Material Iron = new Material(Ref.ID, "iron", 0xc8c8c8, METALLIC, Fe).asMetal(1811, 1500, CRUSHED, CRUSHED_PURIFIED, CRUSHED_CENTRIFUGED, DUST_IMPURE, DUST_PURE).asPlasma().addTools(IRON.getAttackDamage(), IRON.getEfficiency(), IRON.getMaxUses(), IRON.getHarvestLevel());
     public static Material Lead = new Material(Ref.ID, "lead", 0x8c648c, DULL, Pb).asMetal(600, 0, PLATE, PLATE_DENSE, ROD);
     public static Material Manganese = new Material(Ref.ID, "manganese", 0xfafafa, DULL, Mn).asMetal(1519, 0);
     public static Material Nickel = new Material(Ref.ID, "nickel", 0xc8c8fa, METALLIC, Ni).asMetal(1728, 0, PLATE).asPlasma();
@@ -154,8 +154,8 @@ public class Materials {
     //Brittle Gems
     public static Material CoalCoke = new Material(Ref.ID, "coal_coke", 0x8c8caa, LIGNITE).asGemBasic(false);
 
-    public static Material Diamond = new Material(Ref.ID, "diamond", 0xc8ffff, DIAMOND).asDust(CRUSHED, CRUSHED_PURIFIED).mats(of(Carbon, 1));
-    public static Material Emerald = new Material(Ref.ID, "emerald", 0x50ff50, GEM_V).asDust(CRUSHED, CRUSHED_PURIFIED).mats(of(Beryllium, 3, Aluminium, 2, Silicon, 3, Oxygen, 18));
+    public static Material Diamond = new Material(Ref.ID, "diamond", 0xc8ffff, DIAMOND).asDust(CRUSHED, CRUSHED_PURIFIED, CRUSHED_CENTRIFUGED, DUST_IMPURE, DUST_PURE).mats(of(Carbon, 1));
+    public static Material Emerald = new Material(Ref.ID, "emerald", 0x50ff50, GEM_V).asDust(CRUSHED, CRUSHED_PURIFIED, CRUSHED_CENTRIFUGED, DUST_IMPURE, DUST_PURE).mats(of(Beryllium, 3, Aluminium, 2, Silicon, 3, Oxygen, 18));
     public static Material Lazurite = new Material(Ref.ID, "lazurite", 0x6478ff, LAPIS).asDust().mats(of(Aluminium, 6, Silicon, 6, Calcium, 8, Sodium, 8));
     public static Material Ruby = new Material(Ref.ID, "ruby", 0xff6464, RUBY).asGemBasic(false, ORE).addTools(2.0F, 7.0F, 256, 2).mats(of(Chrome, 1, Aluminium, 2, Oxygen, 3));
     public static Material Sapphire = new Material(Ref.ID, "sapphire", 0x6464c8, GEM_V).asGemBasic(false, ORE).addTools(2.0F, 7.0F, 256, 2).mats(of(Aluminium, 2, Oxygen, 3));
@@ -164,13 +164,13 @@ public class Materials {
     public static Material Olivine = new Material(Ref.ID, "olivine", 0x96ff96, RUBY).asGemBasic(false, ORE).mats(of(Magnesium, 2, Iron, 1, Silicon, 1, Oxygen, 4));
     public static Material EnderPearl = new Material(Ref.ID, "enderpearl", 0x6cdcc8, SHINY).asDust().mats(of(Beryllium, 1, Potassium, 4, Nitrogen, 5, Chlorine, 6));
     public static Material EnderEye = new Material(Ref.ID, "endereye", 0xa0fae6, SHINY).asDust().mats(of(EnderPearl, 1, Blaze, 1));
-    public static Material Lapis = new Material(Ref.ID, "lapis", 0x4646dc, LAPIS).asDust(CRUSHED, CRUSHED_PURIFIED).mats(of(Lazurite, 12, Sodalite, 2, Pyrite, 1, Calcite, 1)).setOreMulti(6);
+    public static Material Lapis = new Material(Ref.ID, "lapis", 0x4646dc, LAPIS).asDust(CRUSHED, CRUSHED_PURIFIED, CRUSHED_CENTRIFUGED, DUST_IMPURE, DUST_PURE).mats(of(Lazurite, 12, Sodalite, 2, Pyrite, 1, Calcite, 1)).setOreMulti(6);
     //public static Material Phosphorus = new Material(Ref.ID, "phosphorus", 0xffff00, FLINT).asDust().mats(of(Calcium, 3, Phosphate, 2));
     public static Material RedGarnet = new Material(Ref.ID, "red_garnet", 0xc85050, GARNET).asGemBasic(false).mats(of(Pyrope, 3, Almandine, 5, Spessartine, 8));
     public static Material YellowGarnet = new Material(Ref.ID, "yellow_garnet", 0xc8c850, GARNET).asGemBasic(false).mats(of(Uvarovite, 3, Andradite, 5, Grossular, 8));
 
     /** **/
-    public static Material Redstone = new Material(Ref.ID, "redstone", 0xc80000, ROUGH).asDust(CRUSHED, CRUSHED_PURIFIED).mats(of(Silicon, 1, Pyrite, 5, Ruby, 1, Mercury, 3)).setOreMulti(4);
+    public static Material Redstone = new Material(Ref.ID, "redstone", 0xc80000, ROUGH).asDust(CRUSHED, CRUSHED_PURIFIED, CRUSHED_CENTRIFUGED, DUST_IMPURE, DUST_PURE).mats(of(Silicon, 1, Pyrite, 5, Ruby, 1, Mercury, 3)).setOreMulti(4);
     public static Material Cinnabar = new Material(Ref.ID, "cinnabar", 0x960000, ROUGH).asDust(ORE).mats(of(Mercury, 1, Sulfur, 1)).setOreMulti(2);
 
     /** Metals **/
@@ -253,23 +253,23 @@ public class Materials {
         Steel.remove(BOLT, SCREW);
         TungstenSteel.remove(BOLT, SCREW);
 
-        Iridium.remove(ORE_SMALL);
-        Uranium.remove(ORE_SMALL);
-        Copper.remove(ORE_SMALL);
-        Tin.remove(ORE_SMALL);
-        Cassiterite.remove(ORE_SMALL);
-        Chromite.remove(ORE_SMALL);
-        Galena.remove(ORE_SMALL);
-        Bauxite.remove(ORE_SMALL);
-        Pyrite.remove(ORE_SMALL);
-        Sphalerite.remove(ORE_SMALL);
-        Tetrahedrite.remove(ORE_SMALL);
-        Tungstate.remove(ORE_SMALL);
-        Sodalite.remove(ORE_SMALL);
-        Cinnabar.remove(ORE_SMALL);
-        Ruby.remove(ORE_SMALL);
-        Sapphire.remove(ORE_SMALL);
-        Olivine.remove(ORE_SMALL);
+        Iridium.remove(ORE_SMALL, ROCK);
+        Uranium.remove(ORE_SMALL, ROCK);
+        Copper.remove(ORE_SMALL, ROCK);
+        Tin.remove(ORE_SMALL, ROCK);
+        Cassiterite.remove(ORE_SMALL, ROCK);
+        Chromite.remove(ORE_SMALL, ROCK);
+        Galena.remove(ORE_SMALL, ROCK);
+        Bauxite.remove(ORE_SMALL, ROCK);
+        Pyrite.remove(ORE_SMALL, ROCK);
+        Sphalerite.remove(ORE_SMALL, ROCK);
+        Tetrahedrite.remove(ORE_SMALL, ROCK);
+        Tungstate.remove(ORE_SMALL, ROCK);
+        Sodalite.remove(ORE_SMALL, ROCK);
+        Cinnabar.remove(ORE_SMALL, ROCK);
+        Ruby.remove(ORE_SMALL, ROCK);
+        Sapphire.remove(ORE_SMALL, ROCK);
+        Olivine.remove(ORE_SMALL, ROCK);
 
         Iron.setSmeltInto(Iron).setMacerateInto(Iron);
         WroughtIron.setSmeltInto(Iron).setMacerateInto(Iron);
