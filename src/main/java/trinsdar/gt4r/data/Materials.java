@@ -125,7 +125,7 @@ public class Materials {
     public static Material Andradite = new Material(Ref.ID, "andradite", 0x967800, ROUGH).asDust().mats(of(Calcium, 3, Iron, 2, Silicon, 3, Oxygen, 12));
     public static Material Ash = new Material(Ref.ID, "ash", 0x969696, DULL).asDust();
     public static Material Calcite = new Material(Ref.ID, "calcite", 0xfae6dc, DULL).asDust().mats(of(Calcium, 1, Carbon, 1, Oxygen, 3));
-    public static Material Cassiterite = new Material(Ref.ID, "cassiterite", 0xdcdcdc, METALLIC).asDust(ORE).mats(of(Tin, 1, Oxygen, 2));
+    public static Material Cassiterite = new Material(Ref.ID, "cassiterite", 0xdcdcdc, METALLIC).asDust(ORE).mats(of(Tin, 1, Oxygen, 2)).setOreMulti(2);
     public static Material Chromite = new Material(Ref.ID, "chromite", 0x23140F, DULL).asDust(ORE).mats(of(Iron, 1, Chrome, 2, Oxygen, 4));
     public static Material Clay = new Material(Ref.ID, "clay", 0xc8c8dc, ROUGH).asDust().mats(of(Sodium, 2, Lithium, 1, Aluminium, 2, Silicon, 2));
     public static Material DarkAsh = new Material(Ref.ID, "dark_ash", 0x323232, DULL).asDust();
@@ -133,7 +133,7 @@ public class Materials {
     public static Material Grossular = new Material(Ref.ID, "grossular", 0xc86400, ROUGH).asDust().mats(of(Calcium, 3, Aluminium, 2, Silicon, 3, Oxygen, 12));
     public static Material Obsidian = new Material(Ref.ID, "obsidian", 0x503264, DULL).asDust().mats(of(Magnesium, 1, Iron, 1, Silicon, 2, Oxygen, 8));
     public static Material Phosphate = new Material(Ref.ID, "phosphate", 0xffff00, DULL).asDust().mats(of(Phosphor, 1, Oxygen, 4));
-    public static Material Pyrite = new Material(Ref.ID, "pyrite", 0x967828, ROUGH).asDust(ORE).mats(of(Iron, 1, Sulfur, 2));
+    public static Material Pyrite = new Material(Ref.ID, "pyrite", 0x967828, ROUGH).asDust(ORE).mats(of(Iron, 1, Sulfur, 2)).setOreMulti(2);
     public static Material Pyrope = new Material(Ref.ID, "pyrope", 0x783264, METALLIC).asDust().mats(of(Aluminium, 2, Magnesium, 3, Silicon, 3, Oxygen, 12));
     public static Material RawRubber = new Material(Ref.ID, "raw_rubber", 0xccc789, DULL).asDust().mats(of(Carbon, 5, Hydrogen, 8));
     public static Material Saltpeter = new Material(Ref.ID, "saltpeter", 0xe6e6e6, FINE).asDust().mats(of(Potassium, 1, Nitrogen, 1, Oxygen, 3));
@@ -143,7 +143,7 @@ public class Materials {
     public static Material Spessartine = new Material(Ref.ID, "spessartine", 0xff6464, DULL).asDust().mats(of(Aluminium, 2, Manganese, 3, Silicon, 3, Oxygen, 12));
     public static Material Sphalerite = new Material(Ref.ID, "sphalerite", 0xffffff, DULL).asDust(ORE).mats(of(Zinc, 1, Sulfur, 1));
     public static Material Tetrahedrite = new Material(Ref.ID, "tetrahedrite", 0xc82000, DULL).asDust(ORE).mats(of(Copper, 3, Antimony, 1, Sulfur, 3, Iron, 1));
-    public static Material Tungstate = new Material(Ref.ID, "tungstate", 0x373223, DULL).asDust(ORE).mats(of(Tungsten, 1, Lithium, 2, Oxygen, 4));
+    public static Material Tungstate = new Material(Ref.ID, "tungstate", 0x373223, DULL).asDust(ORE).mats(of(Tungsten, 1, Lithium, 2, Oxygen, 4)).setOreMulti(2);
     public static Material Wood = new Material(Ref.ID, "wood", 0x643200, NONE).asDust().addHandleStat(12, 0.0F).mats(of(Carbon, 1, Oxygen, 1, Hydrogen, 1));
     public static Material Stone = new Material(Ref.ID, "stone", 0xcdcdcd, ROUGH).asDust();
     public static Material Blaze = new Material(Ref.ID, "blaze", 0xffc800, NONE).asDust().mats(of(Sulfur, 1, DarkAsh, 1/*, Magic, 1*/));
@@ -159,19 +159,19 @@ public class Materials {
     public static Material Lazurite = new Material(Ref.ID, "lazurite", 0x6478ff, LAPIS).asDust().mats(of(Aluminium, 6, Silicon, 6, Calcium, 8, Sodium, 8));
     public static Material Ruby = new Material(Ref.ID, "ruby", 0xff6464, RUBY).asGemBasic(false, ORE).addTools(2.0F, 7.0F, 256, 2).mats(of(Chrome, 1, Aluminium, 2, Oxygen, 3));
     public static Material Sapphire = new Material(Ref.ID, "sapphire", 0x6464c8, GEM_V).asGemBasic(false, ORE).addTools(2.0F, 7.0F, 256, 2).mats(of(Aluminium, 2, Oxygen, 3));
-    public static Material Sodalite = new Material(Ref.ID, "sodalite", 0x1414ff, LAPIS).asDust(ORE).mats(of(Aluminium, 3, Silicon, 3, Sodium, 4, Chlorine, 1));
+    public static Material Sodalite = new Material(Ref.ID, "sodalite", 0x1414ff, LAPIS).asDust(ORE).mats(of(Aluminium, 3, Silicon, 3, Sodium, 4, Chlorine, 1)).setOreMulti(6);
     //public static Material Glass = new Material(Ref.ID, "glass", 0xfafafa, SHINY).asDust(PLATE, LENS).mats(of(SiliconDioxide, 1));
     public static Material Olivine = new Material(Ref.ID, "olivine", 0x96ff96, RUBY).asGemBasic(false, ORE).mats(of(Magnesium, 2, Iron, 1, Silicon, 1, Oxygen, 4));
     public static Material EnderPearl = new Material(Ref.ID, "enderpearl", 0x6cdcc8, SHINY).asDust().mats(of(Beryllium, 1, Potassium, 4, Nitrogen, 5, Chlorine, 6));
     public static Material EnderEye = new Material(Ref.ID, "endereye", 0xa0fae6, SHINY).asDust().mats(of(EnderPearl, 1, Blaze, 1));
-    public static Material Lapis = new Material(Ref.ID, "lapis", 0x4646dc, LAPIS).asDust(CRUSHED, CRUSHED_PURIFIED).mats(of(Lazurite, 12, Sodalite, 2, Pyrite, 1, Calcite, 1));
+    public static Material Lapis = new Material(Ref.ID, "lapis", 0x4646dc, LAPIS).asDust(CRUSHED, CRUSHED_PURIFIED).mats(of(Lazurite, 12, Sodalite, 2, Pyrite, 1, Calcite, 1)).setOreMulti(6);
     //public static Material Phosphorus = new Material(Ref.ID, "phosphorus", 0xffff00, FLINT).asDust().mats(of(Calcium, 3, Phosphate, 2));
     public static Material RedGarnet = new Material(Ref.ID, "red_garnet", 0xc85050, GARNET).asGemBasic(false).mats(of(Pyrope, 3, Almandine, 5, Spessartine, 8));
     public static Material YellowGarnet = new Material(Ref.ID, "yellow_garnet", 0xc8c850, GARNET).asGemBasic(false).mats(of(Uvarovite, 3, Andradite, 5, Grossular, 8));
 
     /** **/
-    public static Material Redstone = new Material(Ref.ID, "redstone", 0xc80000, ROUGH).asDust(CRUSHED, CRUSHED_PURIFIED).mats(of(Silicon, 1, Pyrite, 5, Ruby, 1, Mercury, 3));
-    public static Material Cinnabar = new Material(Ref.ID, "cinnabar", 0x960000, ROUGH).asDust(ORE).mats(of(Mercury, 1, Sulfur, 1));
+    public static Material Redstone = new Material(Ref.ID, "redstone", 0xc80000, ROUGH).asDust(CRUSHED, CRUSHED_PURIFIED).mats(of(Silicon, 1, Pyrite, 5, Ruby, 1, Mercury, 3)).setOreMulti(4);
+    public static Material Cinnabar = new Material(Ref.ID, "cinnabar", 0x960000, ROUGH).asDust(ORE).mats(of(Mercury, 1, Sulfur, 1)).setOreMulti(2);
 
     /** Metals **/
     public static Material BatteryAlloy = new Material(Ref.ID, "battery_alloy", 0x9c7ca0, DULL).asMetal(295, 0, PLATE).mats(of(Lead, 4, Antimony, 1));
@@ -217,7 +217,7 @@ public class Materials {
     public static Material Quartzite = new Material(Ref.ID, "quartzite", 0xe6cdcd, QUARTZ).asGemBasic(false, ROCK).mats(of(Silicon, 1, Oxygen, 2));
 
     /** Ore Stones **/
-    public static Material Bauxite = new Material(Ref.ID, "bauxite", 0xc86400, DULL).asDust(ORE).mats(of(Aluminium, 16, Hydrogen, 10, Oxygen, 11, Titanium, 1));
+    public static Material Bauxite = new Material(Ref.ID, "bauxite", 0xc86400, DULL).asDust(ORE).mats(of(Aluminium, 16, Hydrogen, 10, Oxygen, 11, Titanium, 1)).setOreMulti(2);
     //public static Material OilShale = new Material(Ref.ID, "oil_shale", 0x32323c, NONE).asDust(ORE_STONE);
 
 
@@ -253,23 +253,23 @@ public class Materials {
         Steel.remove(BOLT, SCREW);
         TungstenSteel.remove(BOLT, SCREW);
 
-        Iridium.remove(DUST_IMPURE, DUST_PURE, CRUSHED_CENTRIFUGED, ORE_SMALL);
-        Uranium.remove(DUST_IMPURE, DUST_PURE, CRUSHED_CENTRIFUGED, ORE_SMALL);
-        Copper.remove(DUST_IMPURE, DUST_PURE, CRUSHED_CENTRIFUGED, ORE_SMALL);
-        Tin.remove(DUST_IMPURE, DUST_PURE, CRUSHED_CENTRIFUGED, ORE_SMALL);
-        Cassiterite.remove(DUST_IMPURE, DUST_PURE, CRUSHED_CENTRIFUGED, ORE_SMALL);
-        Chromite.remove(DUST_IMPURE, DUST_PURE, CRUSHED_CENTRIFUGED, ORE_SMALL);
-        Galena.remove(DUST_IMPURE, DUST_PURE, CRUSHED_CENTRIFUGED, ORE_SMALL);
-        Bauxite.remove(DUST_IMPURE, DUST_PURE, CRUSHED_CENTRIFUGED, ORE_SMALL);
-        Pyrite.remove(DUST_IMPURE, DUST_PURE, CRUSHED_CENTRIFUGED, ORE_SMALL);
-        Sphalerite.remove(DUST_IMPURE, DUST_PURE, CRUSHED_CENTRIFUGED, ORE_SMALL);
-        Tetrahedrite.remove(DUST_IMPURE, DUST_PURE, CRUSHED_CENTRIFUGED, ORE_SMALL);
-        Tungstate.remove(DUST_IMPURE, DUST_PURE, CRUSHED_CENTRIFUGED, ORE_SMALL);
-        Sodalite.remove(DUST_IMPURE, DUST_PURE, CRUSHED_CENTRIFUGED, ORE_SMALL);
-        Cinnabar.remove(DUST_IMPURE, DUST_PURE, CRUSHED_CENTRIFUGED, ORE_SMALL);
-        Ruby.remove(DUST_IMPURE, DUST_PURE, CRUSHED_CENTRIFUGED, ORE_SMALL);
-        Sapphire.remove(DUST_IMPURE, DUST_PURE, CRUSHED_CENTRIFUGED, ORE_SMALL);
-        Olivine.remove(DUST_IMPURE, DUST_PURE, CRUSHED_CENTRIFUGED, ORE_SMALL);
+        Iridium.remove(ORE_SMALL);
+        Uranium.remove(ORE_SMALL);
+        Copper.remove(ORE_SMALL);
+        Tin.remove(ORE_SMALL);
+        Cassiterite.remove(ORE_SMALL);
+        Chromite.remove(ORE_SMALL);
+        Galena.remove(ORE_SMALL);
+        Bauxite.remove(ORE_SMALL);
+        Pyrite.remove(ORE_SMALL);
+        Sphalerite.remove(ORE_SMALL);
+        Tetrahedrite.remove(ORE_SMALL);
+        Tungstate.remove(ORE_SMALL);
+        Sodalite.remove(ORE_SMALL);
+        Cinnabar.remove(ORE_SMALL);
+        Ruby.remove(ORE_SMALL);
+        Sapphire.remove(ORE_SMALL);
+        Olivine.remove(ORE_SMALL);
 
         Iron.setSmeltInto(Iron).setMacerateInto(Iron);
         WroughtIron.setSmeltInto(Iron).setMacerateInto(Iron);
@@ -294,7 +294,7 @@ public class Materials {
         Copper.addByProduct(Gold, Nickel);
         Tin.addByProduct(Iron, Zinc);
         Cassiterite.addByProduct(Tin);
-        Chromite.addByProduct(Chromite, Chrome);
+        Chromite.addByProduct(Chromite, Chrome, Magnesium);
         Galena.addByProduct(Sulfur, Silver, Lead);
         Pyrite.addByProduct(Sulfur, Phosphor, Iron);
         Sphalerite.addByProduct(Zinc, YellowGarnet/*, Cadmium*/);
@@ -321,7 +321,6 @@ public class Materials {
         Tungsten.addByProduct(Manganese);
         Platinum.addByProduct(Nickel, Iridium);
         Thorium.addByProduct(Uranium, Lead);
-
 
         //other byproducts
         Andradite.addByProduct(YellowGarnet, Iron);

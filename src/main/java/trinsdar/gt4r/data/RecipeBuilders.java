@@ -19,10 +19,17 @@ public class RecipeBuilders {
         }
     }
 
-    public static class PulverizingBuilder extends RecipeBuilder {
+    public static class MaceratingBuilder extends RecipeBuilder {
         @Override
         public Recipe add() {
             return addRecipeToSteamMap(RecipeMaps.STEAM_MACERATING, super.add());
+        }
+    }
+
+    public static class UniversalMaceratingBuilder extends RecipeBuilder {
+        @Override
+        public Recipe add() {
+            return addRecipeToMap(RecipeMaps.MACERATING, super.add());
         }
     }
 
@@ -58,6 +65,17 @@ public class RecipeBuilders {
         try {
             if (recipe.getPower() <= Tier.LV.getVoltage()) {
                 map.RB().ii(recipe.getInputItems()).fi(Materials.Steam.getGas((int)(recipe.getPower() * 2))).io(recipe.getOutputItems()).add(recipe.getDuration(), recipe.getPower() * 2, recipe.getTotalPower() * 2);
+            }
+        } catch (Exception e) {
+            System.out.println("bleh");
+        }
+        return recipe;
+    }
+
+    public static Recipe addRecipeToMap(RecipeMap map, Recipe recipe) {
+        try {
+            if (recipe.getPower() <= Tier.LV.getVoltage()) {
+                map.RB().ii(recipe.getInputItems()).io(recipe.getOutputItems()).add(recipe.getDuration(), recipe.getPower());
             }
         } catch (Exception e) {
             System.out.println("bleh");

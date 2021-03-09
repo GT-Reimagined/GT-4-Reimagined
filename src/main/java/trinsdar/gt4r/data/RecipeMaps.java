@@ -34,9 +34,8 @@ public class RecipeMaps {
     public static RecipeMap EXTRACTING = new RecipeMap<>("extracting", new ExtractingBuilder());
     public static RecipeMap EXTRUDING = new RecipeMap<>("extruding", new RecipeBuilder());
     public static RecipeMap LATHING = new RecipeMap<>("lathing", new RecipeBuilder());
-    public static RecipeMap PULVERIZING = new RecipeMap<>("pulverizing", new PulverizingBuilder(), Tier.MV);
-    //For LV machine!
-    public static RecipeMap MACERATING = new RecipeMap<>("macerating", new PulverizingBuilder());
+    public static RecipeMap UNIVERSAL_MACERATING = new RecipeMap<>("universal_macerating", new UniversalMaceratingBuilder(), Tier.MV);
+    public static RecipeMap MACERATING = new RecipeMap<>("macerating", new MaceratingBuilder());
     public static RecipeMap RECYCLING = new RecipeMap<>("recycling", new RecipeBuilder());
     public static RecipeMap WIRE_MILLING = new RecipeMap<>("wire_milling", new RecipeBuilder());
     public static RecipeMap ELECTROLYZING = new RecipeMap<>("electrolyzing", new RecipeBuilder());
