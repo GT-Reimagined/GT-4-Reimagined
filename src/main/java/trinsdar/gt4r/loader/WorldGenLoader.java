@@ -20,9 +20,9 @@ public class WorldGenLoader {
         //TODO probably increase max generation heights for most things
         //TODO add GC dims to all objects
 
-        RubberTreeWorldGen.build();
+        //RubberTreeWorldGen.build();
 
-        new WorldGenAsteroid("asteroids", END, ASTEROIDS);
+        //new WorldGenAsteroid("asteroids", END, ASTEROIDS);
 
     }
 }

@@ -4,6 +4,7 @@ import muramasa.antimatter.material.Material;
 import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.LazyValue;
 
 
 import static muramasa.antimatter.Data.*;
@@ -18,7 +19,8 @@ public class MaceratorLoader {
         CRUSHED.all().forEach(m -> {
             if (!m.has(ORE) && m != Gold && m != Iron && m != Diamond && m != Emerald && m != Lapis && m != Redstone) return;
             int multiplier = 1;
-            AntimatterIngredient ore = AntimatterIngredient.of(ORE.getMaterialTag(m),1), crushed = CRUSHED.getIngredient(m, 1);
+            LazyValue<AntimatterIngredient> ore = AntimatterIngredient.of(ORE.getMaterialTag(m),1);
+            LazyValue<AntimatterIngredient> crushed = CRUSHED.getIngredient(m, 1);
             ItemStack crushedStack = CRUSHED.get(m,1);
             ItemStack stoneDust = DUST.get(Stone, 1);
             ItemStack dustStack = DUST.get(Stone, 1);

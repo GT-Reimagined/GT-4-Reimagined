@@ -1,25 +1,24 @@
 package trinsdar.gt4r.tree;
 
-import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MutableBoundingBox;
-import net.minecraft.world.gen.IWorldGenerationReader;
-import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.TreeFeatureConfig;
-import org.apache.commons.collections4.SetUtils;
+import net.minecraft.world.ISeedReader;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
+import net.minecraft.world.gen.feature.Feature;
 
 import java.util.Random;
-import java.util.Set;
 
-import static trinsdar.gt4r.data.GregTechData.RUBBER_LEAVES;
-import static trinsdar.gt4r.data.GregTechData.RUBBER_LOG;
-
-public class RubberTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
+public class RubberTreeFeature extends Feature<BaseTreeFeatureConfig> {
     public RubberTreeFeature() {
-        super(TreeFeatureConfig::deserializeAcacia);
+        super(BaseTreeFeatureConfig.CODEC);
     }
 
-    public boolean func_225557_a_(IWorldGenerationReader world, Random random, BlockPos pos, Set<BlockPos> set, Set<BlockPos> set1, MutableBoundingBox boundingBox, TreeFeatureConfig config) {
+    @Override
+    public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, BaseTreeFeatureConfig config) {
+        return false;
+    }
+
+    /*public boolean func_225557_a_(IWorldGenerationReader world, Random random, BlockPos pos, Set<BlockPos> set, Set<BlockPos> set1, MutableBoundingBox boundingBox, TreeFeatureConfig config) {
         int baseHeight = config.baseHeight + random.nextInt(config.heightRandA + 1) + random.nextInt(config.heightRandB + 1);
         int trunkHeight = config.trunkHeight >= 0 ? config.trunkHeight + random.nextInt(config.trunkHeightRandom + 1) : baseHeight - (config.foliageHeight + random.nextInt(config.foliageHeightRandom + 1));
 
@@ -136,5 +135,5 @@ public class RubberTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
             set.add(p);
             this.setBlockState(world, p, config.trunkProvider.getBlockState(random, pos));
         }
-    }
+    }*/
 }

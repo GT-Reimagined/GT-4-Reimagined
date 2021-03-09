@@ -10,6 +10,8 @@ import muramasa.antimatter.pipe.types.Cable;
 import muramasa.antimatter.pipe.types.Wire;
 import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
 import muramasa.antimatter.recipe.ingredient.TagIngredient;
+import muramasa.antimatter.util.Utils;
+import net.minecraft.tags.ITag;
 import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
 import trinsdar.gt4r.block.BlockCasing;
@@ -48,7 +50,7 @@ public class AssemblyLoader {
         ASSEMBLING.RB().ii(of(CircuitBoardProcessor, 1), of(CircuitDataStorage, 1)).io(new ItemStack(CircuitDataControl, 2)).add(3200, 4);
     }
 
-    public static Tag<Item> getTag(String domain, String path){
-        return new Tag<>(new ResourceLocation(domain, path));
+    public static ITag.INamedTag<Item> getTag(String domain, String path){
+        return Utils.getItemTag(new ResourceLocation(domain, path));
     }
 }
