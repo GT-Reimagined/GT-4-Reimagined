@@ -18,6 +18,11 @@ public class CentrifugingLoader {
             else CENTRIFUGING.RB().ii(of(DUST_IMPURE.get(dust),1)).io(new ItemStack(DUST.get(dust), 1)).chances(100, 10).add(400, 2);
         });
 
+        DUST_PURE.all().forEach(dust -> {
+            if (dust.hasByProducts()) CENTRIFUGING.RB().ii(of(DUST_PURE.get(dust),1)).io(new ItemStack(DUST.get(dust), 1), DUST_TINY.get((dust.getByProducts().size() > 1 ? dust.getByProducts().get(1) : dust.getByProducts().get(0)), 1)).add(400, 2);
+            else CENTRIFUGING.RB().ii(of(DUST_PURE.get(dust),1)).io(new ItemStack(DUST.get(dust), 1)).chances(100, 10).add(400, 2);
+        });
+
         add(Pyrite,24,200);
         add(SodiumSulfide,24,150);
     }
