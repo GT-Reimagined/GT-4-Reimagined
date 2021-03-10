@@ -154,7 +154,7 @@ public class Materials {
     //Brittle Gems
     public static Material CoalCoke = new Material(Ref.ID, "coal_coke", 0x8c8caa, LIGNITE).asGemBasic(false);
 
-    public static Material Diamond = new Material(Ref.ID, "diamond", 0xc8ffff, DIAMOND).asDust(CRUSHED, CRUSHED_PURIFIED, CRUSHED_CENTRIFUGED, DUST_IMPURE, DUST_PURE).mats(of(Carbon, 1));
+    public static Material Diamond = new Material(Ref.ID, "diamond", 0xc8ffff, DIAMOND).asDust(CRUSHED, CRUSHED_PURIFIED, CRUSHED_CENTRIFUGED, DUST_IMPURE, DUST_PURE).mats(of(Carbon, 128));
     public static Material Emerald = new Material(Ref.ID, "emerald", 0x50ff50, GEM_V).asDust(CRUSHED, CRUSHED_PURIFIED, CRUSHED_CENTRIFUGED, DUST_IMPURE, DUST_PURE).mats(of(Beryllium, 3, Aluminium, 2, Silicon, 3, Oxygen, 18));
     public static Material Lazurite = new Material(Ref.ID, "lazurite", 0x6478ff, LAPIS).asDust().mats(of(Aluminium, 6, Silicon, 6, Calcium, 8, Sodium, 8));
     public static Material Ruby = new Material(Ref.ID, "ruby", 0xff6464, RUBY).asGemBasic(false, ORE).addTools(2.0F, 7.0F, 256, 2).mats(of(Chrome, 1, Aluminium, 2, Oxygen, 3));
@@ -294,7 +294,7 @@ public class Materials {
         Copper.addByProduct(Gold, Nickel);
         Tin.addByProduct(Iron, Zinc);
         Cassiterite.addByProduct(Tin);
-        Chromite.addByProduct(Chromite, Chrome, Magnesium);
+        Chromite.addByProduct(Iron, Magnesium, Chrome);
         Galena.addByProduct(Sulfur, Silver, Lead);
         Pyrite.addByProduct(Sulfur, Phosphor, Iron);
         Sphalerite.addByProduct(Zinc, YellowGarnet/*, Cadmium*/);

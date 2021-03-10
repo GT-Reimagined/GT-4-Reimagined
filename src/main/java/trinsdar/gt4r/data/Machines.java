@@ -42,7 +42,7 @@ public class Machines {
     public static BasicMachine FORGE_HAMMER = new BasicMachine(Ref.ID, "forge_hammer", HAMMERING, GUI, ITEM, LV, Textures.MACHINE_BASE);
     public static BasicMachine ORE_WASHER = new BasicMachine(Ref.ID, "ore_washer", ORE_WASHING, GUI, ITEM, FLUID, LV, Textures.MACHINE_BASE);
     public static BasicMachine THERMAL_CENTRIFUGE = new BasicMachine(Ref.ID, "thermal_centrifuge", THERMAL_CENTRIFUGING, GUI, ITEM, FLUID, MV, Textures.MACHINE_BASE);
-    public static BasicMachine UNIVERSAL_MACERATOR = new BasicMachine(Ref.ID, "universal_macerator", UNIVERSAL_MACERATING, GUI, ITEM, LV, Textures.MACHINE_BASE);
+    public static BasicMachine UNIVERSAL_MACERATOR = new BasicMachine(Ref.ID, "universal_macerator", UNIVERSAL_MACERATING, GUI, ITEM, MV, Textures.MACHINE_BASE);
 
 
     public static BasicMachine COAL_BOILER = new BasicMachine(Ref.ID, "coal_boiler", SMALL_BOILERS, BRONZE, GUI, STEAM, ITEM, FLUID, Textures.BOILER_HANDLER);
