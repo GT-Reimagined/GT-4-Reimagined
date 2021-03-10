@@ -42,6 +42,7 @@ public class Machines {
     public static BasicMachine FORGE_HAMMER = new BasicMachine(Ref.ID, "forge_hammer", HAMMERING, GUI, ITEM, LV, Textures.MACHINE_BASE);
     public static BasicMachine ORE_WASHER = new BasicMachine(Ref.ID, "ore_washer", ORE_WASHING, GUI, ITEM, FLUID, LV, Textures.MACHINE_BASE);
     public static BasicMachine THERMAL_CENTRIFUGE = new BasicMachine(Ref.ID, "thermal_centrifuge", THERMAL_CENTRIFUGING, GUI, ITEM, FLUID, MV, Textures.MACHINE_BASE);
+    public static BasicMachine UNIVERSAL_MACERATOR = new BasicMachine(Ref.ID, "universal_macerator", UNIVERSAL_MACERATING, GUI, ITEM, LV, Textures.MACHINE_BASE);
 
 
     public static BasicMachine COAL_BOILER = new BasicMachine(Ref.ID, "coal_boiler", SMALL_BOILERS, BRONZE, GUI, STEAM, ITEM, FLUID, Textures.BOILER_HANDLER);
@@ -73,10 +74,10 @@ public class Machines {
     public static HatchMachine HATCH_FLUID_O = new HatchMachineCustom(Ref.ID, "hatch_fluid_output", GUI, FLUID, COVEROUTPUT, CELL, LV, Textures.MACHINE_BASE).setTiers(LV);
     public static HatchMachine HATCH_MUFFLER = new HatchMachineCustom(Ref.ID, "hatch_muffler", GUI, ITEM,COVERMUFFLER, LV, Textures.MACHINE_BASE).setTiers(LV);
     public static HatchMachine HATCH_DYNAMO = new HatchMachine(Ref.ID, "hatch_dynamo", ENERGY,COVERDYNAMO, EV, Textures.MACHINE_BASE).setTiers(EV, IV);
-    public static HatchMachine FUSION_MATERIAL_INJECTOR = new HatchMachineCustom(Ref.ID, "fusion_material_injector", GUI, ITEM, FLUID, LV, Textures.MACHINE_BASE).setTiers(LV);
-    public static HatchMachine FUSION_MATERIAL_EXTRACTOR = new HatchMachineCustom(Ref.ID, "fusion_material_extractor", GUI, ITEM, FLUID, LV, Textures.MACHINE_BASE).setTiers(LV);
-    public static HatchMachine FUSION_ENERGY_INJECTOR = new HatchMachine(Ref.ID, "fusion_energy_injector", ENERGY, IV, Textures.MACHINE_BASE).setTiers(IV);
-    public static HatchMachine FUSION_ENERGY_EXTRACTOR = new HatchMachine(Ref.ID, "fusion_energy_extractor", ENERGY, UV, Textures.MACHINE_BASE).setTiers(UV);
+    public static HatchMachine FUSION_MATERIAL_INJECTOR = new HatchMachineCustom(Ref.ID, "fusion_material_injector", GUI, ITEM, FLUID, LV, Textures.FUSION_IN).setTiers(LV);
+    public static HatchMachine FUSION_MATERIAL_EXTRACTOR = new HatchMachineCustom(Ref.ID, "fusion_material_extractor", GUI, ITEM, FLUID, LV, Textures.FUSION_OUT).setTiers(LV);
+    public static HatchMachine FUSION_ENERGY_INJECTOR = new HatchMachine(Ref.ID, "fusion_energy_injector", ENERGY, IV, Textures.FUSION_IN).setTiers(IV);
+    public static HatchMachine FUSION_ENERGY_EXTRACTOR = new HatchMachine(Ref.ID, "fusion_energy_extractor", ENERGY, UV, Textures.FUSION_OUT).setTiers(UV);
 
     public static TankMachine QUANTUM_TANK = new TankMachine(Ref.ID, "quantum_tank", GUI, CELL);
 

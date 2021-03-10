@@ -79,6 +79,7 @@ public class Guis {
         ELECTROLYZER.getGui().add(CENTRIFUGE);
         THERMAL_CENTRIFUGE.getGui().add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25).add(IT_OUT, 143, 25).add(ENERGY,80, 63);
         ORE_WASHER.getGui().add(THERMAL_CENTRIFUGE).add(FL_IN, 53, 63);
+        UNIVERSAL_MACERATOR.getGui().add(COMPRESSOR).add(IT_OUT, 125, 25);
         CHEMICAL_REACTOR.getGui().add(IT_IN, 17, 25).add(IT_IN, 35, 25).add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(FL_IN, 53, 63).add(FL_IN, 35, 63).add(FL_OUT, 107, 63).add(ENERGY, 80, 63);
         FLUID_CANNER.getGui().add(COMPRESSOR).add(FL_IN, 53, 63).add(FL_OUT, 107, 63);
         DISASSEMBLER.getGui().add(IT_IN, 53, 25)
