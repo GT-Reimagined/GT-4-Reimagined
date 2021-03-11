@@ -123,12 +123,14 @@ public class Materials {
     public static Material Netherrack = new Material(Ref.ID, "netherrack", 0xc80000, DULL).asDust();
     public static Material Almandine = new Material(Ref.ID, "almandine", 0xff0000, ROUGH).asDust().mats(of(Aluminium, 2, Iron, 3, Silicon, 3, Oxygen, 12));
     public static Material Andradite = new Material(Ref.ID, "andradite", 0x967800, ROUGH).asDust().mats(of(Calcium, 3, Iron, 2, Silicon, 3, Oxygen, 12));
-    public static Material Ash = new Material(Ref.ID, "ash", 0x969696, DULL).asDust();
+    public static Material Potash = new Material(Ref.ID, "potash", 0x784237, DULL).asDust().mats(of(Potassium, 2, Oxygen, 1));
+    public static Material SodaAsh = new Material(Ref.ID, "soda_ash", 0xdcdcff, DULL).asDust().mats(of(Sodium, 2, Carbon, 1, Oxygen, 3));
+    public static Material Ash = new Material(Ref.ID, "ash", 0x969696, DULL).asDust().mats(of(Potash, 3, SodaAsh, 1));
     public static Material Calcite = new Material(Ref.ID, "calcite", 0xfae6dc, DULL).asDust().mats(of(Calcium, 1, Carbon, 1, Oxygen, 3));
     public static Material Cassiterite = new Material(Ref.ID, "cassiterite", 0xdcdcdc, METALLIC).asDust(ORE).mats(of(Tin, 1, Oxygen, 2)).setOreMulti(2);
     public static Material Chromite = new Material(Ref.ID, "chromite", 0x23140F, DULL).asDust(ORE).mats(of(Iron, 1, Chrome, 2, Oxygen, 4));
     public static Material Clay = new Material(Ref.ID, "clay", 0xc8c8dc, ROUGH).asDust().mats(of(Sodium, 2, Lithium, 1, Aluminium, 2, Silicon, 2));
-    public static Material DarkAsh = new Material(Ref.ID, "dark_ash", 0x323232, DULL).asDust();
+    public static Material DarkAsh = new Material(Ref.ID, "dark_ash", 0x323232, DULL).asDust().mats(of(Carbon, 2));
     public static Material Galena = new Material(Ref.ID, "galena", 0x643c64, DULL).asDust(ORE).mats(of(Lead, 3, Silver, 3, Sulfur, 2));
     public static Material Grossular = new Material(Ref.ID, "grossular", 0xc86400, ROUGH).asDust().mats(of(Calcium, 3, Aluminium, 2, Silicon, 3, Oxygen, 12));
     public static Material Obsidian = new Material(Ref.ID, "obsidian", 0x503264, DULL).asDust().mats(of(Magnesium, 1, Iron, 1, Silicon, 2, Oxygen, 8));
