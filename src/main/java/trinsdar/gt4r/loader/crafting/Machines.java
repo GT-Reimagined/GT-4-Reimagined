@@ -7,6 +7,6 @@ import java.util.function.Consumer;
 
 public class Machines {
     public static void loadRecipes(Consumer<IFinishedRecipe> output, AntimatterRecipeProvider provider) {
-
+        
     }
 }
