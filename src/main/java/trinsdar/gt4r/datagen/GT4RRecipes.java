@@ -44,44 +44,6 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
 
 
         addItemRecipe(consumer, "gears", "has_stone", this.hasItem(Blocks.PISTON), Blocks.STICKY_PISTON, of('S', GT4RData.StickyResin, 'P', Blocks.PISTON), "S", "P");
-
-//        RegistrationHelper.getMaterialsForDomain(Ref.ID).stream().filter(m -> m.has(PLATE, INGOT)).forEach(mat -> {
-//            Item plate = PLATE.get(mat);
-//            Item ingot = INGOT.get(mat);
-//            Tag<Item> ingotTag = getForgeItemTag("ingots/".concat(mat.getId()));
-//            ShapedRecipeBuilder.shapedRecipe(plate).key('H', HAMMER.getTag()).key('I', ingotTag)
-//                    .patternLine("H").patternLine("I").patternLine("I").setGroup("ingots_hammer_to_plates")
-//                    .addCriterion("has_ingot_" + mat.getId(), this.hasItem(ingotTag)).build(consumer, sigh(ingot.getRegistryName().getPath() + "_hammer_to_" + plate.getRegistryName().getPath()));
-//        });
-//
-//        RegistrationHelper.getMaterialsForDomain(Ref.ID).stream().filter(m -> m.has(DUST)).forEach(mat -> {
-//            Item dust = DUST.get(mat);
-//            if (mat.has(ROCK)) {
-//                Tag<Item> rockTag = getForgeItemTag("rocks/".concat(mat.getId()));
-//                Item rock = ROCK.get(mat);
-//                Item smallDust = DUST_SMALL.get(mat);
-//                ShapelessRecipeBuilder.shapelessRecipe(dust)
-//                        .addIngredient(rockTag).addIngredient(rockTag).addIngredient(rockTag)
-//                        .addIngredient(rockTag).addIngredient(rockTag).addIngredient(rockTag)
-//                        .addIngredient(rockTag).addIngredient(rockTag).addIngredient(MORTAR.getTag())
-//                        .addCriterion("has_rock_" + mat.getId(), this.hasItem(rockTag))
-//                        .setGroup("rocks_grind_to_dust").build(consumer, sigh(rock.getRegistryName().getPath() + "_grind_to_" + dust.getRegistryName().getPath()));
-//
-//                ShapelessRecipeBuilder.shapelessRecipe(smallDust)
-//                        .addIngredient(rockTag).addIngredient(rockTag)
-//                        .addIngredient(rockTag).addIngredient(rockTag).addIngredient(MORTAR.getTag())
-//                        .addCriterion("has_rock_" + mat.getId(), this.hasItem(getForgeItemTag("rocks/".concat(mat.getId()))))
-//                        .setGroup("rocks_grind_to_small_dust").build(consumer, sigh(rock.getRegistryName().getPath() + "_grind_to_" + smallDust.getRegistryName().getPath()));
-//            }
-//            if (mat.has(INGOT, GRINDABLE)) {
-//                Item ingot = INGOT.get(mat);
-//                Tag<Item> ingotTag = getForgeItemTag("ingots/".concat(mat.getId()));
-//                ShapelessRecipeBuilder.shapelessRecipe(dust).addIngredient(ingotTag).addIngredient(MORTAR.getTag())
-//                        .addCriterion("has_ingot_" + mat.getId(), this.hasItem(getForgeItemTag("ingots/".concat(mat.getId()))))
-//                        .setGroup("ingots_grind_to_dust")
-//                        .build(consumer, sigh(ingot.getRegistryName().getPath() + "_grind_to_" + dust.getRegistryName().getPath()));
-//            }
-//        });
     }
 
     @Override
