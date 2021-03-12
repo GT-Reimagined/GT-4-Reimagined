@@ -48,7 +48,7 @@ public class MachineRecipeLoader {
 //        //How the hell does empty stacks even get into smeltingList?!
 //        //FurnaceRecipes.instance().getSmeltingList().entrySet().stream().filter((set) -> !set.getKey().isEmpty()).forEach((set) -> SMELTING.RB().ii(set.getKey()).io(set.getValue()).add(140, 2));
 //
-//        IMPLOSION_COMPRESSING.RB().ii(GregTechData.IridiumAlloyIngot.get(1)).io(GregTechData.IridiumReinforcedPlate.get(1), DUST_TINY.get(DarkAsh, 4)).add(20, 30);
+//        IMPLOSION_COMPRESSING.RB().ii(GT4RData.IridiumAlloyIngot.get(1)).io(GregTechData.IridiumReinforcedPlate.get(1), DUST_TINY.get(DarkAsh, 4)).add(20, 30);
 //
 //        BLASTING.RB().ii(INGOT.get(Tungsten, 1), INGOT.get(Steel, 1)).io(INGOT_HOT.get(TungstenSteel, 2), DUST_SMALL.get(DarkAsh, 1)).add(Math.max(TungstenSteel.getMass() / 80L, 1L) * TungstenSteel.getBlastTemp(), 480, TungstenSteel.getBlastTemp());
 //        BLASTING.RB().ii(INGOT.get(Tungsten, 1), DUST.get(Carbon, 1)).io(INGOT_HOT.get(TungstenCarbide, 1), DUST_SMALL.get(Ash, 2)).add(Math.max(TungstenCarbide.getMass() / 40L, 1L) * TungstenCarbide.getBlastTemp(), 480, TungstenCarbide.getBlastTemp());

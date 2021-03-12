@@ -1,21 +1,6 @@
 package trinsdar.gt4r.loader;
 
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import muramasa.antimatter.material.Material;
-import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
-import muramasa.antimatter.recipe.RecipeHelper;
-import muramasa.antimatter.util.Utils;
 import trinsdar.gt4r.Ref;
-import trinsdar.gt4r.data.Materials;
-import net.minecraft.item.ItemStack;
-
-import java.util.List;
-
-import static muramasa.antimatter.Data.*;
-import static muramasa.antimatter.material.MaterialTag.*;
-import static trinsdar.gt4r.data.GregTechData.*;
-import static trinsdar.gt4r.data.Materials.*;
-import static trinsdar.gt4r.data.RecipeMaps.*;
 
 //TODO EXCLUDED FROM COMPILE
 

@@ -2,9 +2,6 @@ package trinsdar.gt4r.loader.machines;
 
 import com.google.common.collect.ImmutableSet;
 import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.item.ItemBasic;
-import muramasa.antimatter.machine.Tier;
-import muramasa.antimatter.material.Material;
 import muramasa.antimatter.pipe.PipeSize;
 import muramasa.antimatter.pipe.types.Cable;
 import muramasa.antimatter.pipe.types.Wire;
@@ -14,21 +11,14 @@ import muramasa.antimatter.util.Utils;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
-import trinsdar.gt4r.block.BlockCasing;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.tags.ItemTags;
-import trinsdar.gt4r.data.GregTechData;
-
-import java.util.Arrays;
-import java.util.Set;
 
 import static com.google.common.collect.ImmutableMap.of;
 import static muramasa.antimatter.Data.*;
-import static muramasa.antimatter.Data.WRENCH;
 import static muramasa.antimatter.recipe.ingredient.AntimatterIngredient.of;
-import static trinsdar.gt4r.data.GregTechData.*;
+import static trinsdar.gt4r.data.GT4RData.*;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.ASSEMBLING;
 

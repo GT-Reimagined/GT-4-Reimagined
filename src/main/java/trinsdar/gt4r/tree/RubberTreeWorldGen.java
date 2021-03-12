@@ -20,8 +20,8 @@ import java.util.function.Predicate;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static trinsdar.gt4r.data.GregTechData.RUBBER_LEAVES;
-import static trinsdar.gt4r.data.GregTechData.RUBBER_SAPLING;
+import static trinsdar.gt4r.data.GT4RData.RUBBER_LEAVES;
+import static trinsdar.gt4r.data.GT4RData.RUBBER_SAPLING;
 
 public class RubberTreeWorldGen { //  extends WorldGenBase<RubberTreeWorldGen> {
     static Predicate<Biome> getValidBiomes() {

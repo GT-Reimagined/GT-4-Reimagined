@@ -1,9 +1,6 @@
 package trinsdar.gt4r.loader.machines;
 
-import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
-
 import static muramasa.antimatter.Data.*;
-import static trinsdar.gt4r.data.GregTechData.INT_CIRCUITS;
 import static trinsdar.gt4r.data.RecipeMaps.BENDING;
 
 public class BendingLoader {

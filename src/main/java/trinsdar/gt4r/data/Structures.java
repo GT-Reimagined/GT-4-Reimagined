@@ -1,12 +1,9 @@
 package trinsdar.gt4r.data;
 
-import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.structure.BlockStateElement;
-import trinsdar.gt4r.block.BlockCoil;
 import net.minecraft.block.Blocks;
 
-import static trinsdar.gt4r.data.GregTechData.*;
+import static trinsdar.gt4r.data.GT4RData.*;
 import static trinsdar.gt4r.data.Machines.*;
 
 public class Structures {

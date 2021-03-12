@@ -35,13 +35,13 @@ public class Guis {
         }
     }.setPadding(0, 0, 0, 0).add(IT_IN, 17, 16).add(IT_IN, 35, 16).add(IT_IN, 53, 16).add(IT_IN, 17, 34).add(IT_IN, 35, 34).add(IT_IN, 53, 34).add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 142, 16).add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(IT_OUT, 143, 34);
 
-    public static MenuHandlerMachine<ContainerHatch, ScreenHatchCustom<ContainerHatch>> HATCH_MENU_HANDLER_CUSTOM = new MenuHandlerMachine<ContainerHatch, ScreenHatchCustom<ContainerHatch>>(Ref.ID, "container_hatch_custom") {
+    public static MenuHandlerMachine<ContainerHatch> HATCH_MENU_HANDLER_CUSTOM = new MenuHandlerMachine<ContainerHatch>(Ref.ID, "container_hatch_custom") {
         @Override
         public ContainerHatch getMenu(Object tile, PlayerInventory playerInv, int windowId) {
             return tile instanceof TileEntityHatch ? new ContainerHatch((TileEntityHatch) tile, playerInv, this, windowId) : null;
         }
 
-        @Override
+        //@Override
         @ParametersAreNonnullByDefault
         public ScreenHatchCustom<ContainerHatch> create(ContainerHatch container, PlayerInventory inv, ITextComponent name) {
             return new ScreenHatchCustom<>(container, inv, name);
@@ -79,8 +79,11 @@ public class Guis {
         ELECTROLYZER.getGui().add(CENTRIFUGE);
         THERMAL_CENTRIFUGE.getGui().add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25).add(IT_OUT, 143, 25).add(ENERGY,80, 63);
         ORE_WASHER.getGui().add(THERMAL_CENTRIFUGE).add(FL_IN, 53, 63);
+        UNIVERSAL_MACERATOR.getGui().add(COMPRESSOR).add(IT_OUT, 125, 25);
         CHEMICAL_REACTOR.getGui().add(IT_IN, 17, 25).add(IT_IN, 35, 25).add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(FL_IN, 53, 63).add(FL_IN, 35, 63).add(FL_OUT, 107, 63).add(ENERGY, 80, 63);
         FLUID_CANNER.getGui().add(COMPRESSOR).add(FL_IN, 53, 63).add(FL_OUT, 107, 63);
+        FLUID_EXTRACTOR.getGui().add(COMPRESSOR).add(FL_OUT, 107, 63);
+        FLUID_SOLIDIFIER.getGui().add(COMPRESSOR).add(FL_IN, 53, 63);
         DISASSEMBLER.getGui().add(IT_IN, 53, 25)
                 .add(IT_OUT, 107, 7).add(IT_OUT, 107+18, 7).add(IT_OUT, 107+18*2, 7)
                 .add(IT_OUT, 107, 25).add(IT_OUT, 107+18, 25).add(IT_OUT, 107+18*2, 25)

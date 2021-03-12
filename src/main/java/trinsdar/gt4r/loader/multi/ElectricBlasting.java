@@ -1,20 +1,10 @@
 package trinsdar.gt4r.loader.multi;
 
 import muramasa.antimatter.material.Material;
-import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
-import muramasa.antimatter.util.Utils;
-import net.minecraft.tags.Tag;
 import trinsdar.gt4r.Ref;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
 import static muramasa.antimatter.Data.*;
-import static muramasa.antimatter.Data.DUST_IMPURE;
-import static muramasa.antimatter.material.MaterialTag.CALCITE2X;
-import static muramasa.antimatter.material.MaterialTag.CALCITE3X;
-import static trinsdar.gt4r.data.GregTechData.INT_CIRCUITS;
-import static trinsdar.gt4r.data.GregTechData.STONE;
-import static trinsdar.gt4r.data.GregTechData.TungstenGrindHead;
+import static trinsdar.gt4r.data.GT4RData.INT_CIRCUITS;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.BLASTING;
 import static muramasa.antimatter.recipe.ingredient.AntimatterIngredient.*;

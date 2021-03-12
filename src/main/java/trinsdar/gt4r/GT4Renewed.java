@@ -7,9 +7,10 @@ import muramasa.antimatter.recipe.loader.AntimatterRecipeLoader;
 import muramasa.antimatter.recipe.loader.IRecipeRegistrate;
 import muramasa.antimatter.registration.RegistrationEvent;
 import muramasa.antimatter.AntimatterMod;
+import net.minecraftforge.api.distmarker.Dist;
 import trinsdar.gt4r.data.*;
-import trinsdar.gt4r.datagen.GregTechBlockTagProvider;
-import trinsdar.gt4r.datagen.GregTechRecipes;
+import trinsdar.gt4r.datagen.GT4RBlockTagProvider;
+import trinsdar.gt4r.datagen.GT4RRecipes;
 import trinsdar.gt4r.loader.WorldGenLoader;
 import trinsdar.gt4r.loader.machines.*;
 import trinsdar.gt4r.loader.machines.generator.SteamFuels;
@@ -43,14 +44,14 @@ public class GT4Renewed extends AntimatterMod {
         AntimatterAPI.addProvider(Ref.ID, g -> new AntimatterBlockStateProvider(Ref.ID, Ref.NAME + " BlockStates", g));
         AntimatterAPI.addProvider(Ref.ID, g -> new AntimatterItemModelProvider(Ref.ID, Ref.NAME + " Item Models", g));
         AntimatterAPI.addProvider(Ref.ID, g -> {
-            p[0] = new GregTechBlockTagProvider(Ref.ID, Ref.NAME.concat(" Block Tags"), false, g, new ExistingFileHelperOverride());
+            p[0] = new GT4RBlockTagProvider(Ref.ID, Ref.NAME.concat(" Block Tags"), false, g, new ExistingFileHelperOverride());
             return p[0];
         });
         AntimatterAPI.addProvider(Ref.ID, g -> new AntimatterItemTagProvider(Ref.ID, Ref.NAME.concat(" Item Tags"), false, g, p[0], new ExistingFileHelperOverride()));
         AntimatterAPI.addProvider(Ref.ID, g -> new AntimatterFluidTagProvider(Ref.ID, Ref.NAME.concat(" Fluid Tags"), false, g, new ExistingFileHelperOverride()));
-        AntimatterAPI.addProvider(Ref.ID, g -> new GregTechRecipes(Ref.ID, Ref.NAME.concat(" Recipes"), g));
+        AntimatterAPI.addProvider(Ref.ID, g -> new GT4RRecipes(Ref.ID, Ref.NAME.concat(" Recipes"), g));
         //AntimatterAPI.addProvider(Ref.ID, g -> new AntimatterAdvancementProvider(Ref.ID, Ref.NAME.concat(" Advancements"), g, new ProgressionAdvancements()));
-        AntimatterAPI.addProvider(Ref.ID, GregTechLocalizations.en_US::new);
+        AntimatterAPI.addProvider(Ref.ID, GT4RLocalizations.en_US::new);
 
         registerRecipeLoaders();
     }
@@ -66,7 +67,7 @@ public class GT4Renewed extends AntimatterMod {
         loader.add(AssemblyLoader::init);
         loader.add(ChemicalReactorLoader::init);
         loader.add(SteamFuels::init);
-        loader.add(FluidExtractor::init);
+        loader.add(FluidExtractorLoader::init);
 
         loader.add(ElectrolyzerLoader::init);
         loader.add(FluidCanningLoader::init);
@@ -89,17 +90,17 @@ public class GT4Renewed extends AntimatterMod {
     }
 
     @Override
-    public void onRegistrationEvent(RegistrationEvent event) {
+    public void onRegistrationEvent(RegistrationEvent event, Dist side) {
         switch (event) {
             case DATA_INIT:
                 Materials.init();
-                GregTechData.init();
+                GT4RData.init();
                 Machines.init();
                 Guis.init();
                 Models.init();
                 break;
             case DATA_READY:
-                //GregTechData.buildTierMaps();
+                //GT4RData.buildTierMaps();
                 Structures.init();
                 //GregTechAPI.registerFluidCell(Data.CellTin.get(1));
                 //GregTechAPI.registerFluidCell(Data.CellSteel.get(1));

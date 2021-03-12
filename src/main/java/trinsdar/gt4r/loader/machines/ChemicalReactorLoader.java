@@ -8,10 +8,5 @@ import static trinsdar.gt4r.data.RecipeMaps.CHEMICAL_REACTING;
 
 public class ChemicalReactorLoader {
     public static void init() {
-        CHEMICAL_REACTING.RB().ii(AntimatterIngredient.of(
-                DUST.get(Sulfur),1
-        ),AntimatterIngredient.of(
-                DUST.get(RawRubber),9
-        )).fo(Rubber.getLiquid(144*9)).add(200,24);
     }
 }

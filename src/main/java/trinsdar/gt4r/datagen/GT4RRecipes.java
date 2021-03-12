@@ -2,7 +2,7 @@ package trinsdar.gt4r.datagen;
 
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import trinsdar.gt4r.Ref;
-import trinsdar.gt4r.data.GregTechData;
+import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.loader.crafting.Machines;
 import trinsdar.gt4r.loader.crafting.Parts;
 import trinsdar.gt4r.loader.crafting.WireCablesPlates;
@@ -10,7 +10,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tags.ItemTags;
 import net.minecraftforge.common.Tags;
 
 import java.util.function.Consumer;
@@ -18,15 +17,13 @@ import java.util.function.Consumer;
 import static com.google.common.collect.ImmutableMap.of;
 import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.util.Utils.getForgeItemTag;
-import static trinsdar.gt4r.data.GregTechData.ItemFilter;
-import static trinsdar.gt4r.data.Materials.*;
 
-public class GregTechRecipes extends AntimatterRecipeProvider {
+public class GT4RRecipes extends AntimatterRecipeProvider {
 
-    public GregTechRecipes(String providerDomain, String providerName, DataGenerator gen) {
+    public GT4RRecipes(String providerDomain, String providerName, DataGenerator gen) {
         super(providerDomain, providerName, gen);
         registerCraftingLoaders();
-        //GregTechData.buildTierMaps();
+        //GT4RData.buildTierMaps();
     }
 
     protected void registerCraftingLoaders() {
@@ -38,14 +35,14 @@ public class GregTechRecipes extends AntimatterRecipeProvider {
     @Override
     public void registerRecipes(Consumer<IFinishedRecipe> consumer) {
         super.registerRecipes(consumer);
-        addConditionalRecipe(consumer, getStackRecipe("", "has_sulfur_dust", this.hasItem(getForgeItemTag("dusts/sulfur")),
+        /*addConditionalRecipe(consumer, getStackRecipe("", "has_sulfur_dust", this.hasItem(getForgeItemTag("dusts/sulfur")),
                 new ItemStack(Blocks.TORCH, 6), of('D', getForgeItemTag("dusts/sulfur"), 'R', Tags.Items.RODS_WOODEN), "D", "R"), Ref.class, "sulfurTorch", Ref.ID, "sulfur_torch");
 
         addItemRecipe(consumer, Ref.ID, "hopper", "", "has_wrench", this.hasItem(WRENCH.getTag()),
-                Blocks.HOPPER, of('C', Blocks.CHEST, 'I', getForgeItemTag("plates/iron"), 'W', WRENCH.getTag()), "IWI", "ICI", " I ");
+                Blocks.HOPPER, of('C', Blocks.CHEST, 'I', getForgeItemTag("plates/iron"), 'W', WRENCH.getTag()), "IWI", "ICI", " I ");*/
 
 
-        addItemRecipe(consumer, "gears", "has_stone", this.hasItem(Blocks.PISTON), Blocks.STICKY_PISTON, of('S', GregTechData.StickyResin, 'P', Blocks.PISTON), "S", "P");
+        //addItemRecipe(consumer, "gears", "has_stone", this.hasItem(Blocks.PISTON), Blocks.STICKY_PISTON, of('S', GT4RData.StickyResin, 'P', Blocks.PISTON), "S", "P");
 
 //        RegistrationHelper.getMaterialsForDomain(Ref.ID).stream().filter(m -> m.has(PLATE, INGOT)).forEach(mat -> {
 //            Item plate = PLATE.get(mat);
@@ -88,7 +85,7 @@ public class GregTechRecipes extends AntimatterRecipeProvider {
 
     @Override
     public String getName() {
-        return "GregTech Crafting Recipes";
+        return "GT4R Crafting Recipes";
     }
 
     private String fixLoc(String attach) {

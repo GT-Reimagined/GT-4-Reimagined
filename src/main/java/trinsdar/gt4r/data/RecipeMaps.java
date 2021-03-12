@@ -46,6 +46,7 @@ public class RecipeMaps {
     public static RecipeMap DISASSEMBLING = new RecipeMap<>("disassembling", new RecipeBuilder());
     public static RecipeMap MASS_FABRICATING = new RecipeMap<>("mass_fabricating", new RecipeBuilder());
     public static RecipeMap FLUID_EXTRACTING = new RecipeMap<>("fluid_extracting", new RecipeBuilder());
+    public static RecipeMap FLUID_SOLIDIFYING = new RecipeMap<>("fluid_solidifying", new RecipeBuilder());
     public static RecipeMap HAMMERING = new RecipeMap<>("hammering", new HammeringBuilder());
     public static RecipeMap SIFTING = new RecipeMap<>("sifting", new RecipeBuilder());
 

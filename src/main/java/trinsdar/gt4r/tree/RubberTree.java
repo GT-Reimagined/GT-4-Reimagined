@@ -1,7 +1,7 @@
 package trinsdar.gt4r.tree;
 
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
-import trinsdar.gt4r.data.GregTechData;
+import trinsdar.gt4r.data.GT4RData;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.trees.Tree;
@@ -20,14 +20,14 @@ public class RubberTree extends Tree {
 
     public RubberTree() {
         BlockStateProperties.HORIZONTAL_FACING.getAllowedValues().forEach(d -> {
-            TRUNK_BLOCKS.addWeightedBlockstate(GregTechData.RUBBER_LOG.getDefaultState()
+            TRUNK_BLOCKS.addWeightedBlockstate(GT4RData.RUBBER_LOG.getDefaultState()
                     .with(BlockRubberLog.RESIN_STATE, ResinState.FILLED)
                     .with(BlockRubberLog.RESIN_FACING, d), 1);
-            TRUNK_BLOCKS.addWeightedBlockstate(GregTechData.RUBBER_LOG.getDefaultState()
+            TRUNK_BLOCKS.addWeightedBlockstate(GT4RData.RUBBER_LOG.getDefaultState()
                     .with(BlockRubberLog.RESIN_STATE, ResinState.EMPTY)
                     .with(BlockRubberLog.RESIN_FACING, d), 1);
         });
-        TRUNK_BLOCKS.addWeightedBlockstate(GregTechData.RUBBER_LOG.getDefaultState()
+        TRUNK_BLOCKS.addWeightedBlockstate(GT4RData.RUBBER_LOG.getDefaultState()
                 .with(BlockRubberLog.RESIN_STATE, ResinState.NONE), 16);
     }
 
