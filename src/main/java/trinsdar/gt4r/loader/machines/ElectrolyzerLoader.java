@@ -47,13 +47,13 @@ public class ElectrolyzerLoader {
         add(Pyrite, 60, 114);
         //add(Sugar, 90, 448);
         add(Glyceryl, 90, 800);
-        //add(Charcoal, 30, 12);
+        add(Charcoal, 30, 12);
         add(Sphalerite, 60, 92);
         add(Obsidian, 120, 240);
         add(Pyrope, 120, 400);
         add(Uvarovite, 120, 480);
         add(Almandine, 120, 480);
-        //add(Coal, 30, 24);
+        add(Coal, 30, 24);
         //add(Apatite, 90, 288);
         add(NitrogenDioxide, 60, 168);
         add(Andradite, 120, 480);
@@ -67,6 +67,7 @@ public class ElectrolyzerLoader {
         //add(Salt, 60, 56);
         add(Spessartine, 120, 440);
         //add(CalciumCarbonate, 90, 400);
+        add(Prismarine, 30, 800);
     }
 
     private static void add(Material dust, long euT, int duration) {

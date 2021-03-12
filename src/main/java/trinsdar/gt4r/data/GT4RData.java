@@ -34,7 +34,7 @@ import net.minecraft.item.Item;
 import static muramasa.antimatter.Data.ROTOR;
 import static trinsdar.gt4r.data.Materials.*;
 
-public class GregTechData {
+public class GT4RData {
 
     private static final boolean HC = AntimatterConfig.GAMEPLAY.HARDCORE_CABLES;
 
@@ -106,6 +106,7 @@ public class GregTechData {
     public static final Cover COVER_PUMP = new CoverPump();
 
     public static ItemBasic<?> StickyResin = new ItemBasic<>(Ref.ID, "sticky_resin");
+    public static ItemBasic<?> Plantball = new ItemBasic<>(Ref.ID, "plantball");
     public static ItemBasic<?> ComputerMonitor = new ItemBasic<>(Ref.ID, "computer_monitor").tip("Can be placed on machines as a cover");
 
     public static ItemFluidCell CellTin = new ItemFluidCell(Ref.ID,Tin, 1000);

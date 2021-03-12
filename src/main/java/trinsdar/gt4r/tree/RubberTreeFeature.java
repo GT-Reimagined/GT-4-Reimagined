@@ -11,8 +11,8 @@ import org.apache.commons.collections4.SetUtils;
 import java.util.Random;
 import java.util.Set;
 
-import static trinsdar.gt4r.data.GregTechData.RUBBER_LEAVES;
-import static trinsdar.gt4r.data.GregTechData.RUBBER_LOG;
+import static trinsdar.gt4r.data.GT4RData.RUBBER_LEAVES;
+import static trinsdar.gt4r.data.GT4RData.RUBBER_LOG;
 
 public class RubberTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
     public RubberTreeFeature() {

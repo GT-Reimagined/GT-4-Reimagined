@@ -1,5 +1,6 @@
 package trinsdar.gt4r.data;
 
+import com.sun.org.apache.regexp.internal.RE;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.AntimatterConfig;
 import muramasa.antimatter.fluid.AntimatterMaterialFluid;
@@ -85,7 +86,7 @@ public class Materials {
     public static Material NitricOxide = new Material(Ref.ID, "nitric_oxide", 0x7dc8f0, NONE).asGas().mats(of(Nitrogen, 1, Oxygen, 1));
 
     /** Fluids **/
-    public static Material Lava = new Material(Ref.ID, "lava", 0xff4000, NONE).asFluid();
+    public static Material Lava = new Material(Ref.ID, "lava", 0xff4000, NONE).asFluid(/*0, 400*/);
     public static Material Water = new Material(Ref.ID, "water", 0x0000ff, NONE).asFluid().mats(of(Hydrogen, 2, Oxygen, 1));
     public static Material Steam = new Material(Ref.ID, "steam", 0xa0a0a0, NONE).asGas();
     public static Material UUAmplifier = new Material(Ref.ID, "uu_amplifier", 0x600080, NONE).asFluid();
@@ -155,6 +156,8 @@ public class Materials {
     /** Gems **/
     //Brittle Gems
     public static Material CoalCoke = new Material(Ref.ID, "coal_coke", 0x8c8caa, LIGNITE).asGemBasic(false);
+    public static Material Charcoal = new Material(Ref.ID, "charcoal", 0x644646, LIGNITE).asDust().mats(of(Carbon, 1));
+    public static Material Coal = new Material(Ref.ID, "coal", 0x464646, LIGNITE).asDust().mats(of(Carbon, 2));
 
     public static Material Diamond = new Material(Ref.ID, "diamond", 0xc8ffff, DIAMOND).asDust(CRUSHED, CRUSHED_PURIFIED, CRUSHED_CENTRIFUGED, DUST_IMPURE, DUST_PURE).mats(of(Carbon, 128));
     public static Material Emerald = new Material(Ref.ID, "emerald", 0x50ff50, GEM_V).asDust(CRUSHED, CRUSHED_PURIFIED, CRUSHED_CENTRIFUGED, DUST_IMPURE, DUST_PURE).mats(of(Beryllium, 3, Aluminium, 2, Silicon, 3, Oxygen, 18));
@@ -198,7 +201,7 @@ public class Materials {
     public static Material Rubber = new Material(Ref.ID, "rubber", 0x000000, SHINY).asSolid(295, 0, PLATE).addHandleStat(11, 0.4F).mats(of(Carbon, 5, Hydrogen, 8));
 
     /** Stones **/
-    public static Material Granite = new Material(Ref.ID, "granite", 0xa07882, ROUGH).asDust(ROCK);
+    public static Material Granite = new Material(Ref.ID, "granite", 0xa07882, ROUGH).asDust(ROCK).mats(of(Aluminium, 2, Flint, 1, Clay, 1));
     public static Material Diorite = new Material(Ref.ID, "diorite", 0xf0f0f0, ROUGH).asDust(ROCK);
     public static Material Andesite = new Material(Ref.ID, "andesite", 0xbfbfbf, ROUGH).asDust(ROCK);
 
@@ -217,6 +220,8 @@ public class Materials {
     public static Material BlueSchist = new Material(Ref.ID, "blue_schist", 0x0569be, NONE).asDust(ROCK);
     public static Material Kimberlite = new Material(Ref.ID, "kimberlite", 0x64460a, NONE).asDust(ROCK);
     public static Material Quartzite = new Material(Ref.ID, "quartzite", 0xe6cdcd, QUARTZ).asGemBasic(false, ROCK).mats(of(Silicon, 1, Oxygen, 2));
+    public static Material Prismarine = new Material(Ref.ID, "prismarine", 0x6eb2a5, NONE).asDust().mats(of(Potassium, 2, Oxygen, 8, Manganese, 1, Silicon, 5));
+    public static Material DarkPrismarine = new Material(Ref.ID, "dark_prismarine", 0x587d6c, NONE).asDust();
 
     /** Ore Stones **/
     public static Material Bauxite = new Material(Ref.ID, "bauxite", 0xc86400, DULL).asDust(ORE).mats(of(Aluminium, 16, Hydrogen, 10, Oxygen, 11, Titanium, 1)).setOreMulti(2);
@@ -250,6 +255,9 @@ public class Materials {
         SOLDER.add(Lead, Tin, SolderingAlloy);
         //TODO Mercury.add(METALL, SMELTG);
 */
+
+        Lava.mats(of(Electrum, 1, Copper, 4, Tungsten, 1, Basalt, 1));
+
         Bronze.remove(BOLT, SCREW);
         Iron.remove(BOLT, SCREW);
         Steel.remove(BOLT, SCREW);

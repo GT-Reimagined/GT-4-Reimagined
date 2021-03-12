@@ -13,7 +13,7 @@ import net.minecraft.data.DataGenerator;
 
 import static muramasa.antimatter.util.Utils.lowerUnderscoreToUpperSpaced;
 
-public class GregTechLocalizations {
+public class GT4RLocalizations {
 
     public static class en_US extends AntimatterLanguageProvider {
 

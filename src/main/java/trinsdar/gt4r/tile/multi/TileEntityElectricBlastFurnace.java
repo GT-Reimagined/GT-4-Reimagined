@@ -5,10 +5,8 @@ import muramasa.antimatter.tile.multi.TileEntityBasicMultiMachine;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import trinsdar.gt4r.block.BlockCoil;
 import muramasa.antimatter.machine.types.Machine;
-import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
-import trinsdar.gt4r.data.GregTechData;
+import trinsdar.gt4r.data.GT4RData;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -70,11 +68,11 @@ public class TileEntityElectricBlastFurnace extends TileEntityBasicMultiMachine 
     }
 
     public int getHeatPerCasing(Block block){
-        if (block == GregTechData.STANDARD_MACHINE_CASING){
+        if (block == GT4RData.STANDARD_MACHINE_CASING){
             return 30;
-        } else if (block == GregTechData.REINFORCED_MACHINE_CASING){
+        } else if (block == GT4RData.REINFORCED_MACHINE_CASING){
             return 50;
-        } else if (block == GregTechData.ADVANCED_MACHINE_CASING){
+        } else if (block == GT4RData.ADVANCED_MACHINE_CASING){
             return 70;
         } else if (block == Blocks.LAVA){
             return 250;

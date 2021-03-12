@@ -8,8 +8,7 @@ import net.minecraft.item.ItemStack;
 import java.util.List;
 
 import static muramasa.antimatter.Data.*;
-import static trinsdar.gt4r.data.GregTechData.STONE;
-import static trinsdar.gt4r.data.Materials.Stone;
+import static trinsdar.gt4r.data.GT4RData.STONE;
 import static trinsdar.gt4r.data.RecipeMaps.ORE_BYPRODUCTS;
 
 public class OreByproducts {
