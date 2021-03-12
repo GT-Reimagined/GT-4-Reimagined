@@ -7,6 +7,7 @@ import muramasa.antimatter.registration.RegistrationEvent;
 import muramasa.antimatter.AntimatterMod;
 import trinsdar.gt4r.data.*;
 import trinsdar.gt4r.datagen.GT4RBlockTagProvider;
+import trinsdar.gt4r.datagen.GT4RItemTagProvider;
 import trinsdar.gt4r.datagen.GT4RRecipes;
 import trinsdar.gt4r.loader.WorldGenLoader;
 import trinsdar.gt4r.loader.machines.*;
@@ -40,7 +41,7 @@ public class GT4Renewed extends AntimatterMod {
         AntimatterAPI.addProvider(Ref.ID, g -> new AntimatterBlockStateProvider(Ref.ID, Ref.NAME + " BlockStates", g));
         AntimatterAPI.addProvider(Ref.ID, g -> new AntimatterItemModelProvider(Ref.ID, Ref.NAME + " Item Models", g));
         AntimatterAPI.addProvider(Ref.ID, g -> new GT4RBlockTagProvider(Ref.ID, Ref.NAME.concat(" Block Tags"), false, g));
-        AntimatterAPI.addProvider(Ref.ID, g -> new AntimatterItemTagProvider(Ref.ID, Ref.NAME.concat(" Item Tags"), false, g));
+        AntimatterAPI.addProvider(Ref.ID, g -> new GT4RItemTagProvider(Ref.ID, Ref.NAME.concat(" Item Tags"), false, g));
         AntimatterAPI.addProvider(Ref.ID, g -> new AntimatterFluidTagProvider(Ref.ID, Ref.NAME.concat(" Fluid Tags"), false, g));
         AntimatterAPI.addProvider(Ref.ID, g -> new GT4RRecipes(Ref.ID, Ref.NAME.concat(" Recipes"), g));
         //AntimatterAPI.addProvider(Ref.ID, g -> new AntimatterAdvancementProvider(Ref.ID, Ref.NAME.concat(" Advancements"), g, new ProgressionAdvancements()));

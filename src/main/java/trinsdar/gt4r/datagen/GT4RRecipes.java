@@ -3,8 +3,7 @@ package trinsdar.gt4r.datagen;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.GT4RData;
-import trinsdar.gt4r.loader.crafting.CraftingHelper;
-import trinsdar.gt4r.loader.crafting.Machines;
+import trinsdar.gt4r.loader.crafting.MachineCrafting;
 import trinsdar.gt4r.loader.crafting.Parts;
 import trinsdar.gt4r.loader.crafting.WireCablesPlates;
 import net.minecraft.block.Blocks;
@@ -32,7 +31,7 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
     protected void registerCraftingLoaders() {
         this.craftingLoaders.add(Parts::loadRecipes);
         this.craftingLoaders.add(WireCablesPlates::loadRecipes);
-        this.craftingLoaders.add(Machines::loadRecipes);
+        this.craftingLoaders.add(MachineCrafting::loadRecipes);
     }
 
     @Override
