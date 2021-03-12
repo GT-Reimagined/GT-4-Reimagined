@@ -108,9 +108,20 @@ public class GT4RData {
     public static ItemBasic<?> StickyResin = new ItemBasic<>(Ref.ID, "sticky_resin");
     public static ItemBasic<?> Plantball = new ItemBasic<>(Ref.ID, "plantball");
     public static ItemBasic<?> ComputerMonitor = new ItemBasic<>(Ref.ID, "computer_monitor").tip("Can be placed on machines as a cover");
+    public static ItemBasic<?> ConveyorModule = new ItemBasic<>(Ref.ID, "conveyor_module").tip("Can be placed on machines as a cover");
+    public static ItemBasic<?> CraftingModule = new ItemBasic<>(Ref.ID, "crafting_module").tip("Can be placed on machines as a cover");
+    public static ItemBasic<?> Drain = new ItemBasic<>(Ref.ID, "drain").tip("Can be placed on machines as a cover");
+    public static ItemBasic<?> ItemTransportValve = new ItemBasic<>(Ref.ID, "item_transport_valve").tip("Can be placed on machines as a cover");
+    public static ItemBasic<?> PumpModule = new ItemBasic<>(Ref.ID, "pump_module").tip("Can be placed on machines as a cover");
+    public static ItemBasic<?> RedstoneMachineController = new ItemBasic<>(Ref.ID, "redstone_machine_controller").tip("Can be placed on machines as a cover");
+    public static ItemBasic<?> Shutter = new ItemBasic<>(Ref.ID, "shutter").tip("Can be placed on machines as a cover");
 
     public static ItemFluidCell CellTin = new ItemFluidCell(Ref.ID,Tin, 1000);
 
+    public static ItemBasic<?> CopperCoil = new ItemBasic<>(Ref.ID, "copper_coil");
+    public static ItemBasic<?> CupronickelHeatingCoil = new ItemBasic<>(Ref.ID, "cupronickel_heating_coil");
+    public static ItemBasic<?> KanthalHeatingCoil = new ItemBasic<>(Ref.ID, "kanthal_heating_coil");
+    public static ItemBasic<?> NichromeHeatingCoil = new ItemBasic<>(Ref.ID, "nichrome_heating_coil");
     public static ItemBasic<?> ItemFilter = new ItemBasic<>(Ref.ID, "item_filter");
     public static ItemBasic<?> DiamondSawBlade = new ItemBasic<>(Ref.ID, "diamond_saw_blade");
     public static ItemBasic<?> DiamondGrindHead = new ItemBasic<>(Ref.ID, "diamond_grind_head");
@@ -118,6 +129,10 @@ public class GT4RData {
     public static ItemBasic<?> IridiumAlloyIngot = new ItemBasic<>(Ref.ID, "iridium_alloy_ingot").tip("Used to make Iridium Plates");
     public static ItemBasic<?> IridiumReinforcedPlate = new ItemBasic<>(Ref.ID, "iridium_reinforced_plate").tip("GT2s Most Expensive Component");
     public static ItemBasic<?> IridiumNeutronReflector = new ItemBasic<>(Ref.ID, "iridium_neutron_reflector").tip("Indestructible");
+
+    public static ItemBasic<?> LavaFilter = new ItemBasic<>(Ref.ID, "lava_filter");
+    public static ItemBasic<?> Match = new ItemBasic<>(Ref.ID, "match");
+    public static ItemBasic<?> MatchBook = new ItemBasic<>(Ref.ID, "match_book");
 
     public static ItemBasic<?> AdvCircuitParts = new ItemBasic<>(Ref.ID, "advanced_circuit_parts").tip("Used for making Advanced Circuits");
     public static ItemBasic<?> CircuitBoardBasic = new ItemBasic<>(Ref.ID, "basic_circuit_board").tip("A basic Board");

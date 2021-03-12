@@ -10,6 +10,7 @@ import muramasa.antimatter.AntimatterMod;
 import net.minecraftforge.api.distmarker.Dist;
 import trinsdar.gt4r.data.*;
 import trinsdar.gt4r.datagen.GT4RBlockTagProvider;
+import trinsdar.gt4r.datagen.GT4RItemTagProvider;
 import trinsdar.gt4r.datagen.GT4RRecipes;
 import trinsdar.gt4r.loader.WorldGenLoader;
 import trinsdar.gt4r.loader.machines.*;
