@@ -6,7 +6,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.SlotItemHandler;
+import trinsdar.gt4r.GT4Renewed;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.tile.multi.TileEntityElectricBlastFurnace;
 
@@ -31,6 +33,11 @@ public class SlotCoil extends SlotItemHandler {
 
     @Override
     public int getSlotStackLimit() {
+        return 6;
+    }
+
+    @Override
+    public int getItemStackLimit(@Nonnull ItemStack stack) {
         return 6;
     }
 
