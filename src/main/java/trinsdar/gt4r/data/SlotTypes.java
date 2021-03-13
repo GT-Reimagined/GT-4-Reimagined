@@ -9,5 +9,5 @@ import trinsdar.gt4r.machine.IBFItemHandler;
 import java.util.Optional;
 
 public class SlotTypes {
-    public static SlotType COIL = new SlotType("coil_bf", (t, i, d) -> Optional.of(new SlotCoil(t, t.itemHandler.map(MachineItemHandler::getInputHandler).orElse(null), i, d.getX(), d.getY())));
+    public static SlotType COIL = new SlotType("coil_bf", (t, i, d) -> Optional.of(new SlotCoil(t, ((IBFItemHandler)t.itemHandler.orElse(null)).getCoilHandler(), i, d.getX(), d.getY())));
 }
