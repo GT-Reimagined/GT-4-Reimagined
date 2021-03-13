@@ -15,6 +15,7 @@ import muramasa.antimatter.tile.multi.TileEntityHatch;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraftforge.api.distmarker.Dist;
 import trinsdar.gt4r.gui.ScreenHatchCustom;
 import trinsdar.gt4r.gui.SlotCoil;
 
@@ -46,15 +47,9 @@ public class Guis {
         public ContainerHatch getMenu(Object tile, PlayerInventory playerInv, int windowId) {
             return tile instanceof TileEntityHatch ? new ContainerHatch((TileEntityHatch) tile, playerInv, this, windowId) : null;
         }
-
-        //@Override
-        @ParametersAreNonnullByDefault
-        public ScreenHatchCustom<ContainerHatch> create(ContainerHatch container, PlayerInventory inv, ITextComponent name) {
-            return new ScreenHatchCustom<>(container, inv, name);
-        }
     };
 
-    public static void init() {
+    public static void init(Dist side) {
 
         AntimatterAPI.registerJEICategory(RecipeMaps.ORE_BYPRODUCTS, Guis.ORE_BYPRODUCTS);
 //        GregTechAPI.registerJEICategory(RecipeMaps.SMELTING, Guis.MULTI_DISPLAY_COMPACT);
@@ -98,7 +93,7 @@ public class Guis {
         MASS_FABRICATOR.getGui().add(COMPRESSOR);
 
         COKE_OVEN.getGui().add(IT_IN, 53,16).add(IT_OUT,107,25);
-        BLAST_FURNACE.getGui().add(IT_IN, 35, 16).add(IT_IN, 53, 16).add(IT_IN, 35, 34).add(IT_IN, 53, 34).add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(ENERGY, 80, 63).add(SlotTypes.COIL, 8, 63);
+        BLAST_FURNACE.getGui().add(IT_IN, 35, 16).add(IT_IN, 53, 16).add(IT_IN, 35, 34).add(IT_IN, 53, 34).add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(ENERGY, 80, 63);//.add(SlotTypes.COIL, 8, 63);
 
         BATTERY_BUFFER_FOUR.getGui().add(ENERGY,71,27).add(ENERGY,89,27).add(ENERGY,71,45).add(ENERGY,89,45);
         BATTERY_BUFFER_ONE.getGui().add(ENERGY,80,40);
@@ -143,22 +138,24 @@ public class Guis {
 
         HATCH_FLUID_O.getGui().add(FL_OUT, 79, 34).add(CELL_IN, 9, 22).add(CELL_OUT, 9, 58);
 
-        TRANSFORMER_DIGITAL.getGui()
-                .addButton(10, 18, 14, 14, APAD_LEFT)
-                .addButton(25, 18, 14, 14, PAD_LEFT)
-                .addButton(10, 33, 14, 14, APAD_LEFT)
-                .addButton(25, 33, 14, 14, PAD_LEFT)
-                .addButton(10, 48, 14, 14, APAD_LEFT)
-                .addButton(25, 48, 14, 14, PAD_LEFT)
-                .addButton(10, 63, 14, 14, APAD_LEFT)
-                .addButton(25, 63, 14, 14, PAD_LEFT)
-                .addButton(137, 18, 14, 14, PAD_RIGHT)
-                .addButton(152, 18, 14, 14, APAD_RIGHT)
-                .addButton(137, 33, 14, 14, PAD_RIGHT)
-                .addButton(152, 33, 14, 14, APAD_RIGHT)
-                .addButton(137, 48, 14, 14, PAD_RIGHT)
-                .addButton(152, 48, 14, 14, APAD_RIGHT)
-                .addButton(137, 63, 14, 14, PAD_RIGHT)
-                .addButton(152, 63, 14, 14, APAD_RIGHT);
+        if (side.isClient()){
+            TRANSFORMER_DIGITAL.getGui()
+                    .addButton(10, 18, 14, 14, APAD_LEFT)
+                    .addButton(25, 18, 14, 14, PAD_LEFT)
+                    .addButton(10, 33, 14, 14, APAD_LEFT)
+                    .addButton(25, 33, 14, 14, PAD_LEFT)
+                    .addButton(10, 48, 14, 14, APAD_LEFT)
+                    .addButton(25, 48, 14, 14, PAD_LEFT)
+                    .addButton(10, 63, 14, 14, APAD_LEFT)
+                    .addButton(25, 63, 14, 14, PAD_LEFT)
+                    .addButton(137, 18, 14, 14, PAD_RIGHT)
+                    .addButton(152, 18, 14, 14, APAD_RIGHT)
+                    .addButton(137, 33, 14, 14, PAD_RIGHT)
+                    .addButton(152, 33, 14, 14, APAD_RIGHT)
+                    .addButton(137, 48, 14, 14, PAD_RIGHT)
+                    .addButton(152, 48, 14, 14, APAD_RIGHT)
+                    .addButton(137, 63, 14, 14, PAD_RIGHT)
+                    .addButton(152, 63, 14, 14, APAD_RIGHT);
+        }
     }
 }

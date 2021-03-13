@@ -97,7 +97,7 @@ public class GT4Renewed extends AntimatterMod {
                 Materials.init();
                 GT4RData.init();
                 Machines.init();
-                Guis.init();
+                Guis.init(side);
                 Models.init();
                 break;
             case DATA_READY:
