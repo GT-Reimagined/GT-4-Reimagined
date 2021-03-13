@@ -28,7 +28,7 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.getOrCreateBuilder(getTag("circuits/ultimate")).add(CircuitDataOrb);
         this.getOrCreateBuilder(getTag("machine_hull/cheap")).add(HULL.get(Bronze), HULL.get(Brass), HULL.get(WroughtIron));
         this.getOrCreateBuilder(getTag("machine_hull/basic")).add(HULL.get(Steel), HULL.get(StainlessSteel), HULL.get(Aluminium));
-        this.getOrCreateBuilder(getTag("machine_hull/advanced")).add(HULL.get(Tungsten), HULL.get(Titanium));
+        this.getOrCreateBuilder(getTag("machine_hull/advanced")).add(HULL.get(TungstenSteel), HULL.get(Titanium));
     }
 
     public ITag.INamedTag<Item> getTag(String id){
