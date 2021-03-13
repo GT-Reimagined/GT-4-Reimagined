@@ -10,7 +10,7 @@ public class Structures {
 
     /** Special Case Elements **/
     public static BlockStateElement AIR_OR_LAVA = new BlockStateElement("air_or_lava", (w, p, s) -> s.getBlock().isAir(s, w, p) || s.getBlock() == Blocks.LAVA/* || s.getBlock() == Blocks.FLOWING_LAVA*/);
-    public static BlockStateElement WATER = new BlockStateElement("water", (w, p, s) -> s.getBlock() == Blocks.LAVA);
+    public static BlockStateElement WATER = new BlockStateElement("water", (w, p, s) -> s.getBlock() == Blocks.WATER);
 
     public static void init() {
         COKE_OVEN.setStructure(b -> b
@@ -24,19 +24,19 @@ public class Structures {
             .build().offset(2, -1).min(41, FIRE_BRICKS)
         );
         BLAST_FURNACE.setStructure(b -> b
-            .of("CCC", "CCCM", "CCC").of("CCC", "CLC", "CCC").of(1).of("CCC", "CCC", "CCC")
+            .of("CCC ", "CCCM", "CCC ").of("CCC ", "CLC ", "CCC ").of(1).of("CCC ", "CCC ", "CCC ")
             .at("M", BLAST_FURNACE).at("C", STANDARD_MACHINE_CASING, REINFORCED_MACHINE_CASING, ADVANCED_MACHINE_CASING).at("L", AIR_OR_LAVA)
-            .build().offset(2, 0)
+            .build().offset(3, 0)
         );
         VACUUM_FREEZER.setStructure(b -> b
-            .of("CCC", "CcC", "CCC").of("CcC", "cAc", "CcC").of(0).of("AAA", "AMA", "AAA")
+            .of("CCC", "CcC", "CCC").of("CcC", "cAc", "CcC").of(0).of("   ", " M ", "   ")
             .at("M", VACUUM_FREEZER).at("C", REINFORCED_MACHINE_CASING).at("c", ADVANCED_MACHINE_CASING)
-            .build().offset(2, -1).min(20, REINFORCED_MACHINE_CASING).min(6, ADVANCED_MACHINE_CASING)
+            .build().offset(1, -3).min(20, REINFORCED_MACHINE_CASING).min(6, ADVANCED_MACHINE_CASING)
         );
         IMPLOSION_COMPRESSOR.setStructure(b -> b
             .of("cCc", "CCC", "cCc").of("CCC", "CAC", "CCC").of(0).of("AAA", "AMA", "AAA")
             .at("M", IMPLOSION_COMPRESSOR).at("C", REINFORCED_MACHINE_CASING).at("c", STANDARD_MACHINE_CASING)
-            .build().offset(2, -1).min(18, REINFORCED_MACHINE_CASING).min(8, STANDARD_MACHINE_CASING)
+            .build().offset(1, -3).min(18, REINFORCED_MACHINE_CASING).min(8, STANDARD_MACHINE_CASING)
         );
         LARGE_STEAM_TURBINE.setStructure(b -> b
             .of("CCCC", "CCCC", "CCCC").of("CHHC", "EAAM", "CHHC").of(0)
@@ -45,7 +45,7 @@ public class Structures {
         );
         LARGE_GAS_TURBINE.setStructure(b -> b
                 .of("CCCC", "CCCC", "CCCC").of("CHHC", "EAAM", "CHHC").of(0)
-                .at("M", LARGE_STEAM_TURBINE).at("C", REINFORCED_MACHINE_CASING).at("H", STANDARD_MACHINE_CASING, HATCH_FLUID_I, HATCH_FLUID_O).at("E", HATCH_DYNAMO)
+                .at("M", LARGE_GAS_TURBINE).at("C", REINFORCED_MACHINE_CASING).at("H", STANDARD_MACHINE_CASING, HATCH_FLUID_I, HATCH_FLUID_O).at("E", HATCH_DYNAMO)
                 .build().offset(3, -1).min(28, STANDARD_MACHINE_CASING).min(1, HATCH_FLUID_I, HATCH_FLUID_O)
         );
         FUSION_REACTOR.setStructure(b -> b
