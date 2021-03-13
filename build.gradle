@@ -67,7 +67,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                gti {
+                gt4r {
                     source sourceSets.main
                 }
             }
