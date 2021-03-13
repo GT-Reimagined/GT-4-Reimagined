@@ -1,16 +1,25 @@
 package trinsdar.gt4r.tile.multi;
 
 import it.unimi.dsi.fastutil.objects.ObjectCollection;
+import muramasa.antimatter.capability.machine.MultiMachineItemHandler;
+import muramasa.antimatter.machine.event.ContentEvent;
+import muramasa.antimatter.machine.event.IMachineEvent;
 import muramasa.antimatter.tile.multi.TileEntityBasicMultiMachine;
+import muramasa.antimatter.util.LazyHolder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import muramasa.antimatter.machine.types.Machine;
+import net.minecraft.item.ItemStack;
 import trinsdar.gt4r.data.GT4RData;
+import trinsdar.gt4r.machine.IBFItemHandler;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static muramasa.antimatter.machine.MachineFlag.CELL;
+import static muramasa.antimatter.machine.MachineFlag.ITEM;
 
 public class TileEntityElectricBlastFurnace extends TileEntityBasicMultiMachine {
 
@@ -18,6 +27,7 @@ public class TileEntityElectricBlastFurnace extends TileEntityBasicMultiMachine 
 
     public TileEntityElectricBlastFurnace(Machine type) {
         super(type);
+        this.itemHandler = type.has(ITEM) || type.has(CELL) ? LazyHolder.of(() -> new IBFItemHandler(this)) : LazyHolder.empty();
     }
 
 //    @Override
@@ -79,5 +89,28 @@ public class TileEntityElectricBlastFurnace extends TileEntityBasicMultiMachine 
         } else {
             return 0;
         }
+    }
+
+    @Override
+    public void onMachineEvent(IMachineEvent event, Object... data) {
+        if (event instanceof BFEvent){
+            heatingCapacity = getAllStates().stream().mapToInt(s -> (getHeatPerCasing(s.getBlock()))).sum();
+            ItemStack stack = (ItemStack) data[0];
+            if (!stack.isEmpty()){
+                if (stack.getItem() == GT4RData.KanthalHeatingCoil){
+                    heatingCapacity += (125 * stack.getCount());
+                } else {
+                    heatingCapacity += (250 * stack.getCount());
+                }
+            }
+            if (openContainer != null) {
+                openContainer.detectAndSendChanges();
+            }
+        }
+        super.onMachineEvent(event, data);
+    }
+
+    public enum BFEvent implements IMachineEvent{
+        SLOT_COIL_CHANGED
     }
 }

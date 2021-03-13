@@ -2,19 +2,25 @@ package trinsdar.gt4r.data;
 
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.Ref;
+import muramasa.antimatter.capability.machine.MachineItemHandler;
 import muramasa.antimatter.gui.BarDir;
 import muramasa.antimatter.gui.GuiData;
 import muramasa.antimatter.gui.MenuHandlerMachine;
+import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.gui.container.ContainerHatch;
 import muramasa.antimatter.gui.screen.ScreenHatch;
+import muramasa.antimatter.gui.slot.SlotInput;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.tile.multi.TileEntityHatch;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import trinsdar.gt4r.gui.ScreenHatchCustom;
+import trinsdar.gt4r.gui.SlotCoil;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+
+import java.util.Optional;
 
 import static muramasa.antimatter.gui.ButtonBody.*;
 import static muramasa.antimatter.gui.SlotType.*;
@@ -92,6 +98,7 @@ public class Guis {
         MASS_FABRICATOR.getGui().add(COMPRESSOR);
 
         COKE_OVEN.getGui().add(IT_IN, 53,16).add(IT_OUT,107,25);
+        BLAST_FURNACE.getGui().add(IT_IN, 35, 16).add(IT_IN, 53, 16).add(IT_IN, 35, 34).add(IT_IN, 53, 34).add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(ENERGY, 80, 63).add(SlotTypes.COIL, 8, 63);
 
         BATTERY_BUFFER_FOUR.getGui().add(ENERGY,71,27).add(ENERGY,89,27).add(ENERGY,71,45).add(ENERGY,89,45);
         BATTERY_BUFFER_ONE.getGui().add(ENERGY,80,40);
