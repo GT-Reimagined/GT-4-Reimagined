@@ -46,7 +46,13 @@ public class BlockTurbineCasing extends BlockConnectedCasing {
             ct[1] = c;
         }
         ct[0] = conf[0];
-        return config.set(ct);
+        ModelConfig con = config.set(ct);
+        //This is what you call a "hack". This ensures that if there is no turbine
+        //It returns a config of size 1 instead, otherwise it will incorrectly render the textures.
+        if (con.getConfig()[0] == -1) {
+            con.set(new int[]{con.getConfig()[1]});
+        }
+        return con;
     }
 
     protected Texture[] turbineTextures() {
