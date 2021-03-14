@@ -10,24 +10,14 @@ pluginManagement {
 
     }
 }
-/*
-includeBuild('antimatter') {
 
-}*/
-
-//The following are to add these projects as IDEA modules.
-//They aren't actually necessary.
-/*
-includeBuild('antimatter/tesseract/forge') {
-
+def folder = new File( 'AntimatterAPI' )
+if(folder.exists() ) {
+    include 'AntimatterAPI'
+    project(':AntimatterAPI').setProjectDir(new File("AntimatterAPI"))
+    def tesseract = new File( 'AntimatterAPI/TesseractAPI')
+    if (tesseract.exists()) {
+        include 'TesseractAPI'
+        project(':TesseractAPI').setProjectDir(new File("AntimatterAPI/TesseractAPI"))
+    }
 }
-
-includeBuild('antimatter/tesseract') {
-
-}*/
-
-include 'tesseract'
-include 'antimatter'
-
-project(':tesseract').setProjectDir(new File("antimatter/tesseract"))
-project(':antimatter').setProjectDir(new File("antimatter"))
