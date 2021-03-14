@@ -30,7 +30,7 @@ public class Materials {
     public static Material Manganese = new Material(Ref.ID, "manganese", 0xfafafa, DULL, Mn).asMetal(1519, 0);
     public static Material Nickel = new Material(Ref.ID, "nickel", 0xc8c8fa, METALLIC, Ni).asMetal(1728, 0, PLATE).asPlasma();
     public static Material Osmium = new Material(Ref.ID, "osmium", 0x3232ff, METALLIC, Os).asMetal(3306, 3306, PLATE, ROD);
-    public static Material Platinum = new Material(Ref.ID, "platinum", 0xffffc8, SHINY, Pt).asMetal(2041, 0, PLATE, ROD);
+    public static Material Platinum = new Material(Ref.ID, "platinum", 0xffffc8, SHINY, Pt).asMetal(2041, 0, PLATE, ROD, ORE);
     public static Material Plutonium = new Material(Ref.ID, "plutonium_244", 0xf03232, METALLIC, Pu).asMetal(912, 0);
     public static Material Silver = new Material(Ref.ID, "silver", 0xdcdcff, SHINY, Ag).asMetal(1234, 0, PLATE);
     public static Material Thorium = new Material(Ref.ID, "thorium", 0x001e00, SHINY, Th).asMetal(2115, 0);
@@ -224,6 +224,7 @@ public class Materials {
     public static Material HighPressure = new Material(Ref.ID, "high_pressure", 0xc80000, NONE);
     public static Material HighCapacity = new Material(Ref.ID, "high_capacity", 0xb00b69, NONE);
     public static Material PlasmaContainment = new Material(Ref.ID, "plasma_containment", 0xffff00, NONE);
+    public static Material Quartz = new Material(Ref.ID, "quartz", 0xffffff, NONE);
 
     /** VANILLA **/
     public static Material Netherite = new Material(Ref.ID, "netherite", 0x2D2425, ROUGH).asSolid(PLATE);
@@ -273,6 +274,7 @@ public class Materials {
         Ruby.remove(ORE_SMALL, ROCK);
         Sapphire.remove(ORE_SMALL, ROCK);
         Olivine.remove(ORE_SMALL, ROCK);
+        Platinum.remove(ORE_SMALL, ROCK);
 
         Iron.setSmeltInto(Iron).setMacerateInto(Iron);
         WroughtIron.setSmeltInto(Iron).setMacerateInto(Iron);
@@ -290,6 +292,8 @@ public class Materials {
         Redstone.setOreMulti(5).setSmeltingMulti(5);
         Glowstone.setOreMulti(5).setSmeltingMulti(5);
         // ore byproducts
+        // eligible: cinnabar, uranium, copper, cassiterite, pyrite, sodalite-special:4x byproduct, sphalerite, tetra, bauxite 4x bypoduct, lead, tin, galena, iron, gold, platinum aka sheldonite, nickel, tungstate
+        // gems & iridium will be separate redstone, lapis
         Gold.addByProduct(Copper, Nickel);
         Iron.addByProduct(Nickel, Tin);
         Iridium.addByProduct(Platinum, Osmium);
@@ -313,6 +317,7 @@ public class Materials {
         Redstone.addByProduct(Cinnabar, RareEarth, Glowstone);
         Lapis.addByProduct(Lazurite, Sodalite, Pyrite);
         Diamond.addByProduct(Carbon/*Graphite*/);
+        Platinum.addByProduct(Nickel, Iridium);
 
         //ore byproducts from non vanilla/gt4r ores
         Nickel.addByProduct(Iron, Platinum);
@@ -322,7 +327,6 @@ public class Materials {
         RedGarnet.addByProduct(Spessartine, Pyrope, Almandine);
         YellowGarnet.addByProduct(Andradite, Grossular);
         Tungsten.addByProduct(Manganese);
-        Platinum.addByProduct(Nickel, Iridium);
         Thorium.addByProduct(Uranium, Lead);
 
         //other byproducts

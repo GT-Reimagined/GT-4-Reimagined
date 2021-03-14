@@ -16,6 +16,7 @@ import trinsdar.gt4r.loader.WorldGenLoader;
 import trinsdar.gt4r.loader.machines.*;
 import trinsdar.gt4r.loader.machines.generator.SteamFuels;
 import trinsdar.gt4r.loader.multi.ElectricBlasting;
+import trinsdar.gt4r.loader.multi.IndustrialGrinder;
 import trinsdar.gt4r.loader.multi.VacFreezer;
 import trinsdar.gt4r.proxy.ClientHandler;
 import net.minecraftforge.fml.common.Mod;
@@ -63,6 +64,7 @@ public class GT4Renewed extends AntimatterMod {
         loader.add(WiremillLoader::init);
         loader.add(WasherLoader::init);
         loader.add(ElectricBlasting::init);
+        loader.add(IndustrialGrinder::init);
         loader.add(BendingLoader::init);
         loader.add(ForgeHammerLoader::init);
         loader.add(AssemblyLoader::init);

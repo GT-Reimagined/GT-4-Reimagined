@@ -28,12 +28,12 @@ public class CentrifugingLoader {
     public static void init() {
         DUST_IMPURE.all().forEach(dust -> {
             if (dust.hasByProducts()) CENTRIFUGING.RB().ii(of(DUST_IMPURE.get(dust),1)).io(new ItemStack(DUST.get(dust), 1), DUST_TINY.get(dust.getByProducts().get(0), 1)).add(400, 2);
-            else CENTRIFUGING.RB().ii(of(DUST_IMPURE.get(dust),1)).io(new ItemStack(DUST.get(dust), 1)).chances(100, 10).add(400, 2);
+            else CENTRIFUGING.RB().ii(of(DUST_IMPURE.getMaterialTag(dust),1)).io(new ItemStack(DUST.get(dust), 1)).chances(100, 10).add(400, 2);
         });
 
         DUST_PURE.all().forEach(dust -> {
             if (dust.hasByProducts()) CENTRIFUGING.RB().ii(of(DUST_PURE.get(dust),1)).io(new ItemStack(DUST.get(dust), 1), DUST_TINY.get((dust.getByProducts().size() > 1 ? dust.getByProducts().get(1) : dust.getByProducts().get(0)), 1)).add(400, 2);
-            else CENTRIFUGING.RB().ii(of(DUST_PURE.get(dust),1)).io(new ItemStack(DUST.get(dust), 1)).chances(100, 10).add(400, 2);
+            else CENTRIFUGING.RB().ii(of(DUST_PURE.getMaterialTag(dust),1)).io(new ItemStack(DUST.get(dust), 1)).chances(100, 10).add(400, 2);
         });
         add(Lava, 16, 16, 4687);
         add(EnderEye, 10, 792);
@@ -43,9 +43,9 @@ public class CentrifugingLoader {
         CENTRIFUGING.RB().ii(of(MYCELIUM, 64)).io(new ItemStack(SAND, 32), new ItemStack(CLAY_BALL, 8), new ItemStack(BROWN_MUSHROOM, 16), new ItemStack(RED_MUSHROOM, 16)).add(3906, 16);
         add(Lapis,20, 1792);
         CENTRIFUGING.RB().ii(of(StickyResin, 8)).io(DUST.get(Rubber, 28), new ItemStack(Plantball, 4)).add(1250,10);
-        CENTRIFUGING.RB().ii(of(DUST.get(Netherrack, 64))).io(new ItemStack(GOLD_NUGGET, 4), new ItemStack(REDSTONE, 4), new ItemStack(GUNPOWDER, 8), DUST.get(Coal, 4), DUST.get(Sulfur, 4), DUST.get(Phosphor, 2)).add(3125,16);
+        CENTRIFUGING.RB().ii(of(DUST.getMaterialTag(Netherrack), 64)).io(new ItemStack(GOLD_NUGGET, 4), new ItemStack(REDSTONE, 4), new ItemStack(GUNPOWDER, 8), DUST.get(Coal, 4), DUST.get(Sulfur, 4), DUST.get(Phosphor, 2)).add(3125,16);
         add(Granite, 16, 1500);
-        CENTRIFUGING.RB().ii(of(DUST.get(Diorite, 16))).io(DUST.get(Nickel, 1)).add(2250, 16);
+        CENTRIFUGING.RB().ii(of(DUST.getMaterialTag(Diorite), 16)).io(DUST.get(Nickel, 1)).add(2250, 16);
         add(Electrum, 16, 312);
         add(Invar, 16, 312);
         add(Bronze, 16, 312);
@@ -61,7 +61,7 @@ public class CentrifugingLoader {
         CENTRIFUGING.RB().fi(Hydrogen.getGas(4000)).fo(Deuterium.getGas(1000)).add(300, 20);
         CENTRIFUGING.RB().fi(Deuterium.getGas(4000)).fo(Tritium.getGas(1000)).add(300, 20);
         CENTRIFUGING.RB().fi(Helium.getGas(16000)).fo(Helium3.getGas(1000)).add(900, 20);
-        CENTRIFUGING.RB().ii(of(DUST.get(Glowstone, 16))).io(new ItemStack(REDSTONE, 8), DUST.get(Gold, 8)).fo(Helium.getGas(1000)).add(1562, 16);
+        CENTRIFUGING.RB().ii(of(DUST.getMaterialTag(Glowstone), 16)).io(new ItemStack(REDSTONE, 8), DUST.get(Gold, 8)).fo(Helium.getGas(1000)).add(1562, 16);
         add(Redstone, 20, 1750);
         CENTRIFUGING.RB().ii(of(MAGMA_BLOCK, 64)).fo(new FluidStack(Fluids.LAVA.getFluid(), 64000)).add(187, 16);
         CENTRIFUGING.RB().ii(of(ROTTEN_FLESH, 16)).io(new ItemStack(LEATHER, 4), new ItemStack(SLIME_BALL)).fo(Methane.getGas(4000)).add(375, 16);
@@ -101,10 +101,10 @@ public class CentrifugingLoader {
         addMethaneRecipe(ENCHANTED_GOLDEN_APPLE, 1, new ItemStack(GOLD_INGOT, 64));
         addMethaneRecipe(GOLDEN_CARROT, 1, new ItemStack(GOLD_NUGGET, 6));
         addMethaneRecipe(GLISTERING_MELON_SLICE, 8, new ItemStack(GOLD_NUGGET, 6));
-        CENTRIFUGING.RB().ii(of(DUST.get(Endstone, 64))).io(new ItemStack(SAND, 48), DUST.get(Tungsten, 1)).fo(Helium.getGas(4000), Helium3.getGas(4000)).add(19500,16);
+        CENTRIFUGING.RB().ii(of(DUST.getMaterialTag(Endstone), 64)).io(new ItemStack(SAND, 48), DUST.get(Tungsten, 1)).fo(Helium.getGas(4000), Helium3.getGas(4000)).add(19500,16);
         add(RedGarnet, 16, 937);
         add(YellowGarnet, 16, 1093);
-        CENTRIFUGING.RB().ii(of(DUST.get(DarkAsh, 2))).io(DUST.get(Ash, 2)).add(78, 16);
+        CENTRIFUGING.RB().ii(of(DUST.getMaterialTag(DarkAsh), 2)).io(DUST.get(Ash, 2)).add(78, 16);
         //add(RedRock, 16, 2400); // 8 calcite, 4 flint, 4 clay
         add(Marble, 16, 329);
         add(Basalt, 16, 1500);
@@ -141,11 +141,11 @@ public class CentrifugingLoader {
             }
         } else {
             if (fluidStacks.isEmpty()){
-                CENTRIFUGING.RB().ii(AntimatterIngredient.of(DUST.get(mat), count)).io(
+                CENTRIFUGING.RB().ii(AntimatterIngredient.of(DUST.getMaterialTag(mat), count)).io(
                         mat.getProcessInto().stream().filter(t -> DUST.allowGen(t.m)).map(t -> new ItemStack(DUST.get(t.m), t.s))
                                 .toArray(ItemStack[]::new)).add(duration, euT);
             } else {
-                CENTRIFUGING.RB().ii(AntimatterIngredient.of(DUST.get(mat), count)).io(
+                CENTRIFUGING.RB().ii(AntimatterIngredient.of(DUST.getMaterialTag(mat), count)).io(
                         mat.getProcessInto().stream().filter(t -> DUST.allowGen(t.m)).map(t -> new ItemStack(DUST.get(t.m), t.s))
                                 .toArray(ItemStack[]::new)).fo(fluidStacks.toArray(new FluidStack[0])).add(duration, euT);
             }
