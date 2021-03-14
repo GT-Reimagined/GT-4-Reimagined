@@ -24,6 +24,7 @@ public class RecipeMaps {
     public static RecipeMap ALLOY_SMELTING = new RecipeMap<>("alloy_smelting", new AlloySmeltingBuilder());
     public static RecipeMap ASSEMBLING = new RecipeMap<>("assembling", new RecipeBuilder());
     public static RecipeMap AUTOCLAVING = new RecipeMap<>("autoclaving", new RecipeBuilder());
+    public static RecipeMap BATHING = new RecipeMap<>("bathing", new RecipeBuilder());
     public static RecipeMap BENDING = new RecipeMap<>("plate_bending", new RecipeBuilder());
     public static RecipeMap CANNING = new RecipeMap<>("canning", new RecipeBuilder());
     public static RecipeMap CENTRIFUGING = new RecipeMap<>("centrifuging", new RecipeBuilder());
@@ -49,6 +50,7 @@ public class RecipeMaps {
     public static RecipeMap FLUID_SOLIDIFYING = new RecipeMap<>("fluid_solidifying", new RecipeBuilder());
     public static RecipeMap HAMMERING = new RecipeMap<>("hammering", new HammeringBuilder());
     public static RecipeMap SIFTING = new RecipeMap<>("sifting", new RecipeBuilder());
+
 
     public static RecipeMap STEAM_SMELTING = new RecipeMap<>("steam_smelting", new RecipeBuilder(), SteamRecipeInfoRenderer.INSTANCE);
     public static RecipeMap STEAM_MACERATING = new RecipeMap<>("steam_macerating", new RecipeBuilder(), SteamRecipeInfoRenderer.INSTANCE);

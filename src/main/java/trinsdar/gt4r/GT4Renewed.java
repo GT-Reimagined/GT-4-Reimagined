@@ -71,6 +71,7 @@ public class GT4Renewed extends AntimatterMod {
         loader.add(ChemicalReactorLoader::init);
         loader.add(SteamFuels::init);
         loader.add(FluidExtractorLoader::init);
+        loader.add(BathingLoader::init);
 
         loader.add(ElectrolyzerLoader::init);
         loader.add(FluidCanningLoader::init);
