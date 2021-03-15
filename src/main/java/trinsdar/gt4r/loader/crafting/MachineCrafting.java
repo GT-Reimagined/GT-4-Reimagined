@@ -1,11 +1,13 @@
 package trinsdar.gt4r.loader.crafting;
 
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
+import muramasa.antimatter.pipe.PipeSize;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.Items;
 import net.minecraftforge.common.Tags;
 import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.data.GT4RData;
 
 import java.util.function.Consumer;
 
@@ -68,6 +70,8 @@ public class MachineCrafting {
                 CENTRIFUGE.getItem(LV), of('C', getForgeItemTag("circuits/advanced"), 'E', EXTRACTOR.getItem(LV), 'S', getForgeItemTag("plates/steels"), 'M', getForgeItemTag("machine_hull/basic")), "SCS", "MEM", "SCS");
         provider.addItemRecipe(output, Ref.ID,"universal_macerator","machines", "has_macerator", provider.hasSafeItem(MACERATOR.getItem(LV)),
                 UNIVERSAL_MACERATOR.getItem(MV), of('D', getForgeItemTag("grinding_head"), 'M', MACERATOR.getItem(LV), 'S', PLATE.getMaterialTag(Titanium), 'H', getForgeItemTag("machine_hull/very_advanced")), "SDS", "SMS", "SHS");
+        provider.addItemRecipe(output, Ref.ID,"fluid_canner","machines", "has_conveyor_module", provider.hasSafeItem(ConveyorModule),
+                FLUID_CANNER.getItem(LV), of('C', getForgeItemTag("circuits/basic"), 'c', CANNER.getItem(LV), 'T', getForgeItemTag("plates/tin"), 'P', FLUID_PIPE_BRONZE.getBlockItem(PipeSize.SMALL), 'E', CellTin), " C ", "EcE", "TPT");
 
     }
 }
