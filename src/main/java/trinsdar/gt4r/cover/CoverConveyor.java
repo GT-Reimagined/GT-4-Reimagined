@@ -27,6 +27,7 @@ public class CoverConveyor extends Cover {
 
     public CoverConveyor() {
         super();
+        register();
     }
 
     //Useful for using the same model for multiple tiers where id is dependent on tier.

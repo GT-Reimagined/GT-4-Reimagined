@@ -2,20 +2,14 @@ package trinsdar.gt4r.loader.crafting;
 
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.pipe.PipeSize;
-import net.minecraft.block.Blocks;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.Items;
-import net.minecraftforge.common.Tags;
 import trinsdar.gt4r.Ref;
-import trinsdar.gt4r.data.GT4RData;
 
 import java.util.function.Consumer;
 
 import static com.google.common.collect.ImmutableMap.of;
-import static muramasa.antimatter.Data.DUST;
-import static muramasa.antimatter.Data.GEM;
-import static muramasa.antimatter.Data.PLATE;
-import static muramasa.antimatter.Data.WRENCH;
+import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.machine.Tier.*;
 import static muramasa.antimatter.util.Utils.getForgeItemTag;
 import static trinsdar.gt4r.data.GT4RData.*;
@@ -72,6 +66,36 @@ public class MachineCrafting {
                 UNIVERSAL_MACERATOR.getItem(MV), of('D', getForgeItemTag("grinding_head"), 'M', MACERATOR.getItem(LV), 'S', PLATE.getMaterialTag(Titanium), 'H', getForgeItemTag("machine_hull/very_advanced")), "SDS", "SMS", "SHS");
         provider.addItemRecipe(output, Ref.ID,"fluid_canner","machines", "has_conveyor_module", provider.hasSafeItem(ConveyorModule),
                 FLUID_CANNER.getItem(LV), of('C', getForgeItemTag("circuits/basic"), 'c', CANNER.getItem(LV), 'T', getForgeItemTag("plates/tin"), 'P', FLUID_PIPE_BRONZE.getBlockItem(PipeSize.SMALL), 'E', CellTin), " C ", "EcE", "TPT");
+        provider.addItemRecipe(output, Ref.ID,"large_gas_turbine","machines", "has_gas_turbine", provider.hasSafeItem(GAS_TURBINE.getItem(LV)),
+                LARGE_GAS_TURBINE.getItem(IV), of('G', GAS_TURBINE.getItem(LV), 'T', getForgeItemTag("gears/titantungsteel"), 'H', getForgeItemTag("machine_hull/very_advanced"), 'C', getForgeItemTag("circuits/master")), "GGG", "THT", "GCG");
+        provider.addItemRecipe(output, Ref.ID,"large_steam_turbine","machines", "has_steam_turbine", provider.hasSafeItem(STEAM_TURBINE.getItem(LV)),
+                LARGE_STEAM_TURBINE.getItem(EV), of('G', STEAM_TURBINE.getItem(LV), 'T', getForgeItemTag("gears/steels"), 'H', getForgeItemTag("machine_hull/basic"), 'C', getForgeItemTag("circuits/advanced")), "GGG", "THT", "GCG");
+        provider.addItemRecipe(output, Ref.ID,"thermal_boiler","machines", "has_thermal_generator", provider.hasSafeItem(THERMAL_GENERATOR.getItem(LV)),
+                THERMAL_BOILER.getItem(LV), of('G', THERMAL_GENERATOR.getItem(LV), 'T', getForgeItemTag("gears/titantungsteel"), 'M', CENTRIFUGE.getItem(LV), 'C', getForgeItemTag("circuits/elite")), "GMG", "TCT", "GMG");
+        provider.addItemRecipe(output, Ref.ID,"lathe","machines", "has_conveyor_module", provider.hasSafeItem(ConveyorModule),
+                LATHE.getItem(LV), of('c', ConveyorModule, 'G', getForgeItemTag("gears/steels"), 'H', getForgeItemTag("machine_hull/basic"), 'C', getForgeItemTag("circuits/advanced"), 'P',  getForgeItemTag("plates/steels")), "PCP", "GcG", "PHP");
+        provider.addItemRecipe(output, Ref.ID,"cutter","machines", "has_sawblade", provider.hasSafeItem(DiamondSawBlade),
+                CUTTER.getItem(LV), of('D', DiamondSawBlade, 'G', getForgeItemTag("gears/steels"), 'H', getForgeItemTag("machine_hull/basic"), 'C', getForgeItemTag("circuits/advanced"), 'P',  getForgeItemTag("plates/steels")), "PCP", "GDG", "PHP");
+        provider.addItemRecipe(output, Ref.ID,"small_coil_boiler","machines", "has_wrench", provider.hasSafeItem(WRENCH.getTag()),
+                COAL_BOILER.getItem(BRONZE), of( 'P',  getForgeItemTag("plates/bronze"), 'W', WRENCH.getTag(), 'B', Items.BRICKS, 'F', Items.FURNACE), "PPP", "PWP", "BFB");
+        provider.addItemRecipe(output, Ref.ID,"steam_macerator","machines", "has_wrench", provider.hasSafeItem(WRENCH.getTag()),
+                STEAM_MACERATOR.getItem(BRONZE), CraftingHelper.of2( 'P',  getForgeItemTag("plates/bronze"), 'W', WRENCH.getTag(), 'H', HAMMER.getTag(), 'D', GEM.getMaterialTag(Diamond), 'M', getForgeItemTag("machine_hull/cheap"), 'p', getForgeItemTag("pistons"), 'G', GEAR.getMaterialTag(Bronze)), "WDH", "GMG", "PpP");
+        provider.addItemRecipe(output, Ref.ID,"steam_furnace","machines", "has_wrench", provider.hasSafeItem(WRENCH.getTag()),
+                STEAM_FURNACE.getItem(BRONZE), of( 'P',  getForgeItemTag("plates/bronze"), 'W', WRENCH.getTag(), 'B', Items.BRICKS, 'F', Items.FURNACE, 'M', getForgeItemTag("machine_hull/cheap")), "PWP", "PFP", "BMB");
+        provider.addItemRecipe(output, Ref.ID,"steam_alloy_smelter","machines", "has_wrench", provider.hasSafeItem(WRENCH.getTag()),
+                STEAM_ALLOY_SMELTER.getItem(BRONZE), of( 'P',  getForgeItemTag("plates/bronze"), 'W', WRENCH.getTag(), 'B', Items.BRICKS, 'F', STEAM_FURNACE.getItem(BRONZE)), "PPP", "FWF", "BBB");
+        provider.addItemRecipe(output, Ref.ID,"steam_forge_hammer","machines", "has_wrench", provider.hasSafeItem(WRENCH.getTag()),
+                STEAM_FORGE_HAMMER.getItem(BRONZE), of( 'B',  getForgeItemTag("plates/bronze"), 'W', WRENCH.getTag(), 'G', GEAR.getMaterialTag(Bronze), 'P', getForgeItemTag("pistons"), 'M', getForgeItemTag("machine_hull/cheap")), "GPG", "BWB", "BMB");
+        provider.addItemRecipe(output, Ref.ID,"steam_compressor","machines", "has_wrench", provider.hasSafeItem(WRENCH.getTag()),
+                STEAM_COMPRESSOR.getItem(BRONZE), of( 'B',  getForgeItemTag("plates/bronze"), 'W', WRENCH.getTag(), 'G', GEAR.getMaterialTag(Bronze), 'P', getForgeItemTag("pistons"), 'M', getForgeItemTag("machine_hull/cheap")), "BGB", "PWP", "BMB");
+        provider.addItemRecipe(output, Ref.ID,"steam_extractor","machines", "has_wrench", provider.hasSafeItem(WRENCH.getTag()),
+                STEAM_EXTRACTOR.getItem(BRONZE), of( 'B',  getForgeItemTag("plates/bronze"), 'W', WRENCH.getTag(),'P', getForgeItemTag("pistons"), 'M', getForgeItemTag("machine_hull/cheap")), "BBB", "PWP", "BMB");
+        provider.addItemRecipe(output, Ref.ID,"high_pressure_coil_boiler","machines", "has_wrench", provider.hasSafeItem(WRENCH.getTag()),
+                COAL_BOILER.getItem(STEEL), of( 'P',  getForgeItemTag("plates/steels"), 'W', WRENCH.getTag(), 'B', Items.BRICKS, 'F', Items.FURNACE), "PPP", "PWP", "BFB");
+        provider.addItemRecipe(output, Ref.ID,"high_pressure_steam_furnace","machines", "has_wrench", provider.hasSafeItem(WRENCH.getTag()),
+                STEAM_FURNACE.getItem(STEEL), of( 'P',  getForgeItemTag("plates/steels"), 'W', WRENCH.getTag(), 'B', Items.BRICKS, 'F', Items.FURNACE, 'M', getForgeItemTag("machine_hull/semi_cheap")), "PWP", "PFP", "BMB");
+
 
     }
+
 }

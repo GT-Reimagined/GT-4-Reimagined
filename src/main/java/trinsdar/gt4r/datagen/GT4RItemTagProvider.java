@@ -5,6 +5,7 @@ import muramasa.antimatter.datagen.providers.AntimatterItemTagProvider;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.item.Items;
 import net.minecraft.tags.ITag;
 import net.minecraft.item.Item;
 
@@ -27,11 +28,16 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.getOrCreateBuilder(getTag("circuits/master")).add(CircuitEnergyFlow);
         this.getOrCreateBuilder(getTag("circuits/data")).add(CircuitDataStorage);
         this.getOrCreateBuilder(getTag("circuits/ultimate")).add(CircuitDataOrb);
-        this.getOrCreateBuilder(getTag("machine_hull/cheap")).add(HULL.get(Bronze), HULL.get(Brass), HULL.get(WroughtIron));
+        this.getOrCreateBuilder(getTag("machine_hull/cheap")).add(HULL.get(Bronze), HULL.get(Brass), HULL.get(WroughtIron), HULL.get(Aluminium));
+        this.getOrCreateBuilder(getTag("machine_hull/semi_cheap")).add(HULL.get(WroughtIron), HULL.get(Aluminium));
         this.getOrCreateBuilder(getTag("machine_hull/basic")).add(HULL.get(Steel), HULL.get(StainlessSteel), HULL.get(Aluminium));
         this.getOrCreateBuilder(getTag("machine_hull/advanced")).add(HULL.get(TungstenSteel), HULL.get(Titanium));
         this.getOrCreateBuilder(getTag("machine_hull/very_advanced")).add(HULL.get(TungstenSteel), HULL.get(Titanium));
         this.getOrCreateBuilder(getTag("grinding_head")).add(DiamondGrindHead, TungstenGrindHead);
+        this.getOrCreateBuilder(getTag("pistons")).add(Items.PISTON, Items.STICKY_PISTON);
+        this.getOrCreateBuilder(getTag("gears/titantungsteel")).addTag(getTag("gears/titanium")).addTag(getTag("gears/tungstensteel"));
+        this.getOrCreateBuilder(getTag("gears/steels")).addTag(getTag("gears/steel")).addTag(getTag("gears/stainless_steel"));
+
     }
 
     public ITag.INamedTag<Item> getTag(String id){

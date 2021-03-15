@@ -2,26 +2,15 @@ package trinsdar.gt4r.data;
 
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.Ref;
-import muramasa.antimatter.capability.machine.MachineItemHandler;
 import muramasa.antimatter.gui.BarDir;
 import muramasa.antimatter.gui.GuiData;
 import muramasa.antimatter.gui.MenuHandlerMachine;
-import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.gui.container.ContainerHatch;
-import muramasa.antimatter.gui.screen.ScreenHatch;
-import muramasa.antimatter.gui.slot.SlotInput;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.tile.multi.TileEntityHatch;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.api.distmarker.Dist;
-import trinsdar.gt4r.gui.ScreenHatchCustom;
-import trinsdar.gt4r.gui.SlotCoil;
-
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import java.util.Optional;
 
 import static muramasa.antimatter.gui.ButtonBody.*;
 import static muramasa.antimatter.gui.SlotType.*;
@@ -30,12 +19,12 @@ import static trinsdar.gt4r.data.Machines.*;
 
 public class Guis {
 
-    //TODO move these to the API somehow
-    public static GuiData MULTI_DISPLAY = new GuiData("antimatter", "multi_display").add(IT_IN, 17, 16).add(IT_IN, 35, 16).add(IT_IN, 53, 16).add(IT_IN, 17, 34).add(IT_IN, 35, 34).add(IT_IN, 53, 34).add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 143, 16).add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(IT_OUT, 143, 34).add(FL_IN, 17, 63).add(FL_IN, 35, 63).add(FL_IN, 53, 63).add(FL_OUT, 107, 63).add(FL_OUT, 125, 63).add(FL_OUT, 143, 63);
-    public static GuiData MULTI_DISPLAY_COMPACT = new GuiData("antimatter", "multi_display").add(MULTI_DISPLAY).setPadding(0, 0, 0, 0);
+    public static GuiData MULTI_DISPLAY = new GuiData("gt4r", "multi_display").add(IT_IN, 17, 16).add(IT_IN, 35, 16).add(IT_IN, 53, 16).add(IT_IN, 17, 34).add(IT_IN, 35, 34).add(IT_IN, 53, 34).add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 143, 16).add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(IT_OUT, 143, 34).add(FL_IN, 17, 63).add(FL_IN, 35, 63).add(FL_IN, 53, 63).add(FL_OUT, 107, 63).add(FL_OUT, 125, 63).add(FL_OUT, 143, 63);
+    public static GuiData MULTI_DISPLAY_MORE_FLUID = new GuiData("gt4r", "multi_display_more_fluid").add(IT_IN, 17, 16).add(IT_IN, 35, 16).add(IT_IN, 53, 16).add(IT_IN, 17, 34).add(IT_IN, 35, 34).add(IT_IN, 53, 34).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25).add(IT_OUT, 143, 25).add(FL_IN, 17, 63).add(FL_IN, 35, 63).add(FL_IN, 53, 63).add(FL_OUT, 107, 63).add(FL_OUT, 125, 63).add(FL_OUT, 143, 63).add(FL_OUT, 107, 45).add(FL_OUT, 125, 45).add(FL_OUT, 143, 45);
+    public static GuiData MULTI_DISPLAY_COMPACT = new GuiData("gt4r", "multi_display").add(MULTI_DISPLAY).setPadding(0, 0, 0, 0);
     public static GuiData BASIC_TANK = new GuiData("antimatter", "basic_tank").add(CELL_IN, 9, 22).add(CELL_OUT, 9, 58).add(FL_IN, 106, 43);
 
-    public static GuiData ORE_BYPRODUCTS = new GuiData("antimatter", "ore_byproducts") {
+    public static GuiData ORE_BYPRODUCTS = new GuiData("gt4r", "ore_byproducts") {
         @Override
         public ResourceLocation getTexture(Tier tier,String type) {
             return new ResourceLocation(loc.getNamespace(), "textures/gui/" + loc.getPath() + ".png");
@@ -55,9 +44,8 @@ public class Guis {
 //        GregTechAPI.registerJEICategory(RecipeMaps.SMELTING, Guis.MULTI_DISPLAY_COMPACT);
         AntimatterAPI.registerJEICategory(RecipeMaps.STEAM_FUELS, Guis.MULTI_DISPLAY_COMPACT);
         AntimatterAPI.registerJEICategory(RecipeMaps.GAS_FUELS, Guis.MULTI_DISPLAY_COMPACT);
-        AntimatterAPI.registerJEICategory(RecipeMaps.COMBUSTION_FUELS, Guis.MULTI_DISPLAY_COMPACT);
-        AntimatterAPI.registerJEICategory(RecipeMaps.NAQUADAH_FUELS, Guis.MULTI_DISPLAY_COMPACT);
-        AntimatterAPI.registerJEICategory(RecipeMaps.PLASMA_FUELS, Guis.MULTI_DISPLAY_COMPACT);
+        AntimatterAPI.registerJEICategory(RecipeMaps.DIESEL_FUELS, Guis.MULTI_DISPLAY_COMPACT);
+        AntimatterAPI.registerJEICategory(RecipeMaps.LAVA_FUELS, Guis.MULTI_DISPLAY_COMPACT);
 
         //TODO changing slots of a machine in world, will crash from GTItemHandler.validateSlot()
 
@@ -119,8 +107,8 @@ public class Guis {
         STEAM_MACERATOR.getGui().add(STEEL, MACERATOR).add(STEEL, FL_IN, 53, 63);
         STEAM_FORGE_HAMMER.getGui().add(BRONZE, FORGE_HAMMER).add(BRONZE, FL_IN, 53, 63);
 
-        STEAM_GENERATOR.getGui().add(BASIC_TANK);
-        GAS_GENERATOR.getGui().add(BASIC_TANK);
+        STEAM_TURBINE.getGui().add(BASIC_TANK);
+        GAS_TURBINE.getGui().add(BASIC_TANK);
 
         INFINITE_STEAM.getGui().add(BASIC_TANK);
 

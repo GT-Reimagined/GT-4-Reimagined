@@ -16,6 +16,7 @@ public class CoverPump extends Cover {
 
     public CoverPump() {
         super();
+        register();
     }
 
     @Override

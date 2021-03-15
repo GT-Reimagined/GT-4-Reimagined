@@ -26,6 +26,5 @@ public class GT4RBlockTagProvider extends AntimatterBlockTagProvider {
         this.getOrCreateBuilder(BlockTags.LEAVES).add(GT4RData.RUBBER_LEAVES);
         this.getOrCreateBuilder(BlockTags.SAPLINGS).add(GT4RData.RUBBER_SAPLING);
         this.getOrCreateBuilder(Utils.getForgeBlockTag("machine_hull/advanced")).add(ADVANCED_MACHINE_BLOCK);
-        this.getOrCreateBuilder(Utils.getForgeBlockTag("pistons")).add(Blocks.PISTON, Blocks.STICKY_PISTON);
     }
 }
