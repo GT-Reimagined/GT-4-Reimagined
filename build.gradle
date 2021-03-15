@@ -44,6 +44,28 @@ sourceSets {
     }
 }
 
+def shouldCheckEnv() {
+    return findProject(':AntimatterAPI') != null || findProject(':TesseractAPI') != null
+}
+
+def getEnv() {
+    String s = "gt4r%%${project.file('build/resources/main')}" + getPathSeparator() + "gt4r%%${project.file('build/classes/java/main')}"
+    if (findProject(':AntimatterAPI') != null) {
+        s += getPathSeparator() + "antimatter%%${project(':AntimatterAPI').file('build/resources/main')}" + getPathSeparator() + "antimatter%%${project(':AntimatterAPI').file('build/classes/java/main')}"
+    }
+    if (findProject(':TesseractAPI') != null) {
+        s += getPathSeparator() + "tesseract%%${project(':TesseractAPI').file('build/resources/main')}" + getPathSeparator() + "tesseract%%${project(':TesseractAPI').file('build/classes/java/main')}"
+    }
+    return s
+}
+import org.apache.tools.ant.taskdefs.condition.Os
+def getPathSeparator() {
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+        return ";"
+    }
+    return ":"
+}
+
 minecraft {
     // The mappings can be changed at any time, and must be in the following format.
     // snapshot_YYYYMMDD   Snapshot are built nightly.
@@ -62,10 +84,14 @@ minecraft {
             workingDirectory project.file('run')
 
             // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN'
+            property 'forge.logging.markers', 'DEBUG'
 
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
+            if (findProject(':AntimatterAPI') != null) arg "-mixin.config=antimatter.mixins.json"
+            if (shouldCheckEnv()) {
+                environment 'MOD_CLASSES', getEnv()
+            }
 
             mods {
                 gt4r {
@@ -76,12 +102,17 @@ minecraft {
 
         server {
             workingDirectory project.file('run')
-
+            property 'mixin.env.disableRefMap', 'true'
             // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN'
-
+            property 'forge.logging.markers', 'DEBUG'
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
+            //jvmArgs '-javaagent:/opt/JavaHot/hotswap-agent.jar -XX:TraceRedefineClasses=1'
+            //Comment this if you aren't developing against antimatter locally.
+            if (findProject(':AntimatterAPI') != null) arg "-mixin.config=antimatter.mixins.json"
+            if (shouldCheckEnv()) {
+                environment 'MOD_CLASSES', getEnv()
+            }
 
             mods {
                 gt4r {
@@ -92,13 +123,18 @@ minecraft {
 
         data {
             workingDirectory project.file('run')
-
+            property 'mixin.env.disableRefMap', 'true'
             // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN'
+            property 'forge.logging.markers', 'DEBUG'
+            //jvmArgs '-javaagent:/opt/JavaHot/hotswap-agent.jar -XX:TraceRedefineClasses=1'
+            //Comment this if you aren't developing against antimatter locally.
+            if (findProject(':AntimatterAPI') != null) arg "-mixin.config=antimatter.mixins.json"
 
+            if (shouldCheckEnv()) {
+                environment 'MOD_CLASSES', getEnv()
+            }
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
-
             args '--mod', 'gt4r', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources')
 
             mods {
@@ -118,16 +154,14 @@ dependencies {
     if (findProject(':AntimatterAPI') != null) {
         implementation project(':AntimatterAPI')
     } else {
-        implementation("com.github.GregTech-Intergalactical.AntimatterAPI:${antimatter_version}") {
-            transitive = false
-        }
+        runtimeOnly fg.deobf("com.github.GregTech-Intergalactical:AntimatterAPI:${antimatter_version}")
+        compileOnly ("com.github.GregTech-Intergalactical:AntimatterAPI:${antimatter_version}")
     }
     if (findProject(':TesseractAPI') != null) {
         compileOnly project(':TesseractAPI')
     } else {
-        compileOnly ("com.github.GregTech-Intergalactical:TesseractAPI:${tesseract_version}") {
-            transitive = false
-        }
+        runtimeOnly fg.deobf("com.github.GregTech-Intergalactical:TesseractAPI:${tesseract_version}")
+        compileOnly ("com.github.GregTech-Intergalactical:TesseractAPI:${tesseract_version}")
     }
 
     compileOnly fg.deobf("mezz.jei:jei-${jei_version}:api")
