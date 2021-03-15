@@ -1,21 +1,24 @@
 package trinsdar.gt4r.tree;
 
+import muramasa.antimatter.worldgen.AntimatterWorldGenerator;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.TreeFeature;
 
 import java.util.Random;
 
-public class RubberTreeFeature extends Feature<BaseTreeFeatureConfig> {
+public class RubberTreeFeature extends TreeFeature {
     public RubberTreeFeature() {
         super(BaseTreeFeatureConfig.CODEC);
     }
 
-    @Override
-    public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, BaseTreeFeatureConfig config) {
-        return false;
+    public void init() {
+        AntimatterWorldGenerator.register(a -> {
+            RubberTreeWorldGen.onEvent(a);
+        }, "rubber_tree", RubberTreeWorldGen.getValidBiomesStatic());
     }
 
     /*public boolean func_225557_a_(IWorldGenerationReader world, Random random, BlockPos pos, Set<BlockPos> set, Set<BlockPos> set1, MutableBoundingBox boundingBox, TreeFeatureConfig config) {

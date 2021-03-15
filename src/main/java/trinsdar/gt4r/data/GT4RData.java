@@ -75,17 +75,7 @@ public class GT4RData {
             builder.put(Tier.EV, CABLE_ALUMINIUM.getBlockItem(PipeSize.SMALL));
             TIER_CABLES = builder.build();
         }
-        {
-            ImmutableMap.Builder<Tier, Item> builder = ImmutableMap.builder();
-            builder.put(Tier.ULV, ROTOR.get(Bronze));
-            builder.put(Tier.LV, ROTOR.get(Bronze));
-            builder.put(Tier.MV, ROTOR.get(Steel));
-            builder.put(Tier.HV, ROTOR.get(StainlessSteel));
-            builder.put(Tier.EV, ROTOR.get(Titanium));
-            builder.put(Tier.IV, ROTOR.get(TungstenSteel));
-            TIER_ROTORS = builder.build();
-        }
-        {
+        /*{
             ImmutableMap.Builder<Tier, Item> builder = ImmutableMap.builder();
             builder.put(Tier.ULV, AntimatterAPI.get(FluidPipe.class, "fluid_"+Copper.getId()).getBlockItem(PipeSize.NORMAL));
             builder.put(Tier.LV, AntimatterAPI.get(FluidPipe.class, "fluid_"+Copper.getId()).getBlockItem(PipeSize.NORMAL));
@@ -94,7 +84,7 @@ public class GT4RData {
             builder.put(Tier.EV, AntimatterAPI.get(FluidPipe.class, "fluid_"+Titanium.getId()).getBlockItem(PipeSize.NORMAL));
             builder.put(Tier.IV, AntimatterAPI.get(FluidPipe.class, "fluid_"+TungstenSteel.getId()).getBlockItem(PipeSize.NORMAL));
             TIER_PIPES = builder.build();
-        }
+        }*/
     }
 
     public static void init() {

@@ -1,6 +1,7 @@
 package trinsdar.gt4r.tree;
 
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
+import net.minecraft.world.server.ServerWorld;
 import trinsdar.gt4r.data.GT4RData;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -33,20 +34,19 @@ public class RubberTree extends Tree {
 
     @Override
     protected ConfiguredFeature<BaseTreeFeatureConfig, ?> getTreeFeature(Random rand, boolean flowers) {
-        //return TREE_FEATURE.withConfiguration(RubberTreeWorldGen.RUBBER_TREE_CONFIG_NORMAL);
-        return TREE_FEATURE.withConfiguration(null);
+        return TREE_FEATURE.withConfiguration(RubberTreeWorldGen.RUBBER_TREE_CONFIG_NORMAL);
     }
 
-    /*@Override
-    public boolean func_225545_a_(IWorld world, ChunkGenerator<?> chunkGenerator, BlockPos pos, BlockState state, Random random) {
-        ConfiguredFeature<TreeFeatureConfig, ?> configuredFeature = TREE_FEATURE
+    @Override
+    public boolean attemptGrowTree(ServerWorld world, ChunkGenerator chunkGenerator, BlockPos pos, BlockState state, Random random) {
+        ConfiguredFeature<BaseTreeFeatureConfig, ?> configuredFeature = TREE_FEATURE
                 .withConfiguration(RubberTreeWorldGen.getTreeConfig(world.getBiome(pos)));
         world.setBlockState(pos, Blocks.AIR.getDefaultState(), 4);
         configuredFeature.config.forcePlacement();
-        if (!configuredFeature.place(world, chunkGenerator, random, pos)) {
+        if (!configuredFeature.generate(world, chunkGenerator, random, pos)) {
             world.setBlockState(pos, state, 4);
             return false;
         } else
             return true;
-    }*/
+    }
 }

@@ -104,7 +104,7 @@ public class GT4Renewed extends AntimatterMod {
                 Models.init();
                 break;
             case DATA_READY:
-                //GT4RData.buildTierMaps();
+                GT4RData.buildTierMaps();
                 Structures.init();
                 //GregTechAPI.registerFluidCell(Data.CellTin.get(1));
                 //GregTechAPI.registerFluidCell(Data.CellSteel.get(1));

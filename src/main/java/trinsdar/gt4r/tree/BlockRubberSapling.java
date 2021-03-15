@@ -20,10 +20,9 @@ import java.util.Random;
 public class BlockRubberSapling extends SaplingBlock implements IGrowable, IAntimatterObject, IModelProvider, ITextureProvider {
 
     protected String domain, id;
-    final static RubberTree TREE = new RubberTree();
 
     public BlockRubberSapling(String domain, String id) {
-        super(TREE, Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0.0F).sound(SoundType.PLANT));
+        super(new RubberTree(), Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0.0F).sound(SoundType.PLANT));
         this.domain = domain;
         this.id = id;
         AntimatterAPI.register(BlockRubberSapling.class, id, this);
@@ -61,6 +60,6 @@ public class BlockRubberSapling extends SaplingBlock implements IGrowable, IAnti
 
     @Override
     public void placeTree(ServerWorld world, BlockPos pos, BlockState state, Random random) {
-        if (RubberTreeWorldGen.getValidBiomes().test(world.getBiome(pos))) super.placeTree(world, pos, state, random);
+        if (RubberTreeWorldGen.getValidBiomesStatic().test(world.getBiome(pos).getCategory())) super.placeTree(world, pos, state, random);
     }
 }
