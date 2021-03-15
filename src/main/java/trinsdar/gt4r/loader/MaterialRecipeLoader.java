@@ -1,6 +1,15 @@
 package trinsdar.gt4r.loader;
 
+import com.google.common.collect.ImmutableMap;
+import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
+import net.minecraft.data.IFinishedRecipe;
 import trinsdar.gt4r.Ref;
+
+import java.util.function.Consumer;
+
+import static muramasa.antimatter.Data.*;
+import static trinsdar.gt4r.data.Materials.HULL;
+import static trinsdar.gt4r.data.Materials.TURBINE_BLADE;
 
 //TODO EXCLUDED FROM COMPILE
 
@@ -12,6 +21,19 @@ public class MaterialRecipeLoader {
 
     //TODO: When we do have MaterialInfo or a MaterialType 'amount' system, some of this would need to adapt to it!
     //TODO: Plasma Arc/Normal Arc smelting will be handled differently, when we have said amount system.
+
+    public static void loadRecipes(Consumer<IFinishedRecipe> output, AntimatterRecipeProvider provider) {
+        HULL.all().forEach(m -> {
+            provider.addItemRecipe(output, Ref.ID, "hull_" + m.getId(), "hulls", "has_wrench", provider.hasSafeItem(WRENCH.getTag()), HULL.get(m), ImmutableMap.of('P', PLATE.getMaterialTag(m), 'W', WRENCH.getTag()), "PPP", "PWP", "PPP");
+        });
+        TURBINE_BLADE.all().forEach(m -> {
+            provider.addItemRecipe(output, Ref.ID, "turbine_blade_" + m.getId(), "turbine_blades", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), TURBINE_BLADE.get(m), ImmutableMap.of('P', PLATE.getMaterialTag(m), 'H', HAMMER.getTag(), 'F', FILE.getTag()), " H ", "PPP", " F ");
+        });
+        BLOCK.all().forEach(m -> {
+            provider.addStackRecipe(output, Ref.ID, "block_" + m.getId(), "blocks", "has_ingot", provider.hasSafeItem(INGOT.getMaterialTag(m)), BLOCK.get().get(m).asStack(), ImmutableMap.of('I', INGOT.getMaterialTag(m)), "III", "III", "III");
+            provider.addItemRecipe(output, Ref.ID, "ingot_" + m.getId() + "_from_block", "blocks", "has_block", provider.hasSafeItem(BLOCK.getMaterialTag(m)), INGOT.get(m), ImmutableMap.of('B', BLOCK.getMaterialTag(m)), "B");
+        });
+    }
 
     public static void init() {
         //ELEMENTAL.all().forEach();
