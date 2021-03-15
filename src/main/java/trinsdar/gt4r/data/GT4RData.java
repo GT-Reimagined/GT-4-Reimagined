@@ -158,6 +158,7 @@ public class GT4RData {
     public static ItemBasic<?> BatteryLargeSodium = new ItemBattery(Ref.ID, "battery_large_sodium", Tier.HV, 800000, true).tip("Reusable");
     public static ItemBasic<?> LapotronCrystal = new ItemBattery(Ref.ID, "lapotron_crystal", Tier.EV, 10000000, true).tip("Reusable");
     public static ItemBasic<?> EnergyCrystal = new ItemBattery(Ref.ID, "energy_crystal", Tier.HV, 1000000, true).tip("Reusable");
+    public static ItemBasic<?> BatteryRE = new ItemBattery(Ref.ID, "battery_re", Tier.LV, 10000, true).tip("Reusable");
     public static ItemBasic<?> BatteryEnergyOrb = new ItemBasic<>(Ref.ID, "battery_energy_orb");
     public static ItemBasic<?> BatteryEnergyOrbCluster = new ItemBasic<>(Ref.ID, "battery_energy_orb_cluster");
 
