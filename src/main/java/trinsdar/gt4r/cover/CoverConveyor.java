@@ -1,6 +1,7 @@
 package trinsdar.gt4r.cover;
 
 import com.google.common.collect.ImmutableMap;
+import muramasa.antimatter.cover.Cover;
 import muramasa.antimatter.cover.CoverStack;
 import muramasa.antimatter.cover.CoverTiered;
 import muramasa.antimatter.machine.Tier;
@@ -20,20 +21,9 @@ import java.util.Map;
 
 import static net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
 
-public class CoverConveyor extends CoverTiered {
+public class CoverConveyor extends Cover {
 
-    public static String ID = "conveyor";
-
-    static final Map<Tier, Integer> speeds = ImmutableMap.<Tier,Integer>builder().
-            put(Tier.LV,400)
-            .put(Tier.MV, 100)
-            .put(Tier.HV, 20)
-            .put(Tier.EV, 10)
-            .put(Tier.IV, 1).build();
-
-    public CoverConveyor(Tier tier) {
-        super(tier);
-    }
+    public static String ID = "conveyor_module";
 
     public CoverConveyor() {
         super();
@@ -42,11 +32,11 @@ public class CoverConveyor extends CoverTiered {
     //Useful for using the same model for multiple tiers where id is dependent on tier.
     @Override
     protected String getRenderId() {
-        return ID();
+        return ID;
     }
 
     @Override
-    protected String ID() {
+    public String getId() {
         return ID;
     }
 
@@ -57,7 +47,7 @@ public class CoverConveyor extends CoverTiered {
 
     @Override
     public void onUpdate(CoverStack<?> instance, Direction side) {
-        if (instance.getTile() == null || instance.getTile().getWorld().getGameTime() % (speeds.get(tier)) != 0)
+        if (instance.getTile() == null)
             return;
         boolean isMachine = instance.getTile() instanceof TileEntityMachine;
         BlockState state = instance.getTile().getWorld().getBlockState(instance.getTile().getPos().offset(side));
@@ -79,10 +69,5 @@ public class CoverConveyor extends CoverTiered {
         } else {
             Utils.transferItemsOnCap(instance.getTile(), adjTile,true);
         }
-    }
-
-    @Override
-    protected CoverTiered getTiered(Tier tier) {
-        return new CoverConveyor(tier);
     }
 }

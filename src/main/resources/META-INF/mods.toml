@@ -12,7 +12,7 @@ displayName="GT 4 Reimagined"
 #updateJSONURL="http://myurl.me/"
 displayURL="https://github.com/Trinsdar/GT-4-Reimagined"
 #logoFile="gregtech.png"
-credits="GregoriusTechneticies for his previous versions of GregTech. And the current GregTech community for suggestions and ideas."
+credits="GregoriusTechneticies for his previous versions of GregTech. And the current GregTech community and Bear989 for suggestions and ideas."
 authors="Trinsdar"
 description='''My remake of GregTech 4'''
 [[dependencies.gt4r]]

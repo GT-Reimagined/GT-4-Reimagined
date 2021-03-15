@@ -10,6 +10,7 @@ import trinsdar.gt4r.Ref;
 import java.util.function.Consumer;
 
 import static com.google.common.collect.ImmutableMap.of;
+import static muramasa.antimatter.Data.DUST;
 import static muramasa.antimatter.Data.GEM;
 import static muramasa.antimatter.Data.PLATE;
 import static muramasa.antimatter.Data.WRENCH;
@@ -17,9 +18,7 @@ import static muramasa.antimatter.machine.Tier.*;
 import static muramasa.antimatter.util.Utils.getForgeItemTag;
 import static trinsdar.gt4r.data.GT4RData.*;
 import static trinsdar.gt4r.data.Machines.*;
-import static trinsdar.gt4r.data.Materials.Aluminium;
-import static trinsdar.gt4r.data.Materials.Diamond;
-import static trinsdar.gt4r.data.Materials.StainlessSteel;
+import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.loader.crafting.CraftingHelper.criterion;
 
 public class MachineCrafting {
@@ -38,12 +37,37 @@ public class MachineCrafting {
         provider.addItemRecipe(output, Ref.ID, "vacuum_freezer", "machines", "has_pump", provider.hasSafeItem(PUMP.getItem(LV)),
                 VACUUM_FREEZER.getItem(LV), of('C', getForgeItemTag("circuits/basic"), 'G', Items.GLASS, 'P', PUMP.getItem(LV), 'A', PLATE.getMaterialTag(Aluminium)), "APA", "CGC", "APA");
         provider.addItemRecipe(output, Ref.ID, "chemical_reactor", "machines", "has_extractor", provider.hasSafeItem(EXTRACTOR.getItem(LV)),
-                ELECTROLYZER.getItem(MV), of('C', getForgeItemTag("circuits/advanced"), 'P', getForgeItemTag("plates/invaraluminium"), 'E', EXTRACTOR.getItem(LV), 'L', CopperCoil, 'c', COMPRESSOR.getItem(LV)), "PLP", "CcC", "PEP");
+                CHEMICAL_REACTOR.getItem(MV), of('C', getForgeItemTag("circuits/advanced"), 'P', getForgeItemTag("plates/invaraluminium"), 'E', EXTRACTOR.getItem(LV), 'L', CopperCoil, 'c', COMPRESSOR.getItem(LV)), "PLP", "CcC", "PEP");
         provider.addItemRecipe(output, Ref.ID, "distillation_tower", "machines", "has_centrifuge", provider.hasSafeItem(CENTRIFUGE.getItem(LV)),
-                ELECTROLYZER.getItem(MV), of('C', getForgeItemTag("circuits/master"), 'P', PUMP.getItem(LV), 'E', ELECTROLYZER.getItem(MV), 'c', CENTRIFUGE.getItem(LV), 'A', HIGHLY_ADVANCED_MACHINE_BLOCK), "cCc", "PAP", "ECE");
+                DISTILLATION_TOWER.getItem(MV), of('C', getForgeItemTag("circuits/master"), 'P', PUMP.getItem(LV), 'E', ELECTROLYZER.getItem(MV), 'c', CENTRIFUGE.getItem(LV), 'A', HIGHLY_ADVANCED_MACHINE_BLOCK), "cCc", "PAP", "ECE");
         provider.addItemRecipe(output, Ref.ID, "macerator_1", "machines", "has_hull", provider.hasSafeItem(getForgeItemTag("machine_hull/basic")),
-                MACERATOR.getItem(LV), of('C', getForgeItemTag("circuits/advanced"), 'P', getForgeItemTag("plates/steels"), 'M', getForgeItemTag("machine_hull/basic"), 'D', GEM.getMaterialTag(Diamond)), "PDP", "DMD", "PCP");
+                MACERATOR.getItem(LV), of('C', getForgeItemTag("circuits/advanced"), 'P', getForgeItemTag("plates/steels"), 'M', getForgeItemTag("machine_hull/basic"), 'D', DUST.getMaterialTag(Diamond)), "PDP", "DMD", "PCP");
         provider.addItemRecipe(output, Ref.ID, "macerator_2", "machines", "has_hull", provider.hasSafeItem(getForgeItemTag("machine_hull/basic")),
                 MACERATOR.getItem(LV), of('C', getForgeItemTag("circuits/basic"), 'P', getForgeItemTag("plates/steels"), 'M', getForgeItemTag("machine_hull/basic"), 'D', getForgeItemTag("grinding_head")), "PDP", "CMC", "PCP");
+        provider.addItemRecipe(output, Ref.ID,"extractor","machines", "has_piston", provider.hasSafeItem(getForgeItemTag("pistons")),
+                EXTRACTOR.getItem(LV), of('C', getForgeItemTag("circuits/basic"), 'P', getForgeItemTag("pistons"), 'M', getForgeItemTag("machine_hull/basic"), 'G', getForgeItemTag("glass")), "GMG", "PCP");
+        provider.addItemRecipe(output, Ref.ID,"compressor","machines", "has_piston", provider.hasSafeItem(getForgeItemTag("pistons")),
+                COMPRESSOR.getItem(LV), of('C', getForgeItemTag("circuits/basic"), 'P', getForgeItemTag("pistons"), 'M', getForgeItemTag("machine_hull/basic"), 'S', getForgeItemTag("stone")), "S S", "PMP", "SCS");
+        provider.addItemRecipe(output, Ref.ID,"forge_hammer","machines", "has_piston", provider.hasSafeItem(getForgeItemTag("pistons")),
+                FORGE_HAMMER.getItem(LV), of('C', getForgeItemTag("circuits/basic"), 'P', getForgeItemTag("pistons"), 'M', getForgeItemTag("machine_hull/basic"), 'A', Items.ANVIL), " P ", "CMC", " A ");
+        provider.addItemRecipe(output, Ref.ID,"e_furnace","machines", "has_steam_furnace", provider.hasSafeItem(STEAM_FURNACE.getItem(STEEL)),
+                FURNACE.getItem(LV), of('C', getForgeItemTag("circuits/basic"), 'S', STEAM_FURNACE.getItem(STEEL), 'R', DUST.getMaterialTag(Redstone)), " C ", "RSR");
+        provider.addItemRecipe(output, Ref.ID,"wiremill","machines", "has_conveyor_module", provider.hasSafeItem(ConveyorModule),
+                WIRE_MILL.getItem(LV), of('C', getForgeItemTag("circuits/basic"), 'c', ConveyorModule, 'M', getForgeItemTag("machine_hull/basic"), 'D', GEM.getMaterialTag(Diamond), 'B', PLATE.getMaterialTag(Brass)), "BDB", "CMC", "BcB");
+        provider.addItemRecipe(output, Ref.ID,"alloy_smelter","machines", "has_conveyor_module", provider.hasSafeItem(ConveyorModule),
+                ALLOY_SMELTER.getItem(LV), of('C', getForgeItemTag("circuits/basic"), 'c', ConveyorModule, 'M', FURNACE.getItem(LV), 'D', CupronickelHeatingCoil, 'B', PLATE.getMaterialTag(Invar)), "BDB", "CMC", "BcB");
+        provider.addItemRecipe(output, Ref.ID,"canner","machines", "has_conveyor_module", provider.hasSafeItem(ConveyorModule),
+                CANNER.getItem(LV), of('C', getForgeItemTag("circuits/basic"), 'c', ConveyorModule, 'M', getForgeItemTag("machine_hull/basic"), 'T', PLATE.getMaterialTag(Tin)), "TCT", "TMT", "TcT");
+        provider.addItemRecipe(output, Ref.ID,"plate_bender","machines", "has_conveyor_module", provider.hasSafeItem(ConveyorModule),
+                BENDER.getItem(LV), of('C', getForgeItemTag("circuits/basic"), 'c', ConveyorModule, 'M', COMPRESSOR.getItem(LV), 'P', getForgeItemTag("pistons")), "PCP", "McM", "PCP");
+        provider.addItemRecipe(output, Ref.ID,"assembler","machines", "has_conveyor_module", provider.hasSafeItem(ConveyorModule),
+                ASSEMBLER.getItem(LV), of('C', getForgeItemTag("circuits/basic"), 'c', ConveyorModule, 'S', getForgeItemTag("plates/steels"), 'P', getForgeItemTag("pistons")), "CPC", "ScS", "CSC");
+        //provider.addItemRecipe(output, Ref.ID,"printing_factory","machines", "has_conveyor_module", provider.hasSafeItem(ConveyorModule),
+        //        PRINTING_FACTORY.getItem(LV), of('C', getForgeItemTag("circuits/basic"), 'c', ConveyorModule, 'S', getForgeItemTag("plates/steels"), 'P', getForgeItemTag("pistons")), "SPS", "CcC", "SSS");
+        provider.addItemRecipe(output, Ref.ID,"centrifuge","machines", "has_extractor", provider.hasSafeItem(EXTRACTOR.getItem(LV)),
+                CENTRIFUGE.getItem(LV), of('C', getForgeItemTag("circuits/advanced"), 'E', EXTRACTOR.getItem(LV), 'S', getForgeItemTag("plates/steels"), 'M', getForgeItemTag("machine_hull/basic")), "SCS", "MEM", "SCS");
+        provider.addItemRecipe(output, Ref.ID,"universal_macerator","machines", "has_macerator", provider.hasSafeItem(MACERATOR.getItem(LV)),
+                UNIVERSAL_MACERATOR.getItem(MV), of('D', getForgeItemTag("grinding_head"), 'M', MACERATOR.getItem(LV), 'S', PLATE.getMaterialTag(Titanium), 'H', getForgeItemTag("machine_hull/very_advanced")), "SDS", "SMS", "SHS");
+
     }
 }

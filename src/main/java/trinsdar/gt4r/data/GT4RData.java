@@ -3,6 +3,7 @@ package trinsdar.gt4r.data;
 import com.google.common.collect.ImmutableMap;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.AntimatterConfig;
+import muramasa.antimatter.item.ItemCover;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
 import net.minecraft.util.LazyValue;
@@ -98,11 +99,11 @@ public class GT4RData {
     public static ItemBasic<?> StickyResin = new ItemBasic<>(Ref.ID, "sticky_resin");
     public static ItemBasic<?> Plantball = new ItemBasic<>(Ref.ID, "plantball");
     public static ItemBasic<?> ComputerMonitor = new ItemBasic<>(Ref.ID, "computer_monitor").tip("Can be placed on machines as a cover");
-    public static ItemBasic<?> ConveyorModule = new ItemBasic<>(Ref.ID, "conveyor_module").tip("Can be placed on machines as a cover");
+    public static ItemCover ConveyorModule = new ItemCover(Ref.ID, COVER_CONVEYOR.getId()).tip("Can be placed on machines as a cover");
     public static ItemBasic<?> CraftingModule = new ItemBasic<>(Ref.ID, "crafting_module").tip("Can be placed on machines as a cover");
     public static ItemBasic<?> Drain = new ItemBasic<>(Ref.ID, "drain").tip("Can be placed on machines as a cover");
     public static ItemBasic<?> ItemTransportValve = new ItemBasic<>(Ref.ID, "item_transport_valve").tip("Can be placed on machines as a cover");
-    public static ItemBasic<?> PumpModule = new ItemBasic<>(Ref.ID, "pump_module").tip("Can be placed on machines as a cover");
+    public static ItemCover PumpModule = new ItemCover(Ref.ID, COVER_PUMP.getId()).tip("Can be placed on machines as a cover");
     public static ItemBasic<?> RedstoneMachineController = new ItemBasic<>(Ref.ID, "redstone_machine_controller").tip("Can be placed on machines as a cover");
     public static ItemBasic<?> Shutter = new ItemBasic<>(Ref.ID, "shutter").tip("Can be placed on machines as a cover");
 
