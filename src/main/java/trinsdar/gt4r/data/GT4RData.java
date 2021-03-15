@@ -124,6 +124,8 @@ public class GT4RData {
     public static ItemBasic<?> Match = new ItemBasic<>(Ref.ID, "match");
     public static ItemBasic<?> MatchBook = new ItemBasic<>(Ref.ID, "match_book");
 
+    public static ItemBasic<?> MixedMetal = new ItemBasic<>(Ref.ID, "mixed_metal");
+    public static ItemBasic<?> AdvancedAlloy = new ItemBasic<>(Ref.ID,"advanced_alloy");
     public static ItemBasic<?> AdvCircuitParts = new ItemBasic<>(Ref.ID, "advanced_circuit_parts").tip("Used for making Advanced Circuits");
     public static ItemBasic<?> CircuitBoardBasic = new ItemBasic<>(Ref.ID, "basic_circuit_board").tip("A basic Board");
     public static ItemBasic<?> CircuitBoardAdv = new ItemBasic<>(Ref.ID, "advanced_circuit_board").tip("An advanced Board");

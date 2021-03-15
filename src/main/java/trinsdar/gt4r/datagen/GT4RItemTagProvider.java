@@ -20,6 +20,7 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
     public void registerTags() {
         super.registerTags();
         this.getOrCreateBuilder(getTag("plates/steels")).addTag(getTag("plates/steel")).addTag(getTag("plates/stainless_steel"));
+        this.getOrCreateBuilder(getTag("plates/invaraluminium")).addTag(getTag("plates/invar")).addTag(getTag("plates/aluminium"));
         this.getOrCreateBuilder(getTag("circuits/basic")).add(CircuitBasic);
         this.getOrCreateBuilder(getTag("circuits/advanced")).add(CircuitAdv);
         this.getOrCreateBuilder(getTag("circuits/elite")).add(CircuitDataControl);
@@ -29,6 +30,7 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.getOrCreateBuilder(getTag("machine_hull/cheap")).add(HULL.get(Bronze), HULL.get(Brass), HULL.get(WroughtIron));
         this.getOrCreateBuilder(getTag("machine_hull/basic")).add(HULL.get(Steel), HULL.get(StainlessSteel), HULL.get(Aluminium));
         this.getOrCreateBuilder(getTag("machine_hull/advanced")).add(HULL.get(TungstenSteel), HULL.get(Titanium));
+        this.getOrCreateBuilder(getTag("grinding_head")).add(DiamondGrindHead, TungstenGrindHead);
     }
 
     public ITag.INamedTag<Item> getTag(String id){

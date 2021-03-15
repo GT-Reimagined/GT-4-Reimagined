@@ -1,14 +1,10 @@
 package trinsdar.gt4r.gui;
 
-import muramasa.antimatter.machine.event.ContentEvent;
 import muramasa.antimatter.tile.TileEntityMachine;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.SlotItemHandler;
-import trinsdar.gt4r.GT4Renewed;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.tile.multi.TileEntityElectricBlastFurnace;
 

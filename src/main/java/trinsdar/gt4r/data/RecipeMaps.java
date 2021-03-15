@@ -63,7 +63,8 @@ public class RecipeMaps {
     public static RecipeMap<BasicBlastingBuilder> BASIC_BLASTING = new RecipeMap<>("basic_blasting", new BasicBlastingBuilder(), MULTI_DISPLAY);
     public static RecipeMap BLASTING = new RecipeMap<>("industrial_blasting", new RecipeBuilder(), MULTI_DISPLAY);
     public static RecipeMap IMPLOSION_COMPRESSING = new RecipeMap<>("implosion_compressing", new RecipeBuilder(), MULTI_DISPLAY);
-    public static RecipeMap INDUSTRIAL_GRINDING = new RecipeMap<>("industrial_grinder", new RecipeBuilder(), MULTI_DISPLAY);
+    public static RecipeMap INDUSTRIAL_GRINDING = new RecipeMap<>("industrial_grinding", new RecipeBuilder(), MULTI_DISPLAY);
+    public static RecipeMap INDUSTRIAL_SAWMILLING = new RecipeMap<>("industrial_sawmilling", new RecipeBuilder(), MULTI_DISPLAY);
     public static RecipeMap VACUUM_FREEZING = new RecipeMap<>("vacuum_freezing", new RecipeBuilder(), MULTI_DISPLAY);
     public static RecipeMap FUSION = new RecipeMap<>("fusion", new RecipeBuilder(), MULTI_DISPLAY);
 }
