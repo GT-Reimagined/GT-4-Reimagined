@@ -3,7 +3,6 @@ package trinsdar.gt4r;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.datagen.ExistingFileHelperOverride;
 import muramasa.antimatter.datagen.providers.*;
-import muramasa.antimatter.recipe.loader.AntimatterRecipeLoader;
 import muramasa.antimatter.recipe.loader.IRecipeRegistrate;
 import muramasa.antimatter.registration.RegistrationEvent;
 import muramasa.antimatter.AntimatterMod;
@@ -28,12 +27,12 @@ import org.apache.logging.log4j.Logger;
 
 
 @Mod(Ref.ID)
-public class GT4Renewed extends AntimatterMod {
+public class GT4Reimagined extends AntimatterMod {
 
-    public static GT4Renewed INSTANCE;
+    public static GT4Reimagined INSTANCE;
     public static Logger LOGGER = LogManager.getLogger(Ref.ID);
 
-    public GT4Renewed() {
+    public GT4Reimagined() {
         super();
         INSTANCE = this;
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
