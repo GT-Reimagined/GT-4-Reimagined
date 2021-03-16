@@ -1,5 +1,6 @@
 package trinsdar.gt4r.loader.crafting;
 
+import com.google.common.collect.ImmutableMap;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.pipe.PipeSize;
 import net.minecraft.data.IFinishedRecipe;
@@ -76,6 +77,8 @@ public class MachineCrafting {
                 LATHE.getItem(LV), of('c', ConveyorModule, 'G', getForgeItemTag("gears/steels"), 'H', getForgeItemTag("machine_hull/basic"), 'C', getForgeItemTag("circuits/advanced"), 'P',  getForgeItemTag("plates/steels")), "PCP", "GcG", "PHP");
         provider.addItemRecipe(output, Ref.ID,"cutter","machines", "has_sawblade", provider.hasSafeItem(DiamondSawBlade),
                 CUTTER.getItem(LV), of('D', DiamondSawBlade, 'G', getForgeItemTag("gears/steels"), 'H', getForgeItemTag("machine_hull/basic"), 'C', getForgeItemTag("circuits/advanced"), 'P',  getForgeItemTag("plates/steels")), "PCP", "GDG", "PHP");
+        provider.addItemRecipe(output, Ref.ID, "extruder", "machines", "has_hull", provider.hasSafeItem(getForgeItemTag("machine_hull/very_advanced")),
+                EXTRUDER.getItem(MV), CraftingHelper.of2('P', getForgeItemTag("plates/titantungsteel"), 'G', getForgeItemTag("gears/titantungsteel"), 'H', NichromeHeatingCoil, 'M', getForgeItemTag("machine_hull/very_advanced"), 'D', DiamondSawBlade, 'C', getForgeItemTag("circuits/elite")), "PGP", "HMD", "PCP");
         provider.addItemRecipe(output, Ref.ID,"small_coil_boiler","machines", "has_wrench", provider.hasSafeItem(WRENCH.getTag()),
                 COAL_BOILER.getItem(BRONZE), of( 'P',  getForgeItemTag("plates/bronze"), 'W', WRENCH.getTag(), 'B', Items.BRICKS, 'F', Items.FURNACE), "PPP", "PWP", "BFB");
         provider.addItemRecipe(output, Ref.ID,"steam_macerator","machines", "has_wrench", provider.hasSafeItem(WRENCH.getTag()),

@@ -2,12 +2,18 @@ package trinsdar.gt4r.loader;
 
 import com.google.common.collect.ImmutableMap;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
+import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
 import net.minecraft.data.IFinishedRecipe;
+import net.minecraft.tags.ITag;
+import net.minecraft.util.LazyValue;
 import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.data.GT4RData;
 
 import java.util.function.Consumer;
 
 import static muramasa.antimatter.Data.*;
+import static trinsdar.gt4r.data.GT4RData.CarbonPlate;
+import static trinsdar.gt4r.data.Materials.Carbon;
 import static trinsdar.gt4r.data.Materials.HULL;
 import static trinsdar.gt4r.data.Materials.TURBINE_BLADE;
 
@@ -24,14 +30,47 @@ public class MaterialRecipeLoader {
 
     public static void loadRecipes(Consumer<IFinishedRecipe> output, AntimatterRecipeProvider provider) {
         HULL.all().forEach(m -> {
-            provider.addItemRecipe(output, Ref.ID, "hull_" + m.getId(), "hulls", "has_wrench", provider.hasSafeItem(WRENCH.getTag()), HULL.get(m), ImmutableMap.of('P', PLATE.getMaterialTag(m), 'W', WRENCH.getTag()), "PPP", "PWP", "PPP");
+            provider.addItemRecipe(output, Ref.ID, m.getId() + "_hull", "hulls", "has_wrench", provider.hasSafeItem(WRENCH.getTag()), HULL.get(m), ImmutableMap.of('P', PLATE.getMaterialTag(m), 'W', WRENCH.getTag()), "PPP", "PWP", "PPP");
         });
         TURBINE_BLADE.all().forEach(m -> {
-            provider.addItemRecipe(output, Ref.ID, "turbine_blade_" + m.getId(), "turbine_blades", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), TURBINE_BLADE.get(m), ImmutableMap.of('P', PLATE.getMaterialTag(m), 'H', HAMMER.getTag(), 'F', FILE.getTag()), " H ", "PPP", " F ");
+            if (m == Carbon){
+                provider.addItemRecipe(output, Ref.ID, m.getId() + "_turbine_blade", "turbine_blades", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), TURBINE_BLADE.get(m), ImmutableMap.of('P', CarbonPlate, 'H', HAMMER.getTag(), 'F', FILE.getTag()), " H ", "PPP", " F ");
+            } else {
+                provider.addItemRecipe(output, Ref.ID, m.getId() + "_turbine_blade", "turbine_blades", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), TURBINE_BLADE.get(m), ImmutableMap.of('P', PLATE.getMaterialTag(m), 'H', HAMMER.getTag(), 'F', FILE.getTag()), " H ", "PPP", " F ");
+            }
         });
         BLOCK.all().forEach(m -> {
-            provider.addStackRecipe(output, Ref.ID, "block_" + m.getId(), "blocks", "has_ingot", provider.hasSafeItem(INGOT.getMaterialTag(m)), BLOCK.get().get(m).asStack(), ImmutableMap.of('I', INGOT.getMaterialTag(m)), "III", "III", "III");
-            provider.addItemRecipe(output, Ref.ID, "ingot_" + m.getId() + "_from_block", "blocks", "has_block", provider.hasSafeItem(BLOCK.getMaterialTag(m)), INGOT.get(m), ImmutableMap.of('B', BLOCK.getMaterialTag(m)), "B");
+            if (m.has(INGOT)){
+                provider.addStackRecipe(output, Ref.ID, m.getId() + "_block", "blocks", "has_ingot", provider.hasSafeItem(INGOT.getMaterialTag(m)), BLOCK.get().get(m).asStack(), ImmutableMap.of('I', INGOT.getMaterialTag(m)), "III", "III", "III");
+                provider.shapeless(output,"ingot_" + m.getId() + "_from_block", "blocks", "has_block", provider.hasSafeItem(BLOCK.getMaterialTag(m)), INGOT.get(m, 9), BLOCK.getMaterialTag(m));
+            } else if (m.has(GEM)){
+                provider.addStackRecipe(output, Ref.ID, m.getId() + "_block", "blocks", "has_gem", provider.hasSafeItem(GEM.getMaterialTag(m)), BLOCK.get().get(m).asStack(), ImmutableMap.of('I', GEM.getMaterialTag(m)), "III", "III", "III");
+                provider.shapeless(output,"gem_" + m.getId() + "_from_block", "blocks", "has_block", provider.hasSafeItem(BLOCK.getMaterialTag(m)), GEM.get(m, 9), BLOCK.getMaterialTag(m));
+            }
+        });
+        INGOT.all().forEach(m -> {
+            if (m.has(NUGGET)){
+                provider.addItemRecipe(output, Ref.ID, m.getId() + "_ingot", "ingots", "has_nugget", provider.hasSafeItem(NUGGET.getMaterialTag(m)), INGOT.get(m), ImmutableMap.of('I', NUGGET.getMaterialTag(m)), "III", "III", "III");
+                provider.shapeless(output,"nugget_" + m.getId() + "_from_ingot", "ingots", "has_ingot", provider.hasSafeItem(INGOT.getMaterialTag(m)), NUGGET.get(m, 9), INGOT.getMaterialTag(m));
+            }
+        });
+        DUST.all().forEach(m -> {
+            provider.addItemRecipe(output, Ref.ID, m.getId() + "_dust", "dusts", "has_tiny_dust", provider.hasSafeItem(DUST_TINY.getMaterialTag(m)), DUST.get(m), ImmutableMap.of('I', DUST_TINY.getMaterialTag(m)), "III", "III", "III");
+            provider.addItemRecipe(output, Ref.ID, m.getId() + "_dust2", "dusts", "has_small_dust", provider.hasSafeItem(DUST_SMALL.getMaterialTag(m)), DUST.get(m), ImmutableMap.of('I', DUST_SMALL.getMaterialTag(m)), "II", "II");
+            provider.addStackRecipe(output, Ref.ID,"tiny_dust_" + m.getId() + "_from_dust", "dusts", "has_dust", provider.hasSafeItem(DUST.getMaterialTag(m)), DUST_TINY.get(m, 9), ImmutableMap.of('I', DUST.getMaterialTag(m)), "I ");
+            provider.addStackRecipe(output, Ref.ID,"small_dust_" + m.getId() + "_from_dust", "dusts", "has_dust", provider.hasSafeItem(DUST.getMaterialTag(m)), DUST_SMALL.get(m, 4), ImmutableMap.of('I', DUST.getMaterialTag(m)), " I");
+        });
+        ROD.all().forEach(m -> {
+            if (m.has(INGOT) || m.has(GEM)){
+                ITag.INamedTag<?> input = m.has(GEM) ? GEM.getMaterialTag(m) : INGOT.getMaterialTag(m);
+                provider.shapeless(output, m.getId() + "_rod", "rods", "has_file", provider.hasSafeItem(FILE.getTag()), ROD.get(m, 2), input, FILE.getTag());
+            }
+        });
+        GEAR.all().forEach(m -> {
+            if ((m.has(PLATE) || m.has(GEM)) && m.has(ROD)){
+                ITag.INamedTag<?> plate = m.has(PLATE) ? PLATE.getMaterialTag(m) : GEM.getMaterialTag(m);
+                provider.addItemRecipe(output, Ref.ID, m.getId() + "_gear", "gears", "has_wrench", provider.hasSafeItem(WRENCH.getTag()), GEAR.get(m), ImmutableMap.of('P', plate, 'R', ROD.getMaterialTag(m), 'W', WRENCH.getTag()), "RPR", "PWP", "RPR");
+            }
         });
     }
 

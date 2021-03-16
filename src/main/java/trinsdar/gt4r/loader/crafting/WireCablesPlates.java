@@ -7,6 +7,7 @@ import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.pipe.PipeSize;
 import muramasa.antimatter.pipe.PipeSize.*;
 
+import muramasa.antimatter.pipe.types.Cable;
 import muramasa.antimatter.pipe.types.Wire;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.Item;
@@ -19,12 +20,14 @@ import java.util.stream.Collectors;
 
 import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.pipe.PipeSize.*;
+import static trinsdar.gt4r.data.Materials.Rubber;
 import static trinsdar.gt4r.loader.crafting.CraftingHelper.criterion;
 
 public class WireCablesPlates {
     @SuppressWarnings("unchecked")
     public static void loadRecipes(Consumer<IFinishedRecipe> output, AntimatterRecipeProvider provider) {
         AntimatterAPI.all(Wire.class, wire -> {
+            Cable<?> cable = AntimatterAPI.get(Cable.class, "cable" + "_" + wire.getMaterial().getId());
             ImmutableSet<PipeSize> sizes = wire.getSizes();
             Map<PipeSize, Item> wires = sizes.stream().map(s -> new Pair<>(s, wire.getBlockItem(s))).collect(Collectors.toMap(Pair::getFirst, Pair::getSecond));
             PipeSize[] val = values();
@@ -34,6 +37,9 @@ public class WireCablesPlates {
                 if (i > 1) {
                     fourToOne(wires, val[i-2], val[i], output, provider);
                 }
+            }
+            if (cable != null){
+                provider.shapeless(output, wire.getId() + "_cable", "cables", "has_wire", provider.hasSafeItem(wire.getBlockItem(VTINY)), new ItemStack(cable.getBlockItem(VTINY)), wire.getBlockItem(VTINY), INGOT.getMaterialTag(Rubber));
             }
             if (wire.getMaterial().has(PLATE)) {
                 provider.shapeless(output, "platewire","wire","has_cutter", criterion(WIRE_CUTTER.getTag(), provider),

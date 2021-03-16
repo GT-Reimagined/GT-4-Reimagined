@@ -23,6 +23,7 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.getOrCreateBuilder(getTag("plates/steels")).addTag(getTag("plates/steel")).addTag(getTag("plates/stainless_steel"));
         this.getOrCreateBuilder(getTag("plates/invaraluminium")).addTag(getTag("plates/invar")).addTag(getTag("plates/aluminium"));
         this.getOrCreateBuilder(getTag("plates/ironaluminium")).addTag(getTag("plates/iron")).addTag(getTag("plates/aluminium"));
+        this.getOrCreateBuilder(getTag("plates/titantungsteel")).addTag(getTag("plates/titanium")).addTag(getTag("plates/tungstensteel"));
         this.getOrCreateBuilder(getTag("circuits/basic")).add(CircuitBasic);
         this.getOrCreateBuilder(getTag("circuits/advanced")).add(CircuitAdv);
         this.getOrCreateBuilder(getTag("circuits/elite")).add(CircuitDataControl);
@@ -38,6 +39,7 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.getOrCreateBuilder(getTag("pistons")).add(Items.PISTON, Items.STICKY_PISTON);
         this.getOrCreateBuilder(getTag("gears/titantungsteel")).addTag(getTag("gears/titanium")).addTag(getTag("gears/tungstensteel"));
         this.getOrCreateBuilder(getTag("gears/steels")).addTag(getTag("gears/steel")).addTag(getTag("gears/stainless_steel"));
+        this.getOrCreateBuilder(getTag("dusts/lapislaz")).addTag(getTag("dusts/lapis")).addTag(getTag("dusts/lazurite"));
 
     }
 

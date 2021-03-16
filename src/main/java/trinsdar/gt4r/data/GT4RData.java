@@ -98,6 +98,9 @@ public class GT4RData {
 
     public static ItemBasic<?> StickyResin = new ItemBasic<>(Ref.ID, "sticky_resin");
     public static ItemBasic<?> Plantball = new ItemBasic<>(Ref.ID, "plantball");
+    public static ItemBasic<?> CarbonFibre = new ItemBasic<>(Ref.ID, "raw_carbon_fibre");
+    public static ItemBasic<?> CarbonMesh = new ItemBasic<>(Ref.ID, "carbon_mesh");
+    public static ItemBasic<?> CarbonPlate = new ItemBasic<>(Ref.ID, "carbon_plate");
     public static ItemBasic<?> ComputerMonitor = new ItemBasic<>(Ref.ID, "computer_monitor").tip("Can be placed on machines as a cover");
     public static ItemCover ConveyorModule = new ItemCover(Ref.ID, COVER_CONVEYOR.getId()).tip("Can be placed on machines as a cover");
     public static ItemBasic<?> CraftingModule = new ItemBasic<>(Ref.ID, "crafting_module").tip("Can be placed on machines as a cover");

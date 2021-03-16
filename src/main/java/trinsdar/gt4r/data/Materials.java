@@ -17,7 +17,7 @@ import static trinsdar.gt4r.data.Textures.*;
 public class Materials {
 
     public static MaterialTypeItem<?> HULL = new MaterialTypeItem<>("hull", 2, true, muramasa.antimatter.Ref.U * 8);
-    public static MaterialTypeItem<?> TURBINE_BLADE = new MaterialTypeItem<>("turbine_blade", 1, true, muramasa.antimatter.Ref.U * 3);
+    public static MaterialTypeItem<?> TURBINE_BLADE = (MaterialTypeItem<?>) new MaterialTypeItem<>("turbine_blade", 1, true, muramasa.antimatter.Ref.U * 3);//.unSplitName();
 
     /** Elements **/
     public static Material Aluminium = new Material(Ref.ID, "aluminium", 0x80c8f0, DULL, Al).asMetal(933, 1000, PLATE, ROD, GEAR, HULL);
