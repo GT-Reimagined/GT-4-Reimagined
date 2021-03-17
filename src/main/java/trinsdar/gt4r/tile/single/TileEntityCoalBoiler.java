@@ -1,6 +1,7 @@
 package trinsdar.gt4r.tile.single;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+import muramasa.antimatter.Antimatter;
 import muramasa.antimatter.gui.event.IGuiEvent;
 import muramasa.antimatter.machine.MachineState;
 import muramasa.antimatter.machine.event.ContentEvent;
@@ -38,7 +39,6 @@ public class TileEntityCoalBoiler extends TileEntityMachine {
     public TileEntityCoalBoiler(Machine<?> type) {
         super(type);
         this.fluidHandler = LazyHolder.of(() -> new CoalBoilerFluidHandler(this));
-
     }
 
     public int getFuel() {

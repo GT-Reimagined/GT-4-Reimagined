@@ -87,7 +87,7 @@ public class Machines {
     public static HatchMachine FUSION_ENERGY_INJECTOR = new HatchMachine(Ref.ID, "fusion_energy_injector", ENERGY, IV, Textures.FUSION_IN).setTiers(IV);
     public static HatchMachine FUSION_ENERGY_EXTRACTOR = new HatchMachine(Ref.ID, "fusion_energy_extractor", ENERGY, UV, Textures.FUSION_OUT).setTiers(UV);
 
-    public static TankMachine QUANTUM_TANK = new TankMachine(Ref.ID, "quantum_tank", GUI, CELL);
+    public static TankMachine QUANTUM_TANK = new TankMachine(Ref.ID, "quantum_tank", GUI, CELL, Textures.TIER_HANDLER, MAX);
 
     public static BasicMachine STEAM_TURBINE = new BasicMachine(Ref.ID, "steam_turbine", STEAM_FUELS, LV, GUI, ITEM, FLUID, GENERATOR, CELL, Textures.MACHINE_BASE);
     public static BasicMachine GAS_TURBINE = new BasicMachine(Ref.ID, "gas_turbine", GAS_FUELS, LV, GUI, FLUID, GENERATOR, CELL, Textures.MACHINE_BASE);
@@ -97,7 +97,7 @@ public class Machines {
     public static BasicMachine WINDMILL = new BasicMachine(Ref.ID, "windmill", ULV, GENERATOR, Textures.MACHINE_BASE);
     public static BasicMachine WATERMILL = new BasicMachine(Ref.ID, "watermill", ULV, GENERATOR, Textures.MACHINE_BASE);
 
-    public static BasicMachine INFINITE_STORAGE = new BasicMachine(Ref.ID, "infinite_storage", ULV, LV, MV, HV, EV, IV, LUV, ZPM, UV, MAX, ENERGY, CONFIGURABLE).setTile(m -> () -> new TileEntityInfiniteStorage(m, 16))
+    public static BasicMachine INFINITE_STORAGE = new BasicMachine(Ref.ID, "infinite_storage", ULV, LV, MV, HV, EV, IV, LUV, ZPM, UV, MAX, ENERGY, CONFIGURABLE, Textures.TIER_HANDLER).setTile(m -> () -> new TileEntityInfiniteStorage(m, 16))
             .covers(COVERNONE);
     public static BasicMachine INFINITE_STEAM = new BasicMachine(Ref.ID, "infinite_steam", FLUID, CELL, CONFIGURABLE, GUI, Textures.TIER_HANDLER).setTile(m -> () -> new TileEntityInfiniteFluid(m));
     public static BasicMachine BATTERY_BUFFER_FOUR = new BasicMachine(Ref.ID, "battery_buffer_four", GUI, ENERGY, CONFIGURABLE, ITEM,COVERBUFFERFOUR, Textures.TIER_HANDLER).setTile(m -> () -> new TileEntityBatteryBuffer(m)).frontCovers();
