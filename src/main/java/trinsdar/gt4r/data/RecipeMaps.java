@@ -21,6 +21,7 @@ public class RecipeMaps {
     public static RecipeMap SEMIFLUID_FUELS = new RecipeMap<>("semifluid_fuels", new RecipeBuilder(), FuelInfoRenderer.INSTANCE);
 
     public static RecipeMap SMALL_BOILERS = new RecipeMap<>("small_boilers", new RecipeBuilder());
+    public static RecipeMap COAL_BOILERS = new RecipeMap<>("coal_boilers", new RecipeBuilder());
 
     public static RecipeMap ALLOY_SMELTING = new RecipeMap<>("alloy_smelting", new AlloySmeltingBuilder());
     public static RecipeMap ASSEMBLING = new RecipeMap<>("assembling", new RecipeBuilder());

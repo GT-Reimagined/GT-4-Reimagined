@@ -70,6 +70,9 @@ public class TileEntityCoalBoiler extends TileEntityMachine {
     @Override
     public void onServerUpdate() {
         super.onServerUpdate();
+//        Antimatter.LOGGER.info("World Time: " + world.getGameTime());
+//        Antimatter.LOGGER.info("Heat: " + heat);
+//        Antimatter.LOGGER.info("Fuel: " + fuel);
         AtomicBoolean update = new AtomicBoolean(false);
         if (this.heat <= 20) {
             int oldHeat = heat;
@@ -84,7 +87,7 @@ public class TileEntityCoalBoiler extends TileEntityMachine {
             this.lossTimer = 0;
         }
         //Arrays.stream(Direction.values()).filter(f -> f != Direction.DOWN).collect(Collectors.toList()).forEach(facing -> GTUtility.exportFluidFromMachineToSide(this, steam, facing, steam.getFluidAmount()));
-        if (this.getWorld().getDayTime() % 20 == 0){
+        if (this.getWorld().getGameTime() % 20 == 0){
             fluidHandler.ifPresent(f -> {
                 FluidStack[] inputs = f.getInputs();
                 if (this.heat > 100){
@@ -163,13 +166,13 @@ public class TileEntityCoalBoiler extends TileEntityMachine {
             }
 
         });
-        if ((this.heat < 500) && (this.fuel > 0) && (world.getDayTime() % 12L == 0L)) {
+        if ((this.heat < 500) && (this.fuel > 0) && (world.getGameTime() % 12L == 0L)) {
             this.fuel -= 1;
             this.heat += 1;
             update.set(true);
         }
         if (update.get()){
-            this.onMachineEvent(ContentEvent.FLUID_OUTPUT_CHANGED);
+            this.onMachineEvent(ContentEvent.FLUID_OUTPUT_CHANGED, "null");
         }
         this.setActive(this.fuel > 0);
     }
