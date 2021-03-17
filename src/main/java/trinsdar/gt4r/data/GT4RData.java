@@ -230,6 +230,7 @@ public class GT4RData {
     public static final BlockCasing ADVANCED_MACHINE_BLOCK = new BlockCasing(Ref.ID, "advanced_machine_block");
 
     public static final BlockCasing FIRE_BRICKS = new BlockCasing(Ref.ID, "fire_bricks");
+    public static final BlockCasing REINFORCED_GLASS = new BlockCasing(Ref.ID, "reinforced_glass");
 
     public static final BlockCasing FUSION_COIL = new BlockCasing(Ref.ID, "fusion_coil");
 

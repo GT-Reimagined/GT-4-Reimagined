@@ -30,9 +30,8 @@ public class MachineCrafting {
                 IMPLOSION_COMPRESSOR.getItem(LV), of('C', getForgeItemTag("circuits/basic"), 'M', getForgeItemTag("machine_hull/basic"), 'c', COMPRESSOR.getItem(LV), 'A', AdvancedAlloy), "AMA", "CcC", "AMA");
         provider.addItemRecipe(output, Ref.ID, "industrial_sawmill", "machines", "has_pump", provider.hasSafeItem(PUMP.getItem(LV)),
                 INDUSTRIAL_SAWMILL.getItem(MV), of('C', getForgeItemTag("circuits/advanced"), 'M', getForgeItemTag("machine_hull/basic"), 'P', PUMP.getItem(LV), 'S', DiamondSawBlade), "PCP", "SSS", "CMC");
-        //TODO: add reinforced glass
         provider.addItemRecipe(output, Ref.ID, "vacuum_freezer", "machines", "has_pump", provider.hasSafeItem(PUMP.getItem(LV)),
-                VACUUM_FREEZER.getItem(LV), of('C', getForgeItemTag("circuits/basic"), 'G', Items.GLASS, 'P', PUMP.getItem(LV), 'A', PLATE.getMaterialTag(Aluminium)), "APA", "CGC", "APA");
+                VACUUM_FREEZER.getItem(LV), of('C', getForgeItemTag("circuits/basic"), 'G', REINFORCED_GLASS, 'P', PUMP.getItem(LV), 'A', PLATE.getMaterialTag(Aluminium)), "APA", "CGC", "APA");
         provider.addItemRecipe(output, Ref.ID, "chemical_reactor", "machines", "has_extractor", provider.hasSafeItem(EXTRACTOR.getItem(LV)),
                 CHEMICAL_REACTOR.getItem(MV), of('C', getForgeItemTag("circuits/advanced"), 'P', getForgeItemTag("plates/invaraluminium"), 'E', EXTRACTOR.getItem(LV), 'L', CopperCoil, 'c', COMPRESSOR.getItem(LV)), "PLP", "CcC", "PEP");
         provider.addItemRecipe(output, Ref.ID, "distillation_tower", "machines", "has_centrifuge", provider.hasSafeItem(CENTRIFUGE.getItem(LV)),
@@ -97,8 +96,15 @@ public class MachineCrafting {
                 COAL_BOILER.getItem(STEEL), of( 'P',  getForgeItemTag("plates/steels"), 'W', WRENCH.getTag(), 'B', Items.BRICKS, 'F', Items.FURNACE), "PPP", "PWP", "BFB");
         provider.addItemRecipe(output, Ref.ID,"high_pressure_steam_furnace","machines", "has_wrench", provider.hasSafeItem(WRENCH.getTag()),
                 STEAM_FURNACE.getItem(STEEL), of( 'P',  getForgeItemTag("plates/steels"), 'W', WRENCH.getTag(), 'B', Items.BRICKS, 'F', Items.FURNACE, 'M', getForgeItemTag("machine_hull/semi_cheap")), "PWP", "PFP", "BMB");
-
-
+        provider.addItemRecipe(output, Ref.ID, "diesel_generator", "machines", "has_hull", provider.hasSafeItem(getForgeItemTag("machine_hull/basic")),
+                DIESEL_GENERATOR.getItem(LV), of('P', getForgeItemTag("plates/wroughtaluminium"), 'B', BatteryRE, 'C', getForgeItemTag("circuits/basic"), 'M', getForgeItemTag("machine_hull/basic")), "PBP", "P P", "CMC");
+        provider.addItemRecipe(output, Ref.ID, "semifluid_generator", "machines", "has_hull", provider.hasSafeItem(getForgeItemTag("machine_hull/basic")),
+                SEMIFLUID_GENERATOR.getItem(LV), of('P', getForgeItemTag("plates/wroughtaluminium"), 'B', BatteryRE, 'C', getForgeItemTag("circuits/basic"), 'M', getForgeItemTag("machine_hull/basic"), 'R', REINFORCED_GLASS), "PBP", "PRP", "CMC");
+        provider.addItemRecipe(output, Ref.ID, "gas_turbine", "machines", "has_windmill", provider.hasSafeItem(WINDMILL.getItem(ULV)),
+                GAS_TURBINE.getItem(LV), of('P', getForgeItemTag("plates/invaraluminium"), 'W', WINDMILL.getItem(ULV), 'C', getForgeItemTag("circuits/advanced"), 'G', REINFORCED_GLASS), "PCP", "WGW", "PCP");
+        //TODO: replace turbine blade with turbine rotor
+        provider.addItemRecipe(output, Ref.ID, "steam_turbine", "machines", "has_watermill", provider.hasSafeItem(WATERMILL.getItem(ULV)),
+                STEAM_TURBINE.getItem(LV), of('P', getForgeItemTag("plates/wroughtaluminium"), 'W', WATERMILL.getItem(ULV), 'C', getForgeItemTag("circuits/basic"), 'B', TURBINE_BLADE.getMaterialTag(Steel)), "PCP", "WBW", "PCP");
     }
 
 }

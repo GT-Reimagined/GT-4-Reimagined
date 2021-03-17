@@ -2,14 +2,9 @@ package trinsdar.gt4r.loader.multi;
 
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialTypeItem;
-import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import org.lwjgl.system.CallbackI;
 import trinsdar.gt4r.data.GT4RData;
-import trinsdar.gt4r.data.Materials;
-import trinsdar.gt4r.data.RecipeMaps;
-import trinsdar.gt4r.datagen.GT4RRecipes;
 
 import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.recipe.ingredient.AntimatterIngredient.of;
@@ -48,14 +43,14 @@ public class IndustrialGrinder {
         addGrinderRecipe(Galena, Mercury, CRUSHED_PURIFIED.get(Galena, 2), DUST_SMALL.get(Sulfur, 1), DUST.get(Silver, 1));
         addGrinderRecipe(Gold, Mercury, CRUSHED_PURIFIED.get(Gold, 3), DUST_SMALL.get(Copper, 1), DUST_SMALL.get(Nickel, 1));
         addGrinderRecipe(Copper, Mercury, CRUSHED_PURIFIED.get(Copper, 2), DUST_SMALL.get(Nickel, 1), DUST.get(Gold, 1));
-        addGrinderRecipe(Uranium, Mercury, CRUSHED_PURIFIED.get(Uranium, 2), DUST_SMALL.get(Uranium235, 1), DUST.get(Lead, 1));
+        addGrinderRecipe(Uraninite, Mercury, CRUSHED_PURIFIED.get(Uraninite, 2), DUST_SMALL.get(Uranium235, 1), DUST.get(Lead, 1));
         addGrinderRecipe(Iron, SodiumPersulfate, CRUSHED_PURIFIED.get(Iron, 2), DUST.get(Nickel, 1), DUST_SMALL.get(Tin, 1));
         addGrinderRecipe(Sphalerite, SodiumPersulfate, CRUSHED_PURIFIED.get(Sphalerite, 2), DUST.get(Zinc, 1), DUST_SMALL.get(YellowGarnet, 1));
         addGrinderRecipe(Tetrahedrite, SodiumPersulfate, CRUSHED_PURIFIED.get(Tetrahedrite, 3), DUST_SMALL.get(Zinc, 1), DUST_SMALL.get(Antimony, 1));
         addGrinderRecipe(Tin, SodiumPersulfate, CRUSHED_PURIFIED.get(Tin, 2), DUST.get(Zinc, 1), DUST_SMALL.get(Iron, 1));
         addGrinderRecipe(Copper, SodiumPersulfate, CRUSHED_PURIFIED.get(Copper, 3), DUST_SMALL.get(Nickel, 1), DUST_SMALL.get(Gold, 1));
         addGrinderRecipe(Gold, SodiumPersulfate, CRUSHED_PURIFIED.get(Gold, 2), DUST.get(Copper, 1), DUST_SMALL.get(Nickel, 1));
-        addGrinderRecipe(Uranium, SodiumPersulfate, CRUSHED_PURIFIED.get(Uranium, 3), DUST_SMALL.get(Uranium235, 1), DUST_SMALL.get(Lead, 1));
+        addGrinderRecipe(Uraninite, SodiumPersulfate, CRUSHED_PURIFIED.get(Uraninite, 3), DUST_SMALL.get(Uranium235, 1), DUST_SMALL.get(Lead, 1));
         addGrinderRecipe(Bauxite, SulfuricAcid, CRUSHED_PURIFIED.get(Bauxite, 4), DUST.get(Aluminium, 1), DUST_SMALL.get(Titanium, 1));
         addGrinderRecipe(Ruby, SulfuricAcid, GEM.get(Ruby, 2), DUST_SMALL.get(RedGarnet, 1));
         addGrinderRecipe(Sapphire, SulfuricAcid, GEM.get(Sapphire, 2), DUST_SMALL.get(Aluminium, 1));
@@ -64,7 +59,7 @@ public class IndustrialGrinder {
         addGrinderRecipe(Olivine, SulfuricAcid, GEM.get(Olivine, 2), DUST_SMALL.get(Pyrope, 2));
 
         INDUSTRIAL_GRINDING.RB().ii(of(new ItemStack(GT4RData.GRANITE_BLACK.getState().getBlock(), 16))).fi(Water.getLiquid(1000)).io(DUST.get(BlackGranite, 16), DUST_SMALL.get(Thorium, 1)).add(1600, 120);
-        INDUSTRIAL_GRINDING.RB().ii(of(new ItemStack(GT4RData.GRANITE_RED.getState().getBlock(), 16))).fi(Water.getLiquid(1000)).io(DUST.get(RedGranite, 16), DUST_SMALL.get(Uranium, 1)).add(1600, 120);
+        INDUSTRIAL_GRINDING.RB().ii(of(new ItemStack(GT4RData.GRANITE_RED.getState().getBlock(), 16))).fi(Water.getLiquid(1000)).io(DUST.get(RedGranite, 16), DUST_SMALL.get(Uranium238, 1)).add(1600, 120);
         INDUSTRIAL_GRINDING.RB().ii(of(new ItemStack(Items.END_STONE, 1))).fi(Water.getLiquid(1000)).io(DUST.get(Endstone, 16), DUST_TINY.get(Tungsten, 1)).add(1600, 120);
         INDUSTRIAL_GRINDING.RB().ii(of(ORE.getMaterialTag(Coal), 1)).fi(Water.getLiquid(1000)).io(new ItemStack(Items.COAL), DUST.get(Coal, 1), DUST_SMALL.get(Thorium, 1)).add(100, 120);
         INDUSTRIAL_GRINDING.RB().ii(of(ORE.getMaterialTag(Quartz), 1)).fi(Water.getLiquid(1000)).io(new ItemStack(Items.QUARTZ, 4), DUST_SMALL.get(Netherrack, 2)).add(100, 120);

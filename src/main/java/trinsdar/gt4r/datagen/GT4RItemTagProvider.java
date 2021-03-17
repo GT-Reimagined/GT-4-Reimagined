@@ -23,6 +23,7 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.getOrCreateBuilder(getTag("plates/steels")).addTag(getTag("plates/steel")).addTag(getTag("plates/stainless_steel"));
         this.getOrCreateBuilder(getTag("plates/invaraluminium")).addTag(getTag("plates/invar")).addTag(getTag("plates/aluminium"));
         this.getOrCreateBuilder(getTag("plates/ironaluminium")).addTag(getTag("plates/iron")).addTag(getTag("plates/aluminium"));
+        this.getOrCreateBuilder(getTag("plates/wroughtaluminium")).addTag(getTag("plates/wrought_iron")).addTag(getTag("plates/aluminium"));
         this.getOrCreateBuilder(getTag("plates/titantungsteel")).addTag(getTag("plates/titanium")).addTag(getTag("plates/tungstensteel"));
         this.getOrCreateBuilder(getTag("circuits/basic")).add(CircuitBasic);
         this.getOrCreateBuilder(getTag("circuits/advanced")).add(CircuitAdv);

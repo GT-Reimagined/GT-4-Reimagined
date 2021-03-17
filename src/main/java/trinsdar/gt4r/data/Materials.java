@@ -37,7 +37,7 @@ public class Materials {
     public static Material Thorium = new Material(Ref.ID, "thorium", 0x001e00, SHINY, Th).asMetal(2115, 0);
     public static Material Titanium = new Material(Ref.ID, "titanium", 0xdca0f0, METALLIC, Ti).asMetal(1941, 1500,  PLATE, ROD, GEAR, HULL);
     public static Material Tungsten = new Material(Ref.ID, "tungsten", 0x323232, METALLIC, W).asMetal(3695, 2500, PLATE);
-    public static Material Uranium = new Material(Ref.ID, "uranium", 0x32f032, METALLIC, U).asMetal(1405, 0, ORE);
+    public static Material Uranium238 = new Material(Ref.ID, "uranium_238", 0x32f032, METALLIC, U).asMetal(1405, 0);
     public static Material Uranium235 = new Material(Ref.ID, "uranium_235", 0x46fa46, METALLIC, U235).asMetal(1405, 0);
     public static Material Antimony = new Material(Ref.ID, "antimony", 0xdcdcf0, SHINY, Sb).asMetal(1449, 0);
     public static Material Argon = new Material(Ref.ID, "argon", 0xff00f0, NONE, Ar).asGas();
@@ -138,6 +138,7 @@ public class Materials {
     public static Material Sphalerite = new Material(Ref.ID, "sphalerite", 0xffffff, DULL).asDust(ORE).mats(of(Zinc, 1, Sulfur, 1));
     public static Material Tetrahedrite = new Material(Ref.ID, "tetrahedrite", 0xc82000, DULL).asDust(ORE).mats(of(Copper, 3, Antimony, 1, Sulfur, 3, Iron, 1));
     public static Material Tungstate = new Material(Ref.ID, "tungstate", 0x373223, DULL).asDust(ORE).mats(of(Tungsten, 1, Lithium, 2, Oxygen, 4)).setOreMulti(2);
+    public static Material Uraninite = new Material(Ref.ID, "uraninite", 0x232323, DULL).asDust(ORE).mats(of(Uranium238, 1, Oxygen, 2));
     public static Material Wood = new Material(Ref.ID, "wood", 0x643200, NONE).asDust().addHandleStat(12, 0.0F).mats(of(Carbon, 1, Oxygen, 1, Hydrogen, 1));
     public static Material Stone = new Material(Ref.ID, "stone", 0xcdcdcd, ROUGH).asDust();
     public static Material Blaze = new Material(Ref.ID, "blaze", 0xffc800, NONE).asDust().mats(of(Sulfur, 1, DarkAsh, 1/*, Magic, 1*/));
@@ -259,7 +260,7 @@ public class Materials {
         TungstenSteel.remove(BOLT, SCREW);
 
         Iridium.remove(ORE_SMALL, ROCK);
-        Uranium.remove(ORE_SMALL, ROCK);
+        Uraninite.remove(ORE_SMALL, ROCK);
         Copper.remove(ORE_SMALL, ROCK);
         Tin.remove(ORE_SMALL, ROCK);
         Cassiterite.remove(ORE_SMALL, ROCK);
@@ -298,7 +299,7 @@ public class Materials {
         Gold.addByProduct(Copper, Nickel);
         Iron.addByProduct(Nickel, Tin);
         Iridium.addByProduct(Platinum, Osmium);
-        Uranium.addByProduct(Lead, Uranium235, Thorium);
+        Uraninite.addByProduct(Lead, Uranium235, Thorium);
         Copper.addByProduct(Gold, Nickel);
         Tin.addByProduct(Iron, Zinc);
         Cassiterite.addByProduct(Tin);
@@ -328,13 +329,13 @@ public class Materials {
         RedGarnet.addByProduct(Spessartine, Pyrope, Almandine);
         YellowGarnet.addByProduct(Andradite, Grossular);
         Tungsten.addByProduct(Manganese);
-        Thorium.addByProduct(Uranium, Lead);
+        Thorium.addByProduct(Uranium238, Lead);
 
         //other byproducts
         Andradite.addByProduct(YellowGarnet, Iron);
         Glowstone.addByProduct(Redstone, Gold);
         Antimony.addByProduct(Zinc, Iron);
-        Plutonium.addByProduct(Uranium, Lead);
+        Plutonium.addByProduct(Uranium238, Lead);
         Electrum.addByProduct(Gold, Silver);
         Bronze.addByProduct(Copper, Tin);
         Brass.addByProduct(Copper, Zinc);

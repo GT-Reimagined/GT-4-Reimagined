@@ -1,6 +1,6 @@
 {
 	"textures": {
-		"1": "gtu:blocks/machine/cover/pump"
+		"1": "gt4r:blocks/cover/pump_module"
 	},
 	"elements": [
 		{

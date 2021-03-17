@@ -88,23 +88,23 @@ public class Machines {
 
     public static TankMachine QUANTUM_TANK = new TankMachine(Ref.ID, "quantum_tank", GUI, CELL);
 
-    public static BasicMachine STEAM_TURBINE = new BasicMachine(Ref.ID, "steam_turbine", STEAM_FUELS, LV, GUI, ITEM, FLUID, GENERATOR, CELL);
-    public static BasicMachine GAS_TURBINE = new BasicMachine(Ref.ID, "gas_turbine", GAS_FUELS, LV, GUI, FLUID, GENERATOR, CELL);
-    public static BasicMachine THERMAL_GENERATOR = new BasicMachine(Ref.ID, "thermal_generator", LAVA_FUELS, LV, GUI, ITEM, FLUID, GENERATOR, CELL);
-    public static BasicMachine DIESEL_GENERATOR = new BasicMachine(Ref.ID, "diesel_generator", DIESEL_FUELS, LV, GUI, FLUID, GENERATOR, CELL);
-    public static BasicMachine SEMIFLUID_GENERATOR = new BasicMachine(Ref.ID, "semifluid_generator", SEMIFLUID_FUELS, LV, GUI, FLUID, GENERATOR, CELL);
-
+    public static BasicMachine STEAM_TURBINE = new BasicMachine(Ref.ID, "steam_turbine", STEAM_FUELS, LV, GUI, ITEM, FLUID, GENERATOR, CELL, Textures.MACHINE_BASE);
+    public static BasicMachine GAS_TURBINE = new BasicMachine(Ref.ID, "gas_turbine", GAS_FUELS, LV, GUI, FLUID, GENERATOR, CELL, Textures.MACHINE_BASE);
+    public static BasicMachine THERMAL_GENERATOR = new BasicMachine(Ref.ID, "thermal_generator", LAVA_FUELS, LV, GUI, ITEM, FLUID, GENERATOR, CELL, Textures.MACHINE_BASE);
+    public static BasicMachine DIESEL_GENERATOR = new BasicMachine(Ref.ID, "diesel_generator", DIESEL_FUELS, LV, GUI, FLUID, GENERATOR, CELL, Textures.MACHINE_BASE);
+    public static BasicMachine SEMIFLUID_GENERATOR = new BasicMachine(Ref.ID, "semifluid_generator", SEMIFLUID_FUELS, LV, GUI, FLUID, GENERATOR, CELL, Textures.MACHINE_BASE);
+    public static BasicMachine WINDMILL = new BasicMachine(Ref.ID, "windmill", ULV, GENERATOR, Textures.MACHINE_BASE);
+    public static BasicMachine WATERMILL = new BasicMachine(Ref.ID, "watermill", ULV, GENERATOR, Textures.MACHINE_BASE);
 
     public static BasicMachine INFINITE_STORAGE = new BasicMachine(Ref.ID, "infinite_storage", ULV, LV, MV, HV, EV, IV, LUV, ZPM, UV, MAX, ENERGY, CONFIGURABLE).setTile(m -> () -> new TileEntityInfiniteStorage(m, 16))
             .covers(COVERNONE);
-    public static BasicMachine INFINITE_STEAM = new BasicMachine(Ref.ID, "infinite_steam", FLUID, CELL, CONFIGURABLE, GUI).setTile(m -> () -> new TileEntityInfiniteFluid(m));
-    public static BasicMachine BATTERY_BUFFER_FOUR = new BasicMachine(Ref.ID, "battery_buffer_four", GUI, ENERGY, CONFIGURABLE, ITEM,COVERBUFFERFOUR).setTile(m -> () -> new TileEntityBatteryBuffer(m)).frontCovers();
-    public static BasicMachine BATTERY_BUFFER_ONE = new BasicMachine(Ref.ID, "battery_buffer_one", GUI, ENERGY, CONFIGURABLE, ITEM,COVERBUFFERONE).setTile(m -> () -> new TileEntityBatteryBuffer(m)).frontCovers();
-    public static BasicMachine BATTERY_BUFFER_NINE = new BasicMachine(Ref.ID, "battery_buffer_nine", GUI, ENERGY, CONFIGURABLE, ITEM,COVERBUFFERNINE).setTile(m -> () -> new TileEntityBatteryBuffer(m)).frontCovers();
-    public static BasicMachine TRANSFORMER = new BasicMachine(Ref.ID, "transformer", ENERGY, CONFIGURABLE, LV, MV, HV, IV, EV, LUV, UV).setTile(m -> () -> new TileEntityTransformer(m, 1));
-    public static BasicMachine TRANSFORMER_DIGITAL = new BasicMachine(Ref.ID, "transformer_digital", EV, IV, GUI, ENERGY, CONFIGURABLE).setTile(m -> () -> new TileEntityDigitalTransformer(m));//.setTiers();
+    public static BasicMachine INFINITE_STEAM = new BasicMachine(Ref.ID, "infinite_steam", FLUID, CELL, CONFIGURABLE, GUI, Textures.TIER_HANDLER).setTile(m -> () -> new TileEntityInfiniteFluid(m));
+    public static BasicMachine BATTERY_BUFFER_FOUR = new BasicMachine(Ref.ID, "battery_buffer_four", GUI, ENERGY, CONFIGURABLE, ITEM,COVERBUFFERFOUR, Textures.TIER_HANDLER).setTile(m -> () -> new TileEntityBatteryBuffer(m)).frontCovers();
+    public static BasicMachine BATTERY_BUFFER_ONE = new BasicMachine(Ref.ID, "battery_buffer_one", GUI, ENERGY, CONFIGURABLE, ITEM,COVERBUFFERONE, Textures.TIER_HANDLER).setTile(m -> () -> new TileEntityBatteryBuffer(m)).frontCovers();
+    public static BasicMachine BATTERY_BUFFER_NINE = new BasicMachine(Ref.ID, "battery_buffer_nine", GUI, ENERGY, CONFIGURABLE, ITEM,COVERBUFFERNINE, Textures.TIER_HANDLER).setTile(m -> () -> new TileEntityBatteryBuffer(m)).frontCovers();
+    public static BasicMachine TRANSFORMER = new BasicMachine(Ref.ID, "transformer", ENERGY, CONFIGURABLE, LV, MV, HV, IV, EV, LUV, UV, Textures.TIER_HANDLER).setTile(m -> () -> new TileEntityTransformer(m, 1));
+    public static BasicMachine TRANSFORMER_DIGITAL = new BasicMachine(Ref.ID, "transformer_digital", EV, IV, GUI, ENERGY, CONFIGURABLE, Textures.TIER_HANDLER).setTile(m -> () -> new TileEntityDigitalTransformer(m));//.setTiers();
 
     public static void init() {
-
     }
 }
