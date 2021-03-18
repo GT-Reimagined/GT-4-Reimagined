@@ -14,7 +14,7 @@ import trinsdar.gt4r.datagen.GT4RRecipes;
 import trinsdar.gt4r.loader.WorldGenLoader;
 import trinsdar.gt4r.loader.machines.*;
 import trinsdar.gt4r.loader.machines.generator.BronzeSteelBoilerHandler;
-import trinsdar.gt4r.loader.machines.generator.SteamFuels;
+import trinsdar.gt4r.loader.machines.generator.FuelBurnHandler;
 import trinsdar.gt4r.loader.multi.ElectricBlasting;
 import trinsdar.gt4r.loader.multi.IndustrialGrinder;
 import trinsdar.gt4r.loader.multi.VacFreezer;
@@ -70,7 +70,7 @@ public class GT4Reimagined extends AntimatterMod {
         loader.add(ForgeHammerLoader::init);
         loader.add(AssemblyLoader::init);
         loader.add(ChemicalReactorLoader::init);
-        loader.add(SteamFuels::init);
+        loader.add(FuelBurnHandler::init);
         loader.add(FluidExtractorLoader::init);
         loader.add(BathingLoader::init);
         loader.add(BronzeSteelBoilerHandler::init);

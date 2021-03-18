@@ -45,7 +45,7 @@ public class Materials {
     public static Material Chlorine = new Material(Ref.ID, "chlorine", 0xffffff, NONE, Cr).asGas();
     public static Material Copper = new Material(Ref.ID, "copper", 0xff6400, SHINY, Cu).asMetal(1357, 0, PLATE, ROD, GEAR, ORE);
     public static Material Deuterium = new Material(Ref.ID, "deuterium", 0xffff00, NONE, D).asGas();
-    public static Material Hydrogen = new Material(Ref.ID, "hydrogen", 0x0000ff, NONE, H).asGas();
+    public static Material Hydrogen = new Material(Ref.ID, "hydrogen", 0x0000ff, NONE, H).asGas(15);
     public static Material Helium = new Material(Ref.ID, "helium", 0xffff00, NONE, He).asPlasma();
     public static Material Helium3 = new Material(Ref.ID, "helium_3", 0xffffff, NONE, He_3).asGas();
     public static Material Lithium = new Material(Ref.ID, "lithium", 0xe1dcff, DULL, Li).asSolid(454, 0);
@@ -67,14 +67,14 @@ public class Materials {
     //TODO: We can be more lenient about what fluids we have in, its not as bad as solids above, and we can stop them from showing in JEI (I think...)
 
     /** Gases **/
-    public static Material WoodGas = new Material(Ref.ID, "wood_gas", 0xdecd87, NONE).asGas(24);
-    public static Material Methane = new Material(Ref.ID, "methane", 0xffffff, NONE).asGas(104).mats(of(Carbon, 1, Hydrogen, 4));
+    public static Material WoodGas = new Material(Ref.ID, "wood_gas", 0xdecd87, NONE).asGas(25);
+    public static Material Methane = new Material(Ref.ID, "methane", 0xffffff, NONE).asGas(45).mats(of(Carbon, 1, Hydrogen, 4));
     public static Material CarbonDioxide = new Material(Ref.ID, "carbon_dioxide", 0xa9d0f5, NONE).asGas().mats(of(Carbon, 1, Oxygen, 2));
     //public static Material NobleGases = new Material(Ref.ID, "noble_gases", 0xc9e3fc, NONE).asGas()/*.setTemp(79, 0)*/.addComposition(of(CarbonDioxide, 21, Helium, 9, Methane, 3, Deuterium, 1));
     public static Material Air = new Material(Ref.ID, "air", 0xc9e3fc, NONE).asGas().mats(of(Nitrogen, 40, Oxygen, 11, Argon, 1/*, NobleGases, 1*/));
     public static Material NitrogenDioxide = new Material(Ref.ID, "nitrogen_dioxide", 0x64afff, NONE).asGas().mats(of(Nitrogen, 1, Oxygen, 2));
     public static Material NaturalGas = new Material(Ref.ID, "natural_gas", 0xffffff, NONE).asGas(15);
-    public static Material Propane = new Material(Ref.ID, "propane", 0xfae250, NONE).asGas(232).mats(of(Carbon, 2, Hydrogen, 6));
+    public static Material Propane = new Material(Ref.ID, "propane", 0xfae250, NONE).asGas(45).mats(of(Carbon, 2, Hydrogen, 6));
     public static Material SulfurDioxide = new Material(Ref.ID, "sulfur_dioxide", 0xc8c819, NONE).asGas().mats(of(Sulfur, 1, Oxygen, 2));
     public static Material SulfurTrioxide = new Material(Ref.ID, "sulfur_trioxide", 0xa0a014, NONE).asGas()/*.setTemp(344, 1)*/.mats(of(Sulfur, 1, Oxygen, 3));
     public static Material NitricOxide = new Material(Ref.ID, "nitric_oxide", 0x7dc8f0, NONE).asGas().mats(of(Nitrogen, 1, Oxygen, 1));
@@ -93,20 +93,25 @@ public class Materials {
     public static Material NitricAcid = new Material(Ref.ID, "nitric_acid", 0xe6e2ab, NONE).asFluid().mats(of(Hydrogen, 1, Nitrogen, 1, Oxygen, 3));
     //public static Material HydrochloricAcid = new Material(Ref.ID, "hydrochloric_acid", 0x6f8a91, NONE).asFluid().mats(of(Hydrogen, 1, Chlorine, 1));
     public static Material SulfuricAcid = new Material(Ref.ID, "sulfuric_acid", 0xff8000, NONE).asFluid().mats(of(Hydrogen, 2, Sulfur, 1, Oxygen, 4));
-    public static Material Naphtha = new Material(Ref.ID, "naphtha", 0xffff00, NONE).asFluid(256);
+    public static Material NitroCarbon = new Material(Ref.ID, "nitro_carbon", 0x1f5e5e, NONE).asFluid().mats(of(Nitrogen, 1, Carbon, 1));
 
     /** Fuels **/
     public static Material Diesel = new Material(Ref.ID, "diesel", 0xffff00, NONE).asFluid(128);
-    public static Material NitroFuel = new Material(Ref.ID, "cetane_boosted_diesel", 0xc8ff00, NONE).asFluid(512);
+    public static Material Gasoline = new Material(Ref.ID, "gasoline", 0x84723e, NONE).asFluid(128);
+    public static Material NitroDiesel = new Material(Ref.ID, "nitro_diesel", 0xc8ff00, NONE).asFluid(384);
     public static Material BioDiesel = new Material(Ref.ID, "bio_diesel", 0xff8000, NONE).asFluid(192);
     public static Material Biomass = new Material(Ref.ID, "biomass", 0x00ff00, NONE).asFluid(8);
-    public static Material Ethanol = new Material(Ref.ID, "ethanol", 0xff8000, NONE).asFluid(148).mats(of(Carbon, 2, Hydrogen, 6, Oxygen, 1));
+    public static Material Biofuel = new Material(Ref.ID, "biofuel", 0x99cc00, NONE).asFluid(6);
+    public static Material Ethanol = new Material(Ref.ID, "ethanol", 0xff8000, NONE).asFluid(128).mats(of(Carbon, 2, Hydrogen, 6, Oxygen, 1));
     public static Material Creosote = new Material(Ref.ID, "creosote", 0x804000, NONE).asFluid(8);
-    public static Material Oil = new Material(Ref.ID, "oil", 0x0a0a0a, NONE).asFluid(16);
-    public static Material SeedOil = new Material(Ref.ID, "seed_oil", 0xc4ff00, NONE).asFluid(2);
+    public static Material Naphtha = new Material(Ref.ID, "naphtha", 0xffff64, NONE).asFluid(128);
+    public static Material NitroCoalFuel = new Material(Ref.ID, "nitro-coalfuel", 0x002b2b, NONE).asFluid(48);
+    public static Material CoalFuel = new Material(Ref.ID, "coalfuel", 0x0f0f0f, NONE).asFluid(16);
+
+    public static Material Oil = new Material(Ref.ID, "oil", 0x0a0a0a, NONE).asFluid(15);
+    public static Material SeedOil = new Material(Ref.ID, "seed_oil", 0xc4ff00, NONE).asFluid(6);
     //public static Materials SeedOilHemp = new Materials(722, "Hemp Seed Oil", 196, 255, 0, lime, NONE).asSemi(2);
     //public static Materials SeedOilLin = new Materials(723, "Lin Seed Oil", 196, 255, 0, lime, NONE).asSemi(2);
-    public static Material Glycerol = new Material(Ref.ID, "glycerol", 0x87de87, NONE).asFluid(164).mats(of(Carbon, 3, Hydrogen, 8, Oxygen, 3));
 
     /** Dusts **/
     public static Material SodiumSulfide = new Material(Ref.ID, "sodium_sulfide", 0xffe680, NONE).asDust().mats(of(Sodium, 2, Sulfur, 1));

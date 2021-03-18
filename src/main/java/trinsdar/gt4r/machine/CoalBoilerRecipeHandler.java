@@ -10,11 +10,13 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.particles.BlockParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.IIntArray;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.Explosion;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
@@ -137,7 +139,7 @@ public class CoalBoilerRecipeHandler extends MachineRecipeHandler<TileEntityCoal
                         if (fill < 150){
                             //TODO:steam sounds
                             tile.getWorld().playSound(null, tile.getPos(), SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1.0f, 1.0f);
-                            //tile.getWorld().addParticle();
+                            if (tile.getWorld() instanceof ServerWorld) ((ServerWorld)tile.getWorld()).spawnParticle(ParticleTypes.SMOKE, tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ(), tile.getWorld().getRandom().nextInt(8) + 1, 0.0D, 0.2D, 0.0D, 0.0D);
                             f.drain(4000, IFluidHandler.FluidAction.EXECUTE);
                             update.set(true);
                         }
