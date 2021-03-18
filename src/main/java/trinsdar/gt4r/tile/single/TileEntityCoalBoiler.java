@@ -1,23 +1,17 @@
 package trinsdar.gt4r.tile.single;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import muramasa.antimatter.Antimatter;
 import muramasa.antimatter.gui.event.IGuiEvent;
 import muramasa.antimatter.machine.MachineState;
 import muramasa.antimatter.machine.event.ContentEvent;
-import muramasa.antimatter.machine.event.MachineEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.util.LazyHolder;
 import muramasa.antimatter.util.Utils;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraft.world.Explosion;
 import net.minecraftforge.fluids.FluidStack;
@@ -25,8 +19,10 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import trinsdar.gt4r.data.Materials;
 import trinsdar.gt4r.machine.CoalBoilerFluidHandler;
+import trinsdar.gt4r.machine.CoalBoilerRecipeHandler;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static muramasa.antimatter.Data.DUST;
 import static muramasa.antimatter.Data.GEM;
@@ -39,22 +35,39 @@ public class TileEntityCoalBoiler extends TileEntityMachine {
     public TileEntityCoalBoiler(Machine<?> type) {
         super(type);
         this.fluidHandler = LazyHolder.of(() -> new CoalBoilerFluidHandler(this));
+        this.recipeHandler = LazyHolder.of(() -> new CoalBoilerRecipeHandler(this));
     }
 
     public int getFuel() {
-        return fuel;
+        AtomicInteger v = new AtomicInteger();
+        recipeHandler.ifPresent(r -> {
+            v.set(((CoalBoilerRecipeHandler) r).getFuel());
+        });
+        return v.get();
     }
 
     public int getHeat() {
-        return heat;
+        AtomicInteger v = new AtomicInteger();
+        recipeHandler.ifPresent(r -> {
+            v.set(((CoalBoilerRecipeHandler) r).getHeat());
+        });
+        return v.get();
     }
 
     public int getMaxFuel() {
-        return maxFuel;
+        AtomicInteger v = new AtomicInteger();
+        recipeHandler.ifPresent(r -> {
+            v.set(((CoalBoilerRecipeHandler) r).getMaxFuel());
+        });
+        return v.get();
     }
 
     public int getMaxHeat() {
-        return maxHeat;
+        AtomicInteger v = new AtomicInteger();
+        recipeHandler.ifPresent(r -> {
+            v.set(((CoalBoilerRecipeHandler) r).getMaxHeat());
+        });
+        return v.get();
     }
 
     @Override
@@ -67,8 +80,8 @@ public class TileEntityCoalBoiler extends TileEntityMachine {
         super.onGuiEvent(event, data);
     }
 
-    @Override
-    public void onServerUpdate() {
+    //@Override
+    public void onServerUpdate2() {
         super.onServerUpdate();
 //        Antimatter.LOGGER.info("World Time: " + world.getGameTime());
 //        Antimatter.LOGGER.info("Heat: " + heat);
@@ -183,28 +196,5 @@ public class TileEntityCoalBoiler extends TileEntityMachine {
         } else if (!t && this.getMachineState() == MachineState.ACTIVE){
             this.setMachineState(MachineState.IDLE);
         }
-    }
-
-    @Override
-    public void read(BlockState state, CompoundNBT tag) {
-        super.read(state, tag);
-        this.heat = tag.getInt("heat");
-        this.maxHeat = tag.getInt("maxHeat");
-        this.fuel = tag.getInt("fuel");
-        this.maxFuel = tag.getInt("maxFuel");
-        this.lossTimer = tag.getInt("lossTimer");
-        this.hadNoWater = tag.getBoolean("hadNoWater");
-    }
-
-    @Override
-    public CompoundNBT write(CompoundNBT tag) {
-        super.write(tag);
-        tag.putInt("heat", heat);
-        tag.putInt("maxHeat", maxHeat);
-        tag.putInt("fuel", fuel);
-        tag.putInt("maxFuel", maxFuel);
-        tag.putInt("lossTimer", lossTimer);
-        tag.putBoolean("hadNoWater", hadNoWater);
-        return tag;
     }
 }

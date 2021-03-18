@@ -10,6 +10,7 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.IIntArray;
 import net.minecraft.world.Explosion;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -21,22 +22,83 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import static muramasa.antimatter.Data.DUST;
 import static muramasa.antimatter.Data.GEM;
-import static muramasa.antimatter.machine.MachineState.ACTIVE;
-import static muramasa.antimatter.machine.MachineState.IDLE;
-import static muramasa.antimatter.machine.MachineState.INVALID_TIER;
+import static muramasa.antimatter.machine.MachineState.*;
 import static muramasa.antimatter.machine.Tier.BRONZE;
 import static trinsdar.gt4r.data.Materials.Steam;
 
 public class CoalBoilerRecipeHandler extends MachineRecipeHandler<TileEntityCoalBoiler> {
     int maxHeat = 500, heat, fuel = 0, maxFuel, lossTimer = 0;
     boolean hadNoWater;
+
+    protected final IIntArray GUI_SYNC_DATA2 = new IIntArray() {
+
+        @Override
+        public int get(int index) {
+            switch (index) {
+                case 0:
+                    return CoalBoilerRecipeHandler.this.heat;
+                case 1:
+                    return CoalBoilerRecipeHandler.this.maxHeat;
+                case 2:
+                    return CoalBoilerRecipeHandler.this.fuel;
+                case 3:
+                    return CoalBoilerRecipeHandler.this.maxFuel;
+            }
+            return 0;
+        }
+
+        @Override
+        public void set(int index, int value) {
+            switch (index) {
+                case 0:
+                    CoalBoilerRecipeHandler.this.heat = value;
+                    break;
+                case 1:
+                    CoalBoilerRecipeHandler.this.maxHeat = value;
+                    break;
+                case 2:
+                    CoalBoilerRecipeHandler.this.fuel = value;
+                    break;
+                case 3:
+                    CoalBoilerRecipeHandler.this.maxFuel = value;
+                    break;
+            }
+        }
+
+        @Override
+        public int size() {
+            return 4;
+        }
+    };
+
     public CoalBoilerRecipeHandler(TileEntityCoalBoiler tile) {
         super(tile);
+        GUI_SYNC_DATA2.set(0, 0);
+    }
+
+    public int getFuel() {
+        return fuel;
+    }
+
+    public int getHeat() {
+        return heat;
+    }
+
+    public int getMaxFuel() {
+        return maxFuel;
+    }
+
+    public int getMaxHeat() {
+        return maxHeat;
+    }
+
+    @Override
+    public IIntArray getProgressData() {
+        return GUI_SYNC_DATA2;
     }
 
     @Override
     public void onServerUpdate() {
-        super.onServerUpdate();
         AtomicBoolean update = new AtomicBoolean(false);
         if (this.heat <= 20) {
             int oldHeat = heat;
@@ -83,28 +145,51 @@ public class CoalBoilerRecipeHandler extends MachineRecipeHandler<TileEntityCoal
                 }
             });
         }
-        tile.itemHandler.ifPresent(i ->{
-            IItemHandlerModifiable outputs = i.getOutputHandler();
-            IItemHandlerModifiable inputs = i.getInputHandler();
-            ItemStack byproductStack = outputs.getStackInSlot(0);
+        super.onServerUpdate();
+    }
 
-            if (this.fuel <= 0 && activeRecipe != null){
+    @Override
+    protected MachineState recipeFinish() {
+        addOutputs();
+        if (this.generator) {
+            currentProgress = 0;
+            return ACTIVE;
+        }
+        if (!canRecipeContinue()) {
+            this.resetRecipe();
+            return IDLE;
+        } else {
+            return ACTIVE;
+        }
+    }
+
+    @Override
+    protected MachineState tickRecipe() {
+        if (this.activeRecipe == null) {
+            System.out.println("Check Recipe when active recipe is null");
+            return tile.getMachineState();
+        }
+        else {
+            tile.onRecipePreTick();
+            if (fuel <= 0 && canRecipeContinue()){
+                if (fuel < 0){
+                    fuel = 0;
+                }
                 this.maxFuel = activeRecipe.getDuration();
                 addOutputs();
                 this.fuel += maxFuel;
                 consumeInputs();
             }
-
-        });
-        if ((this.heat < 500) && (this.fuel > 0) && (tile.getWorld().getGameTime() % 12L == 0L)) {
-            this.fuel -= 1;
-            this.heat += 1;
-            update.set(true);
+            if ((this.heat < 500) && (this.fuel > 0) && (tile.getWorld().getGameTime() % 12L == 0L)) {
+                this.fuel -= 1;
+                this.heat += 1;
+            }
+            if (fuel == 0 && !canRecipeContinue()){
+                this.resetRecipe();
+            }
+            tile.onRecipePostTick();
+            return ACTIVE;
         }
-        if (update.get()){
-            //tile.onMachineEvent(ContentEvent.FLUID_OUTPUT_CHANGED, "null");
-        }
-        this.setActive(this.fuel > 0);
     }
 
     public void setActive(boolean t){
@@ -116,33 +201,8 @@ public class CoalBoilerRecipeHandler extends MachineRecipeHandler<TileEntityCoal
     }
 
     @Override
-    public void checkRecipe() {
-        if (activeRecipe != null) {
-            return;
-        }
-        //First lookup.
-        if (!this.tile.hadFirstTick() && hasLoadedInput()) {
-            activeRecipe = tile.getMachineType().getRecipeMap().find(itemInputs.toArray(new ItemStack[0]), fluidInputs.toArray(new FluidStack[0]));
-            if (activeRecipe == null) return;
-            tile.setMachineState(ACTIVE);
-            return;
-        }
-        if (tile.getMachineState().allowRecipeCheck()) {
-            if ((activeRecipe = findRecipe()) != null) {
-                if (!validateRecipe(activeRecipe)) {
-                    tile.setMachineState(INVALID_TIER);
-                    activeRecipe = null;
-                    return;
-                }
-                if (!canOutput()) {
-                    activeRecipe = null;
-                    tile.setMachineState(IDLE);
-                    return;
-                }
-                activateRecipe(true);
-                tile.setMachineState(ACTIVE);
-            }
-        }
+    public boolean canOutput() {
+        return true;
     }
 
     @Override
