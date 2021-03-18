@@ -1,7 +1,4 @@
 {
-	"textures": {
-		"1": "gt4r:blocks/cover/pump_module"
-	},
 	"elements": [
 		{
 			"from": [5, 5, 0.5],
