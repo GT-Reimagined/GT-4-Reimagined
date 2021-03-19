@@ -118,7 +118,7 @@ public class CoalBoilerRecipeHandler extends MachineRecipeHandler<TileEntityCoal
             this.heat -= 1;
             this.lossTimer = 0;
         }
-        Arrays.stream(Direction.values()).filter(f -> f != Direction.DOWN).collect(Collectors.toList()).forEach(this::exportFluidFromMachineToSide);
+        //Arrays.stream(Direction.values()).filter(f -> f != Direction.DOWN).collect(Collectors.toList()).forEach(this::exportFluidFromMachineToSide);
         delay = tile.getMachineTier() == BRONZE ? 25 : 10;
         if (tile.getWorld().getGameTime() % delay == 0){
             tile.fluidHandler.ifPresent(f -> {
