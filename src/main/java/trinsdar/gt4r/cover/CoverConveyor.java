@@ -22,7 +22,7 @@ import java.util.Map;
 
 import static net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
 
-public class CoverConveyor extends BaseCover {
+public class CoverConveyor extends CoverBasicTransport {
 
     public static String ID = "conveyor_module";
 
@@ -40,11 +40,6 @@ public class CoverConveyor extends BaseCover {
     @Override
     public String getId() {
         return ID;
-    }
-
-    @Override
-    public String getDomain() {
-        return Ref.ID;
     }
 
     @Override

@@ -5,12 +5,15 @@ import muramasa.antimatter.cover.CoverStack;
 import muramasa.antimatter.cover.CoverTiered;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.util.Utils;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import trinsdar.gt4r.Ref;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 
-public class CoverPump extends BaseCover {
+import static trinsdar.gt4r.cover.CoverMode.*;
+
+public class CoverPump extends CoverBasicTransport {
 
     public static String ID = "pump_module";
 
@@ -31,11 +34,6 @@ public class CoverPump extends BaseCover {
         TileEntity adjTile = instance.getTile().getWorld().getTileEntity(instance.getTile().getPos().offset(side));
         if (adjTile == null) return;
         Utils.transferFluidsOnCap(instance.getTile(), adjTile, Integer.MAX_VALUE);
-    }
-
-    @Override
-    public String getDomain() {
-        return Ref.ID;
     }
 
     @Override

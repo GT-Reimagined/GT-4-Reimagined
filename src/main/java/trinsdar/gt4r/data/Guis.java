@@ -3,6 +3,8 @@ package trinsdar.gt4r.data;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.Ref;
 import muramasa.antimatter.gui.BarDir;
+import muramasa.antimatter.gui.ButtonBody;
+import muramasa.antimatter.gui.ButtonOverlay;
 import muramasa.antimatter.gui.GuiData;
 import muramasa.antimatter.gui.MenuHandlerMachine;
 import muramasa.antimatter.gui.container.ContainerBasicMachine;
@@ -13,11 +15,14 @@ import muramasa.antimatter.tile.multi.TileEntityHatch;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
+import trinsdar.gt4r.gui.ButtonOverlays;
 
 import static muramasa.antimatter.gui.ButtonBody.*;
 import static muramasa.antimatter.gui.SlotType.*;
 import static muramasa.antimatter.machine.Tier.*;
+import static trinsdar.gt4r.data.GT4RData.COVER_CONVEYOR;
 import static trinsdar.gt4r.data.Machines.*;
+import static trinsdar.gt4r.gui.ButtonOverlays.*;
 
 public class Guis {
 
@@ -122,6 +127,15 @@ public class Guis {
 
         STEAM_TURBINE.getGui().add(BASIC_TANK);
         GAS_TURBINE.getGui().add(BASIC_TANK);
+
+        ButtonOverlay[] overlays = new ButtonOverlay[]{IMPORT, IMPORT_CONDITIONAL, IMPORT_INVERT_CONDITIONAL, EXPORT, EXPORT_CONDITIONAL, EXPORT_INVERT_CONDITIONAL, IMPORT_EXPORT, IMPORT_EXPORT_CONDITIONAL, IMPORT_EXPORT_INVERT_CONDITIONAL, EXPORT_IMPORT, EXPORT_IMPORT_CONDITIONAL, EXPORT_IMPORT_INVERT_CONDITIONAL};
+
+        for (int x = 0; x < 6; x++){
+            for (int y = 0; y < 2; y++){
+                COVER_CONVEYOR.getGui().addSwitch(35 + (x * 18), 25 + (y * 18), 16, 16, overlays[x + y], "Test");
+            }
+        }
+
 
         INFINITE_STEAM.getGui().add(BASIC_TANK);
 
