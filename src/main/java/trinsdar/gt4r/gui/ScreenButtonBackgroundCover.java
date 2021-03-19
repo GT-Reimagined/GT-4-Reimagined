@@ -17,8 +17,6 @@ public class ScreenButtonBackgroundCover<T extends ContainerCover> extends Scree
         super(container, inv, name);
     }
 
-    
-
     @Override
     protected void drawGuiContainerBackgroundLayer(MatrixStack stack, float partialTicks, int mouseX, int mouseY) {
         super.drawGuiContainerBackgroundLayer(stack, partialTicks, mouseX, mouseY);

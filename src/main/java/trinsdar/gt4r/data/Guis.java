@@ -132,7 +132,7 @@ public class Guis {
 
         for (int x = 0; x < 6; x++){
             for (int y = 0; y < 2; y++){
-                COVER_CONVEYOR.getGui().addSwitch(35 + (x * 18), 25 + (y * 18), 16, 16, overlays[x + y], "Test");
+                COVER_CONVEYOR.getGui().addSwitch(35 + (x * 18), 25 + (y * 18), 16, 16, overlays[x + y]);
             }
         }
 
