@@ -1,14 +1,14 @@
 package trinsdar.gt4r.data;
 
 import com.google.common.collect.ImmutableMap;
-import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.AntimatterConfig;
+import muramasa.antimatter.cover.BaseCover;
+import muramasa.antimatter.cover.ICover;
 import muramasa.antimatter.item.ItemCover;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
 import net.minecraft.util.LazyValue;
 import trinsdar.gt4r.block.BlockCasing;
-import muramasa.antimatter.cover.Cover;
 import muramasa.antimatter.item.ItemBasic;
 import muramasa.antimatter.item.ItemBattery;
 import muramasa.antimatter.item.ItemFluidCell;
@@ -22,7 +22,6 @@ import muramasa.antimatter.texture.Texture;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.block.BlockConnectedCasing;
 import trinsdar.gt4r.cover.CoverConveyor;
-import trinsdar.gt4r.cover.CoverPlate;
 import trinsdar.gt4r.cover.CoverPump;
 import trinsdar.gt4r.items.ItemIntCircuit;
 import trinsdar.gt4r.tree.BlockRubberLeaves;
@@ -32,7 +31,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.item.Item;
 
-import static muramasa.antimatter.Data.ROTOR;
 import static trinsdar.gt4r.data.Materials.*;
 
 public class GT4RData {
@@ -92,9 +90,8 @@ public class GT4RData {
 
     }
 
-    public static final Cover COVER_PLATE = new CoverPlate();
-    public static final Cover COVER_CONVEYOR = new CoverConveyor();
-    public static final Cover COVER_PUMP = new CoverPump();
+    public static final BaseCover COVER_CONVEYOR = new CoverConveyor();
+    public static final BaseCover COVER_PUMP = new CoverPump();
 
     public static ItemBasic<?> StickyResin = new ItemBasic<>(Ref.ID, "sticky_resin");
     public static ItemBasic<?> Plantball = new ItemBasic<>(Ref.ID, "plantball");

@@ -66,7 +66,8 @@ public class ScreenCoalBoiler<T extends ContainerMachine> extends ScreenMachine<
                         return;
                     }
                     int y = (guiTop + 25 + 54) - lvl;
-                    drawTexture(stack, gui, guiLeft + 84, y, xSize + 48, 54 - lvl, 10, lvl);
+                    drawTexture(stack, gui, guiLeft + 83, y, xSize + 28, 54 - lvl, 10, lvl);
+
                 }
                 FluidStack[] outputs = t.getOutputs();
                 int steam = outputs[0].getAmount();
@@ -80,7 +81,7 @@ public class ScreenCoalBoiler<T extends ContainerMachine> extends ScreenMachine<
                         return;
                     }
                     int y = (guiTop + 25 + 54) - lvl;
-                    drawTexture(stack, gui, guiLeft + 70, y, xSize + 38, 54 - lvl, 10, lvl);
+                    drawTexture(stack, gui, guiLeft + 70, y, xSize + 18, 54 - lvl, 10, lvl);
                 }
             });
             if (container.getTile() instanceof TileEntityCoalBoiler){
@@ -96,7 +97,7 @@ public class ScreenCoalBoiler<T extends ContainerMachine> extends ScreenMachine<
                         return;
                     }
                     int y = (guiTop + 25 + 54) - lvl;
-                    drawTexture(stack, gui, guiLeft + 96, y, xSize + 58, 54 - lvl, 10, lvl);
+                    drawTexture(stack, gui, guiLeft + 96, y, xSize + 38, 54 - lvl, 10, lvl);
                 }
                 int fuel = tile.getFuel();
                 if (fuel > 0){
@@ -109,7 +110,7 @@ public class ScreenCoalBoiler<T extends ContainerMachine> extends ScreenMachine<
                         return;
                     }
                     int y = (guiTop + 42 + 18) - lvl;
-                    drawTexture(stack, gui, guiLeft + 115, y, xSize + 20, 18 - lvl, 18, lvl);
+                    drawTexture(stack, gui, guiLeft + 115, y, xSize, 18 - lvl, 18, lvl);
                 }
             }
         }

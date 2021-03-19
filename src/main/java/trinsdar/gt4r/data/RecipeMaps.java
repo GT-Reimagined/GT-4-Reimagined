@@ -22,6 +22,7 @@ public class RecipeMaps {
 
     public static RecipeMap SMALL_BOILERS = new RecipeMap<>("small_boilers", new RecipeBuilder());
     public static RecipeMap COAL_BOILERS = new RecipeMap<>("coal_boilers", new RecipeBuilder());
+    public static RecipeMap LAVA_BOILERS = new RecipeMap<>("lava_boilers", new RecipeBuilder());
 
     public static RecipeMap ALLOY_SMELTING = new RecipeMap<>("alloy_smelting", new AlloySmeltingBuilder());
     public static RecipeMap ASSEMBLING = new RecipeMap<>("assembling", new RecipeBuilder());

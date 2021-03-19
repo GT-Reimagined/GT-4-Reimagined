@@ -3,7 +3,6 @@ package trinsdar.gt4r.machine;
 import muramasa.antimatter.capability.fluid.FluidTanks;
 import muramasa.antimatter.capability.machine.MachineFluidHandler;
 import muramasa.antimatter.machine.event.ContentEvent;
-import muramasa.antimatter.tile.TileEntityMachine;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -14,14 +13,15 @@ import trinsdar.gt4r.tile.single.TileEntityCoalBoiler;
 import static net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE;
 import static trinsdar.gt4r.data.Materials.DistilledWater;
 
-public class CoalBoilerFluidHandler extends MachineFluidHandler<TileEntityCoalBoiler> {
+public class LavaBoilerFluidHandler extends MachineFluidHandler<TileEntityCoalBoiler> {
 
     private boolean fillingCell = false;
 
-    public CoalBoilerFluidHandler(TileEntityCoalBoiler tile) {
+    public LavaBoilerFluidHandler(TileEntityCoalBoiler tile) {
         super(tile, 16000, 1000 * (250 + tile.getMachineTier().getIntegerId()));
         tanks.put(FluidDirection.INPUT, FluidTanks.create(tile, ContentEvent.FLUID_INPUT_CHANGED, b -> {
             b.tank(fluidStack -> fluidStack.isFluidEqual(new FluidStack(Fluids.WATER, 1)) || fluidStack.isFluidEqual(DistilledWater.getLiquid(1)),16000);
+            b.tank(fluidStack -> fluidStack.isFluidEqual(new FluidStack(Fluids.LAVA, 1)),16000);
             return b;
         }));
         tanks.put(FluidDirection.OUTPUT, FluidTanks.create(tile, ContentEvent.FLUID_OUTPUT_CHANGED, b -> {

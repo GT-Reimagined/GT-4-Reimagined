@@ -54,6 +54,7 @@ public class GT4Reimagined extends AntimatterMod {
         AntimatterAPI.addProvider(Ref.ID, g -> new GT4RRecipes(Ref.ID, Ref.NAME.concat(" Recipes"), g));
         //AntimatterAPI.addProvider(Ref.ID, g -> new AntimatterAdvancementProvider(Ref.ID, Ref.NAME.concat(" Advancements"), g, new ProgressionAdvancements()));
         AntimatterAPI.addProvider(Ref.ID, GT4RLocalizations.en_US::new);
+        AntimatterAPI.addProvider(Ref.ID, g -> new AntimatterBlockLootProvider(Ref.ID, Ref.NAME.concat( " Loot generator"),g));
 
         registerRecipeLoaders();
     }

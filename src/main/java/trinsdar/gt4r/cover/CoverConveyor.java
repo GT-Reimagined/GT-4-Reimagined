@@ -1,12 +1,13 @@
 package trinsdar.gt4r.cover;
 
 import com.google.common.collect.ImmutableMap;
-import muramasa.antimatter.cover.Cover;
+import muramasa.antimatter.cover.BaseCover;
 import muramasa.antimatter.cover.CoverStack;
 import muramasa.antimatter.cover.CoverTiered;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.util.Utils;
+import net.minecraft.util.ResourceLocation;
 import trinsdar.gt4r.Ref;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -21,7 +22,7 @@ import java.util.Map;
 
 import static net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
 
-public class CoverConveyor extends Cover {
+public class CoverConveyor extends BaseCover {
 
     public static String ID = "conveyor_module";
 
@@ -70,5 +71,15 @@ public class CoverConveyor extends Cover {
         } else {
             Utils.transferItemsOnCap(instance.getTile(), adjTile,true);
         }
+    }
+
+    @Override
+    public boolean hasGui() {
+        return true;
+    }
+
+    @Override
+    public ResourceLocation getModel(Direction dir, Direction facing) {
+        return getBasicDepthModel();
     }
 }
