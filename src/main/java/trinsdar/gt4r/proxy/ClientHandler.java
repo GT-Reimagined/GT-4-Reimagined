@@ -9,7 +9,6 @@ import muramasa.antimatter.gui.container.ContainerHatch;
 import muramasa.antimatter.gui.container.ContainerMachine;
 import muramasa.antimatter.gui.container.ContainerMultiMachine;
 import muramasa.antimatter.gui.screen.ScreenBasicMachine;
-import muramasa.antimatter.gui.screen.ScreenCover;
 import muramasa.antimatter.gui.screen.ScreenHatch;
 import muramasa.antimatter.gui.screen.ScreenMultiMachine;
 import muramasa.antimatter.gui.screen.ScreenSteamMachine;
@@ -19,7 +18,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import trinsdar.gt4r.data.Guis;
-import trinsdar.gt4r.gui.ScreenButtonCover;
+import trinsdar.gt4r.gui.ScreenButtonBackgroundCover;
 import trinsdar.gt4r.gui.ScreenCoalBoiler;
 import trinsdar.gt4r.gui.ScreenHatchCustom;
 
@@ -35,7 +34,7 @@ public class ClientHandler {
         });
 
         ScreenSetup.<ContainerMachine, ScreenBasicMachine<ContainerMachine>>setScreenMapping(Data.BASIC_MENU_HANDLER, ScreenBasicMachine::new);
-        ScreenSetup.<ContainerCover, ScreenButtonCover<ContainerCover>>setScreenMapping(Data.COVER_MENU_HANDLER, ScreenButtonCover::new);
+        ScreenSetup.<ContainerCover, ScreenButtonBackgroundCover<ContainerCover>>setScreenMapping(Data.COVER_MENU_HANDLER, ScreenButtonBackgroundCover::new);
         ScreenSetup.<ContainerMultiMachine, ScreenMultiMachine<ContainerMultiMachine>>setScreenMapping(Data.MULTI_MENU_HANDLER, ScreenMultiMachine::new);
         ScreenSetup.<ContainerHatch, ScreenHatch<ContainerHatch>>setScreenMapping(Data.HATCH_MENU_HANDLER, ScreenHatch::new);
         ScreenSetup.<ContainerMachine, ScreenSteamMachine<ContainerMachine>>setScreenMapping(Data.STEAM_MENU_HANDLER, ScreenSteamMachine::new);
