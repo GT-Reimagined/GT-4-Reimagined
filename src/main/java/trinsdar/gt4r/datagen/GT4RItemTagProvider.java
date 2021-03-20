@@ -2,13 +2,12 @@ package trinsdar.gt4r.datagen;
 
 import muramasa.antimatter.datagen.ExistingFileHelperOverride;
 import muramasa.antimatter.datagen.providers.AntimatterItemTagProvider;
-import muramasa.antimatter.util.Utils;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.item.Items;
-import net.minecraft.tags.ITag;
-import net.minecraft.item.Item;
+import trinsdar.gt4r.data.CustomTags;
 
+import static trinsdar.gt4r.data.CustomTags.getTag;
 import static trinsdar.gt4r.data.GT4RData.*;
 import static trinsdar.gt4r.data.Materials.*;
 
@@ -44,7 +43,4 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
 
     }
 
-    public ITag.INamedTag<Item> getTag(String id){
-        return Utils.getForgeItemTag(id);
-    }
 }

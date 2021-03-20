@@ -98,6 +98,10 @@ public class GT4RData {
     public static ItemBasic<?> CarbonFibre = new ItemBasic<>(Ref.ID, "raw_carbon_fibre");
     public static ItemBasic<?> CarbonMesh = new ItemBasic<>(Ref.ID, "carbon_mesh");
     public static ItemBasic<?> CarbonPlate = new ItemBasic<>(Ref.ID, "carbon_plate");
+    public static ItemBasic<?> CoalBall = new ItemBasic<>(Ref.ID, "coal_ball");
+    public static ItemBasic<?> CompressedCoalBall = new ItemBasic<>(Ref.ID, "compressed_coal_ball");
+    public static ItemBasic<?> CoalChunk = new ItemBasic<>(Ref.ID, "coal_chunk");
+
     public static ItemBasic<?> ComputerMonitor = new ItemBasic<>(Ref.ID, "computer_monitor").tip("Can be placed on machines as a cover");
     public static ItemCover ConveyorModule = new ItemCover(Ref.ID, COVER_CONVEYOR.getId()).tip("Can be placed on machines as a cover");
     public static ItemBasic<?> CraftingModule = new ItemBasic<>(Ref.ID, "crafting_module").tip("Can be placed on machines as a cover");
@@ -127,6 +131,7 @@ public class GT4RData {
 
     public static ItemBasic<?> MixedMetal = new ItemBasic<>(Ref.ID, "mixed_metal");
     public static ItemBasic<?> AdvancedAlloy = new ItemBasic<>(Ref.ID,"advanced_alloy");
+    public static ItemBasic<?> MachineParts = new ItemBasic<>(Ref.ID, "machine_parts");
     public static ItemBasic<?> AdvCircuitParts = new ItemBasic<>(Ref.ID, "advanced_circuit_parts").tip("Used for making Advanced Circuits");
     public static ItemBasic<?> CircuitBoardBasic = new ItemBasic<>(Ref.ID, "basic_circuit_board").tip("A basic Board");
     public static ItemBasic<?> CircuitBoardAdv = new ItemBasic<>(Ref.ID, "advanced_circuit_board").tip("An advanced Board");
