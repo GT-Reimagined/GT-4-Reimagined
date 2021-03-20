@@ -78,6 +78,7 @@ public class GT4Reimagined extends AntimatterMod {
 
         loader.add(ElectrolyzerLoader::init);
         loader.add(FluidCanningLoader::init);
+        loader.add(CannerLoader::init);
         loader.add(CentrifugingLoader::init);
         loader.add(ExtractorLoader::init);
         loader.add(CompressorLoader::init);

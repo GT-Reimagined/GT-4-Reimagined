@@ -51,6 +51,11 @@ public class Parts {
         provider.addStackRecipe(output, Ref.ID, "circuit_advanced_v", "parts", "has_basic_circuit", provider.hasSafeItem(CIRCUITS_BASIC),
                 new ItemStack(CircuitAdv, 1), of('C', CIRCUITS_BASIC, 'R', PLATE.getMaterialTag(RedAlloy), 'L', getForgeItemTag("dusts/lapislaz"), 'G', DUST.getMaterialTag(Glowstone)), "RLR", "GCG", "RLR");
         provider.shapeless(output, "mesh_carbon", "parts", "has_carbon_fibre", provider.hasSafeItem(CarbonFibre), new ItemStack(CarbonMesh), CarbonFibre, CarbonFibre);
-        provider.addItemRecipe(output, Ref.ID, "battery_re", "parts", "has_tin_cable", provider.hasSafeItem(CABLE_TIN.getBlockItem(PipeSize.VTINY)), BatteryRE, of('T', PLATE.getMaterialTag(Tin), 'C', CABLE_TIN.getBlockItem(PipeSize.VTINY), 'R', DUST.getMaterialTag(Redstone)), " C ", "TRT", "TRT");
+        provider.addItemRecipe(output, Ref.ID, "re_battery", "parts", "has_tin_cable", provider.hasSafeItem(CABLE_TIN.getBlockItem(PipeSize.VTINY)),
+                BatteryRE, of('T', PLATE.getMaterialTag(Tin), 'C', CABLE_TIN.getBlockItem(PipeSize.VTINY), 'R', DUST.getMaterialTag(Redstone)), " C ", "TRT", "TRT");
+        provider.addItemRecipe(output, Ref.ID, "small_battery_hull", "parts", "has_tin_cable", provider.hasSafeItem(CABLE_TIN.getBlockItem(PipeSize.VTINY)),
+                BatteryHullSmall, of('T', PLATE.getMaterialTag(BatteryAlloy), 'C', CABLE_TIN.getBlockItem(PipeSize.VTINY)), "C", "T", "T");
+        provider.addItemRecipe(output, Ref.ID, "medium_battery_hull", "parts", "has_tin_cable", provider.hasSafeItem(CABLE_COPPER.getBlockItem(PipeSize.VTINY)),
+                BatteryHullMedium, of('T', PLATE.getMaterialTag(BatteryAlloy), 'C', CABLE_COPPER.getBlockItem(PipeSize.VTINY)), "C C", "TTT", "TTT");
     }
 }

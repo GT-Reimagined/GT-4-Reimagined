@@ -105,7 +105,6 @@ public class AssemblyLoader {
         ASSEMBLING.RB().ii(of(CABLE_TIN.getBlockItem(PipeSize.VTINY), 1), PLATE.getMaterialIngredient(BatteryAlloy)).io(new ItemStack(BatteryHullSmall)).add(800, 1);
         ASSEMBLING.RB().ii(of(CABLE_COPPER.getBlockItem(PipeSize.VTINY), 2), PLATE.getMaterialIngredient(BatteryAlloy, 3)).io(new ItemStack(BatteryHullMedium)).add(1600, 2);
         ASSEMBLING.RB().ii(of(CABLE_GOLD.getBlockItem(PipeSize.VTINY), 4), PLATE.getMaterialIngredient(BatteryAlloy, 9)).io(new ItemStack(BatteryHullLarge)).add(6400, 4);
-
     }
 
     public static ITag.INamedTag<Item> getTag(String domain, String path){
