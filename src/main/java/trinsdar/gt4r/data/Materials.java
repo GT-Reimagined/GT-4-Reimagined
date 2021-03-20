@@ -42,6 +42,7 @@ public class Materials {
     public static Material Antimony = new Material(Ref.ID, "antimony", 0xdcdcf0, SHINY, Sb).asMetal(1449, 0);
     public static Material Argon = new Material(Ref.ID, "argon", 0xff00f0, NONE, Ar).asGas();
     public static Material Calcium = new Material(Ref.ID, "calcium", 0xfff5f5, METALLIC, Ca).asDust(1115);
+    public static Material Cadmium = new Material(Ref.ID, "cadmium", 0x32323c, SHINY, Cd).asDust(594);
     public static Material Chlorine = new Material(Ref.ID, "chlorine", 0xffffff, NONE, Cr).asGas();
     public static Material Copper = new Material(Ref.ID, "copper", 0xff6400, SHINY, Cu).asMetal(1357, 0, PLATE, ROD, GEAR, ORE);
     public static Material Deuterium = new Material(Ref.ID, "deuterium", 0xffff00, NONE, D).asGas();
@@ -144,7 +145,7 @@ public class Materials {
     public static Material Tetrahedrite = new Material(Ref.ID, "tetrahedrite", 0xc82000, DULL).asDust(ORE).mats(of(Copper, 3, Antimony, 1, Sulfur, 3, Iron, 1));
     public static Material Tungstate = new Material(Ref.ID, "tungstate", 0x373223, DULL).asDust(ORE).mats(of(Tungsten, 1, Lithium, 2, Oxygen, 4)).setOreMulti(2);
     public static Material Uraninite = new Material(Ref.ID, "uraninite", 0x232323, DULL).asDust(ORE).mats(of(Uranium238, 1, Oxygen, 2));
-    public static Material Wood = new Material(Ref.ID, "wood", 0x643200, NONE).asDust().addHandleStat(12, 0.0F).mats(of(Carbon, 1, Oxygen, 1, Hydrogen, 1));
+    public static Material Wood = new Material(Ref.ID, "wood", 0x643200, NONE).asDust(PLATE).addHandleStat(12, 0.0F).mats(of(Carbon, 1, Oxygen, 1, Hydrogen, 1));
     public static Material Stone = new Material(Ref.ID, "stone", 0xcdcdcd, ROUGH).asDust();
     public static Material Blaze = new Material(Ref.ID, "blaze", 0xffc800, NONE).asDust().mats(of(Sulfur, 1, DarkAsh, 1/*, Magic, 1*/));
     public static Material Flint = new Material(Ref.ID, "flint", 0x002040, FLINT).asDust().addTools(0.0F, 2.0F, 48, 1, of(Enchantments.FIRE_ASPECT, 1)).mats(of(SiliconDioxide, 1));
@@ -311,7 +312,7 @@ public class Materials {
         Chromite.addByProduct(Iron, Magnesium, Chrome);
         Galena.addByProduct(Sulfur, Silver, Lead);
         Pyrite.addByProduct(Sulfur, Phosphor, Iron);
-        Sphalerite.addByProduct(Zinc, YellowGarnet/*, Cadmium*/);
+        Sphalerite.addByProduct(Zinc, YellowGarnet, Cadmium);
         Tetrahedrite.addByProduct(Antimony, Zinc);
         Tungstate.addByProduct(Manganese, Silver, Lithium);
         Ruby.addByProduct(Chrome, RedGarnet);

@@ -7,7 +7,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.item.Items;
 import trinsdar.gt4r.data.CustomTags;
 
-import static trinsdar.gt4r.data.CustomTags.getTag;
+import static trinsdar.gt4r.data.CustomTags.*;
 import static trinsdar.gt4r.data.GT4RData.*;
 import static trinsdar.gt4r.data.Materials.*;
 
@@ -19,27 +19,27 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
     @Override
     public void registerTags() {
         super.registerTags();
-        this.getOrCreateBuilder(getTag("plates/steels")).addTag(getTag("plates/steel")).addTag(getTag("plates/stainless_steel"));
-        this.getOrCreateBuilder(getTag("plates/invaraluminium")).addTag(getTag("plates/invar")).addTag(getTag("plates/aluminium"));
-        this.getOrCreateBuilder(getTag("plates/ironaluminium")).addTag(getTag("plates/iron")).addTag(getTag("plates/aluminium"));
-        this.getOrCreateBuilder(getTag("plates/wroughtaluminium")).addTag(getTag("plates/wrought_iron")).addTag(getTag("plates/aluminium"));
-        this.getOrCreateBuilder(getTag("plates/titantungsteel")).addTag(getTag("plates/titanium")).addTag(getTag("plates/tungstensteel"));
-        this.getOrCreateBuilder(getTag("circuits/basic")).add(CircuitBasic);
-        this.getOrCreateBuilder(getTag("circuits/advanced")).add(CircuitAdv);
-        this.getOrCreateBuilder(getTag("circuits/elite")).add(CircuitDataControl);
-        this.getOrCreateBuilder(getTag("circuits/master")).add(CircuitEnergyFlow);
-        this.getOrCreateBuilder(getTag("circuits/data")).add(CircuitDataStorage);
-        this.getOrCreateBuilder(getTag("circuits/ultimate")).add(CircuitDataOrb);
-        this.getOrCreateBuilder(getTag("machine_hull/cheap")).add(HULL.get(Bronze), HULL.get(Brass), HULL.get(WroughtIron), HULL.get(Aluminium));
-        this.getOrCreateBuilder(getTag("machine_hull/semi_cheap")).add(HULL.get(WroughtIron), HULL.get(Aluminium));
-        this.getOrCreateBuilder(getTag("machine_hull/basic")).add(HULL.get(Steel), HULL.get(StainlessSteel), HULL.get(Aluminium));
-        this.getOrCreateBuilder(getTag("machine_hull/advanced")).add(HULL.get(TungstenSteel), HULL.get(Titanium));
-        this.getOrCreateBuilder(getTag("machine_hull/very_advanced")).add(HULL.get(TungstenSteel), HULL.get(Titanium));
-        this.getOrCreateBuilder(getTag("grinding_head")).add(DiamondGrindHead, TungstenGrindHead);
-        this.getOrCreateBuilder(getTag("pistons")).add(Items.PISTON, Items.STICKY_PISTON);
-        this.getOrCreateBuilder(getTag("gears/titantungsteel")).addTag(getTag("gears/titanium")).addTag(getTag("gears/tungstensteel"));
-        this.getOrCreateBuilder(getTag("gears/steels")).addTag(getTag("gears/steel")).addTag(getTag("gears/stainless_steel"));
-        this.getOrCreateBuilder(getTag("dusts/lapislaz")).addTag(getTag("dusts/lapis")).addTag(getTag("dusts/lazurite"));
+        this.getOrCreateBuilder(PLATES_STEELS).addTag(getTag("plates/steel")).addTag(getTag("plates/stainless_steel"));
+        this.getOrCreateBuilder(PLATES_INVAR_ALUMINIUM).addTag(getTag("plates/invar")).addTag(getTag("plates/aluminium"));
+        this.getOrCreateBuilder(PLATES_IRON_ALUMINIUM).addTag(getTag("plates/iron")).addTag(getTag("plates/aluminium"));
+        this.getOrCreateBuilder(PLATES_WROUGHT_ALUMINIUM).addTag(getTag("plates/wrought_iron")).addTag(getTag("plates/aluminium"));
+        this.getOrCreateBuilder(PLATES_TITAN_TUNGSTEEL).addTag(getTag("plates/titanium")).addTag(getTag("plates/tungstensteel"));
+        this.getOrCreateBuilder(CIRCUITS_BASIC).add(CircuitBasic);
+        this.getOrCreateBuilder(CIRCUITS_ADVANCED).add(CircuitAdv);
+        this.getOrCreateBuilder(CIRCUITS_ELITE).add(CircuitDataControl);
+        this.getOrCreateBuilder(CIRCUITS_MASTER).add(CircuitEnergyFlow);
+        this.getOrCreateBuilder(CIRCUITS_DATA).add(CircuitDataStorage);
+        this.getOrCreateBuilder(CIRCUITS_ULTIMATE).add(CircuitDataOrb);
+        this.getOrCreateBuilder(MACHINE_HULLS_CHEAP).add(HULL.get(Bronze), HULL.get(Brass), HULL.get(WroughtIron), HULL.get(Aluminium));
+        this.getOrCreateBuilder(MACHINE_HULLS_SEMI_CHEAP).add(HULL.get(WroughtIron), HULL.get(Aluminium));
+        this.getOrCreateBuilder(MACHINE_HULLS_BASIC).add(HULL.get(Steel), HULL.get(StainlessSteel), HULL.get(Aluminium));
+        this.getOrCreateBuilder(MACHINE_HULLS_ADVANCED).add(HULL.get(TungstenSteel), HULL.get(Titanium));
+        this.getOrCreateBuilder(MACHINE_HULLS_VERY_ADVANCED).add(HULL.get(TungstenSteel), HULL.get(Titanium));
+        this.getOrCreateBuilder(GRINDING_HEAD).add(DiamondGrindHead, TungstenGrindHead);
+        this.getOrCreateBuilder(PISTONS).add(Items.PISTON, Items.STICKY_PISTON);
+        this.getOrCreateBuilder(GEARS_TITAN_TUNGSTEEL).addTag(getTag("gears/titanium")).addTag(getTag("gears/tungstensteel"));
+        this.getOrCreateBuilder(GEARS_STEELS).addTag(getTag("gears/steel")).addTag(getTag("gears/stainless_steel"));
+        this.getOrCreateBuilder(DUSTS_LAPIS_LAZ).addTag(getTag("dusts/lapis")).addTag(getTag("dusts/lazurite"));
 
     }
 

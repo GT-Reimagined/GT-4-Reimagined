@@ -228,11 +228,15 @@ public class GT4RData {
     public static final BlockConnectedCasing STANDARD_MACHINE_CASING = new BlockConnectedCasing(Ref.ID, "standard_machine_casing");
     public static final BlockConnectedCasing REINFORCED_MACHINE_CASING = new BlockConnectedCasing(Ref.ID, "reinforced_machine_casing");
     public static final BlockConnectedCasing ADVANCED_MACHINE_CASING = new BlockConnectedCasing(Ref.ID, "advanced_machine_casing");
+    public static final BlockConnectedCasing TUNGSTENSTEEL_REINFORCED_STONE = new BlockConnectedCasing(Ref.ID, "tungstensteel_reinforced_stone");
+    public static final BlockConnectedCasing IRIDIUM_TUNGSTENSTEEL_REINFORCED_STONE = new BlockConnectedCasing(Ref.ID, "iridium_tungstensteel_reinforced_stone");
     public static final BlockCasing HIGHLY_ADVANCED_MACHINE_BLOCK = new BlockCasing(Ref.ID, "highly_advanced_machine_block");
     public static final BlockCasing ADVANCED_MACHINE_BLOCK = new BlockCasing(Ref.ID, "advanced_machine_block");
 
     public static final BlockCasing FIRE_BRICKS = new BlockCasing(Ref.ID, "fire_bricks");
     public static final BlockCasing REINFORCED_GLASS = new BlockCasing(Ref.ID, "reinforced_glass");
+    public static final BlockCasing REINFORCED_STONE = new BlockCasing(Ref.ID, "reinforced_stone");
+    public static final BlockCasing IRIDIUM_REINFORCED_STONE = new BlockCasing(Ref.ID, "iridium_reinforced_stone");
 
     public static final BlockCasing FUSION_COIL = new BlockCasing(Ref.ID, "fusion_coil");
 
