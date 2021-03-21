@@ -14,7 +14,7 @@ import static trinsdar.gt4r.data.Materials.Lava;
 import static trinsdar.gt4r.data.RecipeMaps.COAL_BOILERS;
 import static trinsdar.gt4r.data.RecipeMaps.LAVA_BOILERS;
 
-public class BronzeSteelBoilerHandler {
+public class CoalBoilerHandler {
     public static void init(){
         COAL_BOILERS.RB().ii(AntimatterIngredient.of(Items.COAL, 1)).io(DUST.get(DarkAsh, 1)).add(160);
         COAL_BOILERS.RB().ii(AntimatterIngredient.of(Items.CHARCOAL, 1)).io(DUST.get(Ash, 1)).add(160);

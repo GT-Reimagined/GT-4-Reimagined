@@ -33,11 +33,7 @@ public class ClientHandler {
             AntimatterAPI.all(BlockCasing.class, t -> RenderTypeLookup.setRenderLayer(t, RenderType.getCutout()));
         });
 
-        ScreenSetup.<ContainerMachine, ScreenBasicMachine<ContainerMachine>>setScreenMapping(Data.BASIC_MENU_HANDLER, ScreenBasicMachine::new);
         ScreenSetup.<ContainerCover, ScreenButtonBackgroundCover<ContainerCover>>setScreenMapping(Data.COVER_MENU_HANDLER, ScreenButtonBackgroundCover::new);
-        ScreenSetup.<ContainerMultiMachine, ScreenMultiMachine<ContainerMultiMachine>>setScreenMapping(Data.MULTI_MENU_HANDLER, ScreenMultiMachine::new);
-        ScreenSetup.<ContainerHatch, ScreenHatch<ContainerHatch>>setScreenMapping(Data.HATCH_MENU_HANDLER, ScreenHatch::new);
-        ScreenSetup.<ContainerMachine, ScreenSteamMachine<ContainerMachine>>setScreenMapping(Data.STEAM_MENU_HANDLER, ScreenSteamMachine::new);
         ScreenSetup.<ContainerHatch, ScreenHatchCustom<ContainerHatch>>setScreenMapping(Guis.HATCH_MENU_HANDLER_CUSTOM, ScreenHatchCustom::new);
         ScreenSetup.<ContainerBasicMachine, ScreenCoalBoiler<ContainerBasicMachine>>setScreenMapping(Guis.COAL_BOILER_MENU_HANDLER, ScreenCoalBoiler::new);
     }

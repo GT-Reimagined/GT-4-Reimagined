@@ -15,8 +15,9 @@ import static trinsdar.gt4r.data.RecipeMaps.CUTTING;
 public class CutterLoader {
     public static void init(){
         PLATE.all().forEach(t -> {
+            if (!t.has(BLOCK)) return;
             long duration = Math.max(t.getMass(), 1) * 300;
-            CUTTING.RB().ii(AntimatterIngredient.of(BLOCK.getMaterialTag(t), 1)).io(PLATE.get(t,1)).add(duration, 30);
+            CUTTING.RB().ii(AntimatterIngredient.of(BLOCK.getMaterialTag(t), 1)).io(PLATE.get(t,9)).add(duration, 30);
         });
         CUTTING.RB().ii(AntimatterIngredient.of(Items.GLASS, 3)).io(new ItemStack(Items.GLASS_PANE)).add(50, 8);
 

@@ -28,7 +28,7 @@ public class CompressorLoader {
         COMPRESSING.RB().ii(AntimatterIngredient.of(GT4RData.CarbonMesh, 1)).io(new ItemStack(GT4RData.CarbonPlate)).add(400, 2);
         COMPRESSING.RB().ii(AntimatterIngredient.of(GT4RData.MixedMetal, 1)).io(new ItemStack(GT4RData.AdvancedAlloy)).add(400, 2);
         COMPRESSING.RB().ii(AntimatterIngredient.of(Items.SNOWBALL, 1)).io(new ItemStack(Items.SNOW_BLOCK)).add(400, 2);
-        COMPRESSING.RB().ii(DUST.getMaterialIngredient(Glowstone)).io(new ItemStack(Items.GLOWSTONE)).add(400, 2);
+        COMPRESSING.RB().ii(DUST.getMaterialIngredient(Glowstone, 4)).io(new ItemStack(Items.GLOWSTONE)).add(400, 2);
         COMPRESSING.RB().ii(AntimatterIngredient.of(Items.SNOW_BLOCK, 1)).io(new ItemStack(Items.ICE)).add(400, 2);
         COMPRESSING.RB().ii(AntimatterIngredient.of(GT4RData.CoalBall, 1)).io(new ItemStack(GT4RData.CompressedCoalBall)).add(400, 2);
         COMPRESSING.RB().ii(AntimatterIngredient.of(Items.SAND, 4)).io(new ItemStack(Items.SANDSTONE)).add(400, 2);
