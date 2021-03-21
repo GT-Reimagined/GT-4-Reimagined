@@ -20,6 +20,11 @@ public class ScreenCoalBoiler<T extends ContainerMachine> extends ScreenMachine<
     }
 
     @Override
+    protected void drawProgress(MatrixStack stack, float partialTicks, int mouseX, int mouseY) {
+
+    }
+
+    @Override
     protected void drawGuiContainerForegroundLayer(MatrixStack stack, int mouseX, int mouseY) {
         drawTitle(stack, mouseX, mouseY);
         if (container.getTile().has(MachineFlag.RECIPE)) {

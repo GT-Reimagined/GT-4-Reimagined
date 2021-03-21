@@ -17,7 +17,6 @@ import static trinsdar.gt4r.data.RecipeMaps.UNIVERSAL_MACERATING;
 
 public class ForgeHammerLoader {
     public static void init(){
-        HAMMERING.RB().ii(AntimatterIngredient.of(INGOT.get(Materials.Aluminium, 1))).io(PLATE.get(Materials.Aluminium, 1)).add(96, 16);
         CRUSHED.all().forEach(m -> {
             if (!m.has(ORE) && m != Gold && m != Iron && m != Diamond && m != Emerald && m != Lapis && m != Redstone) return;
             int multiplier = 1;
@@ -30,6 +29,9 @@ public class ForgeHammerLoader {
             if (m.has(CRUSHED_CENTRIFUGED)) {
                 HAMMERING.RB().ii(AntimatterIngredient.of(CRUSHED_CENTRIFUGED.get(m,1))).io(DUST.get(m.getMacerateInto(), 1)).add(16, 10);
             }
+        });
+        PLATE.all().forEach(m -> {
+
         });
     }
 }

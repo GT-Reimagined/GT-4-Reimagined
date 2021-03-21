@@ -15,7 +15,9 @@ import trinsdar.gt4r.loader.WorldGenLoader;
 import trinsdar.gt4r.loader.machines.*;
 import trinsdar.gt4r.loader.machines.generator.BronzeSteelBoilerHandler;
 import trinsdar.gt4r.loader.machines.generator.FuelBurnHandler;
+import trinsdar.gt4r.loader.multi.DistillationTower;
 import trinsdar.gt4r.loader.multi.ElectricBlasting;
+import trinsdar.gt4r.loader.multi.ImplosionCompressor;
 import trinsdar.gt4r.loader.multi.IndustrialGrinder;
 import trinsdar.gt4r.loader.multi.VacFreezer;
 import trinsdar.gt4r.proxy.ClientHandler;
@@ -87,6 +89,11 @@ public class GT4Reimagined extends AntimatterMod {
         loader.add(MaceratorLoader::init);
         loader.add(SiftingLoader::init);
         loader.add(ThermalCentrifuge::init);
+        loader.add(AlloySmelterLoader::init);
+        loader.add(CutterLoader::init);
+        loader.add(LatheLoader::init);
+        loader.add(ImplosionCompressor::init);
+        loader.add(DistillationTower::init);
     }
 
     private void clientSetup(final FMLClientSetupEvent e) {
