@@ -27,3 +27,7 @@ src/generated/*
 # Files from Forge MDK
 forge*changelog.txt
 *.db
+
+src/main/resources/assets/gt4r/textures/ic2-texture-reference.zip
+
+src/main/resources/assets/gt4r/textures/ic2.zip
