@@ -4,7 +4,9 @@ import muramasa.antimatter.material.Material;
 import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.LazyValue;
+import net.minecraftforge.common.Tags;
 
 
 import static muramasa.antimatter.Data.*;
@@ -50,5 +52,7 @@ public class MaceratorLoader {
                 UNIVERSAL_MACERATING.RB().ii(GEM.getMaterialIngredient(m)).io(DUST.get(m, 1)).add(duration, 4);
             }
         });
+        UNIVERSAL_MACERATING.RB().ii(AntimatterIngredient.of(Tags.Items.COBBLESTONE, 1)).io(new ItemStack(Items.SAND)).add(400, 2);
+        UNIVERSAL_MACERATING.RB().ii(AntimatterIngredient.of(Tags.Items.STONE, 1)).io(new ItemStack(Items.GRAVEL)).add(400, 2);
     }
 }

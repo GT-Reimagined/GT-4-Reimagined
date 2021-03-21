@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import trinsdar.gt4r.data.GT4RData;
-import trinsdar.gt4r.tile.multi.TileEntityElectricBlastFurnace;
+import trinsdar.gt4r.tile.multi.TileEntityIndustrialBlastFurnace;
 
 import javax.annotation.Nonnull;
 
@@ -40,6 +40,6 @@ public class SlotCoil extends SlotItemHandler {
     @Override
     public void onSlotChanged() {
         super.onSlotChanged();
-        tile.onMachineEvent(TileEntityElectricBlastFurnace.BFEvent.SLOT_COIL_CHANGED, this.getStack());
+        tile.onMachineEvent(TileEntityIndustrialBlastFurnace.BFEvent.SLOT_COIL_CHANGED, this.getStack());
     }
 }

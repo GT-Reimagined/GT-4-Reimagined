@@ -10,7 +10,6 @@ public class TileEntitySteamMachine extends TileEntityMachine {
 
     public TileEntitySteamMachine(Machine<?> type) {
         super(type);
-        //recipeHandler.setup((tile, tag) -> new FluidResourceMachineRecipeHandler<>(tile, tag, Data.GAS.get().get(Material.get("steam"), 1)));
     }
 
     @Override

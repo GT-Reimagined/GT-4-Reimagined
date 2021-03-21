@@ -94,6 +94,7 @@ public class GT4Reimagined extends AntimatterMod {
         loader.add(LatheLoader::init);
         loader.add(ImplosionCompressor::init);
         loader.add(DistillationTower::init);
+        loader.add(ExtruderLoader::init);
     }
 
     private void clientSetup(final FMLClientSetupEvent e) {

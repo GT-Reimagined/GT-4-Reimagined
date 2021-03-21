@@ -4,7 +4,9 @@ import muramasa.antimatter.material.Material;
 import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.LazyValue;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.util.LazyOptional;
 import trinsdar.gt4r.data.Materials;
 
@@ -31,7 +33,11 @@ public class ForgeHammerLoader {
             }
         });
         PLATE.all().forEach(m -> {
-
+            if (!m.has(INGOT)) return;
+            HAMMERING.RB().ii(INGOT.getMaterialIngredient(m, 3)).io(PLATE.get(m, 2)).add(m.getMass(), 16);
         });
+        HAMMERING.RB().ii(AntimatterIngredient.of(Tags.Items.COBBLESTONE, 1)).io(new ItemStack(Items.GRAVEL)).add(10, 16);
+        HAMMERING.RB().ii(AntimatterIngredient.of(Tags.Items.STONE, 1)).io(new ItemStack(Items.COBBLESTONE)).add(10, 16);
+        HAMMERING.RB().ii(AntimatterIngredient.of(Tags.Items.GRAVEL, 1)).io(new ItemStack(Items.SAND)).add(10, 16);
     }
 }
