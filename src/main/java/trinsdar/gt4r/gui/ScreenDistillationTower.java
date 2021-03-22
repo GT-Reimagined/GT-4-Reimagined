@@ -4,6 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import muramasa.antimatter.capability.machine.MachineRecipeHandler;
 import muramasa.antimatter.gui.container.ContainerMultiMachine;
 import muramasa.antimatter.gui.screen.ScreenBasicMachine;
+import muramasa.antimatter.gui.screen.ScreenMachine;
 import muramasa.antimatter.gui.screen.ScreenMultiMachine;
 import muramasa.antimatter.machine.MachineFlag;
 import muramasa.antimatter.machine.MachineState;
@@ -14,8 +15,8 @@ import net.minecraftforge.fluids.FluidStack;
 import static muramasa.antimatter.gui.SlotType.FL_IN;
 import static muramasa.antimatter.gui.SlotType.FL_OUT;
 
-public class ScreenDistillationTower<T extends ContainerMultiMachine> extends ScreenMultiMachine<T> {
-    public ScreenDistillationTower(T container, PlayerInventory inv, ITextComponent name) {
+public class ScreenDistillationTower extends ScreenMachine<ContainerMultiMachine> {
+    public ScreenDistillationTower(ContainerMultiMachine container, PlayerInventory inv, ITextComponent name) {
         super(container, inv, name);
     }
 
@@ -32,8 +33,8 @@ public class ScreenDistillationTower<T extends ContainerMultiMachine> extends Sc
             drawTooltipInArea(stack,"Show Recipes", mouseX, mouseY, 80, 4, 16, 72);
             drawTooltipInArea(stack, container.getTile().getMachineState().getDisplayName(), mouseX, mouseY, 66, 26, 8, 9);
         }
-        if (container.getTile().has(MachineFlag.FLUID)) {
-            //TODO
+        /*if (container.getTile().has(MachineFlag.FLUID)) {
+            //TODO when slotted multis are properly supported
             container.getTile().fluidHandler.ifPresent(t -> {
                 int[] index = new int[]{0};
                 FluidStack[] inputs = t.getInputs();
@@ -46,7 +47,7 @@ public class ScreenDistillationTower<T extends ContainerMultiMachine> extends Sc
                     renderFluid(stack, outputs[index[0]++], sl, mouseX,mouseY);
                 });
             });
-        }
+        }*/
     }
 
     @Override
@@ -56,6 +57,8 @@ public class ScreenDistillationTower<T extends ContainerMultiMachine> extends Sc
         //Draw error.
         if (container.getTile().has(MachineFlag.RECIPE)) {
             if (container.getTile().getMachineState() == MachineState.POWER_LOSS) {
+                drawTexture(stack, gui, guiLeft + 66, guiTop + 26, xSize, 108, 8, 8);
+            } else if (container.getTile().getMachineState() == MachineState.INVALID_STRUCTURE && container.getTile().getWorld().getGameTime() % 4 == 0){
                 drawTexture(stack, gui, guiLeft + 66, guiTop + 26, xSize, 108, 8, 8);
             }
         }
