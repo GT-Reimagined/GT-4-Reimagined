@@ -7,6 +7,7 @@ import muramasa.antimatter.pipe.types.Cable;
 import muramasa.antimatter.pipe.types.Wire;
 import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
 import muramasa.antimatter.recipe.ingredient.TagIngredient;
+import muramasa.antimatter.util.TagUtils;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.Tag;
@@ -20,7 +21,7 @@ import trinsdar.gt4r.data.CustomTags;
 import static com.google.common.collect.ImmutableMap.of;
 import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.recipe.ingredient.AntimatterIngredient.of;
-import static muramasa.antimatter.util.Utils.getForgeItemTag;
+import static muramasa.antimatter.util.TagUtils.getForgeItemTag;
 import static trinsdar.gt4r.data.CustomTags.*;
 import static trinsdar.gt4r.data.GT4RData.*;
 import static trinsdar.gt4r.data.Machines.PUMP;
@@ -107,6 +108,6 @@ public class AssemblyLoader {
     }
 
     public static ITag.INamedTag<Item> getTag(String domain, String path){
-        return Utils.getItemTag(new ResourceLocation(domain, path));
+        return TagUtils.getItemTag(new ResourceLocation(domain, path));
     }
 }

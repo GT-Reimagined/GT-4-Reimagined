@@ -1,6 +1,7 @@
 package trinsdar.gt4r.loader.multi;
 
 import muramasa.antimatter.material.Material;
+import muramasa.antimatter.util.TagUtils;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -18,7 +19,7 @@ public class ElectricBlasting {
     public static void init() {
         final int multiplier = 1;
         //Tag<Item> rockTag = getForgeItemTag()
-        BLASTING.RB().ii(of(Utils.getForgeItemTag("ores/iron"), 1), of(DUST.get(Calcite, 1))).io(new ItemStack(Items.IRON_INGOT, 3), DUST.get(DarkAsh, 1)).add(500, 120, 1500);
+        BLASTING.RB().ii(of(TagUtils.getForgeItemTag("ores/iron"), 1), of(DUST.get(Calcite, 1))).io(new ItemStack(Items.IRON_INGOT, 3), DUST.get(DarkAsh, 1)).add(500, 120, 1500);
         BLASTING.RB().ii(of(DUST.get(Pyrite, 3)), of(DUST.get(Calcite, 1))).io(new ItemStack(Items.IRON_INGOT, 2)).add(500, 120, 1500);
         Material m = Aluminium;
         BLASTING.RB().ii(of(DUST.get(m,1))).io(INGOT.get(m, 1)).add(600, 120, m.getBlastTemp());

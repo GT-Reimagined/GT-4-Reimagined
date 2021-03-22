@@ -12,7 +12,7 @@ import java.util.function.Consumer;
 import static com.google.common.collect.ImmutableMap.of;
 import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.machine.Tier.*;
-import static muramasa.antimatter.util.Utils.getForgeItemTag;
+import static muramasa.antimatter.util.TagUtils.getForgeItemTag;
 import static trinsdar.gt4r.data.CustomTags.*;
 import static trinsdar.gt4r.data.GT4RData.*;
 import static trinsdar.gt4r.data.Machines.*;

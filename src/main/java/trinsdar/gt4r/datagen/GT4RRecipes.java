@@ -17,7 +17,7 @@ import java.util.function.Consumer;
 
 import static com.google.common.collect.ImmutableMap.of;
 import static muramasa.antimatter.Data.*;
-import static muramasa.antimatter.util.Utils.getForgeItemTag;
+import static muramasa.antimatter.util.TagUtils.getForgeItemTag;
 import static trinsdar.gt4r.loader.crafting.CraftingHelper.criterion;
 
 public class GT4RRecipes extends AntimatterRecipeProvider {

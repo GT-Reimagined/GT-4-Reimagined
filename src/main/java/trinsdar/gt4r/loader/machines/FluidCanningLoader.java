@@ -2,6 +2,7 @@ package trinsdar.gt4r.loader.machines;
 
 import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
 import muramasa.antimatter.util.Utils;
+import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -19,7 +20,7 @@ public class FluidCanningLoader {
         ForgeRegistries.FLUIDS.forEach(fluid -> {
             Item bucket = fluid.getFilledBucket();
             //Only the source.
-            if (fluid instanceof ForgeFlowingFluid.Flowing) return;
+            if (fluid instanceof FlowingFluid) return;
             if (bucket != Items.AIR){
                 FLUID_CANNING.RB().ii(of(bucket,1)).fo(new FluidStack(fluid,1000)).io(new ItemStack(Items.BUCKET)).add(20, 8);
                 FLUID_CANNING.RB().ii(of(Items.BUCKET,1)).fi(new FluidStack(fluid,1000)).io(new ItemStack(bucket)).add(20, 8);

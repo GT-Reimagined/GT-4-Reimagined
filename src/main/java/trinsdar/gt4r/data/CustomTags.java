@@ -1,5 +1,6 @@
 package trinsdar.gt4r.data;
 
+import muramasa.antimatter.util.TagUtils;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.item.Item;
 import net.minecraft.tags.ITag;
@@ -31,6 +32,6 @@ public class CustomTags {
 
 
     public static ITag.INamedTag<Item> getTag(String id){
-        return Utils.getForgeItemTag(id);
+        return TagUtils.getForgeItemTag(id);
     }
 }
