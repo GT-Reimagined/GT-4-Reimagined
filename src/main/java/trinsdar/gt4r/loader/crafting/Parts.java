@@ -1,13 +1,16 @@
 package trinsdar.gt4r.loader.crafting;
 
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
+import muramasa.antimatter.material.Material;
 import muramasa.antimatter.pipe.PipeSize;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraftforge.common.Tags;
+import org.lwjgl.system.CallbackI;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.GT4RData;
+import trinsdar.gt4r.data.Materials;
 
 import java.util.function.Consumer;
 
@@ -120,5 +123,73 @@ public class Parts {
                 DUST.get(Energium, 9), of('R', DUST.getMaterialTag(Redstone), 'D', DUST.getMaterialTag(Diamond)), "RDR", "DRD", "RDR");
         provider.addStackRecipe(output, Ref.ID, "energium_dust", "parts", "has_ruby_dust", provider.hasSafeItem(DUST.getMaterialTag(Ruby)),
                 DUST.get(Energium, 9), of('R', DUST.getMaterialTag(Redstone), 'D', DUST.getMaterialTag(Ruby)), "RDR", "DRD", "RDR");
+        provider.addItemRecipe(output, Ref.ID, "crystal_lapotron", "parts", "has_energy_crystal", provider.hasSafeItem(EnergyCrystal),
+                LapotronCrystal, of('L', DUSTS_LAPIS_LAZ, 'C', CIRCUITS_ADVANCED, 'E', EnergyCrystal), "LCL", "LEL", "LCL");
+        provider.addItemRecipe(output, Ref.ID, "crystal_lapotron2", "parts", "has_sapphire", provider.hasSafeItem(GEM.getMaterialTag(Sapphire)),
+                LapotronCrystal, of('L', DUSTS_LAPIS_LAZ, 'C', CIRCUITS_ADVANCED, 'E', GEM.getMaterialTag(Sapphire)), "LCL", "LEL", "LCL");
+        provider.addItemRecipe(output, Ref.ID, "orb_lapotron", "parts", "has_iridium_plate", provider.hasSafeItem(IridiumReinforcedPlate),
+                LapotronicEnergyOrb, of('L', LapotronCrystal, 'I', IridiumReinforcedPlate), "LLL", "LIL", "LLL");
+        provider.addItemRecipe(output, Ref.ID, "coil_copper", "parts", "has_iron_ingot", provider.hasSafeItem(INGOT.getMaterialTag(Iron)),
+                CopperCoil, of('L', WIRE_COPPER.getBlockItem(PipeSize.VTINY), 'I', INGOT.getMaterialTag(Iron)), "LLL", "LIL", "LLL");
+        provider.addItemRecipe(output, Ref.ID, "ingot_iridium_alloy", "parts", "has_diamond", provider.hasSafeItem(GEM.getMaterialTag(Diamond)),
+                IridiumAlloyIngot, of('I', PLATE.getMaterialTag(Iridium), 'D', GEM.getMaterialTag(Diamond), 'A', AdvancedAlloy), "IAI", "ADA", "IAI");
+        Material[] in = new Material[]{Iron, WroughtIron, Nickel};
+        Material[] b = new Material[]{Bronze, Brass};
+        Material[] tz = new Material[]{Tin, Zinc};
+        for (Material it : in){
+            for (Material im : b){
+                for (Material ib : tz){
+                    provider.addItemRecipe(output, Ref.ID, "mixed_metal_" + it.getId() + "_" + im.getId() + "_" + ib.getId(), "parts", "has_first_plate", provider.hasSafeItem(PLATE.getMaterialTag(it)),
+                            MixedMetal, of('T', PLATE.getMaterialTag(it), 'M', PLATE.getMaterialTag(im), 'B', PLATE.getMaterialTag(ib)), "T", "M", "B");
+                }
+            }
+        }
+        Material[] is = new Material[]{Invar, Steel};
+        Material[] ase = new Material[]{Aluminium, Silver, Electrum};
+        for (Material it : is){
+            for (Material im : b){
+                for (Material ib : tz){
+                    provider.addStackRecipe(output, Ref.ID, "mixed_metal_" + it.getId() + "_" + im.getId() + "_" + ib.getId(), "parts", "has_first_plate", provider.hasSafeItem(PLATE.getMaterialTag(it)),
+                            new ItemStack(MixedMetal, 2), of('T', PLATE.getMaterialTag(it), 'M', PLATE.getMaterialTag(im), 'B', PLATE.getMaterialTag(ib)), "T", "M", "B");
+                }
+            }
+        }
+        for (Material it : is){
+            for (Material im : b){
+                for (Material ib : ase){
+                    provider.addStackRecipe(output, Ref.ID, "mixed_metal_" + it.getId() + "_" + im.getId() + "_" + ib.getId(), "parts", "has_first_plate", provider.hasSafeItem(PLATE.getMaterialTag(it)),
+                            new ItemStack(MixedMetal, 3), of('T', PLATE.getMaterialTag(it), 'M', PLATE.getMaterialTag(im), 'B', PLATE.getMaterialTag(ib)), "T", "M", "B");
+                }
+            }
+        }
+        Material[] st = new Material[]{StainlessSteel, Titanium, Tungsten};
+        for (Material it : st){
+            for (Material im : b){
+                for (Material ib : tz){
+                    provider.addStackRecipe(output, Ref.ID, "mixed_metal_" + it.getId() + "_" + im.getId() + "_" + ib.getId(), "parts", "has_first_plate", provider.hasSafeItem(PLATE.getMaterialTag(it)),
+                            new ItemStack(MixedMetal, 3), of('T', PLATE.getMaterialTag(it), 'M', PLATE.getMaterialTag(im), 'B', PLATE.getMaterialTag(ib)), "T", "M", "B");
+                }
+            }
+        }
+        for (Material it : st){
+            for (Material im : b){
+                for (Material ib : ase){
+                    provider.addStackRecipe(output, Ref.ID, "mixed_metal_" + it.getId() + "_" + im.getId() + "_" + ib.getId(), "parts", "has_first_plate", provider.hasSafeItem(PLATE.getMaterialTag(it)),
+                            new ItemStack(MixedMetal, 4), of('T', PLATE.getMaterialTag(it), 'M', PLATE.getMaterialTag(im), 'B', PLATE.getMaterialTag(ib)), "T", "M", "B");
+                }
+            }
+        }
+        for (Material im : b){
+            for (Material ib : tz){
+                provider.addStackRecipe(output, Ref.ID, "mixed_metal_tungstensteel_" + im.getId() + "_" + ib.getId(), "parts", "has_first_plate", provider.hasSafeItem(PLATE.getMaterialTag(TungstenSteel)),
+                        new ItemStack(MixedMetal, 5), of('T', PLATE.getMaterialTag(TungstenSteel), 'M', PLATE.getMaterialTag(im), 'B', PLATE.getMaterialTag(ib)), "T", "M", "B");
+            }
+        }
+        for (Material im : b){
+            for (Material ib : ase){
+                provider.addStackRecipe(output, Ref.ID, "mixed_metal_tungstensteel_" + im.getId() + "_" + ib.getId(), "parts", "has_first_plate", provider.hasSafeItem(PLATE.getMaterialTag(TungstenSteel)),
+                        new ItemStack(MixedMetal, 6), of('T', PLATE.getMaterialTag(TungstenSteel), 'M', PLATE.getMaterialTag(im), 'B', PLATE.getMaterialTag(ib)), "T", "M", "B");
+            }
+        }
     }
 }

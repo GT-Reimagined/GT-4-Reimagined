@@ -164,7 +164,7 @@ public class GT4RData {
     public static ItemBasic<?> LapotronCrystal = new ItemBattery(Ref.ID, "lapotron_crystal", Tier.EV, 10000000, true).tip("Reusable");
     public static ItemBasic<?> EnergyCrystal = new ItemBattery(Ref.ID, "energy_crystal", Tier.HV, 1000000, true).tip("Reusable");
     public static ItemBasic<?> BatteryRE = new ItemBattery(Ref.ID, "battery_re", Tier.LV, 10000, true).tip("Reusable");
-    public static ItemBasic<?> BatteryEnergyOrb = new ItemBasic<>(Ref.ID, "battery_energy_orb");
+    public static ItemBasic<?> LapotronicEnergyOrb = new ItemBattery(Ref.ID, "lapotronic_energy_orb", Tier.IV,100000000, true);
     public static ItemBasic<?> BatteryEnergyOrbCluster = new ItemBasic<>(Ref.ID, "battery_energy_orb_cluster");
 
     public static ItemBasic<?> EmptyShape = new ItemBasic<>(Ref.ID, "empty_shape_plate").tip("Raw plate to make Molds and Extruder Shapes");
