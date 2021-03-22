@@ -58,9 +58,9 @@ public class ScreenDistillationTower extends ScreenMachine<ContainerMultiMachine
         if (container.getTile().has(MachineFlag.RECIPE)) {
             if (container.getTile().getMachineState() == MachineState.POWER_LOSS) {
                 drawTexture(stack, gui, guiLeft + 66, guiTop + 26, xSize, 108, 8, 8);
-            } else if (container.getTile().getMachineState() == MachineState.INVALID_STRUCTURE && container.getTile().getWorld().getGameTime() % 4 == 0){
+            } /*else if (container.getTile().getMachineState() == MachineState.INVALID_STRUCTURE && container.getTile().getWorld().getGameTime() % 4 == 0){
                 drawTexture(stack, gui, guiLeft + 66, guiTop + 26, xSize, 108, 8, 8);
-            }
+            }*/
         }
     }
 }
