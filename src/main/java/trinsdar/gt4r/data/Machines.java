@@ -1,5 +1,6 @@
 package trinsdar.gt4r.data;
 
+import muramasa.antimatter.cover.ICover;
 import muramasa.antimatter.machine.types.*;
 import muramasa.antimatter.tile.single.TileEntityBatteryBuffer;
 import muramasa.antimatter.tile.single.TileEntityDigitalTransformer;
@@ -17,6 +18,9 @@ import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.machine.MachineFlag.*;
 import static muramasa.antimatter.machine.MachineFlag.CELL;
 import static muramasa.antimatter.machine.Tier.*;
+import static trinsdar.gt4r.data.GT4RData.COVER_DYNAMO_OLD;
+import static trinsdar.gt4r.data.GT4RData.COVER_FUSION_INPUT;
+import static trinsdar.gt4r.data.GT4RData.COVER_FUSION_OUTPUT;
 import static trinsdar.gt4r.data.RecipeMaps.*;
 
 public class Machines {
@@ -50,7 +54,7 @@ public class Machines {
     public static BasicMachine SIFTER = new BasicMachine(Ref.ID, "sifter", SIFTING, GUI, ITEM, LV, Textures.MACHINE_BASE);
     public static BasicMachine BATH = new BasicMachine(Ref.ID, "bath", BATHING, GUI, ITEM, LV, Textures.MACHINE_BASE);
 
-    public static BasicMachine COAL_BOILER = new BasicMachine(Ref.ID, "coal_boiler", COAL_BOILERS, BRONZE, STEEL, GUI, STEAM, RECIPE, ITEM, FLUID, CELL, Textures.BOILER_HANDLER).setTile(m -> () -> new TileEntityCoalBoiler(m)).covers(null);
+    public static BasicMachine COAL_BOILER = new BasicMachine(Ref.ID, "coal_boiler", COAL_BOILERS, BRONZE, STEEL, GUI, STEAM, RECIPE, ITEM, FLUID, CELL, Textures.BOILER_HANDLER).setTile(m -> () -> new TileEntityCoalBoiler(m)).covers((ICover[]) null);
     //public static BasicMachine SOLAR_BOILER = new BasicMachine(Ref.ID, "solar_boiler", SMALL_BOILERS, BRONZE, GUI, STEAM, ITEM, FLUID, Textures.BOILER_HANDLER); //TODO
     public static BasicMachine STEAM_FURNACE = new BasicMachine(Ref.ID, "steam_furnace", BRONZE, STEEL, GUI, STEAM, ITEM, FLUID, STEAM_SMELTING, Textures.BOILER_HANDLER).setTile(m -> () -> new TileEntitySteamMachine(m));
     public static BasicMachine STEAM_MACERATOR = new BasicMachine(Ref.ID, "steam_macerator", BRONZE, GUI, STEAM, ITEM, FLUID, STEAM_MACERATING, Textures.BRONZE_MACHINE_BASE).setTile(m -> () -> new TileEntitySteamMachine(m));
@@ -79,11 +83,11 @@ public class Machines {
     public static HatchMachine HATCH_FLUID_I = new HatchMachineCustom(Ref.ID, "hatch_fluid_input", GUI, FLUID, COVERINPUT, CELL, LV, Textures.MACHINE_BASE).setTiers(LV);
     public static HatchMachine HATCH_FLUID_O = new HatchMachineCustom(Ref.ID, "hatch_fluid_output", GUI, FLUID, COVEROUTPUT, CELL, LV, Textures.MACHINE_BASE).setTiers(LV);
     public static HatchMachine HATCH_MUFFLER = new HatchMachineCustom(Ref.ID, "hatch_muffler", GUI, ITEM,COVERMUFFLER, LV, Textures.MACHINE_BASE).setTiers(LV);
-    public static HatchMachine HATCH_DYNAMO = new HatchMachine(Ref.ID, "hatch_dynamo", ENERGY,COVERDYNAMO, EV, Textures.MACHINE_BASE).setTiers(EV, IV);
-    public static HatchMachine FUSION_MATERIAL_INJECTOR = new HatchMachineCustom(Ref.ID, "fusion_material_injector", GUI, ITEM, FLUID, LV, Textures.FUSION_IN).setTiers(LV);
-    public static HatchMachine FUSION_MATERIAL_EXTRACTOR = new HatchMachineCustom(Ref.ID, "fusion_material_extractor", GUI, ITEM, FLUID, LV, Textures.FUSION_OUT).setTiers(LV);
-    public static HatchMachine FUSION_ENERGY_INJECTOR = new HatchMachine(Ref.ID, "fusion_energy_injector", ENERGY, IV, Textures.FUSION_IN).setTiers(IV);
-    public static HatchMachine FUSION_ENERGY_EXTRACTOR = new HatchMachine(Ref.ID, "fusion_energy_extractor", ENERGY, UV, Textures.FUSION_OUT).setTiers(UV);
+    public static HatchMachine HATCH_DYNAMO = new HatchMachine(Ref.ID, "hatch_dynamo", ENERGY,COVER_DYNAMO_OLD, EV, Textures.MACHINE_BASE).setTiers(EV, IV);
+    public static HatchMachine FUSION_MATERIAL_INJECTOR = new HatchMachineCustom(Ref.ID, "fusion_material_injector", GUI, COVER_FUSION_INPUT, ITEM, FLUID, LV, Textures.FUSION_IN).setTiers(LV);
+    public static HatchMachine FUSION_MATERIAL_EXTRACTOR = new HatchMachineCustom(Ref.ID, "fusion_material_extractor", GUI, COVER_FUSION_OUTPUT, ITEM, FLUID, LV, Textures.FUSION_OUT).setTiers(LV);
+    public static HatchMachine FUSION_ENERGY_INJECTOR = new HatchMachine(Ref.ID, "fusion_energy_injector", ENERGY, IV, Textures.FUSION_IN).setTiers(IV).covers((ICover[]) null);
+    public static HatchMachine FUSION_ENERGY_EXTRACTOR = new HatchMachine(Ref.ID, "fusion_energy_extractor", ENERGY,COVER_DYNAMO_OLD, UV, Textures.FUSION_OUT).setTiers(UV);
 
     public static TankMachine QUANTUM_TANK = new TankMachine(Ref.ID, "quantum_tank", GUI, CELL, Textures.TIER_HANDLER, MAX);
 
@@ -96,13 +100,13 @@ public class Machines {
     public static GeneratorMachine WATERMILL = new GeneratorMachine(Ref.ID, "watermill", ULV, GENERATOR, Textures.MACHINE_BASE);
 
     public static BasicMachine INFINITE_STORAGE = new BasicMachine(Ref.ID, "infinite_storage", ULV, LV, MV, HV, EV, IV, LUV, ZPM, UV, MAX, ENERGY, CONFIGURABLE, Textures.TIER_HANDLER).setTile(m -> () -> new TileEntityInfiniteStorage(m, 16))
-            .covers(null);
+            .covers((ICover[]) null);
     public static TankMachine INFINITE_STEAM = new TankMachine(Ref.ID, "infinite_steam", FLUID, CELL, CONFIGURABLE, GUI, Textures.TIER_HANDLER).setTile(m -> () -> new TileEntityInfiniteFluid(m));
     public static BasicMachine BATTERY_BUFFER_FOUR = new BasicMachine(Ref.ID, "battery_buffer_four", GUI, ENERGY, CONFIGURABLE, ITEM,COVERBUFFERFOUR, Textures.TIER_HANDLER).setTile(m -> () -> new TileEntityBatteryBuffer(m)).frontCovers();
     public static BasicMachine BATTERY_BUFFER_ONE = new BasicMachine(Ref.ID, "battery_buffer_one", GUI, ENERGY, CONFIGURABLE, ITEM,COVERBUFFERONE, Textures.TIER_HANDLER).setTile(m -> () -> new TileEntityBatteryBuffer(m)).frontCovers();
     public static BasicMachine BATTERY_BUFFER_NINE = new BasicMachine(Ref.ID, "battery_buffer_nine", GUI, ENERGY, CONFIGURABLE, ITEM,COVERBUFFERNINE, Textures.TIER_HANDLER).setTile(m -> () -> new TileEntityBatteryBuffer(m)).frontCovers();
-    public static BasicMachine TRANSFORMER = new BasicMachine(Ref.ID, "transformer", ENERGY, CONFIGURABLE, LV, MV, HV, IV, EV, LUV, UV, Textures.TIER_HANDLER).setTile(m -> () -> new TileEntityTransformer(m, 1));
-    public static BasicMachine TRANSFORMER_DIGITAL = new BasicMachine(Ref.ID, "transformer_digital", EV, IV, GUI, ENERGY, CONFIGURABLE, Textures.TIER_HANDLER).setTile(m -> () -> new TileEntityDigitalTransformer(m));//.setTiers();
+    public static BasicMachine TRANSFORMER = new BasicMachine(Ref.ID, "transformer", ENERGY, CONFIGURABLE, LV, MV, HV, IV, EV, LUV, UV, Textures.TIER_HANDLER).setTile(m -> () -> new TileEntityTransformer(m, 1)).covers((ICover[]) null);
+    public static BasicMachine TRANSFORMER_DIGITAL = new BasicMachine(Ref.ID, "transformer_digital", EV, IV, GUI, ENERGY, CONFIGURABLE, Textures.TIER_HANDLER).setTile(m -> () -> new TileEntityDigitalTransformer(m)).covers((ICover[]) null);//.setTiers();
 
     public static void init() {
     }

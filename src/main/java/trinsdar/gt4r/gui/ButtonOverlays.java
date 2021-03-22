@@ -5,6 +5,7 @@ import muramasa.antimatter.gui.ButtonOverlay;
 import org.lwjgl.system.CallbackI;
 
 public class ButtonOverlays {
+    public static ButtonBody NO_OVERLAY = new ButtonBody("no_overlay", 80, 0, 0, 0, 16, 16);
     public static ButtonOverlay EXPORT_CONDITIONAL = new ButtonOverlay("export_conditional", 32, 80, 16, 16);
     public static ButtonOverlay IMPORT_CONDITIONAL = new ButtonOverlay("import_conditional", 48, 80, 16, 16);
     public static ButtonOverlay EXPORT_INVERT_CONDITIONAL = new ButtonOverlay("export_invert_conditional", 0, 80, 16, 16);

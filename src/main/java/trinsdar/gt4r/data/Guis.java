@@ -9,9 +9,11 @@ import muramasa.antimatter.gui.GuiData;
 import muramasa.antimatter.gui.MenuHandlerMachine;
 import muramasa.antimatter.gui.container.ContainerBasicMachine;
 import muramasa.antimatter.gui.container.ContainerHatch;
+import muramasa.antimatter.gui.container.ContainerMultiMachine;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.tile.multi.TileEntityHatch;
+import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -52,6 +54,13 @@ public class Guis {
         }
     };
 
+    public static MenuHandlerMachine<ContainerMultiMachine> FUSION_MENU_HANDLER = new MenuHandlerMachine<ContainerMultiMachine>(Ref.ID, "container_fusion_reactor") {
+        @Override
+        public ContainerMultiMachine getMenu(Object tile, PlayerInventory playerInv, int windowId) {
+            return tile instanceof TileEntityMachine ? new ContainerMultiMachine((TileEntityMultiMachine) tile, playerInv, this, windowId) : null;
+        }
+    };
+
     public static void init(Dist side) {
 
         AntimatterAPI.registerJEICategory(RecipeMaps.ORE_BYPRODUCTS, Guis.ORE_BYPRODUCTS);
@@ -63,7 +72,8 @@ public class Guis {
 
         //TODO changing slots of a machine in world, will crash from GTItemHandler.validateSlot()
 
-        COAL_BOILER.setGUI(Guis.COAL_BOILER_MENU_HANDLER);
+        COAL_BOILER.setGUI(COAL_BOILER_MENU_HANDLER);
+        FUSION_REACTOR.setGUI(FUSION_MENU_HANDLER);
 
 
         ALLOY_SMELTER.getGui().add(IT_IN, 35, 25).add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(ENERGY,80, 63);
@@ -140,7 +150,7 @@ public class Guis {
         QUANTUM_TANK.getGui().add(BASIC_TANK);
 
         PRIMITIVE_BLAST_FURNACE.getGui().add(IT_IN, 35, 16).add(IT_IN, 35, 34).add(IT_IN, 53, 16).add(IT_IN, 53, 34).add(IT_IN, 53, 52).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25).add(IT_OUT, 143, 25).setPadding(0, 0, 0, 0);
-        FUSION_REACTOR.getGui().setEnablePlayerSlots(false);
+        FUSION_REACTOR.getGui().addButton(155, 23, 16, 16, NO_OVERLAY).addButton(155, 41, 16, 16, NO_OVERLAY).addButton(155, 59, 16, 16, NO_OVERLAY).setEnablePlayerSlots(false);
 
         HATCH_MUFFLER.getGui().add(IT_IN, 79, 34);
 

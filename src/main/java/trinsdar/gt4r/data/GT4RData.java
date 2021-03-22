@@ -3,6 +3,7 @@ package trinsdar.gt4r.data;
 import com.google.common.collect.ImmutableMap;
 import muramasa.antimatter.AntimatterConfig;
 import muramasa.antimatter.cover.BaseCover;
+import muramasa.antimatter.cover.CoverDynamo;
 import muramasa.antimatter.cover.ICover;
 import muramasa.antimatter.item.ItemCover;
 import muramasa.antimatter.material.Material;
@@ -22,6 +23,9 @@ import muramasa.antimatter.texture.Texture;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.block.BlockConnectedCasing;
 import trinsdar.gt4r.cover.CoverConveyor;
+import trinsdar.gt4r.cover.CoverDynamoOld;
+import trinsdar.gt4r.cover.CoverFusionInput;
+import trinsdar.gt4r.cover.CoverFusionOutput;
 import trinsdar.gt4r.cover.CoverPump;
 import trinsdar.gt4r.items.ItemIntCircuit;
 import trinsdar.gt4r.tree.BlockRubberLeaves;
@@ -92,6 +96,9 @@ public class GT4RData {
 
     public static final BaseCover COVER_CONVEYOR = new CoverConveyor();
     public static final BaseCover COVER_PUMP = new CoverPump();
+    public static final BaseCover COVER_FUSION_OUTPUT = new CoverFusionOutput();
+    public static final BaseCover COVER_FUSION_INPUT = new CoverFusionInput();
+    public static final BaseCover COVER_DYNAMO_OLD = new CoverDynamoOld("dynamo_old");
 
     public static ItemBasic<?> StickyResin = new ItemBasic<>(Ref.ID, "sticky_resin");
     public static ItemBasic<?> Plantball = new ItemBasic<>(Ref.ID, "plantball");
