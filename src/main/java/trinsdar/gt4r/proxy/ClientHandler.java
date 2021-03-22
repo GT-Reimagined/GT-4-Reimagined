@@ -20,6 +20,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import trinsdar.gt4r.data.Guis;
 import trinsdar.gt4r.gui.ScreenButtonBackgroundCover;
 import trinsdar.gt4r.gui.ScreenCoalBoiler;
+import trinsdar.gt4r.gui.ScreenDistillationTower;
 import trinsdar.gt4r.gui.ScreenFusionReactor;
 import trinsdar.gt4r.gui.ScreenHatchCustom;
 
@@ -38,5 +39,6 @@ public class ClientHandler {
         ScreenSetup.<ContainerHatch, ScreenHatchCustom<ContainerHatch>>setScreenMapping(Guis.HATCH_MENU_HANDLER_CUSTOM, ScreenHatchCustom::new);
         ScreenSetup.<ContainerBasicMachine, ScreenCoalBoiler<ContainerBasicMachine>>setScreenMapping(Guis.COAL_BOILER_MENU_HANDLER, ScreenCoalBoiler::new);
         ScreenSetup.<ContainerMultiMachine, ScreenFusionReactor<ContainerMultiMachine>>setScreenMapping(Guis.FUSION_MENU_HANDLER, ScreenFusionReactor::new);
+        ScreenSetup.<ContainerMultiMachine, ScreenDistillationTower<ContainerMultiMachine>>setScreenMapping(Guis.DISTILLATION_MENU_HANDLER, ScreenDistillationTower::new);
     }
 }
