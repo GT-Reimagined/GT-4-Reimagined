@@ -5,6 +5,7 @@ import muramasa.antimatter.pipe.PipeSize;
 import muramasa.antimatter.pipe.types.FluidPipe;
 import muramasa.antimatter.pipe.types.Wire;
 import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
+import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -81,13 +82,13 @@ public class ExtruderLoader {
         EXTRUDING.RB().ii(DUST.getMaterialIngredient(SiliconDioxide), getReusable(GT4RData.ShapeBottle)).io(new ItemStack(Items.GLASS_BOTTLE)).add(32, 16);
     }
 
-    private static LazyValue<AntimatterIngredient> getReusable(ITag.INamedTag<Item> tag){
-        AntimatterIngredient ingredient = AntimatterIngredient.of(tag, 1).getValue().setNonConsume();
-        return new LazyValue<>(() -> ingredient);
+    private static RecipeIngredient getReusable(ITag.INamedTag<Item> tag){
+        AntimatterIngredient ingredient = AntimatterIngredient.of(tag, 1).get().setNonConsume();
+        return new RecipeIngredient(ingredient);
     }
 
-    private static LazyValue<AntimatterIngredient> getReusable(IItemProvider item){
-        AntimatterIngredient ingredient = AntimatterIngredient.of(item, 1).getValue().setNonConsume();
-        return new LazyValue<>(() -> ingredient);
+    private static RecipeIngredient getReusable(IItemProvider item){
+        AntimatterIngredient ingredient = AntimatterIngredient.of(item, 1).get().setNonConsume();
+        return new RecipeIngredient(ingredient);
     }
 }

@@ -106,6 +106,10 @@ public class MachineCrafting {
         //TODO: replace turbine blade with turbine rotor
         provider.addItemRecipe(output, Ref.ID, "steam_turbine", "machines", "has_watermill", provider.hasSafeItem(WATERMILL.getItem(ULV)),
                 STEAM_TURBINE.getItem(LV), of('P', PLATES_WROUGHT_ALUMINIUM, 'W', WATERMILL.getItem(ULV), 'C', CIRCUITS_BASIC, 'B', TURBINE_BLADE.getMaterialTag(Steel)), "PCP", "WBW", "PCP");
+        provider.addItemRecipe(output, Ref.ID, "primitive_blast_furnace", "machines", "has_fire_bricks", provider.hasSafeItem(FIRE_BRICKS),
+                PRIMITIVE_BLAST_FURNACE.getItem(BRONZE), of('B', FIRE_BRICKS, 'I', PLATE.getMaterialTag(Iron)), "BBB", "BIB", "BBB");
+        provider.addItemRecipe(output, Ref.ID, "coke_oven", "machines", "has_fire_bricks", provider.hasSafeItem(FIRE_BRICKS),
+                COKE_OVEN.getItem(LV), of('B', FIRE_BRICKS), "BBB", "B B", "BBB");
     }
 
 }

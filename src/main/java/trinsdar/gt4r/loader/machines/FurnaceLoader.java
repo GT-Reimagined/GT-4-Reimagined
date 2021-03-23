@@ -10,6 +10,6 @@ import static trinsdar.gt4r.data.Materials.Rubber;
 
 public class FurnaceLoader {
     public static void init(){
-        CookingRecipeBuilder.smeltingRecipe(DUST.getIngredient(Rubber, 1).getValue(), INGOT.get(Rubber), 0.5F, 200);
+        CookingRecipeBuilder.smeltingRecipe(DUST.getIngredient(Rubber, 1).get(), INGOT.get(Rubber), 0.5F, 200);
     }
 }

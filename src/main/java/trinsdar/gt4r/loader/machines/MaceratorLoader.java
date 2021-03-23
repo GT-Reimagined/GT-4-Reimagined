@@ -2,6 +2,7 @@ package trinsdar.gt4r.loader.machines;
 
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
+import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -21,8 +22,8 @@ public class MaceratorLoader {
         CRUSHED.all().forEach(m -> {
             if (!m.has(ORE) && m != Gold && m != Iron && m != Diamond && m != Emerald && m != Lapis && m != Redstone) return;
             int multiplier = 1;
-            LazyValue<AntimatterIngredient> ore = AntimatterIngredient.of(ORE.getMaterialTag(m),1);
-            LazyValue<AntimatterIngredient> crushed = AntimatterIngredient.of(CRUSHED.getMaterialTag(m), 1);
+            RecipeIngredient ore = AntimatterIngredient.of(ORE.getMaterialTag(m),1);
+            RecipeIngredient crushed = AntimatterIngredient.of(CRUSHED.getMaterialTag(m), 1);
             ItemStack crushedStack = CRUSHED.get(m,1);
             ItemStack stoneDust = DUST.get(Stone, 1);
 

@@ -3,6 +3,7 @@ package trinsdar.gt4r.loader.machines;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
+import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.LazyValue;
 
@@ -17,13 +18,13 @@ public class OreByproducts {
         CRUSHED.all().forEach(m -> {
             if (!m.has(ORE)) return;
             if (!m.has(INGOT)) return;
-            LazyValue<AntimatterIngredient> ore = ORE.get().get(m, STONE).asIngredient();
-            LazyValue<AntimatterIngredient> crushed = CRUSHED.getIngredient(m, 1);
+            RecipeIngredient ore = ORE.get().get(m, STONE).asIngredient();
+            RecipeIngredient crushed = CRUSHED.getIngredient(m, 1);
             if (m.hasByProducts()) {
                 List<Material> byProducts = m.getByProducts();
                 int byProductsCount = byProducts.size();
 
-                List<LazyValue<AntimatterIngredient>> ores = new ObjectArrayList<>();
+                List<RecipeIngredient> ores = new ObjectArrayList<>();
                 if (m.has(ORE)) ores.add(ore);
                 if (m.has(CRUSHED)) ores.add(crushed);
                 if (m.has(CRUSHED_PURIFIED)) ores.add(CRUSHED_PURIFIED.getIngredient(m, 1));

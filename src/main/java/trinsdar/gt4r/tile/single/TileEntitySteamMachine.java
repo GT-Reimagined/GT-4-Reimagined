@@ -37,13 +37,7 @@ public class TileEntitySteamMachine extends TileEntityMachine {
     }
 
     @Override
-    public void drawInfo(MatrixStack stack, FontRenderer renderer, int left, int top) {
-        recipeHandler.ifPresent(h -> {
-            Recipe r = h.getActiveRecipe();
-            if (r != null) {
-                if (r.hasInputFluids()) renderer.drawString(stack,"Steam: " + r.getPower() + "L/t (" + r.getSpecialValue() + " total)", left + 10, top, 16448255);
-                if (r.getDuration() > 0) renderer.drawString(stack,"Time: " + (r.getDuration() / (float) 20) + "s (" + r.getDuration() + " ticks)", left + 10, top + 10, 16448255);
-            }
-        });
+    public Tier getPowerLevel() {
+        return Tier.LV;
     }
 }
