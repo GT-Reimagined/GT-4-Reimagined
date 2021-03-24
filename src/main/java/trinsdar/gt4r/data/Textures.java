@@ -23,6 +23,7 @@ public class Textures {
     public static TextureSet LIGNITE = new TextureSet(Ref.ID, "lignite");
     public static TextureSet WOOD = new TextureSet(Ref.ID, "wood");
 
+    public static final Texture ROTOR = new Texture(Ref.ID, "material/rotor");
     public static final Texture MACHINE_BASE = new Texture(Ref.ID, "block/machine/base/machine_base");
     public static final Texture BRONZE_MACHINE_BASE = new Texture(Ref.ID, "block/machine/base/tiers/bronze");
     public static final Texture FUSION_IN = new Texture(Ref.ID, "block/machine/base/fusion_control_computer");
