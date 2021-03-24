@@ -32,7 +32,7 @@ public class BathingLoader {
         addBathRecipe(Platinum, Mercury, i(100, 70, 40), CRUSHED_PURIFIED.get(Platinum, 1), DUST.get(Platinum, 1), stoneDust);
         BATHING.RB().ii(AntimatterIngredient.of(DUST.getMaterialTag(Wood), 1)).fi(Water.getLiquid(100)).io(new ItemStack(Items.PAPER)).chances(100).add(200);
         BATHING.RB().ii(AntimatterIngredient.of(Items.SUGAR_CANE, 1)).fi(Water.getLiquid(100)).io(new ItemStack(Items.PAPER)).chances(100).add(100);
-        BATHING.RB().ii(AntimatterIngredient.of(TagUtils.getItemTag(new ResourceLocation("minecraft", "wool")), 1)).fi(Chlorine.getLiquid(125)).io(new ItemStack(Items.WHITE_WOOL)).chances(100).add(12);
+        BATHING.RB().ii(AntimatterIngredient.of(TagUtils.getItemTag(new ResourceLocation("minecraft", "wool")), 1)).fi(Chlorine.getGas(125)).io(new ItemStack(Items.WHITE_WOOL)).chances(100).add(12);
     }
 
     private static int[] i(int... ints){
