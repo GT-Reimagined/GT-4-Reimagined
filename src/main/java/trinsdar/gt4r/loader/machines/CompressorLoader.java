@@ -7,7 +7,9 @@ import org.lwjgl.system.CallbackI;
 import trinsdar.gt4r.data.GT4RData;
 
 import static muramasa.antimatter.Data.*;
+import static trinsdar.gt4r.data.GT4RData.CompressedFireClay;
 import static trinsdar.gt4r.data.Materials.Energium;
+import static trinsdar.gt4r.data.Materials.Fireclay;
 import static trinsdar.gt4r.data.Materials.Glowstone;
 import static trinsdar.gt4r.data.Materials.Wood;
 import static trinsdar.gt4r.data.RecipeMaps.COMPRESSING;
@@ -37,5 +39,6 @@ public class CompressorLoader {
         COMPRESSING.RB().ii(AntimatterIngredient.of(Items.RED_SAND, 4)).io(new ItemStack(Items.RED_SANDSTONE)).add(400, 2);
         COMPRESSING.RB().ii(DUST.getMaterialIngredient(Energium, 9)).io(new ItemStack(GT4RData.EnergyCrystal)).add(400, 2);
         COMPRESSING.RB().ii(DUST.getMaterialIngredient(Wood, 8)).io(PLATE.get(Wood, 1)).add(400, 2);
+        COMPRESSING.RB().ii(DUST.getMaterialIngredient(Fireclay)).io(new ItemStack(CompressedFireClay)).add(400, 2);
     }
 }

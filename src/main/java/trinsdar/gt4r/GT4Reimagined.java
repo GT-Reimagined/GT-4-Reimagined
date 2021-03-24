@@ -65,7 +65,6 @@ public class GT4Reimagined extends AntimatterMod {
     private void registerRecipeLoaders() {
         IRecipeRegistrate loader = AntimatterAPI.getRecipeRegistrate();
         loader.add(WiremillLoader::init);
-        loader.add(FurnaceLoader::init);
         loader.add(WasherLoader::init);
         loader.add(Blasting::init);
         loader.add(IndustrialGrinder::init);

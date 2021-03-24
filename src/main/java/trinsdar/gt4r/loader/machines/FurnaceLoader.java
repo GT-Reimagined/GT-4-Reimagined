@@ -1,15 +1,48 @@
 package trinsdar.gt4r.loader.machines;
 
+import muramasa.antimatter.Antimatter;
+import muramasa.antimatter.AntimatterAPI;
+import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
+import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
 import net.minecraft.data.CookingRecipeBuilder;
+import net.minecraft.data.IFinishedRecipe;
+import net.minecraft.item.crafting.AbstractCookingRecipe;
 import net.minecraft.item.crafting.CookingRecipeSerializer;
+import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.tree.RubberTree;
 
-import static muramasa.antimatter.Data.DUST;
-import static muramasa.antimatter.Data.INGOT;
+import java.util.function.Consumer;
+
+import static muramasa.antimatter.Data.*;
+import static muramasa.antimatter.Data.NUGGET;
+import static trinsdar.gt4r.data.Materials.Iron;
 import static trinsdar.gt4r.data.Materials.Rubber;
+import static trinsdar.gt4r.data.Materials.WroughtIron;
 
 public class FurnaceLoader {
-    public static void init(){
-        CookingRecipeBuilder.smeltingRecipe(DUST.getIngredient(Rubber, 1).get(), INGOT.get(Rubber), 0.5F, 200);
+    public static void loadRecipes(Consumer<IFinishedRecipe> output, AntimatterRecipeProvider provider){
+        //CookingRecipeBuilder.blastingRecipe(DUST.getMaterialIngredient(Rubber, 1).get(), INGOT.get(Rubber), 0.5F, 100).addCriterion("has_rubber_dust", provider.hasSafeItem(DUST.getMaterialTag(Rubber)).get()).build(output, "rubber_dust_to_ingot");
+        CookingRecipeBuilder.blastingRecipe(INGOT.getMaterialIngredient(Iron, 1).get(), INGOT.get(WroughtIron), 0.5F, 100).addCriterion("has_iron_ingot", provider.hasSafeItem(INGOT.getMaterialTag(Iron)).get()).build(output, "iron_to_wrought");
+        //CookingRecipeBuilder.smeltingRecipe(DUST.getMaterialIngredient(Rubber, 1).get(), INGOT.get(Rubber), 0.5F, 200).addCriterion("has_rubber_dust", provider.hasSafeItem(DUST.getMaterialTag(Rubber)).get()).build(output, "rubber_dust_to_ingot");
+        CookingRecipeBuilder.smeltingRecipe(INGOT.getMaterialIngredient(Iron, 1).get(), INGOT.get(WroughtIron), 0.5F, 200).addCriterion("has_iron_ingot", provider.hasSafeItem(INGOT.getMaterialTag(Iron)).get()).build(output, "iron_to_wrought");
+        CookingRecipeBuilder.smeltingRecipe(AntimatterIngredient.of(GT4RData.CompressedFireClay, 1).get(), GT4RData.FireBrick, 0.5F, 200).addCriterion("has_compressed_fire_clay", provider.hasSafeItem(GT4RData.CompressedFireClay).get()).build(output, "firebrick");
+        DUST.all().forEach(m -> {
+            if (m.needsBlastFurnace()) return;
+            if (!m.getDirectSmeltInto().has(INGOT)) return;
+            CookingRecipeBuilder.blastingRecipe(DUST.getMaterialIngredient(m, 1).get(), INGOT.get(m.getDirectSmeltInto()), 0.5F, 100).addCriterion("has_" + m.getId() + "_dust", provider.hasSafeItem(DUST.getMaterialTag(m)).get()).build(output, m.getId() + "_dust_to_ingot");
+            CookingRecipeBuilder.smeltingRecipe(DUST.getMaterialIngredient(m, 1).get(), INGOT.get(m.getDirectSmeltInto()), 0.5F, 200).addCriterion("has_" + m.getId() + "_dust", provider.hasSafeItem(DUST.getMaterialTag(m)).get()).build(output, m.getId() + "_dust_to_ingot");
+        });
+        /*CRUSHED.all().forEach(m -> {
+            if (m.needsBlastFurnace()) return;
+            if (!m.getDirectSmeltInto().has(NUGGET)) return;
+            CookingRecipeBuilder.blastingRecipe(CRUSHED.getMaterialIngredient(m, 1).get(), NUGGET.get(m.getDirectSmeltInto(), 10), 0.5F, 100).addCriterion("has_" + m.getId() + "_dust", provider.hasSafeItem(DUST.getMaterialTag(m)).get()).build(output, m.getId() + "_crushed_to_nuggets");
+            CookingRecipeBuilder.smeltingRecipe(CRUSHED.getMaterialIngredient(m, 1).get(), NUGGET.get(m.getDirectSmeltInto(), 10), 0.5F, 200).addCriterion("has_" + m.getId() + "_dust", provider.hasSafeItem(DUST.getMaterialTag(m)).get()).build(output, m.getId() + "_crushed_to_nuggets");
+        });
+        CRUSHED_PURIFIED.all().forEach(m -> {
+            if (m.needsBlastFurnace()) return;
+            if (!m.getDirectSmeltInto().has(NUGGET)) return;
+            CookingRecipeBuilder.blastingRecipe(CRUSHED_PURIFIED.getMaterialIngredient(m, 1).get(), NUGGET.get(m.getDirectSmeltInto(), 10), 0.5F, 100).addCriterion("has_" + m.getId() + "_dust", provider.hasSafeItem(DUST.getMaterialTag(m)).get()).build(output, m.getId() + "_purified_crushed_to_nuggets");
+            CookingRecipeBuilder.smeltingRecipe(CRUSHED_PURIFIED.getMaterialIngredient(m, 1).get(), NUGGET.get(m.getDirectSmeltInto(), 10), 0.5F, 200).addCriterion("has_" + m.getId() + "_dust", provider.hasSafeItem(DUST.getMaterialTag(m)).get()).build(output, m.getId() + "_purified_crushed_to_nuggets");
+        });*/
     }
 }

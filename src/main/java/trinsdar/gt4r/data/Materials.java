@@ -285,21 +285,13 @@ public class Materials {
         Olivine.remove(ORE_SMALL, ROCK);
         Platinum.remove(ORE_SMALL, ROCK);
 
-        Iron.setSmeltInto(Iron).setMacerateInto(Iron);
-        WroughtIron.setSmeltInto(Iron).setMacerateInto(Iron);
-        Copper.setSmeltInto(Copper).setMacerateInto(Copper);
+        //WroughtIron.setSmeltInto(Iron).setMacerateInto(Iron);
 
-        Cinnabar.setDirectSmeltInto(Mercury);
-        Tetrahedrite.setDirectSmeltInto(Copper);
-        Sphalerite.setDirectSmeltInto(Zinc);
-        Pyrite.setDirectSmeltInto(Iron);
-        Cassiterite.setDirectSmeltInto(Tin);
-        Galena.setDirectSmeltInto(Lead);
-        Tungstate.setOreMulti(2).setSmeltingMulti(2);
+        //Cinnabar.setDirectSmeltInto(Mercury);
+        Tetrahedrite.setDirectSmeltInto(Copper).setSmeltInto(Copper);
+        Cassiterite.setDirectSmeltInto(Tin).setSmeltInto(Tin);
         Cassiterite.setOreMulti(2).setSmeltingMulti(2);
-        Saltpeter.setOreMulti(4).setSmeltingMulti(4);
         Redstone.setOreMulti(5).setSmeltingMulti(5);
-        Glowstone.setOreMulti(5).setSmeltingMulti(5);
         // ore byproducts
         // eligible: cinnabar, uranium, copper, cassiterite, pyrite, sodalite-special:4x byproduct, sphalerite, tetra, bauxite 4x bypoduct, lead, tin, galena, iron, gold, platinum aka sheldonite, nickel, tungstate
         // gems & iridium will be separate redstone, lapis

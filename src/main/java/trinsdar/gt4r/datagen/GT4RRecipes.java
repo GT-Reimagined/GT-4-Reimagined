@@ -12,6 +12,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Tags;
+import trinsdar.gt4r.loader.machines.FurnaceLoader;
 
 import java.util.function.Consumer;
 
@@ -33,6 +34,7 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
         this.craftingLoaders.add(WireCablesPlates::loadRecipes);
         this.craftingLoaders.add(MachineCrafting::loadRecipes);
         this.craftingLoaders.add(MaterialRecipeLoader::loadRecipes);
+        this.craftingLoaders.add(FurnaceLoader::loadRecipes);
     }
 
     @Override
