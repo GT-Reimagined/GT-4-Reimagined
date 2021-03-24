@@ -23,7 +23,7 @@ public class BathingLoader {
         addBathRecipe(Tetrahedrite, SodiumPersulfate, i(100, 70, 40), CRUSHED_PURIFIED.get(Tetrahedrite, 1), DUST.get(Tetrahedrite, 1), stoneDust);
         addBathRecipe(Tin, SodiumPersulfate, i(100, 70, 40), CRUSHED_PURIFIED.get(Tin, 1), DUST.get(Zinc, 1), stoneDust);
         addBathRecipe(Platinum, SodiumPersulfate, i(100, 70, 40), CRUSHED_PURIFIED.get(Platinum, 1), DUST.get(Nickel, 1), stoneDust);
-        addBathRecipe(Zinc, SodiumPersulfate, i(100, 70, 40), CRUSHED_PURIFIED.get(Zinc, 1), DUST.get(Zinc, 1), stoneDust);
+        //addBathRecipe(Zinc, SodiumPersulfate, i(100, 70, 40), CRUSHED_PURIFIED.get(Zinc, 1), DUST.get(Zinc, 1), stoneDust);
         addBathRecipe(Galena, Mercury, i(100, 70, 40), CRUSHED_PURIFIED.get(Galena, 1), DUST.get(Silver, 1), stoneDust);
         addBathRecipe(Tungstate, Mercury, i(100, 70, 40), CRUSHED_PURIFIED.get(Tungstate, 1), DUST.get(Silver, 1), stoneDust);
         addBathRecipe(Gold, Mercury, i(100, 70, 40), CRUSHED_PURIFIED.get(Gold, 1), DUST.get(Gold, 1), stoneDust);

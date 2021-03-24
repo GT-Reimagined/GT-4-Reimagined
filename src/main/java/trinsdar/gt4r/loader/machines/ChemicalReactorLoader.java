@@ -28,9 +28,9 @@ public class ChemicalReactorLoader {
         CHEMICAL_REACTING.RB().fi(Glyceryl.getLiquid(1000), CoalFuel.getLiquid(4000)).fo(NitroCoalFuel.getLiquid(5000)).add(250,30);
         CHEMICAL_REACTING.RB().fi(Glyceryl.getLiquid(1000), Diesel.getLiquid(4000)).fo(NitroDiesel.getLiquid(5000)).add(1000,30);
         CHEMICAL_REACTING.RB().fi(Nitrogen.getGas(1000), Oxygen.getGas(2000)).fo(NitrogenDioxide.getGas(3000)).add(1250, 30);
-        CHEMICAL_REACTING.RB().fi(Oxygen.getGas(2000), SodiumSulfide.getLiquid(1000)).fo(SodiumPersulfate.getLiquid(3000)).add(2000, 30);
+        CHEMICAL_REACTING.RB().fi(Oxygen.getGas(2000)).ii(DUST.getMaterialIngredient(SodiumSulfide)).fo(SodiumPersulfate.getLiquid(3000)).add(2000, 30);
         CHEMICAL_REACTING.RB().fi(NitroCarbon.getLiquid(1000), Water.getLiquid(1000)).fo(Glyceryl.getLiquid(2000)).add(583, 30);
-        CHEMICAL_REACTING.RB().ii(DUST.getMaterialIngredient(Sodium), DUST.getMaterialIngredient(Sulfur)).fo(SodiumSulfide.getLiquid(2000)).add(100, 30);
+        CHEMICAL_REACTING.RB().ii(DUST.getMaterialIngredient(Sodium), DUST.getMaterialIngredient(Sulfur)).io(DUST.get(SodiumSulfide, 2)).add(100, 30);
         CHEMICAL_REACTING.RB().ii(DUST.getMaterialIngredient(Sulfur)).fi(Water.getLiquid(2000)).fo(SulfuricAcid.getLiquid(3000)).add(1150, 30);
         CHEMICAL_REACTING.RB().fi(Hydrogen.getGas(2000), Oxygen.getGas(1000)).fo(new FluidStack(Fluids.WATER, 3000)).add(10, 30);
         CHEMICAL_REACTING.RB().ii(DUST.getMaterialIngredient(Sodium, 2)).fi(NitrogenDioxide.getGas(5000)).io(new ItemStack(Items.GUNPOWDER, 5)).add(34, 30);

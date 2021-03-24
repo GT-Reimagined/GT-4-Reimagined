@@ -28,10 +28,9 @@ public class ClientHandler {
 
     @SuppressWarnings("RedundantTypeArguments")
     public static void setup(FMLClientSetupEvent e) {
-        AntimatterAPI.runLaterClient(() -> {
+        e.enqueueWork(() -> {
             RenderTypeLookup.setRenderLayer(GT4RData.RUBBER_SAPLING, RenderType.getCutout());
             RenderTypeLookup.setRenderLayer(GT4RData.RUBBER_LEAVES, RenderType.getCutout());
-            //AntimatterAPI.all(BlockCasingMachine.class, t -> RenderTypeLookup.setRenderLayer(t, RenderType.getCutout()));
             AntimatterAPI.all(BlockCasing.class, t -> RenderTypeLookup.setRenderLayer(t, RenderType.getCutout()));
         });
 

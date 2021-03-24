@@ -19,6 +19,7 @@ import static trinsdar.gt4r.data.Materials.Iron;
 import static trinsdar.gt4r.data.Materials.Rubber;
 import static trinsdar.gt4r.data.Materials.Tetrahedrite;
 import static trinsdar.gt4r.data.Materials.WroughtIron;
+import static trinsdar.gt4r.data.RecipeMaps.SMELTING;
 import static trinsdar.gt4r.data.RecipeMaps.STEAM_SMELTING;
 
 public class FurnaceLoader {
@@ -34,4 +35,16 @@ public class FurnaceLoader {
         });
     }
 
+    public static void init(){
+        CRUSHED.all().forEach(m -> {
+            if (m.needsBlastFurnace()) return;
+            if (!m.getDirectSmeltInto().has(NUGGET)) return;
+            SMELTING.RB().ii(CRUSHED.getMaterialIngredient(m, 1)).io(NUGGET.get(m.getDirectSmeltInto(), 10)).add(60, 4);
+        });
+        CRUSHED_PURIFIED.all().forEach(m -> {
+            if (m.needsBlastFurnace()) return;
+            if (!m.getDirectSmeltInto().has(NUGGET)) return;
+            SMELTING.RB().ii(CRUSHED_PURIFIED.getMaterialIngredient(m, 1)).io(NUGGET.get(m.getDirectSmeltInto(), 10)).add(60, 4);
+        });
+    }
 }
