@@ -4,6 +4,7 @@ import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.loader.MaterialRecipeLoader;
+import trinsdar.gt4r.loader.crafting.BlockCrafting;
 import trinsdar.gt4r.loader.crafting.MachineCrafting;
 import trinsdar.gt4r.loader.crafting.Parts;
 import trinsdar.gt4r.loader.crafting.WireCablesPlates;
@@ -35,6 +36,7 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
         this.craftingLoaders.add(MachineCrafting::loadRecipes);
         this.craftingLoaders.add(MaterialRecipeLoader::loadRecipes);
         this.craftingLoaders.add(FurnaceLoader::loadRecipes);
+        this.craftingLoaders.add(BlockCrafting::loadRecipes);
     }
 
     @Override

@@ -69,13 +69,13 @@ public class Materials {
 
     /** Gases **/
     public static Material WoodGas = new Material(Ref.ID, "wood_gas", 0xdecd87, NONE).asGas(25);
-    public static Material Methane = new Material(Ref.ID, "methane", 0xffffff, NONE).asGas(45).mats(of(Carbon, 1, Hydrogen, 4));
+    public static Material Methane = new Material(Ref.ID, "methane", 0xffffff, NONE).asGas(48).mats(of(Carbon, 1, Hydrogen, 4));
     public static Material CarbonDioxide = new Material(Ref.ID, "carbon_dioxide", 0xa9d0f5, NONE).asGas().mats(of(Carbon, 1, Oxygen, 2));
     //public static Material NobleGases = new Material(Ref.ID, "noble_gases", 0xc9e3fc, NONE).asGas()/*.setTemp(79, 0)*/.addComposition(of(CarbonDioxide, 21, Helium, 9, Methane, 3, Deuterium, 1));
     public static Material Air = new Material(Ref.ID, "air", 0xc9e3fc, NONE).asGas().mats(of(Nitrogen, 40, Oxygen, 11, Argon, 1/*, NobleGases, 1*/));
     public static Material NitrogenDioxide = new Material(Ref.ID, "nitrogen_dioxide", 0x64afff, NONE).asGas().mats(of(Nitrogen, 1, Oxygen, 2));
     public static Material NaturalGas = new Material(Ref.ID, "natural_gas", 0xffffff, NONE).asGas(15);
-    public static Material Propane = new Material(Ref.ID, "propane", 0xfae250, NONE).asGas(45).mats(of(Carbon, 2, Hydrogen, 6));
+    public static Material Propane = new Material(Ref.ID, "propane", 0xfae250, NONE).asGas(48).mats(of(Carbon, 2, Hydrogen, 6));
     public static Material SulfurDioxide = new Material(Ref.ID, "sulfur_dioxide", 0xc8c819, NONE).asGas().mats(of(Sulfur, 1, Oxygen, 2));
     public static Material SulfurTrioxide = new Material(Ref.ID, "sulfur_trioxide", 0xa0a014, NONE).asGas()/*.setTemp(344, 1)*/.mats(of(Sulfur, 1, Oxygen, 3));
     public static Material NitricOxide = new Material(Ref.ID, "nitric_oxide", 0x7dc8f0, NONE).asGas().mats(of(Nitrogen, 1, Oxygen, 1));

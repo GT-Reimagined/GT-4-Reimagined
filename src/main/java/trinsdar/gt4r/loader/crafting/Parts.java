@@ -193,8 +193,6 @@ public class Parts {
             }
         }
         provider.shapeless(output, "fire_clay_dust", "parts", "has_clay_dust", provider.hasSafeItem(DUST.getMaterialTag(Clay)), DUST.get(Fireclay, 2), DUST.getMaterialTag(Brick), DUST.getMaterialTag(Clay));
-        provider.addStackRecipe(output, Ref.ID, "firebricks", "blocks", "has_fire_brick", provider.hasSafeItem(FireBrick),
-                new ItemStack(FIRE_BRICKS), of('F', FireBrick), "FF", "FF");
         provider.shapeless(output, "iron_ingot_from_wrought", "parts", "has_ash", provider.hasSafeItem(DUST.getMaterialTag(Ash)), new ItemStack(Items.IRON_INGOT), DUST.getMaterialTag(Ash), INGOT.getMaterialTag(WroughtIron));
     }
 }

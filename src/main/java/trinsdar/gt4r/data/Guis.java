@@ -31,7 +31,7 @@ public class Guis {
     public static GuiData MULTI_DISPLAY = new GuiData("gt4r", "multi_display").add(IT_IN, 17, 16).add(IT_IN, 35, 16).add(IT_IN, 53, 16).add(IT_IN, 17, 34).add(IT_IN, 35, 34).add(IT_IN, 53, 34).add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 143, 16).add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(IT_OUT, 143, 34).add(FL_IN, 17, 63).add(FL_IN, 35, 63).add(FL_IN, 53, 63).add(FL_OUT, 107, 63).add(FL_OUT, 125, 63).add(FL_OUT, 143, 63);
     public static GuiData MULTI_DISPLAY_MORE_FLUID = new GuiData("gt4r", "multi_display_more_fluid").add(IT_IN, 17, 16).add(IT_IN, 35, 16).add(IT_IN, 53, 16).add(IT_IN, 17, 34).add(IT_IN, 35, 34).add(IT_IN, 53, 34).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25).add(IT_OUT, 143, 25).add(FL_IN, 17, 63).add(FL_IN, 35, 63).add(FL_IN, 53, 63).add(FL_OUT, 107, 63).add(FL_OUT, 125, 63).add(FL_OUT, 143, 63).add(FL_OUT, 107, 45).add(FL_OUT, 125, 45).add(FL_OUT, 143, 45);
     public static GuiData MULTI_DISPLAY_COMPACT = new GuiData("gt4r", "multi_display").add(MULTI_DISPLAY).setPadding(0, 0, 0, 0);
-    public static GuiData BASIC_TANK = new GuiData("antimatter", "basic_tank").add(CELL_IN, 9, 22).add(CELL_OUT, 9, 58).add(FL_IN, 106, 43);
+    public static GuiData BASIC_TANK = new GuiData("gt4r", "basic_tank").add(CELL_IN, 80, 17).add(CELL_OUT, 80, 53).add(FL_IN, 60, 43);
 
     public static GuiData ORE_BYPRODUCTS = new GuiData("gt4r", "ore_byproducts") {
         @Override
@@ -73,6 +73,7 @@ public class Guis {
         AntimatterAPI.registerJEICategory(RecipeMaps.ORE_BYPRODUCTS, Guis.ORE_BYPRODUCTS);
 //        GregTechAPI.registerJEICategory(RecipeMaps.SMELTING, Guis.MULTI_DISPLAY_COMPACT);
         AntimatterAPI.registerJEICategory(RecipeMaps.STEAM_FUELS, Guis.MULTI_DISPLAY_COMPACT);
+        AntimatterAPI.registerJEICategory(RecipeMaps.SEMIFLUID_FUELS, Guis.MULTI_DISPLAY_COMPACT);
         AntimatterAPI.registerJEICategory(RecipeMaps.GAS_FUELS, Guis.MULTI_DISPLAY_COMPACT);
         AntimatterAPI.registerJEICategory(RecipeMaps.DIESEL_FUELS, Guis.MULTI_DISPLAY_COMPACT);
         AntimatterAPI.registerJEICategory(RecipeMaps.LAVA_FUELS, Guis.MULTI_DISPLAY_COMPACT);
@@ -151,6 +152,8 @@ public class Guis {
 
         STEAM_TURBINE.getGui().add(BASIC_TANK);
         GAS_TURBINE.getGui().add(BASIC_TANK);
+        DIESEL_GENERATOR.getGui().add(BASIC_TANK);
+        SEMIFLUID_GENERATOR.getGui().add(BASIC_TANK);
 
         ButtonOverlay[] overlays = new ButtonOverlay[]{IMPORT, IMPORT_CONDITIONAL, IMPORT_INVERT_CONDITIONAL, EXPORT, EXPORT_CONDITIONAL, EXPORT_INVERT_CONDITIONAL, IMPORT_EXPORT, IMPORT_EXPORT_CONDITIONAL, IMPORT_EXPORT_INVERT_CONDITIONAL, EXPORT_IMPORT, EXPORT_IMPORT_CONDITIONAL, EXPORT_IMPORT_INVERT_CONDITIONAL};
 
