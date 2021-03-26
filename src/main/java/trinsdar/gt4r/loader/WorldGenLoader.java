@@ -16,10 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static muramasa.antimatter.Ref.*;
-import static trinsdar.gt4r.data.Materials.Copper;
-import static trinsdar.gt4r.data.Materials.Gold;
-import static trinsdar.gt4r.data.Materials.Tin;
-import static trinsdar.gt4r.data.Materials.Uraninite;
+import static net.minecraftforge.common.BiomeDictionary.Type.*;
+import static trinsdar.gt4r.data.Materials.*;
 
 public class WorldGenLoader {
 
@@ -36,13 +34,27 @@ public class WorldGenLoader {
         WorldGenStoneLayer.add(GT4RData.KIMBERLITE, 3, World.OVERWORLD);
         WorldGenStoneLayer.add(GT4RData.QUARTZITE, 4, World.OVERWORLD);
         if (AntimatterConfig.WORLD.ORE_VEINS){
-            new WorldGenVanillaTypeVeins("copper", 0, 100, 15, 10, Copper, Gold, 10, World.OVERWORLD);
-            new WorldGenVanillaTypeVeins("tin", 0, 100, 20, 6, Tin, null, 0, World.OVERWORLD);
-            List<Type> types = new ArrayList<>(Type.getAll());
-            types.remove(Type.DEAD);
-            new WorldGenVanillaTypeVeins("uranite", 0, 100, 6, 3, Uraninite, null, 0, World.OVERWORLD).setValidBiomes(types.toArray(new Type[0]));
-            new WorldGenVanillaTypeVeins("uranite", 0, 100, 15, 3, Uraninite, null, 0, World.OVERWORLD).setValidBiomes(Type.DEAD);
-
+            new WorldGenVanillaTypeVeins("copper", 0, 100, 15, 10, Copper, Gold, 2, World.OVERWORLD);
+            new WorldGenVanillaTypeVeins("tin", 0, 100, 20, 6, Tin, Iron, 3, World.OVERWORLD);
+            new WorldGenVanillaTypeVeins("uranite", 0, 100, 6, 3, Uraninite, null, 0, World.OVERWORLD).setInvalidBiomes(DEAD);
+            new WorldGenVanillaTypeVeins("uranite_dead", 0, 100, 15, 3, Uraninite, null, 0, World.OVERWORLD).setValidBiomes(DEAD);
+            new WorldGenVanillaTypeVeins("cassiterite", 30, 80, 1, 32, Cassiterite, Tin, 5, World.OVERWORLD).setValidBiomes(MUSHROOM, MOUNTAIN, CONIFEROUS, COLD).setInvalidBiomes(JUNGLE);
+            new WorldGenVanillaTypeVeins("tetrahedrite", 20, 70, 5, 6, Tetrahedrite, Copper, 1, World.OVERWORLD).setValidBiomes(JUNGLE, SWAMP, MOUNTAIN, MUSHROOM).setInvalidBiomes(COLD);
+            new WorldGenVanillaTypeVeins("galena", 0, 64, 6, 10, Galena, null, 0, World.OVERWORLD);
+            new WorldGenVanillaTypeVeins("bauxite", 50, 120, 4, 16, Bauxite, null, 0, World.OVERWORLD).setValidBiomes(FOREST, PLAINS);
+            new WorldGenVanillaTypeVeins("ruby", 0, 48, 2, 6, Ruby, null, 0, World.OVERWORLD).setValidBiomes(HOT);
+            new WorldGenVanillaTypeVeins("sapphire", 0, 48, 2, 6, Sapphire, null, 0, World.OVERWORLD).setValidBiomes(OCEAN, BEACH);
+            new WorldGenVanillaTypeVeins("platinum", 10, 30, 3, 8, Platinum, Sphalerite, 5, World.OVERWORLD).setValidBiomes(JUNGLE);
+            new WorldGenVanillaTypeVeins("iridium", 0, 128, 1, 2, Iridium, null, 0, World.OVERWORLD);
+            new WorldGenVanillaTypeVeins("emerald", 0, 32, 4, 6, Emerald, null, 0, World.OVERWORLD).setValidBiomes(MOUNTAIN);
+            new WorldGenVanillaTypeVeins("pyrite", 0, 64, 5, 16, Pyrite, null, 0, World.THE_NETHER);
+            new WorldGenVanillaTypeVeins("sphalerite", 32, 96, 5, 16, Sphalerite, null, 0, World.THE_NETHER);
+            new WorldGenVanillaTypeVeins("cinnabar",64, 128, 4, 16, Cinnabar, null, 0, World.THE_NETHER);
+            new WorldGenVanillaTypeVeins("tungstate", 0, 80, 2, 16, Tungstate, null, 0, World.THE_END);
+            new WorldGenVanillaTypeVeins("platinum", 0, 80, 2, 5, Platinum, null, 0, World.THE_END);
+            new WorldGenVanillaTypeVeins("olivine", 0, 80, 5, 8, Olivine, null, 0, World.THE_END);
+            new WorldGenVanillaTypeVeins("sodalite", 0, 80, 6, 16, Sodalite, null, 0, World.THE_END);
+            new WorldGenVanillaTypeVeins("chromite", 0, 80, 4, 5, Chromite, null, 0, World.THE_END);
         }
 
     }

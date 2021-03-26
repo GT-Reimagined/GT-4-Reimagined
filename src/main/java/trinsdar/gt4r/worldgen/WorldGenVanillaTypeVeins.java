@@ -33,6 +33,7 @@ public class WorldGenVanillaTypeVeins extends WorldGenBase<WorldGenVanillaTypeVe
     private final int secondaryChance;
     private final int size;
     private BiomeDictionary.Type[] biomeTypes = new BiomeDictionary.Type[]{};
+    private BiomeDictionary.Type[] invalidBiomeTypes = new BiomeDictionary.Type[]{};
 
     public WorldGenVanillaTypeVeins(String id, int minY, int maxY, int weight, int size, Material primary, Material secondary, int secondaryChance, RegistryKey<World>... dimensions) {
         super(id, WorldGenVanillaTypeVeins.class, dimensions);
@@ -56,6 +57,11 @@ public class WorldGenVanillaTypeVeins extends WorldGenBase<WorldGenVanillaTypeVe
 
     public WorldGenVanillaTypeVeins setValidBiomes(BiomeDictionary.Type... types){
         biomeTypes = types;
+        return this;
+    }
+
+    public WorldGenVanillaTypeVeins setInvalidBiomes(BiomeDictionary.Type... types){
+        invalidBiomeTypes = types;
         return this;
     }
 
@@ -93,19 +99,20 @@ public class WorldGenVanillaTypeVeins extends WorldGenBase<WorldGenVanillaTypeVe
                 int z = chunkZ * 16 + world.getRandom().nextInt(16);
                 BlockPos position = new BlockPos(x, y, z);
 
-                /*if (v.biomeTypes.length != 0) {
-                    List<BiomeDictionary.Type> types = Arrays.asList(v.biomeTypes);
-                    boolean hasType = false;
-                    for (BiomeDictionary.Type type : BiomeDictionary.getTypes(world.getBiome(position))) {
-                        if (types.contains(type)) {
-                            hasType = true;
-                            break;
-                        }
+                List<BiomeDictionary.Type> types = Arrays.asList(v.biomeTypes);
+                List<BiomeDictionary.Type> invalidTypes = Arrays.asList(v.invalidBiomeTypes);
+                boolean hasType = false;
+                for (BiomeDictionary.Type type : BiomeDictionary.getTypes(world.getBiome(position))) {
+                    if (types.contains(type)) {
+                        hasType = true;
                     }
-                    if (!hasType){
+                    if (invalidTypes.contains(type)){
                         return;
                     }
-                }*/
+                }
+                if (!hasType){
+                    return;
+                }
                 float f = rand.nextFloat() * (float)Math.PI;
                 double d0 = (float)(position.getX() + 8) + MathHelper.sin(f) * (float)v.size / 8.0F;
                 double d1 = (float)(position.getX() + 8) - MathHelper.sin(f) * (float)v.size / 8.0F;
@@ -147,7 +154,11 @@ public class WorldGenVanillaTypeVeins extends WorldGenBase<WorldGenVanillaTypeVe
                                         if (d12 * d12 + d13 * d13 + d14 * d14 < 1.0D)
                                         {
                                             BlockPos set = new BlockPos(l1, i2, j2);
-                                            WorldGenHelper.setOre(world, set, world.getBlockState(set), v.materials[0], ORE);
+                                            Material mat = v.materials[0];
+                                            if (v.secondary != null && v.secondaryChance > 0 && v.secondaryChance < 100){
+                                                mat = rand.nextInt(100) < v.secondaryChance ? v.materials[1] : v.materials[0];
+                                            }
+                                            WorldGenHelper.setOre(world, set, world.getBlockState(set), mat, ORE);
                                         }
                                     }
                                 }
