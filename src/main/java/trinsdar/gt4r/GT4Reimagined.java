@@ -28,6 +28,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import trinsdar.gt4r.worldgen.FeatureVanillaTypeOre;
 
 
 @Mod(Ref.ID)
@@ -59,6 +60,7 @@ public class GT4Reimagined extends AntimatterMod {
         AntimatterAPI.addProvider(Ref.ID, GT4RLocalizations.en_US::new);
         AntimatterAPI.addProvider(Ref.ID, g -> new AntimatterBlockLootProvider(Ref.ID, Ref.NAME.concat( " Loot generator"),g));
 
+        new FeatureVanillaTypeOre();
         registerRecipeLoaders();
     }
 
