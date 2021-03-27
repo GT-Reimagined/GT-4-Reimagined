@@ -178,6 +178,8 @@ public class Guis {
 
 
         HATCH_FLUID_O.getGui().add(FL_OUT, 79, 34).add(CELL_IN, 9, 22).add(CELL_OUT, 9, 58);
+        FUSION_MATERIAL_EXTRACTOR.getGui().add(FL_OUT, 79, 34).add(CELL_IN, 9, 22).add(CELL_OUT, 9, 58).add(IT_OUT, 61, 34).add(IT_OUT, 97, 34).add(IT_OUT, 79, 16).add(IT_OUT, 79, 52);
+        FUSION_MATERIAL_INJECTOR.getGui().add(FL_IN, 79, 34).add(CELL_IN, 9, 22).add(CELL_OUT, 9, 58).add(IT_IN, 61, 34).add(IT_IN, 97, 34).add(IT_IN, 79, 16).add(IT_IN, 79, 52);
 
         if (side.isClient()){
             TRANSFORMER_DIGITAL.getGui()

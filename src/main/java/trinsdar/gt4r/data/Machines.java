@@ -84,8 +84,8 @@ public class Machines {
     public static HatchMachine HATCH_FLUID_O = new HatchMachineCustom(Ref.ID, "hatch_fluid_output", GUI, FLUID, COVEROUTPUT, CELL, LV, Textures.TIER_HANDLER).setTiers(LV);
     public static HatchMachine HATCH_MUFFLER = new HatchMachineCustom(Ref.ID, "hatch_muffler", GUI, ITEM,COVERMUFFLER, LV, Textures.TIER_HANDLER).setTiers(LV);
     public static HatchMachine HATCH_DYNAMO = new HatchMachine(Ref.ID, "hatch_dynamo", ENERGY,COVER_DYNAMO_OLD, EV, Textures.TIER_HANDLER).setTiers(EV, IV);
-    public static HatchMachine FUSION_MATERIAL_INJECTOR = new HatchMachineCustom(Ref.ID, "fusion_material_injector", GUI, COVER_FUSION_INPUT, ITEM, FLUID, LV, Textures.FUSION_IN).setTiers(LV);
-    public static HatchMachine FUSION_MATERIAL_EXTRACTOR = new HatchMachineCustom(Ref.ID, "fusion_material_extractor", GUI, COVER_FUSION_OUTPUT, ITEM, FLUID, LV, Textures.FUSION_OUT).setTiers(LV);
+    public static HatchMachine FUSION_MATERIAL_INJECTOR = new HatchMachineCustom(Ref.ID, "fusion_material_injector", GUI, COVER_FUSION_INPUT, ITEM, FLUID, CELL, LV, Textures.FUSION_IN).setTiers(LV);
+    public static HatchMachine FUSION_MATERIAL_EXTRACTOR = new HatchMachineCustom(Ref.ID, "fusion_material_extractor", GUI, COVER_FUSION_OUTPUT, ITEM, FLUID, CELL, LV, Textures.FUSION_OUT).setTiers(LV);
     public static HatchMachine FUSION_ENERGY_INJECTOR = new HatchMachine(Ref.ID, "fusion_energy_injector", ENERGY, IV, Textures.FUSION_IN).setTiers(IV).covers((ICover[]) null);
     public static HatchMachine FUSION_ENERGY_EXTRACTOR = new HatchMachine(Ref.ID, "fusion_energy_extractor", ENERGY,COVER_DYNAMO_OLD, UV, Textures.FUSION_OUT).setTiers(UV);
 
