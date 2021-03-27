@@ -121,7 +121,7 @@ public class Guis {
         COKE_OVEN.getGui().add(IT_IN, 53,25).add(IT_OUT,107,25).add(IT_OUT,125,25).add(IT_OUT,143,25).add(FL_OUT, 107, 63);
         BLAST_FURNACE.getGui().add(IT_IN, 35, 16).add(IT_IN, 53, 16).add(IT_IN, 35, 34).add(IT_IN, 53, 34).add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(ENERGY, 80, 63).add(SlotTypes.COIL, 8, 63);
         PRIMITIVE_BLAST_FURNACE.getGui().add(IT_IN, 35, 16).add(IT_IN, 35, 34).add(IT_IN, 35, 52).add(IT_IN, 53, 16).add(IT_IN, 53, 34).add(IT_IN, 53, 52).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25).add(IT_OUT, 143, 25).setPadding(0, 0, 0, 0);
-        FUSION_REACTOR.getGui().addButton(155, 23, 16, 16, NO_OVERLAY).addButton(155, 41, 16, 16, NO_OVERLAY).addButton(155, 59, 16, 16, NO_OVERLAY).setEnablePlayerSlots(false);
+        FUSION_REACTOR.getGui().setEnablePlayerSlots(false);
         DISTILLATION_TOWER.getGui().add(FL_IN, 62, 41).add(FL_OUT, 98, 59).add(FL_OUT, 98, 41).add(FL_OUT, 98, 23).add(FL_OUT, 98, 5).add(FL_OUT, 116, 23).add(FL_OUT, 116, 5).add(IT_OUT, 116, 41).add(IT_OUT, 116, 59).add(ENERGY, 62, 59);
         VACUUM_FREEZER.getGui().add(COMPRESSOR);
         IMPLOSION_COMPRESSOR.getGui().add(ALLOY_SMELTER).add(IT_OUT, 125, 25);
@@ -182,6 +182,7 @@ public class Guis {
         FUSION_MATERIAL_INJECTOR.getGui().add(FL_IN, 79, 34).add(CELL_IN, 9, 22).add(CELL_OUT, 9, 58).add(IT_IN, 61, 34).add(IT_IN, 97, 34).add(IT_IN, 79, 16).add(IT_IN, 79, 52);
 
         if (side.isClient()){
+            FUSION_REACTOR.getGui().addButton(155, 23, 16, 16, NO_OVERLAY).addButton(155, 41, 16, 16, NO_OVERLAY).addButton(155, 59, 16, 16, NO_OVERLAY);
             TRANSFORMER_DIGITAL.getGui()
                     .addButton(10, 18, 14, 14, APAD_LEFT)
                     .addButton(25, 18, 14, 14, PAD_LEFT)
