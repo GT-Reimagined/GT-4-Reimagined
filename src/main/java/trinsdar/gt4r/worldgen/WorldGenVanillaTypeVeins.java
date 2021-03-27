@@ -1,12 +1,15 @@
 package trinsdar.gt4r.worldgen;
 
+import muramasa.antimatter.Antimatter;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.worldgen.AntimatterWorldGenerator;
 import muramasa.antimatter.worldgen.WorldGenHelper;
 import muramasa.antimatter.worldgen.object.WorldGenBase;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -98,11 +101,17 @@ public class WorldGenVanillaTypeVeins extends WorldGenBase<WorldGenVanillaTypeVe
                 int y = v.minY + world.getRandom().nextInt(heightdiff);
                 int z = chunkZ * 16 + world.getRandom().nextInt(16);
                 BlockPos position = new BlockPos(x, y, z);
+                //BlockState state = world.getBlockState(position);
+                /*if (world.isAirBlock(position)){
+                    --i;
+                    continue;
+                    //Antimatter.LOGGER.info("Air at position: " + position.getCoordinatesAsString() + "for Material: " + v.primary);
+                }*/
 
                 List<BiomeDictionary.Type> types = Arrays.asList(v.biomeTypes);
                 List<BiomeDictionary.Type> invalidTypes = Arrays.asList(v.invalidBiomeTypes);
-                boolean hasType = false;
-                for (BiomeDictionary.Type type : BiomeDictionary.getTypes(world.getBiome(position))) {
+                boolean hasType = types.isEmpty();
+                for (BiomeDictionary.Type type : BiomeDictionary.getTypes(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, world.getBiome(position).getRegistryName()))) {
                     if (types.contains(type)) {
                         hasType = true;
                     }
