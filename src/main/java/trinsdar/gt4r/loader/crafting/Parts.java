@@ -1,8 +1,10 @@
 package trinsdar.gt4r.loader.crafting;
 
+import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.pipe.PipeSize;
+import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -194,5 +196,9 @@ public class Parts {
         }
         provider.shapeless(output, "fire_clay_dust", "parts", "has_clay_dust", provider.hasSafeItem(DUST.getMaterialTag(Clay)), DUST.get(Fireclay, 2), DUST.getMaterialTag(Brick), DUST.getMaterialTag(Clay));
         provider.shapeless(output, "iron_ingot_from_wrought", "parts", "has_ash", provider.hasSafeItem(DUST.getMaterialTag(Ash)), new ItemStack(Items.IRON_INGOT), DUST.getMaterialTag(Ash), INGOT.getMaterialTag(WroughtIron));
+        provider.addStackRecipe(output, Ref.ID, "super_conductor_wire", "parts", "has_superconductor", provider.hasSafeItem(ItemSuperconductor),
+                new ItemStack(WIRE_SUPERCONDUCTOR.getBlockItem(PipeSize.NORMAL), 4), of('M', MACHINE_HULLS_BASIC, 'S', ItemSuperconductor, 'C', CIRCUITS_MASTER), "MCM", "SSS", "MCM");
+        provider.addStackRecipe(output, Ref.ID, "super_conductor", "parts", "has_iridium_plate", provider.hasSafeItem(IridiumReinforcedPlate),
+                new ItemStack(ItemSuperconductor, 4), of('H', AntimatterIngredient.of(Helium.getCellGas(1, CellTin)).get(), 'T', PLATE.getMaterialTag(Tungsten), 'I', IridiumReinforcedPlate, 'C', CIRCUITS_MASTER), "HHH", "TIT", "CCC");
     }
 }

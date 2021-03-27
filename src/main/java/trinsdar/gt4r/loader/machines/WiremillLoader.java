@@ -23,8 +23,11 @@ public class WiremillLoader {
         AntimatterAPI.all(Wire.class).forEach(t -> {
             Item wireItem = t.getBlockItem(PipeSize.VTINY);
             ItemStack stack = new ItemStack(wireItem,2);
-            RecipeIngredient ing = INGOT.getMaterialIngredient(t.getMaterial(),1);
-            WIRE_MILLING.RB().ii(INGOT.getMaterialIngredient(t.getMaterial(),1)).io(stack).add(t.getMaterial().getMass()*2,24);
+            if (t.getMaterial().has(INGOT)){
+                RecipeIngredient ing = INGOT.getMaterialIngredient(t.getMaterial(),1);
+                WIRE_MILLING.RB().ii(ing).io(stack).add(t.getMaterial().getMass()*2,24);
+            }
+
             /*if (WIRE_FINE.allowItemGen(t.getMaterial())) {
                 WIRE_MILLING.RB().ii(AntimatterIngredient.of(wireItem,1)).io(WIRE_FINE.get(t.getMaterial(),4)).add((long)( t.getMaterial().getMass()*2.5),16);
             }*/

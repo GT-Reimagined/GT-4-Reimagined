@@ -41,7 +41,7 @@ public class AssemblyLoader {
             sizes.forEach(size -> {
                 Item wireItem = t.getBlockItem(size);
                 Item cableItem = cable.getBlockItem(size);
-                ASSEMBLING.RB().ii(of(wireItem,1), of(INGOT.get(Rubber, size.getCableThickness()))).io(new ItemStack(cableItem,1)).add(size.getCableThickness()* 20L,8);
+                ASSEMBLING.RB().ii(of(wireItem,1), INGOT.getMaterialIngredient(Rubber, size.getCableThickness())).io(new ItemStack(cableItem,1)).add(size.getCableThickness()* 20L,8);
             });
         });
         HULL.all().forEach(m -> {

@@ -18,4 +18,8 @@ public class IBFItemHandler extends MultiMachineItemHandler {
     public IItemHandlerModifiable getCoilHandler() {
         return inventories.get(ITEM);
     }
+
+    public IItemHandlerModifiable getCoilGuiHandler() {
+        return inventories.get(ITEM);
+    }
 }

@@ -24,6 +24,7 @@ import static muramasa.antimatter.gui.SlotType.*;
 import static muramasa.antimatter.machine.Tier.*;
 import static trinsdar.gt4r.data.GT4RData.COVER_CONVEYOR;
 import static trinsdar.gt4r.data.Machines.*;
+import static trinsdar.gt4r.data.SlotTypes.DISPLAY;
 import static trinsdar.gt4r.gui.ButtonOverlays.*;
 
 public class Guis {
@@ -164,9 +165,10 @@ public class Guis {
         }
 
 
-        INFINITE_STEAM.getGui().add(BASIC_TANK);
+        INFINITE_STEAM.getGui().add(CELL_IN, 80, 17).add(CELL_OUT, 80, 53).add(FL_OUT, 60, 43);
 
         QUANTUM_TANK.getGui().add(BASIC_TANK);
+        QUANTUM_CHEST.getGui().add(IT_IN, 80, 17).add(DISPLAY, 60, 43).add(IT_OUT, 80, 53);
 
         HATCH_MUFFLER.getGui().add(IT_IN, 79, 34);
 
