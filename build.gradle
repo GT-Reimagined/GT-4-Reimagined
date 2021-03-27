@@ -17,6 +17,9 @@ buildscript {
 repositories {
     maven { url 'http://dvs1.progwml6.com/files/maven' }
     maven { url 'https://jitpack.io' }
+    maven {
+        url = "https://www.cursemaven.com"
+    }
 }
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
@@ -150,6 +153,9 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
     implementation 'org.apache.commons:commons-collections4:4.4'
+
+    runtimeOnly fg.deobf("curse.maven:world_stripper-250603:3142092")
+    runtimeOnly fg.deobf("curse.maven:world_edit-225608:3172951")
 
     if (findProject(':AntimatterAPI') != null) {
         implementation project(':AntimatterAPI')
