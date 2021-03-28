@@ -27,6 +27,9 @@ public class GT4RLocalizations {
             add(Ref.ID + ".advancements.greg", "GregTech Intergalactical");
             add(Ref.ID + ".advancements.greg.desc", "Getting familiar with your surroundings");
             add(Ref.ID + ".tooltip.occurrence", "Indicates occurrence of ");
+            add("block.gt4r.rubber_leaves", "Rubber Leaves");
+            add("block.gt4r.rubber_log", "Rubber Log");
+            add("block.gt4r.rubber_sapling", "Rubber Sapling");
         }
 
         @Override
