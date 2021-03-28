@@ -44,10 +44,7 @@ public class QuantumChestItemHandler extends MachineItemHandler<TileEntityQuantu
     }
 
     ItemStack input(){
-        if (getInputList().isEmpty()){
-            return ItemStack.EMPTY;
-        }
-        return getInputList().get(0);
+        return getInputHandler().getStackInSlot(0);
     }
 
     ItemStack output(){
@@ -71,7 +68,7 @@ public class QuantumChestItemHandler extends MachineItemHandler<TileEntityQuantu
             return;
         }
         if (canDigitizeStack(input())) {
-            display(input());
+            display(input().copy());
             this.digitalCount = this.digitalCount + input().getCount();
             input(ItemStack.EMPTY);
         }
@@ -106,8 +103,9 @@ public class QuantumChestItemHandler extends MachineItemHandler<TileEntityQuantu
     }
 
     public void display(ItemStack stack) {
-        this.getInputHandler().setStackInSlot(1, stack);
-        d = stack.copy();
+        this.getInputHandler().setStackInSlot(1, Utils.ca(1, stack));
+        d = Utils.ca(1, stack.copy());
+        tile.onMachineEvent(ContentEvent.ITEM_INPUT_CHANGED);
     }
 
     public void emptyCheck() {
@@ -118,7 +116,7 @@ public class QuantumChestItemHandler extends MachineItemHandler<TileEntityQuantu
 
     /** Checks to see if the given stack can go into the digital storage **/
     public boolean canDigitizeStack(ItemStack stack) {
-        if (display().isEmpty() && this.digitalCount == 0) {
+        if (display().isEmpty() && this.digitalCount <= 0) {
             return true;
         }
         return (this.digitalCount + stack.getCount() <= maxSize) && Utils.equals(display(), stack);
