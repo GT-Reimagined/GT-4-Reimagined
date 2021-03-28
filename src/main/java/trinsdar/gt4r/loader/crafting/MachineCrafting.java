@@ -4,6 +4,7 @@ import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.pipe.PipeSize;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.Items;
+import net.minecraftforge.common.Tags;
 import trinsdar.gt4r.Ref;
 
 import java.util.function.Consumer;
@@ -109,6 +110,20 @@ public class MachineCrafting {
                 PRIMITIVE_BLAST_FURNACE.getItem(BRONZE), of('B', FIRE_BRICKS, 'I', PLATE.getMaterialTag(Iron)), "BBB", "BIB", "BBB");
         provider.addItemRecipe(output, Ref.ID, "coke_oven", "machines", "has_fire_bricks", provider.hasSafeItem(FIRE_BRICKS),
                 COKE_OVEN.getItem(LV), of('B', FIRE_BRICKS), "BBB", "B B", "BBB");
+        BATTERY_BUFFER_ONE.getTiers().forEach(t -> {
+            provider.addItemRecipe(output, Ref.ID, t.getId() + "_batter_buffer_one", "machines", "has_machine_hull", provider.hasSafeItem(HULL.getMaterialTag(TIER_MATERIALS.get(t))),
+                    BATTERY_BUFFER_ONE.getItem(t), of('H', HULL.get(TIER_MATERIALS.get(t)), 'C', Tags.Items.CHESTS, 'W', TIER_WIRES.get(t).getBlockItem(PipeSize.VTINY)), "WCW", "WHW");
+            provider.addItemRecipe(output, Ref.ID, t.getId() + "_batter_buffer_four", "machines", "has_machine_hull", provider.hasSafeItem(HULL.getMaterialTag(TIER_MATERIALS.get(t))),
+                    BATTERY_BUFFER_FOUR.getItem(t), of('H', HULL.get(TIER_MATERIALS.get(t)), 'C', Tags.Items.CHESTS, 'W', TIER_WIRES.get(t).getBlockItem(PipeSize.SMALL)), "WCW", "WHW");
+            provider.addItemRecipe(output, Ref.ID, t.getId() + "_batter_buffer_nine", "machines", "has_machine_hull", provider.hasSafeItem(HULL.getMaterialTag(TIER_MATERIALS.get(t))),
+                    BATTERY_BUFFER_NINE.getItem(t), of('H', HULL.get(TIER_MATERIALS.get(t)), 'C', Tags.Items.CHESTS, 'W', TIER_WIRES.get(t).getBlockItem(PipeSize.NORMAL)), "WCW", "WHW");
+            provider.addItemRecipe(output, Ref.ID, t.getId() + "_batter_buffer_one_bat", "machines", "has_plate", provider.hasSafeItem(PLATE.getMaterialTag(TIER_MATERIALS.get(t))),
+                    BATTERY_BUFFER_ONE.getItem(t), of('P', PLATE.getMaterialTag(TIER_MATERIALS.get(t)), 'B', TIER_BATTERIES.get(t), 'W', TIER_WIRES.get(t).getBlockItem(PipeSize.VTINY)),"PPP", "WBW", "WPW");
+            provider.addItemRecipe(output, Ref.ID, t.getId() + "_batter_buffer_four_bat", "machines", "has_plate", provider.hasSafeItem(PLATE.getMaterialTag(TIER_MATERIALS.get(t))),
+                    BATTERY_BUFFER_FOUR.getItem(t), of('P', PLATE.getMaterialTag(TIER_MATERIALS.get(t)), 'B', TIER_BATTERIES.get(t), 'W', TIER_WIRES.get(t).getBlockItem(PipeSize.SMALL)),"PPP", "WBW", "WPW");
+            provider.addItemRecipe(output, Ref.ID, t.getId() + "_batter_buffer_nine_bat", "machines", "has_plate", provider.hasSafeItem(PLATE.getMaterialTag(TIER_MATERIALS.get(t))),
+                    BATTERY_BUFFER_NINE.getItem(t), of('P', PLATE.getMaterialTag(TIER_MATERIALS.get(t)), 'B', TIER_BATTERIES.get(t), 'W', TIER_WIRES.get(t).getBlockItem(PipeSize.NORMAL)),"PPP", "WBW", "WPW");
+        });
     }
 
 }

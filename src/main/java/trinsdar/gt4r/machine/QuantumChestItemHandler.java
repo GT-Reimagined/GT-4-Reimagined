@@ -21,7 +21,7 @@ public class QuantumChestItemHandler extends MachineItemHandler<TileEntityQuantu
     ItemStack d = ItemStack.EMPTY;
     public QuantumChestItemHandler(TileEntityQuantumChest tile) {
         super(tile);
-        inventories.put(ITEM_INPUT, new TrackedItemHandler<>(tile, tile.getMachineType().getGui().getSlots(SlotTypes.DISPLAY, tile.getMachineTier()).size() + tile.getMachineType().getGui().getSlots(SlotType.IT_IN, tile.getMachineTier()).size(), ContentEvent.ITEM_INPUT_CHANGED));
+        inventories.put(ITEM_INPUT, new TrackedItemHandler<>(tile, tile.getMachineType().getGui().getSlots(SlotTypes.DISPLAY, tile.getMachineTier()).size() + tile.getMachineType().getGui().getSlots(SlotType.IT_IN, tile.getMachineTier()).size(),false, t -> true, ContentEvent.ITEM_INPUT_CHANGED));
     }
 
     /*@Override

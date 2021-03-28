@@ -1,6 +1,7 @@
 package trinsdar.gt4r.data;
 
 import com.google.common.collect.ImmutableMap;
+import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.AntimatterConfig;
 import muramasa.antimatter.cover.BaseCover;
 import muramasa.antimatter.cover.CoverDynamo;
@@ -64,31 +65,35 @@ public class GT4RData {
 
     public static void buildTierMaps() {
         {
-            ImmutableMap.Builder<Tier, Item> builder = ImmutableMap.builder();
-            builder.put(Tier.ULV, WIRE_LEAD.getBlockItem(PipeSize.VTINY));
-            builder.put(Tier.LV, WIRE_COPPER.getBlockItem(PipeSize.VTINY));
-            builder.put(Tier.MV, WIRE_COPPER.getBlockItem(PipeSize.VTINY));
-            builder.put(Tier.HV, WIRE_GOLD.getBlockItem(PipeSize.TINY));
+            ImmutableMap.Builder<Tier, Wire<?>> builder = ImmutableMap.builder();
+            builder.put(Tier.ULV, WIRE_LEAD);
+            builder.put(Tier.LV, WIRE_TIN);
+            builder.put(Tier.MV, WIRE_COPPER);
+            builder.put(Tier.HV, WIRE_GOLD);
+            builder.put(Tier.EV, WIRE_ALUMINIUM);
+            builder.put(Tier.IV, WIRE_TUNGSTEN);
             TIER_WIRES = builder.build();
         }
         {
-            ImmutableMap.Builder<Tier, Item> builder = ImmutableMap.builder();
-            builder.put(Tier.ULV, CABLE_LEAD.getBlockItem(PipeSize.VTINY));
-            builder.put(Tier.LV, CABLE_TIN.getBlockItem(PipeSize.VTINY));
-            builder.put(Tier.MV, CABLE_COPPER.getBlockItem(PipeSize.VTINY));
-            builder.put(Tier.EV, CABLE_ALUMINIUM.getBlockItem(PipeSize.SMALL));
+            ImmutableMap.Builder<Tier, Cable<?>> builder = ImmutableMap.builder();
+            builder.put(Tier.ULV, CABLE_LEAD);
+            builder.put(Tier.LV, CABLE_TIN);
+            builder.put(Tier.MV, CABLE_COPPER);
+            builder.put(Tier.HV, CABLE_GOLD);
+            builder.put(Tier.EV, CABLE_ALUMINIUM);
+            builder.put(Tier.IV, CABLE_TUNGSTEN);
             TIER_CABLES = builder.build();
         }
-        /*{
+        {
             ImmutableMap.Builder<Tier, Item> builder = ImmutableMap.builder();
-            builder.put(Tier.ULV, AntimatterAPI.get(FluidPipe.class, "fluid_"+Copper.getId()).getBlockItem(PipeSize.NORMAL));
-            builder.put(Tier.LV, AntimatterAPI.get(FluidPipe.class, "fluid_"+Copper.getId()).getBlockItem(PipeSize.NORMAL));
-            builder.put(Tier.MV, AntimatterAPI.get(FluidPipe.class, "fluid_"+Copper.getId()).getBlockItem(PipeSize.NORMAL));
-            builder.put(Tier.HV, AntimatterAPI.get(FluidPipe.class, "fluid_"+StainlessSteel.getId()).getBlockItem(PipeSize.NORMAL));
-            builder.put(Tier.EV, AntimatterAPI.get(FluidPipe.class, "fluid_"+Titanium.getId()).getBlockItem(PipeSize.NORMAL));
-            builder.put(Tier.IV, AntimatterAPI.get(FluidPipe.class, "fluid_"+TungstenSteel.getId()).getBlockItem(PipeSize.NORMAL));
-            TIER_PIPES = builder.build();
-        }*/
+            builder.put(Tier.ULV, BatteryRE);
+            builder.put(Tier.LV, BatterySmallLithium);
+            builder.put(Tier.MV, BatteryMediumLithium);
+            builder.put(Tier.HV, BatteryLargeLithium);
+            builder.put(Tier.EV, LapotronCrystal);
+            builder.put(Tier.IV, LapotronicEnergyOrb);
+            TIER_BATTERIES = builder.build();
+        }
     }
 
     public static void init() {
@@ -264,6 +269,7 @@ public class GT4RData {
     public static final Cable<?> CABLE_STEEL = new Cable<>(Ref.ID, Steel, 2, Tier.EV).amps(2);
     public static final Cable<?> CABLE_ALUMINIUM = new Cable<>(Ref.ID, Aluminium, 1, Tier.EV).amps(1);
     public static final Cable<?> CABLE_OSMIUM = new Cable<>(Ref.ID, Osmium, 2, Tier.IV).amps(4);
+    public static final Cable<?> CABLE_TUNGSTEN = new Cable<>(Ref.ID, Tungsten, 2, Tier.IV).amps(2);
 
     public static final Wire<?> WIRE_LEAD = new Wire<>(Ref.ID, Lead, 4, Tier.LV).amps(2);
     public static final Wire<?> WIRE_TIN = new Wire<>(Ref.ID, Tin, 2, Tier.LV).amps(1);
@@ -274,6 +280,7 @@ public class GT4RData {
     public static final Wire<?> WIRE_STEEL = new Wire<>(Ref.ID, Steel, 4, Tier.EV).amps(2);
     public static final Wire<?> WIRE_ALUMINIUM = new Wire<>(Ref.ID, Aluminium, 1, Tier.EV).amps(1);
     public static final Wire<?> WIRE_OSMIUM = new Wire<>(Ref.ID, Osmium, 4, Tier.IV).amps(4);
+    public static final Wire<?> WIRE_TUNGSTEN = new Wire<>(Ref.ID, Tungsten, 4, Tier.IV).amps(2);
     public static final Wire<?> WIRE_SUPERCONDUCTOR = new Wire<>(Ref.ID, Superconductor, 0, Tier.MAX).amps(4); //MAX
 
     public static final FluidPipe<?> FLUID_PIPE_BRONZE = new FluidPipe<>(Ref.ID, Bronze, 1000, false).sizes(PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE).caps(10, 10, 30, 60, 60, 60).pressures(400, 400, 400, 400, 400, 400);
@@ -296,9 +303,10 @@ public class GT4RData {
 
     public static final ImmutableMap<Integer, RecipeIngredient> INT_CIRCUITS;
     public static final ImmutableMap<Tier, Material> TIER_MATERIALS;
-    public static ImmutableMap<Tier, Item> TIER_WIRES;
-    public static ImmutableMap<Tier, Item> TIER_CABLES;
+    public static ImmutableMap<Tier, Wire<?>> TIER_WIRES;
+    public static ImmutableMap<Tier, Cable<?>> TIER_CABLES;
 
     public static ImmutableMap<Tier, Item> TIER_ROTORS;
-    public static ImmutableMap<Tier, Item> TIER_PIPES;
+    public static ImmutableMap<Tier, Item> TIER_BATTERIES;
+    public static ImmutableMap<Tier, FluidPipe> TIER_PIPES;
 }

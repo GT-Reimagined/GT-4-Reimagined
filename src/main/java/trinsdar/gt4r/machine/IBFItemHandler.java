@@ -12,7 +12,7 @@ import static muramasa.antimatter.machine.MachineFlag.ITEM;
 public class IBFItemHandler extends MultiMachineItemHandler {
     public IBFItemHandler(TileEntityIndustrialBlastFurnace tile) {
         super(tile);
-        inventories.put(ITEM, new TrackedItemHandler<>(tile, tile.getMachineType().getGui().getSlots(SlotTypes.COIL, tile.getMachineTier()).size(), ContentEvent.ITEM_INPUT_CHANGED));
+        inventories.put(ITEM, new TrackedItemHandler<>(tile, tile.getMachineType().getGui().getSlots(SlotTypes.COIL, tile.getMachineTier()).size(),false, t -> true, ContentEvent.ITEM_INPUT_CHANGED));
     }
 
     public IItemHandlerModifiable getCoilHandler() {

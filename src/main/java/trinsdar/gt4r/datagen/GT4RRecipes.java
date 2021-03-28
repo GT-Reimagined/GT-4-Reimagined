@@ -27,7 +27,7 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
     public GT4RRecipes(String providerDomain, String providerName, DataGenerator gen) {
         super(providerDomain, providerName, gen);
         registerCraftingLoaders();
-        //GT4RData.buildTierMaps();
+        GT4RData.buildTierMaps();
     }
 
     protected void registerCraftingLoaders() {
