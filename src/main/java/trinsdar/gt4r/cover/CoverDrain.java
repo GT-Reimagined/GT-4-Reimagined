@@ -20,6 +20,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import trinsdar.gt4r.Ref;
 
 import static net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE;
 import static net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.SIMULATE;
@@ -30,6 +31,11 @@ public class CoverDrain extends BaseCover {
     public CoverDrain() {
         super();
         register();
+    }
+
+    @Override
+    public String getDomain() {
+        return Ref.ID;
     }
 
     @Override
