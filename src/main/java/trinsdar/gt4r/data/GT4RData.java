@@ -25,6 +25,7 @@ import muramasa.antimatter.texture.Texture;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.block.BlockConnectedCasing;
 import trinsdar.gt4r.cover.CoverConveyor;
+import trinsdar.gt4r.cover.CoverDrain;
 import trinsdar.gt4r.cover.CoverDynamoOld;
 import trinsdar.gt4r.cover.CoverFusionInput;
 import trinsdar.gt4r.cover.CoverFusionOutput;
@@ -105,6 +106,7 @@ public class GT4RData {
     public static final BaseCover COVER_FUSION_OUTPUT = new CoverFusionOutput();
     public static final BaseCover COVER_FUSION_INPUT = new CoverFusionInput();
     public static final BaseCover COVER_DYNAMO_OLD = new CoverDynamoOld("dynamo_old");
+    public static final BaseCover COVER_DRAIN = new CoverDrain();
 
     public static ItemBasic<?> StickyResin = new ItemBasic<>(Ref.ID, "sticky_resin");
     public static ItemBasic<?> Plantball = new ItemBasic<>(Ref.ID, "plantball");
@@ -118,7 +120,7 @@ public class GT4RData {
     public static ItemBasic<?> ComputerMonitor = new ItemBasic<>(Ref.ID, "computer_monitor").tip("Can be placed on machines as a cover");
     public static ItemCover ConveyorModule = new ItemCover(Ref.ID, COVER_CONVEYOR.getId()).tip("Can be placed on machines as a cover");
     public static ItemBasic<?> CraftingModule = new ItemBasic<>(Ref.ID, "crafting_module").tip("Can be placed on machines as a cover");
-    public static ItemBasic<?> Drain = new ItemBasic<>(Ref.ID, "drain").tip("Can be placed on machines as a cover");
+    public static ItemCover Drain = new ItemCover(Ref.ID, "drain").tip("Can be placed on machines as a cover");
     public static ItemBasic<?> ItemTransportValve = new ItemBasic<>(Ref.ID, "item_transport_valve").tip("Can be placed on machines as a cover");
     public static ItemCover PumpModule = new ItemCover(Ref.ID, COVER_PUMP.getId()).tip("Can be placed on machines as a cover");
     public static ItemBasic<?> RedstoneMachineController = new ItemBasic<>(Ref.ID, "redstone_machine_controller").tip("Can be placed on machines as a cover");
