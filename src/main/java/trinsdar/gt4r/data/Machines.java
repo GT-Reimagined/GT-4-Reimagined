@@ -7,6 +7,7 @@ import muramasa.antimatter.tile.single.TileEntityDigitalTransformer;
 import muramasa.antimatter.tile.single.TileEntityInfiniteStorage;
 import muramasa.antimatter.tile.single.TileEntityTransformer;
 import trinsdar.gt4r.machine.HatchMachineCustom;
+import trinsdar.gt4r.machine.MaterialMachine;
 import trinsdar.gt4r.machine.StorageMachine;
 import trinsdar.gt4r.tile.single.TileEntityCoalBoiler;
 import trinsdar.gt4r.tile.single.TileEntityInfiniteFluid;
@@ -94,6 +95,12 @@ public class Machines {
 
     public static TankMachine QUANTUM_TANK = new TankMachine(Ref.ID, "quantum_tank", GUI, CELL, Textures.TIER_HANDLER, MAX).setTile(m -> () -> new TileEntityQuantumTank(m));
     public static StorageMachine QUANTUM_CHEST = new StorageMachine(Ref.ID, "quantum_chest", GUI, ITEM, Textures.TIER_HANDLER, MAX).setTile(m -> () -> new TileEntityQuantumChest(m));
+
+    public static MaterialMachine IRON_DRUM = new MaterialMachine(Ref.ID, "iron_drum", Materials.Iron, LV);
+    public static MaterialMachine INVAR_DRUM = new MaterialMachine(Ref.ID, "invar_drum", Materials.Invar, LV);
+    public static MaterialMachine TUNGSTEN_DRUM = new MaterialMachine(Ref.ID, "tungsten_drum", Materials.Tungsten, LV);
+    public static MaterialMachine TUNGSTENSTEEL_DRUM = new MaterialMachine(Ref.ID, "tungstensteel_drum", Materials.TungstenSteel, LV);
+    public static MaterialMachine NETHERITE_DRUM = new MaterialMachine(Ref.ID, "netherite_drum", Materials.Netherite, LV);
 
     public static GeneratorMachine STEAM_TURBINE = new GeneratorMachine(Ref.ID, "steam_turbine", STEAM_FUELS, LV, GUI, ITEM, FLUID, GENERATOR, CELL, Textures.TIER_HANDLER);
     public static GeneratorMachine GAS_TURBINE = new GeneratorMachine(Ref.ID, "gas_turbine", GAS_FUELS, LV, GUI, FLUID, GENERATOR, CELL, ITEM, Textures.TIER_HANDLER);

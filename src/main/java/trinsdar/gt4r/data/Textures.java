@@ -1,6 +1,8 @@
 package trinsdar.gt4r.data;
 
+import muramasa.antimatter.machine.MachineState;
 import muramasa.antimatter.material.TextureSet;
+import muramasa.antimatter.texture.IOverlayTexturer;
 import muramasa.antimatter.texture.ITextureHandler;
 import muramasa.antimatter.texture.Texture;
 import trinsdar.gt4r.Ref;
@@ -40,6 +42,24 @@ public class Textures {
         new Texture(Ref.ID, "block/machine/base/tiers/bricked_" + t.getId()),
         new Texture(Ref.ID, "block/machine/base/tiers/bricked_" + t.getId()),
         new Texture(Ref.ID, "block/machine/base/tiers/bricked_" + t.getId()),
+    };
+
+    public static final ITextureHandler DRUM_HANDLER = (m, t) -> new Texture[] {
+            new Texture(Ref.ID, "block/machine/base/drum_bottom"),
+            new Texture(Ref.ID, "block/machine/base/drum_top"),
+            new Texture(Ref.ID, "block/machine/base/drum_side"),
+            new Texture(Ref.ID, "block/machine/base/drum_side"),
+            new Texture(Ref.ID, "block/machine/base/drum_side"),
+            new Texture(Ref.ID, "block/machine/base/drum_side"),
+    };
+
+    public static final IOverlayTexturer DRUM_OVERLAY_HANDLER = (type, state) -> new Texture[] {
+            new Texture(Ref.ID, "block/machine/overlay/drum/bottom"),
+            new Texture(Ref.ID, "block/machine/overlay/drum/top"),
+            new Texture(Ref.ID, "block/machine/overlay/drum/side"),
+            new Texture(Ref.ID, "block/machine/overlay/drum/side"),
+            new Texture(Ref.ID, "block/machine/overlay/drum/side"),
+            new Texture(Ref.ID, "block/machine/overlay/drum/side"),
     };
 
     public static final ITextureHandler MULTI_HANDLER = (m, t) -> m.getTiers().size() > 1 ? new Texture[]{new Texture(Ref.ID, "block/machine/base/" + m.getId() + "_" + t.getId())} : new Texture[]{new Texture(Ref.ID, "block/machine/base/" + m.getId())};
