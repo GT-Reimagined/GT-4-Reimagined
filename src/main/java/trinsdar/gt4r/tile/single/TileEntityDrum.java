@@ -1,5 +1,6 @@
 package trinsdar.gt4r.tile.single;
 
+import muramasa.antimatter.Ref;
 import muramasa.antimatter.capability.fluid.FluidTanks;
 import muramasa.antimatter.capability.machine.MachineFluidHandler;
 import muramasa.antimatter.machine.event.ContentEvent;
@@ -17,8 +18,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import trinsdar.gt4r.data.Materials;
@@ -46,11 +49,13 @@ public class TileEntityDrum extends TileEntityMachine {
             if ((type == WRENCH || type == ELECTRIC_WRENCH) && !player.isSneaking()){
                 dF.setOutput(!dF.isOutput());
                 success[0] = true;
-                //world.me
+                player.playSound(Ref.WRENCH, SoundCategory.BLOCKS, 1.0f, 1.0f);
+                // TODO: Replace by new TranslationTextComponent()
+                player.sendMessage(new StringTextComponent((dF.isOutput() ? "Will" : "Won't") + " fill adjacent Tanks"), player.getUniqueID());
             }
         });
         if (success[0]){
-            return ActionResultType.CONSUME;
+            return ActionResultType.SUCCESS;
         }
         return ActionResultType.PASS;
     }
