@@ -96,7 +96,9 @@ public class Machines {
     public static TankMachine QUANTUM_TANK = new TankMachine(Ref.ID, "quantum_tank", GUI, CELL, Textures.TIER_HANDLER, MAX).setTile(m -> () -> new TileEntityQuantumTank(m));
     public static StorageMachine QUANTUM_CHEST = new StorageMachine(Ref.ID, "quantum_chest", GUI, ITEM, Textures.TIER_HANDLER, MAX).setTile(m -> () -> new TileEntityQuantumChest(m));
 
-    public static MaterialMachine IRON_DRUM = new MaterialMachine(Ref.ID, "iron_drum", Materials.Iron, LV);
+    public static MaterialMachine BRONZE_DRUM = new MaterialMachine(Ref.ID, "bronze_drum", Materials.Bronze, LV);
+    public static MaterialMachine STEEL_DRUM = new MaterialMachine(Ref.ID, "steel_drum", Materials.Steel, LV);
+    public static MaterialMachine STAINLESS_STEEL_DRUM = new MaterialMachine(Ref.ID, "stainless_steel_drum", Materials.StainlessSteel, LV);
     public static MaterialMachine INVAR_DRUM = new MaterialMachine(Ref.ID, "invar_drum", Materials.Invar, LV);
     public static MaterialMachine TUNGSTEN_DRUM = new MaterialMachine(Ref.ID, "tungsten_drum", Materials.Tungsten, LV);
     public static MaterialMachine TUNGSTENSTEEL_DRUM = new MaterialMachine(Ref.ID, "tungstensteel_drum", Materials.TungstenSteel, LV);

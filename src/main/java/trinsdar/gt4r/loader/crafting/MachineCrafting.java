@@ -124,6 +124,20 @@ public class MachineCrafting {
             provider.addItemRecipe(output, Ref.ID, t.getId() + "_batter_buffer_nine_bat", "machines", "has_plate", provider.hasSafeItem(PLATE.getMaterialTag(TIER_MATERIALS.get(t))),
                     BATTERY_BUFFER_NINE.getItem(t), of('P', PLATE.getMaterialTag(TIER_MATERIALS.get(t)), 'B', TIER_BATTERIES.get(t), 'W', TIER_WIRES.get(t).getBlockItem(PipeSize.NORMAL)),"PPP", "WBW", "WPW");
         });
+        provider.addItemRecipe(output, Ref.ID, "drum_bronze", "drums", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),
+                BRONZE_DRUM.getItem(LV), of('H', HAMMER.getTag(), 'R', ROD.getMaterialTag(Bronze), 'P', PLATE.getMaterialTag(Bronze)), " H ", "PRP", "PRP");
+        provider.addItemRecipe(output, Ref.ID, "drum_steel", "drums", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),
+                STEEL_DRUM.getItem(LV), of('H', HAMMER.getTag(), 'R', ROD.getMaterialTag(Steel), 'P', PLATE.getMaterialTag(Steel)), " H ", "PRP", "PRP");
+        provider.addItemRecipe(output, Ref.ID, "drum_invar", "drums", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),
+                INVAR_DRUM.getItem(LV), of('H', HAMMER.getTag(), 'R', ROD.getMaterialTag(Invar), 'P', PLATE.getMaterialTag(Invar)), " H ", "PRP", "PRP");
+        provider.addItemRecipe(output, Ref.ID, "drum_stainless_steel", "drums", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),
+                STAINLESS_STEEL_DRUM.getItem(LV), of('H', HAMMER.getTag(), 'R', ROD.getMaterialTag(StainlessSteel), 'P', PLATE.getMaterialTag(StainlessSteel)), " H ", "PRP", "PRP");
+        provider.addItemRecipe(output, Ref.ID, "drum_netherite", "drums", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),
+                NETHERITE_DRUM.getItem(LV), of('H', HAMMER.getTag(), 'R', ROD.getMaterialTag(Netherite), 'P', PLATE.getMaterialTag(Netherite)), " H ", "PRP", "PRP");
+        provider.addItemRecipe(output, Ref.ID, "drum_tungsten", "drums", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),
+                TUNGSTEN_DRUM.getItem(LV), of('H', HAMMER.getTag(), 'R', ROD.getMaterialTag(Tungsten), 'P', PLATE.getMaterialTag(Tungsten)), " H ", "PRP", "PRP");
+        provider.addItemRecipe(output, Ref.ID, "drum_tungstensteel", "drums", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),
+                TUNGSTENSTEEL_DRUM.getItem(LV), of('H', HAMMER.getTag(), 'R', ROD.getMaterialTag(TungstenSteel), 'P', PLATE.getMaterialTag(TungstenSteel)), " H ", "PRP", "PRP");
     }
 
 }
