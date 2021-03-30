@@ -27,11 +27,11 @@ public class BlockMachineMaterial extends BlockMachine {
 
     @Override
     public int getBlockColor(BlockState state, @Nullable IBlockReader world, @Nullable BlockPos pos, int i) {
-        return i == 0 && material != NULL ? material.getRGB() : -1;
+        return i == 0 ? material.getRGB() : -1;
     }
 
     @Override
     public int getItemColor(ItemStack stack, @Nullable Block block, int i) {
-        return material.getRGB();
+        return i == 0 ? material.getRGB() : -1;
     }
 }

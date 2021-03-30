@@ -12,7 +12,9 @@ import muramasa.antimatter.gui.screen.ScreenBasicMachine;
 import muramasa.antimatter.gui.screen.ScreenHatch;
 import muramasa.antimatter.gui.screen.ScreenMultiMachine;
 import muramasa.antimatter.gui.screen.ScreenSteamMachine;
+import muramasa.antimatter.machine.BlockMachine;
 import trinsdar.gt4r.block.BlockCasing;
+import trinsdar.gt4r.block.BlockMachineMaterial;
 import trinsdar.gt4r.data.GT4RData;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
@@ -32,6 +34,7 @@ public class ClientHandler {
             RenderTypeLookup.setRenderLayer(GT4RData.RUBBER_SAPLING, RenderType.getCutout());
             RenderTypeLookup.setRenderLayer(GT4RData.RUBBER_LEAVES, RenderType.getCutout());
             AntimatterAPI.all(BlockCasing.class, t -> RenderTypeLookup.setRenderLayer(t, RenderType.getCutout()));
+            AntimatterAPI.all(BlockMachineMaterial.class, b -> RenderTypeLookup.setRenderLayer(b, RenderType.getCutout()));
         });
 
         ScreenSetup.<ContainerCover, ScreenButtonBackgroundCover<ContainerCover>>setScreenMapping(Data.COVER_MENU_HANDLER, ScreenButtonBackgroundCover::new);
