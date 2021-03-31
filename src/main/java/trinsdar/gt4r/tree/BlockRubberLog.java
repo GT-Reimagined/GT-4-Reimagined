@@ -1,5 +1,6 @@
 package trinsdar.gt4r.tree;
 
+import muramasa.antimatter.Antimatter;
 import muramasa.antimatter.block.BlockBasic;
 import muramasa.antimatter.datagen.providers.AntimatterBlockStateProvider;
 import muramasa.antimatter.texture.Texture;
@@ -11,6 +12,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import trinsdar.gt4r.Ref;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -27,6 +29,7 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import trinsdar.gt4r.data.GT4RData;
 
 import java.util.List;
+import java.util.Random;
 
 public class BlockRubberLog extends BlockBasic {
 
@@ -35,7 +38,7 @@ public class BlockRubberLog extends BlockBasic {
     final static EnumProperty<Direction.Axis> AXIS = BlockStateProperties.AXIS;
 
     public BlockRubberLog(String domain, String id) {
-        super(domain, id, Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F).sound(SoundType.WOOD));
+        super(domain, id, Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F).sound(SoundType.WOOD).tickRandomly());
         setDefaultState(getDefaultState().with(RESIN_STATE, ResinState.NONE).with(RESIN_FACING, Direction.NORTH).with(AXIS, Direction.Axis.Y));
     }
 
@@ -88,5 +91,12 @@ public class BlockRubberLog extends BlockBasic {
             }
         }
         return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+    }
+
+    @Override
+    public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
+        if (state.get(RESIN_STATE) == ResinState.EMPTY && random.nextInt(50) == 0){
+            worldIn.setBlockState(pos, state.with(RESIN_STATE, ResinState.FILLED));
+        }
     }
 }
