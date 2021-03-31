@@ -3,6 +3,14 @@ package trinsdar.gt4r.tree;
 import muramasa.antimatter.block.BlockBasic;
 import muramasa.antimatter.datagen.providers.AntimatterBlockStateProvider;
 import muramasa.antimatter.texture.Texture;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.loot.LootContext;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.world.World;
 import trinsdar.gt4r.Ref;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -16,6 +24,9 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
+import trinsdar.gt4r.data.GT4RData;
+
+import java.util.List;
 
 public class BlockRubberLog extends BlockBasic {
 
@@ -53,5 +64,29 @@ public class BlockRubberLog extends BlockBasic {
                 .rotationY((int) s.get(RESIN_FACING).getOpposite().getHorizontalAngle())
                 .rotationX(s.get(AXIS) == Direction.Axis.Y ? 0 : 90).build()
         );
+    }
+
+    @Override
+    public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+        List<ItemStack> drops = super.getDrops(state, builder);
+        if (state.get(RESIN_STATE) == ResinState.FILLED){
+            drops.add(new ItemStack(GT4RData.StickyResin));
+        }
+        return drops;
+    }
+
+    @Override
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        ItemStack stack = player.getHeldItem(handIn);
+        if (stack.getItem() == GT4RData.Treetap && state.get(RESIN_FACING) == hit.getFace() && state.get(RESIN_STATE) == ResinState.FILLED){
+            stack.damageItem(1, player, playerEntity -> {});
+            state = state.with(RESIN_STATE, ResinState.EMPTY);
+            worldIn.setBlockState(pos, state);
+            ItemStack drop = new ItemStack(GT4RData.StickyResin, worldIn.rand.nextInt(3) + 1);
+            if (!player.addItemStackToInventory(drop)){
+                player.dropItem(drop, true, false);
+            }
+        }
+        return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
     }
 }

@@ -5,10 +5,12 @@ import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.pipe.PipeSize;
 import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
+import muramasa.antimatter.util.TagUtils;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
 import org.lwjgl.system.CallbackI;
 import trinsdar.gt4r.Ref;
@@ -202,5 +204,7 @@ public class Parts {
                 new ItemStack(WIRE_SUPERCONDUCTOR.getBlockItem(PipeSize.NORMAL), 4), of('M', MACHINE_HULLS_BASIC, 'S', ItemSuperconductor, 'C', CIRCUITS_MASTER), "MCM", "SSS", "MCM");
         provider.addStackRecipe(output, Ref.ID, "super_conductor", "parts", "has_iridium_plate", provider.hasSafeItem(IridiumReinforcedPlate),
                 new ItemStack(ItemSuperconductor, 4), of('H', AntimatterIngredient.of(Helium.getCellGas(1, CellTin)).get(), 'T', PLATE.getMaterialTag(Tungsten), 'I', IridiumReinforcedPlate, 'C', CIRCUITS_MASTER), "HHH", "TIT", "CCC");
+        provider.addItemRecipe(output, Ref.ID, "tree_tap", "parts", "has_plank", provider.hasSafeItem(TagUtils.getItemTag(new ResourceLocation("minecraft", "planks"))),
+                Treetap, of('P', TagUtils.getItemTag(new ResourceLocation("minecraft", "planks"))), " P ", "PPP", "P  ");
     }
 }

@@ -146,6 +146,7 @@ public class GT4RData {
     public static ItemBasic<?> LavaFilter = new ItemBasic<>(Ref.ID, "lava_filter");
     public static ItemBasic<?> Match = new ItemBasic<>(Ref.ID, "match");
     public static ItemBasic<?> MatchBook = new ItemBasic<>(Ref.ID, "match_book");
+    public static ItemBasic<?> Treetap = new ItemBasic<>(Ref.ID, "treetap", new Item.Properties().defaultMaxDamage(16).group(muramasa.antimatter.Ref.TAB_ITEMS));
 
     public static ItemBasic<?> MixedMetal = new ItemBasic<>(Ref.ID, "mixed_metal");
     public static ItemBasic<?> AdvancedAlloy = new ItemBasic<>(Ref.ID,"advanced_alloy");
