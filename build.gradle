@@ -196,4 +196,20 @@ publishing {
 
 jar {
     zip64 true
+    manifest {
+        attributes([
+                "Specification-Title": project.name,
+                "Specification-Vendor": "GT4 Reimagined",
+                "Specification-Version": project.version,
+                "Implementation-Title": project.name,
+                "Implementation-Version": project.version,
+                "Implementation-Vendor": "GT4 Reimagined",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}
+
+processResources {
+    exclude('gtuassets1.14')
+    exclude('assets/gt4r/textures/old_textures')
 }
