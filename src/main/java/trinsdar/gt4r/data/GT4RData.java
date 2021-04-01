@@ -110,9 +110,9 @@ public class GT4RData {
 
     public static ItemBasic<?> StickyResin = new ItemBasic<>(Ref.ID, "sticky_resin");
     public static ItemBasic<?> Plantball = new ItemBasic<>(Ref.ID, "plantball");
+    public static ItemBasic<?> Biochaff = new ItemBasic<>(Ref.ID, "biochaff");
     public static ItemBasic<?> CarbonFibre = new ItemBasic<>(Ref.ID, "raw_carbon_fibre");
     public static ItemBasic<?> CarbonMesh = new ItemBasic<>(Ref.ID, "carbon_mesh");
-    public static ItemBasic<?> CarbonPlate = new ItemBasic<>(Ref.ID, "carbon_plate");
     public static ItemBasic<?> CoalBall = new ItemBasic<>(Ref.ID, "coal_ball");
     public static ItemBasic<?> CompressedCoalBall = new ItemBasic<>(Ref.ID, "compressed_coal_ball");
     public static ItemBasic<?> CoalChunk = new ItemBasic<>(Ref.ID, "coal_chunk");

@@ -12,8 +12,6 @@ import trinsdar.gt4r.data.GT4RData;
 import java.util.function.Consumer;
 
 import static muramasa.antimatter.Data.*;
-import static trinsdar.gt4r.data.GT4RData.CarbonPlate;
-import static trinsdar.gt4r.data.Materials.Carbon;
 import static trinsdar.gt4r.data.Materials.HULL;
 import static trinsdar.gt4r.data.Materials.TURBINE_BLADE;
 
@@ -33,11 +31,7 @@ public class MaterialRecipeLoader {
             provider.addItemRecipe(output, Ref.ID, m.getId() + "_hull", "hulls", "has_wrench", provider.hasSafeItem(WRENCH.getTag()), HULL.get(m), ImmutableMap.of('P', PLATE.getMaterialTag(m), 'W', WRENCH.getTag()), "PPP", "PWP", "PPP");
         });
         TURBINE_BLADE.all().forEach(m -> {
-            if (m == Carbon){
-                provider.addItemRecipe(output, Ref.ID, m.getId() + "_turbine_blade", "turbine_blades", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), TURBINE_BLADE.get(m), ImmutableMap.of('P', CarbonPlate, 'H', HAMMER.getTag(), 'F', FILE.getTag()), " H ", "PPP", " F ");
-            } else {
-                provider.addItemRecipe(output, Ref.ID, m.getId() + "_turbine_blade", "turbine_blades", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), TURBINE_BLADE.get(m), ImmutableMap.of('P', PLATE.getMaterialTag(m), 'H', HAMMER.getTag(), 'F', FILE.getTag()), " H ", "PPP", " F ");
-            }
+            provider.addItemRecipe(output, Ref.ID, m.getId() + "_turbine_blade", "turbine_blades", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), TURBINE_BLADE.get(m), ImmutableMap.of('P', PLATE.getMaterialTag(m), 'H', HAMMER.getTag(), 'F', FILE.getTag()), " H ", "PPP", " F ");
         });
         BLOCK.all().forEach(m -> {
             if (m.has(INGOT)){
