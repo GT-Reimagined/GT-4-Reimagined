@@ -1,6 +1,5 @@
 package trinsdar.gt4r.block;
 
-import muramasa.antimatter.Ref;
 import muramasa.antimatter.client.AntimatterModelManager;
 import muramasa.antimatter.datagen.builder.AntimatterBlockModelBuilder;
 import muramasa.antimatter.datagen.providers.AntimatterBlockStateProvider;
@@ -11,6 +10,8 @@ import muramasa.antimatter.machine.MachineState;
 import muramasa.antimatter.texture.Texture;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialColor;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
@@ -22,25 +23,28 @@ import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
+import trinsdar.gt4r.Ref;
 
 import javax.annotation.Nullable;
 
 import java.util.Arrays;
 
 import static com.google.common.collect.ImmutableMap.of;
+import static net.minecraft.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 import static net.minecraft.util.Direction.*;
 
 public class BlockSapBag  extends BlockDynamic {
     protected ModelConfig config = new ModelConfig();
     final VoxelShape[] SHAPES;
     final Texture[] TEXTURES;
-    public BlockSapBag(String domain, String id, Properties properties) {
-        super(domain, id, properties);
+    public BlockSapBag() {
+        super(Ref.ID, "sap_bag", Block.Properties.create(Material.ORGANIC, MaterialColor.RED_TERRACOTTA).notSolid());
         SHAPES = setBlockBounds2();
         TEXTURES = new Texture[]{new Texture(Ref.ID, "block/sapbag/bottom"), new Texture(Ref.ID, "block/sapbag/top"), new Texture(Ref.ID, "block/sapbag/side"), new Texture(Ref.ID, "block/sapbag/top_filled")};
     }
@@ -50,30 +54,35 @@ public class BlockSapBag  extends BlockDynamic {
         AxisAlignedBB south = new AxisAlignedBB(0.3125F, 0, 0.625F, 0.6875, 0.4375, 1);
         AxisAlignedBB west = new AxisAlignedBB(0, 0, 0.3125F, 0.375, 0.4375, 0.6875);
         AxisAlignedBB east = new AxisAlignedBB(0.625F, 0, 0.3125F, 1, 0.4375, 0.6875);
-        return new VoxelShape[]{VoxelShapes.create(north), VoxelShapes.create(south), VoxelShapes.create(west), VoxelShapes.create(east)};
+        return new VoxelShape[]{VoxelShapes.create(south), VoxelShapes.create(west), VoxelShapes.create(north), VoxelShapes.create(east)};
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context) {
+        return SHAPES[state.get(HORIZONTAL_FACING).getHorizontalIndex()];
     }
 
     @Override
     public ModelConfig getConfig(BlockState state, IBlockReader world, BlockPos.Mutable mut, BlockPos pos) {
-        return config.set(new int[]{getModelId(state.get(BlockStateProperties.HORIZONTAL_FACING), 0)});
+        return config.set(new int[]{getModelId(state.get(HORIZONTAL_FACING), 0)});
     }
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(BlockStateProperties.HORIZONTAL_FACING);
+        builder.add(HORIZONTAL_FACING);
     }
 
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return this.getDefaultState().with(BlockStateProperties.HORIZONTAL_FACING, context.getPlacementHorizontalFacing().getOpposite());
+        return this.getDefaultState().with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing());
     }
 
     @Override
     public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         if (placer != null) { //Y = 0 , reduce to xz plane
             Direction dir = getFacingFromVector((float) placer.getLookVec().x, (float) 0, (float) placer.getLookVec().z).getOpposite();
-            world.setBlockState(pos, state.with(BlockStateProperties.HORIZONTAL_FACING, dir));
+            world.setBlockState(pos, state.with(HORIZONTAL_FACING, dir));
         }
     }
 
@@ -99,7 +108,7 @@ public class BlockSapBag  extends BlockDynamic {
     public void onBlockModelBuild(Block block, AntimatterBlockStateProvider prov) {
         AntimatterBlockModelBuilder builder = prov.getBuilder(block);
         buildModelsForState(builder);
-        builder.property("particle", TEXTURES[2].getNamespace(), TEXTURES[2].getPath());
+        builder.property("particle", TEXTURES[2].toString());
         prov.state(block, builder);
     }
 

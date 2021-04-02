@@ -10,6 +10,9 @@ import muramasa.antimatter.item.ItemCover;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.MaterialColor;
 import net.minecraft.util.LazyValue;
 import trinsdar.gt4r.block.BlockCasing;
 import muramasa.antimatter.item.ItemBasic;
@@ -24,6 +27,7 @@ import muramasa.antimatter.pipe.types.Wire;
 import muramasa.antimatter.texture.Texture;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.block.BlockConnectedCasing;
+import trinsdar.gt4r.block.BlockSapBag;
 import trinsdar.gt4r.cover.CoverConveyor;
 import trinsdar.gt4r.cover.CoverDrain;
 import trinsdar.gt4r.cover.CoverDynamoOld;
@@ -262,6 +266,8 @@ public class GT4RData {
     public static final BlockCasing IRIDIUM_REINFORCED_STONE = new BlockCasing(Ref.ID, "iridium_reinforced_stone");
 
     public static final BlockCasing FUSION_COIL = new BlockCasing(Ref.ID, "fusion_coil");
+
+    public static final BlockSapBag SAP_BAG = new BlockSapBag();
 
     public static final Cable<?> CABLE_LEAD = new Cable<>(Ref.ID, Lead, 2, Tier.LV).amps(2);
     public static final Cable<?> CABLE_TIN = new Cable<>(Ref.ID, Tin, 1, Tier.LV).amps(1);
