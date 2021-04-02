@@ -1,12 +1,5 @@
 {
 	"credit": "Made with Blockbench",
-	"textures": {
-		"top": "gt4r:block/sapbag/top",
-		"topfilled": "gt4r:block/sapbag/top_filled",
-		"bottom": "gt4r:block/sapbag/bottom",
-		"side": "gt4r:block/sapbag/side",
-		"particle": "gt4r:block/sapbag/side"
-	},
 	"elements": [
 		{
 			"from": [0, 0, 5],
