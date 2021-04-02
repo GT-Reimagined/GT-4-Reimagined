@@ -81,7 +81,7 @@ public class BlockSapBag  extends BlockDynamic {
     @Override
     public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         if (placer != null) { //Y = 0 , reduce to xz plane
-            Direction dir = getFacingFromVector((float) placer.getLookVec().x, (float) 0, (float) placer.getLookVec().z).getOpposite();
+            Direction dir = getFacingFromVector((float) placer.getLookVec().x, (float) 0, (float) placer.getLookVec().z);
             world.setBlockState(pos, state.with(HORIZONTAL_FACING, dir));
         }
     }
