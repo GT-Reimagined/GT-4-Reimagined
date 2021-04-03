@@ -10,6 +10,7 @@ import muramasa.antimatter.pipe.PipeSize.*;
 
 import muramasa.antimatter.pipe.types.Cable;
 import muramasa.antimatter.pipe.types.Wire;
+import muramasa.antimatter.util.TagUtils;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -24,7 +25,7 @@ import static muramasa.antimatter.pipe.PipeSize.*;
 import static trinsdar.gt4r.data.Materials.Rubber;
 import static trinsdar.gt4r.loader.crafting.CraftingHelper.criterion;
 
-public class WireCablesPlates {
+public class ToolCraftingTableRecipes {
     @SuppressWarnings("unchecked")
     public static void loadRecipes(Consumer<IFinishedRecipe> output, AntimatterRecipeProvider provider) {
         AntimatterAPI.all(Wire.class, wire -> {
@@ -49,8 +50,13 @@ public class WireCablesPlates {
             }
         });
 
-        INGOT.all().stream().filter(p -> p.has(PLATE)).forEach(p -> provider.shapeless(output, "ingothammer","plate", "has_hammer", criterion(HAMMER.getTag(), provider), new ItemStack(PLATE.get(p),1),
+        INGOT.all().stream().filter(p -> p.has(PLATE)).forEach(p -> provider.shapeless(output, "ingothammer","plate", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), new ItemStack(PLATE.get(p),1),
                 HAMMER.getTag(), INGOT.getMaterialTag(p)));
+        DUST.all().stream().filter(p -> p.has(GEM) || p.has(INGOT)).forEach(p -> {
+            String gemIngot = p.has(GEM) ? "gems" : "ingots";
+            provider.shapeless(output, "dust_" + p.getId() + "_from_id", "mortar_uses", "has_mortar", provider.hasSafeItem(MORTAR.getTag()),
+                    DUST.get(p, 1), MORTAR.getTag(), TagUtils.getForgeItemTag(gemIngot+ "/" + p.getId()));
+        });
     }
 
     private static void twoToOne(Map<PipeSize, Item> wires, PipeSize from, PipeSize to, Consumer<IFinishedRecipe> output, AntimatterRecipeProvider provider) {

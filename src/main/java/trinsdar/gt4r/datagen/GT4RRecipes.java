@@ -7,7 +7,7 @@ import trinsdar.gt4r.loader.MaterialRecipeLoader;
 import trinsdar.gt4r.loader.crafting.BlockCrafting;
 import trinsdar.gt4r.loader.crafting.MachineCrafting;
 import trinsdar.gt4r.loader.crafting.Parts;
-import trinsdar.gt4r.loader.crafting.WireCablesPlates;
+import trinsdar.gt4r.loader.crafting.ToolCraftingTableRecipes;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.IFinishedRecipe;
@@ -32,7 +32,7 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
 
     protected void registerCraftingLoaders() {
         this.craftingLoaders.add(Parts::loadRecipes);
-        this.craftingLoaders.add(WireCablesPlates::loadRecipes);
+        this.craftingLoaders.add(ToolCraftingTableRecipes::loadRecipes);
         this.craftingLoaders.add(MachineCrafting::loadRecipes);
         this.craftingLoaders.add(MaterialRecipeLoader::loadRecipes);
         this.craftingLoaders.add(FurnaceLoader::loadRecipes);
