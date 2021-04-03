@@ -206,5 +206,7 @@ public class Parts {
                 new ItemStack(ItemSuperconductor, 4), of('H', AntimatterIngredient.of(Helium.getCellGas(1, CellTin)).get(), 'T', PLATE.getMaterialTag(Tungsten), 'I', IridiumReinforcedPlate, 'C', CIRCUITS_MASTER), "HHH", "TIT", "CCC");
         provider.addItemRecipe(output, Ref.ID, "tree_tap", "parts", "has_plank", provider.hasSafeItem(TagUtils.getItemTag(new ResourceLocation("minecraft", "planks"))),
                 Treetap, of('P', TagUtils.getItemTag(new ResourceLocation("minecraft", "planks"))), " P ", "PPP", "P  ");
+        provider.shapeless(output, Ref.ID, "bronze_dust", "had_copper", provider.hasSafeItem(DUST.getMaterialTag(Bronze)),
+                DUST.get(Bronze, 4), DUST.get(Copper), DUST.get(Copper), DUST.get(Copper), DUST.get(Tin));
     }
 }

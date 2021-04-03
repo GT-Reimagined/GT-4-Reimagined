@@ -10,9 +10,12 @@ import muramasa.antimatter.machine.MachineState;
 import muramasa.antimatter.texture.Texture;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.IWaterLoggable;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateContainer;
@@ -37,9 +40,10 @@ import java.util.Arrays;
 
 import static com.google.common.collect.ImmutableMap.of;
 import static net.minecraft.state.properties.BlockStateProperties.HORIZONTAL_FACING;
+import static net.minecraft.state.properties.BlockStateProperties.WATERLOGGED;
 import static net.minecraft.util.Direction.*;
 
-public class BlockSapBag  extends BlockDynamic {
+public class BlockSapBag  extends BlockDynamic implements IWaterLoggable {
     protected ModelConfig config = new ModelConfig();
     final VoxelShape[] SHAPES;
     final Texture[] TEXTURES;
@@ -69,22 +73,23 @@ public class BlockSapBag  extends BlockDynamic {
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(HORIZONTAL_FACING);
+        builder.add(HORIZONTAL_FACING, WATERLOGGED);
     }
 
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return this.getDefaultState().with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing());
+        FluidState fluidstate = context.getWorld().getFluidState(context.getPos());
+        return this.getDefaultState().with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing()).with(WATERLOGGED, fluidstate.getFluid() == Fluids.WATER);
     }
 
-    @Override
+    /*@Override
     public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         if (placer != null) { //Y = 0 , reduce to xz plane
             Direction dir = getFacingFromVector((float) placer.getLookVec().x, (float) 0, (float) placer.getLookVec().z);
             world.setBlockState(pos, state.with(HORIZONTAL_FACING, dir));
         }
-    }
+    }*/
 
     /*@Nullable
     @Override
@@ -120,5 +125,10 @@ public class BlockSapBag  extends BlockDynamic {
         for (Direction f : Arrays.asList(NORTH, WEST, SOUTH, EAST)) {
             builder.config(getModelId(f, 0), (b, l) -> l.add(b.of(new ResourceLocation(domain, "block/sapbag/" + f.getString())).tex(of("side", TEXTURES[2], "bottom", TEXTURES[0], "top", TEXTURES[1]))));
         }
+    }
+
+    @Override
+    public FluidState getFluidState(BlockState state) {
+        return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
     }
 }

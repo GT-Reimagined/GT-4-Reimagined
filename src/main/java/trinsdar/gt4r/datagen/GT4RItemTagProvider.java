@@ -7,6 +7,8 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.item.Items;
 import trinsdar.gt4r.data.CustomTags;
 
+import static muramasa.antimatter.Data.DUST;
+import static muramasa.antimatter.Data.GEM;
 import static trinsdar.gt4r.data.CustomTags.*;
 import static trinsdar.gt4r.data.GT4RData.*;
 import static trinsdar.gt4r.data.Materials.*;
@@ -40,6 +42,7 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.getOrCreateBuilder(GEARS_TITAN_TUNGSTEEL).addTag(getTag("gears/titanium")).addTag(getTag("gears/tungstensteel"));
         this.getOrCreateBuilder(GEARS_STEELS).addTag(getTag("gears/steel")).addTag(getTag("gears/stainless_steel"));
         this.getOrCreateBuilder(DUSTS_LAPIS_LAZ).addTag(getTag("dusts/lapis")).addTag(getTag("dusts/lazurite"));
+        this.getOrCreateBuilder(GEM.getMaterialTag(Flint)).add(Items.FLINT);
 
     }
 
