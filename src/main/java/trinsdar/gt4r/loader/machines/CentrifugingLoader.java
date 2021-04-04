@@ -2,27 +2,23 @@ package trinsdar.gt4r.loader.machines;
 
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialStack;
-import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
+import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidUtil;
-import org.lwjgl.system.CallbackI;
-import trinsdar.gt4r.data.GT4RData;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static muramasa.antimatter.Data.*;
+import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.*;
 import static net.minecraft.item.Items.*;
 import static trinsdar.gt4r.data.GT4RData.Plantball;
 import static trinsdar.gt4r.data.GT4RData.RUBBER_LOG;
 import static trinsdar.gt4r.data.GT4RData.StickyResin;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.CENTRIFUGING;
-import static muramasa.antimatter.recipe.ingredient.AntimatterIngredient.*;
 
 public class CentrifugingLoader {
     public static void init() {
@@ -141,11 +137,11 @@ public class CentrifugingLoader {
             }
         } else {
             if (fluidStacks.isEmpty()){
-                CENTRIFUGING.RB().ii(AntimatterIngredient.of(DUST.getMaterialTag(mat), count)).io(
+                CENTRIFUGING.RB().ii(RecipeIngredient.of(DUST.getMaterialTag(mat), count)).io(
                         mat.getProcessInto().stream().filter(t -> DUST.allowGen(t.m)).map(t -> new ItemStack(DUST.get(t.m), t.s))
                                 .toArray(ItemStack[]::new)).add(duration, euT);
             } else {
-                CENTRIFUGING.RB().ii(AntimatterIngredient.of(DUST.getMaterialTag(mat), count)).io(
+                CENTRIFUGING.RB().ii(RecipeIngredient.of(DUST.getMaterialTag(mat), count)).io(
                         mat.getProcessInto().stream().filter(t -> DUST.allowGen(t.m)).map(t -> new ItemStack(DUST.get(t.m), t.s))
                                 .toArray(ItemStack[]::new)).fo(fluidStacks.toArray(new FluidStack[0])).add(duration, euT);
             }

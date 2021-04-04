@@ -2,7 +2,6 @@ package trinsdar.gt4r.loader;
 
 import com.google.common.collect.ImmutableMap;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
-import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.LazyValue;

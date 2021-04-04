@@ -3,18 +3,13 @@ package trinsdar.gt4r.loader.machines;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.pipe.PipeSize;
 import muramasa.antimatter.pipe.types.Wire;
-import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.LazyValue;
 import trinsdar.gt4r.data.GT4RData;
-
-import java.io.CharArrayReader;
 
 import static muramasa.antimatter.Data.DUST;
 import static muramasa.antimatter.Data.INGOT;
-import static muramasa.antimatter.Data.WIRE_FINE;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.WIRE_MILLING;
 
@@ -29,7 +24,7 @@ public class WiremillLoader {
             }
 
             /*if (WIRE_FINE.allowItemGen(t.getMaterial())) {
-                WIRE_MILLING.RB().ii(AntimatterIngredient.of(wireItem,1)).io(WIRE_FINE.get(t.getMaterial(),4)).add((long)( t.getMaterial().getMass()*2.5),16);
+                WIRE_MILLING.RB().ii(RecipeIngredient.of(wireItem,1)).io(WIRE_FINE.get(t.getMaterial(),4)).add((long)( t.getMaterial().getMass()*2.5),16);
             }*/
         });
 

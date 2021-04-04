@@ -1,15 +1,15 @@
 package trinsdar.gt4r.loader.machines;
 
 import muramasa.antimatter.material.Material;
-import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
+import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import muramasa.antimatter.util.TagUtils;
-import muramasa.antimatter.util.Utils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
-import trinsdar.gt4r.data.RecipeMaps;
 
-import static muramasa.antimatter.Data.*;
+import static muramasa.antimatter.Data.CRUSHED;
+import static muramasa.antimatter.Data.CRUSHED_PURIFIED;
+import static muramasa.antimatter.Data.DUST;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.BATHING;
 
@@ -30,9 +30,9 @@ public class BathingLoader {
         addBathRecipe(Iridium, Mercury, i(100, 70, 40), CRUSHED_PURIFIED.get(Iridium, 1), DUST.get(Platinum, 1), stoneDust);
         addBathRecipe(Copper, Mercury, i(100, 70, 40), CRUSHED_PURIFIED.get(Copper, 1), DUST.get(Gold, 1), stoneDust);
         addBathRecipe(Platinum, Mercury, i(100, 70, 40), CRUSHED_PURIFIED.get(Platinum, 1), DUST.get(Platinum, 1), stoneDust);
-        BATHING.RB().ii(AntimatterIngredient.of(DUST.getMaterialTag(Wood), 1)).fi(Water.getLiquid(100)).io(new ItemStack(Items.PAPER)).chances(100).add(200);
-        BATHING.RB().ii(AntimatterIngredient.of(Items.SUGAR_CANE, 1)).fi(Water.getLiquid(100)).io(new ItemStack(Items.PAPER)).chances(100).add(100);
-        BATHING.RB().ii(AntimatterIngredient.of(TagUtils.getItemTag(new ResourceLocation("minecraft", "wool")), 1)).fi(Chlorine.getGas(125)).io(new ItemStack(Items.WHITE_WOOL)).chances(100).add(12);
+        BATHING.RB().ii(RecipeIngredient.of(DUST.getMaterialTag(Wood), 1)).fi(Water.getLiquid(100)).io(new ItemStack(Items.PAPER)).chances(100).add(200);
+        BATHING.RB().ii(RecipeIngredient.of(Items.SUGAR_CANE, 1)).fi(Water.getLiquid(100)).io(new ItemStack(Items.PAPER)).chances(100).add(100);
+        BATHING.RB().ii(RecipeIngredient.of(TagUtils.getItemTag(new ResourceLocation("minecraft", "wool")), 1)).fi(Chlorine.getGas(125)).io(new ItemStack(Items.WHITE_WOOL)).chances(100).add(12);
     }
 
     private static int[] i(int... ints){
@@ -40,6 +40,6 @@ public class BathingLoader {
     }
 
     private static void addBathRecipe(Material input, Material liquid, int[] chances, ItemStack... outputs){
-        BATHING.RB().ii(AntimatterIngredient.of(CRUSHED.getMaterialTag(input), 1)).fi(liquid.getLiquid(1000)).io(outputs).chances(chances).add(800);
+        BATHING.RB().ii(RecipeIngredient.of(CRUSHED.getMaterialTag(input), 1)).fi(liquid.getLiquid(1000)).io(outputs).chances(chances).add(800);
     }
 }

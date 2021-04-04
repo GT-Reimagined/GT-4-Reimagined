@@ -7,7 +7,7 @@ import net.minecraft.item.Items;
 import trinsdar.gt4r.data.GT4RData;
 
 import static muramasa.antimatter.Data.*;
-import static muramasa.antimatter.recipe.ingredient.AntimatterIngredient.of;
+import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.INDUSTRIAL_GRINDING;
 

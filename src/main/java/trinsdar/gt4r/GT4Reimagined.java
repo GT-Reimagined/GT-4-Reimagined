@@ -115,7 +115,7 @@ public class GT4Reimagined extends AntimatterMod {
         switch (event) {
             case DATA_INIT:
                 Materials.init();
-                GT4RData.init();
+                GT4RData.init(side);
                 Machines.init();
                 Guis.init(side);
                 Models.init();

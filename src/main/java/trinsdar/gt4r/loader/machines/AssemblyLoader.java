@@ -5,22 +5,18 @@ import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.pipe.PipeSize;
 import muramasa.antimatter.pipe.types.Cable;
 import muramasa.antimatter.pipe.types.Wire;
-import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
-import muramasa.antimatter.recipe.ingredient.TagIngredient;
 import muramasa.antimatter.util.TagUtils;
-import muramasa.antimatter.util.Utils;
-import net.minecraft.tags.ITag;
-import net.minecraft.tags.Tag;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.tags.ITag;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
-import trinsdar.gt4r.data.CustomTags;
 
-import static com.google.common.collect.ImmutableMap.of;
 import static muramasa.antimatter.Data.*;
-import static muramasa.antimatter.recipe.ingredient.AntimatterIngredient.of;
+import static muramasa.antimatter.machine.Tier.LV;
+import static muramasa.antimatter.machine.Tier.ULV;
+import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
 import static muramasa.antimatter.util.TagUtils.getForgeItemTag;
 import static trinsdar.gt4r.data.CustomTags.*;
 import static trinsdar.gt4r.data.GT4RData.*;
@@ -29,8 +25,6 @@ import static trinsdar.gt4r.data.Machines.WATERMILL;
 import static trinsdar.gt4r.data.Machines.WINDMILL;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.ASSEMBLING;
-import static muramasa.antimatter.machine.Tier.LV;
-import static muramasa.antimatter.machine.Tier.ULV;
 
 public class AssemblyLoader {
     public static void init() {

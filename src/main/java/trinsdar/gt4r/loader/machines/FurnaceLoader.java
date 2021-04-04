@@ -1,32 +1,24 @@
 package trinsdar.gt4r.loader.machines;
 
-import muramasa.antimatter.Antimatter;
-import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
-import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
+import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import net.minecraft.data.CookingRecipeBuilder;
 import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.item.crafting.AbstractCookingRecipe;
-import net.minecraft.item.crafting.CookingRecipeSerializer;
 import trinsdar.gt4r.data.GT4RData;
-import trinsdar.gt4r.tree.RubberTree;
 
 import java.util.function.Consumer;
 
 import static muramasa.antimatter.Data.*;
-import static muramasa.antimatter.Data.NUGGET;
 import static trinsdar.gt4r.data.Materials.Iron;
-import static trinsdar.gt4r.data.Materials.Rubber;
 import static trinsdar.gt4r.data.Materials.Tetrahedrite;
 import static trinsdar.gt4r.data.Materials.WroughtIron;
 import static trinsdar.gt4r.data.RecipeMaps.SMELTING;
-import static trinsdar.gt4r.data.RecipeMaps.STEAM_SMELTING;
 
 public class FurnaceLoader {
     public static void loadRecipes(Consumer<IFinishedRecipe> output, AntimatterRecipeProvider provider){
         CookingRecipeBuilder.blastingRecipe(INGOT.getMaterialIngredient(Iron, 1).get(), INGOT.get(WroughtIron), 0.5F, 100).addCriterion("has_iron_ingot", provider.hasSafeItem(INGOT.getMaterialTag(Iron)).get()).build(output, "iron_to_wrought_bl");
         CookingRecipeBuilder.smeltingRecipe(INGOT.getMaterialIngredient(Iron, 1).get(), INGOT.get(WroughtIron), 0.5F, 200).addCriterion("has_iron_ingot", provider.hasSafeItem(INGOT.getMaterialTag(Iron)).get()).build(output, "iron_to_wrought");
-        CookingRecipeBuilder.smeltingRecipe(AntimatterIngredient.of(GT4RData.CompressedFireClay, 1).get(), GT4RData.FireBrick, 0.5F, 200).addCriterion("has_compressed_fire_clay", provider.hasSafeItem(GT4RData.CompressedFireClay).get()).build(output, "firebrick");
+        CookingRecipeBuilder.smeltingRecipe(RecipeIngredient.of(GT4RData.CompressedFireClay, 1).get(), GT4RData.FireBrick, 0.5F, 200).addCriterion("has_compressed_fire_clay", provider.hasSafeItem(GT4RData.CompressedFireClay).get()).build(output, "firebrick");
         DUST.all().forEach(m -> {
             if (m.needsBlastFurnace()) return;
             if (!m.getDirectSmeltInto().has(INGOT) || m == Tetrahedrite) return;

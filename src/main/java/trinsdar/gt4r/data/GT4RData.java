@@ -8,12 +8,12 @@ import muramasa.antimatter.cover.CoverDynamo;
 import muramasa.antimatter.cover.ICover;
 import muramasa.antimatter.item.ItemCover;
 import muramasa.antimatter.material.Material;
-import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.util.LazyValue;
+import net.minecraftforge.api.distmarker.Dist;
 import trinsdar.gt4r.block.BlockCasing;
 import muramasa.antimatter.item.ItemBasic;
 import muramasa.antimatter.item.ItemBattery;
@@ -52,7 +52,7 @@ public class GT4RData {
         {
             ImmutableMap.Builder<Integer, RecipeIngredient> builder = ImmutableMap.builder();
             for (int i = 0; i <= 24; i++) {
-                builder.put(i, AntimatterIngredient.fromItem(1,new ItemIntCircuit(Ref.ID, "int_circuit_"+i,i).tip("ID: " + i), AntimatterIngredient::setNonConsume));
+                builder.put(i, RecipeIngredient.of(new ItemIntCircuit(Ref.ID, "int_circuit_"+i, i).tip("ID: " + i), 1).setNoConsume());
             }
             INT_CIRCUITS = builder.build();
         }
@@ -101,8 +101,10 @@ public class GT4RData {
         }
     }
 
-    public static void init() {
-
+    public static void init(Dist side) {
+        if (side.isClient()){
+            RecipeMaps.clientMaps();
+        }
     }
 
     public static final BaseCover COVER_CONVEYOR = new CoverConveyor();

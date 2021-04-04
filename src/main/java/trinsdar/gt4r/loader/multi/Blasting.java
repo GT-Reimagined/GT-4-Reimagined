@@ -13,7 +13,7 @@ import static trinsdar.gt4r.data.GT4RData.INT_CIRCUITS;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.BASIC_BLASTING;
 import static trinsdar.gt4r.data.RecipeMaps.BLASTING;
-import static muramasa.antimatter.recipe.ingredient.AntimatterIngredient.*;
+import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.*;
 
 public class Blasting {
     public static int mixedOreYield = Ref.mixedOreYieldsTwoThirdsPureOre ? 2 : 3;

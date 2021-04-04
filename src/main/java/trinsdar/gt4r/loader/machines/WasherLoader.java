@@ -3,11 +3,14 @@ package trinsdar.gt4r.loader.machines;
 import muramasa.antimatter.material.Material;
 import net.minecraft.item.ItemStack;
 
-import static muramasa.antimatter.Data.*;
+import static muramasa.antimatter.Data.CRUSHED;
+import static muramasa.antimatter.Data.CRUSHED_PURIFIED;
+import static muramasa.antimatter.Data.DUST;
+import static muramasa.antimatter.Data.DUST_TINY;
+import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.*;
 import static trinsdar.gt4r.data.Materials.Stone;
 import static trinsdar.gt4r.data.Materials.Water;
 import static trinsdar.gt4r.data.RecipeMaps.ORE_WASHING;
-import static muramasa.antimatter.recipe.ingredient.AntimatterIngredient.*;
 
 public class WasherLoader {
     public static void init() {

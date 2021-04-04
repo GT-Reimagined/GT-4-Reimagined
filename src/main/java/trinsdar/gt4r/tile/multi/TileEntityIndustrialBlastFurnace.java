@@ -2,17 +2,15 @@ package trinsdar.gt4r.tile.multi;
 
 import it.unimi.dsi.fastutil.objects.ObjectCollection;
 import muramasa.antimatter.capability.machine.MachineRecipeHandler;
-import muramasa.antimatter.capability.machine.MultiMachineItemHandler;
-import muramasa.antimatter.machine.event.ContentEvent;
 import muramasa.antimatter.machine.event.IMachineEvent;
+import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.recipe.Recipe;
 import muramasa.antimatter.tile.multi.TileEntityBasicMultiMachine;
-import muramasa.antimatter.util.LazyHolder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import muramasa.antimatter.machine.types.Machine;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.util.LazyOptional;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.machine.IBFItemHandler;
 
@@ -29,8 +27,8 @@ public class TileEntityIndustrialBlastFurnace extends TileEntityBasicMultiMachin
 
     public TileEntityIndustrialBlastFurnace(Machine type) {
         super(type);
-        this.itemHandler = type.has(ITEM) || type.has(CELL) ? LazyHolder.of(() -> new IBFItemHandler(this)) : LazyHolder.empty();
-        this.recipeHandler = LazyHolder.of(() -> new MachineRecipeHandler<TileEntityIndustrialBlastFurnace>(this){
+        this.itemHandler = type.has(ITEM) || type.has(CELL) ? LazyOptional.of(() -> new IBFItemHandler(this)) : LazyOptional.empty();
+        this.recipeHandler = LazyOptional.of(() -> new MachineRecipeHandler<TileEntityIndustrialBlastFurnace>(this){
             @Override
             protected boolean validateRecipe(Recipe r) {
                 return super.validateRecipe(r) && tile.getHeatingCapacity() >= r.getSpecialValue();

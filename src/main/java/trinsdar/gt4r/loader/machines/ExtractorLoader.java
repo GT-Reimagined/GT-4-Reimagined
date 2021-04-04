@@ -1,13 +1,13 @@
 package trinsdar.gt4r.loader.machines;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import trinsdar.gt4r.data.GT4RData;
-import net.minecraft.item.ItemStack;
 
 import static muramasa.antimatter.Data.DUST;
+import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.*;
 import static trinsdar.gt4r.data.Materials.Rubber;
 import static trinsdar.gt4r.data.RecipeMaps.EXTRACTING;
-import static muramasa.antimatter.recipe.ingredient.AntimatterIngredient.*;
 
 public class ExtractorLoader {
     public static void init() {

@@ -1,13 +1,11 @@
 package trinsdar.gt4r.tile.single;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import muramasa.antimatter.capability.machine.MachineRecipeHandler;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.recipe.Recipe;
 import muramasa.antimatter.tile.TileEntityMachine;
-import muramasa.antimatter.util.LazyHolder;
-import net.minecraft.client.gui.FontRenderer;
+import net.minecraftforge.common.util.LazyOptional;
 import trinsdar.gt4r.data.Materials;
 
 import java.util.Arrays;
@@ -18,7 +16,7 @@ public class TileEntitySteamMachine extends TileEntityMachine {
 
     public TileEntitySteamMachine(Machine<?> type) {
         super(type);
-        recipeHandler = LazyHolder.of(() -> new MachineRecipeHandler<TileEntitySteamMachine>(this) {
+        recipeHandler = LazyOptional.of(() -> new MachineRecipeHandler<TileEntitySteamMachine>(this) {
             @Override
             public boolean consumeResourceForRecipe() {
                 return tile.fluidHandler.map(t -> t.consumeAndReturnInputs(Arrays.asList(Materials.Steam.getGas((int)activeRecipe.getPower()))).size() == 0)

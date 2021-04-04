@@ -2,10 +2,8 @@ package trinsdar.gt4r.loader.machines;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import muramasa.antimatter.material.Material;
-import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.LazyValue;
 
 import java.util.List;
 

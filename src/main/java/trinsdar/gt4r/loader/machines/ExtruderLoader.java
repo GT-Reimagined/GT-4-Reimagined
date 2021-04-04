@@ -4,14 +4,12 @@ import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.pipe.PipeSize;
 import muramasa.antimatter.pipe.types.FluidPipe;
 import muramasa.antimatter.pipe.types.Wire;
-import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.IItemProvider;
-import net.minecraft.util.LazyValue;
 import trinsdar.gt4r.data.GT4RData;
 
 import static muramasa.antimatter.Data.*;
@@ -20,7 +18,6 @@ import static trinsdar.gt4r.data.Materials.SiliconDioxide;
 import static trinsdar.gt4r.data.Materials.Tin;
 import static trinsdar.gt4r.data.Materials.WroughtIron;
 import static trinsdar.gt4r.data.RecipeMaps.EXTRUDING;
-import static trinsdar.gt4r.data.RecipeMaps.WIRE_MILLING;
 
 public class ExtruderLoader {
     public static void init(){
@@ -83,12 +80,10 @@ public class ExtruderLoader {
     }
 
     private static RecipeIngredient getReusable(ITag.INamedTag<Item> tag){
-        AntimatterIngredient ingredient = AntimatterIngredient.of(tag, 1).get().setNonConsume();
-        return new RecipeIngredient(ingredient);
+        return RecipeIngredient.of(tag, 1).setNoConsume();
     }
 
     private static RecipeIngredient getReusable(IItemProvider item){
-        AntimatterIngredient ingredient = AntimatterIngredient.of(item, 1).get().setNonConsume();
-        return new RecipeIngredient(ingredient);
+        return RecipeIngredient.of(item, 1).setNoConsume();
     }
 }

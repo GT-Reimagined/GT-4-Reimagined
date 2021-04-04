@@ -1,18 +1,14 @@
 package trinsdar.gt4r.loader.machines;
 
-import muramasa.antimatter.Data;
-import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
 import muramasa.antimatter.util.TagUtils;
-import muramasa.antimatter.util.Utils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 
 import static muramasa.antimatter.Data.CRUSHED_PURIFIED;
 import static muramasa.antimatter.Data.DUST;
 import static muramasa.antimatter.Data.GEM;
-import static muramasa.antimatter.recipe.ingredient.AntimatterIngredient.of;
+import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
 import static trinsdar.gt4r.data.Materials.*;
-import static trinsdar.gt4r.data.Materials.Emerald;
 import static trinsdar.gt4r.data.RecipeMaps.SIFTING;
 
 public class SiftingLoader {

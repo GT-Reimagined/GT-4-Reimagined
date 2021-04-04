@@ -1,6 +1,5 @@
 package trinsdar.gt4r.loader.multi;
 
-import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import org.lwjgl.system.CallbackI;
@@ -9,7 +8,7 @@ import trinsdar.gt4r.data.Materials;
 
 import static muramasa.antimatter.Data.DUST;
 import static muramasa.antimatter.Data.GEM;
-import static muramasa.antimatter.recipe.ingredient.AntimatterIngredient.of;
+import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.IMPLOSION_COMPRESSING;
 

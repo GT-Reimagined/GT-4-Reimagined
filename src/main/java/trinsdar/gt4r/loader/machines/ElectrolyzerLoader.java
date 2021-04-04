@@ -1,9 +1,8 @@
 package trinsdar.gt4r.loader.machines;
 
-import com.mojang.realmsclient.gui.screens.RealmsInviteScreen;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialStack;
-import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
+import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -12,16 +11,19 @@ import net.minecraftforge.fluids.FluidStack;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static muramasa.antimatter.Data.*;
+import static muramasa.antimatter.Data.DUST;
+import static muramasa.antimatter.Data.GAS;
+import static muramasa.antimatter.Data.LIQUID;
+import static muramasa.antimatter.Data.PLASMA;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.ELECTROLYZING;
 
 public class ElectrolyzerLoader {
     public static void init() {
         ELECTROLYZING.RB().fi(Water.getLiquid(6000)).fo(Hydrogen.getGas(4000), Oxygen.getGas(2000)).add(100, 30);
-        ELECTROLYZING.RB().ii(AntimatterIngredient.of(new ItemStack(Items.BONE_MEAL, 3))).io(DUST.get(Calcium, 1)).add(24, 106);
-        ELECTROLYZING.RB().ii(AntimatterIngredient.of(new ItemStack(Blocks.SAND, 8))).io(DUST.get(SiliconDioxide, 1)).add(500, 25);
-        ELECTROLYZING.RB().ii(AntimatterIngredient.of(DUST.get(Diamond, 1))).io(DUST.get(Carbon, 64), DUST.get(Carbon, 64)).add(1536,60);
+        ELECTROLYZING.RB().ii(RecipeIngredient.of(new ItemStack(Items.BONE_MEAL, 3))).io(DUST.get(Calcium, 1)).add(24, 106);
+        ELECTROLYZING.RB().ii(RecipeIngredient.of(new ItemStack(Blocks.SAND, 8))).io(DUST.get(SiliconDioxide, 1)).add(500, 25);
+        ELECTROLYZING.RB().ii(RecipeIngredient.of(DUST.get(Diamond, 1))).io(DUST.get(Carbon, 64), DUST.get(Carbon, 64)).add(1536,60);
         add(Emerald, 120, 522);
         add(Calcite,  90, 100);
         add(Cassiterite,  60, 132);
@@ -91,11 +93,11 @@ public class ElectrolyzerLoader {
             }
         } else {
             if (fluidStacks.isEmpty()){
-                ELECTROLYZING.RB().ii(AntimatterIngredient.of(DUST.get(dust), count)).io(
+                ELECTROLYZING.RB().ii(RecipeIngredient.of(DUST.get(dust), count)).io(
                         dust.getProcessInto().stream().filter(t -> DUST.allowGen(t.m)).map(t -> new ItemStack(DUST.get(t.m), t.s))
                                 .toArray(ItemStack[]::new)).add(duration, euT);
             } else {
-                ELECTROLYZING.RB().ii(AntimatterIngredient.of(DUST.get(dust), count)).io(
+                ELECTROLYZING.RB().ii(RecipeIngredient.of(DUST.get(dust), count)).io(
                         dust.getProcessInto().stream().filter(t -> DUST.allowGen(t.m)).map(t -> new ItemStack(DUST.get(t.m), t.s))
                                 .toArray(ItemStack[]::new)).fo(fluidStacks.toArray(new FluidStack[0])).add(duration, euT);
             }

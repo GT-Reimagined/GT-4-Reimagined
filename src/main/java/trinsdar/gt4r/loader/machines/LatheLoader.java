@@ -1,9 +1,8 @@
 package trinsdar.gt4r.loader.machines;
 
-import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
-
-import static muramasa.antimatter.Data.*;
-import static trinsdar.gt4r.data.RecipeMaps.CUTTING;
+import static muramasa.antimatter.Data.GEM;
+import static muramasa.antimatter.Data.INGOT;
+import static muramasa.antimatter.Data.ROD;
 import static trinsdar.gt4r.data.RecipeMaps.LATHING;
 
 public class LatheLoader {

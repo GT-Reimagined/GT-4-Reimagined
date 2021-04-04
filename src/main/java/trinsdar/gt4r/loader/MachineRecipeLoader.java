@@ -1,6 +1,6 @@
 package trinsdar.gt4r.loader;
 
-import muramasa.antimatter.recipe.RecipeBuilder;
+import muramasa.antimatter.recipe.map.RecipeBuilder;
 
 import static muramasa.antimatter.Data.*;
 import static trinsdar.gt4r.data.Materials.*;
@@ -8,13 +8,11 @@ import static trinsdar.gt4r.data.RecipeMaps.*;
 
 public class MachineRecipeLoader {
 
-    public static RecipeBuilder RB = new RecipeBuilder();
-
     public static void init() {
 
-       // ASSEMBLING.RB().ii(AntimatterIngredient.fromTag(ItemTags.LOGS,2), AntimatterIngredient.fromTag(ItemTags.ANVIL,1), AntimatterIngredient.of(Items.ACACIA_DOOR,2)).io(new ItemStack(Items.DIAMOND,1)).add(60,16);
-     //   BLASTING.RB().ii(AntimatterIngredient.fromTag(ItemTags.LOGS,2), AntimatterIngredient.of(Items.ACACIA_DOOR,2)).io(new ItemStack(Items.DIAMOND,1)).add(60,16);
-    //    ASSEMBLING.RB().ii(AntimatterIngredient.fromTag(ItemTags.LOGS,2), AntimatterIngredient.of(Items.ACACIA_DOOR,2)).io(new ItemStack(Items.DIAMOND,1)).add(60,16);
+       // ASSEMBLING.RB().ii(AntimatterIngredient.fromTag(ItemTags.LOGS,2), AntimatterIngredient.fromTag(ItemTags.ANVIL,1), RecipeIngredient.of(Items.ACACIA_DOOR,2)).io(new ItemStack(Items.DIAMOND,1)).add(60,16);
+     //   BLASTING.RB().ii(AntimatterIngredient.fromTag(ItemTags.LOGS,2), RecipeIngredient.of(Items.ACACIA_DOOR,2)).io(new ItemStack(Items.DIAMOND,1)).add(60,16);
+    //    ASSEMBLING.RB().ii(AntimatterIngredient.fromTag(ItemTags.LOGS,2), RecipeIngredient.of(Items.ACACIA_DOOR,2)).io(new ItemStack(Items.DIAMOND,1)).add(60,16);
 
         //TEMP
 //        STEAM_FUELS.RB().fi(Steam.getGas(2)).add(1,1);

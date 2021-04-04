@@ -4,16 +4,12 @@ import muramasa.antimatter.Ref;
 import muramasa.antimatter.capability.fluid.FluidTanks;
 import muramasa.antimatter.capability.machine.MachineFluidHandler;
 import muramasa.antimatter.machine.event.ContentEvent;
-import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.tile.TileEntityMachine;
-import muramasa.antimatter.tile.TileEntityTank;
 import muramasa.antimatter.tool.AntimatterToolType;
-import muramasa.antimatter.util.LazyHolder;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
@@ -23,8 +19,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
-import trinsdar.gt4r.data.Materials;
 import trinsdar.gt4r.machine.MaterialMachine;
 
 import javax.annotation.Nullable;
@@ -38,7 +34,7 @@ public class TileEntityDrum extends TileEntityMachine {
     public TileEntityDrum(MaterialMachine type) {
         super(type);
         material = type.getMaterial();
-        this.fluidHandler = LazyHolder.of(() -> new DrumFluidHandler(this));
+        this.fluidHandler = LazyOptional.of(() -> new DrumFluidHandler(this));
     }
 
     @Override

@@ -1,12 +1,12 @@
 package trinsdar.gt4r.loader.machines;
 
 import muramasa.antimatter.material.Material;
-import net.minecraft.item.ItemStack;
 
-import static muramasa.antimatter.Data.*;
-import static trinsdar.gt4r.data.Materials.Stone;
+import static muramasa.antimatter.Data.CRUSHED_CENTRIFUGED;
+import static muramasa.antimatter.Data.CRUSHED_PURIFIED;
+import static muramasa.antimatter.Data.DUST_TINY;
+import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.*;
 import static trinsdar.gt4r.data.RecipeMaps.THERMAL_CENTRIFUGING;
-import static muramasa.antimatter.recipe.ingredient.AntimatterIngredient.*;
 
 public class ThermalCentrifuge {
     public static void init() {

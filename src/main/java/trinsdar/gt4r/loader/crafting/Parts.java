@@ -4,7 +4,7 @@ import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.pipe.PipeSize;
-import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
+import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import muramasa.antimatter.util.TagUtils;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.Item;
@@ -203,7 +203,7 @@ public class Parts {
         provider.addStackRecipe(output, Ref.ID, "super_conductor_wire", "parts", "has_superconductor", provider.hasSafeItem(ItemSuperconductor),
                 new ItemStack(WIRE_SUPERCONDUCTOR.getBlockItem(PipeSize.NORMAL), 4), of('M', MACHINE_HULLS_BASIC, 'S', ItemSuperconductor, 'C', CIRCUITS_MASTER), "MCM", "SSS", "MCM");
         provider.addStackRecipe(output, Ref.ID, "super_conductor", "parts", "has_iridium_plate", provider.hasSafeItem(IridiumReinforcedPlate),
-                new ItemStack(ItemSuperconductor, 4), of('H', AntimatterIngredient.of(Helium.getCellGas(1, CellTin)).get(), 'T', PLATE.getMaterialTag(Tungsten), 'I', IridiumReinforcedPlate, 'C', CIRCUITS_MASTER), "HHH", "TIT", "CCC");
+                new ItemStack(ItemSuperconductor, 4), of('H', RecipeIngredient.of(Helium.getCellGas(1, CellTin)).get(), 'T', PLATE.getMaterialTag(Tungsten), 'I', IridiumReinforcedPlate, 'C', CIRCUITS_MASTER), "HHH", "TIT", "CCC");
         provider.addItemRecipe(output, Ref.ID, "tree_tap", "parts", "has_plank", provider.hasSafeItem(TagUtils.getItemTag(new ResourceLocation("minecraft", "planks"))),
                 Treetap, of('P', TagUtils.getItemTag(new ResourceLocation("minecraft", "planks"))), " P ", "PPP", "P  ");
         provider.shapeless(output, Ref.ID, "bronze_dust", "had_copper", provider.hasSafeItem(DUST.getMaterialTag(Bronze)),

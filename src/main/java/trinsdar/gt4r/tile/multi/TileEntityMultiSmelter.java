@@ -1,9 +1,9 @@
 package trinsdar.gt4r.tile.multi;
 
-import trinsdar.gt4r.block.BlockCoil;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
 import net.minecraft.block.BlockState;
+import trinsdar.gt4r.block.BlockCoil;
 
 import java.util.List;
 

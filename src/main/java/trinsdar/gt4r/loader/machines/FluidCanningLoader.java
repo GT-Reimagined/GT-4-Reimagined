@@ -1,22 +1,18 @@
 package trinsdar.gt4r.loader.machines;
 
-import muramasa.antimatter.Ref;
-import muramasa.antimatter.item.ItemBattery;
-import muramasa.antimatter.recipe.ingredient.AntimatterIngredient;
-import muramasa.antimatter.util.Utils;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.IItemProvider;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.registries.ForgeRegistries;
 import tesseract.api.capability.TesseractGTCapability;
 
-import static muramasa.antimatter.recipe.ingredient.AntimatterIngredient.of;
+import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
 import static trinsdar.gt4r.data.GT4RData.*;
-import static trinsdar.gt4r.data.Materials.*;
+import static trinsdar.gt4r.data.Materials.Mercury;
+import static trinsdar.gt4r.data.Materials.SulfuricAcid;
 import static trinsdar.gt4r.data.RecipeMaps.FLUID_CANNING;
 
 public class FluidCanningLoader {
