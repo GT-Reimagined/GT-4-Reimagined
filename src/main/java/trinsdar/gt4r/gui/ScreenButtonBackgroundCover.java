@@ -30,6 +30,11 @@ public class ScreenButtonBackgroundCover<T extends ContainerCover> extends Scree
     }
 
     @Override
+    protected void drawTitle(MatrixStack stack, int mouseX, int mouseY) {
+        Minecraft.getInstance().fontRenderer.drawString(stack, container.getCover().getDisplayName().getString(), getCenteredStringX(container.getCover().getDisplayName().getString()), 4, 0x404040);
+    }
+
+    @Override
     protected void drawGuiContainerBackgroundLayer(MatrixStack stack, float partialTicks, int mouseX, int mouseY) {
         super.drawGuiContainerBackgroundLayer(stack, partialTicks, mouseX, mouseY);
         if (container.getCover().getCover() instanceof ICoverModeCover){

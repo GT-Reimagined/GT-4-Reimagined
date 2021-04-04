@@ -48,8 +48,9 @@ public class CoverConveyor extends CoverBasicTransport {
             return;
         boolean isMachine = instance.getTile() instanceof TileEntityMachine;
         BlockState state = instance.getTile().getWorld().getBlockState(instance.getTile().getPos().offset(side));
+        CoverMode mode = CoverMode.values()[instance.getNbt().getInt("coverMode")];
         //Drop into world.
-        if (state == Blocks.AIR.getDefaultState() && isMachine) {
+        if (state == Blocks.AIR.getDefaultState() && isMachine && mode.getName().startsWith("Export")) {
             World world = instance.getTile().getWorld();
             BlockPos pos = instance.getTile().getPos();
             ItemStack stack = ((TileEntityMachine)instance.getTile()).itemHandler.map(ih -> Utils.extractAny(ih.getOutputHandler())).orElse(ItemStack.EMPTY);
@@ -62,7 +63,11 @@ public class CoverConveyor extends CoverBasicTransport {
             return;
         }
         if (isMachine) {
-            ((TileEntityMachine)instance.getTile()).itemHandler.ifPresent(ih -> adjTile.getCapability(ITEM_HANDLER_CAPABILITY, side.getOpposite()).ifPresent(other -> Utils.transferItems(ih.getOutputHandler(), other,true)));
+            if (mode.getName().startsWith("Export")) {
+                ((TileEntityMachine)instance.getTile()).itemHandler.ifPresent(ih -> adjTile.getCapability(ITEM_HANDLER_CAPABILITY, side.getOpposite()).ifPresent(other -> Utils.transferItems(ih.getOutputHandler(), other,true)));
+            } else {
+                ((TileEntityMachine)instance.getTile()).itemHandler.ifPresent(ih -> adjTile.getCapability(ITEM_HANDLER_CAPABILITY, side.getOpposite()).ifPresent(other -> Utils.transferItems(other, ih.getInputHandler(),true)));
+            }
         }
     }
 

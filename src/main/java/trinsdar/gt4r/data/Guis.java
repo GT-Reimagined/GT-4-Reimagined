@@ -23,6 +23,7 @@ import static muramasa.antimatter.gui.ButtonBody.*;
 import static muramasa.antimatter.gui.SlotType.*;
 import static muramasa.antimatter.machine.Tier.*;
 import static trinsdar.gt4r.data.GT4RData.COVER_CONVEYOR;
+import static trinsdar.gt4r.data.GT4RData.COVER_PUMP;
 import static trinsdar.gt4r.data.Machines.*;
 import static trinsdar.gt4r.data.SlotTypes.DISPLAY;
 import static trinsdar.gt4r.gui.ButtonOverlays.*;
@@ -183,6 +184,7 @@ public class Guis {
             for (int x = 0; x < 6; x++){
                 for (int y = 0; y < 2; y++){
                     COVER_CONVEYOR.getGui().addButton(35 + (x * 18), 25 + (y * 18), 16, 16, overlays[y][x]);
+                    COVER_PUMP.getGui().addButton(35 + (x * 18), 25 + (y * 18), 16, 16, overlays[y][x]);
                 }
             }
             FUSION_REACTOR.getGui().addButton(155, 23, 16, 16, NO_OVERLAY).addButton(155, 41, 16, 16, NO_OVERLAY).addButton(155, 59, 16, 16, NO_OVERLAY);

@@ -33,7 +33,12 @@ public class CoverPump extends CoverBasicTransport {
         if (instance.getTile() == null || instance.getTile().getWorld().getGameTime() % (20) != 0) return;
         TileEntity adjTile = instance.getTile().getWorld().getTileEntity(instance.getTile().getPos().offset(side));
         if (adjTile == null) return;
-        Utils.transferFluidsOnCap(instance.getTile(), adjTile, Integer.MAX_VALUE);
+        if (getCoverMode(instance).getName().startsWith("Output")){
+            Utils.transferFluidsOnCap(instance.getTile(), adjTile, Integer.MAX_VALUE);
+        } else {
+            Utils.transferFluidsOnCap(adjTile, instance.getTile(), Integer.MAX_VALUE);
+        }
+
     }
 
     @Override
