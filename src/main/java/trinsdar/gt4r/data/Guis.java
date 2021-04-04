@@ -26,6 +26,8 @@ import static trinsdar.gt4r.data.GT4RData.COVER_CONVEYOR;
 import static trinsdar.gt4r.data.Machines.*;
 import static trinsdar.gt4r.data.SlotTypes.DISPLAY;
 import static trinsdar.gt4r.gui.ButtonOverlays.*;
+import static trinsdar.gt4r.gui.ButtonOverlays.EXPORT;
+import static trinsdar.gt4r.gui.ButtonOverlays.IMPORT;
 
 public class Guis {
 
@@ -156,14 +158,6 @@ public class Guis {
         DIESEL_GENERATOR.getGui().add(BASIC_TANK);
         SEMIFLUID_GENERATOR.getGui().add(BASIC_TANK);
 
-        /*ButtonOverlay[] overlays = new ButtonOverlay[]{IMPORT, IMPORT_CONDITIONAL, IMPORT_INVERT_CONDITIONAL, EXPORT, EXPORT_CONDITIONAL, EXPORT_INVERT_CONDITIONAL, IMPORT_EXPORT, IMPORT_EXPORT_CONDITIONAL, IMPORT_EXPORT_INVERT_CONDITIONAL, EXPORT_IMPORT, EXPORT_IMPORT_CONDITIONAL, EXPORT_IMPORT_INVERT_CONDITIONAL};
-
-        for (int x = 0; x < 6; x++){
-            for (int y = 0; y < 2; y++){
-                COVER_CONVEYOR.getGui().addSwitch(35 + (x * 18), 25 + (y * 18), 16, 16, overlays[x + y]);
-            }
-        }*/
-
 
         INFINITE_STEAM.getGui().add(CELL_IN, 80, 17).add(CELL_OUT, 80, 53).add(FL_OUT, 60, 43);
 
@@ -184,6 +178,13 @@ public class Guis {
         FUSION_MATERIAL_INJECTOR.getGui().add(FL_IN, 79, 34).add(CELL_IN, 9, 22).add(CELL_OUT, 9, 58).add(IT_IN, 61, 34).add(IT_IN, 97, 34).add(IT_IN, 79, 16).add(IT_IN, 79, 52);
 
         if (side.isClient()){
+            ButtonBody[][] overlays = new ButtonBody[][]{{IMPORT, IMPORT_CONDITIONAL, IMPORT_INVERT_CONDITIONAL, EXPORT, EXPORT_CONDITIONAL, EXPORT_INVERT_CONDITIONAL}, {IMPORT_EXPORT, IMPORT_EXPORT_CONDITIONAL, IMPORT_EXPORT_INVERT_CONDITIONAL, EXPORT_IMPORT, EXPORT_IMPORT_CONDITIONAL, EXPORT_IMPORT_INVERT_CONDITIONAL}};
+
+            for (int x = 0; x < 6; x++){
+                for (int y = 0; y < 2; y++){
+                    COVER_CONVEYOR.getGui().addButton(35 + (x * 18), 25 + (y * 18), 16, 16, overlays[y][x]);
+                }
+            }
             FUSION_REACTOR.getGui().addButton(155, 23, 16, 16, NO_OVERLAY).addButton(155, 41, 16, 16, NO_OVERLAY).addButton(155, 59, 16, 16, NO_OVERLAY);
             TRANSFORMER_DIGITAL.getGui()
                     .addButton(10, 18, 14, 14, APAD_LEFT)

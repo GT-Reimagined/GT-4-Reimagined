@@ -4,6 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import muramasa.antimatter.gui.ButtonData;
 import muramasa.antimatter.gui.container.ContainerCover;
 import muramasa.antimatter.gui.screen.ScreenCover;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
@@ -18,11 +19,22 @@ public class ScreenButtonBackgroundCover<T extends ContainerCover> extends Scree
     }
 
     @Override
+    protected void drawGuiContainerForegroundLayer(MatrixStack stack, int mouseX, int mouseY) {
+        drawTitle(stack, mouseX, mouseY);
+        if (container.getCover().getCover() instanceof ICoverModeCover){
+            ICoverModeCover basicTransport = (ICoverModeCover) container.getCover().getCover();
+            ICoverMode mode = basicTransport.getCoverMode(container.getCover());
+            Minecraft.getInstance().fontRenderer.drawString(stack,"Mode: " + mode.getName(), getCenteredStringX("Mode: " + mode.getName()), 13, 0x404040);
+        }
+
+    }
+
+    @Override
     protected void drawGuiContainerBackgroundLayer(MatrixStack stack, float partialTicks, int mouseX, int mouseY) {
         super.drawGuiContainerBackgroundLayer(stack, partialTicks, mouseX, mouseY);
         if (container.getCover().getCover() instanceof ICoverModeCover){
             ICoverModeCover basicTransport = (ICoverModeCover) container.getCover().getCover();
-            ICoverMode mode = basicTransport.getCoverMode();
+            ICoverMode mode = basicTransport.getCoverMode(container.getCover());
             drawTexture(stack, gui, guiLeft + mode.getX(), guiTop + mode.getY(), 176, 0, 18, 18);
         }
     }

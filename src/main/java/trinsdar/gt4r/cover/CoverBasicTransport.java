@@ -11,46 +11,37 @@ import static trinsdar.gt4r.cover.CoverMode.EXPORT;
 
 public abstract class CoverBasicTransport extends BaseCover implements ICoverModeCover {
 
-    CoverMode coverMode = EXPORT;
-
     @Override
     public String getDomain() {
         return Ref.ID;
     }
 
-    public ICoverMode getCoverMode() {
-        return coverMode;
+    @Override
+    public ICoverMode getCoverMode(CoverStack<?> stack) {
+        return CoverMode.values()[stack.getNbt().getInt("coverMode")];
     }
 
     @Override
-    public void serialize(CoverStack<?> stack, CompoundNBT nbt) {
-        nbt.putInt("coverMode", coverMode.ordinal());
+    public void onGuiEvent(CoverStack<?> stack, IGuiEvent event, int... data) {
+        if (event == GuiEvent.EXTRA_BUTTON){
+            stack.getNbt().putInt("coverMode", getCoverMode(data[0]));
+        }
     }
 
-    @Override
-    public void deserialize(CoverStack<?> stack, CompoundNBT nbt) {
-        super.deserialize(stack, nbt);
-        coverMode = CoverMode.values()[(nbt.getInt("coverMode"))];
-    }
-
-    //@Override
-    public void onGuiEvent(IGuiEvent event, int... data) {
-        if (event == GuiEvent.EXTRA_SWITCH){
-            switch (data[0]){
-                case 0: coverMode = CoverMode.IMPORT;
-                case 1: coverMode = CoverMode.IMPORT_EXPORT;
-                case 2: coverMode = CoverMode.IMPORT_CONDITIONAL;
-                case 3: coverMode = CoverMode.IMPORT_EXPORT_CONDITIONAL;
-                case 4: coverMode = CoverMode.IMPORT_INVERT_COND;
-                case 5: coverMode = CoverMode.IMPORT_EXPORT_INVERT_COND;
-                case 6: coverMode = EXPORT;
-                case 7: coverMode = CoverMode.EXPORT_IMPORT;
-                case 8: coverMode = CoverMode.EXPORT_CONDITIONAL;
-                case 9: coverMode = CoverMode.EXPORT_IMPORT_CONDITIONAL;
-                case 10: coverMode = CoverMode.EXPORT_INVERT_COND;
-                case 11: coverMode = CoverMode.EXPORT_IMPORT_INVERT_COND;
-            }
-
+    public int getCoverMode(int buttonID){
+        switch (buttonID){
+            case 0: return CoverMode.IMPORT.ordinal();
+            case 1: return CoverMode.IMPORT_EXPORT.ordinal();
+            case 2: return CoverMode.IMPORT_CONDITIONAL.ordinal();
+            case 3: return CoverMode.IMPORT_EXPORT_CONDITIONAL.ordinal();
+            case 4: return CoverMode.IMPORT_INVERT_COND.ordinal();
+            case 5: return CoverMode.IMPORT_EXPORT_INVERT_COND.ordinal();
+            case 7: return CoverMode.EXPORT_IMPORT.ordinal();
+            case 8: return CoverMode.EXPORT_CONDITIONAL.ordinal();
+            case 9: return CoverMode.EXPORT_IMPORT_CONDITIONAL.ordinal();
+            case 10: return CoverMode.EXPORT_INVERT_COND.ordinal();
+            case 11: return CoverMode.EXPORT_IMPORT_INVERT_COND.ordinal();
+            default: return CoverMode.EXPORT.ordinal();
         }
     }
 }
