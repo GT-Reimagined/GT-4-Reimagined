@@ -5,6 +5,7 @@ import muramasa.antimatter.fluid.AntimatterMaterialFluid;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialTypeItem;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.item.ItemTier;
 import trinsdar.gt4r.Ref;
 
 import static com.google.common.collect.ImmutableMap.of;
@@ -36,8 +37,8 @@ public class Materials {
     public static Material Plutonium = new Material(Ref.ID, "plutonium_244", 0xf03232, METALLIC, Pu).asMetal(912, 0);
     public static Material Silver = new Material(Ref.ID, "silver", 0xdcdcff, SHINY, Ag).asMetal(1234, 0, PLATE);
     public static Material Thorium = new Material(Ref.ID, "thorium", 0x001e00, SHINY, Th).asMetal(2115, 0);
-    public static Material Titanium = new Material(Ref.ID, "titanium", 0xdca0f0, METALLIC, Ti).asMetal(1941, 1500,  PLATE, ROD, GEAR, HULL)/*.addArmor(2, 1.0F, 0.0F, 20)*/;
-    public static Material Tungsten = new Material(Ref.ID, "tungsten", 0x323232, METALLIC, W).asMetal(3695, 2500, PLATE, ROD);
+    public static Material Titanium = new Material(Ref.ID, "titanium", 0xdca0f0, METALLIC, Ti).asMetal(1941, 1500,  PLATE, ROD, GEAR, HULL).addArmor(new int[]{2, 2, 2, 2}, 1.0F, 0.0F, 20).addTools(3.5F, 8.0F, 1280, 3);
+    public static Material Tungsten = new Material(Ref.ID, "tungsten", 0x323232, METALLIC, W).asMetal(3695, 2500, PLATE, ROD).addTools(3.5F, 8.0F, 2560, 3);
     public static Material Uranium238 = new Material(Ref.ID, "uranium_238", 0x32f032, METALLIC, U).asMetal(1405, 0);
     public static Material Uranium235 = new Material(Ref.ID, "uranium_235", 0x46fa46, METALLIC, U235).asMetal(1405, 0);
     public static Material Antimony = new Material(Ref.ID, "antimony", 0xdcdcf0, SHINY, Sb).asMetal(1449, 0);
@@ -159,7 +160,7 @@ public class Materials {
     public static Material Charcoal = new Material(Ref.ID, "charcoal", 0x644646, LIGNITE).asDust().mats(of(Carbon, 1));
     public static Material Coal = new Material(Ref.ID, "coal", 0x464646, LIGNITE).asDust().mats(of(Carbon, 2));
 
-    public static Material Diamond = new Material(Ref.ID, "diamond", 0x3de0e5, DIAMOND).asGemBasic(false, CRUSHED, CRUSHED_PURIFIED, CRUSHED_CENTRIFUGED, DUST_IMPURE, DUST_PURE).mats(of(Carbon, 128));
+    public static Material Diamond = new Material(Ref.ID, "diamond", 0x3de0e5, DIAMOND).asGemBasic(false, CRUSHED, CRUSHED_PURIFIED, CRUSHED_CENTRIFUGED, DUST_IMPURE, DUST_PURE).mats(of(Carbon, 128)).addTools(ItemTier.DIAMOND.getAttackDamage(), ItemTier.DIAMOND.getEfficiency(), ItemTier.DIAMOND.getMaxUses(), ItemTier.DIAMOND.getHarvestLevel());
     public static Material Emerald = new Material(Ref.ID, "emerald", 0x50ff50, GEM_V).asDust(ORE).mats(of(Beryllium, 3, Aluminium, 2, Silicon, 3, Oxygen, 18));
     public static Material Lazurite = new Material(Ref.ID, "lazurite", 0x6478ff, LAPIS).asDust().mats(of(Aluminium, 6, Silicon, 6, Calcium, 8, Sodium, 8));
     public static Material Ruby = new Material(Ref.ID, "ruby", 0xff6464, RUBY).asGemBasic(false, ORE).addTools(3.0F, 7.0F, 1024, 2).mats(of(Chrome, 1, Aluminium, 2, Oxygen, 3));
@@ -181,17 +182,17 @@ public class Materials {
     /** Metals **/
     public static Material BatteryAlloy = new Material(Ref.ID, "battery_alloy", 0x9c7ca0, DULL).asMetal(295, 0, PLATE).mats(of(Lead, 4, Antimony, 1));
     public static Material Brass = new Material(Ref.ID, "brass", 0xffb400, METALLIC).asMetal(1170, 0,  PLATE, ROD, HULL).mats(of(Zinc, 1, Copper, 3));
-    public static Material Bronze = new Material(Ref.ID, "bronze", 0xff8000, METALLIC).asMetal(1125, 0,  PLATE, ROD, GEAR, HULL, TURBINE_BLADE).mats(of(Tin, 1, Copper, 3)).addTools(2.0F, 6.0F, 350, 2)/*.addArmor(15,new int[]{3, 6, 8, 3}, 0.0F)*/;
+    public static Material Bronze = new Material(Ref.ID, "bronze", 0xff8000, METALLIC).asMetal(1125, 0,  PLATE, ROD, GEAR, HULL, TURBINE_BLADE).mats(of(Tin, 1, Copper, 3)).addTools(2.0F, 6.0F, 350, 2).addArmor(new int[]{1, 1, 2, 1}, 0.0F, 0.0F, 15);
     public static Material Cupronickel = new Material(Ref.ID, "cupronickel", 0xe39680, METALLIC).asMetal(1728, 0, PLATE).mats(of(Copper, 1, Nickel, 1));
     public static Material Electrum = new Material(Ref.ID, "electrum", 0xffff64, SHINY).asMetal(1330, 0, PLATE, ROD).mats(of(Silver, 1, Gold, 1));
-    public static Material Invar = new Material(Ref.ID, "invar", 0xb4b478, METALLIC).asMetal(1700, 0,  PLATE, ROD).mats(of(Iron, 2, Nickel, 1));
+    public static Material Invar = new Material(Ref.ID, "invar", 0xb4b478, METALLIC).asMetal(1700, 0,  PLATE, ROD).mats(of(Iron, 2, Nickel, 1)).addTools(Iron);
     public static Material Kanthal = new Material(Ref.ID, "kanthal", 0xc2d2df, METALLIC).asMetal(1800, 2200,  PLATE, ROD).mats(of(Iron, 1, Aluminium, 1, Chrome, 1));
     public static Material Magnalium = new Material(Ref.ID, "magnalium", 0xc8beff, DULL).asMetal(870, 0,  PLATE, ROD, TURBINE_BLADE).mats(of(Magnesium, 1, Aluminium, 2));
     public static Material Nichrome = new Material(Ref.ID, "nichrome", 0xcdcef6, METALLIC).asMetal(2700, 2500).mats(of(Nickel, 4, Chrome, 1));
     public static Material SolderingAlloy = new Material(Ref.ID, "soldering_alloy", 0xdcdce6, DULL).asMetal(400, 400, PLATE, ROD).mats(of(Tin, 9, Antimony, 1));
     public static Material Steel = new Material(Ref.ID, "steel", 0x808080, METALLIC).asMetal(1811, 1500, PLATE, ROD, GEAR, HULL, TURBINE_BLADE).addTools(2.5F, 6.0F, 512, 2).mats(of(Iron, 50, Carbon, 1));
     public static Material StainlessSteel = new Material(Ref.ID, "stainless_steel", 0xc8c8dc, SHINY).asMetal(1700, 1700, PLATE, ROD, GEAR, HULL).mats(of(Iron, 6, Chrome, 1, Manganese, 1, Nickel, 1));
-    public static Material WroughtIron = new Material(Ref.ID, "wrought_iron", 0xc8b4b4, METALLIC).asMetal(1811, 0, PLATE, ROD, GEAR, HULL).mats(of(Iron, 1));
+    public static Material WroughtIron = new Material(Ref.ID, "wrought_iron", 0xc8b4b4, METALLIC).asMetal(1811, 0, PLATE, ROD, GEAR, HULL).mats(of(Iron, 1)).addTools(IRON.getAttackDamage(), IRON.getEfficiency(), (int)(IRON.getMaxUses() * 1.5F), IRON.getHarvestLevel());
     public static Material TungstenSteel = new Material(Ref.ID, "tungstensteel", 0x6464a0, METALLIC).asMetal(3000, 3000, PLATE, ROD, GEAR, HULL, TURBINE_BLADE).addTools(6.0F, 10.0F, 5120, 4).mats(of(Steel, 1, Tungsten, 1));
     public static Material RedAlloy = new Material(Ref.ID, "red_alloy", 0xc80000, DULL).asMetal(295, 0, PLATE, ROD).mats(of(Copper, 1, Redstone, 4));
     public static Material Osmiridium = new Material(Ref.ID, "osmiridium", 0x6464ff, METALLIC).asMetal(3333, 3300,  PLATE, ROD, TURBINE_BLADE).mats(of(Iridium, 1, Osmium, 1));
@@ -266,6 +267,10 @@ public class Materials {
         Iron.remove(BOLT, SCREW);
         Steel.remove(BOLT, SCREW);
         TungstenSteel.remove(BOLT, SCREW);
+        Titanium.remove(BOLT, SCREW);
+        Tungsten.remove(BOLT, SCREW);
+        Invar.remove(BOLT, SCREW);
+        WroughtIron.remove(BOLT, SCREW);
 
         Gold.remove(ORE_SMALL, ROCK);
         Iron.remove(ORE_SMALL, ROCK);
