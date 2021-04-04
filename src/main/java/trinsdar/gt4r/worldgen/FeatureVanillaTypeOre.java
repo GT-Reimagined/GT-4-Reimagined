@@ -9,14 +9,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 
 import java.util.Random;
 
-public class FeatureVanillaTypeOre extends AntimatterFeature<NoFeatureConfig> {
+public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfig> {
     public FeatureVanillaTypeOre() {
-        super(NoFeatureConfig.field_236558_a_, WorldGenVanillaTypeVeins.class);
+        super(GT4ROreFeatureConfig.CODEC, WorldGenVanillaTypeVeins.class);
     }
 
     @Override
@@ -36,13 +37,14 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<NoFeatureConfig> {
 
     @Override
     public void build(BiomeGenerationSettingsBuilder event) {
-        event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG));
+        event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.withConfiguration(new GT4ROreFeatureConfig("iron", 1, "iron", "nickel", 5)));
     }
 
     @Override
-    public boolean generate(ISeedReader world, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+    public boolean generate(ISeedReader world, ChunkGenerator generator, Random rand, BlockPos pos, GT4ROreFeatureConfig config) {
         int chunkX = pos.getX() >> 4;
         int chunkZ = pos.getZ() >> 4;
+        //Feature.ORE.generate()
         WorldGenVanillaTypeVeins.generate(world, chunkX, chunkZ);
         return true;
     }

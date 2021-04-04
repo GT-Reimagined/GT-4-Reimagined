@@ -10,6 +10,7 @@ import trinsdar.gt4r.Ref;
 import static com.google.common.collect.ImmutableMap.of;
 import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.material.Element.*;
+import static muramasa.antimatter.material.MaterialTag.RUBBERTOOLS;
 import static muramasa.antimatter.material.TextureSet.NONE;
 import static net.minecraft.item.ItemTier.IRON;
 import static trinsdar.gt4r.data.Textures.*;
@@ -149,7 +150,7 @@ public class Materials {
     public static Material Wood = new Material(Ref.ID, "wood", 0x643200, WOOD).asDust(PLATE).addHandleStat(12, 0.0F).mats(of(Carbon, 1, Oxygen, 1, Hydrogen, 1));
     public static Material Stone = new Material(Ref.ID, "stone", 0xcdcdcd, ROUGH).asDust();
     public static Material Blaze = new Material(Ref.ID, "blaze", 0xffc800, NONE).asDust().mats(of(Sulfur, 1, DarkAsh, 1/*, Magic, 1*/));
-    public static Material Flint = new Material(Ref.ID, "flint", 0x002040, FLINT).asDust(GEM).addTools(1.25F, 2.5F, 128, 1, of(Enchantments.FIRE_ASPECT, 1)).mats(of(SiliconDioxide, 1));
+    public static Material Flint = new Material(Ref.ID, "flint", 0x002040, FLINT).asDust(GEM).addTools(1.25F, 2.5F, 128, 1, of(Enchantments.FIRE_ASPECT, 1), PICKAXE, AXE, SHOVEL, SWORD, HOE, MORTAR).mats(of(SiliconDioxide, 1));
     public static Material Uvarovite = new Material(Ref.ID, "uvarovite", 0xb4ffb4, DIAMOND).asDust().mats(of(Calcium, 3, Chrome, 2, Silicon, 3, Oxygen, 12));
 
     /** Gems **/
@@ -196,8 +197,8 @@ public class Materials {
     public static Material Osmiridium = new Material(Ref.ID, "osmiridium", 0x6464ff, METALLIC).asMetal(3333, 3300,  PLATE, ROD, TURBINE_BLADE).mats(of(Iridium, 1, Osmium, 1));
 
     /** Solids (Plastic Related Stuff)**/
-    public static Material Plastic = new Material(Ref.ID, "plastic", 0xc8c8c8, DULL).asSolid(295, 0, PLATE).addHandleStat(66, 0.5F).mats(of(Carbon, 1, Hydrogen, 2));
-    public static Material Rubber = new Material(Ref.ID, "rubber", 0x000000, SHINY).asSolid(295, 0, PLATE).addHandleStat(11, 0.4F).mats(of(Carbon, 5, Hydrogen, 8));
+    public static Material Plastic = new Material(Ref.ID, "plastic", 0xc8c8c8, DULL).asSolid(295, 0, PLATE, RUBBERTOOLS).addHandleStat(66, 0.5F).mats(of(Carbon, 1, Hydrogen, 2));
+    public static Material Rubber = new Material(Ref.ID, "rubber", 0x000000, SHINY).asSolid(295, 0, PLATE, RUBBERTOOLS).addHandleStat(11, 0.4F).mats(of(Carbon, 5, Hydrogen, 8));
 
     /** Stones **/
     public static Material Granite = new Material(Ref.ID, "granite", 0xa07882, ROUGH).asDust(ROCK).mats(of(Aluminium, 2, Flint, 1, Clay, 1));
