@@ -51,7 +51,7 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine {
                 }
 
                 @Override
-                protected boolean consumeGeneratorResources() {
+                protected boolean consumeGeneratorResources(boolean simulate) {
                     if (!activeRecipe.hasInputFluids()) {
                         throw new RuntimeException("Missing fuel in active generator recipe!");
                     }
@@ -64,10 +64,11 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine {
                             How much wiggle room? So, at optimal flow : generate regular. Otherwise, dampen by a factor of 1/(optimal-current) or 1/(current-optimal). Allow
                             consuming up to 1.5x optimal
                          */
-                        int amount = h.getInputTanks().drain(new FluidStack(activeRecipe.getInputFluids()[0],(int)(toConsume*1.5)), IFluidHandler.FluidAction.EXECUTE).getAmount();
+                        int amount = h.getInputTanks().drain(new FluidStack(activeRecipe.getInputFluids()[0],(int)(toConsume*1.5)), IFluidHandler.FluidAction.SIMULATE).getAmount();
 
                         if (amount > 0) {
-                            h.getInputTanks().drain(new FluidStack(activeRecipe.getInputFluids()[0], amount), IFluidHandler.FluidAction.EXECUTE);
+                            if (!simulate)
+                                h.getInputTanks().drain(new FluidStack(activeRecipe.getInputFluids()[0], amount), IFluidHandler.FluidAction.EXECUTE);
                             return amount;
                         }
                         return 0;
@@ -77,7 +78,7 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine {
                         if (consumed > recipeAmount) consumed *= Math.pow(1d/(consumed-recipeAmount),0.04);
                         //Input energy
                         int finalConsumed = consumed;
-                        tile.energyHandler.ifPresent(handler -> {
+                        if (!simulate) tile.energyHandler.ifPresent(handler -> {
                             handler.insert((long) (efficiency*activeRecipe.getPower()*finalConsumed/ recipeAmount), false);
                         });
                         return true;
