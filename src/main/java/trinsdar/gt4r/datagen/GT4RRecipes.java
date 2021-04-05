@@ -1,6 +1,14 @@
 package trinsdar.gt4r.datagen;
 
+import com.google.common.collect.ImmutableMap;
+import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
+import muramasa.antimatter.material.Material;
+import muramasa.antimatter.util.TagUtils;
+import net.minecraft.advancements.ICriterionInstance;
+import net.minecraft.item.DyeColor;
+import net.minecraft.item.Item;
+import net.minecraft.tags.ITag;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.loader.MaterialRecipeLoader;
@@ -15,11 +23,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Tags;
 import trinsdar.gt4r.loader.machines.FurnaceLoader;
 
+import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import static com.google.common.collect.ImmutableMap.of;
 import static muramasa.antimatter.Data.*;
+import static muramasa.antimatter.material.MaterialTag.RUBBERTOOLS;
 import static muramasa.antimatter.util.TagUtils.getForgeItemTag;
+import static trinsdar.gt4r.data.GT4RData.SPEAR;
 import static trinsdar.gt4r.loader.crafting.CraftingHelper.criterion;
 
 public class GT4RRecipes extends AntimatterRecipeProvider {
@@ -50,6 +63,31 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
 
 
         addItemRecipe(consumer,  Ref.ID,"sticky_piston_from_resin", "", "has_piston", criterion(Blocks.PISTON, this), Blocks.STICKY_PISTON, of('S', GT4RData.StickyResin, 'P', Blocks.PISTON), "S", "P");
+    }
+
+    protected void registerToolRecipes(Consumer<IFinishedRecipe> consumer, String providerDomain) {
+        super.registerToolRecipes(consumer, providerDomain);
+        List<Material> mainMats = AntimatterAPI.all(Material.class, providerDomain).stream().filter(m -> (m.getDomain().equals(providerDomain) && m.has(TOOLS))).collect(Collectors.toList());
+        List<Material> handleMats = AntimatterAPI.all(Material.class).stream().filter(m -> (m.getDomain().equals(providerDomain) && m.isHandle())).collect(Collectors.toList());
+
+        mainMats.forEach(main -> {
+            if (!main.has(INGOT) && !main.has(GEM)) return; // TODO: For time being
+            String ingotGem = main.has(INGOT) ? "ingots" : "gems";
+            String plate = main.has(PLATE) ? "plates" : ingotGem;
+            final ITag<Item> ingotTag = TagUtils.getForgeItemTag(ingotGem + "/" + main.getId()), plateTag = TagUtils.getForgeItemTag(plate + "/" + main.getId()), mainRodTag = TagUtils.getForgeItemTag("rods/" + main.getId());
+            final Supplier<ICriterionInstance> ingotTrigger = this.hasSafeItem(ingotTag), plateTrigger = this.hasSafeItem(plateTag), rodTrigger = this.hasSafeItem(mainRodTag);
+
+            for (Material handle : handleMats) {
+                String handleId = handle.getId().equals("wood") ? "wooden" : handle.getId();
+                final ITag<Item> rodTag = TagUtils.getForgeItemTag("rods/" + handleId);
+
+                ImmutableMap<Character, Object> map1 = main.getToolTypes().contains(HAMMER) && main.getToolTypes().contains(FILE) ? of('R', rodTag, 'P', plateTag, 'F', FILE.getTag(), 'H', HAMMER.getTag()) : of('R', rodTag, 'P', plateTag);
+                String[] strings = main.getToolTypes().contains(HAMMER) && main.getToolTypes().contains(FILE) ? new String[]{" FP", " RH", "R  "} : new String[]{"  P", " R ", "R  "};
+                if (main.getToolTypes().contains(PICKAXE))
+                    addStackRecipe(consumer, muramasa.antimatter.Ref.ID, SPEAR.getId() + "_" + main.getId() + "_" + handle.getId(), "antimatter_spears",
+                            "has_material_" + main.getId(), ingotTrigger, SPEAR.getToolStack(main, handle), map1, strings);
+            }
+        });
     }
 
     @Override
