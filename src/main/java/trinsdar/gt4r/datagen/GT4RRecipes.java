@@ -4,10 +4,15 @@ import com.google.common.collect.ImmutableMap;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.material.Material;
+import muramasa.antimatter.ore.BlockOre;
 import muramasa.antimatter.util.TagUtils;
 import net.minecraft.advancements.ICriterionInstance;
+import net.minecraft.data.CookingRecipeBuilder;
+import net.minecraft.data.ShapelessRecipeBuilder;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ITag;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.GT4RData;
@@ -30,8 +35,12 @@ import java.util.stream.Collectors;
 
 import static com.google.common.collect.ImmutableMap.of;
 import static muramasa.antimatter.Data.*;
+import static muramasa.antimatter.material.MaterialTag.GRINDABLE;
 import static muramasa.antimatter.material.MaterialTag.RUBBERTOOLS;
 import static muramasa.antimatter.util.TagUtils.getForgeItemTag;
+import static muramasa.antimatter.util.TagUtils.nc;
+import static muramasa.antimatter.util.Utils.getConventionalMaterialType;
+import static muramasa.antimatter.util.Utils.getConventionalStoneType;
 import static trinsdar.gt4r.data.GT4RData.SPEAR;
 import static trinsdar.gt4r.loader.crafting.CraftingHelper.criterion;
 
@@ -63,6 +72,52 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
 
 
         addItemRecipe(consumer,  Ref.ID,"sticky_piston_from_resin", "", "has_piston", criterion(Blocks.PISTON, this), Blocks.STICKY_PISTON, of('S', GT4RData.StickyResin, 'P', Blocks.PISTON), "S", "P");
+        shapeless(consumer, "gravel_to_flint", "mortar_recipes", "has_mortar", hasSafeItem(MORTAR.getTag()), new ItemStack(Items.FLINT), MORTAR.getTag(), Items.GRAVEL);
+    }
+
+    @Override
+    protected void registerMaterialRecipes(Consumer<IFinishedRecipe> consumer, String providerDomain) {
+        AntimatterAPI.all(BlockOre.class, providerDomain, o -> {
+            if (o.getOreType() != ORE) return;
+            if (!o.getMaterial().has(INGOT)) return;
+            Item ingot = INGOT.get(o.getMaterial());
+            ITag.INamedTag<Item> oreTag = TagUtils.getForgeItemTag(String.join("", getConventionalStoneType(o.getStoneType()), "_", getConventionalMaterialType(o.getOreType()), "/", o.getMaterial().getId()));
+            ITag.INamedTag<Item> ingotTag = TagUtils.getForgeItemTag("ingots/".concat(o.getMaterial().getId()));
+            CookingRecipeBuilder.blastingRecipe(Ingredient.fromTag(nc(oreTag)), ingot, 2.0F, 100)
+                    .addCriterion("has_material_" + o.getMaterial().getId(), hasItem(ingotTag))
+                    .build(consumer, fixLoc(providerDomain, o.getId().concat("_to_ingot")));
+            CookingRecipeBuilder.smeltingRecipe(Ingredient.fromTag(nc(oreTag)), ingot, 2.0F, 200)
+                    .addCriterion("has_material_" + o.getMaterial().getId(), hasItem(ingotTag))
+                    .build(consumer, fixLoc(providerDomain, o.getId().concat("_to_ingot")));
+        });
+        AntimatterAPI.all(Material.class, providerDomain).stream().filter(m -> m.has(DUST)).forEach(mat -> {
+            Item dust = DUST.get(mat);
+            if (mat.has(ROCK)) {
+                ITag<Item> rockTag = nc(TagUtils.getForgeItemTag("rocks/".concat(mat.getId())));
+                Item rock = ROCK.get(mat);
+                Item smallDust = DUST_SMALL.get(mat);
+                ShapelessRecipeBuilder.shapelessRecipe(dust)
+                        .addIngredient(rockTag).addIngredient(rockTag).addIngredient(rockTag)
+                        .addIngredient(rockTag).addIngredient(rockTag).addIngredient(rockTag)
+                        .addIngredient(rockTag).addIngredient(rockTag).addIngredient(nc(MORTAR.getTag()))
+                        .addCriterion("has_rock_" + mat.getId(), this.hasItem(rockTag))
+                        .setGroup("rocks_grind_to_dust").build(consumer, fixLoc(providerDomain, rock.getRegistryName().getPath() + "_grind_to_" + dust.getRegistryName().getPath()));
+
+                ShapelessRecipeBuilder.shapelessRecipe(smallDust)
+                        .addIngredient(rockTag).addIngredient(rockTag)
+                        .addIngredient(rockTag).addIngredient(rockTag).addIngredient(nc(MORTAR.getTag()))
+                        .addCriterion("has_rock_" + mat.getId(), this.hasItem(getForgeItemTag("rocks/".concat(mat.getId()))))
+                        .setGroup("rocks_grind_to_small_dust").build(consumer, fixLoc(providerDomain, rock.getRegistryName().getPath() + "_grind_to_" + smallDust.getRegistryName().getPath()));
+            }
+            if (mat.has(INGOT, GRINDABLE)) {
+                Item ingot = INGOT.get(mat);
+                ITag<Item> ingotTag = nc(TagUtils.getForgeItemTag("ingots/".concat(mat.getId())));
+                ShapelessRecipeBuilder.shapelessRecipe(dust).addIngredient(ingotTag).addIngredient(nc(MORTAR.getTag()))
+                        .addCriterion("has_ingot_" + mat.getId(), this.hasItem(nc(TagUtils.getForgeItemTag("ingots/".concat(mat.getId())))))
+                        .setGroup("ingots_grind_to_dust")
+                        .build(consumer, fixLoc(providerDomain,ingot.getRegistryName().getPath() + "_grind_to_" + dust.getRegistryName().getPath()));
+            }
+        });
     }
 
     protected void registerToolRecipes(Consumer<IFinishedRecipe> consumer, String providerDomain) {

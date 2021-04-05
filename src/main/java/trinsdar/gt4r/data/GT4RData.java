@@ -223,7 +223,7 @@ public class GT4RData {
     public static ItemBasic<?> ShapeGear = new ItemBasic<>(Ref.ID, "shape_gear").tip("Shape for making Gears");
     public static ItemBasic<?> ShapeBottle = new ItemBasic<>(Ref.ID, "shape_bottle").tip("Shape for making Bottles"); //TODO needed?
 
-    public static AntimatterToolType SPEAR = new AntimatterToolType(Ref.ANTIMATTER, "spear", 2, 1, 10, 3.0F, -2.5F){
+    public static AntimatterToolType SPEAR = new AntimatterToolType(Ref.ANTIMATTER, "spear", 2, 1, 10, 3.0F, -2.9F){
         @Override
         public IAntimatterTool instantiateTools(String domain) {
             return new MaterialSpear(domain, this, prepareInstantiation(domain));
