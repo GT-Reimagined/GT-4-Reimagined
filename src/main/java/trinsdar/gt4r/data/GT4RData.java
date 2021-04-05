@@ -1,18 +1,14 @@
 package trinsdar.gt4r.data;
 
 import com.google.common.collect.ImmutableMap;
-import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.AntimatterConfig;
 import muramasa.antimatter.cover.BaseCover;
-import muramasa.antimatter.cover.CoverDynamo;
-import muramasa.antimatter.cover.ICover;
 import muramasa.antimatter.item.ItemCover;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.MaterialColor;
-import net.minecraft.util.LazyValue;
+import muramasa.antimatter.tool.AntimatterToolType;
+import muramasa.antimatter.tool.IAntimatterTool;
+import muramasa.antimatter.util.Utils;
 import net.minecraftforge.api.distmarker.Dist;
 import trinsdar.gt4r.block.BlockCasing;
 import muramasa.antimatter.item.ItemBasic;
@@ -35,12 +31,15 @@ import trinsdar.gt4r.cover.CoverFusionInput;
 import trinsdar.gt4r.cover.CoverFusionOutput;
 import trinsdar.gt4r.cover.CoverPump;
 import trinsdar.gt4r.items.ItemIntCircuit;
+import trinsdar.gt4r.items.MaterialSpear;
 import trinsdar.gt4r.tree.BlockRubberLeaves;
 import trinsdar.gt4r.tree.BlockRubberLog;
 import trinsdar.gt4r.tree.BlockRubberSapling;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.item.Item;
+
+import java.util.function.Supplier;
 
 import static trinsdar.gt4r.data.Materials.*;
 
@@ -103,7 +102,7 @@ public class GT4RData {
 
     public static void init(Dist side) {
         if (side.isClient()){
-            RecipeMaps.clientMaps();
+            RecipeRenderer.clientMaps();
         }
     }
 
@@ -224,6 +223,25 @@ public class GT4RData {
     public static ItemBasic<?> ShapeGear = new ItemBasic<>(Ref.ID, "shape_gear").tip("Shape for making Gears");
     public static ItemBasic<?> ShapeBottle = new ItemBasic<>(Ref.ID, "shape_bottle").tip("Shape for making Bottles"); //TODO needed?
 
+    public static AntimatterToolType SPEAR = new AntimatterToolType(Ref.ANTIMATTER, "spear", 2, 1, 10, 3.0F, -2.5F){
+        @Override
+        public IAntimatterTool instantiateTools(String domain) {
+            return new MaterialSpear(domain, this, prepareInstantiation(domain));
+        }
+
+        @Override
+        public IAntimatterTool instantiateTools(String domain, Supplier<Item.Properties> properties) {
+            return new MaterialSpear(domain, this, properties.get());
+        }
+
+        private Item.Properties prepareInstantiation(String domain) {
+            if (domain.isEmpty()) Utils.onInvalidData("An AntimatterToolType was instantiated with an empty domain name!");
+            Item.Properties properties = new Item.Properties().group(getItemGroup());
+            if (!getRepairability()) properties.setNoRepair();
+            return properties;
+        }
+    };
+
     //STONE should be the only non-removable StoneType. It serves as the foundation. It is also used natively by BlockRock
     //TODO move vanilla stone types (and (vanilla) materials) to Antimatter
     public static StoneType STONE = new StoneType(Ref.ID, "stone", Materials.Stone, new Texture("minecraft", "block/stone"), SoundType.STONE, false).setState(Blocks.STONE);
@@ -236,9 +254,10 @@ public class GT4RData {
     public static StoneType SAND = new StoneType(Ref.ID, "sand", Sand, new Texture("minecraft", "block/sand"), SoundType.SAND, false).setState(Blocks.SAND);
     public static StoneType SAND_RED = new StoneType(Ref.ID, "sand_red", RedSand, new Texture("minecraft", "block/red_sand"), SoundType.SAND, false).setState(Blocks.RED_SAND);
     public static StoneType SANDSTONE = new StoneType(Ref.ID, "sandstone", Sandstone, new Texture("minecraft", "block/sandstone"), SoundType.STONE, false).setState(Blocks.SANDSTONE);
-    public static StoneType BASALT_VANILLA = new StoneType(Ref.ID, "vanilla_basalt", Materials.Basalt, new Texture("minecraft", "block/basalt_side"), SoundType.STONE, false).setState(Blocks.BASALT);
+    public static StoneType BASALT_VANILLA = new StoneType(Ref.ID, "vanilla_basalt", BasaltVanilla, new Texture("minecraft", "block/basalt_side"), SoundType.BASALT, false).setState(Blocks.BASALT);
+    public static StoneType BLACKSTONE = new StoneType(Ref.ID, "blackstone", Blackstone, new Texture("minecraft", "block/blackstone"), SoundType.STONE, false).setState(Blocks.BLACKSTONE);
 
-    public static StoneType NETHERRACK = new StoneType(Ref.ID, "netherrack", Materials.Netherrack, new Texture("minecraft", "block/netherrack"), SoundType.STONE, false).setState(Blocks.NETHERRACK);
+    public static StoneType NETHERRACK = new StoneType(Ref.ID, "netherrack", Materials.Netherrack, new Texture("minecraft", "block/netherrack"), SoundType.NETHERRACK, false).setState(Blocks.NETHERRACK);
     public static StoneType ENDSTONE = new StoneType(Ref.ID, "endstone", Materials.Endstone, new Texture("minecraft", "block/end_stone"), SoundType.STONE, false).setState(Blocks.END_STONE);
 
     public static StoneType GRANITE_RED = new StoneType(Ref.ID, "granite_red", Materials.RedGranite, new Texture(Ref.ID, "block/stone/granite_red"), SoundType.STONE, true);
