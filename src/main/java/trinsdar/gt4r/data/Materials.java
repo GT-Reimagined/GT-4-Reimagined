@@ -26,16 +26,16 @@ public class Materials {
     public static Material Beryllium = new Material(Ref.ID, "beryllium", 0x64b464, METALLIC, Be).asMetal(1560, 0, PLATE);
     public static Material Carbon = new Material(Ref.ID, "carbon", 0x141414, DULL, C).asDust(TURBINE_BLADE, PLATE);
     public static Material Chrome = new Material(Ref.ID, "chrome", 0xffe6e6, SHINY, Cr).asMetal(2180, 1700, PLATE);
-    public static Material Gold = new Material(Ref.ID, "gold", 0xffff1e, SHINY, Au).asMetal(1337, 0, ROD, GEAR, ORE,  PLATE, ROD);
-    public static Material Iridium = new Material(Ref.ID, "iridium", 0xf0f0f5, DULL, Ir).asMetal(2719, 3000, PLATE, ORE);
+    public static Material Gold = new Material(Ref.ID, "gold", 0xffe650, SHINY, Au).asMetal(1337, 0, ROD, GEAR, ORE,  PLATE, ROD).harvestLevel(2);
+    public static Material Iridium = new Material(Ref.ID, "iridium", 0xf0f0f5, DULL, Ir).asMetal(2719, 3000, PLATE, ORE).harvestLevel(3);
     public static Material Iron = new Material(Ref.ID, "iron", 0xc8c8c8, METALLIC, Fe).asMetal(1811, 1500, ORE, PLATE, ROD).asPlasma().addTools(IRON.getAttackDamage(), IRON.getEfficiency(), IRON.getMaxUses(), IRON.getHarvestLevel(),  of(Enchantments.SHARPNESS, 1));
-    public static Material Lead = new Material(Ref.ID, "lead", 0x8c648c, DULL, Pb).asMetal(600, 0, PLATE, PLATE_DENSE, ROD);
+    public static Material Lead = new Material(Ref.ID, "lead", 0x8c648c, DULL, Pb).asMetal(600, 0, PLATE, PLATE_DENSE, ROD).harvestLevel(2);
     public static Material Manganese = new Material(Ref.ID, "manganese", 0xfafafa, DULL, Mn).asMetal(1519, 0);
     public static Material Nickel = new Material(Ref.ID, "nickel", 0xc8c8fa, METALLIC, Ni).asMetal(1728, 0, PLATE).asPlasma();
     public static Material Osmium = new Material(Ref.ID, "osmium", 0x3232ff, METALLIC, Os).asMetal(3306, 3306, PLATE, ROD, TURBINE_BLADE);
-    public static Material Platinum = new Material(Ref.ID, "platinum", 0xffffc8, SHINY, Pt).asMetal(2041, 0, PLATE, ROD, ORE);
+    public static Material Platinum = new Material(Ref.ID, "platinum", 0xffffc8, SHINY, Pt).asMetal(2041, 0, PLATE, ROD, ORE).harvestLevel(2);
     public static Material Plutonium = new Material(Ref.ID, "plutonium_244", 0xf03232, METALLIC, Pu).asMetal(912, 0);
-    public static Material Silver = new Material(Ref.ID, "silver", 0xdcdcff, SHINY, Ag).asMetal(1234, 0, PLATE);
+    public static Material Silver = new Material(Ref.ID, "silver", 0xdcdcff, SHINY, Ag).asMetal(1234, 0, PLATE).harvestLevel(2);
     public static Material Thorium = new Material(Ref.ID, "thorium", 0x001e00, SHINY, Th).asMetal(2115, 0);
     public static Material Titanium = new Material(Ref.ID, "titanium", 0xdca0f0, METALLIC, Ti).asMetal(1941, 1500,  PLATE, ROD, GEAR, HULL).addArmor(new int[]{2, 2, 2, 2}, 1.0F, 0.0F, 20).addTools(3.5F, 8.0F, 1600, 3);
     public static Material Tungsten = new Material(Ref.ID, "tungsten", 0x323232, METALLIC, W).asMetal(3695, 2500, PLATE, ROD).addTools(3.5F, 8.0F, 2560, 3);
@@ -129,11 +129,11 @@ public class Materials {
     public static Material Ash = new Material(Ref.ID, "ash", 0x969696, DULL).asDust();
     public static Material Calcite = new Material(Ref.ID, "calcite", 0xfae6dc, DULL).asDust().mats(of(Calcium, 1, Carbon, 1, Oxygen, 3));
     public static Material Cassiterite = new Material(Ref.ID, "cassiterite", 0xdcdcdc, METALLIC).asDust(ORE).mats(of(Tin, 1, Oxygen, 2)).setOreMulti(2);
-    public static Material Chromite = new Material(Ref.ID, "chromite", 0x23140F, DULL).asDust(ORE).mats(of(Iron, 1, Chrome, 2, Oxygen, 4));
+    public static Material Chromite = new Material(Ref.ID, "chromite", 0x23140F, DULL).asDust(ORE).mats(of(Iron, 1, Chrome, 2, Oxygen, 4)).harvestLevel(3);
     public static Material Clay = new Material(Ref.ID, "clay", 0xc8c8dc, ROUGH).asDust().mats(of(Sodium, 2, Lithium, 1, Aluminium, 2, Silicon, 2));
     public static Material DarkAsh = new Material(Ref.ID, "dark_ash", 0x323232, DULL).asDust().mats(of(Carbon, 2));
     public static Material Energium = new Material(Ref.ID, "energium", 0xff0000, DIAMOND).asDust();
-    public static Material Galena = new Material(Ref.ID, "galena", 0x643c64, DULL).asDust(ORE).mats(of(Lead, 3, Silver, 3, Sulfur, 2));
+    public static Material Galena = new Material(Ref.ID, "galena", 0x643c64, DULL).asDust(ORE).mats(of(Lead, 3, Silver, 3, Sulfur, 2)).harvestLevel(2);
     public static Material Grossular = new Material(Ref.ID, "grossular", 0xc86400, ROUGH).asDust().mats(of(Calcium, 3, Aluminium, 2, Silicon, 3, Oxygen, 12));
     public static Material Obsidian = new Material(Ref.ID, "obsidian", 0x503264, DULL).asDust().mats(of(Magnesium, 1, Iron, 1, Silicon, 2, Oxygen, 8));
     public static Material Phosphate = new Material(Ref.ID, "phosphate", 0xffff00, DULL).asDust().mats(of(Phosphor, 1, Oxygen, 4));
@@ -146,8 +146,8 @@ public class Materials {
     public static Material Spessartine = new Material(Ref.ID, "spessartine", 0xff6464, DULL).asDust().mats(of(Aluminium, 2, Manganese, 3, Silicon, 3, Oxygen, 12));
     public static Material Sphalerite = new Material(Ref.ID, "sphalerite", 0xffffff, DULL).asDust(ORE).mats(of(Zinc, 1, Sulfur, 1));
     public static Material Tetrahedrite = new Material(Ref.ID, "tetrahedrite", 0xc82000, DULL).asDust(ORE).mats(of(Copper, 3, Antimony, 1, Sulfur, 3, Iron, 1));
-    public static Material Tungstate = new Material(Ref.ID, "tungstate", 0x373223, DULL).asDust(ORE).mats(of(Tungsten, 1, Lithium, 2, Oxygen, 4)).setOreMulti(2);
-    public static Material Uraninite = new Material(Ref.ID, "uraninite", 0x232323, DULL).asDust(ORE).mats(of(Uranium238, 1, Oxygen, 2));
+    public static Material Tungstate = new Material(Ref.ID, "tungstate", 0x373223, DULL).asDust(ORE).mats(of(Tungsten, 1, Lithium, 2, Oxygen, 4)).setOreMulti(2).harvestLevel(2);
+    public static Material Uraninite = new Material(Ref.ID, "uraninite", 0x232323, DULL).asDust(ORE).mats(of(Uranium238, 1, Oxygen, 2)).harvestLevel(2);
     public static Material Wood = new Material(Ref.ID, "wood", 0x643200, WOOD).asDust(PLATE).addHandleStat(12, 0.0F).mats(of(Carbon, 1, Oxygen, 1, Hydrogen, 1));
     public static Material Stone = new Material(Ref.ID, "stone", 0xcdcdcd, ROUGH).asDust();
     public static Material Blaze = new Material(Ref.ID, "blaze", 0xffc800, NONE).asDust().mats(of(Sulfur, 1, DarkAsh, 1/*, Magic, 1*/)).addHandleStat(-10, -0.5F, of(Enchantments.FIRE_ASPECT, 1));
@@ -160,14 +160,14 @@ public class Materials {
     public static Material Charcoal = new Material(Ref.ID, "charcoal", 0x644646, LIGNITE).asDust().mats(of(Carbon, 1));
     public static Material Coal = new Material(Ref.ID, "coal", 0x464646, LIGNITE).asDust().mats(of(Carbon, 2));
 
-    public static Material Diamond = new Material(Ref.ID, "diamond", 0x3de0e5, DIAMOND).asGemBasic(false, CRUSHED, CRUSHED_PURIFIED, CRUSHED_CENTRIFUGED, DUST_IMPURE, DUST_PURE).mats(of(Carbon, 128)).addTools(ItemTier.DIAMOND.getAttackDamage(), ItemTier.DIAMOND.getEfficiency(), ItemTier.DIAMOND.getMaxUses(), ItemTier.DIAMOND.getHarvestLevel());
+    public static Material Diamond = new Material(Ref.ID, "diamond", /*0x3de0e5*/0xc8ffff, DIAMOND).asGemBasic(false, CRUSHED, CRUSHED_PURIFIED, CRUSHED_CENTRIFUGED, DUST_IMPURE, DUST_PURE).mats(of(Carbon, 128)).addTools(ItemTier.DIAMOND.getAttackDamage(), ItemTier.DIAMOND.getEfficiency(), ItemTier.DIAMOND.getMaxUses(), ItemTier.DIAMOND.getHarvestLevel());
     public static Material Emerald = new Material(Ref.ID, "emerald", 0x50ff50, GEM_V).asDust(ORE).mats(of(Beryllium, 3, Aluminium, 2, Silicon, 3, Oxygen, 18));
     public static Material Lazurite = new Material(Ref.ID, "lazurite", 0x6478ff, LAPIS).asDust().mats(of(Aluminium, 6, Silicon, 6, Calcium, 8, Sodium, 8));
-    public static Material Ruby = new Material(Ref.ID, "ruby", 0xff6464, RUBY).asGemBasic(false, ORE).addTools(3.0F, 7.0F, 1024, 2).mats(of(Chrome, 1, Aluminium, 2, Oxygen, 3));
-    public static Material Sapphire = new Material(Ref.ID, "sapphire", 0x6464c8, GEM_V).asGemBasic(false, ORE).addTools(3.0F, 7.0F, 1024, 2).mats(of(Aluminium, 2, Oxygen, 3));
-    public static Material Sodalite = new Material(Ref.ID, "sodalite", 0x1414ff, LAPIS).asDust(ORE).mats(of(Aluminium, 3, Silicon, 3, Sodium, 4, Chlorine, 1)).setOreMulti(6);
+    public static Material Ruby = new Material(Ref.ID, "ruby", 0xff6464, RUBY).asGemBasic(false, ORE).addTools(3.0F, 7.0F, 1024, 3).mats(of(Chrome, 1, Aluminium, 2, Oxygen, 3));
+    public static Material Sapphire = new Material(Ref.ID, "sapphire", 0x6464c8, GEM_V).asGemBasic(false, ORE).addTools(3.0F, 7.0F, 1024, 3).mats(of(Aluminium, 2, Oxygen, 3));
+    public static Material Sodalite = new Material(Ref.ID, "sodalite", 0x1414ff, LAPIS).asDust(ORE).mats(of(Aluminium, 3, Silicon, 3, Sodium, 4, Chlorine, 1)).setOreMulti(6).harvestLevel(2);
     //public static Material Glass = new Material(Ref.ID, "glass", 0xfafafa, SHINY).asDust(PLATE, LENS).mats(of(SiliconDioxide, 1));
-    public static Material Olivine = new Material(Ref.ID, "olivine", 0x96ff96, RUBY).asGemBasic(false, ORE).mats(of(Magnesium, 2, Iron, 1, Silicon, 1, Oxygen, 4));
+    public static Material Olivine = new Material(Ref.ID, "olivine", 0x96ff96, RUBY).asGemBasic(false, ORE).mats(of(Magnesium, 2, Iron, 1, Silicon, 1, Oxygen, 4)).harvestLevel(3);
     public static Material EnderPearl = new Material(Ref.ID, "enderpearl", 0x6cdcc8, SHINY).asDust().mats(of(Beryllium, 1, Potassium, 4, Nitrogen, 5, Chlorine, 6));
     public static Material EnderEye = new Material(Ref.ID, "endereye", 0xa0fae6, SHINY).asDust().mats(of(EnderPearl, 1, Blaze, 1));
     public static Material Lapis = new Material(Ref.ID, "lapis", 0x4646dc, LAPIS).asDust(CRUSHED, CRUSHED_PURIFIED, CRUSHED_CENTRIFUGED, DUST_IMPURE, DUST_PURE).mats(of(Lazurite, 12, Sodalite, 2, Pyrite, 1, Calcite, 1)).setOreMulti(6);
@@ -177,7 +177,7 @@ public class Materials {
 
     /** **/
     public static Material Redstone = new Material(Ref.ID, "redstone", 0xc80000, ROUGH).asDust(CRUSHED, CRUSHED_PURIFIED, CRUSHED_CENTRIFUGED, DUST_IMPURE, DUST_PURE).mats(of(Silicon, 1, Pyrite, 5, Ruby, 1, Mercury, 3)).setOreMulti(4);
-    public static Material Cinnabar = new Material(Ref.ID, "cinnabar", 0x960000, ROUGH).asDust(ORE).mats(of(Mercury, 1, Sulfur, 1)).setOreMulti(2);
+    public static Material Cinnabar = new Material(Ref.ID, "cinnabar", 0x960000, ROUGH).asDust(ORE).mats(of(Mercury, 1, Sulfur, 1)).setOreMulti(2).harvestLevel(2);
 
     /** Metals **/
     public static Material BatteryAlloy = new Material(Ref.ID, "battery_alloy", 0x9c7ca0, DULL).asMetal(295, 0, PLATE).mats(of(Lead, 4, Antimony, 1));

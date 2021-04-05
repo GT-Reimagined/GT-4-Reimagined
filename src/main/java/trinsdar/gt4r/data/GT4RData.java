@@ -2,6 +2,7 @@ package trinsdar.gt4r.data;
 
 import com.google.common.collect.ImmutableMap;
 import muramasa.antimatter.AntimatterConfig;
+import muramasa.antimatter.Data;
 import muramasa.antimatter.cover.BaseCover;
 import muramasa.antimatter.item.ItemCover;
 import muramasa.antimatter.material.Material;
@@ -10,6 +11,7 @@ import muramasa.antimatter.tool.AntimatterToolType;
 import muramasa.antimatter.tool.IAntimatterTool;
 import muramasa.antimatter.util.Utils;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.ToolType;
 import trinsdar.gt4r.block.BlockCasing;
 import muramasa.antimatter.item.ItemBasic;
 import muramasa.antimatter.item.ItemBattery;
@@ -250,15 +252,17 @@ public class GT4RData {
     public static StoneType DIORITE = new StoneType(Ref.ID, "diorite", Diorite, new Texture("minecraft", "block/diorite"), SoundType.STONE, AntimatterConfig.WORLD.VANILLA_STONE_GEN || muramasa.antimatter.Ref.debugStones).setState(Blocks.DIORITE);
     public static StoneType ANDESITE = new StoneType(Ref.ID, "andesite", Andesite, new Texture("minecraft", "block/andesite"), SoundType.STONE, AntimatterConfig.WORLD.VANILLA_STONE_GEN || muramasa.antimatter.Ref.debugStones).setState(Blocks.ANDESITE);
 
-    public static StoneType GRAVEL = new StoneType(Ref.ID, "gravel", Gravel, new Texture("minecraft", "block/gravel"), SoundType.GROUND, false).setState(Blocks.GRAVEL);
-    public static StoneType SAND = new StoneType(Ref.ID, "sand", Sand, new Texture("minecraft", "block/sand"), SoundType.SAND, false).setState(Blocks.SAND);
-    public static StoneType SAND_RED = new StoneType(Ref.ID, "sand_red", RedSand, new Texture("minecraft", "block/red_sand"), SoundType.SAND, false).setState(Blocks.RED_SAND);
+    public static StoneType GRAVEL = new StoneType(Ref.ID, "gravel", Gravel, new Texture("minecraft", "block/gravel"), SoundType.GROUND, false).setState(Blocks.GRAVEL).setGravity(true).setBlockMaterial(net.minecraft.block.material.Material.SAND).setHardnessAndResistance(0.6F).setRequiresTool(false).setToolType(ToolType.SHOVEL);
+    public static StoneType SAND = new StoneType(Ref.ID, "sand", Sand, new Texture("minecraft", "block/sand"), SoundType.SAND, false).setState(Blocks.SAND).setGravity(true).setBlockMaterial(net.minecraft.block.material.Material.SAND).setHardnessAndResistance(0.5F).setRequiresTool(false).setToolType(ToolType.SHOVEL);
+    public static StoneType SAND_RED = new StoneType(Ref.ID, "sand_red", RedSand, new Texture("minecraft", "block/red_sand"), SoundType.SAND, false).setState(Blocks.RED_SAND).setGravity(true).setBlockMaterial(net.minecraft.block.material.Material.SAND).setHardnessAndResistance(0.5F).setRequiresTool(false).setToolType(ToolType.SHOVEL);
     public static StoneType SANDSTONE = new StoneType(Ref.ID, "sandstone", Sandstone, new Texture("minecraft", "block/sandstone"), SoundType.STONE, false).setState(Blocks.SANDSTONE);
-    public static StoneType BASALT_VANILLA = new StoneType(Ref.ID, "vanilla_basalt", BasaltVanilla, new Texture("minecraft", "block/basalt_side"), SoundType.BASALT, false).setState(Blocks.BASALT);
+    public static StoneType BASALT_VANILLA = new StoneType(Ref.ID, "vanilla_basalt", BasaltVanilla, new Texture("minecraft", "block/basalt_side"), SoundType.BASALT, false).setState(Blocks.BASALT).setHardnessAndResistance(1.25F, 4.2F);
     public static StoneType BLACKSTONE = new StoneType(Ref.ID, "blackstone", Blackstone, new Texture("minecraft", "block/blackstone"), SoundType.STONE, false).setState(Blocks.BLACKSTONE);
 
-    public static StoneType NETHERRACK = new StoneType(Ref.ID, "netherrack", Materials.Netherrack, new Texture("minecraft", "block/netherrack"), SoundType.NETHERRACK, false).setState(Blocks.NETHERRACK);
-    public static StoneType ENDSTONE = new StoneType(Ref.ID, "endstone", Materials.Endstone, new Texture("minecraft", "block/end_stone"), SoundType.STONE, false).setState(Blocks.END_STONE);
+    public static StoneType NETHERRACK = new StoneType(Ref.ID, "netherrack", Materials.Netherrack, new Texture("minecraft", "block/netherrack"), SoundType.NETHERRACK, false).setState(Blocks.NETHERRACK).setHardnessAndResistance(0.4F);
+    public static StoneType SOUL_SAND = new StoneType(Ref.ID, "soul_sand", Data.NULL, new Texture("minecraft", "block/soul_sand"), SoundType.SOUL_SAND, false).setState(Blocks.SOUL_SAND).setHardnessAndResistance(0.5F).setRequiresTool(false).setToolType(ToolType.SHOVEL);
+    public static StoneType SOUL_SOIL = new StoneType(Ref.ID, "soul_soil", Data.NULL, new Texture("minecraft", "block/soul_soil"), SoundType.SOUL_SOIL, false).setState(Blocks.SOUL_SOIL).setHardnessAndResistance(0.5F).setRequiresTool(false).setToolType(ToolType.SHOVEL);
+    public static StoneType ENDSTONE = new StoneType(Ref.ID, "endstone", Materials.Endstone, new Texture("minecraft", "block/end_stone"), SoundType.STONE, false).setState(Blocks.END_STONE).setHardnessAndResistance(3.0F, 9.0F);
 
     public static StoneType GRANITE_RED = new StoneType(Ref.ID, "granite_red", Materials.RedGranite, new Texture(Ref.ID, "block/stone/granite_red"), SoundType.STONE, true);
     public static StoneType GRANITE_BLACK = new StoneType(Ref.ID, "granite_black", Materials.BlackGranite, new Texture(Ref.ID, "block/stone/granite_black"), SoundType.STONE, true);
