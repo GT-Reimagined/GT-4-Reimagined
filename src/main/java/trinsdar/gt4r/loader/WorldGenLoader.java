@@ -32,6 +32,5 @@ public class WorldGenLoader {
         WorldGenStoneLayer.add(GT4RData.BLUE_SCHIST, 1, World.OVERWORLD);
         WorldGenStoneLayer.add(GT4RData.KIMBERLITE, 3, World.OVERWORLD);
         WorldGenStoneLayer.add(GT4RData.QUARTZITE, 4, World.OVERWORLD);
-
     }
 }
