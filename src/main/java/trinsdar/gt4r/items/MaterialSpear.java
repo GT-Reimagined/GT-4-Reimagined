@@ -35,7 +35,7 @@ public class MaterialSpear extends MaterialTool {
     }
 
     public float getReach(){
-        return 8.0F;
+        return 7.0F;
     };
 
     public void extendReach(PlayerEntity player) {
