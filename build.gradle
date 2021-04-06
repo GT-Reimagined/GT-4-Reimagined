@@ -4,6 +4,10 @@ buildscript {
         jcenter()
         mavenCentral()
         gradlePluginPortal()
+        maven {
+            name = 'sponge'
+            url = 'https://repo.spongepowered.org/maven'
+        }
         maven { url 'http://dvs1.progwml6.com/files/maven' }
         maven {
             url "https://plugins.gradle.org/m2/"
@@ -11,6 +15,7 @@ buildscript {
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.+', changing: true
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
     }
 }
 
@@ -88,9 +93,10 @@ minecraft {
 
             // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'DEBUG'
-
+            property 'mixin.env.disableRefMap', 'true'
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
+            arg "-mixin.config=gt4r.mixins.json"
             if (findProject(':AntimatterAPI') != null) arg "-mixin.config=antimatter.mixins.json"
             if (shouldCheckEnv()) {
                 environment 'MOD_CLASSES', getEnv()
@@ -112,6 +118,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
             //jvmArgs '-javaagent:/opt/JavaHot/hotswap-agent.jar -XX:TraceRedefineClasses=1'
             //Comment this if you aren't developing against antimatter locally.
+            arg "-mixin.config=gt4r.mixins.json"
             if (findProject(':AntimatterAPI') != null) arg "-mixin.config=antimatter.mixins.json"
             if (shouldCheckEnv()) {
                 environment 'MOD_CLASSES', getEnv()
@@ -138,6 +145,7 @@ minecraft {
             }
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
+            arg "-mixin.config=gt4r.mixins.json"
             args '--mod', 'gt4r', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources')
 
             mods {
@@ -156,6 +164,7 @@ dependencies {
 
     runtimeOnly fg.deobf("curse.maven:world_stripper-250603:3142092")
     runtimeOnly fg.deobf("curse.maven:world_edit-225608:3172951")
+    runtimeOnly fg.deobf("curse.maven:spartan_weaponry-278141:3164046")
 
     if (findProject(':AntimatterAPI') != null) {
         implementation project(':AntimatterAPI')
@@ -169,6 +178,8 @@ dependencies {
         runtimeOnly fg.deobf("com.github.GregTech-Intergalactical:TesseractAPI:${tesseract_version}")
         compileOnly ("com.github.GregTech-Intergalactical:TesseractAPI:${tesseract_version}")
     }
+
+    annotationProcessor 'org.spongepowered:mixin:0.8.2:processor'
 
     compileOnly fg.deobf("mezz.jei:jei-${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${jei_version}")
@@ -194,10 +205,17 @@ publishing {
     }
 }
 
+apply plugin: 'org.spongepowered.mixin'
+
+mixin {
+    add sourceSets.main, "gt4r.refmap.json"
+}
+
 jar {
     zip64 true
     manifest {
         attributes([
+                "MixinConfigs": "gt4r.mixins.json",
                 "Specification-Title": project.name,
                 "Specification-Vendor": "GT4 Reimagined",
                 "Specification-Version": project.version,
