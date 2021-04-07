@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
-import trinsdar.gt4r.data.GT4RData;
+import trinsdar.gt4r.data.Attributes;
 
 @Mixin(ServerPlayNetHandler.class)
 public abstract class ServerPlayNetHandlerMixin {
@@ -14,15 +14,15 @@ public abstract class ServerPlayNetHandlerMixin {
     @Shadow
     public ServerPlayerEntity player;
 
-    @ModifyConstant(
-            //remap = false,
+    /*@ModifyConstant(
+            remap = false,
             method = "processUseEntity",
             constant = {
                     @Constant(doubleValue = 36.0D)
             }
     )
     private double getExtendedAttackReachSquared(double value) {
-        double extendedAttackReachValue = player.getAttributeValue(GT4RData.ATTACK_REACH.get()) * 2.0D;
+        double extendedAttackReachValue = player.getAttributeValue(Attributes.ATTACK_REACH.get()) * 2.0D;
         return extendedAttackReachValue * extendedAttackReachValue;
-    }
+    }*/
 }

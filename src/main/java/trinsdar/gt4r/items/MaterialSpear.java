@@ -1,10 +1,7 @@
 package trinsdar.gt4r.items;
 
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import muramasa.antimatter.material.Material;
 import muramasa.antimatter.tool.AntimatterToolType;
-import muramasa.antimatter.tool.MaterialSword;
 import muramasa.antimatter.tool.MaterialTool;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
@@ -12,14 +9,12 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeMod;
-import net.minecraftforge.common.ToolType;
-import trinsdar.gt4r.data.GT4RData;
+import trinsdar.gt4r.data.Attributes;
 
 import java.util.UUID;
 
@@ -73,7 +68,7 @@ public class MaterialSpear extends MaterialTool {
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType slotType, ItemStack stack) {
         Multimap<Attribute, AttributeModifier>modifiers = super.getAttributeModifiers(slotType, stack);
         if (slotType == EquipmentSlotType.MAINHAND) {
-            modifiers.put(GT4RData.ATTACK_REACH.get(), new AttributeModifier(ATTACK_REACH_MODIFIER, "Tool modifier", getReach(), AttributeModifier.Operation.ADDITION));
+            modifiers.put(Attributes.ATTACK_REACH.get(), new AttributeModifier(ATTACK_REACH_MODIFIER, "Tool modifier", getReach(), AttributeModifier.Operation.ADDITION));
         }
         return modifiers;
     }
