@@ -208,5 +208,9 @@ public class Parts {
                 Treetap, of('P', TagUtils.getItemTag(new ResourceLocation("minecraft", "planks"))), " P ", "PPP", "P  ");
         provider.shapeless(output, Ref.ID, "bronze_dust", "had_copper", provider.hasSafeItem(DUST.getMaterialTag(Bronze)),
                 DUST.get(Bronze, 4), DUST.get(Copper), DUST.get(Copper), DUST.get(Copper), DUST.get(Tin));
+        provider.addItemRecipe(output, Ref.ID, "int_circuit", "parts", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),
+                INT_CIRCUITS_ITEMS.get(0), of('R', ROD.getMaterialTag(Iron), 'P', PLATE.getMaterialTag(Iron), 'H', HAMMER.getTag(), 'W', WRENCH.getTag()), "PHP", "RRR", "PWP");
+        provider.addItemRecipe(output, Ref.ID, "int_circuit1", "parts", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),
+                INT_CIRCUITS_ITEMS.get(0), of('R', ROD.getMaterialTag(WroughtIron), 'P', PLATE.getMaterialTag(WroughtIron), 'H', HAMMER.getTag(), 'W', WRENCH.getTag()), "PHP", "RRR", "PWP");
     }
 }

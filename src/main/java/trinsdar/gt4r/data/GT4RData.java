@@ -55,10 +55,14 @@ public class GT4RData {
     static {
         {
             ImmutableMap.Builder<Integer, RecipeIngredient> builder = ImmutableMap.builder();
+            ImmutableMap.Builder<Integer, Item> builderItems = ImmutableMap.builder();
             for (int i = 0; i <= 24; i++) {
-                builder.put(i, RecipeIngredient.of(new ItemIntCircuit(Ref.ID, "int_circuit_"+i, i).tip("ID: " + i), 1).setNoConsume());
+                Item circuit = new ItemIntCircuit(Ref.ID, "int_circuit_"+i, i).tip("ID: " + i);
+                builder.put(i, RecipeIngredient.of(circuit, 1).setNoConsume());
+                builderItems.put(i, circuit);
             }
             INT_CIRCUITS = builder.build();
+            INT_CIRCUITS_ITEMS = builderItems.build();
         }
         {
             ImmutableMap.Builder<Tier, Material> builder = ImmutableMap.builder();
@@ -339,6 +343,7 @@ public class GT4RData {
     public static final BlockRubberSapling RUBBER_SAPLING = new BlockRubberSapling(Ref.ID, "rubber_sapling");
 
     public static final ImmutableMap<Integer, RecipeIngredient> INT_CIRCUITS;
+    public static final ImmutableMap<Integer, Item> INT_CIRCUITS_ITEMS;
     public static final ImmutableMap<Tier, Material> TIER_MATERIALS;
     public static ImmutableMap<Tier, Wire<?>> TIER_WIRES;
     public static ImmutableMap<Tier, Cable<?>> TIER_CABLES;
