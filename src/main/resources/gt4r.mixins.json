@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "trinsdar.gt4r.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "gt4r.refmap.json",
+  "client": [
+    "GameRendererMixin"
+  ],
+  "server": [
+    "ServerPlayNetHandlerMixin"
+  ],
+  "mixins": [
+    "PlayerEntityMixin"
+  ],
+  "minVersion": "0.8"
+}

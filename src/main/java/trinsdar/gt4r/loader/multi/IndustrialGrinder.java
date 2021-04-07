@@ -5,6 +5,7 @@ import muramasa.antimatter.material.MaterialTypeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import trinsdar.gt4r.data.GT4RData;
+import trinsdar.gt4r.data.Materials;
 
 import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
@@ -60,12 +61,12 @@ public class IndustrialGrinder {
 
         INDUSTRIAL_GRINDING.RB().ii(of(new ItemStack(GT4RData.GRANITE_BLACK.getState().getBlock(), 16))).fi(Water.getLiquid(1000)).io(DUST.get(BlackGranite, 16), DUST_SMALL.get(Thorium, 1)).add(1600, 120);
         INDUSTRIAL_GRINDING.RB().ii(of(new ItemStack(GT4RData.GRANITE_RED.getState().getBlock(), 16))).fi(Water.getLiquid(1000)).io(DUST.get(RedGranite, 16), DUST_SMALL.get(Uranium238, 1)).add(1600, 120);
-        INDUSTRIAL_GRINDING.RB().ii(of(new ItemStack(Items.END_STONE, 1))).fi(Water.getLiquid(1000)).io(DUST.get(Endstone, 16), DUST_TINY.get(Tungsten, 1)).add(1600, 120);
+        INDUSTRIAL_GRINDING.RB().ii(of(new ItemStack(Items.END_STONE, 1))).fi(Water.getLiquid(1000)).io(DUST.get(Materials.Endstone, 16), DUST_TINY.get(Tungsten, 1)).add(1600, 120);
         INDUSTRIAL_GRINDING.RB().ii(of(ORE.getMaterialTag(Coal), 1)).fi(Water.getLiquid(1000)).io(new ItemStack(Items.COAL), DUST.get(Coal, 1), DUST_SMALL.get(Thorium, 1)).add(100, 120);
-        INDUSTRIAL_GRINDING.RB().ii(of(ORE.getMaterialTag(Quartz), 1)).fi(Water.getLiquid(1000)).io(new ItemStack(Items.QUARTZ, 4), DUST_SMALL.get(Netherrack, 2)).add(100, 120);
+        INDUSTRIAL_GRINDING.RB().ii(of(ORE.getMaterialTag(Quartz), 1)).fi(Water.getLiquid(1000)).io(new ItemStack(Items.QUARTZ, 4), DUST_SMALL.get(Materials.Netherrack, 2)).add(100, 120);
         INDUSTRIAL_GRINDING.RB().ii(of(Items.TERRACOTTA, 2)).fi(Water.getLiquid(1000)).io(DUST.get(Clay, 2)).add(100, 120);
-        INDUSTRIAL_GRINDING.RB().ii(of(Items.NETHERRACK, 16)).fi(Water.getLiquid(1000)).io(DUST.get(Netherrack, 16), DUST_TINY.get(Gold, 1)).add(1600, 120);
-        INDUSTRIAL_GRINDING.RB().ii(of(Items.NETHERRACK, 8)).fi(Mercury.getLiquid(1000)).io(DUST.get(Netherrack, 8), DUST_TINY.get(Gold, 5)).add(1600, 120);
+        INDUSTRIAL_GRINDING.RB().ii(of(Items.NETHERRACK, 16)).fi(Water.getLiquid(1000)).io(DUST.get(Materials.Netherrack, 16), DUST_TINY.get(Gold, 1)).add(1600, 120);
+        INDUSTRIAL_GRINDING.RB().ii(of(Items.NETHERRACK, 8)).fi(Mercury.getLiquid(1000)).io(DUST.get(Materials.Netherrack, 8), DUST_TINY.get(Gold, 5)).add(1600, 120);
     }
 
     private static void addGrinderRecipe(Material ore, Material fluid, ItemStack... outputs){

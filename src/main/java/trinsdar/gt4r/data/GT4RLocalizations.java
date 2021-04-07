@@ -30,6 +30,7 @@ public class GT4RLocalizations {
             add("block.gt4r.rubber_leaves", "Rubber Leaves");
             add("block.gt4r.rubber_log", "Rubber Log");
             add("block.gt4r.rubber_sapling", "Rubber Sapling");
+            add("attribute.name.generic.gt4r.attackReach", "Attack Reach");
         }
 
         @Override

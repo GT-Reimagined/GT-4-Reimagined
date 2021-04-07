@@ -88,7 +88,7 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
                     .build(consumer, fixLoc(providerDomain, o.getId().concat("_to_ingot")));
             CookingRecipeBuilder.smeltingRecipe(Ingredient.fromTag(nc(oreTag)), ingot, 2.0F, 200)
                     .addCriterion("has_material_" + o.getMaterial().getId(), hasItem(ingotTag))
-                    .build(consumer, fixLoc(providerDomain, o.getId().concat("_to_ingot")));
+                    .build(consumer, fixLoc(providerDomain, o.getId().concat("_to_ingot_smelting")));
         });
         AntimatterAPI.all(Material.class, providerDomain).stream().filter(m -> m.has(DUST)).forEach(mat -> {
             Item dust = DUST.get(mat);

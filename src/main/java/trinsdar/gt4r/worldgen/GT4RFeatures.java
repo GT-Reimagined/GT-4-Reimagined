@@ -19,7 +19,7 @@ public class GT4RFeatures {
 
     //public static final GT4ROreFeatureConfig IRON = new GT4ROreFeatureConfig("iron", 1, "iron", "nickel", 5);
     public static final GT4ROreFeatureConfig COPPER = new GT4ROreFeatureConfig("copper", 0, 100, 15, 10, Copper, Gold, 2, World.OVERWORLD);
-    public static final GT4ROreFeatureConfig TIN = new GT4ROreFeatureConfig("tin", 0, 100, 25, 6, Tin, Iron, 3, World.OVERWORLD);
+    public static final GT4ROreFeatureConfig TIN = new GT4ROreFeatureConfig("tin", 0, 70, 25, 8, Tin, Iron, 1, World.OVERWORLD);
     public static final GT4ROreFeatureConfig URANITE = new GT4ROreFeatureConfig("uranite", 0, 100, 8, 4, Uraninite, NULL, 0, World.OVERWORLD).setInvalidBiomes(DEAD);
     public static final GT4ROreFeatureConfig URANITE_DEAD = new GT4ROreFeatureConfig("uranite_dead", 0, 100, 20, 4, Uraninite, NULL, 0, World.OVERWORLD).setValidBiomes(DEAD);
     public static final GT4ROreFeatureConfig CASSITERITE = new GT4ROreFeatureConfig("cassiterite", 30, 80, 2, 32, Cassiterite, Tin, 5, World.OVERWORLD).setValidBiomes(MUSHROOM, MOUNTAIN, CONIFEROUS, COLD).setInvalidBiomes(JUNGLE);
