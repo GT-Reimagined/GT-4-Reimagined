@@ -1,5 +1,6 @@
 package trinsdar.gt4r.data;
 
+import muramasa.antimatter.Antimatter;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.recipe.Recipe;
 import muramasa.antimatter.recipe.map.RecipeBuilder;
@@ -8,6 +9,7 @@ import muramasa.antimatter.util.Utils;
 import net.minecraft.item.ItemStack;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class RecipeBuilders {
 
@@ -28,7 +30,7 @@ public class RecipeBuilders {
     public static class UniversalMaceratingBuilder extends RecipeBuilder {
         @Override
         public Recipe add() {
-            return addRecipeToMap(RecipeMaps.MACERATING, super.add());
+            return addRecipeToSingleOutputMap(RecipeMaps.MACERATING, super.add());
         }
     }
 
@@ -71,13 +73,13 @@ public class RecipeBuilders {
         return recipe;
     }
 
-    public static Recipe addRecipeToMap(RecipeMap map, Recipe recipe) {
+    public static Recipe addRecipeToSingleOutputMap(RecipeMap map, Recipe recipe) {
         try {
             if (recipe.getPower() <= Tier.LV.getVoltage()) {
-                map.RB().ii(recipe.getInputItems()).io(recipe.getOutputItems()).add(recipe.getDuration(), recipe.getPower());
+                map.RB().ii(recipe.getInputItems()).io(Objects.requireNonNull(recipe.getOutputItems())[0]).add(recipe.getDuration(), recipe.getPower());
             }
         } catch (Exception e) {
-            System.out.println("bleh");
+            Antimatter.LOGGER.info("Recipe " + recipe.toString() + " Failed");
         }
         return recipe;
     }

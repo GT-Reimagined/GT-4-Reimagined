@@ -122,8 +122,6 @@ public class Materials {
     public static Material Glowstone = new Material(Ref.ID, "glowstone", 0xffff00, SHINY).asDust();
     //public static Material Oilsands = new Material(Ref.ID, "oilsands", 0x0a0a0a, NONE).asDust(ORE);
     public static Material RareEarth = new Material(Ref.ID, "rare_earth", 0x808064, FINE).asDust();
-    public static Material Endstone = new Material(Ref.ID, "endstone", 0xffffff, DULL).asDust();
-    public static Material Netherrack = new Material(Ref.ID, "netherrack", 0xc80000, DULL).asDust();
     public static Material Almandine = new Material(Ref.ID, "almandine", 0xff0000, ROUGH).asDust().mats(of(Aluminium, 2, Iron, 3, Silicon, 3, Oxygen, 12));
     public static Material Andradite = new Material(Ref.ID, "andradite", 0x967800, ROUGH).asDust().mats(of(Calcium, 3, Iron, 2, Silicon, 3, Oxygen, 12));
     public static Material Ash = new Material(Ref.ID, "ash", 0x969696, DULL).asDust();
@@ -149,7 +147,6 @@ public class Materials {
     public static Material Tungstate = new Material(Ref.ID, "tungstate", 0x373223, DULL).asDust(ORE).mats(of(Tungsten, 1, Lithium, 2, Oxygen, 4)).setOreMulti(2).harvestLevel(2);
     public static Material Uraninite = new Material(Ref.ID, "uraninite", 0x232323, DULL).asDust(ORE).mats(of(Uranium238, 1, Oxygen, 2)).harvestLevel(2);
     public static Material Wood = new Material(Ref.ID, "wood", 0x643200, WOOD).asDust(PLATE).addHandleStat(12, 0.0F).mats(of(Carbon, 1, Oxygen, 1, Hydrogen, 1));
-    public static Material Stone = new Material(Ref.ID, "stone", 0xcdcdcd, ROUGH).asDust();
     public static Material Blaze = new Material(Ref.ID, "blaze", 0xffc800, NONE).asDust().mats(of(Sulfur, 1, DarkAsh, 1/*, Magic, 1*/)).addHandleStat(-10, -0.5F, of(Enchantments.FIRE_ASPECT, 1));
     public static Material Flint = new Material(Ref.ID, "flint", 0x002040, FLINT).asDust(GEM).addTools(1.25F, 2.5F, 128, 1, of(Enchantments.FIRE_ASPECT, 1), PICKAXE, AXE, SHOVEL, SWORD, HOE, MORTAR).mats(of(SiliconDioxide, 1));
     public static Material Uvarovite = new Material(Ref.ID, "uvarovite", 0xb4ffb4, DIAMOND).asDust().mats(of(Calcium, 3, Chrome, 2, Silicon, 3, Oxygen, 12));
@@ -203,15 +200,6 @@ public class Materials {
     public static Material Rubber = new Material(Ref.ID, "rubber", 0x000000, SHINY).asSolid(295, 0, PLATE, RUBBERTOOLS).addHandleStat(11, 0.4F).mats(of(Carbon, 5, Hydrogen, 8));
 
     /** Stones **/
-    public static Material Granite = new Material(Ref.ID, "granite", 0xa07882, ROUGH).asDust(ROCK).mats(of(Aluminium, 2, Flint, 1, Clay, 1));
-    public static Material Diorite = new Material(Ref.ID, "diorite", 0xf0f0f0, ROUGH).asDust(ROCK);
-    public static Material Andesite = new Material(Ref.ID, "andesite", 0xbfbfbf, ROUGH).asDust(ROCK);
-
-    public static Material Gravel = new Material(Ref.ID, "gravel", 0xcdcdcd, ROUGH).asDust(ROCK);
-    public static Material Sand = new Material(Ref.ID, "sand", 0xfafac8, ROUGH).asDust(ROCK);
-    public static Material RedSand = new Material(Ref.ID, "red_sand", 0xff8438, ROUGH).asDust(ROCK);
-    public static Material Sandstone = new Material(Ref.ID, "sandstone", 0xfafac8, ROUGH).asDust(ROCK);
-
     public static Material RedGranite = new Material(Ref.ID, "red_granite", 0xff0080, ROUGH).asDust(ROCK).addHandleStat(74, 1.0F, of(Enchantments.UNBREAKING, 1)).mats(of(Aluminium, 2, Oxygen, 3));
     public static Material BlackGranite = new Material(Ref.ID, "black_granite", 0x0a0a0a, ROUGH).asDust(ROCK).addHandleStat(74, 1.0F, of(Enchantments.UNBREAKING, 1)).mats(of(SiliconDioxide, 4));
     public static Material Marble = new Material(Ref.ID, "marble", 0xc8c8c8, NONE).asDust(ROCK).mats(of(Magnesium, 1, Calcite, 7));
@@ -224,7 +212,6 @@ public class Materials {
     public static Material Quartzite = new Material(Ref.ID, "quartzite", 0xe6cdcd, QUARTZ).asGemBasic(false, ROCK).mats(of(Silicon, 1, Oxygen, 2));
     public static Material Prismarine = new Material(Ref.ID, "prismarine", 0x6eb2a5, NONE).asDust().mats(of(Potassium, 2, Oxygen, 8, Manganese, 1, Silicon, 5));
     public static Material DarkPrismarine = new Material(Ref.ID, "dark_prismarine", 0x587d6c, NONE).asDust();
-    public static Material Blackstone = new Material(Ref.ID, "blackstone", 0x2c272d, NONE).asDust();
 
     /** Ore Stones **/
     public static Material Bauxite = new Material(Ref.ID, "bauxite", 0xc86400, DULL).asDust(ORE).mats(of(Aluminium, 16, Hydrogen, 10, Oxygen, 11, Titanium, 1)).setOreMulti(2);
@@ -241,7 +228,6 @@ public class Materials {
 
     /** VANILLA **/
     public static Material Netherite = new Material(Ref.ID, "netherite", 0x2D2425, ROUGH).asSolid(PLATE, ROD);
-    public static Material BasaltVanilla = new Material(Ref.ID, "vanilla_basalt", 0x1e1414, NONE);
 
     static {
         /*ELEC.add(Methane, CarbonDioxide, NitrogenDioxide, Toluene, VinylChloride, SulfurDioxide, SulfurTrioxide, Dimethylamine, DinitrogenTetroxide, NitricOxide, Ammonia, Chloromethane, Tetrafluoroethylene, CarbonMonoxide, Ethylene, Propane, Ethenone, Ethanol, Glyceryl, SodiumPersulfate, Dichlorobenzene, Styrene, Isoprene, Tetranitromethane, Epichlorohydrin, NitricAcid, Dimethylhydrazine, Chloramine, Dimethyldichlorosilane, HydrofluoricAcid, Chloroform, BisphenolA, AceticAcid, Acetone, Methanol, VinylAcetate, MethylAcetate, AllylChloride, HypochlorousAcid, Cumene, PhosphoricAcid, SulfuricAcid, Benzene, Phenol, Glycerol, SodiumSulfide, Almandine, Andradite, BandedIron, Calcite, Cassiterite, Chalcopyrite, Cobaltite, Galena, Garnierite, Grossular, Bauxite, Magnesite, Magnetite, Molybdenite, Obsidian, Phosphate, Polydimethylsiloxane, Pyrite, Pyrolusite, Pyrope, RockSalt, Saltpeter, SiliconDioxide, Massicot, ArsenicTrioxide, CobaltOxide, Magnesia, Quicklime, Potash, SodaAsh, PhosphorousPentoxide, SodiumHydroxide, Spessartine, Sphalerite, Uvarovite, PotassiumFeldspar, Biotite, RedGranite, Bastnasite, Pentlandite, Spodumene, Glauconite, Bentonite, Malachite, Barite, Talc, AntimonyTrioxide, CupricOxide, Ferrosilite, Quartzite, Charcoal, Coal, Lignite, Diamond, Emerald, Ruby, Sapphire, Tanzanite, Topaz, Olivine, Opal, Amethyst, EnderPearl, StainlessSteel, Steel, Ultimet, IronMagnetic, SteelMagnetic, NeodymiumMagnetic, Osmiridium);

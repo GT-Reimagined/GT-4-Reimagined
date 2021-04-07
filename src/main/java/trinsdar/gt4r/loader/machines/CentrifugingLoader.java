@@ -41,9 +41,9 @@ public class CentrifugingLoader {
         CENTRIFUGING.RB().ii(of(MYCELIUM, 64)).io(new ItemStack(Items.SAND, 32), new ItemStack(CLAY_BALL, 8), new ItemStack(BROWN_MUSHROOM, 16), new ItemStack(RED_MUSHROOM, 16)).add(3906, 16);
         add(Lapis,20, 1792);
         CENTRIFUGING.RB().ii(of(StickyResin, 8)).io(DUST.get(Rubber, 28), new ItemStack(Plantball, 4)).add(1250,10);
-        CENTRIFUGING.RB().ii(of(DUST.getMaterialTag(Materials.Netherrack), 64)).io(new ItemStack(GOLD_NUGGET, 4), new ItemStack(REDSTONE, 4), new ItemStack(GUNPOWDER, 8), DUST.get(Coal, 4), DUST.get(Sulfur, 4), DUST.get(Phosphor, 2)).add(3125,16);
-        add(Materials.Granite, 16, 1500);
-        CENTRIFUGING.RB().ii(of(DUST.getMaterialTag(Materials.Diorite), 16)).io(DUST.get(Nickel, 1)).add(2250, 16);
+        CENTRIFUGING.RB().ii(of(DUST.getMaterialTag(Netherrack), 64)).io(new ItemStack(GOLD_NUGGET, 4), new ItemStack(REDSTONE, 4), new ItemStack(GUNPOWDER, 8), DUST.get(Coal, 4), DUST.get(Sulfur, 4), DUST.get(Phosphor, 2)).add(3125,16);
+        add(Granite, 16, 1500);
+        CENTRIFUGING.RB().ii(of(DUST.getMaterialTag(Diorite), 16)).io(DUST.get(Nickel, 1)).add(2250, 16);
         add(Electrum, 16, 312);
         add(Invar, 16, 312);
         add(Bronze, 16, 312);
@@ -100,7 +100,7 @@ public class CentrifugingLoader {
         addMethaneRecipe(ENCHANTED_GOLDEN_APPLE, 1, new ItemStack(GOLD_INGOT, 64));
         addMethaneRecipe(GOLDEN_CARROT, 1, new ItemStack(GOLD_NUGGET, 6));
         addMethaneRecipe(GLISTERING_MELON_SLICE, 8, new ItemStack(GOLD_NUGGET, 6));
-        CENTRIFUGING.RB().ii(of(DUST.getMaterialTag(Materials.Endstone), 64)).io(new ItemStack(Items.SAND, 48), DUST.get(Tungsten, 1)).fo(Helium.getGas(4000), Helium3.getGas(4000)).add(19500,16);
+        CENTRIFUGING.RB().ii(of(DUST.getMaterialTag(Endstone), 64)).io(new ItemStack(Items.SAND, 48), DUST.get(Tungsten, 1)).fo(Helium.getGas(4000), Helium3.getGas(4000)).add(19500,16);
         add(RedGarnet, 16, 937);
         add(YellowGarnet, 16, 1093);
         CENTRIFUGING.RB().ii(of(DUST.getMaterialTag(DarkAsh), 2)).io(DUST.get(Ash, 2)).add(78, 16);

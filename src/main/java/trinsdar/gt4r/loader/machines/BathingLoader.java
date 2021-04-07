@@ -10,6 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import static muramasa.antimatter.Data.CRUSHED;
 import static muramasa.antimatter.Data.CRUSHED_PURIFIED;
 import static muramasa.antimatter.Data.DUST;
+import static muramasa.antimatter.Data.Stone;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.BATHING;
 
