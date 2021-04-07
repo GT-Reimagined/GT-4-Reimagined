@@ -265,6 +265,7 @@ public class Materials {
 */
 
         Lava.mats(of(Electrum, 1, Copper, 4, Tungsten, 1, Basalt, 1));
+        Granite.mats(of(Aluminium, 2, Flint, 1, Clay, 1));
 
         Bronze.remove(BOLT, SCREW);
         Iron.remove(BOLT, SCREW);

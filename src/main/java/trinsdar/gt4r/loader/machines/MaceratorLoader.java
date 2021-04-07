@@ -6,6 +6,7 @@ import muramasa.antimatter.util.Utils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraftforge.common.Tags;
+import trinsdar.gt4r.data.Materials;
 
 import static muramasa.antimatter.Data.*;
 import static trinsdar.gt4r.data.Materials.*;
@@ -19,7 +20,7 @@ public class MaceratorLoader {
             RecipeIngredient ore = RecipeIngredient.of(ORE.getMaterialTag(m),1);
             RecipeIngredient crushed = RecipeIngredient.of(CRUSHED.getMaterialTag(m), 1);
             ItemStack crushedStack = CRUSHED.get(m,1);
-            ItemStack stoneDust = DUST.get(Stone, 1);
+            ItemStack stoneDust = DUST.get(Materials.Stone, 1);
 
             //TODO better way to do this
             Material oreByProduct1 = m.getByProducts().size() >= 1 ? m.getByProducts().get(0) : m.getMacerateInto();
