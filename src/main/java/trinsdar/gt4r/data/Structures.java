@@ -38,6 +38,21 @@ public class Structures {
             .at("M", IMPLOSION_COMPRESSOR).at("C", REINFORCED_MACHINE_CASING).at("c", STANDARD_MACHINE_CASING)
             .build().offset(1, -3).min(18, REINFORCED_MACHINE_CASING).min(8, STANDARD_MACHINE_CASING)
         );
+        INDUSTRIAL_GRINDER.setStructure(b -> b
+                .of("ccc ", "ccc ", "ccc ").of("CCC ", "CWCM", "CCC ").of(0)
+                .at("M", INDUSTRIAL_GRINDER).at("C", REINFORCED_MACHINE_CASING).at("c", STANDARD_MACHINE_CASING).at("W", WATER)
+                .build().offset(3, -1)
+        );
+        INDUSTRIAL_SAWMILL.setStructure(b -> b
+                .of("ccc", "cCc", "ccc").of("   ", " M ", "   ")
+                .at("M", INDUSTRIAL_SAWMILL).at("C", REINFORCED_MACHINE_CASING).at("c", STANDARD_MACHINE_CASING)
+                .build().offset(1, -1)
+        );
+        DISTILLATION_TOWER.setStructure(b -> b
+                .of("CCC ", "CCCM", "CCC ").of("ccc ", "c c ", "ccc ").of("CCC ", "C C ", "CCC ").of(1).of("CCC ", "CCC ", "CCC ")
+                .at("M", DISTILLATION_TOWER).at("C", STANDARD_MACHINE_CASING).at("c", ADVANCED_MACHINE_CASING)
+                .build().offset(3, 0)
+        );
         LARGE_STEAM_TURBINE.setStructure(b -> b
             .of("CCCC", "CCCC", "CCCC").of("CHHC", "EAAM", "CHHC").of(0)
             .at("M", LARGE_STEAM_TURBINE).at("C", STANDARD_MACHINE_CASING).at("H", STANDARD_MACHINE_CASING, HATCH_FLUID_I, HATCH_FLUID_O).at("E", HATCH_DYNAMO)

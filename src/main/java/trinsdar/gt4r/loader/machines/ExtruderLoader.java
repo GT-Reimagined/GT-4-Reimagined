@@ -24,17 +24,17 @@ public class ExtruderLoader {
         ROD.all().forEach(m -> {
             if (!m.has(INGOT)) return;
             int euPerTick = m == Rubber ? 32 : 128;
-            EXTRUDING.RB().ii(INGOT.getMaterialIngredient(m), getReusable(GT4RData.ShapeRod)).io(ROD.get(m, 2)).add((m.getMass() * 2), euPerTick);
+            EXTRUDING.RB().ii(INGOT.getMaterialIngredient(m, 1), getReusable(GT4RData.ShapeRod)).io(ROD.get(m, 2)).add((m.getMass() * 2), euPerTick);
             if (m == Rubber){
-                EXTRUDING.RB().ii(DUST.getMaterialIngredient(m), getReusable(GT4RData.ShapeRod)).io(ROD.get(m, 2)).add(m.getMass() * 2, euPerTick);
+                EXTRUDING.RB().ii(DUST.getMaterialIngredient(m, 1), getReusable(GT4RData.ShapeRod)).io(ROD.get(m, 2)).add(m.getMass() * 2, euPerTick);
             }
         });
         PLATE.all().forEach(m -> {
             if (!m.has(INGOT)) return;
             int euPerTick = m == Rubber ? 32 : 128;
-            EXTRUDING.RB().ii(INGOT.getMaterialIngredient(m), getReusable(GT4RData.ShapePlate)).io(PLATE.get(m, 1)).add(m.getMass(), euPerTick);
+            EXTRUDING.RB().ii(INGOT.getMaterialIngredient(m, 1), getReusable(GT4RData.ShapePlate)).io(PLATE.get(m, 1)).add(m.getMass(), euPerTick);
             if (m == Rubber){
-                EXTRUDING.RB().ii(DUST.getMaterialIngredient(m), getReusable(GT4RData.ShapePlate)).io(PLATE.get(m, 1)).add(m.getMass(), euPerTick);
+                EXTRUDING.RB().ii(DUST.getMaterialIngredient(m, 1), getReusable(GT4RData.ShapePlate)).io(PLATE.get(m, 1)).add(m.getMass(), euPerTick);
             }
         });
         AntimatterAPI.all(Wire.class).forEach(t -> {
@@ -73,10 +73,10 @@ public class ExtruderLoader {
             if (!m.has(INGOT)) return;
             EXTRUDING.RB().ii(INGOT.getMaterialIngredient(m, 4), getReusable(GT4RData.ShapeGear)).io(GEAR.get(m, 1)).add((m.getMass() * 5), 128);
         });
-        EXTRUDING.RB().ii(INGOT.getMaterialIngredient(Tin), getReusable(GT4RData.ShapeCell)).io(new ItemStack(GT4RData.CellTin)).add(128, 32);
-        EXTRUDING.RB().ii(DUST.getMaterialIngredient(Rubber), getReusable(GT4RData.ShapeIngot)).io(INGOT.get(Rubber, 1)).add(10, 16);
-        EXTRUDING.RB().ii(INGOT.getMaterialIngredient(WroughtIron), getReusable(GT4RData.ShapeIngot)).io(new ItemStack(Items.IRON_INGOT)).add(10, 64);
-        EXTRUDING.RB().ii(DUST.getMaterialIngredient(SiliconDioxide), getReusable(GT4RData.ShapeBottle)).io(new ItemStack(Items.GLASS_BOTTLE)).add(32, 16);
+        EXTRUDING.RB().ii(INGOT.getMaterialIngredient(Tin, 1), getReusable(GT4RData.ShapeCell)).io(new ItemStack(GT4RData.CellTin)).add(128, 32);
+        EXTRUDING.RB().ii(DUST.getMaterialIngredient(Rubber, 1), getReusable(GT4RData.ShapeIngot)).io(INGOT.get(Rubber, 1)).add(10, 16);
+        EXTRUDING.RB().ii(INGOT.getMaterialIngredient(WroughtIron, 1), getReusable(GT4RData.ShapeIngot)).io(new ItemStack(Items.IRON_INGOT)).add(10, 64);
+        EXTRUDING.RB().ii(DUST.getMaterialIngredient(SiliconDioxide, 1), getReusable(GT4RData.ShapeBottle)).io(new ItemStack(Items.GLASS_BOTTLE)).add(32, 16);
     }
 
     private static RecipeIngredient getReusable(ITag.INamedTag<Item> tag){

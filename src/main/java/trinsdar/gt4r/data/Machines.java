@@ -67,20 +67,20 @@ public class Machines {
     public static BasicMachine STEAM_COMPRESSOR = new BasicMachine(Ref.ID, "steam_compressor", BRONZE, GUI, STEAM, ITEM, FLUID, STEAM_COMPRESSING, Textures.TIER_HANDLER).setTile(m -> () -> new TileEntitySteamMachine(m));
     public static BasicMachine STEAM_ALLOY_SMELTER = new BasicMachine(Ref.ID, "steam_alloy_smelter",BRONZE, GUI, STEAM, ITEM, FLUID, STEAM_ALLOY_SMELTING, Textures.BOILER_HANDLER).setTile(m -> () -> new TileEntitySteamMachine(m));
 
-    public static BasicMultiMachine COKE_OVEN = new BasicMultiMachine(Ref.ID, "coke_oven", COKING, LV, GUI, ITEM).setTile(m -> () -> new TileEntityCokeOven(m));
-    public static BasicMultiMachine PRIMITIVE_BLAST_FURNACE = new BasicMultiMachine(Ref.ID, "primitive_blast_furnace", BASIC_BLASTING, BRONZE, GUI, ITEM).setTile(m -> () -> new TileEntityPrimitiveBlastFurnace(m));
-    public static MultiMachine CHARCOAL_PIT = (MultiMachine) new MultiMachine(Ref.ID, "charcoal_pit", LV).setTile(m -> () -> new TileEntityCharcoalPit(m));
-    public static BasicMultiMachine BLAST_FURNACE = new BasicMultiMachine(Ref.ID, "industrial_blast_furnace", BLASTING, MV, GUI, ITEM, ENERGY).setTile(m -> () -> new TileEntityIndustrialBlastFurnace(m));
-    public static BasicMultiMachine IMPLOSION_COMPRESSOR = new BasicMultiMachine(Ref.ID, "implosion_compressor", IMPLOSION_COMPRESSING, LV, GUI, ITEM,ENERGY).setTile(m -> () -> new TileEntityImplosionCompressor(m));
-    public static BasicMultiMachine INDUSTRIAL_GRINDER = new BasicMultiMachine(Ref.ID, "industrial_grinder", INDUSTRIAL_GRINDING, MV, GUI, ITEM, ENERGY, FLUID).setTile(m -> () -> new TileEntityIndustrialGrinder(m));
-    public static BasicMultiMachine INDUSTRIAL_SAWMILL = new BasicMultiMachine(Ref.ID, "industrial_sawmill", INDUSTRIAL_SAWMILLING, MV, GUI, ITEM, ENERGY, FLUID).setTile(m -> () -> new TileEntityIndustrialSawmill(m));
-    public static BasicMultiMachine DISTILLATION_TOWER = new BasicMultiMachine(Ref.ID, "distillation_tower", DISTILLING, MV, GUI, ITEM, ENERGY, FLUID).setTile(m -> () -> new TileEntityDistillationTower(m));
-    public static BasicMultiMachine VACUUM_FREEZER = new BasicMultiMachine(Ref.ID, "vacuum_freezer", VACUUM_FREEZING, LV, GUI, ITEM, FLUID,ENERGY).setTile(m -> () -> new TileEntityVacuumFreezer(m));
-    public static MultiMachine THERMAL_BOILER = (MultiMachine) new MultiMachine(Ref.ID, "thermal_boiler", LV, GUI, ITEM, FLUID).setTile(m -> () -> new TileEntityLargeBoiler(m));
-    public static MultiMachine LARGE_STEAM_TURBINE = (MultiMachine) new MultiMachine(Ref.ID, "large_steam_turbine", EV, GUI, FLUID,ENERGY, STEAM_FUELS, GENERATOR).setTile(m -> () -> new TileEntityLargeTurbine(m));
-    public static MultiMachine LARGE_GAS_TURBINE = (MultiMachine) new MultiMachine(Ref.ID, "large_gas_turbine", IV, GUI, FLUID,ENERGY, GAS_FUELS, GENERATOR).setTile(m -> () -> new TileEntityLargeTurbine(m));
-    public static MultiMachine LARGE_HEAT_EXCHANGER = (MultiMachine) new MultiMachine(Ref.ID, "large_heat_exchanger", EV, GUI, FLUID,ENERGY).setTile(m -> () -> new TileEntityHeatExchanger(m));
-    public static MultiMachine FUSION_REACTOR = (MultiMachine) new MultiMachine(Ref.ID, "fusion_control_computer", FUSION, IV,  GUI, FLUID,ENERGY).setTile(m -> () -> new TileEntityFusionReactor(m));
+    public static BasicMultiMachine<?> COKE_OVEN = new BasicMultiMachine<>(Ref.ID, "coke_oven", COKING, LV, GUI, ITEM).setTile(m -> () -> new TileEntityCokeOven(m));
+    public static BasicMultiMachine<?> PRIMITIVE_BLAST_FURNACE = new BasicMultiMachine<>(Ref.ID, "primitive_blast_furnace", BASIC_BLASTING, BRONZE, GUI, ITEM).setTile(m -> () -> new TileEntityPrimitiveBlastFurnace(m));
+    public static MultiMachine CHARCOAL_PIT = new MultiMachine(Ref.ID, "charcoal_pit", LV).setTile(m -> () -> new TileEntityCharcoalPit(m));
+    public static BasicMultiMachine<?> BLAST_FURNACE = new BasicMultiMachine<>(Ref.ID, "industrial_blast_furnace", BLASTING, MV, GUI, ITEM, ENERGY).setTile(m -> () -> new TileEntityIndustrialBlastFurnace(m));
+    public static BasicMultiMachine<?> IMPLOSION_COMPRESSOR = new BasicMultiMachine<>(Ref.ID, "implosion_compressor", IMPLOSION_COMPRESSING, LV, GUI, ITEM,ENERGY).setTile(m -> () -> new TileEntityImplosionCompressor(m));
+    public static BasicMultiMachine<?> INDUSTRIAL_GRINDER = new BasicMultiMachine<>(Ref.ID, "industrial_grinder", INDUSTRIAL_GRINDING, MV, GUI, ITEM, ENERGY, FLUID).setTile(m -> () -> new TileEntityIndustrialGrinder(m));
+    public static BasicMultiMachine<?> INDUSTRIAL_SAWMILL = new BasicMultiMachine<>(Ref.ID, "industrial_sawmill", INDUSTRIAL_SAWMILLING, MV, GUI, ITEM, ENERGY, FLUID).setTile(m -> () -> new TileEntityIndustrialSawmill(m));
+    public static BasicMultiMachine<?> DISTILLATION_TOWER = new BasicMultiMachine<>(Ref.ID, "distillation_tower", DISTILLING, MV, GUI, ITEM, ENERGY, FLUID).setTile(m -> () -> new TileEntityDistillationTower(m));
+    public static BasicMultiMachine<?> VACUUM_FREEZER = new BasicMultiMachine<>(Ref.ID, "vacuum_freezer", VACUUM_FREEZING, LV, GUI, ITEM, FLUID,ENERGY).setTile(m -> () -> new TileEntityVacuumFreezer(m));
+    public static MultiMachine THERMAL_BOILER = new MultiMachine(Ref.ID, "thermal_boiler", LV, GUI, ITEM, FLUID).setTile(m -> () -> new TileEntityLargeBoiler(m));
+    public static MultiMachine LARGE_STEAM_TURBINE = new MultiMachine(Ref.ID, "large_steam_turbine", EV, GUI, FLUID,ENERGY, STEAM_FUELS, GENERATOR).setTile(m -> () -> new TileEntityLargeTurbine(m));
+    public static MultiMachine LARGE_GAS_TURBINE = new MultiMachine(Ref.ID, "large_gas_turbine", IV, GUI, FLUID,ENERGY, GAS_FUELS, GENERATOR).setTile(m -> () -> new TileEntityLargeTurbine(m));
+    public static MultiMachine LARGE_HEAT_EXCHANGER = new MultiMachine(Ref.ID, "large_heat_exchanger", EV, GUI, FLUID,ENERGY).setTile(m -> () -> new TileEntityHeatExchanger(m));
+    public static MultiMachine FUSION_REACTOR = new MultiMachine(Ref.ID, "fusion_control_computer", FUSION, IV,  GUI, FLUID,ENERGY).setTile(m -> () -> new TileEntityFusionReactor(m));
 
     public static HatchMachine HATCH_ITEM_I = new HatchMachineCustom(Ref.ID, "hatch_item_input", GUI, ITEM,COVERINPUT, LV, Textures.TIER_HANDLER).setTiers(LV);
     public static HatchMachine HATCH_ITEM_O = new HatchMachineCustom(Ref.ID, "hatch_item_output", GUI, ITEM, COVEROUTPUT, LV, Textures.TIER_HANDLER).setTiers(LV);

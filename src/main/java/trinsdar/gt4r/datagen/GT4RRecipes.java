@@ -100,13 +100,13 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
                         .addIngredient(rockTag).addIngredient(rockTag).addIngredient(rockTag)
                         .addIngredient(rockTag).addIngredient(rockTag).addIngredient(rockTag)
                         .addIngredient(rockTag).addIngredient(rockTag).addIngredient(nc(MORTAR.getTag()))
-                        .addCriterion("has_rock_" + mat.getId(), this.hasItem(rockTag))
+                        .addCriterion("has_rock_" + mat.getId(), this.hasSafeItem(rockTag))
                         .setGroup("rocks_grind_to_dust").build(consumer, fixLoc(providerDomain, rock.getRegistryName().getPath() + "_grind_to_" + dust.getRegistryName().getPath()));
 
                 ShapelessRecipeBuilder.shapelessRecipe(smallDust)
                         .addIngredient(rockTag).addIngredient(rockTag)
                         .addIngredient(rockTag).addIngredient(rockTag).addIngredient(nc(MORTAR.getTag()))
-                        .addCriterion("has_rock_" + mat.getId(), this.hasItem(getForgeItemTag("rocks/".concat(mat.getId()))))
+                        .addCriterion("has_rock_" + mat.getId(), this.hasSafeItem(getForgeItemTag("rocks/".concat(mat.getId()))))
                         .setGroup("rocks_grind_to_small_dust").build(consumer, fixLoc(providerDomain, rock.getRegistryName().getPath() + "_grind_to_" + smallDust.getRegistryName().getPath()));
             }
             if (mat.has(INGOT, GRINDABLE)) {
@@ -130,7 +130,7 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
             String ingotGem = main.has(INGOT) ? "ingots" : "gems";
             String plate = main.has(PLATE) ? "plates" : ingotGem;
             final ITag<Item> ingotTag = TagUtils.getForgeItemTag(ingotGem + "/" + main.getId()), plateTag = TagUtils.getForgeItemTag(plate + "/" + main.getId()), mainRodTag = TagUtils.getForgeItemTag("rods/" + main.getId());
-            final Supplier<ICriterionInstance> ingotTrigger = this.hasSafeItem(ingotTag), plateTrigger = this.hasSafeItem(plateTag), rodTrigger = this.hasSafeItem(mainRodTag);
+            final ICriterionInstance ingotTrigger = this.hasSafeItem(ingotTag), plateTrigger = this.hasSafeItem(plateTag), rodTrigger = this.hasSafeItem(mainRodTag);
 
             for (Material handle : handleMats) {
                 String handleId = handle.getId().equals("wood") ? "wooden" : handle.getId();

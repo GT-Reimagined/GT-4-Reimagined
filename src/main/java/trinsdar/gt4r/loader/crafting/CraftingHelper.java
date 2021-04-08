@@ -13,11 +13,11 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class CraftingHelper {
-    public static Supplier<ICriterionInstance> criterion(IItemProvider item, AntimatterRecipeProvider provider){
+    public static ICriterionInstance criterion(IItemProvider item, AntimatterRecipeProvider provider){
         return provider.hasSafeItem(item);
     }
 
-    public static Supplier<ICriterionInstance> criterion(ITag.INamedTag<Item> item, AntimatterRecipeProvider provider){
+    public static ICriterionInstance criterion(ITag.INamedTag<Item> item, AntimatterRecipeProvider provider){
         return provider.hasSafeItem(item);
     }
 

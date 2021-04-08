@@ -37,15 +37,15 @@ public class MaceratorLoader {
         DUST.all().forEach(m -> {
             if (m.has(PLATE) && m != Wood){
                 long duration = m.getMass();
-                UNIVERSAL_MACERATING.RB().ii(PLATE.getMaterialIngredient(m)).io(DUST.get(m, 1)).add(duration, 4);
+                UNIVERSAL_MACERATING.RB().ii(PLATE.getMaterialIngredient(m, 1)).io(DUST.get(m, 1)).add(duration, 4);
             }
             if (m.has(INGOT)){
                 long duration = m.getMass();
-                UNIVERSAL_MACERATING.RB().ii(INGOT.getMaterialIngredient(m)).io(DUST.get(m, 1)).add(duration, 4);
+                UNIVERSAL_MACERATING.RB().ii(INGOT.getMaterialIngredient(m, 1)).io(DUST.get(m, 1)).add(duration, 4);
             }
             if (m.has(GEM)){
                 long duration = m.getMass();
-                UNIVERSAL_MACERATING.RB().ii(GEM.getMaterialIngredient(m)).io(DUST.get(m, 1)).add(duration, 4);
+                UNIVERSAL_MACERATING.RB().ii(GEM.getMaterialIngredient(m, 1)).io(DUST.get(m, 1)).add(duration, 4);
             }
         });
         UNIVERSAL_MACERATING.RB().ii(RecipeIngredient.of(Tags.Items.COBBLESTONE, 1)).io(new ItemStack(Items.SAND)).add(400, 2);
