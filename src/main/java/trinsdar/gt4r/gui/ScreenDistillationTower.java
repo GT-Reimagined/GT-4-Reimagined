@@ -2,6 +2,7 @@ package trinsdar.gt4r.gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import muramasa.antimatter.capability.machine.MachineRecipeHandler;
+import muramasa.antimatter.gui.container.ContainerBasicMachine;
 import muramasa.antimatter.gui.container.ContainerMultiMachine;
 import muramasa.antimatter.gui.screen.ScreenBasicMachine;
 import muramasa.antimatter.gui.screen.ScreenMachine;
@@ -15,8 +16,8 @@ import net.minecraftforge.fluids.FluidStack;
 import static muramasa.antimatter.gui.SlotType.FL_IN;
 import static muramasa.antimatter.gui.SlotType.FL_OUT;
 
-public class ScreenDistillationTower extends ScreenMachine<ContainerMultiMachine> {
-    public ScreenDistillationTower(ContainerMultiMachine container, PlayerInventory inv, ITextComponent name) {
+public class ScreenDistillationTower extends ScreenMachine<ContainerBasicMachine> {
+    public ScreenDistillationTower(ContainerBasicMachine container, PlayerInventory inv, ITextComponent name) {
         super(container, inv, name);
     }
 
