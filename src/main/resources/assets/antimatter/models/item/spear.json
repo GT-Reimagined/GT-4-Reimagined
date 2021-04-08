@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:item/handheld",
-  "textures": {
-    "layer0": "antimatter:item/tool/spear",
-    "layer1": "antimatter:item/tool/overlay/spear"
-  }
-}
