@@ -42,6 +42,6 @@ public class ClientHandler {
         ScreenSetup.<ContainerHatch, ScreenHatchCustom<ContainerHatch>>setScreenMapping(Guis.HATCH_MENU_HANDLER_CUSTOM, ScreenHatchCustom::new);
         ScreenSetup.<ContainerBasicMachine, ScreenCoalBoiler<ContainerBasicMachine>>setScreenMapping(Guis.COAL_BOILER_MENU_HANDLER, ScreenCoalBoiler::new);
         ScreenSetup.<ContainerMultiMachine, ScreenFusionReactor<ContainerMultiMachine>>setScreenMapping(Guis.FUSION_MENU_HANDLER, ScreenFusionReactor::new);
-        ScreenSetup.<ContainerMultiMachine, ScreenDistillationTower>setScreenMapping(Guis.DISTILLATION_MENU_HANDLER, ScreenDistillationTower::new);
+        ScreenSetup.<ContainerBasicMachine, ScreenDistillationTower>setScreenMapping(Guis.DISTILLATION_MENU_HANDLER, ScreenDistillationTower::new);
     }
 }

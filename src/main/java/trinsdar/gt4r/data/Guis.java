@@ -12,6 +12,7 @@ import muramasa.antimatter.gui.container.ContainerHatch;
 import muramasa.antimatter.gui.container.ContainerMultiMachine;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.tile.TileEntityMachine;
+import muramasa.antimatter.tile.multi.TileEntityBasicMultiMachine;
 import muramasa.antimatter.tile.multi.TileEntityHatch;
 import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
 import net.minecraft.entity.player.PlayerInventory;
@@ -65,10 +66,10 @@ public class Guis {
         }
     };
 
-    public static MenuHandlerMachine<ContainerMultiMachine> DISTILLATION_MENU_HANDLER = new MenuHandlerMachine<ContainerMultiMachine>(Ref.ID, "container_distillation_tower") {
+    public static MenuHandlerMachine<ContainerBasicMachine> DISTILLATION_MENU_HANDLER = new MenuHandlerMachine<ContainerBasicMachine>(Ref.ID, "container_distillation_tower") {
         @Override
-        public ContainerMultiMachine getMenu(Object tile, PlayerInventory playerInv, int windowId) {
-            return tile instanceof TileEntityMachine ? new ContainerMultiMachine((TileEntityMultiMachine) tile, playerInv, this, windowId) : null;
+        public ContainerBasicMachine getMenu(Object tile, PlayerInventory playerInv, int windowId) {
+            return tile instanceof TileEntityMachine ? new ContainerBasicMachine((TileEntityBasicMultiMachine) tile, playerInv, this, windowId) : null;
         }
     };
 
