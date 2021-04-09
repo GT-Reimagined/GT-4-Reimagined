@@ -2,31 +2,28 @@ package trinsdar.gt4r.data;
 
 import com.google.common.collect.ImmutableMap;
 import muramasa.antimatter.AntimatterConfig;
-import muramasa.antimatter.Data;
 import muramasa.antimatter.cover.BaseCover;
-import muramasa.antimatter.item.ItemCover;
-import muramasa.antimatter.material.Material;
-import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
-import muramasa.antimatter.tool.AntimatterToolType;
-import muramasa.antimatter.tool.IAntimatterTool;
-import muramasa.antimatter.util.Utils;
-import net.minecraft.entity.ai.attributes.Attribute;
-import net.minecraft.entity.ai.attributes.RangedAttribute;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.ToolType;
-import net.minecraftforge.fml.RegistryObject;
-import trinsdar.gt4r.block.BlockCasing;
 import muramasa.antimatter.item.ItemBasic;
 import muramasa.antimatter.item.ItemBattery;
+import muramasa.antimatter.item.ItemCover;
 import muramasa.antimatter.item.ItemFluidCell;
 import muramasa.antimatter.machine.Tier;
+import muramasa.antimatter.material.Material;
 import muramasa.antimatter.ore.StoneType;
 import muramasa.antimatter.pipe.PipeSize;
 import muramasa.antimatter.pipe.types.Cable;
 import muramasa.antimatter.pipe.types.FluidPipe;
 import muramasa.antimatter.pipe.types.Wire;
+import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import muramasa.antimatter.texture.Texture;
+import muramasa.antimatter.tool.AntimatterToolType;
+import muramasa.antimatter.tool.IAntimatterTool;
+import muramasa.antimatter.util.Utils;
+import net.minecraft.block.SoundType;
+import net.minecraft.item.Item;
+import net.minecraftforge.api.distmarker.Dist;
 import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.block.BlockCasing;
 import trinsdar.gt4r.block.BlockConnectedCasing;
 import trinsdar.gt4r.block.BlockSapBag;
 import trinsdar.gt4r.cover.CoverConveyor;
@@ -40,9 +37,6 @@ import trinsdar.gt4r.items.MaterialSpear;
 import trinsdar.gt4r.tree.BlockRubberLeaves;
 import trinsdar.gt4r.tree.BlockRubberLog;
 import trinsdar.gt4r.tree.BlockRubberSapling;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.SoundType;
-import net.minecraft.item.Item;
 
 import java.util.function.Supplier;
 
@@ -327,7 +321,7 @@ public class GT4RData {
     public static final Wire<?> WIRE_TUNGSTEN = new Wire<>(Ref.ID, Tungsten, 4, Tier.IV).amps(2);
     public static final Wire<?> WIRE_SUPERCONDUCTOR = new Wire<>(Ref.ID, Superconductor, 0, Tier.MAX).amps(4); //MAX
 
-    public static final FluidPipe<?> FLUID_PIPE_BRONZE = new FluidPipe<>(Ref.ID, Bronze, 1000, false).caps(10, 10, 30, 60, 60, 60).pressures(400, 400, 400, 400, 400, 400);
+    public static final FluidPipe<?> FLUID_PIPE_BRONZE = new FluidPipe<>(Ref.ID, Bronze, 1000, false).sizes().caps(10, 10, 30, 60, 60, 60).pressures(400, 400, 400, 400, 400, 400);
     public static final FluidPipe<?> FLUID_PIPE_INVAR = new FluidPipe<>(Ref.ID, Invar, 1300, true).caps(60).pressures(1000);
     public static final FluidPipe<?> FLUID_PIPE_STEEL = new FluidPipe<>(Ref.ID, Steel, 1300, true).caps(60).pressures(1000);
     public static final FluidPipe<?> FLUID_PIPE_STAINLESS_STEEL = new FluidPipe<>(Ref.ID, StainlessSteel, 1300, true).caps(60).pressures(1000);

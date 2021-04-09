@@ -9,6 +9,7 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.Features;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
+import net.minecraftforge.common.BiomeDictionary;
 
 import static muramasa.antimatter.Data.NULL;
 import static net.minecraftforge.common.BiomeDictionary.Type.*;
@@ -19,7 +20,7 @@ public class GT4RFeatures {
 
     //public static final GT4ROreFeatureConfig IRON = new GT4ROreFeatureConfig("iron", 1, "iron", "nickel", 5);
     public static final GT4ROreFeatureConfig COPPER = new GT4ROreFeatureConfig("copper", 0, 100, 15, 10, Copper, Gold, 2, World.OVERWORLD);
-    public static final GT4ROreFeatureConfig TIN = new GT4ROreFeatureConfig("tin", 0, 70, 25, 8, Tin, Iron, 1, World.OVERWORLD);
+    public static final GT4ROreFeatureConfig TIN = new GT4ROreFeatureConfig("tin", 0, 65, 25, 8, Tin, Iron, 1, World.OVERWORLD);
     public static final GT4ROreFeatureConfig URANITE = new GT4ROreFeatureConfig("uranite", 0, 100, 8, 4, Uraninite, NULL, 0, World.OVERWORLD).setInvalidBiomes(DEAD);
     public static final GT4ROreFeatureConfig URANITE_DEAD = new GT4ROreFeatureConfig("uranite_dead", 0, 100, 20, 4, Uraninite, NULL, 0, World.OVERWORLD).setValidBiomes(DEAD);
     public static final GT4ROreFeatureConfig CASSITERITE = new GT4ROreFeatureConfig("cassiterite", 30, 80, 2, 32, Cassiterite, Tin, 5, World.OVERWORLD).setValidBiomes(MUSHROOM, MOUNTAIN, CONIFEROUS, COLD).setInvalidBiomes(JUNGLE);
@@ -37,8 +38,18 @@ public class GT4RFeatures {
     public static final GT4ROreFeatureConfig TUNGSTATE = new GT4ROreFeatureConfig("tungstate", 0, 80, 2, 16, Tungstate, NULL, 0, World.THE_END);
     public static final GT4ROreFeatureConfig PLATINUM_END = new GT4ROreFeatureConfig("platinum_end", 0, 80, 2, 5, Platinum, NULL, 0, World.THE_END);
     public static final GT4ROreFeatureConfig OLIVINE = new GT4ROreFeatureConfig("olivine", 0, 80, 5, 8, Olivine, NULL, 0, World.THE_END);
-    public static final GT4ROreFeatureConfig SODALITE = new GT4ROreFeatureConfig("sodalite", 0, 80, 6, 16, Sodalite, NULL, 0, World.THE_END);
+    public static final GT4ROreFeatureConfig SODALITE = new GT4ROreFeatureConfig("sodalite", 0, 80, 6, 16, Sodalite, Lapis, 3, World.THE_END);
     public static final GT4ROreFeatureConfig CHROMITE = new GT4ROreFeatureConfig("chromite", 0, 80, 4, 5, Chromite, NULL, 0, World.THE_END);
+
+    //Vanilla
+    public static final GT4ROreFeatureConfig IRON = new GT4ROreFeatureConfig("iron", 0, 64, 20, 9, Iron, Tin, 2, World.OVERWORLD);
+    public static final GT4ROreFeatureConfig GOLD = new GT4ROreFeatureConfig("gold", 0, 100, 2, 9, Gold, Copper, 2, World.OVERWORLD);
+    public static final GT4ROreFeatureConfig GOLD_MESA = new GT4ROreFeatureConfig("gold_mesa", 32, 80, 20, 9, Gold, Copper, 2, World.OVERWORLD).setValidBiomes(MESA);
+    public static final GT4ROreFeatureConfig EMERALD_VANILLA = new GT4ROreFeatureConfig("emerald", 0, 100, 15, 10, Emerald, NULL, 0, World.OVERWORLD).setValidBiomes(MOUNTAIN);
+    public static final GT4ROreFeatureConfig DIAMOND = new GT4ROreFeatureConfig("diamond", 0, 16, 1, 8, Diamond, NULL, 0, World.OVERWORLD);
+    public static final GT4ROreFeatureConfig COAL = new GT4ROreFeatureConfig("coal", 0, 128, 20, 17, Coal, NULL, 0, World.OVERWORLD);
+    public static final GT4ROreFeatureConfig LAPIS = new GT4ROreFeatureConfig("lapis", 0, 100, 1, 7, Lapis, NULL, 0, World.OVERWORLD);
+    public static final GT4ROreFeatureConfig REDSTONE = new GT4ROreFeatureConfig("redstone", 0, 16, 8, 8, Redstone, Cinnabar, 1, World.OVERWORLD);
 
     public static void init(){
 

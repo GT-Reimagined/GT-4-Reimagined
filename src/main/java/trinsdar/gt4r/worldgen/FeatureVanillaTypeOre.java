@@ -21,6 +21,7 @@ import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.gen.placement.DepthAverageConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.placement.TopSolidRangeConfig;
 import net.minecraftforge.common.BiomeDictionary;
@@ -78,6 +79,16 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
             event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(OLIVINE));
             event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(SODALITE));
             event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(CHROMITE));
+            if (AntimatterConfig.WORLD.VANILLA_ORE_GEN){
+                event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(IRON));
+                event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(COAL));
+                event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(GOLD));
+                event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(GOLD_MESA));
+                event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(REDSTONE));
+                event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(DIAMOND));
+                event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(EMERALD_VANILLA));
+                event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.withConfiguration(LAPIS).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(16, 16))).square());
+            }
         }
     }
 

@@ -14,7 +14,6 @@ public class OreByproducts {
     public static void init() {
         CRUSHED.all().forEach(m -> {
             if (!m.has(ORE)) return;
-            if (!m.has(INGOT)) return;
             RecipeIngredient ore = ORE.get().get(m, STONE).asIngredient();
             RecipeIngredient crushed = CRUSHED.getIngredient(m, 1);
             if (m.hasByProducts()) {
