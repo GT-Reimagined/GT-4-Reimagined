@@ -44,8 +44,8 @@ public class TileEntityIndustrialBlastFurnace extends TileEntityBasicMultiMachin
     }
 
     public List<BlockState> getAllStates() {
-        if (result.isPresent()) {
-            ObjectCollection<List<BlockState>> collection = result.get().states.values();
+        if (result != null) {
+            ObjectCollection<List<BlockState>> collection = result.states.values();
             if (collection.isEmpty()){
                 return Collections.emptyList();
             }

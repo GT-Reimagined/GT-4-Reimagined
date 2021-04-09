@@ -93,7 +93,8 @@ minecraft {
 
             // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'DEBUG'
-            property 'mixin.env.disableRefMap', 'true'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
             arg "-mixin.config=gt4r.mixins.json"
@@ -111,7 +112,8 @@ minecraft {
 
         server {
             workingDirectory project.file('run')
-            property 'mixin.env.disableRefMap', 'true'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'DEBUG'
             // Recommended logging level for the console
@@ -133,7 +135,8 @@ minecraft {
 
         data {
             workingDirectory project.file('run')
-            property 'mixin.env.disableRefMap', 'true'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'DEBUG'
             //jvmArgs '-javaagent:/opt/JavaHot/hotswap-agent.jar -XX:TraceRedefineClasses=1'
