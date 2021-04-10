@@ -25,6 +25,7 @@ import trinsdar.gt4r.gui.ScreenCoalBoiler;
 import trinsdar.gt4r.gui.ScreenDistillationTower;
 import trinsdar.gt4r.gui.ScreenFusionReactor;
 import trinsdar.gt4r.gui.ScreenHatchCustom;
+import trinsdar.gt4r.gui.ScreenIBF;
 
 public class ClientHandler {
 
@@ -43,5 +44,6 @@ public class ClientHandler {
         ScreenSetup.<ContainerBasicMachine, ScreenCoalBoiler<ContainerBasicMachine>>setScreenMapping(Guis.COAL_BOILER_MENU_HANDLER, ScreenCoalBoiler::new);
         ScreenSetup.<ContainerMultiMachine, ScreenFusionReactor<ContainerMultiMachine>>setScreenMapping(Guis.FUSION_MENU_HANDLER, ScreenFusionReactor::new);
         ScreenSetup.<ContainerBasicMachine, ScreenDistillationTower>setScreenMapping(Guis.DISTILLATION_MENU_HANDLER, ScreenDistillationTower::new);
+        ScreenSetup.<ContainerBasicMachine, ScreenIBF>setScreenMapping(Guis.IBF_MENU_HANDLER, ScreenIBF::new);
     }
 }

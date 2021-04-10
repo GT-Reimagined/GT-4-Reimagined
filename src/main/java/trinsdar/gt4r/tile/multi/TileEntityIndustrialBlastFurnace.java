@@ -1,7 +1,9 @@
 package trinsdar.gt4r.tile.multi;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
 import it.unimi.dsi.fastutil.objects.ObjectCollection;
 import muramasa.antimatter.capability.machine.MachineRecipeHandler;
+import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.event.IMachineEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.recipe.Recipe;
@@ -9,11 +11,13 @@ import muramasa.antimatter.tile.multi.TileEntityBasicMultiMachine;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.LazyOptional;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.machine.IBFItemHandler;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -95,5 +99,11 @@ public class TileEntityIndustrialBlastFurnace extends TileEntityBasicMultiMachin
 
     public int getHeatingCapacity() {
         return heatingCapacity;
+    }
+
+    @Override
+    public void drawInfo(MatrixStack stack, FontRenderer renderer, int left, int top) {
+        // TODO: Replace by new TranslationTextComponent()
+        renderer.drawString(stack,"Heat: " + getHeatingCapacity() + "K", 27, 62, Color.BLACK.getRGB());
     }
 }
