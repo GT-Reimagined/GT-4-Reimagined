@@ -11,6 +11,7 @@ import trinsdar.gt4r.data.*;
 import trinsdar.gt4r.datagen.GT4RBlockLootProvider;
 import trinsdar.gt4r.datagen.GT4RBlockTagProvider;
 import trinsdar.gt4r.datagen.GT4RItemTagProvider;
+import trinsdar.gt4r.datagen.GT4RLocalizations;
 import trinsdar.gt4r.datagen.GT4RRecipes;
 import trinsdar.gt4r.loader.WorldGenLoader;
 import trinsdar.gt4r.loader.machines.*;
@@ -30,7 +31,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import trinsdar.gt4r.proxy.CommonHandler;
-import trinsdar.gt4r.worldgen.FeatureVanillaTypeOre;
 import trinsdar.gt4r.worldgen.GT4RFeatures;
 
 

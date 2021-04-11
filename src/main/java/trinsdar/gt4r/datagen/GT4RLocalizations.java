@@ -1,4 +1,4 @@
-package trinsdar.gt4r.data;
+package trinsdar.gt4r.datagen;
 
 
 import muramasa.antimatter.AntimatterAPI;
