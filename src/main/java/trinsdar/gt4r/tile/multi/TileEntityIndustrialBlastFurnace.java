@@ -44,6 +44,16 @@ public class TileEntityIndustrialBlastFurnace extends TileEntityBasicMultiMachin
     public boolean onStructureFormed() {
         super.onStructureFormed();
         heatingCapacity = getAllStates().stream().mapToInt(s -> (getHeatPerCasing(s.getBlock()))).sum();
+        this.itemHandler.ifPresent(i -> {
+            ItemStack stack = ((IBFItemHandler)i).getCoilHandler().getStackInSlot(0);
+            if (!stack.isEmpty()){
+                if (stack.getItem() == GT4RData.KanthalHeatingCoil){
+                    heatingCapacity += (125 * stack.getCount());
+                } else {
+                    heatingCapacity += (250 * stack.getCount());
+                }
+            }
+        });
         return true;
     }
 

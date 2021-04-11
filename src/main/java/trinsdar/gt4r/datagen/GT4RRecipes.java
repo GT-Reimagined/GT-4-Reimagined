@@ -5,6 +5,7 @@ import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.ore.BlockOre;
+import muramasa.antimatter.tool.IAntimatterTool;
 import muramasa.antimatter.util.TagUtils;
 import net.minecraft.advancements.ICriterionInstance;
 import net.minecraft.data.CookingRecipeBuilder;
@@ -41,7 +42,10 @@ import static muramasa.antimatter.util.TagUtils.getForgeItemTag;
 import static muramasa.antimatter.util.TagUtils.nc;
 import static muramasa.antimatter.util.Utils.getConventionalMaterialType;
 import static muramasa.antimatter.util.Utils.getConventionalStoneType;
-import static trinsdar.gt4r.data.GT4RData.SPEAR;
+import static trinsdar.gt4r.data.GT4RData.*;
+import static trinsdar.gt4r.data.Materials.StainlessSteel;
+import static trinsdar.gt4r.data.Materials.Titanium;
+import static trinsdar.gt4r.data.Materials.TungstenSteel;
 import static trinsdar.gt4r.loader.crafting.CraftingHelper.criterion;
 
 public class GT4RRecipes extends AntimatterRecipeProvider {
@@ -131,6 +135,33 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
             String plate = main.has(PLATE) ? "plates" : ingotGem;
             final ITag<Item> ingotTag = TagUtils.getForgeItemTag(ingotGem + "/" + main.getId()), plateTag = TagUtils.getForgeItemTag(plate + "/" + main.getId()), mainRodTag = TagUtils.getForgeItemTag("rods/" + main.getId());
             final ICriterionInstance ingotTrigger = this.hasSafeItem(ingotTag), plateTrigger = this.hasSafeItem(plateTag), rodTrigger = this.hasSafeItem(mainRodTag);
+
+            if (main.getToolTypes().contains(DRILL)){
+                IAntimatterTool drill_lv = AntimatterAPI.get(IAntimatterTool.class, "drill_lv");
+                IAntimatterTool drill_mv = AntimatterAPI.get(IAntimatterTool.class, "drill_mv");
+                IAntimatterTool drill_hv = AntimatterAPI.get(IAntimatterTool.class, "drill_hv");
+                addStackRecipe(consumer, Ref.ID, DRILL.getId() + "_lv_" + main.getId() + "_lithium", "antimatter_lv_drills",
+                        "has_material_" + main.getId(), this.hasSafeItem(DRILLBIT.getMaterialTag(main)), drill_lv.resolveStack(main, NULL, 0, 100000), of('B', DRILLBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(StainlessSteel), 'b', BatterySmallLithium, 'M', MotorLV), " BS", "PbP", "PMP");
+                addStackRecipe(consumer, Ref.ID, DRILL.getId() + "_lv_" + main.getId() +"_cadmium", "antimatter_lv_drills",
+                        "has_material_" + main.getId(), this.hasSafeItem(DRILLBIT.getMaterialTag(main)), drill_lv.resolveStack(main, NULL, 0, 75000), of('B', DRILLBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(StainlessSteel), 'b', BatterySmallCadmium, 'M', MotorLV), " BS", "PbP", "PMP");
+                addStackRecipe(consumer, Ref.ID, DRILL.getId() + "_lv_" + main.getId() + "_sodium", "antimatter_lv_drills",
+                        "has_material_" + main.getId(), this.hasSafeItem(DRILLBIT.getMaterialTag(main)), drill_lv.resolveStack(main, NULL, 0, 50000), of('B', DRILLBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(StainlessSteel), 'b', BatterySmallSodium, 'M', MotorLV), " BS", "PbP", "PMP");
+
+                addStackRecipe(consumer, Ref.ID, DRILL.getId() + "_mv_" + main.getId() + "_lithium", "antimatter_mv_drills",
+                        "has_material_" + main.getId(), this.hasSafeItem(DRILLBIT.getMaterialTag(main)), drill_mv.resolveStack(main, NULL, 0, 400000), of('B', DRILLBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(Titanium), 'b', BatteryMediumLithium, 'M', MotorMV), " BS", "PbP", "PMP");
+                addStackRecipe(consumer, Ref.ID, DRILL.getId() + "_mv_" + main.getId() +"_cadmium", "antimatter_mv_drills",
+                        "has_material_" + main.getId(), this.hasSafeItem(DRILLBIT.getMaterialTag(main)), drill_mv.resolveStack(main, NULL, 0, 300000), of('B', DRILLBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(Titanium), 'b', BatteryMediumCadmium, 'M', MotorMV), " BS", "PbP", "PMP");
+                addStackRecipe(consumer, Ref.ID, DRILL.getId() + "_mv_" + main.getId() + "_sodium", "antimatter_mv_drills",
+                        "has_material_" + main.getId(), this.hasSafeItem(DRILLBIT.getMaterialTag(main)), drill_mv.resolveStack(main, NULL, 0, 200000), of('B', DRILLBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(Titanium), 'b', BatteryMediumSodium, 'M', MotorMV), " BS", "PbP", "PMP");
+
+                addStackRecipe(consumer, Ref.ID, DRILL.getId() + "_hv_" + main.getId() + "_lithium", "antimatter_hv_drills",
+                        "has_material_" + main.getId(), this.hasSafeItem(DRILLBIT.getMaterialTag(main)), drill_hv.resolveStack(main, NULL, 0, 1600000), of('B', DRILLBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(TungstenSteel), 'b', BatteryLargeLithium, 'M', MotorHV), " BS", "PbP", "PMP");
+                addStackRecipe(consumer, Ref.ID, DRILL.getId() + "_hv_" + main.getId() +"_cadmium", "antimatter_hv_drills",
+                        "has_material_" + main.getId(), this.hasSafeItem(DRILLBIT.getMaterialTag(main)), drill_hv.resolveStack(main, NULL, 0, 1200000), of('B', DRILLBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(TungstenSteel), 'b', BatteryLargeCadmium, 'M', MotorHV), " BS", "PbP", "PMP");
+                addStackRecipe(consumer, Ref.ID, DRILL.getId() + "_hv_" + main.getId() + "_sodium", "antimatter_hv_drills",
+                        "has_material_" + main.getId(), this.hasSafeItem(DRILLBIT.getMaterialTag(main)), drill_hv.resolveStack(main, NULL, 0, 800000), of('B', DRILLBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(TungstenSteel), 'b', BatteryLargeSodium, 'M', MotorHV), " BS", "PbP", "PMP");
+            }
+
 
             for (Material handle : handleMats) {
                 String handleId = handle.getId().equals("wood") ? "wooden" : handle.getId();

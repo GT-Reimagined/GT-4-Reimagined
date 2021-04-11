@@ -29,12 +29,12 @@ public class SlotCoil extends SlotItemHandler {
 
     @Override
     public int getSlotStackLimit() {
-        return 6;
+        return 4;
     }
 
     @Override
     public int getItemStackLimit(@Nonnull ItemStack stack) {
-        return 6;
+        return 4;
     }
 
     @Override
