@@ -5,11 +5,13 @@ import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.ore.BlockOre;
+import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import muramasa.antimatter.tool.IAntimatterTool;
 import muramasa.antimatter.util.TagUtils;
 import net.minecraft.advancements.ICriterionInstance;
 import net.minecraft.data.CookingRecipeBuilder;
 import net.minecraft.data.ShapelessRecipeBuilder;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -30,6 +32,7 @@ import net.minecraftforge.common.Tags;
 import trinsdar.gt4r.loader.machines.FurnaceLoader;
 
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -141,25 +144,126 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
                 IAntimatterTool drill_mv = AntimatterAPI.get(IAntimatterTool.class, "drill_mv");
                 IAntimatterTool drill_hv = AntimatterAPI.get(IAntimatterTool.class, "drill_hv");
                 addStackRecipe(consumer, Ref.ID, DRILL.getId() + "_lv_" + main.getId() + "_lithium", "antimatter_lv_drills",
-                        "has_material_" + main.getId(), this.hasSafeItem(DRILLBIT.getMaterialTag(main)), drill_lv.resolveStack(main, NULL, 0, 100000), of('B', DRILLBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(StainlessSteel), 'b', BatterySmallLithium, 'M', MotorLV), " BS", "PbP", "PMP");
+                        "has_material_" + main.getId(), this.hasSafeItem(DRILLBIT.getMaterialTag(main)), resolveStack(drill_lv, main, StainlessSteel, 0, 100000), of('B', DRILLBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(StainlessSteel), 'b', BatterySmallLithium, 'M', MotorLV), " BS", "PbP", "PMP");
                 addStackRecipe(consumer, Ref.ID, DRILL.getId() + "_lv_" + main.getId() +"_cadmium", "antimatter_lv_drills",
-                        "has_material_" + main.getId(), this.hasSafeItem(DRILLBIT.getMaterialTag(main)), drill_lv.resolveStack(main, NULL, 0, 75000), of('B', DRILLBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(StainlessSteel), 'b', BatterySmallCadmium, 'M', MotorLV), " BS", "PbP", "PMP");
+                        "has_material_" + main.getId(), this.hasSafeItem(DRILLBIT.getMaterialTag(main)), resolveStack(drill_lv, main, StainlessSteel, 0, 75000), of('B', DRILLBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(StainlessSteel), 'b', BatterySmallCadmium, 'M', MotorLV), " BS", "PbP", "PMP");
                 addStackRecipe(consumer, Ref.ID, DRILL.getId() + "_lv_" + main.getId() + "_sodium", "antimatter_lv_drills",
-                        "has_material_" + main.getId(), this.hasSafeItem(DRILLBIT.getMaterialTag(main)), drill_lv.resolveStack(main, NULL, 0, 50000), of('B', DRILLBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(StainlessSteel), 'b', BatterySmallSodium, 'M', MotorLV), " BS", "PbP", "PMP");
+                        "has_material_" + main.getId(), this.hasSafeItem(DRILLBIT.getMaterialTag(main)), resolveStack(drill_lv, main, StainlessSteel, 0, 50000), of('B', DRILLBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(StainlessSteel), 'b', BatterySmallSodium, 'M', MotorLV), " BS", "PbP", "PMP");
 
                 addStackRecipe(consumer, Ref.ID, DRILL.getId() + "_mv_" + main.getId() + "_lithium", "antimatter_mv_drills",
-                        "has_material_" + main.getId(), this.hasSafeItem(DRILLBIT.getMaterialTag(main)), drill_mv.resolveStack(main, NULL, 0, 400000), of('B', DRILLBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(Titanium), 'b', BatteryMediumLithium, 'M', MotorMV), " BS", "PbP", "PMP");
+                        "has_material_" + main.getId(), this.hasSafeItem(DRILLBIT.getMaterialTag(main)), drill_mv.resolveStack(main, Titanium, 0, 400000), of('B', DRILLBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(Titanium), 'b', BatteryMediumLithium, 'M', MotorMV), " BS", "PbP", "PMP");
                 addStackRecipe(consumer, Ref.ID, DRILL.getId() + "_mv_" + main.getId() +"_cadmium", "antimatter_mv_drills",
-                        "has_material_" + main.getId(), this.hasSafeItem(DRILLBIT.getMaterialTag(main)), drill_mv.resolveStack(main, NULL, 0, 300000), of('B', DRILLBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(Titanium), 'b', BatteryMediumCadmium, 'M', MotorMV), " BS", "PbP", "PMP");
+                        "has_material_" + main.getId(), this.hasSafeItem(DRILLBIT.getMaterialTag(main)), drill_mv.resolveStack(main, Titanium, 0, 300000), of('B', DRILLBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(Titanium), 'b', BatteryMediumCadmium, 'M', MotorMV), " BS", "PbP", "PMP");
                 addStackRecipe(consumer, Ref.ID, DRILL.getId() + "_mv_" + main.getId() + "_sodium", "antimatter_mv_drills",
-                        "has_material_" + main.getId(), this.hasSafeItem(DRILLBIT.getMaterialTag(main)), drill_mv.resolveStack(main, NULL, 0, 200000), of('B', DRILLBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(Titanium), 'b', BatteryMediumSodium, 'M', MotorMV), " BS", "PbP", "PMP");
+                        "has_material_" + main.getId(), this.hasSafeItem(DRILLBIT.getMaterialTag(main)), drill_mv.resolveStack(main, Titanium, 0, 200000), of('B', DRILLBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(Titanium), 'b', BatteryMediumSodium, 'M', MotorMV), " BS", "PbP", "PMP");
 
                 addStackRecipe(consumer, Ref.ID, DRILL.getId() + "_hv_" + main.getId() + "_lithium", "antimatter_hv_drills",
-                        "has_material_" + main.getId(), this.hasSafeItem(DRILLBIT.getMaterialTag(main)), drill_hv.resolveStack(main, NULL, 0, 1600000), of('B', DRILLBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(TungstenSteel), 'b', BatteryLargeLithium, 'M', MotorHV), " BS", "PbP", "PMP");
+                        "has_material_" + main.getId(), this.hasSafeItem(DRILLBIT.getMaterialTag(main)), drill_hv.resolveStack(main, TungstenSteel, 0, 1600000), of('B', DRILLBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(TungstenSteel), 'b', BatteryLargeLithium, 'M', MotorHV), " BS", "PbP", "PMP");
                 addStackRecipe(consumer, Ref.ID, DRILL.getId() + "_hv_" + main.getId() +"_cadmium", "antimatter_hv_drills",
-                        "has_material_" + main.getId(), this.hasSafeItem(DRILLBIT.getMaterialTag(main)), drill_hv.resolveStack(main, NULL, 0, 1200000), of('B', DRILLBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(TungstenSteel), 'b', BatteryLargeCadmium, 'M', MotorHV), " BS", "PbP", "PMP");
+                        "has_material_" + main.getId(), this.hasSafeItem(DRILLBIT.getMaterialTag(main)), drill_hv.resolveStack(main, TungstenSteel, 0, 1200000), of('B', DRILLBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(TungstenSteel), 'b', BatteryLargeCadmium, 'M', MotorHV), " BS", "PbP", "PMP");
                 addStackRecipe(consumer, Ref.ID, DRILL.getId() + "_hv_" + main.getId() + "_sodium", "antimatter_hv_drills",
-                        "has_material_" + main.getId(), this.hasSafeItem(DRILLBIT.getMaterialTag(main)), drill_hv.resolveStack(main, NULL, 0, 800000), of('B', DRILLBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(TungstenSteel), 'b', BatteryLargeSodium, 'M', MotorHV), " BS", "PbP", "PMP");
+                        "has_material_" + main.getId(), this.hasSafeItem(DRILLBIT.getMaterialTag(main)), drill_hv.resolveStack(main, TungstenSteel, 0, 800000), of('B', DRILLBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(TungstenSteel), 'b', BatteryLargeSodium, 'M', MotorHV), " BS", "PbP", "PMP");
+                addStackRecipe(consumer, Ref.ID, DRILL.getId() + "_hv_" + main.getId() + "_energy_crystal", "antimatter_hv_drills",
+                        "has_material_" + main.getId(), this.hasSafeItem(DRILLBIT.getMaterialTag(main)), drill_hv.resolveStack(main, TungstenSteel, 0, 1000000), of('B', DRILLBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(TungstenSteel), 'b', EnergyCrystal, 'M', MotorHV), " BS", "PbP", "PMP");
+            }
+            if (main.getToolTypes().contains(CHAINSAW)){
+                IAntimatterTool chainsaw_lv = AntimatterAPI.get(IAntimatterTool.class, "chainsaw_lv");
+                IAntimatterTool chainsaw_mv = AntimatterAPI.get(IAntimatterTool.class, "chainsaw_mv");
+                IAntimatterTool chainsaw_hv = AntimatterAPI.get(IAntimatterTool.class, "chainsaw_hv");
+                addStackRecipe(consumer, Ref.ID, CHAINSAW.getId() + "_lv_" + main.getId() + "_lithium", "antimatter_lv_chainsaws",
+                        "has_material_" + main.getId(), this.hasSafeItem(CHAINSAWBIT.getMaterialTag(main)), resolveStack(chainsaw_lv, main, StainlessSteel, 0, 100000), of('B', CHAINSAWBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(StainlessSteel), 'b', BatterySmallLithium, 'M', MotorLV), " BS", "PbP", "PMP");
+                addStackRecipe(consumer, Ref.ID, CHAINSAW.getId() + "_lv_" + main.getId() +"_cadmium", "antimatter_lv_chainsaws",
+                        "has_material_" + main.getId(), this.hasSafeItem(CHAINSAWBIT.getMaterialTag(main)), resolveStack(chainsaw_lv, main, StainlessSteel, 0, 75000), of('B', CHAINSAWBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(StainlessSteel), 'b', BatterySmallCadmium, 'M', MotorLV), " BS", "PbP", "PMP");
+                addStackRecipe(consumer, Ref.ID, CHAINSAW.getId() + "_lv_" + main.getId() + "_sodium", "antimatter_lv_chainsaws",
+                        "has_material_" + main.getId(), this.hasSafeItem(CHAINSAWBIT.getMaterialTag(main)), resolveStack(chainsaw_lv, main, StainlessSteel, 0, 50000), of('B', CHAINSAWBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(StainlessSteel), 'b', BatterySmallSodium, 'M', MotorLV), " BS", "PbP", "PMP");
+
+                addStackRecipe(consumer, Ref.ID, CHAINSAW.getId() + "_mv_" + main.getId() + "_lithium", "antimatter_mv_chainsaws",
+                        "has_material_" + main.getId(), this.hasSafeItem(CHAINSAWBIT.getMaterialTag(main)), chainsaw_mv.resolveStack(main, Titanium, 0, 400000), of('B', CHAINSAWBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(Titanium), 'b', BatteryMediumLithium, 'M', MotorMV), " BS", "PbP", "PMP");
+                addStackRecipe(consumer, Ref.ID, CHAINSAW.getId() + "_mv_" + main.getId() +"_cadmium", "antimatter_mv_chainsaws",
+                        "has_material_" + main.getId(), this.hasSafeItem(CHAINSAWBIT.getMaterialTag(main)), chainsaw_mv.resolveStack(main, Titanium, 0, 300000), of('B', CHAINSAWBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(Titanium), 'b', BatteryMediumCadmium, 'M', MotorMV), " BS", "PbP", "PMP");
+                addStackRecipe(consumer, Ref.ID, CHAINSAW.getId() + "_mv_" + main.getId() + "_sodium", "antimatter_mv_chainsaws",
+                        "has_material_" + main.getId(), this.hasSafeItem(CHAINSAWBIT.getMaterialTag(main)), chainsaw_mv.resolveStack(main, Titanium, 0, 200000), of('B', CHAINSAWBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(Titanium), 'b', BatteryMediumSodium, 'M', MotorMV), " BS", "PbP", "PMP");
+
+                addStackRecipe(consumer, Ref.ID, CHAINSAW.getId() + "_hv_" + main.getId() + "_lithium", "antimatter_hv_chainsaws",
+                        "has_material_" + main.getId(), this.hasSafeItem(CHAINSAWBIT.getMaterialTag(main)), chainsaw_hv.resolveStack(main, TungstenSteel, 0, 1600000), of('B', CHAINSAWBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(TungstenSteel), 'b', BatteryLargeLithium, 'M', MotorHV), " BS", "PbP", "PMP");
+                addStackRecipe(consumer, Ref.ID, CHAINSAW.getId() + "_hv_" + main.getId() +"_cadmium", "antimatter_hv_chainsaws",
+                        "has_material_" + main.getId(), this.hasSafeItem(CHAINSAWBIT.getMaterialTag(main)), chainsaw_hv.resolveStack(main, TungstenSteel, 0, 1200000), of('B', CHAINSAWBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(TungstenSteel), 'b', BatteryLargeCadmium, 'M', MotorHV), " BS", "PbP", "PMP");
+                addStackRecipe(consumer, Ref.ID, CHAINSAW.getId() + "_hv_" + main.getId() + "_sodium", "antimatter_hv_chainsaws",
+                        "has_material_" + main.getId(), this.hasSafeItem(CHAINSAWBIT.getMaterialTag(main)), chainsaw_hv.resolveStack(main, TungstenSteel, 0, 800000), of('B', CHAINSAWBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(TungstenSteel), 'b', BatteryLargeSodium, 'M', MotorHV), " BS", "PbP", "PMP");
+                addStackRecipe(consumer, Ref.ID, CHAINSAW.getId() + "_hv_" + main.getId() + "_energy_crystal", "antimatter_hv_chainsaws",
+                        "has_material_" + main.getId(), this.hasSafeItem(CHAINSAWBIT.getMaterialTag(main)), chainsaw_hv.resolveStack(main, TungstenSteel, 0, 1000000), of('B', CHAINSAWBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(TungstenSteel), 'b', EnergyCrystal, 'M', MotorHV), " BS", "PbP", "PMP");
+            }
+            if (main.getToolTypes().contains(ELECTRIC_WRENCH)){
+                IAntimatterTool wrench_lv = AntimatterAPI.get(IAntimatterTool.class, "electric_wrench_lv");
+                IAntimatterTool wrench_mv = AntimatterAPI.get(IAntimatterTool.class, "electric_wrench_mv");
+                IAntimatterTool wrench_hv = AntimatterAPI.get(IAntimatterTool.class, "electric_wrench_hv");
+                addStackRecipe(consumer, Ref.ID, ELECTRIC_WRENCH.getId() + "_lv_" + main.getId() + "_lithium", "antimatter_lv_electric_wrenches",
+                        "has_material_" + main.getId(), this.hasSafeItem(WRENCHBIT.getMaterialTag(main)), resolveStack(wrench_lv, main, StainlessSteel, 0, 100000), of('B', WRENCHBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(StainlessSteel), 'b', BatterySmallLithium, 'M', MotorLV), " BS", "PbP", "PMP");
+                addStackRecipe(consumer, Ref.ID, ELECTRIC_WRENCH.getId() + "_lv_" + main.getId() +"_cadmium", "antimatter_lv_electric_wrenches",
+                        "has_material_" + main.getId(), this.hasSafeItem(WRENCHBIT.getMaterialTag(main)), resolveStack(wrench_lv, main, StainlessSteel, 0, 75000), of('B', WRENCHBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(StainlessSteel), 'b', BatterySmallCadmium, 'M', MotorLV), " BS", "PbP", "PMP");
+                addStackRecipe(consumer, Ref.ID, ELECTRIC_WRENCH.getId() + "_lv_" + main.getId() + "_sodium", "antimatter_lv_electric_wrenches",
+                        "has_material_" + main.getId(), this.hasSafeItem(WRENCHBIT.getMaterialTag(main)), resolveStack(wrench_lv, main, StainlessSteel, 0, 50000), of('B', WRENCHBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(StainlessSteel), 'b', BatterySmallSodium, 'M', MotorLV), " BS", "PbP", "PMP");
+
+                addStackRecipe(consumer, Ref.ID, ELECTRIC_WRENCH.getId() + "_mv_" + main.getId() + "_lithium", "antimatter_mv_electric_wrenches",
+                        "has_material_" + main.getId(), this.hasSafeItem(WRENCHBIT.getMaterialTag(main)), wrench_mv.resolveStack(main, Titanium, 0, 400000), of('B', WRENCHBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(Titanium), 'b', BatteryMediumLithium, 'M', MotorMV), " BS", "PbP", "PMP");
+                addStackRecipe(consumer, Ref.ID, ELECTRIC_WRENCH.getId() + "_mv_" + main.getId() +"_cadmium", "antimatter_mv_electric_wrenches",
+                        "has_material_" + main.getId(), this.hasSafeItem(WRENCHBIT.getMaterialTag(main)), wrench_mv.resolveStack(main, Titanium, 0, 300000), of('B', WRENCHBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(Titanium), 'b', BatteryMediumCadmium, 'M', MotorMV), " BS", "PbP", "PMP");
+                addStackRecipe(consumer, Ref.ID, ELECTRIC_WRENCH.getId() + "_mv_" + main.getId() + "_sodium", "antimatter_mv_electric_wrenches",
+                        "has_material_" + main.getId(), this.hasSafeItem(WRENCHBIT.getMaterialTag(main)), wrench_mv.resolveStack(main, Titanium, 0, 200000), of('B', WRENCHBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(Titanium), 'b', BatteryMediumSodium, 'M', MotorMV), " BS", "PbP", "PMP");
+
+                addStackRecipe(consumer, Ref.ID, ELECTRIC_WRENCH.getId() + "_hv_" + main.getId() + "_lithium", "antimatter_hv_electric_wrenches",
+                        "has_material_" + main.getId(), this.hasSafeItem(WRENCHBIT.getMaterialTag(main)), wrench_hv.resolveStack(main, TungstenSteel, 0, 1600000), of('B', WRENCHBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(TungstenSteel), 'b', BatteryLargeLithium, 'M', MotorHV), " BS", "PbP", "PMP");
+                addStackRecipe(consumer, Ref.ID, ELECTRIC_WRENCH.getId() + "_hv_" + main.getId() +"_cadmium", "antimatter_hv_electric_wrenches",
+                        "has_material_" + main.getId(), this.hasSafeItem(WRENCHBIT.getMaterialTag(main)), wrench_hv.resolveStack(main, TungstenSteel, 0, 1200000), of('B', WRENCHBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(TungstenSteel), 'b', BatteryLargeCadmium, 'M', MotorHV), " BS", "PbP", "PMP");
+                addStackRecipe(consumer, Ref.ID, ELECTRIC_WRENCH.getId() + "_hv_" + main.getId() + "_sodium", "antimatter_hv_electric_wrenches",
+                        "has_material_" + main.getId(), this.hasSafeItem(WRENCHBIT.getMaterialTag(main)), wrench_hv.resolveStack(main, TungstenSteel, 0, 800000), of('B', WRENCHBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(TungstenSteel), 'b', BatteryLargeSodium, 'M', MotorHV), " BS", "PbP", "PMP");
+                addStackRecipe(consumer, Ref.ID, ELECTRIC_WRENCH.getId() + "_hv_" + main.getId() + "_energy_crystal", "antimatter_hv_electric_wrenches",
+                        "has_material_" + main.getId(), this.hasSafeItem(WRENCHBIT.getMaterialTag(main)), wrench_hv.resolveStack(main, TungstenSteel, 0, 1000000), of('B', WRENCHBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(TungstenSteel), 'b', EnergyCrystal, 'M', MotorHV), " BS", "PbP", "PMP");
+            }
+            if (main.getToolTypes().contains(BUZZSAW)){
+                IAntimatterTool buzzsaw_lv = AntimatterAPI.get(IAntimatterTool.class, "buzzsaw_lv");
+                IAntimatterTool buzzsaw_mv = AntimatterAPI.get(IAntimatterTool.class, "buzzsaw_mv");
+                IAntimatterTool buzzsaw_hv = AntimatterAPI.get(IAntimatterTool.class, "buzzsaw_hv");
+                addStackRecipe(consumer, Ref.ID, BUZZSAW.getId() + "_lv_" + main.getId() + "_lithium", "antimatter_lv_buzzsaws",
+                        "has_material_" + main.getId(), this.hasSafeItem(BUZZSAW_BLADE.getMaterialTag(main)), resolveStack(buzzsaw_lv, main, StainlessSteel, 0, 100000), of('B', BUZZSAW_BLADE.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(StainlessSteel), 'b', BatterySmallLithium, 'M', MotorLV), " BS", "PbP", "PMP");
+                addStackRecipe(consumer, Ref.ID, BUZZSAW.getId() + "_lv_" + main.getId() +"_cadmium", "antimatter_lv_buzzsaws",
+                        "has_material_" + main.getId(), this.hasSafeItem(BUZZSAW_BLADE.getMaterialTag(main)), resolveStack(buzzsaw_lv, main, StainlessSteel, 0, 75000), of('B', BUZZSAW_BLADE.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(StainlessSteel), 'b', BatterySmallCadmium, 'M', MotorLV), " BS", "PbP", "PMP");
+                addStackRecipe(consumer, Ref.ID, BUZZSAW.getId() + "_lv_" + main.getId() + "_sodium", "antimatter_lv_buzzsaws",
+                        "has_material_" + main.getId(), this.hasSafeItem(BUZZSAW_BLADE.getMaterialTag(main)), resolveStack(buzzsaw_lv, main, StainlessSteel, 0, 50000), of('B', BUZZSAW_BLADE.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(StainlessSteel), 'b', BatterySmallSodium, 'M', MotorLV), " BS", "PbP", "PMP");
+
+                addStackRecipe(consumer, Ref.ID, BUZZSAW.getId() + "_mv_" + main.getId() + "_lithium", "antimatter_mv_buzzsaws",
+                        "has_material_" + main.getId(), this.hasSafeItem(BUZZSAW_BLADE.getMaterialTag(main)), buzzsaw_mv.resolveStack(main, Titanium, 0, 400000), of('B', BUZZSAW_BLADE.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(Titanium), 'b', BatteryMediumLithium, 'M', MotorMV), " BS", "PbP", "PMP");
+                addStackRecipe(consumer, Ref.ID, BUZZSAW.getId() + "_mv_" + main.getId() +"_cadmium", "antimatter_mv_buzzsaws",
+                        "has_material_" + main.getId(), this.hasSafeItem(BUZZSAW_BLADE.getMaterialTag(main)), buzzsaw_mv.resolveStack(main, Titanium, 0, 300000), of('B', BUZZSAW_BLADE.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(Titanium), 'b', BatteryMediumCadmium, 'M', MotorMV), " BS", "PbP", "PMP");
+                addStackRecipe(consumer, Ref.ID, BUZZSAW.getId() + "_mv_" + main.getId() + "_sodium", "antimatter_mv_buzzsaws",
+                        "has_material_" + main.getId(), this.hasSafeItem(BUZZSAW_BLADE.getMaterialTag(main)), buzzsaw_mv.resolveStack(main, Titanium, 0, 200000), of('B', BUZZSAW_BLADE.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(Titanium), 'b', BatteryMediumSodium, 'M', MotorMV), " BS", "PbP", "PMP");
+
+                addStackRecipe(consumer, Ref.ID, BUZZSAW.getId() + "_hv_" + main.getId() + "_lithium", "antimatter_hv_buzzsaws",
+                        "has_material_" + main.getId(), this.hasSafeItem(BUZZSAW_BLADE.getMaterialTag(main)), buzzsaw_hv.resolveStack(main, TungstenSteel, 0, 1600000), of('B', BUZZSAW_BLADE.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(TungstenSteel), 'b', BatteryLargeLithium, 'M', MotorHV), " BS", "PbP", "PMP");
+                addStackRecipe(consumer, Ref.ID, BUZZSAW.getId() + "_hv_" + main.getId() +"_cadmium", "antimatter_hv_buzzsaws",
+                        "has_material_" + main.getId(), this.hasSafeItem(BUZZSAW_BLADE.getMaterialTag(main)), buzzsaw_hv.resolveStack(main, TungstenSteel, 0, 1200000), of('B', BUZZSAW_BLADE.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(TungstenSteel), 'b', BatteryLargeCadmium, 'M', MotorHV), " BS", "PbP", "PMP");
+                addStackRecipe(consumer, Ref.ID, BUZZSAW.getId() + "_hv_" + main.getId() + "_sodium", "antimatter_hv_buzzsaws",
+                        "has_material_" + main.getId(), this.hasSafeItem(BUZZSAW_BLADE.getMaterialTag(main)), buzzsaw_hv.resolveStack(main, TungstenSteel, 0, 800000), of('B', BUZZSAW_BLADE.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(TungstenSteel), 'b', BatteryLargeSodium, 'M', MotorHV), " BS", "PbP", "PMP");
+                addStackRecipe(consumer, Ref.ID, BUZZSAW.getId() + "_hv_" + main.getId() + "_energy_crystal", "antimatter_hv_buzzsaws",
+                        "has_material_" + main.getId(), this.hasSafeItem(BUZZSAW_BLADE.getMaterialTag(main)), buzzsaw_hv.resolveStack(main, TungstenSteel, 0, 1000000), of('B', BUZZSAW_BLADE.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(TungstenSteel), 'b', EnergyCrystal, 'M', MotorHV), " BS", "PbP", "PMP");
+            }
+            if (main.getToolTypes().contains(ELECTRIC_SCREWDRIVER)){
+                IAntimatterTool drill_lv = AntimatterAPI.get(IAntimatterTool.class, "electric_screwdriver_lv");
+                addStackRecipe(consumer, Ref.ID, ELECTRIC_SCREWDRIVER.getId() + "_lv_" + main.getId() + "_lithium", "antimatter_lv_electric_screwdrivers",
+                        "has_material_" + main.getId(), this.hasSafeItem(ROD.getMaterialTag(main)), drill_lv.resolveStack(main, NULL, 0, 100000), of('R', ROD.getMaterialTag(main), 'b', BatterySmallLithium, 'M', MotorLV), "R  ", " RM", "  b");
+                addStackRecipe(consumer, Ref.ID, ELECTRIC_SCREWDRIVER.getId() + "_lv_" + main.getId() +"_cadmium", "antimatter_lv_electric_screwdrivers",
+                        "has_material_" + main.getId(), this.hasSafeItem(ROD.getMaterialTag(main)), drill_lv.resolveStack(main, NULL, 0, 75000), of('R', ROD.getMaterialTag(main), 'b', BatterySmallCadmium, 'M', MotorLV), "R  ", " RM", "  b");
+                addStackRecipe(consumer, Ref.ID, ELECTRIC_SCREWDRIVER.getId() + "_lv_" + main.getId() + "_sodium", "antimatter_lv_electric_screwdrivers",
+                        "has_material_" + main.getId(), this.hasSafeItem(ROD.getMaterialTag(main)), drill_lv.resolveStack(main, NULL, 0, 50000), of('R', ROD.getMaterialTag(main), 'b', BatterySmallSodium, 'M', MotorLV), "R  ", " RM", "  b");
+            }
+            if (main.getToolTypes().contains(JACKHAMMER)){
+                IAntimatterTool jackhammer_lv = AntimatterAPI.get(IAntimatterTool.class, "jackhammer_lv");
+                addStackRecipe(consumer, Ref.ID, JACKHAMMER.getId() + "_lv_" + main.getId() + "_lithium", "antimatter_lv_jackhammers",
+                        "has_material_" + main.getId(), this.hasSafeItem(ROD.getMaterialTag(main)), jackhammer_lv.resolveStack(main, NULL, 0, 100000), of('R', ROD.getMaterialTag(main), 'P', plateTag, 'b', BatterySmallLithium, 'M', MotorLV), "RbR", " M ", " P ");
+                addStackRecipe(consumer, Ref.ID, JACKHAMMER.getId() + "_lv_" + main.getId() +"_cadmium", "antimatter_lv_jackhammers",
+                        "has_material_" + main.getId(), this.hasSafeItem(ROD.getMaterialTag(main)), jackhammer_lv.resolveStack(main, NULL, 0, 75000), of('R', ROD.getMaterialTag(main), 'P', plateTag, 'b', BatterySmallCadmium, 'M', MotorLV), "RbR", " M ", " P ");
+                addStackRecipe(consumer, Ref.ID, JACKHAMMER.getId() + "_lv_" + main.getId() + "_sodium", "antimatter_lv_jackhammers",
+                        "has_material_" + main.getId(), this.hasSafeItem(ROD.getMaterialTag(main)), jackhammer_lv.resolveStack(main, NULL, 0, 50000), of('R', ROD.getMaterialTag(main), 'P', plateTag, 'b', BatterySmallSodium, 'M', MotorLV), "RbR", " M ", " P ");
             }
 
 
@@ -174,6 +278,16 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
                             "has_material_" + main.getId(), ingotTrigger, SPEAR.getToolStack(main, handle), map1, strings);
             }
         });
+    }
+
+    public static ItemStack resolveStack(IAntimatterTool tool, Material primary, Material secondary, long startingEnergy, long maxEnergy) {
+        ItemStack stack = new ItemStack(tool.getItem());
+        tool.validateTag(stack, primary, secondary, startingEnergy, maxEnergy);
+        Map<Enchantment, Integer> mainEnchants = primary.getEnchantments();
+        if (!mainEnchants.isEmpty()) {
+            mainEnchants.entrySet().stream().filter(e -> e.getKey().canApply(stack)).forEach(e -> stack.addEnchantment(e.getKey(), e.getValue()));
+        }
+        return stack;
     }
 
     @Override

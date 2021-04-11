@@ -155,7 +155,7 @@ public class Materials {
     //Brittle Gems
     public static Material CoalCoke = new Material(Ref.ID, "coal_coke", 0x8c8caa, LIGNITE).asGemBasic(false);
     public static Material Charcoal = new Material(Ref.ID, "charcoal", 0x644646, LIGNITE).asDust().mats(of(Carbon, 1));
-    public static Material Coal = new Material(Ref.ID, "coal", 0x464646, ROUGH).asDust(ORE).mats(of(Carbon, 2));
+    public static Material Coal = new Material(Ref.ID, "coal", 0x464646, LIGNITE).asDust(ORE).mats(of(Carbon, 2));
 
     public static Material Diamond = new Material(Ref.ID, "diamond", /*0x3de0e5*/0xc8ffff, DIAMOND).asGemBasic(false, ORE).mats(of(Carbon, 128)).addTools(ItemTier.DIAMOND.getAttackDamage(), ItemTier.DIAMOND.getEfficiency(), ItemTier.DIAMOND.getMaxUses(), ItemTier.DIAMOND.getHarvestLevel());
     public static Material Emerald = new Material(Ref.ID, "emerald", 0x50ff50, GEM_V).asDust(ORE).mats(of(Beryllium, 3, Aluminium, 2, Silicon, 3, Oxygen, 18));
@@ -188,7 +188,7 @@ public class Materials {
     public static Material Nichrome = new Material(Ref.ID, "nichrome", 0xcdcef6, METALLIC).asMetal(2700, 2500).mats(of(Nickel, 4, Chrome, 1));
     public static Material SolderingAlloy = new Material(Ref.ID, "soldering_alloy", 0xdcdce6, DULL).asMetal(400, 400, PLATE, ROD).mats(of(Tin, 9, Antimony, 1));
     public static Material Steel = new Material(Ref.ID, "steel", 0x808080, METALLIC).asMetal(1811, 1500, PLATE, ROD, GEAR, HULL, TURBINE_BLADE).addTools(2.5F, 6.0F, 512, 2,  of(Enchantments.SHARPNESS, 2)).mats(of(Iron, 50, Carbon, 1));
-    public static Material StainlessSteel = new Material(Ref.ID, "stainless_steel", 0xc8c8dc, SHINY).asMetal(1700, 1700, PLATE, ROD, GEAR, HULL).mats(of(Iron, 6, Chrome, 1, Manganese, 1, Nickel, 1));
+    public static Material StainlessSteel = new Material(Ref.ID, "stainless_steel", 0xc8c8dc, SHINY).asMetal(1700, 1700, PLATE, ROD, GEAR, HULL).mats(of(Iron, 6, Chrome, 1, Manganese, 1, Nickel, 1)).addTools(2.5F, 7.0F, 480, 2, of(Enchantments.SHARPNESS, 3));
     public static Material WroughtIron = new Material(Ref.ID, "wrought_iron", 0xc8b4b4, METALLIC).asMetal(1811, 0, PLATE, ROD, GEAR, HULL).mats(of(Iron, 1)).addTools(IRON.getAttackDamage(), IRON.getEfficiency(), (int)(IRON.getMaxUses() * 1.5F), IRON.getHarvestLevel(),  of(Enchantments.SHARPNESS, 2));
     public static Material TungstenSteel = new Material(Ref.ID, "tungstensteel", 0x6464a0, METALLIC).asMetal(3000, 3000, PLATE, ROD, GEAR, HULL, TURBINE_BLADE).addTools(6.0F, 10.0F, 5120, 4).mats(of(Steel, 1, Tungsten, 1));
     public static Material TungstenCarbide = new Material(Ref.ID, "tungsten_carbide", 0x330066, METALLIC).asMetal(2460, 2460).addTools(5.0F, 14.0F, 2560, 4, of(Enchantments.SHARPNESS, 5)).mats(of(Tungsten, 1, Carbon, 1));
