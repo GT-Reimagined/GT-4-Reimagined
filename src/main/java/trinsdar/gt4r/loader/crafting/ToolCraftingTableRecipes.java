@@ -14,6 +14,7 @@ import muramasa.antimatter.util.TagUtils;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import trinsdar.gt4r.GT4RConfig;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -50,8 +51,16 @@ public class ToolCraftingTableRecipes {
             }
         });
 
-        INGOT.all().stream().filter(p -> p.has(PLATE)).forEach(p -> provider.shapeless(output, "ingothammer","plate", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), new ItemStack(PLATE.get(p),1),
-                HAMMER.getTag(), INGOT.getMaterialTag(p)));
+        INGOT.all().stream().filter(p -> p.has(PLATE)).forEach(p -> {
+            if (GT4RConfig.GAMEPLAY.HARDER_PLATES){
+                provider.shapeless(output, "ingothammer", "plate", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), new ItemStack(PLATE.get(p), 1),
+                        HAMMER.getTag(), INGOT.getMaterialTag(p), INGOT.getMaterialTag(p));
+            } else {
+                provider.shapeless(output, "ingothammer", "plate", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), new ItemStack(PLATE.get(p), 1),
+                        HAMMER.getTag(), INGOT.getMaterialTag(p));
+            }
+
+        });
         DUST.all().stream().filter(p -> p.has(GEM) || p.has(INGOT)).forEach(p -> {
             String gemIngot = p.has(GEM) ? "gems" : "ingots";
             provider.shapeless(output, "dust_" + p.getId() + "_from_id", "mortar_uses", "has_mortar", provider.hasSafeItem(MORTAR.getTag()),

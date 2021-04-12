@@ -5,6 +5,7 @@ import muramasa.antimatter.util.Utils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraftforge.common.Tags;
+import trinsdar.gt4r.GT4RConfig;
 
 import static muramasa.antimatter.Data.*;
 import static trinsdar.gt4r.data.Materials.*;
@@ -27,7 +28,9 @@ public class ForgeHammerLoader {
         });
         PLATE.all().forEach(m -> {
             if (!m.has(INGOT)) return;
-            HAMMERING.RB().ii(INGOT.getMaterialIngredient(m, 3)).io(PLATE.get(m, 2)).add(m.getMass(), 16);
+            int in = GT4RConfig.GAMEPLAY.HARDER_PLATES ? 3 : 1;
+            int out = GT4RConfig.GAMEPLAY.HARDER_PLATES ? 2 : 1;
+            HAMMERING.RB().ii(INGOT.getMaterialIngredient(m, in)).io(PLATE.get(m, out)).add(m.getMass(), 16);
         });
         HAMMERING.RB().ii(RecipeIngredient.of(Tags.Items.COBBLESTONE, 1)).io(new ItemStack(Items.GRAVEL)).add(10, 16);
         HAMMERING.RB().ii(RecipeIngredient.of(Tags.Items.STONE, 1)).io(new ItemStack(Items.COBBLESTONE)).add(10, 16);

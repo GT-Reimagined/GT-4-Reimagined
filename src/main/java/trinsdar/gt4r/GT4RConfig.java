@@ -53,9 +53,9 @@ public class GT4RConfig {
 
         /** @see CommonConfig **/
 
-        public boolean COPPER_ORE_GEN, TIN_ORE_GEN, URANITE_ORE_GEN, PYRITE_ORE_GEN, CINNABAR_ORE_GEN, SPHALERITE_ORE_GEN, GALENA_ORE_GEN, CASSITERITE_ORE_GEN, TETRAHEDRITE_ORE_GEN, BAUXITE_ORE_GEN, RUBY_ORE_GEN, SAPPHIRE_ORE_GEN, IRIDIUM_ORE_GEN, SHELDONITE_ORE_WEIGHT, TUNGSTATE_ORE_GEN, SHELDONITE_ORE_GEN, OLIVINE_ORE_GEN, SODALITE_ORE_GEN, CHROMITE_ORE_GEN, EXTRA_EMERALD_ORE_GEN, REPLACEMENT_VANILLA_ORE_GEN;
+        public boolean COPPER_ORE_GEN, TIN_ORE_GEN, URANITE_ORE_GEN, PYRITE_ORE_GEN, CINNABAR_ORE_GEN, SPHALERITE_ORE_GEN, GALENA_ORE_GEN, CASSITERITE_ORE_GEN, TETRAHEDRITE_ORE_GEN, BAUXITE_ORE_GEN, RUBY_ORE_GEN, SAPPHIRE_ORE_GEN, IRIDIUM_ORE_GEN, TUNGSTATE_ORE_GEN, SHELDONITE_ORE_GEN, OLIVINE_ORE_GEN, SODALITE_ORE_GEN, CHROMITE_ORE_GEN, EXTRA_EMERALD_ORE_GEN, REPLACEMENT_VANILLA_ORE_GEN;
 
-        public int COPPER_ORE_WEIGHT, TIN_ORE_WEIGHT, URANITE_ORE_WEIGHT, URANITE_DEAD_ORE_WEIGHT,  PYRITE_ORE_WEIGHT, CINNABAR_ORE_WEIGHT, SPHALERITE_ORE_WEIGHT, GALENA_ORE_WEIGHT, CASSITERITE_ORE_WEIGHT, TETRAHEDRITE_ORE_WEIGHT, BAUXITE_ORE_WEIGHT, RUBY_ORE_WEIGHT, SAPPHIRE_ORE_WEIGHT, IRIDIUM_ORE_WEIGHT, TUNGSTATE_ORE_WEIGHT, SHELDONITE_END_ORE_WEIGHT, OLIVINE_ORE_WEIGHT, SODALITE_ORE_WEIGHT, CHROMITE_ORE_WEIGHT, EXTRA_EMERALD_ORE_WEIGHT;
+        public int COPPER_ORE_WEIGHT, TIN_ORE_WEIGHT, URANITE_ORE_WEIGHT, URANITE_DEAD_ORE_WEIGHT,  PYRITE_ORE_WEIGHT, CINNABAR_ORE_WEIGHT, SPHALERITE_ORE_WEIGHT, GALENA_ORE_WEIGHT, CASSITERITE_ORE_WEIGHT, TETRAHEDRITE_ORE_WEIGHT, BAUXITE_ORE_WEIGHT, RUBY_ORE_WEIGHT, SAPPHIRE_ORE_WEIGHT, IRIDIUM_ORE_WEIGHT, SHELDONITE_ORE_WEIGHT, TUNGSTATE_ORE_WEIGHT, SHELDONITE_END_ORE_WEIGHT, OLIVINE_ORE_WEIGHT, SODALITE_ORE_WEIGHT, CHROMITE_ORE_WEIGHT, EXTRA_EMERALD_ORE_WEIGHT;
 
         public int COPPER_ORE_SIZE, TIN_ORE_SIZE, URANITE_ORE_SIZE,  PYRITE_ORE_SIZE, CINNABAR_ORE_SIZE, SPHALERITE_ORE_SIZE, GALENA_ORE_SIZE, CASSITERITE_ORE_SIZE, TETRAHEDRITE_ORE_SIZE, BAUXITE_ORE_SIZE, RUBY_ORE_SIZE, SAPPHIRE_ORE_SIZE, IRIDIUM_ORE_SIZE, TUNGSTATE_ORE_SIZE, SHELDONITE_ORE_SIZE, OLIVINE_ORE_SIZE, SODALITE_ORE_SIZE, CHROMITE_ORE_SIZE, EXTRA_EMERALD_ORE_SIZE;
 
@@ -184,97 +184,97 @@ public class GT4RConfig {
             COPPER_ORE_SIZE = builder.comment("Max size of Copper veins - Default: 10")
                     .translation(Ref.ID + ".config.copper_ore_size")
                     .worldRestart()
-                    .defineInRange("ENABLE_COPPER_ORE_SIZE", 10, 1, 32);
+                    .defineInRange("COPPER_ORE_SIZE", 10, 1, 32);
 
             TIN_ORE_SIZE = builder.comment("Max size of Tin veins - Default: 8")
                     .translation(Ref.ID + ".config.tin_ore_size")
                     .worldRestart()
-                    .defineInRange("ENABLE_TIN_ORE_SIZE", 8, 1, 32);
+                    .defineInRange("TIN_ORE_SIZE", 8, 1, 32);
 
             URANITE_ORE_SIZE = builder.comment("Max size of Uranite veins - Default: 4")
                     .translation(Ref.ID + ".config.uranite_ore_size")
                     .worldRestart()
-                    .defineInRange("ENABLE_URANITE_ORE_SIZE", 4, 1, 32);
+                    .defineInRange("URANITE_ORE_SIZE", 4, 1, 32);
 
             GALENA_ORE_SIZE = builder.comment("Max size of Galena veins - Default: 10")
                     .translation(Ref.ID + ".config.galena_ore_size")
                     .worldRestart()
-                    .defineInRange("ENABLE_GALENA_ORE_SIZE", 10, 1, 32);
+                    .defineInRange("GALENA_ORE_SIZE", 10, 1, 32);
 
             CASSITERITE_ORE_SIZE = builder.comment("Max size of Cassiterite veins - Default: 32")
                     .translation(Ref.ID + ".config.cassiterite_ore_size")
                     .worldRestart()
-                    .defineInRange("ENABLE_CASSITERITE_ORE_SIZE", 32, 1, 64);
+                    .defineInRange("CASSITERITE_ORE_SIZE", 32, 1, 64);
 
             TETRAHEDRITE_ORE_SIZE = builder.comment("Max size of Tetrahedrite veins - Default: 6")
                     .translation(Ref.ID + ".config.tetrahedrite_ore_size")
                     .worldRestart()
-                    .defineInRange("ENABLE_TETRAHEDRITE_ORE_SIZE", 6, 1, 32);
+                    .defineInRange("TETRAHEDRITE_ORE_SIZE", 6, 1, 32);
 
             BAUXITE_ORE_SIZE = builder.comment("Max size of Bauxite veins - Default: 16")
                     .translation(Ref.ID + ".config.bauxite_ore_size")
                     .worldRestart()
-                    .defineInRange("ENABLE_BAUXITE_ORE_SIZE", 16, 1, 32);
+                    .defineInRange("BAUXITE_ORE_SIZE", 16, 1, 32);
 
             RUBY_ORE_SIZE = builder.comment("Max size of Ruby veins - Default: 6")
                     .translation(Ref.ID + ".config.ruby_ore_size")
                     .worldRestart()
-                    .defineInRange("ENABLE_RUBY_ORE_SIZE", 6, 1, 16);
+                    .defineInRange("RUBY_ORE_SIZE", 6, 1, 16);
 
             SAPPHIRE_ORE_SIZE = builder.comment("Max size of Sapphire veins - Default: 6")
                     .translation(Ref.ID + ".config.sapphire_ore_size")
                     .worldRestart()
-                    .defineInRange("ENABLE_SAPPHIRE_ORE_SIZE", 6, 1, 16);
+                    .defineInRange("SAPPHIRE_ORE_SIZE", 6, 1, 16);
 
             IRIDIUM_ORE_SIZE = builder.comment("Max size of Iridium veins - Default: 2")
                     .translation(Ref.ID + ".config.iridium_ore_size")
                     .worldRestart()
-                    .defineInRange("ENABLE_IRIDIUM_ORE_SIZE", 2, 1, 16);
+                    .defineInRange("IRIDIUM_ORE_SIZE", 2, 1, 16);
 
             EXTRA_EMERALD_ORE_SIZE = builder.comment("Max size of Extra Emerald veins - Default: 6")
                     .translation(Ref.ID + ".config.extra_emerald_ore_size")
                     .worldRestart()
-                    .defineInRange("ENABLE_EXTRA_EMERALD_ORE_SIZE", 6, 1, 16);
+                    .defineInRange("EXTRA_EMERALD_ORE_SIZE", 6, 1, 16);
 
             PYRITE_ORE_SIZE = builder.comment("Max size of Pyrite veins - Default: 16")
                     .translation(Ref.ID + ".config.pyrite_ore_size")
                     .worldRestart()
-                    .defineInRange("ENABLE_PYRITE_ORE_SIZE", 16, 1, 32);
+                    .defineInRange("PYRITE_ORE_SIZE", 16, 1, 32);
 
             CINNABAR_ORE_SIZE = builder.comment("Max size of Cinnabar veins - Default: 16")
                     .translation(Ref.ID + ".config.cinnabar_ore_size")
                     .worldRestart()
-                    .defineInRange("ENABLE_CINNABAR_ORE_SIZE", 16, 1, 32);
+                    .defineInRange("CINNABAR_ORE_SIZE", 16, 1, 32);
 
             SPHALERITE_ORE_SIZE = builder.comment("Max size of Sphalerite veins - Default: 16")
                     .translation(Ref.ID + ".config.sphalerite_ore_size")
                     .worldRestart()
-                    .defineInRange("ENABLE_SPHALERITE_ORE_SIZE", 16, 1, 32);
+                    .defineInRange("SPHALERITE_ORE_SIZE", 16, 1, 32);
 
             TUNGSTATE_ORE_SIZE = builder.comment("Max size of Tungstate veins - Default: 16")
                     .translation(Ref.ID + ".config.tungstate_ore_size")
                     .worldRestart()
-                    .defineInRange("ENABLE_TUNGSTATE_ORE_SIZE", 16, 1, 32);
+                    .defineInRange("TUNGSTATE_ORE_SIZE", 16, 1, 32);
 
             SODALITE_ORE_SIZE = builder.comment("Max size of Sodalite veins - Default: 16")
                     .translation(Ref.ID + ".config.sodalite_ore_size")
                     .worldRestart()
-                    .defineInRange("ENABLE_SODALITE_ORE_SIZE", 16,1,32);
+                    .defineInRange("SODALITE_ORE_SIZE", 16,1,32);
 
             SHELDONITE_ORE_SIZE = builder.comment("Max size of Sheldonite veins - Default: 6")
                     .translation(Ref.ID + ".config.sheldonite_ore_size")
                     .worldRestart()
-                    .defineInRange("ENABLE_SHELDONITE_ORE_SIZE", 6, 1, 16);
+                    .defineInRange("SHELDONITE_ORE_SIZE", 6, 1, 16);
 
             OLIVINE_ORE_SIZE = builder.comment("Max size of Olivine veins - Default: 8")
                     .translation(Ref.ID + ".config.olivine_ore_size")
                     .worldRestart()
-                    .defineInRange("ENABLE_OLIVINE_ORE_SIZE", 8, 1, 32);
+                    .defineInRange("OLIVINE_ORE_SIZE", 8, 1, 32);
 
             CHROMITE_ORE_SIZE = builder.comment("Max size of Chromite veins - Default: 6")
                     .translation(Ref.ID + ".config.chromite_ore_size")
                     .worldRestart()
-                    .defineInRange("ENABLE_CHROMITE_ORE_SIZE", 6, 1, 16);
+                    .defineInRange("CHROMITE_ORE_SIZE", 6, 1, 16);
 
             builder.pop();
 
@@ -283,107 +283,107 @@ public class GT4RConfig {
             COPPER_ORE_WEIGHT = builder.comment("Total attempts to spawn Copper veins in a chunk - Default: 15")
                     .translation(Ref.ID + ".config.copper_ore_weight")
                     .worldRestart()
-                    .defineInRange("ENABLE_COPPER_ORE_WEIGHT", 15, 1, 32);
+                    .defineInRange("COPPER_ORE_WEIGHT", 15, 1, 32);
 
             TIN_ORE_WEIGHT = builder.comment("Total attempts to spawn Tin veins in a chunk - Default: 25")
                     .translation(Ref.ID + ".config.tin_ore_weight")
                     .worldRestart()
-                    .defineInRange("ENABLE_TIN_ORE_WEIGHT", 25, 1, 32);
+                    .defineInRange("TIN_ORE_WEIGHT", 25, 1, 32);
 
             URANITE_ORE_WEIGHT = builder.comment("Total attempts to spawn Uranite veins in a chunk - Default: 8")
                     .translation(Ref.ID + ".config.uranite_ore_weight")
                     .worldRestart()
-                    .defineInRange("ENABLE_URANITE_ORE_WEIGHT", 8, 1, 32);
+                    .defineInRange("URANITE_ORE_WEIGHT", 8, 1, 32);
 
-            URANITE_ORE_WEIGHT = builder.comment("Total attempts to spawn Dead biome Uranite veins in a chunk - Default: 20")
+            URANITE_DEAD_ORE_WEIGHT = builder.comment("Total attempts to spawn Dead biome Uranite veins in a chunk - Default: 20")
                     .translation(Ref.ID + ".config.uranite_ore_weight")
                     .worldRestart()
-                    .defineInRange("ENABLE_URANITE_ORE_WEIGHT", 20, 1, 32);
+                    .defineInRange("URANITE_DEAD_ORE_WEIGHT", 20, 1, 32);
 
             GALENA_ORE_WEIGHT = builder.comment("Total attempts to spawn Galena veins in a chunk - Default: 12")
                     .translation(Ref.ID + ".config.galena_ore_weight")
                     .worldRestart()
-                    .defineInRange("ENABLE_GALENA_ORE_WEIGHT", 12, 1, 32);
+                    .defineInRange("GALENA_ORE_WEIGHT", 12, 1, 32);
 
             CASSITERITE_ORE_WEIGHT = builder.comment("Total attempts to spawn Cassiterite veins in a chunk - Default: 2")
                     .translation(Ref.ID + ".config.cassiterite_ore_weight")
                     .worldRestart()
-                    .defineInRange("ENABLE_CASSITERITE_ORE_WEIGHT", 2, 1, 32);
+                    .defineInRange("CASSITERITE_ORE_WEIGHT", 2, 1, 32);
 
             TETRAHEDRITE_ORE_WEIGHT = builder.comment("Total attempts to spawn Tetrahedrite veins in a chunk - Default: 7")
                     .translation(Ref.ID + ".config.tetrahedrite_ore_weight")
                     .worldRestart()
-                    .defineInRange("ENABLE_TETRAHEDRITE_ORE_WEIGHT", 7, 1, 32);
+                    .defineInRange("TETRAHEDRITE_ORE_WEIGHT", 7, 1, 32);
 
             BAUXITE_ORE_WEIGHT = builder.comment("Total attempts to spawn Bauxite veins in a chunk - Default: 8")
                     .translation(Ref.ID + ".config.bauxite_ore_weight")
                     .worldRestart()
-                    .defineInRange("ENABLE_BAUXITE_ORE_WEIGHT", 8, 1, 32);
+                    .defineInRange("BAUXITE_ORE_WEIGHT", 8, 1, 32);
 
             RUBY_ORE_WEIGHT = builder.comment("Total attempts to spawn Ruby veins in a chunk - Default: 3")
                     .translation(Ref.ID + ".config.ruby_ore_weight")
                     .worldRestart()
-                    .defineInRange("ENABLE_RUBY_ORE_WEIGHT", 3, 1, 32);
+                    .defineInRange("RUBY_ORE_WEIGHT", 3, 1, 32);
 
             SAPPHIRE_ORE_WEIGHT = builder.comment("Total attempts to spawn Sapphire veins in a chunk - Default: 3")
                     .translation(Ref.ID + ".config.sapphire_ore_weight")
                     .worldRestart()
-                    .defineInRange("ENABLE_SAPPHIRE_ORE_WEIGHT", 3, 1, 32);
+                    .defineInRange("SAPPHIRE_ORE_WEIGHT", 3, 1, 32);
 
             IRIDIUM_ORE_WEIGHT = builder.comment("Total attempts to spawn Iridium veins in a chunk - Default: 1")
                     .translation(Ref.ID + ".config.iridium_ore_weight")
                     .worldRestart()
-                    .defineInRange("ENABLE_IRIDIUM_ORE_WEIGHT", 1, 1, 32);
+                    .defineInRange("IRIDIUM_ORE_WEIGHT", 1, 1, 32);
 
             EXTRA_EMERALD_ORE_WEIGHT = builder.comment("Total attempts to spawn Extra Emerald veins in a chunk - Default: 4")
                     .translation(Ref.ID + ".config.extra_emerald_ore_weight")
                     .worldRestart()
-                    .defineInRange("ENABLE_EXTRA_EMERALD_ORE_WEIGHT", 4, 1, 32);
+                    .defineInRange("EXTRA_EMERALD_ORE_WEIGHT", 4, 1, 32);
 
             SHELDONITE_ORE_WEIGHT = builder.comment("Total attempts to spawn Sheldonite veins in a chunk in the Overworld - Default: 3")
                     .translation(Ref.ID + ".config.sheldonite_ore_weight")
                     .worldRestart()
-                    .defineInRange("ENABLE_SHELDONITE_ORE_WEIGHT", 3, 1, 32);
+                    .defineInRange("SHELDONITE_ORE_WEIGHT", 3, 1, 32);
 
             PYRITE_ORE_WEIGHT = builder.comment("Total attempts to spawn Pyrite veins in a chunk - Default: 8")
                     .translation(Ref.ID + ".config.pyrite_ore_weight")
                     .worldRestart()
-                    .defineInRange("ENABLE_PYRITE_ORE_WEIGHT", 8, 1, 32);
+                    .defineInRange("PYRITE_ORE_WEIGHT", 8, 1, 32);
 
             CINNABAR_ORE_WEIGHT = builder.comment("Total attempts to spawn Cinnabar veins in a chunk - Default: 7")
                     .translation(Ref.ID + ".config.cinnabar_ore_weight")
                     .worldRestart()
-                    .defineInRange("ENABLE_CINNABAR_ORE_WEIGHT", 7, 1, 32);
+                    .defineInRange("CINNABAR_ORE_WEIGHT", 7, 1, 32);
 
             SPHALERITE_ORE_WEIGHT = builder.comment("Total attempts to spawn Sphalerite veins in a chunk - Default: 8")
                     .translation(Ref.ID + ".config.sphalerite_ore_weight")
                     .worldRestart()
-                    .defineInRange("ENABLE_SPHALERITE_ORE_WEIGHT", 8, 1, 32);
+                    .defineInRange("SPHALERITE_ORE_WEIGHT", 8, 1, 32);
 
             TUNGSTATE_ORE_WEIGHT = builder.comment("Total attempts to spawn Tungstate veins in a chunk - Default: 2")
                     .translation(Ref.ID + ".config.tungstate_ore_weight")
                     .worldRestart()
-                    .defineInRange("ENABLE_TUNGSTATE_ORE_WEIGHT", 2, 1, 32);
+                    .defineInRange("TUNGSTATE_ORE_WEIGHT", 2, 1, 32);
 
             SODALITE_ORE_WEIGHT = builder.comment("Total attempts to spawn Sodalite veins in a chunk - Default: 6")
                     .translation(Ref.ID + ".config.sodalite_ore_weight")
                     .worldRestart()
-                    .defineInRange("ENABLE_SODALITE_ORE_WEIGHT", 6,1,32);
+                    .defineInRange("SODALITE_ORE_WEIGHT", 6,1,32);
 
             SHELDONITE_END_ORE_WEIGHT = builder.comment("Total attempts to spawn Sheldonite veins in a chunk in the End - Default: 2")
                     .translation(Ref.ID + ".config.sheldonite_end_ore_weight")
                     .worldRestart()
-                    .defineInRange("ENABLE_SHELDONITE_END_ORE_WEIGHT", 2, 1, 32);
+                    .defineInRange("SHELDONITE_END_ORE_WEIGHT", 2, 1, 32);
 
             OLIVINE_ORE_WEIGHT = builder.comment("Total attempts to spawn Olivine veins in a chunk - Default: 5")
                     .translation(Ref.ID + ".config.olivine_ore_weight")
                     .worldRestart()
-                    .defineInRange("ENABLE_OLIVINE_ORE_WEIGHT", 5, 1, 32);
+                    .defineInRange("OLIVINE_ORE_WEIGHT", 5, 1, 32);
 
             CHROMITE_ORE_WEIGHT = builder.comment("Total attempts to spawn Chromite veins in a chunk - Default: 4")
                     .translation(Ref.ID + ".config.chromite_ore_weight")
                     .worldRestart()
-                    .defineInRange("ENABLE_CHROMITE_ORE_WEIGHT", 4, 1, 32);
+                    .defineInRange("CHROMITE_ORE_WEIGHT", 4, 1, 32);
 
             builder.pop(2);
 
@@ -400,6 +400,8 @@ public class GT4RConfig {
     }
 
     private static void bakeCommonConfig() {
+        WORLD.REPLACEMENT_VANILLA_ORE_GEN = COMMON_CONFIG.REPLACEMENT_VANILLA_ORE_GEN.get();
+
         WORLD.COPPER_ORE_GEN = COMMON_CONFIG.COPPER_ORE_GEN.get();
         WORLD.TIN_ORE_GEN= COMMON_CONFIG.TIN_ORE_GEN.get();
         WORLD.URANITE_ORE_GEN = COMMON_CONFIG.URANITE_ORE_GEN.get();
@@ -412,6 +414,55 @@ public class GT4RConfig {
         WORLD.BAUXITE_ORE_GEN = COMMON_CONFIG.BAUXITE_ORE_GEN.get();
         WORLD.RUBY_ORE_GEN = COMMON_CONFIG.RUBY_ORE_GEN.get();
         WORLD.SAPPHIRE_ORE_GEN = COMMON_CONFIG.SAPPHIRE_ORE_GEN.get();
+        WORLD.IRIDIUM_ORE_GEN = COMMON_CONFIG.IRIDIUM_ORE_GEN.get();
+        WORLD.EXTRA_EMERALD_ORE_GEN = COMMON_CONFIG.EXTRA_EMERALD_ORE_GEN.get();
+        WORLD.TUNGSTATE_ORE_GEN = COMMON_CONFIG.TUNGSTATE_ORE_GEN.get();
+        WORLD.SODALITE_ORE_GEN = COMMON_CONFIG.SODALITE_ORE_GEN.get();
+        WORLD.SHELDONITE_ORE_GEN = COMMON_CONFIG.SHELDONITE_ORE_GEN.get();
+        WORLD.OLIVINE_ORE_GEN = COMMON_CONFIG.OLIVINE_ORE_GEN.get();
+        WORLD.CHROMITE_ORE_GEN = COMMON_CONFIG.CHROMITE_ORE_GEN.get();
+
+        WORLD.COPPER_ORE_SIZE = COMMON_CONFIG.COPPER_ORE_SIZE.get();
+        WORLD.TIN_ORE_SIZE= COMMON_CONFIG.TIN_ORE_SIZE.get();
+        WORLD.URANITE_ORE_SIZE = COMMON_CONFIG.URANITE_ORE_SIZE.get();
+        WORLD.PYRITE_ORE_SIZE = COMMON_CONFIG.PYRITE_ORE_SIZE.get();
+        WORLD.SPHALERITE_ORE_SIZE = COMMON_CONFIG.SPHALERITE_ORE_SIZE.get();
+        WORLD.CINNABAR_ORE_SIZE = COMMON_CONFIG.CINNABAR_ORE_SIZE.get();
+        WORLD.GALENA_ORE_SIZE = COMMON_CONFIG.GALENA_ORE_SIZE.get();
+        WORLD.CASSITERITE_ORE_SIZE = COMMON_CONFIG.CASSITERITE_ORE_SIZE.get();
+        WORLD.TETRAHEDRITE_ORE_SIZE = COMMON_CONFIG.TETRAHEDRITE_ORE_SIZE.get();
+        WORLD.BAUXITE_ORE_SIZE = COMMON_CONFIG.BAUXITE_ORE_SIZE.get();
+        WORLD.RUBY_ORE_SIZE = COMMON_CONFIG.RUBY_ORE_SIZE.get();
+        WORLD.SAPPHIRE_ORE_SIZE = COMMON_CONFIG.SAPPHIRE_ORE_SIZE.get();
+        WORLD.IRIDIUM_ORE_SIZE = COMMON_CONFIG.IRIDIUM_ORE_SIZE.get();
+        WORLD.EXTRA_EMERALD_ORE_SIZE = COMMON_CONFIG.EXTRA_EMERALD_ORE_SIZE.get();
+        WORLD.TUNGSTATE_ORE_SIZE = COMMON_CONFIG.TUNGSTATE_ORE_SIZE.get();
+        WORLD.SODALITE_ORE_SIZE = COMMON_CONFIG.SODALITE_ORE_SIZE.get();
+        WORLD.SHELDONITE_ORE_SIZE = COMMON_CONFIG.SHELDONITE_ORE_SIZE.get();
+        WORLD.OLIVINE_ORE_SIZE = COMMON_CONFIG.OLIVINE_ORE_SIZE.get();
+        WORLD.CHROMITE_ORE_SIZE = COMMON_CONFIG.CHROMITE_ORE_SIZE.get();
+
+        WORLD.COPPER_ORE_WEIGHT = COMMON_CONFIG.COPPER_ORE_WEIGHT.get();
+        WORLD.TIN_ORE_WEIGHT= COMMON_CONFIG.TIN_ORE_WEIGHT.get();
+        WORLD.URANITE_ORE_WEIGHT = COMMON_CONFIG.URANITE_ORE_WEIGHT.get();
+        WORLD.URANITE_DEAD_ORE_WEIGHT = COMMON_CONFIG.URANITE_DEAD_ORE_WEIGHT.get();
+        WORLD.PYRITE_ORE_WEIGHT = COMMON_CONFIG.PYRITE_ORE_WEIGHT.get();
+        WORLD.SPHALERITE_ORE_WEIGHT = COMMON_CONFIG.SPHALERITE_ORE_WEIGHT.get();
+        WORLD.CINNABAR_ORE_WEIGHT = COMMON_CONFIG.CINNABAR_ORE_WEIGHT.get();
+        WORLD.GALENA_ORE_WEIGHT = COMMON_CONFIG.GALENA_ORE_WEIGHT.get();
+        WORLD.CASSITERITE_ORE_WEIGHT = COMMON_CONFIG.CASSITERITE_ORE_WEIGHT.get();
+        WORLD.TETRAHEDRITE_ORE_WEIGHT = COMMON_CONFIG.TETRAHEDRITE_ORE_WEIGHT.get();
+        WORLD.BAUXITE_ORE_WEIGHT = COMMON_CONFIG.BAUXITE_ORE_WEIGHT.get();
+        WORLD.RUBY_ORE_WEIGHT = COMMON_CONFIG.RUBY_ORE_WEIGHT.get();
+        WORLD.SAPPHIRE_ORE_WEIGHT = COMMON_CONFIG.SAPPHIRE_ORE_WEIGHT.get();
+        WORLD.IRIDIUM_ORE_WEIGHT = COMMON_CONFIG.IRIDIUM_ORE_WEIGHT.get();
+        WORLD.EXTRA_EMERALD_ORE_WEIGHT = COMMON_CONFIG.EXTRA_EMERALD_ORE_WEIGHT.get();
+        WORLD.TUNGSTATE_ORE_WEIGHT = COMMON_CONFIG.TUNGSTATE_ORE_WEIGHT.get();
+        WORLD.SODALITE_ORE_WEIGHT = COMMON_CONFIG.SODALITE_ORE_WEIGHT.get();
+        WORLD.SHELDONITE_ORE_WEIGHT = COMMON_CONFIG.SHELDONITE_ORE_WEIGHT.get();
+        WORLD.SHELDONITE_END_ORE_WEIGHT = COMMON_CONFIG.SHELDONITE_END_ORE_WEIGHT.get();
+        WORLD.OLIVINE_ORE_WEIGHT = COMMON_CONFIG.OLIVINE_ORE_WEIGHT.get();
+        WORLD.CHROMITE_ORE_WEIGHT = COMMON_CONFIG.CHROMITE_ORE_WEIGHT.get();
 
         GAMEPLAY.HARDER_PLATES = COMMON_CONFIG.HARDER_PLATES.get();
 
