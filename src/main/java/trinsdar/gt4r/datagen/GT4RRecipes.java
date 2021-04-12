@@ -5,14 +5,11 @@ import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.ore.BlockOre;
-import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import muramasa.antimatter.tool.IAntimatterTool;
 import muramasa.antimatter.util.TagUtils;
 import net.minecraft.advancements.ICriterionInstance;
-import net.minecraft.data.CookingRecipeBuilder;
 import net.minecraft.data.ShapelessRecipeBuilder;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
@@ -34,13 +31,11 @@ import trinsdar.gt4r.loader.machines.FurnaceLoader;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import static com.google.common.collect.ImmutableMap.of;
 import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.material.MaterialTag.GRINDABLE;
-import static muramasa.antimatter.material.MaterialTag.RUBBERTOOLS;
 import static muramasa.antimatter.util.TagUtils.getForgeItemTag;
 import static muramasa.antimatter.util.TagUtils.nc;
 import static muramasa.antimatter.util.Utils.getConventionalMaterialType;
@@ -87,14 +82,14 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
     protected void registerMaterialRecipes(Consumer<IFinishedRecipe> consumer, String providerDomain) {
         AntimatterAPI.all(BlockOre.class, providerDomain, o -> {
             if (o.getOreType() != ORE) return;
-            if (!o.getMaterial().has(INGOT)) return;
-            Item ingot = INGOT.get(o.getMaterial());
+            if (!o.getMaterial().getSmeltInto().has(INGOT)) return;
+            Item ingot = INGOT.get(o.getMaterial().getSmeltInto());
             ITag.INamedTag<Item> oreTag = TagUtils.getForgeItemTag(String.join("", getConventionalStoneType(o.getStoneType()), "_", getConventionalMaterialType(o.getOreType()), "/", o.getMaterial().getId()));
-            ITag.INamedTag<Item> ingotTag = TagUtils.getForgeItemTag("ingots/".concat(o.getMaterial().getId()));
-            CookingRecipeBuilder.blastingRecipe(Ingredient.fromTag(nc(oreTag)), ingot, 2.0F, 100)
+            ITag.INamedTag<Item> ingotTag = TagUtils.getForgeItemTag("ingots/".concat(o.getMaterial().getSmeltInto().getId()));
+            GT4RCookingRecipeBuilder.blastingRecipe(Ingredient.fromTag(nc(oreTag)), new ItemStack(ingot, o.getMaterial().getSmeltingMulti()), 2.0F, 100)
                     .addCriterion("has_material_" + o.getMaterial().getId(), hasItem(ingotTag))
                     .build(consumer, fixLoc(providerDomain, o.getId().concat("_to_ingot")));
-            CookingRecipeBuilder.smeltingRecipe(Ingredient.fromTag(nc(oreTag)), ingot, 2.0F, 200)
+            GT4RCookingRecipeBuilder.smeltingRecipe(Ingredient.fromTag(nc(oreTag)), new ItemStack(ingot, o.getMaterial().getSmeltingMulti()), 2.0F, 200)
                     .addCriterion("has_material_" + o.getMaterial().getId(), hasItem(ingotTag))
                     .build(consumer, fixLoc(providerDomain, o.getId().concat("_to_ingot_smelting")));
         });
