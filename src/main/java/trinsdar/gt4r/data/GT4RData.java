@@ -107,6 +107,8 @@ public class GT4RData {
             builder.put(Tier.IV, LapotronicEnergyOrb);
             TIER_BATTERIES = builder.build();
         }
+        //temp method till this behavior has a hotkey
+        Data.DRILL.removeBehaviour("aoe_break");
     }
 
     public static void init(Dist side) {

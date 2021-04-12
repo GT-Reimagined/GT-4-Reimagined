@@ -29,14 +29,14 @@ public class GT4RFeatures {
     public static final GT4ROreFeatureConfig BAUXITE = new GT4ROreFeatureConfig("bauxite", 50, 120, 6, 16, Bauxite, NULL, 0, World.OVERWORLD).setValidBiomes(FOREST, PLAINS);
     public static final GT4ROreFeatureConfig RUBY = new GT4ROreFeatureConfig("ruby", 0, 48, 3, 6, Ruby, NULL, 0, World.OVERWORLD).setValidBiomes(HOT).setInvalidBiomes(JUNGLE, OCEAN);
     public static final GT4ROreFeatureConfig SAPPHIRE = new GT4ROreFeatureConfig("sapphire", 0, 48, 3, 6, Sapphire, NULL, 0, World.OVERWORLD).setValidBiomes(OCEAN, BEACH);
-    public static final GT4ROreFeatureConfig PLATINUM = new GT4ROreFeatureConfig("platinum", 10, 30, 3, 8, Platinum, Sphalerite, 5, World.OVERWORLD).setValidBiomes(JUNGLE);
+    public static final GT4ROreFeatureConfig PLATINUM = new GT4ROreFeatureConfig("platinum", 10, 30, 3, 6, Platinum, Sphalerite, 5, World.OVERWORLD).setValidBiomes(JUNGLE);
     public static final GT4ROreFeatureConfig IRIDIUM = new GT4ROreFeatureConfig("iridium", 0, 128, 1, 2, Iridium, NULL, 0, World.OVERWORLD);
     public static final GT4ROreFeatureConfig EMERALD = new GT4ROreFeatureConfig("emerald", 0, 32, 4, 6, Emerald, NULL, 0, World.OVERWORLD).setValidBiomes(MOUNTAIN);
     public static final GT4ROreFeatureConfig PYRITE = new GT4ROreFeatureConfig("pyrite", 0, 64, 8, 16, Pyrite, NULL, 0, World.THE_NETHER);
     public static final GT4ROreFeatureConfig SPHALERITE = new GT4ROreFeatureConfig("sphalerite", 32, 96, 8, 16, Sphalerite, NULL, 0, World.THE_NETHER);
     public static final GT4ROreFeatureConfig CINNABAR = new GT4ROreFeatureConfig("cinnabar",64, 128, 7, 16, Cinnabar, NULL, 0, World.THE_NETHER);
     public static final GT4ROreFeatureConfig TUNGSTATE = new GT4ROreFeatureConfig("tungstate", 0, 80, 2, 16, Tungstate, NULL, 0, World.THE_END);
-    public static final GT4ROreFeatureConfig PLATINUM_END = new GT4ROreFeatureConfig("platinum_end", 0, 80, 2, 5, Platinum, NULL, 0, World.THE_END);
+    public static final GT4ROreFeatureConfig PLATINUM_END = new GT4ROreFeatureConfig("platinum_end", 0, 80, 2, 6, Platinum, NULL, 0, World.THE_END);
     public static final GT4ROreFeatureConfig OLIVINE = new GT4ROreFeatureConfig("olivine", 0, 80, 5, 8, Olivine, NULL, 0, World.THE_END);
     public static final GT4ROreFeatureConfig SODALITE = new GT4ROreFeatureConfig("sodalite", 0, 80, 6, 16, Sodalite, Lapis, 3, World.THE_END);
     public static final GT4ROreFeatureConfig CHROMITE = new GT4ROreFeatureConfig("chromite", 0, 80, 4, 5, Chromite, NULL, 0, World.THE_END);
