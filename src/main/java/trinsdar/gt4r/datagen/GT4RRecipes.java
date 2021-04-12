@@ -20,6 +20,7 @@ import trinsdar.gt4r.loader.MaterialRecipeLoader;
 import trinsdar.gt4r.loader.crafting.BlockCrafting;
 import trinsdar.gt4r.loader.crafting.MachineCrafting;
 import trinsdar.gt4r.loader.crafting.Parts;
+import trinsdar.gt4r.loader.crafting.ToolCrafting;
 import trinsdar.gt4r.loader.crafting.ToolCraftingTableRecipes;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;
@@ -62,6 +63,7 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
         this.craftingLoaders.add(MaterialRecipeLoader::loadRecipes);
         this.craftingLoaders.add(FurnaceLoader::loadRecipes);
         this.craftingLoaders.add(BlockCrafting::loadRecipes);
+        this.craftingLoaders.add(ToolCrafting::loadRecipes);
     }
 
     @Override
@@ -135,7 +137,7 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
             final ITag<Item> ingotTag = TagUtils.getForgeItemTag(ingotGem + "/" + main.getId()), plateTag = TagUtils.getForgeItemTag(plate + "/" + main.getId()), mainRodTag = TagUtils.getForgeItemTag("rods/" + main.getId());
             final ICriterionInstance ingotTrigger = this.hasSafeItem(ingotTag), plateTrigger = this.hasSafeItem(plateTag), rodTrigger = this.hasSafeItem(mainRodTag);
 
-            if (main.getToolTypes().contains(DRILL)){
+            /*if (main.getToolTypes().contains(DRILL)){
                 IAntimatterTool drill_lv = AntimatterAPI.get(IAntimatterTool.class, "drill_lv");
                 IAntimatterTool drill_mv = AntimatterAPI.get(IAntimatterTool.class, "drill_mv");
                 IAntimatterTool drill_hv = AntimatterAPI.get(IAntimatterTool.class, "drill_hv");
@@ -161,7 +163,7 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
                         "has_material_" + main.getId(), this.hasSafeItem(DRILLBIT.getMaterialTag(main)), drill_hv.resolveStack(main, TungstenSteel, 0, 800000), of2('B', DRILLBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(TungstenSteel), 's', SCREW.getMaterialTag(TungstenSteel), 'b', BatteryLargeSodium, 'M', MotorHV), "sBS", "PbP", "PMP");
                 addStackRecipe(consumer, Ref.ID, DRILL.getId() + "_hv_" + main.getId() + "_energy_crystal", "antimatter_hv_drills",
                         "has_material_" + main.getId(), this.hasSafeItem(DRILLBIT.getMaterialTag(main)), drill_hv.resolveStack(main, TungstenSteel, 0, 1000000), of2('B', DRILLBIT.getMaterialTag(main), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(TungstenSteel), 's', SCREW.getMaterialTag(TungstenSteel), 'b', EnergyCrystal, 'M', MotorHV), "sBS", "PbP", "PMP");
-            }
+            }*/
             if (main.getToolTypes().contains(CHAINSAW)){
                 IAntimatterTool chainsaw_lv = AntimatterAPI.get(IAntimatterTool.class, "chainsaw_lv");
                 IAntimatterTool chainsaw_mv = AntimatterAPI.get(IAntimatterTool.class, "chainsaw_mv");
