@@ -1,6 +1,7 @@
 package trinsdar.gt4r.datagen;
 
 import muramasa.antimatter.AntimatterAPI;
+import muramasa.antimatter.block.BlockStone;
 import muramasa.antimatter.datagen.providers.AntimatterBlockLootProvider;
 import muramasa.antimatter.machine.BlockMachine;
 import muramasa.antimatter.material.Material;
@@ -16,9 +17,12 @@ import net.minecraft.loot.RandomValueRange;
 import net.minecraft.loot.functions.ApplyBonus;
 import net.minecraft.loot.functions.SetCount;
 import org.apache.logging.log4j.core.pattern.AbstractStyleNameConverter;
+import trinsdar.gt4r.block.BlockCasing;
 import trinsdar.gt4r.block.BlockMachineMaterial;
 import trinsdar.gt4r.data.GT4RData;
+import trinsdar.gt4r.data.Materials;
 
+import static muramasa.antimatter.Data.DUST;
 import static muramasa.antimatter.Data.GEM;
 import static trinsdar.gt4r.data.Materials.*;
 
@@ -31,6 +35,8 @@ public class GT4RBlockLootProvider extends AntimatterBlockLootProvider {
     protected void loot() {
         super.loot();
         AntimatterAPI.all(BlockMachineMaterial.class, providerDomain, this::add);
+        AntimatterAPI.all(BlockStone.class, providerDomain, this::add);
+        AntimatterAPI.all(BlockCasing.class, providerDomain, this::add);
         tables.put(GT4RData.RUBBER_LEAVES, b -> droppingWithChancesAndSticks(GT4RData.RUBBER_LEAVES, GT4RData.RUBBER_SAPLING, 0.025F, 0.027777778F, 0.03125F, 0.041666668F, 0.1F));
         this.add(GT4RData.RUBBER_LOG);
         this.add(GT4RData.RUBBER_SAPLING);
@@ -51,6 +57,10 @@ public class GT4RBlockLootProvider extends AntimatterBlockLootProvider {
                 }
                 return;
             }
+        }
+        if (block instanceof BlockStone && (((BlockStone)block).getType().getMaterial() == Salt || ((BlockStone)block).getType().getMaterial() == RockSalt)){
+            tables.put(block, b -> droppingItemWithFortune(b, DUST.get(((BlockStone)block).getType().getMaterial())));
+            return;
         }
         tables.put(block, this::build);
     }

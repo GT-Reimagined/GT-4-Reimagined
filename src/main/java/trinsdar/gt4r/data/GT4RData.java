@@ -256,26 +256,6 @@ public class GT4RData {
         }
     };
 
-    //STONE should be the only non-removable StoneType. It serves as the foundation. It is also used natively by BlockRock
-    //TODO move vanilla stone types (and (vanilla) materials) to Antimatter
-    //public static StoneType STONE = new StoneType(Ref.ID, "stone", Materials.Stone, new Texture("minecraft", "block/stone"), SoundType.STONE, false).setState(Blocks.STONE);
-
-    /*public static StoneType GRANITE = new StoneType(Ref.ID, "granite", Data.Granite, new Texture("minecraft", "block/granite"), SoundType.STONE, AntimatterConfig.WORLD.VANILLA_STONE_GEN || muramasa.antimatter.Ref.debugStones).setState(Blocks.GRANITE);
-    public static StoneType DIORITE = new StoneType(Ref.ID, "diorite", Data.Diorite, new Texture("minecraft", "block/diorite"), SoundType.STONE, AntimatterConfig.WORLD.VANILLA_STONE_GEN || muramasa.antimatter.Ref.debugStones).setState(Blocks.DIORITE);
-    public static StoneType ANDESITE = new StoneType(Ref.ID, "andesite", Data.Andesite, new Texture("minecraft", "block/andesite"), SoundType.STONE, AntimatterConfig.WORLD.VANILLA_STONE_GEN || muramasa.antimatter.Ref.debugStones).setState(Blocks.ANDESITE);
-
-    public static StoneType GRAVEL = new StoneType(Ref.ID, "gravel", Data.Gravel, new Texture("minecraft", "block/gravel"), SoundType.GROUND, false).setState(Blocks.GRAVEL).setGravity(true).setBlockMaterial(net.minecraft.block.material.Material.SAND).setHardnessAndResistance(0.6F).setRequiresTool(false).setToolType(ToolType.SHOVEL);
-    public static StoneType SAND = new StoneType(Ref.ID, "sand", Data.Sand, new Texture("minecraft", "block/sand"), SoundType.SAND, false).setState(Blocks.SAND).setGravity(true).setBlockMaterial(net.minecraft.block.material.Material.SAND).setHardnessAndResistance(0.5F).setRequiresTool(false).setToolType(ToolType.SHOVEL);
-    public static StoneType SAND_RED = new StoneType(Ref.ID, "sand_red", Data.RedSand, new Texture("minecraft", "block/red_sand"), SoundType.SAND, false).setState(Blocks.RED_SAND).setGravity(true).setBlockMaterial(net.minecraft.block.material.Material.SAND).setHardnessAndResistance(0.5F).setRequiresTool(false).setToolType(ToolType.SHOVEL);
-    public static StoneType SANDSTONE = new StoneType(Ref.ID, "sandstone", Data.Sandstone, new Texture("minecraft", "block/sandstone"), SoundType.STONE, false).setState(Blocks.SANDSTONE);
-    public static StoneType BASALT_VANILLA = new StoneType(Ref.ID, "vanilla_basalt", Data.BasaltVanilla, new Texture("minecraft", "block/basalt_side"), SoundType.BASALT, false).setState(Blocks.BASALT).setHardnessAndResistance(1.25F, 4.2F);
-    public static StoneType BLACKSTONE = new StoneType(Ref.ID, "blackstone", Data.Blackstone, new Texture("minecraft", "block/blackstone"), SoundType.STONE, false).setState(Blocks.BLACKSTONE);
-
-    public static StoneType NETHERRACK = new StoneType(Ref.ID, "netherrack", Data.Netherrack, new Texture("minecraft", "block/netherrack"), SoundType.NETHERRACK, false).setState(Blocks.NETHERRACK).setHardnessAndResistance(0.4F);
-    public static StoneType SOUL_SAND = new StoneType(Ref.ID, "soul_sand", Data.NULL, new Texture("minecraft", "block/soul_sand"), SoundType.SOUL_SAND, false).setState(Blocks.SOUL_SAND).setHardnessAndResistance(0.5F).setRequiresTool(false).setToolType(ToolType.SHOVEL);
-    public static StoneType SOUL_SOIL = new StoneType(Ref.ID, "soul_soil", Data.NULL, new Texture("minecraft", "block/soul_soil"), SoundType.SOUL_SOIL, false).setState(Blocks.SOUL_SOIL).setHardnessAndResistance(0.5F).setRequiresTool(false).setToolType(ToolType.SHOVEL);
-    public static StoneType ENDSTONE = new StoneType(Ref.ID, "endstone", Data.Endstone, new Texture("minecraft", "block/end_stone"), SoundType.STONE, false).setState(Blocks.END_STONE).setHardnessAndResistance(3.0F, 9.0F);*/
-
     public static StoneType GRANITE_RED = new StoneType(Ref.ID, "granite_red", Materials.RedGranite, new Texture(Ref.ID, "block/stone/granite_red"), SoundType.STONE, true).setHardnessAndResistance(4.5F, 60.0F).setHarvestLevel(3);
     public static StoneType GRANITE_BLACK = new StoneType(Ref.ID, "granite_black", Materials.BlackGranite, new Texture(Ref.ID, "block/stone/granite_black"), SoundType.STONE, true).setHardnessAndResistance(4.5F, 60.0F).setHarvestLevel(3);
     public static StoneType MARBLE = new StoneType(Ref.ID, "marble", Materials.Marble, new Texture(Ref.ID, "block/stone/marble"), SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F);
@@ -287,6 +267,8 @@ public class GT4RData {
     public static StoneType BLUE_SCHIST = new StoneType(Ref.ID, "blue_schist", BlueSchist, new Texture(Ref.ID, "block/stone/blue_schist"), SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F);
     public static StoneType KIMBERLITE = new StoneType(Ref.ID, "kimberlite", Kimberlite, new Texture(Ref.ID, "block/stone/kimberlite"), SoundType.STONE, true).setHardnessAndResistance(3.0F, 30.0F).setHarvestLevel(2);
     public static StoneType QUARTZITE = new StoneType(Ref.ID, "quartzite", Quartzite, new Texture(Ref.ID, "block/stone/quartzite"), SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F);
+    public static StoneType SALT = new StoneType(Ref.ID, "salt", Salt, new Texture(Ref.ID, "block/stone/salt"), SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F);
+    public static StoneType ROCK_SALT = new StoneType(Ref.ID, "rock_salt", RockSalt, new Texture(Ref.ID, "block/stone/rock_salt"), SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F);
 
 
     public static final BlockConnectedCasing STANDARD_MACHINE_CASING = new BlockConnectedCasing(Ref.ID, "standard_machine_casing");
