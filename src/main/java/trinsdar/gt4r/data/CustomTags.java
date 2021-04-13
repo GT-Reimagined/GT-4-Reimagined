@@ -29,6 +29,9 @@ public class CustomTags {
     public static ITag.INamedTag<Item> GEARS_STEELS = getTag("gears/steels");
     public static ITag.INamedTag<Item> GEARS_TITAN_TUNGSTEEL = getTag("gears/titantungsteel");
     public static ITag.INamedTag<Item> DUSTS_LAPIS_LAZ = getTag("dusts/lapislaz");
+    public static ITag.INamedTag<Item> BATTERIES_SMALL = getTag("batteries/small");
+    public static ITag.INamedTag<Item> BATTERIES_MEDIUM = getTag("batteries/medium");
+    public static ITag.INamedTag<Item> BATTERIES_LARGE = getTag("batteries/large");
 
 
     public static ITag.INamedTag<Item> getTag(String id){

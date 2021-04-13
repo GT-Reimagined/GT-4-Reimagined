@@ -1,20 +1,32 @@
 package trinsdar.gt4r.data;
 
 import com.google.common.collect.ImmutableMap;
+import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.AntimatterConfig;
 import muramasa.antimatter.Data;
+import muramasa.antimatter.capability.energy.ItemEnergyHandler;
 import muramasa.antimatter.cover.BaseCover;
 import muramasa.antimatter.item.ItemCover;
 import muramasa.antimatter.material.Material;
+import muramasa.antimatter.recipe.ingredient.PropertyIngredient;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
+import muramasa.antimatter.recipe.material.MaterialRecipe;
 import muramasa.antimatter.tool.AntimatterToolType;
 import muramasa.antimatter.tool.IAntimatterTool;
 import muramasa.antimatter.util.Utils;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
+import net.minecraft.inventory.CraftingInventory;
+import net.minecraft.item.DyeColor;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
+import tesseract.Tesseract;
+import tesseract.api.capability.TesseractGTCapability;
 import trinsdar.gt4r.block.BlockCasing;
 import muramasa.antimatter.item.ItemBasic;
 import muramasa.antimatter.item.ItemBattery;
@@ -35,6 +47,7 @@ import trinsdar.gt4r.cover.CoverDynamoOld;
 import trinsdar.gt4r.cover.CoverFusionInput;
 import trinsdar.gt4r.cover.CoverFusionOutput;
 import trinsdar.gt4r.cover.CoverPump;
+import trinsdar.gt4r.datagen.GT4RRecipes;
 import trinsdar.gt4r.items.ItemIntCircuit;
 import trinsdar.gt4r.items.MaterialSpear;
 import trinsdar.gt4r.tree.BlockRubberLeaves;
@@ -44,15 +57,63 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.item.Item;
 
+import javax.annotation.Nonnull;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
+import static muramasa.antimatter.Data.NULL;
 import static trinsdar.gt4r.data.Materials.*;
 
 public class GT4RData {
 
     private static final boolean HC = AntimatterConfig.GAMEPLAY.HARDCORE_CABLES;
 
+    public static final Function<String, MaterialRecipe.ItemBuilder> POWERED_TOOL_BUILDER = id -> {
+        MaterialRecipe.ItemBuilder builder = AntimatterAPI.get(MaterialRecipe.ItemBuilder.class, id);
+
+        return builder != null ? builder : new MaterialRecipe.ItemBuilder() {
+            @Override
+            public String getId() {
+                return id;
+            }
+
+            @Override
+            public ItemStack build(CraftingInventory inv, MaterialRecipe.Result mats) {
+                Material m = id.contains("screwdriver") || id.contains("jackhammer") ? NULL : id.contains("lv") ? StainlessSteel : id.contains("mv") ? Titanium : id.contains("hv") ? TungstenSteel : NULL;
+                ItemStack battery = (ItemStack) mats.mats.get("battery");
+                IAntimatterTool type = AntimatterAPI.get(IAntimatterTool.class, id);
+                if (battery.isEmpty()){
+                    return resolveStack(type, (Material) mats.mats.get("primary"), m, 0, 100000);
+                }
+                return resolveStack(type, (Material) mats.mats.get("primary"), m, battery.getTag().getLong(muramasa.antimatter.Ref.KEY_ITEM_ENERGY), battery.getCapability(TesseractGTCapability.ENERGY_HANDLER_CAPABILITY).orElseGet(null).getCapacity());
+            }
+
+            public ItemStack resolveStack(IAntimatterTool tool, Material primary, Material secondary, long startingEnergy, long maxEnergy) {
+                if (tool == null){
+                    return ItemStack.EMPTY;
+                }
+                ItemStack stack = new ItemStack(tool.getItem());
+                tool.validateTag(stack, primary, secondary, startingEnergy, maxEnergy);
+                Map<Enchantment, Integer> mainEnchants = primary.getEnchantments();
+                if (!mainEnchants.isEmpty()) {
+                    mainEnchants.entrySet().stream().filter(e -> e.getKey().canApply(stack)).forEach(e -> stack.addEnchantment(e.getKey(), e.getValue()));
+                }
+                return stack;
+            }
+
+            @Override
+            public Map<String, Object> getFromResult(@Nonnull ItemStack stack) {
+                CompoundNBT nbt = stack.getTag().getCompound(muramasa.antimatter.Ref.TAG_TOOL_DATA);
+                Material primary = AntimatterAPI.get(Material.class, nbt.getString(muramasa.antimatter.Ref.KEY_TOOL_DATA_PRIMARY_MATERIAL));
+                Material secondary = AntimatterAPI.get(Material.class, nbt.getString(muramasa.antimatter.Ref.KEY_TOOL_DATA_SECONDARY_MATERIAL));
+                return ImmutableMap.of("primary", primary, "secondary", secondary, "battery", getBattery(stack));
+            }
+        };
+    };
+
     static {
+        PropertyIngredient.addGetter(CustomTags.BATTERIES_SMALL.getName(), GT4RData::getBattery);
         {
             ImmutableMap.Builder<Integer, RecipeIngredient> builder = ImmutableMap.builder();
             ImmutableMap.Builder<Integer, Item> builderItems = ImmutableMap.builder();
@@ -74,6 +135,33 @@ public class GT4RData {
             builder.put(Tier.IV, TungstenSteel);
             TIER_MATERIALS = builder.build();
         }
+    }
+
+    public static ItemStack getBattery(ItemStack stack){
+        if (stack.getItem() instanceof ItemBattery){
+            return stack;
+        }
+        if (stack.getItem() instanceof IAntimatterTool){
+            IAntimatterTool tool = (IAntimatterTool) stack.getItem();
+            if (tool.getType().isPowered()){
+                long currentEnergy = tool.getCurrentEnergy(stack);
+                long maxEnergy = tool.getMaxEnergy(stack);
+                Item battery;
+                if (maxEnergy <= 100000){
+                    battery = maxEnergy == 100000 ? BatterySmallLithium : maxEnergy == 75000 ? BatterySmallCadmium : BatterySmallSodium;
+                } else if (maxEnergy < 800000){
+                    battery = maxEnergy == 400000 ? BatteryMediumLithium : maxEnergy == 300000 ? BatteryMediumCadmium : BatteryMediumSodium;
+                } else {
+                    battery = maxEnergy == 1600000 ? BatteryMediumLithium : maxEnergy == 1200000 ? BatteryMediumCadmium : maxEnergy == 1000000 ? EnergyCrystal : BatteryMediumSodium;
+                }
+                ItemStack batteryStack = new ItemStack(battery);
+                batteryStack.getCapability(TesseractGTCapability.ENERGY_HANDLER_CAPABILITY).ifPresent(c -> {
+                    ((ItemEnergyHandler)c).setEnergy(currentEnergy);
+                });
+                return batteryStack;
+            }
+        }
+        return ItemStack.EMPTY;
     }
 
     public static void buildTierMaps() {

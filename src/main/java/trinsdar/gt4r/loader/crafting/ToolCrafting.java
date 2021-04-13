@@ -9,7 +9,9 @@ import net.minecraft.advancements.ICriterionInstance;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.Tags;
 import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.data.CustomTags;
 
 import java.io.File;
 import java.util.Collections;
@@ -33,8 +35,8 @@ public class ToolCrafting {
         IAntimatterTool drill_lv = AntimatterAPI.get(IAntimatterTool.class, "drill_lv");
         IAntimatterTool drill_mv = AntimatterAPI.get(IAntimatterTool.class, "drill_mv");
         IAntimatterTool drill_hv = AntimatterAPI.get(IAntimatterTool.class, "drill_hv");
-        provider.addToolRecipe(TOOL_BUILDER.apply(DRILL.getId()),output, Ref.ID, DRILL.getId() + "_lv_" + "_lithium_recipe", "antimatter_lv_drills",
-                "has_screwdriver", in, Collections.singletonList(resolveStack(drill_lv, NULL, StainlessSteel, 0, 100000)), of2('B', PropertyIngredient.of(DRILLBIT, "primary"), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(StainlessSteel), 's', SCREW.getMaterialTag(StainlessSteel), 'b', BatterySmallLithium, 'M', MotorLV), "sBS", "PbP", "PMP");
+        provider.addToolRecipe(POWERED_TOOL_BUILDER.apply(DRILL.getId() + "_lv"),output, Ref.ID, DRILL.getId() + "_lv_" + "recipe", "antimatter_lv_drills",
+                "has_screwdriver", in, Collections.singletonList(resolveStack(drill_lv, NULL, StainlessSteel, 0, 100000)), of2('B', PropertyIngredient.of(DRILLBIT, "primary"), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(StainlessSteel), 's', SCREW.getMaterialTag(StainlessSteel), 'b', PropertyIngredient.builder("battery").itemTags(CustomTags.BATTERIES_SMALL).build(), 'M', MotorLV), "sBS", "PMP", "PbP");
         provider.addToolRecipe(TOOL_BUILDER.apply(DRILL.getId()),output, Ref.ID, DRILL.getId() + "_lv_" + "_cadmium_recipe", "antimatter_lv_drills",
                 "has_screwdriver", in, Collections.singletonList(resolveStack(drill_lv, NULL, StainlessSteel, 0, 75000)), of2('B', PropertyIngredient.of(DRILLBIT, "primary"), 'S', SCREWDRIVER.getTag(), 'P', PLATE.getMaterialTag(StainlessSteel), 's', SCREW.getMaterialTag(StainlessSteel), 'b', BatterySmallCadmium, 'M', MotorLV), "sBS", "PbP", "PMP");
         provider.addToolRecipe(TOOL_BUILDER.apply(DRILL.getId()),output, Ref.ID, DRILL.getId() + "_lv_" + "_sodium_recipe", "antimatter_lv_drills",
