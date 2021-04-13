@@ -50,7 +50,7 @@ public class MaceratorLoader {
         });
         UNIVERSAL_MACERATING.RB().ii(RecipeIngredient.of(Tags.Items.COBBLESTONE, 1)).io(new ItemStack(Items.SAND)).add(400, 2);
         UNIVERSAL_MACERATING.RB().ii(RecipeIngredient.of(Tags.Items.STONE, 1)).io(new ItemStack(Items.GRAVEL)).add(400, 2);
-        UNIVERSAL_MACERATING.RB().ii(RecipeIngredient.of(Items.BRICK, 1)).io(DUST.get(Brick, 1)).add(400, 2);
+        UNIVERSAL_MACERATING.RB().ii(RecipeIngredient.of(Items.BRICK, 1)).io(DUST_SMALL.get(Brick, 1)).add(400, 2);
         UNIVERSAL_MACERATING.RB().ii(RecipeIngredient.of(Items.CLAY_BALL, 1)).io(DUST_SMALL.get(Clay, 2)).add(16, 4);
         UNIVERSAL_MACERATING.RB().ii(RecipeIngredient.of(Items.CLAY, 1)).io(DUST.get(Clay, 2)).add(30, 4);
     }
