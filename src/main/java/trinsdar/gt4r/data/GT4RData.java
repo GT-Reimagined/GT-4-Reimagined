@@ -33,6 +33,7 @@ import trinsdar.gt4r.cover.CoverFusionOutput;
 import trinsdar.gt4r.cover.CoverPump;
 import trinsdar.gt4r.cover.CoverSteamVent;
 import trinsdar.gt4r.items.ItemIntCircuit;
+import trinsdar.gt4r.items.ItemMixedMetal;
 import trinsdar.gt4r.items.MaterialSpear;
 import trinsdar.gt4r.tree.BlockRubberLeaves;
 import trinsdar.gt4r.tree.BlockRubberLog;
@@ -161,7 +162,7 @@ public class GT4RData {
     public static ItemBasic<?> MatchBook = new ItemBasic<>(Ref.ID, "match_book");
     public static ItemBasic<?> Treetap = new ItemBasic<>(Ref.ID, "treetap", new Item.Properties().defaultMaxDamage(16).group(muramasa.antimatter.Ref.TAB_ITEMS));
 
-    public static ItemBasic<?> MixedMetal = new ItemBasic<>(Ref.ID, "mixed_metal");
+    public static ItemBasic<?> MixedMetal = new ItemMixedMetal();
     public static ItemBasic<?> AdvancedAlloy = new ItemBasic<>(Ref.ID,"advanced_alloy");
     public static ItemBasic<?> MachineParts = new ItemBasic<>(Ref.ID, "machine_parts");
     public static ItemBasic<?> AdvCircuitParts = new ItemBasic<>(Ref.ID, "advanced_circuit_parts").tip("Used for making Advanced Circuits");
