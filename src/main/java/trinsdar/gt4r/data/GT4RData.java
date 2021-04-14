@@ -10,11 +10,7 @@ import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import muramasa.antimatter.tool.AntimatterToolType;
 import muramasa.antimatter.tool.IAntimatterTool;
 import muramasa.antimatter.util.Utils;
-import net.minecraft.entity.ai.attributes.Attribute;
-import net.minecraft.entity.ai.attributes.RangedAttribute;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.ToolType;
-import net.minecraftforge.fml.RegistryObject;
 import trinsdar.gt4r.block.BlockCasing;
 import muramasa.antimatter.item.ItemBasic;
 import muramasa.antimatter.item.ItemBattery;
@@ -35,12 +31,12 @@ import trinsdar.gt4r.cover.CoverDynamoOld;
 import trinsdar.gt4r.cover.CoverFusionInput;
 import trinsdar.gt4r.cover.CoverFusionOutput;
 import trinsdar.gt4r.cover.CoverPump;
+import trinsdar.gt4r.cover.CoverSteamVent;
 import trinsdar.gt4r.items.ItemIntCircuit;
 import trinsdar.gt4r.items.MaterialSpear;
 import trinsdar.gt4r.tree.BlockRubberLeaves;
 import trinsdar.gt4r.tree.BlockRubberLog;
 import trinsdar.gt4r.tree.BlockRubberSapling;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.item.Item;
 
@@ -123,6 +119,7 @@ public class GT4RData {
     public static final BaseCover COVER_FUSION_INPUT = new CoverFusionInput();
     public static final BaseCover COVER_DYNAMO_OLD = new CoverDynamoOld("dynamo_old");
     public static final BaseCover COVER_DRAIN = new CoverDrain();
+    public static final BaseCover COVER_STEAM_VENT = new CoverSteamVent();
 
     public static ItemBasic<?> StickyResin = new ItemBasic<>(Ref.ID, "sticky_resin");
     public static ItemBasic<?> Plantball = new ItemBasic<>(Ref.ID, "plantball");
@@ -267,8 +264,8 @@ public class GT4RData {
     public static StoneType BLUE_SCHIST = new StoneType(Ref.ID, "blue_schist", BlueSchist, new Texture(Ref.ID, "block/stone/blue_schist"), SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F);
     public static StoneType KIMBERLITE = new StoneType(Ref.ID, "kimberlite", Kimberlite, new Texture(Ref.ID, "block/stone/kimberlite"), SoundType.STONE, true).setHardnessAndResistance(3.0F, 30.0F).setHarvestLevel(2);
     public static StoneType QUARTZITE = new StoneType(Ref.ID, "quartzite", Quartzite, new Texture(Ref.ID, "block/stone/quartzite"), SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F);
-    public static StoneType SALT = new StoneType(Ref.ID, "salt", Salt, new Texture(Ref.ID, "block/stone/salt"), SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F);
-    public static StoneType ROCK_SALT = new StoneType(Ref.ID, "rock_salt", RockSalt, new Texture(Ref.ID, "block/stone/rock_salt"), SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F);
+    public static StoneType SALT = new StoneType(Ref.ID, "salt", Salt, new Texture(Ref.ID, "block/stone/salt"), SoundType.STONE, true).setHardnessAndResistance(1.0F,7.5F);
+    public static StoneType ROCK_SALT = new StoneType(Ref.ID, "rock_salt", RockSalt, new Texture(Ref.ID, "block/stone/rock_salt"), SoundType.STONE, true).setHardnessAndResistance(1.0F,7.5F);
 
 
     public static final BlockConnectedCasing STANDARD_MACHINE_CASING = new BlockConnectedCasing(Ref.ID, "standard_machine_casing");

@@ -70,6 +70,8 @@ public class ElectrolyzerLoader {
         add(Spessartine, 120, 440);
         //add(CalciumCarbonate, 90, 400);
         add(Prismarine, 30, 800);
+        add(Salt, 30,320);
+        add(RockSalt, 30,72);
     }
 
     private static void add(Material dust, long euT, int duration) {

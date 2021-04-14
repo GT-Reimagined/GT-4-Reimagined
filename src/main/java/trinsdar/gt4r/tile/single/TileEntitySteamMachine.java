@@ -27,6 +27,12 @@ public class TileEntitySteamMachine extends TileEntityMachine {
             protected boolean validateRecipe(Recipe r) {
                 return r.getPower() <= Tier.LV.getVoltage()/2;
             }
+
+            @Override
+            protected boolean canRecipeContinue() {
+                return super.canRecipeContinue() && world.isAirBlock(tile.pos.offset(getOutputFacing()));
+            }
+
             @Override
             protected int getOverclock() {
                 return tile.getMachineTier() == BRONZE ? 0 : 1;

@@ -40,6 +40,9 @@ public class GT4RFeatures {
     public static final GT4ROreFeatureConfig OLIVINE = new GT4ROreFeatureConfig("olivine", 0, 80, 5, 8, Olivine, NULL, 0, World.THE_END);
     public static final GT4ROreFeatureConfig SODALITE = new GT4ROreFeatureConfig("sodalite", 0, 80, 6, 16, Sodalite, Lapis, 3, World.THE_END);
     public static final GT4ROreFeatureConfig CHROMITE = new GT4ROreFeatureConfig("chromite", 0, 80, 4, 5, Chromite, NULL, 0, World.THE_END);
+    public static final GT4ROreFeatureConfig SALT = new GT4ROreFeatureConfig("salt", 0, 62, 6, 64, Salt, NULL, 0, World.OVERWORLD).setValidBiomes(OCEAN);
+    public static final GT4ROreFeatureConfig ROCK_SALT = new GT4ROreFeatureConfig("rock_salt", 0, 80, 4, 64, RockSalt, NULL, 0, World.OVERWORLD).setValidBiomes(SANDY);
+
 
     //Vanilla
     public static final GT4ROreFeatureConfig IRON = new GT4ROreFeatureConfig("iron", 0, 64, 20, 9, Iron, Tin, 2, World.OVERWORLD);
