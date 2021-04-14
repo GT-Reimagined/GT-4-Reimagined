@@ -9,6 +9,7 @@ import muramasa.antimatter.material.MaterialTypeItem;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemTier;
+import net.minecraft.item.Items;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.items.ItemTurbineRotor;
 
@@ -283,6 +284,16 @@ public class Materials {
         SOLDER.add(Lead, Tin, SolderingAlloy);
         //TODO Mercury.add(METALL, SMELTG);
 */
+        NUGGET.forceOverride(Iron, Items.IRON_NUGGET);
+        NUGGET.forceOverride(Gold, Items.GOLD_NUGGET);
+        INGOT.forceOverride(Iron, Items.IRON_INGOT);
+        INGOT.forceOverride(Gold, Items.GOLD_INGOT);
+        DUST.forceOverride(Redstone, Items.REDSTONE);
+        DUST.forceOverride(Glowstone, Items.GLOWSTONE_DUST);
+        DUST.forceOverride(Blaze, Items.BLAZE_POWDER);
+
+        ROD.forceOverride(Blaze, Items.BLAZE_ROD);
+        ROD.forceOverride(Wood, Items.STICK);
 
         Lava.mats(of(Electrum, 1, Copper, 4, Tungsten, 1, Basalt, 1));
         Granite.mats(of(Aluminium, 2, Flint, 1, Clay, 1));
@@ -296,7 +307,6 @@ public class Materials {
         Invar.remove(BOLT, SCREW);
         WroughtIron.remove(BOLT, SCREW);
         TungstenCarbide.remove(BOLT, SCREW);
-        Blaze.remove(ROD);
 
         Gold.remove(ORE_SMALL, ROCK);
         Iron.remove(ORE_SMALL, ROCK);

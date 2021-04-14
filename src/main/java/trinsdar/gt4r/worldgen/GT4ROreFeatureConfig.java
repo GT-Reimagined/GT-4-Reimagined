@@ -22,6 +22,8 @@ import java.util.stream.Collectors;
 
 import static muramasa.antimatter.Data.NULL;
 import static muramasa.antimatter.Data.ORE;
+import static trinsdar.gt4r.data.Materials.RockSalt;
+import static trinsdar.gt4r.data.Materials.Salt;
 
 public class GT4ROreFeatureConfig implements IFeatureConfig {
     public static final Codec<GT4ROreFeatureConfig> CODEC = RecordCodecBuilder.create((p_236568_0_) -> {
@@ -71,7 +73,7 @@ public class GT4ROreFeatureConfig implements IFeatureConfig {
         this.weight = weight;
         this.secondaryChance = secondaryChance;
         this.size = size;
-        if (primary == null || !Material.get(primary).has(ORE)) throw new IllegalArgumentException("GT4ROreFeatureConfig - " + id + ": " + primary + " material either doesn't exist or doesn't have the ORE tag");
+        if (primary == null || (!Material.get(primary).has(ORE) && Material.get(primary) != Salt && Material.get(primary) != RockSalt)) throw new IllegalArgumentException("GT4ROreFeatureConfig - " + id + ": " + primary + " material either doesn't exist or doesn't have the ORE tag");
         if (secondary != null && !Material.get(secondary).has(ORE) && Material.get(secondary) != NULL) throw new IllegalArgumentException("GT4ROreFeatureConfig - " + id + ": " + secondary + " material doesn't have the ORE tag");
         if (secondary != null){
             materials = new Material[] {Material.get(primary), Material.get(secondary)};

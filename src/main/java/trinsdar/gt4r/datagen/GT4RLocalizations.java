@@ -8,6 +8,7 @@ import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.block.BlockCasing;
 import trinsdar.gt4r.block.BlockCasingMachine;
 import trinsdar.gt4r.block.BlockTurbineCasing;
+import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.items.ItemIntCircuit;
 import net.minecraft.data.DataGenerator;
 
@@ -38,6 +39,7 @@ public class GT4RLocalizations {
             super.processTranslations(domain, locale);
             AntimatterAPI.all(BlockCasing.class, domain).forEach(i -> add(i, lowerUnderscoreToUpperSpaced(i.getId())));
             AntimatterAPI.all(ItemIntCircuit.class, domain).forEach(i -> add(i, "Integrated Circuit (" + i.circuitId + ")"));
+            add(GT4RData.MixedMetal, lowerUnderscoreToUpperSpaced(GT4RData.MixedMetal.getId()));
         }
     }
 

@@ -10,6 +10,7 @@ import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
 import org.lwjgl.system.CallbackI;
@@ -146,8 +147,14 @@ public class Parts {
         for (Material it : in){
             for (Material im : b){
                 for (Material ib : tz){
-                    provider.addItemRecipe(output, Ref.ID, "mixed_metal_" + it.getId() + "_" + im.getId() + "_" + ib.getId(), "parts", "has_first_plate", provider.hasSafeItem(PLATE.getMaterialTag(it)),
-                            MixedMetal, of('T', PLATE.getMaterialTag(it), 'M', PLATE.getMaterialTag(im), 'B', PLATE.getMaterialTag(ib)), "T", "M", "B");
+                    CompoundNBT nbt = new CompoundNBT();
+                    nbt.putString("tm", it.getId());
+                    nbt.putString("mm", im.getId());
+                    nbt.putString("bm", ib.getId());
+                    ItemStack stack = new ItemStack(MixedMetal, 1);
+                    stack.setTag(nbt);
+                    provider.addStackRecipe(output, Ref.ID, "mixed_metal_" + it.getId() + "_" + im.getId() + "_" + ib.getId(), "parts", "has_first_plate", provider.hasSafeItem(PLATE.getMaterialTag(it)),
+                            stack, of('T', PLATE.getMaterialTag(it), 'M', PLATE.getMaterialTag(im), 'B', PLATE.getMaterialTag(ib)), "T", "M", "B");
                 }
             }
         }
@@ -156,16 +163,28 @@ public class Parts {
         for (Material it : is){
             for (Material im : b){
                 for (Material ib : tz){
+                    CompoundNBT nbt = new CompoundNBT();
+                    nbt.putString("tm", it.getId());
+                    nbt.putString("mm", im.getId());
+                    nbt.putString("bm", ib.getId());
+                    ItemStack stack = new ItemStack(MixedMetal, 2);
+                    stack.setTag(nbt);
                     provider.addStackRecipe(output, Ref.ID, "mixed_metal_" + it.getId() + "_" + im.getId() + "_" + ib.getId(), "parts", "has_first_plate", provider.hasSafeItem(PLATE.getMaterialTag(it)),
-                            new ItemStack(MixedMetal, 2), of('T', PLATE.getMaterialTag(it), 'M', PLATE.getMaterialTag(im), 'B', PLATE.getMaterialTag(ib)), "T", "M", "B");
+                            stack, of('T', PLATE.getMaterialTag(it), 'M', PLATE.getMaterialTag(im), 'B', PLATE.getMaterialTag(ib)), "T", "M", "B");
                 }
             }
         }
         for (Material it : is){
             for (Material im : b){
                 for (Material ib : ase){
+                    CompoundNBT nbt = new CompoundNBT();
+                    nbt.putString("tm", it.getId());
+                    nbt.putString("mm", im.getId());
+                    nbt.putString("bm", ib.getId());
+                    ItemStack stack = new ItemStack(MixedMetal, 3);
+                    stack.setTag(nbt);
                     provider.addStackRecipe(output, Ref.ID, "mixed_metal_" + it.getId() + "_" + im.getId() + "_" + ib.getId(), "parts", "has_first_plate", provider.hasSafeItem(PLATE.getMaterialTag(it)),
-                            new ItemStack(MixedMetal, 3), of('T', PLATE.getMaterialTag(it), 'M', PLATE.getMaterialTag(im), 'B', PLATE.getMaterialTag(ib)), "T", "M", "B");
+                            stack, of('T', PLATE.getMaterialTag(it), 'M', PLATE.getMaterialTag(im), 'B', PLATE.getMaterialTag(ib)), "T", "M", "B");
                 }
             }
         }
@@ -173,29 +192,53 @@ public class Parts {
         for (Material it : st){
             for (Material im : b){
                 for (Material ib : tz){
+                    CompoundNBT nbt = new CompoundNBT();
+                    nbt.putString("tm", it.getId());
+                    nbt.putString("mm", im.getId());
+                    nbt.putString("bm", ib.getId());
+                    ItemStack stack = new ItemStack(MixedMetal, 3);
+                    stack.setTag(nbt);
                     provider.addStackRecipe(output, Ref.ID, "mixed_metal_" + it.getId() + "_" + im.getId() + "_" + ib.getId(), "parts", "has_first_plate", provider.hasSafeItem(PLATE.getMaterialTag(it)),
-                            new ItemStack(MixedMetal, 3), of('T', PLATE.getMaterialTag(it), 'M', PLATE.getMaterialTag(im), 'B', PLATE.getMaterialTag(ib)), "T", "M", "B");
+                            stack, of('T', PLATE.getMaterialTag(it), 'M', PLATE.getMaterialTag(im), 'B', PLATE.getMaterialTag(ib)), "T", "M", "B");
                 }
             }
         }
         for (Material it : st){
             for (Material im : b){
                 for (Material ib : ase){
+                    CompoundNBT nbt = new CompoundNBT();
+                    nbt.putString("tm", it.getId());
+                    nbt.putString("mm", im.getId());
+                    nbt.putString("bm", ib.getId());
+                    ItemStack stack = new ItemStack(MixedMetal, 4);
+                    stack.setTag(nbt);
                     provider.addStackRecipe(output, Ref.ID, "mixed_metal_" + it.getId() + "_" + im.getId() + "_" + ib.getId(), "parts", "has_first_plate", provider.hasSafeItem(PLATE.getMaterialTag(it)),
-                            new ItemStack(MixedMetal, 4), of('T', PLATE.getMaterialTag(it), 'M', PLATE.getMaterialTag(im), 'B', PLATE.getMaterialTag(ib)), "T", "M", "B");
+                            stack, of('T', PLATE.getMaterialTag(it), 'M', PLATE.getMaterialTag(im), 'B', PLATE.getMaterialTag(ib)), "T", "M", "B");
                 }
             }
         }
         for (Material im : b){
             for (Material ib : tz){
+                CompoundNBT nbt = new CompoundNBT();
+                nbt.putString("tm", TungstenSteel.getId());
+                nbt.putString("mm", im.getId());
+                nbt.putString("bm", ib.getId());
+                ItemStack stack = new ItemStack(MixedMetal, 5);
+                stack.setTag(nbt);
                 provider.addStackRecipe(output, Ref.ID, "mixed_metal_tungstensteel_" + im.getId() + "_" + ib.getId(), "parts", "has_first_plate", provider.hasSafeItem(PLATE.getMaterialTag(TungstenSteel)),
-                        new ItemStack(MixedMetal, 5), of('T', PLATE.getMaterialTag(TungstenSteel), 'M', PLATE.getMaterialTag(im), 'B', PLATE.getMaterialTag(ib)), "T", "M", "B");
+                        stack, of('T', PLATE.getMaterialTag(TungstenSteel), 'M', PLATE.getMaterialTag(im), 'B', PLATE.getMaterialTag(ib)), "T", "M", "B");
             }
         }
         for (Material im : b){
             for (Material ib : ase){
+                CompoundNBT nbt = new CompoundNBT();
+                nbt.putString("tm", TungstenSteel.getId());
+                nbt.putString("mm", im.getId());
+                nbt.putString("bm", ib.getId());
+                ItemStack stack = new ItemStack(MixedMetal, 6);
+                stack.setTag(nbt);
                 provider.addStackRecipe(output, Ref.ID, "mixed_metal_tungstensteel_" + im.getId() + "_" + ib.getId(), "parts", "has_first_plate", provider.hasSafeItem(PLATE.getMaterialTag(TungstenSteel)),
-                        new ItemStack(MixedMetal, 6), of('T', PLATE.getMaterialTag(TungstenSteel), 'M', PLATE.getMaterialTag(im), 'B', PLATE.getMaterialTag(ib)), "T", "M", "B");
+                        stack, of('T', PLATE.getMaterialTag(TungstenSteel), 'M', PLATE.getMaterialTag(im), 'B', PLATE.getMaterialTag(ib)), "T", "M", "B");
             }
         }
         provider.shapeless(output, "fire_clay_dust", "parts", "has_clay_dust", provider.hasSafeItem(DUST.getMaterialTag(Clay)), DUST.get(Fireclay, 2), DUST.getMaterialTag(Brick), DUST.getMaterialTag(Clay));
