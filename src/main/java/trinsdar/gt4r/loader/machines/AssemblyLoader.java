@@ -73,7 +73,7 @@ public class AssemblyLoader {
         ASSEMBLING.RB().ii(GEM.getMaterialIngredient(Emerald, 8), of(CIRCUITS_ADVANCED, 1)).io(new ItemStack(CircuitDataStorage, 4)).add(6400, 8);
         ASSEMBLING.RB().ii(GEM.getMaterialIngredient(Olivine, 8), of(CIRCUITS_ADVANCED, 1)).io(new ItemStack(CircuitDataStorage, 4)).add(6400, 8);
         ASSEMBLING.RB().ii(of(Items.ENDER_PEARL, 1), DUST.getMaterialIngredient(Blaze, 1)).io(new ItemStack(Items.ENDER_EYE)).add(400, 2);
-        ASSEMBLING.RB().ii(of(Items.ENDER_PEARL, 5), DUST.getMaterialIngredient(Blaze, 1)).io(new ItemStack(Items.ENDER_EYE, 5)).add(2500, 2);
+        ASSEMBLING.RB().ii(of(Items.ENDER_PEARL, 5), ROD.getMaterialIngredient(Blaze, 1)).io(new ItemStack(Items.ENDER_EYE, 5)).add(2500, 2);
         //Todo when ic2 makes it to 1.16
         //ASSEMBLING.RB().ii(DUST.getMaterialIngredient(Flint, 5), of(Items.TNT, 1)).io(new ItemStack(ITNT, 5)).add(800, 2);
 
@@ -84,11 +84,12 @@ public class AssemblyLoader {
         ASSEMBLING.RB().ii(INGOT.getMaterialIngredient(Iron, 4), DUST.getMaterialIngredient(Redstone, 1)).io(new ItemStack(Items.COMPASS)).add(400, 4);
         ASSEMBLING.RB().ii(INGOT.getMaterialIngredient(Gold, 4), DUST.getMaterialIngredient(Redstone, 1)).io(new ItemStack(Items.CLOCK)).add(400, 4);
         ASSEMBLING.RB().ii(of(getTag("forge", "rods/wooden"), 1), of(StickyResin, 1)).io(new ItemStack(Items.TORCH, 6)).add(400, 1);
-        ASSEMBLING.RB().ii(INGOT.getMaterialIngredient(Coal, 8), GEM.getMaterialIngredient(Flint, 1)).io(new ItemStack(CompressedCoalBall)).add(400, 4);
+        ASSEMBLING.RB().ii(GEM.getMaterialIngredient(Coal, 8), GEM.getMaterialIngredient(Flint, 1)).io(new ItemStack(CompressedCoalBall)).add(400, 4);
         ASSEMBLING.RB().ii(of(getTag("forge", "rods/wooden"), 1), of(Tags.Items.COBBLESTONE, 1)).io(new ItemStack(Items.LEVER, 1)).add(400, 1);
         ASSEMBLING.RB().ii(of(CircuitBoardBasic, 1), of(CABLE_COPPER.getBlockItem(PipeSize.VTINY), 3)).io(new ItemStack(CircuitBasic)).add(800, 1);
         ASSEMBLING.RB().ii(of(CompressedCoalBall, 8), of(BLOCK.getMaterialTag(Iron), 1)).io(new ItemStack(CoalChunk)).add(400, 4);
         ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Carbon, 4), of(MACHINE_HULLS_BASIC, 1), of(BatteryRE, 1)).io(new ItemStack(WINDMILL.getItem(ULV), 1)).add(6400, 8);
+        //missing
         ASSEMBLING.RB().ii(of(AdvancedAlloy, 1), of(getForgeItemTag("stone"), 8)).io(new ItemStack(REINFORCED_STONE, 8)).add(400, 4);
         ASSEMBLING.RB().ii(of(PLATE.getMaterialTag(Wood), 8), DUST.getMaterialIngredient(Redstone, 1)).io(new ItemStack(Items.NOTE_BLOCK)).add(800, 1);
         ASSEMBLING.RB().ii(of(PLATE.getMaterialTag(Wood), 8), GEM.getMaterialIngredient(Diamond, 1)).io(new ItemStack(Items.JUKEBOX)).add(1600, 1);

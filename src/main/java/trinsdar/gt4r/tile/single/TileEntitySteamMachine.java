@@ -30,7 +30,12 @@ public class TileEntitySteamMachine extends TileEntityMachine {
 
             @Override
             protected boolean canRecipeContinue() {
-                return super.canRecipeContinue() && world.isAirBlock(tile.pos.offset(getOutputFacing()));
+                try {
+                    return super.canRecipeContinue() && world.isAirBlock(tile.pos.offset(getOutputFacing()));
+                } catch (NullPointerException e){
+                    e.printStackTrace();
+                    return super.canRecipeContinue();
+                }
             }
 
             @Override

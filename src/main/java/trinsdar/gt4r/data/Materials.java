@@ -290,6 +290,7 @@ public class Materials {
         INGOT.forceOverride(Gold, Items.GOLD_INGOT);
         DUST.forceOverride(Redstone, Items.REDSTONE);
         DUST.forceOverride(Glowstone, Items.GLOWSTONE_DUST);
+        DUST.forceOverride(Blaze, Items.BLAZE_POWDER);
 
         ROD.forceOverride(Blaze, Items.BLAZE_ROD);
         ROD.forceOverride(Wood, Items.STICK);
