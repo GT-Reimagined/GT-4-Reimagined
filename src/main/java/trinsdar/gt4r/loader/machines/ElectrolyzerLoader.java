@@ -36,11 +36,9 @@ public class ElectrolyzerLoader {
         add(Sapphire, 60, 100);
         add(Saltpeter, 90, 100);
         add(Clay, 120, 154);
-        //add(RockSalt, 60, 72);
         add(StainlessSteel, 120, 450);
         add(Chromite, 90, 210);
         add(DarkAsh, 1, 30, 24);
-        add(Tungstate, 90, 220);
         add(SiliconDioxide, 60, 60);
         add(Sodalite, 120, 264);
         add(Bauxite, 120, 624);
@@ -66,7 +64,6 @@ public class ElectrolyzerLoader {
         add(Phosphate, 60, 90);
         add(Galena, 90, 832);
         add(Tungstate, 90, 224);
-        //add(Salt, 60, 56);
         add(Spessartine, 120, 440);
         //add(CalciumCarbonate, 90, 400);
         add(Prismarine, 30, 800);
