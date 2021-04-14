@@ -5,11 +5,20 @@ import muramasa.antimatter.material.Material;
 import muramasa.antimatter.registration.IColorHandler;
 import muramasa.antimatter.texture.Texture;
 import net.minecraft.block.Block;
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.world.World;
 import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.data.Materials;
 
 import javax.annotation.Nullable;
+
+import java.util.List;
 
 import static muramasa.antimatter.Data.NULL;
 
@@ -26,6 +35,34 @@ public class ItemMixedMetal extends ItemBasic<ItemMixedMetal> implements IColorH
         Material mat = Material.get(nbt.getString(tagId));
         if (mat == NULL) return -1;
         return mat.getRGB();
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+        CompoundNBT nbt = stack.getTag();
+        if (nbt == null){
+            super.addInformation(stack, worldIn, tooltip, flagIn);
+            return;
+        }
+        Material t = Material.get(nbt.getString("tm"));
+        Material m = Material.get(nbt.getString("mm"));
+        Material b = Material.get(nbt.getString("bm"));
+        tooltip.add(new StringTextComponent("Top Material: " + t.getDisplayName().getString()));
+        tooltip.add(new StringTextComponent("Middle Material: " + m.getDisplayName().getString()));
+        tooltip.add(new StringTextComponent("Bottom Material: " + b.getDisplayName().getString()));
+        super.addInformation(stack, worldIn, tooltip, flagIn);
+    }
+
+    @Override
+    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+        if (this.isInGroup(group)) {
+            ItemStack itemStack = new ItemStack(this);
+            CompoundNBT nbt = itemStack.getOrCreateTag();
+            nbt.putString("tm", Materials.WroughtIron.getId());
+            nbt.putString("mm", Materials.Brass.getId());
+            nbt.putString("bm", Materials.Tin.getId());
+            items.add(itemStack);
+        }
     }
 
     @Override
