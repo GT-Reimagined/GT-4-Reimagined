@@ -76,11 +76,11 @@ public class ToolCrafting {
         IAntimatterTool electric_screwdriver_lv = AntimatterAPI.get(IAntimatterTool.class, "electric_screwdriver_lv");
 
         provider.addToolRecipe(POWERED_TOOL_BUILDER.apply(ELECTRIC_SCREWDRIVER.getId() + "_lv"), output, Ref.ID, ELECTRIC_SCREWDRIVER.getId() + "_lv", "antimatter_electric_screwdrivers",
-                "has_material_" + StainlessSteel.getId(), provider.hasSafeItem(PLATE.getMaterialTag(StainlessSteel)), electric_screwdriver_lv.resolveStack(NULL, StainlessSteel, 0, 100000), of('R', PropertyIngredient.builder("primary").types(ROD).tool(ELECTRIC_SCREWDRIVER, true).build(), 'b', PropertyIngredient.builder("battery").itemTags(CustomTags.BATTERIES_MEDIUM).build(), 'M', MotorLV, 'S', PLATE.getMaterialTag(StainlessSteel)), "R  ", " RM", " bS");
+                "has_material_" + StainlessSteel.getId(), provider.hasSafeItem(PLATE.getMaterialTag(StainlessSteel)), electric_screwdriver_lv.resolveStack(NULL, StainlessSteel, 0, 100000), of('R', PropertyIngredient.builder("primary").types(ROD).tool(ELECTRIC_SCREWDRIVER, true).build(), 'b', PropertyIngredient.builder("battery").itemTags(CustomTags.BATTERIES_SMALL).build(), 'M', MotorLV, 'S', PLATE.getMaterialTag(StainlessSteel)), "R  ", " RM", " bS");
 
         IAntimatterTool jackhammer_lv = AntimatterAPI.get(IAntimatterTool.class, "jackhammer_lv");
         provider.addToolRecipe(POWERED_TOOL_BUILDER.apply(JACKHAMMER.getId() + "_lv"), output, Ref.ID, JACKHAMMER.getId() + "_lv", "antimatter_jackhammers",
-                "has_battery_small", provider.hasSafeItem(CustomTags.BATTERIES_SMALL), jackhammer_lv.resolveStack(NULL, NULL, 0, 100000), of('R', PropertyIngredient.builder("primary").types(ROD).tool(JACKHAMMER, true).build(), 'P', PropertyIngredient.builder("primary").types(PLATE).tool(JACKHAMMER, true).build(), 'b', PropertyIngredient.builder("battery").itemTags(CustomTags.BATTERIES_MEDIUM).build(), 'M', MotorLV), "RbR", " M ", " P ");
+                "has_battery_small", provider.hasSafeItem(CustomTags.BATTERIES_SMALL), jackhammer_lv.resolveStack(NULL, NULL, 0, 100000), of('R', PropertyIngredient.builder("primary").types(ROD).tool(JACKHAMMER, true).build(), 'P', PropertyIngredient.builder("primary").types(PLATE, GEM).tool(JACKHAMMER, true).build(), 'b', PropertyIngredient.builder("battery").itemTags(CustomTags.BATTERIES_SMALL).build(), 'M', MotorLV), "RbR", " M ", " P ");
 
         /*final ICriterionInstance in = provider.hasSafeItem(FILE.getTag());
 
