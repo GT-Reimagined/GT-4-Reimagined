@@ -20,17 +20,16 @@ import java.util.function.Consumer;
 
 import static com.google.common.collect.ImmutableMap.of;
 import static muramasa.antimatter.Data.*;
+import static muramasa.antimatter.material.MaterialTag.HANDLE;
 import static trinsdar.gt4r.data.GT4RData.*;
 import static trinsdar.gt4r.data.GT4RData.BatterySmallSodium;
 import static trinsdar.gt4r.data.GT4RData.MotorLV;
-import static trinsdar.gt4r.data.Materials.StainlessSteel;
-import static trinsdar.gt4r.data.Materials.Titanium;
-import static trinsdar.gt4r.data.Materials.TungstenSteel;
+import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.loader.crafting.CraftingHelper.of2;
 
 public class ToolCrafting {
     public static void loadRecipes(Consumer<IFinishedRecipe> output, AntimatterRecipeProvider provider){
-        final ICriterionInstance in = provider.hasSafeItem(SCREWDRIVER.getTag());
+        ICriterionInstance in = provider.hasSafeItem(SCREWDRIVER.getTag());
 
         IAntimatterTool drill_lv = AntimatterAPI.get(IAntimatterTool.class, "drill_lv");
         IAntimatterTool drill_mv = AntimatterAPI.get(IAntimatterTool.class, "drill_mv");
@@ -82,10 +81,36 @@ public class ToolCrafting {
         provider.addToolRecipe(POWERED_TOOL_BUILDER.apply(JACKHAMMER.getId() + "_lv"), output, Ref.ID, JACKHAMMER.getId() + "_lv", "antimatter_jackhammers",
                 "has_battery_small", provider.hasSafeItem(CustomTags.BATTERIES_SMALL), jackhammer_lv.resolveStack(NULL, NULL, 0, 100000), of('R', PropertyIngredient.builder("primary").types(ROD).tool(JACKHAMMER, true).build(), 'P', PropertyIngredient.builder("primary").types(PLATE, GEM).tool(JACKHAMMER, true).build(), 'b', PropertyIngredient.builder("battery").itemTags(CustomTags.BATTERIES_SMALL).build(), 'M', MotorLV), "RbR", " M ", " P ");
 
-        /*final ICriterionInstance in = provider.hasSafeItem(FILE.getTag());
+        //loadOtherRecipes(output, provider);
+    }
 
-        provider.addStackRecipe("spear", output, Ref.ID, HAMMER.getId() + "_" +"recipe", "antimatter_tools",
-                "has_file", in, SPEAR.getToolStack(NULL, NULL), of('I', MaterialIngredient.of(INGOT), 'R', MaterialIngredient.of(ROD)), "II ", "IIR", "II ");*/
+    private static void loadOtherRecipes(Consumer<IFinishedRecipe> output, AntimatterRecipeProvider provider){
+        ICriterionInstance in = provider.hasSafeItem(FILE.getTag());
+
+        provider.addToolRecipe(TOOL_BUILDER.apply(SPEAR.getId()), output, Ref.ID, SPEAR.getId() + "_" +"recipe", "antimatter_tools",
+                "has_file", in, SPEAR.getToolStack(NULL, NULL), of('I', PropertyIngredient.builder("primary").types(PLATE, GEM).tags(TOOLS).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build(), 'F', FILE.getTag(), 'H', HAMMER.getTag()), " FI", " RH", "R  ");
+
+
+        provider.addToolRecipe(TOOL_BUILDER.apply(PICKAXE.getId()), output, Ref.ID,  "flint_" + PICKAXE.getId() + "_" +"recipe", "antimatter_tools",
+                "has_flint", provider.hasSafeItem(GEM.getMaterialTag(Flint)), PICKAXE.getToolStack(Flint, NULL), of('I', PropertyIngredient.builder("primary").types(GEM).tags(FLINT_TAG).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "III", " R ", " R ");
+
+        provider.addToolRecipe(TOOL_BUILDER.apply(AXE.getId()), output, Ref.ID,  "flint_" + AXE.getId() + "_" +"recipe", "antimatter_tools",
+                "has_flint", provider.hasSafeItem(GEM.getMaterialTag(Flint)), AXE.getToolStack(Flint, NULL), of('I', PropertyIngredient.builder("primary").types(GEM).tags(FLINT_TAG).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "II", "IR", " R");
+
+        provider.addToolRecipe(TOOL_BUILDER.apply(SWORD.getId()), output, Ref.ID,  "flint_" + SWORD.getId() + "_" +"recipe", "antimatter_tools",
+                "has_flint", provider.hasSafeItem(GEM.getMaterialTag(Flint)), SWORD.getToolStack(Flint, NULL), of('I', PropertyIngredient.builder("primary").types(GEM).tags(FLINT_TAG).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "I", "I", "R");
+
+        provider.addToolRecipe(TOOL_BUILDER.apply(SHOVEL.getId()), output, Ref.ID,  "flint_" + SHOVEL.getId() + "_" +"recipe", "antimatter_tools",
+                "has_flint", provider.hasSafeItem(GEM.getMaterialTag(Flint)), SHOVEL.getToolStack(Flint, NULL), of('I', PropertyIngredient.builder("primary").types(GEM).tags(FLINT_TAG).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "I", "R", "R");
+
+        provider.addToolRecipe(TOOL_BUILDER.apply(HOE.getId()), output, Ref.ID,  "flint_" + HOE.getId() + "_" +"recipe", "antimatter_tools",
+                "has_flint", provider.hasSafeItem(GEM.getMaterialTag(Flint)), HOE.getToolStack(Flint, NULL), of('I', PropertyIngredient.builder("primary").types(GEM).tags(FLINT_TAG).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "II", " R", " R");
+
+        provider.addToolRecipe(TOOL_BUILDER.apply(KNIFE.getId()), output, Ref.ID,  "flint_" + KNIFE.getId() + "_" +"recipe", "antimatter_tools",
+                "has_flint", provider.hasSafeItem(GEM.getMaterialTag(Flint)), KNIFE.getToolStack(Flint, NULL), of('I', PropertyIngredient.builder("primary").types(GEM).tags(FLINT_TAG).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "I", "R");
+
+        provider.addToolRecipe(TOOL_BUILDER.apply(SPEAR.getId()), output, Ref.ID,  "flint_" + SPEAR.getId() + "_" +"recipe", "antimatter_tools",
+                "has_flint", provider.hasSafeItem(GEM.getMaterialTag(Flint)), SPEAR.getToolStack(Flint, NULL), of('I', PropertyIngredient.builder("primary").types(GEM).tags(FLINT_TAG).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "  I", " R ", "R  ");
     }
 
 

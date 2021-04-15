@@ -8,7 +8,9 @@ import muramasa.antimatter.capability.energy.ItemEnergyHandler;
 import muramasa.antimatter.cover.BaseCover;
 import muramasa.antimatter.item.ItemCover;
 import muramasa.antimatter.material.Material;
+import muramasa.antimatter.pipe.PipeItemBlock;
 import muramasa.antimatter.pipe.types.ItemPipe;
+import muramasa.antimatter.pipe.types.PipeType;
 import muramasa.antimatter.recipe.ingredient.PropertyIngredient;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import muramasa.antimatter.recipe.material.MaterialRecipe;
@@ -63,6 +65,29 @@ import static trinsdar.gt4r.data.Materials.*;
 public class GT4RData {
 
     private static final boolean HC = AntimatterConfig.GAMEPLAY.HARDCORE_CABLES;
+
+    public static final Data.TriFunction<String, PipeSize, Class<? extends PipeType>, MaterialRecipe.ItemBuilder> PIPE_BUILDER = (id, size, pipe)  -> {
+        MaterialRecipe.ItemBuilder builder = AntimatterAPI.get(MaterialRecipe.ItemBuilder.class,  id + "_" + size.getId());
+        return builder != null ? builder : new MaterialRecipe.ItemBuilder() {
+            @Override
+            public String getId() {
+                return id + "_" + size.getId();
+            }
+
+            @Override
+            public ItemStack build(CraftingInventory inv, MaterialRecipe.Result mats) {
+                Material mat = (Material) mats.mats.get("primary");
+                PipeType p = AntimatterAPI.get(pipe, id + "_" + mat.getId());
+                int amount = size == PipeSize.TINY ? 12 : size == PipeSize.SMALL ? 6 : size == PipeSize.NORMAL ? 2 : 1;
+                return new ItemStack(p.getBlock(size));
+            }
+
+            @Override
+            public Map<String, Object> getFromResult(@Nonnull ItemStack stack) {
+                return ImmutableMap.of("primary",((PipeItemBlock)stack.getItem()).getPipe().getType().getMaterial());
+            }
+        };
+    };
 
     public static final Function<String, MaterialRecipe.ItemBuilder> POWERED_TOOL_BUILDER = id -> {
         MaterialRecipe.ItemBuilder builder = AntimatterAPI.get(MaterialRecipe.ItemBuilder.class, id);

@@ -4,6 +4,7 @@ import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.fluid.AntimatterMaterialFluid;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialItem;
+import muramasa.antimatter.material.MaterialTag;
 import muramasa.antimatter.material.MaterialType;
 import muramasa.antimatter.material.MaterialTypeItem;
 import net.minecraft.enchantment.Enchantments;
@@ -53,6 +54,7 @@ public class Materials {
             return d;
         }
     });
+    public static MaterialTag FLINT_TAG = new MaterialTag("flint");
 
     /** Elements **/
     public static Material Aluminium = new Material(Ref.ID, "aluminium", 0x80c8f0, DULL, Al).asMetal(933, 1000, PLATE, ROD, GEAR, HULL);
@@ -182,7 +184,7 @@ public class Materials {
     public static Material Bauxite = new Material(Ref.ID, "bauxite", 0xc86400, DULL).asDust(ORE).mats(of(Aluminium, 16, Hydrogen, 10, Oxygen, 11, Titanium, 1)).setOreMulti(2);
     public static Material Wood = new Material(Ref.ID, "wood", 0x643200, WOOD).asDust(PLATE).addHandleStat(12, 0.0F).mats(of(Carbon, 1, Oxygen, 1, Hydrogen, 1));
     public static Material Blaze = new Material(Ref.ID, "blaze", 0xffc800, NONE).asDust().mats(of(Sulfur, 1, DarkAsh, 1/*, Magic, 1*/)).addHandleStat(-10, -0.5F, of(Enchantments.FIRE_ASPECT, 1));
-    public static Material Flint = new Material(Ref.ID, "flint", 0x002040, FLINT).asDust(GEM).addTools(1.25F, 2.5F, 128, 1, of(Enchantments.FIRE_ASPECT, 1), PICKAXE, AXE, SHOVEL, SWORD, HOE, MORTAR).mats(of(SiliconDioxide, 1));
+    public static Material Flint = new Material(Ref.ID, "flint", 0x002040, FLINT).asDust(GEM, FLINT_TAG).addTools(1.25F, 2.5F, 128, 1, of(Enchantments.FIRE_ASPECT, 1), PICKAXE, AXE, SHOVEL, SWORD, HOE, MORTAR, KNIFE).mats(of(SiliconDioxide, 1));
     public static Material Uvarovite = new Material(Ref.ID, "uvarovite", 0xb4ffb4, DIAMOND).asDust().mats(of(Calcium, 3, Chrome, 2, Silicon, 3, Oxygen, 12));
 
     /** Gems **/
@@ -291,6 +293,7 @@ public class Materials {
         DUST.forceOverride(Redstone, Items.REDSTONE);
         DUST.forceOverride(Glowstone, Items.GLOWSTONE_DUST);
         DUST.forceOverride(Blaze, Items.BLAZE_POWDER);
+        GEM.forceOverride(Flint, Items.FLINT);
 
         ROD.forceOverride(Blaze, Items.BLAZE_ROD);
         ROD.forceOverride(Wood, Items.STICK);
