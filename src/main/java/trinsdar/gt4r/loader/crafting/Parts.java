@@ -152,7 +152,7 @@ public class Parts {
                     nbt.putString("mm", im.getId());
                     nbt.putString("bm", ib.getId());
                     ItemStack stack = new ItemStack(MixedMetal, 1);
-                    stack.setTag(nbt);
+                    stack.getOrCreateTag().put(muramasa.antimatter.Ref.TAG_TOOL_DATA, nbt);
                     provider.addStackRecipe(output, Ref.ID, "mixed_metal_" + it.getId() + "_" + im.getId() + "_" + ib.getId(), "parts", "has_first_plate", provider.hasSafeItem(PLATE.getMaterialTag(it)),
                             stack, of('T', PLATE.getMaterialTag(it), 'M', PLATE.getMaterialTag(im), 'B', PLATE.getMaterialTag(ib)), "T", "M", "B");
                 }
@@ -168,7 +168,7 @@ public class Parts {
                     nbt.putString("mm", im.getId());
                     nbt.putString("bm", ib.getId());
                     ItemStack stack = new ItemStack(MixedMetal, 2);
-                    stack.setTag(nbt);
+                    stack.getOrCreateTag().put(muramasa.antimatter.Ref.TAG_TOOL_DATA, nbt);
                     provider.addStackRecipe(output, Ref.ID, "mixed_metal_" + it.getId() + "_" + im.getId() + "_" + ib.getId(), "parts", "has_first_plate", provider.hasSafeItem(PLATE.getMaterialTag(it)),
                             stack, of('T', PLATE.getMaterialTag(it), 'M', PLATE.getMaterialTag(im), 'B', PLATE.getMaterialTag(ib)), "T", "M", "B");
                 }
@@ -182,7 +182,7 @@ public class Parts {
                     nbt.putString("mm", im.getId());
                     nbt.putString("bm", ib.getId());
                     ItemStack stack = new ItemStack(MixedMetal, 3);
-                    stack.setTag(nbt);
+                    stack.getOrCreateTag().put(muramasa.antimatter.Ref.TAG_TOOL_DATA, nbt);
                     provider.addStackRecipe(output, Ref.ID, "mixed_metal_" + it.getId() + "_" + im.getId() + "_" + ib.getId(), "parts", "has_first_plate", provider.hasSafeItem(PLATE.getMaterialTag(it)),
                             stack, of('T', PLATE.getMaterialTag(it), 'M', PLATE.getMaterialTag(im), 'B', PLATE.getMaterialTag(ib)), "T", "M", "B");
                 }
@@ -197,7 +197,7 @@ public class Parts {
                     nbt.putString("mm", im.getId());
                     nbt.putString("bm", ib.getId());
                     ItemStack stack = new ItemStack(MixedMetal, 3);
-                    stack.setTag(nbt);
+                    stack.getOrCreateTag().put(muramasa.antimatter.Ref.TAG_TOOL_DATA, nbt);
                     provider.addStackRecipe(output, Ref.ID, "mixed_metal_" + it.getId() + "_" + im.getId() + "_" + ib.getId(), "parts", "has_first_plate", provider.hasSafeItem(PLATE.getMaterialTag(it)),
                             stack, of('T', PLATE.getMaterialTag(it), 'M', PLATE.getMaterialTag(im), 'B', PLATE.getMaterialTag(ib)), "T", "M", "B");
                 }
@@ -211,7 +211,7 @@ public class Parts {
                     nbt.putString("mm", im.getId());
                     nbt.putString("bm", ib.getId());
                     ItemStack stack = new ItemStack(MixedMetal, 4);
-                    stack.setTag(nbt);
+                    stack.getOrCreateTag().put(muramasa.antimatter.Ref.TAG_TOOL_DATA, nbt);
                     provider.addStackRecipe(output, Ref.ID, "mixed_metal_" + it.getId() + "_" + im.getId() + "_" + ib.getId(), "parts", "has_first_plate", provider.hasSafeItem(PLATE.getMaterialTag(it)),
                             stack, of('T', PLATE.getMaterialTag(it), 'M', PLATE.getMaterialTag(im), 'B', PLATE.getMaterialTag(ib)), "T", "M", "B");
                 }
@@ -224,7 +224,7 @@ public class Parts {
                 nbt.putString("mm", im.getId());
                 nbt.putString("bm", ib.getId());
                 ItemStack stack = new ItemStack(MixedMetal, 5);
-                stack.setTag(nbt);
+                stack.getOrCreateTag().put(muramasa.antimatter.Ref.TAG_TOOL_DATA, nbt);
                 provider.addStackRecipe(output, Ref.ID, "mixed_metal_tungstensteel_" + im.getId() + "_" + ib.getId(), "parts", "has_first_plate", provider.hasSafeItem(PLATE.getMaterialTag(TungstenSteel)),
                         stack, of('T', PLATE.getMaterialTag(TungstenSteel), 'M', PLATE.getMaterialTag(im), 'B', PLATE.getMaterialTag(ib)), "T", "M", "B");
             }
@@ -236,7 +236,7 @@ public class Parts {
                 nbt.putString("mm", im.getId());
                 nbt.putString("bm", ib.getId());
                 ItemStack stack = new ItemStack(MixedMetal, 6);
-                stack.setTag(nbt);
+                stack.getOrCreateTag().put(muramasa.antimatter.Ref.TAG_TOOL_DATA, nbt);
                 provider.addStackRecipe(output, Ref.ID, "mixed_metal_tungstensteel_" + im.getId() + "_" + ib.getId(), "parts", "has_first_plate", provider.hasSafeItem(PLATE.getMaterialTag(TungstenSteel)),
                         stack, of('T', PLATE.getMaterialTag(TungstenSteel), 'M', PLATE.getMaterialTag(im), 'B', PLATE.getMaterialTag(ib)), "T", "M", "B");
             }

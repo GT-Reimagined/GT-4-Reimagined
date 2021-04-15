@@ -3,6 +3,7 @@ package trinsdar.gt4r.loader.machines;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.pipe.PipeSize;
 import muramasa.antimatter.pipe.types.FluidPipe;
+import muramasa.antimatter.pipe.types.ItemPipe;
 import muramasa.antimatter.pipe.types.Wire;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import net.minecraft.item.Item;
@@ -56,7 +57,7 @@ public class ExtruderLoader {
             EXTRUDING.RB().ii(INGOT.getMaterialIngredient(t.getMaterial(),12), getReusable(GT4RData.ShapePipeHuge)).io(new ItemStack(pipeHuge, 1)).add(t.getMaterial().getMass()*12,128);
         });
 
-        AntimatterAPI.all(FluidPipe.class).forEach(t -> {
+        AntimatterAPI.all(ItemPipe.class).forEach(t -> {
             Item pipeNormal = t.getBlockItem(PipeSize.NORMAL);
             Item pipeLarge = t.getBlockItem(PipeSize.LARGE);
             Item pipeHuge = t.getBlockItem(PipeSize.HUGE);

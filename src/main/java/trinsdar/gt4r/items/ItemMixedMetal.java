@@ -30,7 +30,9 @@ public class ItemMixedMetal extends ItemBasic<ItemMixedMetal> implements IColorH
     @Override
     public int getItemColor(ItemStack stack, @Nullable Block block, int i) {
         if (i > 2) return -1;
-        CompoundNBT nbt = stack.getOrCreateTag();
+        CompoundNBT stackNbt = stack.getTag();
+        if (stackNbt == null) return -1;
+        CompoundNBT nbt = stackNbt.getCompound(muramasa.antimatter.Ref.TAG_TOOL_DATA);
         String tagId = i == 0 ? "tm" : i == 1 ? "mm" : "bm";
         Material mat = Material.get(nbt.getString(tagId));
         if (mat == NULL) return -1;
@@ -39,11 +41,12 @@ public class ItemMixedMetal extends ItemBasic<ItemMixedMetal> implements IColorH
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        CompoundNBT nbt = stack.getTag();
-        if (nbt == null){
+        CompoundNBT stackNbt = stack.getTag();
+        if (stackNbt == null){
             super.addInformation(stack, worldIn, tooltip, flagIn);
             return;
         }
+        CompoundNBT nbt = stackNbt.getCompound(muramasa.antimatter.Ref.TAG_TOOL_DATA);
         Material t = Material.get(nbt.getString("tm"));
         Material m = Material.get(nbt.getString("mm"));
         Material b = Material.get(nbt.getString("bm"));
@@ -57,10 +60,11 @@ public class ItemMixedMetal extends ItemBasic<ItemMixedMetal> implements IColorH
     public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
         if (this.isInGroup(group)) {
             ItemStack itemStack = new ItemStack(this);
-            CompoundNBT nbt = itemStack.getOrCreateTag();
+            CompoundNBT nbt = new CompoundNBT();
             nbt.putString("tm", Materials.WroughtIron.getId());
             nbt.putString("mm", Materials.Brass.getId());
             nbt.putString("bm", Materials.Tin.getId());
+            itemStack.getOrCreateTag().put(muramasa.antimatter.Ref.TAG_TOOL_DATA, nbt);
             items.add(itemStack);
         }
     }
