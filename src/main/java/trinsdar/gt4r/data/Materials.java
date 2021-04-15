@@ -23,6 +23,7 @@ import static muramasa.antimatter.material.Element.*;
 import static muramasa.antimatter.material.MaterialTag.RUBBERTOOLS;
 import static muramasa.antimatter.material.TextureSet.NONE;
 import static net.minecraft.item.ItemTier.IRON;
+import static net.minecraft.item.ItemTier.NETHERITE;
 import static trinsdar.gt4r.data.Textures.*;
 
 public class Materials {
@@ -265,7 +266,9 @@ public class Materials {
     public static Material Quartz = new Material(Ref.ID, "quartz", 0xffffff, NONE);
 
     /** VANILLA **/
-    public static Material Netherite = new Material(Ref.ID, "netherite", 0x2D2425, ROUGH).asSolid(PLATE, ROD);
+    public static Material Netherite = new Material(Ref.ID, "netherite", 0x504650, DULL).asMetal(2246,1000, PLATE, ROD).addTools(3.0F, 10, 500, NETHERITE.getHarvestLevel(), of(Enchantments.FIRE_ASPECT, 3));
+    public static Material NetherizedDiamond = new Material(Ref.ID, "netherized_diamond", 0x5a505a, DIAMOND).asGem(false).addTools(4.0F, 12, NETHERITE.getMaxUses(), NETHERITE.getHarvestLevel(), of(Enchantments.FIRE_ASPECT, 3, Enchantments.SHARPNESS, 4));
+    public static Material NetheriteScrap = new Material(Ref.ID, "netherite_scrap", 0x6e505a, ROUGH).asDust(CRUSHED, CRUSHED_PURIFIED, CRUSHED_CENTRIFUGED, DUST_IMPURE, DUST_PURE);
 
     static {
         /*ELEC.add(Methane, CarbonDioxide, NitrogenDioxide, Toluene, VinylChloride, SulfurDioxide, SulfurTrioxide, Dimethylamine, DinitrogenTetroxide, NitricOxide, Ammonia, Chloromethane, Tetrafluoroethylene, CarbonMonoxide, Ethylene, Propane, Ethenone, Ethanol, Glyceryl, SodiumPersulfate, Dichlorobenzene, Styrene, Isoprene, Tetranitromethane, Epichlorohydrin, NitricAcid, Dimethylhydrazine, Chloramine, Dimethyldichlorosilane, HydrofluoricAcid, Chloroform, BisphenolA, AceticAcid, Acetone, Methanol, VinylAcetate, MethylAcetate, AllylChloride, HypochlorousAcid, Cumene, PhosphoricAcid, SulfuricAcid, Benzene, Phenol, Glycerol, SodiumSulfide, Almandine, Andradite, BandedIron, Calcite, Cassiterite, Chalcopyrite, Cobaltite, Galena, Garnierite, Grossular, Bauxite, Magnesite, Magnetite, Molybdenite, Obsidian, Phosphate, Polydimethylsiloxane, Pyrite, Pyrolusite, Pyrope, RockSalt, Saltpeter, SiliconDioxide, Massicot, ArsenicTrioxide, CobaltOxide, Magnesia, Quicklime, Potash, SodaAsh, PhosphorousPentoxide, SodiumHydroxide, Spessartine, Sphalerite, Uvarovite, PotassiumFeldspar, Biotite, RedGranite, Bastnasite, Pentlandite, Spodumene, Glauconite, Bentonite, Malachite, Barite, Talc, AntimonyTrioxide, CupricOxide, Ferrosilite, Quartzite, Charcoal, Coal, Lignite, Diamond, Emerald, Ruby, Sapphire, Tanzanite, Topaz, Olivine, Opal, Amethyst, EnderPearl, StainlessSteel, Steel, Ultimet, IronMagnetic, SteelMagnetic, NeodymiumMagnetic, Osmiridium);
@@ -291,6 +294,7 @@ public class Materials {
         NUGGET.forceOverride(Gold, Items.GOLD_NUGGET);
         INGOT.forceOverride(Iron, Items.IRON_INGOT);
         INGOT.forceOverride(Gold, Items.GOLD_INGOT);
+        INGOT.forceOverride(Netherite, Items.NETHERITE_INGOT);
         DUST.forceOverride(Redstone, Items.REDSTONE);
         DUST.forceOverride(Glowstone, Items.GLOWSTONE_DUST);
         DUST.forceOverride(Blaze, Items.BLAZE_POWDER);
@@ -308,6 +312,8 @@ public class Materials {
         //TungstenSteel.remove(BOLT, SCREW);
         //Titanium.remove(BOLT, SCREW);
         Tungsten.remove(BOLT, SCREW);
+        Netherite.remove(BOLT, SCREW);
+        NetherizedDiamond.remove(BOLT, SCREW);
         Invar.remove(BOLT, SCREW);
         WroughtIron.remove(BOLT, SCREW);
         TungstenCarbide.remove(BOLT, SCREW);

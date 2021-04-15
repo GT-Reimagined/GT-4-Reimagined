@@ -227,7 +227,7 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
                 strings = main.getToolTypes().contains(HAMMER) && main.getToolTypes().contains(FILE) ? new String[]{" FP", " RH", "R  "} : new String[]{"  P", " R ", "R  "};
                 if (main.getToolTypes().contains(PICKAXE))
                     addStackRecipe(consumer, muramasa.antimatter.Ref.ID, SPEAR.getId() + "_" + main.getId() + "_" + handle.getId(), "antimatter_spears",
-                        "has_material_" + main.getId(), ingotTrigger, SPEAR.getToolStack(main, handle), map1, strings);
+                        "has_material_" + main.getId(), ingotTrigger, SPEAR.getToolStack(main, handle), map2, strings);
                 strings = main.getToolTypes().contains(HAMMER) && main.getToolTypes().contains(FILE) ? new String[]{"IIH", "PR ", "FR "} : new String[]{"II", "PR", " R"};
                 if (main.getToolTypes().contains(AXE))
                     addStackRecipe(consumer, Ref.ID, AXE.getId() + "_" + main.getId() + "_" + handle.getId(), "antimatter_axes",
