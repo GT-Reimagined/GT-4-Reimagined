@@ -263,11 +263,11 @@ public class Materials {
     public static Material HighPressure = new Material(Ref.ID, "high_pressure", 0xc80000, NONE);
     public static Material HighCapacity = new Material(Ref.ID, "high_capacity", 0xb00b69, NONE);
     public static Material PlasmaContainment = new Material(Ref.ID, "plasma_containment", 0xffff00, NONE);
-    public static Material Quartz = new Material(Ref.ID, "quartz", 0xffffff, NONE);
+    public static Material Quartz = new Material(Ref.ID, "quartz", 0xffffff, NONE).asDust();
 
     /** VANILLA **/
-    public static Material Netherite = new Material(Ref.ID, "netherite", 0x504650, DULL).asMetal(2246,1000, PLATE, ROD).addTools(3.0F, 10, 500, NETHERITE.getHarvestLevel(), of(Enchantments.FIRE_ASPECT, 3));
-    public static Material NetherizedDiamond = new Material(Ref.ID, "netherized_diamond", 0x5a505a, DIAMOND).asGem(false).addTools(4.0F, 12, NETHERITE.getMaxUses(), NETHERITE.getHarvestLevel(), of(Enchantments.FIRE_ASPECT, 3, Enchantments.SHARPNESS, 4));
+    public static Material Netherite = new Material(Ref.ID, "netherite", 0x504650, DULL).asMetal(2246,1300, PLATE, ROD).addTools(3.0F, 10, 500, NETHERITE.getHarvestLevel(), of(Enchantments.FIRE_ASPECT, 3));
+    public static Material NetherizedDiamond = new Material(Ref.ID, "netherized_diamond", 0x5a505a, DIAMOND).asGemBasic(false).addTools(4.0F, 12, NETHERITE.getMaxUses(), NETHERITE.getHarvestLevel(), of(Enchantments.FIRE_ASPECT, 3, Enchantments.SHARPNESS, 4));
     public static Material NetheriteScrap = new Material(Ref.ID, "netherite_scrap", 0x6e505a, ROUGH).asDust(CRUSHED, CRUSHED_PURIFIED, CRUSHED_CENTRIFUGED, DUST_IMPURE, DUST_PURE);
 
     static {
@@ -378,6 +378,7 @@ public class Materials {
         Lapis.addByProduct(Lazurite, Sodalite, Pyrite);
         Diamond.addByProduct(Carbon/*Graphite*/);
         Platinum.addByProduct(Nickel, Iridium);
+        NetheriteScrap.addByProduct(Quartz);
 
         //ore byproducts from non vanilla/gt4r ores
         Nickel.addByProduct(Iron, Platinum);

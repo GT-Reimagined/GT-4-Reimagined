@@ -15,7 +15,7 @@ import static trinsdar.gt4r.data.RecipeMaps.UNIVERSAL_MACERATING;
 public class MaceratorLoader {
     public static void init() {
         CRUSHED.all().forEach(m -> {
-            if (!m.has(ORE) && m != Gold && m != Iron && m != Diamond && m != Emerald && m != Lapis && m != Redstone) return;
+            if (!m.has(ORE) && m != NetheriteScrap) return;
             int multiplier = 1;
             RecipeIngredient ore = RecipeIngredient.of(ORE.getMaterialTag(m),1);
             RecipeIngredient crushed = RecipeIngredient.of(CRUSHED.getMaterialTag(m), 1);
