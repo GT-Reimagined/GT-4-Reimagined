@@ -67,7 +67,7 @@ public class GT4RData {
 
     private static final boolean HC = AntimatterConfig.GAMEPLAY.HARDCORE_CABLES;
 
-    public static final MaterialRecipe.Provider POWERED_TOOL_BUILDER = MaterialRecipe.registerProvider("powered_tool", id -> new MaterialRecipe.ItemBuilder() {
+    public static final MaterialRecipe.Provider POWERED_TOOL_BUILDER = MaterialRecipe.registerProvider("powered-tool", id -> new MaterialRecipe.ItemBuilder() {
 
         @Override
         public ItemStack build(CraftingInventory inv, MaterialRecipe.Result mats) {
