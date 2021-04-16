@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XHX",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "tag": "forge:plates/gold"
+    },
+    "H": {
+      "tag": "antimatter:hammer"
+    }
+  },
+  "result": {
+    "item": "minecraft:golden_leggings"
+  }
+}

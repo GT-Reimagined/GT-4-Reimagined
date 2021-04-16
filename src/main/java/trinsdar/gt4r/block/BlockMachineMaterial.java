@@ -5,6 +5,7 @@ import muramasa.antimatter.machine.BlockMachine;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.material.Material;
+import muramasa.antimatter.registration.IColorHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
@@ -16,7 +17,7 @@ import javax.annotation.Nullable;
 
 import static muramasa.antimatter.Data.NULL;
 
-public class BlockMachineMaterial extends BlockMachine {
+public class BlockMachineMaterial extends BlockMachine implements IColorHandler {
     Material material = NULL;
     public BlockMachineMaterial(Machine<?> type, Tier tier) {
         super(type, tier);

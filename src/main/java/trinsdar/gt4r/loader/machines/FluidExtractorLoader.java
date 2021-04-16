@@ -16,7 +16,7 @@ public class FluidExtractorLoader {
             add(r, PLATE.get(r), 144);
         });
         INGOT.all().forEach(r -> {
-            add(r, INGOT.get(r), 72);
+            add(r, INGOT.get(r), 144);
         });
         GEAR.all().forEach(r -> {
             add(r, GEAR.get(r), 144*4);

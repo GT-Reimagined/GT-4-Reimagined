@@ -4,16 +4,15 @@ import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import net.minecraft.data.CookingRecipeBuilder;
 import net.minecraft.data.IFinishedRecipe;
+import net.minecraft.item.Items;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.datagen.GT4RCookingRecipeBuilder;
 
 import java.util.function.Consumer;
 
 import static muramasa.antimatter.Data.*;
-import static trinsdar.gt4r.data.Materials.Copper;
-import static trinsdar.gt4r.data.Materials.Iron;
-import static trinsdar.gt4r.data.Materials.Tetrahedrite;
-import static trinsdar.gt4r.data.Materials.WroughtIron;
+import static trinsdar.gt4r.data.Materials.*;
+import static trinsdar.gt4r.data.Materials.Quartz;
 import static trinsdar.gt4r.data.RecipeMaps.SMELTING;
 
 public class FurnaceLoader {
@@ -21,6 +20,8 @@ public class FurnaceLoader {
         CookingRecipeBuilder.blastingRecipe(INGOT.getMaterialIngredient(Iron, 1).get(), INGOT.get(WroughtIron), 0.5F, 100).addCriterion("has_iron_ingot", provider.hasSafeItem(INGOT.getMaterialTag(Iron))).build(output, "iron_to_wrought_bl");
         CookingRecipeBuilder.smeltingRecipe(INGOT.getMaterialIngredient(Iron, 1).get(), INGOT.get(WroughtIron), 0.5F, 200).addCriterion("has_iron_ingot", provider.hasSafeItem(INGOT.getMaterialTag(Iron))).build(output, "iron_to_wrought");
         CookingRecipeBuilder.smeltingRecipe(RecipeIngredient.of(GT4RData.CompressedFireClay, 1).get(), GT4RData.FireBrick, 0.5F, 200).addCriterion("has_compressed_fire_clay", provider.hasSafeItem(GT4RData.CompressedFireClay)).build(output, "firebrick");
+        CookingRecipeBuilder.blastingRecipe(DUST.getMaterialIngredient(Quartz, 1).get(), Items.QUARTZ, 0.5F, 100).addCriterion("has_quartz_dust", provider.hasSafeItem(DUST.getMaterialTag(Quartz))).build(output, "quartz_dust_to_gem_bl");
+        CookingRecipeBuilder.smeltingRecipe(DUST.getMaterialIngredient(Quartz, 1).get(), Items.QUARTZ, 0.5F, 200).addCriterion("has_quartz_dust", provider.hasSafeItem(DUST.getMaterialTag(Quartz))).build(output, "quartz_dust_to_gem");
         DUST.all().forEach(m -> {
             if (m.needsBlastFurnace()) return;
             if (!m.getDirectSmeltInto().has(INGOT) || m == Tetrahedrite) return;

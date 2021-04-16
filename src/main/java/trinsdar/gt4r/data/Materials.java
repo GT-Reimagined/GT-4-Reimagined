@@ -4,9 +4,11 @@ import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.fluid.AntimatterMaterialFluid;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialItem;
+import muramasa.antimatter.material.MaterialTag;
 import muramasa.antimatter.material.MaterialType;
 import muramasa.antimatter.material.MaterialTypeItem;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemTier;
 import net.minecraft.item.Items;
@@ -21,6 +23,7 @@ import static muramasa.antimatter.material.Element.*;
 import static muramasa.antimatter.material.MaterialTag.RUBBERTOOLS;
 import static muramasa.antimatter.material.TextureSet.NONE;
 import static net.minecraft.item.ItemTier.IRON;
+import static net.minecraft.item.ItemTier.NETHERITE;
 import static trinsdar.gt4r.data.Textures.*;
 
 public class Materials {
@@ -53,6 +56,7 @@ public class Materials {
             return d;
         }
     });
+    public static MaterialTag FLINT_TAG = new MaterialTag("flint");
 
     /** Elements **/
     public static Material Aluminium = new Material(Ref.ID, "aluminium", 0x80c8f0, DULL, Al).asMetal(933, 1000, PLATE, ROD, GEAR, HULL);
@@ -70,7 +74,7 @@ public class Materials {
     public static Material Plutonium = new Material(Ref.ID, "plutonium_244", 0xf03232, METALLIC, Pu).asMetal(912, 0);
     public static Material Silver = new Material(Ref.ID, "silver", 0xdcdcff, SHINY, Ag).asMetal(1234, 0, PLATE).harvestLevel(2);
     public static Material Thorium = new Material(Ref.ID, "thorium", 0x001e00, SHINY, Th).asMetal(2115, 0);
-    public static Material Titanium = new Material(Ref.ID, "titanium", 0xdca0f0, METALLIC, Ti).asMetal(1941, 1500,  PLATE, ROD, GEAR, HULL).addArmor(new int[]{2, 2, 2, 2}, 1.0F, 0.0F, 20).addTools(3.5F, 8.0F, 1600, 3);
+    public static Material Titanium = new Material(Ref.ID, "titanium", 0xdca0f0, METALLIC, Ti).asMetal(1941, 1500,  PLATE, ROD, GEAR, HULL).addArmor(new int[]{1, 1, 2, 1}, 1.0F, 0.0F, 15).addTools(3.5F, 8.0F, 1600, 3);
     public static Material Tungsten = new Material(Ref.ID, "tungsten", 0x323232, METALLIC, W).asMetal(3695, 2500, PLATE, ROD).addTools(3.5F, 8.0F, 2560, 3);
     public static Material Uranium238 = new Material(Ref.ID, "uranium_238", 0x32f032, METALLIC, U).asMetal(1405, 0);
     public static Material Uranium235 = new Material(Ref.ID, "uranium_235", 0x46fa46, METALLIC, U235).asMetal(1405, 0);
@@ -182,7 +186,7 @@ public class Materials {
     public static Material Bauxite = new Material(Ref.ID, "bauxite", 0xc86400, DULL).asDust(ORE).mats(of(Aluminium, 16, Hydrogen, 10, Oxygen, 11, Titanium, 1)).setOreMulti(2);
     public static Material Wood = new Material(Ref.ID, "wood", 0x643200, WOOD).asDust(PLATE).addHandleStat(12, 0.0F).mats(of(Carbon, 1, Oxygen, 1, Hydrogen, 1));
     public static Material Blaze = new Material(Ref.ID, "blaze", 0xffc800, NONE).asDust().mats(of(Sulfur, 1, DarkAsh, 1/*, Magic, 1*/)).addHandleStat(-10, -0.5F, of(Enchantments.FIRE_ASPECT, 1));
-    public static Material Flint = new Material(Ref.ID, "flint", 0x002040, FLINT).asDust(GEM).addTools(1.25F, 2.5F, 128, 1, of(Enchantments.FIRE_ASPECT, 1), PICKAXE, AXE, SHOVEL, SWORD, HOE, MORTAR).mats(of(SiliconDioxide, 1));
+    public static Material Flint = new Material(Ref.ID, "flint", 0x002040, FLINT).asDust(GEM, FLINT_TAG).addTools(1.25F, 2.5F, 128, 1, of(Enchantments.FIRE_ASPECT, 1), PICKAXE, AXE, SHOVEL, SWORD, HOE, MORTAR, KNIFE).mats(of(SiliconDioxide, 1));
     public static Material Uvarovite = new Material(Ref.ID, "uvarovite", 0xb4ffb4, DIAMOND).asDust().mats(of(Calcium, 3, Chrome, 2, Silicon, 3, Oxygen, 12));
 
     /** Gems **/
@@ -194,8 +198,8 @@ public class Materials {
     public static Material Diamond = new Material(Ref.ID, "diamond", /*0x3de0e5*/0xc8ffff, DIAMOND).asGemBasic(false, ORE).mats(of(Carbon, 128)).addTools(ItemTier.DIAMOND.getAttackDamage(), ItemTier.DIAMOND.getEfficiency(), ItemTier.DIAMOND.getMaxUses(), ItemTier.DIAMOND.getHarvestLevel());
     public static Material Emerald = new Material(Ref.ID, "emerald", 0x50ff50, GEM_V).asDust(ORE).mats(of(Beryllium, 3, Aluminium, 2, Silicon, 3, Oxygen, 18));
     public static Material Lazurite = new Material(Ref.ID, "lazurite", 0x6478ff, LAPIS).asDust().mats(of(Aluminium, 6, Silicon, 6, Calcium, 8, Sodium, 8));
-    public static Material Ruby = new Material(Ref.ID, "ruby", 0xff6464, RUBY).asGemBasic(false, ORE).addTools(3.0F, 7.0F, 1024, 3).mats(of(Chrome, 1, Aluminium, 2, Oxygen, 3));
-    public static Material Sapphire = new Material(Ref.ID, "sapphire", 0x6464c8, GEM_V).asGemBasic(false, ORE).addTools(3.0F, 7.0F, 1024, 3).mats(of(Aluminium, 2, Oxygen, 3));
+    public static Material Ruby = new Material(Ref.ID, "ruby", 0xff6464, RUBY).asGemBasic(false, ORE).addTools(3.0F, 7.0F, 1024, 3).addArmor(new int[]{1, 1, 2, 1}, 1.0F, 0.0F, 30).mats(of(Chrome, 1, Aluminium, 2, Oxygen, 3));
+    public static Material Sapphire = new Material(Ref.ID, "sapphire", 0x6464c8, GEM_V).asGemBasic(false, ORE).addTools(3.0F, 7.0F, 1024, 3).addArmor(new int[]{1, 1, 2, 1}, 1.0F, 0.0F, 30).mats(of(Aluminium, 2, Oxygen, 3));
     public static Material Sodalite = new Material(Ref.ID, "sodalite", 0x1414ff, LAPIS).asDust(ORE).mats(of(Aluminium, 3, Silicon, 3, Sodium, 4, Chlorine, 1)).setOreMulti(6).harvestLevel(2);
     //public static Material Glass = new Material(Ref.ID, "glass", 0xfafafa, SHINY).asDust(PLATE, LENS).mats(of(SiliconDioxide, 1));
     public static Material Olivine = new Material(Ref.ID, "olivine", 0x96ff96, RUBY).asGemBasic(false, ORE).mats(of(Magnesium, 2, Iron, 1, Silicon, 1, Oxygen, 4)).harvestLevel(3);
@@ -216,15 +220,15 @@ public class Materials {
     public static Material Bronze = new Material(Ref.ID, "bronze", 0xff8000, METALLIC).asMetal(1125, 0,  PLATE, ROD, GEAR, HULL, TURBINE_BLADE, TURBINE_ROTOR).mats(of(Tin, 1, Copper, 3)).addTools(2.0F, 6.0F, 350, 2,  of(Enchantments.SHARPNESS, 1)).addArmor(new int[]{1, 1, 2, 1}, 0.0F, 0.0F, 15);
     public static Material Cupronickel = new Material(Ref.ID, "cupronickel", 0xe39680, METALLIC).asMetal(1728, 0, PLATE).mats(of(Copper, 1, Nickel, 1));
     public static Material Electrum = new Material(Ref.ID, "electrum", 0xffff64, SHINY).asMetal(1330, 0, PLATE, ROD).mats(of(Silver, 1, Gold, 1));
-    public static Material Invar = new Material(Ref.ID, "invar", 0xb4b478, METALLIC).asMetal(1700, 0,  PLATE, ROD).mats(of(Iron, 2, Nickel, 1)).addTools(Iron, of(Enchantments.BANE_OF_ARTHROPODS, 3));
+    public static Material Invar = new Material(Ref.ID, "invar", 0xb4b478, METALLIC).asMetal(1700, 0,  PLATE, ROD).mats(of(Iron, 2, Nickel, 1)).addTools(Iron, of(Enchantments.BANE_OF_ARTHROPODS, 3)).addArmor(new int[]{0, 0, 0,0}, 0.0F, 0.0F, 15, of(Enchantments.PROJECTILE_PROTECTION, 1));
     public static Material Kanthal = new Material(Ref.ID, "kanthal", 0xc2d2df, METALLIC).asMetal(1800, 2200,  PLATE, ROD).mats(of(Iron, 1, Aluminium, 1, Chrome, 1));
     public static Material Magnalium = new Material(Ref.ID, "magnalium", 0xc8beff, DULL).asMetal(870, 0,  PLATE, ROD, TURBINE_BLADE, TURBINE_ROTOR).mats(of(Magnesium, 1, Aluminium, 2));
     public static Material Nichrome = new Material(Ref.ID, "nichrome", 0xcdcef6, METALLIC).asMetal(2700, 2500).mats(of(Nickel, 4, Chrome, 1));
     public static Material SolderingAlloy = new Material(Ref.ID, "soldering_alloy", 0xdcdce6, DULL).asMetal(400, 400, PLATE, ROD).mats(of(Tin, 9, Antimony, 1));
-    public static Material Steel = new Material(Ref.ID, "steel", 0x808080, METALLIC).asMetal(1811, 1500, PLATE, ROD, GEAR, HULL, TURBINE_BLADE, TURBINE_ROTOR).addTools(2.5F, 6.0F, 512, 2,  of(Enchantments.SHARPNESS, 2)).mats(of(Iron, 50, Carbon, 1));
-    public static Material StainlessSteel = new Material(Ref.ID, "stainless_steel", 0xc8c8dc, SHINY).asMetal(1700, 1700, PLATE, ROD, GEAR, HULL).mats(of(Iron, 6, Chrome, 1, Manganese, 1, Nickel, 1)).addTools(2.5F, 7.0F, 480, 2, of(Enchantments.SHARPNESS, 3));
-    public static Material WroughtIron = new Material(Ref.ID, "wrought_iron", 0xc8b4b4, METALLIC).asMetal(1811, 0, PLATE, ROD, GEAR, HULL).mats(of(Iron, 1)).addTools(IRON.getAttackDamage(), IRON.getEfficiency(), (int)(IRON.getMaxUses() * 1.5F), IRON.getHarvestLevel(),  of(Enchantments.SHARPNESS, 2));
-    public static Material TungstenSteel = new Material(Ref.ID, "tungstensteel", 0x6464a0, METALLIC).asMetal(3000, 3000, PLATE, ROD, GEAR, HULL, TURBINE_BLADE, TURBINE_ROTOR).addTools(6.0F, 10.0F, 5120, 4).mats(of(Steel, 1, Tungsten, 1));
+    public static Material Steel = new Material(Ref.ID, "steel", 0x808080, METALLIC).asMetal(1811, 1500, PLATE, ROD, GEAR, HULL, TURBINE_BLADE, TURBINE_ROTOR).addTools(2.5F, 6.0F, 512, 2,  of(Enchantments.SHARPNESS, 2)).addArmor(new int[]{0, 1, 1, 0}, 1.0F, 0.0F, 21, of(Enchantments.PROTECTION, 1)).mats(of(Iron, 50, Carbon, 1));
+    public static Material StainlessSteel = new Material(Ref.ID, "stainless_steel", 0xc8c8dc, SHINY).asMetal(1700, 1700, PLATE, ROD, GEAR, HULL).mats(of(Iron, 6, Chrome, 1, Manganese, 1, Nickel, 1)).addTools(2.5F, 7.0F, 480, 2, of(Enchantments.SHARPNESS, 3)).addArmor(new int[]{0, 1, 1, 0}, 2.0F, 0.0F, 20, of(Enchantments.PROTECTION, 2));
+    public static Material WroughtIron = new Material(Ref.ID, "wrought_iron", 0xc8b4b4, METALLIC).asMetal(1811, 0, PLATE, ROD, GEAR, HULL).mats(of(Iron, 1)).addTools(IRON.getAttackDamage(), IRON.getEfficiency(), (int)(IRON.getMaxUses() * 1.5F), IRON.getHarvestLevel(),  of(Enchantments.SHARPNESS, 2)).addArmor(new int[]{0, 0, 0, 0}, 1.0F, 0.0F, 17, of(Enchantments.PROTECTION, 1));
+    public static Material TungstenSteel = new Material(Ref.ID, "tungstensteel", 0x6464a0, METALLIC).asMetal(3000, 3000, PLATE, ROD, GEAR, HULL, TURBINE_BLADE, TURBINE_ROTOR).addTools(6.0F, 10.0F, 5120, 4).mats(of(Steel, 1, Tungsten, 1)).addArmor(new int[]{1, 2, 3, 1}, 3.0F, 0.0F, 18, of(Enchantments.PROTECTION, 3));
     public static Material TungstenCarbide = new Material(Ref.ID, "tungsten_carbide", 0x330066, METALLIC).asMetal(2460, 2460).addTools(5.0F, 14.0F, 2560, 4, of(Enchantments.SHARPNESS, 5)).mats(of(Tungsten, 1, Carbon, 1));
     public static Material RedAlloy = new Material(Ref.ID, "red_alloy", 0xc80000, DULL).asMetal(295, 0, PLATE, ROD).mats(of(Copper, 1, Redstone, 4));
     public static Material Osmiridium = new Material(Ref.ID, "osmiridium", 0x6464ff, METALLIC).asMetal(3333, 3300,  PLATE, ROD, TURBINE_BLADE, TURBINE_ROTOR).mats(of(Iridium, 1, Osmium, 1));
@@ -259,10 +263,12 @@ public class Materials {
     public static Material HighPressure = new Material(Ref.ID, "high_pressure", 0xc80000, NONE);
     public static Material HighCapacity = new Material(Ref.ID, "high_capacity", 0xb00b69, NONE);
     public static Material PlasmaContainment = new Material(Ref.ID, "plasma_containment", 0xffff00, NONE);
-    public static Material Quartz = new Material(Ref.ID, "quartz", 0xffffff, NONE);
+    public static Material Quartz = new Material(Ref.ID, "quartz", 0xffffff, NONE).asDust();
 
     /** VANILLA **/
-    public static Material Netherite = new Material(Ref.ID, "netherite", 0x2D2425, ROUGH).asSolid(PLATE, ROD);
+    public static Material Netherite = new Material(Ref.ID, "netherite", 0x504650, DULL).asMetal(2246,1300, PLATE, ROD).addTools(3.0F, 10, 500, NETHERITE.getHarvestLevel(), of(Enchantments.FIRE_ASPECT, 3));
+    public static Material NetherizedDiamond = new Material(Ref.ID, "netherized_diamond", 0x5a505a, DIAMOND).asGemBasic(false).addTools(4.0F, 12, NETHERITE.getMaxUses(), NETHERITE.getHarvestLevel(), of(Enchantments.FIRE_ASPECT, 3, Enchantments.SHARPNESS, 4));
+    public static Material NetheriteScrap = new Material(Ref.ID, "netherite_scrap", 0x6e505a, ROUGH).asDust(CRUSHED, CRUSHED_PURIFIED, CRUSHED_CENTRIFUGED, DUST_IMPURE, DUST_PURE);
 
     static {
         /*ELEC.add(Methane, CarbonDioxide, NitrogenDioxide, Toluene, VinylChloride, SulfurDioxide, SulfurTrioxide, Dimethylamine, DinitrogenTetroxide, NitricOxide, Ammonia, Chloromethane, Tetrafluoroethylene, CarbonMonoxide, Ethylene, Propane, Ethenone, Ethanol, Glyceryl, SodiumPersulfate, Dichlorobenzene, Styrene, Isoprene, Tetranitromethane, Epichlorohydrin, NitricAcid, Dimethylhydrazine, Chloramine, Dimethyldichlorosilane, HydrofluoricAcid, Chloroform, BisphenolA, AceticAcid, Acetone, Methanol, VinylAcetate, MethylAcetate, AllylChloride, HypochlorousAcid, Cumene, PhosphoricAcid, SulfuricAcid, Benzene, Phenol, Glycerol, SodiumSulfide, Almandine, Andradite, BandedIron, Calcite, Cassiterite, Chalcopyrite, Cobaltite, Galena, Garnierite, Grossular, Bauxite, Magnesite, Magnetite, Molybdenite, Obsidian, Phosphate, Polydimethylsiloxane, Pyrite, Pyrolusite, Pyrope, RockSalt, Saltpeter, SiliconDioxide, Massicot, ArsenicTrioxide, CobaltOxide, Magnesia, Quicklime, Potash, SodaAsh, PhosphorousPentoxide, SodiumHydroxide, Spessartine, Sphalerite, Uvarovite, PotassiumFeldspar, Biotite, RedGranite, Bastnasite, Pentlandite, Spodumene, Glauconite, Bentonite, Malachite, Barite, Talc, AntimonyTrioxide, CupricOxide, Ferrosilite, Quartzite, Charcoal, Coal, Lignite, Diamond, Emerald, Ruby, Sapphire, Tanzanite, Topaz, Olivine, Opal, Amethyst, EnderPearl, StainlessSteel, Steel, Ultimet, IronMagnetic, SteelMagnetic, NeodymiumMagnetic, Osmiridium);
@@ -288,9 +294,11 @@ public class Materials {
         NUGGET.forceOverride(Gold, Items.GOLD_NUGGET);
         INGOT.forceOverride(Iron, Items.IRON_INGOT);
         INGOT.forceOverride(Gold, Items.GOLD_INGOT);
+        INGOT.forceOverride(Netherite, Items.NETHERITE_INGOT);
         DUST.forceOverride(Redstone, Items.REDSTONE);
         DUST.forceOverride(Glowstone, Items.GLOWSTONE_DUST);
         DUST.forceOverride(Blaze, Items.BLAZE_POWDER);
+        GEM.forceOverride(Flint, Items.FLINT);
 
         ROD.forceOverride(Blaze, Items.BLAZE_ROD);
         ROD.forceOverride(Wood, Items.STICK);
@@ -304,6 +312,8 @@ public class Materials {
         //TungstenSteel.remove(BOLT, SCREW);
         //Titanium.remove(BOLT, SCREW);
         Tungsten.remove(BOLT, SCREW);
+        Netherite.remove(BOLT, SCREW);
+        NetherizedDiamond.remove(BOLT, SCREW);
         Invar.remove(BOLT, SCREW);
         WroughtIron.remove(BOLT, SCREW);
         TungstenCarbide.remove(BOLT, SCREW);
@@ -368,6 +378,7 @@ public class Materials {
         Lapis.addByProduct(Lazurite, Sodalite, Pyrite);
         Diamond.addByProduct(Carbon/*Graphite*/);
         Platinum.addByProduct(Nickel, Iridium);
+        NetheriteScrap.addByProduct(Quartz);
 
         //ore byproducts from non vanilla/gt4r ores
         Nickel.addByProduct(Iron, Platinum);

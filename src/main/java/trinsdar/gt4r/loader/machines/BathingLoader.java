@@ -7,10 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 
-import static muramasa.antimatter.Data.CRUSHED;
-import static muramasa.antimatter.Data.CRUSHED_PURIFIED;
-import static muramasa.antimatter.Data.DUST;
-import static muramasa.antimatter.Data.Stone;
+import static muramasa.antimatter.Data.*;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.BATHING;
 
@@ -34,6 +31,7 @@ public class BathingLoader {
         BATHING.RB().ii(RecipeIngredient.of(DUST.getMaterialTag(Wood), 1)).fi(Water.getLiquid(100)).io(new ItemStack(Items.PAPER)).chances(100).add(200);
         BATHING.RB().ii(RecipeIngredient.of(Items.SUGAR_CANE, 1)).fi(Water.getLiquid(100)).io(new ItemStack(Items.PAPER)).chances(100).add(100);
         BATHING.RB().ii(RecipeIngredient.of(TagUtils.getItemTag(new ResourceLocation("minecraft", "wool")), 1)).fi(Chlorine.getGas(125)).io(new ItemStack(Items.WHITE_WOOL)).chances(100).add(12);
+        BATHING.RB().ii(GEM.getMaterialIngredient(Diamond, 1)).fi(Netherite.getLiquid(36)).io(GEM.get(NetherizedDiamond, 1)).add(144);
     }
 
     private static int[] i(int... ints){

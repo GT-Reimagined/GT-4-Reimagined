@@ -44,6 +44,9 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.getOrCreateBuilder(DUSTS_LAPIS_LAZ).addTag(getTag("dusts/lapis")).addTag(getTag("dusts/lazurite"));
         this.getOrCreateBuilder(GEM.getMaterialTag(Flint)).add(Items.FLINT);
         this.getOrCreateBuilder(DUST.getMaterialTag(Blaze)).add(Items.BLAZE_POWDER);
+        this.getOrCreateBuilder(BATTERIES_SMALL).add(BatterySmallSodium, BatterySmallCadmium, BatterySmallLithium);
+        this.getOrCreateBuilder(BATTERIES_MEDIUM).add(BatteryMediumSodium, BatteryMediumCadmium, BatteryMediumLithium);
+        this.getOrCreateBuilder(BATTERIES_LARGE).add(BatteryLargeSodium, BatteryLargeCadmium, BatteryLargeLithium, EnergyCrystal);
 
     }
 
