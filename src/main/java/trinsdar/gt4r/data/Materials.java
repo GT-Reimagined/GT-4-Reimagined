@@ -65,7 +65,7 @@ public class Materials {
     public static Material Chrome = new Material(Ref.ID, "chrome", 0xffe6e6, SHINY, Cr).asMetal(2180, 1700, PLATE);
     public static Material Gold = new Material(Ref.ID, "gold", 0xffe650, SHINY, Au).asMetal(1337, 0, ROD, GEAR, ORE,  PLATE, ROD).harvestLevel(2);
     public static Material Iridium = new Material(Ref.ID, "iridium", 0xf0f0f5, DULL, Ir).asMetal(2719, 3000, PLATE, ORE).harvestLevel(3);
-    public static Material Iron = new Material(Ref.ID, "iron", 0xc8c8c8, METALLIC, Fe).asMetal(1811, 500, ORE, PLATE, ROD).asPlasma().addTools(IRON.getAttackDamage(), IRON.getEfficiency(), IRON.getMaxUses(), IRON.getHarvestLevel(),  of(Enchantments.SHARPNESS, 1)).addArmor(new int[]{0,0,0,0}, 0.0F, 0.0F, 15);
+    public static Material Iron = new Material(Ref.ID, "iron", 0xc8c8c8, METALLIC, Fe).asMetal(1811, 500, ORE, PLATE, ROD).asPlasma().addTools(IRON.getAttackDamage(), IRON.getEfficiency(), IRON.getMaxUses(), IRON.getHarvestLevel(),  of(Enchantments.SHARPNESS, 1));
     public static Material Lead = new Material(Ref.ID, "lead", 0x8c648c, DULL, Pb).asMetal(600, 0, PLATE, PLATE_DENSE, ROD).harvestLevel(2);
     public static Material Manganese = new Material(Ref.ID, "manganese", 0xfafafa, DULL, Mn).asMetal(1519, 0);
     public static Material Nickel = new Material(Ref.ID, "nickel", 0xc8c8fa, METALLIC, Ni).asMetal(1728, 0, PLATE).asPlasma();
@@ -220,7 +220,7 @@ public class Materials {
     public static Material Bronze = new Material(Ref.ID, "bronze", 0xff8000, METALLIC).asMetal(1125, 0,  PLATE, ROD, GEAR, HULL, TURBINE_BLADE, TURBINE_ROTOR).mats(of(Tin, 1, Copper, 3)).addTools(2.0F, 6.0F, 350, 2,  of(Enchantments.SHARPNESS, 1)).addArmor(new int[]{1, 1, 2, 1}, 0.0F, 0.0F, 15);
     public static Material Cupronickel = new Material(Ref.ID, "cupronickel", 0xe39680, METALLIC).asMetal(1728, 0, PLATE).mats(of(Copper, 1, Nickel, 1));
     public static Material Electrum = new Material(Ref.ID, "electrum", 0xffff64, SHINY).asMetal(1330, 0, PLATE, ROD).mats(of(Silver, 1, Gold, 1));
-    public static Material Invar = new Material(Ref.ID, "invar", 0xb4b478, METALLIC).asMetal(1700, 0,  PLATE, ROD).mats(of(Iron, 2, Nickel, 1)).addTools(Iron, of(Enchantments.BANE_OF_ARTHROPODS, 3));
+    public static Material Invar = new Material(Ref.ID, "invar", 0xb4b478, METALLIC).asMetal(1700, 0,  PLATE, ROD).mats(of(Iron, 2, Nickel, 1)).addTools(Iron, of(Enchantments.BANE_OF_ARTHROPODS, 3)).addArmor(new int[]{0, 0, 0,0}, 0.0F, 0.0F, 15, of(Enchantments.PROJECTILE_PROTECTION, 1));
     public static Material Kanthal = new Material(Ref.ID, "kanthal", 0xc2d2df, METALLIC).asMetal(1800, 2200,  PLATE, ROD).mats(of(Iron, 1, Aluminium, 1, Chrome, 1));
     public static Material Magnalium = new Material(Ref.ID, "magnalium", 0xc8beff, DULL).asMetal(870, 0,  PLATE, ROD, TURBINE_BLADE, TURBINE_ROTOR).mats(of(Magnesium, 1, Aluminium, 2));
     public static Material Nichrome = new Material(Ref.ID, "nichrome", 0xcdcef6, METALLIC).asMetal(2700, 2500).mats(of(Nickel, 4, Chrome, 1));

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XHX",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "tag": "forge:plates/iron"
+    },
+    "H": {
+      "tag": "antimatter:hammer"
+    }
+  },
+  "result": {
+    "item": "minecraft:iron_chestplate"
+  }
+}

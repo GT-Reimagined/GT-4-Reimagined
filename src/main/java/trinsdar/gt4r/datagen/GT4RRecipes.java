@@ -77,7 +77,10 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
 
     @Override
     public void registerRecipes(Consumer<IFinishedRecipe> consumer) {
-        super.registerRecipes(consumer);
+        //super.registerRecipes(consumer);
+        registerToolRecipes(consumer, providerDomain);
+        registerPipeRecipes(consumer, providerDomain);
+        craftingLoaders.forEach(cl -> cl.loadRecipes(consumer,this));
         registerMaterialRecipes(consumer, this.providerDomain);
         addConditionalRecipe(consumer, getStackRecipe("", "has_sulfur_dust", criterion(getForgeItemTag("dusts/sulfur"), this),
                 new ItemStack(Blocks.TORCH, 6), of('D', getForgeItemTag("dusts/sulfur"), 'R', Tags.Items.RODS_WOODEN), "D", "R"), Ref.class, "sulfurTorch", Ref.ID, "sulfur_torch");
@@ -156,6 +159,7 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
         });
     }
 
+    @Override
     protected void registerToolRecipes(Consumer<IFinishedRecipe> consumer, String providerDomain) {
         //Temp override till bug in new recipe system gets fixed
         List<Material> mainMats = AntimatterAPI.all(Material.class, providerDomain).stream().filter(m -> (m.getDomain().equals(providerDomain) && m.has(TOOLS))).collect(Collectors.toList());
@@ -170,10 +174,10 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
         }));
 
         armorMats.forEach(armor -> {
-            if (!armor.has(INGOT) && !armor.has(GEM)) return; // TODO: For time being
+            if (!armor.has(PLATE) && !armor.has(GEM)) return; // TODO: For time being
             final ITag<Item> inputTag;
-            if (armor.has(INGOT)){
-                inputTag = INGOT.getMaterialTag(armor);
+            if (armor.has(PLATE)){
+                inputTag = PLATE.getMaterialTag(armor);
             } else {
                 inputTag = GEM.getMaterialTag(armor);
             }
