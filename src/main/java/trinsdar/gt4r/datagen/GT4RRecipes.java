@@ -1,26 +1,22 @@
 package trinsdar.gt4r.datagen;
 
-import com.google.common.collect.ImmutableMap;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.material.Material;
-import muramasa.antimatter.material.MaterialTag;
 import muramasa.antimatter.ore.BlockOre;
-import muramasa.antimatter.pipe.PipeSize;
-import muramasa.antimatter.pipe.types.FluidPipe;
-import muramasa.antimatter.pipe.types.ItemPipe;
-import muramasa.antimatter.pipe.types.PipeType;
-import muramasa.antimatter.recipe.ingredient.PropertyIngredient;
 import muramasa.antimatter.tool.IAntimatterTool;
 import muramasa.antimatter.util.TagUtils;
-import net.minecraft.advancements.ICriterionInstance;
+import net.minecraft.block.Blocks;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.data.ShapelessRecipeBuilder;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ITag;
+import net.minecraftforge.common.Tags;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.loader.MaterialRecipeLoader;
@@ -29,33 +25,20 @@ import trinsdar.gt4r.loader.crafting.MachineCrafting;
 import trinsdar.gt4r.loader.crafting.Parts;
 import trinsdar.gt4r.loader.crafting.ToolCrafting;
 import trinsdar.gt4r.loader.crafting.ToolCraftingTableRecipes;
-import net.minecraft.block.Blocks;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.Tags;
 import trinsdar.gt4r.loader.machines.FurnaceLoader;
 
-import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 import static com.google.common.collect.ImmutableMap.of;
 import static muramasa.antimatter.Data.*;
-import static muramasa.antimatter.material.MaterialTag.FLUIDPIPE;
 import static muramasa.antimatter.material.MaterialTag.GRINDABLE;
-import static muramasa.antimatter.material.MaterialTag.RUBBERTOOLS;
 import static muramasa.antimatter.util.TagUtils.getForgeItemTag;
 import static muramasa.antimatter.util.TagUtils.nc;
 import static muramasa.antimatter.util.Utils.getConventionalMaterialType;
 import static muramasa.antimatter.util.Utils.getConventionalStoneType;
-import static trinsdar.gt4r.data.GT4RData.*;
-import static trinsdar.gt4r.data.Materials.StainlessSteel;
-import static trinsdar.gt4r.data.Materials.Titanium;
-import static trinsdar.gt4r.data.Materials.TungstenSteel;
+import static trinsdar.gt4r.data.Materials.Steel;
 import static trinsdar.gt4r.loader.crafting.CraftingHelper.criterion;
-import static trinsdar.gt4r.loader.crafting.CraftingHelper.of2;
 
 public class GT4RRecipes extends AntimatterRecipeProvider {
 
@@ -77,41 +60,25 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
 
     @Override
     public void registerRecipes(Consumer<IFinishedRecipe> consumer) {
-        //super.registerRecipes(consumer);
-        registerToolRecipes(consumer, providerDomain);
+        super.registerRecipes(consumer);
+        /*registerToolRecipes(consumer, providerDomain);
         registerPipeRecipes(consumer, providerDomain);
-        craftingLoaders.forEach(cl -> cl.loadRecipes(consumer,this));
+        craftingLoaders.forEach(cl -> cl.loadRecipes(consumer,this));*/
         registerMaterialRecipes(consumer, this.providerDomain);
         addConditionalRecipe(consumer, getStackRecipe("", "has_sulfur_dust", criterion(getForgeItemTag("dusts/sulfur"), this),
                 new ItemStack(Blocks.TORCH, 6), of('D', getForgeItemTag("dusts/sulfur"), 'R', Tags.Items.RODS_WOODEN), "D", "R"), Ref.class, "sulfurTorch", Ref.ID, "sulfur_torch");
-
-
-
-
+        addItemRecipe(consumer, Ref.ID, "chainmail_helmet", "chainmail_armor", "has_hammer", hasSafeItem(HAMMER.getTag()),
+                Items.CHAINMAIL_HELMET, of('R', RING.getMaterialTag(Steel), 'H', HAMMER.getTag()), "RRR", "RHR");
+        addItemRecipe(consumer, Ref.ID, "chainmail_chestplate", "chainmail_armor", "has_hammer", hasSafeItem(HAMMER.getTag()),
+                Items.CHAINMAIL_CHESTPLATE, of('R', RING.getMaterialTag(Steel), 'H', HAMMER.getTag()), "RHR", "RRR", "RRR");
+        addItemRecipe(consumer, Ref.ID, "chainmail_leggings", "chainmail_armor", "has_hammer", hasSafeItem(HAMMER.getTag()),
+                Items.CHAINMAIL_LEGGINGS, of('R', RING.getMaterialTag(Steel), 'H', HAMMER.getTag()), "RRR", "RHR", "R R");
+        addItemRecipe(consumer, Ref.ID, "chainmail_boots", "chainmail_armor", "has_hammer", hasSafeItem(HAMMER.getTag()),
+                Items.CHAINMAIL_BOOTS, of('R', RING.getMaterialTag(Steel), 'H', HAMMER.getTag()), "R R", "RHR");
+        addItemRecipe(consumer, Ref.ID, "saddle", "", "has_leather", hasSafeItem(Items.LEATHER), Items.SADDLE,
+                of('L', Items.LEATHER, 'R', RING.getMaterialTag(Steel), 'S', SCREW.getMaterialTag(Steel)), "LLL", "LSL", "R R");
         addItemRecipe(consumer,  Ref.ID,"sticky_piston_from_resin", "", "has_piston", criterion(Blocks.PISTON, this), Blocks.STICKY_PISTON, of('S', GT4RData.StickyResin, 'P', Blocks.PISTON), "S", "P");
         shapeless(consumer, "gravel_to_flint", "mortar_recipes", "has_mortar", hasSafeItem(MORTAR.getTag()), new ItemStack(Items.FLINT), MORTAR.getTag(), Items.GRAVEL);
-    }
-
-    @Override
-    protected void registerPipeRecipes(Consumer<IFinishedRecipe> consumer, String providerDomain) {
-        if (providerDomain.equals(muramasa.antimatter.Ref.ID)) {
-            final ICriterionInstance in = this.hasSafeItem(WRENCH.getTag());
-            final Map<Class, MaterialTag> tags = ImmutableMap.of(ItemPipe.class, MaterialTag.ITEMPIPE, FluidPipe.class, FLUIDPIPE);
-            for (Map.Entry<Class<? extends PipeType>, String> c : ImmutableMap.of(ItemPipe.class, "item", FluidPipe.class, "fluid").entrySet()) {
-                List<ItemStack> stacks = AntimatterAPI.all(c.getKey()).stream().filter(t -> t.getSizes().contains(PipeSize.TINY)).filter(t -> t.getMaterial().has(PLATE)).map(t -> new ItemStack(t.getBlock(PipeSize.TINY), 6)).collect(Collectors.toList());
-                if (stacks.size() > 0) addToolRecipe(GT4RData.PIPE_BUILDER.apply(c.getValue(), PipeSize.TINY, c.getKey()),  consumer, muramasa.antimatter.Ref.ID, "pipe_"+c.getValue()+ "_" + PipeSize.TINY.getId(), "antimatter_pipes",
-                        "has_wrench", in, stacks, of('H', HAMMER.getTag(), 'W', WRENCH.getTag(), 'P', PropertyIngredient.builder("primary").types(PLATE).tags(tags.get(c.getKey())).build()), "PPP", "H W", "PPP");
-                stacks = AntimatterAPI.all(c.getKey()).stream().filter(t -> t.getSizes().contains(PipeSize.SMALL)).filter(t -> t.getMaterial().has(PLATE)).map(t -> new ItemStack(t.getBlock(PipeSize.SMALL), 6)).collect(Collectors.toList());
-                if (stacks.size() > 0) addToolRecipe(GT4RData.PIPE_BUILDER.apply(c.getValue(), PipeSize.SMALL, c.getKey()),  consumer, muramasa.antimatter.Ref.ID, "pipe_"+c.getValue()+ "_" + PipeSize.SMALL.getId(), "antimatter_pipes",
-                        "has_wrench", in, stacks, of('H', HAMMER.getTag(), 'W', WRENCH.getTag(), 'P', PropertyIngredient.builder("primary").types(PLATE).tags(tags.get(c.getKey())).build()), "PWP", "P P", "PHP");
-                stacks = AntimatterAPI.all(c.getKey()).stream().filter(t -> t.getSizes().contains(PipeSize.NORMAL)).filter(t -> t.getMaterial().has(PLATE)).map(t -> new ItemStack(t.getBlock(PipeSize.NORMAL), 2)).collect(Collectors.toList());
-                if (stacks.size() > 0) addToolRecipe(GT4RData.PIPE_BUILDER.apply(c.getValue(), PipeSize.NORMAL, c.getKey()),  consumer, muramasa.antimatter.Ref.ID, "pipe_"+c.getValue()+ "_" + PipeSize.NORMAL.getId(), "antimatter_pipes",
-                        "has_wrench", in, stacks, of('H', HAMMER.getTag(), 'W', WRENCH.getTag(), 'P', PropertyIngredient.builder("primary").types(PLATE).tags(tags.get(c.getKey())).build()), "PPP", "W H", "PPP");
-                stacks = AntimatterAPI.all(c.getKey()).stream().filter(t -> t.getSizes().contains(PipeSize.LARGE)).filter(t -> t.getMaterial().has(PLATE)).map(t -> new ItemStack(t.getBlock(PipeSize.LARGE), 6)).collect(Collectors.toList());
-                if (stacks.size() > 0) addToolRecipe(GT4RData.PIPE_BUILDER.apply(c.getValue(), PipeSize.LARGE, c.getKey()),  consumer, muramasa.antimatter.Ref.ID, "pipe_"+c.getValue()+ "_" + PipeSize.LARGE.getId(), "antimatter_pipes",
-                        "has_wrench", in, stacks, of('H', HAMMER.getTag(), 'W', WRENCH.getTag(), 'P', PropertyIngredient.builder("primary").types(PLATE).tags(tags.get(c.getKey())).build()), "PHP", "P P", "PWP");
-            }
-        }
     }
 
     @Override
@@ -161,8 +128,9 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
 
     @Override
     protected void registerToolRecipes(Consumer<IFinishedRecipe> consumer, String providerDomain) {
+        super.registerToolRecipes(consumer, providerDomain);
         //Temp override till bug in new recipe system gets fixed
-        List<Material> mainMats = AntimatterAPI.all(Material.class, providerDomain).stream().filter(m -> (m.getDomain().equals(providerDomain) && m.has(TOOLS))).collect(Collectors.toList());
+        /*List<Material> mainMats = AntimatterAPI.all(Material.class, providerDomain).stream().filter(m -> (m.getDomain().equals(providerDomain) && m.has(TOOLS))).collect(Collectors.toList());
         List<Material> armorMats = AntimatterAPI.all(Material.class, providerDomain).stream().filter(m -> (m.getDomain().equals(providerDomain) && m.has(ARMOR))).collect(Collectors.toList());
         List<Material> handleMats = AntimatterAPI.all(Material.class).stream().filter(m -> (m.getDomain().equals(providerDomain) && m.isHandle())).collect(Collectors.toList());
 
@@ -283,7 +251,7 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
                     }
                 }
             }
-        });
+        });*/
 
         /*super.registerToolRecipes(consumer, providerDomain);
         List<Material> mainMats = AntimatterAPI.all(Material.class, providerDomain).stream().filter(m -> (m.getDomain().equals(providerDomain) && m.has(TOOLS))).collect(Collectors.toList());

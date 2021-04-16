@@ -55,6 +55,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.item.Item;
 
 import javax.annotation.Nonnull;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -66,71 +67,42 @@ public class GT4RData {
 
     private static final boolean HC = AntimatterConfig.GAMEPLAY.HARDCORE_CABLES;
 
-    public static final Data.TriFunction<String, PipeSize, Class<? extends PipeType>, MaterialRecipe.ItemBuilder> PIPE_BUILDER = (id, size, pipe)  -> {
-        MaterialRecipe.ItemBuilder builder = AntimatterAPI.get(MaterialRecipe.ItemBuilder.class,  id + "_" + size.getId());
-        return builder != null ? builder : new MaterialRecipe.ItemBuilder() {
-            @Override
-            public String getId() {
-                return id + "_" + size.getId();
-            }
+    public static final MaterialRecipe.Provider POWERED_TOOL_BUILDER = MaterialRecipe.registerProvider("powered_tool", id -> new MaterialRecipe.ItemBuilder() {
 
-            @Override
-            public ItemStack build(CraftingInventory inv, MaterialRecipe.Result mats) {
-                Material mat = (Material) mats.mats.get("primary");
-                PipeType p = AntimatterAPI.get(pipe, id + "_" + mat.getId());
-                int amount = size == PipeSize.TINY ? 12 : size == PipeSize.SMALL ? 6 : size == PipeSize.NORMAL ? 2 : 1;
-                return new ItemStack(p.getBlock(size));
-            }
+        @Override
+        public ItemStack build(CraftingInventory inv, MaterialRecipe.Result mats) {
+            Material m = id.contains("jackhammer") ? NULL : id.contains("lv") ? StainlessSteel : id.contains("mv") ? Titanium : id.contains("hv") ? TungstenSteel : NULL;
+            Tuple<Long, Long> battery = (Tuple<Long, Long>) mats.mats.get("battery");
+            IAntimatterTool type = AntimatterAPI.get(IAntimatterTool.class, id);
+            return resolveStack(type, (Material) mats.mats.get("primary"), m, battery.getA(), battery.getB());
+        }
 
-            @Override
-            public Map<String, Object> getFromResult(@Nonnull ItemStack stack) {
-                return ImmutableMap.of("primary",((PipeItemBlock)stack.getItem()).getPipe().getType().getMaterial());
+        public ItemStack resolveStack(IAntimatterTool tool, Material primary, Material secondary, long startingEnergy, long maxEnergy) {
+            if (tool == null){
+                return ItemStack.EMPTY;
             }
-        };
-    };
-
-    public static final Function<String, MaterialRecipe.ItemBuilder> POWERED_TOOL_BUILDER = id -> {
-        MaterialRecipe.ItemBuilder builder = AntimatterAPI.get(MaterialRecipe.ItemBuilder.class, id);
-
-        return builder != null ? builder : new MaterialRecipe.ItemBuilder() {
-            @Override
-            public String getId() {
-                return id;
+            ItemStack stack = new ItemStack(tool.getItem());
+            tool.validateTag(stack, primary, secondary, startingEnergy, maxEnergy);
+            Map<Enchantment, Integer> mainEnchants = primary.getEnchantments();
+            if (!mainEnchants.isEmpty()) {
+                mainEnchants.entrySet().stream().filter(e -> e.getKey().canApply(stack)).forEach(e -> stack.addEnchantment(e.getKey(), e.getValue()));
             }
+            return stack;
+        }
 
-            @Override
-            public ItemStack build(CraftingInventory inv, MaterialRecipe.Result mats) {
-                Material m = id.contains("jackhammer") ? NULL : id.contains("lv") ? StainlessSteel : id.contains("mv") ? Titanium : id.contains("hv") ? TungstenSteel : NULL;
-                Tuple<Long, Long> battery = (Tuple<Long, Long>) mats.mats.get("battery");
-                IAntimatterTool type = AntimatterAPI.get(IAntimatterTool.class, id);
-                return resolveStack(type, (Material) mats.mats.get("primary"), m, battery.getA(), battery.getB());
-            }
-
-            public ItemStack resolveStack(IAntimatterTool tool, Material primary, Material secondary, long startingEnergy, long maxEnergy) {
-                if (tool == null){
-                    return ItemStack.EMPTY;
-                }
-                ItemStack stack = new ItemStack(tool.getItem());
-                tool.validateTag(stack, primary, secondary, startingEnergy, maxEnergy);
-                Map<Enchantment, Integer> mainEnchants = primary.getEnchantments();
-                if (!mainEnchants.isEmpty()) {
-                    mainEnchants.entrySet().stream().filter(e -> e.getKey().canApply(stack)).forEach(e -> stack.addEnchantment(e.getKey(), e.getValue()));
-                }
-                return stack;
-            }
-
-            @Override
-            public Map<String, Object> getFromResult(@Nonnull ItemStack stack) {
-                CompoundNBT nbt = stack.getTag().getCompound(muramasa.antimatter.Ref.TAG_TOOL_DATA);
-                Material primary = AntimatterAPI.get(Material.class, nbt.getString(muramasa.antimatter.Ref.KEY_TOOL_DATA_PRIMARY_MATERIAL));
-                Material secondary = AntimatterAPI.get(Material.class, nbt.getString(muramasa.antimatter.Ref.KEY_TOOL_DATA_SECONDARY_MATERIAL));
-                return ImmutableMap.of("primary", primary, "secondary", secondary, "energy", getEnergy(stack).getA(), "maxEnergy", getEnergy(stack).getB());
-            }
-        };
-    };
+        @Override
+        public Map<String, Object> getFromResult(@Nonnull ItemStack stack) {
+            CompoundNBT nbt = stack.getTag().getCompound(muramasa.antimatter.Ref.TAG_TOOL_DATA);
+            Material primary = AntimatterAPI.get(Material.class, nbt.getString(muramasa.antimatter.Ref.KEY_TOOL_DATA_PRIMARY_MATERIAL));
+            Material secondary = AntimatterAPI.get(Material.class, nbt.getString(muramasa.antimatter.Ref.KEY_TOOL_DATA_SECONDARY_MATERIAL));
+            return ImmutableMap.of("primary", primary, "secondary", secondary, "energy", getEnergy(stack).getA(), "maxEnergy", getEnergy(stack).getB());
+        }
+    });
 
     static {
         PropertyIngredient.addGetter(CustomTags.BATTERIES_SMALL.getName(), GT4RData::getEnergy);
+        PropertyIngredient.addGetter(CustomTags.BATTERIES_MEDIUM.getName(), GT4RData::getEnergy);
+        PropertyIngredient.addGetter(CustomTags.BATTERIES_LARGE.getName(), GT4RData::getEnergy);
         {
             ImmutableMap.Builder<Integer, RecipeIngredient> builder = ImmutableMap.builder();
             ImmutableMap.Builder<Integer, Item> builderItems = ImmutableMap.builder();
