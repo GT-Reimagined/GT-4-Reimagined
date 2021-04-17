@@ -76,7 +76,11 @@ public class MaterialRecipeLoader {
         });
         BOLT.all().forEach(m -> {
             if (m.has(SCREW)){
-                provider.addItemRecipe(output, Ref.ID, m.getId() + "_screw", "screws", "has_file", provider.hasSafeItem(FILE.getTag()), SCREW.get(m), ImmutableMap.of('F', FILE.getTag(), 'B', BOLT.getMaterialTag(m)), (GT4RConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? new String[]{"FB", "B "} : new String[]{"FB"}));
+                if (GT4RConfig.GAMEPLAY.LOSSY_PART_CRAFTING){
+                    provider.addItemRecipe(output, Ref.ID, m.getId() + "_screw", "screws", "has_file", provider.hasSafeItem(FILE.getTag()), SCREW.get(m), ImmutableMap.of('F', FILE.getTag(), 'B', BOLT.getMaterialTag(m)), "FB", "B ");
+                } else {
+                    provider.shapeless(output, m.getId() + "_screw", "screws", "has_file", provider.hasSafeItem(FILE.getTag()), SCREW.get(m, 1), FILE.getTag(), BOLT.getMaterialTag(m));
+                }
             }
             provider.addStackRecipe(output, Ref.ID, m.getId() + "_bolt", "bolts", "has_saw", provider.hasSafeItem(SAW.getTag()), BOLT.get(m, craftingMultiplier * 2), ImmutableMap.of('S', SAW.getTag(), 'R', ROD.getMaterialTag(m)), "S ", " R");
         });
