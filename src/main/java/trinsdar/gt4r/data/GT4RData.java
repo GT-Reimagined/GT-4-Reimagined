@@ -73,7 +73,7 @@ public class GT4RData {
         public ItemStack build(CraftingInventory inv, MaterialRecipe.Result mats) {
             Material m = id.contains("jackhammer") ? NULL : id.contains("lv") ? StainlessSteel : id.contains("mv") ? Titanium : id.contains("hv") ? TungstenSteel : NULL;
             Tuple<Long, Long> battery = (Tuple<Long, Long>) mats.mats.get("battery");
-            IAntimatterTool type = AntimatterAPI.get(IAntimatterTool.class, id);
+            IAntimatterTool type = AntimatterAPI.get(IAntimatterTool.class, id.replace('-', '_'));
             return resolveStack(type, (Material) mats.mats.get("primary"), m, battery.getA(), battery.getB());
         }
 
@@ -129,7 +129,7 @@ public class GT4RData {
     public static Tuple<Long, Long> getEnergy(ItemStack stack){
         if (stack.getItem() instanceof ItemBattery){
             long energy = stack.getTag() != null ? stack.getTag().getLong(muramasa.antimatter.Ref.KEY_ITEM_ENERGY) : 0;
-            return new Tuple<>(energy, stack.getCapability(TesseractGTCapability.ENERGY_HANDLER_CAPABILITY).orElseGet(null).getCapacity());
+            return new Tuple<>(energy, ((ItemBattery)stack.getItem()).getCapacity());
         }
         if (stack.getItem() instanceof IAntimatterTool){
             IAntimatterTool tool = (IAntimatterTool) stack.getItem();
@@ -283,6 +283,8 @@ public class GT4RData {
     public static ItemBasic<?> MoldNugget = new ItemBasic<>(Ref.ID, "mold_nugget").tip("Mold for making Nuggets");
     public static ItemBasic<?> ShapePlate = new ItemBasic<>(Ref.ID, "shape_plate").tip("Shape for making Plates");
     public static ItemBasic<?> ShapeRod = new ItemBasic<>(Ref.ID, "shape_rod").tip("Shape for making Rods");
+    public static ItemBasic<?> ShapeBolt = new ItemBasic<>(Ref.ID, "shape_bolt").tip("Shape for making Boltss");
+    public static ItemBasic<?> ShapeRing = new ItemBasic<>(Ref.ID, "shape_ring").tip("Shape for making Rings");
     public static ItemBasic<?> ShapeCell = new ItemBasic<>(Ref.ID, "shape_cell").tip("Shape for making Cells");
     public static ItemBasic<?> ShapeIngot = new ItemBasic<>(Ref.ID, "shape_ingot").tip("Shape for making Ingots");
     public static ItemBasic<?> ShapeWire = new ItemBasic<>(Ref.ID, "shape_wire").tip("Shape for making Wires");

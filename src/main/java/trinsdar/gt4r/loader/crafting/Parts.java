@@ -87,6 +87,10 @@ public class Parts {
                 ShapePlate, of('W', WIRE_CUTTER.getTag(), 'P', EmptyShape), "WP");
         provider.addItemRecipe(output, Ref.ID, "rod_shape", "parts", "has_wire_cutter", provider.hasSafeItem(WIRE_CUTTER.getTag()),
                 ShapeRod, of('W', WIRE_CUTTER.getTag(), 'P', EmptyShape), "P ", " W");
+        provider.addItemRecipe(output, Ref.ID, "bolt_shape", "parts", "has_wire_cutter", provider.hasSafeItem(WIRE_CUTTER.getTag()),
+                ShapeBolt, of('W', WIRE_CUTTER.getTag(), 'P', EmptyShape), "W ", " P");
+        provider.addItemRecipe(output, Ref.ID, "ring_shape", "parts", "has_wire_cutter", provider.hasSafeItem(WIRE_CUTTER.getTag()),
+                ShapeRing, of('W', WIRE_CUTTER.getTag(), 'P', EmptyShape), "PW");
         provider.addItemRecipe(output, Ref.ID, "cell_shape", "parts", "has_wire_cutter", provider.hasSafeItem(WIRE_CUTTER.getTag()),
                 ShapeCell, of('W', WIRE_CUTTER.getTag(), 'P', EmptyShape), "W", "P");
         provider.addItemRecipe(output, Ref.ID, "ingot_shape", "parts", "has_wire_cutter", provider.hasSafeItem(WIRE_CUTTER.getTag()),
