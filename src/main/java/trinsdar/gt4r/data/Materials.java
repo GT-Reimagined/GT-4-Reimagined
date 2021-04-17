@@ -266,8 +266,8 @@ public class Materials {
     public static Material Quartz = new Material(Ref.ID, "quartz", 0xffffff, NONE).asDust();
 
     /** VANILLA **/
-    public static Material Netherite = new Material(Ref.ID, "netherite", 0x504650, DULL).asMetal(2246,1300, PLATE, ROD).addTools(3.0F, 10, 500, NETHERITE.getHarvestLevel(), of(Enchantments.FIRE_ASPECT, 3));
-    public static Material NetherizedDiamond = new Material(Ref.ID, "netherized_diamond", 0x5a505a, DIAMOND).asGemBasic(false).addTools(4.0F, 12, NETHERITE.getMaxUses(), NETHERITE.getHarvestLevel(), of(Enchantments.FIRE_ASPECT, 3, Enchantments.SHARPNESS, 4));
+    public static Material Netherite = new Material(Ref.ID, "netherite", 0x504650, DULL).asMetal(2246,1300, PLATE, ROD).addTools(3.0F, 10, 500, NETHERITE.getHarvestLevel(), of(Enchantments.FIRE_ASPECT, 3)).addArmor(new int[]{0, 1, 1, 0}, 0.5F, 0.1F, 20);
+    public static Material NetherizedDiamond = new Material(Ref.ID, "netherized_diamond", 0x5a505a, DIAMOND).asGemBasic(false).addTools(4.0F, 12, NETHERITE.getMaxUses(), NETHERITE.getHarvestLevel(), of(Enchantments.FIRE_ASPECT, 3, Enchantments.SHARPNESS, 4)).addArmor(new int[]{1, 1, 2, 1}, 3.0F, 0.1F, 37, of(Enchantments.PROTECTION, 4));
     public static Material NetheriteScrap = new Material(Ref.ID, "netherite_scrap", 0x6e505a, ROUGH).asDust(CRUSHED, CRUSHED_PURIFIED, CRUSHED_CENTRIFUGED, DUST_IMPURE, DUST_PURE);
 
     static {
