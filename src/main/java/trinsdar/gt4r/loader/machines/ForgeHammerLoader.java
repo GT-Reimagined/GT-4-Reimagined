@@ -28,8 +28,8 @@ public class ForgeHammerLoader {
         });
         PLATE.all().forEach(m -> {
             if (!m.has(INGOT)) return;
-            int in = GT4RConfig.GAMEPLAY.HARDER_PLATES ? 3 : 1;
-            int out = GT4RConfig.GAMEPLAY.HARDER_PLATES ? 2 : 1;
+            int in = GT4RConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 3 : 1;
+            int out = GT4RConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 2 : 1;
             HAMMERING.RB().ii(INGOT.getMaterialIngredient(m, in)).io(PLATE.get(m, out)).add(m.getMass(), 16);
         });
         HAMMERING.RB().ii(RecipeIngredient.of(Tags.Items.COBBLESTONE, 1)).io(new ItemStack(Items.GRAVEL)).add(10, 16);

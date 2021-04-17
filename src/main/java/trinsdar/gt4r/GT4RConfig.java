@@ -1,6 +1,5 @@
 package trinsdar.gt4r;
 
-import muramasa.antimatter.AntimatterConfig;
 import muramasa.antimatter.Ref;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -45,7 +44,7 @@ public class GT4RConfig {
 
         /** @see CommonConfig **/
 
-        public boolean HARDER_PLATES, REMOVE_VANILLA_CHARCOAL_RECIPE, HARDER_WOOD;
+        public boolean LOSSY_PART_CRAFTING, REMOVE_VANILLA_CHARCOAL_RECIPE, HARDER_WOOD;
 
     }
 
@@ -63,7 +62,7 @@ public class GT4RConfig {
 
     public static class CommonConfig {
 
-        public ForgeConfigSpec.BooleanValue HARDER_PLATES, REMOVE_VANILLA_CHARCOAL_RECIPE, HARDER_WOOD;
+        public ForgeConfigSpec.BooleanValue LOSSY_PART_CRAFTING, REMOVE_VANILLA_CHARCOAL_RECIPE, HARDER_WOOD;
 
         public ForgeConfigSpec.IntValue COPPER_ORE_WEIGHT, TIN_ORE_WEIGHT, URANITE_ORE_WEIGHT, URANITE_DEAD_ORE_WEIGHT,  PYRITE_ORE_WEIGHT, CINNABAR_ORE_WEIGHT, SPHALERITE_ORE_WEIGHT, GALENA_ORE_WEIGHT, CASSITERITE_ORE_WEIGHT, TETRAHEDRITE_ORE_WEIGHT, BAUXITE_ORE_WEIGHT, RUBY_ORE_WEIGHT, SAPPHIRE_ORE_WEIGHT, IRIDIUM_ORE_WEIGHT, SHELDONITE_ORE_WEIGHT, TUNGSTATE_ORE_WEIGHT, SHELDONITE_END_ORE_WEIGHT, OLIVINE_ORE_WEIGHT, SODALITE_ORE_WEIGHT, CHROMITE_ORE_WEIGHT, EXTRA_EMERALD_ORE_WEIGHT;
 
@@ -389,9 +388,9 @@ public class GT4RConfig {
 
             builder.push("Gameplay");
 
-            HARDER_PLATES = builder.comment("Whether or not plates cost more in the forge hammer and in the crafting table - Default : false")
-                    .translation(Ref.ID + ".config.harder_plates")
-                    .define("HARDER_PLATES", false);
+            LOSSY_PART_CRAFTING = builder.comment("Whether or not plates cost more in the forge hammer and in the crafting table and other parts like rods give less in the crafting table - Default : false")
+                    .translation(Ref.ID + ".config.lossy_part_crafting")
+                    .define("LOSSY_PART_CRAFTING", false);
 
             builder.pop();
 
@@ -464,7 +463,7 @@ public class GT4RConfig {
         WORLD.OLIVINE_ORE_WEIGHT = COMMON_CONFIG.OLIVINE_ORE_WEIGHT.get();
         WORLD.CHROMITE_ORE_WEIGHT = COMMON_CONFIG.CHROMITE_ORE_WEIGHT.get();
 
-        GAMEPLAY.HARDER_PLATES = COMMON_CONFIG.HARDER_PLATES.get();
+        GAMEPLAY.LOSSY_PART_CRAFTING = COMMON_CONFIG.LOSSY_PART_CRAFTING.get();
 
     }
 }

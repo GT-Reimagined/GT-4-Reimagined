@@ -5,6 +5,7 @@ import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.LazyValue;
+import trinsdar.gt4r.GT4RConfig;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.GT4RData;
 
@@ -27,6 +28,7 @@ public class MaterialRecipeLoader {
     //TODO: Plasma Arc/Normal Arc smelting will be handled differently, when we have said amount system.
 
     public static void loadRecipes(Consumer<IFinishedRecipe> output, AntimatterRecipeProvider provider) {
+        int craftingMultiplier = GT4RConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 1 : 2;
         HULL.all().forEach(m -> {
             provider.addItemRecipe(output, Ref.ID, m.getId() + "_hull", "hulls", "has_wrench", provider.hasSafeItem(WRENCH.getTag()), HULL.get(m), ImmutableMap.of('P', PLATE.getMaterialTag(m), 'W', WRENCH.getTag()), "PPP", "PWP", "PPP");
         });
@@ -57,12 +59,12 @@ public class MaterialRecipeLoader {
         ROD.all().forEach(m -> {
             if (m.has(INGOT) || m.has(GEM)){
                 ITag.INamedTag<?> input = m.has(GEM) ? GEM.getMaterialTag(m) : INGOT.getMaterialTag(m);
-                provider.shapeless(output, m.getId() + "_rod", "rods", "has_file", provider.hasSafeItem(FILE.getTag()), ROD.get(m, 2), input, FILE.getTag());
+                provider.shapeless(output, m.getId() + "_rod", "rods", "has_file", provider.hasSafeItem(FILE.getTag()), ROD.get(m, craftingMultiplier), input, FILE.getTag());
             }
         });
         RING.all().forEach(m -> {
             if (m.has(ROD)){
-                provider.addStackRecipe(output, Ref.ID, m.getId() + "_ring", "rings", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), RING.get(m, 2),
+                provider.addStackRecipe(output, Ref.ID, m.getId() + "_ring", "rings", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), RING.get(m, craftingMultiplier),
                         ImmutableMap.of('H', HAMMER.getTag(), 'R', ROD.getMaterialTag(m)), "H ", " R");
             }
         });
@@ -74,9 +76,9 @@ public class MaterialRecipeLoader {
         });
         BOLT.all().forEach(m -> {
             if (m.has(SCREW)){
-                provider.addItemRecipe(output, Ref.ID, m.getId() + "_screw", "screws", "has_file", provider.hasSafeItem(FILE.getTag()), SCREW.get(m), ImmutableMap.of('F', FILE.getTag(), 'B', BOLT.getMaterialTag(m)), "FB", "B ");
+                provider.addItemRecipe(output, Ref.ID, m.getId() + "_screw", "screws", "has_file", provider.hasSafeItem(FILE.getTag()), SCREW.get(m), ImmutableMap.of('F', FILE.getTag(), 'B', BOLT.getMaterialTag(m)), (GT4RConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? new String[]{"FB", "B "} : new String[]{"FB"}));
             }
-            provider.addStackRecipe(output, Ref.ID, m.getId() + "_bolt", "bolts", "has_saw", provider.hasSafeItem(SAW.getTag()), BOLT.get(m, 2), ImmutableMap.of('S', SAW.getTag(), 'R', ROD.getMaterialTag(m)), "S ", " R");
+            provider.addStackRecipe(output, Ref.ID, m.getId() + "_bolt", "bolts", "has_saw", provider.hasSafeItem(SAW.getTag()), BOLT.get(m, craftingMultiplier * 2), ImmutableMap.of('S', SAW.getTag(), 'R', ROD.getMaterialTag(m)), "S ", " R");
         });
         DRILLBIT.all().forEach(m -> {
             if (m.has(PLATE) || m.has(GEM)){

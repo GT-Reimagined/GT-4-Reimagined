@@ -3,10 +3,8 @@ package trinsdar.gt4r.loader.crafting;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
 import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.AntimatterConfig;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.pipe.PipeSize;
-import muramasa.antimatter.pipe.PipeSize.*;
 
 import muramasa.antimatter.pipe.types.Cable;
 import muramasa.antimatter.pipe.types.Wire;
@@ -16,7 +14,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import trinsdar.gt4r.GT4RConfig;
 
-import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -52,7 +49,7 @@ public class ToolCraftingTableRecipes {
         });
 
         INGOT.all().stream().filter(p -> p.has(PLATE)).forEach(p -> {
-            if (GT4RConfig.GAMEPLAY.HARDER_PLATES){
+            if (GT4RConfig.GAMEPLAY.LOSSY_PART_CRAFTING){
                 provider.shapeless(output, "ingothammer", "plate", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), new ItemStack(PLATE.get(p), 1),
                         HAMMER.getTag(), INGOT.getMaterialTag(p), INGOT.getMaterialTag(p));
             } else {
