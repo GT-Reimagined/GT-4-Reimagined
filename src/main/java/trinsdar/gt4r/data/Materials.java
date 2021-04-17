@@ -7,6 +7,9 @@ import muramasa.antimatter.material.MaterialItem;
 import muramasa.antimatter.material.MaterialTag;
 import muramasa.antimatter.material.MaterialType;
 import muramasa.antimatter.material.MaterialTypeItem;
+import muramasa.antimatter.tool.AntimatterToolType;
+import muramasa.antimatter.tool.IAntimatterTool;
+import muramasa.antimatter.util.Utils;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
@@ -14,8 +17,10 @@ import net.minecraft.item.ItemTier;
 import net.minecraft.item.Items;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.items.ItemTurbineRotor;
+import trinsdar.gt4r.items.MaterialSpear;
 
 import java.util.Properties;
+import java.util.function.Supplier;
 
 import static com.google.common.collect.ImmutableMap.of;
 import static muramasa.antimatter.Data.*;
@@ -57,6 +62,25 @@ public class Materials {
         }
     });
     public static MaterialTag FLINT_TAG = new MaterialTag("flint");
+    public static AntimatterToolType SPEAR = new AntimatterToolType(Ref.ID, "spear", 2, 1, 10, 3.0F, -2.9F){
+        @Override
+        public IAntimatterTool instantiateTools(String domain) {
+            return new MaterialSpear(domain, this, prepareInstantiation(domain));
+        }
+
+        @Override
+        public IAntimatterTool instantiateTools(String domain, Supplier<Item.Properties> properties) {
+            return new MaterialSpear(domain, this, properties.get());
+        }
+
+        private Item.Properties prepareInstantiation(String domain) {
+            if (domain.isEmpty()) Utils.onInvalidData("An AntimatterToolType was instantiated with an empty domain name!");
+            Item.Properties properties = new Item.Properties().group(getItemGroup());
+            if (!getRepairability()) properties.setNoRepair();
+            return properties;
+        }
+    };
+
 
     /** Elements **/
     public static Material Aluminium = new Material(Ref.ID, "aluminium", 0x80c8f0, DULL, Al).asMetal(933, 1000, PLATE, ROD, GEAR, HULL);
@@ -186,7 +210,7 @@ public class Materials {
     public static Material Bauxite = new Material(Ref.ID, "bauxite", 0xc86400, DULL).asDust(ORE).mats(of(Aluminium, 16, Hydrogen, 10, Oxygen, 11, Titanium, 1)).setOreMulti(2);
     public static Material Wood = new Material(Ref.ID, "wood", 0x643200, WOOD).asDust(PLATE).addHandleStat(12, 0.0F).mats(of(Carbon, 1, Oxygen, 1, Hydrogen, 1));
     public static Material Blaze = new Material(Ref.ID, "blaze", 0xffc800, NONE).asDust().mats(of(Sulfur, 1, DarkAsh, 1/*, Magic, 1*/)).addHandleStat(-10, -0.5F, of(Enchantments.FIRE_ASPECT, 1));
-    public static Material Flint = new Material(Ref.ID, "flint", 0x002040, FLINT).asDust(GEM, FLINT_TAG).addTools(1.25F, 2.5F, 128, 1, of(Enchantments.FIRE_ASPECT, 1), PICKAXE, AXE, SHOVEL, SWORD, HOE, MORTAR, KNIFE).mats(of(SiliconDioxide, 1));
+    public static Material Flint = new Material(Ref.ID, "flint", 0x002040, FLINT).asDust(GEM, FLINT_TAG).addTools(1.25F, 2.5F, 128, 1, of(Enchantments.FIRE_ASPECT, 1), PICKAXE, AXE, SHOVEL, SWORD, HOE, MORTAR, KNIFE, SPEAR).mats(of(SiliconDioxide, 1));
     public static Material Uvarovite = new Material(Ref.ID, "uvarovite", 0xb4ffb4, DIAMOND).asDust().mats(of(Calcium, 3, Chrome, 2, Silicon, 3, Oxygen, 12));
 
     /** Gems **/
@@ -269,6 +293,7 @@ public class Materials {
     public static Material Netherite = new Material(Ref.ID, "netherite", 0x504650, DULL).asMetal(2246,1300, PLATE, ROD).addTools(3.0F, 10, 500, NETHERITE.getHarvestLevel(), of(Enchantments.FIRE_ASPECT, 3)).addArmor(new int[]{0, 1, 1, 0}, 0.5F, 0.1F, 20);
     public static Material NetherizedDiamond = new Material(Ref.ID, "netherized_diamond", 0x5a505a, DIAMOND).asGemBasic(false).addTools(4.0F, 12, NETHERITE.getMaxUses(), NETHERITE.getHarvestLevel(), of(Enchantments.FIRE_ASPECT, 3, Enchantments.SHARPNESS, 4)).addArmor(new int[]{1, 1, 2, 1}, 3.0F, 0.1F, 37, of(Enchantments.PROTECTION, 4));
     public static Material NetheriteScrap = new Material(Ref.ID, "netherite_scrap", 0x6e505a, ROUGH).asDust(CRUSHED, CRUSHED_PURIFIED, CRUSHED_CENTRIFUGED, DUST_IMPURE, DUST_PURE);
+
 
     static {
         /*ELEC.add(Methane, CarbonDioxide, NitrogenDioxide, Toluene, VinylChloride, SulfurDioxide, SulfurTrioxide, Dimethylamine, DinitrogenTetroxide, NitricOxide, Ammonia, Chloromethane, Tetrafluoroethylene, CarbonMonoxide, Ethylene, Propane, Ethenone, Ethanol, Glyceryl, SodiumPersulfate, Dichlorobenzene, Styrene, Isoprene, Tetranitromethane, Epichlorohydrin, NitricAcid, Dimethylhydrazine, Chloramine, Dimethyldichlorosilane, HydrofluoricAcid, Chloroform, BisphenolA, AceticAcid, Acetone, Methanol, VinylAcetate, MethylAcetate, AllylChloride, HypochlorousAcid, Cumene, PhosphoricAcid, SulfuricAcid, Benzene, Phenol, Glycerol, SodiumSulfide, Almandine, Andradite, BandedIron, Calcite, Cassiterite, Chalcopyrite, Cobaltite, Galena, Garnierite, Grossular, Bauxite, Magnesite, Magnetite, Molybdenite, Obsidian, Phosphate, Polydimethylsiloxane, Pyrite, Pyrolusite, Pyrope, RockSalt, Saltpeter, SiliconDioxide, Massicot, ArsenicTrioxide, CobaltOxide, Magnesia, Quicklime, Potash, SodaAsh, PhosphorousPentoxide, SodiumHydroxide, Spessartine, Sphalerite, Uvarovite, PotassiumFeldspar, Biotite, RedGranite, Bastnasite, Pentlandite, Spodumene, Glauconite, Bentonite, Malachite, Barite, Talc, AntimonyTrioxide, CupricOxide, Ferrosilite, Quartzite, Charcoal, Coal, Lignite, Diamond, Emerald, Ruby, Sapphire, Tanzanite, Topaz, Olivine, Opal, Amethyst, EnderPearl, StainlessSteel, Steel, Ultimet, IronMagnetic, SteelMagnetic, NeodymiumMagnetic, Osmiridium);

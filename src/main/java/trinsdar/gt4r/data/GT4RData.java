@@ -306,25 +306,6 @@ public class GT4RData {
     public static ItemBasic<?> ShapeGear = new ItemBasic<>(Ref.ID, "shape_gear").tip("Shape for making Gears");
     public static ItemBasic<?> ShapeBottle = new ItemBasic<>(Ref.ID, "shape_bottle").tip("Shape for making Bottles"); //TODO needed?
 
-    public static AntimatterToolType SPEAR = new AntimatterToolType(Ref.ID, "spear", 2, 1, 10, 3.0F, -2.9F){
-        @Override
-        public IAntimatterTool instantiateTools(String domain) {
-            return new MaterialSpear(domain, this, prepareInstantiation(domain));
-        }
-
-        @Override
-        public IAntimatterTool instantiateTools(String domain, Supplier<Item.Properties> properties) {
-            return new MaterialSpear(domain, this, properties.get());
-        }
-
-        private Item.Properties prepareInstantiation(String domain) {
-            if (domain.isEmpty()) Utils.onInvalidData("An AntimatterToolType was instantiated with an empty domain name!");
-            Item.Properties properties = new Item.Properties().group(getItemGroup());
-            if (!getRepairability()) properties.setNoRepair();
-            return properties;
-        }
-    };
-
     public static StoneType GRANITE_RED = new StoneType(Ref.ID, "granite_red", Materials.RedGranite, new Texture(Ref.ID, "block/stone/granite_red"), SoundType.STONE, true).setHardnessAndResistance(4.5F, 60.0F).setHarvestLevel(3);
     public static StoneType GRANITE_BLACK = new StoneType(Ref.ID, "granite_black", Materials.BlackGranite, new Texture(Ref.ID, "block/stone/granite_black"), SoundType.STONE, true).setHardnessAndResistance(4.5F, 60.0F).setHarvestLevel(3);
     public static StoneType MARBLE = new StoneType(Ref.ID, "marble", Materials.Marble, new Texture(Ref.ID, "block/stone/marble"), SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F);

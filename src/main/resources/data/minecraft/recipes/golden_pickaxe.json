@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PII",
+    "FRH",
+    " R "
+  ],
+  "key": {
+    "P": {
+      "tag": "forge:plates/gold"
+    },
+    "I": {
+      "tag": "forge:ingots/gold"
+    },
+    "H": {
+      "tag": "antimatter:hammer"
+    },
+    "F": {
+      "tag": "antimatter:file"
+    },
+    "R": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "result": {
+    "item": "minecraft:golden_pickaxe"
+  }
+}

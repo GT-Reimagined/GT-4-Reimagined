@@ -1,6 +1,5 @@
 package trinsdar.gt4r.loader.crafting;
 
-import muramasa.antimatter.Antimatter;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.material.Material;
@@ -10,11 +9,9 @@ import net.minecraft.advancements.ICriterionInstance;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.Tags;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.CustomTags;
 
-import java.io.File;
 import java.util.Collections;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -23,7 +20,6 @@ import static com.google.common.collect.ImmutableMap.of;
 import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.material.MaterialTag.HANDLE;
 import static trinsdar.gt4r.data.GT4RData.*;
-import static trinsdar.gt4r.data.GT4RData.BatterySmallSodium;
 import static trinsdar.gt4r.data.GT4RData.MotorLV;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.loader.crafting.CraftingHelper.of2;
@@ -92,7 +88,7 @@ public class ToolCrafting {
         ICriterionInstance in = provider.hasSafeItem(FILE.getTag());
 
         provider.addToolRecipe(TOOL_BUILDER.get(SPEAR.getId()), output, Ref.ID, SPEAR.getId() + "_" +"recipe", "antimatter_tools",
-                "has_file", in, SPEAR.getToolStack(NULL, NULL), of('I', PropertyIngredient.builder("primary").types(PLATE, GEM).tags(TOOLS).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build(), 'F', FILE.getTag(), 'H', HAMMER.getTag()), " FI", " RH", "R  ");
+                "has_file", in, SPEAR.getToolStack(NULL, NULL), of('I', PropertyIngredient.builder("primary").types(PLATE, GEM).tool(SPEAR, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build(), 'F', FILE.getTag(), 'H', HAMMER.getTag()), " FI", " RH", "R  ");
 
 
         provider.addToolRecipe(TOOL_BUILDER.get(PICKAXE.getId()), output, Ref.ID,  "flint_" + PICKAXE.getId() + "_" +"recipe", "antimatter_tools",

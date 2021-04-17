@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FPH",
+    " R ",
+    " R "
+  ],
+  "key": {
+    "P": {
+      "tag": "forge:plates/gold"
+    },
+    "H": {
+      "tag": "antimatter:hammer"
+    },
+    "F": {
+      "tag": "antimatter:file"
+    },
+    "R": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "result": {
+    "item": "minecraft:golden_shovel"
+  }
+}

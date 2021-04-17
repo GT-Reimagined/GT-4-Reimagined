@@ -144,7 +144,6 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
             addToolRecipe(TOOL_BUILDER.get(HAMMER.getId()), consumer, muramasa.antimatter.Ref.ID, HAMMER.getId() + "_" +"recipe", "antimatter_tools",
                     "has_wrench", in, Collections.singletonList(HAMMER.getToolStack(NULL, NULL)), of('I', PropertyIngredient.builder("primary").types(INGOT, GEM).tool(HAMMER, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "II ", "IIR", "II ");
 
-            PropertyIngredient.builder("primary").types(PLATE).tags(ARMOR).build();
             addToolRecipe(ARMOR_BUILDER.get(HELMET.getId()), consumer, muramasa.antimatter.Ref.ID, HELMET.getId() + "_recipe", "antimatter_helmets",
                     "has_wrench", in, Collections.singletonList(HELMET.getToolStack(NULL)), of('I', PropertyIngredient.builder("primary").types(PLATE, GEM).tags(ARMOR).build(), 'H', HAMMER.getTag()), "III", "IHI");
             addToolRecipe(ARMOR_BUILDER.get(CHESTPLATE.getId()), consumer, muramasa.antimatter.Ref.ID, CHESTPLATE.getId() + "_recipe", "antimatter_chestplates",

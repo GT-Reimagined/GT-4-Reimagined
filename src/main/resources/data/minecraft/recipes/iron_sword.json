@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " P ",
+    "FPH",
+    " R "
+  ],
+  "key": {
+    "P": {
+      "tag": "forge:ingots/iron"
+    },
+    "H": {
+      "tag": "antimatter:hammer"
+    },
+    "F": {
+      "tag": "antimatter:file"
+    },
+    "R": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "result": {
+    "item": "minecraft:iron_sword"
+  }
+}
