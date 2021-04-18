@@ -56,7 +56,7 @@ public class AssemblyLoader {
         ASSEMBLING.RB().ii(of(PLATES_IRON_ALUMINIUM, 1), of(Items.LEVER, 1)).io(new ItemStack(RedstoneMachineController)).add(800, 16);
         ASSEMBLING.RB().ii(of(PLATES_IRON_ALUMINIUM, 1), of(Items.CRAFTING_TABLE, 1)).io(new ItemStack(CraftingModule)).add(800, 16);
         ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Aluminium, 2), of(CIRCUITS_BASIC, 1)).io(new ItemStack(MachineParts, 3)).add(800, 16);
-        ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Aluminium, 4), of(MACHINE_HULLS_BASIC, 1), of(BatteryRE, 1)).io(new ItemStack(WATERMILL.getItem(ULV), 2)).add(6400, 8);
+        //ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Aluminium, 4), of(MACHINE_HULLS_BASIC, 1), of(BatteryRE, 1)).io(new ItemStack(WATERMILL.getItem(ULV), 2)).add(6400, 8);
         ASSEMBLING.RB().ii(of(PLATES_IRON_ALUMINIUM, 1), PLATE.getMaterialIngredient(RedAlloy, 2)).io(new ItemStack(CircuitBoardBasic)).add(800, 1);
         ASSEMBLING.RB().ii(of(PLATES_IRON_ALUMINIUM, 1), PLATE.getMaterialIngredient(Electrum, 2)).io(new ItemStack(CircuitBoardBasic, 2)).add(800, 1);
         ASSEMBLING.RB().ii(of(PLATES_IRON_ALUMINIUM, 1), of(Items.IRON_TRAPDOOR, 1)).io(new ItemStack(Shutter, 1)).add(400, 16);
