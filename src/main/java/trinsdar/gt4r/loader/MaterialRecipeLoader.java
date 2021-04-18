@@ -3,6 +3,7 @@ package trinsdar.gt4r.loader;
 import com.google.common.collect.ImmutableMap;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import net.minecraft.data.IFinishedRecipe;
+import net.minecraft.item.Item;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.LazyValue;
 import trinsdar.gt4r.GT4RConfig;
@@ -12,9 +13,7 @@ import trinsdar.gt4r.data.GT4RData;
 import java.util.function.Consumer;
 
 import static muramasa.antimatter.Data.*;
-import static trinsdar.gt4r.data.Materials.HULL;
-import static trinsdar.gt4r.data.Materials.Steel;
-import static trinsdar.gt4r.data.Materials.TURBINE_BLADE;
+import static trinsdar.gt4r.data.Materials.*;
 
 //TODO EXCLUDED FROM COMPILE
 
@@ -34,6 +33,13 @@ public class MaterialRecipeLoader {
         });
         TURBINE_BLADE.all().forEach(m -> {
             provider.addItemRecipe(output, Ref.ID, m.getId() + "_turbine_blade", "turbine_blades", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), TURBINE_BLADE.get(m), ImmutableMap.of('P', PLATE.getMaterialTag(m), 'H', HAMMER.getTag(), 'F', FILE.getTag()), " H ", "PPP", " F ");
+        });
+        TURBINE_ROTOR.all().forEach(m -> {
+            if (m.has(TURBINE_BLADE) && (m.has(BLOCK) || m == Carbon)){
+                ITag.INamedTag<Item> center = m == Carbon ? PLATE.getMaterialTag(Carbon) : BLOCK.getMaterialTag(m);
+                provider.addItemRecipe(output, Ref.ID, m.getId() + "_turbine_rotor", "turbine_rotors", "has_turbine_blade", provider.hasSafeItem(TURBINE_BLADE.getMaterialTag(m)), TURBINE_ROTOR.get(m), ImmutableMap.of('T', TURBINE_BLADE.getMaterialTag(m), 'C', center), "TTT", "TCT", "TTT");
+            }
+
         });
         BLOCK.all().forEach(m -> {
             if (m.has(INGOT)){
