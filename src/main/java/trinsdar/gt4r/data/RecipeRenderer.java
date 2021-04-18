@@ -16,7 +16,7 @@ public class RecipeRenderer {
             String fuelPerB = "Fuel content(bb): " + ((double) (recipe.getPower() * recipe.getDuration()) / (double) Objects.requireNonNull(recipe.getInputFluids())[0].getAmount()) * 1000;
             renderString(stack, fuelPerMb, fontRenderer, 5, 5, guiOffsetX, guiOffsetY);
             renderString(stack, fuelPerB, fontRenderer, 5, 15, guiOffsetX, guiOffsetY);
-            renderString(stack, "Ticks: " + recipe.getDuration(), fontRenderer, 5, 15, guiOffsetX, guiOffsetY);
+            renderString(stack, "Ticks: " + recipe.getDuration(), fontRenderer, 5, 25, guiOffsetX, guiOffsetY);
         }
     };
 
