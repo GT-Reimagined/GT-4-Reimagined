@@ -62,6 +62,7 @@ public class Materials {
         }
     });
     public static MaterialTag FLINT_TAG = new MaterialTag("flint");
+    public static MaterialTag SEMIFLUID = new MaterialTag("semifluid");
     public static AntimatterToolType SPEAR = new AntimatterToolType(Ref.ID, "spear", 2, 1, 10, 3.0F, -2.9F){
         @Override
         public IAntimatterTool instantiateTools(String domain) {
@@ -164,16 +165,16 @@ public class Materials {
     public static Material Gasoline = new Material(Ref.ID, "gasoline", 0x84723e, NONE).asFluid(128);
     public static Material NitroDiesel = new Material(Ref.ID, "nitro_diesel", 0xc8ff00, NONE).asFluid(384);
     public static Material BioDiesel = new Material(Ref.ID, "bio_diesel", 0xff8000, NONE).asFluid(192);
-    public static Material Biomass = new Material(Ref.ID, "biomass", 0x00ff00, NONE).asFluid(8);
+    public static Material Biomass = new Material(Ref.ID, "biomass", 0x00ff00, NONE).asFluid(8).flags(SEMIFLUID);
     public static Material Biofuel = new Material(Ref.ID, "biofuel", 0x99cc00, NONE).asFluid(6);
     public static Material Ethanol = new Material(Ref.ID, "ethanol", 0xff8000, NONE).asFluid(128).mats(of(Carbon, 2, Hydrogen, 6, Oxygen, 1));
-    public static Material Creosote = new Material(Ref.ID, "creosote", 0x804000, NONE).asFluid(8);
+    public static Material Creosote = new Material(Ref.ID, "creosote", 0x804000, NONE).asFluid(8).flags(SEMIFLUID);
     public static Material Naphtha = new Material(Ref.ID, "naphtha", 0xffff64, NONE).asFluid(128);
     public static Material NitroCoalFuel = new Material(Ref.ID, "nitro-coalfuel", 0x002b2b, NONE).asFluid(48);
     public static Material CoalFuel = new Material(Ref.ID, "coalfuel", 0x0f0f0f, NONE).asFluid(16);
 
-    public static Material Oil = new Material(Ref.ID, "oil", 0x0a0a0a, NONE).asFluid(15);
-    public static Material SeedOil = new Material(Ref.ID, "seed_oil", 0xc4ff00, NONE).asFluid(6);
+    public static Material Oil = new Material(Ref.ID, "oil", 0x0a0a0a, NONE).asFluid(15).flags(SEMIFLUID);
+    public static Material SeedOil = new Material(Ref.ID, "seed_oil", 0xc4ff00, NONE).asFluid(6).flags(SEMIFLUID);
     //public static Materials SeedOilHemp = new Materials(722, "Hemp Seed Oil", 196, 255, 0, lime, NONE).asSemi(2);
     //public static Materials SeedOilLin = new Materials(723, "Lin Seed Oil", 196, 255, 0, lime, NONE).asSemi(2);
 

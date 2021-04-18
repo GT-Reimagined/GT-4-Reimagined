@@ -26,7 +26,7 @@ public class FuelBurnHandler {
                         ticks = mat.getFuelPower() / 32;
                         power = 32;
                     }
-                    if (mat == Biomass || mat == SeedOil || mat == Oil){
+                    if (mat.has(SEMIFLUID)){
                         SEMIFLUID_FUELS.RB().fi(mat.getLiquid(1)).add(ticks, power);
                     } else {
                         DIESEL_FUELS.RB().fi(mat.getLiquid(1)).add(ticks, power);
