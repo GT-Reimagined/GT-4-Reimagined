@@ -220,7 +220,7 @@ public class Materials {
     public static Material Coal = new Material(Ref.ID, "coal", 0x464646, LIGNITE).asDust(ORE).mats(of(Carbon, 2));
 
     public static Material Diamond = new Material(Ref.ID, "diamond", /*0x3de0e5*/0xc8ffff, DIAMOND).asGemBasic(false, ORE).mats(of(Carbon, 128)).addTools(ItemTier.DIAMOND.getAttackDamage(), ItemTier.DIAMOND.getEfficiency(), ItemTier.DIAMOND.getMaxUses(), ItemTier.DIAMOND.getHarvestLevel());
-    public static Material Emerald = new Material(Ref.ID, "emerald", 0x50ff50, GEM_V).asDust(ORE).mats(of(Beryllium, 3, Aluminium, 2, Silicon, 3, Oxygen, 18));
+    public static Material Emerald = new Material(Ref.ID, "emerald", 0x50ff50, GEM_V).asGemBasic(false, ORE).mats(of(Beryllium, 3, Aluminium, 2, Silicon, 3, Oxygen, 18));
     public static Material Lazurite = new Material(Ref.ID, "lazurite", 0x6478ff, LAPIS).asDust().mats(of(Aluminium, 6, Silicon, 6, Calcium, 8, Sodium, 8));
     public static Material Ruby = new Material(Ref.ID, "ruby", 0xff6464, RUBY).asGemBasic(false, ORE).addTools(3.0F, 7.0F, 1024, 3).addArmor(new int[]{1, 1, 2, 1}, 1.0F, 0.0F, 30).mats(of(Chrome, 1, Aluminium, 2, Oxygen, 3));
     public static Material Sapphire = new Material(Ref.ID, "sapphire", 0x6464c8, GEM_V).asGemBasic(false, ORE).addTools(3.0F, 7.0F, 1024, 3).addArmor(new int[]{1, 1, 2, 1}, 1.0F, 0.0F, 30).mats(of(Aluminium, 2, Oxygen, 3));
@@ -324,6 +324,8 @@ public class Materials {
         DUST.forceOverride(Glowstone, Items.GLOWSTONE_DUST);
         DUST.forceOverride(Blaze, Items.BLAZE_POWDER);
         GEM.forceOverride(Flint, Items.FLINT);
+        GEM.forceOverride(Diamond, Items.DIAMOND);
+        GEM.forceOverride(Emerald, Items.EMERALD);
 
         ROD.forceOverride(Blaze, Items.BLAZE_ROD);
         ROD.forceOverride(Wood, Items.STICK);
