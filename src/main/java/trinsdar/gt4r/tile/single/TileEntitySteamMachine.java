@@ -25,7 +25,7 @@ public class TileEntitySteamMachine extends TileEntityMachine {
             //Allow up to 16 .
             @Override
             protected boolean validateRecipe(Recipe r) {
-                return r.getPower() <= Tier.LV.getVoltage()/2;
+                return r.getPower() <= Tier.LV.getVoltage();
             }
 
             @Override
