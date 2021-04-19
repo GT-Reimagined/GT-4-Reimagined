@@ -71,9 +71,7 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
     @Override
     public void registerRecipes(Consumer<IFinishedRecipe> consumer) {
         registerToolRecipes(consumer, muramasa.antimatter.Ref.ID);
-        registerPipeRecipes(consumer, muramasa.antimatter.Ref.ID);
         craftingLoaders.forEach(cl -> cl.loadRecipes(consumer,this));
-        registerMaterialRecipes(consumer, this.providerDomain);
         addConditionalRecipe(consumer, getStackRecipe("", "has_sulfur_dust", criterion(getForgeItemTag("dusts/sulfur"), this),
                 new ItemStack(Blocks.TORCH, 6), of('D', getForgeItemTag("dusts/sulfur"), 'R', Tags.Items.RODS_WOODEN), "D", "R"), Ref.class, "sulfurTorch", Ref.ID, "sulfur_torch");
         addItemRecipe(consumer, Ref.ID, "chainmail_helmet", "chainmail_armor", "has_hammer", hasSafeItem(HAMMER.getTag()),
@@ -88,51 +86,6 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
                 of('L', Items.LEATHER, 'R', RING.getMaterialTag(Steel), 'S', SCREW.getMaterialTag(Steel)), "LLL", "LSL", "R R");
         addItemRecipe(consumer,  Ref.ID,"sticky_piston_from_resin", "", "has_piston", criterion(Blocks.PISTON, this), Blocks.STICKY_PISTON, of('S', GT4RData.StickyResin, 'P', Blocks.PISTON), "S", "P");
         shapeless(consumer, "gravel_to_flint", "mortar_recipes", "has_mortar", hasSafeItem(MORTAR.getTag()), new ItemStack(Items.FLINT), MORTAR.getTag(), Items.GRAVEL);
-    }
-
-    @Override
-    protected void registerMaterialRecipes(Consumer<IFinishedRecipe> consumer, String providerDomain) {
-        AntimatterAPI.all(BlockOre.class, providerDomain, o -> {
-            if (o.getOreType() != ORE) return;
-            if (!o.getMaterial().getSmeltInto().has(INGOT)) return;
-            Item ingot = INGOT.get(o.getMaterial().getSmeltInto());
-            ITag.INamedTag<Item> oreTag = TagUtils.getForgeItemTag(String.join("", getConventionalStoneType(o.getStoneType()), "_", getConventionalMaterialType(o.getOreType()), "/", o.getMaterial().getId()));
-            ITag.INamedTag<Item> ingotTag = TagUtils.getForgeItemTag("ingots/".concat(o.getMaterial().getSmeltInto().getId()));
-            GT4RCookingRecipeBuilder.blastingRecipe(Ingredient.fromTag(nc(oreTag)), new ItemStack(ingot, o.getMaterial().getSmeltingMulti()), 2.0F, 100)
-                    .addCriterion("has_material_" + o.getMaterial().getId(), hasItem(ingotTag))
-                    .build(consumer, fixLoc(providerDomain, o.getId().concat("_to_ingot")));
-            GT4RCookingRecipeBuilder.smeltingRecipe(Ingredient.fromTag(nc(oreTag)), new ItemStack(ingot, o.getMaterial().getSmeltingMulti()), 2.0F, 200)
-                    .addCriterion("has_material_" + o.getMaterial().getId(), hasItem(ingotTag))
-                    .build(consumer, fixLoc(providerDomain, o.getId().concat("_to_ingot_smelting")));
-        });
-        AntimatterAPI.all(Material.class, providerDomain).stream().filter(m -> m.has(DUST)).forEach(mat -> {
-            Item dust = DUST.get(mat);
-            if (mat.has(ROCK)) {
-                ITag<Item> rockTag = nc(TagUtils.getForgeItemTag("rocks/".concat(mat.getId())));
-                Item rock = ROCK.get(mat);
-                Item smallDust = DUST_SMALL.get(mat);
-                ShapelessRecipeBuilder.shapelessRecipe(dust)
-                        .addIngredient(rockTag).addIngredient(rockTag).addIngredient(rockTag)
-                        .addIngredient(rockTag).addIngredient(rockTag).addIngredient(rockTag)
-                        .addIngredient(rockTag).addIngredient(rockTag).addIngredient(nc(MORTAR.getTag()))
-                        .addCriterion("has_rock_" + mat.getId(), this.hasSafeItem(rockTag))
-                        .setGroup("rocks_grind_to_dust").build(consumer, fixLoc(providerDomain, rock.getRegistryName().getPath() + "_grind_to_" + dust.getRegistryName().getPath()));
-
-                ShapelessRecipeBuilder.shapelessRecipe(smallDust)
-                        .addIngredient(rockTag).addIngredient(rockTag)
-                        .addIngredient(rockTag).addIngredient(rockTag).addIngredient(nc(MORTAR.getTag()))
-                        .addCriterion("has_rock_" + mat.getId(), this.hasSafeItem(getForgeItemTag("rocks/".concat(mat.getId()))))
-                        .setGroup("rocks_grind_to_small_dust").build(consumer, fixLoc(providerDomain, rock.getRegistryName().getPath() + "_grind_to_" + smallDust.getRegistryName().getPath()));
-            }
-            if (mat.has(INGOT, GRINDABLE)) {
-                Item ingot = INGOT.get(mat);
-                ITag<Item> ingotTag = nc(TagUtils.getForgeItemTag("ingots/".concat(mat.getId())));
-                ShapelessRecipeBuilder.shapelessRecipe(dust).addIngredient(ingotTag).addIngredient(nc(MORTAR.getTag()))
-                        .addCriterion("has_ingot_" + mat.getId(), this.hasItem(nc(TagUtils.getForgeItemTag("ingots/".concat(mat.getId())))))
-                        .setGroup("ingots_grind_to_dust")
-                        .build(consumer, fixLoc(providerDomain,ingot.getRegistryName().getPath() + "_grind_to_" + dust.getRegistryName().getPath()));
-            }
-        });
     }
 
     @Override

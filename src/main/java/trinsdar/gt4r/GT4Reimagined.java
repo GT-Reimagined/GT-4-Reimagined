@@ -167,4 +167,9 @@ public class GT4Reimagined extends AntimatterMod {
                 break;
         }
     }
+
+    @Override
+    public String getId() {
+        return Ref.ID;
+    }
 }
