@@ -1,5 +1,8 @@
 package trinsdar.gt4r;
 
+import muramasa.antimatter.datagen.resources.DynamicDataPackFinder;
+import trinsdar.gt4r.datagen.GT4RDataPackFinder;
+
 public class Ref {
 
     /** Mod Data **/
@@ -7,6 +10,7 @@ public class Ref {
     public static final String NAME = "GT 4 Reimagined";
     public static final String VERSION = "0.0.1";
     public static final String ANTIMATTER = muramasa.antimatter.Ref.ID;
+    public static final GT4RDataPackFinder SERVER_PACK_FINDER = new GT4RDataPackFinder();
 
     /** Config Values **/
     public static boolean mixedOreYieldsTwoThirdsPureOre = false; //TODO 5U remnant, determine if needed

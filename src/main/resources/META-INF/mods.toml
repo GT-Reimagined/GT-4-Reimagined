@@ -33,6 +33,6 @@ description='''My remake of GregTech 4'''
     modId="minecraft"
     mandatory=true
     #versionRange="[${minecraft_version}]"
-    versionRange="1.15.2"
+    versionRange="1.16.5"
     ordering="AFTER"
     side="BOTH"

@@ -5,15 +5,21 @@ import muramasa.antimatter.AntimatterConfig;
 import muramasa.antimatter.AntimatterDynamics;
 import muramasa.antimatter.datagen.ExistingFileHelperOverride;
 import muramasa.antimatter.datagen.providers.*;
+import muramasa.antimatter.datagen.resources.DynamicDataPackFinder;
 import muramasa.antimatter.recipe.loader.IRecipeRegistrate;
 import muramasa.antimatter.registration.RegistrationEvent;
 import muramasa.antimatter.AntimatterMod;
+import net.minecraft.resources.ResourcePackInfo;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
+import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 import trinsdar.gt4r.data.*;
 import trinsdar.gt4r.datagen.GT4RBlockLootProvider;
 import trinsdar.gt4r.datagen.GT4RBlockTagProvider;
+import trinsdar.gt4r.datagen.GT4RDataPackFinder;
 import trinsdar.gt4r.datagen.GT4RItemTagProvider;
 import trinsdar.gt4r.datagen.GT4RLocalizations;
 import trinsdar.gt4r.datagen.GT4RRecipes;
@@ -49,6 +55,7 @@ public class GT4Reimagined extends AntimatterMod {
         INSTANCE = this;
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::serverSetup);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, GT4RConfig.COMMON_SPEC);
         //GregTechAPI.addRegistrar(new ForestryRegistrar());
         //GregTechAPI.addRegistrar(new GalacticraftRegistrar());
@@ -116,6 +123,10 @@ public class GT4Reimagined extends AntimatterMod {
     private void setup(final FMLCommonSetupEvent e) {
         CommonHandler.setup(e);
 
+    }
+
+    private void serverSetup(final FMLDedicatedServerSetupEvent event){
+        MinecraftForge.EVENT_BUS.register(GT4RDataPackFinder.class);
     }
 
     @Override

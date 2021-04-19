@@ -10,8 +10,14 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.lwjgl.system.CallbackI;
+import trinsdar.gt4r.GT4Reimagined;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.events.CommonEvents;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 import static trinsdar.gt4r.data.GT4RData.*;
 
@@ -19,6 +25,7 @@ public class CommonHandler {
 
     public static void setup(FMLCommonSetupEvent e){
         MinecraftForge.EVENT_BUS.register(CommonHandler.class);
+        copyResourcePack();
     }
 
     public static void onBreak(PlayerDestroyItemEvent event){
@@ -43,6 +50,30 @@ public class CommonHandler {
                 if (!event.getPlayer().addItemStackToInventory(motorStack)){
                     event.getPlayer().dropItem(motorStack, true);
                 }
+            }
+        }
+    }
+
+    private static void copyResourcePack(){
+        File dir = new File(".", "datapacks");
+        File target = new File(dir, "GT4R-Vanilla-Overrides.zip");
+
+
+        if (!target.exists()) {
+            try {
+                dir.mkdirs();
+                InputStream in = GT4Reimagined.class.getResourceAsStream("/data/overrides.zip");
+                FileOutputStream out = new FileOutputStream(target);
+
+                byte[] buf = new byte[16384];
+                int len = 0;
+                while((len = in.read(buf)) > 0)
+                    out.write(buf, 0, len);
+
+                in.close();
+                out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
