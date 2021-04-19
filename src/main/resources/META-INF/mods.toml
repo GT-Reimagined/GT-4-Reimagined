@@ -27,12 +27,12 @@ description='''My remake of GregTech 4'''
     mandatory=true
     #versionRange="[${forge_version},)"
     versionRange="31.0.1"
-    ordering="NONE"
+    ordering="AFTER"
     side="BOTH"
 [[dependencies.gt4r]]
     modId="minecraft"
     mandatory=true
     #versionRange="[${minecraft_version}]"
     versionRange="1.15.2"
-    ordering="NONE"
+    ordering="AFTER"
     side="BOTH"
