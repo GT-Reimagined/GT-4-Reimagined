@@ -26,6 +26,7 @@ public class BlockRubberSapling extends SaplingBlock implements IGrowable, IAnti
         this.domain = domain;
         this.id = id;
         AntimatterAPI.register(BlockRubberSapling.class, id, this);
+        RubberTree.TREE_FEATURE.init();
     }
 
     @Override
