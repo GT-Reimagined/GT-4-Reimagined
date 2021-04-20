@@ -70,6 +70,8 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
 
     @Override
     public void registerRecipes(Consumer<IFinishedRecipe> consumer) {
+        registerMaterialRecipes(consumer, muramasa.antimatter.Ref.ID);
+        registerPipeRecipes(consumer, muramasa.antimatter.Ref.ID);
         registerToolRecipes(consumer, muramasa.antimatter.Ref.ID);
         craftingLoaders.forEach(cl -> cl.loadRecipes(consumer,this));
         addConditionalRecipe(consumer, getStackRecipe("", "has_sulfur_dust", criterion(getForgeItemTag("dusts/sulfur"), this),
