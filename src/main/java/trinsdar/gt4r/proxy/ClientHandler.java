@@ -58,7 +58,8 @@ public class ClientHandler {
         File dir = new File(".", "resourcepacks");
         File target = new File(dir, "GT4R-Programmer-Art.zip");
 
-        if(!target.exists())
+
+        //if(!target.exists())
             try {
                 dir.mkdirs();
                 InputStream in = GT4Reimagined.class.getResourceAsStream("/assets/gt4r/programmer_art.zip");
