@@ -37,6 +37,7 @@ public class RecipeMaps {
     public static RecipeMap UNIVERSAL_MACERATING = new RecipeMap<>("universal_macerating", new UniversalMaceratingBuilder(), Tier.MV);
     public static RecipeMap MACERATING = new RecipeMap<>("macerating", new MaceratingBuilder());
     public static RecipeMap RECYCLING = new RecipeMap<>("recycling", new RecipeBuilder());
+    public static RecipeMap SCANNING = new RecipeMap<>("scanning", new RecipeBuilder());
     public static RecipeMap WIRE_MILLING = new RecipeMap<>("wire_milling", new RecipeBuilder());
     public static RecipeMap ELECTROLYZING = new RecipeMap<>("electrolyzing", new RecipeBuilder());
     public static RecipeMap THERMAL_CENTRIFUGING = new RecipeMap<>("thermal_centrifuging", new RecipeBuilder());
@@ -45,6 +46,7 @@ public class RecipeMaps {
     public static RecipeMap FLUID_CANNING = new RecipeMap<>("fluid_canning", new RecipeBuilder());
     public static RecipeMap DISASSEMBLING = new RecipeMap<>("disassembling", new RecipeBuilder());
     public static RecipeMap MASS_FABRICATING = new RecipeMap<>("mass_fabricating", new RecipeBuilder());
+    public static RecipeMap REPLICATING = new RecipeMap<>("replicating", new RecipeBuilder());
     public static RecipeMap FLUID_EXTRACTING = new RecipeMap<>("fluid_extracting", new RecipeBuilder());
     public static RecipeMap FLUID_SOLIDIFYING = new RecipeMap<>("fluid_solidifying", new RecipeBuilder());
     public static RecipeMap HAMMERING = new RecipeMap<>("hammering", new HammeringBuilder());
