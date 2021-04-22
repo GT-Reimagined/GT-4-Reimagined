@@ -96,8 +96,12 @@ public class MachineCrafting {
                 STEAM_EXTRACTOR.getItem(BRONZE), of( 'B',  getForgeItemTag("plates/bronze"), 'W', WRENCH.getTag(),'P', PISTONS, 'M', MACHINE_HULLS_CHEAP), "BBB", "PWP", "BMB");
         provider.addItemRecipe(output, Ref.ID,"high_pressure_coil_boiler","machines", "has_wrench", provider.hasSafeItem(WRENCH.getTag()),
                 COAL_BOILER.getItem(STEEL), of( 'P',  PLATES_STEELS, 'W', WRENCH.getTag(), 'B', Items.BRICKS, 'F', Items.FURNACE), "PPP", "PWP", "BFB");
+        provider.addItemRecipe(output, Ref.ID,"high_pressure_coil_boiler_upgrade","machines", "has_bronze_coal_boiler", provider.hasSafeItem(COAL_BOILER.getItem(BRONZE)),
+                COAL_BOILER.getItem(STEEL), of( 'P',  PLATES_STEELS, 'C', COAL_BOILER.getItem(BRONZE)), "PPP", "PCP");
         provider.addItemRecipe(output, Ref.ID,"high_pressure_steam_furnace","machines", "has_wrench", provider.hasSafeItem(WRENCH.getTag()),
                 STEAM_FURNACE.getItem(STEEL), of( 'P',  PLATES_STEELS, 'W', WRENCH.getTag(), 'B', Items.BRICKS, 'F', Items.FURNACE, 'M', MACHINE_HULLS_SEMI_CHEAP), "PWP", "PFP", "BMB");
+        provider.addItemRecipe(output, Ref.ID,"high_pressure_coil_boiler_upgrade","machines", "has_bronze_furnace", provider.hasSafeItem(STEAM_FURNACE.getItem(BRONZE)),
+                STEAM_FURNACE.getItem(STEEL), of( 'P',  PLATES_STEELS, 'C', STEAM_FURNACE.getItem(BRONZE)), "PPP", "PCP");
         provider.addItemRecipe(output, Ref.ID, "diesel_generator", "machines", "has_hull", provider.hasSafeItem(MACHINE_HULLS_BASIC),
                 DIESEL_GENERATOR.getItem(LV), of('P', PLATES_WROUGHT_ALUMINIUM, 'B', BatteryRE, 'C', CIRCUITS_BASIC, 'M', MACHINE_HULLS_BASIC), "PBP", "P P", "CMC");
         provider.addItemRecipe(output, Ref.ID, "semifluid_generator", "machines", "has_hull", provider.hasSafeItem(MACHINE_HULLS_BASIC),
@@ -106,7 +110,7 @@ public class MachineCrafting {
                 GAS_TURBINE.getItem(LV), of('P', PLATES_INVAR_ALUMINIUM, 'W', WINDMILL.getItem(ULV), 'C', CIRCUITS_ADVANCED, 'G', REINFORCED_GLASS), "PCP", "WGW", "PCP");
         //TODO: replace turbine blade with turbine rotor
         provider.addItemRecipe(output, Ref.ID, "steam_turbine", "machines", "has_watermill", provider.hasSafeItem(WATERMILL.getItem(ULV)),
-                STEAM_TURBINE.getItem(LV), of('P', PLATES_INVAR_ALUMINIUM, 'W', WATERMILL.getItem(ULV), 'C', CIRCUITS_BASIC, 'B', TURBINE_BLADE.getMaterialTag(Bronze)), "PCP", "WBW", "PCP");
+                STEAM_TURBINE.getItem(LV), of('P', PLATES_INVAR_ALUMINIUM, 'M', MACHINE_HULLS_BASIC, 'C', CIRCUITS_BASIC, 'B', TURBINE_BLADE.getMaterialTag(Bronze)), "PCP", "BMB", "PCP");
         provider.addItemRecipe(output, Ref.ID, "primitive_blast_furnace", "machines", "has_fire_bricks", provider.hasSafeItem(FIRE_BRICKS),
                 PRIMITIVE_BLAST_FURNACE.getItem(BRONZE), of('B', FIRE_BRICKS, 'I', PLATE.getMaterialTag(Iron)), "BBB", "BIB", "BBB");
         provider.addItemRecipe(output, Ref.ID, "coke_oven", "machines", "has_fire_bricks", provider.hasSafeItem(FIRE_BRICKS),
@@ -118,12 +122,6 @@ public class MachineCrafting {
                     BATTERY_BUFFER_FOUR.getItem(t), of('H', HULL.get(TIER_MATERIALS.get(t)), 'C', Tags.Items.CHESTS, 'W', TIER_WIRES.get(t).getBlockItem(PipeSize.SMALL)), "WCW", "WHW");
             provider.addItemRecipe(output, Ref.ID, t.getId() + "_batter_buffer_nine", "machines", "has_machine_hull", provider.hasSafeItem(HULL.getMaterialTag(TIER_MATERIALS.get(t))),
                     BATTERY_BUFFER_NINE.getItem(t), of('H', HULL.get(TIER_MATERIALS.get(t)), 'C', Tags.Items.CHESTS, 'W', TIER_WIRES.get(t).getBlockItem(PipeSize.NORMAL)), "WCW", "WHW");
-            provider.addItemRecipe(output, Ref.ID, t.getId() + "_batter_buffer_one_bat", "machines", "has_plate", provider.hasSafeItem(PLATE.getMaterialTag(TIER_MATERIALS.get(t))),
-                    BATTERY_BUFFER_ONE.getItem(t), of('P', PLATE.getMaterialTag(TIER_MATERIALS.get(t)), 'B', TIER_BATTERIES.get(t), 'W', TIER_WIRES.get(t).getBlockItem(PipeSize.VTINY)),"PPP", "WBW", "WPW");
-            provider.addItemRecipe(output, Ref.ID, t.getId() + "_batter_buffer_four_bat", "machines", "has_plate", provider.hasSafeItem(PLATE.getMaterialTag(TIER_MATERIALS.get(t))),
-                    BATTERY_BUFFER_FOUR.getItem(t), of('P', PLATE.getMaterialTag(TIER_MATERIALS.get(t)), 'B', TIER_BATTERIES.get(t), 'W', TIER_WIRES.get(t).getBlockItem(PipeSize.SMALL)),"PPP", "WBW", "WPW");
-            provider.addItemRecipe(output, Ref.ID, t.getId() + "_batter_buffer_nine_bat", "machines", "has_plate", provider.hasSafeItem(PLATE.getMaterialTag(TIER_MATERIALS.get(t))),
-                    BATTERY_BUFFER_NINE.getItem(t), of('P', PLATE.getMaterialTag(TIER_MATERIALS.get(t)), 'B', TIER_BATTERIES.get(t), 'W', TIER_WIRES.get(t).getBlockItem(PipeSize.NORMAL)),"PPP", "WBW", "WPW");
         });
         provider.addItemRecipe(output, Ref.ID, "drum_bronze", "drums", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),
                 BRONZE_DRUM.getItem(LV), of('H', HAMMER.getTag(), 'R', ROD.getMaterialTag(Bronze), 'P', PLATE.getMaterialTag(Bronze)), " H ", "PRP", "PRP");
