@@ -6,6 +6,7 @@ import muramasa.antimatter.datagen.providers.AntimatterBlockStateProvider;
 import muramasa.antimatter.datagen.providers.AntimatterItemModelProvider;
 import muramasa.antimatter.dynamic.BlockDynamic;
 import muramasa.antimatter.dynamic.ModelConfig;
+import muramasa.antimatter.machine.BlockMachine;
 import muramasa.antimatter.machine.MachineState;
 import muramasa.antimatter.texture.Texture;
 import net.minecraft.block.Block;
@@ -31,8 +32,10 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.client.BakedModels;
 
 import javax.annotation.Nullable;
 
@@ -111,20 +114,24 @@ public class BlockSapBag  extends BlockDynamic implements IWaterLoggable {
 
     @Override
     public void onBlockModelBuild(Block block, AntimatterBlockStateProvider prov) {
-        AntimatterBlockModelBuilder builder = prov.getBuilder(block);
-        buildModelsForState(builder);
-        builder.property("particle", TEXTURES[2].toString());
-        prov.state(block, builder);
+        prov.getVariantBuilder(block).forAllStates(s -> ConfiguredModel.builder()
+                .modelFile(buildModelsForState(prov.getBuilder(block)))
+                .uvLock(true)
+                .build()
+        );
     }
 
     private int getModelId(Direction facing, int filled) {
         return facing.getHorizontalIndex() +  (filled * 10);
     }
 
-    void buildModelsForState(AntimatterBlockModelBuilder builder) {
+    AntimatterBlockModelBuilder buildModelsForState(AntimatterBlockModelBuilder builder) {
+        builder.staticConfigId("sap_bag");
         for (Direction f : Arrays.asList(NORTH, WEST, SOUTH, EAST)) {
             builder.config(getModelId(f, 0), (b, l) -> l.add(b.of(new ResourceLocation(domain, "block/sapbag/" + f.getString())).tex(of("side", TEXTURES[2], "bottom", TEXTURES[0], "top", TEXTURES[1]))));
         }
+        builder.property("particle", TEXTURES[2].toString());
+        return builder.loader(BakedModels.LOADER_SAP_BAG);
     }
 
     @Override

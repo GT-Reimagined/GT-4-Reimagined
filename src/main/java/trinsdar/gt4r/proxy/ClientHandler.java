@@ -13,9 +13,11 @@ import muramasa.antimatter.gui.screen.ScreenHatch;
 import muramasa.antimatter.gui.screen.ScreenMultiMachine;
 import muramasa.antimatter.gui.screen.ScreenSteamMachine;
 import muramasa.antimatter.machine.BlockMachine;
+import net.minecraft.client.Minecraft;
 import trinsdar.gt4r.GT4Reimagined;
 import trinsdar.gt4r.block.BlockCasing;
 import trinsdar.gt4r.block.BlockMachineMaterial;
+import trinsdar.gt4r.client.BakedModels;
 import trinsdar.gt4r.data.GT4RData;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
@@ -45,6 +47,8 @@ public class ClientHandler {
             AntimatterAPI.all(BlockMachineMaterial.class, b -> RenderTypeLookup.setRenderLayer(b, RenderType.getCutout()));
         });
 
+
+        BakedModels.init();
         ScreenSetup.<ContainerCover, ScreenButtonBackgroundCover<ContainerCover>>setScreenMapping(Data.COVER_MENU_HANDLER, ScreenButtonBackgroundCover::new);
         ScreenSetup.<ContainerHatch, ScreenHatchCustom<ContainerHatch>>setScreenMapping(Guis.HATCH_MENU_HANDLER_CUSTOM, ScreenHatchCustom::new);
         ScreenSetup.<ContainerBasicMachine, ScreenCoalBoiler<ContainerBasicMachine>>setScreenMapping(Guis.COAL_BOILER_MENU_HANDLER, ScreenCoalBoiler::new);
