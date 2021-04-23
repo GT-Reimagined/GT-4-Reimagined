@@ -12,6 +12,7 @@ import muramasa.antimatter.texture.Texture;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.IWaterLoggable;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.entity.LivingEntity;
@@ -51,7 +52,7 @@ public class BlockSapBag  extends BlockDynamic implements IWaterLoggable {
     final VoxelShape[] SHAPES;
     final Texture[] TEXTURES;
     public BlockSapBag() {
-        super(Ref.ID, "sap_bag", Block.Properties.create(Material.ORGANIC, MaterialColor.RED_TERRACOTTA).notSolid());
+        super(Ref.ID, "sap_bag", Block.Properties.create(Material.ORGANIC, MaterialColor.RED_TERRACOTTA).notSolid().hardnessAndResistance(0.5F).sound(SoundType.CLOTH));
         SHAPES = setBlockBounds2();
         TEXTURES = new Texture[]{new Texture(Ref.ID, "block/sapbag/bottom"), new Texture(Ref.ID, "block/sapbag/top"), new Texture(Ref.ID, "block/sapbag/side"), new Texture(Ref.ID, "block/sapbag/top_filled")};
     }

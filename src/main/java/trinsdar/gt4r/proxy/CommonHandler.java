@@ -1,6 +1,8 @@
 package trinsdar.gt4r.proxy;
 
 import muramasa.antimatter.tool.IAntimatterTool;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.FireBlock;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;

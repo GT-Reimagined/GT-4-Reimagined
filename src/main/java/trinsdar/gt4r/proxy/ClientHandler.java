@@ -2,6 +2,7 @@ package trinsdar.gt4r.proxy;
 
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.Data;
+import muramasa.antimatter.client.AntimatterModelLoader;
 import muramasa.antimatter.client.ScreenSetup;
 import muramasa.antimatter.gui.container.ContainerBasicMachine;
 import muramasa.antimatter.gui.container.ContainerCover;
@@ -13,7 +14,11 @@ import muramasa.antimatter.gui.screen.ScreenHatch;
 import muramasa.antimatter.gui.screen.ScreenMultiMachine;
 import muramasa.antimatter.gui.screen.ScreenSteamMachine;
 import muramasa.antimatter.machine.BlockMachine;
+import muramasa.antimatter.proxy.IProxyHandler;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoaderRegistry;
 import trinsdar.gt4r.GT4Reimagined;
 import trinsdar.gt4r.block.BlockCasing;
 import trinsdar.gt4r.block.BlockMachineMaterial;
@@ -35,7 +40,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class ClientHandler {
+public class ClientHandler implements IProxyHandler {
+
+    public ClientHandler(){
+        if (Minecraft.getInstance() != null){
+            BakedModels.init();
+            ModelLoaderRegistry.registerLoader(BakedModels.LOADER_SAP_BAG.getLoc(), BakedModels.LOADER_SAP_BAG);
+        }
+
+    }
 
     @SuppressWarnings("RedundantTypeArguments")
     public static void setup(FMLClientSetupEvent e) {
@@ -47,8 +60,6 @@ public class ClientHandler {
             AntimatterAPI.all(BlockMachineMaterial.class, b -> RenderTypeLookup.setRenderLayer(b, RenderType.getCutout()));
         });
 
-
-        BakedModels.init();
         ScreenSetup.<ContainerCover, ScreenButtonBackgroundCover<ContainerCover>>setScreenMapping(Data.COVER_MENU_HANDLER, ScreenButtonBackgroundCover::new);
         ScreenSetup.<ContainerHatch, ScreenHatchCustom<ContainerHatch>>setScreenMapping(Guis.HATCH_MENU_HANDLER_CUSTOM, ScreenHatchCustom::new);
         ScreenSetup.<ContainerBasicMachine, ScreenCoalBoiler<ContainerBasicMachine>>setScreenMapping(Guis.COAL_BOILER_MENU_HANDLER, ScreenCoalBoiler::new);
@@ -79,5 +90,15 @@ public class ClientHandler {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+    }
+
+    @Override
+    public World getClientWorld() {
+        return Minecraft.getInstance().world;
+    }
+
+    @Override
+    public PlayerEntity getClientPlayer() {
+        return Minecraft.getInstance().player;
     }
 }

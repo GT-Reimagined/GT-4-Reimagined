@@ -6,12 +6,14 @@ import muramasa.antimatter.AntimatterDynamics;
 import muramasa.antimatter.datagen.ExistingFileHelperOverride;
 import muramasa.antimatter.datagen.providers.*;
 import muramasa.antimatter.datagen.resources.DynamicDataPackFinder;
+import muramasa.antimatter.proxy.IProxyHandler;
 import muramasa.antimatter.recipe.loader.IRecipeRegistrate;
 import muramasa.antimatter.registration.RegistrationEvent;
 import muramasa.antimatter.AntimatterMod;
 import net.minecraft.resources.ResourcePackInfo;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
@@ -41,6 +43,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import trinsdar.gt4r.proxy.CommonHandler;
+import trinsdar.gt4r.proxy.ServerHandler;
 import trinsdar.gt4r.worldgen.GT4RFeatures;
 
 
@@ -48,11 +51,13 @@ import trinsdar.gt4r.worldgen.GT4RFeatures;
 public class GT4Reimagined extends AntimatterMod {
 
     public static GT4Reimagined INSTANCE;
+    public static IProxyHandler PROXY;
     public static Logger LOGGER = LogManager.getLogger(Ref.ID);
 
     public GT4Reimagined() {
         super();
         INSTANCE = this;
+        PROXY = DistExecutor.runForDist(() -> ClientHandler::new, () -> ServerHandler::new); // todo: scheduled to change in new Forge
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::serverSetup);
