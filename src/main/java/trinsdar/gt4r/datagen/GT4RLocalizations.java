@@ -31,7 +31,7 @@ public class GT4RLocalizations {
             add("block.gt4r.rubber_leaves", "Rubber Leaves");
             add("block.gt4r.rubber_log", "Rubber Log");
             add("block.gt4r.rubber_sapling", "Rubber Sapling");
-            add("attribute.name.generic.gt4r.attackReach", "Attack Reach");
+            add("attribute.name.generic.gt4r.attackReach", "Attack Reach");;
         }
 
         @Override
@@ -40,6 +40,7 @@ public class GT4RLocalizations {
             AntimatterAPI.all(BlockCasing.class, domain).forEach(i -> add(i, lowerUnderscoreToUpperSpaced(i.getId())));
             AntimatterAPI.all(ItemIntCircuit.class, domain).forEach(i -> add(i, "Integrated Circuit (" + i.circuitId + ")"));
             add(GT4RData.MixedMetal, lowerUnderscoreToUpperSpaced(GT4RData.MixedMetal.getId()));
+            add(GT4RData.SAP_BAG, lowerUnderscoreToUpperSpaced(GT4RData.SAP_BAG.getId()));
         }
     }
 

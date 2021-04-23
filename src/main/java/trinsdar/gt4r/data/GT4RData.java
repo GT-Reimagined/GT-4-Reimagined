@@ -17,6 +17,7 @@ import muramasa.antimatter.recipe.material.MaterialRecipe;
 import muramasa.antimatter.tool.AntimatterToolType;
 import muramasa.antimatter.tool.IAntimatterTool;
 import muramasa.antimatter.util.Utils;
+import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;
@@ -46,6 +47,7 @@ import trinsdar.gt4r.cover.CoverFusionOutput;
 import trinsdar.gt4r.cover.CoverPump;
 import trinsdar.gt4r.cover.CoverSteamVent;
 import trinsdar.gt4r.items.ItemIntCircuit;
+import trinsdar.gt4r.items.ItemMatch;
 import trinsdar.gt4r.items.ItemMixedMetal;
 import trinsdar.gt4r.items.MaterialSpear;
 import trinsdar.gt4r.tree.BlockRubberLeaves;
@@ -227,8 +229,8 @@ public class GT4RData {
     public static ItemBasic<?> ItemSuperconductor = new ItemBasic<>(Ref.ID, "superconductor").tip("Conducts Energy Losslessly");
 
     public static ItemBasic<?> LavaFilter = new ItemBasic<>(Ref.ID, "lava_filter");
-    public static ItemBasic<?> Match = new ItemBasic<>(Ref.ID, "match");
-    public static ItemBasic<?> MatchBook = new ItemBasic<>(Ref.ID, "match_book");
+    public static ItemBasic<ItemMatch> Match = new ItemMatch(Ref.ID, "match", new Item.Properties().group(muramasa.antimatter.Ref.TAB_ITEMS));
+    public static ItemBasic<ItemMatch> MatchBook = new ItemMatch(Ref.ID, "match_book", new Item.Properties().group(muramasa.antimatter.Ref.TAB_ITEMS).defaultMaxDamage(64));
     public static ItemBasic<?> Treetap = new ItemBasic<>(Ref.ID, "treetap", new Item.Properties().defaultMaxDamage(16).group(muramasa.antimatter.Ref.TAB_ITEMS));
 
     public static ItemBasic<?> MixedMetal = new ItemMixedMetal();

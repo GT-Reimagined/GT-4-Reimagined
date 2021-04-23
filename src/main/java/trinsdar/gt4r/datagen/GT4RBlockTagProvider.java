@@ -30,5 +30,6 @@ public class GT4RBlockTagProvider extends AntimatterBlockTagProvider {
         this.getOrCreateBuilder(TagUtils.getForgeBlockTag("machine_hull/advanced")).add(ADVANCED_MACHINE_BLOCK);
         this.getOrCreateBuilder(TagUtils.getForgeBlockTag("wg_stone")).add(GRANITE_BLACK.getState().getBlock(), GRANITE_RED.getState().getBlock(), MARBLE.getState().getBlock(), BASALT.getState().getBlock(), KOMATIITE.getState().getBlock(), LIMESTONE.getState().getBlock(), GREEN_SCHIST.getState().getBlock(), BLUE_SCHIST.getState().getBlock(), KIMBERLITE.getState().getBlock(), QUARTZITE.getState().getBlock());
         this.getOrCreateBuilder(TagUtils.getBlockTag(new ResourceLocation("minecraft","base_stone_overworld"))).add(GRANITE_BLACK.getState().getBlock(), GRANITE_RED.getState().getBlock(), MARBLE.getState().getBlock(), BASALT.getState().getBlock(), KOMATIITE.getState().getBlock(), LIMESTONE.getState().getBlock(), GREEN_SCHIST.getState().getBlock(), BLUE_SCHIST.getState().getBlock(), KIMBERLITE.getState().getBlock(), QUARTZITE.getState().getBlock());
+        this.getOrCreateBuilder(TagUtils.getBlockTag(new ResourceLocation("minecraft", "logs_that_burn"))).add(RUBBER_LOG);
     }
 }
