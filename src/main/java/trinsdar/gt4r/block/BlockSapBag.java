@@ -1,15 +1,13 @@
 package trinsdar.gt4r.block;
 
-import muramasa.antimatter.client.AntimatterModelManager;
+import com.google.common.collect.ImmutableList;
 import muramasa.antimatter.datagen.builder.AntimatterBlockModelBuilder;
+import muramasa.antimatter.datagen.builder.DynamicConfigBuilder;
 import muramasa.antimatter.datagen.providers.AntimatterBlockStateProvider;
 import muramasa.antimatter.datagen.providers.AntimatterItemModelProvider;
 import muramasa.antimatter.dynamic.BlockDynamic;
 import muramasa.antimatter.dynamic.ModelConfig;
-import muramasa.antimatter.machine.BlockMachine;
-import muramasa.antimatter.machine.MachineState;
 import muramasa.antimatter.texture.Texture;
-import muramasa.antimatter.tile.TileEntityMachine;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.IWaterLoggable;
@@ -22,8 +20,9 @@ import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.loot.LootContext;
+import net.minecraft.loot.LootParameters;
 import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
@@ -37,7 +36,6 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
@@ -49,6 +47,7 @@ import trinsdar.gt4r.tile.single.TileEntitySapBag;
 import javax.annotation.Nullable;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static com.google.common.collect.ImmutableMap.of;
 import static net.minecraft.state.properties.BlockStateProperties.HORIZONTAL_FACING;
@@ -80,7 +79,9 @@ public class BlockSapBag  extends BlockDynamic implements IWaterLoggable {
 
     @Override
     public ModelConfig getConfig(BlockState state, IBlockReader world, BlockPos.Mutable mut, BlockPos pos) {
-        return config.set(new int[]{getModelId(state.get(HORIZONTAL_FACING), 0)});
+        TileEntitySapBag tile = (TileEntitySapBag) world.getTileEntity(pos);
+        int filled = tile != null ? (tile.getSap().isEmpty() || tile.getSap().getCount() == 0 ? 0 : tile.getSap().getCount() < 11 ? 1 : tile.getSap().getCount() < 21 ? 2 : tile.getSap().getCount() < 31 ? 3 : tile.getSap().getCount() < 41 ? 4 : tile.getSap().getCount() < 51 ? 5 : 6 ) : 0;
+        return config.set(new int[]{getModelId(state.get(HORIZONTAL_FACING), filled)});
     }
 
     @Override
@@ -132,6 +133,19 @@ public class BlockSapBag  extends BlockDynamic implements IWaterLoggable {
         return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
     }
 
+    @Override
+    public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+        List<ItemStack> list = super.getDrops(state, builder);
+        TileEntity tileentity = builder.get(LootParameters.BLOCK_ENTITY);
+        if (tileentity instanceof TileEntitySapBag){
+            ItemStack stack = ((TileEntitySapBag)tileentity).getSap();
+            if (!stack.isEmpty()){
+                list.add(stack);
+            }
+        }
+        return list;
+    }
+
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
@@ -164,7 +178,17 @@ public class BlockSapBag  extends BlockDynamic implements IWaterLoggable {
     AntimatterBlockModelBuilder buildModelsForState(AntimatterBlockModelBuilder builder) {
         builder.staticConfigId("sap_bag");
         for (Direction f : Arrays.asList(NORTH, WEST, SOUTH, EAST)) {
-            builder.config(getModelId(f, 0), (b, l) -> l.add(b.of(new ResourceLocation(domain, "block/sapbag/" + f.getString())).tex(of("side", TEXTURES[2], "bottom", TEXTURES[0], "top", TEXTURES[1]))));
+            for (int i = 0; i < 7; i++){
+                String addition = i == 0 ? "" : "_filled_" + i;
+                int finalI = i;
+                builder.config(getModelId(f, i), (b, l) -> {
+                    DynamicConfigBuilder build = b.of(new ResourceLocation(domain, "block/sapbag/" + f.getString() + addition)).tex(of("side", TEXTURES[2], "bottom", TEXTURES[0], "top", TEXTURES[1]));
+                    if (finalI != 0){
+                        build.tex(TEXTURES[3]);
+                    }
+                    return l.add(build);
+                });
+            }
         }
         builder.property("particle", TEXTURES[2].toString());
         return builder.loader(BakedModels.LOADER_SAP_BAG);
