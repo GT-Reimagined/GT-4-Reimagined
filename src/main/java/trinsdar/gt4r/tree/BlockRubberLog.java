@@ -34,9 +34,9 @@ import java.util.Random;
 
 public class BlockRubberLog extends BlockBasic {
 
-    final static EnumProperty<ResinState> RESIN_STATE = EnumProperty.create("resin_state", ResinState.class);
-    final static DirectionProperty RESIN_FACING = BlockStateProperties.HORIZONTAL_FACING;
-    final static EnumProperty<Direction.Axis> AXIS = BlockStateProperties.AXIS;
+    public final static EnumProperty<ResinState> RESIN_STATE = EnumProperty.create("resin_state", ResinState.class);
+    public final static DirectionProperty RESIN_FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public final static EnumProperty<Direction.Axis> AXIS = BlockStateProperties.AXIS;
 
     public BlockRubberLog(String domain, String id) {
         super(domain, id, Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F).sound(SoundType.WOOD).tickRandomly());

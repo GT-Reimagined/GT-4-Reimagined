@@ -44,6 +44,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import trinsdar.gt4r.proxy.CommonHandler;
 import trinsdar.gt4r.proxy.ServerHandler;
+import trinsdar.gt4r.tile.TileEntityTypes;
 import trinsdar.gt4r.worldgen.GT4RFeatures;
 
 
@@ -141,6 +142,7 @@ public class GT4Reimagined extends AntimatterMod {
                 Materials.init();
                 GT4RData.init(side);
                 Machines.init();
+                TileEntityTypes.init();
                 Guis.init(side);
                 Models.init();
                 break;

@@ -9,6 +9,7 @@ import muramasa.antimatter.dynamic.ModelConfig;
 import muramasa.antimatter.machine.BlockMachine;
 import muramasa.antimatter.machine.MachineState;
 import muramasa.antimatter.texture.Texture;
+import muramasa.antimatter.tile.TileEntityMachine;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.IWaterLoggable;
@@ -16,6 +17,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItemUseContext;
@@ -23,20 +25,26 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.client.BakedModels;
+import trinsdar.gt4r.tile.TileEntityTypes;
+import trinsdar.gt4r.tile.single.TileEntitySapBag;
 
 import javax.annotation.Nullable;
 
@@ -87,26 +95,53 @@ public class BlockSapBag  extends BlockDynamic implements IWaterLoggable {
         return this.getDefaultState().with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing()).with(WATERLOGGED, fluidstate.getFluid() == Fluids.WATER);
     }
 
-    /*@Override
+    @Override
     public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         if (placer != null) { //Y = 0 , reduce to xz plane
             Direction dir = getFacingFromVector((float) placer.getLookVec().x, (float) 0, (float) placer.getLookVec().z);
             world.setBlockState(pos, state.with(HORIZONTAL_FACING, dir));
+            TileEntity tile = world.getTileEntity(pos);
+            if (tile instanceof TileEntitySapBag){
+                ((TileEntitySapBag)tile).setFacing(dir);
+            }
         }
-    }*/
+    }
 
-    /*@Nullable
+    @Override
+    public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
+        super.neighborChanged(state, worldIn, pos, blockIn, fromPos, isMoving);
+        TileEntity tile = worldIn.getTileEntity(pos);
+        if (tile instanceof TileEntitySapBag){
+            ((TileEntitySapBag)tile).onBlockUpdate();
+        }
+    }
+
+    @Override
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        TileEntity tile = worldIn.getTileEntity(pos);
+        if (tile instanceof TileEntitySapBag){
+            TileEntitySapBag sapBag = (TileEntitySapBag) tile;
+            if (!sapBag.getSap().isEmpty()){
+                if (!player.addItemStackToInventory(sapBag.getSap().copy())){
+                    player.dropItem(sapBag.getSap().copy(), false);
+                }
+                sapBag.setSap(ItemStack.EMPTY);
+                return ActionResultType.SUCCESS;
+            }
+        }
+        return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+    }
+
+    @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        TileEntityMachine machine = (TileEntityMachine)getType().getTileType().create();
-        machine.ofState(state);
-        return machine;
+        return TileEntityTypes.SAP_BAG_TYPE.create();
     }
 
     @Override
     public boolean hasTileEntity(BlockState state) {
         return true;
-    }*/
+    }
 
     @Override
     public void onItemModelBuild(IItemProvider item, AntimatterItemModelProvider prov) {
