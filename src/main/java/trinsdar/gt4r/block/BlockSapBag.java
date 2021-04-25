@@ -127,6 +127,7 @@ public class BlockSapBag  extends BlockDynamic implements IWaterLoggable {
                     player.dropItem(sapBag.getSap().copy(), false);
                 }
                 sapBag.setSap(ItemStack.EMPTY);
+                sapBag.onFirstTick();
                 return ActionResultType.SUCCESS;
             }
         }
@@ -184,7 +185,7 @@ public class BlockSapBag  extends BlockDynamic implements IWaterLoggable {
                 builder.config(getModelId(f, i), (b, l) -> {
                     DynamicConfigBuilder build = b.of(new ResourceLocation(domain, "block/sapbag/" + f.getString() + addition)).tex(of("side", TEXTURES[2], "bottom", TEXTURES[0], "top", TEXTURES[1]));
                     if (finalI != 0){
-                        build.tex(TEXTURES[3]);
+                        build.tex(of("side", TEXTURES[2], "bottom", TEXTURES[0], "top", TEXTURES[1],"topfilled", TEXTURES[3]));
                     }
                     return l.add(build);
                 });
