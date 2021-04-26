@@ -31,7 +31,7 @@ public class TileEntitySapBag extends TileEntityTickable {
                     setSap(new ItemStack(GT4RData.StickyResin, amount));
                     successful = true;
                 } else if (sap.getCount() < 64){
-                    sap.grow(amount);
+                    growSap(amount);
                     successful = true;
                 }
                 if (successful){
@@ -58,7 +58,13 @@ public class TileEntitySapBag extends TileEntityTickable {
     }
 
     public void setSap(ItemStack sap) {
+        this.sidedSync(true);
         this.sap = sap;
+    }
+
+    public void growSap(int amount){
+        this.sidedSync(true);
+        this.sap.grow(amount);
     }
 
     @Override

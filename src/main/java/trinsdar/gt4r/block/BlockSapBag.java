@@ -1,6 +1,7 @@
 package trinsdar.gt4r.block;
 
 import com.google.common.collect.ImmutableList;
+import muramasa.antimatter.Antimatter;
 import muramasa.antimatter.datagen.builder.AntimatterBlockModelBuilder;
 import muramasa.antimatter.datagen.builder.DynamicConfigBuilder;
 import muramasa.antimatter.datagen.providers.AntimatterBlockStateProvider;
@@ -81,6 +82,11 @@ public class BlockSapBag  extends BlockDynamic implements IWaterLoggable {
     public ModelConfig getConfig(BlockState state, IBlockReader world, BlockPos.Mutable mut, BlockPos pos) {
         TileEntitySapBag tile = (TileEntitySapBag) world.getTileEntity(pos);
         int filled = tile != null ? (tile.getSap().isEmpty() || tile.getSap().getCount() == 0 ? 0 : tile.getSap().getCount() < 11 ? 1 : tile.getSap().getCount() < 21 ? 2 : tile.getSap().getCount() < 31 ? 3 : tile.getSap().getCount() < 41 ? 4 : tile.getSap().getCount() < 51 ? 5 : 6 ) : 0;
+        Antimatter.LOGGER.info("tile null? " + (tile == null));
+        if (tile != null){
+            Antimatter.LOGGER.info("sap empty? " + tile.getSap().isEmpty());
+        }
+        Antimatter.LOGGER.info("filled: " + filled);
         return config.set(new int[]{getModelId(state.get(HORIZONTAL_FACING), filled)});
     }
 

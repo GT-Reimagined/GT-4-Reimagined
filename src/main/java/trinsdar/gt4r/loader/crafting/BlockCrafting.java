@@ -10,6 +10,7 @@ import java.util.function.Consumer;
 
 import static com.google.common.collect.ImmutableMap.of;
 import static muramasa.antimatter.Data.PLATE;
+import static muramasa.antimatter.Data.SAW;
 import static trinsdar.gt4r.data.CustomTags.*;
 import static trinsdar.gt4r.data.CustomTags.CIRCUITS_ADVANCED;
 import static trinsdar.gt4r.data.GT4RData.*;
@@ -37,6 +38,7 @@ public class BlockCrafting {
                 new ItemStack(ADVANCED_MACHINE_BLOCK, 1), of('A', AdvancedAlloy, 'C', PLATE.getMaterialTag(Carbon), 'M', MACHINE_HULLS_BASIC), " C ", "AMA", " C ");
         provider.addStackRecipe(output, Ref.ID, "machine_block_advanced_2", "blocks", "has_machine_hull_basic", provider.hasSafeItem(MACHINE_HULLS_BASIC),
                 new ItemStack(ADVANCED_MACHINE_BLOCK, 1), of('A', AdvancedAlloy, 'C', PLATE.getMaterialTag(Carbon), 'M', MACHINE_HULLS_BASIC), " A ", "CMC", " A ");
-
+        provider.addStackRecipe(output, Ref.ID, "sapbag", "blocks", "has_saw", provider.hasSafeItem(SAW.getTag()),
+                new ItemStack(SAP_BAG), of('L', Tags.Items.LEATHER, 'S', SAW.getTag(), 's', getTag("rods/wooden")), "sss", "LSL", "LLL");
     }
 }
