@@ -11,7 +11,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.IBlockReader;
 import net.minecraftforge.common.ToolType;
+import trinsdar.gt4r.data.GT4RData;
+import trinsdar.gt4r.tile.TileEntityTypes;
 
 import javax.annotation.Nullable;
 
@@ -43,5 +47,16 @@ public class BlockCasing extends BlockDynamic {
     //Hierarchial block builder.
     protected AntimatterBlockModelBuilder buildBlock(Block block, AntimatterBlockStateProvider prov) {
         return null;
+    }
+
+    @Override
+    public boolean hasTileEntity(BlockState state) {
+        return this == GT4RData.FIRE_BRICKS;
+    }
+
+    @Nullable
+    @Override
+    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+        return TileEntityTypes.SLAVE_CONTROLLER_TYPE.create();
     }
 }

@@ -11,7 +11,12 @@ public class TileEntityPrimitiveBlastFurnace extends TileEntityBasicMultiMachine
         super(type);
     }
 
-//    @Override
+    @Override
+    public int maxShares() {
+        return 0;
+    }
+
+    //    @Override
 //    public boolean onStructureFormed() {
 //        super.onStructureFormed();
 //        int3 controller = new int3(getPos(), getFacing());
