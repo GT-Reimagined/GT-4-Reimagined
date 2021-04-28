@@ -82,11 +82,6 @@ public class BlockSapBag  extends BlockDynamic implements IWaterLoggable {
     public ModelConfig getConfig(BlockState state, IBlockReader world, BlockPos.Mutable mut, BlockPos pos) {
         TileEntitySapBag tile = (TileEntitySapBag) world.getTileEntity(pos);
         int filled = tile != null ? (tile.getSap().isEmpty() || tile.getSap().getCount() == 0 ? 0 : tile.getSap().getCount() < 11 ? 1 : tile.getSap().getCount() < 21 ? 2 : tile.getSap().getCount() < 31 ? 3 : tile.getSap().getCount() < 41 ? 4 : tile.getSap().getCount() < 51 ? 5 : 6 ) : 0;
-        Antimatter.LOGGER.info("tile null? " + (tile == null));
-        if (tile != null){
-            Antimatter.LOGGER.info("sap empty? " + tile.getSap().isEmpty());
-        }
-        Antimatter.LOGGER.info("filled: " + filled);
         return config.set(new int[]{getModelId(state.get(HORIZONTAL_FACING), filled)});
     }
 
@@ -172,7 +167,7 @@ public class BlockSapBag  extends BlockDynamic implements IWaterLoggable {
     @Override
     public void onBlockModelBuild(Block block, AntimatterBlockStateProvider prov) {
         prov.getVariantBuilder(block).forAllStates(s -> ConfiguredModel.builder()
-                .modelFile(buildModelsForState(prov.getBuilder(block)))
+                .modelFile(buildModelsForState(prov.getBuilder(block), s))
                 .uvLock(true)
                 .build()
         );
@@ -182,9 +177,11 @@ public class BlockSapBag  extends BlockDynamic implements IWaterLoggable {
         return facing.getHorizontalIndex() +  (filled * 10);
     }
 
-    AntimatterBlockModelBuilder buildModelsForState(AntimatterBlockModelBuilder builder) {
+    AntimatterBlockModelBuilder buildModelsForState(AntimatterBlockModelBuilder builder, BlockState state) {
         builder.staticConfigId("sap_bag");
-        for (Direction f : Arrays.asList(NORTH, WEST, SOUTH, EAST)) {
+        Direction f = state.get(HORIZONTAL_FACING);
+        boolean waterlogged = state.get(WATERLOGGED);
+        if (!waterlogged){
             for (int i = 0; i < 7; i++){
                 String addition = i == 0 ? "" : "_filled_" + i;
                 int finalI = i;

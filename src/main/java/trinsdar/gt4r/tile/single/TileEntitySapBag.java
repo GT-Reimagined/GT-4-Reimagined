@@ -81,4 +81,12 @@ public class TileEntitySapBag extends TileEntityTickable {
         this.facing = Direction.byIndex(nbt.getInt("F"));
         this.sap = ItemStack.read(nbt.getCompound("S"));
     }
+
+    @Override
+    public CompoundNBT getUpdateTag() {
+        CompoundNBT tag = super.getUpdateTag();
+        tag.putInt("F", facing.getIndex());
+        tag.put("S", sap.write(new CompoundNBT()));
+        return tag;
+    }
 }
