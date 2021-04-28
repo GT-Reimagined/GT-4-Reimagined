@@ -1,9 +1,5 @@
-//def folder = new File( 'AntimatterAPI' )
-include 'AntimatterAPI'
-project(':AntimatterAPI').setProjectDir(new File("AntimatterAPI"))
-include 'TesseractAPI'
-project(':TesseractAPI').setProjectDir(new File("AntimatterAPI/TesseractAPI"))
-/*if(folder.exists() ) {
+def folder = new File( 'AntimatterAPI' )
+if(folder.exists() ) {
     include 'AntimatterAPI'
     project(':AntimatterAPI').setProjectDir(new File("AntimatterAPI"))
     def tesseract = new File( 'AntimatterAPI/TesseractAPI')
@@ -11,4 +7,4 @@ project(':TesseractAPI').setProjectDir(new File("AntimatterAPI/TesseractAPI"))
         include 'TesseractAPI'
         project(':TesseractAPI').setProjectDir(new File("AntimatterAPI/TesseractAPI"))
     }
-}*/
+}

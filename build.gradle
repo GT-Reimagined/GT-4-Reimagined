@@ -123,8 +123,9 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
             //jvmArgs '-javaagent:/opt/JavaHot/hotswap-agent.jar -XX:TraceRedefineClasses=1'
             //Comment this if you aren't developing against antimatter locally.
-            arg "-mixin.config=gt4r.mixins.json"
+
             if (findProject(':AntimatterAPI') != null) arg "-mixin.config=antimatter.mixins.json"
+            arg "-mixin.config=gt4r.mixins.json"
             if (shouldCheckEnv()) {
                 environment 'MOD_CLASSES', getEnv()
             }
