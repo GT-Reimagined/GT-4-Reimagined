@@ -17,12 +17,17 @@ import muramasa.antimatter.recipe.material.MaterialRecipe;
 import muramasa.antimatter.tool.AntimatterToolType;
 import muramasa.antimatter.tool.IAntimatterTool;
 import muramasa.antimatter.util.Utils;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Tuple;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockReader;
 import net.minecraftforge.api.distmarker.Dist;
 import tesseract.api.capability.TesseractGTCapability;
 import trinsdar.gt4r.block.BlockCasing;
@@ -332,9 +337,9 @@ public class GT4RData {
     public static final BlockCasing ADVANCED_MACHINE_BLOCK = new BlockCasing(Ref.ID, "advanced_machine_block");
 
     public static final BlockCasing FIRE_BRICKS = new BlockCasing(Ref.ID, "fire_bricks");
-    public static final BlockCasing REINFORCED_GLASS = new BlockCasing(Ref.ID, "reinforced_glass");
-    public static final BlockCasing REINFORCED_STONE = new BlockCasing(Ref.ID, "reinforced_stone");
-    public static final BlockCasing IRIDIUM_REINFORCED_STONE = new BlockCasing(Ref.ID, "iridium_reinforced_stone");
+    public static final BlockCasing REINFORCED_GLASS = new BlockCasing(Ref.ID, "reinforced_glass", Block.Properties.create(net.minecraft.block.material.Material.GLASS).hardnessAndResistance(15.0f, 150.0f).sound(SoundType.GLASS).setRequiresTool().harvestLevel(2).notSolid().setAllowsSpawn(GT4RData::neverAllowSpawn).setOpaque(GT4RData::isntSolid).setSuffocates(GT4RData::isntSolid).setBlocksVision(GT4RData::isntSolid));
+    public static final BlockCasing REINFORCED_STONE = new BlockCasing(Ref.ID, "reinforced_stone", Block.Properties.create(net.minecraft.block.material.Material.ROCK).hardnessAndResistance(80.0f, 150.0f).sound(SoundType.STONE).setRequiresTool().harvestLevel(2));
+    public static final BlockCasing IRIDIUM_REINFORCED_STONE = new BlockCasing(Ref.ID, "iridium_reinforced_stone", Block.Properties.create(net.minecraft.block.material.Material.ROCK).hardnessAndResistance(80.0f, 150.0f).sound(SoundType.STONE).setRequiresTool().harvestLevel(2));
 
     public static final BlockCasing FUSION_COIL = new BlockCasing(Ref.ID, "fusion_coil");
 
@@ -399,4 +404,12 @@ public class GT4RData {
     public static ImmutableMap<Tier, Item> TIER_ROTORS;
     public static ImmutableMap<Tier, Item> TIER_BATTERIES;
     public static ImmutableMap<Tier, FluidPipe> TIER_PIPES;
+
+    public static Boolean isntSolid(BlockState state, IBlockReader reader, BlockPos pos) {
+        return false;
+    }
+
+    private static Boolean neverAllowSpawn(BlockState state, IBlockReader reader, BlockPos pos, EntityType<?> entity) {
+        return false;
+    }
 }

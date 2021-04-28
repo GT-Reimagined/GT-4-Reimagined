@@ -12,7 +12,11 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Direction;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ToolType;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.tile.TileEntityTypes;
@@ -58,5 +62,19 @@ public class BlockCasing extends BlockDynamic {
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
         return TileEntityTypes.SLAVE_CONTROLLER_TYPE.create();
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public float getAmbientOcclusionLightValue(BlockState state, IBlockReader worldIn, BlockPos pos) {
+        return this == GT4RData.REINFORCED_GLASS ? 1.0F : super.getAmbientOcclusionLightValue(state, worldIn, pos);
+    }
+
+   /* public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos) {
+        return true;
+    }*/
+
+    @OnlyIn(Dist.CLIENT)
+    public boolean isSideInvisible(BlockState state, BlockState adjacentBlockState, Direction side) {
+        return (this == GT4RData.REINFORCED_GLASS && adjacentBlockState.isIn(this)) || super.isSideInvisible(state, adjacentBlockState, side);
     }
 }

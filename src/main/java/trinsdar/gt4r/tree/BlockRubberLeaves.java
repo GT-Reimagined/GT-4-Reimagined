@@ -7,7 +7,6 @@ import muramasa.antimatter.registration.ITextureProvider;
 import muramasa.antimatter.texture.Texture;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -16,13 +15,14 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
+import trinsdar.gt4r.data.GT4RData;
 
 public class BlockRubberLeaves extends LeavesBlock implements IAntimatterObject, IModelProvider, ITextureProvider {
 
     protected String domain, id;
 
     public BlockRubberLeaves(String domain, String id) {
-        super(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT).notSolid().setAllowsSpawn(BlockRubberLeaves::allowsSpawnOnLeaves).setSuffocates(BlockRubberLeaves::isntSolid).setBlocksVision(BlockRubberLeaves::isntSolid));
+        super(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT).notSolid().setAllowsSpawn(BlockRubberLeaves::allowsSpawnOnLeaves).setSuffocates(GT4RData::isntSolid).setBlocksVision(GT4RData::isntSolid));
         this.domain = domain;
         this.id = id;
         AntimatterAPI.register(BlockRubberLeaves.class, id, this);
@@ -57,7 +57,4 @@ public class BlockRubberLeaves extends LeavesBlock implements IAntimatterObject,
         return entity == EntityType.OCELOT || entity == EntityType.PARROT;
     }
 
-    private static Boolean isntSolid(BlockState state, IBlockReader reader, BlockPos pos) {
-        return false;
-    }
 }

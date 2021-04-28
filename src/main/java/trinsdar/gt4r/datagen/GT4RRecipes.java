@@ -70,10 +70,11 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
 
     @Override
     public void registerRecipes(Consumer<IFinishedRecipe> consumer) {
+        super.registerRecipes(consumer);
         registerMaterialRecipes(consumer, muramasa.antimatter.Ref.ID);
-        registerPipeRecipes(consumer, muramasa.antimatter.Ref.ID);
-        registerToolRecipes(consumer, muramasa.antimatter.Ref.ID);
-        craftingLoaders.forEach(cl -> cl.loadRecipes(consumer,this));
+        //registerPipeRecipes(consumer, muramasa.antimatter.Ref.ID);
+        //registerToolRecipes(consumer, muramasa.antimatter.Ref.ID);
+        //craftingLoaders.forEach(cl -> cl.loadRecipes(consumer,this));
         addConditionalRecipe(consumer, getStackRecipe("", "has_sulfur_dust", criterion(getForgeItemTag("dusts/sulfur"), this),
                 new ItemStack(Blocks.TORCH, 6), of('D', getForgeItemTag("dusts/sulfur"), 'R', Tags.Items.RODS_WOODEN), "D", "R"), Ref.class, "sulfurTorch", Ref.ID, "sulfur_torch");
         addItemRecipe(consumer, Ref.ID, "chainmail_helmet", "chainmail_armor", "has_hammer", hasSafeItem(HAMMER.getTag()),
@@ -169,7 +170,7 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
                     "has_wrench", in, CROWBAR.getToolStack(NULL, NULL), of('H', HAMMER.getTag(), 'C', PropertyIngredient.builder("secondary").itemTags(Tags.Items.DYES).build(), 'R', PropertyIngredient.builder("primary").types(ROD).tool(CROWBAR, true).build(), 'F', FILE.getTag()), "HCR", "CRC", "RCF");
         }
 
-        List<Material> handleMats = AntimatterAPI.all(Material.class).stream().filter(m -> (m.getDomain().equals(providerDomain) && m.isHandle())).collect(Collectors.toList());
+        List<Material> handleMats = AntimatterAPI.all(Material.class).stream().filter(m -> (m.getDomain().equals(providerDomain) && m.has(HANDLE))).collect(Collectors.toList());
 
         handleMats.forEach(handle -> AntimatterAPI.all(Material.class).stream().filter(m -> (m.getDomain().equals(providerDomain) && m.has(RUBBERTOOLS))).forEach(rubber -> {
             ITag<Item> ingotTag = TagUtils.getForgeItemTag("ingots/" + rubber.getId()), rodTag = TagUtils.getForgeItemTag("rods/" + handle.getId());
