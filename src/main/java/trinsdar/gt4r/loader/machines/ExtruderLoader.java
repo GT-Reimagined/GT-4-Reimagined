@@ -39,12 +39,14 @@ public class ExtruderLoader {
             }
         });
         AntimatterAPI.all(Wire.class).forEach(t -> {
+            if (!t.getMaterial().has(INGOT)) return;
             Item wireItem = t.getBlockItem(PipeSize.VTINY);
             ItemStack stack = new ItemStack(wireItem,2);
             EXTRUDING.RB().ii(INGOT.getMaterialIngredient(t.getMaterial(),1), getReusable(GT4RData.ShapeWire)).io(stack).add(t.getMaterial().getMass()*2,96);
         });
 
         AntimatterAPI.all(FluidPipe.class).forEach(t -> {
+            if (!t.getMaterial().has(INGOT)) return;
             Item pipeTiny = t.getBlockItem(PipeSize.TINY);
             Item pipeSmall = t.getBlockItem(PipeSize.SMALL);
             Item pipeNormal = t.getBlockItem(PipeSize.NORMAL);
@@ -58,6 +60,7 @@ public class ExtruderLoader {
         });
 
         AntimatterAPI.all(ItemPipe.class).forEach(t -> {
+            if (!t.getMaterial().has(INGOT)) return;
             Item pipeNormal = t.getBlockItem(PipeSize.NORMAL);
             Item pipeLarge = t.getBlockItem(PipeSize.LARGE);
             Item pipeHuge = t.getBlockItem(PipeSize.HUGE);

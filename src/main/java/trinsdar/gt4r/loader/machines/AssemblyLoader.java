@@ -84,7 +84,7 @@ public class AssemblyLoader {
         ASSEMBLING.RB().ii(INGOT.getMaterialIngredient(Iron, 4), DUST.getMaterialIngredient(Redstone, 1)).io(new ItemStack(Items.COMPASS)).add(400, 4);
         ASSEMBLING.RB().ii(INGOT.getMaterialIngredient(Gold, 4), DUST.getMaterialIngredient(Redstone, 1)).io(new ItemStack(Items.CLOCK)).add(400, 4);
         ASSEMBLING.RB().ii(of(getTag("forge", "rods/wooden"), 1), of(StickyResin, 1)).io(new ItemStack(Items.TORCH, 6)).add(400, 1);
-        ASSEMBLING.RB().ii(GEM.getMaterialIngredient(Coal, 8), GEM.getMaterialIngredient(Flint, 1)).io(new ItemStack(CompressedCoalBall)).add(400, 4);
+        ASSEMBLING.RB().ii(of(Items.COAL, 8), GEM.getMaterialIngredient(Flint, 1)).io(new ItemStack(CompressedCoalBall)).add(400, 4);
         ASSEMBLING.RB().ii(of(getTag("forge", "rods/wooden"), 1), of(Tags.Items.COBBLESTONE, 1)).io(new ItemStack(Items.LEVER, 1)).add(400, 1);
         ASSEMBLING.RB().ii(of(CircuitBoardBasic, 1), of(CABLE_COPPER.getBlockItem(PipeSize.VTINY), 3)).io(new ItemStack(CircuitBasic)).add(800, 1);
         ASSEMBLING.RB().ii(of(CompressedCoalBall, 8), of(BLOCK.getMaterialTag(Iron), 1)).io(new ItemStack(CoalChunk)).add(400, 4);
