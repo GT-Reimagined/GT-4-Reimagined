@@ -26,6 +26,7 @@ import static trinsdar.gt4r.loader.crafting.CraftingHelper.criterion;
 public class ToolCraftingTableRecipes {
     @SuppressWarnings("unchecked")
     public static void loadRecipes(Consumer<IFinishedRecipe> output, AntimatterRecipeProvider provider) {
+        int wireAmount = GT4RConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 1 : 2;
         AntimatterAPI.all(Wire.class, wire -> {
             Cable<?> cable = AntimatterAPI.get(Cable.class, "cable" + "_" + wire.getMaterial().getId());
             ImmutableSet<PipeSize> sizes = wire.getSizes();
@@ -51,7 +52,7 @@ public class ToolCraftingTableRecipes {
             }
             if (wire.getMaterial().has(PLATE)) {
                 provider.shapeless(output, "platewire","wire","has_cutter", criterion(WIRE_CUTTER.getTag(), provider),
-                        new ItemStack(wires.get(VTINY)),
+                        new ItemStack(wires.get(VTINY), wireAmount),
                         WIRE_CUTTER.getTag(), PLATE.getMaterialTag(wire.getMaterial()));
             }
         });
