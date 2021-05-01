@@ -2,7 +2,11 @@ package trinsdar.gt4r.tile.single;
 
 import muramasa.antimatter.Ref;
 import muramasa.antimatter.capability.fluid.FluidTanks;
+import muramasa.antimatter.capability.machine.MachineCoverHandler;
+import muramasa.antimatter.capability.machine.MachineEnergyHandler;
 import muramasa.antimatter.capability.machine.MachineFluidHandler;
+import muramasa.antimatter.capability.machine.MachineItemHandler;
+import muramasa.antimatter.capability.machine.MachineRecipeHandler;
 import muramasa.antimatter.machine.event.ContentEvent;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.tile.TileEntityMachine;
@@ -10,6 +14,7 @@ import muramasa.antimatter.tool.AntimatterToolType;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
@@ -20,6 +25,7 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import trinsdar.gt4r.machine.MaterialMachine;
 
@@ -31,6 +37,8 @@ import static trinsdar.gt4r.data.Materials.*;
 
 public class TileEntityDrum extends TileEntityMachine {
     Material material;
+    FluidStack drop = FluidStack.EMPTY;
+    boolean output = false;
     public TileEntityDrum(MaterialMachine type) {
         super(type);
         material = type.getMaterial();
@@ -54,6 +62,23 @@ public class TileEntityDrum extends TileEntityMachine {
             return ActionResultType.SUCCESS;
         }
         return ActionResultType.PASS;
+    }
+
+    @Override
+    public void onRemove() {
+        this.fluidHandler.ifPresent(f -> {
+            this.drop = f.getFluidInTank(0);
+            this.output = ((DrumFluidHandler)f).isOutput();
+        });
+       super.onRemove();
+    }
+
+    public FluidStack getDrop() {
+        return drop;
+    }
+
+    public boolean isOutput() {
+        return output;
     }
 
     public static class DrumFluidHandler extends MachineFluidHandler<TileEntityDrum>{
@@ -111,6 +136,19 @@ public class TileEntityDrum extends TileEntityMachine {
                     }
                 }
             }
+        }
+
+        @Override
+        public CompoundNBT serializeNBT() {
+            CompoundNBT nbt = super.serializeNBT();
+            nbt.putBoolean("Output", output);
+            return nbt;
+        }
+
+        @Override
+        public void deserializeNBT(CompoundNBT nbt) {
+            super.deserializeNBT(nbt);
+            this.output = nbt.getBoolean("Output");
         }
     }
 }
