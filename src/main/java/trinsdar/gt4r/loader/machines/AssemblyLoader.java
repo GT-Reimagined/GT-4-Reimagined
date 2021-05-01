@@ -94,8 +94,8 @@ public class AssemblyLoader {
         ASSEMBLING.RB().ii(of(PLATE.getMaterialTag(Wood), 8), DUST.getMaterialIngredient(Redstone, 1)).io(new ItemStack(Items.NOTE_BLOCK)).add(800, 1);
         ASSEMBLING.RB().ii(of(PLATE.getMaterialTag(Wood), 8), GEM.getMaterialIngredient(Diamond, 1)).io(new ItemStack(Items.JUKEBOX)).add(1600, 1);
         ASSEMBLING.RB().ii(of(AdvancedAlloy, 2), of(Tags.Items.GLASS, 7)).io(new ItemStack(REINFORCED_GLASS, 7)).add(400, 4);
-        ASSEMBLING.RB().ii(of(getTag("minecraft", "planks"), 1), DUST.getMaterialIngredient(Redstone, 1)).io(new ItemStack(Items.NOTE_BLOCK)).add(800, 1);
-        ASSEMBLING.RB().ii(of(getTag("minecraft", "planks"), 1), GEM.getMaterialIngredient(Diamond, 1)).io(new ItemStack(Items.JUKEBOX)).add(1600, 1);
+        ASSEMBLING.RB().ii(of(getTag("minecraft", "planks"), 8), DUST.getMaterialIngredient(Redstone, 1)).io(new ItemStack(Items.NOTE_BLOCK)).add(800, 1);
+        ASSEMBLING.RB().ii(of(getTag("minecraft", "planks"), 8), GEM.getMaterialIngredient(Diamond, 1)).io(new ItemStack(Items.JUKEBOX)).add(1600, 1);
         ASSEMBLING.RB().ii(of(CompressedCoalBall, 8), of(getForgeItemTag("obsidian"), 1)).io(new ItemStack(CoalChunk)).add(400, 4);
         ASSEMBLING.RB().ii(of(CABLE_TIN.getBlockItem(PipeSize.VTINY), 1), PLATE.getMaterialIngredient(BatteryAlloy, 1)).io(new ItemStack(BatteryHullSmall)).add(800, 1);
         ASSEMBLING.RB().ii(of(CABLE_COPPER.getBlockItem(PipeSize.VTINY), 2), PLATE.getMaterialIngredient(BatteryAlloy, 3)).io(new ItemStack(BatteryHullMedium)).add(1600, 2);

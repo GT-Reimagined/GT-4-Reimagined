@@ -34,7 +34,7 @@ public class CompressorLoader {
         COMPRESSING.RB().ii(RecipeIngredient.of(Items.SAND, 4)).io(new ItemStack(Items.SANDSTONE)).add(400, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(Items.RED_SAND, 4)).io(new ItemStack(Items.RED_SANDSTONE)).add(400, 2);
         COMPRESSING.RB().ii(DUST.getMaterialIngredient(Energium, 9)).io(new ItemStack(GT4RData.EnergyCrystal)).add(400, 2);
-        COMPRESSING.RB().ii(DUST.getMaterialIngredient(Wood, 8)).io(PLATE.get(Wood, 1)).add(400, 2);
+        COMPRESSING.RB().ii(DUST.getMaterialIngredient(Wood, 1)).io(PLATE.get(Wood, 1)).add(400, 2);
         COMPRESSING.RB().ii(DUST.getMaterialIngredient(Fireclay, 1)).io(new ItemStack(CompressedFireClay)).add(400, 2);
     }
 }
