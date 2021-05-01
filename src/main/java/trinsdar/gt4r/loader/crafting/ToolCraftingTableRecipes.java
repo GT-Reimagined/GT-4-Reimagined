@@ -31,11 +31,19 @@ public class ToolCraftingTableRecipes {
             ImmutableSet<PipeSize> sizes = wire.getSizes();
             Map<PipeSize, Item> wires = sizes.stream().map(s -> new Pair<>(s, wire.getBlockItem(s))).collect(Collectors.toMap(Pair::getFirst, Pair::getSecond));
             PipeSize[] val = values();
-            for (int i = 1; i < val.length; i += 2) {
-                twoToOne(wires, val[i-1], val[i], output,provider);
-                oneToTwo(wires, val[i], val[i-1], output, provider);
+            for (int i = 1; i < val.length; i ++) {
+                int offset = val[i] == HUGE ? 1 : 0;
+                if (val[i] == LARGE){
+                    provider.shapeless(output,"threeone","wire","has_cutter",criterion(WIRE_CUTTER.getTag(), provider),
+                            new ItemStack(wires.get(val[i]),1),wires.get(SMALL),wires.get(SMALL),wires.get(SMALL));
+                    provider.shapeless(output,"onethree","wire","has_cutter",criterion(WIRE_CUTTER.getTag(), provider),
+                            new ItemStack(wires.get(SMALL),3),wires.get(val[i]));
+                    continue;
+                }
+                twoToOne(wires, val[i-1 - offset], val[i], output,provider);
+                oneToTwo(wires, val[i], val[i-1 - offset], output, provider);
                 if (i > 1) {
-                    fourToOne(wires, val[i-2], val[i], output, provider);
+                    fourToOne(wires, val[i-2 - offset], val[i], output, provider);
                 }
             }
             if (cable != null){
