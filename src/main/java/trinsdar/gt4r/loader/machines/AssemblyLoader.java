@@ -77,6 +77,8 @@ public class AssemblyLoader {
         //Todo when ic2 makes it to 1.16
         //ASSEMBLING.RB().ii(DUST.getMaterialIngredient(Flint, 5), of(Items.TNT, 1)).io(new ItemStack(ITNT, 5)).add(800, 2);
 
+        ASSEMBLING.RB().ii(DUST.getMaterialIngredient(Phosphor, 1), of(getTag("forge", "rods/wooden"), 1)).io(new ItemStack(Match, 4)).add(400, 1);
+        ASSEMBLING.RB().ii(of(Match, 64), of(Items.PAPER, 2)).io(new ItemStack(MatchBook)).add(400, 1);
         ASSEMBLING.RB().ii(of(Items.GUNPOWDER, 4), of(Tags.Items.SAND, 1)).io(new ItemStack(Items.TNT, 1)).add(400, 1);
         ASSEMBLING.RB().ii(DUST.getMaterialIngredient(Glowstone, 1), of(DUSTS_LAPIS_LAZ, 1)).io(new ItemStack(AdvCircuitParts, 2)).add(800,2);
         ASSEMBLING.RB().ii(DUST.getMaterialIngredient(Redstone, 4), DUST.getMaterialIngredient(Glowstone, 4)).io(new ItemStack(Items.REDSTONE_LAMP)).add(400, 1);
