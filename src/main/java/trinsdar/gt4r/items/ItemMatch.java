@@ -1,6 +1,9 @@
 package trinsdar.gt4r.items;
 
+import muramasa.antimatter.datagen.providers.AntimatterItemModelProvider;
 import muramasa.antimatter.item.ItemBasic;
+import muramasa.antimatter.registration.ITextureProvider;
+import muramasa.antimatter.texture.Texture;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.AbstractFireBlock;
 import net.minecraft.block.BlockState;
@@ -12,10 +15,18 @@ import net.minecraft.item.ItemUseContext;
 import net.minecraft.item.Items;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.ActionResultType;
+import net.minecraft.util.IItemProvider;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.generators.ItemModelBuilder;
+import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.common.extensions.IForgeBlock;
+import trinsdar.gt4r.Ref;
+
+import static trinsdar.gt4r.data.GT4RData.MatchBook;
 
 public class ItemMatch extends ItemBasic<ItemMatch> {
     public ItemMatch(String domain, String id, Properties properties) {
@@ -28,42 +39,65 @@ public class ItemMatch extends ItemBasic<ItemMatch> {
         World world = context.getWorld();
         BlockPos blockpos = context.getPos();
         BlockState blockstate = world.getBlockState(blockpos);
-        if (CampfireBlock.canBeLit(blockstate)) {
-            world.playSound(playerentity, blockpos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, random.nextFloat() * 0.4F + 0.8F);
-            world.setBlockState(blockpos, blockstate.with(BlockStateProperties.LIT, true), 11);
-            if (playerentity != null) {
-                if (this.isDamageable()){
-                    context.getItem().damageItem(1, playerentity, (player) -> {
-                        player.sendBreakAnimation(context.getHand());
-                    });
-                } else {
-                    context.getItem().shrink(1);
-                }
-            }
-
-            return ActionResultType.func_233537_a_(world.isRemote());
-        } else {
-            BlockPos blockpos1 = blockpos.offset(context.getFace());
-            if (AbstractFireBlock.canLightBlock(world, blockpos1, context.getPlacementHorizontalFacing())) {
-                world.playSound(playerentity, blockpos1, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, random.nextFloat() * 0.4F + 0.8F);
-                BlockState blockstate1 = AbstractFireBlock.getFireForPlacement(world, blockpos1);
-                world.setBlockState(blockpos1, blockstate1, 11);
-                ItemStack itemstack = context.getItem();
-                if (playerentity instanceof ServerPlayerEntity) {
-                    CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayerEntity)playerentity, blockpos1, itemstack);
+        ItemStack stack = context.getItem();
+        if ((this.isDamageable() && stack.getCount() == 1) || !this.isDamageable()){
+            if (CampfireBlock.canBeLit(blockstate)) {
+                world.playSound(playerentity, blockpos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, random.nextFloat() * 0.4F + 0.8F);
+                world.setBlockState(blockpos, blockstate.with(BlockStateProperties.LIT, true), 11);
+                if (playerentity != null) {
                     if (this.isDamageable()){
-                        context.getItem().damageItem(1, playerentity, (player) -> {
+                        stack.damageItem(1, playerentity, (player) -> {
                             player.sendBreakAnimation(context.getHand());
                         });
                     } else {
-                        context.getItem().shrink(1);
+                        stack.shrink(1);
                     }
                 }
 
                 return ActionResultType.func_233537_a_(world.isRemote());
             } else {
-                return ActionResultType.FAIL;
+                BlockPos blockpos1 = blockpos.offset(context.getFace());
+                if (AbstractFireBlock.canLightBlock(world, blockpos1, context.getPlacementHorizontalFacing())) {
+                    world.playSound(playerentity, blockpos1, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, random.nextFloat() * 0.4F + 0.8F);
+                    BlockState blockstate1 = AbstractFireBlock.getFireForPlacement(world, blockpos1);
+                    world.setBlockState(blockpos1, blockstate1, 11);
+                    if (playerentity instanceof ServerPlayerEntity) {
+                        CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayerEntity)playerentity, blockpos1, stack);
+                        if (this.isDamageable()){
+                            stack.damageItem(1, playerentity, (player) -> {
+                                player.sendBreakAnimation(context.getHand());
+                            });
+                        } else {
+                            stack.shrink(1);
+                        }
+                    }
+
+                    return ActionResultType.func_233537_a_(world.isRemote());
+                }
             }
         }
+        return ActionResultType.FAIL;
+    }
+
+    @Override
+    public int getItemStackLimit(ItemStack stack) {
+        return this.getDamage(stack) == 0 ? 64 : 1;
+    }
+
+    @Override
+    public void onItemModelBuild(IItemProvider item, AntimatterItemModelProvider prov) {
+        if (this != MatchBook) {
+            super.onItemModelBuild(item, prov);
+            return;
+        }
+        ItemModelBuilder builder = prov.getBuilder("match_book_lit");
+        builder.parent(new ModelFile.UncheckedModelFile(new ResourceLocation("minecraft:item/generated")));
+        builder.texture("layer0", new Texture(Ref.ID, "item/basic/match_book_lit"));
+        prov.tex(item, new ResourceLocation(Ref.ID, "item/basic/match_book")).override().predicate(new ResourceLocation("damaged"), 1).predicate(new ResourceLocation("damage"), 0).model(new ModelFile.UncheckedModelFile(new ResourceLocation(Ref.ID, "item/match_book_lit")));
+    }
+
+    @Override
+    public Texture[] getTextures() {
+        return super.getTextures();
     }
 }
