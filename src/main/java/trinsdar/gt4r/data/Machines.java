@@ -45,7 +45,9 @@ public class Machines {
     public static BasicMachine SCANNER = new BasicMachine(Ref.ID, "scanner", SCANNING, GUI, ITEM, FLUID, HV, Textures.TIER_HANDLER);
     public static BasicMachine WIRE_MILL = new BasicMachine(Ref.ID, "wire_mill", WIRE_MILLING, GUI, ITEM, LV, Textures.TIER_HANDLER);
     public static BasicMachine CENTRIFUGE = new BasicMachine(Ref.ID, "centrifuge", CENTRIFUGING, GUI, ITEM, FLUID, LV, Textures.TIER_HANDLER);
-    public static BasicMachine ELECTROLYZER = new BasicMachine(Ref.ID, "electrolyzer", ELECTROLYZING, GUI, ITEM, FLUID, MV, Textures.TIER_HANDLER);
+    public static BasicMachine ELECTROLYZER = new BasicMachine(Ref.ID, "electrolyzer", ELECTROLYZING, GUI, ITEM, FLUID, LV,
+
+            MV, Textures.TIER_HANDLER);
     public static BasicMachine CHEMICAL_REACTOR = new BasicMachine(Ref.ID, "chemical_reactor", CHEMICAL_REACTING, GUI, ITEM, FLUID, MV, Textures.TIER_HANDLER);
     public static BasicMachine FLUID_CANNER = new BasicMachine(Ref.ID, "fluid_canner", FLUID_CANNING, GUI, ITEM, FLUID, LV, Textures.TIER_HANDLER);
     public static BasicMachine DISASSEMBLER = new BasicMachine(Ref.ID, "disassembler", DISASSEMBLING, GUI, ITEM, LV, Textures.TIER_HANDLER);
