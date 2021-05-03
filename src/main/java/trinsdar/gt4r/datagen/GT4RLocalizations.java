@@ -3,7 +3,9 @@ package trinsdar.gt4r.datagen;
 
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.datagen.providers.AntimatterLanguageProvider;
+import muramasa.antimatter.item.ItemFluidCell;
 import muramasa.antimatter.machine.BlockMachine;
+import net.minecraft.item.Item;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.block.BlockCasing;
 import trinsdar.gt4r.block.BlockCasingMachine;
@@ -14,6 +16,7 @@ import net.minecraft.data.DataGenerator;
 import trinsdar.gt4r.items.ItemMatch;
 
 import static muramasa.antimatter.util.Utils.lowerUnderscoreToUpperSpaced;
+import static muramasa.antimatter.util.Utils.lowerUnderscoreToUpperSpacedRotated;
 
 public class GT4RLocalizations {
 
@@ -43,6 +46,15 @@ public class GT4RLocalizations {
             AntimatterAPI.all(ItemIntCircuit.class, domain).forEach(i -> add(i, "Integrated Circuit (" + i.circuitId + ")"));
             add(GT4RData.MixedMetal, lowerUnderscoreToUpperSpaced(GT4RData.MixedMetal.getId()));
             add(GT4RData.SAP_BAG, lowerUnderscoreToUpperSpaced(GT4RData.SAP_BAG.getId()));
+        }
+
+        @Override
+        public void add(Item key, String name) {
+            if (key instanceof ItemFluidCell){
+                add(key.getTranslationKey(), lowerUnderscoreToUpperSpacedRotated(((ItemFluidCell)key).getId()));
+                return;
+            }
+            super.add(key, name);
         }
     }
 
