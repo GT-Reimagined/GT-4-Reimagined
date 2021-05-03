@@ -94,7 +94,7 @@ public class ExtruderLoader {
             }
         });
 
-        EXTRUDING.RB().ii(INGOT.getMaterialIngredient(Tin, 1), getReusable(GT4RData.ShapeCell)).io(new ItemStack(GT4RData.CellTin)).add(128, 32);
+        EXTRUDING.RB().ii(INGOT.getMaterialIngredient(Tin, 2), getReusable(GT4RData.ShapeCell)).io(new ItemStack(GT4RData.CellTin)).add(128, 32);
         EXTRUDING.RB().ii(DUST.getMaterialIngredient(Rubber, 1), getReusable(GT4RData.ShapeIngot)).io(INGOT.get(Rubber, 1)).add(10, 16);
         EXTRUDING.RB().ii(INGOT.getMaterialIngredient(WroughtIron, 1), getReusable(GT4RData.ShapeIngot)).io(new ItemStack(Items.IRON_INGOT)).add(10, 64);
         EXTRUDING.RB().ii(DUST.getMaterialIngredient(SiliconDioxide, 1), getReusable(GT4RData.ShapeBottle)).io(new ItemStack(Items.GLASS_BOTTLE)).add(32, 16);

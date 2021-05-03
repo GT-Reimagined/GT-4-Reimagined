@@ -266,5 +266,7 @@ public class Parts {
         provider.addItemRecipe(output, Ref.ID, "motor_hv", "parts", "has_gold_cable", provider.hasSafeItem(CABLE_GOLD.getBlockItem(PipeSize.VTINY)),
                 MotorHV, of('T', CABLE_GOLD.getBlockItem(PipeSize.VTINY), 'C', WIRE_COPPER.getBlockItem(PipeSize.SMALL), 'I', ROD.getMaterialTag(StainlessSteel), 'M', ROD.getMaterialTag(Steel)), "TCI", "CMC", "ICT");
         provider.shapeless(output, "match_r", "parts", "has_stick", provider.hasSafeItem(getForgeItemTag("rods/wooden")), new ItemStack(Match), DUST.getMaterialTag(Phosphor), getForgeItemTag("rods/wooden"));
+        provider.addStackRecipe(output, Ref.ID, "fluid_cell", "parts", "has_tin", provider.hasSafeItem(PLATE.getMaterialTag(Tin)),
+                new ItemStack(CellTin, 2), of('T', PLATE.getMaterialTag(Tin)), " T ", "T T", " T ");
     }
 }
