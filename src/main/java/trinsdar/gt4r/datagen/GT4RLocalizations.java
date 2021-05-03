@@ -61,21 +61,10 @@ public class GT4RLocalizations {
         }
 
         @Override
-        public void add(Block key, String name) {
-            if (key instanceof BlockMachine){
-                BlockMachine machine = (BlockMachine) key;
-                String id = machine.getType() == Machines.MACERATOR && machine.getTier() == MV ? machine.getId().replace("mv", "universal") : machine.getType() == Machines.ELECTROLYZER ? machine.getId().replace("mv", "industrial").replace("lv", "basic") : machine.getId().replace("_lv", "").replace("_mv", "");
-                add(key.getTranslationKey(), lowerUnderscoreToUpperSpaced(id));
-                return;
-            }
-            super.add(key, name);
-        }
-
-        @Override
         public void add(String key, String value) {
             if (key.contains("machine")){
                 String id = key.contains("macerator.mv") ? "universal_macerator" : key.contains("electrolyzer") ? key.contains("lv") ? "basic_electrolyzer" : "industrial_electrolyzer" : "";
-                super.add(key,  id.isEmpty() ? value.replace("Mv ", "").replace("Lv ", "") : lowerUnderscoreToUpperSpaced(id));
+                super.add(key,  value.contains("Infinite") || value.contains("Transformer") || value.contains("Battery") ? value : (id.isEmpty() ? value.replace("Mv ", "").replace("Lv ", "").replace("Ulv ", "").replace("Hv ", "").replace("Ev ", "") : lowerUnderscoreToUpperSpaced(id)));
                 return;
             }
             super.add(key, value);
