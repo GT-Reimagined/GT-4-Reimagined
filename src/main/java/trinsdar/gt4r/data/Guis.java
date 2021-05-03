@@ -110,14 +110,14 @@ public class Guis {
         EXTRACTOR.getGui().add(COMPRESSOR);
         EXTRUDER.getGui().add(ALLOY_SMELTER);
         LATHE.getGui().add(CUTTER);
-        MACERATOR.getGui().add(COMPRESSOR);
+        MACERATOR.getGui().add(MV, COMPRESSOR).add(MV, IT_OUT, 125, 25).add(MV, IT_OUT, 143, 25);
+        MACERATOR.getGui().add(LV, COMPRESSOR);
         RECYCLER.getGui().add(COMPRESSOR);
         WIRE_MILL.getGui().add(COMPRESSOR);
         CENTRIFUGE.getGui().add(IT_IN, 35, 25).add(IT_IN, 53, 25).add(FL_IN, 26, 63).add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 142, 16).add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(IT_OUT, 143, 34).add(ENERGY,8, 63).add(FL_OUT, 44, 63).add(FL_OUT, 62, 63).add(FL_OUT, 80, 63).add(FL_OUT, 98, 63).add(FL_OUT, 116, 63).add(FL_OUT, 134, 63);
         ELECTROLYZER.getGui().add(CENTRIFUGE);
         THERMAL_CENTRIFUGE.getGui().add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25).add(IT_OUT, 143, 25).add(ENERGY,80, 63);
         ORE_WASHER.getGui().add(THERMAL_CENTRIFUGE).add(FL_IN, 53, 63);
-        UNIVERSAL_MACERATOR.getGui().add(COMPRESSOR).add(IT_OUT, 125, 25);
         CHEMICAL_REACTOR.getGui().add(IT_IN, 17, 25).add(IT_IN, 35, 25).add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25).add(FL_IN, 53, 63).add(FL_IN, 35, 63).add(FL_OUT, 107, 63).add(FL_OUT, 125, 63).add(ENERGY, 80, 63);
         FLUID_CANNER.getGui().add(COMPRESSOR).add(FL_IN, 53, 63).add(FL_OUT, 107, 63);
         FLUID_EXTRACTOR.getGui().add(COMPRESSOR).add(FL_OUT, 107, 63);
@@ -159,8 +159,8 @@ public class Guis {
         STEAM_FURNACE.getGui().add(STEEL, FURNACE).add(STEEL, FL_IN, 53, 63);
         STEAM_EXTRACTOR.getGui().add(BRONZE, EXTRACTOR).add(BRONZE, FL_IN, 53, 63);
         STEAM_EXTRACTOR.getGui().add(STEEL, EXTRACTOR).add(STEEL, FL_IN, 53, 63);
-        STEAM_MACERATOR.getGui().add(BRONZE, MACERATOR).add(BRONZE, FL_IN, 53, 63);
-        STEAM_MACERATOR.getGui().add(STEEL, MACERATOR).add(STEEL, FL_IN, 53, 63);
+        STEAM_MACERATOR.getGui().add(BRONZE, MACERATOR, LV).add(BRONZE, FL_IN, 53, 63);
+        STEAM_MACERATOR.getGui().add(STEEL, MACERATOR, LV).add(STEEL, FL_IN, 53, 63);
         STEAM_FORGE_HAMMER.getGui().add(BRONZE, FORGE_HAMMER).add(BRONZE, FL_IN, 53, 63);
 
         STEAM_TURBINE.getGui().add(BASIC_TANK);

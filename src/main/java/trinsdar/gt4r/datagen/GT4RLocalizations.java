@@ -5,16 +5,19 @@ import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.datagen.providers.AntimatterLanguageProvider;
 import muramasa.antimatter.item.ItemFluidCell;
 import muramasa.antimatter.machine.BlockMachine;
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.block.BlockCasing;
 import trinsdar.gt4r.block.BlockCasingMachine;
 import trinsdar.gt4r.block.BlockTurbineCasing;
 import trinsdar.gt4r.data.GT4RData;
+import trinsdar.gt4r.data.Machines;
 import trinsdar.gt4r.items.ItemIntCircuit;
 import net.minecraft.data.DataGenerator;
 import trinsdar.gt4r.items.ItemMatch;
 
+import static muramasa.antimatter.machine.Tier.MV;
 import static muramasa.antimatter.util.Utils.lowerUnderscoreToUpperSpaced;
 import static muramasa.antimatter.util.Utils.lowerUnderscoreToUpperSpacedRotated;
 
@@ -55,6 +58,27 @@ public class GT4RLocalizations {
                 return;
             }
             super.add(key, name);
+        }
+
+        @Override
+        public void add(Block key, String name) {
+            if (key instanceof BlockMachine){
+                BlockMachine machine = (BlockMachine) key;
+                String id = machine.getType() == Machines.MACERATOR && machine.getTier() == MV ? machine.getId().replace("mv", "universal") : machine.getType() == Machines.ELECTROLYZER ? machine.getId().replace("mv", "industrial").replace("lv", "basic") : machine.getId().replace("_lv", "").replace("_mv", "");
+                add(key.getTranslationKey(), lowerUnderscoreToUpperSpaced(id));
+                return;
+            }
+            super.add(key, name);
+        }
+
+        @Override
+        public void add(String key, String value) {
+            if (key.contains("machine")){
+                String id = key.contains("macerator.mv") ? "universal_macerator" : key.contains("electrolyzer") ? key.contains("lv") ? "basic_electrolyzer" : "industrial_electrolyzer" : "";
+                super.add(key,  id.isEmpty() ? value.replace("Mv ", "").replace("Lv ", "") : lowerUnderscoreToUpperSpaced(id));
+                return;
+            }
+            super.add(key, value);
         }
     }
 

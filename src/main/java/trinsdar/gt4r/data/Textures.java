@@ -44,6 +44,20 @@ public class Textures {
         new Texture(Ref.ID, "block/machine/base/tiers/bricked_" + t.getId()),
     };
 
+    public static final IOverlayTexturer MACERATOR_HANDLER = (type, state) -> {
+        if (state != MachineState.ACTIVE && state != MachineState.INVALID_STRUCTURE) state = MachineState.IDLE;
+        String stateDir = state == MachineState.IDLE ? "" : state.getId() + "/";
+
+        return new Texture[] {
+                new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + stateDir + "bottom"),
+                new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + stateDir + "top"),
+                new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + stateDir + "front"),
+                new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + stateDir + "back"),
+                new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + stateDir + "side"),
+                new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + stateDir + "side"),
+        };
+    };
+
     public static final ITextureHandler DRUM_HANDLER = (m, t) -> new Texture[] {
             new Texture(Ref.ID, "block/machine/base/drum_bottom"),
             new Texture(Ref.ID, "block/machine/base/drum_top"),

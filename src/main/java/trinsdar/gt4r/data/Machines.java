@@ -40,14 +40,12 @@ public class Machines {
     public static BasicMachine EXTRACTOR = new BasicMachine(Ref.ID, "extractor", EXTRACTING, GUI, ITEM, LV, Textures.TIER_HANDLER);
     public static BasicMachine EXTRUDER = new BasicMachine(Ref.ID, "extruder", EXTRUDING, GUI, ITEM, MV, Textures.TIER_HANDLER);
     public static BasicMachine LATHE = new BasicMachine(Ref.ID, "lathe", LATHING, GUI, ITEM, LV, Textures.TIER_HANDLER);
-    public static BasicMachine MACERATOR = new BasicMachine(Ref.ID, "macerator", MACERATING, GUI, ITEM, LV, Textures.TIER_HANDLER);
+    public static BasicMachine MACERATOR = new BasicMachine(Ref.ID, "macerator", MACERATING, GUI, ITEM, LV, MV, Textures.TIER_HANDLER);
     public static BasicMachine RECYCLER = new BasicMachine(Ref.ID, "recycler", RECYCLING, GUI, ITEM, LV, Textures.TIER_HANDLER);
     public static BasicMachine SCANNER = new BasicMachine(Ref.ID, "scanner", SCANNING, GUI, ITEM, FLUID, HV, Textures.TIER_HANDLER);
     public static BasicMachine WIRE_MILL = new BasicMachine(Ref.ID, "wire_mill", WIRE_MILLING, GUI, ITEM, LV, Textures.TIER_HANDLER);
     public static BasicMachine CENTRIFUGE = new BasicMachine(Ref.ID, "centrifuge", CENTRIFUGING, GUI, ITEM, FLUID, LV, Textures.TIER_HANDLER);
-    public static BasicMachine ELECTROLYZER = new BasicMachine(Ref.ID, "electrolyzer", ELECTROLYZING, GUI, ITEM, FLUID, LV,
-
-            MV, Textures.TIER_HANDLER);
+    public static BasicMachine ELECTROLYZER = new BasicMachine(Ref.ID, "electrolyzer", ELECTROLYZING, GUI, ITEM, FLUID, LV, MV, Textures.TIER_HANDLER);
     public static BasicMachine CHEMICAL_REACTOR = new BasicMachine(Ref.ID, "chemical_reactor", CHEMICAL_REACTING, GUI, ITEM, FLUID, MV, Textures.TIER_HANDLER);
     public static BasicMachine FLUID_CANNER = new BasicMachine(Ref.ID, "fluid_canner", FLUID_CANNING, GUI, ITEM, FLUID, LV, Textures.TIER_HANDLER);
     public static BasicMachine DISASSEMBLER = new BasicMachine(Ref.ID, "disassembler", DISASSEMBLING, GUI, ITEM, LV, Textures.TIER_HANDLER);
@@ -56,7 +54,7 @@ public class Machines {
     public static BasicMachine FORGE_HAMMER = new BasicMachine(Ref.ID, "forge_hammer", HAMMERING, GUI, ITEM, LV, Textures.TIER_HANDLER);
     public static BasicMachine ORE_WASHER = new BasicMachine(Ref.ID, "ore_washer", ORE_WASHING, GUI, ITEM, FLUID, LV, Textures.TIER_HANDLER);
     public static BasicMachine THERMAL_CENTRIFUGE = new BasicMachine(Ref.ID, "thermal_centrifuge", THERMAL_CENTRIFUGING, GUI, ITEM, FLUID, MV, Textures.TIER_HANDLER);
-    public static BasicMachine UNIVERSAL_MACERATOR = new BasicMachine(Ref.ID, "universal_macerator", UNIVERSAL_MACERATING, GUI, ITEM, MV, Textures.TIER_HANDLER);
+    //public static BasicMachine UNIVERSAL_MACERATOR = new BasicMachine(Ref.ID, "universal_macerator", UNIVERSAL_MACERATING, GUI, ITEM, MV, Textures.TIER_HANDLER);
     public static BasicMachine FLUID_EXTRACTOR = new BasicMachine(Ref.ID, "fluid_extractor", FLUID_EXTRACTING, GUI, ITEM, FLUID, LV, Textures.TIER_HANDLER);
     public static BasicMachine FLUID_SOLIDIFIER = new BasicMachine(Ref.ID, "fluid_solidifier", FLUID_SOLIDIFYING, GUI, ITEM, FLUID, LV, Textures.TIER_HANDLER);
     public static BasicMachine PUMP = new BasicMachine(Ref.ID, "pump", GUI, FLUID, LV, Textures.TIER_HANDLER);

@@ -11,7 +11,7 @@ import trinsdar.gt4r.data.Materials;
 
 import static muramasa.antimatter.Data.*;
 import static trinsdar.gt4r.data.Materials.*;
-import static trinsdar.gt4r.data.RecipeMaps.UNIVERSAL_MACERATING;
+import static trinsdar.gt4r.data.RecipeMaps.MACERATING;
 
 public class MaceratorLoader {
     public static void init() {
@@ -28,33 +28,33 @@ public class MaceratorLoader {
             Material oreByProduct2 = m.getByProducts().size() >= 2 ? m.getByProducts().get(1) : oreByProduct1;
             Material oreByProduct3 = m.getByProducts().size() >= 3 ? m.getByProducts().get(2) : oreByProduct2;
 
-            UNIVERSAL_MACERATING.RB().ii(ore).io(Utils.ca((m.getOreMulti() * multiplier) * 2, crushedStack), DUST.get(oreByProduct1, 1), stoneDust).chances(100, 10 * multiplier * m.getByProductMulti(), 50).add(400, 2);
-            UNIVERSAL_MACERATING.RB().ii(crushed).io(DUST_IMPURE.get(m.getMacerateInto(), 1), DUST.get(oreByProduct1, 1)).chances(100, 10).add(400, 2);
-            UNIVERSAL_MACERATING.RB().ii(RecipeIngredient.of(CRUSHED_PURIFIED.getMaterialTag(m), 1)).io(DUST_PURE.get(m.getMacerateInto(), 1), DUST.get(oreByProduct2, 1)).chances(100, 10).add(400, 2);
+            MACERATING.RB().ii(ore).io(Utils.ca((m.getOreMulti() * multiplier) * 2, crushedStack), DUST.get(oreByProduct1, 1), stoneDust).chances(100, 10 * multiplier * m.getByProductMulti(), 50).add(400, 2);
+            MACERATING.RB().ii(crushed).io(DUST_IMPURE.get(m.getMacerateInto(), 1), DUST.get(oreByProduct1, 1)).chances(100, 10).add(400, 2);
+            MACERATING.RB().ii(RecipeIngredient.of(CRUSHED_PURIFIED.getMaterialTag(m), 1)).io(DUST_PURE.get(m.getMacerateInto(), 1), DUST.get(oreByProduct2, 1)).chances(100, 10).add(400, 2);
             if (m.has(CRUSHED_CENTRIFUGED)) {
-                UNIVERSAL_MACERATING.RB().ii(RecipeIngredient.of(CRUSHED_CENTRIFUGED.getMaterialTag(m), 1)).io(DUST.get(m.getMacerateInto(), 1), DUST.get(oreByProduct3, 1)).chances(100, 10).add(400, 2);
+                MACERATING.RB().ii(RecipeIngredient.of(CRUSHED_CENTRIFUGED.getMaterialTag(m), 1)).io(DUST.get(m.getMacerateInto(), 1), DUST.get(oreByProduct3, 1)).chances(100, 10).add(400, 2);
             }
         });
         DUST.all().forEach(m -> {
             if (m.has(PLATE) && m != Wood){
                 long duration = m.getMass();
-                UNIVERSAL_MACERATING.RB().ii(PLATE.getMaterialIngredient(m, 1)).io(DUST.get(m, 1)).add(duration, 4);
+                MACERATING.RB().ii(PLATE.getMaterialIngredient(m, 1)).io(DUST.get(m, 1)).add(duration, 4);
             }
             if (m.has(INGOT)){
                 long duration = m.getMass();
-                UNIVERSAL_MACERATING.RB().ii(INGOT.getMaterialIngredient(m, 1)).io(DUST.get(m, 1)).add(duration, 4);
+                MACERATING.RB().ii(INGOT.getMaterialIngredient(m, 1)).io(DUST.get(m, 1)).add(duration, 4);
             }
             if (m.has(GEM)){
                 long duration = m.getMass();
-                UNIVERSAL_MACERATING.RB().ii(GEM.getMaterialIngredient(m, 1)).io(DUST.get(m, 1)).add(duration, 4);
+                MACERATING.RB().ii(GEM.getMaterialIngredient(m, 1)).io(DUST.get(m, 1)).add(duration, 4);
             }
         });
-        UNIVERSAL_MACERATING.RB().ii(RecipeIngredient.of(Tags.Items.COBBLESTONE, 1)).io(new ItemStack(Items.SAND)).add(400, 2);
-        UNIVERSAL_MACERATING.RB().ii(RecipeIngredient.of(Tags.Items.STONE, 1)).io(new ItemStack(Items.GRAVEL)).add(400, 2);
-        UNIVERSAL_MACERATING.RB().ii(RecipeIngredient.of(Items.BRICK, 1)).io(DUST_SMALL.get(Brick, 1)).add(400, 2);
-        UNIVERSAL_MACERATING.RB().ii(RecipeIngredient.of(Items.CLAY_BALL, 1)).io(DUST_SMALL.get(Clay, 2)).add(16, 4);
-        UNIVERSAL_MACERATING.RB().ii(RecipeIngredient.of(Items.CLAY, 1)).io(DUST.get(Clay, 2)).add(30, 4);
-        UNIVERSAL_MACERATING.RB().ii(RecipeIngredient.of(Items.BRICKS, 1)).io(DUST.get(Brick, 1)).add(400, 2);
-        UNIVERSAL_MACERATING.RB().ii(RecipeIngredient.of(ItemTags.LOGS, 1)).io(DUST.get(Wood, 6)).add(400, 2);
+        MACERATING.RB().ii(RecipeIngredient.of(Tags.Items.COBBLESTONE, 1)).io(new ItemStack(Items.SAND)).add(400, 2);
+        MACERATING.RB().ii(RecipeIngredient.of(Tags.Items.STONE, 1)).io(new ItemStack(Items.GRAVEL)).add(400, 2);
+        MACERATING.RB().ii(RecipeIngredient.of(Items.BRICK, 1)).io(DUST_SMALL.get(Brick, 1)).add(400, 2);
+        MACERATING.RB().ii(RecipeIngredient.of(Items.CLAY_BALL, 1)).io(DUST_SMALL.get(Clay, 2)).add(16, 4);
+        MACERATING.RB().ii(RecipeIngredient.of(Items.CLAY, 1)).io(DUST.get(Clay, 2)).add(30, 4);
+        MACERATING.RB().ii(RecipeIngredient.of(Items.BRICKS, 1)).io(DUST.get(Brick, 1)).add(400, 2);
+        MACERATING.RB().ii(RecipeIngredient.of(ItemTags.LOGS, 1)).io(DUST.get(Wood, 6)).add(400, 2);
     }
 }

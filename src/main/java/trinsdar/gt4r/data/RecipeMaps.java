@@ -6,6 +6,7 @@ import muramasa.antimatter.recipe.map.RecipeBuilder;
 import muramasa.antimatter.recipe.map.RecipeMap;
 import muramasa.antimatter.recipe.RecipeProxies;
 
+import static muramasa.antimatter.machine.Tier.MV;
 import static trinsdar.gt4r.data.Guis.MULTI_DISPLAY;
 import static trinsdar.gt4r.data.Guis.MULTI_DISPLAY_MORE_FLUID;
 import static trinsdar.gt4r.data.RecipeBuilders.*;
@@ -34,8 +35,8 @@ public class RecipeMaps {
     public static RecipeMap EXTRACTING = new RecipeMap<>("extracting", new ExtractingBuilder());
     public static RecipeMap EXTRUDING = new RecipeMap<>("extruding", new RecipeBuilder());
     public static RecipeMap LATHING = new RecipeMap<>("lathing", new RecipeBuilder());
-    public static RecipeMap UNIVERSAL_MACERATING = new RecipeMap<>("universal_macerating", new UniversalMaceratingBuilder(), Tier.MV);
-    public static RecipeMap MACERATING = new RecipeMap<>("macerating", new MaceratingBuilder());
+    //public static RecipeMap UNIVERSAL_MACERATING = new RecipeMap<>("universal_macerating", new UniversalMaceratingBuilder(), Tier.MV);
+    public static RecipeMap MACERATING = new RecipeMap<>("macerating", new MaceratingBuilder(), MV);
     public static RecipeMap RECYCLING = new RecipeMap<>("recycling", new RecipeBuilder());
     public static RecipeMap SCANNING = new RecipeMap<>("scanning", new RecipeBuilder());
     public static RecipeMap WIRE_MILLING = new RecipeMap<>("wire_milling", new RecipeBuilder());
