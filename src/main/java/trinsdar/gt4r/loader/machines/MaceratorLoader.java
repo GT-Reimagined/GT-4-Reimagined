@@ -1,20 +1,56 @@
 package trinsdar.gt4r.loader.machines;
 
+import muramasa.antimatter.AntimatterAPI;
+import muramasa.antimatter.Data;
+import muramasa.antimatter.datagen.builder.AntimatterCookingRecipeBuilder;
 import muramasa.antimatter.material.Material;
+import muramasa.antimatter.ore.BlockOre;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
+import muramasa.antimatter.recipe.map.RecipeBuilder;
+import muramasa.antimatter.recipe.map.RecipeMap;
+import muramasa.antimatter.util.TagUtils;
 import muramasa.antimatter.util.Utils;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraftforge.common.Tags;
+import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.Materials;
+import trinsdar.gt4r.data.RecipeMaps;
 
 import static muramasa.antimatter.Data.*;
+import static muramasa.antimatter.util.Utils.formatNumber;
+import static muramasa.antimatter.util.Utils.getConventionalMaterialType;
+import static muramasa.antimatter.util.Utils.getConventionalStoneType;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.MACERATING;
+import static trinsdar.gt4r.data.RecipeMaps.SIFTING;
 
 public class MaceratorLoader {
     public static void init() {
+        AntimatterAPI.all(BlockOre.class, Ref.ID,o -> {
+            if (o.getOreType() != ORE) return;
+            Material m = o.getMaterial();
+            Material sm = o.getStoneType().getMaterial();
+            if (!m.has(DUST) || !m.has(CRUSHED)) return;
+            ItemStack stoneDust = sm.has(DUST) ? DUST.get(sm, 1) : ItemStack.EMPTY;
+            ITag.INamedTag<Item> oreTag = TagUtils.getForgeItemTag(String.join("", getConventionalStoneType(o.getStoneType()), "_", getConventionalMaterialType(o.getOreType()), "/", o.getMaterial().getId()));
+            RecipeIngredient ore = RecipeIngredient.of(oreTag,1);
+            ItemStack crushedStack = CRUSHED.get(m,1);
+            Material oreByProduct1 = m.getByProducts().size() > 0 ? m.getByProducts().get(0) : m.getMacerateInto();
+            RecipeMap rm = MACERATING;
+            if (sm == Sand || sm == RedSand || sm == Gravel || o.getStoneType() == SOUL_SAND || o.getStoneType() == SOUL_SOIL){
+                rm = SIFTING;
+            }
+            if (stoneDust.isEmpty()){
+                rm.RB().ii(ore).io(Utils.ca((m.getOreMulti()) * 2, crushedStack), DUST.get(oreByProduct1, 1)).chances(100, 10 * m.getByProductMulti()).add(400, 2);
+            } else {
+                rm.RB().ii(ore).io(Utils.ca((m.getOreMulti()) * 2, crushedStack), DUST.get(oreByProduct1, 1), stoneDust).chances(100, 10 * m.getByProductMulti(), 50).add(400, 2);
+            }
+
+        });
         CRUSHED.all().forEach(m -> {
             if (!m.has(ORE) && m != NetheriteScrap) return;
             int multiplier = 1;
@@ -24,11 +60,13 @@ public class MaceratorLoader {
             ItemStack stoneDust = DUST.get(Stone, 1);
 
             //TODO better way to do this
-            Material oreByProduct1 = m.getByProducts().size() >= 1 ? m.getByProducts().get(0) : m.getMacerateInto();
-            Material oreByProduct2 = m.getByProducts().size() >= 2 ? m.getByProducts().get(1) : oreByProduct1;
-            Material oreByProduct3 = m.getByProducts().size() >= 3 ? m.getByProducts().get(2) : oreByProduct2;
+            Material oreByProduct1 = m.getByProducts().size() > 0 ? m.getByProducts().get(0) : m.getMacerateInto();
+            Material oreByProduct2 = m.getByProducts().size() > 1 ? m.getByProducts().get(1) : oreByProduct1;
+            Material oreByProduct3 = m.getByProducts().size() > 2 ? m.getByProducts().get(2) : oreByProduct2;
 
-            MACERATING.RB().ii(ore).io(Utils.ca((m.getOreMulti() * multiplier) * 2, crushedStack), DUST.get(oreByProduct1, 1), stoneDust).chances(100, 10 * multiplier * m.getByProductMulti(), 50).add(400, 2);
+            if (m == NetheriteScrap){
+                MACERATING.RB().ii(ore).io(Utils.ca((m.getOreMulti() * multiplier) * 2, crushedStack), DUST.get(oreByProduct1, 1), DUST.get(Netherrack, 1)).chances(100, 10 * multiplier * m.getByProductMulti(), 50).add(400, 2);
+            }
             MACERATING.RB().ii(crushed).io(DUST_IMPURE.get(m.getMacerateInto(), 1), DUST.get(oreByProduct1, 1)).chances(100, 10).add(400, 2);
             MACERATING.RB().ii(RecipeIngredient.of(CRUSHED_PURIFIED.getMaterialTag(m), 1)).io(DUST_PURE.get(m.getMacerateInto(), 1), DUST.get(oreByProduct2, 1)).chances(100, 10).add(400, 2);
             if (m.has(CRUSHED_CENTRIFUGED)) {

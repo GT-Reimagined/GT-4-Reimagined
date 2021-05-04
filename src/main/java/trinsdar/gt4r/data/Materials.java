@@ -1,6 +1,7 @@
 package trinsdar.gt4r.data;
 
 import muramasa.antimatter.AntimatterAPI;
+import muramasa.antimatter.Data;
 import muramasa.antimatter.fluid.AntimatterMaterialFluid;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialItem;
@@ -316,6 +317,8 @@ public class Materials {
         SOLDER.add(Lead, Tin, SolderingAlloy);
         //TODO Mercury.add(METALL, SMELTG);
 */
+
+        DUST.forceOverride(BasaltVanilla, DUST.get(Basalt));
         NUGGET.forceOverride(Iron, Items.IRON_NUGGET);
         NUGGET.forceOverride(Gold, Items.GOLD_NUGGET);
         INGOT.forceOverride(Iron, Items.IRON_INGOT);

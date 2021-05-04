@@ -2,6 +2,7 @@ package trinsdar.gt4r.datagen;
 
 import muramasa.antimatter.datagen.ExistingFileHelperOverride;
 import muramasa.antimatter.datagen.providers.AntimatterItemTagProvider;
+import muramasa.antimatter.util.TagUtils;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.item.Items;
@@ -48,6 +49,13 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.getOrCreateBuilder(BATTERIES_SMALL).add(BatterySmallSodium, BatterySmallCadmium, BatterySmallLithium);
         this.getOrCreateBuilder(BATTERIES_MEDIUM).add(BatteryMediumSodium, BatteryMediumCadmium, BatteryMediumLithium);
         this.getOrCreateBuilder(BATTERIES_LARGE).add(BatteryLargeSodium, BatteryLargeCadmium, BatteryLargeLithium, EnergyCrystal);
+        this.getOrCreateBuilder(TagUtils.getForgeItemTag("stone_ores/iron")).add(Items.IRON_ORE);
+        this.getOrCreateBuilder(TagUtils.getForgeItemTag("stone_ores/gold")).add(Items.GOLD_ORE);
+        this.getOrCreateBuilder(TagUtils.getForgeItemTag("stone_ores/coal")).add(Items.COAL_ORE);
+        this.getOrCreateBuilder(TagUtils.getForgeItemTag("stone_ores/lapis")).add(Items.LAPIS_ORE);
+        this.getOrCreateBuilder(TagUtils.getForgeItemTag("stone_ores/diamond")).add(Items.DIAMOND_ORE);
+        this.getOrCreateBuilder(TagUtils.getForgeItemTag("stone_ores/redstone")).add(Items.REDSTONE_ORE);
+        this.getOrCreateBuilder(TagUtils.getForgeItemTag("stone_ores/emerald")).add(Items.EMERALD_ORE);
 
     }
 
