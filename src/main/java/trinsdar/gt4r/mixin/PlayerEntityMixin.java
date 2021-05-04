@@ -31,17 +31,12 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         return attackReachValue * attackReachValue;
     }
 */
-    /*@Inject(
-            remap = false,
+   @Inject(
             method = "func_234570_el_",
-            at = @At(value = "RETURN", target = "Lnet/minecraft/entity/player/PlayerEntity;func_234570_el_()Lnet/minecraft/entity/ai/attributes/AttributeModifierMap$MutableAttribute;")
+            at = @At(value = "RETURN", target = "Lnet/minecraft/entity/player/PlayerEntity;func_234570_el_()Lnet/minecraft/entity/ai/attributes/AttributeModifierMap$MutableAttribute;"),
+            cancellable = true
     )
     private static void initAttributes(CallbackInfoReturnable<AttributeModifierMap.MutableAttribute> ci) {
-        ci.getReturnValue().createMutableAttribute(Attributes.ATTACK_REACH.get());
-    }*/
-
-    /*@ModifyVariable(remap = false, method = "func_234570_el_", at = @At(value = "RETURN"))
-    private static AttributeModifierMap.MutableAttribute injectAttribute(AttributeModifierMap.MutableAttribute attribute){
-        return attribute.createMutableAttribute(Attributes.ATTACK_REACH.get());
-    }*/
+        ci.setReturnValue(ci.getReturnValue().createMutableAttribute(Attributes.ATTACK_REACH.get()));
+    }
 }
