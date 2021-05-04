@@ -368,17 +368,17 @@ public class GT4RData {
     public static final Wire<?> WIRE_TUNGSTEN = new Wire<>(Ref.ID, Tungsten, 4, Tier.IV).amps(2);
     public static final Wire<?> WIRE_SUPERCONDUCTOR = new Wire<>(Ref.ID, Superconductor, 0, Tier.MAX).amps(4); //MAX
 
-    public static final FluidPipe<?> FLUID_PIPE_WOOD = new FluidPipe<>(Ref.ID, Wood, 350, false).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(150).pressures(400);
-    public static final FluidPipe<?> FLUID_PIPE_COPPER = new FluidPipe<>(Ref.ID, Copper, 1696, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(300).pressures(800);
-    public static final FluidPipe<?> FLUID_PIPE_BRONZE = new FluidPipe<>(Ref.ID, Bronze, 1696, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(450).pressures(4500);
-    public static final FluidPipe<?> FLUID_PIPE_INVAR = new FluidPipe<>(Ref.ID, Invar, 2395, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(600).pressures(6000);
-    public static final FluidPipe<?> FLUID_PIPE_STEEL = new FluidPipe<>(Ref.ID, Steel, 2557, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(600).pressures(6000);
-    public static final FluidPipe<?> FLUID_PIPE_STAINLESS_STEEL = new FluidPipe<>(Ref.ID, StainlessSteel, 2428, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(750).pressures(7500);
-    public static final FluidPipe<?> FLUID_PIPE_NETHERRITE = new FluidPipe<>(Ref.ID, Netherite, 2807, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(900).pressures(9000);
-    public static final FluidPipe<?> FLUID_PIPE_TUNGSTEN = new FluidPipe<>(Ref.ID, Tungsten, 4618, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1050).pressures(10500);
-    public static final FluidPipe<?> FLUID_PIPE_TUNGSTEN_STEEL = new FluidPipe<>(Ref.ID, TungstenSteel, 3587, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1200).pressures(12000);
-    public static final FluidPipe<?> FLUID_PIPE_TUNGSTEN_CARBIDE = new FluidPipe<>(Ref.ID, TungstenCarbide, 3837, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1350).pressures(5000);
-    public static final FluidPipe<?> FLUID_PIPE_HP = new FluidPipe<>(Ref.ID, HighPressure, 3422, true).sizes(PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE).caps(4800, 4800, 4800, 7200, 9600, 9600).pressures(10000);
+    public static final FluidPipe<?> FLUID_PIPE_WOOD = new FluidPipe<>(Ref.ID, Wood, 350, false).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1).pressures(getPressures(150));
+    public static final FluidPipe<?> FLUID_PIPE_COPPER = new FluidPipe<>(Ref.ID, Copper, 1696, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1).pressures(getPressures(300));
+    public static final FluidPipe<?> FLUID_PIPE_BRONZE = new FluidPipe<>(Ref.ID, Bronze, 1696, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1).pressures(getPressures(450));
+    public static final FluidPipe<?> FLUID_PIPE_INVAR = new FluidPipe<>(Ref.ID, Invar, 2395, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1).pressures(getPressures(600));
+    public static final FluidPipe<?> FLUID_PIPE_STEEL = new FluidPipe<>(Ref.ID, Steel, 2557, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1).pressures(getPressures(600));
+    public static final FluidPipe<?> FLUID_PIPE_STAINLESS_STEEL = new FluidPipe<>(Ref.ID, StainlessSteel, 2428, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1).pressures(getPressures(750));
+    public static final FluidPipe<?> FLUID_PIPE_NETHERRITE = new FluidPipe<>(Ref.ID, Netherite, 2807, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1).pressures(getPressures(900));
+    public static final FluidPipe<?> FLUID_PIPE_TUNGSTEN = new FluidPipe<>(Ref.ID, Tungsten, 4618, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1).pressures(getPressures(1050));
+    public static final FluidPipe<?> FLUID_PIPE_TUNGSTEN_STEEL = new FluidPipe<>(Ref.ID, TungstenSteel, 3587, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1).pressures(getPressures(1200));
+    public static final FluidPipe<?> FLUID_PIPE_TUNGSTEN_CARBIDE = new FluidPipe<>(Ref.ID, TungstenCarbide, 3837, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1).pressures(getPressures(1350));
+    public static final FluidPipe<?> FLUID_PIPE_HP = new FluidPipe<>(Ref.ID, HighPressure, 3422, true).sizes(PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE).caps(1).pressures(10000);
 
     public static final ItemPipe<?> ITEM_PIPE_BRASS = new ItemPipe<>(Ref.ID, Brass).sizes(PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(0, 0, 0, 1, 2, 4);
     public static final ItemPipe<?> ITEM_PIPE_CUPRONICKEL = new ItemPipe<>(Ref.ID, Cupronickel).sizes(PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(0, 0, 0, 1, 2, 4);
@@ -411,5 +411,9 @@ public class GT4RData {
 
     private static Boolean neverAllowSpawn(BlockState state, IBlockReader reader, BlockPos pos, EntityType<?> entity) {
         return false;
+    }
+
+    private static int[] getPressures(int basePressure){
+        return new int[]{basePressure / 6, basePressure / 6, basePressure / 3, basePressure, basePressure * 2, basePressure * 4};
     }
 }

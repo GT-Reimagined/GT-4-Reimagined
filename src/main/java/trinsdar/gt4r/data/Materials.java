@@ -147,7 +147,7 @@ public class Materials {
     /** Fluids **/
     public static Material Lava = new Material(Ref.ID, "lava", 0xff4000, NONE).asFluid(/*0, 400*/);
     public static Material Water = new Material(Ref.ID, "water", 0x0000ff, NONE).asFluid().mats(of(Hydrogen, 2, Oxygen, 1));
-    public static Material Steam = new Material(Ref.ID, "steam", 0xa0a0a0, NONE).asGas();
+    public static Material Steam = new Material(Ref.ID, "steam", 0xa0a0a0, NONE).asGas(0, 373);
     public static Material UUAmplifier = new Material(Ref.ID, "uu_amplifier", 0x600080, NONE).asFluid();
     public static Material UUMatter = new Material(Ref.ID, "uu_matter", 0x8000c4, NONE).asFluid();
     public static Material Lubricant = new Material(Ref.ID, "lubricant", 0xffc400, NONE).asFluid();

@@ -77,22 +77,10 @@ public class TileEntityDrum extends TileEntityMachine {
         return ActionResultType.PASS;
     }
 
-    /*@Override
-    public <T> boolean blocksCapability(@Nonnull Capability<T> cap, Direction side) {
-        return super.blocksCapability(cap, side) || fluidHandler.map(f -> {
-            DrumFluidHandler fluid = (DrumFluidHandler) f;
-            boolean vertical = (side == Direction.UP && f.getFluidInTank(0).getFluid().getAttributes().isGaseous()) || (!f.getFluidInTank(0).getFluid().getAttributes().isGaseous() && side == Direction.DOWN);
-            return fluid.isOutput() && vertical;
-        }).orElse(false);
-    }*/
-
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
         if (blocksCapability(cap, side)) return LazyOptional.empty();
-        if (side == null && cap == FLUID_HANDLER_CAPABILITY){
-            return LazyOptional.empty();
-        }
         else if (cap == FLUID_HANDLER_CAPABILITY && fluidHandler.isPresent()) return ((DrumFluidHandler)fluidHandler.resolve().orElse(null)).getCapability(cap, side);
         return super.getCapability(cap, side);
     }
@@ -117,6 +105,7 @@ public class TileEntityDrum extends TileEntityMachine {
     public static class DrumFluidHandler extends MachineFluidHandler<TileEntityDrum> {
         boolean output = false;
         Map<Direction, LazyOptional<IFluidHandler>> sidedCaps = new LinkedHashMap<>();
+        LazyOptional<IFluidHandler> nullCap = LazyOptional.empty();
         public DrumFluidHandler(TileEntityDrum tile) {
             super(tile);
             tanks.put(FluidDirection.INPUT, FluidTanks.create(tile, ContentEvent.FLUID_INPUT_CHANGED, b -> {
@@ -126,6 +115,7 @@ public class TileEntityDrum extends TileEntityMachine {
             for (Direction dir : Direction.values()){
                 sidedCaps.put(dir, LazyOptional.of(() -> new FluidHandlerSidedWrapper(this, dir)));
             }
+            nullCap = LazyOptional.of(() -> new FluidHandlerNullSideWrapper(this));
         }
 
         public void setOutput(boolean output) {
@@ -177,6 +167,12 @@ public class TileEntityDrum extends TileEntityMachine {
         }
 
         @Override
+        public void onRemove() {
+            this.nullCap.invalidate();
+            this.sidedCaps.values().forEach(LazyOptional::invalidate);
+        }
+
+        @Override
         public CompoundNBT serializeNBT() {
             CompoundNBT nbt = super.serializeNBT();
             nbt.putBoolean("Output", output);
@@ -191,7 +187,11 @@ public class TileEntityDrum extends TileEntityMachine {
 
         @Nonnull
         public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
-            if (cap == FLUID_HANDLER_CAPABILITY && sidedCaps.get(side).isPresent()) return sidedCaps.get(side).cast();
+            if (side == null){
+                if (nullCap.isPresent()) return nullCap.cast();
+                return LazyOptional.empty();
+            }
+            if (sidedCaps.get(side).isPresent()) return sidedCaps.get(side).cast();
             return LazyOptional.empty();
         }
 
@@ -243,6 +243,51 @@ public class TileEntityDrum extends TileEntityMachine {
             public FluidStack drain(int maxDrain, FluidAction action) {
                 return fluidHandler.drain(maxDrain, action);
             }
+        }
+    }
+
+    public static class FluidHandlerNullSideWrapper implements IFluidHandler{
+        DrumFluidHandler fluidHandler;
+        public FluidHandlerNullSideWrapper(DrumFluidHandler fluidHandler){
+            this.fluidHandler = fluidHandler;
+        }
+
+        @Override
+        public int getTanks() {
+            return fluidHandler.getTanks();
+        }
+
+        @Nonnull
+        @Override
+        public FluidStack getFluidInTank(int tank) {
+            return fluidHandler.getFluidInTank(tank);
+        }
+
+        @Override
+        public int getTankCapacity(int tank) {
+            return fluidHandler.getTankCapacity(tank);
+        }
+
+        @Override
+        public boolean isFluidValid(int tank, @Nonnull FluidStack stack) {
+            return fluidHandler.isFluidValid(tank, stack);
+        }
+
+        @Override
+        public int fill(FluidStack resource, FluidAction action) {
+            return 0;
+        }
+
+        @Nonnull
+        @Override
+        public FluidStack drain(FluidStack resource, FluidAction action) {
+            return null;
+        }
+
+        @Nonnull
+        @Override
+        public FluidStack drain(int maxDrain, FluidAction action) {
+            return null;
         }
     }
 }
