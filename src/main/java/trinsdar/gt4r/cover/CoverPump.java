@@ -7,6 +7,10 @@ import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import trinsdar.gt4r.Ref;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
@@ -29,16 +33,28 @@ public class CoverPump extends CoverBasicTransport {
     }
 
     @Override
+    public <T> boolean blocksCapability(CoverStack<?> stack, Capability<T> cap, Direction side) {
+        if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY){
+            String coverModeName = getCoverMode(stack).getName();
+
+        }
+        return side == null && cap != CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
+    }
+
+
+    @Override
     public void onUpdate(CoverStack<?> instance, Direction side) {
-        if (instance.getTile() == null || instance.getTile().getWorld().getGameTime() % (20) != 0) return;
+        if (instance.getTile() == null) return;
         TileEntity adjTile = instance.getTile().getWorld().getTileEntity(instance.getTile().getPos().offset(side));
         if (adjTile == null) return;
-        if (getCoverMode(instance).getName().startsWith("Output")){
-            Utils.transferFluidsOnCap(instance.getTile(), adjTile, Integer.MAX_VALUE);
-        } else {
-            Utils.transferFluidsOnCap(adjTile, instance.getTile(), Integer.MAX_VALUE);
+        TileEntity from = instance.getTile();
+        TileEntity to = adjTile;
+        if (getCoverMode(instance).getName().startsWith("Input")){
+            from = adjTile;
+            to = instance.getTile();
         }
-
+        TileEntity finalTo = to;
+        from.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side).ifPresent(ih -> finalTo.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side.getOpposite()).ifPresent(other -> Utils.transferFluids(ih, other, Integer.MAX_VALUE)));
     }
 
     @Override

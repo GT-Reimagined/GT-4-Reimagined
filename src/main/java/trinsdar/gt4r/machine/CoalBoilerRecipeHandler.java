@@ -19,7 +19,9 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import trinsdar.gt4r.data.Materials;
@@ -156,7 +158,8 @@ public class CoalBoilerRecipeHandler extends MachineRecipeHandler<TileEntityCoal
     public void exportFluidFromMachineToSide(Direction side){
         TileEntity adjTile = tile.getWorld().getTileEntity(tile.getPos().offset(side));
         if (adjTile == null) return;
-        Utils.transferFluidsOnCap(tile, adjTile, 1000);
+        LazyOptional<IFluidHandler> cap = adjTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side.getOpposite());
+        tile.fluidHandler.ifPresent(f -> cap.ifPresent(other -> Utils.transferFluids(f, other, 1000)));
     }
 
     @Override
