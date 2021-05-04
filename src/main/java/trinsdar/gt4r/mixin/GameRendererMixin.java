@@ -14,7 +14,7 @@ public abstract class GameRendererMixin {
     @Shadow
     private Minecraft mc;
 
-    /*@ModifyConstant(
+    @ModifyConstant(
             remap = false,
             method = "getMouseOver",
             constant = @Constant(doubleValue = 6.0D)
@@ -43,5 +43,5 @@ public abstract class GameRendererMixin {
         if (mc.player == null) return value;
         double attackReachValue = mc.player.getAttributeValue(Attributes.ATTACK_REACH.get());
         return attackReachValue * attackReachValue;
-    }*/
+    }
 }

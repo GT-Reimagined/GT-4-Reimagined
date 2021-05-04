@@ -1,5 +1,6 @@
 package trinsdar.gt4r.mixin;
 
+import muramasa.antimatter.Antimatter;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.play.ServerPlayNetHandler;
 import org.spongepowered.asm.mixin.Mixin;
@@ -14,7 +15,7 @@ public abstract class ServerPlayNetHandlerMixin {
     @Shadow
     public ServerPlayerEntity player;
 
-    /*@ModifyConstant(
+    @ModifyConstant(
             remap = false,
             method = "processUseEntity",
             constant = {
@@ -23,6 +24,8 @@ public abstract class ServerPlayNetHandlerMixin {
     )
     private double getExtendedAttackReachSquared(double value) {
         double extendedAttackReachValue = player.getAttributeValue(Attributes.ATTACK_REACH.get()) * 2.0D;
+        Antimatter.LOGGER.info("Extended: " + extendedAttackReachValue);
+        Antimatter.LOGGER.info("Extended Squared: " + (extendedAttackReachValue * extendedAttackReachValue));
         return extendedAttackReachValue * extendedAttackReachValue;
-    }*/
+    }
 }

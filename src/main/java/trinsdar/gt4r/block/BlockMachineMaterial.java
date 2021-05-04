@@ -57,7 +57,6 @@ public class BlockMachineMaterial extends BlockMachine implements IColorHandler 
             ItemStack stack = list.get(0);
             TileEntityDrum drum = (TileEntityDrum) tileentity;
             if (!drum.getDrop().isEmpty()){
-                Antimatter.LOGGER.info("drop not empty");
                 CompoundNBT nbt = stack.getOrCreateTag();
                 nbt.put("Fluid", drum.getDrop().writeToNBT(new CompoundNBT()));
             }

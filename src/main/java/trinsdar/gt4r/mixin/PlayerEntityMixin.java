@@ -21,7 +21,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         super(entityType_1, world_1);
     }
 
-    /*@ModifyConstant(
+    @ModifyConstant(
             remap = false,
             method = "attackTargetEntityWithCurrentItem",
             constant = @Constant(doubleValue = 9.0D)
@@ -30,7 +30,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         double attackReachValue = this.getAttributeValue(Attributes.ATTACK_REACH.get());
         return attackReachValue * attackReachValue;
     }
-*/
+
    @Inject(
             method = "func_234570_el_",
             at = @At(value = "RETURN", target = "Lnet/minecraft/entity/player/PlayerEntity;func_234570_el_()Lnet/minecraft/entity/ai/attributes/AttributeModifierMap$MutableAttribute;"),
