@@ -4,12 +4,9 @@ import muramasa.antimatter.cover.BaseCover;
 import muramasa.antimatter.cover.CoverStack;
 import muramasa.antimatter.gui.event.GuiEvent;
 import muramasa.antimatter.gui.event.IGuiEvent;
-import net.minecraft.nbt.CompoundNBT;
 import trinsdar.gt4r.Ref;
 
-import static trinsdar.gt4r.cover.CoverMode.EXPORT;
-
-public abstract class CoverBasicTransport extends BaseCover implements ICoverModeCover {
+public abstract class CoverBasicTransport extends BaseCover implements ICoverModeHandler {
 
     @Override
     public String getDomain() {
