@@ -36,6 +36,7 @@ public class MaceratorLoader {
             Material sm = o.getStoneType().getMaterial();
             if (!m.has(DUST) || !m.has(CRUSHED)) return;
             ItemStack stoneDust = sm.has(DUST) ? DUST.get(sm, 1) : ItemStack.EMPTY;
+            if (sm == BasaltVanilla) stoneDust = DUST.get(Basalt, 1);
             ITag.INamedTag<Item> oreTag = TagUtils.getForgeItemTag(String.join("", getConventionalStoneType(o.getStoneType()), "_", getConventionalMaterialType(o.getOreType()), "/", o.getMaterial().getId()));
             RecipeIngredient ore = RecipeIngredient.of(oreTag,1);
             ItemStack crushedStack = CRUSHED.get(m,1);

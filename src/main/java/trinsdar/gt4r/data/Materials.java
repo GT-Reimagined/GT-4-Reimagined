@@ -324,7 +324,6 @@ public class Materials {
         ELEC.add(ELEC90.all().toArray(new Material[0]));
         ELEC.add(ELEC120.all().toArray(new Material[0]));
 
-        DUST.forceOverride(BasaltVanilla, DUST.get(Basalt));
         NUGGET.forceOverride(Iron, Items.IRON_NUGGET);
         NUGGET.forceOverride(Gold, Items.GOLD_NUGGET);
         INGOT.forceOverride(Iron, Items.IRON_INGOT);
