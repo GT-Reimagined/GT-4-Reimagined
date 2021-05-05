@@ -33,10 +33,11 @@ public class ElectrolyzerLoader {
             if (power == 0) return;
             if (!m.has(DUST) && !m.has(LIQUID) && !m.has(GAS)) return;
             int count = m.getProcessInto().stream().mapToInt(t -> t.s).sum();
+            if (m.has(LIQUID) || m.has(GAS)) count *= 4;
             add(m, power, (int) m.getMass() * count);
         });
 
-        ELECTROLYZING.RB().fi(Water.getLiquid(6000)).fo(Hydrogen.getGas(4000), Oxygen.getGas(2000)).add(100, 30);
+        ELECTROLYZING.RB().fi(Water.getLiquid(3000)).fo(Hydrogen.getGas(2000), Oxygen.getGas(1000)).add(2000, 30);
         ELECTROLYZING.RB().ii(RecipeIngredient.of(new ItemStack(Items.BONE_MEAL, 3))).io(DUST.get(Calcium, 1)).add(24, 106);
         ELECTROLYZING.RB().ii(RecipeIngredient.of(new ItemStack(Blocks.SAND, 8))).io(DUST.get(SiliconDioxide, 1)).add(500, 25);
         ELECTROLYZING.RB().ii(RecipeIngredient.of(DUST.get(Diamond, 1))).io(DUST.get(Carbon, 64), DUST.get(Carbon, 64)).add(1536,60);
@@ -44,17 +45,16 @@ public class ElectrolyzerLoader {
         add(DarkAsh, 1, 30, 24);
         add(Coal, 1, 30, 24);
         if (breakMethod) return;
-        add(SulfuricAcid, 90, 392); // multiply still too low
 
-        add(SodiumPersulfate, 90, 432); //still too low
-        add(Methane, 60, 80); // still too low
+        add(SodiumPersulfate, 90, 432); //close
+        add(Methane, 60, 80); // close: 1 sec off
         //add(Sugar, 90, 448);
-        add(Glyceryl, 90, 800); // still too low
+        add(Glyceryl, 90, 800); // close
 
         //add(Apatite, 90, 288);
 
         //add(NitroCarbon, 60, 96);
-        add(Lazurite, 120, 392); // multiplied amount far over
+        add(Lazurite, 120, 392); // fixed
         add(Galena, 90, 832); // slightly over
         //add(CalciumCarbonate, 90, 400);
         add(Salt, 30,320); // far under
