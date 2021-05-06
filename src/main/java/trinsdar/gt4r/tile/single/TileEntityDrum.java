@@ -44,6 +44,8 @@ import java.util.Map;
 import static muramasa.antimatter.Data.ELECTRIC_WRENCH;
 import static muramasa.antimatter.Data.WRENCH;
 import static muramasa.antimatter.capability.AntimatterCaps.COVERABLE_HANDLER_CAPABILITY;
+import static net.minecraft.util.Direction.DOWN;
+import static net.minecraft.util.Direction.UP;
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
 import static net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
 import static trinsdar.gt4r.data.Materials.*;
@@ -155,7 +157,7 @@ public class TileEntityDrum extends TileEntityMachine {
         public void onUpdate() {
             super.onUpdate();
             if (tile.getWorld().getGameTime() % 20 == 0 && output){
-                Direction dir = getTank(0).getFluid().getFluid().getAttributes().isGaseous() ? Direction.UP : Direction.DOWN;
+                Direction dir = getTank(0).getFluid().getFluid().getAttributes().isGaseous() ? UP : Direction.DOWN;
                 if (getTank(0).getFluidAmount() > 0){
                     TileEntity adjacent = tile.getWorld().getTileEntity(tile.getPos().offset(dir));
                     if (adjacent != null){
@@ -226,7 +228,7 @@ public class TileEntityDrum extends TileEntityMachine {
 
             @Override
             public int fill(FluidStack resource, FluidAction action) {
-                if (fluidHandler.isOutput() && side.getAxis() == Direction.Axis.Y){
+                if (fluidHandler.isOutput() && (side == UP && resource.getFluid().getAttributes().isGaseous()) || (side == DOWN && !resource.getFluid().getAttributes().isGaseous())){
                     return 0;
                 }
                 return fluidHandler.fill(resource, action);
