@@ -45,7 +45,7 @@ public class CoverDrain extends BaseCover {
             return;
         }
         World world = tile.getWorld();
-        LazyOptional<IFluidHandler> cap = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY);
+        LazyOptional<IFluidHandler> cap = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);
         BlockPos offset = tile.getPos().offset(side);
         if (side == Direction.UP && world.isRainingAt(offset) && world.getGameTime() % 60 == 0){
             cap.ifPresent(f -> {
