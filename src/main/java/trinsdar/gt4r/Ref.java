@@ -12,6 +12,9 @@ public class Ref {
     public static final String ANTIMATTER = muramasa.antimatter.Ref.ID;
     public static final GT4RDataPackFinder SERVER_PACK_FINDER = new GT4RDataPackFinder();
 
+    /** Mod ids **/
+    public static final String IE = "immersiveengineering";
+
     /** Config Values **/
     public static boolean mixedOreYieldsTwoThirdsPureOre = false; //TODO 5U remnant, determine if needed
     public static boolean sulfurTorch = true;  //TODO: move to config, this is a placeholder testing thingy atm
