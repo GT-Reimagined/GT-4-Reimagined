@@ -89,6 +89,17 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
     }
 
     @Override
+    protected void registerPipeRecipes(Consumer<IFinishedRecipe> consumer, String providerDomain) {
+        super.registerPipeRecipes(consumer, providerDomain);
+        final ICriterionInstance in = this.hasSafeItem(WRENCH.getTag());
+        AntimatterAPI.all(FluidPipe.class).forEach(t -> {
+            Item pipeSmall = t.getBlockItem(PipeSize.SMALL);
+            Item pipeNormal = t.getBlockItem(PipeSize.NORMAL);
+            shapeless(consumer, "small_to_normal_pipe", "pipes", "has_wrench", in, new ItemStack(pipeNormal), pipeSmall, pipeSmall, pipeSmall);
+        });
+    }
+
+    @Override
     protected void registerToolRecipes(Consumer<IFinishedRecipe> consumer, String providerDomain) {
         if (providerDomain.equals(muramasa.antimatter.Ref.ID)){
             final ICriterionInstance in = this.hasSafeItem(WRENCH.getTag());

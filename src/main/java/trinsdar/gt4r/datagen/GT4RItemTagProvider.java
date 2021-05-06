@@ -56,6 +56,7 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.getOrCreateBuilder(TagUtils.getForgeItemTag("stone_ores/diamond")).add(Items.DIAMOND_ORE);
         this.getOrCreateBuilder(TagUtils.getForgeItemTag("stone_ores/redstone")).add(Items.REDSTONE_ORE);
         this.getOrCreateBuilder(TagUtils.getForgeItemTag("stone_ores/emerald")).add(Items.EMERALD_ORE);
+        this.getOrCreateBuilder(INGOTS_MIXED_METAL).add(MixedMetal);
 
     }
 
