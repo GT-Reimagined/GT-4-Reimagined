@@ -48,7 +48,9 @@ public class ToolCraftingTableRecipes {
                 }
             }
             if (cable != null){
-                provider.shapeless(output, wire.getId() + "_cable", "cables", "has_wire", provider.hasSafeItem(wire.getBlockItem(VTINY)), new ItemStack(cable.getBlockItem(VTINY)), wire.getBlockItem(VTINY), INGOT.getMaterialTag(Rubber));
+                provider.shapeless(output, wire.getId() + "_cable_1x", "cables", "has_wire1x", provider.hasSafeItem(wire.getBlockItem(VTINY)), new ItemStack(cable.getBlockItem(VTINY)), wire.getBlockItem(VTINY), INGOT.getMaterialTag(Rubber));
+                provider.shapeless(output, wire.getId() + "_cable_2x", "cables", "has_wire2x", provider.hasSafeItem(wire.getBlockItem(TINY)), new ItemStack(cable.getBlockItem(TINY)), wire.getBlockItem(TINY), INGOT.getMaterialTag(Rubber), INGOT.getMaterialTag(Rubber));
+                provider.shapeless(output, wire.getId() + "_cable_4x", "cables", "has_wire4x", provider.hasSafeItem(wire.getBlockItem(SMALL)), new ItemStack(cable.getBlockItem(SMALL)), wire.getBlockItem(SMALL), INGOT.getMaterialTag(Rubber), INGOT.getMaterialTag(Rubber), INGOT.getMaterialTag(Rubber), INGOT.getMaterialTag(Rubber));
             }
             if (wire.getMaterial().has(PLATE)) {
                 provider.shapeless(output, "platewire","wire","has_cutter", criterion(WIRE_CUTTER.getTag(), provider),
