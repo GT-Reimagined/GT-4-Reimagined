@@ -3,6 +3,7 @@ package trinsdar.gt4r.data;
 import muramasa.antimatter.registration.IAntimatterObject;
 import muramasa.antimatter.structure.BlockStateElement;
 import net.minecraft.block.Blocks;
+import net.minecraft.fluid.Fluids;
 
 import static trinsdar.gt4r.data.GT4RData.*;
 import static trinsdar.gt4r.data.Machines.*;
@@ -10,8 +11,9 @@ import static trinsdar.gt4r.data.Machines.*;
 public class Structures {
 
     /** Special Case Elements **/
-    public static BlockStateElement AIR_OR_LAVA = new BlockStateElement("air_or_lava", (w, p, s) -> s.getBlock().isAir(s, w, p) || s.getBlock() == Blocks.LAVA/* || s.getBlock() == Blocks.FLOWING_LAVA*/);
-    public static BlockStateElement WATER = new BlockStateElement("water", (w, p, s) -> s.getBlock() == Blocks.WATER);
+    public static BlockStateElement AIR_OR_LAVA = new BlockStateElement("air_or_lava", (w, p, s) -> s.getBlock().isAir(s, w, p) || s.getFluidState().getFluid() == Fluids.LAVA/* || s.getBlock() == Blocks.FLOWING_LAVA*/);
+    public static BlockStateElement AIR = new BlockStateElement("air", (w, p, s) -> s.getBlock().isAir(s, w, p));
+    public static BlockStateElement WATER = new BlockStateElement("water", (w, p, s) -> s.getFluidState().getFluid() == Fluids.WATER);
 
 
     public static ComponentIdWrapper BRICK_WRAPPER = new ComponentIdWrapper("slave_controller");
@@ -23,8 +25,8 @@ public class Structures {
             .build().offset(2, -1)
         );
         PRIMITIVE_BLAST_FURNACE.setStructure(b -> b
-            .of("CCC", "CCC", "CCC").of("CCC", "CBM", "CCC").of("CCC", "CBC", "CCC").of(2).of("CCC", "CCC", "CCC")
-            .at("C", "slave_controller", BRICK_WRAPPER, FIRE_BRICKS).at("B", AIR_OR_LAVA).at("M", PRIMITIVE_BLAST_FURNACE)
+            .of("CCC", "CCC", "CCC").of("CCC", "CBM", "CCC").of("CCC", "CBC", "CCC").of(2).of("CCC", "CAC", "CCC")
+            .at("C", "slave_controller", BRICK_WRAPPER, FIRE_BRICKS).at("B", AIR_OR_LAVA).at("M", PRIMITIVE_BLAST_FURNACE).at("A", AIR)
             .build().offset(2, -1)
         );
         BLAST_FURNACE.setStructure(b -> b
