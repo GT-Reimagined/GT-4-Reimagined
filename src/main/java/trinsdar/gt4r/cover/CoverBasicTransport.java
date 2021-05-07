@@ -2,6 +2,8 @@ package trinsdar.gt4r.cover;
 
 import muramasa.antimatter.cover.BaseCover;
 import muramasa.antimatter.cover.CoverStack;
+import muramasa.antimatter.cover.ICoverMode;
+import muramasa.antimatter.cover.ICoverModeHandler;
 import muramasa.antimatter.gui.event.GuiEvent;
 import muramasa.antimatter.gui.event.IGuiEvent;
 import trinsdar.gt4r.Ref;

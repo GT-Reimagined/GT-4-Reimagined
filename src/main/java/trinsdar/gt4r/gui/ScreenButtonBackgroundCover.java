@@ -1,13 +1,13 @@
 package trinsdar.gt4r.gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+import muramasa.antimatter.cover.ICoverMode;
+import muramasa.antimatter.cover.ICoverModeHandler;
 import muramasa.antimatter.gui.container.ContainerCover;
 import muramasa.antimatter.gui.screen.ScreenCover;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.text.ITextComponent;
-import trinsdar.gt4r.cover.ICoverMode;
-import trinsdar.gt4r.cover.ICoverModeHandler;
 
 public class ScreenButtonBackgroundCover<T extends ContainerCover> extends ScreenCover<T> {
     public ScreenButtonBackgroundCover(T container, PlayerInventory inv, ITextComponent name) {

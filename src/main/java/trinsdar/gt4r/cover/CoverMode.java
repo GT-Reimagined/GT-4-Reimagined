@@ -1,5 +1,7 @@
 package trinsdar.gt4r.cover;
 
+import muramasa.antimatter.cover.ICoverMode;
+
 public enum CoverMode implements ICoverMode {
     EXPORT("Export",88, 24),
     IMPORT("Import",34, 24),
