@@ -13,7 +13,8 @@ public class Ref {
     public static final GT4RDataPackFinder SERVER_PACK_FINDER = new GT4RDataPackFinder();
 
     /** Mod ids **/
-    public static final String IE = "immersiveengineering";
+    public static final String MOD_IE = "immersiveengineering";
+    public static final String MOD_CREATE = "create";
 
     /** Config Values **/
     public static boolean mixedOreYieldsTwoThirdsPureOre = false; //TODO 5U remnant, determine if needed

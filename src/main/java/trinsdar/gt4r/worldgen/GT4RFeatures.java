@@ -24,7 +24,7 @@ public class GT4RFeatures {
     public static final GT4ROreFeatureConfig URANITE = new GT4ROreFeatureConfig("uranite", 0, 100, 8, 4, Uraninite, NULL, 0, World.OVERWORLD).setInvalidBiomes(DEAD);
     public static final GT4ROreFeatureConfig URANITE_DEAD = new GT4ROreFeatureConfig("uranite_dead", 0, 100, 20, 4, Uraninite, NULL, 0, World.OVERWORLD).setValidBiomes(DEAD);
     public static final GT4ROreFeatureConfig CASSITERITE = new GT4ROreFeatureConfig("cassiterite", 30, 80, 2, 32, Cassiterite, Tin, 5, World.OVERWORLD).setValidBiomes(MUSHROOM, MOUNTAIN, CONIFEROUS, COLD).setInvalidBiomes(JUNGLE);
-    public static final GT4ROreFeatureConfig TETRAHEDRITE = new GT4ROreFeatureConfig("tetrahedrite", 20, 70, 7, 6, Tetrahedrite, Copper, 1, World.OVERWORLD).setValidBiomes(JUNGLE, SWAMP, MOUNTAIN, MUSHROOM).setInvalidBiomes(COLD);
+    public static final GT4ROreFeatureConfig TETRAHEDRITE = new GT4ROreFeatureConfig("tetrahedrite", 20, 70, 7, 12, Tetrahedrite, Copper, 1, World.OVERWORLD).setValidBiomes(JUNGLE, SWAMP, MOUNTAIN, MUSHROOM).setInvalidBiomes(COLD);
     public static final GT4ROreFeatureConfig GALENA = new GT4ROreFeatureConfig("galena", 0, 64, 12, 10, Galena, NULL, 0, World.OVERWORLD);
     public static final GT4ROreFeatureConfig BAUXITE = new GT4ROreFeatureConfig("bauxite", 50, 120, 6, 16, Bauxite, NULL, 0, World.OVERWORLD).setValidBiomes(FOREST, PLAINS);
     public static final GT4ROreFeatureConfig RUBY = new GT4ROreFeatureConfig("ruby", 0, 48, 3, 6, Ruby, NULL, 0, World.OVERWORLD).setValidBiomes(HOT).setInvalidBiomes(JUNGLE, OCEAN);

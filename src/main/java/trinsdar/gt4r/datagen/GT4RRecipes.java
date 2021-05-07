@@ -4,8 +4,6 @@ import com.google.common.collect.ImmutableMap;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.material.Material;
-import muramasa.antimatter.ore.BlockOre;
-import muramasa.antimatter.pipe.PipeItemBlock;
 import muramasa.antimatter.pipe.PipeSize;
 import muramasa.antimatter.pipe.types.FluidPipe;
 import muramasa.antimatter.recipe.ingredient.PropertyIngredient;
@@ -16,15 +14,12 @@ import net.minecraft.advancements.ICriterionInstance;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.data.ShapelessRecipeBuilder;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ITag;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.fml.common.Mod;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.loader.MaterialRecipeLoader;
@@ -45,15 +40,11 @@ import java.util.stream.Collectors;
 
 import static com.google.common.collect.ImmutableMap.of;
 import static muramasa.antimatter.Data.*;
-import static muramasa.antimatter.material.MaterialTag.GRINDABLE;
 import static muramasa.antimatter.material.MaterialTag.HANDLE;
 import static muramasa.antimatter.material.MaterialTag.RUBBERTOOLS;
 import static muramasa.antimatter.util.TagUtils.getForgeItemTag;
 import static muramasa.antimatter.util.TagUtils.nc;
-import static muramasa.antimatter.util.Utils.getConventionalMaterialType;
-import static muramasa.antimatter.util.Utils.getConventionalStoneType;
 import static trinsdar.gt4r.data.Materials.Steel;
-import static trinsdar.gt4r.data.RecipeMaps.EXTRUDING;
 import static trinsdar.gt4r.loader.crafting.CraftingHelper.criterion;
 
 public class GT4RRecipes extends AntimatterRecipeProvider {
@@ -72,7 +63,7 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
         this.craftingLoaders.add(FurnaceLoader::loadRecipes);
         this.craftingLoaders.add(BlockCrafting::loadRecipes);
         this.craftingLoaders.add(ToolCrafting::loadRecipes);
-        if (AntimatterAPI.isModLoaded(Ref.IE)){
+        if (AntimatterAPI.isModLoaded(Ref.MOD_IE)){
             this.craftingLoaders.add(ModCompatRecipes::loadIE);
         }
     }
