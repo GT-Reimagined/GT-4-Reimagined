@@ -2,9 +2,11 @@ package trinsdar.gt4r.datagen;
 
 
 import muramasa.antimatter.AntimatterAPI;
+import muramasa.antimatter.block.BlockStone;
 import muramasa.antimatter.datagen.providers.AntimatterLanguageProvider;
 import muramasa.antimatter.item.ItemFluidCell;
 import muramasa.antimatter.machine.BlockMachine;
+import muramasa.antimatter.material.MaterialItem;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import trinsdar.gt4r.Ref;
@@ -55,6 +57,19 @@ public class GT4RLocalizations {
         public void add(Item key, String name) {
             if (key instanceof ItemFluidCell){
                 add(key.getTranslationKey(), lowerUnderscoreToUpperSpacedRotated(((ItemFluidCell)key).getId()));
+                return;
+            }
+            if (key instanceof MaterialItem && name.contains("Gem")){
+                super.add(key, name.replace(" Gem", ""));
+                return;
+            }
+            super.add(key, name);
+        }
+
+        @Override
+        public void add(Block key, String name) {
+            if (key instanceof BlockStone){
+                super.add(key, name.replace("Stone ", ""));
                 return;
             }
             super.add(key, name);
