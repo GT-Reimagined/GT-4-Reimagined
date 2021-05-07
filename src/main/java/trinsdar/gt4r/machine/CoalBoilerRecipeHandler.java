@@ -110,6 +110,11 @@ public class CoalBoilerRecipeHandler extends MachineRecipeHandler<TileEntityCoal
     }
 
     @Override
+    public void setClientProgress(int progress) {
+        fuel = progress;
+    }
+
+    @Override
     public void onServerUpdate() {
         if (this.heat <= 20) {
             this.heat = 20;
