@@ -84,11 +84,13 @@ public class Guis {
 
         AntimatterAPI.registerJEICategory(RecipeMaps.ORE_BYPRODUCTS, Guis.ORE_BYPRODUCTS);
 //        GregTechAPI.registerJEICategory(RecipeMaps.SMELTING, Guis.MULTI_DISPLAY_COMPACT);
-        AntimatterAPI.registerJEICategory(RecipeMaps.STEAM_FUELS, Guis.MULTI_DISPLAY_COMPACT);
-        AntimatterAPI.registerJEICategory(RecipeMaps.SEMIFLUID_FUELS, Guis.MULTI_DISPLAY_COMPACT);
-        AntimatterAPI.registerJEICategory(RecipeMaps.GAS_FUELS, Guis.MULTI_DISPLAY_COMPACT);
-        AntimatterAPI.registerJEICategory(RecipeMaps.DIESEL_FUELS, Guis.MULTI_DISPLAY_COMPACT);
-        AntimatterAPI.registerJEICategory(RecipeMaps.LAVA_FUELS, Guis.MULTI_DISPLAY_COMPACT);
+        AntimatterAPI.registerJEICategory(RecipeMaps.STEAM_FUELS, Guis.MULTI_DISPLAY_COMPACT, STEAM_TURBINE);
+        AntimatterAPI.registerJEICategory(RecipeMaps.SEMIFLUID_FUELS, Guis.MULTI_DISPLAY_COMPACT, SEMIFLUID_GENERATOR);
+        AntimatterAPI.registerJEICategory(RecipeMaps.GAS_FUELS, Guis.MULTI_DISPLAY_COMPACT, GAS_TURBINE);
+        AntimatterAPI.registerJEICategory(RecipeMaps.DIESEL_FUELS, Guis.MULTI_DISPLAY_COMPACT, DIESEL_GENERATOR);
+        AntimatterAPI.registerJEICategory(RecipeMaps.LAVA_FUELS, Guis.MULTI_DISPLAY_COMPACT, HEAT_EXCHANGER);
+
+        // extruder, chemical reactor, thermal centrifuge, all multiblocks
 
         //TODO changing slots of a machine in world, will crash from GTItemHandler.validateSlot()
 
