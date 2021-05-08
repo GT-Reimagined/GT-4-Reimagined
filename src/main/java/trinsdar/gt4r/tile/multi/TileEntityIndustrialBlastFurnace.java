@@ -3,6 +3,7 @@ package trinsdar.gt4r.tile.multi;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import it.unimi.dsi.fastutil.objects.ObjectCollection;
 import muramasa.antimatter.capability.machine.MachineRecipeHandler;
+import muramasa.antimatter.gui.container.ContainerMachine;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.event.IMachineEvent;
 import muramasa.antimatter.machine.types.Machine;
@@ -96,8 +97,8 @@ public class TileEntityIndustrialBlastFurnace extends TileEntityBasicMultiMachin
                     heatingCapacity += (250 * stack.getCount());
                 }
             }
-            if (openContainer != null) {
-                openContainer.detectAndSendChanges();
+            if (!openContainers.isEmpty()) {
+                openContainers.forEach(ContainerMachine::detectAndSendChanges);
             }
         }
         super.onMachineEvent(event, data);

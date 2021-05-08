@@ -97,6 +97,16 @@ public class TileEntityInfiniteFluid extends TileEntityMachine {
             tank.setFluid(Steam.getGas(Integer.MAX_VALUE-1));
         }
 
+        @Override
+        public boolean canInput(FluidStack fluid, Direction direction) {
+            return false;
+        }
+
+        @Override
+        public boolean canInput(Direction direction) {
+            return false;
+        }
+
         @Nonnull
         @Override
         public FluidStack drain(FluidStack stack, FluidAction action) {
