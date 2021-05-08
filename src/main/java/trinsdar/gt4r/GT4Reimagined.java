@@ -25,6 +25,7 @@ import trinsdar.gt4r.datagen.GT4RDataPackFinder;
 import trinsdar.gt4r.datagen.GT4RItemTagProvider;
 import trinsdar.gt4r.datagen.GT4RLocalizations;
 import trinsdar.gt4r.datagen.GT4RRecipes;
+import trinsdar.gt4r.datagen.ProgressionAdvancements;
 import trinsdar.gt4r.loader.WorldGenLoader;
 import trinsdar.gt4r.loader.machines.*;
 import trinsdar.gt4r.loader.machines.generator.CoalBoilerHandler;
@@ -77,7 +78,7 @@ public class GT4Reimagined extends AntimatterMod {
         AntimatterDynamics.addProvider(Ref.ID, g -> new GT4RItemTagProvider(Ref.ID, Ref.NAME.concat(" Item Tags"), false, g, p[0], new ExistingFileHelperOverride()));
         AntimatterDynamics.addProvider(Ref.ID, g -> new AntimatterFluidTagProvider(Ref.ID, Ref.NAME.concat(" Fluid Tags"), false, g, new ExistingFileHelperOverride()));
         AntimatterDynamics.addProvider(Ref.ID, g -> new GT4RRecipes(Ref.ID, Ref.NAME.concat(" Recipes"), g));
-        //AntimatterAPI.addProvider(Ref.ID, g -> new AntimatterAdvancementProvider(Ref.ID, Ref.NAME.concat(" Advancements"), g, new ProgressionAdvancements()));
+        AntimatterDynamics.addProvider(Ref.ID, g -> new AntimatterAdvancementProvider(Ref.ID, Ref.NAME.concat(" Advancements"), g, new ProgressionAdvancements()));
         AntimatterDynamics.addProvider(Ref.ID, GT4RLocalizations.en_US::new);
         AntimatterDynamics.addProvider(Ref.ID, g -> new GT4RBlockLootProvider(Ref.ID, Ref.NAME.concat( " Loot generator"),g));
 

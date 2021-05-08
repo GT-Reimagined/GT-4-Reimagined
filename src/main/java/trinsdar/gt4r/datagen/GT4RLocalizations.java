@@ -34,8 +34,8 @@ public class GT4RLocalizations {
         @Override
         protected void addTranslations() {
             super.addTranslations();
-            add(Ref.ID + ".advancements.greg", "GregTech Intergalactical");
-            add(Ref.ID + ".advancements.greg.desc", "Getting familiar with your surroundings");
+            add(Ref.ID + ".advancements.gt4r", "GT4 Renewed");
+            add(Ref.ID + ".advancements.gt4r.desc", "Getting familiar with your surroundings");
             add(Ref.ID + ".tooltip.occurrence", "Indicates occurrence of ");
             add("block.gt4r.rubber_leaves", "Rubber Leaves");
             add("block.gt4r.rubber_log", "Rubber Log");
