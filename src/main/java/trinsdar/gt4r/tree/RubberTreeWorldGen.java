@@ -1,10 +1,8 @@
 package trinsdar.gt4r.tree;
 
-import com.google.common.collect.ImmutableList;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import muramasa.antimatter.worldgen.object.WorldGenBase;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
@@ -15,11 +13,8 @@ import net.minecraft.world.gen.feature.FeatureSpread;
 import net.minecraft.world.gen.feature.TwoLayerFeature;
 import net.minecraft.world.gen.feature.WorldDecoratingHelper;
 import net.minecraft.world.gen.foliageplacer.AcaciaFoliagePlacer;
-import net.minecraft.world.gen.foliageplacer.BlobFoliagePlacer;
 import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
 import net.minecraft.world.gen.placement.Placement;
-import net.minecraft.world.gen.treedecorator.LeaveVineTreeDecorator;
-import net.minecraft.world.gen.trunkplacer.ForkyTrunkPlacer;
 import net.minecraft.world.gen.trunkplacer.StraightTrunkPlacer;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -30,9 +25,6 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
-
-import static trinsdar.gt4r.data.GT4RData.RUBBER_LEAVES;
-import static trinsdar.gt4r.data.GT4RData.RUBBER_SAPLING;
 
 public class RubberTreeWorldGen  extends WorldGenBase<RubberTreeWorldGen> {
     public static Predicate<Biome.Category> getValidBiomesStatic() {
