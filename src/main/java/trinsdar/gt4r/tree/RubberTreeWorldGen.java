@@ -49,19 +49,15 @@ public class RubberTreeWorldGen  extends WorldGenBase<RubberTreeWorldGen> {
 
     final static BaseTreeFeatureConfig RUBBER_TREE_CONFIG_SWAMP =
             (new BaseTreeFeatureConfig.Builder(RubberTree.TRUNK_BLOCKS, new SimpleBlockStateProvider(GT4RData.RUBBER_LEAVES.getDefaultState()),
-                    new AcaciaFoliagePlacer(FeatureSpread.func_242252_a(2), FeatureSpread.func_242252_a(0)), new StraightTrunkPlacer(5, 2, 2), new TwoLayerFeature(1, 0, 2))).setIgnoreVines().setMaxWaterDepth(1).build();
+                    new AcaciaFoliagePlacer(FeatureSpread.func_242252_a(2), FeatureSpread.func_242252_a(0)), new StraightTrunkPlacer(5, 2, 0), new TwoLayerFeature(1, 0, 2))).setIgnoreVines().setMaxWaterDepth(1).build();
 
     final static BaseTreeFeatureConfig RUBBER_TREE_CONFIG_JUNGLE =
             (new BaseTreeFeatureConfig.Builder(RubberTree.TRUNK_BLOCKS, new SimpleBlockStateProvider(GT4RData.RUBBER_LEAVES.getDefaultState()),
                     new AcaciaFoliagePlacer(FeatureSpread.func_242252_a(2), FeatureSpread.func_242252_a(0)), new StraightTrunkPlacer(7, 2, 2), new TwoLayerFeature(1, 0, 2))).setIgnoreVines().build();
-    ///   .trunkHeight(4).trunkHeightRandom(1) // bare trunk height
-    //     .trunkTopOffset(2) // depresses trunk top within leaves
-    //     .setSapling(RUBBER_SAPLING)
-    //          .decorators(ImmutableList.of(new LeaveVineTreeDecorator())).build();
 
     final static BaseTreeFeatureConfig RUBBER_TREE_CONFIG_NORMAL =
             (new BaseTreeFeatureConfig.Builder(RubberTree.TRUNK_BLOCKS, new SimpleBlockStateProvider(GT4RData.RUBBER_LEAVES.getDefaultState()),
-                    new AcaciaFoliagePlacer(FeatureSpread.func_242252_a(2), FeatureSpread.func_242252_a(0)), new StraightTrunkPlacer(5, 2, 2), new TwoLayerFeature(1, 0, 2))).setIgnoreVines().build();
+                    new AcaciaFoliagePlacer(FeatureSpread.func_242252_a(2), FeatureSpread.func_242252_a(0)), new StraightTrunkPlacer(4, 3, 0), new TwoLayerFeature(1, 0, 2))).setIgnoreVines().build();
 
 
 
