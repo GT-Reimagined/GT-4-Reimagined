@@ -21,7 +21,7 @@ public class CoalBoilerFluidHandler extends MachineFluidHandler<TileEntityCoalBo
     public CoalBoilerFluidHandler(TileEntityCoalBoiler tile) {
         super(tile, 16000, 1000 * (250 + tile.getMachineTier().getIntegerId()));
         tanks.put(FluidDirection.INPUT, FluidTanks.create(tile, ContentEvent.FLUID_INPUT_CHANGED, b -> {
-            b.tank(fluidStack -> fluidStack.isFluidEqual(new FluidStack(Fluids.WATER, 1)) || fluidStack.isFluidEqual(DistilledWater.getLiquid(1)),16000);
+            b.tank(16000);
             return b;
         }));
         tanks.put(FluidDirection.OUTPUT, FluidTanks.create(tile, ContentEvent.FLUID_OUTPUT_CHANGED, b -> {

@@ -35,6 +35,7 @@ import static muramasa.antimatter.Data.DUST;
 import static muramasa.antimatter.Data.GEM;
 import static muramasa.antimatter.machine.MachineState.*;
 import static muramasa.antimatter.machine.Tier.BRONZE;
+import static trinsdar.gt4r.data.Materials.DistilledWater;
 import static trinsdar.gt4r.data.Materials.Steam;
 
 public class CoalBoilerRecipeHandler extends MachineRecipeHandler<TileEntityCoalBoiler> {
@@ -213,6 +214,11 @@ public class CoalBoilerRecipeHandler extends MachineRecipeHandler<TileEntityCoal
         } else if (!t && tile.getMachineState() == MachineState.ACTIVE){
             tile.setMachineState(MachineState.IDLE);
         }
+    }
+
+    @Override
+    public boolean accepts(FluidStack fluid) {
+        return fluid.isFluidEqual(new FluidStack(Fluids.WATER, 1)) || fluid.isFluidEqual(DistilledWater.getLiquid(1));
     }
 
     @Override
