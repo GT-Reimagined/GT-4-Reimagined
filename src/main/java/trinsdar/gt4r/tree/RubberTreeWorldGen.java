@@ -13,6 +13,9 @@ import net.minecraft.world.gen.feature.FeatureSpread;
 import net.minecraft.world.gen.feature.TwoLayerFeature;
 import net.minecraft.world.gen.feature.WorldDecoratingHelper;
 import net.minecraft.world.gen.foliageplacer.AcaciaFoliagePlacer;
+import net.minecraft.world.gen.foliageplacer.BlobFoliagePlacer;
+import net.minecraft.world.gen.foliageplacer.FoliagePlacer;
+import net.minecraft.world.gen.foliageplacer.PineFoliagePlacer;
 import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.trunkplacer.StraightTrunkPlacer;
@@ -41,15 +44,15 @@ public class RubberTreeWorldGen  extends WorldGenBase<RubberTreeWorldGen> {
 
     final static BaseTreeFeatureConfig RUBBER_TREE_CONFIG_SWAMP =
             (new BaseTreeFeatureConfig.Builder(RubberTree.TRUNK_BLOCKS, new SimpleBlockStateProvider(GT4RData.RUBBER_LEAVES.getDefaultState()),
-                    new AcaciaFoliagePlacer(FeatureSpread.func_242252_a(2), FeatureSpread.func_242252_a(0)), new StraightTrunkPlacer(5, 2, 0), new TwoLayerFeature(1, 0, 2))).setIgnoreVines().setMaxWaterDepth(1).build();
+                    new BlobFoliagePlacer(FeatureSpread.func_242252_a(2), FeatureSpread.func_242252_a(0), 2), new StraightTrunkPlacer(4, 3, 0), new TwoLayerFeature(1, 0, 2))).setIgnoreVines().setMaxWaterDepth(1).build();
 
     final static BaseTreeFeatureConfig RUBBER_TREE_CONFIG_JUNGLE =
             (new BaseTreeFeatureConfig.Builder(RubberTree.TRUNK_BLOCKS, new SimpleBlockStateProvider(GT4RData.RUBBER_LEAVES.getDefaultState()),
-                    new AcaciaFoliagePlacer(FeatureSpread.func_242252_a(2), FeatureSpread.func_242252_a(0)), new StraightTrunkPlacer(7, 2, 2), new TwoLayerFeature(1, 0, 2))).setIgnoreVines().build();
+                    new BlobFoliagePlacer(FeatureSpread.func_242252_a(2), FeatureSpread.func_242252_a(0), 2), new StraightTrunkPlacer(4, 3, 0), new TwoLayerFeature(1, 0, 2))).setIgnoreVines().build();
 
     final static BaseTreeFeatureConfig RUBBER_TREE_CONFIG_NORMAL =
             (new BaseTreeFeatureConfig.Builder(RubberTree.TRUNK_BLOCKS, new SimpleBlockStateProvider(GT4RData.RUBBER_LEAVES.getDefaultState()),
-                    new AcaciaFoliagePlacer(FeatureSpread.func_242252_a(2), FeatureSpread.func_242252_a(0)), new StraightTrunkPlacer(4, 3, 0), new TwoLayerFeature(1, 0, 2))).setIgnoreVines().build();
+                    new BlobFoliagePlacer(FeatureSpread.func_242252_a(2), FeatureSpread.func_242252_a(0), 2), new StraightTrunkPlacer(4, 3, 0), new TwoLayerFeature(1, 0, 0))).setIgnoreVines().build();
 
 
 
@@ -70,7 +73,7 @@ public class RubberTreeWorldGen  extends WorldGenBase<RubberTreeWorldGen> {
             }
             float finalp = p;
             builder.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(() -> RubberTree.TREE_FEATURE.withConfiguration(getTreeConfig(biome))
-                    .withPlacement(new RubberTreePlacement().configure(new AtSurfaceWithExtraConfig(0, finalp, 3))));
+                    .withPlacement(new RubberTreePlacement().configure(new AtSurfaceWithExtraConfig(0, finalp, 1))));
         }
     }
 

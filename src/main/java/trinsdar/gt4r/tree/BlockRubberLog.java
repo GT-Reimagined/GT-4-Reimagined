@@ -4,6 +4,7 @@ import muramasa.antimatter.Antimatter;
 import muramasa.antimatter.block.BlockBasic;
 import muramasa.antimatter.datagen.providers.AntimatterBlockStateProvider;
 import muramasa.antimatter.texture.Texture;
+import net.minecraft.block.CropsBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootContext;
