@@ -23,8 +23,12 @@ public class RubberFoliagePlacer extends FoliagePlacer {
         return func_242830_b(p_242834_0_).apply(p_242834_0_, RubberFoliagePlacer::new);
     });
     public static final FoliagePlacerType<RubberFoliagePlacer> RUBBER = new FoliagePlacerType<>(CODEC);
-    public RubberFoliagePlacer(FeatureSpread radius, FeatureSpread offset) {
+    protected RubberFoliagePlacer(FeatureSpread radius, FeatureSpread offset) {
         super(radius, offset);
+    }
+
+    public RubberFoliagePlacer() {
+        super(FeatureSpread.func_242252_a(2), FeatureSpread.func_242252_a(-1));
     }
 
     @Override
