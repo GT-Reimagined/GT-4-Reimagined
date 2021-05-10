@@ -52,7 +52,7 @@ public class RubberTreeWorldGen  extends WorldGenBase<RubberTreeWorldGen> {
 
     final static BaseTreeFeatureConfig RUBBER_TREE_CONFIG_NORMAL =
             (new BaseTreeFeatureConfig.Builder(RubberTree.TRUNK_BLOCKS, new SimpleBlockStateProvider(GT4RData.RUBBER_LEAVES.getDefaultState()),
-                    new BlobFoliagePlacer(FeatureSpread.func_242252_a(2), FeatureSpread.func_242252_a(0), 2), new StraightTrunkPlacer(4, 3, 0), new TwoLayerFeature(1, 0, 0))).setIgnoreVines().build();
+                    new RubberFoliagePlacer(FeatureSpread.func_242252_a(2), FeatureSpread.func_242252_a(-1)), new StraightTrunkPlacer(4, 3, 0), new TwoLayerFeature(1, 0, 0))).setIgnoreVines().build();
 
 
 
@@ -79,10 +79,10 @@ public class RubberTreeWorldGen  extends WorldGenBase<RubberTreeWorldGen> {
 
     static BaseTreeFeatureConfig getTreeConfig(Biome biome){
         BaseTreeFeatureConfig config = RUBBER_TREE_CONFIG_NORMAL;
-        if (biome.getCategory() == Biome.Category.SWAMP)
+        /*if (biome.getCategory() == Biome.Category.SWAMP)
             config = RUBBER_TREE_CONFIG_SWAMP;
         else if (biome.getCategory() == Biome.Category.JUNGLE)
-            config = RUBBER_TREE_CONFIG_JUNGLE;
+            config = RUBBER_TREE_CONFIG_JUNGLE;*/
         return config;
     }
     public static class RubberTreePlacement extends Placement<AtSurfaceWithExtraConfig> {

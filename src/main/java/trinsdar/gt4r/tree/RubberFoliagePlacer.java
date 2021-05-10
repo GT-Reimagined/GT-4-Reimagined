@@ -2,6 +2,8 @@ package trinsdar.gt4r.tree;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import io.netty.util.internal.MathUtil;
+import muramasa.antimatter.Antimatter;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.gen.IWorldGenerationReader;
@@ -35,15 +37,17 @@ public class RubberFoliagePlacer extends FoliagePlacer {
 
     protected void generate(IWorldGenerationReader world, Random random, BaseTreeFeatureConfig config, int trunkHeight, Foliage treeNode, int foliageHeight, int radius, Set<BlockPos> leaves, int offset, MutableBoundingBox box) {
         for(int i = offset; i >= offset - foliageHeight; --i) {
-            //int j = Math.max(radius + treeNode.getFoliageRadius() - 1 - i / 2, 0);
-            //this.generateSquare(world, random, config, treeNode.getCenter(), j, leaves, i, treeNode.isGiantTrunk(), box);
+            Antimatter.LOGGER.info("i: " + i);
+            int j = Math.max(radius + treeNode.func_236764_b_() - 1 - i / 2, 0);
+            Antimatter.LOGGER.info("j: " + j);
+            this.func_236753_a_(world, random, config, treeNode.func_236763_a_(), j, leaves, i, treeNode.func_236765_c_(), box);
         }
 
     }
 
     @Override
     public int func_230374_a_(Random p_230374_1_, int p_230374_2_, BaseTreeFeatureConfig p_230374_3_) {
-        return 0;
+        return Math.max(1, p_230374_2_ - (3 + p_230374_1_.nextInt(2)));
     }
 
     @Override
