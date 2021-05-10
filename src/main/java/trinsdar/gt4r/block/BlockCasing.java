@@ -77,6 +77,6 @@ public class BlockCasing extends BlockDynamic {
 
     @OnlyIn(Dist.CLIENT)
     public boolean isSideInvisible(BlockState state, BlockState adjacentBlockState, Direction side) {
-        return (this == GT4RData.REINFORCED_GLASS && adjacentBlockState.isIn(Tags.Blocks.GLASS)) || super.isSideInvisible(state, adjacentBlockState, side);
+        return (this == GT4RData.REINFORCED_GLASS && adjacentBlockState.matchesBlock(this)) || super.isSideInvisible(state, adjacentBlockState, side);
     }
 }

@@ -172,6 +172,7 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:world_stripper-250603:3142092")
     runtimeOnly fg.deobf("curse.maven:world_edit-225608:3172951")
     runtimeOnly fg.deobf("curse.maven:spartan_weaponry-278141:3164046")
+    runtimeOnly fg.deobf("curse.maven:top-245211:${top_file}")
 
     if (findProject(':AntimatterAPI') != null) {
         implementation project(':AntimatterAPI')
