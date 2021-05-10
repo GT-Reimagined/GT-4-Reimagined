@@ -104,7 +104,7 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
     }
 
     public ConfiguredFeature<?, ?> getConfiguration(GT4ROreFeatureConfig config){
-        return this.withConfiguration(config).withPlacement(Placement.RANGE.configure(getRange(config.getMinY(), config.getMaxY()))).square().func_242731_b(config.getWeight());
+        return this.withConfiguration(config).withPlacement(Placement.RANGE.configure(getRange(config.getMinY(), config.getMaxY()))).square().count(config.getWeight());
     }
 
     public TopSolidRangeConfig getRange(int min, int max){

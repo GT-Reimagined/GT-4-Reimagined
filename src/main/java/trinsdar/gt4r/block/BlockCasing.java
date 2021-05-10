@@ -11,12 +11,14 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolType;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.tile.TileEntityTypes;
@@ -75,6 +77,6 @@ public class BlockCasing extends BlockDynamic {
 
     @OnlyIn(Dist.CLIENT)
     public boolean isSideInvisible(BlockState state, BlockState adjacentBlockState, Direction side) {
-        return (this == GT4RData.REINFORCED_GLASS && adjacentBlockState.isIn(this)) || super.isSideInvisible(state, adjacentBlockState, side);
+        return (this == GT4RData.REINFORCED_GLASS && adjacentBlockState.isIn(Tags.Blocks.GLASS)) || super.isSideInvisible(state, adjacentBlockState, side);
     }
 }

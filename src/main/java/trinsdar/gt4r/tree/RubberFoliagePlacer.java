@@ -28,11 +28,11 @@ public class RubberFoliagePlacer extends FoliagePlacer {
     }
 
     public RubberFoliagePlacer() {
-        super(FeatureSpread.func_242252_a(2), FeatureSpread.func_242252_a(-1));
+        super(FeatureSpread.create(2), FeatureSpread.create(-1));
     }
 
     @Override
-    protected FoliagePlacerType<?> func_230371_a_() {
+    protected FoliagePlacerType<?> getPlacerType() {
         return RUBBER;
     }
 
