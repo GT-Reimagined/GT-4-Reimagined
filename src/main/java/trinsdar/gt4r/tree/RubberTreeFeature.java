@@ -1,24 +1,43 @@
 package trinsdar.gt4r.tree;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import muramasa.antimatter.worldgen.AntimatterWorldGenerator;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MutableBoundingBox;
+import net.minecraft.util.math.shapes.VoxelShapePart;
+import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.world.ISeedReader;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.TreeFeature;
+import net.minecraft.world.gen.feature.template.Template;
+import trinsdar.gt4r.Ref;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 public class RubberTreeFeature extends TreeFeature {
     public RubberTreeFeature() {
         super(BaseTreeFeatureConfig.CODEC);
+        this.setRegistryName(new ResourceLocation(Ref.ID, "rubber_tree"));
     }
 
     public void init() {
         AntimatterWorldGenerator.register(a -> {
             RubberTreeWorldGen.onEvent(a);
         }, "rubber_tree", RubberTreeWorldGen.getValidBiomesStatic());
+    }
+
+    public boolean generateRubber(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, BaseTreeFeatureConfig config) {
+        if (reader.getBiome(pos).getCategory() != Biome.Category.SWAMP && config == RubberTreeWorldGen.RUBBER_TREE_CONFIG_SWAMP) return false;
+        if (reader.getBiome(pos).getCategory() != Biome.Category.JUNGLE && config == RubberTreeWorldGen.RUBBER_TREE_CONFIG_JUNGLE) return false;
+        return super.generate(reader, generator, rand, pos, config);
     }
 
     /*public boolean func_225557_a_(IWorldGenerationReader world, Random random, BlockPos pos, Set<BlockPos> set, Set<BlockPos> set1, MutableBoundingBox boundingBox, TreeFeatureConfig config) {

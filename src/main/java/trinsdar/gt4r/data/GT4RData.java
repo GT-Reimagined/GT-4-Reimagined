@@ -414,6 +414,7 @@ public class GT4RData {
     }
 
     private static int[] getPressures(int basePressure){
+        basePressure *= 20;
         return new int[]{basePressure / 6, basePressure / 6, basePressure / 3, basePressure, basePressure * 2, basePressure * 4};
     }
 }

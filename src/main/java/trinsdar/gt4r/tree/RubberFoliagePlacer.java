@@ -37,8 +37,8 @@ public class RubberFoliagePlacer extends FoliagePlacer {
     }
 
     @Override
-    protected void func_230372_a_(IWorldGenerationReader p_230372_1_, Random p_230372_2_, BaseTreeFeatureConfig p_230372_3_, int p_230372_4_, Foliage p_230372_5_, int p_230372_6_, int p_230372_7_, Set<BlockPos> p_230372_8_, int p_230372_9_, MutableBoundingBox p_230372_10_) {
-        generate(p_230372_1_, p_230372_2_, p_230372_3_, p_230372_4_, p_230372_5_, p_230372_6_, p_230372_7_, p_230372_8_, p_230372_9_, p_230372_10_);
+    protected void func_230372_a_(IWorldGenerationReader world, Random random, BaseTreeFeatureConfig config, int trunkHeight, Foliage treeNode, int foilageHeight, int radius, Set<BlockPos> leaves, int offset, MutableBoundingBox box) {
+        generate(world, random, config, trunkHeight, treeNode, foilageHeight, radius, leaves, offset, box);
     }
 
     protected void generate(IWorldGenerationReader world, Random random, BaseTreeFeatureConfig config, int trunkHeight, Foliage treeNode, int foliageHeight, int radius, Set<BlockPos> leaves, int offset, MutableBoundingBox box) {

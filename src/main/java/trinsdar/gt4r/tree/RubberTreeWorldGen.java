@@ -50,11 +50,11 @@ public class RubberTreeWorldGen  extends WorldGenBase<RubberTreeWorldGen> {
 
     final static BaseTreeFeatureConfig RUBBER_TREE_CONFIG_JUNGLE =
             (new BaseTreeFeatureConfig.Builder(RubberTree.TRUNK_BLOCKS, new SimpleBlockStateProvider(GT4RData.RUBBER_LEAVES.getDefaultState()),
-                    new RubberFoliagePlacer(), new StraightTrunkPlacer(4, 3, 0), new TwoLayerFeature(1, 0, 2))).setIgnoreVines().setDecorators(ImmutableList.of(new LeaveVineTreeDecorator())).build();
+                    new RubberFoliagePlacer(), new StraightTrunkPlacer(6, 3, 0), new TwoLayerFeature(1, 0, 2))).setIgnoreVines().setDecorators(ImmutableList.of(new LeaveVineTreeDecorator())).build();
 
     final static BaseTreeFeatureConfig RUBBER_TREE_CONFIG_NORMAL =
             (new BaseTreeFeatureConfig.Builder(RubberTree.TRUNK_BLOCKS, new SimpleBlockStateProvider(GT4RData.RUBBER_LEAVES.getDefaultState()),
-                    new RubberFoliagePlacer(), new StraightTrunkPlacer(4, 3, 0), new TwoLayerFeature(1, 0, 0))).setIgnoreVines().build();
+                    new RubberFoliagePlacer(), new StraightTrunkPlacer(4, 3, 0), new TwoLayerFeature(1, 0, 2))).setIgnoreVines().build();
 
 
 
