@@ -27,7 +27,7 @@ public class CompressorLoader {
             }
         });
         COMPRESSING.RB().ii(RecipeIngredient.of(GT4RData.CarbonMesh, 1)).io(PLATE.get(Carbon, 1)).add(400, 2);
-        COMPRESSING.RB().ii(RecipeIngredient.of(CustomTags.INGOTS_MIXED_METAL, 1)).io(new ItemStack(GT4RData.AdvancedAlloy)).add(400, 2);
+        COMPRESSING.RB().ii(RecipeIngredient.of(CustomTags.INGOTS_MIXED_METAL, 1).setIgnoreNbt()).io(new ItemStack(GT4RData.AdvancedAlloy)).add(400, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(Items.SNOWBALL, 1)).io(new ItemStack(Items.SNOW_BLOCK)).add(400, 2);
         COMPRESSING.RB().ii(DUST.getMaterialIngredient(Glowstone, 4)).io(new ItemStack(Items.GLOWSTONE)).add(400, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(Items.SNOW_BLOCK, 1)).io(new ItemStack(Items.ICE)).add(400, 2);
