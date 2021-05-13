@@ -268,5 +268,6 @@ public class Parts {
         provider.shapeless(output, "match_r", "parts", "has_stick", provider.hasSafeItem(getForgeItemTag("rods/wooden")), new ItemStack(Match, 4), DUST.getMaterialTag(Phosphor), getForgeItemTag("rods/wooden"));
         provider.addStackRecipe(output, Ref.ID, "fluid_cell", "parts", "has_tin", provider.hasSafeItem(PLATE.getMaterialTag(Tin)),
                 new ItemStack(CellTin, 2), of('T', PLATE.getMaterialTag(Tin)), " T ", "T T", " T ");
+        provider.shapeless(output, "resin_torch", "parts", "has_sticky_resin", provider.hasSafeItem(StickyResin), new ItemStack(Items.TORCH, 4), StickyResin, getForgeItemTag("rods/wooden"));
     }
 }

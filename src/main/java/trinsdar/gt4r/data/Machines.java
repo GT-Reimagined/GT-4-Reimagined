@@ -109,8 +109,8 @@ public class Machines {
     public static GeneratorMachine STEAM_TURBINE = new GeneratorMachine(Ref.ID, "steam_turbine", STEAM_FUELS, LV, GUI, ITEM, FLUID, GENERATOR, CELL, Textures.TIER_HANDLER).covers(COVERNONE,COVERNONE,COVERNONE,COVERNONE,COVERNONE, COVER_DYNAMO_OLD);
     public static GeneratorMachine GAS_TURBINE = new GeneratorMachine(Ref.ID, "gas_turbine", GAS_FUELS, LV, GUI, FLUID, GENERATOR, CELL, ITEM, Textures.TIER_HANDLER).covers(COVERNONE,COVERNONE,COVERNONE,COVERNONE,COVERNONE, COVER_DYNAMO_OLD);
     public static BasicMachine HEAT_EXCHANGER = new BasicMachine(Ref.ID, "heat_exchanger", LAVA_FUELS, LV, GUI, ITEM, FLUID, CELL, Textures.TIER_HANDLER).covers(COVEROUTPUT);
-    public static GeneratorMachine DIESEL_GENERATOR = new GeneratorMachine(Ref.ID, "diesel_generator", DIESEL_FUELS, LV, GUI, FLUID, GENERATOR, CELL, Textures.TIER_HANDLER).covers(COVERNONE,COVERNONE,COVERNONE,COVERNONE,COVERNONE, COVER_DYNAMO_OLD);
-    public static GeneratorMachine SEMIFLUID_GENERATOR = new GeneratorMachine(Ref.ID, "semifluid_generator", SEMIFLUID_FUELS, LV, GUI, FLUID, GENERATOR, CELL, Textures.TIER_HANDLER).covers(COVERNONE,COVERNONE,COVERNONE,COVERNONE,COVERNONE, COVER_DYNAMO_OLD);
+    public static GeneratorMachine DIESEL_GENERATOR = new GeneratorMachine(Ref.ID, "diesel_generator", DIESEL_FUELS, LV, GUI, FLUID, GENERATOR, CELL, ITEM, Textures.TIER_HANDLER).covers(COVERNONE,COVERNONE,COVERNONE,COVERNONE,COVERNONE, COVER_DYNAMO_OLD);
+    public static GeneratorMachine SEMIFLUID_GENERATOR = new GeneratorMachine(Ref.ID, "semifluid_generator", SEMIFLUID_FUELS, LV, GUI, FLUID, GENERATOR, CELL, ITEM, Textures.TIER_HANDLER).covers(COVERNONE,COVERNONE,COVERNONE,COVERNONE,COVERNONE, COVER_DYNAMO_OLD);
     public static GeneratorMachine WINDMILL = new GeneratorMachine(Ref.ID, "windmill", ULV, GENERATOR, Textures.TIER_HANDLER).covers(COVERNONE,COVERNONE,COVERNONE,COVERNONE,COVERNONE, COVER_DYNAMO_OLD);
     public static GeneratorMachine WATERMILL = new GeneratorMachine(Ref.ID, "watermill", ULV, GENERATOR, Textures.TIER_HANDLER).covers(COVERNONE,COVERNONE,COVERNONE,COVERNONE,COVERNONE, COVER_DYNAMO_OLD);
 

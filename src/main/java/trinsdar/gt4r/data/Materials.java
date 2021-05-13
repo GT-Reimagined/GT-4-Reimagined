@@ -335,6 +335,7 @@ public class Materials {
         GEM.forceOverride(Flint, Items.FLINT);
         GEM.forceOverride(Diamond, Items.DIAMOND);
         GEM.forceOverride(Emerald, Items.EMERALD);
+        GEM.forceOverride(Lapis, Items.LAPIS_LAZULI);
 
         BLOCK.forceOverride(Iron, Items.IRON_BLOCK);
         BLOCK.forceOverride(Gold, Items.GOLD_BLOCK);

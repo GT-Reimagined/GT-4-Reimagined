@@ -3,6 +3,7 @@ package trinsdar.gt4r.loader.machines;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialStack;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
+import muramasa.antimatter.recipe.map.RecipeBuilder;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -21,6 +22,7 @@ import static trinsdar.gt4r.data.GT4RData.RUBBER_LOG;
 import static trinsdar.gt4r.data.GT4RData.StickyResin;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.CENTRIFUGING;
+import static trinsdar.gt4r.data.RecipeMaps.ELECTROLYZING;
 
 public class CentrifugingLoader {
     public static void init() {
@@ -126,33 +128,22 @@ public class CentrifugingLoader {
         add(mat, mat.getProcessInto().stream().mapToInt(t -> t.s).sum(), euT, duration);
     }
 
-    private static void add(Material mat, int count, long euT, int duration) {
-        List<MaterialStack> stacks = mat.getProcessInto();
+    private static void add(Material dust, int count, long euT, int duration) {
+        List<MaterialStack> stacks = dust.getProcessInto();
         List<FluidStack> fluidStacks = stacks.stream().filter(t -> (t.m.has(LIQUID) || t.m.has(GAS)) && !t.m.has(DUST)).map(t -> {
             return t.m.has(LIQUID) ? t.m.getLiquid(t.s * 1000) : t.m.getGas(t.s * 1000);
         }).collect(Collectors.toList());
-        if ((mat.has(LIQUID) || mat.has(GAS)) && !mat.has(DUST)){
-            if (fluidStacks.isEmpty()){
-                CENTRIFUGING.RB().fi(getFluid(mat,count * 1000)).io(
-                        mat.getProcessInto().stream().filter(t -> DUST.allowGen(t.m)).map(t -> new ItemStack(DUST.get(t.m), t.s))
-                                .toArray(ItemStack[]::new)).add(duration, euT);
-            } else {
-                CENTRIFUGING.RB().fi(getFluid(mat,count * 1000)).io(
-                        mat.getProcessInto().stream().filter(t -> DUST.allowGen(t.m)).map(t -> new ItemStack(DUST.get(t.m), t.s))
-                                .toArray(ItemStack[]::new)).fo(fluidStacks.toArray(new FluidStack[0])).add(duration, euT);
-            }
+        List<ItemStack> itemStacks = dust.getProcessInto().stream().filter(t -> t.m.has(DUST)).map(t -> new ItemStack(DUST.get(t.m), t.s))
+                .collect(Collectors.toList());
+        RecipeBuilder rb = CENTRIFUGING.RB();
+        if ((dust.has(LIQUID) || dust.has(GAS)) && !dust.has(DUST)){
+            rb.fi(getFluid(dust,count * 1000));
         } else {
-            if (fluidStacks.isEmpty()){
-                CENTRIFUGING.RB().ii(RecipeIngredient.of(DUST.getMaterialTag(mat), count)).io(
-                        mat.getProcessInto().stream().filter(t -> DUST.allowGen(t.m)).map(t -> new ItemStack(DUST.get(t.m), t.s))
-                                .toArray(ItemStack[]::new)).add(duration, euT);
-            } else {
-                CENTRIFUGING.RB().ii(RecipeIngredient.of(DUST.getMaterialTag(mat), count)).io(
-                        mat.getProcessInto().stream().filter(t -> DUST.allowGen(t.m)).map(t -> new ItemStack(DUST.get(t.m), t.s))
-                                .toArray(ItemStack[]::new)).fo(fluidStacks.toArray(new FluidStack[0])).add(duration, euT);
-            }
+            rb.ii(RecipeIngredient.of(DUST.get(dust), count));
         }
-
+        if (!itemStacks.isEmpty()) rb.io(itemStacks.toArray(new ItemStack[0]));
+        if (!fluidStacks.isEmpty()) rb.fo(fluidStacks.toArray(new FluidStack[0]));
+        rb.add(duration, euT);
     }
 
     private static FluidStack getFluid(Material mat, int amount){

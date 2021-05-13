@@ -13,10 +13,7 @@ import net.minecraftforge.fluids.FluidStack;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static muramasa.antimatter.Data.DUST;
-import static muramasa.antimatter.Data.GAS;
-import static muramasa.antimatter.Data.LIQUID;
-import static muramasa.antimatter.Data.PLASMA;
+import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.material.MaterialTag.ELEC;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.ELECTROLYZING;
@@ -40,6 +37,7 @@ public class ElectrolyzerLoader {
         ELECTROLYZING.RB().fi(Water.getLiquid(3000)).fo(Hydrogen.getGas(2000), Oxygen.getGas(1000)).add(2000, 30);
         ELECTROLYZING.RB().ii(RecipeIngredient.of(new ItemStack(Items.BONE_MEAL, 3))).io(DUST.get(Calcium, 1)).add(24, 106);
         ELECTROLYZING.RB().ii(RecipeIngredient.of(new ItemStack(Blocks.SAND, 8))).io(DUST.get(SiliconDioxide, 1)).add(500, 25);
+        ELECTROLYZING.RB().ii(RecipeIngredient.of(new ItemStack(Blocks.RED_SAND, 8))).io(DUST.get(SiliconDioxide, 1), DUST_TINY.get(Iron, 1)).add(500, 25);
         ELECTROLYZING.RB().ii(RecipeIngredient.of(DUST.get(Diamond, 1))).io(DUST.get(Carbon, 64), DUST.get(Carbon, 64)).add(1536,60);
         add(Steel,50, 60, 2600);
         add(DarkAsh, 1, 30, 24);
@@ -69,7 +67,7 @@ public class ElectrolyzerLoader {
         List<FluidStack> fluidStacks = stacks.stream().filter(t -> (t.m.has(LIQUID) || t.m.has(GAS)) && !t.m.has(DUST)).map(t -> {
             return t.m.has(LIQUID) ? t.m.getLiquid(t.s * 1000) : t.m.getGas(t.s * 1000);
         }).collect(Collectors.toList());
-        List<ItemStack> itemStacks = dust.getProcessInto().stream().filter(t -> DUST.allowGen(t.m)).map(t -> new ItemStack(DUST.get(t.m), t.s))
+        List<ItemStack> itemStacks = dust.getProcessInto().stream().filter(t -> t.m.has(DUST)).map(t -> new ItemStack(DUST.get(t.m), t.s))
                 .collect(Collectors.toList());
         RecipeBuilder rb = ELECTROLYZING.RB();
         if ((dust.has(LIQUID) || dust.has(GAS)) && !dust.has(DUST)){
