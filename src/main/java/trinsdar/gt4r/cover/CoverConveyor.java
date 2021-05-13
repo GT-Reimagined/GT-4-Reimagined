@@ -1,14 +1,9 @@
 package trinsdar.gt4r.cover;
 
-import com.google.common.collect.ImmutableMap;
-import muramasa.antimatter.cover.BaseCover;
 import muramasa.antimatter.cover.CoverStack;
-import muramasa.antimatter.cover.CoverTiered;
-import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.util.ResourceLocation;
-import trinsdar.gt4r.Ref;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.item.ItemEntity;
@@ -17,8 +12,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import java.util.Map;
 
 import static net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
 
@@ -48,7 +41,7 @@ public class CoverConveyor extends CoverBasicTransport {
             return;
         boolean isMachine = instance.getTile() instanceof TileEntityMachine;
         BlockState state = instance.getTile().getWorld().getBlockState(instance.getTile().getPos().offset(side));
-        CoverMode mode = CoverMode.values()[instance.getNbt().getInt("coverMode")];
+        ImportExportMode mode = ImportExportMode.values()[instance.getNbt().getInt("coverMode")];
         //Drop into world.
         if (state == Blocks.AIR.getDefaultState() && isMachine && mode.getName().startsWith("Export")) {
             World world = instance.getTile().getWorld();

@@ -17,7 +17,7 @@ public abstract class CoverBasicTransport extends BaseCover implements ICoverMod
 
     @Override
     public ICoverMode getCoverMode(CoverStack<?> stack) {
-        return CoverMode.values()[stack.getNbt().getInt("coverMode")];
+        return ImportExportMode.values()[stack.getNbt().getInt("coverMode")];
     }
 
     @Override
@@ -29,18 +29,18 @@ public abstract class CoverBasicTransport extends BaseCover implements ICoverMod
 
     public int getCoverMode(int buttonID){
         switch (buttonID){
-            case 0: return CoverMode.IMPORT.ordinal();
-            case 1: return CoverMode.IMPORT_EXPORT.ordinal();
-            case 2: return CoverMode.IMPORT_CONDITIONAL.ordinal();
-            case 3: return CoverMode.IMPORT_EXPORT_CONDITIONAL.ordinal();
-            case 4: return CoverMode.IMPORT_INVERT_COND.ordinal();
-            case 5: return CoverMode.IMPORT_EXPORT_INVERT_COND.ordinal();
-            case 7: return CoverMode.EXPORT_IMPORT.ordinal();
-            case 8: return CoverMode.EXPORT_CONDITIONAL.ordinal();
-            case 9: return CoverMode.EXPORT_IMPORT_CONDITIONAL.ordinal();
-            case 10: return CoverMode.EXPORT_INVERT_COND.ordinal();
-            case 11: return CoverMode.EXPORT_IMPORT_INVERT_COND.ordinal();
-            default: return CoverMode.EXPORT.ordinal();
+            case 0: return ImportExportMode.IMPORT.ordinal();
+            case 1: return ImportExportMode.IMPORT_EXPORT.ordinal();
+            case 2: return ImportExportMode.IMPORT_CONDITIONAL.ordinal();
+            case 3: return ImportExportMode.IMPORT_EXPORT_CONDITIONAL.ordinal();
+            case 4: return ImportExportMode.IMPORT_INVERT_COND.ordinal();
+            case 5: return ImportExportMode.IMPORT_EXPORT_INVERT_COND.ordinal();
+            case 7: return ImportExportMode.EXPORT_IMPORT.ordinal();
+            case 8: return ImportExportMode.EXPORT_CONDITIONAL.ordinal();
+            case 9: return ImportExportMode.EXPORT_IMPORT_CONDITIONAL.ordinal();
+            case 10: return ImportExportMode.EXPORT_INVERT_COND.ordinal();
+            case 11: return ImportExportMode.EXPORT_IMPORT_INVERT_COND.ordinal();
+            default: return ImportExportMode.EXPORT.ordinal();
         }
     }
 }

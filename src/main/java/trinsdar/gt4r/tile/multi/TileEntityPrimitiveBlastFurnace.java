@@ -1,9 +1,18 @@
 package trinsdar.gt4r.tile.multi;
 
+import muramasa.antimatter.cover.ICover;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.multi.TileEntityBasicMultiMachine;
 import muramasa.antimatter.util.int3;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.Direction;
+import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
+import tesseract.api.capability.TesseractGTCapability;
+
+import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
+import static net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
 
 public class TileEntityPrimitiveBlastFurnace extends TileEntityBasicMultiMachine {
 
@@ -26,4 +35,12 @@ public class TileEntityPrimitiveBlastFurnace extends TileEntityBasicMultiMachine
 //        getWorld().setBlockState(controller, Blocks.LAVA.getDefaultState(), 3);
 //        return true;
 //    }
+
+    @Override
+    public <T> LazyOptional<T> getCapabilityFromFake(Capability<T> cap, BlockPos pos, Direction side, ICover coverPresent) {
+        if (cap == ITEM_HANDLER_CAPABILITY && itemHandler.isPresent()) return itemHandler.resolve().orElse(null).getCapability().cast();
+        else if (cap == FLUID_HANDLER_CAPABILITY && fluidHandler.isPresent()) return fluidHandler.cast();
+        else if (cap == TesseractGTCapability.ENERGY_HANDLER_CAPABILITY && energyHandler.isPresent()) return energyHandler.cast();
+        return LazyOptional.empty();
+    }
 }

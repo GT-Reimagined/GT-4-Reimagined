@@ -2,7 +2,7 @@ package trinsdar.gt4r.cover;
 
 import muramasa.antimatter.cover.ICoverMode;
 
-public enum CoverMode implements ICoverMode {
+public enum ImportExportMode implements ICoverMode {
     EXPORT("Export",88, 24),
     IMPORT("Import",34, 24),
     EXPORT_CONDITIONAL("Export Conditional",106, 24),
@@ -19,7 +19,7 @@ public enum CoverMode implements ICoverMode {
     int x, y;
     String name;
 
-    CoverMode(String name, int x, int y){
+    ImportExportMode(String name, int x, int y){
         this.name = name;
         this.x = x;
         this.y = y;

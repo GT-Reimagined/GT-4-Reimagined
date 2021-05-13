@@ -28,7 +28,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import trinsdar.gt4r.data.Guis;
-import trinsdar.gt4r.gui.ScreenButtonBackgroundCover;
 import trinsdar.gt4r.gui.ScreenCoalBoiler;
 import trinsdar.gt4r.gui.ScreenDistillationTower;
 import trinsdar.gt4r.gui.ScreenFusionReactor;
@@ -60,7 +59,6 @@ public class ClientHandler implements IProxyHandler {
             AntimatterAPI.all(BlockMachineMaterial.class, b -> RenderTypeLookup.setRenderLayer(b, RenderType.getCutout()));
         });
 
-        //ScreenSetup.<ContainerCover, ScreenButtonBackgroundCover<ContainerCover>>setScreenMapping(Data.COVER_MENU_HANDLER, ScreenButtonBackgroundCover::new);
         ScreenSetup.<ContainerHatch, ScreenHatchCustom<ContainerHatch>>setScreenMapping(Guis.HATCH_MENU_HANDLER_CUSTOM, ScreenHatchCustom::new);
         ScreenSetup.<ContainerBasicMachine, ScreenCoalBoiler<ContainerBasicMachine>>setScreenMapping(Guis.COAL_BOILER_MENU_HANDLER, ScreenCoalBoiler::new);
         ScreenSetup.<ContainerMultiMachine, ScreenFusionReactor<ContainerMultiMachine>>setScreenMapping(Guis.FUSION_MENU_HANDLER, ScreenFusionReactor::new);

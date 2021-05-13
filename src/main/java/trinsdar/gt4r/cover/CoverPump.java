@@ -1,21 +1,12 @@
 package trinsdar.gt4r.cover;
 
-import muramasa.antimatter.cover.BaseCover;
 import muramasa.antimatter.cover.CoverStack;
-import muramasa.antimatter.cover.CoverTiered;
-import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.util.Utils;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import trinsdar.gt4r.Ref;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
-
-import static trinsdar.gt4r.cover.CoverMode.*;
 
 public class CoverPump extends CoverBasicTransport {
 

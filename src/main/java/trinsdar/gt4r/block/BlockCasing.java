@@ -60,12 +60,6 @@ public class BlockCasing extends BlockDynamic {
         return this == GT4RData.FIRE_BRICKS;
     }
 
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return TileEntityTypes.SLAVE_CONTROLLER_TYPE.create();
-    }
-
     @OnlyIn(Dist.CLIENT)
     public float getAmbientOcclusionLightValue(BlockState state, IBlockReader worldIn, BlockPos pos) {
         return this == GT4RData.REINFORCED_GLASS ? 1.0F : super.getAmbientOcclusionLightValue(state, worldIn, pos);

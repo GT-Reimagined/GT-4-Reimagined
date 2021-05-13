@@ -2,6 +2,7 @@ package trinsdar.gt4r.data;
 
 import muramasa.antimatter.registration.IAntimatterObject;
 import muramasa.antimatter.structure.BlockStateElement;
+import muramasa.antimatter.structure.FakeTileElement;
 import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluids;
 
@@ -16,17 +17,17 @@ public class Structures {
     public static BlockStateElement WATER = new BlockStateElement("water", (w, p, s) -> s.getFluidState().getFluid() == Fluids.WATER);
 
 
-    public static ComponentIdWrapper BRICK_WRAPPER = new ComponentIdWrapper("slave_controller");
+    public static FakeTileElement BRICK = new FakeTileElement(FIRE_BRICKS);
 
     public static void init() {
         COKE_OVEN.setStructure(b -> b
             .of("CCC", "CCC", "CCC").of("CCC", "CAM", "CCC").of(0)
-            .at("C", "slave_controller", BRICK_WRAPPER, FIRE_BRICKS).at("M", COKE_OVEN)
+            .at("C", BRICK).at("M", COKE_OVEN)
             .build().offset(2, -1)
         );
         PRIMITIVE_BLAST_FURNACE.setStructure(b -> b
             .of("CCC", "CCC", "CCC").of("CCC", "CBM", "CCC").of("CCC", "CBC", "CCC").of(2).of("CCC", "CAC", "CCC")
-            .at("C", "slave_controller", BRICK_WRAPPER, FIRE_BRICKS).at("B", AIR_OR_LAVA).at("M", PRIMITIVE_BLAST_FURNACE).at("A", AIR)
+            .at("C", BRICK).at("B", AIR_OR_LAVA).at("M", PRIMITIVE_BLAST_FURNACE).at("A", AIR)
             .build().offset(2, -1)
         );
         BLAST_FURNACE.setStructure(b -> b
