@@ -153,9 +153,12 @@ public class Materials {
     public static Material NitricOxide = new Material(Ref.ID, "nitric_oxide", 0x7dc8f0, NONE).asGas().mats(of(Nitrogen, 1, Oxygen, 1));
 
     /** Fluids **/
-    public static Material Lava = new Material(Ref.ID, "lava", 0xff4000, NONE).asFluid(/*0, 400*/);
+    public static Material Lava = new Material(Ref.ID, "lava", 0xff4000, NONE).asFluid(0, 1300);
+    public static Material PahoehoeLava = new Material(Ref.ID, "pahoehoe_lava", 0xff4000, NONE).asFluid(0, 1200);
     public static Material Water = new Material(Ref.ID, "water", 0x0000ff, NONE).asFluid().mats(of(Hydrogen, 2, Oxygen, 1));
     public static Material Steam = new Material(Ref.ID, "steam", 0xa0a0a0, NONE).asGas(0, 373);
+    public static Material HotCoolant = new Material(Ref.ID, "hot_coolant", 0xe20000, NONE).asFluid(0, 1200);
+    public static Material ColdCoolant = new Material(Ref.ID, "cold_coolant", 0x01b2ed, NONE).asFluid(0, 300);
     public static Material UUAmplifier = new Material(Ref.ID, "uu_amplifier", 0x600080, NONE).asFluid();
     public static Material UUMatter = new Material(Ref.ID, "uu_matter", 0x8000c4, NONE).asFluid();
     public static Material Lubricant = new Material(Ref.ID, "lubricant", 0xffc400, NONE).asFluid();

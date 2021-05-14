@@ -4,7 +4,6 @@ import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.Ref;
 import muramasa.antimatter.gui.BarDir;
 import muramasa.antimatter.gui.ButtonBody;
-import muramasa.antimatter.gui.ButtonOverlay;
 import muramasa.antimatter.gui.GuiData;
 import muramasa.antimatter.gui.MenuHandlerMachine;
 import muramasa.antimatter.gui.container.ContainerBasicMachine;
@@ -18,7 +17,6 @@ import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
-import trinsdar.gt4r.gui.ButtonOverlays;
 
 import static muramasa.antimatter.gui.ButtonBody.*;
 import static muramasa.antimatter.gui.SlotType.*;
@@ -88,7 +86,7 @@ public class Guis {
         AntimatterAPI.registerJEICategory(RecipeMaps.SEMIFLUID_FUELS, Guis.MULTI_DISPLAY_COMPACT, SEMIFLUID_GENERATOR);
         AntimatterAPI.registerJEICategory(RecipeMaps.GAS_FUELS, Guis.MULTI_DISPLAY_COMPACT, GAS_TURBINE);
         AntimatterAPI.registerJEICategory(RecipeMaps.DIESEL_FUELS, Guis.MULTI_DISPLAY_COMPACT, DIESEL_GENERATOR);
-        AntimatterAPI.registerJEICategory(RecipeMaps.LAVA_FUELS, Guis.MULTI_DISPLAY_COMPACT, HEAT_EXCHANGER);
+        AntimatterAPI.registerJEICategory(RecipeMaps.HOT_FUELS, Guis.MULTI_DISPLAY_COMPACT, HEAT_EXCHANGER);
 
         // extruder, chemical reactor, thermal centrifuge, all multiblocks
 
@@ -169,6 +167,7 @@ public class Guis {
         GAS_TURBINE.getGui().add(BASIC_TANK);
         DIESEL_GENERATOR.getGui().add(BASIC_TANK);
         SEMIFLUID_GENERATOR.getGui().add(BASIC_TANK);
+        HEAT_EXCHANGER.getGui().add(FL_IN, 35, 63).add(FL_IN, 53, 63).add(FL_OUT, 107, 63).add(FL_OUT, 125, 63);
 
 
         INFINITE_STEAM.getGui().add(CELL_IN, 80, 17).add(CELL_OUT, 80, 53).add(FL_OUT, 60, 43);

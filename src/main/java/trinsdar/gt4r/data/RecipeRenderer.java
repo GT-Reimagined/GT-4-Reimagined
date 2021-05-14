@@ -3,6 +3,7 @@ package trinsdar.gt4r.data;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import muramasa.antimatter.integration.jei.renderer.IRecipeInfoRenderer;
 import muramasa.antimatter.integration.jei.renderer.InfoRenderers;
+import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.recipe.Recipe;
 import net.minecraft.client.gui.FontRenderer;
 
@@ -20,12 +21,23 @@ public class RecipeRenderer {
         }
     };
 
+    public static final IRecipeInfoRenderer HOT_FUEL_RENDERER = new IRecipeInfoRenderer() {
+        @Override
+        public void render(MatrixStack stack, Recipe recipe, FontRenderer fontRenderer, int guiOffsetX, int guiOffsetY) {
+            if (recipe.getDuration() == 0) return;
+            String power = "Duration: " + recipe.getDuration() + " ticks";
+            String temperature = "HU: " + recipe.getSpecialValue();
+            renderString(stack, power,fontRenderer, 5, 0,guiOffsetX,guiOffsetY);
+            renderString(stack, temperature,fontRenderer, 5, 20,guiOffsetX,guiOffsetY);
+        }
+    };
+
     public static void clientMaps() {
         RecipeMaps.ORE_BYPRODUCTS.setInfoRenderer(InfoRenderers.EMPTY_RENDERER);
         RecipeMaps.STEAM_FUELS.setInfoRenderer(FUEL_RENDERER);
         RecipeMaps.GAS_FUELS.setInfoRenderer(FUEL_RENDERER);
         RecipeMaps.DIESEL_FUELS.setInfoRenderer(FUEL_RENDERER);
-        RecipeMaps.LAVA_FUELS.setInfoRenderer(FUEL_RENDERER);
+        RecipeMaps.HOT_FUELS.setInfoRenderer(HOT_FUEL_RENDERER);
         RecipeMaps.SEMIFLUID_FUELS.setInfoRenderer(FUEL_RENDERER);
 
         RecipeMaps.BLASTING.setInfoRenderer(InfoRenderers.BLASTING_RENDERER);

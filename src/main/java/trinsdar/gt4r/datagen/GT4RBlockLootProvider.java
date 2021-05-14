@@ -36,9 +36,9 @@ public class GT4RBlockLootProvider extends AntimatterBlockLootProvider {
         super.loot();
         AntimatterAPI.all(BlockMachineMaterial.class, providerDomain, this::add);
         AntimatterAPI.all(BlockStone.class, providerDomain, b -> {
-            if (b.getType().getMaterial() == Quartzite){
+            /*if (b.getType().getMaterial() == Quartzite){
                 tables.put(b, b2 -> droppingItemWithFortune(b, GEM.get(Quartzite)));
-            }
+            }*/
             this.add(b);
         });
         AntimatterAPI.all(BlockCasing.class, providerDomain, this::add);

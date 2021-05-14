@@ -17,7 +17,7 @@ public class RecipeMaps {
     public static RecipeMap STEAM_FUELS = new RecipeMap<>("steam_fuels", new RecipeBuilder());
     public static RecipeMap GAS_FUELS = new RecipeMap<>("gas_fuels", new RecipeBuilder());
     public static RecipeMap DIESEL_FUELS = new RecipeMap<>("diesel_fuels", new RecipeBuilder());
-    public static RecipeMap LAVA_FUELS = new RecipeMap<>("lava_fuels", new RecipeBuilder());
+    public static RecipeMap HOT_FUELS = new RecipeMap<>("hot_fuels", new RecipeBuilder());
     public static RecipeMap SEMIFLUID_FUELS = new RecipeMap<>("semifluid_fuels", new RecipeBuilder());
 
     public static RecipeMap COAL_BOILERS = new RecipeMap<>("coal_boilers", new RecipeBuilder());

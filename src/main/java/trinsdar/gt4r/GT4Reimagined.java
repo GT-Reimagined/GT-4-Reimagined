@@ -30,6 +30,7 @@ import trinsdar.gt4r.loader.WorldGenLoader;
 import trinsdar.gt4r.loader.machines.*;
 import trinsdar.gt4r.loader.machines.generator.CoalBoilerHandler;
 import trinsdar.gt4r.loader.machines.generator.FuelBurnHandler;
+import trinsdar.gt4r.loader.machines.generator.HeatExchangerLoader;
 import trinsdar.gt4r.loader.multi.CokeOven;
 import trinsdar.gt4r.loader.multi.DistillationTower;
 import trinsdar.gt4r.loader.multi.Blasting;
@@ -98,6 +99,7 @@ public class GT4Reimagined extends AntimatterMod {
         loader.add(AssemblyLoader::init);
         loader.add(ChemicalReactorLoader::init);
         loader.add(FuelBurnHandler::init);
+        loader.add(HeatExchangerLoader::init);
         loader.add(FluidExtractorLoader::init);
         loader.add(BathingLoader::init);
         loader.add(CoalBoilerHandler::init);

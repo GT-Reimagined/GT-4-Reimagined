@@ -107,7 +107,7 @@ public class TileEntityDrum extends TileEntityMachine {
     public static class DrumFluidHandler extends MachineFluidHandler<TileEntityDrum> {
         boolean output = false;
         Map<Direction, LazyOptional<IFluidHandler>> sidedCaps = new LinkedHashMap<>();
-        LazyOptional<IFluidHandler> nullCap = LazyOptional.empty();
+        LazyOptional<IFluidHandler> nullCap;
         public DrumFluidHandler(TileEntityDrum tile) {
             super(tile);
             tanks.put(FluidDirection.INPUT, FluidTanks.create(tile, ContentEvent.FLUID_INPUT_CHANGED, b -> {
