@@ -28,7 +28,7 @@ public class RecipeRenderer {
             String power = "Duration: " + recipe.getDuration() + " ticks";
             String temperature = "HU: " + recipe.getSpecialValue();
             renderString(stack, power,fontRenderer, 5, 0,guiOffsetX,guiOffsetY);
-            renderString(stack, temperature,fontRenderer, 5, 20,guiOffsetX,guiOffsetY);
+            renderString(stack, temperature,fontRenderer, 5, 10,guiOffsetX,guiOffsetY);
         }
     };
 
