@@ -11,11 +11,13 @@ import muramasa.antimatter.material.MaterialTypeItem;
 import muramasa.antimatter.tool.AntimatterToolType;
 import muramasa.antimatter.tool.IAntimatterTool;
 import muramasa.antimatter.util.Utils;
+import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemTier;
 import net.minecraft.item.Items;
+import net.minecraftforge.fluids.FluidAttributes;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.items.ItemTurbineRotor;
 import trinsdar.gt4r.items.MaterialSpear;
@@ -25,6 +27,9 @@ import java.util.function.Supplier;
 
 import static com.google.common.collect.ImmutableMap.of;
 import static muramasa.antimatter.Data.*;
+import static muramasa.antimatter.fluid.AntimatterFluid.LIQUID_FLOW_TEXTURE;
+import static muramasa.antimatter.fluid.AntimatterFluid.LIQUID_STILL_TEXTURE;
+import static muramasa.antimatter.fluid.AntimatterFluid.OVERLAY_TEXTURE;
 import static muramasa.antimatter.material.Element.*;
 import static muramasa.antimatter.material.MaterialTag.ELEC;
 import static muramasa.antimatter.material.MaterialTag.RUBBERTOOLS;
@@ -491,10 +496,26 @@ public class Materials {
 //        }
 
         //TODO move to antimatter
-        LIQUID.all().stream().filter(l -> !l.equals(Water) || !l.equals(Lava)).forEach(m -> new AntimatterMaterialFluid(Ref.ID, m, LIQUID));
+        LIQUID.all().stream().filter(l -> !l.equals(Water) || !l.equals(Lava)).forEach(m -> {
+            if (m == HotCoolant) {
+                new AntimatterMaterialFluid(Ref.ID, m, LIQUID, prepareAttributes(Ref.ID, m, LIQUID), prepareProperties(LIQUID));
+                return;
+            }
+            new AntimatterMaterialFluid(Ref.ID, m, LIQUID);
+        });
         GAS.all().forEach(m -> new AntimatterMaterialFluid(Ref.ID, m, GAS));
         PLASMA.all().forEach(m -> new AntimatterMaterialFluid(Ref.ID, m, PLASMA));
 
         AntimatterAPI.all(Material.class, Material::setChemicalFormula);
+    }
+
+    private static FluidAttributes.Builder prepareAttributes(String domain, Material material, MaterialType<?> type) {
+        return FluidAttributes.builder(LIQUID_STILL_TEXTURE, LIQUID_FLOW_TEXTURE).overlay(OVERLAY_TEXTURE).color((155 << 24) | (material.getRGB() & 0x00ffffff))
+                .translationKey(String.join("", "block.", domain, type.getId(), ".", material.getId()))
+                .viscosity(1000).density(1000).temperature(material.getLiquidTemperature());
+    }
+
+    private static Block.Properties prepareProperties(MaterialType<?> type) {
+        return Block.Properties.create(net.minecraft.block.material.Material.WATER).hardnessAndResistance(100.0F).noDrops().setLightLevel(s -> type == Data.PLASMA ? 15 : 0);
     }
 }
