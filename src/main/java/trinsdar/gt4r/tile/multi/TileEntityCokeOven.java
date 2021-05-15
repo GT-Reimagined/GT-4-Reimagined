@@ -29,41 +29,18 @@ import static muramasa.antimatter.machine.MachineFlag.*;
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
 import static net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
 
-public class TileEntityCokeOven extends TileEntityMultiMachine {
+public class TileEntityCokeOven extends TileEntityBasicMultiMachine {
 
     public TileEntityCokeOven(Machine<?> type) {
         super(type);
-        this.itemHandler = type.has(ITEM) || type.has(CELL) ? LazyOptional.of(() -> new MachineItemHandler<>(this)) : LazyOptional.empty();
+        /*this.itemHandler = type.has(ITEM) || type.has(CELL) ? LazyOptional.of(() -> new MachineItemHandler<>(this)) : LazyOptional.empty();
         this.fluidHandler = type.has(FLUID) ? LazyOptional.of(() -> new MachineFluidHandler<>(this)) : LazyOptional.empty();
-        this.energyHandler = type.has(ENERGY) ? LazyOptional.of(() -> new MachineEnergyHandler<>(this, type.amps(),type.has(GENERATOR))) : LazyOptional.empty();
-    }
-
-    @Override
-    public Tier getPowerLevel() {
-        return Tier.getTier(type.amps()*getMachineTier().getVoltage());
-    }
-
-    @Override
-    public void afterStructureFormed(){
-        this.result.components.forEach((k, v) -> v.forEach(c -> {
-            c.onStructureFormed(this);
-        }));
-    }
-
-    public void onStructureInvalidated() {
-        this.result.components.forEach((k, v) -> v.forEach(c -> {
-            c.onStructureInvalidated(this);
-        }));
+        this.energyHandler = type.has(ENERGY) ? LazyOptional.of(() -> new MachineEnergyHandler<>(this, type.amps(),type.has(GENERATOR))) : LazyOptional.empty();*/
     }
 
     @Override
     public int maxShares() {
         return 0;
-    }
-
-    @Override
-    public int getMaxInputVoltage() {
-        return energyHandler.map(EnergyHandler::getInputVoltage).orElse(0);
     }
 
     @Override
