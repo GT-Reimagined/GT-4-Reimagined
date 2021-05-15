@@ -17,6 +17,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -35,7 +36,12 @@ public class TileEntityHeatExchanger extends TileEntityMachine {
 
             @Override
             public boolean canOutput() {
-                return super.canOutput() && tile.fluidHandler.map(t -> t.canOutputsFit(new FluidStack[]{Steam.getLiquid(160)})).orElse(false);
+                List<FluidStack> output = new ArrayList<>();
+                output.add(Steam.getGas(160));
+                if (activeRecipe.hasOutputFluids()){
+                    output.addAll(Arrays.asList(activeRecipe.getOutputFluids()));
+                }
+                return super.canOutput() && tile.fluidHandler.map(t -> t.canOutputsFit(output.toArray(new FluidStack[0]))).orElse(false);
             }
 
             @Override
@@ -49,7 +55,7 @@ public class TileEntityHeatExchanger extends TileEntityMachine {
                 }
                 if (heat >= 80 && consumedWater){
                     tile.fluidHandler.ifPresent(h -> {
-                        h.addOutputs(Steam.getLiquid(160));
+                        h.addOutputs(Steam.getGas(160));
                         tile.onMachineEvent(MachineEvent.FLUIDS_OUTPUTTED);
                     });
                     heat -= 80;

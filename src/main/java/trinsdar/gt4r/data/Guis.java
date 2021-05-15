@@ -140,6 +140,7 @@ public class Guis {
         IMPLOSION_COMPRESSOR.getGui().add(ALLOY_SMELTER).add(IT_OUT, 125, 25);
         INDUSTRIAL_SAWMILL.getGui().add(ORE_WASHER);
         INDUSTRIAL_GRINDER.getGui().add(BATH);
+        PUMP.getGui().add(IT_IN, 53, 25).add(FL_OUT, 107, 25).add(ENERGY, 80, 63);
 
 
         BATTERY_BUFFER_FOUR.getGui().add(ENERGY,71,27).add(ENERGY,89,27).add(ENERGY,71,45).add(ENERGY,89,45);
