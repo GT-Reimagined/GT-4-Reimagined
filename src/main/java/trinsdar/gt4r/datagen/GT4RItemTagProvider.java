@@ -10,6 +10,8 @@ import trinsdar.gt4r.data.CustomTags;
 
 import static muramasa.antimatter.Data.DUST;
 import static muramasa.antimatter.Data.GEM;
+import static muramasa.antimatter.Data.INGOT;
+import static muramasa.antimatter.Data.PLATE;
 import static trinsdar.gt4r.data.CustomTags.*;
 import static trinsdar.gt4r.data.GT4RData.*;
 import static trinsdar.gt4r.data.Materials.*;
@@ -57,6 +59,8 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.getOrCreateBuilder(TagUtils.getForgeItemTag("stone_ores/redstone")).add(Items.REDSTONE_ORE);
         this.getOrCreateBuilder(TagUtils.getForgeItemTag("stone_ores/emerald")).add(Items.EMERALD_ORE);
         this.getOrCreateBuilder(INGOTS_MIXED_METAL).add(MixedMetal);
+        this.getOrCreateBuilder(TagUtils.getForgeItemTag("plates/constantan")).addTag(PLATE.getMaterialTag(Cupronickel));
+        this.getOrCreateBuilder(TagUtils.getForgeItemTag("ingots/constantan")).addTag(INGOT.getMaterialTag(Cupronickel));
 
     }
 

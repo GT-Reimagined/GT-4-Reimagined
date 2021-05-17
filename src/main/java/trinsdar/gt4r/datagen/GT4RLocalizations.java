@@ -82,10 +82,6 @@ public class GT4RLocalizations {
                 super.add(key,  value.contains("Infinite") || value.contains("Transformer") || value.contains("Battery") ? value : (id.isEmpty() ? value.replace("Mv ", "").replace("Lv ", "").replace("Ulv ", "").replace("Hv ", "").replace("Ev ", "") : lowerUnderscoreToUpperSpaced(id)));
                 return;
             }
-            if (value.contains("Hot Coolant")){
-                super.add(key, value.replace("Hot Coolant", "Heatant"));
-                return;
-            }
             super.add(key, value);
         }
     }
