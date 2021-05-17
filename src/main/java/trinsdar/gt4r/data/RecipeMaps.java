@@ -52,6 +52,7 @@ public class RecipeMaps {
     public static RecipeMap FLUID_SOLIDIFYING = new RecipeMap<>("fluid_solidifying", new RecipeBuilder());
     public static RecipeMap HAMMERING = new RecipeMap<>("hammering", new HammeringBuilder());
     public static RecipeMap SIFTING = new RecipeMap<>("sifting", new RecipeBuilder());
+    public static RecipeMap DUSTBIN = new RecipeMap<>("dustbin", new RecipeBuilder());
 
 
     public static RecipeMap STEAM_SMELTING = new RecipeMap<>("steam_smelting", new RecipeBuilder(), RecipeProxies.FURNACE_PROXY.apply(8, 180));
