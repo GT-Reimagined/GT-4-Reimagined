@@ -264,10 +264,10 @@ public class Materials {
     /** Metals **/
     public static Material BatteryAlloy = new Material(Ref.ID, "battery_alloy", 0x9c7ca0, DULL).asMetal(295, 0, PLATE).mats(of(Lead, 4, Antimony, 1));
     public static Material Brass = new Material(Ref.ID, "brass", 0xffb400, METALLIC).asMetal(1170, 0,  PLATE, ROD, HULL).mats(of(Zinc, 1, Copper, 3));
-    public static Material Bronze = new Material(Ref.ID, "bronze", 0xff8000, METALLIC).asMetal(1125, 0,  PLATE, ROD, GEAR, HULL, TURBINE_BLADE, TURBINE_ROTOR).mats(of(Tin, 1, Copper, 3)).addTools(2.0F, 6.0F, 350, 2,  of(Enchantments.SHARPNESS, 1)).addArmor(new int[]{1, 1, 2, 1}, 0.0F, 0.0F, 15);
+    public static Material Bronze = new Material(Ref.ID, "bronze", 0xff8000, METALLIC).asMetal(1125, 0,  PLATE, ROD, GEAR, HULL, TURBINE_BLADE, TURBINE_ROTOR).mats(of(Tin, 1, Copper, 3)).addTools(2.0F, 6.0F, 350, 2,  of(Enchantments.SHARPNESS, 1)).addArmor(new int[]{0, 0, 0, 0}, 0.0F, 0.0F, 14);
     public static Material Cupronickel = new Material(Ref.ID, "cupronickel", 0xe39680, METALLIC).asMetal(1728, 0, PLATE).mats(of(Copper, 1, Nickel, 1));
     public static Material Electrum = new Material(Ref.ID, "electrum", 0xffff64, SHINY).asMetal(1330, 0, PLATE, ROD).mats(of(Silver, 1, Gold, 1));
-    public static Material Invar = new Material(Ref.ID, "invar", 0xb4b478, METALLIC).asMetal(1700, 0,  PLATE, ROD).mats(of(Iron, 2, Nickel, 1)).addTools(Iron, of(Enchantments.BANE_OF_ARTHROPODS, 3)).addArmor(new int[]{0, 0, 0,0}, 0.0F, 0.0F, 15, of(Enchantments.PROJECTILE_PROTECTION, 1));
+    public static Material Invar = new Material(Ref.ID, "invar", 0xb4b478, METALLIC).asMetal(1700, 0,  PLATE, ROD).mats(of(Iron, 2, Nickel, 1)).addTools(Iron, of(Enchantments.BANE_OF_ARTHROPODS, 3)).addArmor(new int[]{0, 0, 0,0}, 0.0F, 0.0F, 15, of(Enchantments.FIRE_PROTECTION, 1));
     public static Material Kanthal = new Material(Ref.ID, "kanthal", 0xc2d2df, METALLIC).asMetal(1800, 2200,  PLATE, ROD).mats(of(Iron, 1, Aluminium, 1, Chrome, 1));
     public static Material Magnalium = new Material(Ref.ID, "magnalium", 0xc8beff, DULL).asMetal(870, 0,  PLATE, ROD, TURBINE_BLADE, TURBINE_ROTOR).mats(of(Magnesium, 1, Aluminium, 2));
     public static Material Nichrome = new Material(Ref.ID, "nichrome", 0xcdcef6, METALLIC).asMetal(2700, 2500).mats(of(Nickel, 4, Chrome, 1));
