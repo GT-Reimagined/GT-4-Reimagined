@@ -281,6 +281,7 @@ public class Materials {
     public static Material Osmiridium = new Material(Ref.ID, "osmiridium", 0x6464ff, METALLIC).asMetal(3333, 3300,  PLATE, ROD, TURBINE_BLADE, TURBINE_ROTOR).mats(of(Iridium, 1, Osmium, 1));
 
     /** Solids (Plastic Related Stuff)**/
+    public static Material Bone = new Material(Ref.ID, "bone", 0xb3b3b3, DULL).addHandleStat(12, 0.0F);
     public static Material Plastic = new Material(Ref.ID, "plastic", 0xc8c8c8, DULL).asSolid(295, 0, PLATE, RUBBERTOOLS).addHandleStat(66, 0.5F).mats(of(Carbon, 1, Hydrogen, 2));
     public static Material Rubber = new Material(Ref.ID, "rubber", 0x000000, SHINY).asSolid(295, 0, PLATE, RUBBERTOOLS).addHandleStat(11, 0.4F).mats(of(Carbon, 5, Hydrogen, 8));
 
@@ -352,6 +353,7 @@ public class Materials {
         BLOCK.forceOverride(Gold, Items.GOLD_BLOCK);
 
         ROD.forceOverride(Blaze, Items.BLAZE_ROD);
+        ROD.forceOverride(Bone, Items.BONE);
         ROD.forceOverride(Wood, Items.STICK);
 
         Lava.mats(of(Copper, 1, Tin, 1, Gold, 1, Silver, 1, Tungsten, 1));
