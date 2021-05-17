@@ -299,6 +299,9 @@ public class Materials {
     public static Material Prismarine = new Material(Ref.ID, "prismarine", 0x6eb2a5, NONE).asDust().mats(of(Potassium, 2, Oxygen, 8, Manganese, 1, Silicon, 5));
     public static Material DarkPrismarine = new Material(Ref.ID, "dark_prismarine", 0x587d6c, NONE).asDust();
 
+
+    public static Material Scoria = new Material(Ref.ID, "scoria", 0x1e1414, ROUGH, Ref.MOD_CREATE).asDust().mats(of(SiliconDioxide, 6, Calcium, 1, Carbon, 1, Iron, 1));
+
     /** Ore Stones **/
     public static Material Salt = new Material(Ref.ID, "salt", 0xfafafa, FINE).asDust().mats(of(Sodium, 1, Chlorine, 1));
     public static Material RockSalt = new Material(Ref.ID, "rock_salt", 0xf0c8c8, FINE).asDust().mats(of(Potassium, 1, Chlorine, 1));
