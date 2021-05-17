@@ -101,6 +101,9 @@ public class MaceratorLoader {
         MACERATING.RB().ii(RecipeIngredient.of(ItemTags.LOGS, 1)).io(DUST.get(Wood, 6)).add(400, 2);
         MACERATING.RB().ii(RecipeIngredient.of(Items.BASALT, 1)).io(DUST.get(Basalt, 1)).add(400, 2);
         MACERATING.RB().ii(RecipeIngredient.of(Items.BLACKSTONE, 1)).io(DUST.get(Blackstone, 1)).add(400, 2);
+        MACERATING.RB().ii(RecipeIngredient.of(Items.GRANITE, 1)).io(DUST.get(Granite, 1)).add(400, 2);
+        MACERATING.RB().ii(RecipeIngredient.of(Items.DIORITE, 1)).io(DUST.get(Diorite, 1)).add(400, 2);
+        MACERATING.RB().ii(RecipeIngredient.of(Items.ANDESITE, 1)).io(DUST.get(Andesite, 1)).add(400, 2);
         AntimatterAPI.all(StoneType.class, Ref.ID, s -> {
             if (s.getMaterial() == NULL || !s.getMaterial().has(DUST)) return;
             MACERATING.RB().ii(RecipeIngredient.of(s.getState().getBlock().asItem(), 1)).io(DUST.get(s.getMaterial(), 1)).add(400, 2);
