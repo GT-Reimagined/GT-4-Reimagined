@@ -161,7 +161,8 @@ public class MachineCrafting {
                 SIFTER.getItem(LV), of('I', ItemFilter, 'M', MACHINE_HULLS_BASIC, 'P', PISTONS, 'C', CIRCUITS_BASIC), " I ", "PMP", "CIC");
         provider.addItemRecipe(output, Ref.ID, "recycler", "machines", "has_compressor", provider.hasSafeItem(COMPRESSOR.getItem(LV)),
                 RECYCLER.getItem(LV), of('G', DUST.getMaterialTag(Glowstone), 'C', COMPRESSOR.getItem(LV), 'D', Items.DIRT, 'S', PLATES_STEELS), " G ", "DCD", "SDS");
-
+        provider.addItemRecipe(output, Ref.ID, "heat_exchanger", "machines", "has_machine_hull_basic", provider.hasSafeItem(MACHINE_HULLS_BASIC),
+                HEAT_EXCHANGER.getItem(LV), of('I', PLATE.getMaterialTag(Invar), 'C', CopperCoil, 'P', FLUID_PIPE_INVAR.getBlock(PipeSize.SMALL), 'M', MACHINE_HULLS_BASIC), "ICI", "PMP", "ICI");
     }
 
 }

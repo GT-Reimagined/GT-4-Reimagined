@@ -17,6 +17,7 @@ import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemTier;
 import net.minecraft.item.Items;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidAttributes;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.items.ItemTurbineRotor;
@@ -39,6 +40,8 @@ import static net.minecraft.item.ItemTier.NETHERITE;
 import static trinsdar.gt4r.data.Textures.*;
 
 public class Materials {
+
+    public static final ResourceLocation PAHOEHOE_STILL_TEXTURE = new ResourceLocation(Ref.ID, "fluids/pahoehoe_lava");
 
     public static MaterialTag ELEC30 = new MaterialTag("elec30");
     public static MaterialTag ELEC60 = new MaterialTag("elec60");
@@ -159,7 +162,7 @@ public class Materials {
 
     /** Fluids **/
     public static Material Lava = new Material(Ref.ID, "lava", 0xff4000, NONE).asFluid(0, 1300);
-    public static Material PahoehoeLava = new Material(Ref.ID, "pahoehoe_lava", 0xff4000, NONE).asFluid(0, 1200);
+    public static Material PahoehoeLava = new Material(Ref.ID, "pahoehoe_lava", 0xffffff, NONE).asFluid(0, 1200);
     public static Material Water = new Material(Ref.ID, "water", 0x0000ff, NONE).asFluid().mats(of(Hydrogen, 2, Oxygen, 1));
     public static Material Steam = new Material(Ref.ID, "steam", 0xa0a0a0, NONE).asGas(0, 373);
     public static Material HotCoolant = new Material(Ref.ID, "hot_coolant", 0xe20000, NONE).asFluid(0, 1200);
@@ -351,7 +354,7 @@ public class Materials {
         ROD.forceOverride(Blaze, Items.BLAZE_ROD);
         ROD.forceOverride(Wood, Items.STICK);
 
-        Lava.mats(of(Electrum, 1, Copper, 4, Tungsten, 1, Basalt, 1));
+        Lava.mats(of(Copper, 1, Tin, 1, Gold, 1, Silver, 1, Tungsten, 1));
         Granite.mats(of(Aluminium, 2, Flint, 1, Clay, 1));
         Glowstone.mats(of(Redstone, 8, Gold, 8, Helium, 1));
         Diorite.mats(of(Nickel, 1));
@@ -497,8 +500,8 @@ public class Materials {
 
         //TODO move to antimatter
         LIQUID.all().stream().filter(l -> !l.equals(Water) || !l.equals(Lava)).forEach(m -> {
-            if (m == HotCoolant) {
-                new AntimatterMaterialFluid(Ref.ID, m, LIQUID, prepareAttributes(Ref.ID, m, LIQUID), prepareProperties(LIQUID));
+            if (m == HotCoolant || m == PahoehoeLava) {
+                new AntimatterMaterialFluid(Ref.ID, m, LIQUID, prepareAttributes(Ref.ID, m, LIQUID), prepareProperties(m, LIQUID));
                 return;
             }
             new AntimatterMaterialFluid(Ref.ID, m, LIQUID);
@@ -510,12 +513,14 @@ public class Materials {
     }
 
     private static FluidAttributes.Builder prepareAttributes(String domain, Material material, MaterialType<?> type) {
-        return FluidAttributes.builder(LIQUID_STILL_TEXTURE, LIQUID_FLOW_TEXTURE).overlay(OVERLAY_TEXTURE).color((155 << 24) | (material.getRGB() & 0x00ffffff))
+        FluidAttributes.Builder builder = FluidAttributes.builder(LIQUID_STILL_TEXTURE, LIQUID_FLOW_TEXTURE);
+        if (material == PahoehoeLava) builder = FluidAttributes.builder(PAHOEHOE_STILL_TEXTURE, PAHOEHOE_STILL_TEXTURE);
+        return builder.overlay(OVERLAY_TEXTURE).color((155 << 24) | (material.getRGB() & 0x00ffffff))
                 .translationKey(String.join("", "block.", domain, type.getId(), ".", material.getId()))
                 .viscosity(1000).density(1000).temperature(material.getLiquidTemperature());
     }
 
-    private static Block.Properties prepareProperties(MaterialType<?> type) {
-        return Block.Properties.create(net.minecraft.block.material.Material.WATER).hardnessAndResistance(100.0F).noDrops().setLightLevel(s -> type == Data.PLASMA ? 15 : 0);
+    private static Block.Properties prepareProperties(Material m, MaterialType<?> type) {
+        return Block.Properties.create(net.minecraft.block.material.Material.WATER).hardnessAndResistance(100.0F).noDrops().setLightLevel(s -> type == Data.PLASMA ? 15 : m == PahoehoeLava ? 9: 0);
     }
 }
