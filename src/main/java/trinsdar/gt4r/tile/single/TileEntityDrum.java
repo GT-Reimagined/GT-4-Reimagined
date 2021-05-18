@@ -1,18 +1,12 @@
 package trinsdar.gt4r.tile.single;
 
-import muramasa.antimatter.Antimatter;
 import muramasa.antimatter.Ref;
 import muramasa.antimatter.capability.fluid.FluidTanks;
-import muramasa.antimatter.capability.machine.MachineCoverHandler;
-import muramasa.antimatter.capability.machine.MachineEnergyHandler;
 import muramasa.antimatter.capability.machine.MachineFluidHandler;
-import muramasa.antimatter.capability.machine.MachineItemHandler;
-import muramasa.antimatter.capability.machine.MachineRecipeHandler;
 import muramasa.antimatter.machine.event.ContentEvent;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.tool.AntimatterToolType;
-import muramasa.antimatter.util.Dir;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -32,7 +26,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
-import tesseract.api.capability.TesseractGTCapability;
+import trinsdar.gt4r.machine.FluidHandlerNullSideWrapper;
 import trinsdar.gt4r.machine.MaterialMachine;
 
 import javax.annotation.Nonnull;
@@ -43,11 +37,9 @@ import java.util.Map;
 
 import static muramasa.antimatter.Data.ELECTRIC_WRENCH;
 import static muramasa.antimatter.Data.WRENCH;
-import static muramasa.antimatter.capability.AntimatterCaps.COVERABLE_HANDLER_CAPABILITY;
 import static net.minecraft.util.Direction.DOWN;
 import static net.minecraft.util.Direction.UP;
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
-import static net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
 import static trinsdar.gt4r.data.Materials.*;
 
 public class TileEntityDrum extends TileEntityMachine {
@@ -245,51 +237,6 @@ public class TileEntityDrum extends TileEntityMachine {
             public FluidStack drain(int maxDrain, FluidAction action) {
                 return fluidHandler.drain(maxDrain, action);
             }
-        }
-    }
-
-    public static class FluidHandlerNullSideWrapper implements IFluidHandler{
-        DrumFluidHandler fluidHandler;
-        public FluidHandlerNullSideWrapper(DrumFluidHandler fluidHandler){
-            this.fluidHandler = fluidHandler;
-        }
-
-        @Override
-        public int getTanks() {
-            return fluidHandler.getTanks();
-        }
-
-        @Nonnull
-        @Override
-        public FluidStack getFluidInTank(int tank) {
-            return fluidHandler.getFluidInTank(tank);
-        }
-
-        @Override
-        public int getTankCapacity(int tank) {
-            return fluidHandler.getTankCapacity(tank);
-        }
-
-        @Override
-        public boolean isFluidValid(int tank, @Nonnull FluidStack stack) {
-            return fluidHandler.isFluidValid(tank, stack);
-        }
-
-        @Override
-        public int fill(FluidStack resource, FluidAction action) {
-            return 0;
-        }
-
-        @Nonnull
-        @Override
-        public FluidStack drain(FluidStack resource, FluidAction action) {
-            return null;
-        }
-
-        @Nonnull
-        @Override
-        public FluidStack drain(int maxDrain, FluidAction action) {
-            return null;
         }
     }
 }

@@ -7,22 +7,33 @@ import muramasa.antimatter.machine.event.ContentEvent;
 import muramasa.antimatter.machine.event.MachineEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.TileEntityMachine;
+import muramasa.antimatter.util.Utils;
 import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.world.Explosion;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import trinsdar.gt4r.machine.FluidHandlerNullSideWrapper;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 
+import static net.minecraft.util.Direction.DOWN;
+import static net.minecraft.util.Direction.UP;
+import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
 import static trinsdar.gt4r.data.Materials.DistilledWater;
 import static trinsdar.gt4r.data.Materials.Steam;
 
@@ -98,7 +109,20 @@ public class TileEntityHeatExchanger extends TileEntityMachine {
         this.fluidHandler = LazyOptional.of(() -> new HeatExchangerFluidHandler(this));
     }
 
+    @Nonnull
+    @Override
+    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
+        if (blocksCapability(cap, side)) return LazyOptional.empty();
+        else if (cap == FLUID_HANDLER_CAPABILITY && fluidHandler.isPresent()) {
+            return fluidHandler.map(f -> ((HeatExchangerFluidHandler)f).getCapability(cap, side)).orElse(LazyOptional.empty());
+        }
+        return super.getCapability(cap, side);
+    }
+
     public static class HeatExchangerFluidHandler extends MachineFluidHandler<TileEntityHeatExchanger>{
+
+        Map<Direction, LazyOptional<IFluidHandler>> sidedCaps = new LinkedHashMap<>();
+        LazyOptional<IFluidHandler> nullCap;
 
         public HeatExchangerFluidHandler(TileEntityHeatExchanger tile) {
             this(tile, 8000 * (1 + tile.getMachineTier().getIntegerId()), 1000 * (250 + tile.getMachineTier().getIntegerId()));
@@ -129,6 +153,30 @@ public class TileEntityHeatExchanger extends TileEntityMachine {
                 }
                 return b;
             }));
+            for (Direction dir : Direction.values()){
+                sidedCaps.put(dir, LazyOptional.of(() -> new FluidHandlerSidedWrapper(this, dir)));
+            }
+            nullCap = LazyOptional.of(() -> new FluidHandlerNullSideWrapper(this));
+        }
+
+        @Override
+        public void onRemove() {
+            this.nullCap.invalidate();
+            this.sidedCaps.values().forEach(LazyOptional::invalidate);
+        }
+
+        @Override
+        public void onUpdate() {
+            super.onUpdate();
+            Direction right = tile.getFacing().rotateYCCW();
+            TileEntity rightTile = tile.world.getTileEntity(tile.getPos().offset(right));
+            TileEntity downTile = tile.world.getTileEntity(tile.getPos().offset(DOWN));
+            if (rightTile != null) {
+                this.sidedCaps.get(right).ifPresent( f -> rightTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, right.getOpposite()).ifPresent(other -> Utils.transferFluids(f, other, 1000)));
+            }
+            if (downTile != null) {
+                this.sidedCaps.get(DOWN).ifPresent(f -> downTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, UP).ifPresent(other -> Utils.transferFluids(f, other, 1000)));
+            }
         }
 
         @Override
@@ -147,6 +195,68 @@ public class TileEntityHeatExchanger extends TileEntityMachine {
                 }
             }
             return super.fill(stack, action);
+        }
+
+        @Nonnull
+        public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
+            if (side == null){
+                if (nullCap.isPresent()) return nullCap.cast();
+                return LazyOptional.empty();
+            }
+            if (sidedCaps.get(side).isPresent()) return sidedCaps.get(side).cast();
+            return LazyOptional.empty();
+        }
+
+        public static class FluidHandlerSidedWrapper implements IFluidHandler{
+            HeatExchangerFluidHandler fluidHandler;
+            Direction side;
+            public FluidHandlerSidedWrapper(HeatExchangerFluidHandler fluidHandler, Direction side){
+                this.fluidHandler = fluidHandler;
+                this.side = side;
+            }
+
+            @Override
+            public int getTanks() {
+                return fluidHandler.getTanks();
+            }
+
+            @Nonnull
+            @Override
+            public FluidStack getFluidInTank(int tank) {
+                return fluidHandler.getFluidInTank(tank);
+            }
+
+            @Override
+            public int getTankCapacity(int tank) {
+                return fluidHandler.getTankCapacity(tank);
+            }
+
+            @Override
+            public boolean isFluidValid(int tank, @Nonnull FluidStack stack) {
+                return fluidHandler.isFluidValid(tank, stack);
+            }
+
+            @Override
+            public int fill(FluidStack resource, FluidAction action) {
+                if (side == DOWN || side == fluidHandler.tile.getFacing().rotateYCCW()) return 0;
+                return fluidHandler.fill(resource, action);
+            }
+
+            @Nonnull
+            @Override
+            public FluidStack drain(FluidStack resource, FluidAction action) {
+                if (side == DOWN) return fluidHandler.tanks.get(FluidDirection.OUTPUT).getTank(0).drain(resource, action);
+                if (side == fluidHandler.tile.getFacing().rotateYCCW()) return fluidHandler.tanks.get(FluidDirection.OUTPUT).getTank(1).drain(resource, action);
+                return FluidStack.EMPTY;
+            }
+
+            @Nonnull
+            @Override
+            public FluidStack drain(int maxDrain, FluidAction action) {
+                if (side == DOWN) return fluidHandler.tanks.get(FluidDirection.OUTPUT).getTank(0).drain(maxDrain, action);
+                if (side == fluidHandler.tile.getFacing().rotateYCCW()) return fluidHandler.tanks.get(FluidDirection.OUTPUT).getTank(1).drain(maxDrain, action);
+                return FluidStack.EMPTY;
+            }
         }
     }
 }

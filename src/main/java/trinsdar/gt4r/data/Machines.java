@@ -61,6 +61,7 @@ public class Machines {
     public static BasicMachine PUMP = new BasicMachine(Ref.ID, "pump", GUI, FLUID, LV, Textures.TIER_HANDLER);
     public static BasicMachine SIFTER = new BasicMachine(Ref.ID, "sifter", SIFTING, GUI, ITEM, LV, Textures.TIER_HANDLER);
     public static BasicMachine BATH = new BasicMachine(Ref.ID, "bath", BATHING, GUI, ITEM, LV, Textures.TIER_HANDLER);
+    public static BasicMachine DUSTBIN = new BasicMachine(Ref.ID, "dustbin", RecipeMaps.DUSTBIN, GUI, ITEM, LV, Textures.TIER_HANDLER).covers(COVERNONE).frontCovers();
 
     public static BasicMachine COAL_BOILER = new BasicMachine(Ref.ID, "coal_boiler", COAL_BOILERS, BRONZE, STEEL, GUI, STEAM, RECIPE, ITEM, FLUID, CELL, Textures.BOILER_HANDLER).setTile(m -> () -> new TileEntityCoalBoiler(m)).covers((ICover[]) null);
     public static BasicMachine STEAM_FURNACE = new BasicMachine(Ref.ID, "steam_furnace", BRONZE, STEEL, GUI, STEAM, ITEM, FLUID, STEAM_SMELTING, Textures.BOILER_HANDLER).setTile(m -> () -> new TileEntitySteamMachine(m)).covers(COVER_STEAM_VENT);
@@ -109,7 +110,7 @@ public class Machines {
 
     public static GeneratorMachine STEAM_TURBINE = new GeneratorMachine(Ref.ID, "steam_turbine", STEAM_FUELS, LV, GUI, ITEM, FLUID, GENERATOR, CELL, Textures.TIER_HANDLER).covers(COVERNONE,COVERNONE,COVERNONE,COVERNONE,COVERNONE, COVER_DYNAMO_OLD);
     public static GeneratorMachine GAS_TURBINE = new GeneratorMachine(Ref.ID, "gas_turbine", GAS_FUELS, LV, GUI, FLUID, GENERATOR, CELL, ITEM, Textures.TIER_HANDLER).covers(COVERNONE,COVERNONE,COVERNONE,COVERNONE,COVERNONE, COVER_DYNAMO_OLD);
-    public static BasicMachine HEAT_EXCHANGER = new BasicMachine(Ref.ID, "heat_exchanger", HOT_FUELS, LV, GUI, ITEM, FLUID, CELL, Textures.TIER_HANDLER).covers(COVEROUTPUT).setTile(m -> () -> new TileEntityHeatExchanger(m));
+    public static BasicMachine HEAT_EXCHANGER = new BasicMachine(Ref.ID, "heat_exchanger", HOT_FUELS, LV, GUI, ITEM, FLUID, CELL, Textures.TIER_HANDLER, Textures.LEFT_RIGHT_HANDLER).covers(COVERNONE).setTile(m -> () -> new TileEntityHeatExchanger(m));
     public static GeneratorMachine DIESEL_GENERATOR = new GeneratorMachine(Ref.ID, "diesel_generator", DIESEL_FUELS, LV, GUI, FLUID, GENERATOR, CELL, ITEM, Textures.TIER_HANDLER).covers(COVERNONE,COVERNONE,COVERNONE,COVERNONE,COVERNONE, COVER_DYNAMO_OLD);
     public static GeneratorMachine SEMIFLUID_GENERATOR = new GeneratorMachine(Ref.ID, "semifluid_generator", SEMIFLUID_FUELS, LV, GUI, FLUID, GENERATOR, CELL, ITEM, Textures.TIER_HANDLER).covers(COVERNONE,COVERNONE,COVERNONE,COVERNONE,COVERNONE, COVER_DYNAMO_OLD);
     public static GeneratorMachine WINDMILL = new GeneratorMachine(Ref.ID, "windmill", ULV, GENERATOR, Textures.TIER_HANDLER).covers(COVERNONE,COVERNONE,COVERNONE,COVERNONE,COVERNONE, COVER_DYNAMO_OLD);
@@ -132,5 +133,6 @@ public class Machines {
         WINDMILL.setOutputCover(COVER_DYNAMO_OLD);
         WATERMILL.setOutputCover(COVER_DYNAMO_OLD);
         ENERGY.remove(HEAT_EXCHANGER);
+        ENERGY.remove(DUSTBIN);
     }
 }
