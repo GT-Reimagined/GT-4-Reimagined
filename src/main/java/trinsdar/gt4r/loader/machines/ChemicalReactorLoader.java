@@ -34,5 +34,6 @@ public class ChemicalReactorLoader {
         CHEMICAL_REACTING.RB().fi(NitrogenDioxide.getGas(3000), Water.getLiquid(1000)).fo(NitricAcid.getLiquid(2000), NitricOxide.getGas(1000)).add(20, 30);
         CHEMICAL_REACTING.RB().ii(DUST.getMaterialIngredient(Silicon, 1)).fi(Oxygen.getGas(2000)).io(DUST.get(SiliconDioxide, 3)).add(50,30);
         CHEMICAL_REACTING.RB().fi(NitricOxide.getGas(1000), Oxygen.getGas(1000)).fo(NitrogenDioxide.getGas(1000)).add(20, 30);
+        CHEMICAL_REACTING.RB().fi(Oxygen.getGas(500), Hydrogen.getGas(1000)).fo(DistilledWater.getLiquid(1500)).add(5, 30);
     }
 }
