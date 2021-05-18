@@ -34,6 +34,7 @@ public class CustomTags {
     public static ITag.INamedTag<Item> BATTERIES_MEDIUM = getTag("batteries/medium");
     public static ITag.INamedTag<Item> BATTERIES_LARGE = getTag("batteries/large");
     public static ITag.INamedTag<Item> INGOTS_MIXED_METAL = getTag("ingots/mixed_metal");
+    public static ITag.INamedTag<Item> RODS_STEELS = getTag("rods/steels");
 
 
     public static ITag.INamedTag<Item> getTag(String id){

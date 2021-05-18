@@ -44,6 +44,15 @@ public class Textures {
         new Texture(Ref.ID, "block/machine/base/tiers/bricked_" + t.getId()),
     };
 
+    public static final ITextureHandler DUSTBIN_HANDLER = (m, t) -> new Texture[] {
+            new Texture(Ref.ID, "block/machine/base/dust_bin/bottom"),
+            new Texture(Ref.ID, "block/machine/base/dust_bin/top"),
+            new Texture(Ref.ID, "block/machine/base/dust_bin/side"),
+            new Texture(Ref.ID, "block/machine/base/dust_bin/side"),
+            new Texture(Ref.ID, "block/machine/base/dust_bin/side"),
+            new Texture(Ref.ID, "block/machine/base/dust_bin/side"),
+    };
+
     public static final IOverlayTexturer LEFT_RIGHT_HANDLER = (type, state) -> {
         if (state != MachineState.ACTIVE && state != MachineState.INVALID_STRUCTURE) state = MachineState.IDLE;
         String stateDir = state == MachineState.IDLE ? "" : state.getId() + "/";

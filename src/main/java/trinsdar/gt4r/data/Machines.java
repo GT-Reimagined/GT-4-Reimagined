@@ -8,8 +8,10 @@ import muramasa.antimatter.tile.single.TileEntityInfiniteStorage;
 import muramasa.antimatter.tile.single.TileEntityTransformer;
 import trinsdar.gt4r.machine.HatchMachineCustom;
 import trinsdar.gt4r.machine.MaterialMachine;
+import trinsdar.gt4r.machine.NonSolidMachine;
 import trinsdar.gt4r.machine.StorageMachine;
 import trinsdar.gt4r.tile.single.TileEntityCoalBoiler;
+import trinsdar.gt4r.tile.single.TileEntityDustBin;
 import trinsdar.gt4r.tile.single.TileEntityHeatExchanger;
 import trinsdar.gt4r.tile.single.TileEntityInfiniteFluid;
 import trinsdar.gt4r.tile.single.TileEntityQuantumChest;
@@ -61,7 +63,7 @@ public class Machines {
     public static BasicMachine PUMP = new BasicMachine(Ref.ID, "pump", GUI, FLUID, LV, Textures.TIER_HANDLER);
     public static BasicMachine SIFTER = new BasicMachine(Ref.ID, "sifter", SIFTING, GUI, ITEM, LV, Textures.TIER_HANDLER);
     public static BasicMachine BATH = new BasicMachine(Ref.ID, "bath", BATHING, GUI, ITEM, LV, Textures.TIER_HANDLER);
-    public static BasicMachine DUSTBIN = new BasicMachine(Ref.ID, "dustbin", RecipeMaps.DUSTBIN, GUI, ITEM, LV, Textures.TIER_HANDLER).covers(COVERNONE).frontCovers();
+    public static NonSolidMachine DUSTBIN = new NonSolidMachine(Ref.ID, "dustbin", RecipeMaps.DUSTBIN, GUI, ITEM, LV, Textures.DUSTBIN_HANDLER).covers(COVERNONE).frontCovers().setTile(m -> () -> new TileEntityDustBin(m));
 
     public static BasicMachine COAL_BOILER = new BasicMachine(Ref.ID, "coal_boiler", COAL_BOILERS, BRONZE, STEEL, GUI, STEAM, RECIPE, ITEM, FLUID, CELL, Textures.BOILER_HANDLER).setTile(m -> () -> new TileEntityCoalBoiler(m)).covers((ICover[]) null);
     public static BasicMachine STEAM_FURNACE = new BasicMachine(Ref.ID, "steam_furnace", BRONZE, STEEL, GUI, STEAM, ITEM, FLUID, STEAM_SMELTING, Textures.BOILER_HANDLER).setTile(m -> () -> new TileEntitySteamMachine(m)).covers(COVER_STEAM_VENT);

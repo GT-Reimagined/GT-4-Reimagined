@@ -62,6 +62,7 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.getOrCreateBuilder(TagUtils.getForgeItemTag("plates/constantan")).addTag(PLATE.getMaterialTag(Cupronickel));
         this.getOrCreateBuilder(TagUtils.getForgeItemTag("ingots/constantan")).addTag(INGOT.getMaterialTag(Cupronickel));
         this.getOrCreateBuilder(TagUtils.getForgeItemTag("rods/bone")).add(Items.BONE);
+        this.getOrCreateBuilder(RODS_STEELS).addTag(getTag("rods/steel")).addTag(getTag("rods/stainless_steel"));
 
     }
 

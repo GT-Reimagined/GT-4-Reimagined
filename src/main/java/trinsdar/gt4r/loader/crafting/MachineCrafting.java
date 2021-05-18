@@ -19,6 +19,7 @@ import static trinsdar.gt4r.data.GT4RData.*;
 import static trinsdar.gt4r.data.Machines.*;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.loader.crafting.CraftingHelper.criterion;
+import static trinsdar.gt4r.loader.crafting.CraftingHelper.of2;
 
 public class MachineCrafting {
     public static void loadRecipes(Consumer<IFinishedRecipe> output, AntimatterRecipeProvider provider) {
@@ -83,11 +84,11 @@ public class MachineCrafting {
         provider.addItemRecipe(output, Ref.ID,"cutter","machines", "has_sawblade", provider.hasSafeItem(DiamondSawBlade),
                 CUTTER.getItem(LV), of('D', DiamondSawBlade, 'G', GEARS_STEELS, 'H', MACHINE_HULLS_BASIC, 'C', CIRCUITS_ADVANCED, 'P',  PLATES_STEELS), "PCP", "GDG", "PHP");
         provider.addItemRecipe(output, Ref.ID, "extruder", "machines", "has_hull", provider.hasSafeItem(MACHINE_HULLS_VERY_ADVANCED),
-                EXTRUDER.getItem(MV), CraftingHelper.of2('P', PLATES_TITAN_TUNGSTEEL, 'G', GEARS_TITAN_TUNGSTEEL, 'H', NichromeHeatingCoil, 'M', MACHINE_HULLS_VERY_ADVANCED, 'D', DiamondSawBlade, 'C', CIRCUITS_ELITE), "PGP", "HMD", "PCP");
+                EXTRUDER.getItem(MV), of2('P', PLATES_TITAN_TUNGSTEEL, 'G', GEARS_TITAN_TUNGSTEEL, 'H', NichromeHeatingCoil, 'M', MACHINE_HULLS_VERY_ADVANCED, 'D', DiamondSawBlade, 'C', CIRCUITS_ELITE), "PGP", "HMD", "PCP");
         provider.addItemRecipe(output, Ref.ID,"small_coil_boiler","machines", "has_wrench", provider.hasSafeItem(WRENCH.getTag()),
                 COAL_BOILER.getItem(BRONZE), of( 'P',  getForgeItemTag("plates/bronze"), 'W', WRENCH.getTag(), 'B', Items.BRICKS, 'F', Items.FURNACE), "PPP", "PWP", "BFB");
         provider.addItemRecipe(output, Ref.ID,"steam_macerator","machines", "has_wrench", provider.hasSafeItem(WRENCH.getTag()),
-                STEAM_MACERATOR.getItem(BRONZE), CraftingHelper.of2( 'P',  getForgeItemTag("plates/bronze"), 'W', WRENCH.getTag(), 'H', HAMMER.getTag(), 'D', GEM.getMaterialTag(Diamond), 'M', MACHINE_HULLS_CHEAP, 'p', PISTONS, 'G', GEAR.getMaterialTag(Bronze)), "WDH", "GMG", "PpP");
+                STEAM_MACERATOR.getItem(BRONZE), of2( 'P',  getForgeItemTag("plates/bronze"), 'W', WRENCH.getTag(), 'H', HAMMER.getTag(), 'D', GEM.getMaterialTag(Diamond), 'M', MACHINE_HULLS_CHEAP, 'p', PISTONS, 'G', GEAR.getMaterialTag(Bronze)), "WDH", "GMG", "PpP");
         provider.addItemRecipe(output, Ref.ID,"steam_furnace","machines", "has_wrench", provider.hasSafeItem(WRENCH.getTag()),
                 STEAM_FURNACE.getItem(BRONZE), of( 'P',  getForgeItemTag("plates/bronze"), 'W', WRENCH.getTag(), 'B', Items.BRICKS, 'F', Items.FURNACE, 'M', MACHINE_HULLS_CHEAP), "PWP", "PFP", "BMB");
         provider.addItemRecipe(output, Ref.ID,"steam_alloy_smelter","machines", "has_wrench", provider.hasSafeItem(WRENCH.getTag()),
@@ -163,6 +164,8 @@ public class MachineCrafting {
                 RECYCLER.getItem(LV), of('G', DUST.getMaterialTag(Glowstone), 'C', COMPRESSOR.getItem(LV), 'D', Items.DIRT, 'S', PLATES_STEELS), " G ", "DCD", "SDS");
         provider.addItemRecipe(output, Ref.ID, "heat_exchanger", "machines", "has_machine_hull_basic", provider.hasSafeItem(MACHINE_HULLS_BASIC),
                 HEAT_EXCHANGER.getItem(LV), of('I', PLATE.getMaterialTag(Invar), 'C', CopperCoil, 'P', FLUID_PIPE_INVAR.getBlock(PipeSize.SMALL), 'M', MACHINE_HULLS_BASIC), "ICI", "PMP", "ICI");
+        provider.addItemRecipe(output, Ref.ID, "dustbin", "machines", "has_wrench", provider.hasSafeItem(WRENCH.getTag()),
+                DUSTBIN.getItem(LV), of2('H', HAMMER.getTag(), 'W', WRENCH.getTag(), 'S', SAW.getTag(), 'P', PLATES_STEELS, 'h', Items.HOPPER, 'R', RODS_STEELS), "HWS", "PhP", "RPR");
     }
 
 }

@@ -17,6 +17,7 @@ import muramasa.antimatter.machine.BlockMachine;
 import muramasa.antimatter.proxy.IProxyHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BlockItem;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import trinsdar.gt4r.GT4Reimagined;
@@ -28,6 +29,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import trinsdar.gt4r.data.Guis;
+import trinsdar.gt4r.data.Machines;
 import trinsdar.gt4r.gui.ScreenCoalBoiler;
 import trinsdar.gt4r.gui.ScreenDistillationTower;
 import trinsdar.gt4r.gui.ScreenFusionReactor;
@@ -38,6 +40,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
+import static muramasa.antimatter.machine.Tier.LV;
 
 public class ClientHandler implements IProxyHandler {
 
@@ -55,6 +59,7 @@ public class ClientHandler implements IProxyHandler {
             RenderTypeLookup.setRenderLayer(GT4RData.RUBBER_SAPLING, RenderType.getCutout());
             RenderTypeLookup.setRenderLayer(GT4RData.RUBBER_LEAVES, RenderType.getCutout());
             RenderTypeLookup.setRenderLayer(GT4RData.SAP_BAG, RenderType.getCutout());
+            RenderTypeLookup.setRenderLayer(((BlockItem)Machines.DUSTBIN.getItem(LV)).getBlock(), RenderType.getCutout());
             AntimatterAPI.all(BlockCasing.class, t -> RenderTypeLookup.setRenderLayer(t, RenderType.getCutout()));
             AntimatterAPI.all(BlockMachineMaterial.class, b -> RenderTypeLookup.setRenderLayer(b, RenderType.getCutout()));
         });
