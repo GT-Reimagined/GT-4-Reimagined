@@ -93,11 +93,10 @@ public class BlockRubberLog extends BlockBasic {
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         ItemStack stack = player.getHeldItem(handIn);
-        if (stack.getItem() == GT4RData.Treetap && state.get(RESIN_FACING) == hit.getFace() && state.get(RESIN_STATE) == ResinState.FILLED){
-            stack.damageItem(1, player, playerEntity -> {});
+        if ((stack.isEmpty() || stack.getItem() == GT4RData.StickyResin) && state.get(RESIN_FACING) == hit.getFace() && state.get(RESIN_STATE) == ResinState.FILLED){
             state = state.with(RESIN_STATE, ResinState.EMPTY);
             worldIn.setBlockState(pos, state);
-            ItemStack drop = new ItemStack(GT4RData.StickyResin, worldIn.rand.nextInt(3) + 1);
+            ItemStack drop = new ItemStack(GT4RData.StickyResin, 1);
             if (!player.addItemStackToInventory(drop)){
                 player.dropItem(drop, true, false);
             }
