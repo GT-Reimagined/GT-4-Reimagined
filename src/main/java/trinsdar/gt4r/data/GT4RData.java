@@ -234,8 +234,10 @@ public class GT4RData {
     public static ItemBasic<?> ItemSuperconductor = new ItemBasic<>(Ref.ID, "superconductor").tip("Conducts Energy Losslessly");
 
     public static ItemBasic<?> LavaFilter = new ItemBasic<>(Ref.ID, "lava_filter");
+    public static ItemBasic<?> LighterEmpty = new ItemBasic<>(Ref.ID, "lighter_empty");
     public static ItemBasic<ItemMatch> Match = new ItemMatch(Ref.ID, "match", new Item.Properties().group(muramasa.antimatter.Ref.TAB_ITEMS));
     public static ItemBasic<ItemMatch> MatchBook = new ItemMatch(Ref.ID, "match_book", new Item.Properties().group(muramasa.antimatter.Ref.TAB_ITEMS).defaultMaxDamage(64));
+    public static ItemBasic<ItemMatch> Lighter = new ItemMatch(Ref.ID, "lighter", new Item.Properties().group(muramasa.antimatter.Ref.TAB_ITEMS).defaultMaxDamage(100));
 
     public static ItemBasic<?> MixedMetal = new ItemMixedMetal();
     public static ItemBasic<?> AdvancedAlloy = new ItemBasic<>(Ref.ID,"advanced_alloy");

@@ -24,8 +24,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.extensions.IForgeBlock;
+import org.lwjgl.system.CallbackI;
 import trinsdar.gt4r.Ref;
 
+import static trinsdar.gt4r.data.GT4RData.Lighter;
+import static trinsdar.gt4r.data.GT4RData.LighterEmpty;
 import static trinsdar.gt4r.data.GT4RData.MatchBook;
 
 public class ItemMatch extends ItemBasic<ItemMatch> {
@@ -48,6 +51,9 @@ public class ItemMatch extends ItemBasic<ItemMatch> {
                     if (this.isDamageable()){
                         stack.damageItem(1, playerentity, (player) -> {
                             player.sendBreakAnimation(context.getHand());
+                            if (this == Lighter) {
+                                if (!player.addItemStackToInventory(new ItemStack(LighterEmpty))) player.dropItem(new ItemStack(LighterEmpty), true);
+                            }
                         });
                     } else {
                         stack.shrink(1);
@@ -66,6 +72,9 @@ public class ItemMatch extends ItemBasic<ItemMatch> {
                         if (this.isDamageable()){
                             stack.damageItem(1, playerentity, (player) -> {
                                 player.sendBreakAnimation(context.getHand());
+                                if (this == Lighter) {
+                                    if (!player.addItemStackToInventory(new ItemStack(LighterEmpty))) player.dropItem(new ItemStack(LighterEmpty), true);
+                                }
                             });
                         } else {
                             stack.shrink(1);
@@ -86,14 +95,15 @@ public class ItemMatch extends ItemBasic<ItemMatch> {
 
     @Override
     public void onItemModelBuild(IItemProvider item, AntimatterItemModelProvider prov) {
-        if (this != MatchBook) {
+        if (this != MatchBook && this != Lighter) {
             super.onItemModelBuild(item, prov);
             return;
         }
-        ItemModelBuilder builder = prov.getBuilder("match_book_lit");
+        String id = this.getId();
+        ItemModelBuilder builder = prov.getBuilder(id +"_lit");
         builder.parent(new ModelFile.UncheckedModelFile(new ResourceLocation("minecraft:item/generated")));
-        builder.texture("layer0", new Texture(Ref.ID, "item/basic/match_book_lit"));
-        prov.tex(item, new ResourceLocation(Ref.ID, "item/basic/match_book")).override().predicate(new ResourceLocation("damaged"), 1).predicate(new ResourceLocation("damage"), 0).model(new ModelFile.UncheckedModelFile(new ResourceLocation(Ref.ID, "item/match_book_lit")));
+        builder.texture("layer0", new Texture(Ref.ID, "item/basic/" + id +"_lit"));
+        prov.tex(item, new ResourceLocation(Ref.ID, "item/basic/" + id)).override().predicate(new ResourceLocation("damaged"), 1).predicate(new ResourceLocation("damage"), 0).model(new ModelFile.UncheckedModelFile(new ResourceLocation(Ref.ID, "item/" + id +"_lit")));
     }
 
     @Override

@@ -12,6 +12,7 @@ import tesseract.api.capability.TesseractGTCapability;
 import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
 import static trinsdar.gt4r.data.GT4RData.*;
 import static trinsdar.gt4r.data.Materials.Mercury;
+import static trinsdar.gt4r.data.Materials.Propane;
 import static trinsdar.gt4r.data.Materials.SulfuricAcid;
 import static trinsdar.gt4r.data.RecipeMaps.FLUID_CANNING;
 
@@ -39,6 +40,7 @@ public class FluidCanningLoader {
         FLUID_CANNING.RB().ii(of(BatteryHullMedium, 1)).fi(SulfuricAcid.getLiquid(4000)).io(getFullBattery(BatteryMediumAcid)).add(64, 1);
         FLUID_CANNING.RB().ii(of(BatteryHullLarge, 1)).fi(Mercury.getLiquid(16000)).io(getFullBattery(BatteryLargeMercury)).add(258, 1);
         FLUID_CANNING.RB().ii(of(BatteryHullLarge, 1)).fi(SulfuricAcid.getLiquid(16000)).io(getFullBattery(BatteryLargeAcid)).add(258, 1);
+        FLUID_CANNING.RB().ii(of(LighterEmpty, 1)).fi(Propane.getGas(100)).io(new ItemStack(Lighter)).add(1, 1);
     }
 
     private static ItemStack getFullBattery(IItemProvider battery){
