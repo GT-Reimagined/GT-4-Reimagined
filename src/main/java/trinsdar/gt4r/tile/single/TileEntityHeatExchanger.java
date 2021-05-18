@@ -169,13 +169,22 @@ public class TileEntityHeatExchanger extends TileEntityMachine {
         public void onUpdate() {
             super.onUpdate();
             Direction right = tile.getFacing().rotateYCCW();
+            Direction left = tile.getFacing().rotateY();
             TileEntity rightTile = tile.world.getTileEntity(tile.getPos().offset(right));
             TileEntity downTile = tile.world.getTileEntity(tile.getPos().offset(DOWN));
             if (rightTile != null) {
-                this.sidedCaps.get(right).ifPresent( f -> rightTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, right.getOpposite()).ifPresent(other -> Utils.transferFluids(f, other, 1000)));
+                this.sidedCaps.get(right).ifPresent(f -> rightTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, right.getOpposite()).ifPresent(t -> Utils.transferFluids(f, t, 1000)));
             }
             if (downTile != null) {
-                this.sidedCaps.get(DOWN).ifPresent(f -> downTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, UP).ifPresent(other -> Utils.transferFluids(f, other, 1000)));
+                this.sidedCaps.get(DOWN).ifPresent(f -> downTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, UP).ifPresent(t -> Utils.transferFluids(f, t, 1000)));
+            }
+            TileEntity leftTile = tile.world.getTileEntity(tile.getPos().offset(left));
+            TileEntity upTile = tile.world.getTileEntity(tile.getPos().offset(UP));
+            if (leftTile != null) {
+                this.sidedCaps.get(left).ifPresent(t -> leftTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, left.getOpposite()).ifPresent(f -> Utils.transferFluids(f, t, 1000)));
+            }
+            if (upTile != null) {
+                this.sidedCaps.get(UP).ifPresent(t -> upTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, DOWN).ifPresent(f -> Utils.transferFluids(f, t, 1000)));
             }
         }
 
@@ -239,6 +248,8 @@ public class TileEntityHeatExchanger extends TileEntityMachine {
             @Override
             public int fill(FluidStack resource, FluidAction action) {
                 if (side == DOWN || side == fluidHandler.tile.getFacing().rotateYCCW()) return 0;
+                if (side == UP) return fluidHandler.tanks.get(FluidDirection.INPUT).getTank(0).fill(resource, action);
+                if (side == fluidHandler.tile.getFacing().rotateY()) return fluidHandler.tanks.get(FluidDirection.INPUT).getTank(1).fill(resource, action);
                 return fluidHandler.fill(resource, action);
             }
 
