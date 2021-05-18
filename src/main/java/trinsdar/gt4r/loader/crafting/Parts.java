@@ -251,8 +251,6 @@ public class Parts {
                 new ItemStack(WIRE_SUPERCONDUCTOR.getBlockItem(PipeSize.NORMAL), 4), of('M', MACHINE_HULLS_BASIC, 'S', ItemSuperconductor, 'C', CIRCUITS_MASTER), "MCM", "SSS", "MCM");
         provider.addStackRecipe(output, Ref.ID, "super_conductor", "parts", "has_iridium_plate", provider.hasSafeItem(IridiumReinforcedPlate),
                 new ItemStack(ItemSuperconductor, 4), of('H', RecipeIngredient.of(Helium.getCellGas(1, CellTin)).get(), 'T', PLATE.getMaterialTag(Tungsten), 'I', IridiumReinforcedPlate, 'C', CIRCUITS_MASTER), "HHH", "TIT", "CCC");
-        provider.addItemRecipe(output, Ref.ID, "tree_tap", "parts", "has_plank", provider.hasSafeItem(TagUtils.getItemTag(new ResourceLocation("minecraft", "planks"))),
-                Treetap, of('P', TagUtils.getItemTag(new ResourceLocation("minecraft", "planks"))), " P ", "PPP", "P  ");
         provider.shapeless(output, Ref.ID, "bronze_dust", "had_copper", provider.hasSafeItem(DUST.getMaterialTag(Bronze)),
                 DUST.get(Bronze, 4), DUST.get(Copper), DUST.get(Copper), DUST.get(Copper), DUST.get(Tin));
         provider.addItemRecipe(output, Ref.ID, "int_circuit", "parts", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),
