@@ -22,6 +22,7 @@ import trinsdar.gt4r.items.ItemMatch;
 import static muramasa.antimatter.machine.Tier.MV;
 import static muramasa.antimatter.util.Utils.lowerUnderscoreToUpperSpaced;
 import static muramasa.antimatter.util.Utils.lowerUnderscoreToUpperSpacedRotated;
+import static muramasa.antimatter.util.Utils.validateNBT;
 
 public class GT4RLocalizations {
 
@@ -47,7 +48,11 @@ public class GT4RLocalizations {
         protected void processTranslations(String domain, String locale) {
             super.processTranslations(domain, locale);
             AntimatterAPI.all(BlockCasing.class, domain).forEach(i -> add(i, lowerUnderscoreToUpperSpaced(i.getId())));
-            AntimatterAPI.all(ItemMatch.class, domain).forEach(i -> add(i, lowerUnderscoreToUpperSpaced(i.getId())));
+            AntimatterAPI.all(ItemMatch.class, domain).forEach(i -> {
+                String value = lowerUnderscoreToUpperSpaced(i.getId());
+                if (i == GT4RData.Lighter) value = value.concat(" (Full)");
+                add(i, value);
+            });
             AntimatterAPI.all(ItemIntCircuit.class, domain).forEach(i -> add(i, "Integrated Circuit (" + i.circuitId + ")"));
             add(GT4RData.MixedMetal, lowerUnderscoreToUpperSpaced(GT4RData.MixedMetal.getId()));
             add(GT4RData.SAP_BAG, lowerUnderscoreToUpperSpaced(GT4RData.SAP_BAG.getId()));
@@ -55,6 +60,10 @@ public class GT4RLocalizations {
 
         @Override
         public void add(Item key, String name) {
+            if (key == GT4RData.LighterEmpty){
+                super.add(key, name.replace("Empty", "(Empty)"));
+                return;
+            }
             if (key instanceof ItemFluidCell){
                 add(key.getTranslationKey(), lowerUnderscoreToUpperSpacedRotated(((ItemFluidCell)key).getId()));
                 return;
