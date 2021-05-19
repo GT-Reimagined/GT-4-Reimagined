@@ -35,7 +35,7 @@ public class AssemblyLoader {
             sizes.forEach(size -> {
                 Item wireItem = t.getBlockItem(size);
                 Item cableItem = cable.getBlockItem(size);
-                ASSEMBLING.RB().ii(of(wireItem,1), INGOT.getMaterialIngredient(Rubber, size.getCableThickness())).io(new ItemStack(cableItem,1)).add(size.getCableThickness()* 20L,8);
+                ASSEMBLING.RB().ii(of(wireItem,1), PLATE.getMaterialIngredient(Rubber, getRubberAmount(size))).io(new ItemStack(cableItem,1)).add(size.getCableThickness()* 20L,8);
             });
         });
         HULL.all().forEach(m -> {
@@ -103,6 +103,16 @@ public class AssemblyLoader {
         ASSEMBLING.RB().ii(of(CABLE_COPPER.getBlockItem(PipeSize.VTINY), 2), PLATE.getMaterialIngredient(BatteryAlloy, 3)).io(new ItemStack(BatteryHullMedium)).add(1600, 2);
         ASSEMBLING.RB().ii(of(CABLE_GOLD.getBlockItem(PipeSize.VTINY), 4), PLATE.getMaterialIngredient(BatteryAlloy, 9)).io(new ItemStack(BatteryHullLarge)).add(6400, 4);
         ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Invar, 2), GEM.getMaterialIngredient(Flint, 1)).io(new ItemStack(LighterEmpty)).add(256, 16);
+    }
+
+    public static int getRubberAmount(PipeSize size){
+        switch (size){
+            case SMALL: return  2;
+            case NORMAL: return 3;
+            case LARGE: return 4;
+            case HUGE: return 5;
+            default: return 1;
+        }
     }
 
     public static ITag.INamedTag<Item> getTag(String domain, String path){
