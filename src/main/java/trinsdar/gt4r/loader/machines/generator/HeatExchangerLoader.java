@@ -8,7 +8,7 @@ import static trinsdar.gt4r.data.RecipeMaps.HOT_FUELS;
 
 public class HeatExchangerLoader {
     public static void init(){
-        HOT_FUELS.RB().fi(Lava.getLiquid(1)).fo(PahoehoeLava.getLiquid(1)).add(1, 0, 80);
-        HOT_FUELS.RB().fi(HotCoolant.getLiquid(1)).fo(ColdCoolant.getLiquid(1)).add(1, 0, 20);
+        HOT_FUELS.RB().fi(Lava.getLiquid(1)).fo(PahoehoeLava.getLiquid(1)).add(5, 0, 80);
+        HOT_FUELS.RB().fi(HotCoolant.getLiquid(1)).fo(ColdCoolant.getLiquid(1)).add(5, 0, 20);
     }
 }

@@ -20,6 +20,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import trinsdar.gt4r.GT4Reimagined;
 import trinsdar.gt4r.machine.FluidHandlerNullSideWrapper;
 
 import javax.annotation.Nonnull;
@@ -248,24 +249,36 @@ public class TileEntityHeatExchanger extends TileEntityMachine {
             @Override
             public int fill(FluidStack resource, FluidAction action) {
                 if (side == DOWN || side == fluidHandler.tile.getFacing().rotateYCCW()) return 0;
-                if (side == UP) return fluidHandler.tanks.get(FluidDirection.INPUT).getTank(0).fill(resource, action);
-                if (side == fluidHandler.tile.getFacing().rotateY()) return fluidHandler.tanks.get(FluidDirection.INPUT).getTank(1).fill(resource, action);
+                if (side == UP) {
+                    //GT4Reimagined.LOGGER.info("Filling fluid: " + resource.getFluid().toString() + " at side: " + side.toString() + "in tank 0");
+                    //GT4Reimagined.LOGGER.info("Side = up");
+                    int fill = fluidHandler.tanks.get(FluidDirection.INPUT).getTank(0).fill(resource, action);
+                    //GT4Reimagined.LOGGER.info("Fill amount: " + fill);
+                    return fill;
+                }
+                if (side == fluidHandler.tile.getFacing().rotateY()) {
+                    //GT4Reimagined.LOGGER.info("Filling fluid: " + resource.getFluid().toString() + " at side: " + side.toString() + "in tank 0");
+                    //GT4Reimagined.LOGGER.info("Left = " + side.rotateY());
+                    int fill = fluidHandler.tanks.get(FluidDirection.INPUT).getTank(1).fill(resource, action);
+                    //GT4Reimagined.LOGGER.info("Fill amount: " + fill);
+                    return fill;
+                }
                 return fluidHandler.fill(resource, action);
             }
 
             @Nonnull
             @Override
             public FluidStack drain(FluidStack resource, FluidAction action) {
-                if (side == DOWN) return fluidHandler.tanks.get(FluidDirection.OUTPUT).getTank(0).drain(resource, action);
-                if (side == fluidHandler.tile.getFacing().rotateYCCW()) return fluidHandler.tanks.get(FluidDirection.OUTPUT).getTank(1).drain(resource, action);
+                if (side == DOWN) return fluidHandler.tanks.get(FluidDirection.OUTPUT).getTank(1).drain(resource, action);
+                if (side == fluidHandler.tile.getFacing().rotateYCCW()) return fluidHandler.tanks.get(FluidDirection.OUTPUT).getTank(0).drain(resource, action);
                 return FluidStack.EMPTY;
             }
 
             @Nonnull
             @Override
             public FluidStack drain(int maxDrain, FluidAction action) {
-                if (side == DOWN) return fluidHandler.tanks.get(FluidDirection.OUTPUT).getTank(0).drain(maxDrain, action);
-                if (side == fluidHandler.tile.getFacing().rotateYCCW()) return fluidHandler.tanks.get(FluidDirection.OUTPUT).getTank(1).drain(maxDrain, action);
+                if (side == DOWN) return fluidHandler.tanks.get(FluidDirection.OUTPUT).getTank(1).drain(maxDrain, action);
+                if (side == fluidHandler.tile.getFacing().rotateYCCW()) return fluidHandler.tanks.get(FluidDirection.OUTPUT).getTank(0).drain(maxDrain, action);
                 return FluidStack.EMPTY;
             }
         }
