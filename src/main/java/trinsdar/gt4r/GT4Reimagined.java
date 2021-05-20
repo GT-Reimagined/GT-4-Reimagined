@@ -160,13 +160,6 @@ public class GT4Reimagined extends AntimatterMod {
     }
 
     @SubscribeEvent
-    public void onRegister(final RegistryEvent.Register<?> e){
-        if (e.getRegistry() == ForgeRegistries.LOOT_MODIFIER_SERIALIZERS){
-            Registry.register(Registry.LOOT_FUNCTION_TYPE, new ResourceLocation(Ref.ID, "random_drop_bonus"), GT4RRandomDropBonus.RANDOM_DROP_BONUS);
-        }
-    }
-
-    @SubscribeEvent
     public void onServerAboutToStart(FMLServerAboutToStartEvent event){
         /*GT4RReloadListener.server = event.getServer();
         if (GT4RConfig.GAMEPLAY.HARDER_VANILLA_RECIPES) {

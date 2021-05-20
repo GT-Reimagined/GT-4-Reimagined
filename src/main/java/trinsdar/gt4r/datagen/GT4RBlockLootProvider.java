@@ -76,10 +76,10 @@ public class GT4RBlockLootProvider extends AntimatterBlockLootProvider {
             } else if (mat == Cinnabar || mat == Sphalerite || mat == Pyrite){
                 tables.put(block, b -> droppingWithSilkTouch(b, withExplosionDecay(b, ItemLootEntry.builder(DUST.get(mat)).acceptFunction(SetCount.builder(RandomValueRange.of(2.0F, 2.0F))).acceptFunction(ApplyBonus.uniformBonusCount(Enchantments.FORTUNE)))));
                 return;
-            } /*else if (mat == Sodalite){
+            } else if (mat == Sodalite){
                 tables.put(block, b -> droppingWithSilkTouch(b, withExplosionDecay(b, ItemLootEntry.builder(DUST.get(mat)).acceptFunction(SetCount.builder(RandomValueRange.of(6.0F, 6.0F))).acceptFunction(GT4RRandomDropBonus.uniformBonusCount(Enchantments.FORTUNE, 3)))));
                 return;
-            }*/
+            }
         }
         if (block instanceof BlockStone && (((BlockStone)block).getType().getMaterial() == Salt || ((BlockStone)block).getType().getMaterial() == RockSalt)){
             tables.put(block, b -> droppingItemWithFortune(b, DUST.get(((BlockStone)block).getType().getMaterial())));

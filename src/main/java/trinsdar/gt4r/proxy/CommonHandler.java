@@ -5,6 +5,8 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.FireBlock;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.registry.Registry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -13,7 +15,9 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.lwjgl.system.CallbackI;
 import trinsdar.gt4r.GT4Reimagined;
+import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.GT4RData;
+import trinsdar.gt4r.datagen.GT4RRandomDropBonus;
 import trinsdar.gt4r.events.CommonEvents;
 
 import java.io.File;
@@ -26,6 +30,9 @@ import static trinsdar.gt4r.data.GT4RData.*;
 public class CommonHandler {
 
     public static void setup(FMLCommonSetupEvent e){
+        e.enqueueWork(() -> {
+            Registry.register(Registry.LOOT_FUNCTION_TYPE, new ResourceLocation(Ref.ID, "random_drop_bonus"), GT4RRandomDropBonus.RANDOM_DROP_BONUS);
+        });
         MinecraftForge.EVENT_BUS.register(CommonHandler.class);
         //copyResourcePack();
     }
