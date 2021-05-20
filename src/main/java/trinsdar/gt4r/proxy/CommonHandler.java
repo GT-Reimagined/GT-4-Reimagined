@@ -27,7 +27,7 @@ public class CommonHandler {
 
     public static void setup(FMLCommonSetupEvent e){
         MinecraftForge.EVENT_BUS.register(CommonHandler.class);
-        copyResourcePack();
+        //copyResourcePack();
     }
 
     public static void onBreak(PlayerDestroyItemEvent event){

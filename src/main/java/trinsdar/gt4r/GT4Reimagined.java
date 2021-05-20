@@ -1,5 +1,7 @@
 package trinsdar.gt4r;
 
+import com.google.common.collect.Lists;
+import muramasa.antimatter.Antimatter;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.AntimatterConfig;
 import muramasa.antimatter.AntimatterDynamics;
@@ -10,9 +12,13 @@ import muramasa.antimatter.proxy.IProxyHandler;
 import muramasa.antimatter.recipe.loader.IRecipeRegistrate;
 import muramasa.antimatter.registration.RegistrationEvent;
 import muramasa.antimatter.AntimatterMod;
+import net.minecraft.client.resources.ReloadListener;
 import net.minecraft.resources.ResourcePackInfo;
+import net.minecraft.resources.ResourcePackList;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.AddReloadListenerEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
@@ -21,10 +27,10 @@ import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 import trinsdar.gt4r.data.*;
 import trinsdar.gt4r.datagen.GT4RBlockLootProvider;
 import trinsdar.gt4r.datagen.GT4RBlockTagProvider;
-import trinsdar.gt4r.datagen.GT4RDataPackFinder;
 import trinsdar.gt4r.datagen.GT4RItemTagProvider;
 import trinsdar.gt4r.datagen.GT4RLocalizations;
 import trinsdar.gt4r.datagen.GT4RRecipes;
+import trinsdar.gt4r.datagen.GT4RReloadListener;
 import trinsdar.gt4r.datagen.ProgressionAdvancements;
 import trinsdar.gt4r.loader.WorldGenLoader;
 import trinsdar.gt4r.loader.machines.*;
@@ -49,6 +55,9 @@ import trinsdar.gt4r.proxy.ServerHandler;
 import trinsdar.gt4r.tile.TileEntityTypes;
 import trinsdar.gt4r.worldgen.GT4RFeatures;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Mod(Ref.ID)
 public class GT4Reimagined extends AntimatterMod {
@@ -65,6 +74,7 @@ public class GT4Reimagined extends AntimatterMod {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::serverSetup);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, GT4RConfig.COMMON_SPEC);
+        MinecraftForge.EVENT_BUS.register(this);
         //GregTechAPI.addRegistrar(new ForestryRegistrar());
         //GregTechAPI.addRegistrar(new GalacticraftRegistrar());
         //if (ModList.get().isLoaded(Ref.MOD_UB)) GregTechAPI.addRegistrar(new UndergroundBiomesRegistrar());
@@ -136,7 +146,26 @@ public class GT4Reimagined extends AntimatterMod {
     }
 
     private void serverSetup(final FMLDedicatedServerSetupEvent event){
-        MinecraftForge.EVENT_BUS.register(GT4RDataPackFinder.class);
+    }
+
+    @SubscribeEvent
+    public void onResourceReload(AddReloadListenerEvent event) {
+        //Add Reload Listener for the Vanilla override recipes
+        event.addListener(new GT4RReloadListener(event.getDataPackRegistries()));
+    }
+
+    @SubscribeEvent
+    public void onServerAboutToStart(FMLServerAboutToStartEvent event){
+        GT4RReloadListener.server = event.getServer();
+        if (GT4RConfig.GAMEPLAY.HARDER_VANILLA_RECIPES) {
+            if (GT4RReloadListener.createDataPacks(event.getServer())){
+                ResourcePackList resourcepacklist = event.getServer().getResourcePacks();
+                resourcepacklist.reloadPacksFromFinders();
+                List<ResourcePackInfo> list = Lists.newArrayList(resourcepacklist.getEnabledPacks());
+                event.getServer().func_240780_a_(list.stream().map(ResourcePackInfo::getName).collect(Collectors.toList())).exceptionally(ex -> null);
+            }
+        }
+
     }
 
     @Override
