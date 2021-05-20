@@ -52,8 +52,8 @@ public class GT4RBlockLootProvider extends AntimatterBlockLootProvider {
     protected void add(Block block) {
         if (block instanceof BlockOre){
             Material mat = ((BlockOre)block).getMaterial();
-            if (mat.has(GEM) || mat == Lapis || mat == Redstone || mat == Coal || mat == Emerald){
-                Item item = mat == Diamond ? Items.DIAMOND : mat == Lapis ? Items.LAPIS_LAZULI : mat == Redstone ? Items.REDSTONE : mat == Coal ? Items.COAL : mat == Emerald ? Items.EMERALD : GEM.get(mat);
+            if (mat.has(GEM) || mat == Redstone){
+                Item item = mat == Redstone ? Items.REDSTONE : GEM.get(mat);
                 if (mat == Lapis){
                     tables.put(block, b -> droppingWithSilkTouch(b, withExplosionDecay(b, ItemLootEntry.builder(item).acceptFunction(SetCount.builder(RandomValueRange.of(4.0F, 9.0F))).acceptFunction(ApplyBonus.oreDrops(Enchantments.FORTUNE)))));
                 } else if (mat == Redstone){
