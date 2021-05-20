@@ -6,6 +6,7 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
+import muramasa.antimatter.Antimatter;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.item.ItemStack;
@@ -59,9 +60,9 @@ public class GT4RRandomDropBonus extends LootFunction {
         return stack;
     }
 
-    public static LootFunction.Builder<?> randomDrops(Enchantment enchantment, int divisor) {
+    public static LootFunction.Builder<?> randomDrops(Enchantment enchantment, int dividend) {
         return builder((conditions) -> {
-            return new GT4RRandomDropBonus(conditions, enchantment, new UniformMultipliedFormula(divisor));
+            return new GT4RRandomDropBonus(conditions, enchantment, new RandomDropsFormula(dividend));
         });
     }
 
@@ -91,26 +92,26 @@ public class GT4RRandomDropBonus extends LootFunction {
     static final class RandomDropsFormula implements IFormula {
         public static final ResourceLocation ID = new ResourceLocation(Ref.ID,"random_drops");
 
-        private final int divisor;
+        private final int dividend;
 
-        private RandomDropsFormula(int divisor) {
-            this.divisor = divisor;
+        private RandomDropsFormula(int dividend) {
+            this.dividend = dividend;
         }
 
         public int getValue(Random random, int initialCount, int enchantmentLevel) {
-            if (random.nextInt(Math.max(1, divisor / (enchantmentLevel + 1))) == 0){
+            if (random.nextInt(Math.max(1, dividend / (enchantmentLevel + 1))) == 0){
                 return 1;
             }
             return 0;
         }
 
         public void serialize(JsonObject json, JsonSerializationContext context) {
-            json.addProperty("divisor", divisor);
+            json.addProperty("dividend", dividend);
         }
 
 
         public static IFormula deserialize(JsonObject json, JsonDeserializationContext context) {
-            return new RandomDropsFormula(json.has("divisor") ? json.getAsJsonObject("divisor").getAsInt() : 4);
+            return new RandomDropsFormula(json.has("dividend") ? json.getAsJsonPrimitive("dividend").getAsInt() : 4);
         }
 
         public ResourceLocation getID() {
@@ -136,7 +137,7 @@ public class GT4RRandomDropBonus extends LootFunction {
         }
 
         public static IFormula deserialize(JsonObject json, JsonDeserializationContext context) {
-            return new UniformMultipliedFormula(json.has("multiplier") ? json.getAsJsonObject("multiplier").getAsInt() : 3);
+            return new UniformMultipliedFormula(json.has("multiplier") ? json.getAsJsonPrimitive("multiplier").getAsInt() : 3);
         }
 
         public ResourceLocation getID() {
