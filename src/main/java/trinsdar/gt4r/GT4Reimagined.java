@@ -15,20 +15,25 @@ import muramasa.antimatter.AntimatterMod;
 import net.minecraft.client.resources.ReloadListener;
 import net.minecraft.resources.ResourcePackInfo;
 import net.minecraft.resources.ResourcePackList;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.registry.Registry;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
 import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
+import net.minecraftforge.registries.ForgeRegistries;
 import trinsdar.gt4r.data.*;
 import trinsdar.gt4r.datagen.GT4RBlockLootProvider;
 import trinsdar.gt4r.datagen.GT4RBlockTagProvider;
 import trinsdar.gt4r.datagen.GT4RItemTagProvider;
 import trinsdar.gt4r.datagen.GT4RLocalizations;
+import trinsdar.gt4r.datagen.GT4RRandomDropBonus;
 import trinsdar.gt4r.datagen.GT4RRecipes;
 import trinsdar.gt4r.datagen.GT4RReloadListener;
 import trinsdar.gt4r.datagen.ProgressionAdvancements;
@@ -152,6 +157,13 @@ public class GT4Reimagined extends AntimatterMod {
     public void onResourceReload(AddReloadListenerEvent event) {
         //Add Reload Listener for the Vanilla override recipes
         //event.addListener(new GT4RReloadListener(event.getDataPackRegistries()));
+    }
+
+    @SubscribeEvent
+    public void onRegister(final RegistryEvent.Register<?> e){
+        if (e.getRegistry() == ForgeRegistries.LOOT_MODIFIER_SERIALIZERS){
+            Registry.register(Registry.LOOT_FUNCTION_TYPE, new ResourceLocation(Ref.ID, "random_drop_bonus"), GT4RRandomDropBonus.RANDOM_DROP_BONUS);
+        }
     }
 
     @SubscribeEvent
