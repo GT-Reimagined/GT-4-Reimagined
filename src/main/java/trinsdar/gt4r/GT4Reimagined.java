@@ -151,12 +151,12 @@ public class GT4Reimagined extends AntimatterMod {
     @SubscribeEvent
     public void onResourceReload(AddReloadListenerEvent event) {
         //Add Reload Listener for the Vanilla override recipes
-        event.addListener(new GT4RReloadListener(event.getDataPackRegistries()));
+        //event.addListener(new GT4RReloadListener(event.getDataPackRegistries()));
     }
 
     @SubscribeEvent
     public void onServerAboutToStart(FMLServerAboutToStartEvent event){
-        GT4RReloadListener.server = event.getServer();
+        /*GT4RReloadListener.server = event.getServer();
         if (GT4RConfig.GAMEPLAY.HARDER_VANILLA_RECIPES) {
             if (GT4RReloadListener.createDataPacks(event.getServer())){
                 ResourcePackList resourcepacklist = event.getServer().getResourcePacks();
@@ -164,7 +164,7 @@ public class GT4Reimagined extends AntimatterMod {
                 List<ResourcePackInfo> list = Lists.newArrayList(resourcepacklist.getEnabledPacks());
                 event.getServer().func_240780_a_(list.stream().map(ResourcePackInfo::getName).collect(Collectors.toList())).exceptionally(ex -> null);
             }
-        }
+        }*/
 
     }
 
