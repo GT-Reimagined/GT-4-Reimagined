@@ -1,9 +1,14 @@
 package trinsdar.gt4r.loader.machines;
 
 import muramasa.antimatter.material.Material;
+import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
+import trinsdar.gt4r.GT4RConfig;
+import trinsdar.gt4r.data.GT4RData;
 
 import static muramasa.antimatter.Data.DUST;
 import static muramasa.antimatter.Data.INGOT;
+import static muramasa.antimatter.Data.PLATE;
+import static muramasa.antimatter.material.MaterialTag.RUBBERTOOLS;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.ALLOY_SMELTING;
 
@@ -26,7 +31,15 @@ public class AlloySmelterLoader {
         //TODO compat for bluepower
         //ALLOY_SMELTING.RB().ii(DUST.getMaterialIngredient(Nikolite, 4), DUST.getMaterialIngredient(Copper)).io(INGOT.get(BlueAlloy, 1)).add(50, 16);
         //ALLOY_SMELTING.RB().ii(DUST.getMaterialIngredient(Nikolite, 4), INGOT.getMaterialIngredient(Copper)).io(INGOT.get(BlueAlloy, 1)).add(50, 16);
-
+        int ingotCount = GT4RConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 2 : 1;
+        PLATE.all().forEach(m -> {
+            if (!m.needsBlastFurnace() && m.has(INGOT)){
+                ALLOY_SMELTING.RB().ii(INGOT.getMaterialIngredient(m, ingotCount), RecipeIngredient.of(GT4RData.MoldPlate, 1).setNoConsume()).io(PLATE.get(m, 1)).add(m.getMass() * ingotCount, 32);
+                if (m.has(RUBBERTOOLS) && m.has(DUST)){
+                    ALLOY_SMELTING.RB().ii(DUST.getMaterialIngredient(m, ingotCount), RecipeIngredient.of(GT4RData.MoldPlate, 1).setNoConsume()).io(PLATE.get(m, 1)).add(m.getMass() * ingotCount, 32);
+                }
+            }
+        });
 
     }
 

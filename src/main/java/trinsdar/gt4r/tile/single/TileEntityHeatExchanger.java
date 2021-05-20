@@ -35,6 +35,8 @@ import java.util.function.Predicate;
 import static net.minecraft.util.Direction.DOWN;
 import static net.minecraft.util.Direction.UP;
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
+import static net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE;
+import static net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.SIMULATE;
 import static trinsdar.gt4r.data.Materials.DistilledWater;
 import static trinsdar.gt4r.data.Materials.Steam;
 
@@ -50,7 +52,7 @@ public class TileEntityHeatExchanger extends TileEntityMachine {
             public boolean canOutput() {
                 List<FluidStack> output = new ArrayList<>();
                 output.add(Steam.getGas(160));
-                if (activeRecipe.hasOutputFluids()){
+                if (activeRecipe != null && activeRecipe.hasOutputFluids()){
                     output.addAll(Arrays.asList(activeRecipe.getOutputFluids()));
                 }
                 return super.canOutput() && tile.fluidHandler.map(t -> t.canOutputsFit(output.toArray(new FluidStack[0]))).orElse(false);
@@ -182,10 +184,36 @@ public class TileEntityHeatExchanger extends TileEntityMachine {
             TileEntity leftTile = tile.world.getTileEntity(tile.getPos().offset(left));
             TileEntity upTile = tile.world.getTileEntity(tile.getPos().offset(UP));
             if (leftTile != null) {
-                this.sidedCaps.get(left).ifPresent(t -> leftTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, left.getOpposite()).ifPresent(f -> Utils.transferFluids(f, t, 1000)));
+                this.sidedCaps.get(left).ifPresent(t -> leftTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, left.getOpposite()).ifPresent(f -> transferFluids(f, ((FluidHandlerSidedWrapper)t), 1000)));
             }
             if (upTile != null) {
-                this.sidedCaps.get(UP).ifPresent(t -> upTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, DOWN).ifPresent(f -> Utils.transferFluids(f, t, 1000)));
+                this.sidedCaps.get(UP).ifPresent(t -> upTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, DOWN).ifPresent(f -> transferFluids(f, ((FluidHandlerSidedWrapper)t), 1000)));
+            }
+        }
+
+        public static void transferFluids(IFluidHandler from, FluidHandlerSidedWrapper to, int cap) {
+            for (int i = 0; i < to.getTanks(); i++) {
+                //if (i >= from.getTanks()) break;
+                FluidStack toInsert = FluidStack.EMPTY;
+                for (int j = 0; j < from.getTanks(); j++) {
+                    if (cap > 0) {
+                        FluidStack fluid = from.getFluidInTank(j);
+                        if (fluid.isEmpty()) {
+                            continue;
+                        }
+                        fluid = fluid.copy();
+                        int toDrain = Math.min(cap, fluid.getAmount());
+                        fluid.setAmount(toDrain);
+                        toInsert = from.drain(fluid, SIMULATE);
+                    } else {
+                        toInsert = from.drain(from.getFluidInTank(j), SIMULATE);
+                    }
+                    int filled = to.fillInternal(toInsert, SIMULATE);
+                    if (filled > 0) {
+                        toInsert.setAmount(filled);
+                        to.fillInternal(from.drain(toInsert, EXECUTE), EXECUTE);
+                    }
+                }
             }
         }
 
@@ -249,18 +277,25 @@ public class TileEntityHeatExchanger extends TileEntityMachine {
             @Override
             public int fill(FluidStack resource, FluidAction action) {
                 if (side == DOWN || side == fluidHandler.tile.getFacing().rotateYCCW()) return 0;
-                if (side == UP) {
-                    //GT4Reimagined.LOGGER.info("Filling fluid: " + resource.getFluid().toString() + " at side: " + side.toString() + "in tank 0");
-                    //GT4Reimagined.LOGGER.info("Side = up");
+                /*if (side == UP) {
                     int fill = fluidHandler.tanks.get(FluidDirection.INPUT).getTank(0).fill(resource, action);
-                    //GT4Reimagined.LOGGER.info("Fill amount: " + fill);
                     return fill;
                 }
                 if (side == fluidHandler.tile.getFacing().rotateY()) {
-                    //GT4Reimagined.LOGGER.info("Filling fluid: " + resource.getFluid().toString() + " at side: " + side.toString() + "in tank 0");
-                    //GT4Reimagined.LOGGER.info("Left = " + side.rotateY());
                     int fill = fluidHandler.tanks.get(FluidDirection.INPUT).getTank(1).fill(resource, action);
-                    //GT4Reimagined.LOGGER.info("Fill amount: " + fill);
+                    return fill;
+                }*/
+                return fluidHandler.fill(resource, action);
+            }
+
+            public int fillInternal(FluidStack resource, FluidAction action) {
+                if (side == DOWN || side == fluidHandler.tile.getFacing().rotateYCCW()) return 0;
+                if (side == UP) {
+                    int fill = fluidHandler.tanks.get(FluidDirection.INPUT).getTank(0).fill(resource, action);
+                    return fill;
+                }
+                if (side == fluidHandler.tile.getFacing().rotateY()) {
+                    int fill = fluidHandler.tanks.get(FluidDirection.INPUT).getTank(1).fill(resource, action);
                     return fill;
                 }
                 return fluidHandler.fill(resource, action);
