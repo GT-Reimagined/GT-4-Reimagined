@@ -34,7 +34,6 @@ public class CommonHandler {
             Registry.register(Registry.LOOT_FUNCTION_TYPE, new ResourceLocation(Ref.ID, "random_drop_bonus"), GT4RRandomDropBonus.RANDOM_DROP_BONUS);
         });
         MinecraftForge.EVENT_BUS.register(CommonHandler.class);
-        //copyResourcePack();
     }
 
     public static void onBreak(PlayerDestroyItemEvent event){
@@ -59,30 +58,6 @@ public class CommonHandler {
                 if (!event.getPlayer().addItemStackToInventory(motorStack)){
                     event.getPlayer().dropItem(motorStack, true);
                 }
-            }
-        }
-    }
-
-    private static void copyResourcePack(){
-        File dir = new File(".", "datapacks");
-        File target = new File(dir, "GT4R-Vanilla-Overrides.zip");
-
-
-        if (!target.exists()) {
-            try {
-                dir.mkdirs();
-                InputStream in = GT4Reimagined.class.getResourceAsStream("/data/overrides.zip");
-                FileOutputStream out = new FileOutputStream(target);
-
-                byte[] buf = new byte[16384];
-                int len = 0;
-                while((len = in.read(buf)) > 0)
-                    out.write(buf, 0, len);
-
-                in.close();
-                out.close();
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
     }
