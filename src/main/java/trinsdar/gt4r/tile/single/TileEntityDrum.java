@@ -42,14 +42,14 @@ import static net.minecraft.util.Direction.UP;
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
 import static trinsdar.gt4r.data.Materials.*;
 
-public class TileEntityDrum extends TileEntityMachine {
+public class TileEntityDrum extends TileEntityMachine<TileEntityDrum> {
     Material material;
     FluidStack drop = FluidStack.EMPTY;
     boolean output = false;
     public TileEntityDrum(MaterialMachine type) {
         super(type);
         material = type.getMaterial();
-        this.fluidHandler = LazyOptional.of(() -> new DrumFluidHandler(this));
+        this.fluidHandler.set(() -> new DrumFluidHandler(this));
     }
 
     @Override
@@ -75,7 +75,7 @@ public class TileEntityDrum extends TileEntityMachine {
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
         if (blocksCapability(cap, side)) return LazyOptional.empty();
-        else if (cap == FLUID_HANDLER_CAPABILITY && fluidHandler.isPresent()) return ((DrumFluidHandler)fluidHandler.resolve().orElse(null)).getCapability(cap, side);
+        else if (cap == FLUID_HANDLER_CAPABILITY && fluidHandler.isPresent()) return fluidHandler.map(f -> ((DrumFluidHandler)f).getCapability(cap, side)).orElse(LazyOptional.empty());
         return super.getCapability(cap, side);
     }
 

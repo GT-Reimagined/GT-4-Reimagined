@@ -15,7 +15,7 @@ import java.util.List;
 
 import static net.minecraft.util.Direction.DOWN;
 
-public class TileEntityDustBin extends TileEntityMachine {
+public class TileEntityDustBin extends TileEntityMachine<TileEntityDustBin> {
     public TileEntityDustBin(Machine<?> type) {
         super(type);
     }

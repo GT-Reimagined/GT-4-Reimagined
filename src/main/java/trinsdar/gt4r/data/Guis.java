@@ -2,12 +2,14 @@ package trinsdar.gt4r.data;
 
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.Ref;
+import muramasa.antimatter.client.ClientData;
 import muramasa.antimatter.gui.BarDir;
 import muramasa.antimatter.gui.ButtonBody;
 import muramasa.antimatter.gui.GuiData;
 import muramasa.antimatter.gui.MenuHandlerMachine;
 import muramasa.antimatter.gui.container.ContainerBasicMachine;
 import muramasa.antimatter.gui.container.ContainerHatch;
+import muramasa.antimatter.gui.container.ContainerMachine;
 import muramasa.antimatter.gui.container.ContainerMultiMachine;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.tile.TileEntityMachine;
@@ -17,6 +19,13 @@ import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
+import trinsdar.gt4r.data.client.ScreenFactories;
+import trinsdar.gt4r.gui.ScreenFusionReactor;
+import trinsdar.gt4r.tile.multi.TileEntityDistillationTower;
+import trinsdar.gt4r.tile.multi.TileEntityFusionReactor;
+import trinsdar.gt4r.tile.multi.TileEntityIndustrialBlastFurnace;
+import trinsdar.gt4r.tile.single.TileEntityCoalBoiler;
+import trinsdar.gt4r.tile.single.TileEntityHeatExchanger;
 
 import static muramasa.antimatter.gui.ButtonBody.*;
 import static muramasa.antimatter.gui.SlotType.*;
@@ -43,38 +52,47 @@ public class Guis {
         }
     }.setPadding(0, 0, 0, 0).add(IT_IN, 17, 16).add(IT_IN, 35, 16).add(IT_IN, 53, 16).add(IT_IN, 17, 34).add(IT_IN, 35, 34).add(IT_IN, 53, 34).add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 142, 16).add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(IT_OUT, 143, 34);
 
-    public static MenuHandlerMachine<ContainerHatch> HATCH_MENU_HANDLER_CUSTOM = new MenuHandlerMachine<ContainerHatch>(Ref.ID, "container_hatch_custom") {
-        @Override
-        public ContainerHatch getMenu(Object tile, PlayerInventory playerInv, int windowId) {
-            return tile instanceof TileEntityHatch ? new ContainerHatch((TileEntityHatch) tile, playerInv, this, windowId) : null;
-        }
-    };
-
-    public static MenuHandlerMachine<ContainerBasicMachine> COAL_BOILER_MENU_HANDLER = new MenuHandlerMachine<ContainerBasicMachine>(Ref.ID, "container_coal_boiler") {
+    public static MenuHandlerMachine<TileEntityCoalBoiler,? extends ContainerMachine> COAL_BOILER_MENU_HANDLER = new MenuHandlerMachine(Ref.ID, "container_coal_boiler") {
         @Override
         public ContainerBasicMachine getMenu(Object tile, PlayerInventory playerInv, int windowId) {
-            return tile instanceof TileEntityMachine ? new ContainerBasicMachine((TileEntityMachine) tile, playerInv, this, windowId) : null;
+            return tile instanceof TileEntityMachine ? new ContainerBasicMachine( (TileEntityMachine<?>) tile, playerInv, this, windowId) : null;
+        }
+        @Override
+        public Object screen() {
+            return ScreenFactories.SCREEN_COAL_BOILER;
         }
     };
 
-    public static MenuHandlerMachine<ContainerMultiMachine> FUSION_MENU_HANDLER = new MenuHandlerMachine<ContainerMultiMachine>(Ref.ID, "container_fusion_reactor") {
+    public static MenuHandlerMachine<TileEntityFusionReactor, ? extends ContainerMultiMachine> FUSION_MENU_HANDLER = new MenuHandlerMachine(Ref.ID, "container_fusion_reactor") {
         @Override
         public ContainerMultiMachine getMenu(Object tile, PlayerInventory playerInv, int windowId) {
-            return tile instanceof TileEntityMachine ? new ContainerMultiMachine((TileEntityMultiMachine) tile, playerInv, this, windowId) : null;
+            return tile instanceof TileEntityMachine ? new ContainerMultiMachine((TileEntityMultiMachine<?>) tile, playerInv, this, windowId) : null;
+        }
+        @Override
+        public Object screen() {
+            return ScreenFactories.SCREEN_FUSION_REACTOR;
         }
     };
 
-    public static MenuHandlerMachine<ContainerBasicMachine> DISTILLATION_MENU_HANDLER = new MenuHandlerMachine<ContainerBasicMachine>(Ref.ID, "container_distillation_tower") {
+    public static MenuHandlerMachine<TileEntityDistillationTower, ? extends ContainerBasicMachine> DISTILLATION_MENU_HANDLER = new MenuHandlerMachine(Ref.ID, "container_distillation_tower") {
         @Override
         public ContainerBasicMachine getMenu(Object tile, PlayerInventory playerInv, int windowId) {
             return tile instanceof TileEntityMachine ? new ContainerBasicMachine((TileEntityBasicMultiMachine) tile, playerInv, this, windowId) : null;
         }
+        @Override
+        public Object screen() {
+            return ScreenFactories.SCREEN_DISTILLATION_TOWER;
+        }
     };
 
-    public static MenuHandlerMachine<ContainerBasicMachine> IBF_MENU_HANDLER = new MenuHandlerMachine<ContainerBasicMachine>(Ref.ID, "container_industrial_blast_furnace") {
+    public static MenuHandlerMachine<TileEntityIndustrialBlastFurnace, ? extends ContainerBasicMachine> IBF_MENU_HANDLER = new MenuHandlerMachine(Ref.ID, "container_industrial_blast_furnace") {
         @Override
         public ContainerBasicMachine getMenu(Object tile, PlayerInventory playerInv, int windowId) {
             return tile instanceof TileEntityMachine ? new ContainerBasicMachine((TileEntityBasicMultiMachine) tile, playerInv, this, windowId) : null;
+        }
+        @Override
+        public Object screen() {
+            return ScreenFactories.SCREEN_IBF;
         }
     };
 

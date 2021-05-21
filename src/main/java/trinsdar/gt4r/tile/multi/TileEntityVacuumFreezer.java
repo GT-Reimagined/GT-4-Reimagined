@@ -3,9 +3,9 @@ package trinsdar.gt4r.tile.multi;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.multi.TileEntityBasicMultiMachine;
 
-public class TileEntityVacuumFreezer extends TileEntityBasicMultiMachine {
+public class TileEntityVacuumFreezer extends TileEntityBasicMultiMachine<TileEntityVacuumFreezer> {
 
-    public TileEntityVacuumFreezer(Machine type) {
+    public TileEntityVacuumFreezer(Machine<?> type) {
         super(type);
     }
 

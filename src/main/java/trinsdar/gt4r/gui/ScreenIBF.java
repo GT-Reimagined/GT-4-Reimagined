@@ -8,7 +8,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.text.ITextComponent;
 import trinsdar.gt4r.tile.multi.TileEntityIndustrialBlastFurnace;
 
-public class ScreenIBF extends ScreenBasicMachine<ContainerBasicMachine> {
+public class ScreenIBF extends ScreenBasicMachine<TileEntityIndustrialBlastFurnace, ContainerBasicMachine<TileEntityIndustrialBlastFurnace>> {
     public ScreenIBF(ContainerBasicMachine container, PlayerInventory inv, ITextComponent name) {
         super(container, inv, name);
     }

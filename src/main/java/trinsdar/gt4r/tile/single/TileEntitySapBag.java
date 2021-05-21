@@ -13,7 +13,7 @@ import trinsdar.gt4r.tree.BlockRubberLog;
 import trinsdar.gt4r.tree.ResinState;
 import trinsdar.gt4r.tree.RubberTree;
 
-public class TileEntitySapBag extends TileEntityTickable {
+public class TileEntitySapBag extends TileEntityTickable<TileEntitySapBag> {
     ItemStack sap = ItemStack.EMPTY;
     Direction facing = Direction.NORTH;
     public TileEntitySapBag() {

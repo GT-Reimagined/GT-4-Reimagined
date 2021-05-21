@@ -31,8 +31,8 @@ public class CoalBoilerFluidHandler extends MachineFluidHandler<TileEntityCoalBo
     }
 
     @Override
-    public int fillCell(int cellSlot, int maxFill) {
-        if (fillingCell) return 0;
+    public void fillCell(int cellSlot, int maxFill) {
+        if (fillingCell) return;
         fillingCell = true;
         if (getInputTanks() != null) {
             tile.itemHandler.ifPresent(ih -> {
@@ -68,6 +68,5 @@ public class CoalBoilerFluidHandler extends MachineFluidHandler<TileEntityCoalBo
             });
         }
         fillingCell = false;
-        return 0;
     }
 }

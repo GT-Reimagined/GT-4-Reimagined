@@ -14,7 +14,7 @@ import trinsdar.gt4r.tile.single.TileEntityCoalBoiler;
 import static muramasa.antimatter.gui.SlotType.FL_IN;
 import static muramasa.antimatter.gui.SlotType.FL_OUT;
 
-public class ScreenCoalBoiler<T extends ContainerMachine> extends ScreenMachine<T> {
+public class ScreenCoalBoiler<T extends ContainerMachine<TileEntityCoalBoiler>> extends ScreenMachine<TileEntityCoalBoiler, T> {
     public ScreenCoalBoiler(T container, PlayerInventory inv, ITextComponent name) {
         super(container, inv, name);
     }

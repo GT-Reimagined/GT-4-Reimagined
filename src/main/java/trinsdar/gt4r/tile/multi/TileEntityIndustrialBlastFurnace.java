@@ -26,14 +26,14 @@ import java.util.List;
 import static muramasa.antimatter.machine.MachineFlag.CELL;
 import static muramasa.antimatter.machine.MachineFlag.ITEM;
 
-public class TileEntityIndustrialBlastFurnace extends TileEntityBasicMultiMachine {
+public class TileEntityIndustrialBlastFurnace extends TileEntityBasicMultiMachine<TileEntityIndustrialBlastFurnace> {
 
     private int heatingCapacity;
 
     public TileEntityIndustrialBlastFurnace(Machine type) {
         super(type);
-        this.itemHandler = type.has(ITEM) || type.has(CELL) ? LazyOptional.of(() -> new IBFItemHandler(this)) : LazyOptional.empty();
-        this.recipeHandler = LazyOptional.of(() -> new MachineRecipeHandler<TileEntityIndustrialBlastFurnace>(this){
+        this.itemHandler.set(() -> new IBFItemHandler(this));
+        this.recipeHandler.set(() -> new MachineRecipeHandler<TileEntityIndustrialBlastFurnace>(this){
             @Override
             protected boolean validateRecipe(Recipe r) {
                 return super.validateRecipe(r) && tile.getHeatingCapacity() >= r.getSpecialValue();

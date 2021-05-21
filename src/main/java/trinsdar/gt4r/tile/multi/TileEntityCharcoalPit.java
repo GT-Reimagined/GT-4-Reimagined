@@ -14,7 +14,7 @@ import trinsdar.gt4r.data.Machines;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TileEntityCharcoalPit extends TileEntityMultiMachine {
+public class TileEntityCharcoalPit extends TileEntityMultiMachine<TileEntityCharcoalPit> {
     List<BlockPos> logPositions;
 
     public TileEntityCharcoalPit(Machine type) {

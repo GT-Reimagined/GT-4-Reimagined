@@ -40,10 +40,10 @@ import static net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.SIM
 import static trinsdar.gt4r.data.Materials.DistilledWater;
 import static trinsdar.gt4r.data.Materials.Steam;
 
-public class TileEntityHeatExchanger extends TileEntityMachine {
+public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExchanger> {
     public TileEntityHeatExchanger(Machine<?> type) {
         super(type);
-        this.recipeHandler = LazyOptional.of(() -> new MachineRecipeHandler<TileEntityHeatExchanger>(this){
+        this.recipeHandler.set(() -> new MachineRecipeHandler<TileEntityHeatExchanger>(this){
             int heat = 0;
             final int maxHeat = 500;
             boolean consumedWater = false;
@@ -109,7 +109,7 @@ public class TileEntityHeatExchanger extends TileEntityMachine {
             }
         });
 
-        this.fluidHandler = LazyOptional.of(() -> new HeatExchangerFluidHandler(this));
+        this.fluidHandler.set(() -> new HeatExchangerFluidHandler(this));
     }
 
     @Nonnull

@@ -8,13 +8,13 @@ import trinsdar.gt4r.machine.CoalBoilerRecipeHandler;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class TileEntityCoalBoiler extends TileEntityMachine {
+public class TileEntityCoalBoiler extends TileEntityMachine<TileEntityCoalBoiler> {
     int maxHeat = 500, heat, fuel = 0, maxFuel, lossTimer = 0;
     boolean hadNoWater;
     public TileEntityCoalBoiler(Machine<?> type) {
         super(type);
-        this.fluidHandler = LazyOptional.of(() -> new CoalBoilerFluidHandler(this));
-        this.recipeHandler = LazyOptional.of(() -> new CoalBoilerRecipeHandler(this));
+        this.fluidHandler.set(() -> new CoalBoilerFluidHandler(this));
+        this.recipeHandler.set(() -> new CoalBoilerRecipeHandler(this));
     }
 
     public int getFuel() {

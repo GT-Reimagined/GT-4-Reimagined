@@ -15,7 +15,7 @@ import trinsdar.gt4r.tile.multi.TileEntityFusionReactor;
 
 import java.util.ResourceBundle;
 
-public class ScreenFusionReactor<T extends ContainerMultiMachine> extends ScreenMultiMachine<T> {
+public class ScreenFusionReactor<T extends ContainerMultiMachine<TileEntityFusionReactor>> extends ScreenMultiMachine<TileEntityFusionReactor, T> {
     ResourceLocation middle = new ResourceLocation(Ref.ID, "textures/gui/machine/fusion_computer_middle_overlay.png");
     ResourceLocation top_bottom = new ResourceLocation(Ref.ID, "textures/gui/machine/fusion_computer_top_bottom_overlay.png");
     public ScreenFusionReactor(T container, PlayerInventory inv, ITextComponent name) {

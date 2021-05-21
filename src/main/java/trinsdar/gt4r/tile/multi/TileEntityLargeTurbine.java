@@ -10,11 +10,11 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
 
-public class TileEntityLargeTurbine extends TileEntityMultiMachine {
+public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLargeTurbine> {
 
     public TileEntityLargeTurbine(Machine type) {
         super(type);
-        this.recipeHandler = LazyOptional.of(() ->
+        this.recipeHandler.set(() ->
             new MachineRecipeHandler<TileEntityLargeTurbine>(this) {
 
                 private Recipe sourceRecipe;

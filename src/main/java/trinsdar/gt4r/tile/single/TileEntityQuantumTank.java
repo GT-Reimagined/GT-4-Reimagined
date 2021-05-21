@@ -9,11 +9,11 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 import javax.annotation.Nullable;
 
-public class TileEntityQuantumTank extends TileEntityMachine {
+public class TileEntityQuantumTank extends TileEntityMachine<TileEntityQuantumTank> {
 
     public TileEntityQuantumTank(Machine<?> type) {
         super(type);
-        this.fluidHandler = LazyOptional.of(() -> new MachineFluidHandler<TileEntityQuantumTank>(this, Integer.MAX_VALUE, 265000){
+        this.fluidHandler.set(() -> new MachineFluidHandler<TileEntityQuantumTank>(this, Integer.MAX_VALUE, 265000){
             @Nullable
             @Override
             public FluidTanks getOutputTanks() {

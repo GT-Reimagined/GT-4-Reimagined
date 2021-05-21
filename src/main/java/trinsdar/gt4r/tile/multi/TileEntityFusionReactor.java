@@ -7,11 +7,11 @@ import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 
-public class TileEntityFusionReactor extends TileEntityMultiMachine {
+public class TileEntityFusionReactor extends TileEntityMultiMachine<TileEntityFusionReactor> {
 
     Display display = Display.REGULAR;
 
-    public TileEntityFusionReactor(Machine type) {
+    public TileEntityFusionReactor(Machine<?> type) {
         super(type);
     }
 

@@ -12,11 +12,12 @@ import muramasa.antimatter.machine.MachineState;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.fluids.FluidStack;
+import trinsdar.gt4r.tile.multi.TileEntityDistillationTower;
 
 import static muramasa.antimatter.gui.SlotType.FL_IN;
 import static muramasa.antimatter.gui.SlotType.FL_OUT;
 
-public class ScreenDistillationTower extends ScreenMachine<ContainerBasicMachine> {
+public class ScreenDistillationTower extends ScreenMachine<TileEntityDistillationTower, ContainerBasicMachine<TileEntityDistillationTower>> {
     public ScreenDistillationTower(ContainerBasicMachine container, PlayerInventory inv, ITextComponent name) {
         super(container, inv, name);
     }

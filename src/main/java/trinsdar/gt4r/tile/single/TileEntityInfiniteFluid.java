@@ -18,7 +18,7 @@ import java.util.List;
 import static muramasa.antimatter.Data.COVEROUTPUT;
 import static trinsdar.gt4r.data.Materials.Steam;
 
-public class TileEntityInfiniteFluid extends TileEntityMachine {
+public class TileEntityInfiniteFluid extends TileEntityMachine<TileEntityInfiniteFluid> {
 
     @Override
     public boolean setFacing(Direction side) {
@@ -40,7 +40,7 @@ public class TileEntityInfiniteFluid extends TileEntityMachine {
 
     public TileEntityInfiniteFluid(Machine<?> type) {
         super(type);
-        this.fluidHandler = LazyOptional.of(() -> new InfiniteFluidHandler(this) {
+        this.fluidHandler.set(() -> new InfiniteFluidHandler(this) {
 
         });
         // TODO

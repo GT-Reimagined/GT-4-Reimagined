@@ -7,10 +7,10 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraftforge.common.util.LazyOptional;
 import trinsdar.gt4r.machine.QuantumChestItemHandler;
 
-public class TileEntityQuantumChest extends TileEntityMachine {
+public class TileEntityQuantumChest extends TileEntityMachine<TileEntityQuantumChest> {
     public TileEntityQuantumChest(Machine<?> type) {
         super(type);
-        this.itemHandler = LazyOptional.of(() -> new QuantumChestItemHandler(this));
+        this.itemHandler.set(() -> new QuantumChestItemHandler(this));
     }
 
     @Override

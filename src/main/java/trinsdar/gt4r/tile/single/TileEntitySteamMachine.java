@@ -14,11 +14,11 @@ import java.util.Arrays;
 
 import static muramasa.antimatter.machine.Tier.BRONZE;
 
-public class TileEntitySteamMachine extends TileEntityMachine {
+public class TileEntitySteamMachine extends TileEntityMachine<TileEntitySteamMachine> {
 
     public TileEntitySteamMachine(Machine<?> type) {
         super(type);
-        recipeHandler = LazyOptional.of(() -> new MachineRecipeHandler<TileEntitySteamMachine>(this) {
+        recipeHandler.set(() -> new MachineRecipeHandler<TileEntitySteamMachine>(this) {
             @Override
             public boolean consumeResourceForRecipe(boolean simulate) {
                 return tile.fluidHandler.map(t -> t.consumeAndReturnInputs(Arrays.asList(Materials.Steam.getGas((int)activeRecipe.getPower())), simulate).size() == 0)

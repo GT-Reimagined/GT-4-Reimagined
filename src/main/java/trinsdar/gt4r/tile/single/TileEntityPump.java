@@ -17,7 +17,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.lwjgl.system.CallbackI;
 
-public class TileEntityPump extends TileEntityMachine {
+public class TileEntityPump extends TileEntityMachine<TileEntityPump> {
     int3 pump;
     public TileEntityPump(Machine<?> type) {
         super(type);
