@@ -10,18 +10,18 @@ import muramasa.antimatter.util.Utils;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraftforge.items.IItemHandlerModifiable;
 import trinsdar.gt4r.data.SlotTypes;
 import trinsdar.gt4r.tile.single.TileEntityQuantumChest;
 
 import static muramasa.antimatter.machine.MachineFlag.ITEM_INPUT;
 
-public class QuantumChestItemHandler extends MachineItemHandler<TileEntityQuantumChest> {
+public class QuantumChestItemHandler extends MachineItemHandler<TileEntityQuantumChest> implements IFakeSlotHandler {
     int maxSize = Integer.MAX_VALUE;
     int digitalCount;
     ItemStack d = ItemStack.EMPTY;
     public QuantumChestItemHandler(TileEntityQuantumChest tile) {
         super(tile);
-        inventories.put(ITEM_INPUT, new TrackedItemHandler<>(tile, tile.getMachineType().getGui().getSlots(SlotTypes.DISPLAY, tile.getMachineTier()).size() + tile.getMachineType().getGui().getSlots(SlotType.IT_IN, tile.getMachineTier()).size(),false, t -> true, ContentEvent.ITEM_INPUT_CHANGED));
     }
 
     /*@Override
@@ -99,11 +99,11 @@ public class QuantumChestItemHandler extends MachineItemHandler<TileEntityQuantu
     }
 
     public ItemStack display() {
-        return this.getInputHandler().getStackInSlot(1);
+        return this.getFakeHandler().getStackInSlot(0);
     }
 
     public void display(ItemStack stack) {
-        this.getInputHandler().setStackInSlot(1, Utils.ca(1, stack));
+        this.getFakeHandler().setStackInSlot(0, Utils.ca(1, stack));
         d = Utils.ca(1, stack.copy());
         tile.onMachineEvent(ContentEvent.ITEM_INPUT_CHANGED);
     }
@@ -150,5 +150,10 @@ public class QuantumChestItemHandler extends MachineItemHandler<TileEntityQuantu
     public void drawInfo(MatrixStack stack, FontRenderer renderer, int left, int top) {
         // TODO: Replace by new TranslationTextComponent()
         renderer.drawString(stack,"Item amount: " + digitalCount, left + 10, top + 19, 16448255);
+    }
+
+    @Override
+    public IItemHandlerModifiable getFakeHandler() {
+        return inventories.get(SlotTypes.DISPLAY);
     }
 }

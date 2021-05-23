@@ -130,7 +130,7 @@ public class GT4RData {
         }
         if (stack.getItem() instanceof IAntimatterTool){
             IAntimatterTool tool = (IAntimatterTool) stack.getItem();
-            if (tool.getType().isPowered()){
+            if (tool.getAntimatterToolType().isPowered()){
                 long currentEnergy = tool.getCurrentEnergy(stack);
                 long maxEnergy = tool.getMaxEnergy(stack);
                 return new Tuple<>(currentEnergy, maxEnergy);

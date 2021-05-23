@@ -1,5 +1,7 @@
 package trinsdar.gt4r.gui;
 
+import muramasa.antimatter.gui.SlotType;
+import muramasa.antimatter.gui.slot.AbstractSlot;
 import muramasa.antimatter.tile.TileEntityMachine;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -10,11 +12,9 @@ import trinsdar.gt4r.tile.multi.TileEntityIndustrialBlastFurnace;
 
 import javax.annotation.Nonnull;
 
-public class SlotCoil extends SlotItemHandler {
-    TileEntityMachine tile;
-    public SlotCoil(TileEntityMachine tile, IItemHandler itemHandler, int index, int xPosition, int yPosition) {
-        super(itemHandler, index, xPosition, yPosition);
-        this.tile = tile;
+public class SlotCoil extends AbstractSlot {
+    public SlotCoil(SlotType<? extends AbstractSlot> type, TileEntityMachine<?> tile, IItemHandler stackHandler, int index, int xPosition, int yPosition) {
+        super(type, tile, stackHandler, index, xPosition, yPosition);
     }
 
     @Override
@@ -40,6 +40,6 @@ public class SlotCoil extends SlotItemHandler {
     @Override
     public void onSlotChanged() {
         super.onSlotChanged();
-        tile.onMachineEvent(TileEntityIndustrialBlastFurnace.BFEvent.SLOT_COIL_CHANGED, this.getStack());
+        holder.onMachineEvent(TileEntityIndustrialBlastFurnace.BFEvent.SLOT_COIL_CHANGED, this.getStack());
     }
 }
