@@ -191,7 +191,7 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
     public static ItemStack resolveStack(IAntimatterTool tool, Material primary, Material secondary, long startingEnergy, long maxEnergy) {
         ItemStack stack = new ItemStack(tool.getItem());
         tool.validateTag(stack, primary, secondary, startingEnergy, maxEnergy);
-        Map<Enchantment, Integer> mainEnchants = primary.getEnchantments();
+        Map<Enchantment, Integer> mainEnchants = primary.getToolEnchantments();
         if (!mainEnchants.isEmpty()) {
             mainEnchants.entrySet().stream().filter(e -> e.getKey().canApply(stack)).forEach(e -> stack.addEnchantment(e.getKey(), e.getValue()));
         }
