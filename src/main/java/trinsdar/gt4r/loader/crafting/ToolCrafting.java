@@ -11,6 +11,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.ItemStack;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.CustomTags;
+import trinsdar.gt4r.data.ToolTypes;
 
 import java.util.Collections;
 import java.util.Map;
@@ -87,8 +88,10 @@ public class ToolCrafting {
     private static void loadOtherRecipes(Consumer<IFinishedRecipe> output, AntimatterRecipeProvider provider){
         ICriterionInstance in = provider.hasSafeItem(FILE.getTag());
 
-        provider.addToolRecipe(TOOL_BUILDER.get(SPEAR.getId()), output, Ref.ID, SPEAR.getId() + "_" +"recipe", "antimatter_tools",
-                "has_file", in, SPEAR.getToolStack(NULL, NULL), of('I', PropertyIngredient.builder("primary").types(PLATE, GEM).tool(SPEAR, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build(), 'F', FILE.getTag(), 'H', HAMMER.getTag()), " FI", " RH", "R  ");
+        if (!AntimatterAPI.isModLoaded("gtsp")){
+            provider.addToolRecipe(TOOL_BUILDER.get(ToolTypes.SPEAR.getId()), output, Ref.ID, ToolTypes.SPEAR.getId() + "_" + "recipe", "antimatter_tools",
+                    "has_file", in, ToolTypes.SPEAR.getToolStack(NULL, NULL), of('I', PropertyIngredient.builder("primary").types(PLATE, GEM).tool(ToolTypes.SPEAR, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build(), 'F', FILE.getTag(), 'H', HAMMER.getTag()), " FI", " RH", "R  ");
+        }
 
 
         provider.addToolRecipe(TOOL_BUILDER.get(PICKAXE.getId()), output, Ref.ID,  "flint_" + PICKAXE.getId() + "_" +"recipe", "antimatter_tools",
@@ -109,8 +112,10 @@ public class ToolCrafting {
         provider.addToolRecipe(TOOL_BUILDER.get(KNIFE.getId()), output, Ref.ID,  "flint_" + KNIFE.getId() + "_" +"recipe", "antimatter_tools",
                 "has_flint", provider.hasSafeItem(GEM.getMaterialTag(Flint)), KNIFE.getToolStack(Flint, NULL), of('I', PropertyIngredient.builder("primary").types(GEM).tags(FLINT_TAG).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "I", "R");
 
-        provider.addToolRecipe(TOOL_BUILDER.get(SPEAR.getId()), output, Ref.ID,  "flint_" + SPEAR.getId() + "_" +"recipe", "antimatter_tools",
-                "has_flint", provider.hasSafeItem(GEM.getMaterialTag(Flint)), SPEAR.getToolStack(Flint, NULL), of('I', PropertyIngredient.builder("primary").types(GEM).tags(FLINT_TAG).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "  I", " R ", "R  ");
+        if (!AntimatterAPI.isModLoaded("gtsp")){
+            provider.addToolRecipe(TOOL_BUILDER.get(ToolTypes.SPEAR.getId()), output, Ref.ID, "flint_" + ToolTypes.SPEAR.getId() + "_" + "recipe", "antimatter_tools",
+                    "has_flint", provider.hasSafeItem(GEM.getMaterialTag(Flint)), ToolTypes.SPEAR.getToolStack(Flint, NULL), of('I', PropertyIngredient.builder("primary").types(GEM).tags(FLINT_TAG).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "  I", " R ", "R  ");
+        }
     }
 
 

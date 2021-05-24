@@ -136,6 +136,7 @@ public class GT4Reimagined extends AntimatterMod {
     public void onRegistrationEvent(RegistrationEvent event, Dist side) {
         switch (event) {
             case DATA_INIT:
+                ToolTypes.init();
                 Materials.init();
                 GT4RData.init(side);
                 Machines.init();

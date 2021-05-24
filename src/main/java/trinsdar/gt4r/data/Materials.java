@@ -8,12 +8,8 @@ import muramasa.antimatter.material.MaterialItem;
 import muramasa.antimatter.material.MaterialTag;
 import muramasa.antimatter.material.MaterialType;
 import muramasa.antimatter.material.MaterialTypeItem;
-import muramasa.antimatter.tool.AntimatterToolType;
-import muramasa.antimatter.tool.IAntimatterTool;
-import muramasa.antimatter.util.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantments;
-import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemTier;
 import net.minecraft.item.Items;
@@ -21,10 +17,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidAttributes;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.items.ItemTurbineRotor;
-import trinsdar.gt4r.items.MaterialSpear;
-
-import java.util.Properties;
-import java.util.function.Supplier;
 
 import static com.google.common.collect.ImmutableMap.of;
 import static muramasa.antimatter.Data.*;
@@ -78,24 +70,6 @@ public class Materials {
     });
     public static MaterialTag FLINT_TAG = new MaterialTag("flint");
     public static MaterialTag SEMIFLUID = new MaterialTag("semifluid");
-    public static AntimatterToolType SPEAR = new AntimatterToolType(Ref.ID, "spear", 2, 1, 10, 3.0F, -2.9F){
-        @Override
-        public IAntimatterTool instantiateTools(String domain) {
-            return new MaterialSpear(domain, this, prepareInstantiation(domain));
-        }
-
-        @Override
-        public IAntimatterTool instantiateTools(String domain, Supplier<Item.Properties> properties) {
-            return new MaterialSpear(domain, this, properties.get());
-        }
-
-        private Item.Properties prepareInstantiation(String domain) {
-            if (domain.isEmpty()) Utils.onInvalidData("An AntimatterToolType was instantiated with an empty domain name!");
-            Item.Properties properties = new Item.Properties().group(getItemGroup());
-            if (!getRepairability()) properties.setNoRepair();
-            return properties;
-        }
-    };
 
 
     /** Elements **/
@@ -231,7 +205,7 @@ public class Materials {
     public static Material Bauxite = new Material(Ref.ID, "bauxite", 0xc86400, DULL).asDust(ORE).mats(of(Aluminium, 16, Hydrogen, 10, Oxygen, 11, Titanium, 1)).setOreMulti(2);
     public static Material Wood = new Material(Ref.ID, "wood", 0x643200, WOOD).asDust(PLATE).addHandleStat(12, 0.0F).mats(of(Carbon, 1, Oxygen, 1, Hydrogen, 1));
     public static Material Blaze = new Material(Ref.ID, "blaze", 0xffc800, NONE).asDust().mats(of(Sulfur, 1, DarkAsh, 1/*, Magic, 1*/)).addHandleStat(-10, -0.5F, of(Enchantments.FIRE_ASPECT, 1));
-    public static Material Flint = new Material(Ref.ID, "flint", 0x002040, FLINT).asDust(GEM, FLINT_TAG).addTools(1.25F, 2.5F, 128, 1, of(Enchantments.FIRE_ASPECT, 1), PICKAXE, AXE, SHOVEL, SWORD, HOE, MORTAR, KNIFE, SPEAR).mats(of(SiliconDioxide, 1));
+    public static Material Flint = new Material(Ref.ID, "flint", 0x002040, FLINT).asDust(GEM, FLINT_TAG).addTools(1.25F, 2.5F, 128, 1, of(Enchantments.FIRE_ASPECT, 1), PICKAXE, AXE, SHOVEL, SWORD, HOE, MORTAR, KNIFE, ToolTypes.SPEAR).mats(of(SiliconDioxide, 1));
     public static Material PotassiumFeldspar = new Material(Ref.ID, "potassium_feldspar", 0x782828, FINE).asDust().mats(of(Potassium, 1, Aluminium, 1, Silicon, 3, Oxygen, 8));
     public static Material Biotite = new Material(Ref.ID, "biotite", 0x141e14, METALLIC).asDust().mats(b -> b.put(Potassium, 1).put(Magnesium, 3).put(Aluminium, 3).put(Fluorine, 2).put(Silicon, 3).put(Oxygen, 10));
     public static Material Uvarovite = new Material(Ref.ID, "uvarovite", 0xb4ffb4, DIAMOND).asDust().mats(of(Calcium, 3, Chrome, 2, Silicon, 3, Oxygen, 12));
@@ -329,6 +303,11 @@ public class Materials {
         SOLDER.add(Lead, Tin, SolderingAlloy);
         //TODO Mercury.add(METALL, SMELTG);
 */
+
+        /*if (!AntimatterAPI.isModLoaded("gtsp")){
+            Flint.getToolTypes().add(ToolTypes.SPEAR);
+        }*/
+
         ELEC30.add(Charcoal, Prismarine, Salt, RockSalt, Quartzite);
         ELEC60.add(Cassiterite, SodiumSulfide, Sapphire, SiliconDioxide, Methane, Pyrite, Sphalerite, NitrogenDioxide, Phosphate, Magnesite);
         ELEC90.add(Calcite, EnderPearl, SulfuricAcid, RedGranite, Saltpeter, Chromite, SodiumPersulfate, Glyceryl, Ruby, Olivine, Galena, Tungstate/* CalciumCarbonate*/);
