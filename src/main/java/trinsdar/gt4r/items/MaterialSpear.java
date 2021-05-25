@@ -1,7 +1,9 @@
 package trinsdar.gt4r.items;
 
 import com.google.common.collect.Multimap;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import muramasa.antimatter.datagen.providers.AntimatterItemModelProvider;
+import muramasa.antimatter.texture.Texture;
 import muramasa.antimatter.tool.AntimatterToolType;
 import muramasa.antimatter.tool.MaterialTool;
 import net.minecraft.block.BlockState;
@@ -34,6 +36,8 @@ import trinsdar.gt4r.client.ClientUtil;
 import trinsdar.gt4r.data.Attributes;
 import trinsdar.gt4r.entity.SpearEntity;
 
+import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 public class MaterialSpear extends MaterialTool {
@@ -60,6 +64,24 @@ public class MaterialSpear extends MaterialTool {
     @Override
     public void onItemModelBuild(IItemProvider item, AntimatterItemModelProvider prov) {
         prov.tex(item, "minecraft:item/handheld", getTextures()).override().predicate(new ResourceLocation("throwing"), 1).model(new ModelFile.UncheckedModelFile(new ResourceLocation(Ref.ID, "item/spear_throwing")));
+    }
+
+    @Override
+    public Texture[] getTextures() {
+        List<Texture> textures = new ObjectArrayList<>();
+        int layers = getAntimatterToolType().getOverlayLayers();
+        textures.add(new Texture(getDomain(), "item/tool/".concat(getId())));
+        if (layers == 1) textures.add(new Texture(getDomain(), "item/tool/overlay/".concat(getId())));
+        if (layers > 1) {
+            for (int i = 1; i <= layers; i++) {
+                textures.add(new Texture(getDomain(), String.join("", "item/tool/overlay/", getId(), "_", Integer.toString(i))));
+            }
+        }
+        return textures.toArray(new Texture[textures.size()]);
+    }
+
+    public String getId() {
+        return "spear";
     }
 
     public float getReach(){
@@ -121,9 +143,8 @@ public class MaterialSpear extends MaterialTool {
                 if (thrown == null) {
                     return;
                 }
-
-
-                thrown.setDirectionAndMovement(player, player.rotationPitch, player.rotationYaw, 0.0F, 2.0F * ((float)charge / 10.0F + 0.5F), 0.5F);
+                //thrown.setDirectionAndMovement(player, player.rotationPitch, player.rotationYaw, 0.0F, 2.0F * ((float)charge / 10.0F + 0.5F), 0.5F);
+                thrown.setDirectionAndMovement(player, player.rotationPitch, player.rotationYaw, 0.0F, 1.5F * ((float) charge / 10.0F + 0.5F), 0.5F);
                 float damage = (type.getBaseAttackDamage() + getTier(stack).getAttackDamage() + 1.0F);
                 thrown.setDamage(damage);
 
