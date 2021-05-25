@@ -70,7 +70,7 @@ public class GT4Reimagined extends AntimatterMod {
         //GregTechAPI.addRegistrar(new GalacticraftRegistrar());
         //if (ModList.get().isLoaded(Ref.MOD_UB)) GregTechAPI.addRegistrar(new UndergroundBiomesRegistrar());
         final AntimatterBlockTagProvider[] p = new AntimatterBlockTagProvider[1];
-        MinecraftForge.EVENT_BUS.register(this);
+        FMLJavaModLoadingContext.get().getModEventBus().register(this);
 
         AntimatterDynamics.addProvider(Ref.ID, g -> new AntimatterBlockStateProvider(Ref.ID, Ref.NAME + " BlockStates", g));
         AntimatterDynamics.addProvider(Ref.ID, g -> new AntimatterItemModelProvider(Ref.ID, Ref.NAME + " Item Models", g));

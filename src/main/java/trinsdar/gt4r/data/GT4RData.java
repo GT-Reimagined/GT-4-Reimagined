@@ -338,7 +338,7 @@ public class GT4RData {
 
     public static final BlockSapBag SAP_BAG = new BlockSapBag();
 
-    public static final EntityType<SpearEntity> SPEAR_ENTITY_TYPE = EntityType.Builder.<SpearEntity>create(SpearEntity::new, EntityClassification.MISC).size(0.5F, 0.5F).setShouldReceiveVelocityUpdates(true).trackingRange(4).updateInterval(20).setCustomClientFactory(SpearEntity::new).build("spear");
+    public static final EntityType<SpearEntity> SPEAR_ENTITY_TYPE = EntityType.Builder.<SpearEntity>create(SpearEntity::new, EntityClassification.MISC).size(0.5F, 0.5F).setShouldReceiveVelocityUpdates(true).trackingRange(4).updateInterval(20).setCustomClientFactory(SpearEntity::new).build("gt4r:spear");
 
     public static final Cable<?> CABLE_LEAD = new Cable<>(Ref.ID, Lead, 2, Tier.LV).amps(2);
     public static final Cable<?> CABLE_TIN = new Cable<>(Ref.ID, Tin, 1, Tier.LV).amps(1);

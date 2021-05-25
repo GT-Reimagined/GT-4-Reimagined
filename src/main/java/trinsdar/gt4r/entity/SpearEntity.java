@@ -7,6 +7,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
+import net.minecraft.entity.projectile.TridentEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
@@ -25,16 +26,17 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.network.FMLPlayMessages;
 import net.minecraftforge.fml.network.NetworkHooks;
 import trinsdar.gt4r.data.GT4RData;
 
-public class SpearEntity extends AbstractArrowEntity {
+public class SpearEntity extends AbstractArrowEntity  implements IEntityAdditionalSpawnData {
     private static final DataParameter<Byte> LOYALTY_LEVEL = EntityDataManager.createKey(SpearEntity.class, DataSerializers.BYTE);
     protected ItemStack weapon = ItemStack.EMPTY;
     public int returningTicks;
     private boolean dealtDamage;
-    public SpearEntity(EntityType<? extends SpearEntity> type, World worldIn) {
+    public SpearEntity(EntityType<SpearEntity> type, World worldIn) {
         super(type, worldIn);
     }
 
