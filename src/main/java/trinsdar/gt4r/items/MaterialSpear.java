@@ -1,20 +1,38 @@
 package trinsdar.gt4r.items;
 
 import com.google.common.collect.Multimap;
+import muramasa.antimatter.datagen.providers.AntimatterItemModelProvider;
 import muramasa.antimatter.tool.AntimatterToolType;
 import muramasa.antimatter.tool.MaterialTool;
+import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.UseAction;
+import net.minecraft.stats.Stats;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.IItemProvider;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.ForgeMod;
+import net.minecraftforge.fml.loading.FMLEnvironment;
+import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.client.ClientUtil;
 import trinsdar.gt4r.data.Attributes;
+import trinsdar.gt4r.entity.SpearEntity;
 
 import java.util.UUID;
 
@@ -24,6 +42,9 @@ public class MaterialSpear extends MaterialTool {
 
     public MaterialSpear(String domain, AntimatterToolType type, Properties properties) {
         super(domain, type, properties);
+        if (FMLEnvironment.dist.isClient()) {
+            ClientUtil.registerThrowingWeaponPropertyOverrides(this);
+        }
     }
 
     @Override
@@ -34,6 +55,11 @@ public class MaterialSpear extends MaterialTool {
         else if(!isSelected && entityIn instanceof PlayerEntity && this.hasReach((PlayerEntity) entityIn)) {
             this.removeReach((PlayerEntity) entityIn);
         }*/
+    }
+
+    @Override
+    public void onItemModelBuild(IItemProvider item, AntimatterItemModelProvider prov) {
+        prov.tex(item, "minecraft:item/handheld", getTextures()).override().predicate(new ResourceLocation("throwing"), 1).model(new ModelFile.UncheckedModelFile(new ResourceLocation(Ref.ID, "item/spear_throwing")));
     }
 
     public float getReach(){
@@ -58,7 +84,7 @@ public class MaterialSpear extends MaterialTool {
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-        if (enchantment.type == EnchantmentType.WEAPON){
+        if (enchantment.type == EnchantmentType.WEAPON || enchantment == Enchantments.LOYALTY){
             return true;
         }
         return type.isPowered() ? enchantment != Enchantments.UNBREAKING : super.canApplyAtEnchantingTable(stack, enchantment);
@@ -71,5 +97,72 @@ public class MaterialSpear extends MaterialTool {
             modifiers.put(Attributes.ATTACK_REACH.get(), new AttributeModifier(ATTACK_REACH_MODIFIER, "Tool modifier", getReach(), AttributeModifier.Operation.ADDITION));
         }
         return modifiers;
+    }
+
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity player, Hand hand) {
+        ItemStack stack = player.getHeldItem(hand);
+        player.setActiveHand(hand);
+        return ActionResult.resultConsume(stack);
+    }
+
+    public void onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
+        if (entityLiving instanceof PlayerEntity) {
+            PlayerEntity player = (PlayerEntity)entityLiving;
+            int charge = this.getUseDuration(stack) - timeLeft;
+            if (charge >= 5) {
+                charge = 5;
+            }
+
+            if (!worldIn.isRemote && charge > 2) {
+                ItemStack weaponStack = stack.copy();
+                weaponStack.setCount(1);
+                SpearEntity thrown = this.createThrowingWeaponEntity(worldIn, player, weaponStack, charge);
+                if (thrown == null) {
+                    return;
+                }
+
+
+                thrown.setDirectionAndMovement(player, player.rotationPitch, player.rotationYaw, 0.0F, 2.0F * ((float)charge / 10.0F + 0.5F), 0.5F);
+                float damage = (type.getBaseAttackDamage() + getTier(stack).getAttackDamage() + 1.0F);
+                thrown.setDamage(damage);
+
+                if (player.abilities.isCreativeMode) {
+                    thrown.pickupStatus = AbstractArrowEntity.PickupStatus.CREATIVE_ONLY;
+                } else if (thrown.isValidThrowingWeapon()) {
+                    stack.shrink(1);
+                    if (stack.getCount() <= 0) {
+                        player.inventory.deleteStack(stack);
+                    }
+                }
+
+                if (thrown.isValidThrowingWeapon()) {
+                    worldIn.playSound((PlayerEntity)null, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.ITEM_TRIDENT_THROW, SoundCategory.PLAYERS, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
+                    worldIn.addEntity(thrown);
+                }
+
+                player.addStat(Stats.ITEM_USED.get(this));
+            }
+        }
+
+        super.onPlayerStoppedUsing(stack, worldIn, entityLiving, timeLeft);
+    }
+
+    public SpearEntity createThrowingWeaponEntity(World worldIn, PlayerEntity player, ItemStack stack, int charge) {
+        return new SpearEntity(worldIn, player, stack);
+    }
+
+    @Override
+    public UseAction getUseAction(ItemStack stack) {
+        return UseAction.SPEAR;
+    }
+
+    @Override
+    public int getUseDuration(ItemStack stack) {
+        return 72000;
+    }
+
+    public boolean canPlayerBreakBlockWhileHolding(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
+        return !player.isCreative();
     }
 }

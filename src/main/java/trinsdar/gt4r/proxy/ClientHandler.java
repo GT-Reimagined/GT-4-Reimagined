@@ -14,6 +14,7 @@ import trinsdar.gt4r.GT4Reimagined;
 import trinsdar.gt4r.block.BlockCasing;
 import trinsdar.gt4r.block.BlockMachineMaterial;
 import trinsdar.gt4r.client.BakedModels;
+import trinsdar.gt4r.client.ClientUtil;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.data.Machines;
 
@@ -44,6 +45,7 @@ public class ClientHandler implements IProxyHandler {
             AntimatterAPI.all(BlockCasing.class, t -> RenderTypeLookup.setRenderLayer(t, RenderType.getCutout()));
             AntimatterAPI.all(BlockMachineMaterial.class, b -> RenderTypeLookup.setRenderLayer(b, RenderType.getCutout()));
         });
+        ClientUtil.registerEntityRenders();
         copyProgrammerArtIfMissing();
     }
 

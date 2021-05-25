@@ -8,11 +8,18 @@ import muramasa.antimatter.proxy.IProxyHandler;
 import muramasa.antimatter.recipe.loader.IRecipeRegistrate;
 import muramasa.antimatter.registration.RegistrationEvent;
 import muramasa.antimatter.AntimatterMod;
+import net.minecraft.entity.EntityType;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.IForgeRegistry;
 import trinsdar.gt4r.data.*;
 import trinsdar.gt4r.datagen.GT4RBlockLootProvider;
 import trinsdar.gt4r.datagen.GT4RBlockTagProvider;
@@ -63,6 +70,7 @@ public class GT4Reimagined extends AntimatterMod {
         //GregTechAPI.addRegistrar(new GalacticraftRegistrar());
         //if (ModList.get().isLoaded(Ref.MOD_UB)) GregTechAPI.addRegistrar(new UndergroundBiomesRegistrar());
         final AntimatterBlockTagProvider[] p = new AntimatterBlockTagProvider[1];
+        MinecraftForge.EVENT_BUS.register(this);
 
         AntimatterDynamics.addProvider(Ref.ID, g -> new AntimatterBlockStateProvider(Ref.ID, Ref.NAME + " BlockStates", g));
         AntimatterDynamics.addProvider(Ref.ID, g -> new AntimatterItemModelProvider(Ref.ID, Ref.NAME + " Item Models", g));
@@ -127,6 +135,14 @@ public class GT4Reimagined extends AntimatterMod {
     private void setup(final FMLCommonSetupEvent e) {
         CommonHandler.setup(e);
 
+    }
+
+    @SubscribeEvent
+    public void onRegister(final RegistryEvent.Register<?> e){
+        if (e.getRegistry() == ForgeRegistries.ENTITIES){
+            IForgeRegistry<EntityType<?>> reg = (IForgeRegistry<EntityType<?>>) e.getRegistry();
+            reg.register(GT4RData.SPEAR_ENTITY_TYPE.setRegistryName(new ResourceLocation(Ref.ID, "spear")));
+        }
     }
 
     private void serverSetup(final FMLDedicatedServerSetupEvent event){
