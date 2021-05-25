@@ -8,6 +8,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.INBT;
+import net.minecraft.network.IPacket;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -22,6 +26,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.FMLPlayMessages;
+import net.minecraftforge.fml.network.NetworkHooks;
 import trinsdar.gt4r.data.GT4RData;
 
 public class SpearEntity extends AbstractArrowEntity {
@@ -154,6 +159,31 @@ public class SpearEntity extends AbstractArrowEntity {
                 this.remove();
             }
         }
+    }
+
+    public void readAdditional(CompoundNBT compound) {
+        super.readAdditional(compound);
+        CompoundNBT weaponNBT = compound.getCompound("Weapon");
+        this.weapon = ItemStack.read(weaponNBT);
+    }
+
+    public void writeSpawnData(PacketBuffer buffer) {
+        buffer.writeItemStack(this.weapon, false);
+    }
+
+    public void readSpawnData(PacketBuffer additionalData) {
+        ItemStack stack = additionalData.readItemStack();
+        weapon = stack.copy();
+    }
+
+    public void writeAdditional(CompoundNBT compound) {
+        super.writeAdditional(compound);
+        CompoundNBT weaponNBT = this.weapon.write(new CompoundNBT());
+        compound.put("Weapon", weaponNBT);
+    }
+
+    public IPacket<?> createSpawnPacket() {
+        return NetworkHooks.getEntitySpawningPacket(this);
     }
 
     public boolean isValidThrowingWeapon() {

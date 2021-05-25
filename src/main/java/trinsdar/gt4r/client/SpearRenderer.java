@@ -17,7 +17,7 @@ import trinsdar.gt4r.entity.SpearEntity;
 
 public class SpearRenderer extends EntityRenderer<SpearEntity> {
     private final ItemRenderer itemRenderer;
-    protected SpearRenderer(EntityRendererManager renderManager, ItemRenderer renderer) {
+    public SpearRenderer(EntityRendererManager renderManager, ItemRenderer renderer) {
         super(renderManager);
         this.itemRenderer = renderer;
     }
