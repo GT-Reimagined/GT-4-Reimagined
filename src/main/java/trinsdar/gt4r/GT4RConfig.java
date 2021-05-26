@@ -396,6 +396,10 @@ public class GT4RConfig {
                     .translation(Ref.ID + ".config.harder_vanilla_recipes")
                     .define("HARDER_VANILLA_RECIPES", true);
 
+            HARDER_WOOD = builder.comment("If true logs to planks and planks to sticks give half of vannila amounts - Default: false")
+                    .translation(Ref.ID + ".config.harder_wood")
+                    .define("HARDER_WOOD", false);
+
             builder.pop();
 
         }
@@ -469,6 +473,7 @@ public class GT4RConfig {
 
         GAMEPLAY.LOSSY_PART_CRAFTING = COMMON_CONFIG.LOSSY_PART_CRAFTING.get();
         GAMEPLAY.HARDER_VANILLA_RECIPES = COMMON_CONFIG.HARDER_VANILLA_RECIPES.get();
+        GAMEPLAY.HARDER_WOOD = COMMON_CONFIG.HARDER_WOOD.get();
 
     }
 }
