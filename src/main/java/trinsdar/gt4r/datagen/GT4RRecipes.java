@@ -20,7 +20,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.registries.ForgeRegistries;
 import trinsdar.gt4r.GT4RConfig;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.GT4RData;
@@ -92,6 +95,11 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
         for (Material m : mats){
             addItemRecipe(consumer, Ref.ID, "piston_" + m.getId(), "pistons", "has_" + m.getId(), hasSafeItem(INGOT.getMaterialTag(m)),
                     Items.PISTON, of('W', ItemTags.PLANKS, 'C', Tags.Items.COBBLESTONE, 'R', DUST.getMaterialTag(Redstone), 'I', INGOT.getMaterialTag(m)), "WWW", "CIC", "CRC");
+        }
+        String[] colors = {"white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray", "light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black"};
+        for (String color : colors){
+            ITag.INamedTag<Item> tag = TagUtils.getForgeItemTag("dyes/" + color);
+            shapeless(consumer, "concrete_" + color, "concretes", "has_dye", hasSafeItem(tag), new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(color + "_concrete_powder")), 8), tag, Items.SAND, Items.SAND, Items.SAND, Items.SAND, DUST.get(Stone), DUST.get(Stone), DUST.get(Stone), DUST.get(Stone));
         }
         // todo: bucket, minecart, iron door
         if (GT4RConfig.GAMEPLAY.HARDER_WOOD){
