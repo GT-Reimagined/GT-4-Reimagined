@@ -34,9 +34,10 @@ public class AlloySmelterLoader {
         int ingotCount = GT4RConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 2 : 1;
         PLATE.all().forEach(m -> {
             if (!m.needsBlastFurnace() && m.has(INGOT)){
-                ALLOY_SMELTING.RB().ii(INGOT.getMaterialIngredient(m, ingotCount), RecipeIngredient.of(GT4RData.MoldPlate, 1).setNoConsume()).io(PLATE.get(m, 1)).add(m.getMass() * ingotCount, 32);
+                int euTick = m.has(RUBBERTOOLS) ? 16 : 32;
+                ALLOY_SMELTING.RB().ii(INGOT.getMaterialIngredient(m, ingotCount), RecipeIngredient.of(GT4RData.MoldPlate, 1).setNoConsume()).io(PLATE.get(m, 1)).add(m.getMass() * ingotCount, euTick);
                 if (m.has(RUBBERTOOLS) && m.has(DUST)){
-                    ALLOY_SMELTING.RB().ii(DUST.getMaterialIngredient(m, ingotCount), RecipeIngredient.of(GT4RData.MoldPlate, 1).setNoConsume()).io(PLATE.get(m, 1)).add(m.getMass() * ingotCount, 32);
+                    ALLOY_SMELTING.RB().ii(DUST.getMaterialIngredient(m, ingotCount), RecipeIngredient.of(GT4RData.MoldPlate, 1).setNoConsume()).io(PLATE.get(m, 1)).add(m.getMass() * ingotCount, euTick);
                 }
             }
         });

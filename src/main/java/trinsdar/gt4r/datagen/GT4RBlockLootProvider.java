@@ -31,7 +31,9 @@ import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.core.pattern.AbstractStyleNameConverter;
 import trinsdar.gt4r.block.BlockCasing;
 import trinsdar.gt4r.block.BlockMachineMaterial;
+import trinsdar.gt4r.block.BlockNonSolidMachine;
 import trinsdar.gt4r.data.GT4RData;
+import trinsdar.gt4r.data.Machines;
 import trinsdar.gt4r.data.Materials;
 
 import java.util.Random;
@@ -50,6 +52,7 @@ public class GT4RBlockLootProvider extends AntimatterBlockLootProvider {
     protected void loot() {
         super.loot();
         AntimatterAPI.all(BlockMachineMaterial.class, providerDomain, this::add);
+        AntimatterAPI.all(BlockNonSolidMachine.class, providerDomain, this::add);
         AntimatterAPI.all(BlockStone.class, providerDomain, b -> {
             /*if (b.getType().getMaterial() == Quartzite){
                 tables.put(b, b2 -> droppingItemWithFortune(b, GEM.get(Quartzite)));
