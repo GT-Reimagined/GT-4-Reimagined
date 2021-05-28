@@ -172,5 +172,4 @@ public class MachineCrafting {
             provider.addItemRecipe(output, Ref.ID, "cabinet_" + m.getId(), "machines", "has_chest", provider.hasSafeItem(Tags.Items.CHESTS_WOODEN), Machine.get(m.getId() + "_cabinet").getItem(LV), of('P', PLATE.getMaterialTag(m), 'C', Tags.Items.CHESTS_WOODEN), "PPP", "CPC", "PPP");
         });
     }
-
 }
