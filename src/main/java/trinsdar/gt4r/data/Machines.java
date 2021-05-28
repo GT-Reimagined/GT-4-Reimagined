@@ -10,6 +10,7 @@ import trinsdar.gt4r.machine.MaterialMachine;
 import trinsdar.gt4r.machine.NonSolidMachine;
 import trinsdar.gt4r.machine.StorageMachine;
 import trinsdar.gt4r.tile.single.TileEntityCoalBoiler;
+import trinsdar.gt4r.tile.single.TileEntityDrum;
 import trinsdar.gt4r.tile.single.TileEntityDustBin;
 import trinsdar.gt4r.tile.single.TileEntityHeatExchanger;
 import trinsdar.gt4r.tile.single.TileEntityInfiniteFluid;
@@ -101,13 +102,24 @@ public class Machines {
     public static TankMachine QUANTUM_TANK = new TankMachine(Ref.ID, "quantum_tank", GUI, CELL, Textures.TIER_HANDLER, MAX).setTile(m -> () -> new TileEntityQuantumTank(m)).frontCovers();
     public static StorageMachine QUANTUM_CHEST = new StorageMachine(Ref.ID, "quantum_chest", GUI, ITEM, Textures.TIER_HANDLER, MAX).setTile(m -> () -> new TileEntityQuantumChest(m));
 
-    public static MaterialMachine BRONZE_DRUM = new MaterialMachine(Ref.ID, "bronze_drum", Materials.Bronze, LV);
-    public static MaterialMachine STEEL_DRUM = new MaterialMachine(Ref.ID, "steel_drum", Materials.Steel, LV);
-    public static MaterialMachine STAINLESS_STEEL_DRUM = new MaterialMachine(Ref.ID, "stainless_steel_drum", Materials.StainlessSteel, LV);
-    public static MaterialMachine INVAR_DRUM = new MaterialMachine(Ref.ID, "invar_drum", Materials.Invar, LV);
-    public static MaterialMachine TUNGSTEN_DRUM = new MaterialMachine(Ref.ID, "tungsten_drum", Materials.Tungsten, LV);
-    public static MaterialMachine TUNGSTENSTEEL_DRUM = new MaterialMachine(Ref.ID, "tungstensteel_drum", Materials.TungstenSteel, LV);
-    public static MaterialMachine NETHERITE_DRUM = new MaterialMachine(Ref.ID, "netherite_drum", Materials.Netherite, LV);
+    public static MaterialMachine BRONZE_DRUM = new MaterialMachine(Ref.ID, "bronze_drum", Materials.Bronze, LV, Textures.DRUM_HANDLER, Textures.DRUM_OVERLAY_HANDLER).setTile(m -> () -> new TileEntityDrum(m));
+    public static MaterialMachine STEEL_DRUM = new MaterialMachine(Ref.ID, "steel_drum", Materials.Steel, LV, Textures.DRUM_HANDLER, Textures.DRUM_OVERLAY_HANDLER).setTile(m -> () -> new TileEntityDrum(m));
+    public static MaterialMachine STAINLESS_STEEL_DRUM = new MaterialMachine(Ref.ID, "stainless_steel_drum", Materials.StainlessSteel, LV, Textures.DRUM_HANDLER, Textures.DRUM_OVERLAY_HANDLER).setTile(m -> () -> new TileEntityDrum(m));
+    public static MaterialMachine INVAR_DRUM = new MaterialMachine(Ref.ID, "invar_drum", Materials.Invar, LV, Textures.DRUM_HANDLER, Textures.DRUM_OVERLAY_HANDLER).setTile(m -> () -> new TileEntityDrum(m));
+    public static MaterialMachine TUNGSTEN_DRUM = new MaterialMachine(Ref.ID, "tungsten_drum", Materials.Tungsten, LV, Textures.DRUM_HANDLER, Textures.DRUM_OVERLAY_HANDLER).setTile(m -> () -> new TileEntityDrum(m));
+    public static MaterialMachine TUNGSTENSTEEL_DRUM = new MaterialMachine(Ref.ID, "tungstensteel_drum", Materials.TungstenSteel, LV, Textures.DRUM_HANDLER, Textures.DRUM_OVERLAY_HANDLER).setTile(m -> () -> new TileEntityDrum(m));
+    public static MaterialMachine NETHERITE_DRUM = new MaterialMachine(Ref.ID, "netherite_drum", Materials.Netherite, LV, Textures.DRUM_HANDLER, Textures.DRUM_OVERLAY_HANDLER).setTile(m -> () -> new TileEntityDrum(m));
+
+    public static MaterialMachine IRON_CABINET = new MaterialMachine(Ref.ID, "iron_cabinet", Materials.Iron, LV, Textures.CABINET_HANDLER, Textures.CABINET_OVERLAY_HANDLER, ITEM, GUI);
+    public static MaterialMachine WROUGHT_IRON_CABINET = new MaterialMachine(Ref.ID, "wrought_iron_cabinet", Materials.WroughtIron, LV, Textures.CABINET_HANDLER, Textures.CABINET_OVERLAY_HANDLER, ITEM, GUI);
+    public static MaterialMachine BRASS_CABINET = new MaterialMachine(Ref.ID, "brass_cabinet", Materials.Brass, LV, Textures.CABINET_HANDLER, Textures.CABINET_OVERLAY_HANDLER, ITEM, GUI);
+    public static MaterialMachine CUPRONICKEL_CABINET = new MaterialMachine(Ref.ID, "cupronickel_cabinet", Materials.Cupronickel, LV, Textures.CABINET_HANDLER, Textures.CABINET_OVERLAY_HANDLER, ITEM, GUI);
+    public static MaterialMachine ELECTRUM_CABINET = new MaterialMachine(Ref.ID, "electrum_cabinet", Materials.Electrum, LV, Textures.CABINET_HANDLER, Textures.CABINET_OVERLAY_HANDLER, ITEM, GUI);
+    public static MaterialMachine GOLD_CABINET = new MaterialMachine(Ref.ID, "gold_cabinet", Materials.Gold, LV, Textures.CABINET_HANDLER, Textures.CABINET_OVERLAY_HANDLER, ITEM, GUI);
+    public static MaterialMachine SILVER_CABINET = new MaterialMachine(Ref.ID, "silver_cabinet", Materials.Silver, LV, Textures.CABINET_HANDLER, Textures.CABINET_OVERLAY_HANDLER, ITEM, GUI);
+    public static MaterialMachine MAGNALIUM_CABINET = new MaterialMachine(Ref.ID, "magnalium_cabinet", Materials.Magnalium, LV, Textures.CABINET_HANDLER, Textures.CABINET_OVERLAY_HANDLER, ITEM, GUI);
+    public static MaterialMachine PLATINUM_CABINET = new MaterialMachine(Ref.ID, "platinum_cabinet", Materials.Platinum, LV, Textures.CABINET_HANDLER, Textures.CABINET_OVERLAY_HANDLER, ITEM, GUI);
+    public static MaterialMachine OSMIUM_CABINET = new MaterialMachine(Ref.ID, "osmium_cabinet", Materials.Osmium, LV, Textures.CABINET_HANDLER, Textures.CABINET_OVERLAY_HANDLER, ITEM, GUI);
 
     public static GeneratorMachine STEAM_TURBINE = new GeneratorMachine(Ref.ID, "steam_turbine", STEAM_FUELS, LV, GUI, ITEM, FLUID, GENERATOR, CELL, Textures.TIER_HANDLER).covers(COVERNONE,COVERNONE,COVERNONE,COVERNONE,COVERNONE, COVER_DYNAMO_OLD);
     public static GeneratorMachine GAS_TURBINE = new GeneratorMachine(Ref.ID, "gas_turbine", GAS_FUELS, LV, GUI, FLUID, GENERATOR, CELL, ITEM, Textures.TIER_HANDLER).covers(COVERNONE,COVERNONE,COVERNONE,COVERNONE,COVERNONE, COVER_DYNAMO_OLD);

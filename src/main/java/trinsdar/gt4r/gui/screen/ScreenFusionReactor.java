@@ -1,4 +1,4 @@
-package trinsdar.gt4r.gui;
+package trinsdar.gt4r.gui.screen;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import muramasa.antimatter.capability.machine.MachineRecipeHandler;

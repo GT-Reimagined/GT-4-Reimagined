@@ -1,31 +1,28 @@
 package trinsdar.gt4r.data;
 
 import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.Ref;
-import muramasa.antimatter.client.ClientData;
 import muramasa.antimatter.gui.BarDir;
 import muramasa.antimatter.gui.ButtonBody;
 import muramasa.antimatter.gui.GuiData;
 import muramasa.antimatter.gui.MenuHandlerMachine;
 import muramasa.antimatter.gui.container.ContainerBasicMachine;
-import muramasa.antimatter.gui.container.ContainerHatch;
 import muramasa.antimatter.gui.container.ContainerMachine;
 import muramasa.antimatter.gui.container.ContainerMultiMachine;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.tile.multi.TileEntityBasicMultiMachine;
-import muramasa.antimatter.tile.multi.TileEntityHatch;
 import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
+import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.client.ScreenFactories;
-import trinsdar.gt4r.gui.ScreenFusionReactor;
+import trinsdar.gt4r.gui.ContainerCabinet;
 import trinsdar.gt4r.tile.multi.TileEntityDistillationTower;
 import trinsdar.gt4r.tile.multi.TileEntityFusionReactor;
 import trinsdar.gt4r.tile.multi.TileEntityIndustrialBlastFurnace;
 import trinsdar.gt4r.tile.single.TileEntityCoalBoiler;
-import trinsdar.gt4r.tile.single.TileEntityHeatExchanger;
+import trinsdar.gt4r.tile.single.TileEntityMaterial;
 
 import static muramasa.antimatter.gui.ButtonBody.*;
 import static muramasa.antimatter.gui.SlotType.*;
@@ -96,6 +93,54 @@ public class Guis {
         }
     };
 
+    public static MenuHandlerMachine<? extends TileEntityMaterial, ? extends ContainerCabinet> CABINET_HANDLER_SIX = new MenuHandlerMachine(Ref.ID, "container_cabinet_six") {
+        @Override
+        public ContainerCabinet getMenu(Object tile, PlayerInventory playerInv, int windowId) {
+            return tile instanceof TileEntityMaterial ? new ContainerCabinet((TileEntityMaterial) tile, playerInv, this, windowId) : null;
+        }
+
+        @Override
+        public Object screen() {
+            return ScreenFactories.SCREEN_CABINET_SIX;
+        }
+    };
+
+    public static MenuHandlerMachine<? extends TileEntityMaterial, ? extends ContainerCabinet> CABINET_HANDLER_SEVEN = new MenuHandlerMachine(Ref.ID, "container_cabinet_seven") {
+        @Override
+        public ContainerCabinet getMenu(Object tile, PlayerInventory playerInv, int windowId) {
+            return tile instanceof TileEntityMaterial ? new ContainerCabinet((TileEntityMaterial) tile, playerInv, this, windowId) : null;
+        }
+
+        @Override
+        public Object screen() {
+            return ScreenFactories.SCREEN_CABINET_SEVEN;
+        }
+    };
+
+    public static MenuHandlerMachine<? extends TileEntityMaterial, ? extends ContainerCabinet> CABINET_HANDLER_EIGHT = new MenuHandlerMachine(Ref.ID, "container_cabinet_eight") {
+        @Override
+        public ContainerCabinet getMenu(Object tile, PlayerInventory playerInv, int windowId) {
+            return tile instanceof TileEntityMaterial ? new ContainerCabinet((TileEntityMaterial) tile, playerInv, this, windowId) : null;
+        }
+
+        @Override
+        public Object screen() {
+            return ScreenFactories.SCREEN_CABINET_EIGHT;
+        }
+    };
+
+    public static MenuHandlerMachine<? extends TileEntityMaterial, ? extends ContainerCabinet> CABINET_HANDLER_NINE = new MenuHandlerMachine(Ref.ID, "container_cabinet_nine") {
+        @Override
+        public ContainerCabinet getMenu(Object tile, PlayerInventory playerInv, int windowId) {
+            return tile instanceof TileEntityMaterial ? new ContainerCabinet((TileEntityMaterial) tile, playerInv, this, windowId) : null;
+        }
+
+        @Override
+        public Object screen() {
+            return ScreenFactories.SCREEN_CABINET_NINE;
+        }
+    };
+
     public static void init(Dist side) {
 
         AntimatterAPI.registerJEICategory(RecipeMaps.ORE_BYPRODUCTS, Guis.ORE_BYPRODUCTS);
@@ -114,7 +159,36 @@ public class Guis {
         FUSION_REACTOR.setGUI(FUSION_MENU_HANDLER);
         DISTILLATION_TOWER.setGUI(DISTILLATION_MENU_HANDLER);
         BLAST_FURNACE.setGUI(IBF_MENU_HANDLER);
-
+        IRON_CABINET.setGUI(CABINET_HANDLER_SIX);
+        WROUGHT_IRON_CABINET.setGUI(CABINET_HANDLER_SIX);
+        BRASS_CABINET.setGUI(CABINET_HANDLER_SIX);
+        CUPRONICKEL_CABINET.setGUI(CABINET_HANDLER_SIX);
+        ELECTRUM_CABINET.setGUI(CABINET_HANDLER_SEVEN);
+        GOLD_CABINET.setGUI(CABINET_HANDLER_SEVEN);
+        SILVER_CABINET.setGUI(CABINET_HANDLER_SEVEN);
+        MAGNALIUM_CABINET.setGUI(CABINET_HANDLER_SEVEN);
+        PLATINUM_CABINET.setGUI(CABINET_HANDLER_EIGHT);
+        OSMIUM_CABINET.setGUI(CABINET_HANDLER_NINE);
+        for (int i = 0; i < 9; i++){
+            for (int j = 0; j < 9; ++j) {
+                if (i < 6){
+                    IRON_CABINET.getGui().add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
+                    WROUGHT_IRON_CABINET.getGui().add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
+                    BRASS_CABINET.getGui().add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
+                    CUPRONICKEL_CABINET.getGui().add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
+                }
+                if (i < 7){
+                    ELECTRUM_CABINET.getGui().add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
+                    GOLD_CABINET.getGui().add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
+                    SILVER_CABINET.getGui().add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
+                    MAGNALIUM_CABINET.getGui().add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
+                }
+                if (i < 8){
+                    PLATINUM_CABINET.getGui().add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
+                }
+                OSMIUM_CABINET.getGui().add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
+            }
+        }
 
         ALLOY_SMELTER.getGui().add(IT_IN, 35, 25).add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(ENERGY,80, 63);
         ASSEMBLER.getGui().add(IT_IN, 17, 16).add(IT_IN, 35, 16).add(IT_IN, 53, 16).add(IT_IN, 17, 34).add(IT_IN, 35, 34).add(IT_IN, 53, 34).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25)

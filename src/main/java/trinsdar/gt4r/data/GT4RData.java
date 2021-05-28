@@ -379,7 +379,6 @@ public class GT4RData {
     public static final ItemPipe<?> ITEM_PIPE_CUPRONICKEL = new ItemPipe<>(Ref.ID, Cupronickel).sizes(PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(0, 0, 0, 1, 2, 4);
     public static final ItemPipe<?> ITEM_PIPE_ELECTRUM = new ItemPipe<>(Ref.ID, Electrum).sizes(PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(0, 0, 0, 2, 4, 8);
     public static final ItemPipe<?> ITEM_PIPE_MAGNALIUM = new ItemPipe<>(Ref.ID, Magnalium).sizes(PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(0, 0, 0, 2, 4, 8);
-    public static final ItemPipe<?> ITEM_PIPE_WROUGHT_IRON = new ItemPipe<>(Ref.ID, WroughtIron).sizes(PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(0, 0, 0, 2, 3, 4);
     public static final ItemPipe<?> ITEM_PIPE_PLATINUM = new ItemPipe<>(Ref.ID, Platinum).sizes(PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(0, 0, 0, 4, 8, 16);
     public static final ItemPipe<?> ITEM_PIPE_OSMIUM = new ItemPipe<>(Ref.ID, Osmium).sizes(PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(0, 0, 0, 8, 16, 32);
     public static final ItemPipe<?> ITEM_PIPE_HC = new ItemPipe<>(Ref.ID, HighCapacity).sizes(PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(64);

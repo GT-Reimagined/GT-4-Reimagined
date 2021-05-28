@@ -42,13 +42,11 @@ import static net.minecraft.util.Direction.UP;
 import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
 import static trinsdar.gt4r.data.Materials.*;
 
-public class TileEntityDrum extends TileEntityMachine<TileEntityDrum> {
-    Material material;
+public class TileEntityDrum extends TileEntityMaterial<TileEntityDrum> {
     FluidStack drop = FluidStack.EMPTY;
     boolean output = false;
     public TileEntityDrum(MaterialMachine type) {
         super(type);
-        material = type.getMaterial();
         this.fluidHandler.set(() -> new DrumFluidHandler(this));
     }
 

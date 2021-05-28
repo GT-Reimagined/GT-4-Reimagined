@@ -24,9 +24,12 @@ repositories {
     mavenCentral()
     maven { url = 'https://maven.minecraftforge.net/' }
     maven { url 'http://dvs1.progwml6.com/files/maven' }
-    maven { url 'https://jitpack.io' }
+    //maven { url 'https://jitpack.io' }
     maven {
         url = "https://www.cursemaven.com"
+    }
+    maven {
+        url "https://maven.tterrag.com/"
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
@@ -86,7 +89,7 @@ minecraft {
     mappings channel: 'snapshot', version: "${mappings_version}"
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 
-    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+    //accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     // Default run configurations.
     // These can be tweaked, removed, or duplicated as needed.
@@ -173,6 +176,7 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:world_edit-225608:3172951")
     runtimeOnly fg.deobf("curse.maven:spartan_weaponry-278141:3164046")
     runtimeOnly fg.deobf("curse.maven:top-245211:${top_file}")
+    runtimeOnly fg.deobf("curse.maven:mmmm-225738:3279930")
 
     if (findProject(':AntimatterAPI') != null) {
         implementation project(':AntimatterAPI')

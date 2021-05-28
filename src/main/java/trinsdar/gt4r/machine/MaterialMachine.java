@@ -15,6 +15,7 @@ import net.minecraft.item.Item;
 import trinsdar.gt4r.block.BlockMachineMaterial;
 import trinsdar.gt4r.data.Textures;
 import trinsdar.gt4r.tile.single.TileEntityDrum;
+import trinsdar.gt4r.tile.single.TileEntityMaterial;
 
 import static muramasa.antimatter.machine.MachineFlag.CONFIGURABLE;
 import static muramasa.antimatter.machine.MachineFlag.COVERABLE;
@@ -26,12 +27,10 @@ public class MaterialMachine extends Machine<MaterialMachine> {
     public MaterialMachine(String domain, String id, Material material, Object... data) {
         super(domain, id, data);
         this.material = material;
-        setTile(() -> new TileEntityDrum(this));
+        setTile(() -> new TileEntityMaterial<>(this));
         addFlags(FLUID, COVERABLE, CONFIGURABLE);
         covers((ICover[]) null);
         frontCovers();
-        baseTexture = Textures.DRUM_HANDLER;
-        overlayTextures = Textures.DRUM_OVERLAY_HANDLER;
     }
 
     public Material getMaterial() {

@@ -68,12 +68,12 @@ public class Textures {
     };
 
     public static final ITextureHandler DRUM_HANDLER = (m, t) -> new Texture[] {
-            new Texture(Ref.ID, "block/machine/base/drum_bottom"),
-            new Texture(Ref.ID, "block/machine/base/drum_top"),
-            new Texture(Ref.ID, "block/machine/base/drum_side"),
-            new Texture(Ref.ID, "block/machine/base/drum_side"),
-            new Texture(Ref.ID, "block/machine/base/drum_side"),
-            new Texture(Ref.ID, "block/machine/base/drum_side"),
+            new Texture(Ref.ID, "block/machine/base/drum/bottom"),
+            new Texture(Ref.ID, "block/machine/base/drum/top"),
+            new Texture(Ref.ID, "block/machine/base/drum/side"),
+            new Texture(Ref.ID, "block/machine/base/drum/side"),
+            new Texture(Ref.ID, "block/machine/base/drum/side"),
+            new Texture(Ref.ID, "block/machine/base/drum/side"),
     };
 
     public static final IOverlayTexturer DRUM_OVERLAY_HANDLER = (type, state) -> new Texture[] {
@@ -83,6 +83,24 @@ public class Textures {
             new Texture(Ref.ID, "block/machine/overlay/drum/side"),
             new Texture(Ref.ID, "block/machine/overlay/drum/side"),
             new Texture(Ref.ID, "block/machine/overlay/drum/side"),
+    };
+
+    public static final ITextureHandler CABINET_HANDLER = (m, t) -> new Texture[] {
+            new Texture(Ref.ID, "block/machine/base/cabinet/bottom"),
+            new Texture(Ref.ID, "block/machine/base/cabinet/top"),
+            new Texture(Ref.ID, "block/machine/base/cabinet/front"),
+            new Texture(Ref.ID, "block/machine/base/cabinet/back"),
+            new Texture(Ref.ID, "block/machine/base/cabinet/side"),
+            new Texture(Ref.ID, "block/machine/base/cabinet/side"),
+    };
+
+    public static final IOverlayTexturer CABINET_OVERLAY_HANDLER = (type, state) -> new Texture[] {
+            new Texture(Ref.ID, "block/machine/overlay/cabinet/bottom"),
+            new Texture(Ref.ID, "block/machine/overlay/cabinet/top"),
+            new Texture(Ref.ID, "block/machine/overlay/cabinet/front"),
+            new Texture(Ref.ID, "block/machine/overlay/cabinet/back"),
+            new Texture(Ref.ID, "block/machine/overlay/cabinet/side"),
+            new Texture(Ref.ID, "block/machine/overlay/cabinet/side"),
     };
 
     public static final ITextureHandler MULTI_HANDLER = (m, t) -> m.getTiers().size() > 1 ? new Texture[]{new Texture(Ref.ID, "block/machine/base/" + m.getId() + "_" + t.getId())} : new Texture[]{new Texture(Ref.ID, "block/machine/base/" + m.getId())};

@@ -1,4 +1,4 @@
-package trinsdar.gt4r.gui;
+package trinsdar.gt4r.gui.slots;
 
 import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.gui.slot.AbstractSlot;
