@@ -337,8 +337,8 @@ public class Guis {
         FUSION_MATERIAL_INJECTOR.getGui().add(FL_IN, 79, 34).add(CELL_IN, 9, 22).add(CELL_OUT, 9, 58).add(IT_IN, 61, 34).add(IT_IN, 97, 34).add(IT_IN, 79, 16).add(IT_IN, 79, 52);
 
         if (side.isClient()){
-            BRONZE_WORKBENCH.getGui().addButton(136, 28, 16, 16, NO_OVERLAY, "Export Crafting stacks to storage");
-            BRONZE_WORKBENCH.getGui().addButton(154, 28, 16, 16, NO_OVERLAY, "Export Crafting stacks to player");
+            BRONZE_WORKBENCH.getGui().addButton(136, 28, 16, 16, NO_OVERLAY);
+            BRONZE_WORKBENCH.getGui().addButton(154, 28, 16, 16, NO_OVERLAY);
             IRON_WORKBENCH.getGui().addButton(136, 28, 16, 16, NO_OVERLAY);
             IRON_WORKBENCH.getGui().addButton(154, 28, 16, 16, NO_OVERLAY);
             ALUMINIUM_WORKBENCH.getGui().addButton(136, 28, 16, 16, NO_OVERLAY);
