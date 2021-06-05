@@ -19,6 +19,7 @@ import trinsdar.gt4r.tile.single.TileEntityQuantumTank;
 import trinsdar.gt4r.tile.single.TileEntitySteamMachine;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.tile.multi.*;
+import trinsdar.gt4r.tile.single.TileEntityWorkbench;
 
 
 import static muramasa.antimatter.Data.*;
@@ -120,6 +121,12 @@ public class Machines {
     public static MaterialMachine MAGNALIUM_CABINET = new MaterialMachine(Ref.ID, "magnalium_cabinet", Materials.Magnalium, LV, Textures.CABINET_HANDLER, Textures.CABINET_OVERLAY_HANDLER, ITEM, GUI);
     public static MaterialMachine PLATINUM_CABINET = new MaterialMachine(Ref.ID, "platinum_cabinet", Materials.Platinum, LV, Textures.CABINET_HANDLER, Textures.CABINET_OVERLAY_HANDLER, ITEM, GUI);
     public static MaterialMachine OSMIUM_CABINET = new MaterialMachine(Ref.ID, "osmium_cabinet", Materials.Osmium, LV, Textures.CABINET_HANDLER, Textures.CABINET_OVERLAY_HANDLER, ITEM, GUI);
+
+    public static MaterialMachine BRONZE_WORKBENCH = new MaterialMachine(Ref.ID, "bronze_workbench", Materials.Bronze, LV, Textures.WORKBENCH_HANDLER, Textures.WORKBENCH_OVERLAY_HANDLER, ITEM, GUI).setTile(m -> () -> new TileEntityWorkbench(m));
+    public static MaterialMachine IRON_WORKBENCH = new MaterialMachine(Ref.ID, "iron_workbench", Materials.Iron, LV, Textures.WORKBENCH_HANDLER, Textures.WORKBENCH_OVERLAY_HANDLER, ITEM, GUI).setTile(m -> () -> new TileEntityWorkbench(m));
+    public static MaterialMachine ALUMINIUM_WORKBENCH = new MaterialMachine(Ref.ID, "aluminium_workbench", Materials.Aluminium, LV, Textures.WORKBENCH_HANDLER, Textures.WORKBENCH_OVERLAY_HANDLER, ITEM, GUI).setTile(m -> () -> new TileEntityWorkbench(m));
+    public static MaterialMachine IRON_CHARGING_WORKBENCH = new MaterialMachine(Ref.ID, "iron_charging_workbench", Materials.Iron, HV, Textures.WORKBENCH_HANDLER, Textures.CHARGING_WORKBENCH_OVERLAY_HANDLER, ITEM, GUI, ENERGY).setTile(m -> () -> new TileEntityWorkbench(m));
+    public static MaterialMachine ALUMINIUM_CHARGING_WORKBENCH = new MaterialMachine(Ref.ID, "aluminium_charging_workbench", Materials.Aluminium, HV, Textures.WORKBENCH_HANDLER, Textures.CHARGING_WORKBENCH_OVERLAY_HANDLER, ITEM, GUI, ENERGY).setTile(m -> () -> new TileEntityWorkbench(m));
 
     public static GeneratorMachine STEAM_TURBINE = new GeneratorMachine(Ref.ID, "steam_turbine", STEAM_FUELS, LV, GUI, ITEM, FLUID, GENERATOR, CELL, Textures.TIER_HANDLER).covers(COVERNONE,COVERNONE,COVERNONE,COVERNONE,COVERNONE, COVER_DYNAMO_OLD);
     public static GeneratorMachine GAS_TURBINE = new GeneratorMachine(Ref.ID, "gas_turbine", GAS_FUELS, LV, GUI, FLUID, GENERATOR, CELL, ITEM, Textures.TIER_HANDLER).covers(COVERNONE,COVERNONE,COVERNONE,COVERNONE,COVERNONE, COVER_DYNAMO_OLD);

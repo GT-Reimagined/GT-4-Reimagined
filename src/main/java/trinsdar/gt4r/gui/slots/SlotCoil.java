@@ -13,7 +13,7 @@ import trinsdar.gt4r.tile.multi.TileEntityIndustrialBlastFurnace;
 import javax.annotation.Nonnull;
 
 public class SlotCoil extends AbstractSlot {
-    public SlotCoil(SlotType<? extends AbstractSlot> type, TileEntityMachine<?> tile, IItemHandler stackHandler, int index, int xPosition, int yPosition) {
+    public SlotCoil(SlotType<?> type, TileEntityMachine<?> tile, IItemHandler stackHandler, int index, int xPosition, int yPosition) {
         super(type, tile, stackHandler, index, xPosition, yPosition);
     }
 

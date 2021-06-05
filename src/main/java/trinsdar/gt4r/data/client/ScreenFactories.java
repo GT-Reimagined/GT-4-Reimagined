@@ -4,11 +4,13 @@ import muramasa.antimatter.gui.container.ContainerBasicMachine;
 import muramasa.antimatter.gui.container.ContainerMultiMachine;
 import net.minecraft.client.gui.ScreenManager;
 import trinsdar.gt4r.gui.ContainerCabinet;
+import trinsdar.gt4r.gui.ContainerWorkbench;
 import trinsdar.gt4r.gui.screen.ScreenCabinet;
 import trinsdar.gt4r.gui.screen.ScreenCoalBoiler;
 import trinsdar.gt4r.gui.screen.ScreenDistillationTower;
 import trinsdar.gt4r.gui.screen.ScreenFusionReactor;
 import trinsdar.gt4r.gui.screen.ScreenIBF;
+import trinsdar.gt4r.gui.screen.ScreenWorkbench;
 
 public class ScreenFactories {
     public final static ScreenManager.IScreenFactory SCREEN_IBF = (a, b, c) -> new ScreenIBF((ContainerBasicMachine) a,b,c);
@@ -19,4 +21,5 @@ public class ScreenFactories {
     public final static ScreenManager.IScreenFactory SCREEN_CABINET_SEVEN = (a, b, c) -> new ScreenCabinet.ScreenCabinetSeven<>((ContainerCabinet) a,b,c);
     public final static ScreenManager.IScreenFactory SCREEN_CABINET_EIGHT = (a, b, c) -> new ScreenCabinet.ScreenCabinetEight<>((ContainerCabinet) a,b,c);
     public final static ScreenManager.IScreenFactory SCREEN_CABINET_NINE = (a, b, c) -> new ScreenCabinet.ScreenCabinetNine<>((ContainerCabinet) a,b,c);
+    public final static ScreenManager.IScreenFactory SCREEN_WORKBENCH = (a, b, c) -> new ScreenWorkbench<>((ContainerWorkbench) a,b,c);
 }

@@ -103,6 +103,33 @@ public class Textures {
             new Texture(Ref.ID, "block/machine/overlay/cabinet/side"),
     };
 
+    public static final ITextureHandler WORKBENCH_HANDLER = (m, t) -> new Texture[] {
+            new Texture(Ref.ID, "block/machine/base/workbench/bottom"),
+            new Texture(Ref.ID, "block/machine/base/workbench/top"),
+            new Texture(Ref.ID, "block/machine/base/workbench/front"),
+            new Texture(Ref.ID, "block/machine/base/workbench/back"),
+            new Texture(Ref.ID, "block/machine/base/workbench/side"),
+            new Texture(Ref.ID, "block/machine/base/workbench/side"),
+    };
+
+    public static final IOverlayTexturer WORKBENCH_OVERLAY_HANDLER = (type, state) -> new Texture[] {
+            new Texture(Ref.ID, "block/machine/overlay/workbench/bottom"),
+            new Texture(Ref.ID, "block/machine/overlay/workbench/top"),
+            new Texture(Ref.ID, "block/machine/overlay/workbench/front"),
+            new Texture(Ref.ID, "block/machine/overlay/workbench/back"),
+            new Texture(Ref.ID, "block/machine/overlay/workbench/side"),
+            new Texture(Ref.ID, "block/machine/overlay/workbench/side"),
+    };
+
+    public static final IOverlayTexturer CHARGING_WORKBENCH_OVERLAY_HANDLER = (type, state) -> new Texture[] {
+            new Texture(Ref.ID, "block/machine/overlay/charging_workbench/bottom"),
+            new Texture(Ref.ID, "block/machine/overlay/charging_workbench/top"),
+            new Texture(Ref.ID, "block/machine/overlay/charging_workbench/front"),
+            new Texture(Ref.ID, "block/machine/overlay/charging_workbench/back"),
+            new Texture(Ref.ID, "block/machine/overlay/charging_workbench/side"),
+            new Texture(Ref.ID, "block/machine/overlay/charging_workbench/side"),
+    };
+
     public static final ITextureHandler MULTI_HANDLER = (m, t) -> m.getTiers().size() > 1 ? new Texture[]{new Texture(Ref.ID, "block/machine/base/" + m.getId() + "_" + t.getId())} : new Texture[]{new Texture(Ref.ID, "block/machine/base/" + m.getId())};
 
     public static final Texture[] LARGE_TURBINE = new Texture[] {

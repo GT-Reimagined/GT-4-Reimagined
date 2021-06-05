@@ -17,7 +17,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.client.ScreenFactories;
+import trinsdar.gt4r.gui.ButtonOverlays;
 import trinsdar.gt4r.gui.ContainerCabinet;
+import trinsdar.gt4r.gui.ContainerWorkbench;
 import trinsdar.gt4r.tile.multi.TileEntityDistillationTower;
 import trinsdar.gt4r.tile.multi.TileEntityFusionReactor;
 import trinsdar.gt4r.tile.multi.TileEntityIndustrialBlastFurnace;
@@ -30,7 +32,7 @@ import static muramasa.antimatter.machine.Tier.*;
 import static trinsdar.gt4r.data.GT4RData.COVER_CONVEYOR;
 import static trinsdar.gt4r.data.GT4RData.COVER_PUMP;
 import static trinsdar.gt4r.data.Machines.*;
-import static trinsdar.gt4r.data.SlotTypes.DISPLAY;
+import static trinsdar.gt4r.data.SlotTypes.*;
 import static trinsdar.gt4r.gui.ButtonOverlays.*;
 import static trinsdar.gt4r.gui.ButtonOverlays.EXPORT;
 import static trinsdar.gt4r.gui.ButtonOverlays.IMPORT;
@@ -48,6 +50,9 @@ public class Guis {
             return new ResourceLocation(loc.getNamespace(), "textures/gui/" + loc.getPath() + ".png");
         }
     }.setPadding(0, 0, 0, 0).add(IT_IN, 17, 16).add(IT_IN, 35, 16).add(IT_IN, 53, 16).add(IT_IN, 17, 34).add(IT_IN, 35, 34).add(IT_IN, 53, 34).add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 142, 16).add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(IT_OUT, 143, 34);
+
+    public static GuiData WORKBENCH = new GuiData("gt4r","workbench");
+    public static GuiData CHARGING_WORKBENCH = new GuiData("gt4r","charging_workbench");
 
     public static MenuHandlerMachine<TileEntityCoalBoiler,? extends ContainerMachine> COAL_BOILER_MENU_HANDLER = new MenuHandlerMachine(Ref.ID, "container_coal_boiler") {
         @Override
@@ -141,20 +146,63 @@ public class Guis {
         }
     };
 
+    public static MenuHandlerMachine<? extends TileEntityMaterial, ? extends ContainerWorkbench> WORKBENCH_HANDLER = new MenuHandlerMachine(Ref.ID, "container_workbench") {
+        @Override
+        public ContainerWorkbench getMenu(Object tile, PlayerInventory playerInv, int windowId) {
+            return tile instanceof TileEntityMaterial ? new ContainerWorkbench((TileEntityMaterial) tile, playerInv, this, windowId) : null;
+        }
+
+        @Override
+        public Object screen() {
+            return ScreenFactories.SCREEN_WORKBENCH;
+        }
+    };
+
     public static void init(Dist side) {
 
         AntimatterAPI.registerJEICategory(RecipeMaps.ORE_BYPRODUCTS, Guis.ORE_BYPRODUCTS);
-//        GregTechAPI.registerJEICategory(RecipeMaps.SMELTING, Guis.MULTI_DISPLAY_COMPACT);
         AntimatterAPI.registerJEICategory(RecipeMaps.STEAM_FUELS, Guis.MULTI_DISPLAY_COMPACT, STEAM_TURBINE);
         AntimatterAPI.registerJEICategory(RecipeMaps.SEMIFLUID_FUELS, Guis.MULTI_DISPLAY_COMPACT, SEMIFLUID_GENERATOR);
         AntimatterAPI.registerJEICategory(RecipeMaps.GAS_FUELS, Guis.MULTI_DISPLAY_COMPACT, GAS_TURBINE);
         AntimatterAPI.registerJEICategory(RecipeMaps.DIESEL_FUELS, Guis.MULTI_DISPLAY_COMPACT, DIESEL_GENERATOR);
         AntimatterAPI.registerJEICategory(RecipeMaps.HOT_FUELS, Guis.MULTI_DISPLAY_COMPACT, HEAT_EXCHANGER);
 
-        // extruder, chemical reactor, thermal centrifuge, all multiblocks
-
         //TODO changing slots of a machine in world, will crash from GTItemHandler.validateSlot()
 
+        for (int x = 0; x < 4; x++){
+            for (int y = 0; y < 4; y++){
+                WORKBENCH.add(STORAGE, 8 + (x * 18), 8 + (y * 18));
+                CHARGING_WORKBENCH.add(STORAGE, 8 + (x * 18), 8 + (y * 18));
+            }
+        }
+        for (int y = 0; y < 3; y++){
+            for (int x = 0; x < 3; x++){
+                WORKBENCH.add(CRAFTING, 82 + (x * 18), 28 + (y * 18));
+                CHARGING_WORKBENCH.add(CRAFTING, 82 + (x * 18), 28 + (y * 18));
+            }
+        }
+        for (int x = 0; x < 5; x++){
+            WORKBENCH.add(TOOLS, 82 + (x * 18), 8);
+            CHARGING_WORKBENCH.add(TOOL_CHARGE, 82 + (x * 18), 8);
+        }
+        WORKBENCH.add(PARK, 154, 46);
+        CHARGING_WORKBENCH.add(PARK, 154, 46);
+        if (side.isClient()){
+            WORKBENCH.addButton(136, 28, 16, 16, NO_OVERLAY, "Export Crafting stacks to storage");
+            WORKBENCH.addButton(154, 28, 16, 16, NO_OVERLAY, "Export Crafting stacks to player");
+            CHARGING_WORKBENCH.addButton(136, 28, 16, 16, NO_OVERLAY);
+            CHARGING_WORKBENCH.addButton(154, 28, 16, 16, NO_OVERLAY);
+        }
+        BRONZE_WORKBENCH.setGUI(WORKBENCH_HANDLER);
+        IRON_WORKBENCH.setGUI(WORKBENCH_HANDLER);
+        ALUMINIUM_WORKBENCH.setGUI(WORKBENCH_HANDLER);
+        IRON_CHARGING_WORKBENCH.setGUI(WORKBENCH_HANDLER);
+        ALUMINIUM_CHARGING_WORKBENCH.setGUI(WORKBENCH_HANDLER);
+        BRONZE_WORKBENCH.getGui().add(WORKBENCH);
+        IRON_WORKBENCH.getGui().add(WORKBENCH);
+        ALUMINIUM_WORKBENCH.getGui().add(WORKBENCH);
+        IRON_CHARGING_WORKBENCH.getGui().add(CHARGING_WORKBENCH);
+        ALUMINIUM_CHARGING_WORKBENCH.getGui().add(CHARGING_WORKBENCH);
         COAL_BOILER.setGUI(COAL_BOILER_MENU_HANDLER);
         FUSION_REACTOR.setGUI(FUSION_MENU_HANDLER);
         DISTILLATION_TOWER.setGUI(DISTILLATION_MENU_HANDLER);
@@ -289,6 +337,16 @@ public class Guis {
         FUSION_MATERIAL_INJECTOR.getGui().add(FL_IN, 79, 34).add(CELL_IN, 9, 22).add(CELL_OUT, 9, 58).add(IT_IN, 61, 34).add(IT_IN, 97, 34).add(IT_IN, 79, 16).add(IT_IN, 79, 52);
 
         if (side.isClient()){
+            BRONZE_WORKBENCH.getGui().addButton(136, 28, 16, 16, NO_OVERLAY, "Export Crafting stacks to storage");
+            BRONZE_WORKBENCH.getGui().addButton(154, 28, 16, 16, NO_OVERLAY, "Export Crafting stacks to player");
+            IRON_WORKBENCH.getGui().addButton(136, 28, 16, 16, NO_OVERLAY);
+            IRON_WORKBENCH.getGui().addButton(154, 28, 16, 16, NO_OVERLAY);
+            ALUMINIUM_WORKBENCH.getGui().addButton(136, 28, 16, 16, NO_OVERLAY);
+            ALUMINIUM_WORKBENCH.getGui().addButton(154, 28, 16, 16, NO_OVERLAY);
+            IRON_CHARGING_WORKBENCH.getGui().addButton(136, 28, 16, 16, NO_OVERLAY);
+            IRON_CHARGING_WORKBENCH.getGui().addButton(154, 28, 16, 16, NO_OVERLAY);
+            ALUMINIUM_CHARGING_WORKBENCH.getGui().addButton(136, 28, 16, 16, NO_OVERLAY);
+            ALUMINIUM_CHARGING_WORKBENCH.getGui().addButton(154, 28, 16, 16, NO_OVERLAY);
             ButtonBody[][] overlays = new ButtonBody[][]{{IMPORT, IMPORT_CONDITIONAL, IMPORT_INVERT_CONDITIONAL, EXPORT, EXPORT_CONDITIONAL, EXPORT_INVERT_CONDITIONAL}, {IMPORT_EXPORT, IMPORT_EXPORT_CONDITIONAL, IMPORT_EXPORT_INVERT_CONDITIONAL, EXPORT_IMPORT, EXPORT_IMPORT_CONDITIONAL, EXPORT_IMPORT_INVERT_CONDITIONAL}};
 
             for (int x = 0; x < 6; x++){
