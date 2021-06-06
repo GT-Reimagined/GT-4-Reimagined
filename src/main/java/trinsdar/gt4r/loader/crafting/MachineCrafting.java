@@ -171,5 +171,11 @@ public class MachineCrafting {
         CABINET.all().forEach(m -> {
             provider.addItemRecipe(output, Ref.ID, "cabinet_" + m.getId(), "machines", "has_chest", provider.hasSafeItem(Tags.Items.CHESTS_WOODEN), Machine.get(m.getId() + "_cabinet").getItem(LV), of('P', PLATE.getMaterialTag(m), 'C', Tags.Items.CHESTS_WOODEN), "PPP", "CPC", "PPP");
         });
+        WORKBENCH.all().forEach(m -> {
+            provider.addItemRecipe(output, Ref.ID, "workbench_" + m.getId(), "machines", "has_chest", provider.hasSafeItem(Tags.Items.CHESTS_WOODEN), Machine.get(m.getId() + "_workbench").getItem(LV), of('P', PLATE.getMaterialTag(m), 'C', Tags.Items.CHESTS_WOODEN, 'c', Items.CRAFTING_TABLE, 'S', SCREWDRIVER.getTag()), "PSP", "PcP", "PCP");
+        });
+        CHARGING_WORKBENCH.all().forEach(m -> {
+            provider.addItemRecipe(output, Ref.ID, "charging_workbench_" + m.getId(), "machines", "has_chest", provider.hasSafeItem(Tags.Items.CHESTS_WOODEN), Machine.get(m.getId() + "_charging_workbench").getItem(HV), of('P', PLATE.getMaterialTag(m), 'W', Machine.get(m.getId() + "_workbench").getItem(LV), 'c', CABLE_GOLD.getBlockItem(PipeSize.TINY), 'C', CIRCUITS_ADVANCED), "PCP", "PWP", "ccc");
+        });
     }
 }

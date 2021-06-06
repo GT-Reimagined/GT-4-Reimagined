@@ -71,6 +71,8 @@ public class Materials {
     public static MaterialTag FLINT_TAG = new MaterialTag("flint");
     public static MaterialTag SEMIFLUID = new MaterialTag("semifluid");
     public static MaterialTag CABINET = new MaterialTag("cabinet");
+    public static MaterialTag WORKBENCH = new MaterialTag("workbench");
+    public static MaterialTag CHARGING_WORKBENCH = new MaterialTag("charging_workbench");
 
 
     /** Elements **/
@@ -315,6 +317,8 @@ public class Materials {
         ELEC120.add(Emerald, Grossular, Clay, StainlessSteel, Sodalite, Bauxite, Obsidian, Pyrope, Uvarovite, Almandine, Andradite, Lazurite, Spessartine, PotassiumFeldspar, Biotite);
 
         CABINET.add(Iron, WroughtIron, Brass, Cupronickel, Electrum, Gold, Silver, Magnalium, Platinum, Osmium);
+        WORKBENCH.add(Bronze, Iron, Aluminium);
+        CHARGING_WORKBENCH.add(Iron, Aluminium);
 
         ELEC.add(ELEC30.all().toArray(new Material[0]));
         ELEC.add(ELEC60.all().toArray(new Material[0]));
