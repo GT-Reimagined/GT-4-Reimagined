@@ -10,8 +10,8 @@ import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
 
-public class SlotDisplay extends AbstractSlot {
-    public SlotDisplay(SlotType<?> type, TileEntityMachine<?> tile, IItemHandler stackHandler, int index, int xPosition, int yPosition) {
+public class SlotDisplay extends AbstractSlot<SlotDisplay> {
+    public SlotDisplay(SlotType<SlotDisplay> type, TileEntityMachine<?> tile, IItemHandler stackHandler, int index, int xPosition, int yPosition) {
         super(type, tile, stackHandler, index, xPosition, yPosition);
     }
 

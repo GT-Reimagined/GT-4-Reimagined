@@ -6,6 +6,7 @@ import muramasa.antimatter.cover.ICoverMode;
 import muramasa.antimatter.cover.ICoverModeHandler;
 import muramasa.antimatter.gui.event.GuiEvent;
 import muramasa.antimatter.gui.event.IGuiEvent;
+import net.minecraft.entity.player.PlayerEntity;
 import trinsdar.gt4r.Ref;
 
 public abstract class CoverBasicTransport extends BaseCover implements ICoverModeHandler {
@@ -21,7 +22,7 @@ public abstract class CoverBasicTransport extends BaseCover implements ICoverMod
     }
 
     @Override
-    public void onGuiEvent(CoverStack<?> stack, IGuiEvent event, int... data) {
+    public void onGuiEvent(CoverStack<?> stack, IGuiEvent event, PlayerEntity playerEntity, int... data) {
         if (event == GuiEvent.EXTRA_BUTTON){
             stack.getNbt().putInt("coverMode", getCoverMode(data[0]));
         }

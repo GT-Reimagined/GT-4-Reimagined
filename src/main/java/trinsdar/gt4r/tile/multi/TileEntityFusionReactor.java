@@ -5,6 +5,7 @@ import muramasa.antimatter.gui.event.IGuiEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 
 public class TileEntityFusionReactor extends TileEntityMultiMachine<TileEntityFusionReactor> {
@@ -40,8 +41,8 @@ public class TileEntityFusionReactor extends TileEntityMultiMachine<TileEntityFu
     }
 
     @Override
-    public void onGuiEvent(IGuiEvent event, int... data) {
-        super.onGuiEvent(event, data);
+    public void onGuiEvent(IGuiEvent event, PlayerEntity playerEntity, int... data) {
+        super.onGuiEvent(event, playerEntity, data);
         if (event == GuiEvent.EXTRA_BUTTON){
             if (data[0] == 0){
                 this.display = Display.REGULAR;

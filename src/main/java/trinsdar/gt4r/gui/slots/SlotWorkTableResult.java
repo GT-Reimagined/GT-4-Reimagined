@@ -1,6 +1,7 @@
 package trinsdar.gt4r.gui.slots;
 
 import muramasa.antimatter.capability.machine.MachineItemHandler;
+import muramasa.antimatter.gui.slot.IAntimatterSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.CraftResultInventory;
 import net.minecraft.inventory.CraftingInventory;
@@ -8,7 +9,7 @@ import net.minecraft.inventory.container.CraftingResultSlot;
 import net.minecraft.item.ItemStack;
 import trinsdar.gt4r.data.SlotTypes;
 
-public class SlotWorkTableResult extends CraftingResultSlot {
+public class SlotWorkTableResult extends CraftingResultSlot implements IAntimatterSlot {
     private final CraftingInventory craftMatrix;
     private final MachineItemHandler<?> projectTable;
     public SlotWorkTableResult(MachineItemHandler<?> table, PlayerEntity player, CraftingInventory craftingInventory, CraftResultInventory result, int slotIndex, int xPosition, int yPosition) {
