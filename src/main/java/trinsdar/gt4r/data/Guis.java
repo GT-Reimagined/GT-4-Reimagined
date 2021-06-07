@@ -169,8 +169,8 @@ public class Guis {
 
         //TODO changing slots of a machine in world, will crash from GTItemHandler.validateSlot()
 
-        for (int x = 0; x < 4; x++){
-            for (int y = 0; y < 4; y++){
+        for (int y = 0; y < 4; y++){
+            for (int x = 0; x < 4; x++){
                 WORKBENCH.add(STORAGE, 8 + (x * 18), 8 + (y * 18));
                 CHARGING_WORKBENCH.add(STORAGE, 8 + (x * 18), 8 + (y * 18));
             }
