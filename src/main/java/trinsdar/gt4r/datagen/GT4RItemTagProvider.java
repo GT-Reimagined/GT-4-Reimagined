@@ -50,6 +50,7 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.getOrCreateBuilder(GEM.getMaterialTag(Coal)).add(Items.COAL);
         this.getOrCreateBuilder(GEM.getMaterialTag(Charcoal)).add(Items.CHARCOAL);
         this.getOrCreateBuilder(DUST.getMaterialTag(Blaze)).add(Items.BLAZE_POWDER);
+        this.getOrCreateBuilder(BATTERIES_RE).add(BatteryRE);
         this.getOrCreateBuilder(BATTERIES_SMALL).add(BatterySmallSodium, BatterySmallCadmium, BatterySmallLithium);
         this.getOrCreateBuilder(BATTERIES_MEDIUM).add(BatteryMediumSodium, BatteryMediumCadmium, BatteryMediumLithium);
         this.getOrCreateBuilder(BATTERIES_LARGE).add(BatteryLargeSodium, BatteryLargeCadmium, BatteryLargeLithium, EnergyCrystal);

@@ -15,6 +15,7 @@ import muramasa.antimatter.tool.IAntimatterTool;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.CraftingInventory;
@@ -50,6 +51,7 @@ import trinsdar.gt4r.entity.SpearEntity;
 import trinsdar.gt4r.items.ItemIntCircuit;
 import trinsdar.gt4r.items.ItemMatch;
 import trinsdar.gt4r.items.ItemMixedMetal;
+import trinsdar.gt4r.items.ItemRockCutter;
 import trinsdar.gt4r.tree.BlockRubberLeaves;
 import trinsdar.gt4r.tree.BlockRubberLog;
 import trinsdar.gt4r.tree.BlockRubberSapling;
@@ -98,7 +100,25 @@ public class GT4RData {
         }
     });
 
+    public static final MaterialRecipe.Provider ROCK_CUTTER_BUILDER = MaterialRecipe.registerProvider("rock-cutter", id -> new MaterialRecipe.ItemBuilder() {
+
+        @Override
+        public ItemStack build(CraftingInventory inv, MaterialRecipe.Result mats) {
+            Tuple<Long, Long> battery = (Tuple<Long, Long>) mats.mats.get("battery");
+            ItemStack rockCutter = new ItemStack(RockCutter);
+            RockCutter.validateTag(rockCutter, battery.getA(), battery.getB());
+            rockCutter.addEnchantment(Enchantments.SILK_TOUCH, 1);
+            return rockCutter;
+        }
+
+        @Override
+        public Map<String, Object> getFromResult(@Nonnull ItemStack stack) {
+            return ImmutableMap.of();
+        }
+    });
+
     static {
+        PropertyIngredient.addGetter(CustomTags.BATTERIES_RE.getName(), GT4RData::getEnergy);
         PropertyIngredient.addGetter(CustomTags.BATTERIES_SMALL.getName(), GT4RData::getEnergy);
         PropertyIngredient.addGetter(CustomTags.BATTERIES_MEDIUM.getName(), GT4RData::getEnergy);
         PropertyIngredient.addGetter(CustomTags.BATTERIES_LARGE.getName(), GT4RData::getEnergy);
@@ -189,6 +209,8 @@ public class GT4RData {
     public static final BaseCover COVER_DYNAMO_OLD = new CoverDynamoOld("dynamo_old");
     public static final BaseCover COVER_DRAIN = new CoverDrain();
     public static final BaseCover COVER_STEAM_VENT = new CoverSteamVent();
+
+    public static ItemRockCutter RockCutter = new ItemRockCutter();
 
     public static ItemBasic<?> StickyResin = new ItemBasic<>(Ref.ID, "sticky_resin");
     public static ItemBasic<?> Plantball = new ItemBasic<>(Ref.ID, "plantball");

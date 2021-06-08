@@ -11,11 +11,13 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.ItemStack;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.CustomTags;
+import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.data.ToolTypes;
 
 import java.util.Collections;
 import java.util.Map;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 import static com.google.common.collect.ImmutableMap.of;
 import static muramasa.antimatter.Data.*;
@@ -27,11 +29,13 @@ import static trinsdar.gt4r.loader.crafting.CraftingHelper.of2;
 
 public class ToolCrafting {
     public static void loadRecipes(Consumer<IFinishedRecipe> output, AntimatterRecipeProvider provider){
-        //loadPoweredRecipes(output, provider);
+        loadPoweredRecipes(output, provider);
         loadOtherRecipes(output, provider);
     }
 
     private static void loadPoweredRecipes(Consumer<IFinishedRecipe> output, AntimatterRecipeProvider provider){
+        provider.addToolRecipe(ROCK_CUTTER_BUILDER.get("cutter"), output, Ref.ID, "rock_cutter_1", "rock_cutters", "has_diamond", provider.hasSafeItem(GEM.getMaterialTag(Diamond)), new ItemStack(RockCutter), of('D', DUST.getMaterialTag(Diamond), 'P', PropertyIngredient.builder("primary").mats(Titanium, TungstenSteel).types(PLATE).build(), 'R', PropertyIngredient.builder("primary").mats(Titanium, TungstenSteel).types(ROD).build(), 'C', CustomTags.CIRCUITS_BASIC, 'B', PropertyIngredient.builder("battery").itemTags(CustomTags.BATTERIES_RE).build()), "DR ", "DP ", "DCB");
+
         ICriterionInstance in = provider.hasSafeItem(SCREWDRIVER.getTag());
 
         IAntimatterTool drill_lv = AntimatterAPI.get(IAntimatterTool.class, "drill_lv");

@@ -173,7 +173,7 @@ public class MaterialSpear extends MaterialTool {
         return new SpearEntity(worldIn, player, stack);
     }
 
-    @Override
+    /*@Override
     public UseAction getUseAction(ItemStack stack) {
         return UseAction.SPEAR;
     }
@@ -181,7 +181,7 @@ public class MaterialSpear extends MaterialTool {
     @Override
     public int getUseDuration(ItemStack stack) {
         return 72000;
-    }
+    }*/
 
     public boolean canPlayerBreakBlockWhileHolding(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
         return !player.isCreative();

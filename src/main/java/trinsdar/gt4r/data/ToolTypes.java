@@ -8,6 +8,7 @@ import muramasa.antimatter.util.TagUtils;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.UseAction;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.ResourceLocation;
 import trinsdar.gt4r.Ref;
@@ -17,7 +18,7 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 public class ToolTypes {
-    public static AntimatterToolType SPEAR = new SpearToolType(Ref.ID, "spear_gt", 2, 1, 10, 3.0F, -2.9F);
+    public static AntimatterToolType SPEAR = new SpearToolType(Ref.ID, "spear_gt", 2, 1, 10, 3.0F, -2.9F).setUseAction(UseAction.SPEAR);
 
     public static void init(){
         //NOOP
