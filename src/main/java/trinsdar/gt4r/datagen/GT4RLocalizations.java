@@ -18,6 +18,7 @@ import trinsdar.gt4r.data.Machines;
 import trinsdar.gt4r.items.ItemIntCircuit;
 import net.minecraft.data.DataGenerator;
 import trinsdar.gt4r.items.ItemMatch;
+import trinsdar.gt4r.items.ItemPowerUnit;
 
 import static muramasa.antimatter.machine.Tier.MV;
 import static muramasa.antimatter.util.Utils.lowerUnderscoreToUpperSpaced;
@@ -51,6 +52,11 @@ public class GT4RLocalizations {
             AntimatterAPI.all(ItemMatch.class, domain).forEach(i -> {
                 String value = lowerUnderscoreToUpperSpaced(i.getId());
                 if (i == GT4RData.Lighter) value = value.concat(" (Full)");
+                add(i, value);
+            });
+            AntimatterAPI.all(ItemPowerUnit.class, domain).forEach(i -> {
+                String value = lowerUnderscoreToUpperSpaced(i.getId());
+                if (i.getId().startsWith("power_unit")) value = lowerUnderscoreToUpperSpacedRotated(i.getId());
                 add(i, value);
             });
             AntimatterAPI.all(ItemIntCircuit.class, domain).forEach(i -> add(i, "Integrated Circuit (" + i.circuitId + ")"));

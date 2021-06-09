@@ -21,6 +21,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.IItemProvider;
 import net.minecraft.util.Tuple;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
@@ -51,6 +52,7 @@ import trinsdar.gt4r.entity.SpearEntity;
 import trinsdar.gt4r.items.ItemIntCircuit;
 import trinsdar.gt4r.items.ItemMatch;
 import trinsdar.gt4r.items.ItemMixedMetal;
+import trinsdar.gt4r.items.ItemPowerUnit;
 import trinsdar.gt4r.items.ItemRockCutter;
 import trinsdar.gt4r.tree.BlockRubberLeaves;
 import trinsdar.gt4r.tree.BlockRubberLog;
@@ -72,10 +74,10 @@ public class GT4RData {
 
         @Override
         public ItemStack build(CraftingInventory inv, MaterialRecipe.Result mats) {
-            Material m = id.contains("jackhammer") ? NULL : id.contains("lv") ? StainlessSteel : id.contains("mv") ? Titanium : id.contains("hv") ? TungstenSteel : NULL;
+            Material m = (Material) mats.mats.get("secondary");
             Tuple<Long, Long> battery = (Tuple<Long, Long>) mats.mats.get("battery");
             IAntimatterTool type = AntimatterAPI.get(IAntimatterTool.class, id.replace('-', '_'));
-            return resolveStack(type, (Material) mats.mats.get("primary"), m, battery.getA(), battery.getB());
+            return resolveStack(type, (Material) mats.mats.get("primary"), m == null ? NULL : m, battery.getA(), battery.getB());
         }
 
         public ItemStack resolveStack(IAntimatterTool tool, Material primary, Material secondary, long startingEnergy, long maxEnergy) {
@@ -194,6 +196,22 @@ public class GT4RData {
         }
         //temp method till this behavior has a hotkey
         Data.DRILL.removeBehaviour("aoe_break");
+        Data.DRILL.setBrokenItems(ImmutableMap.of("drill_lv", i -> getBrokenItem(i, PowerUnitLV), "drill_mv", i -> getBrokenItem(i, PowerUnitMV), "drill_hv", i -> getBrokenItem(i, PowerUnitHV)));
+        Data.CHAINSAW.setBrokenItems(ImmutableMap.of("chainsaw_lv", i -> getBrokenItem(i, PowerUnitLV), "chainsaw_mv", i -> getBrokenItem(i, PowerUnitMV), "chainsaw_hv", i -> getBrokenItem(i, PowerUnitHV)));
+        Data.ELECTRIC_WRENCH.setBrokenItems(ImmutableMap.of("electric_wrench_lv", i -> getBrokenItem(i, PowerUnitLV), "electric_wrench_mv", i -> getBrokenItem(i, PowerUnitMV), "electric_wrench_hv", i -> getBrokenItem(i, PowerUnitHV)));
+        Data.BUZZSAW.setBrokenItems(ImmutableMap.of("buzzsaw_lv", i -> getBrokenItem(i, PowerUnitLV), "buzzsaw_mv", i -> getBrokenItem(i, PowerUnitMV), "buzzsaw_hv", i -> getBrokenItem(i, PowerUnitHV)));
+        Data.ELECTRIC_SCREWDRIVER.setBrokenItems(ImmutableMap.of("electric_screwdriver_lv", i -> getBrokenItem(i, SmallPowerUnit)));
+        Data.JACKHAMMER.setBrokenItems(ImmutableMap.of("jackhammer_lv", i -> getBrokenItem(i, SmallPowerUnit)));
+    }
+
+    private static ItemStack getBrokenItem(ItemStack tool, IItemProvider broken){
+        ItemStack powerUnit = new ItemStack(broken);
+        long maxEnergy = ((IAntimatterTool)tool.getItem()).getMaxEnergy(tool);
+        long startingEnergy = ((IAntimatterTool)tool.getItem()).getMaxEnergy(tool);
+        CompoundNBT dataTag = powerUnit.getOrCreateChildTag(muramasa.antimatter.Ref.TAG_TOOL_DATA);
+        dataTag.putLong(muramasa.antimatter.Ref.KEY_TOOL_DATA_ENERGY, startingEnergy);
+        dataTag.putLong(muramasa.antimatter.Ref.KEY_TOOL_DATA_MAX_ENERGY, maxEnergy);
+        return powerUnit;
     }
 
     public static void init(Dist side) {
@@ -220,6 +238,11 @@ public class GT4RData {
     public static ItemBasic<?> CoalBall = new ItemBasic<>(Ref.ID, "coal_ball");
     public static ItemBasic<?> CompressedCoalBall = new ItemBasic<>(Ref.ID, "compressed_coal_ball");
     public static ItemBasic<?> CoalChunk = new ItemBasic<>(Ref.ID, "coal_chunk");
+
+    public static ItemPowerUnit PowerUnitLV = new ItemPowerUnit(Ref.ID, "power_unit_lv", StainlessSteel);
+    public static ItemPowerUnit PowerUnitMV = new ItemPowerUnit(Ref.ID, "power_unit_mv", Titanium);
+    public static ItemPowerUnit PowerUnitHV = new ItemPowerUnit(Ref.ID, "power_unit_hv", TungstenSteel);
+    public static ItemPowerUnit SmallPowerUnit = new ItemPowerUnit(Ref.ID, "small_power_unit", StainlessSteel);
 
     public static ItemBasic<?> ComputerMonitor = new ItemBasic<>(Ref.ID, "computer_monitor").tip("Can be placed on machines as a cover");
     public static ItemCover ConveyorModule = new ItemCover(Ref.ID, COVER_CONVEYOR.getId()).tip("Can be placed on machines as a cover");
