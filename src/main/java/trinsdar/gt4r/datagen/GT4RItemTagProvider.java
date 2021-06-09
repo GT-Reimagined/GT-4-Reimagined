@@ -54,6 +54,10 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.getOrCreateBuilder(BATTERIES_SMALL).add(BatterySmallSodium, BatterySmallCadmium, BatterySmallLithium);
         this.getOrCreateBuilder(BATTERIES_MEDIUM).add(BatteryMediumSodium, BatteryMediumCadmium, BatteryMediumLithium);
         this.getOrCreateBuilder(BATTERIES_LARGE).add(BatteryLargeSodium, BatteryLargeCadmium, BatteryLargeLithium, EnergyCrystal);
+        this.getOrCreateBuilder(POWER_UNIT_LV).add(PowerUnitLV);
+        this.getOrCreateBuilder(POWER_UNIT_MV).add(PowerUnitMV);
+        this.getOrCreateBuilder(POWER_UNIT_HV).add(PowerUnitHV);
+        this.getOrCreateBuilder(POWER_UNIT_SMALL).add(SmallPowerUnit);
         this.getOrCreateBuilder(TagUtils.getForgeItemTag("stone_ores/iron")).add(Items.IRON_ORE);
         this.getOrCreateBuilder(TagUtils.getForgeItemTag("stone_ores/gold")).add(Items.GOLD_ORE);
         this.getOrCreateBuilder(TagUtils.getForgeItemTag("stone_ores/coal")).add(Items.COAL_ORE);

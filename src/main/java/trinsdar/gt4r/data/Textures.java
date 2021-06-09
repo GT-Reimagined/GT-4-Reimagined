@@ -31,17 +31,13 @@ public class Textures {
     public static final Texture FUSION_IN = new Texture(Ref.ID, "block/machine/base/fusion_control_computer");
     public static final Texture FUSION_OUT = new Texture(Ref.ID, "block/machine/base/fusion_out");
 
-    public static final ITextureHandler TIER_HANDLER = (m, t) -> new Texture[]{
-            new Texture(Ref.ID, "block/machine/base/tiers/" + t.getId()),
-    };
-
     public static final ITextureHandler BOILER_HANDLER = (m, t) -> new Texture[] {
         new Texture(Ref.ID, "block/machine/base/brick"),
-        new Texture(Ref.ID, "block/machine/base/tiers/" + t.getId()),
-        new Texture(Ref.ID, "block/machine/base/tiers/bricked_" + t.getId()),
-        new Texture(Ref.ID, "block/machine/base/tiers/bricked_" + t.getId()),
-        new Texture(Ref.ID, "block/machine/base/tiers/bricked_" + t.getId()),
-        new Texture(Ref.ID, "block/machine/base/tiers/bricked_" + t.getId()),
+        new Texture(Ref.ID, "block/machine/base/" + t.getId()),
+        new Texture(Ref.ID, "block/machine/base/bricked_" + t.getId()),
+        new Texture(Ref.ID, "block/machine/base/bricked_" + t.getId()),
+        new Texture(Ref.ID, "block/machine/base/bricked_" + t.getId()),
+        new Texture(Ref.ID, "block/machine/base/bricked_" + t.getId()),
     };
 
     public static final ITextureHandler DUSTBIN_HANDLER = (m, t) -> new Texture[] {

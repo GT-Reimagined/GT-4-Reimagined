@@ -79,20 +79,7 @@ public class GT4RData {
             Material m = (Material) mats.mats.get("secondary");
             Tuple<Long, Long> battery = (Tuple<Long, Long>) mats.mats.get("battery");
             IAntimatterTool type = AntimatterAPI.get(IAntimatterTool.class, id.replace('-', '_'));
-            return resolveStack(type, (Material) mats.mats.get("primary"), m == null ? NULL : m, battery.getA(), battery.getB());
-        }
-
-        public ItemStack resolveStack(IAntimatterTool tool, Material primary, Material secondary, long startingEnergy, long maxEnergy) {
-            if (tool == null){
-                return ItemStack.EMPTY;
-            }
-            ItemStack stack = new ItemStack(tool.getItem());
-            tool.validateTag(stack, primary, secondary, startingEnergy, maxEnergy);
-            Map<Enchantment, Integer> mainEnchants = primary.getToolEnchantments();
-            if (!mainEnchants.isEmpty()) {
-                mainEnchants.entrySet().stream().filter(e -> e.getKey().canApply(stack)).forEach(e -> stack.addEnchantment(e.getKey(), e.getValue()));
-            }
-            return stack;
+            return type.resolveStack((Material) mats.mats.get("primary"), m == null ? NULL : m, battery.getA(), battery.getB());
         }
 
         @Override
@@ -101,6 +88,22 @@ public class GT4RData {
             Material primary = AntimatterAPI.get(Material.class, nbt.getString(muramasa.antimatter.Ref.KEY_TOOL_DATA_PRIMARY_MATERIAL));
             Material secondary = AntimatterAPI.get(Material.class, nbt.getString(muramasa.antimatter.Ref.KEY_TOOL_DATA_SECONDARY_MATERIAL));
             return ImmutableMap.of("primary", primary, "secondary", secondary, "energy", getEnergy(stack).getA(), "maxEnergy", getEnergy(stack).getB());
+        }
+    });
+
+    public static final MaterialRecipe.Provider UNIT_POWERED_TOOL_BUILDER = MaterialRecipe.registerProvider("powered-tool-from-unit", id -> new MaterialRecipe.ItemBuilder() {
+
+        @Override
+        public ItemStack build(CraftingInventory inv, MaterialRecipe.Result mats) {
+            Tuple<Long, Tuple<Long, Material>> t = (Tuple<Long, Tuple<Long, Material>>) mats.mats.get("secondary");
+            IAntimatterTool type = AntimatterAPI.get(IAntimatterTool.class, id.replace('-', '_'));
+            t.getB().getB();
+            return type.resolveStack((Material) mats.mats.get("primary"), t.getB().getB(), t.getA(), t.getB().getA());
+        }
+
+        @Override
+        public Map<String, Object> getFromResult(@Nonnull ItemStack stack) {
+            return ImmutableMap.of();
         }
     });
 
@@ -126,6 +129,10 @@ public class GT4RData {
         PropertyIngredient.addGetter(CustomTags.BATTERIES_SMALL.getName(), GT4RData::getEnergy);
         PropertyIngredient.addGetter(CustomTags.BATTERIES_MEDIUM.getName(), GT4RData::getEnergy);
         PropertyIngredient.addGetter(CustomTags.BATTERIES_LARGE.getName(), GT4RData::getEnergy);
+        PropertyIngredient.addGetter(CustomTags.POWER_UNIT_LV.getName(), GT4RData::getEnergyAndMat);
+        PropertyIngredient.addGetter(CustomTags.POWER_UNIT_MV.getName(), GT4RData::getEnergyAndMat);
+        PropertyIngredient.addGetter(CustomTags.POWER_UNIT_HV.getName(), GT4RData::getEnergyAndMat);
+        PropertyIngredient.addGetter(CustomTags.POWER_UNIT_SMALL.getName(), GT4RData::getEnergyAndMat);
         {
             ImmutableMap.Builder<Integer, RecipeIngredient> builder = ImmutableMap.builder();
             ImmutableMap.Builder<Integer, Item> builderItems = ImmutableMap.builder();
@@ -163,6 +170,16 @@ public class GT4RData {
             }
         }
         return new Tuple<>((long)0, (long)100000);
+    }
+
+    public static Tuple<Long, Tuple<Long, Material>> getEnergyAndMat(ItemStack stack){
+        if (stack.getItem() instanceof ItemPowerUnit){
+            ItemPowerUnit tool = (ItemPowerUnit) stack.getItem();
+            long currentEnergy = tool.getCurrentEnergy(stack);
+            long maxEnergy = tool.getMaxEnergy(stack);
+            return new Tuple<>(currentEnergy, new Tuple<>(maxEnergy, tool.getMaterial()));
+        }
+        return new Tuple<>((long)0, new Tuple<>((long)100000, NULL));
     }
 
     public static void buildTierMaps() {

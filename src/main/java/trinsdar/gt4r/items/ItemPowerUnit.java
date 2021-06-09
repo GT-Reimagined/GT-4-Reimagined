@@ -26,6 +26,10 @@ public class ItemPowerUnit extends ItemBasic<ItemPowerUnit> implements IColorHan
         this.material = material;
     }
 
+    public Material getMaterial() {
+        return material;
+    }
+
     @Override
     public int getItemColor(ItemStack stack, @Nullable Block block, int i) {
         return material.getRGB();

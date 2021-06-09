@@ -34,6 +34,10 @@ public class CustomTags {
     public static ITag.INamedTag<Item> BATTERIES_SMALL = getTag("batteries/small");
     public static ITag.INamedTag<Item> BATTERIES_MEDIUM = getTag("batteries/medium");
     public static ITag.INamedTag<Item> BATTERIES_LARGE = getTag("batteries/large");
+    public static ITag.INamedTag<Item> POWER_UNIT_LV = getTag("power_units/lv");
+    public static ITag.INamedTag<Item> POWER_UNIT_MV = getTag("power_units/mv");
+    public static ITag.INamedTag<Item> POWER_UNIT_HV = getTag("power_units/hv");
+    public static ITag.INamedTag<Item> POWER_UNIT_SMALL = getTag("power_units/small");
     public static ITag.INamedTag<Item> INGOTS_MIXED_METAL = getTag("ingots/mixed_metal");
     public static ITag.INamedTag<Item> RODS_STEELS = getTag("rods/steels");
 
