@@ -26,6 +26,8 @@ import net.minecraft.util.Tuple;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraftforge.api.distmarker.Dist;
+import tesseract.api.capability.TesseractGTCapability;
+import tesseract.api.gt.IGTNode;
 import trinsdar.gt4r.block.BlockCasing;
 import muramasa.antimatter.item.ItemBasic;
 import muramasa.antimatter.item.ItemBattery;
@@ -149,7 +151,7 @@ public class GT4RData {
 
     public static Tuple<Long, Long> getEnergy(ItemStack stack){
         if (stack.getItem() instanceof ItemBattery){
-            long energy = stack.getTag() != null ? stack.getTag().getLong(muramasa.antimatter.Ref.KEY_ITEM_ENERGY) : 0;
+            long energy = stack.getCapability(TesseractGTCapability.ENERGY_HANDLER_CAPABILITY).map(IGTNode::getEnergy).orElse((long)0);
             return new Tuple<>(energy, ((ItemBattery)stack.getItem()).getCapacity());
         }
         if (stack.getItem() instanceof IAntimatterTool){
@@ -206,11 +208,10 @@ public class GT4RData {
 
     private static ItemStack getBrokenItem(ItemStack tool, IItemProvider broken){
         ItemStack powerUnit = new ItemStack(broken);
-        long maxEnergy = ((IAntimatterTool)tool.getItem()).getMaxEnergy(tool);
-        long startingEnergy = ((IAntimatterTool)tool.getItem()).getMaxEnergy(tool);
+        Tuple<Long, Long> tuple = getEnergy(tool);
         CompoundNBT dataTag = powerUnit.getOrCreateChildTag(muramasa.antimatter.Ref.TAG_TOOL_DATA);
-        dataTag.putLong(muramasa.antimatter.Ref.KEY_TOOL_DATA_ENERGY, startingEnergy);
-        dataTag.putLong(muramasa.antimatter.Ref.KEY_TOOL_DATA_MAX_ENERGY, maxEnergy);
+        dataTag.putLong(muramasa.antimatter.Ref.KEY_TOOL_DATA_ENERGY, tuple.getA());
+        dataTag.putLong(muramasa.antimatter.Ref.KEY_TOOL_DATA_MAX_ENERGY, tuple.getB());
         return powerUnit;
     }
 
