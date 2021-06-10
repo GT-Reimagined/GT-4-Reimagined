@@ -126,6 +126,33 @@ public class Textures {
             new Texture(Ref.ID, "block/machine/overlay/charging_workbench/side"),
     };
 
+    public static final ITextureHandler LOCKER_HANDLER = (m, t) -> new Texture[] {
+            new Texture(Ref.ID, "block/machine/base/locker/bottom"),
+            new Texture(Ref.ID, "block/machine/base/locker/top"),
+            new Texture(Ref.ID, "block/machine/base/locker/front"),
+            new Texture(Ref.ID, "block/machine/base/locker/back"),
+            new Texture(Ref.ID, "block/machine/base/locker/side"),
+            new Texture(Ref.ID, "block/machine/base/locker/side"),
+    };
+
+    public static final IOverlayTexturer LOCKER_OVERLAY_HANDLER = (type, state) -> new Texture[] {
+            new Texture(Ref.ID, "block/machine/overlay/locker/bottom"),
+            new Texture(Ref.ID, "block/machine/overlay/locker/top"),
+            new Texture(Ref.ID, "block/machine/overlay/locker/front"),
+            new Texture(Ref.ID, "block/machine/overlay/locker/back"),
+            new Texture(Ref.ID, "block/machine/overlay/locker/side"),
+            new Texture(Ref.ID, "block/machine/overlay/locker/side"),
+    };
+
+    public static final IOverlayTexturer CHARGING_LOCKER_OVERLAY_HANDLER = (type, state) -> new Texture[] {
+            new Texture(Ref.ID, "block/machine/overlay/charging_locker/bottom"),
+            new Texture(Ref.ID, "block/machine/overlay/charging_locker/top"),
+            new Texture(Ref.ID, "block/machine/overlay/charging_locker/front"),
+            new Texture(Ref.ID, "block/machine/overlay/charging_locker/back"),
+            new Texture(Ref.ID, "block/machine/overlay/charging_locker/side"),
+            new Texture(Ref.ID, "block/machine/overlay/charging_locker/side"),
+    };
+
     public static final ITextureHandler MULTI_HANDLER = (m, t) -> m.getTiers().size() > 1 ? new Texture[]{new Texture(Ref.ID, "block/machine/base/" + m.getId() + "_" + t.getId())} : new Texture[]{new Texture(Ref.ID, "block/machine/base/" + m.getId())};
 
     public static final Texture[] LARGE_TURBINE = new Texture[] {

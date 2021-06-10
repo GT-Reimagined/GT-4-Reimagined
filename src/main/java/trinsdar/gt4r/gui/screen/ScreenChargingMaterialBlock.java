@@ -10,11 +10,11 @@ import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.gui.ContainerWorkbench;
 import trinsdar.gt4r.tile.single.TileEntityMaterial;
 
-public class ScreenWorkbench<T extends TileEntityMaterial<T>> extends ScreenMachine<T, ContainerWorkbench<T>> {
-    public ScreenWorkbench(ContainerWorkbench<T> container, PlayerInventory inv, ITextComponent name) {
+public class ScreenChargingMaterialBlock<T extends TileEntityMaterial<T>> extends ScreenMachine<T, ContainerWorkbench<T>> {
+    public ScreenChargingMaterialBlock(ContainerWorkbench<T> container, PlayerInventory inv, ITextComponent name, String location) {
         super(container, inv, name);
         boolean charged = container.getTile().has(MachineFlag.ENERGY);
-        gui = new ResourceLocation(Ref.ID, "textures/gui/machine/" + (charged ? "charging_" : "") + "workbench.png");
+        gui = new ResourceLocation(Ref.ID, "textures/gui/machine/" + (charged ? "charging_" : "") + location + ".png");
     }
 
     @Override

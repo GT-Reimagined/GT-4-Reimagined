@@ -53,6 +53,8 @@ public class Guis {
 
     public static GuiData WORKBENCH = new GuiData("gt4r","workbench");
     public static GuiData CHARGING_WORKBENCH = new GuiData("gt4r","charging_workbench");
+    public static GuiData LOCKER = new GuiData("gt4r","locker").add(STORAGE, 80, 8).add(STORAGE, 80, 8 + (18)).add(STORAGE, 80, 8 + (2 * 18)).add(STORAGE, 80, 8 + (3 * 18));
+    public static GuiData CHARGING_LOCKER = new GuiData("gt4r","charging_locker").add(ENERGY, 80, 8).add(ENERGY, 80, 8 + (18)).add(ENERGY, 80, 8 + (2 * 18)).add(ENERGY, 80, 8 + (3 * 18));
 
     public static MenuHandlerMachine<TileEntityCoalBoiler,? extends ContainerMachine> COAL_BOILER_MENU_HANDLER = new MenuHandlerMachine(Ref.ID, "container_coal_boiler") {
         @Override
@@ -158,6 +160,18 @@ public class Guis {
         }
     };
 
+    public static MenuHandlerMachine<? extends TileEntityMaterial, ? extends ContainerBasicMachine> LOCKER_HANDLER = new MenuHandlerMachine(Ref.ID, "container_locker") {
+        @Override
+        public ContainerBasicMachine getMenu(Object tile, PlayerInventory playerInv, int windowId) {
+            return tile instanceof TileEntityMaterial ? new ContainerBasicMachine<>((TileEntityMaterial) tile, playerInv, this, windowId) : null;
+        }
+
+        @Override
+        public Object screen() {
+            return ScreenFactories.SCREEN_LOCKER;
+        }
+    };
+
     public static void init(Dist side) {
 
         AntimatterAPI.registerJEICategory(RecipeMaps.ORE_BYPRODUCTS, Guis.ORE_BYPRODUCTS);
@@ -198,16 +212,25 @@ public class Guis {
         ALUMINIUM_WORKBENCH.setGUI(WORKBENCH_HANDLER);
         IRON_CHARGING_WORKBENCH.setGUI(WORKBENCH_HANDLER);
         ALUMINIUM_CHARGING_WORKBENCH.setGUI(WORKBENCH_HANDLER);
+        IRON_LOCKER.setGUI(LOCKER_HANDLER);
+        ALUMINIUM_LOCKER.setGUI(LOCKER_HANDLER);
+        IRON_CHARGING_LOCKER.setGUI(LOCKER_HANDLER);
+        ALUMINIUM_CHARGING_LOCKER.setGUI(LOCKER_HANDLER);
         BRONZE_WORKBENCH.getGui().add(WORKBENCH);
         IRON_WORKBENCH.getGui().add(WORKBENCH);
         ALUMINIUM_WORKBENCH.getGui().add(WORKBENCH);
         IRON_CHARGING_WORKBENCH.getGui().add(CHARGING_WORKBENCH);
         ALUMINIUM_CHARGING_WORKBENCH.getGui().add(CHARGING_WORKBENCH);
+        IRON_LOCKER.getGui().add(LOCKER);
+        ALUMINIUM_LOCKER.getGui().add(LOCKER);
+        IRON_CHARGING_LOCKER.getGui().add(CHARGING_LOCKER);
+        ALUMINIUM_CHARGING_LOCKER.getGui().add(CHARGING_LOCKER);
         COAL_BOILER.setGUI(COAL_BOILER_MENU_HANDLER);
         FUSION_REACTOR.setGUI(FUSION_MENU_HANDLER);
         DISTILLATION_TOWER.setGUI(DISTILLATION_MENU_HANDLER);
         BLAST_FURNACE.setGUI(IBF_MENU_HANDLER);
         IRON_CABINET.setGUI(CABINET_HANDLER_SIX);
+        ALUMINIUM_CABINET.setGUI(CABINET_HANDLER_SIX);
         WROUGHT_IRON_CABINET.setGUI(CABINET_HANDLER_SIX);
         BRASS_CABINET.setGUI(CABINET_HANDLER_SIX);
         CUPRONICKEL_CABINET.setGUI(CABINET_HANDLER_SIX);
@@ -221,6 +244,7 @@ public class Guis {
             for (int j = 0; j < 9; ++j) {
                 if (i < 6){
                     IRON_CABINET.getGui().add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
+                    ALUMINIUM_CABINET.getGui().add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
                     WROUGHT_IRON_CABINET.getGui().add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
                     BRASS_CABINET.getGui().add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
                     CUPRONICKEL_CABINET.getGui().add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));

@@ -190,6 +190,11 @@ public class GT4Reimagined extends AntimatterMod {
     }
 
     @Override
+    public int getPriority() {
+        return 800;
+    }
+
+    @Override
     public String getId() {
         return Ref.ID;
     }
