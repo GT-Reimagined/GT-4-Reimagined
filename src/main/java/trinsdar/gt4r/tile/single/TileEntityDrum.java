@@ -33,6 +33,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import static muramasa.antimatter.Data.ELECTRIC_WRENCH;
@@ -92,6 +93,16 @@ public class TileEntityDrum extends TileEntityMaterial<TileEntityDrum> {
 
     public boolean isOutput() {
         return output;
+    }
+
+    @Override
+    public List<String> getInfo() {
+        List<String> list = super.getInfo();
+        fluidHandler.ifPresent(f -> {
+            FluidStack stack = f.getInputTanks().getFluidInTank(0);
+            list.add("Fluid: " + (stack.isEmpty() ? "Empty" : stack.getAmount() + "mb of " + stack.getFluid().getAttributes().getDisplayName(stack)));
+        });
+        return list;
     }
 
     public static class DrumFluidHandler extends MachineFluidHandler<TileEntityDrum> {
