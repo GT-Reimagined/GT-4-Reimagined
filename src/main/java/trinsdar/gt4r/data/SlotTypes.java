@@ -4,16 +4,10 @@ import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.gui.slot.AbstractSlot;
 import muramasa.antimatter.machine.event.ContentEvent;
 import muramasa.antimatter.tool.IAntimatterTool;
-import net.minecraft.inventory.CraftResultInventory;
-import net.minecraftforge.items.SlotItemHandler;
 import tesseract.api.capability.TesseractGTCapability;
 import trinsdar.gt4r.gui.slots.SlotCoil;
 import trinsdar.gt4r.gui.slots.SlotCrafting;
 import trinsdar.gt4r.gui.slots.SlotDisplay;
-import trinsdar.gt4r.gui.slots.SlotWorkTableResult;
-import trinsdar.gt4r.machine.IBFItemHandler;
-import trinsdar.gt4r.machine.IFakeSlotHandler;
-import trinsdar.gt4r.machine.IStorageSlotHandler;
 
 public class SlotTypes {
     public static SlotType<SlotCoil> COIL = new SlotType<>("coil_bf", (type, t, i, d) -> new SlotCoil(type, t,t.itemHandler.map(m -> m.getHandler(type)).orElse(null), i, d.getX(), d.getY()), (t, i) -> true, ContentEvent.ITEM_INPUT_CHANGED);
