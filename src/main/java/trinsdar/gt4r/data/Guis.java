@@ -227,7 +227,7 @@ public class Guis {
         ALUMINIUM_CHARGING_LOCKER.getGui().add(CHARGING_LOCKER);
         COAL_BOILER.setGUI(COAL_BOILER_MENU_HANDLER);
         FUSION_REACTOR.setGUI(FUSION_MENU_HANDLER);
-        DISTILLATION_TOWER.setGUI(DISTILLATION_MENU_HANDLER);
+        //DISTILLATION_TOWER.setGUI(DISTILLATION_MENU_HANDLER);
         BLAST_FURNACE.setGUI(IBF_MENU_HANDLER);
         IRON_CABINET.setGUI(CABINET_HANDLER_SIX);
         ALUMINIUM_CABINET.setGUI(CABINET_HANDLER_SIX);
@@ -269,7 +269,7 @@ public class Guis {
         CANNER.getGui().add(IT_IN, 35, 25).add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(ENERGY,80, 63);
         COMPRESSOR.getGui().add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(ENERGY,80, 63);
         CUTTER.getGui().add(IT_IN, 53, 25).add(FL_IN, 53, 63).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25).add(ENERGY,80, 63);
-        FORGE_HAMMER.getGui().add(COMPRESSOR).setDir(BarDir.TOP);
+        FORGE_HAMMER.getGui().add(COMPRESSOR).setDir(BarDir.BOTTOM).setBarFill(false);
         FURNACE.getGui().add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(ENERGY,80, 63);
         EXTRACTOR.getGui().add(COMPRESSOR);
         EXTRUDER.getGui().add(ALLOY_SMELTER);
@@ -306,7 +306,7 @@ public class Guis {
         BLAST_FURNACE.getGui().add(IT_IN, 35, 16).add(IT_IN, 53, 16).add(IT_IN, 35, 34).add(IT_IN, 53, 34).add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(SlotTypes.COIL, 8, 63);
         PRIMITIVE_BLAST_FURNACE.getGui().add(IT_IN, 35, 16).add(IT_IN, 35, 34).add(IT_IN, 35, 52).add(IT_IN, 53, 16).add(IT_IN, 53, 34).add(IT_IN, 53, 52).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25).add(IT_OUT, 143, 25).setPadding(0, 0, 0, 0);
         FUSION_REACTOR.getGui().setEnablePlayerSlots(false);
-        DISTILLATION_TOWER.getGui().add(FL_IN, 62, 41).add(FL_OUT, 98, 59).add(FL_OUT, 98, 41).add(FL_OUT, 98, 23).add(FL_OUT, 98, 5).add(FL_OUT, 116, 23).add(FL_OUT, 116, 5).add(IT_OUT, 116, 41).add(IT_OUT, 116, 59).add(ENERGY, 62, 59);
+        DISTILLATION_TOWER.getGui().add(FL_IN, 62, 41).add(FL_OUT, 98, 59).add(FL_OUT, 98, 41).add(FL_OUT, 98, 23).add(FL_OUT, 98, 5).add(FL_OUT, 116, 23).add(FL_OUT, 116, 5).add(IT_OUT, 116, 41).add(IT_OUT, 116, 59).add(ENERGY, 62, 59).setDir(BarDir.TOP).setProgress(80, 4, 16, 72).setState(66, 26, 8, 8).setStateLocation(176, 108);
         VACUUM_FREEZER.getGui().add(COMPRESSOR);
         IMPLOSION_COMPRESSOR.getGui().add(ALLOY_SMELTER).add(IT_OUT, 125, 25);
         INDUSTRIAL_SAWMILL.getGui().add(ORE_WASHER);
@@ -333,7 +333,7 @@ public class Guis {
         STEAM_EXTRACTOR.getGui().add(STEEL, EXTRACTOR).add(STEEL, FL_IN, 53, 63);
         STEAM_MACERATOR.getGui().add(BRONZE, MACERATOR, LV).add(BRONZE, FL_IN, 53, 63);
         STEAM_MACERATOR.getGui().add(STEEL, MACERATOR, LV).add(STEEL, FL_IN, 53, 63);
-        STEAM_FORGE_HAMMER.getGui().add(BRONZE, FORGE_HAMMER).add(BRONZE, FL_IN, 53, 63);
+        STEAM_FORGE_HAMMER.getGui().add(BRONZE, FORGE_HAMMER).add(BRONZE, FL_IN, 53, 63).setDir(BarDir.BOTTOM).setBarFill(false);
 
         STEAM_TURBINE.getGui().add(BASIC_TANK);
         GAS_TURBINE.getGui().add(BASIC_TANK);

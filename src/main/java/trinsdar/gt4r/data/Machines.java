@@ -12,6 +12,7 @@ import trinsdar.gt4r.machine.StorageMachine;
 import trinsdar.gt4r.tile.single.TileEntityCoalBoiler;
 import trinsdar.gt4r.tile.single.TileEntityDrum;
 import trinsdar.gt4r.tile.single.TileEntityDustBin;
+import trinsdar.gt4r.tile.single.TileEntityForgeHammer;
 import trinsdar.gt4r.tile.single.TileEntityHeatExchanger;
 import trinsdar.gt4r.tile.single.TileEntityInfiniteFluid;
 import trinsdar.gt4r.tile.single.TileEntityLocker;
@@ -56,7 +57,7 @@ public class Machines {
     public static BasicMachine DISASSEMBLER = new BasicMachine(Ref.ID, "disassembler", DISASSEMBLING, GUI, ITEM, LV);
     public static BasicMachine MASS_FABRICATOR = new BasicMachine(Ref.ID, "mass_fabricator", MASS_FABRICATING, GUI, ITEM, FLUID, EV);
     public static BasicMachine REPLICATOR = new BasicMachine(Ref.ID, "replicator", REPLICATING, GUI, ITEM, FLUID, EV);
-    public static BasicMachine FORGE_HAMMER = new BasicMachine(Ref.ID, "forge_hammer", HAMMERING, GUI, ITEM, LV);
+    public static BasicMachine FORGE_HAMMER = new BasicMachine(Ref.ID, "forge_hammer", HAMMERING, GUI, ITEM, LV).setTile(m -> () -> new TileEntityForgeHammer(m));
     public static BasicMachine ORE_WASHER = new BasicMachine(Ref.ID, "ore_washer", ORE_WASHING, GUI, ITEM, FLUID, LV);
     public static BasicMachine THERMAL_CENTRIFUGE = new BasicMachine(Ref.ID, "thermal_centrifuge", THERMAL_CENTRIFUGING, GUI, ITEM, FLUID, MV);
     //public static BasicMachine UNIVERSAL_MACERATOR = new BasicMachine(Ref.ID, "universal_macerator", UNIVERSAL_MACERATING, GUI, ITEM, MV, Textures.TIER_HANDLER);
