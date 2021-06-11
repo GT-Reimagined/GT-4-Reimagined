@@ -104,13 +104,13 @@ public class Machines {
     public static TankMachine QUANTUM_TANK = new TankMachine(Ref.ID, "quantum_tank", GUI, CELL, MAX).setTile(m -> () -> new TileEntityQuantumTank(m)).frontCovers();
     public static StorageMachine QUANTUM_CHEST = new StorageMachine(Ref.ID, "quantum_chest", GUI, ITEM, MAX).setTile(m -> () -> new TileEntityQuantumChest(m));
 
-    public static MaterialMachine BRONZE_DRUM = new MaterialMachine(Ref.ID, "bronze_drum", Materials.Bronze, LV, Textures.DRUM_HANDLER, Textures.DRUM_OVERLAY_HANDLER, COVERABLE).setTile(m -> () -> new TileEntityDrum(m));
-    public static MaterialMachine STEEL_DRUM = new MaterialMachine(Ref.ID, "steel_drum", Materials.Steel, LV, Textures.DRUM_HANDLER, Textures.DRUM_OVERLAY_HANDLER, COVERABLE).setTile(m -> () -> new TileEntityDrum(m));
-    public static MaterialMachine STAINLESS_STEEL_DRUM = new MaterialMachine(Ref.ID, "stainless_steel_drum", Materials.StainlessSteel, LV, Textures.DRUM_HANDLER, Textures.DRUM_OVERLAY_HANDLER, COVERABLE).setTile(m -> () -> new TileEntityDrum(m));
-    public static MaterialMachine INVAR_DRUM = new MaterialMachine(Ref.ID, "invar_drum", Materials.Invar, LV, Textures.DRUM_HANDLER, Textures.DRUM_OVERLAY_HANDLER, COVERABLE).setTile(m -> () -> new TileEntityDrum(m));
-    public static MaterialMachine TUNGSTEN_DRUM = new MaterialMachine(Ref.ID, "tungsten_drum", Materials.Tungsten, LV, Textures.DRUM_HANDLER, Textures.DRUM_OVERLAY_HANDLER, COVERABLE).setTile(m -> () -> new TileEntityDrum(m));
-    public static MaterialMachine TUNGSTENSTEEL_DRUM = new MaterialMachine(Ref.ID, "tungstensteel_drum", Materials.TungstenSteel, LV, Textures.DRUM_HANDLER, Textures.DRUM_OVERLAY_HANDLER, COVERABLE).setTile(m -> () -> new TileEntityDrum(m));
-    public static MaterialMachine NETHERITE_DRUM = new MaterialMachine(Ref.ID, "netherite_drum", Materials.Netherite, LV, Textures.DRUM_HANDLER, Textures.DRUM_OVERLAY_HANDLER, COVERABLE).setTile(m -> () -> new TileEntityDrum(m));
+    public static MaterialMachine BRONZE_DRUM = new MaterialMachine(Ref.ID, "bronze_drum", Materials.Bronze, LV, Textures.DRUM_HANDLER, Textures.DRUM_OVERLAY_HANDLER, COVERABLE, FLUID).setTile(m -> () -> new TileEntityDrum(m));
+    public static MaterialMachine STEEL_DRUM = new MaterialMachine(Ref.ID, "steel_drum", Materials.Steel, LV, Textures.DRUM_HANDLER, Textures.DRUM_OVERLAY_HANDLER, COVERABLE, FLUID).setTile(m -> () -> new TileEntityDrum(m));
+    public static MaterialMachine STAINLESS_STEEL_DRUM = new MaterialMachine(Ref.ID, "stainless_steel_drum", Materials.StainlessSteel, LV, Textures.DRUM_HANDLER, Textures.DRUM_OVERLAY_HANDLER, COVERABLE, FLUID).setTile(m -> () -> new TileEntityDrum(m));
+    public static MaterialMachine INVAR_DRUM = new MaterialMachine(Ref.ID, "invar_drum", Materials.Invar, LV, Textures.DRUM_HANDLER, Textures.DRUM_OVERLAY_HANDLER, COVERABLE, FLUID).setTile(m -> () -> new TileEntityDrum(m));
+    public static MaterialMachine TUNGSTEN_DRUM = new MaterialMachine(Ref.ID, "tungsten_drum", Materials.Tungsten, LV, Textures.DRUM_HANDLER, Textures.DRUM_OVERLAY_HANDLER, COVERABLE, FLUID).setTile(m -> () -> new TileEntityDrum(m));
+    public static MaterialMachine TUNGSTENSTEEL_DRUM = new MaterialMachine(Ref.ID, "tungstensteel_drum", Materials.TungstenSteel, LV, Textures.DRUM_HANDLER, Textures.DRUM_OVERLAY_HANDLER, COVERABLE, FLUID).setTile(m -> () -> new TileEntityDrum(m));
+    public static MaterialMachine NETHERITE_DRUM = new MaterialMachine(Ref.ID, "netherite_drum", Materials.Netherite, LV, Textures.DRUM_HANDLER, Textures.DRUM_OVERLAY_HANDLER, COVERABLE, FLUID).setTile(m -> () -> new TileEntityDrum(m));
 
     public static MaterialMachine IRON_CABINET = new MaterialMachine(Ref.ID, "iron_cabinet", Materials.Iron, LV, Textures.CABINET_HANDLER, Textures.CABINET_OVERLAY_HANDLER, ITEM, GUI, COVERABLE);
     public static MaterialMachine ALUMINIUM_CABINET = new MaterialMachine(Ref.ID, "aluminium_cabinet", Materials.Aluminium, LV, Textures.CABINET_HANDLER, Textures.CABINET_OVERLAY_HANDLER, ITEM, GUI, COVERABLE);

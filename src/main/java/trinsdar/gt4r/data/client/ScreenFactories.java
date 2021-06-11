@@ -22,6 +22,6 @@ public class ScreenFactories {
     public final static ScreenManager.IScreenFactory SCREEN_CABINET_EIGHT = (a, b, c) -> new ScreenCabinet.ScreenCabinetEight<>((ContainerCabinet) a,b,c);
     public final static ScreenManager.IScreenFactory SCREEN_CABINET_NINE = (a, b, c) -> new ScreenCabinet.ScreenCabinetNine<>((ContainerCabinet) a,b,c);
     public final static ScreenManager.IScreenFactory SCREEN_WORKBENCH = (a, b, c) -> new ScreenChargingMaterialBlock<>((ContainerWorkbench) a,b,c, "workbench");
-    public final static ScreenManager.IScreenFactory SCREEN_LOCKER = (a, b, c) -> new ScreenChargingMaterialBlock<>((ContainerWorkbench) a,b,c, "locker");
+    public final static ScreenManager.IScreenFactory SCREEN_LOCKER = (a, b, c) -> new ScreenChargingMaterialBlock<>((ContainerBasicMachine) a,b,c, "locker");
 
 }

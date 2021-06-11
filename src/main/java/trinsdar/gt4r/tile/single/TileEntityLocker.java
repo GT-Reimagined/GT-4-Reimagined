@@ -1,6 +1,9 @@
 package trinsdar.gt4r.tile.single;
 
+import muramasa.antimatter.Antimatter;
+import muramasa.antimatter.capability.machine.MachineCoverHandler;
 import muramasa.antimatter.capability.machine.MachineItemHandler;
+import muramasa.antimatter.cover.ICover;
 import muramasa.antimatter.tool.AntimatterToolType;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -27,6 +30,12 @@ import javax.annotation.Nullable;
 public class TileEntityLocker extends TileEntityMaterial<TileEntityLocker> {
     public TileEntityLocker(MaterialMachine type) {
         super(type);
+        coverHandler.set(() -> new MachineCoverHandler<TileEntityLocker>(this){
+            @Override
+            public boolean placeCover(PlayerEntity player, Direction side, ItemStack stack, ICover cover) {
+                return false;
+            }
+        });
     }
 
     @Override
@@ -52,17 +61,15 @@ public class TileEntityLocker extends TileEntityMaterial<TileEntityLocker> {
                     }
                 }
             });
-
-            world.playSound(player, player.getPosition(), SoundEvents.UI_BUTTON_CLICK, SoundCategory.PLAYERS, 1.0F, 1.0F);
+            world.playSound(null, this.getPos(), SoundEvents.UI_BUTTON_CLICK, SoundCategory.PLAYERS, 1.0F, 1.0F);
             return ActionResultType.SUCCESS;
         }
         return super.onInteract(state, world, pos, player, hand, hit, type);
     }
 
-    @Nullable
     @Override
-    public Container createMenu(int windowId, @Nonnull PlayerInventory inv, @Nonnull PlayerEntity player) {
-        return player.isCreative() ? super.createMenu(windowId, inv, player) : null;
+    public boolean canPlayerOpenGui(PlayerEntity player) {
+        return player.isCreative();
     }
 
     @Override

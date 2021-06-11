@@ -35,7 +35,7 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.getOrCreateBuilder(CIRCUITS_MASTER).add(CircuitEnergyFlow);
         this.getOrCreateBuilder(CIRCUITS_DATA).add(CircuitDataStorage);
         this.getOrCreateBuilder(CIRCUITS_ULTIMATE).add(CircuitDataOrb);
-        this.getOrCreateBuilder(MACHINE_HULLS_CHEAP).add(HULL.get(Bronze), HULL.get(Brass), HULL.get(WroughtIron), HULL.get(Aluminium));
+        this.getOrCreateBuilder(MACHINE_HULLS_CHEAP).add(HULL.get(Bronze), HULL.get(Brass), HULL.get(WroughtIron), HULL.get(Iron), HULL.get(Aluminium));
         this.getOrCreateBuilder(MACHINE_HULLS_SEMI_CHEAP).add(HULL.get(WroughtIron), HULL.get(Aluminium));
         this.getOrCreateBuilder(MACHINE_HULLS_BASIC).add(HULL.get(Steel), HULL.get(StainlessSteel), HULL.get(Aluminium));
         this.getOrCreateBuilder(MACHINE_HULLS_ADVANCED).add(HULL.get(TungstenSteel), HULL.get(Titanium));

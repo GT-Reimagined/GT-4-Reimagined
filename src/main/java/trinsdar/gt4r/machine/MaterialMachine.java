@@ -28,7 +28,7 @@ public class MaterialMachine extends Machine<MaterialMachine> {
         super(domain, id, data);
         this.material = material;
         setTile(() -> new TileEntityMaterial<>(this));
-        addFlags(FLUID, CONFIGURABLE);
+        addFlags(CONFIGURABLE, COVERABLE);
         covers((ICover[]) null);
         frontCovers();
     }
