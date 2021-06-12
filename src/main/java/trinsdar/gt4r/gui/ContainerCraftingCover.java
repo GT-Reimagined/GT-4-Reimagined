@@ -1,4 +1,4 @@
-package trinsdar.gt4r.gui.screen;
+package trinsdar.gt4r.gui;
 
 import muramasa.antimatter.cover.CoverStack;
 import net.minecraft.block.Blocks;

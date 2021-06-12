@@ -25,6 +25,7 @@ import trinsdar.gt4r.gui.ButtonOverlays;
 import trinsdar.gt4r.gui.ContainerCabinet;
 import trinsdar.gt4r.gui.ContainerWorkbench;
 import trinsdar.gt4r.gui.MenuHandlerCrafting;
+import trinsdar.gt4r.gui.MenuHandlerCraftingItem;
 import trinsdar.gt4r.tile.multi.TileEntityDistillationTower;
 import trinsdar.gt4r.tile.multi.TileEntityFusionReactor;
 import trinsdar.gt4r.tile.multi.TileEntityIndustrialBlastFurnace;
@@ -179,6 +180,7 @@ public class Guis {
     };
 
     public static MenuHandlerCrafting COVER_CRAFTING_HANDLER = new MenuHandlerCrafting(Ref.ID, "crafting_grid");
+    public static MenuHandlerCraftingItem ITEM_CRAFTING_HANDLER = new MenuHandlerCraftingItem(Ref.ID, "crafting_item");
 
     public static void init(Dist side) {
 

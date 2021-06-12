@@ -5,6 +5,7 @@ import muramasa.antimatter.capability.ICoverHandler;
 import muramasa.antimatter.cover.CoverStack;
 import muramasa.antimatter.gui.MenuHandler;
 import muramasa.antimatter.util.Utils;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.WorkbenchContainer;
 import net.minecraft.network.PacketBuffer;
@@ -14,25 +15,19 @@ import net.minecraft.util.IWorldPosCallable;
 import net.minecraftforge.common.util.LazyOptional;
 import trinsdar.gt4r.data.client.ScreenFactories;
 
-public class MenuHandlerCrafting extends MenuHandler<WorkbenchContainer> {
-    public MenuHandlerCrafting(String domain, String id) {
+public class MenuHandlerCraftingItem extends MenuHandler<WorkbenchContainer> {
+    public MenuHandlerCraftingItem(String domain, String id) {
         super(domain, id);
     }
 
     @Override
     public WorkbenchContainer onContainerCreate(int windowId, PlayerInventory inv, PacketBuffer data) {
-        TileEntity tile = Utils.getTileFromBuf(data);
-        if (tile != null) {
-            Direction dir = Direction.byIndex(data.readInt());
-            LazyOptional<ICoverHandler> coverHandler = tile.getCapability(AntimatterCaps.COVERABLE_HANDLER_CAPABILITY);
-            return getMenu(coverHandler.map(ch -> ch.get(dir)).orElse(null), inv, windowId);
-        }
-        return null;
+        return getMenu(inv.player, inv, windowId);
     }
 
     @Override
     public WorkbenchContainer getMenu(Object tile, PlayerInventory playerInv, int windowId) {
-        return tile instanceof CoverStack ? new ContainerCraftingCover(windowId, playerInv, IWorldPosCallable.of(((CoverStack<?>)tile).getTile().getWorld(), ((CoverStack<?>)tile).getTile().getPos()), ((CoverStack<?>) tile)) : null;
+        return tile instanceof PlayerEntity ? new ContainerCraftingItem(windowId, playerInv, IWorldPosCallable.of(playerInv.player.world, playerInv.player.getPosition())) : null;
     }
 
     @Override

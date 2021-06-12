@@ -53,6 +53,7 @@ import trinsdar.gt4r.cover.CoverPump;
 import trinsdar.gt4r.cover.CoverSteamVent;
 import trinsdar.gt4r.data.client.RecipeRenderer;
 import trinsdar.gt4r.entity.SpearEntity;
+import trinsdar.gt4r.items.ItemCraftingModule;
 import trinsdar.gt4r.items.ItemIntCircuit;
 import trinsdar.gt4r.items.ItemMatch;
 import trinsdar.gt4r.items.ItemMixedMetal;
@@ -269,7 +270,7 @@ public class GT4RData {
 
     public static ItemBasic<?> ComputerMonitor = new ItemBasic<>(Ref.ID, "computer_monitor").tip("Can be placed on machines as a cover");
     public static ItemCover ConveyorModule = new ItemCover(Ref.ID, COVER_CONVEYOR.getId()).tip("Can be placed on machines as a cover");
-    public static ItemCover CraftingModule = new ItemCover(Ref.ID, COVER_CRAFTING.getId()).tip("Can be placed on machines as a cover");
+    public static ItemCover CraftingModule = new ItemCraftingModule().tip("Can be placed on machines as a cover");
     public static ItemCover Drain = new ItemCover(Ref.ID, "drain").tip("Can be placed on machines as a cover");
     public static ItemBasic<?> ItemTransportValve = new ItemBasic<>(Ref.ID, "item_transport_valve").tip("Can be placed on machines as a cover");
     public static ItemCover PumpModule = new ItemCover(Ref.ID, COVER_PUMP.getId()).tip("Can be placed on machines as a cover");
