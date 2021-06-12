@@ -38,7 +38,7 @@ public class ItemCraftingModule extends ItemCover implements INamedContainerProv
     }
 
     public boolean openGui(PlayerEntity player) {
-        if (!player.world.isRemote) return false;
+        if (player.world.isRemote) return false;
         NetworkHooks.openGui((ServerPlayerEntity) player, this, packetBuffer -> {
             packetBuffer.writeBlockPos(player.getPosition());
         });
