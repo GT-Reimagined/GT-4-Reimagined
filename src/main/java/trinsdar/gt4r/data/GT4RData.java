@@ -44,6 +44,7 @@ import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.block.BlockConnectedCasing;
 import trinsdar.gt4r.block.BlockSapBag;
 import trinsdar.gt4r.cover.CoverConveyor;
+import trinsdar.gt4r.cover.CoverCrafting;
 import trinsdar.gt4r.cover.CoverDrain;
 import trinsdar.gt4r.cover.CoverDynamoOld;
 import trinsdar.gt4r.cover.CoverFusionInput;
@@ -248,6 +249,7 @@ public class GT4RData {
     public static final BaseCover COVER_DYNAMO_OLD = new CoverDynamoOld("dynamo_old");
     public static final BaseCover COVER_DRAIN = new CoverDrain();
     public static final BaseCover COVER_STEAM_VENT = new CoverSteamVent();
+    public static final BaseCover COVER_CRAFTING = new CoverCrafting();
 
     public static ItemRockCutter RockCutter = new ItemRockCutter();
 
@@ -267,7 +269,7 @@ public class GT4RData {
 
     public static ItemBasic<?> ComputerMonitor = new ItemBasic<>(Ref.ID, "computer_monitor").tip("Can be placed on machines as a cover");
     public static ItemCover ConveyorModule = new ItemCover(Ref.ID, COVER_CONVEYOR.getId()).tip("Can be placed on machines as a cover");
-    public static ItemBasic<?> CraftingModule = new ItemBasic<>(Ref.ID, "crafting_module").tip("Can be placed on machines as a cover");
+    public static ItemCover CraftingModule = new ItemCover(Ref.ID, COVER_CRAFTING.getId()).tip("Can be placed on machines as a cover");
     public static ItemCover Drain = new ItemCover(Ref.ID, "drain").tip("Can be placed on machines as a cover");
     public static ItemBasic<?> ItemTransportValve = new ItemBasic<>(Ref.ID, "item_transport_valve").tip("Can be placed on machines as a cover");
     public static ItemCover PumpModule = new ItemCover(Ref.ID, COVER_PUMP.getId()).tip("Can be placed on machines as a cover");

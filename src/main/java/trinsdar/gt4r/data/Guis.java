@@ -1,11 +1,14 @@
 package trinsdar.gt4r.data;
 
 import muramasa.antimatter.AntimatterAPI;
+import muramasa.antimatter.cover.CoverStack;
 import muramasa.antimatter.gui.BarDir;
 import muramasa.antimatter.gui.ButtonBody;
 import muramasa.antimatter.gui.GuiData;
+import muramasa.antimatter.gui.MenuHandlerCover;
 import muramasa.antimatter.gui.MenuHandlerMachine;
 import muramasa.antimatter.gui.container.ContainerBasicMachine;
+import muramasa.antimatter.gui.container.ContainerCover;
 import muramasa.antimatter.gui.container.ContainerMachine;
 import muramasa.antimatter.gui.container.ContainerMultiMachine;
 import muramasa.antimatter.machine.Tier;
@@ -13,6 +16,7 @@ import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.tile.multi.TileEntityBasicMultiMachine;
 import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.WorkbenchContainer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import trinsdar.gt4r.Ref;
@@ -20,6 +24,7 @@ import trinsdar.gt4r.data.client.ScreenFactories;
 import trinsdar.gt4r.gui.ButtonOverlays;
 import trinsdar.gt4r.gui.ContainerCabinet;
 import trinsdar.gt4r.gui.ContainerWorkbench;
+import trinsdar.gt4r.gui.MenuHandlerCrafting;
 import trinsdar.gt4r.tile.multi.TileEntityDistillationTower;
 import trinsdar.gt4r.tile.multi.TileEntityFusionReactor;
 import trinsdar.gt4r.tile.multi.TileEntityIndustrialBlastFurnace;
@@ -30,6 +35,7 @@ import static muramasa.antimatter.gui.ButtonBody.*;
 import static muramasa.antimatter.gui.SlotType.*;
 import static muramasa.antimatter.machine.Tier.*;
 import static trinsdar.gt4r.data.GT4RData.COVER_CONVEYOR;
+import static trinsdar.gt4r.data.GT4RData.COVER_CRAFTING;
 import static trinsdar.gt4r.data.GT4RData.COVER_PUMP;
 import static trinsdar.gt4r.data.Machines.*;
 import static trinsdar.gt4r.data.SlotTypes.*;
@@ -172,6 +178,8 @@ public class Guis {
         }
     };
 
+    public static MenuHandlerCrafting COVER_CRAFTING_HANDLER = new MenuHandlerCrafting(Ref.ID, "crafting_grid");
+
     public static void init(Dist side) {
 
         AntimatterAPI.registerJEICategory(RecipeMaps.ORE_BYPRODUCTS, Guis.ORE_BYPRODUCTS);
@@ -282,6 +290,8 @@ public class Guis {
         HATCH_FLUID_O.getGui().add(FL_OUT, 79, 34).add(CELL_IN, 9, 22).add(CELL_OUT, 9, 58);
         FUSION_MATERIAL_EXTRACTOR.getGui().add(FL_OUT, 79, 34).add(CELL_IN, 9, 22).add(CELL_OUT, 9, 58).add(IT_OUT, 61, 34).add(IT_OUT, 97, 34).add(IT_OUT, 79, 16).add(IT_OUT, 79, 52);
         FUSION_MATERIAL_INJECTOR.getGui().add(FL_IN, 79, 34).add(CELL_IN, 9, 22).add(CELL_OUT, 9, 58).add(IT_IN, 61, 34).add(IT_IN, 97, 34).add(IT_IN, 79, 16).add(IT_IN, 79, 52);
+
+        COVER_CRAFTING.setGui(new GuiData(COVER_CRAFTING, COVER_CRAFTING_HANDLER));
 
         if (side.isClient()){
             BRONZE_WORKBENCH.getGui().addButton(136, 28, 16, 16, NO_OVERLAY);
