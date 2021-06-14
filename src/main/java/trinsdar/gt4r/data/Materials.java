@@ -165,6 +165,7 @@ public class Materials {
     public static Material BioDiesel = new Material(Ref.ID, "bio_diesel", 0xff8000, NONE).asFluid(192);
     public static Material Biomass = new Material(Ref.ID, "biomass", 0x00ff00, NONE).asFluid(8).flags(SEMIFLUID);
     public static Material Biofuel = new Material(Ref.ID, "biofuel", 0x99cc00, NONE).asFluid(6);
+    public static Material Biogas = new Material(Ref.ID, "biogas", 0x99cc00, NONE).asFluid(6);
     public static Material Ethanol = new Material(Ref.ID, "ethanol", 0xff8000, NONE).asFluid(128).mats(of(Carbon, 2, Hydrogen, 6, Oxygen, 1));
     public static Material Creosote = new Material(Ref.ID, "creosote", 0x804000, NONE).asFluid(8).flags(SEMIFLUID);
     public static Material Naphtha = new Material(Ref.ID, "naphtha", 0xffff64, NONE).asFluid(128);
