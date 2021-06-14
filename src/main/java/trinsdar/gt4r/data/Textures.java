@@ -49,7 +49,7 @@ public class Textures {
             new Texture(Ref.ID, "block/machine/base/dust_bin/side"),
     };
 
-    public static final IOverlayTexturer LEFT_RIGHT_HANDLER = (type, state) -> {
+    public static final IOverlayTexturer LEFT_RIGHT_HANDLER = (type, state, tier) -> {
         if (state != MachineState.ACTIVE && state != MachineState.INVALID_STRUCTURE) state = MachineState.IDLE;
         String stateDir = state == MachineState.IDLE ? "" : state.getId() + "/";
 
@@ -72,7 +72,7 @@ public class Textures {
             new Texture(Ref.ID, "block/machine/base/drum/side"),
     };
 
-    public static final IOverlayTexturer DRUM_OVERLAY_HANDLER = (type, state) -> new Texture[] {
+    public static final IOverlayTexturer DRUM_OVERLAY_HANDLER = (type, state, tier) -> new Texture[] {
             new Texture(Ref.ID, "block/machine/overlay/drum/bottom"),
             new Texture(Ref.ID, "block/machine/overlay/drum/top"),
             new Texture(Ref.ID, "block/machine/overlay/drum/side"),
@@ -90,7 +90,7 @@ public class Textures {
             new Texture(Ref.ID, "block/machine/base/cabinet/side"),
     };
 
-    public static final IOverlayTexturer CABINET_OVERLAY_HANDLER = (type, state) -> new Texture[] {
+    public static final IOverlayTexturer CABINET_OVERLAY_HANDLER = (type, state, tier) -> new Texture[] {
             new Texture(Ref.ID, "block/machine/overlay/cabinet/bottom"),
             new Texture(Ref.ID, "block/machine/overlay/cabinet/top"),
             new Texture(Ref.ID, "block/machine/overlay/cabinet/front"),
@@ -108,7 +108,7 @@ public class Textures {
             new Texture(Ref.ID, "block/machine/base/workbench/side"),
     };
 
-    public static final IOverlayTexturer WORKBENCH_OVERLAY_HANDLER = (type, state) -> new Texture[] {
+    public static final IOverlayTexturer WORKBENCH_OVERLAY_HANDLER = (type, state, tier) -> new Texture[] {
             new Texture(Ref.ID, "block/machine/overlay/workbench/bottom"),
             new Texture(Ref.ID, "block/machine/overlay/workbench/top"),
             new Texture(Ref.ID, "block/machine/overlay/workbench/front"),
@@ -117,7 +117,7 @@ public class Textures {
             new Texture(Ref.ID, "block/machine/overlay/workbench/side"),
     };
 
-    public static final IOverlayTexturer CHARGING_WORKBENCH_OVERLAY_HANDLER = (type, state) -> new Texture[] {
+    public static final IOverlayTexturer CHARGING_WORKBENCH_OVERLAY_HANDLER = (type, state, tier) -> new Texture[] {
             new Texture(Ref.ID, "block/machine/overlay/charging_workbench/bottom"),
             new Texture(Ref.ID, "block/machine/overlay/charging_workbench/top"),
             new Texture(Ref.ID, "block/machine/overlay/charging_workbench/front"),
@@ -135,7 +135,7 @@ public class Textures {
             new Texture(Ref.ID, "block/machine/base/locker/side"),
     };
 
-    public static final IOverlayTexturer LOCKER_OVERLAY_HANDLER = (type, state) -> new Texture[] {
+    public static final IOverlayTexturer LOCKER_OVERLAY_HANDLER = (type, state, tier) -> new Texture[] {
             new Texture(Ref.ID, "block/machine/overlay/locker/bottom"),
             new Texture(Ref.ID, "block/machine/overlay/locker/top"),
             new Texture(Ref.ID, "block/machine/overlay/locker/front"),
@@ -144,13 +144,27 @@ public class Textures {
             new Texture(Ref.ID, "block/machine/overlay/locker/side"),
     };
 
-    public static final IOverlayTexturer CHARGING_LOCKER_OVERLAY_HANDLER = (type, state) -> new Texture[] {
+    public static final IOverlayTexturer CHARGING_LOCKER_OVERLAY_HANDLER = (type, state, tier) -> new Texture[] {
             new Texture(Ref.ID, "block/machine/overlay/charging_locker/bottom"),
             new Texture(Ref.ID, "block/machine/overlay/charging_locker/top"),
             new Texture(Ref.ID, "block/machine/overlay/charging_locker/front"),
             new Texture(Ref.ID, "block/machine/overlay/charging_locker/back"),
             new Texture(Ref.ID, "block/machine/overlay/charging_locker/side"),
             new Texture(Ref.ID, "block/machine/overlay/charging_locker/side"),
+    };
+
+    public static final IOverlayTexturer TIER_SPECIFIC_OVERLAY_HANDLER = (type, state, tier) -> {
+        if (state != MachineState.ACTIVE && state != MachineState.INVALID_STRUCTURE) state = MachineState.IDLE;
+        String stateDir = state == MachineState.IDLE ? "" : state.getId() + "/";
+
+        return new Texture[] {
+                new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + tier.getId() + "/" + stateDir + "bottom"),
+                new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + tier.getId() + "/" + stateDir + "top"),
+                new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + tier.getId() + "/" + stateDir + "front"),
+                new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + tier.getId() + "/" + stateDir + "back"),
+                new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + tier.getId() + "/" + stateDir + "side"),
+                new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + tier.getId() + "/" + stateDir + "side"),
+        };
     };
 
     public static final ITextureHandler MULTI_HANDLER = (m, t) -> m.getTiers().size() > 1 ? new Texture[]{new Texture(Ref.ID, "block/machine/base/" + m.getId() + "_" + t.getId())} : new Texture[]{new Texture(Ref.ID, "block/machine/base/" + m.getId())};
