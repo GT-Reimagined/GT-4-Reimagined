@@ -1,0 +1,17 @@
+package trinsdar.gt4r.loader.machines;
+
+import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
+import net.minecraft.fluid.Fluids;
+import net.minecraftforge.fluids.FluidStack;
+import trinsdar.gt4r.data.GT4RData;
+
+import static trinsdar.gt4r.data.Materials.Biomass;
+import static trinsdar.gt4r.data.Materials.Methane;
+import static trinsdar.gt4r.data.RecipeMaps.FERMENTING;
+
+public class FermentingLoader {
+    public static void init(){
+        FERMENTING.RB().fi(new FluidStack(Fluids.WATER, 1000)).ii(RecipeIngredient.of(GT4RData.Biochaff, 1)).fo(Biomass.getLiquid(1000)).add(128, 16);
+        FERMENTING.RB().fo(Biomass.getLiquid(10)).fo(Methane.getGas(6)).add(16, 8);
+    }
+}

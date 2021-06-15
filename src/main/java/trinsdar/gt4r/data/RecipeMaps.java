@@ -54,6 +54,7 @@ public class RecipeMaps {
     public static RecipeMap<?> SIFTING = new RecipeMap<>("sifting", new RecipeBuilder());
     public static RecipeMap<?> BASIC_DISTILLING = new RecipeMap<>("basic_distilling", new RecipeBuilder());
     public static RecipeMap<?> DUSTBIN = new RecipeMap<>("dustbin", new RecipeBuilder());
+    public static RecipeMap<?> FERMENTING = new RecipeMap<>("fermenting", new RecipeBuilder());
 
 
     public static RecipeMap<?> STEAM_SMELTING = new RecipeMap<>("steam_smelting", new RecipeBuilder(), RecipeProxies.FURNACE_PROXY.apply(8, 180));
