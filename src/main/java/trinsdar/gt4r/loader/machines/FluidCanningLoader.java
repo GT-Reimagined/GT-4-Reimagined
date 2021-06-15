@@ -43,7 +43,7 @@ public class FluidCanningLoader {
         FLUID_CANNING.RB().ii(of(BatteryHullLarge, 1)).fi(Mercury.getLiquid(16000)).io(getFullBattery(BatteryLargeMercury)).add(258, 1);
         FLUID_CANNING.RB().ii(of(BatteryHullLarge, 1)).fi(SulfuricAcid.getLiquid(16000)).io(getFullBattery(BatteryLargeAcid)).add(258, 1);
         FLUID_CANNING.RB().ii(of(LighterEmpty, 1)).fi(Propane.getGas(100)).io(new ItemStack(Lighter)).add(1, 1);
-        FLUID_CANNING.RB().ii(of(Biochaff, 1)).fi(new FluidStack(Fluids.WATER, 1000)).fo(Biomass.getLiquid(1000)).add(400, 8);
+        //FLUID_CANNING.RB().ii(of(Biochaff, 1)).fi(new FluidStack(Fluids.WATER, 1000)).fo(Biomass.getLiquid(1000)).add(400, 8);
     }
 
     private static ItemStack getFullBattery(IItemProvider battery){

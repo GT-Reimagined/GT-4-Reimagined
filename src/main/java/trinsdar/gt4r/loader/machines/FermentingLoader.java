@@ -5,6 +5,8 @@ import net.minecraft.fluid.Fluids;
 import net.minecraftforge.fluids.FluidStack;
 import trinsdar.gt4r.data.GT4RData;
 
+import static trinsdar.gt4r.data.GT4RData.INT_CIRCUITS;
+import static trinsdar.gt4r.data.Materials.Biogas;
 import static trinsdar.gt4r.data.Materials.Biomass;
 import static trinsdar.gt4r.data.Materials.Methane;
 import static trinsdar.gt4r.data.RecipeMaps.FERMENTING;
@@ -12,6 +14,8 @@ import static trinsdar.gt4r.data.RecipeMaps.FERMENTING;
 public class FermentingLoader {
     public static void init(){
         FERMENTING.RB().fi(new FluidStack(Fluids.WATER, 1000)).ii(RecipeIngredient.of(GT4RData.Biochaff, 1)).fo(Biomass.getLiquid(1000)).add(128, 16);
-        FERMENTING.RB().fo(Biomass.getLiquid(10)).fo(Methane.getGas(6)).add(16, 8);
+        FERMENTING.RB().fi(Biomass.getLiquid(10)).ii(INT_CIRCUITS.get(0)).fo(Methane.getGas(6)).add(16, 8);
+        FERMENTING.RB().fi(Biomass.getLiquid(6)).ii(INT_CIRCUITS.get(1)).fo(Biogas.getGas(120)).add(75, 16);
+        FERMENTING.RB().fi(Biomass.getLiquid(6)).ii(INT_CIRCUITS.get(2)).fo(Biogas.getGas(16)).add(20, 16);
     }
 }

@@ -60,12 +60,13 @@ public class Machines {
     public static BasicMachine FORGE_HAMMER = new BasicMachine(Ref.ID, "forge_hammer", HAMMERING, GUI, ITEM, LV).setTile(m -> () -> new TileEntityForgeHammer(m));
     public static BasicMachine ORE_WASHER = new BasicMachine(Ref.ID, "ore_washer", ORE_WASHING, GUI, ITEM, FLUID, LV);
     public static BasicMachine THERMAL_CENTRIFUGE = new BasicMachine(Ref.ID, "thermal_centrifuge", THERMAL_CENTRIFUGING, GUI, ITEM, FLUID, MV);
-    //public static BasicMachine UNIVERSAL_MACERATOR = new BasicMachine(Ref.ID, "universal_macerator", UNIVERSAL_MACERATING, GUI, ITEM, MV, Textures.TIER_HANDLER);
     public static BasicMachine FLUID_EXTRACTOR = new BasicMachine(Ref.ID, "fluid_extractor", FLUID_EXTRACTING, GUI, ITEM, FLUID, LV);
     public static BasicMachine FLUID_SOLIDIFIER = new BasicMachine(Ref.ID, "fluid_solidifier", FLUID_SOLIDIFYING, GUI, ITEM, FLUID, LV);
     public static BasicMachine PUMP = new BasicMachine(Ref.ID, "pump", GUI, FLUID, LV);
     public static BasicMachine SIFTER = new BasicMachine(Ref.ID, "sifter", SIFTING, GUI, ITEM, LV);
     public static BasicMachine BATH = new BasicMachine(Ref.ID, "bath", BATHING, GUI, ITEM, LV);
+    public static BasicMachine DISTILLERY = new BasicMachine(Ref.ID, "distillery", BASIC_DISTILLING, GUI, ITEM, FLUID, LV);
+    public static BasicMachine FERMENTER = new BasicMachine(Ref.ID, "fermenter", FERMENTING, GUI, ITEM, FLUID, LV);
     public static NonSolidMachine DUSTBIN = new NonSolidMachine(Ref.ID, "dustbin", RecipeMaps.DUSTBIN, GUI, ITEM, LV, Textures.DUSTBIN_HANDLER).covers(COVERNONE).frontCovers().setTile(m -> () -> new TileEntityDustBin(m));
 
     public static BasicMachine COAL_BOILER = new BasicMachine(Ref.ID, "coal_boiler", COAL_BOILERS, BRONZE, STEEL, GUI, STEAM, RECIPE, ITEM, FLUID, CELL, Textures.BOILER_HANDLER).setTile(m -> () -> new TileEntityCoalBoiler(m)).covers((ICover[]) null);
