@@ -183,5 +183,6 @@ public class MachineCrafting {
         CHARGING_LOCKER.all().forEach(m -> {
             provider.addItemRecipe(output, Ref.ID, "charging_locker_" + m.getId(), "machines", "has_chest", provider.hasSafeItem(Machine.get(m.getId() + "_locker").map(mch -> mch.getItem(LV)).orElse(Items.AIR)), Machine.get(m.getId() + "_charging_locker").map(mch -> mch.getItem(HV)).orElse(Items.AIR), of('L', Machine.get(m.getId() + "_locker").map(mch -> mch.getItem(LV)).orElse(Items.AIR), 'c', CABLE_GOLD.getBlockItem(PipeSize.VTINY), 'C', CIRCUITS_ADVANCED), "cCc", "cLc", "cCc");
         });
+        provider.addItemRecipe(output, Ref.ID, "fermenter", "machines", "has_chest", provider.hasSafeItem(MACHINE_HULLS_BASIC), FERMENTER.getItem(LV), of('c', CABLE_TIN.getBlockItem(PipeSize.VTINY), 'C', CIRCUITS_BASIC, 'G', Tags.Items.GLASS, 'M', MACHINE_HULLS_BASIC, 'P', PumpModule), "cPc", "GMG", "cCc");
     }
 }
