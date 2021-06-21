@@ -17,6 +17,9 @@ public class FluidExtractorLoader {
         });
         INGOT.all().forEach(r -> {
             add(r, INGOT.get(r), 144);
+            if (r.has(DUST)){
+                add(r, DUST.get(r), 144);
+            }
         });
         GEAR.all().forEach(r -> {
             add(r, GEAR.get(r), 144*4);
@@ -31,6 +34,6 @@ public class FluidExtractorLoader {
         FLUID_EXTRACTING.RB()
                 .ii(RecipeIngredient.of(i,1))
                 .fo(m.getLiquid(amount))
-                .add(m.getMass()*amount/144, 64);
+                .add((long)(m.getMass()*((float)amount/144F)), 64);
     }
 }

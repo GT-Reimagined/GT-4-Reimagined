@@ -104,6 +104,7 @@ public class GT4Reimagined extends AntimatterMod {
         loader.add(FuelBurnHandler::init);
         loader.add(HeatExchangerLoader::init);
         loader.add(FluidExtractorLoader::init);
+        loader.add(FluidSolidifierLoader::init);
         loader.add(BathingLoader::init);
         loader.add(CoalBoilerHandler::init);
         loader.add(DistillingLoader::init);
