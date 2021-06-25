@@ -128,7 +128,7 @@ public class Materials {
 
     /** Gases **/
     public static Material WoodGas = new Material(Ref.ID, "wood_gas", 0xdecd87, NONE).asGas(25);
-    public static Material Methane = new Material(Ref.ID, "methane", 0xfac8fa, NONE).asGas(48).mats(of(Carbon, 1, Hydrogen, 4));
+    public static Material Methane = new Material(Ref.ID, "methane", 0xfac8fa, NONE).asGas(128).mats(of(Carbon, 1, Hydrogen, 4));
     //public static Material Biogas = new Material(Ref.ID, "biogas", 0xa7984c, NONE).asGas(32);
     public static Material CarbonDioxide = new Material(Ref.ID, "carbon_dioxide", 0xa9d0f5, NONE).asGas().mats(of(Carbon, 1, Oxygen, 2));
     //public static Material NobleGases = new Material(Ref.ID, "noble_gases", 0xc9e3fc, NONE).asGas()/*.setTemp(79, 0)*/.addComposition(of(CarbonDioxide, 21, Helium, 9, Methane, 3, Deuterium, 1));

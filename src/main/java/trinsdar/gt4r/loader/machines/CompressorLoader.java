@@ -43,7 +43,7 @@ public class CompressorLoader {
         COMPRESSING.RB().ii(DUST.getMaterialIngredient(Energium, 9)).io(new ItemStack(GT4RData.EnergyCrystal)).add(400, 2);
         COMPRESSING.RB().ii(DUST.getMaterialIngredient(Wood, 1)).io(PLATE.get(Wood, 1)).add(400, 2);
         COMPRESSING.RB().ii(DUST.getMaterialIngredient(Fireclay, 1)).io(new ItemStack(CompressedFireClay)).add(400, 2);
-        COMPRESSING.RB().ii(RecipeIngredient.of(ItemTags.SAPLINGS, 8)).io(new ItemStack(Plantball)).add(300, 2);
+        COMPRESSING.RB().ii(RecipeIngredient.of(ItemTags.SAPLINGS, 4)).io(new ItemStack(Plantball)).add(300, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(ItemTags.SMALL_FLOWERS, 8)).io(new ItemStack(Plantball)).add(300, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(Tags.Items.CROPS, 8)).io(new ItemStack(Plantball)).add(300, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(Tags.Items.SEEDS, 16)).io(new ItemStack(Plantball)).add(300, 2);
@@ -59,9 +59,9 @@ public class CompressorLoader {
         }
         COMPRESSING.RB().ii(RecipeIngredient.of(Tags.Items.MUSHROOMS, 8)).io(new ItemStack(Plantball)).add(300, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(Items.NETHER_WART_BLOCK, 8)).io(new ItemStack(Plantball)).add(300, 2);
-        COMPRESSING.RB().ii(RecipeIngredient.of(Items.WARPED_FUNGUS, 8)).io(new ItemStack(Plantball)).add(300, 2);
+        COMPRESSING.RB().ii(RecipeIngredient.of(Items.WARPED_FUNGUS, 4)).io(new ItemStack(Plantball)).add(300, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(Items.WARPED_ROOTS, 8)).io(new ItemStack(Plantball)).add(300, 2);
-        COMPRESSING.RB().ii(RecipeIngredient.of(Items.CRIMSON_FUNGUS, 8)).io(new ItemStack(Plantball)).add(300, 2);
+        COMPRESSING.RB().ii(RecipeIngredient.of(Items.CRIMSON_FUNGUS, 4)).io(new ItemStack(Plantball)).add(300, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(Items.CRIMSON_ROOTS, 8)).io(new ItemStack(Plantball)).add(300, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(Items.WARPED_WART_BLOCK, 8)).io(new ItemStack(Plantball)).add(300, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(Items.WEEPING_VINES, 8)).io(new ItemStack(Plantball)).add(300, 2);
