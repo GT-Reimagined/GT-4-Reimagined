@@ -2,11 +2,14 @@ package trinsdar.gt4r.datagen;
 
 
 import muramasa.antimatter.AntimatterAPI;
+import muramasa.antimatter.Data;
 import muramasa.antimatter.block.BlockStone;
 import muramasa.antimatter.datagen.providers.AntimatterLanguageProvider;
 import muramasa.antimatter.item.ItemFluidCell;
 import muramasa.antimatter.machine.BlockMachine;
+import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialItem;
+import muramasa.antimatter.material.MaterialTag;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import trinsdar.gt4r.Ref;
@@ -93,10 +96,30 @@ public class GT4RLocalizations {
         }
 
         @Override
-        public void add(String key, String value) {
+        public void add(final String key, final String value) {
             if (key.contains("machine")){
                 String id = key.contains("macerator.mv") ? "universal_macerator" : key.contains("electrolyzer") ? key.contains("lv") ? "basic_electrolyzer" : "industrial_electrolyzer" : "";
                 super.add(key,  value.contains("Infinite") || value.contains("Transformer") || value.contains("Battery") ? value : (id.isEmpty() ? value.replace("Mv ", "").replace("Lv ", "").replace("Ulv ", "").replace("Hv ", "").replace("Ev ", "") : lowerUnderscoreToUpperSpaced(id)));
+                return;
+            }
+            if (key.startsWith("block.gt4r.liquid")){
+                String id;
+                if (value.startsWith("Liquid") || value.startsWith("Plasma")){
+                    id = value.substring(7);
+                    if (value.startsWith("Plasma")){
+                        id = id + " Plasma";
+                    }
+                } else {
+                    id = value.substring(4);
+                }
+                if (key.startsWith("block.gt4r.liquid.liquid_")){
+                    String molten = key.replace("block.gt4r.liquid.liquid_", "");
+                    if (Material.get(molten) != Data.NULL && Material.get(molten).has(MaterialTag.METAL)){
+                        id = value.replace("Liquid", "Molten");
+                    }
+                }
+
+                super.add(key, id);
                 return;
             }
             super.add(key, value);

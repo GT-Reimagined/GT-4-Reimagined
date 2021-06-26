@@ -38,6 +38,7 @@ import trinsdar.gt4r.loader.multi.DistillationTower;
 import trinsdar.gt4r.loader.multi.Blasting;
 import trinsdar.gt4r.loader.multi.ImplosionCompressor;
 import trinsdar.gt4r.loader.multi.IndustrialGrinder;
+import trinsdar.gt4r.loader.multi.IndustrialSawmill;
 import trinsdar.gt4r.loader.multi.VacFreezer;
 import trinsdar.gt4r.proxy.ClientHandler;
 import net.minecraftforge.fml.common.Mod;
@@ -109,6 +110,7 @@ public class GT4Reimagined extends AntimatterMod {
         loader.add(CoalBoilerHandler::init);
         loader.add(DistillingLoader::init);
         loader.add(FermentingLoader::init);
+        loader.add(IndustrialSawmill::init);
 
         loader.add(ElectrolyzerLoader::init);
         loader.add(FluidCanningLoader::init);
