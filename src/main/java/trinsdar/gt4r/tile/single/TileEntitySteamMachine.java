@@ -14,6 +14,7 @@ import trinsdar.gt4r.data.Materials;
 import java.util.Arrays;
 
 import static muramasa.antimatter.machine.Tier.BRONZE;
+import static trinsdar.gt4r.data.Machines.STEAM_FORGE_HAMMER;
 
 public class TileEntitySteamMachine extends TileEntityMachine<TileEntitySteamMachine> {
 
@@ -58,6 +59,20 @@ public class TileEntitySteamMachine extends TileEntityMachine<TileEntitySteamMac
         protected boolean canRecipeContinue() {
             isSteamClear = tile.world.isAirBlock(tile.pos.offset(tile.getOutputFacing()));
             return super.canRecipeContinue() && isSteamClear;
+        }
+
+        @Override
+        public float getClientProgress() {
+            if (tile.getMachineType() == STEAM_FORGE_HAMMER){
+                float percent = (float) currentProgress / ((float) maxProgress / 3);
+                if (percent > 2){
+                    percent -= 2;
+                } else if (percent > 1){
+                    percent -=1;
+                }
+                return percent;
+            }
+            return super.getClientProgress();
         }
 
         @Override

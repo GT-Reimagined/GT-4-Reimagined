@@ -4,7 +4,7 @@ import muramasa.antimatter.util.TagUtils;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.item.Item;
 import net.minecraft.tags.ITag;
-
+import net.minecraft.util.ResourceLocation;
 
 
 public class CustomTags {
@@ -40,6 +40,8 @@ public class CustomTags {
     public static ITag.INamedTag<Item> POWER_UNIT_SMALL = getTag("power_units/small");
     public static ITag.INamedTag<Item> INGOTS_MIXED_METAL = getTag("ingots/mixed_metal");
     public static ITag.INamedTag<Item> RODS_STEELS = getTag("rods/steels");
+    public static ITag.INamedTag<Item> CORALS = TagUtils.getItemTag(new ResourceLocation("corals"));
+    public static ITag.INamedTag<Item> VINES = TagUtils.getItemTag(new ResourceLocation("vines"));
 
 
     public static ITag.INamedTag<Item> getTag(String id){

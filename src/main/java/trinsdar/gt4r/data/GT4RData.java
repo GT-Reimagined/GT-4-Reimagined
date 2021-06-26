@@ -50,6 +50,7 @@ import trinsdar.gt4r.cover.CoverDynamoOld;
 import trinsdar.gt4r.cover.CoverFusionInput;
 import trinsdar.gt4r.cover.CoverFusionOutput;
 import trinsdar.gt4r.cover.CoverPump;
+import trinsdar.gt4r.cover.CoverRedstoneMachineController;
 import trinsdar.gt4r.cover.CoverSteamVent;
 import trinsdar.gt4r.data.client.RecipeRenderer;
 import trinsdar.gt4r.entity.SpearEntity;
@@ -251,6 +252,7 @@ public class GT4RData {
     public static final BaseCover COVER_DRAIN = new CoverDrain();
     public static final BaseCover COVER_STEAM_VENT = new CoverSteamVent();
     public static final BaseCover COVER_CRAFTING = new CoverCrafting();
+    public static final BaseCover COVER_REDSTONE_MACHINE_CONTROLLER = new CoverRedstoneMachineController();
 
     public static ItemRockCutter RockCutter = new ItemRockCutter();
 
@@ -274,7 +276,7 @@ public class GT4RData {
     public static ItemCover Drain = new ItemCover(Ref.ID, "drain").tip("Can be placed on machines as a cover");
     public static ItemBasic<?> ItemTransportValve = new ItemBasic<>(Ref.ID, "item_transport_valve").tip("Can be placed on machines as a cover");
     public static ItemCover PumpModule = new ItemCover(Ref.ID, COVER_PUMP.getId()).tip("Can be placed on machines as a cover");
-    public static ItemBasic<?> RedstoneMachineController = new ItemBasic<>(Ref.ID, "redstone_machine_controller").tip("Can be placed on machines as a cover");
+    public static ItemCover RedstoneMachineController = new ItemCover(Ref.ID, COVER_REDSTONE_MACHINE_CONTROLLER.getId()).tip("Can be placed on machines as a cover");
     public static ItemBasic<?> Shutter = new ItemBasic<>(Ref.ID, "shutter").tip("Can be placed on machines as a cover");
 
     public static ItemFluidCell CellTin = new ItemFluidCell(Ref.ID,Tin, 1000);

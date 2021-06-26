@@ -18,4 +18,7 @@ public class ButtonOverlays {
     public static ButtonBody IMPORT_EXPORT_CONDITIONAL = new ButtonBody("import_export_conditional", 144, 80, 0, 0,16, 16);
     public static ButtonBody EXPORT_IMPORT_INVERT_CONDITIONAL = new ButtonBody("export_import_invert_conditional", 96, 80, 0, 0,16, 16);
     public static ButtonBody IMPORT_EXPORT_INVERT_CONDITIONAL = new ButtonBody("import_export_invert_conditional", 112, 80, 0, 0,16, 16);
+    public static ButtonBody TORCH_OFF = new ButtonBody("torch_off", 16, 16, 0, 0, 16, 16);
+    public static ButtonBody TORCH_ON = new ButtonBody("torch_on", 32, 16, 0, 0, 16, 16);
+    public static ButtonBody REDSTONE = new ButtonBody("redstone", 64, 32, 0, 0, 16, 16);
 }

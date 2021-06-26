@@ -2,10 +2,15 @@ package trinsdar.gt4r.datagen;
 
 import muramasa.antimatter.datagen.ExistingFileHelperOverride;
 import muramasa.antimatter.datagen.providers.AntimatterItemTagProvider;
+import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import muramasa.antimatter.util.TagUtils;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.registries.ForgeRegistries;
 import trinsdar.gt4r.data.CustomTags;
 
 import static muramasa.antimatter.Data.DUST;
@@ -15,6 +20,7 @@ import static muramasa.antimatter.Data.PLATE;
 import static trinsdar.gt4r.data.CustomTags.*;
 import static trinsdar.gt4r.data.GT4RData.*;
 import static trinsdar.gt4r.data.Materials.*;
+import static trinsdar.gt4r.data.RecipeMaps.COMPRESSING;
 
 public class GT4RItemTagProvider extends AntimatterItemTagProvider {
     public GT4RItemTagProvider(String providerDomain, String providerName, boolean replace, DataGenerator gen, BlockTagsProvider p, ExistingFileHelperOverride fh) {
@@ -70,7 +76,12 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.getOrCreateBuilder(TagUtils.getForgeItemTag("ingots/constantan")).addTag(INGOT.getMaterialTag(Cupronickel));
         this.getOrCreateBuilder(TagUtils.getForgeItemTag("rods/bone")).add(Items.BONE);
         this.getOrCreateBuilder(RODS_STEELS).addTag(getTag("rods/steel")).addTag(getTag("rods/stainless_steel"));
-
+        Builder<Item> add = this.getOrCreateBuilder(CORALS);
+        String[] corals = {"tube", "brain", "bubble", "fire", "horn"};
+        for (String coral : corals){
+            add.add(ForgeRegistries.ITEMS.getValue(new ResourceLocation(coral + "_coral")), ForgeRegistries.ITEMS.getValue(new ResourceLocation("dead_" + coral + "_coral")), ForgeRegistries.ITEMS.getValue(new ResourceLocation(coral + "_coral_fan")), ForgeRegistries.ITEMS.getValue(new ResourceLocation("dead_" + coral + "_coral_fan")));
+        }
+        this.getOrCreateBuilder(VINES).add(Items.VINE, Items.TWISTING_VINES, Items.WEEPING_VINES);
     }
 
 }

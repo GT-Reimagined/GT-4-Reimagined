@@ -38,11 +38,14 @@ import static muramasa.antimatter.machine.Tier.*;
 import static trinsdar.gt4r.data.GT4RData.COVER_CONVEYOR;
 import static trinsdar.gt4r.data.GT4RData.COVER_CRAFTING;
 import static trinsdar.gt4r.data.GT4RData.COVER_PUMP;
+import static trinsdar.gt4r.data.GT4RData.COVER_REDSTONE_MACHINE_CONTROLLER;
 import static trinsdar.gt4r.data.Machines.*;
 import static trinsdar.gt4r.data.SlotTypes.*;
 import static trinsdar.gt4r.gui.ButtonOverlays.*;
 import static trinsdar.gt4r.gui.ButtonOverlays.EXPORT;
 import static trinsdar.gt4r.gui.ButtonOverlays.IMPORT;
+import static trinsdar.gt4r.gui.ButtonOverlays.TORCH_OFF;
+import static trinsdar.gt4r.gui.ButtonOverlays.TORCH_ON;
 
 public class Guis {
 
@@ -316,6 +319,7 @@ public class Guis {
                     COVER_PUMP.getGui().addButton(35 + (x * 18), 25 + (y * 18), 16, 16, overlays[y][x]);
                 }
             }
+            COVER_REDSTONE_MACHINE_CONTROLLER.getGui().addButton(61, 34, 16, 16, TORCH_ON).addButton(79, 34, 16, 16, TORCH_OFF).addButton(97, 34, 16, 16, REDSTONE);
             FUSION_REACTOR.getGui().addButton(155, 23, 16, 16, NO_OVERLAY).addButton(155, 41, 16, 16, NO_OVERLAY).addButton(155, 59, 16, 16, NO_OVERLAY);
             TRANSFORMER_DIGITAL.getGui()
                     .addButton(10, 18, 14, 14, APAD_LEFT)

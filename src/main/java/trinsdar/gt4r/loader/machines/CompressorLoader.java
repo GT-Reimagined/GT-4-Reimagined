@@ -12,6 +12,8 @@ import trinsdar.gt4r.data.CustomTags;
 import trinsdar.gt4r.data.GT4RData;
 
 import static muramasa.antimatter.Data.*;
+import static trinsdar.gt4r.data.CustomTags.CORALS;
+import static trinsdar.gt4r.data.CustomTags.VINES;
 import static trinsdar.gt4r.data.GT4RData.CompressedFireClay;
 import static trinsdar.gt4r.data.GT4RData.Plantball;
 import static trinsdar.gt4r.data.Materials.*;
@@ -50,13 +52,7 @@ public class CompressorLoader {
         COMPRESSING.RB().ii(RecipeIngredient.of(ItemTags.LEAVES, 8)).io(new ItemStack(Plantball)).add(300, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(Items.CACTUS, 8)).io(new ItemStack(Plantball)).add(300, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(Items.DEAD_BUSH, 8)).io(new ItemStack(Plantball)).add(300, 2);
-        String[] corals = {"tube", "brain", "bubble", "fire", "horn"};
-        for (String coral : corals){
-            COMPRESSING.RB().ii(RecipeIngredient.of(ForgeRegistries.ITEMS.getValue(new ResourceLocation(coral + "_coral")), 8)).io(new ItemStack(Plantball)).add(300, 2);
-            COMPRESSING.RB().ii(RecipeIngredient.of(ForgeRegistries.ITEMS.getValue(new ResourceLocation("dead_" + coral + "_coral")), 8)).io(new ItemStack(Plantball)).add(300, 2);
-            COMPRESSING.RB().ii(RecipeIngredient.of(ForgeRegistries.ITEMS.getValue(new ResourceLocation(coral + "_coral_fan")), 8)).io(new ItemStack(Plantball)).add(300, 2);
-            COMPRESSING.RB().ii(RecipeIngredient.of(ForgeRegistries.ITEMS.getValue(new ResourceLocation("dead_" + coral + "_coral_fan")), 8)).io(new ItemStack(Plantball)).add(300, 2);
-        }
+        COMPRESSING.RB().ii(RecipeIngredient.of(CORALS, 8)).io(new ItemStack(Plantball)).add(300, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(Tags.Items.MUSHROOMS, 8)).io(new ItemStack(Plantball)).add(300, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(Items.NETHER_WART_BLOCK, 8)).io(new ItemStack(Plantball)).add(300, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(Items.WARPED_FUNGUS, 4)).io(new ItemStack(Plantball)).add(300, 2);
@@ -64,8 +60,6 @@ public class CompressorLoader {
         COMPRESSING.RB().ii(RecipeIngredient.of(Items.CRIMSON_FUNGUS, 4)).io(new ItemStack(Plantball)).add(300, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(Items.CRIMSON_ROOTS, 8)).io(new ItemStack(Plantball)).add(300, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(Items.WARPED_WART_BLOCK, 8)).io(new ItemStack(Plantball)).add(300, 2);
-        COMPRESSING.RB().ii(RecipeIngredient.of(Items.WEEPING_VINES, 8)).io(new ItemStack(Plantball)).add(300, 2);
-        COMPRESSING.RB().ii(RecipeIngredient.of(Items.TWISTING_VINES, 8)).io(new ItemStack(Plantball)).add(300, 2);
-        COMPRESSING.RB().ii(RecipeIngredient.of(Items.VINE, 8)).io(new ItemStack(Plantball)).add(300, 2);
+        COMPRESSING.RB().ii(RecipeIngredient.of(VINES, 8)).io(new ItemStack(Plantball)).add(300, 2);
     }
 }
