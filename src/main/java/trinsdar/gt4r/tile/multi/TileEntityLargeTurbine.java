@@ -1,15 +1,21 @@
 package trinsdar.gt4r.tile.multi;
 
 import muramasa.antimatter.capability.machine.MachineRecipeHandler;
+import muramasa.antimatter.machine.event.ContentEvent;
+import muramasa.antimatter.machine.event.IMachineEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.recipe.Recipe;
 import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
 import muramasa.antimatter.util.Utils;
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import trinsdar.gt4r.data.GT4RData;
+import trinsdar.gt4r.data.Machines;
 import trinsdar.gt4r.data.Materials;
 import trinsdar.gt4r.data.SlotTypes;
 import trinsdar.gt4r.items.ItemTurbineRotor;
@@ -32,6 +38,11 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
                 }
 
                 @Override
+                public boolean canOutput() {
+                    return true;
+                }
+
+                @Override
                 public Recipe findRecipe() {
                     Recipe r = super.findRecipe();
                     if (r == null) return null;
@@ -42,13 +53,13 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
                     //ItemStack t = tile.itemHandler.map(tt -> tt.getSpecial()).orElse(ItemStack.EMPTY);
                     //if (!(t.getItem() instanceof ItemTurbine)) return null;
                    // ItemTurbine turbine = (ItemTurbine) t.getItem();
-                    int flow = 120;//turbine.optimalEUT;
+                    long flow = sourceRecipe.getPower();//turbine.optimalEUT;
                     efficiency = getEfficiency();//turbine.efficency;
                     if (efficiency <= 0.0F) return null;
-                    long toConsume = calculateGeneratorConsumption(flow, sourceRecipe);
+                    long toConsume = calculateGeneratorConsumption((int) flow, sourceRecipe);
 
                     return Utils.getFluidPoweredRecipe(new FluidStack[]{new FluidStack(stacks[0].getFluid(),(int) toConsume)},
-                            new FluidStack[0],
+                            r.getOutputFluids(),
                            // new FluidStack[]{new FluidStack(DistilledWater.getLiquid(), stacks[0].getAmount())},// Arrays.stream(sourceRecipe.getOutputFluids()).map(tt -> new FluidStack(tt.getFluid(), (int) (tt.getAmount()*toConsume))).toArray(FluidStack[]::new),
                             1, flow,1);
                 }
@@ -71,9 +82,9 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
                             How much wiggle room? So, at optimal flow : generate regular. Otherwise, dampen by a factor of 1/(optimal-current) or 1/(current-optimal). Allow
                             consuming up to 1.5x optimal
                          */
-                        int amount = h.getInputTanks().drain(new FluidStack(activeRecipe.getInputFluids()[0],(int)(toConsume*1.5)), IFluidHandler.FluidAction.SIMULATE).getAmount();
+                        int amount = h.getInputTanks().drain(new FluidStack(activeRecipe.getInputFluids()[0],(int)(toConsume)), IFluidHandler.FluidAction.SIMULATE).getAmount();
 
-                        if (amount > 0) {
+                        if (amount == toConsume) {
                             if (!simulate)
                                 h.getInputTanks().drain(new FluidStack(activeRecipe.getInputFluids()[0], amount), IFluidHandler.FluidAction.EXECUTE);
                             return amount;
@@ -85,21 +96,28 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
                         if (consumed > recipeAmount) consumed *= Math.pow(1d/(consumed-recipeAmount),0.04);
                         //Input energy
                         int finalConsumed = consumed;
-                        if (ticker == 20){
-                            ticker = 0;
-                            tile.itemHandler.ifPresent(h -> {
-                                ItemStack copy = h.getHandler(SlotTypes.ROTOR).getStackInSlot(0).copy();
-                                if (h.getHandler(SlotTypes.ROTOR).getStackInSlot(0).attemptDamageItem(1, tile.world.rand, null)){
-                                    if (copy.getItem() instanceof ItemTurbineRotor){
-                                        h.getHandler(SlotTypes.ROTOR).setStackInSlot(0, Materials.BROKEN_TURBINE_ROTOR.get(((ItemTurbineRotor)copy.getItem()).getMaterial(), 1));
+
+                        if (!simulate) {
+                            if (ticker == 20){
+                                ticker = 0;
+                                tile.itemHandler.ifPresent(h -> {
+                                    ItemStack copy = h.getHandler(SlotTypes.ROTOR).getStackInSlot(0).copy();
+                                    if (h.getHandler(SlotTypes.ROTOR).getStackInSlot(0).attemptDamageItem(1, tile.world.rand, null)){
+                                        if (copy.getItem() instanceof ItemTurbineRotor){
+                                            h.getHandler(SlotTypes.ROTOR).setStackInSlot(0, Materials.BROKEN_TURBINE_ROTOR.get(((ItemTurbineRotor)copy.getItem()).getMaterial(), 1));
+                                        }
                                     }
-                                }
+                                });
+                            }
+                            ticker++;
+                            /*if (activeRecipe.hasOutputFluids()){
+                                addOutputs();
+                            }*/
+
+                            tile.energyHandler.ifPresent(handler -> {
+                                handler.insert((long) (efficiency*activeRecipe.getPower()/* *finalConsumed/ recipeAmount*/), false);
                             });
                         }
-                        ticker++;
-                        if (!simulate) tile.energyHandler.ifPresent(handler -> {
-                            handler.insert((long) (efficiency*activeRecipe.getPower()*finalConsumed/ recipeAmount), false);
-                        });
                         return true;
                     }
                     return false;
@@ -112,7 +130,35 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
                     }
                     return 0.0F;
                 }
+
+                @Override
+                public void onMachineEvent(IMachineEvent event, Object... data) {
+                    super.onMachineEvent(event, data);
+                    if (event == ContentEvent.ITEM_INPUT_CHANGED) efficiency = getEfficiency();
+                }
+
+                @Override
+                public CompoundNBT serializeNBT() {
+                    CompoundNBT nbt = super.serializeNBT();
+                    nbt.putInt("ticker", ticker);
+                    nbt.putDouble("efficiency", efficiency);
+                    return nbt;
+                }
+
+                @Override
+                public void deserializeNBT(CompoundNBT nbt) {
+                    super.deserializeNBT(nbt);
+                    ticker = nbt.getInt("ticker");
+                    efficiency = nbt.getDouble("efficiency");
+                }
             }
         );
+    }
+
+    public Block getCasing(){
+        if (type == Machines.LARGE_GAS_TURBINE){
+            return GT4RData.REINFORCED_MACHINE_CASING;
+        }
+        return GT4RData.STANDARD_MACHINE_CASING;
     }
 }

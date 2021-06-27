@@ -10,6 +10,7 @@ import muramasa.antimatter.registration.ITextureProvider;
 import muramasa.antimatter.texture.Texture;
 import muramasa.antimatter.util.int3;
 import net.minecraft.util.math.vector.Vector3i;
+import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.tile.multi.TileEntityLargeTurbine;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -57,16 +58,24 @@ public class BlockTurbineCasing extends BlockConnectedCasing {
 
     protected Texture[] turbineTextures() {
         Texture[] tex = new Texture[9];
+        String gas = "gas";
+        if (this == GT4RData.STANDARD_MACHINE_CASING){
+            gas = "steam";
+        }
         for (int i = 0; i <= 8; i++) {
-            tex[i] = new Texture(domain,"block/ct/turbine/large_turbine_active_"+i);
+            tex[i] = new Texture(domain,"block/ct/turbine/large_" + gas + "_turbine_active_"+i);
         }
         return tex;
     }
 
     protected Texture[] turbineTexturesInactive() {
         Texture[] tex = new Texture[9];
+        String gas = "gas";
+        if (this == GT4RData.STANDARD_MACHINE_CASING){
+            gas = "steam";
+        }
         for (int i = 0; i <= 8; i++) {
-            tex[i] = new Texture(domain,"block/ct/turbine/large_turbine_"+i);
+            tex[i] = new Texture(domain,"block/ct/turbine/large_" + gas + "_turbine_"+i);
         }
         return tex;
     }
@@ -132,7 +141,7 @@ public class BlockTurbineCasing extends BlockConnectedCasing {
 
     private TileEntityLargeTurbine checkTurbine(IBlockReader reader, BlockPos pos) {
         TileEntity tile = reader.getTileEntity(pos);
-        return tile instanceof TileEntityLargeTurbine ? (TileEntityLargeTurbine) tile : null;
+        return tile instanceof TileEntityLargeTurbine && ((TileEntityLargeTurbine)tile).getCasing() == this ? (TileEntityLargeTurbine) tile : null;
     }
 
     protected TileEntityLargeTurbine getTurbine(IBlockReader world, BlockPos pos) {

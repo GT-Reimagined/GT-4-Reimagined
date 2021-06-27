@@ -42,7 +42,7 @@ public class FuelBurnHandler {
             }
         });
         STEAM_FUELS.RB().fi(Steam.getGas(32)).add(1,16);
-        LARGE_STEAM_FUELS.RB().fi(Steam.getGas(1600)).add(1, 800);
+        LARGE_STEAM_FUELS.RB().fi(Steam.getGas(1600)).fo(DistilledWater.getLiquid(10)).add(1, 800);
 
     }
 }

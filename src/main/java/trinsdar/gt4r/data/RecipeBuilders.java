@@ -68,7 +68,7 @@ public class RecipeBuilders {
         public Recipe add() {
             Recipe recipe = super.add();
             if (recipe.hasInputFluids()) {
-                RecipeMaps.LARGE_GAS_FUELS.RB().fi(new FluidStack(Objects.requireNonNull(recipe.getInputFluids())[0].getFluid(), 20)).add(1, recipe.getDuration() * recipe.getPower() * 20L);
+                RecipeMaps.LARGE_GAS_FUELS.RB().fi(new FluidStack(Objects.requireNonNull(recipe.getInputFluids())[0].getFluid(), 50)).add(1, recipe.getDuration() * recipe.getPower() * 50L);
             }
             return recipe;
         }
