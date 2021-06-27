@@ -16,9 +16,21 @@ public class RecipeRenderer {
         public void render(MatrixStack stack, Recipe recipe, FontRenderer fontRenderer, int guiOffsetX, int guiOffsetY) {
             String fuelPerMb = "Fuel content(mb): " + ((double) (recipe.getPower() * recipe.getDuration()) / (double) Objects.requireNonNull(recipe.getInputFluids())[0].getAmount());
             String fuelPerB = "Fuel content(bb): " + ((double) (recipe.getPower() * recipe.getDuration()) / (double) Objects.requireNonNull(recipe.getInputFluids())[0].getAmount()) * 1000;
-            renderString(stack, fuelPerMb, fontRenderer, 5, 5, guiOffsetX, guiOffsetY);
-            renderString(stack, fuelPerB, fontRenderer, 5, 15, guiOffsetX, guiOffsetY);
-            renderString(stack, "Ticks: " + recipe.getDuration(), fontRenderer, 5, 25, guiOffsetX, guiOffsetY);
+            renderString(stack, fuelPerMb, fontRenderer, 5, 0, guiOffsetX, guiOffsetY);
+            renderString(stack, fuelPerB, fontRenderer, 5, 10, guiOffsetX, guiOffsetY);
+            renderString(stack, "Ticks: " + recipe.getDuration(), fontRenderer, 5, 20, guiOffsetX, guiOffsetY);
+        }
+    };
+
+    static final IRecipeInfoRenderer LARGE_FUEL_RENDERER = new IRecipeInfoRenderer() {
+        @Override
+        public void render(MatrixStack stack, Recipe recipe, FontRenderer fontRenderer, int guiOffsetX, int guiOffsetY) {
+            String fuelPerMb = "Fuel content(mb): " + ((double) (recipe.getPower() * recipe.getDuration()) / (double) Objects.requireNonNull(recipe.getInputFluids())[0].getAmount());
+            String fuelPerB = "Fuel content(bb): " + ((double) (recipe.getPower() * recipe.getDuration()) / (double) Objects.requireNonNull(recipe.getInputFluids())[0].getAmount()) * 1000;
+            renderString(stack, fuelPerMb, fontRenderer, 5, 0, guiOffsetX, guiOffsetY);
+            renderString(stack, fuelPerB, fontRenderer, 5, 10, guiOffsetX, guiOffsetY);
+            renderString(stack, "Base total eu/tick generated: " + recipe.getPower(), fontRenderer, 5, 20, guiOffsetX, guiOffsetY);
+            renderString(stack, "Ticks: " + recipe.getDuration(), fontRenderer, 5, 30, guiOffsetX, guiOffsetY);
         }
     };
 
@@ -37,6 +49,8 @@ public class RecipeRenderer {
         RecipeMaps.ORE_BYPRODUCTS.setInfoRenderer(InfoRenderers.EMPTY_RENDERER);
         RecipeMaps.STEAM_FUELS.setInfoRenderer(FUEL_RENDERER);
         RecipeMaps.GAS_FUELS.setInfoRenderer(FUEL_RENDERER);
+        RecipeMaps.LARGE_STEAM_FUELS.setInfoRenderer(LARGE_FUEL_RENDERER);
+        RecipeMaps.LARGE_GAS_FUELS.setInfoRenderer(LARGE_FUEL_RENDERER);
         RecipeMaps.DIESEL_FUELS.setInfoRenderer(FUEL_RENDERER);
         RecipeMaps.HOT_FUELS.setInfoRenderer(HOT_FUEL_RENDERER);
         RecipeMaps.SEMIFLUID_FUELS.setInfoRenderer(FUEL_RENDERER);

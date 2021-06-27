@@ -7,6 +7,7 @@ import muramasa.antimatter.recipe.map.RecipeBuilder;
 import muramasa.antimatter.recipe.map.RecipeMap;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -59,6 +60,17 @@ public class RecipeBuilders {
         @Override
         public Recipe add() {
             return addRecipeToSteamMap(RecipeMaps.STEAM_ALLOY_SMELTING, super.add());
+        }
+    }
+
+    public static class GasFuelBuilder extends RecipeBuilder {
+        @Override
+        public Recipe add() {
+            Recipe recipe = super.add();
+            if (recipe.hasInputFluids()) {
+                RecipeMaps.LARGE_GAS_FUELS.RB().fi(new FluidStack(Objects.requireNonNull(recipe.getInputFluids())[0].getFluid(), 20)).add(1, recipe.getDuration() * recipe.getPower() * 20L);
+            }
+            return recipe;
         }
     }
 

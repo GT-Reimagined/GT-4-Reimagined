@@ -14,11 +14,13 @@ import static trinsdar.gt4r.data.RecipeBuilders.*;
 public class RecipeMaps {
 
     public static RecipeMap<?> ORE_BYPRODUCTS = new RecipeMap<>("ore_byproducts", new RecipeBuilder());
-    public static RecipeMap<?> STEAM_FUELS = new RecipeMap<>("steam_fuels", new RecipeBuilder());
-    public static RecipeMap<?> GAS_FUELS = new RecipeMap<>("gas_fuels", new RecipeBuilder());
-    public static RecipeMap<?> DIESEL_FUELS = new RecipeMap<>("diesel_fuels", new RecipeBuilder());
-    public static RecipeMap<?> HOT_FUELS = new RecipeMap<>("hot_fuels", new RecipeBuilder());
-    public static RecipeMap<?> SEMIFLUID_FUELS = new RecipeMap<>("semifluid_fuels", new RecipeBuilder());
+    public static RecipeMap<?> STEAM_FUELS = new RecipeMap<>("steam_fuels", new RecipeBuilder(), MULTI_DISPLAY);
+    public static RecipeMap<?> GAS_FUELS = new RecipeMap<>("gas_fuels", new GasFuelBuilder(), MULTI_DISPLAY);
+    public static RecipeMap<?> LARGE_STEAM_FUELS = new RecipeMap<>("large_steam_fuels", new RecipeBuilder(), MULTI_DISPLAY);
+    public static RecipeMap<?> LARGE_GAS_FUELS = new RecipeMap<>("large_gas_fuels", new RecipeBuilder(), MULTI_DISPLAY);
+    public static RecipeMap<?> DIESEL_FUELS = new RecipeMap<>("diesel_fuels", new RecipeBuilder(), MULTI_DISPLAY);
+    public static RecipeMap<?> HOT_FUELS = new RecipeMap<>("hot_fuels", new RecipeBuilder(), MULTI_DISPLAY);
+    public static RecipeMap<?> SEMIFLUID_FUELS = new RecipeMap<>("semifluid_fuels", new RecipeBuilder(), MULTI_DISPLAY);
 
     public static RecipeMap<?> COAL_BOILERS = new RecipeMap<>("coal_boilers", new RecipeBuilder());
 

@@ -5,9 +5,12 @@ import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.recipe.Recipe;
 import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
 import muramasa.antimatter.util.Utils;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import trinsdar.gt4r.data.SlotTypes;
+import trinsdar.gt4r.items.ItemTurbineRotor;
 
 
 public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLargeTurbine> {
@@ -57,7 +60,7 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
                     }
                     //boolean shouldRun = tile.energyHandler.map(h -> h.insert((long)(tile.getMachineType().getMachineEfficiency()*(double)tile.getMachineTier().getVoltage()),true) > 0).orElse(false);
                     ///if (!shouldRun) return false;
-                    int recipeAmount = activeRecipe.getInputFluids()[0].getAmount();
+                    int recipeAmount = activeRecipe.getInputFluids()[0].getAmount() * 50;
                     long toConsume = recipeAmount; // calculateGeneratorConsumption(tile.getMachineTier().getVoltage(), activeRecipe);// (long) ((double)tile.getMachineTier().getVoltage() / (activeRecipe.getPower() /(double) Objects.requireNonNull(activeRecipe.getInputFluids())[0].getAmount()));
                     int consumed = tile.fluidHandler.map(h -> {
                         /*
@@ -84,6 +87,14 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
                         return true;
                     }
                     return false;
+                }
+
+                public float getEfficiency(){
+                    ItemStack stack = tile.itemHandler.map(i -> i.getHandler(SlotTypes.ROTOR).getStackInSlot(0)).orElse(ItemStack.EMPTY);
+                    if (!stack.isEmpty() && stack.getItem() instanceof ItemTurbineRotor){
+                        return ((ItemTurbineRotor)stack.getItem()).getRotorEfficiency();
+                    }
+                    return 0.0F;
                 }
             }
         );

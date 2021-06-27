@@ -188,11 +188,6 @@ public class Guis {
     public static void init(Dist side) {
 
         AntimatterAPI.registerJEICategory(RecipeMaps.ORE_BYPRODUCTS, Guis.ORE_BYPRODUCTS);
-        AntimatterAPI.registerJEICategory(RecipeMaps.STEAM_FUELS, Guis.MULTI_DISPLAY_COMPACT, STEAM_TURBINE);
-        AntimatterAPI.registerJEICategory(RecipeMaps.SEMIFLUID_FUELS, Guis.MULTI_DISPLAY_COMPACT, SEMIFLUID_GENERATOR);
-        AntimatterAPI.registerJEICategory(RecipeMaps.GAS_FUELS, Guis.MULTI_DISPLAY_COMPACT, GAS_TURBINE);
-        AntimatterAPI.registerJEICategory(RecipeMaps.DIESEL_FUELS, Guis.MULTI_DISPLAY_COMPACT, DIESEL_GENERATOR);
-        AntimatterAPI.registerJEICategory(RecipeMaps.HOT_FUELS, Guis.MULTI_DISPLAY_COMPACT, HEAT_EXCHANGER);
 
         //TODO changing slots of a machine in world, will crash from GTItemHandler.validateSlot()
 
@@ -249,6 +244,8 @@ public class Guis {
         IMPLOSION_COMPRESSOR.getGui().add(ALLOY_SMELTER).add(IT_OUT, 125, 25).setHasIOButton(false);
         INDUSTRIAL_SAWMILL.getGui().add(ORE_WASHER).setHasIOButton(false);
         INDUSTRIAL_GRINDER.getGui().add(BATH).setHasIOButton(false);
+        LARGE_GAS_TURBINE.getGui().add(ROTOR, 152, 5);
+        LARGE_STEAM_TURBINE.getGui().add(LARGE_GAS_TURBINE);
         PUMP.getGui().add(IT_IN, 53, 25).add(FL_OUT, 107, 25).add(ENERGY, 80, 63);
 
 
