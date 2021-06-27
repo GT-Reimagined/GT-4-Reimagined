@@ -80,7 +80,7 @@ public class Materials {
     /** Elements **/
     public static Material Aluminium = new Material(Ref.ID, "aluminium", 0x80c8f0, DULL, Al).asMetal(933, 1000, PLATE, ROD, GEAR, HULL);
     public static Material Beryllium = new Material(Ref.ID, "beryllium", 0x64b464, METALLIC, Be).asMetal(1560, 0, PLATE);
-    public static Material Carbon = new Material(Ref.ID, "carbon", 0x141414, DULL, C).asDust(TURBINE_BLADE, PLATE, TURBINE_ROTOR);
+    public static Material Carbon = new Material(Ref.ID, "carbon", 0x141414, DULL, C).asMetal(3800, 1000, TURBINE_BLADE, PLATE, TURBINE_ROTOR);
     public static Material Chrome = new Material(Ref.ID, "chrome", 0xffe6e6, SHINY, Cr).asMetal(2180, 1700, PLATE);
     public static Material Gold = new Material(Ref.ID, "gold", 0xffe650, SHINY, Au).asMetal(1337, 0, ROD, GEAR, ORE,  PLATE, ROD).harvestLevel(2);
     public static Material Iridium = new Material(Ref.ID, "iridium", 0xf0f0f5, DULL, Ir).asMetal(2719, 3000, PLATE, ORE).harvestLevel(3);
@@ -108,13 +108,13 @@ public class Materials {
     public static Material Hydrogen = new Material(Ref.ID, "hydrogen", 0x0000ff, NONE, H).asGas(15);
     public static Material Helium = new Material(Ref.ID, "helium", 0xffff00, NONE, He).asPlasma();
     public static Material Helium3 = new Material(Ref.ID, "helium_3", 0xffffff, NONE, He_3).asGas();
-    public static Material Lithium = new Material(Ref.ID, "lithium", 0xe1dcff, DULL, Li).asSolid(454, 0);
+    public static Material Lithium = new Material(Ref.ID, "lithium", 0xe1dcff, DULL, Li).asMetal(454, 0);
     public static Material Magnesium = new Material(Ref.ID, "magnesium", 0xffc8c8, METALLIC, Mg).asMetal(923, 0);
     public static Material Mercury = new Material(Ref.ID, "mercury", 0xffdcdc, SHINY, Hg).asFluid();
     public static Material Nitrogen = new Material(Ref.ID, "nitrogen", 0x0096c8, NONE, N).asPlasma();
     public static Material Oxygen = new Material(Ref.ID, "oxygen", 0x0064c8, NONE, O).asPlasma();
     public static Material Phosphor = new Material(Ref.ID, "phosphor", 0xffff00, DULL, P).asDust(317);
-    public static Material Potassium = new Material(Ref.ID, "potassium", 0xfafafa, METALLIC, K).asSolid(336, 0);
+    public static Material Potassium = new Material(Ref.ID, "potassium", 0xfafafa, METALLIC, K).asMetal(336, 0);
     public static Material Silicon = new Material(Ref.ID, "silicon", 0x3c3c50, METALLIC, Si).asMetal(1687, 1000, PLATE);
     public static Material Sodium = new Material(Ref.ID, "sodium", 0x000096, METALLIC, Na).asDust(370);
     public static Material Sulfur = new Material(Ref.ID, "sulfur", 0xc8c800, DULL, S).asDust(388).asPlasma();
@@ -368,6 +368,8 @@ public class Materials {
         Invar.remove(BOLT, SCREW);
         WroughtIron.remove(BOLT, SCREW);
         TungstenCarbide.remove(BOLT, SCREW);
+        Carbon.remove(INGOT, NUGGET, BLOCK);
+        //Lithium.remove(INGOT, NUGGET, BLOCK);
 
         Gold.remove(ORE_SMALL, ROCK);
         Iron.remove(ORE_SMALL, ROCK);

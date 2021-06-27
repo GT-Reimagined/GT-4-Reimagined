@@ -102,6 +102,25 @@ public class GT4RLocalizations {
                 super.add(key,  value.contains("Infinite") || value.contains("Transformer") || value.contains("Battery") ? value : (id.isEmpty() ? value.replace("Mv ", "").replace("Lv ", "").replace("Ulv ", "").replace("Hv ", "").replace("Ev ", "") : lowerUnderscoreToUpperSpaced(id)));
                 return;
             }
+            if (key.startsWith("item.gt4r.") && key.contains("bucket")){
+                String id;
+                if (value.startsWith("Liquid") || value.startsWith("Plasma")){
+                    id = value.substring(7).replace(" Bucket", "");
+                    if (value.startsWith("Plasma")){
+                        id = id + " Plasma";
+                    }
+                } else {
+                    id = value.substring(4).replace(" Bucket", "");
+                }
+                if (key.startsWith("item.gt4r.liquid_")){
+                    String molten = key.replace("item.gt4r.liquid_", "").replace("_bucket", "");
+                    if (Material.get(molten) != Data.NULL && Material.get(molten).has(MaterialTag.METAL)){
+                        id = value.replace("Liquid", "Molten").replace(" Bucket", "");
+                    }
+                }
+                super.add(key, id + " Bucket");
+                return;
+            }
             if (key.startsWith("block.gt4r.liquid")){
                 String id;
                 if (value.startsWith("Liquid") || value.startsWith("Plasma")){
