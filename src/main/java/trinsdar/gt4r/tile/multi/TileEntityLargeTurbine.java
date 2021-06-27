@@ -5,10 +5,12 @@ import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.recipe.Recipe;
 import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
 import muramasa.antimatter.util.Utils;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import trinsdar.gt4r.data.Materials;
 import trinsdar.gt4r.data.SlotTypes;
 import trinsdar.gt4r.items.ItemTurbineRotor;
 
@@ -21,6 +23,7 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
             new MachineRecipeHandler<TileEntityLargeTurbine>(this) {
 
                 private Recipe sourceRecipe;
+                private int ticker = 0;
                 private double efficiency;
 
                 @Override
@@ -40,7 +43,8 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
                     //if (!(t.getItem() instanceof ItemTurbine)) return null;
                    // ItemTurbine turbine = (ItemTurbine) t.getItem();
                     int flow = 120;//turbine.optimalEUT;
-                    efficiency = 1.15;//turbine.efficency;
+                    efficiency = getEfficiency();//turbine.efficency;
+                    if (efficiency <= 0.0F) return null;
                     long toConsume = calculateGeneratorConsumption(flow, sourceRecipe);
 
                     return Utils.getFluidPoweredRecipe(new FluidStack[]{new FluidStack(stacks[0].getFluid(),(int) toConsume)},
@@ -60,7 +64,7 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
                     }
                     //boolean shouldRun = tile.energyHandler.map(h -> h.insert((long)(tile.getMachineType().getMachineEfficiency()*(double)tile.getMachineTier().getVoltage()),true) > 0).orElse(false);
                     ///if (!shouldRun) return false;
-                    int recipeAmount = activeRecipe.getInputFluids()[0].getAmount() * 50;
+                    int recipeAmount = activeRecipe.getInputFluids()[0].getAmount();
                     long toConsume = recipeAmount; // calculateGeneratorConsumption(tile.getMachineTier().getVoltage(), activeRecipe);// (long) ((double)tile.getMachineTier().getVoltage() / (activeRecipe.getPower() /(double) Objects.requireNonNull(activeRecipe.getInputFluids())[0].getAmount()));
                     int consumed = tile.fluidHandler.map(h -> {
                         /*
@@ -76,11 +80,23 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
                         }
                         return 0;
                     }).orElse(0);
-                    if (consumed > 0){
+                    if (consumed > 0 && efficiency > 0.0F){
                         if (consumed < recipeAmount) consumed *= Math.pow(1d/(recipeAmount-consumed),0.04);
                         if (consumed > recipeAmount) consumed *= Math.pow(1d/(consumed-recipeAmount),0.04);
                         //Input energy
                         int finalConsumed = consumed;
+                        if (ticker == 20){
+                            ticker = 0;
+                            tile.itemHandler.ifPresent(h -> {
+                                ItemStack copy = h.getHandler(SlotTypes.ROTOR).getStackInSlot(0).copy();
+                                if (h.getHandler(SlotTypes.ROTOR).getStackInSlot(0).attemptDamageItem(1, tile.world.rand, null)){
+                                    if (copy.getItem() instanceof ItemTurbineRotor){
+                                        h.getHandler(SlotTypes.ROTOR).setStackInSlot(0, Materials.BROKEN_TURBINE_ROTOR.get(((ItemTurbineRotor)copy.getItem()).getMaterial(), 1));
+                                    }
+                                }
+                            });
+                        }
+                        ticker++;
                         if (!simulate) tile.energyHandler.ifPresent(handler -> {
                             handler.insert((long) (efficiency*activeRecipe.getPower()*finalConsumed/ recipeAmount), false);
                         });

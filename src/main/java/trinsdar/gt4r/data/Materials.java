@@ -68,6 +68,7 @@ public class Materials {
             return d;
         }
     });
+    public static MaterialTypeItem<?> BROKEN_TURBINE_ROTOR = new MaterialTypeItem<>("broken_turbine_rotor", 1, true, muramasa.antimatter.Ref.U * 17);
     public static MaterialTag FLINT_TAG = new MaterialTag("flint");
     public static MaterialTag SEMIFLUID = new MaterialTag("semifluid");
     public static MaterialTag CABINET = new MaterialTag("cabinet");
@@ -324,6 +325,7 @@ public class Materials {
         CHARGING_WORKBENCH.add(Iron, Aluminium);
         LOCKER.add(Iron, Aluminium);
         CHARGING_LOCKER.add(Iron, Aluminium);
+        TURBINE_ROTOR.all().forEach(m -> m.flags(BROKEN_TURBINE_ROTOR));
 
         ELEC.add(ELEC30.all().toArray(new Material[0]));
         ELEC.add(ELEC60.all().toArray(new Material[0]));
