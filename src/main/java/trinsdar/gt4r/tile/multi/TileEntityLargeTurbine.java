@@ -8,9 +8,13 @@ import muramasa.antimatter.recipe.Recipe;
 import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.block.Block;
+import net.minecraft.command.arguments.EntitySelector;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityPredicates;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -98,13 +102,23 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
                         int finalConsumed = consumed;
 
                         if (!simulate) {
-                            if (ticker == 20){
+                            if (ticker == 80){
                                 ticker = 0;
                                 tile.itemHandler.ifPresent(h -> {
                                     ItemStack copy = h.getHandler(SlotTypes.ROTOR).getStackInSlot(0).copy();
                                     if (h.getHandler(SlotTypes.ROTOR).getStackInSlot(0).attemptDamageItem(1, tile.world.rand, null)){
                                         if (copy.getItem() instanceof ItemTurbineRotor){
                                             h.getHandler(SlotTypes.ROTOR).setStackInSlot(0, Materials.BROKEN_TURBINE_ROTOR.get(((ItemTurbineRotor)copy.getItem()).getMaterial(), 1));
+                                        }
+                                        if (world.isPlayerWithin(tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ(), 5)){
+                                            for (PlayerEntity player : world.getPlayers()){
+                                                if (EntityPredicates.NOT_SPECTATING.test(player) && !player.isCreative()) {
+                                                    double d0 = player.getDistanceSq(tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ());
+                                                    if (d0 < 5 * 5) {
+                                                        player.attackEntityFrom(DamageSource.GENERIC, 8);
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                 });
