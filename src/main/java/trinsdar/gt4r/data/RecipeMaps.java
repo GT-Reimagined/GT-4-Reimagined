@@ -21,6 +21,7 @@ public class RecipeMaps {
     public static RecipeMap<?> DIESEL_FUELS = new RecipeMap<>("diesel_fuels", new RecipeBuilder(), MULTI_DISPLAY);
     public static RecipeMap<?> HOT_FUELS = new RecipeMap<>("hot_fuels", new RecipeBuilder(), MULTI_DISPLAY);
     public static RecipeMap<?> SEMIFLUID_FUELS = new RecipeMap<>("semifluid_fuels", new RecipeBuilder(), MULTI_DISPLAY);
+    public static RecipeMap<?> THERMAL_BOILER_FUELS = new RecipeMap<>("thermal_boiler_fuels", new RecipeBuilder(), MULTI_DISPLAY);
 
     public static RecipeMap<?> COAL_BOILERS = new RecipeMap<>("coal_boilers", new RecipeBuilder());
 

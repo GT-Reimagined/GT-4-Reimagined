@@ -47,6 +47,7 @@ public class RecipeRenderer {
 
     public static void clientMaps() {
         RecipeMaps.ORE_BYPRODUCTS.setInfoRenderer(InfoRenderers.EMPTY_RENDERER);
+        RecipeMaps.THERMAL_BOILER_FUELS.setInfoRenderer(InfoRenderers.EMPTY_RENDERER);
         RecipeMaps.STEAM_FUELS.setInfoRenderer(FUEL_RENDERER);
         RecipeMaps.GAS_FUELS.setInfoRenderer(FUEL_RENDERER);
         RecipeMaps.LARGE_STEAM_FUELS.setInfoRenderer(LARGE_FUEL_RENDERER);

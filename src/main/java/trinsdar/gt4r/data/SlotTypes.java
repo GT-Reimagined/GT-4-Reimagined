@@ -19,4 +19,5 @@ public class SlotTypes {
     public static SlotType<SlotCrafting> CRAFTING = new SlotType<>("crafting", (type, t, i, d) -> new SlotCrafting(t.itemHandler.map(m -> m.getHandler(type)).orElse(null), i, d.getX(), d.getY()), (t, i) -> true, ContentEvent.ITEM_INPUT_CHANGED);
     public static SlotType<AbstractSlot> PARK = new SlotType<>("park", (type, t, i, d) -> new AbstractSlot(type, t,t.itemHandler.map(m -> m.getHandler(type)).orElse(null), i, d.getX(), d.getY()), (t, i) -> true, ContentEvent.ITEM_INPUT_CHANGED);
     public static SlotType<AbstractSlot> ROTOR = new SlotType<>("rotor", (type, t, i, d) -> new AbstractSlot(type, t,t.itemHandler.map(m -> m.getHandler(type)).orElse(null), i, d.getX(), d.getY()), (t, i) -> i.getItem() instanceof ItemTurbineRotor, ContentEvent.ITEM_INPUT_CHANGED);
+    public static SlotType<AbstractSlot> FILTER = new SlotType<>("filter", (type, t, i, d) -> new AbstractSlot(type, t,t.itemHandler.map(m -> m.getHandler(type)).orElse(null), i, d.getX(), d.getY()), (t, i) -> i.getItem() == GT4RData.LavaFilter, ContentEvent.ITEM_INPUT_CHANGED);
 }
