@@ -9,6 +9,7 @@ import net.minecraft.item.Items;
 import net.minecraft.tags.ItemTags;
 import net.minecraftforge.common.Tags;
 import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.data.GT4RData;
 
 import java.util.function.Consumer;
 
@@ -187,5 +188,12 @@ public class MachineCrafting {
         provider.addItemRecipe(output, Ref.ID, "distillery", "machines", "has_machine_hull_basic", provider.hasSafeItem(MACHINE_HULLS_BASIC), DISTILLERY.getItem(LV), of('C', CIRCUITS_BASIC, 'G', Tags.Items.GLASS, 'M', MACHINE_HULLS_BASIC, 'P', PumpModule, 'B', ROD.getMaterialTag(Blaze)), " B ", "CMC", "GPG");
         provider.addItemRecipe(output, Ref.ID, "fluid_extractor", "machines", "has_machine_hull_basic", provider.hasSafeItem(MACHINE_HULLS_BASIC), FLUID_EXTRACTOR.getItem(LV), of('C', CIRCUITS_BASIC, 'G', Tags.Items.GLASS, 'M', MACHINE_HULLS_BASIC, 'P', PISTONS, 'p', PumpModule), " C ", "pMP", "GCG");
         provider.addItemRecipe(output, Ref.ID, "fluid_solidifier", "machines", "has_machine_hull_basic", provider.hasSafeItem(MACHINE_HULLS_BASIC), FLUID_SOLIDIFIER.getItem(LV), of('C', CIRCUITS_BASIC, 'G', Tags.Items.GLASS, 'M', MACHINE_HULLS_BASIC, 'P', PumpModule, 'c', Tags.Items.CHESTS_WOODEN), " G ", "PMP", "CcC");
+        provider.addItemRecipe(output, Ref.ID, "item_input_hatch", "hatches", "has_machine_hull_basic", provider.hasSafeItem(MACHINE_HULLS_BASIC), HATCH_ITEM_I.getItem(LV), of('P', PLATE.getMaterialTag(StainlessSteel), 'G', GEARS_STEELS, 'M', MACHINE_HULLS_BASIC, 'C', Tags.Items.CHESTS_WOODEN), "PCP", "GMG", "PPP");
+        provider.addItemRecipe(output, Ref.ID, "item_output_hatch", "hatches", "has_machine_hull_basic", provider.hasSafeItem(MACHINE_HULLS_BASIC), HATCH_ITEM_O.getItem(LV), of('P', PLATE.getMaterialTag(StainlessSteel), 'G', GEARS_STEELS, 'M', MACHINE_HULLS_BASIC, 'C', Tags.Items.CHESTS_WOODEN), "PPP", "GMG", "PCP");
+        provider.addItemRecipe(output, Ref.ID, "fluid_input_hatch", "hatches", "has_machine_hull_basic", provider.hasSafeItem(MACHINE_HULLS_BASIC), HATCH_FLUID_I.getItem(LV), of('P', PLATE.getMaterialTag(StainlessSteel), 'G', GEARS_STEELS, 'M', MACHINE_HULLS_BASIC, 'C', Tags.Items.GLASS), "PCP", "GMG", "PPP");
+        provider.addItemRecipe(output, Ref.ID, "fluid_output_hatch", "hatches", "has_machine_hull_basic", provider.hasSafeItem(MACHINE_HULLS_BASIC), HATCH_FLUID_O.getItem(LV), of('P', PLATE.getMaterialTag(StainlessSteel), 'G', GEARS_STEELS, 'M', MACHINE_HULLS_BASIC, 'C', Tags.Items.GLASS), "PPP", "GMG", "PCP");
+        provider.addItemRecipe(output, Ref.ID, "dynamo_hatch_ev", "hatches", "has_machine_hull_basic", provider.hasSafeItem(MACHINE_HULLS_BASIC), HATCH_DYNAMO.getItem(EV), of('P', PLATE.getMaterialTag(StainlessSteel), 'G', GEARS_STEELS, 'M', MACHINE_HULLS_BASIC, 'C', TIER_CABLES.get(EV).getBlock(PipeSize.VTINY)), "PPP", "GMG", "PCP");
+        provider.addItemRecipe(output, Ref.ID, "dynamo_hatch_iv", "hatches", "has_machine_hull_basic", provider.hasSafeItem(MACHINE_HULLS_BASIC), HATCH_DYNAMO.getItem(IV), of('P', PLATE.getMaterialTag(StainlessSteel), 'G', GEARS_STEELS, 'M', MACHINE_HULLS_BASIC, 'C', TIER_CABLES.get(IV).getBlock(PipeSize.VTINY)), "PPP", "GMG", "PCP");
+        provider.addItemRecipe(output, Ref.ID, "muffler_hatch", "hatches", "has_machine_hull_basic", provider.hasSafeItem(MACHINE_HULLS_BASIC), HATCH_MUFFLER.getItem(LV), of('P', PLATE.getMaterialTag(StainlessSteel), 'G', GEARS_STEELS, 'M', MACHINE_HULLS_BASIC, 'C', REINFORCED_GLASS), "PMP", "GCG", "PCP");
     }
 }

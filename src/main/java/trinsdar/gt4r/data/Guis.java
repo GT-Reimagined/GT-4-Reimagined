@@ -246,6 +246,7 @@ public class Guis {
         INDUSTRIAL_GRINDER.getGui().add(BATH).setHasIOButton(false);
         LARGE_GAS_TURBINE.getGui().add(ROTOR, 152, 5);
         LARGE_STEAM_TURBINE.getGui().add(LARGE_GAS_TURBINE);
+        THERMAL_BOILER.getGui().add(FILTER, 152, 5);
         PUMP.getGui().add(IT_IN, 53, 25).add(FL_OUT, 107, 25).add(ENERGY, 80, 63);
 
 

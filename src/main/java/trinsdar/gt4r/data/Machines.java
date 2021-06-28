@@ -86,7 +86,7 @@ public class Machines {
     public static BasicMultiMachine<?> INDUSTRIAL_SAWMILL = new BasicMultiMachine<>(Ref.ID, "industrial_sawmill", INDUSTRIAL_SAWMILLING, MV, GUI, ITEM, ENERGY, FLUID).setTile(m -> () -> new TileEntityIndustrialSawmill(m));
     public static BasicMultiMachine<?> DISTILLATION_TOWER = new BasicMultiMachine<>(Ref.ID, "distillation_tower", DISTILLING, MV, GUI, ITEM, ENERGY, FLUID).setTile(m -> () -> new TileEntityDistillationTower(m));
     public static BasicMultiMachine<?> VACUUM_FREEZER = new BasicMultiMachine<>(Ref.ID, "vacuum_freezer", VACUUM_FREEZING, LV, GUI, ITEM, FLUID,ENERGY).setTile(m -> () -> new TileEntityVacuumFreezer(m));
-    public static MultiMachine THERMAL_BOILER = new MultiMachine(Ref.ID, "thermal_boiler", LV, GUI, ITEM, FLUID, THERMAL_BOILER_FUELS).setTile(m -> () -> new TileEntityLargeBoiler(m));
+    public static MultiMachine THERMAL_BOILER = new MultiMachine(Ref.ID, "thermal_boiler", LV, GUI, ITEM, FLUID, THERMAL_BOILER_FUELS).setTile(m -> () -> new TileEntityThermalBoiler(m));
     public static MultiMachine LARGE_STEAM_TURBINE = new MultiMachine(Ref.ID, "large_steam_turbine", EV, GUI, FLUID,ENERGY, LARGE_STEAM_FUELS, GENERATOR).setTile(m -> () -> new TileEntityLargeTurbine(m));
     public static MultiMachine LARGE_GAS_TURBINE = new MultiMachine(Ref.ID, "large_gas_turbine", IV, GUI, FLUID,ENERGY, LARGE_GAS_FUELS, GENERATOR).setTile(m -> () -> new TileEntityLargeTurbine(m));
     public static MultiMachine LARGE_HEAT_EXCHANGER = new MultiMachine(Ref.ID, "large_heat_exchanger", EV, GUI, FLUID,ENERGY).setTile(m -> () -> new TileEntityLargeHeatExchanger(m));

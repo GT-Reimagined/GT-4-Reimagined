@@ -62,13 +62,17 @@ public class Structures {
         );
         LARGE_STEAM_TURBINE.setStructure(b -> b
             .of("CCCC", "CCCC", "CCCC").of("CHHC", "EAAM", "CHHC").of(0)
-            .at("M", LARGE_STEAM_TURBINE).at("C", STANDARD_MACHINE_CASING).at("H", STANDARD_MACHINE_CASING, HATCH_FLUID_I, HATCH_FLUID_O).at("E", HATCH_DYNAMO)
-            .build().offset(3, -1).min(28, STANDARD_MACHINE_CASING).min(1, HATCH_FLUID_I, HATCH_FLUID_O)
+            .at("M", LARGE_STEAM_TURBINE).at("C", STANDARD_MACHINE_CASING).at("H", STANDARD_MACHINE_CASING, HATCH_FLUID_I, HATCH_FLUID_O, HATCH_MUFFLER).at("E", HATCH_DYNAMO)
+            .build().offset(3, -1).min(28, STANDARD_MACHINE_CASING).min(1, HATCH_FLUID_I, HATCH_MUFFLER)
         );
+        THERMAL_BOILER.setStructure(b -> b
+                .of("CCC", "CHC", "CCC").of("CHC", "HAM", "CHC").of(0)
+                .at("M", THERMAL_BOILER).at("C", REINFORCED_MACHINE_CASING).at("H", REINFORCED_MACHINE_CASING, HATCH_FLUID_I, HATCH_FLUID_O, HATCH_ITEM_O)
+                .build().offset(2, -1).min(2, HATCH_FLUID_I).min(1, HATCH_FLUID_O).min(20, REINFORCED_MACHINE_CASING));
         LARGE_GAS_TURBINE.setStructure(b -> b
                 .of("CCCC", "CCCC", "CCCC").of("CHHC", "EAAM", "CHHC").of(0)
-                .at("M", LARGE_GAS_TURBINE).at("C", REINFORCED_MACHINE_CASING).at("H", STANDARD_MACHINE_CASING, HATCH_FLUID_I, HATCH_FLUID_O).at("E", HATCH_DYNAMO)
-                .build().offset(3, -1).min(28, STANDARD_MACHINE_CASING).min(1, HATCH_FLUID_I, HATCH_FLUID_O)
+                .at("M", LARGE_GAS_TURBINE).at("C", REINFORCED_MACHINE_CASING).at("H", STANDARD_MACHINE_CASING, HATCH_FLUID_I, HATCH_FLUID_O, HATCH_MUFFLER).at("E", HATCH_DYNAMO)
+                .build().offset(3, -1).min(28, STANDARD_MACHINE_CASING).min(1, HATCH_FLUID_I, HATCH_MUFFLER)
         );
         FUSION_REACTOR.setStructure(b -> b
             .of(
