@@ -7,14 +7,17 @@ import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.recipe.Recipe;
 import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
 import muramasa.antimatter.util.Utils;
+import muramasa.antimatter.util.int3;
 import net.minecraft.block.Block;
 import net.minecraft.command.arguments.EntitySelector;
+import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityPredicates;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -110,13 +113,11 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
                                         if (copy.getItem() instanceof ItemTurbineRotor){
                                             h.getHandler(SlotTypes.ROTOR).setStackInSlot(0, Materials.BROKEN_TURBINE_ROTOR.get(((ItemTurbineRotor)copy.getItem()).getMaterial(), 1));
                                         }
-                                        if (world.isPlayerWithin(tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ(), 5)){
-                                            for (PlayerEntity player : world.getPlayers()){
-                                                if (EntityPredicates.NOT_SPECTATING.test(player) && !player.isCreative()) {
-                                                    double d0 = player.getDistanceSq(tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ());
-                                                    if (d0 < 5 * 5) {
-                                                        player.attackEntityFrom(DamageSource.GENERIC, 8);
-                                                    }
+                                        for (PlayerEntity player : world.getTargettablePlayersWithinAABB(new EntityPredicate().setDistance(5.0D), null, new AxisAlignedBB(new int3(tile.getPos(), tile.getFacing()).left(2).back(5), new int3(tile.getPos(), tile.getFacing()).right(2)))){
+                                            if (EntityPredicates.NOT_SPECTATING.test(player) && !player.isCreative()) {
+                                                double d0 = player.getDistanceSq(tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ());
+                                                if (d0 < 5 * 5) {
+                                                    player.attackEntityFrom(DamageSource.GENERIC, 8);
                                                 }
                                             }
                                         }
