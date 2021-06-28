@@ -26,10 +26,13 @@ repositories {
     maven { url 'http://dvs1.progwml6.com/files/maven' }
     //maven { url 'https://jitpack.io' }
     maven {
-        url = "https://www.cursemaven.com"
+        url "https://maven.tterrag.com/"
     }
     maven {
-        url "https://maven.tterrag.com/"
+        url = "https://www.cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
@@ -58,17 +61,24 @@ sourceSets {
     }
 }
 
+def isVSTask() {
+    return gradle.startParameter.taskNames[0].equals("genVSCodeRuns")
+}
+
 def shouldCheckEnv() {
     return findProject(':AntimatterAPI') != null || findProject(':TesseractAPI') != null
 }
 
 def getEnv() {
-    String s = "gt4r%%${project.file('build/resources/main')}" + getPathSeparator() + "gt4r%%${project.file('build/classes/java/main')}"
+    boolean vscode = isVSTask()
+    String resourcePath = vscode ? 'bin/main' : 'build/resources/main'
+    String codePath = vscode ? 'bin/main' : 'build/classes/java/main'
+    String s = "gt4r%%${project.file(resourcePath)}" + getPathSeparator() + "gt4r%%${project.file(codePath)}"
     if (findProject(':AntimatterAPI') != null) {
-        s += getPathSeparator() + "antimatter%%${project(':AntimatterAPI').file('build/resources/main')}" + getPathSeparator() + "antimatter%%${project(':AntimatterAPI').file('build/classes/java/main')}"
+        s += getPathSeparator() + "antimatter%%${project(':AntimatterAPI').file(resourcePath)}" + getPathSeparator() + "antimatter%%${project(':AntimatterAPI').file(codePath)}"
     }
     if (findProject(':TesseractAPI') != null) {
-        s += getPathSeparator() + "tesseract%%${project(':TesseractAPI').file('build/resources/main')}" + getPathSeparator() + "tesseract%%${project(':TesseractAPI').file('build/classes/java/main')}"
+        s += getPathSeparator() + "tesseract%%${project(':TesseractAPI').file(resourcePath)}" + getPathSeparator() + "tesseract%%${project(':TesseractAPI').file(codePath)}"
     }
     return s
 }
@@ -101,6 +111,8 @@ minecraft {
             property 'forge.logging.markers', 'DEBUG'
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'DEBUG'
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
             arg "-mixin.config=gt4r.mixins.json"
@@ -177,6 +189,9 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:spartan_weaponry-278141:3164046")
     runtimeOnly fg.deobf("curse.maven:top-245211:${top_file}")
     runtimeOnly fg.deobf("curse.maven:mmmm-225738:3279930")
+    runtimeOnly fg.deobf("curse.maven:rhino-416294:${rhino_file}")
+    runtimeOnly fg.deobf("curse.maven:architectury-forge-419699:${architectury_file}")
+    runtimeOnly fg.deobf("curse.maven:kubejs-238086:${kubejs_file}")
 
     if (findProject(':AntimatterAPI') != null) {
         implementation project(':AntimatterAPI')

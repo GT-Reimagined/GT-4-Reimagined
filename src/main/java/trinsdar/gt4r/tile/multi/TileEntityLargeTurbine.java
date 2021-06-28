@@ -125,9 +125,6 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
                                 });
                             }
                             ticker++;
-                            /*if (activeRecipe.hasOutputFluids()){
-                                addOutputs();
-                            }*/
 
                             tile.energyHandler.ifPresent(handler -> {
                                 handler.insert((long) (efficiency*activeRecipe.getPower()/* *finalConsumed/ recipeAmount*/), false);
