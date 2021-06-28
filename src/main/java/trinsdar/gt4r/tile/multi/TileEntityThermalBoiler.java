@@ -9,6 +9,7 @@ import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.recipe.Recipe;
 import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 import trinsdar.gt4r.data.SlotTypes;
 
 import java.util.ArrayList;
@@ -23,6 +24,8 @@ public class TileEntityThermalBoiler extends TileEntityMultiMachine<TileEntityTh
         super(type);
         this.recipeHandler.set(() -> new MachineRecipeHandler<TileEntityThermalBoiler>(this){
 
+            int ticker = 0;
+
             @Override
             protected void addOutputs() {
                 if (itemHandler.map(h -> !h.getHandler(SlotTypes.FILTER).getStackInSlot(0).isEmpty()).orElse(false)){
@@ -32,10 +35,17 @@ public class TileEntityThermalBoiler extends TileEntityMultiMachine<TileEntityTh
                             ItemStack[] out = getOutputItems(activeRecipe,true);
                             if (h.canOutputsFit(out)) {
                                 h.addOutputs(out);
-                            } else {
-                                h.addOutputs(activeRecipe.getFlatOutputItems());
+                                tile.onMachineEvent(MachineEvent.ITEMS_OUTPUTTED);
+                                if (ticker < 80){
+                                    ticker++;
+                                } else {
+                                    if (!h.getHandler(SlotTypes.FILTER).getStackInSlot(0).attemptDamageItem(1, tile.getWorld().rand, null)){
+                                        h.getHandler(SlotTypes.FILTER).getStackInSlot(0).shrink(1);
+                                    }
+                                    ticker = 0;
+                                }
                             }
-                            tile.onMachineEvent(MachineEvent.ITEMS_OUTPUTTED);
+
                         });
                     }
 
@@ -46,6 +56,19 @@ public class TileEntityThermalBoiler extends TileEntityMultiMachine<TileEntityTh
                         tile.onMachineEvent(MachineEvent.FLUIDS_OUTPUTTED);
                     });
                 }
+            }
+
+            @Override
+            public CompoundNBT serializeNBT() {
+                CompoundNBT nbt = super.serializeNBT();
+                nbt.putInt("ticker", ticker);
+                return nbt;
+            }
+
+            @Override
+            public void deserializeNBT(CompoundNBT nbt) {
+                super.deserializeNBT(nbt);
+                ticker = nbt.getInt("ticker");
             }
 
             public ItemStack[] getOutputItems(Recipe r, boolean chance) {

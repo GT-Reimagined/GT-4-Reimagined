@@ -105,7 +105,9 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
                         int finalConsumed = consumed;
 
                         if (!simulate) {
-                            if (ticker == 80){
+                            if (ticker < 80){
+                                ticker++;
+                            } else {
                                 ticker = 0;
                                 tile.itemHandler.ifPresent(h -> {
                                     ItemStack copy = h.getHandler(SlotTypes.ROTOR).getStackInSlot(0).copy();
@@ -124,7 +126,6 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
                                     }
                                 });
                             }
-                            ticker++;
 
                             tile.energyHandler.ifPresent(handler -> {
                                 handler.insert((long) (efficiency*activeRecipe.getPower()/* *finalConsumed/ recipeAmount*/), false);
