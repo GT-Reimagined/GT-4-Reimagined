@@ -160,6 +160,7 @@ public class Materials {
     public static Material SulfuricAcid = AntimatterAPI.registerIfAbsent(Material.class,"sulfuric_acid",() -> new Material(Ref.ID, "sulfuric_acid", 0xff8000, NONE).asFluid().mats(of(Hydrogen, 2, Sulfur, 1, Oxygen, 4)));
     public static Material NitroCarbon = AntimatterAPI.registerIfAbsent(Material.class,"nitro_carbon",() -> new Material(Ref.ID, "nitro_carbon", 0x1f5e5e, NONE).asFluid().mats(of(Nitrogen, 1, Carbon, 1)));
 
+
     /** Fuels **/
     public static Material Diesel = AntimatterAPI.registerIfAbsent(Material.class,"diesel",() -> new Material(Ref.ID, "diesel", 0xffff00, NONE).asFluid(128));
     public static Material Gasoline = AntimatterAPI.registerIfAbsent(Material.class,"gasoline",() -> new Material(Ref.ID, "gasoline", 0x84723e, NONE).asFluid(128));
@@ -172,11 +173,12 @@ public class Materials {
     public static Material Naphtha = AntimatterAPI.registerIfAbsent(Material.class,"naphtha",() -> new Material(Ref.ID, "naphtha", 0xffff64, NONE).asFluid(128));
     public static Material NitroCoalFuel = AntimatterAPI.registerIfAbsent(Material.class,"nitro-coalfuel",() -> new Material(Ref.ID, "nitro-coalfuel", 0x002b2b, NONE).asFluid(48));
     public static Material CoalFuel = AntimatterAPI.registerIfAbsent(Material.class,"coalfuel",() -> new Material(Ref.ID, "coalfuel", 0x0f0f0f, NONE).asFluid(16));
-
+    public static Material FishOil = AntimatterAPI.registerIfAbsent(Material.class, "fish_oil", () -> new Material(Ref.ID, "fish_oil", 0xffc400, NONE).asFluid(6).flags(SEMIFLUID));
     public static Material Oil = AntimatterAPI.registerIfAbsent(Material.class,"oil",() -> new Material(Ref.ID, "oil", 0x0a0a0a, NONE).asFluid(15).flags(SEMIFLUID));
     public static Material SeedOil = AntimatterAPI.registerIfAbsent(Material.class,"seed_oil",() -> new Material(Ref.ID, "seed_oil", 0xc4ff00, NONE).asFluid(6).flags(SEMIFLUID));
     //public static Materials SeedOilHemp = new Materials(722, "Hemp Seed Oil", 196, 255, 0, lime, NONE).asSemi(2);
     //public static Materials SeedOilLin = new Materials(723, "Lin Seed Oil", 196, 255, 0, lime, NONE).asSemi(2);
+    public static Material Glycerol = AntimatterAPI.registerIfAbsent(Material.class,"glycerol",() -> new Material(Ref.ID, "glycerol", 0x87de87, NONE).asFluid(160).mats(of(Carbon, 3, Hydrogen, 8, Oxygen, 3)));
 
     /** Dusts **/
     public static Material SodiumSulfide = AntimatterAPI.registerIfAbsent(Material.class,"sodium_sulfide",() -> new Material(Ref.ID, "sodium_sulfide", 0xffe680, NONE).asDust().mats(of(Sodium, 2, Sulfur, 1)));
@@ -202,6 +204,7 @@ public class Materials {
     public static Material Pyrope = AntimatterAPI.registerIfAbsent(Material.class,"pyrope",() -> new Material(Ref.ID, "pyrope", 0x783264, METALLIC).asDust().mats(of(Aluminium, 2, Magnesium, 3, Silicon, 3, Oxygen, 12)));
     public static Material Saltpeter = AntimatterAPI.registerIfAbsent(Material.class,"saltpeter",() -> new Material(Ref.ID, "saltpeter", 0xe6e6e6, FINE).asDust().mats(of(Potassium, 1, Nitrogen, 1, Oxygen, 3)));
     public static Material SiliconDioxide = AntimatterAPI.registerIfAbsent(Material.class,"silicon_dioxide",() -> new Material(Ref.ID, "silicon_dioxide", 0xc8c8c8, QUARTZ).asDust().mats(of(Silicon, 1, Oxygen, 2)));
+    public static Material SodiumHydroxide = AntimatterAPI.registerIfAbsent(Material.class, "sodium_hydroxide", () -> new Material(Ref.ID, "sodium_hydroxide", 0x003380, DULL).asDust().mats(of(Sodium, 1, Oxygen, 1, Hydrogen, 1)));
     public static Material Brick = AntimatterAPI.registerIfAbsent(Material.class,"brick",() -> new Material(Ref.ID, "brick", 0x9b5643, ROUGH).asDust().mats(of(Aluminium, 4, Silicon, 3, Oxygen, 12)));
     public static Material Fireclay = AntimatterAPI.registerIfAbsent(Material.class,"fireclay",() -> new Material(Ref.ID, "fireclay", 0xada09b, ROUGH).asDust().mats(of(Brick, 1)));
     public static Material Spessartine = AntimatterAPI.registerIfAbsent(Material.class,"spessartine",() -> new Material(Ref.ID, "spessartine", 0xff6464, DULL).asDust().mats(of(Aluminium, 2, Manganese, 3, Silicon, 3, Oxygen, 12)));

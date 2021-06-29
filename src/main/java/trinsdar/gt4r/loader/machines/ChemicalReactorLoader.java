@@ -8,6 +8,7 @@ import net.minecraftforge.fluids.FluidStack;
 import trinsdar.gt4r.data.GT4RData;
 
 import static muramasa.antimatter.Data.DUST;
+import static muramasa.antimatter.Data.DUST_TINY;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.CHEMICAL_REACTING;
 
@@ -35,5 +36,8 @@ public class ChemicalReactorLoader {
         CHEMICAL_REACTING.RB().ii(DUST.getMaterialIngredient(Silicon, 1)).fi(Oxygen.getGas(2000)).io(DUST.get(SiliconDioxide, 3)).add(50,30);
         CHEMICAL_REACTING.RB().fi(NitricOxide.getGas(1000), Oxygen.getGas(1000)).fo(NitrogenDioxide.getGas(1000)).add(20, 30);
         CHEMICAL_REACTING.RB().fi(Oxygen.getGas(500), Hydrogen.getGas(1000)).fo(DistilledWater.getLiquid(1500)).add(5, 30);
+        CHEMICAL_REACTING.RB().fi(FishOil.getLiquid(6000), Ethanol.getLiquid(1000)).ii(DUST_TINY.getMaterialIngredient(SodiumHydroxide, 1)).fo(BioDiesel.getLiquid(6000), Glycerol.getLiquid(1000)).add(600, 30);
+        CHEMICAL_REACTING.RB().fi(SeedOil.getLiquid(6000), Ethanol.getLiquid(1000)).ii(DUST_TINY.getMaterialIngredient(SodiumHydroxide, 1)).fo(BioDiesel.getLiquid(6000), Glycerol.getLiquid(1000)).add(600, 30);
+        CHEMICAL_REACTING.RB().fi(new FluidStack(Fluids.WATER, 3000)).ii(DUST.getMaterialIngredient(Sodium, 1)).fo(Hydrogen.getGas(1000)).io(DUST.get(SodiumHydroxide, 3)).add(600, 30);
     }
 }
