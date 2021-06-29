@@ -8,6 +8,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.RegistryKey;
@@ -62,6 +63,7 @@ public class CoverDrain extends BaseCover {
         if (world.getGameTime() % (20) != 0) {
             return;
         }
+        BlockState blockState = world.getBlockState(offset);
         FluidState state = world.getFluidState(offset);
         if (state.getFluid() == Fluids.EMPTY) return;
         Fluid fluid = state.getFluid();
@@ -71,7 +73,11 @@ public class CoverDrain extends BaseCover {
                 int filled = f.fill(toInsert, EXECUTE);
                 if (filled > 0) {
                     if (fluid != Fluids.WATER || (!BiomeDictionary.hasType(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, world.getBiome(offset).getRegistryName()), BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, world.getBiome(offset).getRegistryName()), BiomeDictionary.Type.RIVER))){
-                        world.setBlockState(offset, Blocks.AIR.getDefaultState());
+                        BlockState newState = Blocks.AIR.getDefaultState();
+                        if (fluid == Fluids.WATER && blockState.getBlock() != Blocks.WATER && blockState.hasProperty(BlockStateProperties.WATERLOGGED) && blockState.get(BlockStateProperties.WATERLOGGED)){
+                            newState = blockState.with(BlockStateProperties.WATERLOGGED, false);
+                        }
+                        world.setBlockState(offset, newState);
                     }
                     break;
                 }
