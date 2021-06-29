@@ -3,11 +3,14 @@ package trinsdar.gt4r.loader.machines;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.tags.ItemTags;
 import net.minecraftforge.common.Tags;
 
 import static muramasa.antimatter.Data.*;
 import static trinsdar.gt4r.data.Materials.FishOil;
+import static trinsdar.gt4r.data.Materials.Honey;
 import static trinsdar.gt4r.data.Materials.SeedOil;
 import static trinsdar.gt4r.data.RecipeMaps.FLUID_EXTRACTING;
 
@@ -39,6 +42,11 @@ public class FluidExtractorLoader {
         FLUID_EXTRACTING.RB()
                 .ii(RecipeIngredient.of(ItemTags.FISHES,1))
                 .fo(FishOil.getLiquid(10))
+                .add(32, 2);
+        FLUID_EXTRACTING.RB()
+                .ii(RecipeIngredient.of(Items.HONEY_BOTTLE,1))
+                .fo(Honey.getLiquid(250))
+                .io(new ItemStack(Items.GLASS_BOTTLE))
                 .add(32, 2);
     }
 

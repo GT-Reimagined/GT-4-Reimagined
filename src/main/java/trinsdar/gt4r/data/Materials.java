@@ -15,6 +15,7 @@ import net.minecraft.item.ItemTier;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidAttributes;
+import org.apache.maven.artifact.resolver.MultipleArtifactsNotFoundException;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.items.ItemTurbineRotor;
 
@@ -159,7 +160,7 @@ public class Materials {
     //public static Material HydrochloricAcid = AntimatterAPI.registerIfAbsent(Material.class,"hydrochloric_acid",() -> new Material(Ref.ID, "hydrochloric_acid", 0x6f8a91, NONE).asFluid().mats(of(Hydrogen, 1, Chlorine, 1)));
     public static Material SulfuricAcid = AntimatterAPI.registerIfAbsent(Material.class,"sulfuric_acid",() -> new Material(Ref.ID, "sulfuric_acid", 0xff8000, NONE).asFluid().mats(of(Hydrogen, 2, Sulfur, 1, Oxygen, 4)));
     public static Material NitroCarbon = AntimatterAPI.registerIfAbsent(Material.class,"nitro_carbon",() -> new Material(Ref.ID, "nitro_carbon", 0x1f5e5e, NONE).asFluid().mats(of(Nitrogen, 1, Carbon, 1)));
-
+    public static Material Honey = AntimatterAPI.registerIfAbsent(Material.class, "honey", () -> new Material(Ref.ID, "honey", 0xfac800, NONE).asFluid());
 
     /** Fuels **/
     public static Material Diesel = AntimatterAPI.registerIfAbsent(Material.class,"diesel",() -> new Material(Ref.ID, "diesel", 0xffff00, NONE).asFluid(128));
@@ -181,6 +182,7 @@ public class Materials {
     public static Material Glycerol = AntimatterAPI.registerIfAbsent(Material.class,"glycerol",() -> new Material(Ref.ID, "glycerol", 0x87de87, NONE).asFluid(160).mats(of(Carbon, 3, Hydrogen, 8, Oxygen, 3)));
 
     /** Dusts **/
+    public static Material Sugar = AntimatterAPI.registerIfAbsent(Material.class, "sugar", () -> new Material(Ref.ID, "sugar", 0xfafafa, DULL).asDust());
     public static Material SodiumSulfide = AntimatterAPI.registerIfAbsent(Material.class,"sodium_sulfide",() -> new Material(Ref.ID, "sodium_sulfide", 0xffe680, NONE).asDust().mats(of(Sodium, 2, Sulfur, 1)));
     public static Material PlatinumGroupSludge = AntimatterAPI.registerIfAbsent(Material.class,"platinum_group_sludge",() -> new Material(Ref.ID, "platinum_group_sludge", 0x001e00, NONE).asDust());
     public static Material Glowstone = AntimatterAPI.registerIfAbsent(Material.class,"glowstone",() -> new Material(Ref.ID, "glowstone", 0xffff00, SHINY).asDust());
@@ -343,6 +345,7 @@ public class Materials {
         DUST.forceOverride(Redstone, Items.REDSTONE);
         DUST.forceOverride(Glowstone, Items.GLOWSTONE_DUST);
         DUST.forceOverride(Blaze, Items.BLAZE_POWDER);
+        DUST.forceOverride(Sugar, Items.SUGAR);
         GEM.forceOverride(Flint, Items.FLINT);
         GEM.forceOverride(Diamond, Items.DIAMOND);
         GEM.forceOverride(Emerald, Items.EMERALD);
