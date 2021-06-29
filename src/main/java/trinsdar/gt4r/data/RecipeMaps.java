@@ -14,6 +14,7 @@ import static trinsdar.gt4r.data.RecipeBuilders.*;
 public class RecipeMaps {
 
     public static RecipeMap<?> ORE_BYPRODUCTS = new RecipeMap<>("ore_byproducts", new RecipeBuilder());
+    public static RecipeMap<?> INT_CIRCUITS = new RecipeMap<>("int_circuits", new RecipeBuilder());
     public static RecipeMap<?> STEAM_FUELS = new RecipeMap<>("steam_fuels", new RecipeBuilder(), MULTI_DISPLAY);
     public static RecipeMap<?> GAS_FUELS = new RecipeMap<>("gas_fuels", new GasFuelBuilder(), MULTI_DISPLAY);
     public static RecipeMap<?> LARGE_STEAM_FUELS = new RecipeMap<>("large_steam_fuels", new RecipeBuilder(), MULTI_DISPLAY);

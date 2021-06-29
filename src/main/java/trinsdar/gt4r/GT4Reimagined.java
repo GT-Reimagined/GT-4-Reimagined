@@ -28,6 +28,7 @@ import trinsdar.gt4r.datagen.GT4RItemTagProvider;
 import trinsdar.gt4r.datagen.GT4RLocalizations;
 import trinsdar.gt4r.datagen.GT4RRecipes;
 import trinsdar.gt4r.datagen.ProgressionAdvancements;
+import trinsdar.gt4r.loader.IntCircuitJeiLoader;
 import trinsdar.gt4r.loader.WorldGenLoader;
 import trinsdar.gt4r.loader.machines.*;
 import trinsdar.gt4r.loader.machines.generator.CoalBoilerHandler;
@@ -132,6 +133,7 @@ public class GT4Reimagined extends AntimatterMod {
         loader.add(CokeOven::init);
         loader.add(FurnaceLoader::init);
         loader.add(DustbinLoader::init);
+        loader.add(IntCircuitJeiLoader::init);
     }
 
     private void clientSetup(final FMLClientSetupEvent e) {

@@ -22,6 +22,13 @@ public class RecipeRenderer {
         }
     };
 
+    static final IRecipeInfoRenderer INT_CIRCUIT_RENDERER = new IRecipeInfoRenderer() {
+        @Override
+        public void render(MatrixStack stack, Recipe recipe, FontRenderer fontRenderer, int guiOffsetX, int guiOffsetY) {
+            renderString(stack, "Right click to cycle", fontRenderer, 5, 0, guiOffsetX, guiOffsetY);
+        }
+    };
+
     static final IRecipeInfoRenderer LARGE_FUEL_RENDERER = new IRecipeInfoRenderer() {
         @Override
         public void render(MatrixStack stack, Recipe recipe, FontRenderer fontRenderer, int guiOffsetX, int guiOffsetY) {
@@ -47,6 +54,7 @@ public class RecipeRenderer {
 
     public static void clientMaps() {
         RecipeMaps.ORE_BYPRODUCTS.setInfoRenderer(InfoRenderers.EMPTY_RENDERER);
+        RecipeMaps.INT_CIRCUITS.setInfoRenderer(INT_CIRCUIT_RENDERER);
         RecipeMaps.THERMAL_BOILER_FUELS.setInfoRenderer(InfoRenderers.EMPTY_RENDERER);
         RecipeMaps.STEAM_FUELS.setInfoRenderer(FUEL_RENDERER);
         RecipeMaps.GAS_FUELS.setInfoRenderer(FUEL_RENDERER);
