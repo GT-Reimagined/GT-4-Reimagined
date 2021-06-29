@@ -11,13 +11,12 @@ import net.minecraft.item.Item;
 import trinsdar.gt4r.block.BlockNonSolidMachine;
 
 import static muramasa.antimatter.machine.MachineFlag.BASIC;
-import static muramasa.antimatter.machine.MachineFlag.CONFIGURABLE;
 import static muramasa.antimatter.machine.MachineFlag.ENERGY;
 
 public class NonSolidMachine extends Machine<NonSolidMachine> {
-    public NonSolidMachine(String domain, String id, Object... data) {
-        super(domain, id, data);
-        addFlags(BASIC, ENERGY, CONFIGURABLE);
+    public NonSolidMachine(String domain, String id) {
+        super(domain, id);
+        addFlags(BASIC, ENERGY);
         setTile(() -> new TileEntityMachine(this));
         setGUI(Data.BASIC_MENU_HANDLER);
     }

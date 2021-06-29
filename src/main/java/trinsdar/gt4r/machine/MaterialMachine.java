@@ -2,33 +2,24 @@ package trinsdar.gt4r.machine;
 
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.cover.ICover;
-import muramasa.antimatter.machine.BlockMachine;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.Machine;
-import muramasa.antimatter.machine.types.TankMachine;
 import muramasa.antimatter.material.Material;
-import muramasa.antimatter.texture.Texture;
-import muramasa.antimatter.tile.TileEntityTank;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import trinsdar.gt4r.block.BlockMachineMaterial;
-import trinsdar.gt4r.data.Textures;
-import trinsdar.gt4r.tile.single.TileEntityDrum;
 import trinsdar.gt4r.tile.single.TileEntityMaterial;
 
-import static muramasa.antimatter.machine.MachineFlag.CONFIGURABLE;
 import static muramasa.antimatter.machine.MachineFlag.COVERABLE;
-import static muramasa.antimatter.machine.MachineFlag.FLUID;
-import static muramasa.antimatter.machine.MachineFlag.ITEM;
 
 public class MaterialMachine extends Machine<MaterialMachine> {
     Material material;
-    public MaterialMachine(String domain, String id, Material material, Object... data) {
-        super(domain, id, data);
+    public MaterialMachine(String domain, String id, Material material) {
+        super(domain, id);
         this.material = material;
         setTile(() -> new TileEntityMaterial<>(this));
-        addFlags(CONFIGURABLE, COVERABLE);
+        addFlags(COVERABLE);
         covers((ICover[]) null);
         frontCovers();
     }
