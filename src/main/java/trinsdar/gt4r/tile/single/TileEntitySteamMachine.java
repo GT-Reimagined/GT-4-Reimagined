@@ -28,15 +28,6 @@ public class TileEntitySteamMachine extends TileEntityMachine<TileEntitySteamMac
         return Tier.LV;
     }
 
-    @Override
-    public void onBlockUpdate(BlockPos neighbor) {
-        super.onBlockUpdate(neighbor);
-        if (neighbor.equals(this.getPos().offset(this.getOutputFacing()))){
-            this.recipeHandler.ifPresent(h -> ((SteamMachineRecipeHandler)h).isSteamClear = world.isAirBlock(neighbor));
-        }
-
-    }
-
     public static class SteamMachineRecipeHandler extends MachineRecipeHandler<TileEntitySteamMachine>{
         protected boolean isSteamClear = false;
 
@@ -53,6 +44,10 @@ public class TileEntitySteamMachine extends TileEntityMachine<TileEntitySteamMac
         @Override
         protected boolean validateRecipe(Recipe r) {
             return r.getPower() <= Tier.LV.getVoltage();
+        }
+
+        public void setSteamClear(boolean steamClear) {
+            isSteamClear = steamClear;
         }
 
         @Override
