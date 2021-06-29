@@ -37,6 +37,7 @@ public class CoverConveyor extends CoverBasicTransport {
 
     @Override
     public void onUpdate(CoverStack<?> instance, Direction side) {
+        //if (instance.getTile().getWorld().isRemote) return;
         if (instance.getTile() == null)
             return;
         boolean isMachine = instance.getTile() instanceof TileEntityMachine;

@@ -65,7 +65,7 @@ public class AssemblyLoader {
         ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Electrum, 2), of(CIRCUITS_BASIC, 1)).io(new ItemStack(CircuitBoardAdv)).add(1600,2);
         ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Electrum, 4), PLATE.getMaterialIngredient(Silicon, 1)).io(new ItemStack(CircuitBoardAdv, 2)).add(1600,2);
         ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Platinum, 1), of(CIRCUITS_ADVANCED, 1)).io(new ItemStack(CircuitBoardProcessor)).add(1600,2);
-        ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Magnalium, 2), of(MACHINE_HULLS_BASIC, 1), of(BatteryRE, 1)).io(new ItemStack(WINDMILL.getItem(ULV), 1)).add(6400, 8);
+        ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Magnalium, 2), of(MACHINE_HULLS_BASIC, 1), of(BatteryRE, 1).setIgnoreNbt()).io(new ItemStack(WINDMILL.getItem(ULV), 1)).add(6400, 8);
         ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(TungstenSteel, 1), of(REINFORCED_STONE, 1)).io(new ItemStack(TUNGSTENSTEEL_REINFORCED_STONE)).add(400, 4);
         ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(TungstenSteel, 1), of(IRIDIUM_REINFORCED_STONE, 1)).io(new ItemStack(IRIDIUM_TUNGSTENSTEEL_REINFORCED_STONE)).add(400, 4);
         ASSEMBLING.RB().ii(of(IridiumReinforcedPlate, 1), of(REINFORCED_STONE, 1)).io(new ItemStack(IRIDIUM_REINFORCED_STONE)).add(400, 4);
@@ -90,7 +90,7 @@ public class AssemblyLoader {
         ASSEMBLING.RB().ii(of(getTag("forge", "rods/wooden"), 1), of(Tags.Items.COBBLESTONE, 1)).io(new ItemStack(Items.LEVER, 1)).add(400, 1);
         ASSEMBLING.RB().ii(of(CircuitBoardBasic, 1), of(CABLE_COPPER.getBlockItem(PipeSize.VTINY), 3)).io(new ItemStack(CircuitBasic)).add(800, 1);
         ASSEMBLING.RB().ii(of(CompressedCoalBall, 8), of(BLOCK.getMaterialTag(Iron), 1)).io(new ItemStack(CoalChunk)).add(400, 4);
-        ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Carbon, 4), of(MACHINE_HULLS_BASIC, 1), of(BatteryRE, 1)).io(new ItemStack(WINDMILL.getItem(ULV), 1)).add(6400, 8);
+        ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Carbon, 4), of(MACHINE_HULLS_BASIC, 1), of(BatteryRE, 1).setIgnoreNbt()).io(new ItemStack(WINDMILL.getItem(ULV), 1)).add(6400, 8);
         //missing
         ASSEMBLING.RB().ii(of(AdvancedAlloy, 1), of(getForgeItemTag("stone"), 8)).io(new ItemStack(REINFORCED_STONE, 8)).add(400, 4);
         ASSEMBLING.RB().ii(of(PLATE.getMaterialTag(Wood), 8), DUST.getMaterialIngredient(Redstone, 1)).io(new ItemStack(Items.NOTE_BLOCK)).add(800, 1);

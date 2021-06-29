@@ -85,7 +85,7 @@ public class GT4RBlockLootProvider extends AntimatterBlockLootProvider {
                 if (mat == Cinnabar){
                     builder = builder.addLootPool(LootPool.builder().rolls(ConstantRange.of(1)).acceptCondition(BlockLootTablesAccessor.getNoSilkTouch()).addEntry(ItemLootEntry.builder(DUST.get(Redstone)).acceptFunction(GT4RRandomDropBonus.randomDrops(Enchantments.FORTUNE, 4))));
                 } else if (mat == Sphalerite){
-                    builder = builder.addLootPool(LootPool.builder().rolls(ConstantRange.of(1)).acceptCondition(BlockLootTablesAccessor.getNoSilkTouch()).addEntry(ItemLootEntry.builder(DUST.get(Zinc)).acceptFunction(GT4RRandomDropBonus.randomDrops(Enchantments.FORTUNE, 4)))).addLootPool(LootPool.builder().rolls(ConstantRange.of(1)).acceptCondition(BlockLootTablesAccessor.getNoSilkTouch()).addEntry(ItemLootEntry.builder(GEM.get(RedGarnet)).acceptFunction(GT4RRandomDropBonus.randomDrops(Enchantments.FORTUNE, 32))));
+                    builder = builder.addLootPool(LootPool.builder().rolls(ConstantRange.of(1)).acceptCondition(BlockLootTablesAccessor.getNoSilkTouch()).addEntry(ItemLootEntry.builder(DUST.get(Zinc)).acceptFunction(GT4RRandomDropBonus.randomDrops(Enchantments.FORTUNE, 4)))).addLootPool(LootPool.builder().rolls(ConstantRange.of(1)).acceptCondition(BlockLootTablesAccessor.getNoSilkTouch()).addEntry(ItemLootEntry.builder(GEM.get(YellowGarnet)).acceptFunction(GT4RRandomDropBonus.randomDrops(Enchantments.FORTUNE, 32))));
                 }
                 LootTable.Builder finalBuilder = builder;
                 tables.put(block, b -> finalBuilder);
