@@ -63,5 +63,8 @@ public class CompressorLoader {
         COMPRESSING.RB().ii(RecipeIngredient.of(VINES, 8)).io(new ItemStack(Plantball)).add(300, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(Items.KELP, 8)).io(new ItemStack(Plantball)).add(300, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(Items.DRIED_KELP, 8)).io(new ItemStack(Plantball)).add(300, 2);
+        COMPRESSING.RB().ii(RecipeIngredient.of(Items.PUMPKIN, 4)).io(new ItemStack(Plantball)).add(300, 2);
+        COMPRESSING.RB().ii(RecipeIngredient.of(Items.MELON, 4)).io(new ItemStack(Plantball)).add(300, 2);
+        COMPRESSING.RB().ii(RecipeIngredient.of(Items.MELON_SLICE, 8)).io(new ItemStack(Plantball)).add(300, 2);
     }
 }
