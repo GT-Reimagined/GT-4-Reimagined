@@ -35,6 +35,7 @@ public class CoverPump extends CoverBasicTransport {
 
     @Override
     public void onUpdate(CoverStack<?> instance, Direction side) {
+        if (instance.getTile().getWorld().isRemote) return;
         if (instance.getTile() == null) return;
         TileEntity adjTile = instance.getTile().getWorld().getTileEntity(instance.getTile().getPos().offset(side));
         if (adjTile == null) return;
