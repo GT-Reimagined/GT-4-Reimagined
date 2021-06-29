@@ -40,6 +40,7 @@ public class CoverDrain extends BaseCover {
 
     @Override
     public void onUpdate(CoverStack<?> instance, Direction side) {
+        if (instance.getTile().getWorld().isRemote) return;
         TileEntity tile = instance.getTile();
         if (tile == null) {
             return;
