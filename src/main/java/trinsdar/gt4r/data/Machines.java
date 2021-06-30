@@ -92,16 +92,16 @@ public class Machines {
     public static MultiMachine LARGE_HEAT_EXCHANGER = new MultiMachine(Ref.ID, "large_heat_exchanger").setTiers(EV).addFlags(GUI, FLUID, ENERGY).setTile(m -> () -> new TileEntityLargeHeatExchanger(m));
     public static MultiMachine FUSION_REACTOR = new MultiMachine(Ref.ID, "fusion_control_computer").setMap(FUSION).setTiers(IV).addFlags(GUI, FLUID, ENERGY).setTile(m -> () -> new TileEntityFusionReactor(m));
 
-    public static HatchMachine HATCH_ITEM_I = new HatchMachine(Ref.ID, "hatch_item_input").addFlags(GUI, ITEM).covers(COVERINPUT).setTiers(LV);
-    public static HatchMachine HATCH_ITEM_O = new HatchMachine(Ref.ID, "hatch_item_output").addFlags(GUI, ITEM).covers(COVEROUTPUT).setTiers(LV);
-    public static HatchMachine HATCH_FLUID_I = new HatchMachine(Ref.ID, "hatch_fluid_input").addFlags(GUI, FLUID, CELL).covers(COVERINPUT).setTiers(LV);
-    public static HatchMachine HATCH_FLUID_O = new HatchMachine(Ref.ID, "hatch_fluid_output").addFlags(GUI, FLUID, CELL).covers(COVEROUTPUT).setTiers(LV);
-    public static HatchMachine HATCH_MUFFLER = new HatchMachine(Ref.ID, "hatch_muffler").addFlags(GUI, ITEM).covers(COVERMUFFLER).setTiers(LV);
-    public static HatchMachine HATCH_DYNAMO = new HatchMachine(Ref.ID, "hatch_dynamo").addFlags(ENERGY).covers(COVER_DYNAMO_OLD).setTiers(EV, IV);
-    public static HatchMachine FUSION_MATERIAL_INJECTOR = new HatchMachine(Ref.ID, "fusion_material_injector").addFlags(GUI, ITEM, FLUID, CELL).baseTexture(Textures.FUSION_IN).setTiers(LV).covers(COVER_FUSION_INPUT);
-    public static HatchMachine FUSION_MATERIAL_EXTRACTOR = new HatchMachine(Ref.ID, "fusion_material_extractor").addFlags(GUI, ITEM, FLUID, CELL).baseTexture(Textures.FUSION_OUT).setTiers(LV).covers(COVER_FUSION_OUTPUT);
+    public static HatchMachine HATCH_ITEM_I = new HatchMachine(Ref.ID, "hatch_item_input").addFlags(GUI, ITEM).covers(COVERNONE,COVERNONE,COVERINPUT,COVERNONE,COVERNONE,COVERNONE).setTiers(LV);
+    public static HatchMachine HATCH_ITEM_O = new HatchMachine(Ref.ID, "hatch_item_output").addFlags(GUI, ITEM).covers(COVERNONE,COVERNONE,COVEROUTPUT,COVERNONE,COVERNONE,COVERNONE).setTiers(LV);
+    public static HatchMachine HATCH_FLUID_I = new HatchMachine(Ref.ID, "hatch_fluid_input").addFlags(GUI, FLUID, CELL).covers(COVERNONE,COVERNONE,COVERINPUT,COVERNONE,COVERNONE,COVERNONE).setTiers(LV);
+    public static HatchMachine HATCH_FLUID_O = new HatchMachine(Ref.ID, "hatch_fluid_output").addFlags(GUI, FLUID, CELL).covers(COVERNONE,COVERNONE,COVEROUTPUT,COVERNONE,COVERNONE,COVERNONE).setTiers(LV);
+    public static HatchMachine HATCH_MUFFLER = new HatchMachine(Ref.ID, "hatch_muffler").addFlags(GUI, ITEM).covers(COVERNONE,COVERNONE,COVERMUFFLER,COVERNONE,COVERNONE,COVERNONE).setTiers(LV);
+    public static HatchMachine HATCH_DYNAMO = new HatchMachine(Ref.ID, "hatch_dynamo").addFlags(ENERGY).covers(COVERNONE,COVERNONE,COVER_DYNAMO_OLD,COVERNONE,COVERNONE,COVERNONE).setTiers(EV, IV);
+    public static HatchMachine FUSION_MATERIAL_INJECTOR = new HatchMachine(Ref.ID, "fusion_material_injector").addFlags(GUI, ITEM, FLUID, CELL).baseTexture(Textures.FUSION_IN).setTiers(LV).covers(COVERNONE,COVERNONE,COVER_FUSION_INPUT,COVERNONE,COVERNONE,COVERNONE);
+    public static HatchMachine FUSION_MATERIAL_EXTRACTOR = new HatchMachine(Ref.ID, "fusion_material_extractor").addFlags(GUI, ITEM, FLUID, CELL).baseTexture(Textures.FUSION_OUT).setTiers(LV).covers(COVERNONE,COVERNONE,COVER_FUSION_OUTPUT,COVERNONE,COVERNONE,COVERNONE);
     public static HatchMachine FUSION_ENERGY_INJECTOR = new HatchMachine(Ref.ID, "fusion_energy_injector").addFlags(ENERGY).baseTexture(Textures.FUSION_IN).setTiers(IV).covers((ICover[]) null);
-    public static HatchMachine FUSION_ENERGY_EXTRACTOR = new HatchMachine(Ref.ID, "fusion_energy_extractor").addFlags(ENERGY).baseTexture(Textures.FUSION_OUT).setTiers(UV).covers(COVER_DYNAMO_OLD);
+    public static HatchMachine FUSION_ENERGY_EXTRACTOR = new HatchMachine(Ref.ID, "fusion_energy_extractor").addFlags(ENERGY).baseTexture(Textures.FUSION_OUT).setTiers(UV).covers(COVERNONE,COVERNONE,COVER_DYNAMO_OLD,COVERNONE,COVERNONE,COVERNONE);
 
     public static TankMachine QUANTUM_TANK = new TankMachine(Ref.ID, "quantum_tank").addFlags(GUI, CELL).setTiers(MAX).setTile(m -> () -> new TileEntityQuantumTank(m)).frontCovers();
     public static StorageMachine QUANTUM_CHEST = new StorageMachine(Ref.ID, "quantum_chest").addFlags(GUI, CELL).setTiers(MAX).setTile(m -> () -> new TileEntityQuantumChest(m));
