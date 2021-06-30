@@ -1,7 +1,10 @@
 package trinsdar.gt4r.loader;
 
 import com.google.common.collect.ImmutableMap;
+import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
+import muramasa.antimatter.material.Material;
+import muramasa.antimatter.ore.StoneType;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.Item;
 import net.minecraft.tags.ITag;
@@ -112,6 +115,12 @@ public class MaterialRecipeLoader {
             if (m.has(PLATE) || m.has(GEM)){
                 ITag.INamedTag<?> plate = m.has(PLATE) ? PLATE.getMaterialTag(m) : GEM.getMaterialTag(m);
                 provider.addItemRecipe(output, Ref.ID, m.getId() + "_buzzsaw_blade", "buzzsaw_blades", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), BUZZSAW_BLADE.get(m), ImmutableMap.of('H', HAMMER.getTag(), 'P', plate, 'F', FILE.getTag(), 'W', WRENCH.getTag(), 'C', WIRE_CUTTER.getTag()), "WPH", "P P", "FPC");
+            }
+        });
+        AntimatterAPI.all(StoneType.class).forEach(s -> {
+            Material m = s.getMaterial();
+            if (m.has(ROD)){
+                provider.addStackRecipe(output, Ref.ID, m.getId() + "_rod", "rods", "has_stone", provider.hasSafeItem(s.getState().getBlock()), ROD.get(m, 4), ImmutableMap.of('S', s.getState().getBlock()), "S", "S");
             }
         });
     }
