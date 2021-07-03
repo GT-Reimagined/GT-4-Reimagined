@@ -215,7 +215,7 @@ public class Materials {
     public static Material Tungstate = AntimatterAPI.registerIfAbsent(Material.class,"tungstate",() -> new Material(Ref.ID, "tungstate", 0x373223, DULL).asDust(ORE).mats(of(Tungsten, 1, Lithium, 2, Oxygen, 4)).setOreMulti(2).harvestLevel(2));
     public static Material Uraninite = AntimatterAPI.registerIfAbsent(Material.class,"uraninite",() -> new Material(Ref.ID, "uraninite", 0x232323, DULL).asDust(ORE).mats(of(Uranium238, 1, Oxygen, 2)).harvestLevel(2));
     public static Material Bauxite = AntimatterAPI.registerIfAbsent(Material.class,"bauxite",() -> new Material(Ref.ID, "bauxite", 0xc86400, DULL).asDust(ORE).mats(of(Aluminium, 16, Hydrogen, 10, Oxygen, 11, Titanium, 1)).setOreMulti(2));
-    public static Material Wood = AntimatterAPI.registerIfAbsent(Material.class,"wood",() -> new Material(Ref.ID, "wood", 0x643200, WOOD).asDust(PLATE).addHandleStat(12, 0.0F).mats(of(Carbon, 1, Oxygen, 1, Hydrogen, 1)));
+    public static Material Wood = AntimatterAPI.registerIfAbsent(Material.class,"wood",() -> new Material(Ref.ID, "wood", 0x643200, WOOD).asDust(PLATE).addTools(ItemTier.WOOD.getAttackDamage(), ItemTier.WOOD.getEfficiency(), 16, ItemTier.WOOD.getHarvestLevel(), of(), SOFT_HAMMER).addHandleStat(12, 0.0F).mats(of(Carbon, 1, Oxygen, 1, Hydrogen, 1)));
     public static Material Blaze = AntimatterAPI.registerIfAbsent(Material.class,"blaze",() -> new Material(Ref.ID, "blaze", 0xffc800, NONE).asDust().mats(of(Sulfur, 1, DarkAsh, 1/*, Magic, 1*/)).addHandleStat(-10, -0.5F, of(Enchantments.FIRE_ASPECT, 1)));
     public static Material Flint = AntimatterAPI.registerIfAbsent(Material.class,"flint",() -> new Material(Ref.ID, "flint", 0x002040, FLINT).asDust(GEM, FLINT_TAG).addTools(1.25F, 2.5F, 128, 1, of(Enchantments.FIRE_ASPECT, 1), PICKAXE, AXE, SHOVEL, SWORD, HOE, MORTAR, KNIFE, ToolTypes.SPEAR).mats(of(SiliconDioxide, 1)));
     public static Material PotassiumFeldspar = AntimatterAPI.registerIfAbsent(Material.class,"potassium_feldspar",() -> new Material(Ref.ID, "potassium_feldspar", 0x782828, FINE).asDust().mats(of(Potassium, 1, Aluminium, 1, Silicon, 3, Oxygen, 8)));
@@ -268,8 +268,8 @@ public class Materials {
 
     /** Solids (Plastic Related Stuff)**/
     public static Material Bone = AntimatterAPI.registerIfAbsent(Material.class,"bone",() -> new Material(Ref.ID, "bone", 0xb3b3b3, DULL).addHandleStat(12, 0.0F));
-    public static Material Plastic = AntimatterAPI.registerIfAbsent(Material.class,"plastic",() -> new Material(Ref.ID, "plastic", 0xc8c8c8, DULL).asSolid(295, 0, PLATE, RUBBERTOOLS).addHandleStat(66, 0.5F).mats(of(Carbon, 1, Hydrogen, 2)));
-    public static Material Rubber = AntimatterAPI.registerIfAbsent(Material.class,"rubber",() -> new Material(Ref.ID, "rubber", 0x000000, SHINY).asSolid(295, 0, PLATE, RUBBERTOOLS).addHandleStat(11, 0.4F).mats(of(Carbon, 5, Hydrogen, 8)));
+    public static Material Plastic = AntimatterAPI.registerIfAbsent(Material.class,"plastic",() -> new Material(Ref.ID, "plastic", 0xc8c8c8, DULL).asSolid(295, 0, PLATE, RUBBERTOOLS).addTools(0.0F, 0.0F, 64, 0, of(), SOFT_HAMMER).addHandleStat(66, 0.5F).mats(of(Carbon, 1, Hydrogen, 2)));
+    public static Material Rubber = AntimatterAPI.registerIfAbsent(Material.class,"rubber",() -> new Material(Ref.ID, "rubber", 0x000000, SHINY).asSolid(295, 0, PLATE, RUBBERTOOLS).addTools(0.0F, 0.0F, 64, 0, of(), SOFT_HAMMER).addHandleStat(11, 0.4F).mats(of(Carbon, 5, Hydrogen, 8)));
 
     /** Stones **/
     public static Material RedGranite = AntimatterAPI.registerIfAbsent(Material.class,"red_granite",() -> new Material(Ref.ID, "red_granite", 0xff0080, ROUGH).asDust(ROCK).addHandleStat(74, 1.0F, of(Enchantments.UNBREAKING, 1)).mats(of(Aluminium, 2, PotassiumFeldspar, 1, Oxygen, 3)));

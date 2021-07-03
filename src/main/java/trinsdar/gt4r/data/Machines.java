@@ -96,7 +96,7 @@ public class Machines {
     public static HatchMachine HATCH_ITEM_O = new HatchMachine(Ref.ID, "hatch_item_output").addFlags(GUI, ITEM).covers(COVERNONE,COVERNONE,COVEROUTPUT,COVERNONE,COVERNONE,COVERNONE).setTiers(LV);
     public static HatchMachine HATCH_FLUID_I = new HatchMachine(Ref.ID, "hatch_fluid_input").addFlags(GUI, FLUID, CELL).covers(COVERNONE,COVERNONE,COVERINPUT,COVERNONE,COVERNONE,COVERNONE).setTiers(LV);
     public static HatchMachine HATCH_FLUID_O = new HatchMachine(Ref.ID, "hatch_fluid_output").addFlags(GUI, FLUID, CELL).covers(COVERNONE,COVERNONE,COVEROUTPUT,COVERNONE,COVERNONE,COVERNONE).setTiers(LV);
-    public static HatchMachine HATCH_MUFFLER = new HatchMachine(Ref.ID, "hatch_muffler").addFlags(GUI, ITEM).covers(COVERNONE,COVERNONE,COVERMUFFLER,COVERNONE,COVERNONE,COVERNONE).setTiers(LV);
+    public static HatchMachine HATCH_MUFFLER = new HatchMachine(Ref.ID, "hatch_muffler").addFlags(GUI, ITEM).covers(COVERNONE/*COVERNONE,COVERNONE,COVERMUFFLER,COVERNONE,COVERNONE,COVERNONE*/).setTiers(LV);
     public static HatchMachine HATCH_DYNAMO = new HatchMachine(Ref.ID, "hatch_dynamo").addFlags(ENERGY).covers(COVERNONE,COVERNONE,COVER_DYNAMO_OLD,COVERNONE,COVERNONE,COVERNONE).setTiers(EV, IV);
     public static HatchMachine FUSION_MATERIAL_INJECTOR = new HatchMachine(Ref.ID, "fusion_material_injector").addFlags(GUI, ITEM, FLUID, CELL).baseTexture(Textures.FUSION_IN).setTiers(LV).covers(COVERNONE,COVERNONE,COVER_FUSION_INPUT,COVERNONE,COVERNONE,COVERNONE);
     public static HatchMachine FUSION_MATERIAL_EXTRACTOR = new HatchMachine(Ref.ID, "fusion_material_extractor").addFlags(GUI, ITEM, FLUID, CELL).baseTexture(Textures.FUSION_OUT).setTiers(LV).covers(COVERNONE,COVERNONE,COVER_FUSION_OUTPUT,COVERNONE,COVERNONE,COVERNONE);
@@ -147,11 +147,11 @@ public class Machines {
     public static BasicMachine INFINITE_STORAGE = new BasicMachine(Ref.ID, "infinite_storage").addFlags(ENERGY).setTiers(ULV, LV, MV, HV, EV, IV, LUV, ZPM, UV, MAX).setTile(m -> () -> new TileEntityInfiniteStorage<>(m, 16))
             .covers((ICover[]) null);
     public static TankMachine INFINITE_STEAM = new TankMachine(Ref.ID, "infinite_steam").addFlags(FLUID, CELL, GUI).setTiers(LV).setTile(m -> () -> new TileEntityInfiniteFluid(m));
-    public static BasicMachine BATTERY_BUFFER_ONE = new BasicMachine(Ref.ID, "battery_buffer_one").covers(COVERBUFFERONE).addFlags(GUI, ENERGY, ITEM).setTile(m -> () -> new TileEntityBatteryBuffer<>(m)).frontCovers();
-    public static BasicMachine BATTERY_BUFFER_FOUR = new BasicMachine(Ref.ID, "battery_buffer_four").covers(COVERBUFFERFOUR).addFlags(GUI, ENERGY, ITEM).setTile(m -> () -> new TileEntityBatteryBuffer<>(m)).frontCovers();
-    public static BasicMachine BATTERY_BUFFER_NINE = new BasicMachine(Ref.ID, "battery_buffer_nine").covers(COVERBUFFERNINE).addFlags(GUI, ENERGY, ITEM).setTile(m -> () -> new TileEntityBatteryBuffer<>(m)).frontCovers();
-    public static BasicMachine TRANSFORMER = new BasicMachine(Ref.ID, "transformer").addFlags(ENERGY).setTiers(LV, MV, HV, IV, EV, LUV, ZPM, UV).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).setTile(m -> () -> new TileEntityTransformer<>(m, 1)).covers((ICover[]) null).setAllowVerticalFacing(true);
-    public static BasicMachine TRANSFORMER_DIGITAL = new BasicMachine(Ref.ID, "transformer_digital").addFlags(GUI, ENERGY).setTiers(EV, IV).setTile(m -> () -> new TileEntityDigitalTransformer<>(m)).covers((ICover[]) null);//.setTiers();
+    public static BasicMachine BATTERY_BUFFER_ONE = new BasicMachine(Ref.ID, "battery_buffer_one").covers(COVER_DYNAMO_OLD/*COVERBUFFERONE*/).addFlags(GUI, ENERGY, ITEM).setTile(m -> () -> new TileEntityBatteryBuffer<>(m)).frontCovers();
+    public static BasicMachine BATTERY_BUFFER_FOUR = new BasicMachine(Ref.ID, "battery_buffer_four").covers(COVER_DYNAMO_OLD/*COVERBUFFERFOUR*/).addFlags(GUI, ENERGY, ITEM).setTile(m -> () -> new TileEntityBatteryBuffer<>(m)).frontCovers();
+    public static BasicMachine BATTERY_BUFFER_NINE = new BasicMachine(Ref.ID, "battery_buffer_nine").covers(COVER_DYNAMO_OLD/*COVERBUFFERNINE*/).addFlags(GUI, ENERGY, ITEM).setTile(m -> () -> new TileEntityBatteryBuffer<>(m)).frontCovers();
+    public static BasicMachine TRANSFORMER = new BasicMachine(Ref.ID, "transformer").addFlags(ENERGY).setTiers(LV, MV, HV, IV, EV, LUV, ZPM, UV).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).setTile(m -> () -> new TileEntityTransformer<>(m, 1)).covers(COVERNONE).setAllowVerticalFacing(true);
+    public static BasicMachine TRANSFORMER_DIGITAL = new BasicMachine(Ref.ID, "transformer_digital").addFlags(GUI, ENERGY).setTiers(EV, IV).setTile(m -> () -> new TileEntityDigitalTransformer<>(m)).covers(COVERNONE);//.setTiers();
 
     public static void init() {
         STEAM_TURBINE.setOutputCover(COVER_DYNAMO_OLD);

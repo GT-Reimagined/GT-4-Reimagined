@@ -9,20 +9,21 @@ import muramasa.antimatter.recipe.RecipeProxies;
 import static muramasa.antimatter.machine.Tier.MV;
 import static trinsdar.gt4r.data.Guis.MULTI_DISPLAY;
 import static trinsdar.gt4r.data.Guis.MULTI_DISPLAY_MORE_FLUID;
+import static trinsdar.gt4r.data.Machines.*;
 import static trinsdar.gt4r.data.RecipeBuilders.*;
 
 public class RecipeMaps {
 
     public static RecipeMap<?> ORE_BYPRODUCTS = new RecipeMap<>("ore_byproducts", new RecipeBuilder());
     public static RecipeMap<?> INT_CIRCUITS = new RecipeMap<>("int_circuits", new RecipeBuilder());
-    public static RecipeMap<?> STEAM_FUELS = new RecipeMap<>("steam_fuels", new RecipeBuilder(), MULTI_DISPLAY);
-    public static RecipeMap<?> GAS_FUELS = new RecipeMap<>("gas_fuels", new GasFuelBuilder(), MULTI_DISPLAY);
-    public static RecipeMap<?> LARGE_STEAM_FUELS = new RecipeMap<>("large_steam_fuels", new RecipeBuilder(), MULTI_DISPLAY);
-    public static RecipeMap<?> LARGE_GAS_FUELS = new RecipeMap<>("large_gas_fuels", new RecipeBuilder(), MULTI_DISPLAY);
-    public static RecipeMap<?> DIESEL_FUELS = new RecipeMap<>("diesel_fuels", new RecipeBuilder(), MULTI_DISPLAY);
-    public static RecipeMap<?> HOT_FUELS = new RecipeMap<>("hot_fuels", new RecipeBuilder(), MULTI_DISPLAY);
-    public static RecipeMap<?> SEMIFLUID_FUELS = new RecipeMap<>("semifluid_fuels", new RecipeBuilder(), MULTI_DISPLAY);
-    public static RecipeMap<?> THERMAL_BOILER_FUELS = new RecipeMap<>("thermal_boiler_fuels", new RecipeBuilder(), MULTI_DISPLAY);
+    public static RecipeMap<?> STEAM_FUELS = new RecipeMap<>("steam_fuels", new RecipeBuilder()).setGuiData(MULTI_DISPLAY, STEAM_TURBINE);
+    public static RecipeMap<?> GAS_FUELS = new RecipeMap<>("gas_fuels", new GasFuelBuilder()).setGuiData(MULTI_DISPLAY, GAS_TURBINE);
+    public static RecipeMap<?> LARGE_STEAM_FUELS = new RecipeMap<>("large_steam_fuels", new RecipeBuilder()).setGuiData(MULTI_DISPLAY, LARGE_STEAM_TURBINE);
+    public static RecipeMap<?> LARGE_GAS_FUELS = new RecipeMap<>("large_gas_fuels", new RecipeBuilder()).setGuiData(MULTI_DISPLAY, LARGE_GAS_TURBINE);
+    public static RecipeMap<?> DIESEL_FUELS = new RecipeMap<>("diesel_fuels", new RecipeBuilder()).setGuiData(MULTI_DISPLAY, DIESEL_GENERATOR);
+    public static RecipeMap<?> HOT_FUELS = new RecipeMap<>("hot_fuels", new RecipeBuilder()).setGuiData(MULTI_DISPLAY, HEAT_EXCHANGER);
+    public static RecipeMap<?> SEMIFLUID_FUELS = new RecipeMap<>("semifluid_fuels", new RecipeBuilder()).setGuiData(MULTI_DISPLAY, SEMIFLUID_GENERATOR);
+    public static RecipeMap<?> THERMAL_BOILER_FUELS = new RecipeMap<>("thermal_boiler_fuels", new RecipeBuilder()).setGuiData(MULTI_DISPLAY, THERMAL_BOILER);
 
     public static RecipeMap<?> COAL_BOILERS = new RecipeMap<>("coal_boilers", new RecipeBuilder());
 
@@ -35,12 +36,12 @@ public class RecipeMaps {
     public static RecipeMap<?> CENTRIFUGING = new RecipeMap<>("centrifuging", new RecipeBuilder());
     public static RecipeMap<?> COMPRESSING = new RecipeMap<>("compressing", new CompressingBuilder());
     public static RecipeMap<?> CUTTING = new RecipeMap<>("plate_cutting", new RecipeBuilder());
-    public static RecipeMap<?> SMELTING = new RecipeMap<>("smelting", new SmeltingBuilder(), RecipeProxies.FURNACE_PROXY.apply(4, 60));
+    public static RecipeMap<?> SMELTING = new RecipeMap<>("smelting", new SmeltingBuilder()).setProxy(RecipeProxies.FURNACE_PROXY.apply(4, 60));
     public static RecipeMap<?> EXTRACTING = new RecipeMap<>("extracting", new ExtractingBuilder());
     public static RecipeMap<?> EXTRUDING = new RecipeMap<>("extruding", new RecipeBuilder());
     public static RecipeMap<?> LATHING = new RecipeMap<>("lathing", new RecipeBuilder());
     //public static RecipeMap UNIVERSAL_MACERATING = new RecipeMap<>("universal_macerating", new UniversalMaceratingBuilder(), Tier.MV);
-    public static RecipeMap<?> MACERATING = new RecipeMap<>("macerating", new MaceratingBuilder(), MV);
+    public static RecipeMap<?> MACERATING = new RecipeMap<>("macerating", new MaceratingBuilder()).setGuiTier(MV);
     public static RecipeMap<?> RECYCLING = new RecipeMap<>("recycling", new RecipeBuilder());
     public static RecipeMap<?> SCANNING = new RecipeMap<>("scanning", new RecipeBuilder());
     public static RecipeMap<?> WIRE_MILLING = new RecipeMap<>("wire_milling", new RecipeBuilder());
@@ -61,21 +62,21 @@ public class RecipeMaps {
     public static RecipeMap<?> FERMENTING = new RecipeMap<>("fermenting", new RecipeBuilder());
 
 
-    public static RecipeMap<?> STEAM_SMELTING = new RecipeMap<>("steam_smelting", new RecipeBuilder(), RecipeProxies.FURNACE_PROXY.apply(8, 180));
+    public static RecipeMap<?> STEAM_SMELTING = new RecipeMap<>("steam_smelting", new RecipeBuilder()).setProxy(RecipeProxies.FURNACE_PROXY.apply(8, 180));
     public static RecipeMap<?> STEAM_MACERATING = new RecipeMap<>("steam_macerating", new RecipeBuilder());
     public static RecipeMap<?> STEAM_EXTRACTING = new RecipeMap<>("steam_extracting", new RecipeBuilder());
     public static RecipeMap<?> STEAM_HAMMERING = new RecipeMap<>("steam_hammering", new RecipeBuilder());
     public static RecipeMap<?> STEAM_COMPRESSING = new RecipeMap<>("steam_compressing", new RecipeBuilder());
     public static RecipeMap<?> STEAM_ALLOY_SMELTING = new RecipeMap<>("steam_alloy_smelting", new RecipeBuilder());
 
-    public static RecipeMap<?> COKING = new RecipeMap<>("coking", new RecipeBuilder(), MULTI_DISPLAY);
-    public static RecipeMap<?> DISTILLING = new RecipeMap<>("distilling", new RecipeBuilder(), MULTI_DISPLAY_MORE_FLUID);
-    public static RecipeMap<BasicBlastingBuilder> BASIC_BLASTING = new RecipeMap<>("basic_blasting", new BasicBlastingBuilder(), MULTI_DISPLAY);
-    public static RecipeMap<?> BLASTING = new RecipeMap<>("industrial_blasting", new RecipeBuilder(), MULTI_DISPLAY);
-    public static RecipeMap<?> IMPLOSION_COMPRESSING = new RecipeMap<>("implosion_compressing", new RecipeBuilder(), MULTI_DISPLAY);
-    public static RecipeMap<?> INDUSTRIAL_GRINDING = new RecipeMap<>("industrial_grinding", new RecipeBuilder(), MULTI_DISPLAY);
-    public static RecipeMap<?> INDUSTRIAL_SAWMILLING = new RecipeMap<>("industrial_sawmilling", new RecipeBuilder(), MULTI_DISPLAY);
-    public static RecipeMap<?> VACUUM_FREEZING = new RecipeMap<>("vacuum_freezing", new RecipeBuilder(), MULTI_DISPLAY);
-    public static RecipeMap<?> FUSION = new RecipeMap<>("fusion", new RecipeBuilder(), MULTI_DISPLAY);
+    public static RecipeMap<?> COKING = new RecipeMap<>("coking", new RecipeBuilder()).setGuiData(MULTI_DISPLAY);
+    public static RecipeMap<?> DISTILLING = new RecipeMap<>("distilling", new RecipeBuilder()).setGuiData(MULTI_DISPLAY_MORE_FLUID, DISTILLATION_TOWER);
+    public static RecipeMap<BasicBlastingBuilder> BASIC_BLASTING = new RecipeMap<>("basic_blasting", new BasicBlastingBuilder()).setGuiData(MULTI_DISPLAY, PRIMITIVE_BLAST_FURNACE);
+    public static RecipeMap<?> BLASTING = new RecipeMap<>("industrial_blasting", new RecipeBuilder()).setGuiData(MULTI_DISPLAY, BLAST_FURNACE);
+    public static RecipeMap<?> IMPLOSION_COMPRESSING = new RecipeMap<>("implosion_compressing", new RecipeBuilder()).setGuiData(MULTI_DISPLAY, IMPLOSION_COMPRESSOR);
+    public static RecipeMap<?> INDUSTRIAL_GRINDING = new RecipeMap<>("industrial_grinding", new RecipeBuilder()).setGuiData(MULTI_DISPLAY, INDUSTRIAL_GRINDER);
+    public static RecipeMap<?> INDUSTRIAL_SAWMILLING = new RecipeMap<>("industrial_sawmilling", new RecipeBuilder()).setGuiData(MULTI_DISPLAY, INDUSTRIAL_SAWMILL);
+    public static RecipeMap<?> VACUUM_FREEZING = new RecipeMap<>("vacuum_freezing", new RecipeBuilder()).setGuiData(MULTI_DISPLAY, VACUUM_FREEZER);
+    public static RecipeMap<?> FUSION = new RecipeMap<>("fusion", new RecipeBuilder()).setGuiData(MULTI_DISPLAY, FUSION_REACTOR);
 
 }
