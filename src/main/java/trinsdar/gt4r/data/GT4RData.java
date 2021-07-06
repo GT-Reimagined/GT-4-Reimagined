@@ -243,6 +243,9 @@ public class GT4RData {
         if (side.isClient()){
             RecipeRenderer.clientMaps();
         }
+        if (AntimatterAPI.isModLoaded(Ref.MOD_TFC)){
+            TFCData.init();
+        }
     }
 
     public static final BaseCover COVER_CONVEYOR = new CoverConveyor();
@@ -482,5 +485,14 @@ public class GT4RData {
     private static int[] getPressures(int basePressure){
         basePressure *= 20;
         return new int[]{basePressure / 6, basePressure / 6, basePressure / 3, basePressure, basePressure * 2, basePressure * 4};
+    }
+
+    public static class TFCData{
+        public static final ItemPipe<?> ITEM_PIPE_STERLING_SILVER = new ItemPipe<>(Ref.ID, SterlingSilver).sizes(PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(0, 0, 0, 2, 4, 8);
+        public static final ItemPipe<?> ITEM_PIPE_ROSE_GOLD = new ItemPipe<>(Ref.ID, RoseGold).sizes(PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(0, 0, 0, 2, 4, 8);
+        public static final ItemPipe<?> ITEM_PIPE_BLACK_BRONZE = new ItemPipe<>(Ref.ID, BlackBronze).sizes(PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(0, 0, 0, 2, 4, 8);
+        public static void init(){
+            //NOOP
+        }
     }
 }

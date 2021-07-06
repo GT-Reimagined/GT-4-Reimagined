@@ -82,6 +82,7 @@ public class Materials {
     /** Elements **/
     public static Material Aluminium = AntimatterAPI.registerIfAbsent(Material.class,"aluminium",() -> new Material(Ref.ID, "aluminium", 0x80c8f0, DULL, Al).asMetal(933, 1000, PLATE, ROD, GEAR, HULL));
     public static Material Beryllium = AntimatterAPI.registerIfAbsent(Material.class,"beryllium",() -> new Material(Ref.ID, "beryllium", 0x64b464, METALLIC, Be).asMetal(1560, 0, PLATE));
+    public static Material Bismuth = AntimatterAPI.registerIfAbsent(Material.class,"bismuth",() -> new Material(Ref.ID, "bismuth", 0x64a0a0, METALLIC, Bi, Ref.MOD_TFC).asMetal(544, 0, ORE, PLATE));
     public static Material Carbon = AntimatterAPI.registerIfAbsent(Material.class,"carbon",() -> new Material(Ref.ID, "carbon", 0x141414, DULL, C).asMetal(3800, 1000, TURBINE_BLADE, PLATE, TURBINE_ROTOR));
     public static Material Chrome = AntimatterAPI.registerIfAbsent(Material.class,"chrome",() -> new Material(Ref.ID, "chrome", 0xffe6e6, SHINY, Cr).asMetal(2180, 1700, PLATE));
     public static Material Gold = AntimatterAPI.registerIfAbsent(Material.class,"gold",() -> new Material(Ref.ID, "gold", 0xffe650, SHINY, Au).asMetal(1337, 0, ROD, GEAR, ORE,  PLATE, ROD).harvestLevel(2));
@@ -265,6 +266,15 @@ public class Materials {
     public static Material TungstenCarbide = AntimatterAPI.registerIfAbsent(Material.class,"tungsten_carbide",() -> new Material(Ref.ID, "tungsten_carbide", 0x330066, METALLIC).asMetal(2460, 2460).addTools(5.0F, 14.0F, 2560, 4, of(Enchantments.SHARPNESS, 5)).mats(of(Tungsten, 1, Carbon, 1)));
     public static Material RedAlloy = AntimatterAPI.registerIfAbsent(Material.class,"red_alloy",() -> new Material(Ref.ID, "red_alloy", 0xc80000, DULL).asMetal(295, 0, PLATE, ROD).mats(of(Copper, 1, Redstone, 4)));
     public static Material Osmiridium = AntimatterAPI.registerIfAbsent(Material.class,"osmiridium",() -> new Material(Ref.ID, "osmiridium", 0x6464ff, METALLIC).asMetal(3333, 3300,  PLATE, ROD, TURBINE_BLADE, TURBINE_ROTOR).mats(of(Iridium, 1, Osmium, 1)));
+
+    /** TFC Materials **/
+    public static Material SterlingSilver = AntimatterAPI.registerIfAbsent(Material.class,"sterling_silver",() -> new Material(Ref.ID, "sterling_silver", 0xfadce1, SHINY, Ref.MOD_TFC).asMetal(1700, 1700).mats(of(Copper, 1, Silver, 4)));
+    public static Material RoseGold = AntimatterAPI.registerIfAbsent(Material.class,"rose_gold",() -> new Material(Ref.ID, "rose_gold", 0xffe61e, SHINY, Ref.MOD_TFC).asMetal(1600, 1600).mats(of(Copper, 1, Gold, 4)));
+    public static Material BlackBronze = AntimatterAPI.registerIfAbsent(Material.class,"black_bronze",() -> new Material(Ref.ID, "black_bronze", 0x64327d, DULL, Ref.MOD_TFC).asMetal(2000, 2000).addTools(Bronze, of(Enchantments.SWEEPING, 1)).mats(of(Gold, 1, Silver, 1, Copper, 3)));
+    public static Material BismuthBronze = AntimatterAPI.registerIfAbsent(Material.class,"bismuth_bronze",() -> new Material(Ref.ID, "bismuth_bronze", 0x647d7d, DULL, Ref.MOD_TFC).asMetal(1100, 900, PLATE).addTools(2.5F, Bronze.getToolSpeed() + 2.0F, 350, 2, of(Enchantments.BANE_OF_ARTHROPODS, 4)).mats(of(Bismuth, 1, Zinc, 1, Copper, 3)));
+    public static Material BlackSteel = AntimatterAPI.registerIfAbsent(Material.class,"black_steel",() -> new Material(Ref.ID, "black_steel", 0x646464, METALLIC, Ref.MOD_TFC).asMetal(1200, 1200, FRAME, PLATE).addTools(3.5F, 6.5F, 768, 2).mats(of(Nickel, 1, BlackBronze, 1, Steel, 3)));
+    public static Material RedSteel = AntimatterAPI.registerIfAbsent(Material.class,"red_steel",() -> new Material(Ref.ID, "red_steel", 0x8c6464, METALLIC, Ref.MOD_TFC).asMetal(1300, 1300).addTools(3.5F, 7.0F, 896, 2).mats(of(SterlingSilver, 1, BismuthBronze, 1, Steel, 2, BlackSteel, 4)));
+    public static Material BlueSteel = AntimatterAPI.registerIfAbsent(Material.class,"blue_steel",() -> new Material(Ref.ID, "blue_steel", 0x64648c, METALLIC, Ref.MOD_TFC).asMetal(1400, 1400, FRAME).addTools(3.5F, 7.5F, 1024, 2).mats(of(RoseGold, 1, Brass, 1, Steel, 2, BlackSteel, 4)));
 
     /** Solids (Plastic Related Stuff)**/
     public static Material Bone = AntimatterAPI.registerIfAbsent(Material.class,"bone",() -> new Material(Ref.ID, "bone", 0xb3b3b3, DULL).addHandleStat(12, 0.0F));

@@ -13,6 +13,7 @@ public class Ref {
     /** Mod ids **/
     public static final String MOD_IE = "immersiveengineering";
     public static final String MOD_CREATE = "create";
+    public static final String MOD_TFC = "tfc";
 
     /** Config Values **/
     public static boolean mixedOreYieldsTwoThirdsPureOre = false; //TODO 5U remnant, determine if needed

@@ -22,6 +22,7 @@ import java.util.function.Predicate;
 import static com.google.common.collect.ImmutableMap.of;
 import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.material.MaterialTag.HANDLE;
+import static muramasa.antimatter.recipe.RecipeBuilders.TOOL_BUILDER;
 import static trinsdar.gt4r.data.CustomTags.*;
 import static trinsdar.gt4r.data.GT4RData.*;
 import static trinsdar.gt4r.data.GT4RData.MotorLV;
@@ -48,11 +49,11 @@ public class ToolCrafting {
                 "has_screwdriver", in, Collections.singletonList(resolveStack(drill_mv, NULL, Titanium, 0, 200000)), of2('B', PropertyIngredient.of(DRILLBIT, "primary"), 'S', SCREWDRIVER.getTag(), 'P', PropertyIngredient.builder("secondary").mats(Titanium).types(PLATE).build(), 's', PropertyIngredient.builder("secondary").mats(Titanium).types(SCREW).build(), 'b', PropertyIngredient.builder("battery").itemTags(CustomTags.BATTERIES_MEDIUM).build(), 'M', MotorLV), "sBS", "PMP", "PbP");
         provider.addToolRecipe(POWERED_TOOL_BUILDER.get(DRILL.getId() + "-hv"),output, Ref.ID, DRILL.getId() + "_hv_" + "recipe", "antimatter_drills",
                 "has_screwdriver", in, Collections.singletonList(resolveStack(drill_hv, NULL, TungstenSteel, 0, 800000)), of2('B', PropertyIngredient.of(DRILLBIT, "primary"), 'S', SCREWDRIVER.getTag(), 'P', PropertyIngredient.builder("secondary").mats(TungstenSteel).types(PLATE).build(), 's', PropertyIngredient.builder("secondary").mats(TungstenSteel).types(SCREW).build(), 'b', PropertyIngredient.builder("battery").itemTags(CustomTags.BATTERIES_LARGE).build(), 'M', MotorLV), "sBS", "PMP", "PbP");
-        provider.addToolRecipe(POWERED_TOOL_BUILDER.get(DRILL.getId() + "-lv"),output, Ref.ID, DRILL.getId() + "_lv_power_unit_" + "recipe", "antimatter_drills",
+        provider.addToolRecipe(UNIT_POWERED_TOOL_BUILDER.get(DRILL.getId() + "-lv"),output, Ref.ID, DRILL.getId() + "_lv_power_unit_" + "recipe", "antimatter_drills",
                 "has_screwdriver", in, Collections.singletonList(resolveStack(drill_lv, NULL, StainlessSteel, 0, 100000)), of('B', PropertyIngredient.of(DRILLBIT, "primary"), 'S', SCREWDRIVER.getTag(), 'P', PropertyIngredient.builder("secondary").itemTags(POWER_UNIT_LV).build()), "BS", "P ");
-        provider.addToolRecipe(POWERED_TOOL_BUILDER.get(DRILL.getId() + "-mv"),output, Ref.ID, DRILL.getId() + "_mv_power_unit_" + "recipe", "antimatter_drills",
+        provider.addToolRecipe(UNIT_POWERED_TOOL_BUILDER.get(DRILL.getId() + "-mv"),output, Ref.ID, DRILL.getId() + "_mv_power_unit_" + "recipe", "antimatter_drills",
                 "has_screwdriver", in, Collections.singletonList(resolveStack(drill_mv, NULL, Titanium, 0, 100000)), of('B', PropertyIngredient.of(DRILLBIT, "primary"), 'S', SCREWDRIVER.getTag(), 'P', PropertyIngredient.builder("secondary").itemTags(POWER_UNIT_MV).build()), "BS", "P ");
-        provider.addToolRecipe(POWERED_TOOL_BUILDER.get(DRILL.getId() + "-hv"),output, Ref.ID, DRILL.getId() + "_hv_power_unit_" + "recipe", "antimatter_drills",
+        provider.addToolRecipe(UNIT_POWERED_TOOL_BUILDER.get(DRILL.getId() + "-hv"),output, Ref.ID, DRILL.getId() + "_hv_power_unit_" + "recipe", "antimatter_drills",
                 "has_screwdriver", in, Collections.singletonList(resolveStack(drill_hv, NULL, TungstenSteel, 0, 100000)), of('B', PropertyIngredient.of(DRILLBIT, "primary"), 'S', SCREWDRIVER.getTag(), 'P', PropertyIngredient.builder("secondary").itemTags(POWER_UNIT_HV).build()), "BS", "P ");
 
 
@@ -65,11 +66,11 @@ public class ToolCrafting {
                 "has_screwdriver", in, Collections.singletonList(resolveStack(chainsaw_mv, NULL, Titanium, 0, 200000)), of2('B', PropertyIngredient.of(CHAINSAWBIT, "primary"), 'S', SCREWDRIVER.getTag(), 'P', PropertyIngredient.builder("secondary").mats(Titanium).types(PLATE).build(), 's', PropertyIngredient.builder("secondary").mats(Titanium).types(SCREW).build(), 'b', PropertyIngredient.builder("battery").itemTags(CustomTags.BATTERIES_MEDIUM).build(), 'M', MotorLV), "sBS", "PMP", "PbP");
         provider.addToolRecipe(POWERED_TOOL_BUILDER.get(CHAINSAW.getId() + "-hv"),output, Ref.ID, CHAINSAW.getId() + "_hv_" + "recipe", "antimatter_chainsaws",
                 "has_screwdriver", in, Collections.singletonList(resolveStack(chainsaw_hv, NULL, TungstenSteel, 0, 800000)), of2('B', PropertyIngredient.of(CHAINSAWBIT, "primary"), 'S', SCREWDRIVER.getTag(), 'P', PropertyIngredient.builder("secondary").mats(TungstenSteel).types(PLATE).build(), 's', PropertyIngredient.builder("secondary").mats(TungstenSteel).types(SCREW).build(), 'b', PropertyIngredient.builder("battery").itemTags(CustomTags.BATTERIES_LARGE).build(), 'M', MotorLV), "sBS", "PMP", "PbP");
-        provider.addToolRecipe(POWERED_TOOL_BUILDER.get(CHAINSAW.getId() + "-lv"),output, Ref.ID, CHAINSAW.getId() + "_lv_power_unit_" + "recipe", "antimatter_chainsaws",
+        provider.addToolRecipe(UNIT_POWERED_TOOL_BUILDER.get(CHAINSAW.getId() + "-lv"),output, Ref.ID, CHAINSAW.getId() + "_lv_power_unit_" + "recipe", "antimatter_chainsaws",
                 "has_screwdriver", in, Collections.singletonList(resolveStack(chainsaw_lv, NULL, StainlessSteel, 0, 100000)), of('B', PropertyIngredient.of(CHAINSAWBIT, "primary"), 'S', SCREWDRIVER.getTag(), 'P', PropertyIngredient.builder("secondary").itemTags(POWER_UNIT_LV).build()), "BS", "P ");
-        provider.addToolRecipe(POWERED_TOOL_BUILDER.get(CHAINSAW.getId() + "-mv"),output, Ref.ID, CHAINSAW.getId() + "_mv_power_unit_" + "recipe", "antimatter_chainsaws",
+        provider.addToolRecipe(UNIT_POWERED_TOOL_BUILDER.get(CHAINSAW.getId() + "-mv"),output, Ref.ID, CHAINSAW.getId() + "_mv_power_unit_" + "recipe", "antimatter_chainsaws",
                 "has_screwdriver", in, Collections.singletonList(resolveStack(chainsaw_mv, NULL, Titanium, 0, 100000)), of('B', PropertyIngredient.of(CHAINSAWBIT, "primary"), 'S', SCREWDRIVER.getTag(), 'P', PropertyIngredient.builder("secondary").itemTags(POWER_UNIT_MV).build()), "BS", "P ");
-        provider.addToolRecipe(POWERED_TOOL_BUILDER.get(CHAINSAW.getId() + "-hv"),output, Ref.ID, CHAINSAW.getId() + "_hv_power_unit_" + "recipe", "antimatter_chainsaws",
+        provider.addToolRecipe(UNIT_POWERED_TOOL_BUILDER.get(CHAINSAW.getId() + "-hv"),output, Ref.ID, CHAINSAW.getId() + "_hv_power_unit_" + "recipe", "antimatter_chainsaws",
                 "has_screwdriver", in, Collections.singletonList(resolveStack(chainsaw_hv, NULL, TungstenSteel, 0, 100000)), of('B', PropertyIngredient.of(CHAINSAWBIT, "primary"), 'S', SCREWDRIVER.getTag(), 'P', PropertyIngredient.builder("secondary").itemTags(POWER_UNIT_HV).build()), "BS", "P ");
 
         IAntimatterTool electric_wrench_lv = AntimatterAPI.get(IAntimatterTool.class, "electric_wrench_lv");
@@ -81,11 +82,11 @@ public class ToolCrafting {
                 "has_screwdriver", in, Collections.singletonList(resolveStack(electric_wrench_mv, NULL, Titanium, 0, 200000)), of2('B', PropertyIngredient.of(WRENCHBIT, "primary"), 'S', SCREWDRIVER.getTag(), 'P', PropertyIngredient.builder("secondary").mats(Titanium).types(PLATE).build(), 's', PropertyIngredient.builder("secondary").mats(Titanium).types(SCREW).build(), 'b', PropertyIngredient.builder("battery").itemTags(CustomTags.BATTERIES_MEDIUM).build(), 'M', MotorLV), "sBS", "PMP", "PbP");
         provider.addToolRecipe(POWERED_TOOL_BUILDER.get(ELECTRIC_WRENCH.getId() + "-hv"),output, Ref.ID, ELECTRIC_WRENCH.getId() + "_hv_" + "recipe", "antimatter_electric_wrenches",
                 "has_screwdriver", in, Collections.singletonList(resolveStack(electric_wrench_hv, NULL, TungstenSteel, 0, 800000)), of2('B', PropertyIngredient.of(WRENCHBIT, "primary"), 'S', SCREWDRIVER.getTag(), 'P', PropertyIngredient.builder("secondary").mats(TungstenSteel).types(PLATE).build(), 's', PropertyIngredient.builder("secondary").mats(TungstenSteel).types(SCREW).build(), 'b', PropertyIngredient.builder("battery").itemTags(CustomTags.BATTERIES_LARGE).build(), 'M', MotorLV), "sBS", "PMP", "PbP");
-        provider.addToolRecipe(POWERED_TOOL_BUILDER.get(ELECTRIC_WRENCH.getId() + "-lv"),output, Ref.ID, ELECTRIC_WRENCH.getId() + "_lv_power_unit_" + "recipe", "electric_wrenches",
+        provider.addToolRecipe(UNIT_POWERED_TOOL_BUILDER.get(ELECTRIC_WRENCH.getId() + "-lv"),output, Ref.ID, ELECTRIC_WRENCH.getId() + "_lv_power_unit_" + "recipe", "electric_wrenches",
                 "has_screwdriver", in, Collections.singletonList(resolveStack(electric_wrench_lv, NULL, StainlessSteel, 0, 100000)), of('B', PropertyIngredient.of(WRENCHBIT, "primary"), 'S', SCREWDRIVER.getTag(), 'P', PropertyIngredient.builder("secondary").itemTags(POWER_UNIT_LV).build()), "BS", "P ");
-        provider.addToolRecipe(POWERED_TOOL_BUILDER.get(ELECTRIC_WRENCH.getId() + "-mv"),output, Ref.ID, ELECTRIC_WRENCH.getId() + "_mv_power_unit_" + "recipe", "electric_wrenches",
+        provider.addToolRecipe(UNIT_POWERED_TOOL_BUILDER.get(ELECTRIC_WRENCH.getId() + "-mv"),output, Ref.ID, ELECTRIC_WRENCH.getId() + "_mv_power_unit_" + "recipe", "electric_wrenches",
                 "has_screwdriver", in, Collections.singletonList(resolveStack(electric_wrench_mv, NULL, Titanium, 0, 100000)), of('B', PropertyIngredient.of(WRENCHBIT, "primary"), 'S', SCREWDRIVER.getTag(), 'P', PropertyIngredient.builder("secondary").itemTags(POWER_UNIT_MV).build()), "BS", "P ");
-        provider.addToolRecipe(POWERED_TOOL_BUILDER.get(ELECTRIC_WRENCH.getId() + "-hv"),output, Ref.ID, ELECTRIC_WRENCH.getId() + "_hv_power_unit_" + "recipe", "electric_wrenches",
+        provider.addToolRecipe(UNIT_POWERED_TOOL_BUILDER.get(ELECTRIC_WRENCH.getId() + "-hv"),output, Ref.ID, ELECTRIC_WRENCH.getId() + "_hv_power_unit_" + "recipe", "electric_wrenches",
                 "has_screwdriver", in, Collections.singletonList(resolveStack(electric_wrench_hv, NULL, TungstenSteel, 0, 100000)), of('B', PropertyIngredient.of(WRENCHBIT, "primary"), 'S', SCREWDRIVER.getTag(), 'P', PropertyIngredient.builder("secondary").itemTags(POWER_UNIT_HV).build()), "BS", "P ");
 
 
@@ -98,24 +99,24 @@ public class ToolCrafting {
                 "has_screwdriver", in, Collections.singletonList(resolveStack(buzzsaw_mv, NULL, Titanium, 0, 200000)), of2('B', PropertyIngredient.of(BUZZSAW_BLADE, "primary"), 'S', SCREWDRIVER.getTag(), 'P', PropertyIngredient.builder("secondary").mats(Titanium).types(PLATE).build(), 's', PropertyIngredient.builder("secondary").mats(Titanium).types(SCREW).build(), 'b', PropertyIngredient.builder("battery").itemTags(CustomTags.BATTERIES_MEDIUM).build(), 'M', MotorLV), "PbM", "SBP", "sPP");
         provider.addToolRecipe(POWERED_TOOL_BUILDER.get(BUZZSAW.getId() + "-hv"),output, Ref.ID, BUZZSAW.getId() + "_hv_" + "recipe", "antimatter_buzzsaws",
                 "has_screwdriver", in, Collections.singletonList(resolveStack(buzzsaw_hv, NULL, TungstenSteel, 0, 800000)), of2('B', PropertyIngredient.of(BUZZSAW_BLADE, "primary"), 'S', SCREWDRIVER.getTag(), 'P', PropertyIngredient.builder("secondary").mats(TungstenSteel).types(PLATE).build(), 's', PropertyIngredient.builder("secondary").mats(TungstenSteel).types(SCREW).build(), 'b', PropertyIngredient.builder("battery").itemTags(CustomTags.BATTERIES_LARGE).build(), 'M', MotorLV), "PbM", "SBP", "sPP");
-        provider.addToolRecipe(POWERED_TOOL_BUILDER.get(BUZZSAW.getId() + "-lv"),output, Ref.ID, BUZZSAW.getId() + "_lv_power_unit_" + "recipe", "antimatter_buzzsaws",
+        provider.addToolRecipe(UNIT_POWERED_TOOL_BUILDER.get(BUZZSAW.getId() + "-lv"),output, Ref.ID, BUZZSAW.getId() + "_lv_power_unit_" + "recipe", "antimatter_buzzsaws",
                 "has_screwdriver", in, Collections.singletonList(resolveStack(buzzsaw_lv, NULL, StainlessSteel, 0, 100000)), of('B', PropertyIngredient.of(BUZZSAW_BLADE, "primary"), 'S', SCREWDRIVER.getTag(), 'P', PropertyIngredient.builder("secondary").itemTags(POWER_UNIT_LV).build()), "PS", "B ");
-        provider.addToolRecipe(POWERED_TOOL_BUILDER.get(BUZZSAW.getId() + "-mv"),output, Ref.ID, BUZZSAW.getId() + "_mv_power_unit_" + "recipe", "antimatter_buzzsaws",
+        provider.addToolRecipe(UNIT_POWERED_TOOL_BUILDER.get(BUZZSAW.getId() + "-mv"),output, Ref.ID, BUZZSAW.getId() + "_mv_power_unit_" + "recipe", "antimatter_buzzsaws",
                 "has_screwdriver", in, Collections.singletonList(resolveStack(buzzsaw_mv, NULL, Titanium, 0, 100000)), of('B', PropertyIngredient.of(BUZZSAW_BLADE, "primary"), 'S', SCREWDRIVER.getTag(), 'P', PropertyIngredient.builder("secondary").itemTags(POWER_UNIT_MV).build()), "PS", "B ");
-        provider.addToolRecipe(POWERED_TOOL_BUILDER.get(BUZZSAW.getId() + "-hv"),output, Ref.ID, BUZZSAW.getId() + "_hv_power_unit_" + "recipe", "antimatter_buzzsaws",
+        provider.addToolRecipe(UNIT_POWERED_TOOL_BUILDER.get(BUZZSAW.getId() + "-hv"),output, Ref.ID, BUZZSAW.getId() + "_hv_power_unit_" + "recipe", "antimatter_buzzsaws",
                 "has_screwdriver", in, Collections.singletonList(resolveStack(buzzsaw_hv, NULL, TungstenSteel, 0, 100000)), of('B', PropertyIngredient.of(BUZZSAW_BLADE, "primary"), 'S', SCREWDRIVER.getTag(), 'P', PropertyIngredient.builder("secondary").itemTags(POWER_UNIT_HV).build()), "PS", "B ");
 
         IAntimatterTool electric_screwdriver_lv = AntimatterAPI.get(IAntimatterTool.class, "electric_screwdriver_lv");
 
         provider.addToolRecipe(POWERED_TOOL_BUILDER.get(ELECTRIC_SCREWDRIVER.getId() + "-lv"), output, Ref.ID, ELECTRIC_SCREWDRIVER.getId() + "_lv", "antimatter_electric_screwdrivers",
                 "has_material_" + StainlessSteel.getId(), provider.hasSafeItem(PLATE.getMaterialTag(StainlessSteel)), electric_screwdriver_lv.resolveStack(NULL, StainlessSteel, 0, 100000), of('R', PropertyIngredient.builder("primary").types(ROD).tool(ELECTRIC_SCREWDRIVER, true).build(), 'b', PropertyIngredient.builder("battery").itemTags(BATTERIES_SMALL).build(), 'M', MotorLV, 'S', PropertyIngredient.builder("secondary").mats(StainlessSteel).types(PLATE).build()), "R  ", " RM", " bS");
-        provider.addToolRecipe(POWERED_TOOL_BUILDER.get(ELECTRIC_SCREWDRIVER.getId() + "-lv"), output, Ref.ID, ELECTRIC_SCREWDRIVER.getId() + "_power_unit_lv", "antimatter_electric_screwdrivers",
+        provider.addToolRecipe(UNIT_POWERED_TOOL_BUILDER.get(ELECTRIC_SCREWDRIVER.getId() + "-lv"), output, Ref.ID, ELECTRIC_SCREWDRIVER.getId() + "_power_unit_lv", "antimatter_electric_screwdrivers",
                 "has_material_" + StainlessSteel.getId(), provider.hasSafeItem(PLATE.getMaterialTag(StainlessSteel)), electric_screwdriver_lv.resolveStack(NULL, StainlessSteel, 0, 100000), of('R', PropertyIngredient.builder("primary").types(ROD).tool(ELECTRIC_SCREWDRIVER, true).build(),'S', PropertyIngredient.builder("secondary").itemTags(POWER_UNIT_SMALL).build()), "R  ", " R ", "  S");
 
         IAntimatterTool jackhammer_lv = AntimatterAPI.get(IAntimatterTool.class, "jackhammer_lv");
         provider.addToolRecipe(POWERED_TOOL_BUILDER.get(JACKHAMMER.getId() + "-lv"), output, Ref.ID, JACKHAMMER.getId() + "_lv", "antimatter_jackhammers",
                 "has_battery_small", provider.hasSafeItem(BATTERIES_SMALL), jackhammer_lv.resolveStack(NULL, StainlessSteel, 0, 100000), of('R', PropertyIngredient.builder("primary").types(ROD).tool(JACKHAMMER, true).build(), 'P', PropertyIngredient.builder("primary").types(PLATE, GEM).tool(JACKHAMMER, true).build(), 'b', PropertyIngredient.builder("battery").itemTags(BATTERIES_SMALL).build(), 'M', MotorLV, 'r', PropertyIngredient.builder("secondary").mats(StainlessSteel).types(ROD).build()), "RbR", "rMr", " P ");
-        provider.addToolRecipe(POWERED_TOOL_BUILDER.get(JACKHAMMER.getId() + "-lv"), output, Ref.ID, JACKHAMMER.getId() + "_lv", "antimatter_jackhammers",
+        provider.addToolRecipe(UNIT_POWERED_TOOL_BUILDER.get(JACKHAMMER.getId() + "-lv"), output, Ref.ID, JACKHAMMER.getId() + "_lv", "antimatter_jackhammers",
                 "has_power_unit_small", provider.hasSafeItem(POWER_UNIT_SMALL), jackhammer_lv.resolveStack(NULL, StainlessSteel, 0, 100000), of('R', PropertyIngredient.builder("primary").types(ROD).tool(JACKHAMMER, true).build(), 'P', PropertyIngredient.builder("primary").types(PLATE, GEM).tool(JACKHAMMER, true).build(), 'b', PropertyIngredient.builder("secondary").itemTags(POWER_UNIT_SMALL).build()), "RbR", " P ");
     }
 
