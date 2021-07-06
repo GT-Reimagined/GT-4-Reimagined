@@ -81,6 +81,10 @@ public class RecipeMaps {
 
 
     public static void init(){
+
+    }
+
+    public static void postInit(){
         STEAM_FUELS.setGuiData(MULTI_DISPLAY, STEAM_TURBINE);
         GAS_FUELS.setGuiData(MULTI_DISPLAY, GAS_TURBINE);
         LARGE_STEAM_FUELS.setGuiData(MULTI_DISPLAY, LARGE_STEAM_TURBINE);

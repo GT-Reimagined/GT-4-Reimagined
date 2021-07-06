@@ -165,6 +165,7 @@ public class GT4Reimagined extends AntimatterMod {
                 RecipeMaps.init();
                 GT4RData.init(side);
                 Machines.init();
+                RecipeMaps.postInit();
                 TileEntityTypes.init();
                 Guis.init(side);
                 Models.init();
