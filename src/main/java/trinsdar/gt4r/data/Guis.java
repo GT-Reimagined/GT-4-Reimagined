@@ -272,16 +272,16 @@ public class Guis {
         STEAM_MACERATOR.getGui().add(STEEL, MACERATOR, LV).add(STEEL, FL_IN, 53, 63);
         STEAM_FORGE_HAMMER.getGui().add(BRONZE, FORGE_HAMMER).add(BRONZE, FL_IN, 53, 63).setDir(BarDir.BOTTOM).setBarFill(false);
 
-        STEAM_TURBINE.getGui().add(BASIC_TANK).setHasIOButton(false);
-        GAS_TURBINE.getGui().add(BASIC_TANK).setHasIOButton(false);
-        DIESEL_GENERATOR.getGui().add(BASIC_TANK).setHasIOButton(false);
-        SEMIFLUID_GENERATOR.getGui().add(BASIC_TANK).setHasIOButton(false);
+        STEAM_TURBINE.getGui().add(BASIC_TANK).setHasIOButton(false).setOverrideLocation(BASIC_TANK.getTexture(LV, "machine"));
+        GAS_TURBINE.getGui().add(BASIC_TANK).setHasIOButton(false).setOverrideLocation(BASIC_TANK.getTexture(LV, "machine"));
+        DIESEL_GENERATOR.getGui().add(BASIC_TANK).setHasIOButton(false).setOverrideLocation(BASIC_TANK.getTexture(LV, "machine"));
+        SEMIFLUID_GENERATOR.getGui().add(BASIC_TANK).setHasIOButton(false).setOverrideLocation(BASIC_TANK.getTexture(LV, "machine"));
         HEAT_EXCHANGER.getGui().add(FL_IN, 35, 63).add(FL_IN, 53, 63).add(FL_OUT, 107, 63).add(FL_OUT, 125, 63).setHasIOButton(false);
 
 
         INFINITE_STEAM.getGui().add(CELL_IN, 80, 17).add(CELL_OUT, 80, 53).add(FL_OUT, 60, 43);
 
-        QUANTUM_TANK.getGui().add(BASIC_TANK);
+        QUANTUM_TANK.getGui().add(BASIC_TANK).setOverrideLocation(BASIC_TANK.getTexture(LV, "machine"));
         QUANTUM_CHEST.getGui().add(IT_IN, 80, 17).add(DISPLAY, 60, 43).add(IT_OUT, 80, 53);
 
         HATCH_MUFFLER.getGui().add(IT_IN, 79, 34);
