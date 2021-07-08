@@ -1,14 +1,11 @@
 package trinsdar.gt4r.data;
 
 import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.cover.CoverStack;
 import muramasa.antimatter.gui.BarDir;
 import muramasa.antimatter.gui.ButtonBody;
 import muramasa.antimatter.gui.GuiData;
-import muramasa.antimatter.gui.MenuHandlerCover;
 import muramasa.antimatter.gui.MenuHandlerMachine;
 import muramasa.antimatter.gui.container.ContainerBasicMachine;
-import muramasa.antimatter.gui.container.ContainerCover;
 import muramasa.antimatter.gui.container.ContainerMachine;
 import muramasa.antimatter.gui.container.ContainerMultiMachine;
 import muramasa.antimatter.machine.Tier;
@@ -16,12 +13,10 @@ import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.tile.multi.TileEntityBasicMultiMachine;
 import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.WorkbenchContainer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.client.ScreenFactories;
-import trinsdar.gt4r.gui.ButtonOverlays;
 import trinsdar.gt4r.gui.ContainerCabinet;
 import trinsdar.gt4r.gui.ContainerWorkbench;
 import trinsdar.gt4r.gui.MenuHandlerCrafting;
@@ -196,7 +191,7 @@ public class Guis {
 
         ALLOY_SMELTER.getGui().add(IT_IN, 35, 25).add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(ENERGY,80, 63);
         ASSEMBLER.getGui().add(IT_IN, 17, 16).add(IT_IN, 35, 16).add(IT_IN, 53, 16).add(IT_IN, 17, 34).add(IT_IN, 35, 34).add(IT_IN, 53, 34).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25)
-                .add(ENERGY,80, 62);
+                .add(ENERGY,80, 63);
         BENDER.getGui().add(ALLOY_SMELTER);
         CANNER.getGui().add(IT_IN, 35, 25).add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(ENERGY,80, 63);
         COMPRESSOR.getGui().add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(ENERGY,80, 63);
@@ -272,11 +267,11 @@ public class Guis {
         STEAM_MACERATOR.getGui().add(STEEL, MACERATOR, LV).add(STEEL, FL_IN, 53, 63);
         STEAM_FORGE_HAMMER.getGui().add(BRONZE, FORGE_HAMMER).add(BRONZE, FL_IN, 53, 63).setDir(BarDir.BOTTOM).setBarFill(false);
 
-        STEAM_TURBINE.getGui().add(BASIC_TANK).setHasIOButton(false).setOverrideLocation(BASIC_TANK.getTexture(LV, "machine"));
-        GAS_TURBINE.getGui().add(BASIC_TANK).setHasIOButton(false).setOverrideLocation(BASIC_TANK.getTexture(LV, "machine"));
-        DIESEL_GENERATOR.getGui().add(BASIC_TANK).setHasIOButton(false).setOverrideLocation(BASIC_TANK.getTexture(LV, "machine"));
-        SEMIFLUID_GENERATOR.getGui().add(BASIC_TANK).setHasIOButton(false).setOverrideLocation(BASIC_TANK.getTexture(LV, "machine"));
-        HEAT_EXCHANGER.getGui().add(FL_IN, 35, 63).add(FL_IN, 53, 63).add(FL_OUT, 107, 63).add(FL_OUT, 125, 63).setHasIOButton(false);
+        STEAM_TURBINE.getGui().add(BASIC_TANK).setOverrideLocation(BASIC_TANK.getTexture(LV, "machine"));
+        GAS_TURBINE.getGui().add(BASIC_TANK).setOverrideLocation(BASIC_TANK.getTexture(LV, "machine"));
+        DIESEL_GENERATOR.getGui().add(BASIC_TANK).setOverrideLocation(BASIC_TANK.getTexture(LV, "machine"));
+        SEMIFLUID_GENERATOR.getGui().add(BASIC_TANK).setOverrideLocation(BASIC_TANK.getTexture(LV, "machine"));
+        HEAT_EXCHANGER.getGui().add(FL_IN, 35, 63).add(FL_IN, 53, 63).add(FL_OUT, 107, 63).add(FL_OUT, 125, 63);
 
 
         INFINITE_STEAM.getGui().add(CELL_IN, 80, 17).add(CELL_OUT, 80, 53).add(FL_OUT, 60, 43);
@@ -292,10 +287,11 @@ public class Guis {
 
         HATCH_FLUID_I.getGui().add(FL_IN, 79, 34).add(CELL_IN, 9, 22).add(CELL_OUT, 9, 58);
 
-
         HATCH_FLUID_O.getGui().add(FL_OUT, 79, 34).add(CELL_IN, 9, 22).add(CELL_OUT, 9, 58);
-        FUSION_MATERIAL_EXTRACTOR.getGui().add(FL_OUT, 79, 34).add(CELL_IN, 9, 22).add(CELL_OUT, 9, 58).add(IT_OUT, 61, 34).add(IT_OUT, 97, 34).add(IT_OUT, 79, 16).add(IT_OUT, 79, 52);
-        FUSION_MATERIAL_INJECTOR.getGui().add(FL_IN, 79, 34).add(CELL_IN, 9, 22).add(CELL_OUT, 9, 58).add(IT_IN, 61, 34).add(IT_IN, 97, 34).add(IT_IN, 79, 16).add(IT_IN, 79, 52);
+        FUSION_FLUID_INJECTOR.getGui().add(HATCH_FLUID_I);
+        FUSION_FLUID_EXTRACTOR.getGui().add(HATCH_FLUID_O);
+        FUSION_ITEM_EXTRACTOR.getGui().add(IT_OUT, 79, 34);
+        FUSION_ITEM_INJECTOR.getGui().add(IT_IN, 79, 34);
 
         COVER_CRAFTING.setGui(new GuiData(COVER_CRAFTING, COVER_CRAFTING_HANDLER));
 

@@ -3,7 +3,6 @@ package trinsdar.gt4r.data;
 import muramasa.antimatter.registration.IAntimatterObject;
 import muramasa.antimatter.structure.BlockStateElement;
 import muramasa.antimatter.structure.FakeTileElement;
-import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluids;
 
 import static trinsdar.gt4r.data.GT4RData.*;
@@ -108,8 +107,8 @@ public class Structures {
                 "    OOCCCOO    ",
                 "      HOH      "
             ).of(0)
-            .at("O", ADVANCED_MACHINE_CASING).at("C", FUSION_COIL).at("M", FUSION_REACTOR).at("B", ADVANCED_MACHINE_CASING, FUSION_MATERIAL_INJECTOR).at("H", ADVANCED_MACHINE_CASING, FUSION_MATERIAL_EXTRACTOR, FUSION_ENERGY_EXTRACTOR).at("E", ADVANCED_MACHINE_CASING, FUSION_ENERGY_INJECTOR)
-            .build().offset(2, -1).min(2, FUSION_MATERIAL_INJECTOR).min(1, FUSION_MATERIAL_EXTRACTOR).min(4, FUSION_ENERGY_INJECTOR).min(1, FUSION_ENERGY_EXTRACTOR));
+            .at("O", ADVANCED_MACHINE_CASING).at("C", FUSION_COIL).at("M", FUSION_REACTOR).at("B", ADVANCED_MACHINE_CASING, FUSION_ITEM_INJECTOR).at("H", ADVANCED_MACHINE_CASING, FUSION_ITEM_EXTRACTOR, FUSION_ENERGY_EXTRACTOR).at("E", ADVANCED_MACHINE_CASING, FUSION_ENERGY_INJECTOR)
+            .build().offset(2, -1).min(2, FUSION_ITEM_INJECTOR).min(1, FUSION_ITEM_EXTRACTOR).min(4, FUSION_ENERGY_INJECTOR).min(1, FUSION_ENERGY_EXTRACTOR));
     }
 
     public static class ComponentIdWrapper implements IAntimatterObject {
