@@ -6,10 +6,8 @@ import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.pipe.PipeSize;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.Items;
-import net.minecraft.tags.ItemTags;
 import net.minecraftforge.common.Tags;
 import trinsdar.gt4r.Ref;
-import trinsdar.gt4r.data.GT4RData;
 
 import java.util.function.Consumer;
 
@@ -128,8 +126,8 @@ public class MachineCrafting {
                     BATTERY_BUFFER_ONE.getItem(t), of('H', HULL.get(TIER_MATERIALS.get(t)), 'C', Tags.Items.CHESTS, 'W', TIER_WIRES.get(t).getBlockItem(PipeSize.VTINY)), "WCW", "WHW");
             provider.addItemRecipe(output, Ref.ID, t.getId() + "_batter_buffer_four", "machines", "has_machine_hull", provider.hasSafeItem(HULL.getMaterialTag(TIER_MATERIALS.get(t))),
                     BATTERY_BUFFER_FOUR.getItem(t), of('H', HULL.get(TIER_MATERIALS.get(t)), 'C', Tags.Items.CHESTS, 'W', TIER_WIRES.get(t).getBlockItem(PipeSize.SMALL)), "WCW", "WHW");
-            provider.addItemRecipe(output, Ref.ID, t.getId() + "_batter_buffer_nine", "machines", "has_machine_hull", provider.hasSafeItem(HULL.getMaterialTag(TIER_MATERIALS.get(t))),
-                    BATTERY_BUFFER_NINE.getItem(t), of('H', HULL.get(TIER_MATERIALS.get(t)), 'C', Tags.Items.CHESTS, 'W', TIER_WIRES.get(t).getBlockItem(PipeSize.NORMAL)), "WCW", "WHW");
+            provider.addItemRecipe(output, Ref.ID, t.getId() + "_batter_buffer_eight", "machines", "has_machine_hull", provider.hasSafeItem(HULL.getMaterialTag(TIER_MATERIALS.get(t))),
+                    BATTERY_BUFFER_EIGHT.getItem(t), of('H', HULL.get(TIER_MATERIALS.get(t)), 'C', Tags.Items.CHESTS, 'W', TIER_WIRES.get(t).getBlockItem(PipeSize.NORMAL)), "WCW", "WHW");
         });
         provider.addItemRecipe(output, Ref.ID, "drum_bronze", "drums", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),
                 BRONZE_DRUM.getItem(LV), of('H', HAMMER.getTag(), 'R', ROD.getMaterialTag(Bronze), 'P', PLATE.getMaterialTag(Bronze)), " H ", "PRP", "PRP");

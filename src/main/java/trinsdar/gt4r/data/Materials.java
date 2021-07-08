@@ -382,6 +382,8 @@ public class Materials {
         //Titanium.remove(BOLT, SCREW);
         Tungsten.remove(BOLT, SCREW);
         Netherite.remove(BOLT, SCREW);
+        Rubber.remove(BOLT, SCREW);
+        Plastic.remove(BOLT, SCREW);
         NetherizedDiamond.remove(BOLT, SCREW);
         Invar.remove(BOLT, SCREW);
         WroughtIron.remove(BOLT, SCREW);

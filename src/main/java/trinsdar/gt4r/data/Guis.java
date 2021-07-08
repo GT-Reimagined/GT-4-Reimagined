@@ -246,11 +246,12 @@ public class Guis {
         PUMP.getGui().add(IT_IN, 53, 25).add(FL_OUT, 107, 25).add(ENERGY, 80, 63);
 
 
-        BATTERY_BUFFER_FOUR.getGui().add(ENERGY,71,27).add(ENERGY,89,27).add(ENERGY,71,45).add(ENERGY,89,45).setHasIOButton(false);
+
         BATTERY_BUFFER_ONE.getGui().add(ENERGY,80,40).setHasIOButton(false);
-        BATTERY_BUFFER_NINE.getGui().add(ENERGY,62,21).add(ENERGY,80,21).add(ENERGY,98,21)
-                .add(ENERGY,62,39).add(ENERGY,80,39).add(ENERGY,98,39)
-                .add(ENERGY,62,57).add(ENERGY,80,57).add(ENERGY,98,57).setHasIOButton(false);
+        BATTERY_BUFFER_FOUR.getGui().add(ENERGY,71,27).add(ENERGY,89,27).add(ENERGY,71,45).add(ENERGY,89,45).setHasIOButton(false);
+        BATTERY_BUFFER_EIGHT.getGui()
+                .add(ENERGY,53,27).add(ENERGY,71,27).add(ENERGY,89,27).add(ENERGY,107,27)
+                .add(ENERGY,53,45).add(ENERGY,71,45).add(ENERGY,89,45).add(ENERGY,107,45).setHasIOButton(false);
 
         COAL_BOILER.getGui().add(BRONZE, CELL_IN, 44, 26).add(BRONZE, CELL_OUT, 44, 62).add(BRONZE, IT_OUT, 116, 26).add(BRONZE, IT_IN, 116, 62);
         COAL_BOILER.getGui().add(STEEL, CELL_IN, 44, 26).add(STEEL, CELL_OUT, 44, 62).add(STEEL, IT_OUT, 116, 26).add(STEEL, IT_IN, 116, 62);

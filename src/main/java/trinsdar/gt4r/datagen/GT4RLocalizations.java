@@ -99,6 +99,13 @@ public class GT4RLocalizations {
         public void add(final String key, final String value) {
             if (key.contains("machine")){
                 String id = key.contains("macerator.mv") ? "universal_macerator" : key.contains("electrolyzer") ? key.contains("lv") ? "basic_electrolyzer" : "industrial_electrolyzer" : "";
+                if (key.contains("battery_buffer")){
+                    String tier = value.substring(0, 3);
+                    String number = value.contains("One") ? "1x " : value.contains("Four") ? "4x " : "8x ";
+                    String afterTier = value.substring(3).replace(" One", "").replace(" Four", "").replace(" Eight", "");
+                    super.add(key, tier + number + afterTier);
+                    return;
+                }
                 super.add(key,  value.contains("Infinite") || value.contains("Transformer") || value.contains("Battery") ? value : (id.isEmpty() ? value.replace("Mv ", "").replace("Lv ", "").replace("Ulv ", "").replace("Hv ", "").replace("Ev ", "") : lowerUnderscoreToUpperSpaced(id)));
                 return;
             }
