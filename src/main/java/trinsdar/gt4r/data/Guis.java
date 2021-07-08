@@ -334,6 +334,23 @@ public class Guis {
                     .addButton(152, 48, 14, 14, APAD_RIGHT)
                     .addButton(137, 63, 14, 14, PAD_RIGHT)
                     .addButton(152, 63, 14, 14, APAD_RIGHT);
+            INFINITE_STORAGE.getGui()
+                    .addButton(10, 18, 14, 14, APAD_LEFT)
+                    .addButton(25, 18, 14, 14, PAD_LEFT)
+                    .addButton(10, 33, 14, 14, APAD_LEFT)
+                    .addButton(25, 33, 14, 14, PAD_LEFT)
+                    .addButton(10, 48, 14, 14, APAD_LEFT)
+                    .addButton(25, 48, 14, 14, PAD_LEFT)
+                    .addButton(10, 63, 14, 14, APAD_LEFT)
+                    .addButton(25, 63, 14, 14, PAD_LEFT)
+                    .addButton(137, 18, 14, 14, PAD_RIGHT)
+                    .addButton(152, 18, 14, 14, APAD_RIGHT)
+                    .addButton(137, 33, 14, 14, PAD_RIGHT)
+                    .addButton(152, 33, 14, 14, APAD_RIGHT)
+                    .addButton(137, 48, 14, 14, PAD_RIGHT)
+                    .addButton(152, 48, 14, 14, APAD_RIGHT)
+                    .addButton(137, 63, 14, 14, PAD_RIGHT)
+                    .addButton(152, 63, 14, 14, APAD_RIGHT);
         }
     }
 

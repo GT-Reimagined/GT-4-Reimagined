@@ -1,10 +1,10 @@
 package trinsdar.gt4r.data;
 
 import muramasa.antimatter.cover.ICover;
+import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.*;
 import muramasa.antimatter.tile.single.TileEntityBatteryBuffer;
 import muramasa.antimatter.tile.single.TileEntityDigitalTransformer;
-import muramasa.antimatter.tile.single.TileEntityInfiniteStorage;
 import muramasa.antimatter.tile.single.TileEntityTransformer;
 import trinsdar.gt4r.machine.MaterialMachine;
 import trinsdar.gt4r.machine.NonSolidMachine;
@@ -15,6 +15,7 @@ import trinsdar.gt4r.tile.single.TileEntityDustBin;
 import trinsdar.gt4r.tile.single.TileEntityForgeHammer;
 import trinsdar.gt4r.tile.single.TileEntityHeatExchanger;
 import trinsdar.gt4r.tile.single.TileEntityInfiniteFluid;
+import trinsdar.gt4r.tile.single.TileEntityInfiniteStorage;
 import trinsdar.gt4r.tile.single.TileEntityLocker;
 import trinsdar.gt4r.tile.single.TileEntityQuantumChest;
 import trinsdar.gt4r.tile.single.TileEntityQuantumTank;
@@ -23,6 +24,8 @@ import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.tile.multi.*;
 import trinsdar.gt4r.tile.single.TileEntityWorkbench;
 
+
+import java.util.Arrays;
 
 import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.machine.MachineFlag.*;
@@ -146,13 +149,13 @@ public class Machines {
     public static GeneratorMachine WINDMILL = new GeneratorMachine(Ref.ID, "windmill").setTiers(ULV).covers(COVERNONE,COVERNONE,COVERNONE,COVERNONE,COVERNONE, COVER_DYNAMO_OLD).setAllowVerticalFacing(false).setOutputCover(COVER_DYNAMO_OLD);
     public static GeneratorMachine WATERMILL = new GeneratorMachine(Ref.ID, "watermill").setTiers(ULV).covers(COVERNONE,COVERNONE,COVERNONE,COVERNONE,COVERNONE, COVER_DYNAMO_OLD).setAllowVerticalFacing(false).setOutputCover(COVER_DYNAMO_OLD);
 
-    public static BasicMachine INFINITE_STORAGE = new BasicMachine(Ref.ID, "infinite_storage").addFlags(ENERGY).setTiers(ULV, LV, MV, HV, EV, IV, LUV, ZPM, UV, MAX).setTile(m -> () -> new TileEntityInfiniteStorage<>(m, 16))
+    public static BasicMachine INFINITE_STORAGE = new BasicMachine(Ref.ID, "infinite_storage").addFlags(ENERGY, GUI).setTiers(MAX).setTile(m -> () -> new TileEntityInfiniteStorage<>(m))
             .noCovers();
     public static TankMachine INFINITE_STEAM = new TankMachine(Ref.ID, "infinite_steam").addFlags(FLUID, CELL, GUI).setTiers(LV).setTile(m -> () -> new TileEntityInfiniteFluid(m));
     public static BasicMachine BATTERY_BUFFER_ONE = new BasicMachine(Ref.ID, "battery_buffer_one").noCovers().addFlags(GUI, ENERGY, ITEM).setTile(m -> () -> new TileEntityBatteryBuffer<>(m)).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).frontCovers().setAllowVerticalFacing(true);
     public static BasicMachine BATTERY_BUFFER_FOUR = new BasicMachine(Ref.ID, "battery_buffer_four").noCovers().addFlags(GUI, ENERGY, ITEM).setTile(m -> () -> new TileEntityBatteryBuffer<>(m)).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).frontCovers().setAllowVerticalFacing(true);
     public static BasicMachine BATTERY_BUFFER_EIGHT = new BasicMachine(Ref.ID, "battery_buffer_eight").noCovers().addFlags(GUI, ENERGY, ITEM).setTile(m -> () -> new TileEntityBatteryBuffer<>(m)).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).frontCovers().setAllowVerticalFacing(true);
-    public static BasicMachine TRANSFORMER = new BasicMachine(Ref.ID, "transformer").addFlags(ENERGY).setTiers(LV, MV, HV, IV, EV, LUV, ZPM, UV).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).setTile(m -> () -> new TileEntityTransformer<>(m, 1)).noCovers().setAllowVerticalFacing(true);
+    public static BasicMachine TRANSFORMER = new BasicMachine(Ref.ID, "transformer").addFlags(ENERGY).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).setTile(m -> () -> new TileEntityTransformer<>(m, 1)).setTiers(Arrays.stream(getAllElectric()).filter(t -> t != ULV).toArray(Tier[]::new)).noCovers().setAllowVerticalFacing(true);
     public static BasicMachine TRANSFORMER_DIGITAL = new BasicMachine(Ref.ID, "transformer_digital").addFlags(GUI, ENERGY).setTiers(EV, IV).setTile(m -> () -> new TileEntityDigitalTransformer<>(m)).noCovers();//.setTiers();
 
     public static void init() {
