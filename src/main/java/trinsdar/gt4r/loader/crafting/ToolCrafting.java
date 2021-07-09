@@ -36,7 +36,7 @@ public class ToolCrafting {
     }
 
     private static void loadPoweredRecipes(Consumer<IFinishedRecipe> output, AntimatterRecipeProvider provider){
-        provider.addToolRecipe(ROCK_CUTTER_BUILDER.get("cutter"), output, Ref.ID, "rock_cutter_1", "rock_cutters", "has_diamond", provider.hasSafeItem(GEM.getMaterialTag(Diamond)), new ItemStack(RockCutter), of('D', DUST.getMaterialTag(Diamond), 'P', PropertyIngredient.builder("primary").mats(Titanium, TungstenSteel).types(PLATE).build(), 'R', PropertyIngredient.builder("primary").mats(Titanium, TungstenSteel).types(ROD).build(), 'C', CustomTags.CIRCUITS_BASIC, 'B', PropertyIngredient.builder("battery").itemTags(CustomTags.BATTERIES_RE).build()), "DR ", "DP ", "DCB");
+        provider.addToolRecipe(ROCK_CUTTER_BUILDER.get("cutter"), output, Ref.ID, "rock_cutter_1", "rock_cutters", "has_diamond", provider.hasSafeItem(GEM.getMaterialTag(Diamond)), new ItemStack(RockCutter), of('D', DUST.getMaterialTag(Diamond), 'P', PropertyIngredient.builder("primary").mats(Titanium, TungstenSteel).types(PLATE).build(), 'R', PropertyIngredient.builder("primary").mats(Titanium, TungstenSteel).types(ROD).build(), 'C', CustomTags.CIRCUITS_BASIC, 'B', PropertyIngredient.builder("battery").itemTags(CustomTags.BATTERIES_SMALL).build()), "DR ", "DP ", "DCB");
 
         ICriterionInstance in = provider.hasSafeItem(SCREWDRIVER.getTag());
 

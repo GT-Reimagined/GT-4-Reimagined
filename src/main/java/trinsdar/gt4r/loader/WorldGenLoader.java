@@ -2,6 +2,7 @@ package trinsdar.gt4r.loader;
 
 import muramasa.antimatter.Antimatter;
 import muramasa.antimatter.AntimatterConfig;
+import muramasa.antimatter.Data;
 import muramasa.antimatter.worldgen.object.WorldGenStoneLayer;
 import muramasa.antimatter.worldgen.object.WorldGenVeinLayer;
 import muramasa.antimatter.worldgen.old.WorldGenAsteroid;
@@ -32,5 +33,10 @@ public class WorldGenLoader {
         WorldGenStoneLayer.add(GT4RData.BLUE_SCHIST, 1, World.OVERWORLD);
         WorldGenStoneLayer.add(GT4RData.KIMBERLITE, 3, World.OVERWORLD);
         WorldGenStoneLayer.add(GT4RData.QUARTZITE, 4, World.OVERWORLD);
+        if (AntimatterConfig.WORLD.VANILLA_STONE_GEN){
+            WorldGenStoneLayer.add(Data.GRANITE, 4, World.OVERWORLD);
+            WorldGenStoneLayer.add(Data.ANDESITE, 4, World.OVERWORLD);
+            WorldGenStoneLayer.add(Data.DIORITE, 4, World.OVERWORLD);
+        }
     }
 }
