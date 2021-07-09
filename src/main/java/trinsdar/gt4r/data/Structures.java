@@ -24,9 +24,14 @@ public class Structures {
             .at("C", BRICK).at("M", COKE_OVEN)
             .build().offset(2, -1)
         );
+        PYROLYSIS_OVEN.setStructure(b -> b
+                .of("CCC ", "CCCM", "CCC ").of("CCC ", "CLC ", "CCC ").of("CCC ", "CCC ", "CCC ")
+                .at("M", PYROLYSIS_OVEN).at("C", STANDARD_MACHINE_CASING, REINFORCED_MACHINE_CASING).at("L", AIR_OR_LAVA)
+                .build().offset(3, 0)
+        );
         PRIMITIVE_BLAST_FURNACE.setStructure(b -> b
             .of("CCC", "CCC", "CCC").of("CCC", "CBM", "CCC").of("CCC", "CBC", "CCC").of(2).of("CCC", "CAC", "CCC")
-            .at("C", BRICK).at("B", AIR_OR_LAVA).at("M", PRIMITIVE_BLAST_FURNACE).at("A", AIR)
+            .at("C", BRICK).at("B", AIR_OR_LAVA).at("M", PRIMITIVE_BLAST_FURNACE)
             .build().offset(2, -1)
         );
         BLAST_FURNACE.setStructure(b -> b
@@ -40,7 +45,7 @@ public class Structures {
             .build().offset(1, -3).min(20, REINFORCED_MACHINE_CASING).min(6, ADVANCED_MACHINE_CASING)
         );
         IMPLOSION_COMPRESSOR.setStructure(b -> b
-            .of("cCc", "CCC", "cCc").of("CCC", "CAC", "CCC").of(0).of("AAA", "AMA", "AAA")
+            .of("cCc", "CCC", "cCc").of("CCC", "CAC", "CCC").of(0).of("   ", " M ", "   ")
             .at("M", IMPLOSION_COMPRESSOR).at("C", REINFORCED_MACHINE_CASING).at("c", STANDARD_MACHINE_CASING)
             .build().offset(1, -3).min(18, REINFORCED_MACHINE_CASING).min(8, STANDARD_MACHINE_CASING)
         );
@@ -109,17 +114,5 @@ public class Structures {
             ).of(0)
             .at("O", ADVANCED_MACHINE_CASING).at("C", FUSION_COIL).at("M", FUSION_REACTOR).at("B", ADVANCED_MACHINE_CASING, FUSION_ITEM_INJECTOR).at("H", ADVANCED_MACHINE_CASING, FUSION_ITEM_EXTRACTOR, FUSION_ENERGY_EXTRACTOR).at("E", ADVANCED_MACHINE_CASING, FUSION_ENERGY_INJECTOR)
             .build().offset(2, -1).min(2, FUSION_ITEM_INJECTOR).min(1, FUSION_ITEM_EXTRACTOR).min(4, FUSION_ENERGY_INJECTOR).min(1, FUSION_ENERGY_EXTRACTOR));
-    }
-
-    public static class ComponentIdWrapper implements IAntimatterObject {
-        String id;
-        public ComponentIdWrapper(String id){
-            this.id = id;
-        }
-
-        @Override
-        public String getId() {
-            return id;
-        }
     }
 }

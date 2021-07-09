@@ -234,6 +234,7 @@ public class Guis {
         COKE_OVEN.getGui().add(IT_IN, 53,25).add(IT_OUT,107,25).add(IT_OUT,125,25).add(IT_OUT,143,25).add(FL_OUT, 107, 63);
         BLAST_FURNACE.getGui().add(IT_IN, 35, 16).add(IT_IN, 53, 16).add(IT_IN, 35, 34).add(IT_IN, 53, 34).add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(SlotTypes.COIL, 8, 63).setHasIOButton(false);
         PRIMITIVE_BLAST_FURNACE.getGui().add(IT_IN, 35, 16).add(IT_IN, 35, 34).add(IT_IN, 35, 52).add(IT_IN, 53, 16).add(IT_IN, 53, 34).add(IT_IN, 53, 52).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25).add(IT_OUT, 143, 25).setPadding(0, 0, 0, 0);
+        PYROLYSIS_OVEN.getGui().add(COKE_OVEN).add(SlotTypes.COIL, 8, 63).setHasIOButton(false);
         FUSION_REACTOR.getGui().setEnablePlayerSlots(false);
         DISTILLATION_TOWER.getGui().add(FL_IN, 62, 41).add(FL_OUT, 98, 59).add(FL_OUT, 98, 41).add(FL_OUT, 98, 23).add(FL_OUT, 98, 5).add(FL_OUT, 116, 23).add(FL_OUT, 116, 5).add(IT_OUT, 116, 41).add(IT_OUT, 116, 59).add(ENERGY, 62, 59).setDir(BarDir.TOP).setProgress(80, 4, 16, 72).setState(66, 26, 8, 8).setStateLocation(176, 108).setHasIOButton(false);
         VACUUM_FREEZER.getGui().add(COMPRESSOR).setHasIOButton(false);
