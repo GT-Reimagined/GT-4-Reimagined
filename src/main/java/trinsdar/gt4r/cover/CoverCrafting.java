@@ -9,6 +9,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.network.NetworkHooks;
 import trinsdar.gt4r.Ref;
 
@@ -42,13 +43,17 @@ public class CoverCrafting extends BaseCover {
             packetBuffer.writeBlockPos(instance.getTile().getPos());
             packetBuffer.writeInt(side.getIndex());
         });
-        //player.playSound(muramasa.antimatter.Ref.WRENCH, SoundCategory.BLOCKS, 1.0f, 2.0f);
         return true;
     }
 
     @Override
     public boolean onInteract(CoverStack<?> instance, PlayerEntity player, Hand hand, Direction side, @Nullable AntimatterToolType type) {
         return openGui(instance, player, side);
+    }
+
+    @Override
+    public <T> boolean blocksCapability(CoverStack<?> stack, Capability<T> cap, @Nullable Direction side) {
+        return true;
     }
 
     @Override
