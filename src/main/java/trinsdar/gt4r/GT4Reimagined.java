@@ -87,7 +87,6 @@ public class GT4Reimagined extends AntimatterMod {
         AntimatterDynamics.addProvider(Ref.ID, GT4RLocalizations.en_US::new);
         AntimatterDynamics.addProvider(Ref.ID, g -> new GT4RBlockLootProvider(Ref.ID, Ref.NAME.concat( " Loot generator"),g));
 
-        GT4RFeatures.init();
         Attributes.init();
         registerRecipeLoaders();
     }
@@ -172,6 +171,7 @@ public class GT4Reimagined extends AntimatterMod {
             case DATA_READY:
                 GT4RData.buildTierMaps();
                 Structures.init();
+                GT4RFeatures.init();
                 //GregTechAPI.registerFluidCell(Data.CellTin.get(1));
                 //GregTechAPI.registerFluidCell(Data.CellSteel.get(1));
                 //GregTechAPI.registerFluidCell(Data.CellTungstensteel.get(1));

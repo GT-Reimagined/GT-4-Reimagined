@@ -40,6 +40,7 @@ import java.util.List;
 import java.util.Random;
 
 import static muramasa.antimatter.Data.ORE;
+import static muramasa.antimatter.Data.ORE_STONE;
 import static trinsdar.gt4r.data.Materials.RockSalt;
 import static trinsdar.gt4r.data.Materials.Salt;
 import static trinsdar.gt4r.worldgen.GT4RFeatures.*;
@@ -259,10 +260,10 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
                                             bitset.set(l2);
                                             blockpos$mutable.setPos(i2, j2, k2);
                                             Material mat = Material.get(config.getPrimary());
-                                            if (mat == Salt || mat == RockSalt){
+                                            if (mat.has(ORE_STONE)){
                                                 StoneType stone = WorldGenHelper.STONE_MAP.get(worldIn.getBlockState(blockpos$mutable));
                                                 if (stone == null) continue;
-                                                if (WorldGenHelper.setState(worldIn, blockpos$mutable, mat == Salt ? GT4RData.SALT.getState() : GT4RData.ROCK_SALT.getState())) {
+                                                if (WorldGenHelper.setState(worldIn, blockpos$mutable, ORE_STONE.get().get(mat).asState())) {
                                                     ++i;
                                                     continue;
                                                 }

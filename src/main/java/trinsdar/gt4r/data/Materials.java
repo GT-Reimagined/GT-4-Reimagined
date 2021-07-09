@@ -299,8 +299,8 @@ public class Materials {
     public static Material Scoria = AntimatterAPI.registerIfAbsent(Material.class,"scoria",() -> new Material(Ref.ID, "scoria", 0x1e1414, ROUGH, Ref.MOD_CREATE).asDust().mats(of(SiliconDioxide, 6, Calcium, 1, Carbon, 1, Iron, 1)));
 
     /** Ore Stones **/
-    public static Material Salt = AntimatterAPI.registerIfAbsent(Material.class,"salt",() -> new Material(Ref.ID, "salt", 0xfafafa, FINE).asDust().mats(of(Sodium, 1, Chlorine, 1)));
-    public static Material RockSalt = AntimatterAPI.registerIfAbsent(Material.class,"rock_salt",() -> new Material(Ref.ID, "rock_salt", 0xf0c8c8, FINE).asDust().mats(of(Potassium, 1, Chlorine, 1)));
+    public static Material Salt = AntimatterAPI.registerIfAbsent(Material.class,"salt",() -> new Material(Ref.ID, "salt", 0xfafafa, FINE).asDust(ORE_STONE).mats(of(Sodium, 1, Chlorine, 1)));
+    public static Material RockSalt = AntimatterAPI.registerIfAbsent(Material.class,"rock_salt",() -> new Material(Ref.ID, "rock_salt", 0xf0c8c8, FINE).asDust(ORE_STONE).mats(of(Potassium, 1, Chlorine, 1)));
     //public static Material OilShale = AntimatterAPI.registerIfAbsent(Material.class,"oil_shale",() -> new Material(Ref.ID, "oil_shale", 0x32323c, NONE).asDust(ORE_STONE));
 
 
@@ -414,6 +414,8 @@ public class Materials {
         Platinum.remove(ORE_SMALL, ROCK);
         Diamond.remove(ORE_SMALL, ROCK);
         Coal.remove(CRUSHED, CRUSHED_PURIFIED, CRUSHED_CENTRIFUGED, DUST_IMPURE, DUST_PURE, ORE_SMALL, ROCK);
+        Salt.remove(ROCK, CRUSHED, CRUSHED_PURIFIED, CRUSHED_CENTRIFUGED, DUST_IMPURE, DUST_PURE);
+        RockSalt.remove(ROCK, CRUSHED, CRUSHED_PURIFIED, CRUSHED_CENTRIFUGED, DUST_IMPURE, DUST_PURE);
         Redstone.remove(ORE_SMALL, ROCK);
         Lapis.remove(ORE_SMALL, ROCK);
 

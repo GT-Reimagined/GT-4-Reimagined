@@ -9,14 +9,19 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.Features;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
+import net.minecraft.world.gen.feature.template.BlockMatchRuleTest;
+import net.minecraft.world.gen.feature.template.RuleTest;
 import net.minecraftforge.common.BiomeDictionary;
+import trinsdar.gt4r.data.GT4RData;
 
 import static muramasa.antimatter.Data.NULL;
+import static muramasa.antimatter.Data.ORE_STONE;
 import static net.minecraftforge.common.BiomeDictionary.Type.*;
 import static trinsdar.gt4r.data.Materials.*;
 
 public class GT4RFeatures {
     public static final AntimatterFeature<?> ORE = new FeatureVanillaTypeOre();
+    public static final AntimatterFeature<?> RETROGEN_ORE_STONE = new RetrogenFeature();
 
     //public static final GT4ROreFeatureConfig IRON = new GT4ROreFeatureConfig("iron", 1, "iron", "nickel", 5);
     public static final GT4ROreFeatureConfig COPPER = new GT4ROreFeatureConfig("copper", 0, 100, 15, 10, Copper, Gold, 2, World.OVERWORLD);
@@ -54,7 +59,11 @@ public class GT4RFeatures {
     public static final GT4ROreFeatureConfig LAPIS = new GT4ROreFeatureConfig("lapis", 0, 100, 1, 7, Lapis, NULL, 0, World.OVERWORLD);
     public static final GT4ROreFeatureConfig REDSTONE = new GT4ROreFeatureConfig("redstone", 0, 16, 8, 8, Redstone, Cinnabar, 1, World.OVERWORLD);
 
+    public static OreFeatureConfig SALT_OVERRIDE = new OreFeatureConfig(new BlockMatchRuleTest(GT4RData.SALT.getState().getBlock()), ORE_STONE.get().get(Salt).asState(), 1);
+    public static final OreFeatureConfig ROCK_SALT_OVERRIDE = new OreFeatureConfig(new BlockMatchRuleTest(GT4RData.ROCK_SALT.getState().getBlock()), ORE_STONE.get().get(RockSalt).asState(), 1);
+
     public static void init(){
+
 
     }
 }

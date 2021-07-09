@@ -10,6 +10,7 @@ import muramasa.antimatter.machine.BlockMachine;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.mixin.BlockLootTablesAccessor;
 import muramasa.antimatter.ore.BlockOre;
+import muramasa.antimatter.ore.BlockOreStone;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.loot.BlockLootTables;
@@ -95,8 +96,8 @@ public class GT4RBlockLootProvider extends AntimatterBlockLootProvider {
                 return;
             }
         }
-        if (block instanceof BlockStone && (((BlockStone)block).getType().getMaterial() == Salt || ((BlockStone)block).getType().getMaterial() == RockSalt)){
-            tables.put(block, b -> droppingItemWithFortune(b, DUST.get(((BlockStone)block).getType().getMaterial())));
+        if (block instanceof BlockOreStone && (((BlockOreStone)block).getMaterial() == Salt || ((BlockOreStone)block).getMaterial() == RockSalt)){
+            tables.put(block, b -> droppingItemWithFortune(b, DUST.get(((BlockOreStone)block).getMaterial())));
             return;
         }
         tables.put(block, this::build);
