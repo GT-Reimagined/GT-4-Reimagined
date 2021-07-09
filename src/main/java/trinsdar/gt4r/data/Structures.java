@@ -26,7 +26,7 @@ public class Structures {
         );
         PYROLYSIS_OVEN.setStructure(b -> b
                 .of("CCC ", "CCCM", "CCC ").of("CCC ", "CLC ", "CCC ").of("CCC ", "CCC ", "CCC ")
-                .at("M", PYROLYSIS_OVEN).at("C", STANDARD_MACHINE_CASING, REINFORCED_MACHINE_CASING).at("L", AIR_OR_LAVA)
+                .at("M", PYROLYSIS_OVEN).at("C", STANDARD_MACHINE_CASING).at("L", AIR_OR_LAVA)
                 .build().offset(3, 0)
         );
         PRIMITIVE_BLAST_FURNACE.setStructure(b -> b

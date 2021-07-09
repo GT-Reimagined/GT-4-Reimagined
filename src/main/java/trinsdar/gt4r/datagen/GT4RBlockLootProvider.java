@@ -100,6 +100,10 @@ public class GT4RBlockLootProvider extends AntimatterBlockLootProvider {
             tables.put(block, b -> droppingItemWithFortune(b, DUST.get(((BlockOreStone)block).getMaterial())));
             return;
         }
+        if (block instanceof BlockStone && (((BlockStone)block).getType().getMaterial() == Salt || ((BlockStone)block).getType().getMaterial() == RockSalt)){
+            tables.put(block, b -> droppingItemWithFortune(b, DUST.get(((BlockStone)block).getType().getMaterial())));
+            return;
+        }
         tables.put(block, this::build);
     }
 }
