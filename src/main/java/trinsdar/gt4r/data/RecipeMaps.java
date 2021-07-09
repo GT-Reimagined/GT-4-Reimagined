@@ -70,6 +70,7 @@ public class RecipeMaps {
     public static RecipeMap<?> STEAM_ALLOY_SMELTING = new RecipeMap<>("steam_alloy_smelting", new RecipeBuilder());
 
     public static RecipeMap<?> COKING = new RecipeMap<>("coking", new RecipeBuilder());
+    public static RecipeMap<?> PYROLYSING = new RecipeMap<>("pyrolysing", new RecipeBuilder());
     public static RecipeMap<?> DISTILLING = new RecipeMap<>("distilling", new RecipeBuilder());
     public static RecipeMap<BasicBlastingBuilder> BASIC_BLASTING = new RecipeMap<>("basic_blasting", new BasicBlastingBuilder());
     public static RecipeMap<?> BLASTING = new RecipeMap<>("industrial_blasting", new RecipeBuilder());
@@ -94,6 +95,7 @@ public class RecipeMaps {
         SEMIFLUID_FUELS.setGuiData(MULTI_DISPLAY, SEMIFLUID_GENERATOR);
         THERMAL_BOILER_FUELS.setGuiData(MULTI_DISPLAY, THERMAL_BOILER);
         COKING.setGuiData(MULTI_DISPLAY, COKE_OVEN);
+        PYROLYSING.setGuiData(MULTI_DISPLAY, PYROLYSIS_OVEN);
         DISTILLING.setGuiData(MULTI_DISPLAY_MORE_FLUID, DISTILLATION_TOWER);
         BASIC_BLASTING.setGuiData(MULTI_DISPLAY, PRIMITIVE_BLAST_FURNACE);
         BLASTING.setGuiData(MULTI_DISPLAY, BLAST_FURNACE);
