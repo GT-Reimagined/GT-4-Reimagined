@@ -48,7 +48,7 @@ public class MaceratorLoader {
             ItemStack crushedStack = CRUSHED.get(m,1);
             Material oreByProduct1 = m.getByProducts().size() > 0 ? m.getByProducts().get(0) : m.getMacerateInto();
             RecipeMap rm = MACERATING;
-            if (sm == Sand || sm == RedSand || sm == Gravel || o.getStoneType() == SOUL_SAND || o.getStoneType() == SOUL_SOIL){
+            if (sm == Sand || sm == RedSand || sm == Gravel){
                 rm = SIFTING;
             }
             if (stoneDust.isEmpty()){
