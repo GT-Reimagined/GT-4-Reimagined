@@ -145,6 +145,10 @@ public class Parts {
                 CopperCoil, of('L', WIRE_COPPER.getBlockItem(PipeSize.VTINY), 'I', INGOT.getMaterialTag(Iron)), "LLL", "LIL", "LLL");
         provider.addItemRecipe(output, Ref.ID, "ingot_iridium_alloy", "parts", "has_diamond", provider.hasSafeItem(GEM.getMaterialTag(Diamond)),
                 IridiumAlloyIngot, of('I', PLATE.getMaterialTag(Iridium), 'D', GEM.getMaterialTag(Diamond), 'A', AdvancedAlloy), "IAI", "ADA", "IAI");
+        provider.addItemRecipe(output, Ref.ID, "magnetic_steel_ingot", "parts", "has_redstone", provider.hasSafeItem(DUST.getMaterialTag(Redstone)), INGOT.get(SteelMagnetic), of('R', DUST.getMaterialTag(Redstone), 'I', INGOT.getMaterialTag(Steel)), "RRR", "RIR", "RRR");
+        provider.shapeless(output, "magnetic_steel_rod", "parts", "has_redstone", provider.hasSafeItem(DUST.getMaterialTag(Redstone)), ROD.get(SteelMagnetic, 1), ROD.getMaterialTag(Steel), DUST.getMaterialTag(Redstone), DUST.getMaterialTag(Redstone), DUST.getMaterialTag(Redstone), DUST.getMaterialTag(Redstone));
+        provider.addItemRecipe(output, Ref.ID, "magnetic_iron_ingot", "parts", "has_redstone", provider.hasSafeItem(DUST.getMaterialTag(Redstone)), INGOT.get(IronMagnetic), of('R', DUST.getMaterialTag(Redstone), 'I', INGOT.getMaterialTag(Iron)), "RRR", "RIR", "RRR");
+        provider.shapeless(output, "magnetic_iron_rod", "parts", "has_redstone", provider.hasSafeItem(DUST.getMaterialTag(Redstone)), ROD.get(IronMagnetic, 1), ROD.getMaterialTag(Iron), DUST.getMaterialTag(Redstone), DUST.getMaterialTag(Redstone), DUST.getMaterialTag(Redstone), DUST.getMaterialTag(Redstone));
         Material[] in = new Material[]{Iron, WroughtIron, Nickel};
         Material[] b = new Material[]{Bronze, Brass};
         Material[] tz = new Material[]{Tin, Zinc};
@@ -258,11 +262,11 @@ public class Parts {
         provider.addItemRecipe(output, Ref.ID, "int_circuit1", "parts", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),
                 INT_CIRCUITS_ITEMS.get(0), of('R', ROD.getMaterialTag(WroughtIron), 'P', PLATE.getMaterialTag(WroughtIron), 'H', HAMMER.getTag(), 'W', WRENCH.getTag()), "PHP", "RRR", "PWP");
         provider.addItemRecipe(output, Ref.ID, "motor_lv", "parts", "has_tin_cable", provider.hasSafeItem(CABLE_TIN.getBlockItem(PipeSize.VTINY)),
-                MotorLV, of('T', CABLE_TIN.getBlockItem(PipeSize.VTINY), 'C', WIRE_COPPER.getBlockItem(PipeSize.VTINY), 'I', ROD.getMaterialTag(Steel), 'M', ROD.getMaterialTag(Steel)), "TCI", "CMC", "ICT");
+                MotorLV, of('T', CABLE_TIN.getBlockItem(PipeSize.VTINY), 'C', WIRE_COPPER.getBlockItem(PipeSize.VTINY), 'I', ROD.getMaterialTag(Steel), 'M', RODS_MAGNETIC), "TCI", "CMC", "ICT");
         provider.addItemRecipe(output, Ref.ID, "motor_mv", "parts", "has_copper_cable", provider.hasSafeItem(CABLE_COPPER.getBlockItem(PipeSize.VTINY)),
-                MotorMV, of('T', CABLE_COPPER.getBlockItem(PipeSize.VTINY), 'C', WIRE_COPPER.getBlockItem(PipeSize.TINY), 'I', ROD.getMaterialTag(Aluminium), 'M', ROD.getMaterialTag(Steel)), "TCI", "CMC", "ICT");
+                MotorMV, of('T', CABLE_COPPER.getBlockItem(PipeSize.VTINY), 'C', WIRE_COPPER.getBlockItem(PipeSize.TINY), 'I', ROD.getMaterialTag(Aluminium), 'M', RODS_MAGNETIC), "TCI", "CMC", "ICT");
         provider.addItemRecipe(output, Ref.ID, "motor_hv", "parts", "has_gold_cable", provider.hasSafeItem(CABLE_GOLD.getBlockItem(PipeSize.VTINY)),
-                MotorHV, of('T', CABLE_GOLD.getBlockItem(PipeSize.VTINY), 'C', WIRE_COPPER.getBlockItem(PipeSize.SMALL), 'I', ROD.getMaterialTag(StainlessSteel), 'M', ROD.getMaterialTag(Steel)), "TCI", "CMC", "ICT");
+                MotorHV, of('T', CABLE_GOLD.getBlockItem(PipeSize.VTINY), 'C', WIRE_COPPER.getBlockItem(PipeSize.SMALL), 'I', ROD.getMaterialTag(StainlessSteel), 'M', RODS_MAGNETIC), "TCI", "CMC", "ICT");
         provider.shapeless(output, "match_r", "parts", "has_stick", provider.hasSafeItem(getForgeItemTag("rods/wooden")), new ItemStack(Match, 4), DUST.getMaterialTag(Phosphor), getForgeItemTag("rods/wooden"));
         provider.addStackRecipe(output, Ref.ID, "fluid_cell", "parts", "has_tin", provider.hasSafeItem(PLATE.getMaterialTag(Tin)),
                 new ItemStack(CellTin, 2), of('T', PLATE.getMaterialTag(Tin)), " T ", "T T", " T ");

@@ -266,6 +266,8 @@ public class Materials {
     public static Material TungstenCarbide = AntimatterAPI.registerIfAbsent(Material.class,"tungsten_carbide",() -> new Material(Ref.ID, "tungsten_carbide", 0x330066, METALLIC).asMetal(2460, 2460).addTools(5.0F, 14.0F, 2560, 4, of(Enchantments.SHARPNESS, 5)).mats(of(Tungsten, 1, Carbon, 1)));
     public static Material RedAlloy = AntimatterAPI.registerIfAbsent(Material.class,"red_alloy",() -> new Material(Ref.ID, "red_alloy", 0xc80000, DULL).asMetal(295, 0, PLATE, ROD).mats(of(Copper, 1, Redstone, 4)));
     public static Material Osmiridium = AntimatterAPI.registerIfAbsent(Material.class,"osmiridium",() -> new Material(Ref.ID, "osmiridium", 0x6464ff, METALLIC).asMetal(3333, 3300,  PLATE, ROD, TURBINE_BLADE, TURBINE_ROTOR).mats(of(Iridium, 1, Osmium, 1)));
+    public static Material IronMagnetic = AntimatterAPI.registerIfAbsent(Material.class,"magnetic_iron",() -> new Material(Ref.ID, "magnetic_iron", 0xc8c8c8, MAGNETIC).asMetal(1811, 0,ROD).addTools(Iron).mats(of(Iron, 1)));
+    public static Material SteelMagnetic = AntimatterAPI.registerIfAbsent(Material.class,"magnetic_steel",() -> new Material(Ref.ID, "magnetic_steel", 0x808080, MAGNETIC).asMetal(1000, 1000,ROD).addTools(Steel).mats(of(Steel, 1)));
 
     /** TFC Materials **/
     public static Material SterlingSilver = AntimatterAPI.registerIfAbsent(Material.class,"sterling_silver",() -> new Material(Ref.ID, "sterling_silver", 0xfadce1, SHINY, Ref.MOD_TFC).asMetal(1700, 1700).mats(of(Copper, 1, Silver, 4)));
@@ -377,6 +379,8 @@ public class Materials {
 
         Bronze.remove(BOLT, SCREW);
         Iron.remove(BOLT, SCREW);
+        IronMagnetic.remove(BOLT, SCREW);
+        SteelMagnetic.remove(BOLT, SCREW);
         //Steel.remove(BOLT, SCREW);
         //TungstenSteel.remove(BOLT, SCREW);
         //Titanium.remove(BOLT, SCREW);
