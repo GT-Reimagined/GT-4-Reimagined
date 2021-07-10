@@ -43,10 +43,10 @@ public class CoverRedstoneMachineController extends BaseCover implements ICoverM
         ICoverMode coverMode = getCoverMode(instance);
         int redstone = instance.getNbt().getInt("redstonePower");
         if (coverMode == RedstoneMode.NORMAL){
-            return redstone == 0;
+            return redstone > 0;
         }
         if (coverMode == RedstoneMode.INVERTED){
-            return redstone > 0;
+            return redstone == 0;
         }
         return false;
     }
