@@ -1,5 +1,6 @@
 package trinsdar.gt4r.cover;
 
+import muramasa.antimatter.capability.AntimatterCaps;
 import muramasa.antimatter.cover.CoverStack;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.util.ResourceLocation;
@@ -7,6 +8,13 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
+import trinsdar.gt4r.data.GT4RData;
+
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CoverPump extends CoverBasicTransport {
 
@@ -24,12 +32,15 @@ public class CoverPump extends CoverBasicTransport {
     }
 
     @Override
-    public <T> boolean blocksCapability(CoverStack<?> stack, Capability<T> cap, Direction side) {
-        if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY){
-            String coverModeName = getCoverMode(stack).getName();
+    public <T> boolean blocksInput(CoverStack<?> stack, Capability<T> cap, @Nullable Direction side) {
+        int mode = stack.getNbt().getInt("coverMode");
+        return mode == 0 || mode == 2 || mode == 4;
+    }
 
-        }
-        return side == null && cap != CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
+    @Override
+    public <T> boolean blocksOutput(CoverStack<?> stack, Capability<T> cap, @Nullable Direction side) {
+        int mode = stack.getNbt().getInt("coverMode");
+        return mode == 1 || mode == 3 || mode == 5;
     }
 
 
@@ -46,7 +57,34 @@ public class CoverPump extends CoverBasicTransport {
             to = instance.getTile();
         }
         TileEntity finalTo = to;
-        from.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side).ifPresent(ih -> finalTo.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side.getOpposite()).ifPresent(other -> Utils.transferFluids(ih, other, Integer.MAX_VALUE)));
+        if (canMove(instance, side)) {
+            from.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side).ifPresent(ih -> finalTo.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side.getOpposite()).ifPresent(other -> Utils.transferFluids(ih, other, Integer.MAX_VALUE)));
+        }
+    }
+
+    protected boolean canMove(CoverStack<?> instance, Direction side){
+        String name = getCoverMode(instance).getName();
+        if (name.contains("Conditional")){
+            boolean powered = instance.getTile().getCapability(AntimatterCaps.COVERABLE_HANDLER_CAPABILITY, side).map(h -> {
+                List<CoverStack<?>> list = new ArrayList<>();
+                for (Direction dir : Direction.values()){
+                    if (h.get(dir).getCover() == GT4RData.COVER_REDSTONE_MACHINE_CONTROLLER){
+                        list.add(h.get(dir));
+                    }
+                }
+                int i = 0;
+                int j = 0;
+                for (CoverStack<?> coverStack : list){
+                    j++;
+                    if (GT4RData.COVER_REDSTONE_MACHINE_CONTROLLER.isPowered(coverStack)){
+                        i++;
+                    }
+                }
+                return i > 0 && i == j;
+            }).orElse(false);
+            return name.contains("Invert") != powered;
+        }
+        return true;
     }
 
     @Override

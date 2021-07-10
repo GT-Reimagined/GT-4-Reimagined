@@ -1,5 +1,6 @@
 package trinsdar.gt4r.cover;
 
+import muramasa.antimatter.capability.AntimatterCaps;
 import muramasa.antimatter.cover.CoverStack;
 import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.util.Utils;
@@ -12,6 +13,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
+import trinsdar.gt4r.data.GT4RData;
+
+import javax.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
 
@@ -22,6 +30,18 @@ public class CoverConveyor extends CoverBasicTransport {
     public CoverConveyor() {
         super();
         register();
+    }
+
+    @Override
+    public <T> boolean blocksInput(CoverStack<?> stack, Capability<T> cap, @Nullable Direction side) {
+        int mode = stack.getNbt().getInt("coverMode");
+        return mode == 0 || mode == 2 || mode == 4;
+    }
+
+    @Override
+    public <T> boolean blocksOutput(CoverStack<?> stack, Capability<T> cap, @Nullable Direction side) {
+        int mode = stack.getNbt().getInt("coverMode");
+        return mode == 1 || mode == 3 || mode == 5;
     }
 
     //Useful for using the same model for multiple tiers where id is dependent on tier.
@@ -56,11 +76,41 @@ public class CoverConveyor extends CoverBasicTransport {
         if (adjTile == null) {
             return;
         }
-        if (mode.getName().startsWith("Export")) {
-            if (isMachine) instance.getTile().getCapability(ITEM_HANDLER_CAPABILITY, side).ifPresent(ih -> adjTile.getCapability(ITEM_HANDLER_CAPABILITY, side.getOpposite()).ifPresent(other -> Utils.transferItems(ih, other,true)));
-        } else {
-            instance.getTile().getCapability(ITEM_HANDLER_CAPABILITY, side).ifPresent(ih -> adjTile.getCapability(ITEM_HANDLER_CAPABILITY, side.getOpposite()).ifPresent(other -> Utils.transferItems(other, ih,true)));
+        if (canMove(instance, side)) {
+            if (mode.getName().startsWith("Export")) {
+                if (isMachine) instance.getTile().getCapability(ITEM_HANDLER_CAPABILITY, side).ifPresent(ih -> adjTile.getCapability(ITEM_HANDLER_CAPABILITY, side.getOpposite()).ifPresent(other -> Utils.transferItems(ih, other,true)));
+            } else {
+                instance.getTile().getCapability(ITEM_HANDLER_CAPABILITY, side).ifPresent(ih -> adjTile.getCapability(ITEM_HANDLER_CAPABILITY, side.getOpposite()).ifPresent(other -> Utils.transferItems(other, ih,true)));
+            }
         }
+    }
+
+    protected boolean canMove(CoverStack<?> instance, Direction side){
+        String name = getCoverMode(instance).getName();
+        if (name.contains("Conditional")){
+            boolean powered = instance.getTile().getCapability(AntimatterCaps.COVERABLE_HANDLER_CAPABILITY, side).map(h -> {
+                List<CoverStack<?>> list = new ArrayList<>();
+                for (Direction dir : Direction.values()){
+                    if (h.get(dir).getCover() == GT4RData.COVER_REDSTONE_MACHINE_CONTROLLER){
+                        list.add(h.get(dir));
+                    }
+                }
+                int i = 0;
+                int j = 0;
+                for (CoverStack<?> coverStack : list){
+                    j++;
+                    if (GT4RData.COVER_REDSTONE_MACHINE_CONTROLLER.isPowered(coverStack)){
+                        i++;
+                    }
+                }
+                return i > 0 && i == j;
+            }).orElse(true);
+            if (name.contains("Invert")){
+                powered = !powered;
+            }
+            return powered;
+        }
+        return true;
     }
 
     @Override

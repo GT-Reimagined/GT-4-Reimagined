@@ -256,7 +256,7 @@ public class GT4RData {
     public static final BaseCover COVER_DRAIN = new CoverDrain();
     public static final BaseCover COVER_STEAM_VENT = new CoverSteamVent();
     public static final BaseCover COVER_CRAFTING = new CoverCrafting();
-    public static final BaseCover COVER_REDSTONE_MACHINE_CONTROLLER = new CoverRedstoneMachineController();
+    public static final CoverRedstoneMachineController COVER_REDSTONE_MACHINE_CONTROLLER = new CoverRedstoneMachineController();
 
     public static ItemRockCutter RockCutter = new ItemRockCutter();
 

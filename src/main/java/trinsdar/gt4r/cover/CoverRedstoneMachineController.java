@@ -39,6 +39,18 @@ public class CoverRedstoneMachineController extends BaseCover implements ICoverM
         }
     }
 
+    public boolean isPowered(CoverStack<?> instance){
+        ICoverMode coverMode = getCoverMode(instance);
+        int redstone = instance.getNbt().getInt("redstonePower");
+        if (coverMode == RedstoneMode.NORMAL){
+            return redstone == 0;
+        }
+        if (coverMode == RedstoneMode.INVERTED){
+            return redstone > 0;
+        }
+        return false;
+    }
+
     @Override
     public void onUpdate(CoverStack<?> instance, Direction side) {
         if (instance.getTile() instanceof TileEntityMachine){
