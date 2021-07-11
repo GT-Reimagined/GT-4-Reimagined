@@ -148,6 +148,10 @@ public class GT4RLocalizations {
                 super.add(key, id);
                 return;
             }
+            if (key.contains("item.gt4r.spear")){
+                super.add(key, value.replace(" Gt", ""));
+                return;
+            }
             super.add(key, value);
         }
     }

@@ -39,7 +39,7 @@ public class ToolTypes {
         }
 
         public ItemStack getToolStack(Material primary, Material secondary) {
-            return Objects.requireNonNull(AntimatterAPI.get(IAntimatterTool.class, "spear")).asItemStack(primary, secondary);
+            return Objects.requireNonNull(AntimatterAPI.get(IAntimatterTool.class, "spear_gt")).asItemStack(primary, secondary);
         }
 
         @Override

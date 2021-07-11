@@ -46,6 +46,7 @@ public class MaterialSpear extends MaterialTool {
 
     public MaterialSpear(String domain, AntimatterToolType type, Properties properties) {
         super(domain, type, properties);
+        setRegistryName(Ref.ID, "spear");
         if (FMLEnvironment.dist.isClient()) {
             ClientUtil.registerThrowingWeaponPropertyOverrides(this);
         }
@@ -70,18 +71,18 @@ public class MaterialSpear extends MaterialTool {
     public Texture[] getTextures() {
         List<Texture> textures = new ObjectArrayList<>();
         int layers = getAntimatterToolType().getOverlayLayers();
-        textures.add(new Texture(getDomain(), "item/tool/".concat(getId())));
-        if (layers == 1) textures.add(new Texture(getDomain(), "item/tool/overlay/".concat(getId())));
+        textures.add(new Texture(getDomain(), "item/tool/".concat(getId().replace("_gt", ""))));
+        if (layers == 1) textures.add(new Texture(getDomain(), "item/tool/overlay/".concat(getId().replace("_gt", ""))));
         if (layers > 1) {
             for (int i = 1; i <= layers; i++) {
-                textures.add(new Texture(getDomain(), String.join("", "item/tool/overlay/", getId(), "_", Integer.toString(i))));
+                textures.add(new Texture(getDomain(), String.join("", "item/tool/overlay/", getId().replace("_gt", ""), "_", Integer.toString(i))));
             }
         }
         return textures.toArray(new Texture[textures.size()]);
     }
 
     public String getId() {
-        return "spear";
+        return "spear_gt";
     }
 
     public float getReach(){
