@@ -59,6 +59,7 @@ import trinsdar.gt4r.proxy.ServerHandler;
 import trinsdar.gt4r.tile.TileEntityTypes;
 import trinsdar.gt4r.worldgen.GT4RFeatures;
 
+import static muramasa.antimatter.Data.DRILL;
 import static muramasa.antimatter.Data.PICKAXE;
 
 
@@ -166,7 +167,7 @@ public class GT4Reimagined extends AntimatterMod {
         Hand hand = event.getHand();
         boolean server = !event.getWorld().isRemote;
         if (hand == Hand.OFF_HAND && server){
-            if (player.getHeldItemMainhand().getItem() instanceof IAntimatterTool && ((IAntimatterTool)player.getHeldItemMainhand().getItem()).getAntimatterToolType() == PICKAXE && (player.getHeldItemOffhand().getItem() == Items.TORCH || player.getHeldItemOffhand().getItem() == Items.SOUL_TORCH)){
+            if (player.getHeldItemMainhand().getItem() instanceof IAntimatterTool && (((IAntimatterTool)player.getHeldItemMainhand().getItem()).getAntimatterToolType() == PICKAXE || ((IAntimatterTool)player.getHeldItemMainhand().getItem()).getAntimatterToolType() == DRILL) && (player.getHeldItemOffhand().getItem() == Items.TORCH || player.getHeldItemOffhand().getItem() == Items.SOUL_TORCH)){
                 player.sendMessage(new TranslationTextComponent("message.gt4r.pickaxe_torch_right_click"), player.getUniqueID());
             }
         }
