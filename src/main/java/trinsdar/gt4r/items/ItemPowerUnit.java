@@ -1,5 +1,6 @@
 package trinsdar.gt4r.items;
 
+import muramasa.antimatter.Data;
 import muramasa.antimatter.Ref;
 import muramasa.antimatter.capability.energy.ItemEnergyHandler;
 import muramasa.antimatter.item.ItemBasic;
@@ -19,6 +20,8 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static muramasa.antimatter.Data.NULL;
+
 public class ItemPowerUnit extends ItemBasic<ItemPowerUnit> implements IColorHandler {
     Material material;
     public ItemPowerUnit(String domain, String id, Material material) {
@@ -30,9 +33,20 @@ public class ItemPowerUnit extends ItemBasic<ItemPowerUnit> implements IColorHan
         return material;
     }
 
+    public Material getMaterial(ItemStack stack){
+        CompoundNBT nbt = stack.getTag();
+        if (nbt == null || !nbt.contains("M")) return material;
+        return Material.get(nbt.getString("M"));
+    }
+
+    public void setMaterial(Material mat, ItemStack stack){
+        CompoundNBT nbt = stack.getOrCreateTag();
+        nbt.putString("M", mat.getId());
+    }
+
     @Override
     public int getItemColor(ItemStack stack, @Nullable Block block, int i) {
-        return material.getRGB();
+        return getMaterial(stack).getRGB();
     }
 
     @Override

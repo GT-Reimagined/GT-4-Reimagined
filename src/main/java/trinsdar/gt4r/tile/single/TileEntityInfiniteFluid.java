@@ -10,7 +10,6 @@ import net.minecraft.util.Direction;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
-import tesseract.api.IRefreshable;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -20,13 +19,11 @@ import static trinsdar.gt4r.data.Materials.Steam;
 
 public class TileEntityInfiniteFluid extends TileEntityMachine<TileEntityInfiniteFluid> {
 
-    @Override
-    public boolean setFacing(Direction side) {
-        boolean ok = super.setFacing(side);
-        if (ok) {
-            fluidHandler.ifPresent(IRefreshable::refreshNet);
-        }
-        return ok;
+    public TileEntityInfiniteFluid(Machine<?> type) {
+        super(type);
+        this.fluidHandler.set(() -> new InfiniteFluidHandler(this) {
+
+        });
     }
 
     @Override
@@ -36,33 +33,6 @@ public class TileEntityInfiniteFluid extends TileEntityMachine<TileEntityInfinit
             CoverStack<?> stack = c.get(c.getOutputFacing());
             COVEROUTPUT.manualOutput(stack);
         });
-    }
-
-    public TileEntityInfiniteFluid(Machine<?> type) {
-        super(type);
-        this.fluidHandler.set(() -> new InfiniteFluidHandler(this) {
-
-        });
-        // TODO
-        /*
-        interactHandler.setup((tile, tag) -> new MachineInteractHandler<TileEntityMachine>(tile, tag) {
-            @Override
-            public boolean onInteract(PlayerEntity player, Hand hand, Direction side, @Nullable AntimatterToolType type) {
-                if ((type == SCREWDRIVER || type == ELECTRIC_SCREWDRIVER) && hand == Hand.MAIN_HAND) {
-                    energyHandler.ifPresent(h -> {
-                        int amps = h.getOutputAmperage();
-                        amps = (amps + 1) % amperage;
-                        h.setOutputAmperage(amps);
-                        // TODO: Replace by new TranslationTextComponent()
-                        player.sendMessage(new StringTextComponent(h.getOutputVoltage() + "V@" + h.getOutputAmperage() + "Amp"));
-                    });
-                    return true;
-                }
-                return super.onInteract(player, hand, side, type);
-            }
-        });
-         */
-
     }
 
     @Override

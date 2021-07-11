@@ -174,7 +174,7 @@ public class GT4RData {
                 return new Tuple<>(currentEnergy, maxEnergy);
             }
         }
-        return new Tuple<>((long)0, (long)100000);
+        return null;
     }
 
     public static Tuple<Long, Tuple<Long, Material>> getEnergyAndMat(ItemStack stack){
@@ -182,9 +182,9 @@ public class GT4RData {
             ItemPowerUnit tool = (ItemPowerUnit) stack.getItem();
             long currentEnergy = tool.getCurrentEnergy(stack);
             long maxEnergy = tool.getMaxEnergy(stack);
-            return new Tuple<>(currentEnergy, new Tuple<>(maxEnergy, tool.getMaterial()));
+            return new Tuple<>(currentEnergy, new Tuple<>(maxEnergy, tool.getMaterial(stack)));
         }
-        return new Tuple<>((long)0, new Tuple<>((long)100000, NULL));
+        return null;
     }
 
     public static void buildTierMaps() {
@@ -236,6 +236,9 @@ public class GT4RData {
         CompoundNBT dataTag = powerUnit.getOrCreateChildTag(muramasa.antimatter.Ref.TAG_TOOL_DATA);
         dataTag.putLong(muramasa.antimatter.Ref.KEY_TOOL_DATA_ENERGY, tuple.getA());
         dataTag.putLong(muramasa.antimatter.Ref.KEY_TOOL_DATA_MAX_ENERGY, tuple.getB());
+        if (broken.asItem() == PowerUnitHV){
+            PowerUnitHV.setMaterial(((IAntimatterTool)tool.getItem()).getSecondaryMaterial(tool), powerUnit);
+        }
         return powerUnit;
     }
 
@@ -269,10 +272,10 @@ public class GT4RData {
     public static ItemBasic<?> CompressedCoalBall = new ItemBasic<>(Ref.ID, "compressed_coal_ball");
     public static ItemBasic<?> CoalChunk = new ItemBasic<>(Ref.ID, "coal_chunk");
 
-    public static ItemPowerUnit PowerUnitLV = new ItemPowerUnit(Ref.ID, "power_unit_lv", StainlessSteel);
-    public static ItemPowerUnit PowerUnitMV = new ItemPowerUnit(Ref.ID, "power_unit_mv", Titanium);
-    public static ItemPowerUnit PowerUnitHV = new ItemPowerUnit(Ref.ID, "power_unit_hv", TungstenSteel);
-    public static ItemPowerUnit SmallPowerUnit = new ItemPowerUnit(Ref.ID, "small_power_unit", StainlessSteel);
+    public static ItemPowerUnit PowerUnitLV = new ItemPowerUnit(Ref.ID, "power_unit_lv", Aluminium);
+    public static ItemPowerUnit PowerUnitMV = new ItemPowerUnit(Ref.ID, "power_unit_mv", StainlessSteel);
+    public static ItemPowerUnit PowerUnitHV = new ItemPowerUnit(Ref.ID, "power_unit_hv", Titanium);
+    public static ItemPowerUnit SmallPowerUnit = new ItemPowerUnit(Ref.ID, "small_power_unit", Aluminium);
 
     public static ItemBasic<?> ComputerMonitor = new ItemBasic<>(Ref.ID, "computer_monitor").tip("Can be placed on machines as a cover");
     public static ItemCover ConveyorModule = new ItemCover(Ref.ID, COVER_CONVEYOR.getId()).tip("Can be placed on machines as a cover");
