@@ -17,6 +17,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidAttributes;
 import org.apache.maven.artifact.resolver.MultipleArtifactsNotFoundException;
 import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.items.ItemToolHead;
 import trinsdar.gt4r.items.ItemTurbineRotor;
 
 import static com.google.common.collect.ImmutableMap.of;
@@ -69,7 +70,17 @@ public class Materials {
             return d;
         }
     });
+
+    private static MaterialTypeItem.ItemSupplier TOOL_HEAD = (domain, type, material) -> new ItemToolHead(domain, type, material, new Item.Properties().group(muramasa.antimatter.Ref.TAB_MATERIALS));
     public static MaterialTypeItem<?> BROKEN_TURBINE_ROTOR = new MaterialTypeItem<>("broken_turbine_rotor", 1, true, muramasa.antimatter.Ref.U * 17);
+    public static MaterialTypeItem<?> PICKAXE_HEAD = new MaterialTypeItem<>("pickaxe_head", 1, true, muramasa.antimatter.Ref.U * 3, TOOL_HEAD);
+    public static MaterialTypeItem<?> AXE_HEAD = new MaterialTypeItem<>("axe_head", 1, true, muramasa.antimatter.Ref.U * 3, TOOL_HEAD);
+    public static MaterialTypeItem<?> SWORD_HEAD = new MaterialTypeItem<>("sword_head", 1, true, muramasa.antimatter.Ref.U * 2, TOOL_HEAD);
+    public static MaterialTypeItem<?> SHOVEL_HEAD = new MaterialTypeItem<>("shovel_head", 1, true, muramasa.antimatter.Ref.U, TOOL_HEAD);
+    public static MaterialTypeItem<?> HOE_HEAD = new MaterialTypeItem<>("hoe_head", 1, true, muramasa.antimatter.Ref.U * 2, TOOL_HEAD);
+    public static MaterialTypeItem<?> HAMMER_HEAD = new MaterialTypeItem<>("hammer_head", 1, true, muramasa.antimatter.Ref.U * 6, TOOL_HEAD);
+    public static MaterialTypeItem<?> FILE_HEAD = new MaterialTypeItem<>("file_head", 1, true, muramasa.antimatter.Ref.U * 2, TOOL_HEAD);
+    public static MaterialTypeItem<?> SAW_HEAD = new MaterialTypeItem<>("saw_head", 1, true, muramasa.antimatter.Ref.U * 2, TOOL_HEAD);
     public static MaterialTag FLINT_TAG = new MaterialTag("flint");
     public static MaterialTag SEMIFLUID = new MaterialTag("semifluid");
     public static MaterialTag CABINET = new MaterialTag("cabinet");
@@ -422,6 +433,12 @@ public class Materials {
         RockSalt.remove(ROCK, CRUSHED, CRUSHED_PURIFIED, CRUSHED_CENTRIFUGED, DUST_IMPURE, DUST_PURE);
         Redstone.remove(ORE_SMALL, ROCK);
         Lapis.remove(ORE_SMALL, ROCK);
+
+        TOOLS.all().forEach(m -> {
+            if (m != Flint && m != NULL){
+                m.flags(PICKAXE_HEAD, AXE_HEAD, SHOVEL_HEAD, SWORD_HEAD, HOE_HEAD, HAMMER_HEAD, FILE_HEAD, SAW_HEAD);
+            }
+        });
 
         //WroughtIron.setSmeltInto(Iron).setMacerateInto(Iron);
 

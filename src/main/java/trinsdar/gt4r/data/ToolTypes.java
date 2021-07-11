@@ -38,10 +38,6 @@ public class ToolTypes {
             return new MaterialSpear(domain, this, prepareInstantiation(domain));
         }
 
-        public ItemStack getToolStack(Material primary, Material secondary) {
-            return Objects.requireNonNull(AntimatterAPI.get(IAntimatterTool.class, "spear_gt")).asItemStack(primary, secondary);
-        }
-
         @Override
         public ITag.INamedTag<Item> getTag() {
             return tag;

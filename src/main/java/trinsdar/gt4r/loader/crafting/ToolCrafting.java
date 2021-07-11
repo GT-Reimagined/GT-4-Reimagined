@@ -146,6 +146,30 @@ public class ToolCrafting {
 
         provider.addToolRecipe(TOOL_BUILDER.get(ToolTypes.SPEAR.getId()), output, Ref.ID, "flint_spear_recipe", "antimatter_tools",
                 "has_flint", provider.hasSafeItem(GEM.getMaterialTag(Flint)), ToolTypes.SPEAR.getToolStack(Flint, NULL), of('I', PropertyIngredient.builder("primary").types(GEM).tags(FLINT_TAG).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "  I", " R ", "R  ");
+
+        provider.addToolRecipe(TOOL_BUILDER.get(PICKAXE.getId()), output, muramasa.antimatter.Ref.ID, PICKAXE.getId() + "__recipe_with_head", "antimatter_files",
+                "has_wrench", in, PICKAXE.getToolStack(NULL, NULL), of('P', PropertyIngredient.builder("primary").types(PICKAXE_HEAD).tool(PICKAXE, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
+
+        provider.addToolRecipe(TOOL_BUILDER.get(AXE.getId()), output, muramasa.antimatter.Ref.ID, AXE.getId() + "__recipe_with_head", "antimatter_files",
+                "has_wrench", in, AXE.getToolStack(NULL, NULL), of('P', PropertyIngredient.builder("primary").types(AXE_HEAD).tool(AXE, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
+
+        provider.addToolRecipe(TOOL_BUILDER.get(SHOVEL.getId()), output, muramasa.antimatter.Ref.ID, SHOVEL.getId() + "__recipe_with_head", "antimatter_files",
+                "has_wrench", in, SHOVEL.getToolStack(NULL, NULL), of('P', PropertyIngredient.builder("primary").types(SHOVEL_HEAD).tool(SHOVEL, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
+
+        provider.addToolRecipe(TOOL_BUILDER.get(SWORD.getId()), output, muramasa.antimatter.Ref.ID, SWORD.getId() + "__recipe_with_head", "antimatter_files",
+                "has_wrench", in, SWORD.getToolStack(NULL, NULL), of('P', PropertyIngredient.builder("primary").types(SWORD_HEAD).tool(SWORD, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
+
+        provider.addToolRecipe(TOOL_BUILDER.get(HOE.getId()), output, muramasa.antimatter.Ref.ID, HOE.getId() + "__recipe_with_head", "antimatter_files",
+                "has_wrench", in, HOE.getToolStack(NULL, NULL), of('P', PropertyIngredient.builder("primary").types(HOE_HEAD).tool(HOE, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
+
+        provider.addToolRecipe(TOOL_BUILDER.get(HAMMER.getId()), output, muramasa.antimatter.Ref.ID, HAMMER.getId() + "__recipe_with_head", "antimatter_files",
+                "has_wrench", in, HAMMER.getToolStack(NULL, NULL), of('P', PropertyIngredient.builder("primary").types(HAMMER_HEAD).tool(HAMMER, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
+
+        provider.addToolRecipe(TOOL_BUILDER.get(FILE.getId()), output, muramasa.antimatter.Ref.ID, FILE.getId() + "__recipe_with_head", "antimatter_files",
+                "has_wrench", in, FILE.getToolStack(NULL, NULL), of('P', PropertyIngredient.builder("primary").types(FILE_HEAD).tool(FILE, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
+
+        provider.addToolRecipe(TOOL_BUILDER.get(SAW.getId()), output, muramasa.antimatter.Ref.ID, SAW.getId() + "__recipe_with_head", "antimatter_files",
+                "has_wrench", in, SAW.getToolStack(NULL, NULL), of('P', PropertyIngredient.builder("primary").types(SAW_HEAD).tool(SAW, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
     }
 
 
