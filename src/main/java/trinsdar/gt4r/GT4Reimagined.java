@@ -8,10 +8,17 @@ import muramasa.antimatter.proxy.IProxyHandler;
 import muramasa.antimatter.recipe.loader.IRecipeRegistrate;
 import muramasa.antimatter.registration.RegistrationEvent;
 import muramasa.antimatter.AntimatterMod;
+import muramasa.antimatter.tool.IAntimatterTool;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
+import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -52,6 +59,8 @@ import trinsdar.gt4r.proxy.ServerHandler;
 import trinsdar.gt4r.tile.TileEntityTypes;
 import trinsdar.gt4r.worldgen.GT4RFeatures;
 
+import static muramasa.antimatter.Data.PICKAXE;
+
 
 @Mod(Ref.ID)
 public class GT4Reimagined extends AntimatterMod {
@@ -67,6 +76,7 @@ public class GT4Reimagined extends AntimatterMod {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::serverSetup);
+        MinecraftForge.EVENT_BUS.addListener(this::onRightlickBlock);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, GT4RConfig.COMMON_SPEC);
         //GregTechAPI.addRegistrar(new ForestryRegistrar());
         //GregTechAPI.addRegistrar(new GalacticraftRegistrar());
@@ -148,6 +158,17 @@ public class GT4Reimagined extends AntimatterMod {
         if (e.getRegistry() == ForgeRegistries.ENTITIES){
             IForgeRegistry<EntityType<?>> reg = (IForgeRegistry<EntityType<?>>) e.getRegistry();
             reg.register(GT4RData.SPEAR_ENTITY_TYPE.setRegistryName(new ResourceLocation(Ref.ID, "spear")));
+        }
+    }
+
+    public void onRightlickBlock(PlayerInteractEvent.RightClickBlock event){
+        PlayerEntity player = event.getPlayer();
+        Hand hand = event.getHand();
+        boolean server = !event.getWorld().isRemote;
+        if (hand == Hand.OFF_HAND && server){
+            if (player.getHeldItemMainhand().getItem() instanceof IAntimatterTool && ((IAntimatterTool)player.getHeldItemMainhand().getItem()).getAntimatterToolType() == PICKAXE && (player.getHeldItemOffhand().getItem() == Items.TORCH || player.getHeldItemOffhand().getItem() == Items.SOUL_TORCH)){
+                player.sendMessage(new TranslationTextComponent("message.gt4r.pickaxe_torch_right_click"), player.getUniqueID());
+            }
         }
     }
 

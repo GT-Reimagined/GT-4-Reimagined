@@ -7,6 +7,7 @@ import muramasa.antimatter.Data;
 import muramasa.antimatter.cover.BaseCover;
 import muramasa.antimatter.item.ItemCover;
 import muramasa.antimatter.material.Material;
+import muramasa.antimatter.ore.CobbleStoneType;
 import muramasa.antimatter.pipe.types.ItemPipe;
 import muramasa.antimatter.recipe.ingredient.PropertyIngredient;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
@@ -384,17 +385,17 @@ public class GT4RData {
     public static ItemBasic<?> ShapeGear = new ItemBasic<>(Ref.ID, "shape_gear").tip("Shape for making Gears");
     public static ItemBasic<?> ShapeBottle = new ItemBasic<>(Ref.ID, "shape_bottle").tip("Shape for making Bottles"); //TODO needed?
 
-    public static StoneType GRANITE_RED = new StoneType(Ref.ID, "red_granite", Materials.RedGranite, new Texture(Ref.ID, "block/stone/granite_red"), SoundType.STONE, true).setHardnessAndResistance(4.5F, 60.0F).setHarvestLevel(3);
-    public static StoneType GRANITE_BLACK = new StoneType(Ref.ID, "black_granite", Materials.BlackGranite, new Texture(Ref.ID, "block/stone/granite_black"), SoundType.STONE, true).setHardnessAndResistance(4.5F, 60.0F).setHarvestLevel(3);
-    public static StoneType MARBLE = new StoneType(Ref.ID, "marble", Materials.Marble, new Texture(Ref.ID, "block/stone/marble"), SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F);
-    public static StoneType BASALT = new StoneType(Ref.ID, "basalt", Materials.Basalt, new Texture(Ref.ID, "block/stone/basalt"), SoundType.STONE, true).setHardnessAndResistance(3.0F, 30.0F).setHarvestLevel(2);
+    public static StoneType GRANITE_RED = new CobbleStoneType(Ref.ID, "red_granite", Materials.RedGranite, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(4.5F, 60.0F).setHarvestLevel(3);
+    public static StoneType GRANITE_BLACK = new CobbleStoneType(Ref.ID, "black_granite", Materials.BlackGranite, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(4.5F, 60.0F).setHarvestLevel(3);
+    public static StoneType MARBLE = new CobbleStoneType(Ref.ID, "marble", Materials.Marble, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F);
+    public static StoneType BASALT = new CobbleStoneType(Ref.ID, "basalt", Materials.Basalt, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(3.0F, 30.0F).setHarvestLevel(2);
 
-    public static StoneType KOMATIITE = new StoneType(Ref.ID, "komatiite", Materials.Komatiite, new Texture(Ref.ID, "block/stone/komatiite"), SoundType.STONE, true).setHardnessAndResistance(3.0F, 30.0F).setHarvestLevel(2);
-    public static StoneType LIMESTONE = new StoneType(Ref.ID, "limestone", Limestone, new Texture(Ref.ID, "block/stone/limestone"), SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F);
-    public static StoneType GREEN_SCHIST = new StoneType(Ref.ID, "green_schist", GreenSchist, new Texture(Ref.ID, "block/stone/green_schist"), SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F);
-    public static StoneType BLUE_SCHIST = new StoneType(Ref.ID, "blue_schist", BlueSchist, new Texture(Ref.ID, "block/stone/blue_schist"), SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F);
-    public static StoneType KIMBERLITE = new StoneType(Ref.ID, "kimberlite", Kimberlite, new Texture(Ref.ID, "block/stone/kimberlite"), SoundType.STONE, true).setHardnessAndResistance(3.0F, 30.0F).setHarvestLevel(2);
-    public static StoneType QUARTZITE = new StoneType(Ref.ID, "quartzite", Quartzite, new Texture(Ref.ID, "block/stone/quartzite"), SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F);
+    public static StoneType KOMATIITE = new CobbleStoneType(Ref.ID, "komatiite", Materials.Komatiite, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(3.0F, 30.0F).setHarvestLevel(2);
+    public static StoneType LIMESTONE = new CobbleStoneType(Ref.ID, "limestone", Limestone, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F);
+    public static StoneType GREEN_SCHIST = new CobbleStoneType(Ref.ID, "green_schist", GreenSchist, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F);
+    public static StoneType BLUE_SCHIST = new CobbleStoneType(Ref.ID, "blue_schist", BlueSchist, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F);
+    public static StoneType KIMBERLITE = new CobbleStoneType(Ref.ID, "kimberlite", Kimberlite, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(3.0F, 30.0F).setHarvestLevel(2);
+    public static StoneType QUARTZITE = new CobbleStoneType(Ref.ID, "quartzite", Quartzite, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F);
     public static StoneType SALT = new StoneType(Ref.ID, "salt", Salt, new Texture(Ref.ID, "block/stone/salt"), SoundType.STONE, true).setHardnessAndResistance(1.0F,7.5F);
     public static StoneType ROCK_SALT = new StoneType(Ref.ID, "rock_salt", RockSalt, new Texture(Ref.ID, "block/stone/rock_salt"), SoundType.STONE, true).setHardnessAndResistance(1.0F,7.5F);
 

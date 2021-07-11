@@ -46,6 +46,7 @@ public class GT4RLocalizations {
             add("block.gt4r.rubber_log", "Rubber Log");
             add("block.gt4r.rubber_sapling", "Rubber Sapling");
             add("attribute.name.generic.gt4r.attackReach", "Attack Reach");;
+            add("message.gt4r.pickaxe_torch_right_click", "Fyi there is no need to put a torch in your offhand, just right click with a pickaxe");
         }
 
         @Override
