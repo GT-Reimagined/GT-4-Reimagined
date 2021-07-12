@@ -25,6 +25,7 @@ public class Textures {
     public static TextureSet FLINT = AntimatterAPI.registerIfAbsent(TextureSet.class, "flint", () -> new TextureSet(Ref.ID, "flint"));
     public static TextureSet LIGNITE = AntimatterAPI.registerIfAbsent(TextureSet.class, "lignite", () -> new TextureSet(Ref.ID, "lignite"));
     public static TextureSet WOOD = AntimatterAPI.registerIfAbsent(TextureSet.class, "wood", () -> new TextureSet(Ref.ID, "wood"));
+    public static TextureSet REDSTONE = AntimatterAPI.registerIfAbsent(TextureSet.class, "redstone", () -> new TextureSet(Ref.ID, "redstone"));
 
     public static final Texture ROTOR = new Texture(Ref.ID, "material/rotor");
     public static final Texture MACHINE_BASE = new Texture(Ref.ID, "block/machine/base/machine_base");
