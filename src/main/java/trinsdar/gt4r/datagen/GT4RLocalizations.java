@@ -5,8 +5,12 @@ import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.Data;
 import muramasa.antimatter.block.BlockStone;
 import muramasa.antimatter.datagen.providers.AntimatterLanguageProvider;
+import muramasa.antimatter.fluid.AntimatterFluid;
 import muramasa.antimatter.item.ItemFluidCell;
 import muramasa.antimatter.machine.BlockMachine;
+import muramasa.antimatter.machine.MachineFlag;
+import muramasa.antimatter.machine.Tier;
+import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialItem;
 import muramasa.antimatter.material.MaterialTag;
@@ -23,10 +27,19 @@ import net.minecraft.data.DataGenerator;
 import trinsdar.gt4r.items.ItemMatch;
 import trinsdar.gt4r.items.ItemPowerUnit;
 
+import java.util.Collection;
+
+import static muramasa.antimatter.Data.GEM;
+import static muramasa.antimatter.Data.LIQUID;
+import static muramasa.antimatter.Data.NULL;
+import static muramasa.antimatter.machine.Tier.LV;
 import static muramasa.antimatter.machine.Tier.MV;
 import static muramasa.antimatter.util.Utils.lowerUnderscoreToUpperSpaced;
 import static muramasa.antimatter.util.Utils.lowerUnderscoreToUpperSpacedRotated;
 import static muramasa.antimatter.util.Utils.validateNBT;
+import static trinsdar.gt4r.data.Machines.ELECTROLYZER;
+import static trinsdar.gt4r.data.Machines.MACERATOR;
+import static trinsdar.gt4r.data.ToolTypes.ROCK_CUTTER;
 
 public class GT4RLocalizations {
 
@@ -66,94 +79,49 @@ public class GT4RLocalizations {
             AntimatterAPI.all(ItemIntCircuit.class, domain).forEach(i -> add(i, "Integrated Circuit (" + i.circuitId + ")"));
             add(GT4RData.MixedMetal, lowerUnderscoreToUpperSpaced(GT4RData.MixedMetal.getId()));
             add(GT4RData.SAP_BAG, lowerUnderscoreToUpperSpaced(GT4RData.SAP_BAG.getId()));
-            add(GT4RData.RockCutter, lowerUnderscoreToUpperSpaced(GT4RData.RockCutter.getId()));
             add(GT4RData.CraftingModule, lowerUnderscoreToUpperSpaced(GT4RData.CraftingModule.getId()));
-        }
-
-        @Override
-        public void add(Item key, String name) {
-            if (key == GT4RData.LighterEmpty){
-                super.add(key, name.replace("Empty", "(Empty)"));
-                return;
-            }
-            if (key instanceof ItemFluidCell){
-                add(key.getTranslationKey(), lowerUnderscoreToUpperSpacedRotated(((ItemFluidCell)key).getId()));
-                return;
-            }
-            if (key instanceof MaterialItem && name.contains("Gem")){
-                super.add(key, name.replace(" Gem", ""));
-                return;
-            }
-            super.add(key, name);
-        }
-
-        @Override
-        public void add(Block key, String name) {
-            if (key instanceof BlockStone){
-                super.add(key, name.replace("Stone ", ""));
-                return;
-            }
-            super.add(key, name);
-        }
-
-        @Override
-        public void add(final String key, final String value) {
-            if (key.contains("machine")){
-                String id = key.contains("macerator.mv") ? "universal_macerator" : key.contains("electrolyzer") ? key.contains("lv") ? "basic_electrolyzer" : "industrial_electrolyzer" : "";
-                if (key.contains("battery_buffer")){
-                    String tier = value.substring(0, 3);
-                    String number = value.contains("One") ? "1x " : value.contains("Four") ? "4x " : "8x ";
-                    String afterTier = value.substring(3).replace(" One", "").replace(" Four", "").replace(" Eight", "");
-                    super.add(key, tier + number + afterTier);
-                    return;
+            override(ROCK_CUTTER.getToolStack(NULL, NULL).getItem().getTranslationKey(), "Rock Cutter");
+            override(GT4RData.LighterEmpty.getTranslationKey(), "Lighter (Empty)");
+            AntimatterAPI.all(Machine.class, domain).forEach(i -> {
+                Collection<Tier> tiers =  i.getTiers();
+                if (i.has(MachineFlag.BASIC)) {
+                    tiers.forEach(t -> {
+                        String value = lowerUnderscoreToUpperSpacedRotated(i.getId() + "_" + t.getId());
+                        String id = i == MACERATOR && t == MV ? "universal_macerator" : i == ELECTROLYZER ? t == LV ? "basic_electrolyzer" : "industrial_electrolyzer" : "";
+                        if (i.getId().contains("battery_buffer")){
+                            String tier = lowerUnderscoreToUpperSpaced(t.getId());
+                            String number = value.contains("One") ? " 1x " : value.contains("Four") ? " 4x " : " 8x ";
+                            String afterTier = lowerUnderscoreToUpperSpaced("battery_buffer");
+                            override("machine." + i.getId() + "." + t.getId(), tier + number + afterTier);
+                            return;
+                        }
+                        override("machine." + i.getId() + "." + t.getId(), value.contains("Infinite") || value.contains("Transformer") || value.contains("Battery") ? value : lowerUnderscoreToUpperSpaced(id.isEmpty() ? i.getId() : id));
+                    });
                 }
-                super.add(key,  value.contains("Infinite") || value.contains("Transformer") || value.contains("Battery") ? value : (id.isEmpty() ? value.replace("Mv ", "").replace("Lv ", "").replace("Ulv ", "").replace("Hv ", "").replace("Ev ", "") : lowerUnderscoreToUpperSpaced(id)));
-                return;
-            }
-            if (key.startsWith("item.gt4r.") && key.contains("bucket")){
-                String id;
-                if (value.startsWith("Liquid") || value.startsWith("Plasma")){
-                    id = value.substring(7).replace(" Bucket", "");
-                    if (value.startsWith("Plasma")){
-                        id = id + " Plasma";
-                    }
+            });
+            AntimatterAPI.all(AntimatterFluid.class, domain).forEach(s -> {
+                String mat;
+                if (s.getId().startsWith("liquid") || s.getId().startsWith("plasma")){
+                    mat = s.getId().substring(7);
                 } else {
-                    id = value.substring(4).replace(" Bucket", "");
+                    mat = s.getId().substring(4);
                 }
-                if (key.startsWith("item.gt4r.liquid_")){
-                    String molten = key.replace("item.gt4r.liquid_", "").replace("_bucket", "");
-                    if (Material.get(molten) != Data.NULL && Material.get(molten).has(MaterialTag.METAL)){
-                        id = value.replace("Liquid", "Molten").replace(" Bucket", "");
+                String id = mat;
+                if (s.getId().startsWith("plasma")){
+                    id = mat + "_plasma";
+                }
+                Material m = Material.get(mat);
+                if (m != NULL){
+                    if (m.has(LIQUID) && m.has(MaterialTag.METAL)){
+                        id = "molten_" + mat;
                     }
+                    override(s.getAttributes().getTranslationKey(), lowerUnderscoreToUpperSpaced(id));
+                    Item bucket = AntimatterAPI.get(Item.class, s.getId()+ "_bucket");
+                    if (bucket != null) override(bucket.getTranslationKey(), lowerUnderscoreToUpperSpaced(id) + " Bucket");
                 }
-                super.add(key, id + " Bucket");
-                return;
-            }
-            if (key.startsWith("block.gt4r.liquid")){
-                String id;
-                if (value.startsWith("Liquid") || value.startsWith("Plasma")){
-                    id = value.substring(7);
-                    if (value.startsWith("Plasma")){
-                        id = id + " Plasma";
-                    }
-                } else {
-                    id = value.substring(4);
-                }
-                if (key.startsWith("block.gt4r.liquid.liquid_")){
-                    String molten = key.replace("block.gt4r.liquid.liquid_", "");
-                    if (Material.get(molten) != Data.NULL && Material.get(molten).has(MaterialTag.METAL)){
-                        id = value.replace("Liquid", "Molten");
-                    }
-                }
-
-                super.add(key, id);
-                return;
-            }
-            if (key.contains("item.gt4r.spear")){
-                super.add(key, value.replace(" Gt", ""));
-                return;
-            }
-            super.add(key, value);
+            });
+            AntimatterAPI.all(ItemFluidCell.class, domain).forEach(i -> override(i.getTranslationKey(), lowerUnderscoreToUpperSpacedRotated(i.getId())));
+            GEM.all().forEach(m -> override(GEM.get(m).getTranslationKey(), lowerUnderscoreToUpperSpaced(m.getId())));
         }
     }
 
