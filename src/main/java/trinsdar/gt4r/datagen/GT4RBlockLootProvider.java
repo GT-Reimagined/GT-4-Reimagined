@@ -42,6 +42,7 @@ import java.util.function.Function;
 
 import static muramasa.antimatter.Data.DUST;
 import static muramasa.antimatter.Data.GEM;
+import static muramasa.antimatter.Data.ORE;
 import static trinsdar.gt4r.data.Materials.*;
 
 public class GT4RBlockLootProvider extends AntimatterBlockLootProvider {
@@ -64,7 +65,7 @@ public class GT4RBlockLootProvider extends AntimatterBlockLootProvider {
 
     @Override
     protected void add(Block block) {
-        if (block instanceof BlockOre){
+        if (block instanceof BlockOre && ((BlockOre)block).getOreType() == ORE){
             Material mat = ((BlockOre)block).getMaterial();
             if (mat.has(GEM) || mat == Redstone){
                 Item item = mat == Redstone ? Items.REDSTONE : GEM.get(mat);
