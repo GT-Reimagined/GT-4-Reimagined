@@ -15,9 +15,7 @@ import net.minecraft.item.ItemTier;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidAttributes;
-import org.apache.maven.artifact.resolver.MultipleArtifactsNotFoundException;
 import trinsdar.gt4r.Ref;
-import trinsdar.gt4r.items.ItemToolHead;
 import trinsdar.gt4r.items.ItemTurbineRotor;
 
 import static com.google.common.collect.ImmutableMap.of;
@@ -71,16 +69,15 @@ public class Materials {
         }
     });
 
-    private static MaterialTypeItem.ItemSupplier TOOL_HEAD = (domain, type, material) -> new ItemToolHead(domain, type, material, new Item.Properties().group(muramasa.antimatter.Ref.TAB_MATERIALS));
     public static MaterialTypeItem<?> BROKEN_TURBINE_ROTOR = new MaterialTypeItem<>("broken_turbine_rotor", 1, true, muramasa.antimatter.Ref.U * 17);
-    public static MaterialTypeItem<?> PICKAXE_HEAD = new MaterialTypeItem<>("pickaxe_head", 1, true, muramasa.antimatter.Ref.U * 3, TOOL_HEAD);
-    public static MaterialTypeItem<?> AXE_HEAD = new MaterialTypeItem<>("axe_head", 1, true, muramasa.antimatter.Ref.U * 3, TOOL_HEAD);
-    public static MaterialTypeItem<?> SWORD_HEAD = new MaterialTypeItem<>("sword_head", 1, true, muramasa.antimatter.Ref.U * 2, TOOL_HEAD);
-    public static MaterialTypeItem<?> SHOVEL_HEAD = new MaterialTypeItem<>("shovel_head", 1, true, muramasa.antimatter.Ref.U, TOOL_HEAD);
-    public static MaterialTypeItem<?> HOE_HEAD = new MaterialTypeItem<>("hoe_head", 1, true, muramasa.antimatter.Ref.U * 2, TOOL_HEAD);
-    public static MaterialTypeItem<?> HAMMER_HEAD = new MaterialTypeItem<>("hammer_head", 1, true, muramasa.antimatter.Ref.U * 6, TOOL_HEAD);
-    public static MaterialTypeItem<?> FILE_HEAD = new MaterialTypeItem<>("file_head", 1, true, muramasa.antimatter.Ref.U * 2, TOOL_HEAD);
-    public static MaterialTypeItem<?> SAW_HEAD = new MaterialTypeItem<>("saw_head", 1, true, muramasa.antimatter.Ref.U * 2, TOOL_HEAD);
+    public static MaterialTypeItem<?> PICKAXE_HEAD = new MaterialTypeItem<>("pickaxe_head", 2, true, muramasa.antimatter.Ref.U * 3);
+    public static MaterialTypeItem<?> AXE_HEAD = new MaterialTypeItem<>("axe_head", 2, true, muramasa.antimatter.Ref.U * 3);
+    public static MaterialTypeItem<?> SWORD_HEAD = new MaterialTypeItem<>("sword_head", 2, true, muramasa.antimatter.Ref.U * 2);
+    public static MaterialTypeItem<?> SHOVEL_HEAD = new MaterialTypeItem<>("shovel_head", 2, true, muramasa.antimatter.Ref.U);
+    public static MaterialTypeItem<?> HOE_HEAD = new MaterialTypeItem<>("hoe_head", 2, true, muramasa.antimatter.Ref.U * 2);
+    public static MaterialTypeItem<?> HAMMER_HEAD = new MaterialTypeItem<>("hammer_head", 2, true, muramasa.antimatter.Ref.U * 6);
+    public static MaterialTypeItem<?> FILE_HEAD = new MaterialTypeItem<>("file_head", 2, true, muramasa.antimatter.Ref.U * 2);
+    public static MaterialTypeItem<?> SAW_HEAD = new MaterialTypeItem<>("saw_head", 2, true, muramasa.antimatter.Ref.U * 2);
     public static MaterialTag FLINT_TAG = new MaterialTag("flint");
     public static MaterialTag SEMIFLUID = new MaterialTag("semifluid");
     public static MaterialTag CABINET = new MaterialTag("cabinet");
@@ -248,8 +245,8 @@ public class Materials {
     public static Material Sodalite = AntimatterAPI.registerIfAbsent(Material.class,"sodalite",() -> new Material(Ref.ID, "sodalite", 0x1414ff, LAPIS).asDust(ORE, ORE_SMALL).mats(of(Aluminium, 3, Silicon, 3, Sodium, 4, Chlorine, 1)).setOreMulti(6).harvestLevel(2));
     //public static Material Glass = AntimatterAPI.registerIfAbsent(Material.class,"glass",() -> new Material(Ref.ID, "glass", 0xfafafa, SHINY).asDust(PLATE, LENS).mats(of(SiliconDioxide, 1)));
     public static Material Olivine = AntimatterAPI.registerIfAbsent(Material.class,"olivine",() -> new Material(Ref.ID, "olivine", 0x96ff96, RUBY).asGemBasic(false, ORE, ORE_SMALL).mats(of(Magnesium, 2, Iron, 1, Silicon, 1, Oxygen, 4)).harvestLevel(3));
-    public static Material EnderPearl = AntimatterAPI.registerIfAbsent(Material.class,"enderpearl",() -> new Material(Ref.ID, "enderpearl", 0x6cdcc8, SHINY).asDust().mats(of(Beryllium, 1, Potassium, 4, Nitrogen, 5, Chlorine, 6)));
-    public static Material EnderEye = AntimatterAPI.registerIfAbsent(Material.class,"endereye",() -> new Material(Ref.ID, "endereye", 0xa0fae6, SHINY).asDust().mats(of(EnderPearl, 1, Blaze, 1)));
+    public static Material EnderPearl = AntimatterAPI.registerIfAbsent(Material.class,"enderpearl",() -> new Material(Ref.ID, "enderpearl", 0x6cdcc8, SHINY).asGemBasic(false).mats(of(Beryllium, 1, Potassium, 4, Nitrogen, 5, Chlorine, 6)));
+    public static Material EnderEye = AntimatterAPI.registerIfAbsent(Material.class,"endereye",() -> new Material(Ref.ID, "endereye", 0xa0fae6, SHINY).asGemBasic(false).mats(of(EnderPearl, 1, Blaze, 1)));
     public static Material Lapis = AntimatterAPI.registerIfAbsent(Material.class,"lapis",() -> new Material(Ref.ID, "lapis", 0x4646dc, LAPIS).asDust(ORE, ORE_SMALL).mats(of(Lazurite, 12, Sodalite, 2, Pyrite, 1, Calcite, 1)).setOreMulti(6));
     //public static Material Phosphorus = AntimatterAPI.registerIfAbsent(Material.class,"phosphorus",() -> new Material(Ref.ID, "phosphorus", 0xffff00, FLINT).asDust().mats(of(Calcium, 3, Phosphate, 2)));
     public static Material RedGarnet = AntimatterAPI.registerIfAbsent(Material.class,"red_garnet",() -> new Material(Ref.ID, "red_garnet", 0xc85050, GARNET).asGemBasic(false).mats(of(Pyrope, 3, Almandine, 5, Spessartine, 8)));
@@ -375,6 +372,8 @@ public class Materials {
         GEM.forceOverride(Lapis, Items.LAPIS_LAZULI);
         GEM.forceOverride(Coal, Items.COAL);
         GEM.forceOverride(Charcoal, Items.CHARCOAL);
+        GEM.forceOverride(EnderEye, Items.ENDER_EYE);
+        GEM.forceOverride(EnderPearl, Items.ENDER_PEARL);
 
         BLOCK.forceOverride(Iron, Items.IRON_BLOCK);
         BLOCK.forceOverride(Gold, Items.GOLD_BLOCK);
@@ -411,7 +410,7 @@ public class Materials {
         RockSalt.remove(CRUSHED, CRUSHED_PURIFIED, CRUSHED_CENTRIFUGED, DUST_IMPURE, DUST_PURE);
 
         TOOLS.all().forEach(m -> {
-            if (m != Flint && m != NULL){
+            if (m != Flint && m != NULL && !m.has(RUBBERTOOLS) && m != Wood){
                 m.flags(PICKAXE_HEAD, AXE_HEAD, SHOVEL_HEAD, SWORD_HEAD, HOE_HEAD, HAMMER_HEAD, FILE_HEAD, SAW_HEAD);
             }
         });

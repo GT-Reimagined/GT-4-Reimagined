@@ -55,6 +55,8 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.getOrCreateBuilder(GEM.getMaterialTag(Flint)).add(Items.FLINT);
         this.getOrCreateBuilder(GEM.getMaterialTag(Coal)).add(Items.COAL);
         this.getOrCreateBuilder(GEM.getMaterialTag(Charcoal)).add(Items.CHARCOAL);
+        this.getOrCreateBuilder(GEM.getMaterialTag(EnderEye)).add(Items.ENDER_EYE);
+        this.getOrCreateBuilder(GEM.getMaterialTag(EnderPearl)).add(Items.ENDER_PEARL);
         this.getOrCreateBuilder(DUST.getMaterialTag(Blaze)).add(Items.BLAZE_POWDER);
         this.getOrCreateBuilder(DUST.getMaterialTag(Sugar)).add(Items.SUGAR);
         this.getOrCreateBuilder(BATTERIES_RE).add(BatteryRE);

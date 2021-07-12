@@ -190,6 +190,11 @@ public class MaterialRecipeLoader {
                 "has_wrench", in, SWORD_HEAD.all().stream().filter(t -> t.getToolTypes().contains(SWORD)).map(t -> SWORD_HEAD.get(t,1)).collect(Collectors.toList()), of('P', PropertyIngredient.builder("primary").types(PLATE, GEM).tags(SWORD_HEAD).tool(SWORD, true).build(), 'H', HAMMER.getTag(), 'F', FILE.getTag()), " P ", "FPH");
         provider.addToolRecipe(DUST_BUILDER.get(HOE_HEAD.getId()), output, muramasa.antimatter.Ref.ID, "hoe_head", "antimatter_dusts",
                 "has_wrench", in, HOE_HEAD.all().stream().filter(t -> t.getToolTypes().contains(HOE)).map(t -> HOE_HEAD.get(t,1)).collect(Collectors.toList()), of('P', PropertyIngredient.builder("primary").types(PLATE, GEM).tags(HOE_HEAD).tool(HOE, true).build(), 'I', PropertyIngredient.builder("primary").types(INGOT, GEM).tags(HOE_HEAD).tool(HOE, true).build(), 'H', HAMMER.getTag(), 'F', FILE.getTag()), "PIH", "F  ");
-        //todo: file, hammer, saw heads
+        provider.addToolRecipe(DUST_BUILDER.get(HAMMER_HEAD.getId()), output, muramasa.antimatter.Ref.ID, "hammer_head", "antimatter_dusts",
+                "has_wrench", in, HAMMER_HEAD.all().stream().filter(t -> t.getToolTypes().contains(HAMMER)).map(t -> HAMMER_HEAD.get(t,1)).collect(Collectors.toList()), of('I', PropertyIngredient.builder("primary").types(INGOT, GEM).tags(HAMMER_HEAD).tool(HAMMER, true).build(), 'H', HAMMER.getTag()), "II ", "IIH", "II ");
+        provider.addToolRecipe(DUST_BUILDER.get(SAW_HEAD.getId()), output, muramasa.antimatter.Ref.ID, "saw_head", "antimatter_dusts",
+                "has_wrench", in, SAW_HEAD.all().stream().filter(t -> t.getToolTypes().contains(SAW)).map(t -> SAW_HEAD.get(t,1)).collect(Collectors.toList()), of('P', PropertyIngredient.builder("primary").types(PLATE, GEM).tags(SAW_HEAD).tool(SAW, true).build(), 'H', HAMMER.getTag(), 'F', FILE.getTag()), "PP", "FH");
+        provider.addToolRecipe(DUST_BUILDER.get(FILE_HEAD.getId()), output, muramasa.antimatter.Ref.ID, "file_head", "antimatter_dusts",
+                "has_wrench", in, FILE_HEAD.all().stream().filter(t -> t.getToolTypes().contains(FILE)).map(t -> FILE_HEAD.get(t,1)).collect(Collectors.toList()), of('P', PropertyIngredient.builder("primary").types(PLATE, GEM).tags(FILE_HEAD).tool(FILE, true).build(), 'H', HAMMER.getTag(), 'F', FILE.getTag()), "FPH", " P ");
     }
 }
