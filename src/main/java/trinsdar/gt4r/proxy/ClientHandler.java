@@ -52,6 +52,7 @@ public class ClientHandler implements IProxyHandler {
     private static void copyProgrammerArtIfMissing() {
         File dir = new File(".", "resourcepacks");
         File target = new File(dir, "GT4R-Programmer-Art.zip");
+        File target2 = new File(dir, "GT4R-Classic-Tools.zip");
 
 
         //if(!target.exists())
@@ -62,6 +63,15 @@ public class ClientHandler implements IProxyHandler {
 
                 byte[] buf = new byte[16384];
                 int len = 0;
+                while((len = in.read(buf)) > 0)
+                    out.write(buf, 0, len);
+
+                in.close();
+                out.close();
+                in = GT4Reimagined.class.getResourceAsStream("/assets/gt4r/classic_tools.zip");
+                out = new FileOutputStream(target2);
+                buf = new byte[16384];
+                len = 0;
                 while((len = in.read(buf)) > 0)
                     out.write(buf, 0, len);
 
