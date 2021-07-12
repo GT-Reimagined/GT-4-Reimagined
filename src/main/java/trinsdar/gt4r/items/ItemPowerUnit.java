@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static muramasa.antimatter.Data.NULL;
+import static trinsdar.gt4r.data.GT4RData.RockCutterPowerUnit;
+import static trinsdar.gt4r.data.GT4RData.SmallPowerUnit;
 
 public class ItemPowerUnit extends ItemBasic<ItemPowerUnit> implements IColorHandler {
     Material material;
@@ -91,7 +93,7 @@ public class ItemPowerUnit extends ItemBasic<ItemPowerUnit> implements IColorHan
 
     public CompoundNBT getDataTag(ItemStack stack) {
         CompoundNBT dataTag = stack.getChildTag(Ref.TAG_TOOL_DATA);
-        return dataTag != null ? dataTag : validateTag(stack, 0, 10000);
+        return dataTag != null ? dataTag : validateTag(stack, 0, 100000);
     }
 
     public CompoundNBT validateTag(ItemStack stack, long startingEnergy, long maxEnergy) {
@@ -110,7 +112,7 @@ public class ItemPowerUnit extends ItemBasic<ItemPowerUnit> implements IColorHan
         String id = getId().startsWith("power_unit") ? "power_unit" : getId();
         List<Texture> list = new ArrayList<>();
         list.add(new Texture(getDomain(), "item/basic/" + id));
-        if (getId().equals("small_power_unit")){
+        if (this == SmallPowerUnit || this == RockCutterPowerUnit){
             list.add(new Texture(getDomain(), "item/basic/" + id + "_overlay"));
         }
         return list.toArray(new Texture[0]);

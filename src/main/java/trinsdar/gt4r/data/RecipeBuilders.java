@@ -1,5 +1,6 @@
 package trinsdar.gt4r.data;
 
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import muramasa.antimatter.Antimatter;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.recipe.Recipe;
@@ -10,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Objects;
 
 public class RecipeBuilders {
@@ -60,6 +62,18 @@ public class RecipeBuilders {
         @Override
         public Recipe add() {
             return addRecipeToSteamMap(RecipeMaps.STEAM_ALLOY_SMELTING, super.add());
+        }
+    }
+
+    public static class CoilBuilder extends RecipeBuilder {
+        @Override
+        public Recipe build(int duration, long power, int special, int amps) {
+            if (ingredientInput == null) ingredientInput = Collections.emptyList();
+            if (ingredientInput.isEmpty()){
+                Utils.onInvalidData("RECIPE BUILDER ERROR - INPUT ITEMS OF COIL LIST INVALID!");
+                return Utils.getEmptyRecipe();
+            }
+            return new Recipe(ingredientInput, null, null, null, 0, 0, special, 1);
         }
     }
 

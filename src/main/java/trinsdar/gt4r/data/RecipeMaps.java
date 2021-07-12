@@ -60,6 +60,7 @@ public class RecipeMaps {
     public static RecipeMap<?> BASIC_DISTILLING = new RecipeMap<>("basic_distilling", new RecipeBuilder());
     public static RecipeMap<?> DUSTBIN = new RecipeMap<>("dustbin", new RecipeBuilder());
     public static RecipeMap<?> FERMENTING = new RecipeMap<>("fermenting", new RecipeBuilder());
+    public static RecipeMap<?> FLUID_EXTRACTOR_COILS = new RecipeMap<>("fluid_extractor_coils", new CoilBuilder());
 
 
     public static RecipeMap<?> STEAM_SMELTING = new RecipeMap<>("steam_smelting", new RecipeBuilder()).setProxy(RecipeProxies.FURNACE_PROXY.apply(8, 180));

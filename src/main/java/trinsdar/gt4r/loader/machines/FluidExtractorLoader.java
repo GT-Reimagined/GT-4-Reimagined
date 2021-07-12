@@ -7,15 +7,20 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.tags.ItemTags;
 import net.minecraftforge.common.Tags;
+import trinsdar.gt4r.data.GT4RData;
 
 import static muramasa.antimatter.Data.*;
 import static trinsdar.gt4r.data.Materials.FishOil;
 import static trinsdar.gt4r.data.Materials.Honey;
 import static trinsdar.gt4r.data.Materials.SeedOil;
 import static trinsdar.gt4r.data.RecipeMaps.FLUID_EXTRACTING;
+import static trinsdar.gt4r.data.RecipeMaps.FLUID_EXTRACTOR_COILS;
 
 public class FluidExtractorLoader {
     public static void init() {
+        FLUID_EXTRACTOR_COILS.RB().ii(RecipeIngredient.of(GT4RData.CupronickelHeatingCoil, 1)).add(0, 0, 250);
+        FLUID_EXTRACTOR_COILS.RB().ii(RecipeIngredient.of(GT4RData.KanthalHeatingCoil, 1)).add(0, 0, 500);
+        FLUID_EXTRACTOR_COILS.RB().ii(RecipeIngredient.of(GT4RData.NichromeHeatingCoil, 1)).add(0, 0, 750);
         ROD.all().forEach(r -> {
             add(r, ROD.get(r), 72);
         });

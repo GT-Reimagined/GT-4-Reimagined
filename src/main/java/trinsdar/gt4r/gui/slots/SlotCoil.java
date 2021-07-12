@@ -9,7 +9,9 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.data.Machines;
+import trinsdar.gt4r.data.RecipeMaps;
 import trinsdar.gt4r.tile.multi.TileEntityIndustrialBlastFurnace;
+import trinsdar.gt4r.tile.single.TileEntityFluidExtractor;
 
 import javax.annotation.Nonnull;
 
@@ -20,6 +22,9 @@ public class SlotCoil extends AbstractSlot<SlotCoil> {
 
     @Override
     public boolean isItemValid(@Nonnull ItemStack stack) {
+        if (holder instanceof TileEntityFluidExtractor){
+            return RecipeMaps.FLUID_EXTRACTOR_COILS.acceptsItem(stack);
+        }
         return stack.getItem() == GT4RData.KanthalHeatingCoil || stack.getItem() == GT4RData.NichromeHeatingCoil || (holder.getMachineType() == Machines.PYROLYSIS_OVEN && stack.getItem() == GT4RData.CupronickelHeatingCoil);
     }
 
@@ -30,11 +35,17 @@ public class SlotCoil extends AbstractSlot<SlotCoil> {
 
     @Override
     public int getSlotStackLimit() {
+        if (holder instanceof TileEntityFluidExtractor){
+            return 6;
+        }
         return 4;
     }
 
     @Override
     public int getItemStackLimit(@Nonnull ItemStack stack) {
+        if (holder instanceof TileEntityFluidExtractor){
+            return 6;
+        }
         return 4;
     }
 

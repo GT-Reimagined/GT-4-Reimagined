@@ -38,6 +38,8 @@ public class CustomTags {
     public static ITag.INamedTag<Item> POWER_UNIT_MV = getTag("power_units/mv");
     public static ITag.INamedTag<Item> POWER_UNIT_HV = getTag("power_units/hv");
     public static ITag.INamedTag<Item> POWER_UNIT_SMALL = getTag("power_units/small");
+    public static ITag.INamedTag<Item> POWER_UNIT_ROCK_CUTTER = getTag("power_units/rock_cutter");
+
     public static ITag.INamedTag<Item> INGOTS_MIXED_METAL = getTag("ingots/mixed_metal");
     public static ITag.INamedTag<Item> RODS_STEELS = getTag("rods/steels");
     public static ITag.INamedTag<Item> RODS_MAGNETIC = getTag("rods/magnetic");

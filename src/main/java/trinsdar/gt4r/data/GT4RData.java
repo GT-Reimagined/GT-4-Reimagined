@@ -3,7 +3,6 @@ package trinsdar.gt4r.data;
 import com.google.common.collect.ImmutableMap;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.AntimatterConfig;
-import muramasa.antimatter.Data;
 import muramasa.antimatter.cover.BaseCover;
 import muramasa.antimatter.item.ItemCover;
 import muramasa.antimatter.material.Material;
@@ -15,9 +14,6 @@ import muramasa.antimatter.recipe.material.MaterialRecipe;
 import muramasa.antimatter.tool.IAntimatterTool;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.CraftingInventory;
@@ -61,7 +57,6 @@ import trinsdar.gt4r.items.ItemIntCircuit;
 import trinsdar.gt4r.items.ItemMatch;
 import trinsdar.gt4r.items.ItemMixedMetal;
 import trinsdar.gt4r.items.ItemPowerUnit;
-import trinsdar.gt4r.items.ItemRockCutter;
 import trinsdar.gt4r.tree.BlockRubberLeaves;
 import trinsdar.gt4r.tree.BlockRubberLog;
 import trinsdar.gt4r.tree.BlockRubberSapling;
@@ -78,67 +73,7 @@ public class GT4RData {
 
     private static final boolean HC = AntimatterConfig.GAMEPLAY.HARDCORE_CABLES;
 
-    public static final MaterialRecipe.Provider POWERED_TOOL_BUILDER = MaterialRecipe.registerProvider("powered-tool", id -> new MaterialRecipe.ItemBuilder() {
-
-        @Override
-        public ItemStack build(CraftingInventory inv, MaterialRecipe.Result mats) {
-            Material m = (Material) mats.mats.get("secondary");
-            Tuple<Long, Long> battery = (Tuple<Long, Long>) mats.mats.get("battery");
-            IAntimatterTool type = AntimatterAPI.get(IAntimatterTool.class, id.replace('-', '_'));
-            return type.resolveStack((Material) mats.mats.get("primary"), m == null ? NULL : m, battery.getA(), battery.getB());
-        }
-
-        @Override
-        public Map<String, Object> getFromResult(@Nonnull ItemStack stack) {
-            CompoundNBT nbt = stack.getTag().getCompound(muramasa.antimatter.Ref.TAG_TOOL_DATA);
-            Material primary = AntimatterAPI.get(Material.class, nbt.getString(muramasa.antimatter.Ref.KEY_TOOL_DATA_PRIMARY_MATERIAL));
-            Material secondary = AntimatterAPI.get(Material.class, nbt.getString(muramasa.antimatter.Ref.KEY_TOOL_DATA_SECONDARY_MATERIAL));
-            return ImmutableMap.of("primary", primary, "secondary", secondary, "energy", getEnergy(stack).getA(), "maxEnergy", getEnergy(stack).getB());
-        }
-    });
-
-    public static final MaterialRecipe.Provider UNIT_POWERED_TOOL_BUILDER = MaterialRecipe.registerProvider("powered-tool-from-unit", id -> new MaterialRecipe.ItemBuilder() {
-
-        @Override
-        public ItemStack build(CraftingInventory inv, MaterialRecipe.Result mats) {
-            Tuple<Long, Tuple<Long, Material>> t = (Tuple<Long, Tuple<Long, Material>>) mats.mats.get("secondary");
-            IAntimatterTool type = AntimatterAPI.get(IAntimatterTool.class, id.replace('-', '_'));
-            t.getB().getB();
-            return type.resolveStack((Material) mats.mats.get("primary"), t.getB().getB(), t.getA(), t.getB().getA());
-        }
-
-        @Override
-        public Map<String, Object> getFromResult(@Nonnull ItemStack stack) {
-            return ImmutableMap.of();
-        }
-    });
-
-    public static final MaterialRecipe.Provider ROCK_CUTTER_BUILDER = MaterialRecipe.registerProvider("rock-cutter", id -> new MaterialRecipe.ItemBuilder() {
-
-        @Override
-        public ItemStack build(CraftingInventory inv, MaterialRecipe.Result mats) {
-            Tuple<Long, Long> battery = (Tuple<Long, Long>) mats.mats.get("battery");
-            ItemStack rockCutter = new ItemStack(RockCutter);
-            RockCutter.validateTag(rockCutter, battery.getA(), battery.getB());
-            rockCutter.addEnchantment(Enchantments.SILK_TOUCH, 1);
-            return rockCutter;
-        }
-
-        @Override
-        public Map<String, Object> getFromResult(@Nonnull ItemStack stack) {
-            return ImmutableMap.of();
-        }
-    });
-
     static {
-        PropertyIngredient.addGetter(CustomTags.BATTERIES_RE.getName(), GT4RData::getEnergy);
-        PropertyIngredient.addGetter(CustomTags.BATTERIES_SMALL.getName(), GT4RData::getEnergy);
-        PropertyIngredient.addGetter(CustomTags.BATTERIES_MEDIUM.getName(), GT4RData::getEnergy);
-        PropertyIngredient.addGetter(CustomTags.BATTERIES_LARGE.getName(), GT4RData::getEnergy);
-        PropertyIngredient.addGetter(CustomTags.POWER_UNIT_LV.getName(), GT4RData::getEnergyAndMat);
-        PropertyIngredient.addGetter(CustomTags.POWER_UNIT_MV.getName(), GT4RData::getEnergyAndMat);
-        PropertyIngredient.addGetter(CustomTags.POWER_UNIT_HV.getName(), GT4RData::getEnergyAndMat);
-        PropertyIngredient.addGetter(CustomTags.POWER_UNIT_SMALL.getName(), GT4RData::getEnergyAndMat);
         {
             ImmutableMap.Builder<Integer, RecipeIngredient> builder = ImmutableMap.builder();
             ImmutableMap.Builder<Integer, Item> builderItems = ImmutableMap.builder();
@@ -160,32 +95,6 @@ public class GT4RData {
             builder.put(Tier.IV, TungstenSteel);
             TIER_MATERIALS = builder.build();
         }
-    }
-
-    public static Tuple<Long, Long> getEnergy(ItemStack stack){
-        if (stack.getItem() instanceof ItemBattery){
-            long energy = stack.getCapability(TesseractGTCapability.ENERGY_HANDLER_CAPABILITY).map(IGTNode::getEnergy).orElse((long)0);
-            return new Tuple<>(energy, ((ItemBattery)stack.getItem()).getCapacity());
-        }
-        if (stack.getItem() instanceof IAntimatterTool){
-            IAntimatterTool tool = (IAntimatterTool) stack.getItem();
-            if (tool.getAntimatterToolType().isPowered()){
-                long currentEnergy = tool.getCurrentEnergy(stack);
-                long maxEnergy = tool.getMaxEnergy(stack);
-                return new Tuple<>(currentEnergy, maxEnergy);
-            }
-        }
-        return null;
-    }
-
-    public static Tuple<Long, Tuple<Long, Material>> getEnergyAndMat(ItemStack stack){
-        if (stack.getItem() instanceof ItemPowerUnit){
-            ItemPowerUnit tool = (ItemPowerUnit) stack.getItem();
-            long currentEnergy = tool.getCurrentEnergy(stack);
-            long maxEnergy = tool.getMaxEnergy(stack);
-            return new Tuple<>(currentEnergy, new Tuple<>(maxEnergy, tool.getMaterial(stack)));
-        }
-        return null;
     }
 
     public static void buildTierMaps() {
@@ -222,18 +131,6 @@ public class GT4RData {
 
     }
 
-    private static ItemStack getBrokenItem(ItemStack tool, IItemProvider broken){
-        ItemStack powerUnit = new ItemStack(broken);
-        Tuple<Long, Long> tuple = getEnergy(tool);
-        CompoundNBT dataTag = powerUnit.getOrCreateChildTag(muramasa.antimatter.Ref.TAG_TOOL_DATA);
-        dataTag.putLong(muramasa.antimatter.Ref.KEY_TOOL_DATA_ENERGY, tuple.getA());
-        dataTag.putLong(muramasa.antimatter.Ref.KEY_TOOL_DATA_MAX_ENERGY, tuple.getB());
-        if (broken.asItem() == PowerUnitHV){
-            PowerUnitHV.setMaterial(((IAntimatterTool)tool.getItem()).getSecondaryMaterial(tool), powerUnit);
-        }
-        return powerUnit;
-    }
-
     public static void init(Dist side) {
         if (side.isClient()){
             RecipeRenderer.clientMaps();
@@ -253,8 +150,6 @@ public class GT4RData {
     public static final BaseCover COVER_CRAFTING = new CoverCrafting();
     public static final CoverRedstoneMachineController COVER_REDSTONE_MACHINE_CONTROLLER = new CoverRedstoneMachineController();
 
-    public static ItemRockCutter RockCutter = new ItemRockCutter();
-
     public static ItemBasic<?> StickyResin = new ItemBasic<>(Ref.ID, "sticky_resin");
     public static ItemBasic<?> Plantball = new ItemBasic<>(Ref.ID, "plantball");
     public static ItemBasic<?> Biochaff = new ItemBasic<>(Ref.ID, "biochaff");
@@ -268,6 +163,7 @@ public class GT4RData {
     public static ItemPowerUnit PowerUnitMV = new ItemPowerUnit(Ref.ID, "power_unit_mv", StainlessSteel);
     public static ItemPowerUnit PowerUnitHV = new ItemPowerUnit(Ref.ID, "power_unit_hv", Titanium);
     public static ItemPowerUnit SmallPowerUnit = new ItemPowerUnit(Ref.ID, "small_power_unit", Aluminium);
+    public static ItemPowerUnit RockCutterPowerUnit = new ItemPowerUnit(Ref.ID, "rock_cutter_power_unit", Aluminium);
 
     public static ItemBasic<?> ComputerMonitor = new ItemBasic<>(Ref.ID, "computer_monitor").tip("Can be placed on machines as a cover");
     public static ItemCover ConveyorModule = new ItemCover(Ref.ID, COVER_CONVEYOR.getId()).tip("Can be placed on machines as a cover");
