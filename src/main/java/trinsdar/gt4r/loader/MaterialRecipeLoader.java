@@ -152,9 +152,8 @@ public class MaterialRecipeLoader {
                     provider.addStackRecipe(output, Ref.ID, m.getId() + i + type + "_slab", "slabs", "has_stone", provider.hasSafeItem(c.getBlock(type)), new ItemStack(c.getBlock(type + i + "slab"), 6), of('S', c.getBlock(type)), "SSS");
                     provider.addStackRecipe(output, Ref.ID, m.getId() + i + type + "_stairs", "stairs", "has_stone", provider.hasSafeItem(c.getBlock(type)), new ItemStack(c.getBlock(type + i + "stairs"), 4), of('S', c.getBlock(type)), "S  ", "SS ", "SSS");
                     provider.addStackRecipe(output, Ref.ID, m.getId() + i + type + "_wall", "walls", "has_stone", provider.hasSafeItem(c.getBlock(type)), new ItemStack(c.getBlock(type + i + "wall"), 6), of('S', c.getBlock(type)), "SSS", "SSS");
-                    if (!type.equals("bricks")) {
-                        provider.addStackRecipe(output, Ref.ID, m.getId() + i + type + "_from_slabs", "slabs", "has_stone", provider.hasSafeItem(c.getBlock(type + i + "slab")), new ItemStack(c.getBlock(type), 1), of('S', c.getBlock(type + i + "slab")), "S", "S");
-                    }
+                    String[] pattern = type.equals("bricks") ? new String[]{"SS"} : new String[]{"S", "S"};
+                    provider.addStackRecipe(output, Ref.ID, m.getId() + i + type + "_from_slabs", "slabs", "has_stone", provider.hasSafeItem(c.getBlock(type + i + "slab")), new ItemStack(c.getBlock(type), 1), of('S', c.getBlock(type + i + "slab")), pattern);
                 }
                 provider.addStackRecipe(output, Ref.ID, m.getId() + "_bricks", "bricks", "has_stone", provider.hasSafeItem(c.getBlock("")), new ItemStack(c.getBlock("bricks"), 4), of('S', c.getBlock("")), "SS", "SS");
                 provider.addStackRecipe(output, Ref.ID, m.getId() + "_bricks_chiseled", "bricks", "has_stone", provider.hasSafeItem(c.getBlock("bricks_slab")), new ItemStack(c.getBlock("bricks_chiseled"), 1), of('S', c.getBlock("bricks_slab")), "S", "S");
