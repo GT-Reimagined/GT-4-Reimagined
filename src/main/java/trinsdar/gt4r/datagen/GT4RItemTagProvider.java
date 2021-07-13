@@ -52,13 +52,7 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.getOrCreateBuilder(GEARS_STEELS).addTag(getTag("gears/steel")).addTag(getTag("gears/stainless_steel"));
         this.getOrCreateBuilder(DUSTS_LAPIS_LAZ).addTag(getTag("dusts/lapis")).addTag(getTag("dusts/lazurite"));
         this.getOrCreateBuilder(DUSTS_COALS).addTag(getTag("dusts/coal")).addTag(getTag("dusts/charcoal"));
-        this.getOrCreateBuilder(GEM.getMaterialTag(Flint)).add(Items.FLINT);
-        this.getOrCreateBuilder(GEM.getMaterialTag(Coal)).add(Items.COAL);
-        this.getOrCreateBuilder(GEM.getMaterialTag(Charcoal)).add(Items.CHARCOAL);
-        this.getOrCreateBuilder(GEM.getMaterialTag(EnderEye)).add(Items.ENDER_EYE);
-        this.getOrCreateBuilder(GEM.getMaterialTag(EnderPearl)).add(Items.ENDER_PEARL);
-        this.getOrCreateBuilder(DUST.getMaterialTag(Blaze)).add(Items.BLAZE_POWDER);
-        this.getOrCreateBuilder(DUST.getMaterialTag(Sugar)).add(Items.SUGAR);
+
         this.getOrCreateBuilder(BATTERIES_RE).add(BatteryRE);
         this.getOrCreateBuilder(BATTERIES_SMALL).add(BatterySmallSodium, BatterySmallCadmium, BatterySmallLithium);
         this.getOrCreateBuilder(BATTERIES_MEDIUM).add(BatteryMediumSodium, BatteryMediumCadmium, BatteryMediumLithium);
@@ -78,7 +72,7 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.getOrCreateBuilder(INGOTS_MIXED_METAL).add(MixedMetal);
         this.getOrCreateBuilder(TagUtils.getForgeItemTag("plates/constantan")).addTag(PLATE.getMaterialTag(Cupronickel));
         this.getOrCreateBuilder(TagUtils.getForgeItemTag("ingots/constantan")).addTag(INGOT.getMaterialTag(Cupronickel));
-        this.getOrCreateBuilder(TagUtils.getForgeItemTag("rods/bone")).add(Items.BONE);
+
         this.getOrCreateBuilder(RODS_STEELS).addTag(getTag("rods/steel")).addTag(getTag("rods/stainless_steel"));
         this.getOrCreateBuilder(RODS_MAGNETIC).addTag(getTag("rods/magnetic_steel")).addTag(getTag("rods/magnetic_iron"));
         Builder<Item> add = this.getOrCreateBuilder(CORALS);

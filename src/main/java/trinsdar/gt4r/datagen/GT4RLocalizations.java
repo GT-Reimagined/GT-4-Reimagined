@@ -32,13 +32,17 @@ import java.util.Collection;
 import static muramasa.antimatter.Data.GEM;
 import static muramasa.antimatter.Data.LIQUID;
 import static muramasa.antimatter.Data.NULL;
+import static muramasa.antimatter.machine.Tier.BRONZE;
 import static muramasa.antimatter.machine.Tier.LV;
 import static muramasa.antimatter.machine.Tier.MV;
+import static muramasa.antimatter.machine.Tier.STEEL;
 import static muramasa.antimatter.util.Utils.lowerUnderscoreToUpperSpaced;
 import static muramasa.antimatter.util.Utils.lowerUnderscoreToUpperSpacedRotated;
 import static muramasa.antimatter.util.Utils.validateNBT;
 import static trinsdar.gt4r.data.Machines.ELECTROLYZER;
+import static trinsdar.gt4r.data.Machines.HATCH_DYNAMO;
 import static trinsdar.gt4r.data.Machines.MACERATOR;
+import static trinsdar.gt4r.data.Materials.BROKEN_TURBINE_ROTOR;
 import static trinsdar.gt4r.data.ToolTypes.ROCK_CUTTER;
 
 public class GT4RLocalizations {
@@ -95,7 +99,7 @@ public class GT4RLocalizations {
                             override("machine." + i.getId() + "." + t.getId(), tier + number + afterTier);
                             return;
                         }
-                        override("machine." + i.getId() + "." + t.getId(), value.contains("Infinite") || value.contains("Transformer") || value.contains("Battery") ? value : lowerUnderscoreToUpperSpaced(id.isEmpty() ? i.getId() : id));
+                        override("machine." + i.getId() + "." + t.getId(), value.contains("Infinite") || value.contains("Transformer") || value.contains("Battery") || t == BRONZE || t == STEEL || i == HATCH_DYNAMO ? value : lowerUnderscoreToUpperSpaced(id.isEmpty() ? i.getId() : id));
                     });
                 }
             });
@@ -122,6 +126,7 @@ public class GT4RLocalizations {
             });
             AntimatterAPI.all(ItemFluidCell.class, domain).forEach(i -> override(i.getTranslationKey(), lowerUnderscoreToUpperSpacedRotated(i.getId())));
             GEM.all().forEach(m -> override(GEM.get(m).getTranslationKey(), lowerUnderscoreToUpperSpaced(m.getId())));
+            BROKEN_TURBINE_ROTOR.all().forEach(m -> override(BROKEN_TURBINE_ROTOR.get(m).getTranslationKey(), lowerUnderscoreToUpperSpaced(m.getId() + "_" + BROKEN_TURBINE_ROTOR.getId())));
         }
     }
 

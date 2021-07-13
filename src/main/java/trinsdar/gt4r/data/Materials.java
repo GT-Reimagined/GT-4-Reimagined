@@ -88,23 +88,23 @@ public class Materials {
 
 
     /** Elements **/
-    public static Material Aluminium = AntimatterAPI.registerIfAbsent(Material.class,"aluminium",() -> new Material(Ref.ID, "aluminium", 0x80c8f0, DULL, Al).asMetal(933, 1000, PLATE, ROD, GEAR, HULL, BOLT, SCREW));
+    public static Material Aluminium = AntimatterAPI.registerIfAbsent(Material.class,"aluminium",() -> new Material(Ref.ID, "aluminium", 0x80c8f0, DULL, Al).asMetal(933, 1000, PLATE, ROD, GEAR, BOLT, SCREW));
     public static Material Beryllium = AntimatterAPI.registerIfAbsent(Material.class,"beryllium",() -> new Material(Ref.ID, "beryllium", 0x64b464, METALLIC, Be).asMetal(1560, 0, PLATE));
     public static Material Bismuth = AntimatterAPI.registerIfAbsent(Material.class,"bismuth",() -> new Material(Ref.ID, "bismuth", 0x64a0a0, METALLIC, Bi, Ref.MOD_TFC).asMetal(544, 0, PLATE).asOre());
-    public static Material Carbon = AntimatterAPI.registerIfAbsent(Material.class,"carbon",() -> new Material(Ref.ID, "carbon", 0x141414, DULL, C).asMetal(3800, 1000, TURBINE_BLADE, PLATE, TURBINE_ROTOR));
+    public static Material Carbon = AntimatterAPI.registerIfAbsent(Material.class,"carbon",() -> new Material(Ref.ID, "carbon", 0x141414, DULL, C).asMetal(3800, 1000, PLATE));
     public static Material Chrome = AntimatterAPI.registerIfAbsent(Material.class,"chrome",() -> new Material(Ref.ID, "chrome", 0xffe6e6, SHINY, Cr).asMetal(2180, 1700, PLATE));
     public static Material Gold = AntimatterAPI.registerIfAbsent(Material.class,"gold",() -> new Material(Ref.ID, "gold", 0xffe650, SHINY, Au).asMetal(1337, 0, ROD, GEAR, PLATE, ROD).asOre().harvestLevel(2));
     public static Material Iridium = AntimatterAPI.registerIfAbsent(Material.class,"iridium",() -> new Material(Ref.ID, "iridium", 0xf0f0f5, DULL, Ir).asMetal(2719, 3000, PLATE).asOre().harvestLevel(3));
-    public static Material Iron = AntimatterAPI.registerIfAbsent(Material.class,"iron",() -> new Material(Ref.ID, "iron", 0xc8c8c8, METALLIC, Fe).asMetal(1811, 500, PLATE, ROD, HULL).asOre().asPlasma().addTools(IRON.getAttackDamage(), IRON.getEfficiency(), 256, IRON.getHarvestLevel(),  of(Enchantments.SHARPNESS, 1)));
+    public static Material Iron = AntimatterAPI.registerIfAbsent(Material.class,"iron",() -> new Material(Ref.ID, "iron", 0xc8c8c8, METALLIC, Fe).asMetal(1811, 500, PLATE, ROD).asOre().asPlasma().addTools(IRON.getAttackDamage(), IRON.getEfficiency(), 256, IRON.getHarvestLevel(),  of(Enchantments.SHARPNESS, 1)));
     public static Material Lead = AntimatterAPI.registerIfAbsent(Material.class,"lead",() -> new Material(Ref.ID, "lead", 0x8c648c, DULL, Pb).asMetal(600, 0, PLATE, PLATE_DENSE, ROD).harvestLevel(2));
     public static Material Manganese = AntimatterAPI.registerIfAbsent(Material.class,"manganese",() -> new Material(Ref.ID, "manganese", 0xfafafa, DULL, Mn).asMetal(1519, 0));
     public static Material Nickel = AntimatterAPI.registerIfAbsent(Material.class,"nickel",() -> new Material(Ref.ID, "nickel", 0xc8c8fa, METALLIC, Ni).asMetal(1728, 0, PLATE).asPlasma());
-    public static Material Osmium = AntimatterAPI.registerIfAbsent(Material.class,"osmium",() -> new Material(Ref.ID, "osmium", 0x3232ff, METALLIC, Os).asMetal(3306, 3306, PLATE, ROD, TURBINE_BLADE, TURBINE_ROTOR));
+    public static Material Osmium = AntimatterAPI.registerIfAbsent(Material.class,"osmium",() -> new Material(Ref.ID, "osmium", 0x3232ff, METALLIC, Os).asMetal(3306, 3306, PLATE, ROD));
     public static Material Platinum = AntimatterAPI.registerIfAbsent(Material.class,"platinum",() -> new Material(Ref.ID, "platinum", 0xffffc8, SHINY, Pt).asMetal(2041, 0, PLATE, ROD).asOre().harvestLevel(2));
     public static Material Plutonium = AntimatterAPI.registerIfAbsent(Material.class,"plutonium_244",() -> new Material(Ref.ID, "plutonium_244", 0xf03232, METALLIC, Pu).asMetal(912, 0));
     public static Material Silver = AntimatterAPI.registerIfAbsent(Material.class,"silver",() -> new Material(Ref.ID, "silver", 0xdcdcff, SHINY, Ag).asMetal(1234, 0, PLATE).harvestLevel(2));
     public static Material Thorium = AntimatterAPI.registerIfAbsent(Material.class,"thorium",() -> new Material(Ref.ID, "thorium", 0x001e00, SHINY, Th).asMetal(2115, 0));
-    public static Material Titanium = AntimatterAPI.registerIfAbsent(Material.class,"titanium",() -> new Material(Ref.ID, "titanium", 0xdca0f0, METALLIC, Ti).asMetal(1941, 1500,  PLATE, ROD, GEAR, HULL).addArmor(new int[]{1, 1, 2, 1}, 1.0F, 0.0F, 15).addTools(3.5F, 8.0F, 1600, 3));
+    public static Material Titanium = AntimatterAPI.registerIfAbsent(Material.class,"titanium",() -> new Material(Ref.ID, "titanium", 0xdca0f0, METALLIC, Ti).asMetal(1941, 1500,  PLATE, ROD, GEAR).addArmor(new int[]{1, 1, 2, 1}, 1.0F, 0.0F, 15).addTools(3.5F, 8.0F, 1600, 3));
     public static Material Tungsten = AntimatterAPI.registerIfAbsent(Material.class,"tungsten",() -> new Material(Ref.ID, "tungsten", 0x323232, METALLIC, W).asMetal(3695, 2500, PLATE, ROD).addTools(3.5F, 8.0F, 2560, 3));
     public static Material Uranium238 = AntimatterAPI.registerIfAbsent(Material.class,"uranium_238",() -> new Material(Ref.ID, "uranium_238", 0x32f032, METALLIC, U).asMetal(1405, 0));
     public static Material Uranium235 = AntimatterAPI.registerIfAbsent(Material.class,"uranium_235",() -> new Material(Ref.ID, "uranium_235", 0x46fa46, METALLIC, U235).asMetal(1405, 0));
@@ -176,16 +176,16 @@ public class Materials {
     public static Material Gasoline = AntimatterAPI.registerIfAbsent(Material.class,"gasoline",() -> new Material(Ref.ID, "gasoline", 0x84723e, NONE).asFluid(128));
     public static Material NitroDiesel = AntimatterAPI.registerIfAbsent(Material.class,"nitro_diesel",() -> new Material(Ref.ID, "nitro_diesel", 0xc8ff00, NONE).asFluid(384));
     public static Material BioDiesel = AntimatterAPI.registerIfAbsent(Material.class,"bio_diesel",() -> new Material(Ref.ID, "bio_diesel", 0xff8000, NONE).asFluid(192));
-    public static Material Biomass = AntimatterAPI.registerIfAbsent(Material.class,"biomass",() -> new Material(Ref.ID, "biomass", 0x00ff00, NONE).asFluid(8).flags(SEMIFLUID));
+    public static Material Biomass = AntimatterAPI.registerIfAbsent(Material.class,"biomass",() -> new Material(Ref.ID, "biomass", 0x00ff00, NONE).asFluid(8));
     //public static Material Biofuel = AntimatterAPI.registerIfAbsent(Material.class,"biofuel",() -> new Material(Ref.ID, "biofuel", 0x99cc00, NONE).asFluid(6));
     public static Material Ethanol = AntimatterAPI.registerIfAbsent(Material.class,"ethanol",() -> new Material(Ref.ID, "ethanol", 0xff8000, NONE).asFluid(128).mats(of(Carbon, 2, Hydrogen, 6, Oxygen, 1)));
-    public static Material Creosote = AntimatterAPI.registerIfAbsent(Material.class,"creosote",() -> new Material(Ref.ID, "creosote", 0x804000, NONE).asFluid(8).flags(SEMIFLUID));
+    public static Material Creosote = AntimatterAPI.registerIfAbsent(Material.class,"creosote",() -> new Material(Ref.ID, "creosote", 0x804000, NONE).asFluid(8));
     public static Material Naphtha = AntimatterAPI.registerIfAbsent(Material.class,"naphtha",() -> new Material(Ref.ID, "naphtha", 0xffff64, NONE).asFluid(128));
     public static Material NitroCoalFuel = AntimatterAPI.registerIfAbsent(Material.class,"nitro-coalfuel",() -> new Material(Ref.ID, "nitro-coalfuel", 0x002b2b, NONE).asFluid(48));
     public static Material CoalFuel = AntimatterAPI.registerIfAbsent(Material.class,"coalfuel",() -> new Material(Ref.ID, "coalfuel", 0x0f0f0f, NONE).asFluid(16));
-    public static Material FishOil = AntimatterAPI.registerIfAbsent(Material.class, "fish_oil", () -> new Material(Ref.ID, "fish_oil", 0xffc400, NONE).asFluid(6).flags(SEMIFLUID));
-    public static Material Oil = AntimatterAPI.registerIfAbsent(Material.class,"oil",() -> new Material(Ref.ID, "oil", 0x0a0a0a, NONE).asFluid(15).flags(SEMIFLUID));
-    public static Material SeedOil = AntimatterAPI.registerIfAbsent(Material.class,"seed_oil",() -> new Material(Ref.ID, "seed_oil", 0xc4ff00, NONE).asFluid(6).flags(SEMIFLUID));
+    public static Material FishOil = AntimatterAPI.registerIfAbsent(Material.class, "fish_oil", () -> new Material(Ref.ID, "fish_oil", 0xffc400, NONE).asFluid(6));
+    public static Material Oil = AntimatterAPI.registerIfAbsent(Material.class,"oil",() -> new Material(Ref.ID, "oil", 0x0a0a0a, NONE).asFluid(15));
+    public static Material SeedOil = AntimatterAPI.registerIfAbsent(Material.class,"seed_oil",() -> new Material(Ref.ID, "seed_oil", 0xc4ff00, NONE).asFluid(6));
     //public static Materials SeedOilHemp = new Materials(722, "Hemp Seed Oil", 196, 255, 0, lime, NONE).asSemi(2);
     //public static Materials SeedOilLin = new Materials(723, "Lin Seed Oil", 196, 255, 0, lime, NONE).asSemi(2);
     public static Material Glycerol = AntimatterAPI.registerIfAbsent(Material.class,"glycerol",() -> new Material(Ref.ID, "glycerol", 0x87de87, NONE).asFluid(160).mats(of(Carbon, 3, Hydrogen, 8, Oxygen, 3)));
@@ -226,7 +226,7 @@ public class Materials {
     public static Material Bauxite = AntimatterAPI.registerIfAbsent(Material.class,"bauxite",() -> new Material(Ref.ID, "bauxite", 0xc86400, DULL).asOre().mats(of(Aluminium, 16, Hydrogen, 10, Oxygen, 11, Titanium, 1)).setOreMulti(2));
     public static Material Wood = AntimatterAPI.registerIfAbsent(Material.class,"wood",() -> new Material(Ref.ID, "wood", 0x643200, WOOD).asDust(PLATE).addTools(ItemTier.WOOD.getAttackDamage(), ItemTier.WOOD.getEfficiency(), 16, ItemTier.WOOD.getHarvestLevel(), of(), SOFT_HAMMER).addHandleStat(12, 0.0F).mats(of(Carbon, 1, Oxygen, 1, Hydrogen, 1)));
     public static Material Blaze = AntimatterAPI.registerIfAbsent(Material.class,"blaze",() -> new Material(Ref.ID, "blaze", 0xffc800, NONE).asDust().mats(of(Sulfur, 1, DarkAsh, 1/*, Magic, 1*/)).addHandleStat(-10, -0.5F, of(Enchantments.FIRE_ASPECT, 1)));
-    public static Material Flint = AntimatterAPI.registerIfAbsent(Material.class,"flint",() -> new Material(Ref.ID, "flint", 0x002040, FLINT).asDust(GEM, FLINT_TAG).addTools(1.25F, 2.5F, 128, 1, of(Enchantments.FIRE_ASPECT, 1), PICKAXE, AXE, SHOVEL, SWORD, HOE, MORTAR, KNIFE, ToolTypes.SPEAR).mats(of(SiliconDioxide, 1)));
+    public static Material Flint = AntimatterAPI.registerIfAbsent(Material.class,"flint",() -> new Material(Ref.ID, "flint", 0x002040, FLINT).asDust(GEM).addTools(1.25F, 2.5F, 128, 1, of(Enchantments.FIRE_ASPECT, 1), PICKAXE, AXE, SHOVEL, SWORD, HOE, MORTAR, KNIFE, ToolTypes.SPEAR).mats(of(SiliconDioxide, 1)));
     public static Material PotassiumFeldspar = AntimatterAPI.registerIfAbsent(Material.class,"potassium_feldspar",() -> new Material(Ref.ID, "potassium_feldspar", 0x782828, FINE).asDust().mats(of(Potassium, 1, Aluminium, 1, Silicon, 3, Oxygen, 8)));
     public static Material Biotite = AntimatterAPI.registerIfAbsent(Material.class,"biotite",() -> new Material(Ref.ID, "biotite", 0x141e14, METALLIC).asDust().mats(b -> b.put(Potassium, 1).put(Magnesium, 3).put(Aluminium, 3).put(Fluorine, 2).put(Silicon, 3).put(Oxygen, 10)));
     public static Material Uvarovite = AntimatterAPI.registerIfAbsent(Material.class,"uvarovite",() -> new Material(Ref.ID, "uvarovite", 0xb4ffb4, DIAMOND).asDust().mats(of(Calcium, 3, Chrome, 2, Silicon, 3, Oxygen, 12)));
@@ -234,7 +234,7 @@ public class Materials {
     /** Gems **/
     //Brittle Gems
     public static Material CoalCoke = AntimatterAPI.registerIfAbsent(Material.class,"coal_coke",() -> new Material(Ref.ID, "coal_coke", 0x8c8caa, LIGNITE).asGemBasic(false));
-    public static Material Charcoal = AntimatterAPI.registerIfAbsent(Material.class,"charcoal",() -> new Material(Ref.ID, "charcoal", 0x644646, LIGNITE).asDust().mats(of(Carbon, 1)));
+    public static Material Charcoal = AntimatterAPI.registerIfAbsent(Material.class,"charcoal",() -> new Material(Ref.ID, "charcoal", 0x644646, LIGNITE).asDust(BLOCK).mats(of(Carbon, 1)));
     public static Material Coal = AntimatterAPI.registerIfAbsent(Material.class,"coal",() -> new Material(Ref.ID, "coal", 0x464646, LIGNITE).asOre(0, 2, true).mats(of(Carbon, 2)));
 
     public static Material Diamond = AntimatterAPI.registerIfAbsent(Material.class,"diamond",() -> new Material(Ref.ID, "diamond", /*0x3de0e5*/0xc8ffff, DIAMOND).asGemBasic(false).asOre(3, 7,false).mats(of(Carbon, 128)).addTools(ItemTier.DIAMOND.getAttackDamage(), ItemTier.DIAMOND.getEfficiency(), ItemTier.DIAMOND.getMaxUses(), ItemTier.DIAMOND.getHarvestLevel()));
@@ -258,22 +258,22 @@ public class Materials {
 
     /** Metals **/
     public static Material BatteryAlloy = AntimatterAPI.registerIfAbsent(Material.class,"battery_alloy",() -> new Material(Ref.ID, "battery_alloy", 0x9c7ca0, DULL).asMetal(295, 0, PLATE).mats(of(Lead, 4, Antimony, 1)));
-    public static Material Brass = AntimatterAPI.registerIfAbsent(Material.class,"brass",() -> new Material(Ref.ID, "brass", 0xffb400, METALLIC).asMetal(1170, 0,  PLATE, ROD, HULL).mats(of(Zinc, 1, Copper, 3)));
-    public static Material Bronze = AntimatterAPI.registerIfAbsent(Material.class,"bronze",() -> new Material(Ref.ID, "bronze", 0xff8000, METALLIC).asMetal(1125, 0,  PLATE, ROD, GEAR, HULL, TURBINE_BLADE, TURBINE_ROTOR).mats(of(Tin, 1, Copper, 3)).addTools(2.0F, 6.0F, 192, 2,  of(Enchantments.SHARPNESS, 1)).addArmor(new int[]{0, 0, 0, 0}, 0.0F, 0.0F, 12));
+    public static Material Brass = AntimatterAPI.registerIfAbsent(Material.class,"brass",() -> new Material(Ref.ID, "brass", 0xffb400, METALLIC).asMetal(1170, 0,  PLATE, ROD).mats(of(Zinc, 1, Copper, 3)));
+    public static Material Bronze = AntimatterAPI.registerIfAbsent(Material.class,"bronze",() -> new Material(Ref.ID, "bronze", 0xff8000, METALLIC).asMetal(1125, 0,  PLATE, ROD, GEAR).mats(of(Tin, 1, Copper, 3)).addTools(2.0F, 6.0F, 192, 2,  of(Enchantments.SHARPNESS, 1)).addArmor(new int[]{0, 0, 0, 0}, 0.0F, 0.0F, 12));
     public static Material Cupronickel = AntimatterAPI.registerIfAbsent(Material.class,"cupronickel",() -> new Material(Ref.ID, "cupronickel", 0xe39680, METALLIC).asMetal(1728, 0, PLATE).mats(of(Copper, 1, Nickel, 1)));
     public static Material Electrum = AntimatterAPI.registerIfAbsent(Material.class,"electrum",() -> new Material(Ref.ID, "electrum", 0xffff64, SHINY).asMetal(1330, 0, PLATE, ROD).mats(of(Silver, 1, Gold, 1)));
     public static Material Invar = AntimatterAPI.registerIfAbsent(Material.class,"invar",() -> new Material(Ref.ID, "invar", 0xb4b478, METALLIC).asMetal(1700, 0,  PLATE, ROD).mats(of(Iron, 2, Nickel, 1)).addTools(Iron, of(Enchantments.BANE_OF_ARTHROPODS, 3)).addArmor(new int[]{0, 0, 0,0}, 0.0F, 0.0F, 15, of(Enchantments.FIRE_PROTECTION, 1)));
     public static Material Kanthal = AntimatterAPI.registerIfAbsent(Material.class,"kanthal",() -> new Material(Ref.ID, "kanthal", 0xc2d2df, METALLIC).asMetal(1800, 2200,  PLATE, ROD).mats(of(Iron, 1, Aluminium, 1, Chrome, 1)));
-    public static Material Magnalium = AntimatterAPI.registerIfAbsent(Material.class,"magnalium",() -> new Material(Ref.ID, "magnalium", 0xc8beff, DULL).asMetal(870, 0,  PLATE, ROD, TURBINE_BLADE, TURBINE_ROTOR).mats(of(Magnesium, 1, Aluminium, 2)));
+    public static Material Magnalium = AntimatterAPI.registerIfAbsent(Material.class,"magnalium",() -> new Material(Ref.ID, "magnalium", 0xc8beff, DULL).asMetal(870, 0,  PLATE, ROD).mats(of(Magnesium, 1, Aluminium, 2)));
     public static Material Nichrome = AntimatterAPI.registerIfAbsent(Material.class,"nichrome",() -> new Material(Ref.ID, "nichrome", 0xcdcef6, METALLIC).asMetal(2700, 2500).mats(of(Nickel, 4, Chrome, 1)));
     public static Material SolderingAlloy = AntimatterAPI.registerIfAbsent(Material.class,"soldering_alloy",() -> new Material(Ref.ID, "soldering_alloy", 0xdcdce6, DULL).asMetal(400, 400, PLATE, ROD).mats(of(Tin, 9, Antimony, 1)));
-    public static Material Steel = AntimatterAPI.registerIfAbsent(Material.class,"steel",() -> new Material(Ref.ID, "steel", 0x808080, METALLIC).asMetal(1811, 1500, PLATE, ROD, GEAR, HULL, TURBINE_BLADE, TURBINE_ROTOR, RING).addTools(2.5F, 6.0F, 512, 2,  of(Enchantments.SHARPNESS, 2)).addArmor(new int[]{0, 1, 1, 0}, 1.0F, 0.0F, 21, of(Enchantments.PROTECTION, 1)).mats(of(Iron, 50, Carbon, 1)));
-    public static Material StainlessSteel = AntimatterAPI.registerIfAbsent(Material.class,"stainless_steel",() -> new Material(Ref.ID, "stainless_steel", 0xc8c8dc, SHINY).asMetal(1700, 1700, PLATE, ROD, GEAR, HULL).mats(of(Iron, 6, Chrome, 1, Manganese, 1, Nickel, 1)).addTools(2.5F, 7.0F, 480, 2, of(Enchantments.SHARPNESS, 3)).addArmor(new int[]{0, 1, 1, 0}, 2.0F, 0.0F, 20, of(Enchantments.PROTECTION, 2)));
-    public static Material WroughtIron = AntimatterAPI.registerIfAbsent(Material.class,"wrought_iron",() -> new Material(Ref.ID, "wrought_iron", 0xc8b4b4, METALLIC).asMetal(1811, 0, PLATE, ROD, GEAR, HULL).mats(of(Iron, 1)).addTools(IRON.getAttackDamage(), IRON.getEfficiency(), (int)(256 * 1.5F), IRON.getHarvestLevel(),  of(Enchantments.SHARPNESS, 2)).addArmor(new int[]{0, 0, 0, 0}, 1.0F, 0.0F, 17, of(Enchantments.PROTECTION, 1)));
-    public static Material TungstenSteel = AntimatterAPI.registerIfAbsent(Material.class,"tungstensteel",() -> new Material(Ref.ID, "tungstensteel", 0x6464a0, METALLIC).asMetal(3000, 3000, PLATE, ROD, GEAR, HULL, TURBINE_BLADE, TURBINE_ROTOR).addTools(6.0F, 10.0F, 5120, 4).mats(of(Steel, 1, Tungsten, 1)).addArmor(new int[]{1, 2, 3, 1}, 3.0F, 0.0F, 18, of(Enchantments.PROTECTION, 3)));
+    public static Material Steel = AntimatterAPI.registerIfAbsent(Material.class,"steel",() -> new Material(Ref.ID, "steel", 0x808080, METALLIC).asMetal(1811, 1500, PLATE, ROD, GEAR, RING).addTools(2.5F, 6.0F, 512, 2,  of(Enchantments.SHARPNESS, 2)).addArmor(new int[]{0, 1, 1, 0}, 1.0F, 0.0F, 21, of(Enchantments.PROTECTION, 1)).mats(of(Iron, 50, Carbon, 1)));
+    public static Material StainlessSteel = AntimatterAPI.registerIfAbsent(Material.class,"stainless_steel",() -> new Material(Ref.ID, "stainless_steel", 0xc8c8dc, SHINY).asMetal(1700, 1700, PLATE, ROD, GEAR).mats(of(Iron, 6, Chrome, 1, Manganese, 1, Nickel, 1)).addTools(2.5F, 7.0F, 480, 2, of(Enchantments.SHARPNESS, 3)).addArmor(new int[]{0, 1, 1, 0}, 2.0F, 0.0F, 20, of(Enchantments.PROTECTION, 2)));
+    public static Material WroughtIron = AntimatterAPI.registerIfAbsent(Material.class,"wrought_iron",() -> new Material(Ref.ID, "wrought_iron", 0xc8b4b4, METALLIC).asMetal(1811, 0, PLATE, ROD, GEAR).mats(of(Iron, 1)).addTools(IRON.getAttackDamage(), IRON.getEfficiency(), (int)(256 * 1.5F), IRON.getHarvestLevel(),  of(Enchantments.SHARPNESS, 2)).addArmor(new int[]{0, 0, 0, 0}, 1.0F, 0.0F, 17, of(Enchantments.PROTECTION, 1)));
+    public static Material TungstenSteel = AntimatterAPI.registerIfAbsent(Material.class,"tungstensteel",() -> new Material(Ref.ID, "tungstensteel", 0x6464a0, METALLIC).asMetal(3000, 3000, PLATE, ROD, GEAR).addTools(6.0F, 10.0F, 5120, 4).mats(of(Steel, 1, Tungsten, 1)).addArmor(new int[]{1, 2, 3, 1}, 3.0F, 0.0F, 18, of(Enchantments.PROTECTION, 3)));
     public static Material TungstenCarbide = AntimatterAPI.registerIfAbsent(Material.class,"tungsten_carbide",() -> new Material(Ref.ID, "tungsten_carbide", 0x330066, METALLIC).asMetal(2460, 2460).addTools(5.0F, 14.0F, 2560, 4, of(Enchantments.SHARPNESS, 5)).mats(of(Tungsten, 1, Carbon, 1)));
     public static Material RedAlloy = AntimatterAPI.registerIfAbsent(Material.class,"red_alloy",() -> new Material(Ref.ID, "red_alloy", 0xc80000, DULL).asMetal(295, 0, PLATE, ROD).mats(of(Copper, 1, Redstone, 4)));
-    public static Material Osmiridium = AntimatterAPI.registerIfAbsent(Material.class,"osmiridium",() -> new Material(Ref.ID, "osmiridium", 0x6464ff, METALLIC).asMetal(3333, 3300,  PLATE, ROD, TURBINE_BLADE, TURBINE_ROTOR).mats(of(Iridium, 1, Osmium, 1)));
+    public static Material Osmiridium = AntimatterAPI.registerIfAbsent(Material.class,"osmiridium",() -> new Material(Ref.ID, "osmiridium", 0x6464ff, METALLIC).asMetal(3333, 3300,  PLATE, ROD).mats(of(Iridium, 1, Osmium, 1)));
     public static Material IronMagnetic = AntimatterAPI.registerIfAbsent(Material.class,"magnetic_iron",() -> new Material(Ref.ID, "magnetic_iron", 0xc8c8c8, MAGNETIC).asMetal(1811, 0,ROD).addTools(Iron).mats(of(Iron, 1)));
     public static Material SteelMagnetic = AntimatterAPI.registerIfAbsent(Material.class,"magnetic_steel",() -> new Material(Ref.ID, "magnetic_steel", 0x808080, MAGNETIC).asMetal(1000, 1000,ROD).addTools(Steel).mats(of(Steel, 1)));
 
@@ -350,7 +350,16 @@ public class Materials {
         CHARGING_WORKBENCH.add(Iron, Aluminium);
         LOCKER.add(Iron, Aluminium);
         CHARGING_LOCKER.add(Iron, Aluminium);
-        TURBINE_ROTOR.all().forEach(m -> m.flags(BROKEN_TURBINE_ROTOR));
+        Material[] turbineStuff = new Material[]{Carbon, Osmium, Bronze, Magnalium, Steel, TungstenSteel, Osmiridium};
+        for (Material material : turbineStuff) {
+            material.flags(TURBINE_ROTOR, TURBINE_BLADE, BROKEN_TURBINE_ROTOR);
+        }
+        Material[] hulls = new Material[]{Aluminium, Iron, Titanium, Brass, Bronze, Steel, StainlessSteel, WroughtIron, TungstenSteel};
+        for (Material hull : hulls) {
+            hull.flags(HULL);
+        }
+        SEMIFLUID.add(Biomass, Creosote, FishOil, Oil, SeedOil);
+        FLINT_TAG.add(Flint);
 
         ELEC.add(ELEC30.all().toArray(new Material[0]));
         ELEC.add(ELEC60.all().toArray(new Material[0]));
@@ -377,6 +386,10 @@ public class Materials {
 
         BLOCK.forceOverride(Iron, Items.IRON_BLOCK);
         BLOCK.forceOverride(Gold, Items.GOLD_BLOCK);
+        BLOCK.forceOverride(Diamond, Items.DIAMOND_BLOCK);
+        BLOCK.forceOverride(Emerald, Items.EMERALD_BLOCK);
+        BLOCK.forceOverride(Lapis, Items.LAPIS_BLOCK);
+        BLOCK.forceOverride(Netherite, Items.NETHERITE_BLOCK);
 
         ROD.forceOverride(Blaze, Items.BLAZE_ROD);
         ROD.forceOverride(Bone, Items.BONE);

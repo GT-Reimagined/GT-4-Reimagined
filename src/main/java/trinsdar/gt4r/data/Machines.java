@@ -97,12 +97,12 @@ public class Machines {
     public static MultiMachine LARGE_HEAT_EXCHANGER = new MultiMachine(Ref.ID, "large_heat_exchanger").setTiers(EV).addFlags(GUI, FLUID, ENERGY).setTile(m -> () -> new TileEntityLargeHeatExchanger(m));
     public static MultiMachine FUSION_REACTOR = new MultiMachine(Ref.ID, "fusion_control_computer").setMap(FUSION).setTiers(IV).addFlags(GUI, FLUID, ENERGY).setTile(m -> () -> new TileEntityFusionReactor(m));
 
-    public static HatchMachine HATCH_ITEM_I = new HatchMachine(Ref.ID, "hatch_item_input", COVERINPUT).addFlags(GUI, ITEM).setTiers(LV).setAllowVerticalFacing(false).allowFrontIO();
-    public static HatchMachine HATCH_ITEM_O = new HatchMachine(Ref.ID, "hatch_item_output", COVEROUTPUT).addFlags(GUI, ITEM).setTiers(LV).setAllowVerticalFacing(false).allowFrontIO();
-    public static HatchMachine HATCH_FLUID_I = new HatchMachine(Ref.ID, "hatch_fluid_input", COVERINPUT).addFlags(GUI, FLUID, CELL).setTiers(LV).setAllowVerticalFacing(false).allowFrontIO();
-    public static HatchMachine HATCH_FLUID_O = new HatchMachine(Ref.ID, "hatch_fluid_output", COVEROUTPUT).addFlags(GUI, FLUID, CELL).setTiers(LV).setAllowVerticalFacing(false).allowFrontIO();
-    public static HatchMachine HATCH_MUFFLER = new HatchMachine(Ref.ID, "hatch_muffler", COVERMUFFLER).addFlags(GUI, ITEM).setTiers(LV).setAllowVerticalFacing(false).allowFrontIO();
-    public static HatchMachine HATCH_DYNAMO = new HatchMachine(Ref.ID, "hatch_dynamo", COVER_DYNAMO_OLD).addFlags(ENERGY).setTiers(EV, IV).setAllowVerticalFacing(false).allowFrontIO();
+    public static HatchMachine HATCH_ITEM_I = new HatchMachine(Ref.ID, "item_input_hatch", COVERINPUT).addFlags(GUI, ITEM).setTiers(LV).setAllowVerticalFacing(false).allowFrontIO();
+    public static HatchMachine HATCH_ITEM_O = new HatchMachine(Ref.ID, "item_output_hatch", COVEROUTPUT).addFlags(GUI, ITEM).setTiers(LV).setAllowVerticalFacing(false).allowFrontIO();
+    public static HatchMachine HATCH_FLUID_I = new HatchMachine(Ref.ID, "fluid_input_hatch", COVERINPUT).addFlags(GUI, FLUID, CELL).setTiers(LV).setAllowVerticalFacing(false).allowFrontIO();
+    public static HatchMachine HATCH_FLUID_O = new HatchMachine(Ref.ID, "fluid_output_hatch", COVEROUTPUT).addFlags(GUI, FLUID, CELL).setTiers(LV).setAllowVerticalFacing(false).allowFrontIO();
+    public static HatchMachine HATCH_MUFFLER = new HatchMachine(Ref.ID, "muffler_hatch", COVERMUFFLER).addFlags(GUI, ITEM).setTiers(LV).setAllowVerticalFacing(false).allowFrontIO();
+    public static HatchMachine HATCH_DYNAMO = new HatchMachine(Ref.ID, "dynamo_hatch", COVER_DYNAMO_OLD).addFlags(ENERGY).setTiers(EV, IV).setAllowVerticalFacing(false).allowFrontIO();
     public static HatchMachine FUSION_ITEM_INJECTOR = new HatchMachine(Ref.ID, "fusion_item_injector", COVER_FUSION_INPUT).addFlags(GUI, ITEM).baseTexture(Textures.FUSION_IN).setTiers(LV).setAllowVerticalFacing(false).allowFrontIO();
     public static HatchMachine FUSION_ITEM_EXTRACTOR = new HatchMachine(Ref.ID, "fusion_item_extractor", COVER_FUSION_OUTPUT).addFlags(GUI, ITEM).baseTexture(Textures.FUSION_OUT).setTiers(LV).setAllowVerticalFacing(false).allowFrontIO();
     public static HatchMachine FUSION_FLUID_INJECTOR = new HatchMachine(Ref.ID, "fusion_fluid_injector", COVER_FUSION_INPUT).addFlags(GUI, FLUID, CELL).baseTexture(Textures.FUSION_IN).setTiers(LV).setAllowVerticalFacing(false).allowFrontIO();
