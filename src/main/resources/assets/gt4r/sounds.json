@@ -1,8 +1,8 @@
 {
   "wrench": {
-    "sounds": [ "gti:wrench" ]
+    "sounds": [ "gt4r:wrench" ]
   },
   "drill": {
-    "sounds": [ "gti:drill" ]
+    "sounds": [ "gt4r:drill" ]
   }
 }
