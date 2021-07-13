@@ -45,7 +45,7 @@ public class CentrifugingLoader {
         CENTRIFUGING.RB().ii(of(GRASS_BLOCK, 64)).io(new ItemStack(Items.SAND, 32), new ItemStack(CLAY_BALL, 2), new ItemStack(Plantball, 6)).add(3125, 16);
         CENTRIFUGING.RB().ii(of(MYCELIUM, 64)).io(new ItemStack(Items.SAND, 32), new ItemStack(CLAY_BALL, 8), new ItemStack(BROWN_MUSHROOM, 16), new ItemStack(RED_MUSHROOM, 16)).add(3906, 16);
         add(Lapis,20, 1792);
-        CENTRIFUGING.RB().ii(of(StickyResin, 8)).io(DUST.get(Rubber, 28), new ItemStack(Plantball, 4)).add(1250,10);
+        CENTRIFUGING.RB().ii(of(StickyResin, 8)).io(DUST.get(Rubber, 21), DUST.get(Plastic, 7), new ItemStack(Plantball, 4)).add(1250,10);
         CENTRIFUGING.RB().ii(of(DUST.getMaterialTag(Netherrack), 64)).io(new ItemStack(GOLD_NUGGET, 4), new ItemStack(REDSTONE, 4), new ItemStack(GUNPOWDER, 8), DUST.get(Coal, 4), DUST.get(Sulfur, 4), DUST.get(Phosphor, 2)).add(3125,16);
         add(Granite, 16, 1500);
         add(Diorite, 16,2250, 16);
