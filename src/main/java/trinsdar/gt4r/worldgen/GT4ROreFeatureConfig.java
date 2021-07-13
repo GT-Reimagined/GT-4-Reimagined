@@ -59,6 +59,7 @@ public class GT4ROreFeatureConfig implements IFeatureConfig {
     private final int weight;
     private final int secondaryChance;
     private final int size;
+    private boolean invertBiomeFilter;
     private List<RegistryKey<World>> dimensions;
     private Set<ResourceLocation> dimensionLocations;
     private List<BiomeDictionary.Type> biomeTypes = new ArrayList<>();
@@ -73,6 +74,7 @@ public class GT4ROreFeatureConfig implements IFeatureConfig {
         this.weight = weight;
         this.secondaryChance = secondaryChance;
         this.size = size;
+        this.invertBiomeFilter = false;
         if (primary == null || (!Material.get(primary).has(ORE) && Material.get(primary) != Salt && Material.get(primary) != RockSalt)) throw new IllegalArgumentException("GT4ROreFeatureConfig - " + id + ": " + primary + " material either doesn't exist or doesn't have the ORE tag");
         if (secondary != null && !Material.get(secondary).has(ORE) && Material.get(secondary) != NULL) throw new IllegalArgumentException("GT4ROreFeatureConfig - " + id + ": " + secondary + " material doesn't have the ORE tag");
         if (secondary != null){
@@ -114,6 +116,11 @@ public class GT4ROreFeatureConfig implements IFeatureConfig {
         return this;
     }
 
+    public GT4ROreFeatureConfig setInvertBiomeFilter(boolean invert){
+        this.invertBiomeFilter = invert;
+        return this;
+    }
+
     public String getId() {
         return id;
     }
@@ -144,6 +151,10 @@ public class GT4ROreFeatureConfig implements IFeatureConfig {
 
     public int getSecondaryChance() {
         return secondaryChance;
+    }
+
+    public boolean isInvertBiomeFilter() {
+        return invertBiomeFilter;
     }
 
     public Set<ResourceLocation> getDimensionLocations() {

@@ -126,10 +126,11 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
                 hasType = true;
             }
             if (invalidTypes.contains(type)){
-                return false;
+                hasType = false;
+                break;
             }
         }
-        if (!hasType){
+        if (hasType == config.isInvertBiomeFilter()){
             return false;
         }
 

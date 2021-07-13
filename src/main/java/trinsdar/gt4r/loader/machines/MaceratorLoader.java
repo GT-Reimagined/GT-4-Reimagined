@@ -24,7 +24,11 @@ import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.Materials;
 import trinsdar.gt4r.data.RecipeMaps;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static muramasa.antimatter.Data.*;
+import static muramasa.antimatter.util.Utils.addNoConsumeTag;
 import static muramasa.antimatter.util.Utils.formatNumber;
 import static muramasa.antimatter.util.Utils.getConventionalMaterialType;
 import static muramasa.antimatter.util.Utils.getConventionalStoneType;
@@ -45,18 +49,25 @@ public class MaceratorLoader {
             if (sm == BasaltVanilla) stoneDust = DUST.get(Basalt, 1);
             ITag.INamedTag<Item> oreTag = TagUtils.getForgeItemTag(String.join("", getConventionalStoneType(o.getStoneType()), "_", getConventionalMaterialType(o.getOreType()), "/", o.getMaterial().getId()));
             RecipeIngredient ore = RecipeIngredient.of(oreTag,1);
-            ItemStack crushedStack = CRUSHED.get(m,1);
+            ItemStack crushedStack = CRUSHED.get(m,m.getOreMulti());
             Material oreByProduct1 = m.getByProducts().size() > 0 ? m.getByProducts().get(0) : m.getMacerateInto();
             RecipeMap rm = MACERATING;
             if (sm == Sand || sm == RedSand || sm == Gravel){
                 rm = SIFTING;
             }
-            if (stoneDust.isEmpty()){
-                rm.RB().ii(ore).io(Utils.ca((m.getOreMulti()) * 2, crushedStack), DUST.get(oreByProduct1, 1)).chances(100, 10 * m.getByProductMulti()).add(400, 2);
-            } else {
-                rm.RB().ii(ore).io(Utils.ca((m.getOreMulti()) * 2, crushedStack), DUST.get(oreByProduct1, 1), stoneDust).chances(100, 10 * m.getByProductMulti(), 50).add(400, 2);
-            }
-
+            List<ItemStack> stacks = new ArrayList<>();
+            stacks.add(Utils.ca((m.getOreMulti()) * (rm == SIFTING ? 1 : 2), crushedStack));
+            if (rm == SIFTING) stacks.add(crushedStack);
+            stacks.add(DUST.get(oreByProduct1, 1));
+            if (!stoneDust.isEmpty()) stacks.add(stoneDust);
+            ItemStack[] stackArray = stacks.toArray(new ItemStack[0]);
+            List<Integer> ints = new ArrayList<>();
+            ints.add(100);
+            if (rm == SIFTING) ints.add(50);
+            ints.add(10 * m.getByProductMulti());
+            if (!stoneDust.isEmpty()) ints.add(50);
+            int[] chances = ints.stream().mapToInt(i -> i).toArray();
+            rm.RB().ii(ore).io(stackArray).chances(chances).add(400, 2);
         });
         CRUSHED.all().forEach(m -> {
             if (!m.has(ORE) && m != NetheriteScrap) return;
