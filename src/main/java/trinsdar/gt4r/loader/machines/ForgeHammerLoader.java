@@ -12,6 +12,7 @@ import trinsdar.gt4r.GT4RConfig;
 import trinsdar.gt4r.Ref;
 
 import static muramasa.antimatter.Data.*;
+import static muramasa.antimatter.material.MaterialTag.RUBBERTOOLS;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.HAMMERING;
 import static trinsdar.gt4r.data.RecipeMaps.MACERATING;
@@ -31,8 +32,7 @@ public class ForgeHammerLoader {
                 HAMMERING.RB().ii(RecipeIngredient.of(CRUSHED_CENTRIFUGED.get(m,1))).io(DUST.get(m.getMacerateInto(), 1)).add(16, 10);
             }
         });
-        PLATE.all().forEach(m -> {
-            if (!m.has(INGOT)) return;
+        PLATE.all().stream().filter(m -> m.has(INGOT) && !m.has(RUBBERTOOLS)).forEach(m -> {
             int in = GT4RConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 3 : 1;
             int out = GT4RConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 2 : 1;
             HAMMERING.RB().ii(INGOT.getMaterialIngredient(m, in)).io(PLATE.get(m, out)).add(m.getMass(), 16);

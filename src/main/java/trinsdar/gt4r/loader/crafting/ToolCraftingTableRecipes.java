@@ -19,6 +19,7 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import static muramasa.antimatter.Data.*;
+import static muramasa.antimatter.material.MaterialTag.RUBBERTOOLS;
 import static muramasa.antimatter.pipe.PipeSize.*;
 import static trinsdar.gt4r.data.Materials.Rubber;
 import static trinsdar.gt4r.loader.crafting.CraftingHelper.criterion;
@@ -62,7 +63,7 @@ public class ToolCraftingTableRecipes {
             }
         });
 
-        INGOT.all().stream().filter(p -> p.has(PLATE)).forEach(p -> {
+        INGOT.all().stream().filter(p -> p.has(PLATE) && !p.has(RUBBERTOOLS)).forEach(p -> {
             if (GT4RConfig.GAMEPLAY.LOSSY_PART_CRAFTING){
                 provider.shapeless(output, "ingothammer", "plate", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), new ItemStack(PLATE.get(p), 1),
                         HAMMER.getTag(), INGOT.getMaterialTag(p), INGOT.getMaterialTag(p));
