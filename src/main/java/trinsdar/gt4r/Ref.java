@@ -14,6 +14,7 @@ public class Ref {
     public static final String MOD_IE = "immersiveengineering";
     public static final String MOD_CREATE = "create";
     public static final String MOD_TFC = "tfc";
+    public static final String MOD_BLUEPOWER = "bluepower";
 
     /** Config Values **/
     public static boolean mixedOreYieldsTwoThirdsPureOre = false; //TODO 5U remnant, determine if needed

@@ -60,7 +60,9 @@ import trinsdar.gt4r.tile.TileEntityTypes;
 import trinsdar.gt4r.worldgen.GT4RFeatures;
 
 import static muramasa.antimatter.Data.DRILL;
+import static muramasa.antimatter.Data.GEM;
 import static muramasa.antimatter.Data.PICKAXE;
+import static trinsdar.gt4r.data.Materials.Amethyst;
 
 
 @Mod(Ref.ID)
@@ -191,6 +193,9 @@ public class GT4Reimagined extends AntimatterMod {
                 Models.init();
                 break;
             case DATA_READY:
+                if (AntimatterAPI.isModLoaded(Ref.MOD_BLUEPOWER)){
+                    GEM.forceOverride(Amethyst, ForgeRegistries.ITEMS.getValue(new ResourceLocation("bluepower", "amethyst_gem")));
+                }
                 GT4RData.buildTierMaps();
                 Structures.init();
                 GT4RFeatures.init();
