@@ -40,7 +40,7 @@ import static trinsdar.gt4r.data.RecipeMaps.SIFTING;
 
 public class MaceratorLoader {
     public static void init() {
-        AntimatterAPI.all(BlockOre.class, Ref.ID,o -> {
+        AntimatterAPI.all(BlockOre.class, o -> {
             if (o.getOreType() != ORE) return;
             Material m = o.getMaterial();
             Material sm = o.getStoneType().getMaterial();

@@ -2,6 +2,7 @@ package trinsdar.gt4r.loader.multi;
 
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialTypeItem;
+import muramasa.antimatter.util.TagUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import trinsdar.gt4r.data.GT4RData;
@@ -70,6 +71,6 @@ public class IndustrialGrinder {
     }
 
     private static void addGrinderRecipe(Material ore, Material fluid, ItemStack... outputs){
-        INDUSTRIAL_GRINDING.RB().ii(of(ORE.getMaterialTag(ore), 1)).fi(fluid.getLiquid(1000)).io(outputs).add(100, 120);
+        INDUSTRIAL_GRINDING.RB().ii(of(TagUtils.getForgeItemTag("sandless_ores/" + ore.getId()), 1)).fi(fluid.getLiquid(1000)).io(outputs).add(100, 120);
     }
 }

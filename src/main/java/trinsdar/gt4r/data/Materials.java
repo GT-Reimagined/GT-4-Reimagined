@@ -386,9 +386,6 @@ public class Materials {
         GEM.forceOverride(Charcoal, Items.CHARCOAL);
         GEM.forceOverride(EnderEye, Items.ENDER_EYE);
         GEM.forceOverride(EnderPearl, Items.ENDER_PEARL);
-        if (AntimatterAPI.isModLoaded(Ref.MOD_BLUEPOWER)){
-            Amethyst.remove(ORE, GEM);
-        }
 
 
         BLOCK.forceOverride(Iron, Items.IRON_BLOCK);

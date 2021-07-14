@@ -1,7 +1,9 @@
 package trinsdar.gt4r.datagen;
 
+import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.datagen.ExistingFileHelperOverride;
 import muramasa.antimatter.datagen.providers.AntimatterItemTagProvider;
+import muramasa.antimatter.ore.BlockOre;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import muramasa.antimatter.util.TagUtils;
 import net.minecraft.data.BlockTagsProvider;
@@ -11,12 +13,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
+import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.CustomTags;
 
-import static muramasa.antimatter.Data.DUST;
-import static muramasa.antimatter.Data.GEM;
-import static muramasa.antimatter.Data.INGOT;
-import static muramasa.antimatter.Data.PLATE;
+import static muramasa.antimatter.Data.*;
 import static trinsdar.gt4r.data.CustomTags.*;
 import static trinsdar.gt4r.data.GT4RData.*;
 import static trinsdar.gt4r.data.Materials.*;
@@ -69,6 +69,10 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.getOrCreateBuilder(TagUtils.getForgeItemTag("stone_ores/diamond")).add(Items.DIAMOND_ORE);
         this.getOrCreateBuilder(TagUtils.getForgeItemTag("stone_ores/redstone")).add(Items.REDSTONE_ORE);
         this.getOrCreateBuilder(TagUtils.getForgeItemTag("stone_ores/emerald")).add(Items.EMERALD_ORE);
+        if (AntimatterAPI.isModLoaded(Ref.MOD_BLUEPOWER)){
+            this.getOrCreateBuilder(TagUtils.getForgeItemTag("stone_ores/amethyst")).add(ForgeRegistries.ITEMS.getValue(new ResourceLocation(Ref.MOD_BLUEPOWER, "amethyst_ore")));
+        }
+
         this.getOrCreateBuilder(INGOTS_MIXED_METAL).add(MixedMetal);
         this.getOrCreateBuilder(TagUtils.getForgeItemTag("plates/constantan")).addTag(PLATE.getMaterialTag(Cupronickel));
         this.getOrCreateBuilder(TagUtils.getForgeItemTag("ingots/constantan")).addTag(INGOT.getMaterialTag(Cupronickel));
@@ -81,6 +85,11 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
             add.add(ForgeRegistries.ITEMS.getValue(new ResourceLocation(coral + "_coral")), ForgeRegistries.ITEMS.getValue(new ResourceLocation("dead_" + coral + "_coral")), ForgeRegistries.ITEMS.getValue(new ResourceLocation(coral + "_coral_fan")), ForgeRegistries.ITEMS.getValue(new ResourceLocation("dead_" + coral + "_coral_fan")));
         }
         this.getOrCreateBuilder(VINES).add(Items.VINE, Items.TWISTING_VINES, Items.WEEPING_VINES);
+        AntimatterAPI.all(BlockOre.class, o -> {
+            if (o.getStoneType() != SAND && o.getStoneType() != SAND_RED && o.getStoneType() != GRAVEL){
+                this.getOrCreateBuilder(TagUtils.getForgeItemTag("sandless_ores/" +  o.getMaterial().getId())).add(o.asItem());
+            }
+        });
     }
 
 }

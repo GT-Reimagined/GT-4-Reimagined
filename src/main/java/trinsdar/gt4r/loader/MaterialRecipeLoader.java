@@ -18,6 +18,8 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.crafting.StonecuttingRecipe;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.LazyValue;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.registries.ForgeRegistries;
 import trinsdar.gt4r.GT4RConfig;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.GT4RData;
@@ -44,6 +46,9 @@ public class MaterialRecipeLoader {
     public static void loadRecipes(Consumer<IFinishedRecipe> output, AntimatterRecipeProvider provider) {
         final ICriterionInstance in = provider.hasSafeItem(WRENCH.getTag());
         int craftingMultiplier = GT4RConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 1 : 2;
+        if (AntimatterAPI.isModLoaded(Ref.MOD_BLUEPOWER)){
+            provider.shapeless(output, "amethyst_gem_convert", "gems", "has_gem", provider.hasSafeItem(GEM.getMaterialTag(Amethyst)), GEM.get(Amethyst, 1), ForgeRegistries.ITEMS.getValue(new ResourceLocation(Ref.MOD_BLUEPOWER, "amethyst_gem")));
+        }
         HULL.all().forEach(m -> {
             provider.addItemRecipe(output, Ref.ID, m.getId() + "_hull", "hulls", "has_wrench", provider.hasSafeItem(WRENCH.getTag()), HULL.get(m), ImmutableMap.of('P', PLATE.getMaterialTag(m), 'W', WRENCH.getTag()), "PPP", "PWP", "PPP");
         });

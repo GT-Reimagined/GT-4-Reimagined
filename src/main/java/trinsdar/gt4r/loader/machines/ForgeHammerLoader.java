@@ -4,6 +4,7 @@ import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.ore.CobbleStoneType;
 import muramasa.antimatter.ore.StoneType;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
+import muramasa.antimatter.util.TagUtils;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -22,7 +23,7 @@ public class ForgeHammerLoader {
         CRUSHED.all().forEach(m -> {
             if (!m.has(ORE) && m != Gold && m != Iron && m != Diamond && m != Emerald && m != Lapis && m != Redstone) return;
             int multiplier = 1;
-            RecipeIngredient ore = RecipeIngredient.of(ORE.getMaterialTag(m),1), crushed = CRUSHED.getIngredient(m, 1);
+            RecipeIngredient ore = RecipeIngredient.of(TagUtils.getForgeItemTag("sandless_ores/" + m.getId()),1), crushed = CRUSHED.getIngredient(m, 1);
             ItemStack crushedStack = CRUSHED.get(m,1);
 
             HAMMERING.RB().ii(ore).io(Utils.ca(m.getOreMulti() * multiplier, crushedStack)).add(16, 10);
