@@ -253,7 +253,7 @@ public class Materials {
     public static Material RedGarnet = AntimatterAPI.registerIfAbsent(Material.class,"red_garnet",() -> new Material(Ref.ID, "red_garnet", 0xc85050, GARNET).asGemBasic(false).mats(of(Pyrope, 3, Almandine, 5, Spessartine, 8)));
     public static Material YellowGarnet = AntimatterAPI.registerIfAbsent(Material.class,"yellow_garnet",() -> new Material(Ref.ID, "yellow_garnet", 0xc8c850, GARNET).asGemBasic(false).mats(of(Uvarovite, 3, Andradite, 5, Grossular, 8)));
 
-    public static Material Amethyst = AntimatterAPI.registerIfAbsent(Material.class,"amethyst",() -> new Material(Ref.ID, "amethyst", 0xd232d2, RUBY, Ref.MOD_BLUEPOWER).asGemBasic(false).asOre(false).addTools(3.0F, 7.0F, 1024, 3).mats(of(SiliconDioxide, 4, Iron, 1)));
+    public static Material Amethyst = AntimatterAPI.registerIfAbsent(Material.class,"amethyst",() -> new Material(Ref.ID, "amethyst", 0xd232d2, RUBY, Ref.MOD_BLUEPOWER).asGemBasic(false).asOre(3, 7,true).addTools(3.0F, 7.0F, 1024, 3).addArmor(new int[]{1, 1, 2, 1}, 1.0F, 0.0F, 30).mats(of(SiliconDioxide, 4, Iron, 1)));
 
     /** **/
     public static Material Redstone = AntimatterAPI.registerIfAbsent(Material.class,"redstone",() -> new Material(Ref.ID, "redstone", 0xc80000, REDSTONE).asDust().asOre(1, 5,false).mats(of(Silicon, 1, Pyrite, 5, Ruby, 1, Mercury, 3)).setOreMulti(4));
