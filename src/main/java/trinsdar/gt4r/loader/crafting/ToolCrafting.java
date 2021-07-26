@@ -11,6 +11,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.ItemStack;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.CustomTags;
+import trinsdar.gt4r.data.Materials;
 import trinsdar.gt4r.data.ToolTypes;
 
 import java.util.Collections;
@@ -35,9 +36,9 @@ public class ToolCrafting {
 
     private static void loadPoweredRecipes(Consumer<IFinishedRecipe> output, AntimatterRecipeProvider provider){
         ICriterionInstance in = provider.hasSafeItem(SCREWDRIVER.getTag());
-        provider.addToolRecipe(ToolTypes.POWERED_TOOL_BUILDER.get(ROCK_CUTTER.getId()), output, Ref.ID, "rock_cutter_1", "rock_cutters", "has_screwdriver", in, ROCK_CUTTER.getToolStack(NULL, NULL), of('D', PropertyIngredient.builder("primary").mats(Sapphire, Diamond, Ruby, NetherizedDiamond).types(DUST).build(), 'P', PropertyIngredient.builder("secondary").mats(Titanium, TungstenSteel).types(PLATE).build(), 'R', PropertyIngredient.builder("secondary").mats(Titanium, TungstenSteel).types(ROD).build(), 'C', CustomTags.CIRCUITS_BASIC, 'B', PropertyIngredient.builder("battery").itemTags(CustomTags.BATTERIES_SMALL).build()), "DR ", "DP ", "DCB");
+        provider.addToolRecipe(ToolTypes.POWERED_TOOL_BUILDER.get(ROCK_CUTTER.getId()), output, Ref.ID, "rock_cutter_1", "rock_cutters", "has_screwdriver", in, ROCK_CUTTER.getToolStack(NULL, NULL), of('D', PropertyIngredient.builder("primary").types(DUST).tags(Materials.ROCK_CUTTER).build(), 'P', PropertyIngredient.builder("secondary").mats(Titanium, TungstenSteel).types(PLATE).build(), 'R', PropertyIngredient.builder("secondary").mats(Titanium, TungstenSteel).types(ROD).build(), 'C', CustomTags.CIRCUITS_BASIC, 'B', PropertyIngredient.builder("battery").itemTags(CustomTags.BATTERIES_SMALL).build()), "DR ", "DP ", "DCB");
         provider.addToolRecipe(ToolTypes.UNIT_POWERED_TOOL_BUILDER.get(ROCK_CUTTER.getId()),output, Ref.ID, ROCK_CUTTER.getId() + "_power_unit_recipe", "rock_cutters",
-                "has_screwdriver", in, ROCK_CUTTER.getToolStack(NULL, NULL), of('D', PropertyIngredient.builder("primary").mats(Sapphire, Diamond, Ruby, NetherizedDiamond).types(DUST).build(), 'S', FILE.getTag(), 'P', PropertyIngredient.builder("secondary").itemTags(POWER_UNIT_ROCK_CUTTER).build()), "DS", "DP", "D ");
+                "has_screwdriver", in, ROCK_CUTTER.getToolStack(NULL, NULL), of('D', PropertyIngredient.builder("primary").types(DUST).tags(Materials.ROCK_CUTTER).build(), 'S', FILE.getTag(), 'P', PropertyIngredient.builder("secondary").itemTags(POWER_UNIT_ROCK_CUTTER).build()), "DS", "DP", "D ");
 
 
         IAntimatterTool drill_lv = AntimatterAPI.get(IAntimatterTool.class, "drill_lv");

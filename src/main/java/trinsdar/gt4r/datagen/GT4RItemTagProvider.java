@@ -17,6 +17,8 @@ import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.CustomTags;
 
 import static muramasa.antimatter.Data.*;
+import static muramasa.antimatter.util.Utils.getConventionalMaterialType;
+import static muramasa.antimatter.util.Utils.getConventionalStoneType;
 import static trinsdar.gt4r.data.CustomTags.*;
 import static trinsdar.gt4r.data.GT4RData.*;
 import static trinsdar.gt4r.data.Materials.*;
@@ -87,9 +89,11 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.getOrCreateBuilder(VINES).add(Items.VINE, Items.TWISTING_VINES, Items.WEEPING_VINES);
         AntimatterAPI.all(BlockOre.class, o -> {
             if (o.getStoneType() != SAND && o.getStoneType() != SAND_RED && o.getStoneType() != GRAVEL){
-                this.getOrCreateBuilder(TagUtils.getForgeItemTag("sandless_ores/" +  o.getMaterial().getId())).add(o.asItem());
+                this.getOrCreateBuilder(TagUtils.getForgeItemTag("sandless_" + getConventionalMaterialType(o.getOreType()) + "/" +  o.getMaterial().getId())).addTag(TagUtils.getForgeItemTag(String.join("", getConventionalStoneType(o.getStoneType()), "_", getConventionalMaterialType(o.getOreType()), "/", o.getMaterial().getId())));
             }
         });
+        this.getOrCreateBuilder(TagUtils.getForgeItemTag("sandless_ores/"+ NetheriteScrap.getId())).add(Items.ANCIENT_DEBRIS);
+
     }
 
 }

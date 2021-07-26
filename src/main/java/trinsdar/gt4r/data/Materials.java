@@ -40,6 +40,7 @@ public class Materials {
     public static MaterialTag ELEC60 = new MaterialTag("elec60");
     public static MaterialTag ELEC90 = new MaterialTag("elec90");
     public static MaterialTag ELEC120 = new MaterialTag("elec120");
+    public static MaterialTag ROCK_CUTTER = new MaterialTag("rock_cutter");
 
     public static MaterialTypeItem<?> HULL = new MaterialTypeItem<>("hull", 2, true, muramasa.antimatter.Ref.U * 8);
     public static MaterialTypeItem<?> TURBINE_BLADE = new MaterialTypeItem<>("turbine_blade", 1, true, muramasa.antimatter.Ref.U * 3);//.unSplitName();
@@ -347,6 +348,7 @@ public class Materials {
         ELEC60.add(Cassiterite, SodiumSulfide, Sapphire, SiliconDioxide, Methane, Pyrite, Sphalerite, NitrogenDioxide, Phosphate, Magnesite);
         ELEC90.add(Calcite, EnderPearl, SulfuricAcid, RedGranite, Saltpeter, Chromite, SodiumPersulfate, Glyceryl, Ruby, Olivine, Galena, Tungstate/* CalciumCarbonate*/);
         ELEC120.add(Emerald, Grossular, Clay, StainlessSteel, Sodalite, Bauxite, Obsidian, Pyrope, Uvarovite, Almandine, Andradite, Lazurite, Spessartine, PotassiumFeldspar, Biotite);
+        ROCK_CUTTER.add(Diamond, Ruby, Sapphire, NetherizedDiamond, Amethyst);
 
         CABINET.add(Iron, Aluminium, WroughtIron, Brass, Cupronickel, Electrum, Gold, Silver, Magnalium, Platinum, Osmium);
         WORKBENCH.add(Bronze, Iron, Aluminium);
