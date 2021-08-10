@@ -8,6 +8,9 @@ import muramasa.antimatter.gui.MenuHandlerMachine;
 import muramasa.antimatter.gui.container.ContainerBasicMachine;
 import muramasa.antimatter.gui.container.ContainerMachine;
 import muramasa.antimatter.gui.container.ContainerMultiMachine;
+import muramasa.antimatter.gui.slot.ISlotProvider;
+import muramasa.antimatter.gui.widget.IOWidget;
+import muramasa.antimatter.gui.widget.ProgressWidget;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.tile.multi.TileEntityBasicMultiMachine;
@@ -44,17 +47,17 @@ import static trinsdar.gt4r.gui.ButtonOverlays.TORCH_ON;
 
 public class Guis {
 
-    public static GuiData MULTI_DISPLAY = new GuiData("gt4r", "multi_display").add(IT_IN, 17, 16).add(IT_IN, 35, 16).add(IT_IN, 53, 16).add(IT_IN, 17, 34).add(IT_IN, 35, 34).add(IT_IN, 53, 34).add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 143, 16).add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(IT_OUT, 143, 34).add(FL_IN, 17, 63).add(FL_IN, 35, 63).add(FL_IN, 53, 63).add(FL_OUT, 107, 63).add(FL_OUT, 125, 63).add(FL_OUT, 143, 63);
-    public static GuiData MULTI_DISPLAY_MORE_FLUID = new GuiData("gt4r", "multi_display_more_fluid").add(IT_IN, 17, 16).add(IT_IN, 35, 16).add(IT_IN, 53, 16).add(IT_IN, 17, 34).add(IT_IN, 35, 34).add(IT_IN, 53, 34).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25).add(IT_OUT, 143, 25).add(FL_IN, 17, 63).add(FL_IN, 35, 63).add(FL_IN, 53, 63).add(FL_OUT, 107, 63).add(FL_OUT, 125, 63).add(FL_OUT, 143, 63).add(FL_OUT, 107, 45).add(FL_OUT, 125, 45).add(FL_OUT, 143, 45);
-    public static GuiData MULTI_DISPLAY_COMPACT = new GuiData("gt4r", "multi_display").add(MULTI_DISPLAY).setPadding(0, 0, 0, 0);
-    public static GuiData BASIC_TANK = new GuiData("gt4r", "basic_tank").add(CELL_IN, 80, 17).add(CELL_OUT, 80, 53).add(FL_IN, 60, 43);
+    public static GuiData<?> MULTI_DISPLAY = new GuiData<>("gt4r", "multi_display").setSlots(ISlotProvider.DEFAULT().add(IT_IN, 17, 16).add(IT_IN, 35, 16).add(IT_IN, 53, 16).add(IT_IN, 17, 34).add(IT_IN, 35, 34).add(IT_IN, 53, 34).add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 143, 16).add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(IT_OUT, 143, 34).add(FL_IN, 17, 63).add(FL_IN, 35, 63).add(FL_IN, 53, 63).add(FL_OUT, 107, 63).add(FL_OUT, 125, 63).add(FL_OUT, 143, 63));
+    public static GuiData<?> MULTI_DISPLAY_MORE_FLUID = new GuiData<>("gt4r", "multi_display_more_fluid").setSlots(ISlotProvider.DEFAULT().add(IT_IN, 17, 16).add(IT_IN, 35, 16).add(IT_IN, 53, 16).add(IT_IN, 17, 34).add(IT_IN, 35, 34).add(IT_IN, 53, 34).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25).add(IT_OUT, 143, 25).add(FL_IN, 17, 63).add(FL_IN, 35, 63).add(FL_IN, 53, 63).add(FL_OUT, 107, 63).add(FL_OUT, 125, 63).add(FL_OUT, 143, 63).add(FL_OUT, 107, 45).add(FL_OUT, 125, 45).add(FL_OUT, 143, 45));
+    public static GuiData<?> MULTI_DISPLAY_COMPACT = new GuiData<>("gt4r", "multi_display").setSlots(ISlotProvider.DEFAULT().add(MULTI_DISPLAY.getSlots())).setPadding(0, 0, 0, 0);
+    public static GuiData<?> BASIC_TANK = new GuiData<>("gt4r", "basic_tank").setSlots(ISlotProvider.DEFAULT().add(CELL_IN, 80, 17).add(CELL_OUT, 80, 53).add(FL_IN, 60, 43));
 
-    public static GuiData ORE_BYPRODUCTS = new GuiData("gt4r", "ore_byproducts") {
+    public static GuiData<?> ORE_BYPRODUCTS = new GuiData<>("gt4r", "ore_byproducts") {
         @Override
         public ResourceLocation getTexture(Tier tier,String type) {
             return new ResourceLocation(loc.getNamespace(), "textures/gui/" + loc.getPath() + ".png");
         }
-    }.setPadding(0, 0, 0, 0).add(IT_IN, 17, 16).add(IT_IN, 35, 16).add(IT_IN, 53, 16).add(IT_IN, 17, 34).add(IT_IN, 35, 34).add(IT_IN, 53, 34).add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 142, 16).add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(IT_OUT, 143, 34);
+    }.setPadding(0, 0, 0, 0).setSlots(ISlotProvider.DEFAULT().add(IT_IN, 17, 16).add(IT_IN, 35, 16).add(IT_IN, 53, 16).add(IT_IN, 17, 34).add(IT_IN, 35, 34).add(IT_IN, 53, 34).add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 142, 16).add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(IT_OUT, 143, 34));
 
     public static GuiData WORKBENCH = new GuiData("gt4r","workbench");
     public static GuiData CHARGING_WORKBENCH = new GuiData("gt4r","charging_workbench");
@@ -189,111 +192,112 @@ public class Guis {
 
         initMaterialMachine(side);
 
-        ALLOY_SMELTER.getGui().add(IT_IN, 35, 25).add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(ENERGY,80, 63);
-        ASSEMBLER.getGui().add(IT_IN, 17, 16).add(IT_IN, 35, 16).add(IT_IN, 53, 16).add(IT_IN, 17, 34).add(IT_IN, 35, 34).add(IT_IN, 53, 34).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25)
+        ALLOY_SMELTER.add(IT_IN, 35, 25).add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(ENERGY,80, 63);
+        ASSEMBLER.add(IT_IN, 17, 16).add(IT_IN, 35, 16).add(IT_IN, 53, 16).add(IT_IN, 17, 34).add(IT_IN, 35, 34).add(IT_IN, 53, 34).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25)
                 .add(ENERGY,80, 63);
-        BENDER.getGui().add(ALLOY_SMELTER);
-        CANNER.getGui().add(IT_IN, 35, 25).add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(ENERGY,80, 63);
-        COMPRESSOR.getGui().add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(ENERGY,80, 63);
-        CUTTER.getGui().add(IT_IN, 53, 25).add(FL_IN, 53, 63).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25).add(ENERGY,80, 63);
-        FORGE_HAMMER.getGui().add(COMPRESSOR).setDir(BarDir.BOTTOM).setBarFill(false);
-        FURNACE.getGui().add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(ENERGY,80, 63);
-        EXTRACTOR.getGui().add(COMPRESSOR);
-        EXTRUDER.getGui().add(ALLOY_SMELTER);
-        LATHE.getGui().add(CUTTER);
-        MACERATOR.getGui().add(MV, COMPRESSOR).add(MV, IT_OUT, 125, 25).add(MV, IT_OUT, 143, 25);
-        MACERATOR.getGui().add(LV, COMPRESSOR);
-        RECYCLER.getGui().add(COMPRESSOR);
-        WIRE_MILL.getGui().add(COMPRESSOR);
-        CENTRIFUGE.getGui().add(IT_IN, 35, 25).add(IT_IN, 53, 25).add(FL_IN, 8, 63).add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 142, 16).add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(IT_OUT, 143, 34).add(ENERGY,26, 63).add(FL_OUT, 44, 63).add(FL_OUT, 62, 63).add(FL_OUT, 80, 63).add(FL_OUT, 98, 63).add(FL_OUT, 116, 63).add(FL_OUT, 134, 63).setIO(9, 46, 14, 14).setItem(44, 63, 16, 16).setFluid(62, 63, 16, 16);
-        ELECTROLYZER.getGui().add(CENTRIFUGE).setIO(9, 46, 14, 14).setItem(35, 45, 16, 16).setFluid(53, 45, 16, 16);
-        THERMAL_CENTRIFUGE.getGui().add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25).add(IT_OUT, 143, 25).add(ENERGY,80, 63);
-        ORE_WASHER.getGui().add(THERMAL_CENTRIFUGE).add(FL_IN, 53, 63);
-        CHEMICAL_REACTOR.getGui().add(IT_IN, 17, 25).add(IT_IN, 35, 25).add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25).add(FL_IN, 53, 63).add(FL_IN, 35, 63).add(FL_OUT, 107, 63).add(FL_OUT, 125, 63).add(ENERGY, 80, 63);
-        FLUID_CANNER.getGui().add(COMPRESSOR).add(FL_IN, 53, 63).add(FL_OUT, 107, 63);
-        FLUID_EXTRACTOR.getGui().add(COMPRESSOR).add(FL_OUT, 107, 63);
-        FLUID_SOLIDIFIER.getGui().add(COMPRESSOR).add(FL_IN, 53, 63);
-        FERMENTER.getGui().add(FLUID_CANNER);
-        DISTILLERY.getGui().add(FLUID_CANNER).add(FL_OUT, 125, 63);
-        DISASSEMBLER.getGui().add(IT_IN, 53, 25)
+        BENDER.add(ALLOY_SMELTER);
+        CANNER.add(IT_IN, 35, 25).add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(ENERGY,80, 63);
+        COMPRESSOR.add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(ENERGY,80, 63);
+        CUTTER.add(IT_IN, 53, 25).add(FL_IN, 53, 63).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25).add(ENERGY,80, 63);
+        FORGE_HAMMER.add(COMPRESSOR).getGui().removeWidget(0, null).widget(ProgressWidget.build(BarDir.BOTTOM, false));
+        FURNACE.add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(ENERGY,80, 63);
+        EXTRACTOR.add(COMPRESSOR);
+        EXTRUDER.add(ALLOY_SMELTER);
+        LATHE.add(CUTTER);
+        MACERATOR.add(MV, COMPRESSOR).add(MV, IT_OUT, 125, 25).add(MV, IT_OUT, 143, 25);
+        MACERATOR.add(LV, COMPRESSOR);
+        RECYCLER.add(COMPRESSOR);
+        WIRE_MILL.add(COMPRESSOR);
+        CENTRIFUGE.add(IT_IN, 35, 25).add(IT_IN, 53, 25).add(FL_IN, 8, 63).add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 142, 16).add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(IT_OUT, 143, 34).add(ENERGY,26, 63).add(FL_OUT, 44, 63).add(FL_OUT, 62, 63).add(FL_OUT, 80, 63).add(FL_OUT, 98, 63).add(FL_OUT, 116, 63).add(FL_OUT, 134, 63).getGui().removeWidget(2, null).widget(IOWidget.build(9, 45, 16, 16));
+        ELECTROLYZER.add(CENTRIFUGE).getGui().removeWidget(2, null).widget(IOWidget.build(9, 45, 16, 16));
+
+        THERMAL_CENTRIFUGE.add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25).add(IT_OUT, 143, 25).add(ENERGY,80, 63);
+        ORE_WASHER.add(THERMAL_CENTRIFUGE).add(FL_IN, 53, 63);
+        CHEMICAL_REACTOR.add(IT_IN, 17, 25).add(IT_IN, 35, 25).add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25).add(FL_IN, 53, 63).add(FL_IN, 35, 63).add(FL_OUT, 107, 63).add(FL_OUT, 125, 63).add(ENERGY, 80, 63);
+        FLUID_CANNER.add(COMPRESSOR).add(FL_IN, 53, 63).add(FL_OUT, 107, 63);
+        FLUID_EXTRACTOR.add(COMPRESSOR).add(FL_OUT, 107, 63);
+        FLUID_SOLIDIFIER.add(COMPRESSOR).add(FL_IN, 53, 63);
+        FERMENTER.add(FLUID_CANNER);
+        DISTILLERY.add(FLUID_CANNER).add(FL_OUT, 125, 63);
+        DISASSEMBLER.add(IT_IN, 53, 25)
                 .add(IT_OUT, 107, 7).add(IT_OUT, 107+18, 7).add(IT_OUT, 107+18*2, 7)
                 .add(IT_OUT, 107, 25).add(IT_OUT, 107+18, 25).add(IT_OUT, 107+18*2, 25)
                 .add(IT_OUT, 107, 43).add(IT_OUT, 107+18, 43).add(IT_OUT, 107+18*2, 43)
                 .add(ENERGY,80, 63);
-        SIFTER.getGui().add(DISASSEMBLER);
-        BATH.getGui().add(IT_IN, 53, 25).add(FL_IN, 53, 63).add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 142, 16).add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(IT_OUT, 143, 34).add(ENERGY, 80, 63);
-        DUSTBIN.getGui()
+        SIFTER.add(DISASSEMBLER);
+        BATH.add(IT_IN, 53, 25).add(FL_IN, 53, 63).add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 142, 16).add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(IT_OUT, 143, 34).add(ENERGY, 80, 63);
+        DUSTBIN
                 .add(IT_IN, 17, 7).add(IT_IN, 17+18, 7).add(IT_IN, 17+18*2, 7)
                 .add(IT_IN, 17, 25).add(IT_IN, 17+18, 25).add(IT_IN, 17+18*2, 25)
                 .add(IT_IN, 17, 43).add(IT_IN, 17+18, 43).add(IT_IN, 17+18*2, 43)
                 .add(IT_OUT, 107, 7).add(IT_OUT, 107+18, 7).add(IT_OUT, 107+18*2, 7)
                 .add(IT_OUT, 107, 25).add(IT_OUT, 107+18, 25).add(IT_OUT, 107+18*2, 25)
-                .add(IT_OUT, 107, 43).add(IT_OUT, 107+18, 43).add(IT_OUT, 107+18*2, 43).setHasIOButton(false);
-        MASS_FABRICATOR.getGui().add(COMPRESSOR);
+                .add(IT_OUT, 107, 43).add(IT_OUT, 107+18, 43).add(IT_OUT, 107+18*2, 43);
+        MASS_FABRICATOR.add(COMPRESSOR);
 
-        COKE_OVEN.getGui().add(IT_IN, 53,25).add(IT_OUT,107,25).add(IT_OUT,125,25).add(IT_OUT,143,25).add(FL_OUT, 107, 63);
-        BLAST_FURNACE.getGui().add(IT_IN, 35, 16).add(IT_IN, 53, 16).add(IT_IN, 35, 34).add(IT_IN, 53, 34).add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(SlotTypes.COIL, 8, 63).setHasIOButton(false);
-        PRIMITIVE_BLAST_FURNACE.getGui().add(IT_IN, 35, 16).add(IT_IN, 35, 34).add(IT_IN, 35, 52).add(IT_IN, 53, 16).add(IT_IN, 53, 34).add(IT_IN, 53, 52).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25).add(IT_OUT, 143, 25).setPadding(0, 0, 0, 0);
-        PYROLYSIS_OVEN.getGui().add(COKE_OVEN).add(SlotTypes.COIL, 8, 63).setHasIOButton(false);
+        COKE_OVEN.add(IT_IN, 53,25).add(IT_OUT,107,25).add(IT_OUT,125,25).add(IT_OUT,143,25).add(FL_OUT, 107, 63);
+        BLAST_FURNACE.add(IT_IN, 35, 16).add(IT_IN, 53, 16).add(IT_IN, 35, 34).add(IT_IN, 53, 34).add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(SlotTypes.COIL, 8, 63);
+        PRIMITIVE_BLAST_FURNACE.add(IT_IN, 35, 16).add(IT_IN, 35, 34).add(IT_IN, 35, 52).add(IT_IN, 53, 16).add(IT_IN, 53, 34).add(IT_IN, 53, 52).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25).add(IT_OUT, 143, 25).getGui().setPadding(0, 0, 0, 0);
+        PYROLYSIS_OVEN.add(COKE_OVEN).add(SlotTypes.COIL, 8, 63);
         FUSION_REACTOR.getGui().setEnablePlayerSlots(false);
-        DISTILLATION_TOWER.getGui().add(FL_IN, 62, 41).add(FL_OUT, 98, 59).add(FL_OUT, 98, 41).add(FL_OUT, 98, 23).add(FL_OUT, 98, 5).add(FL_OUT, 116, 23).add(FL_OUT, 116, 5).add(IT_OUT, 116, 41).add(IT_OUT, 116, 59).add(ENERGY, 62, 59).setDir(BarDir.TOP).setProgress(80, 4, 16, 72).setState(66, 26, 8, 8).setStateLocation(176, 108).setHasIOButton(false);
-        VACUUM_FREEZER.getGui().add(COMPRESSOR).setHasIOButton(false);
-        IMPLOSION_COMPRESSOR.getGui().add(ALLOY_SMELTER).add(IT_OUT, 125, 25).setHasIOButton(false);
-        INDUSTRIAL_SAWMILL.getGui().add(ORE_WASHER).setHasIOButton(false);
-        INDUSTRIAL_GRINDER.getGui().add(BATH).setHasIOButton(false);
-        LARGE_GAS_TURBINE.getGui().add(ROTOR, 152, 5);
-        LARGE_STEAM_TURBINE.getGui().add(LARGE_GAS_TURBINE);
-        THERMAL_BOILER.getGui().add(FILTER, 152, 5);
-        PUMP.getGui().add(IT_IN, 53, 25).add(FL_OUT, 107, 25).add(ENERGY, 80, 63);
+        DISTILLATION_TOWER.add(FL_IN, 62, 41).add(FL_OUT, 98, 59).add(FL_OUT, 98, 41).add(FL_OUT, 98, 23).add(FL_OUT, 98, 5).add(FL_OUT, 116, 23).add(FL_OUT, 116, 5).add(IT_OUT, 116, 41).add(IT_OUT, 116, 59).add(ENERGY, 62, 59).getGui().removeWidget(0, null).setDir(BarDir.TOP).setProgress(80, 4, 16, 72).setState(66, 26, 8, 8).setStateLocation(176, 108).setHasIOButton(false);
+        VACUUM_FREEZER.add(COMPRESSOR);
+        IMPLOSION_COMPRESSOR.add(ALLOY_SMELTER).add(IT_OUT, 125, 25);
+        INDUSTRIAL_SAWMILL.add(ORE_WASHER);
+        INDUSTRIAL_GRINDER.add(BATH);
+        LARGE_GAS_TURBINE.add(ROTOR, 152, 5);
+        LARGE_STEAM_TURBINE.add(LARGE_GAS_TURBINE);
+        THERMAL_BOILER.add(FILTER, 152, 5);
+        PUMP.add(IT_IN, 53, 25).add(FL_OUT, 107, 25).add(ENERGY, 80, 63);
 
 
 
-        BATTERY_BUFFER_ONE.getGui().add(ENERGY,80,40).setHasIOButton(false);
-        BATTERY_BUFFER_FOUR.getGui().add(ENERGY,71,27).add(ENERGY,89,27).add(ENERGY,71,45).add(ENERGY,89,45).setHasIOButton(false);
-        BATTERY_BUFFER_EIGHT.getGui()
+        BATTERY_BUFFER_ONE.add(ENERGY,80,40).getGui().removeWidget(2, null);
+        BATTERY_BUFFER_FOUR.add(ENERGY,71,27).add(ENERGY,89,27).add(ENERGY,71,45).add(ENERGY,89,45).getGui().removeWidget(2, null);
+        BATTERY_BUFFER_EIGHT
                 .add(ENERGY,53,27).add(ENERGY,71,27).add(ENERGY,89,27).add(ENERGY,107,27)
-                .add(ENERGY,53,45).add(ENERGY,71,45).add(ENERGY,89,45).add(ENERGY,107,45).setHasIOButton(false);
+                .add(ENERGY,53,45).add(ENERGY,71,45).add(ENERGY,89,45).add(ENERGY,107,45).getGui().removeWidget(2, null);
 
-        COAL_BOILER.getGui().add(BRONZE, CELL_IN, 44, 26).add(BRONZE, CELL_OUT, 44, 62).add(BRONZE, IT_OUT, 116, 26).add(BRONZE, IT_IN, 116, 62);
-        COAL_BOILER.getGui().add(STEEL, CELL_IN, 44, 26).add(STEEL, CELL_OUT, 44, 62).add(STEEL, IT_OUT, 116, 26).add(STEEL, IT_IN, 116, 62);
+        COAL_BOILER.add(BRONZE, CELL_IN, 44, 26).add(BRONZE, CELL_OUT, 44, 62).add(BRONZE, IT_OUT, 116, 26).add(BRONZE, IT_IN, 116, 62);
+        COAL_BOILER.add(STEEL, CELL_IN, 44, 26).add(STEEL, CELL_OUT, 44, 62).add(STEEL, IT_OUT, 116, 26).add(STEEL, IT_IN, 116, 62);
 
-        STEAM_ALLOY_SMELTER.getGui().add(BRONZE, ALLOY_SMELTER).add(BRONZE, FL_IN, 53, 63);
-        STEAM_ALLOY_SMELTER.getGui().add(STEEL, ALLOY_SMELTER).add(STEEL, FL_IN, 53, 63);
-        STEAM_COMPRESSOR.getGui().add(BRONZE, COMPRESSOR).add(BRONZE, FL_IN, 53, 63);
-        STEAM_COMPRESSOR.getGui().add(STEEL, COMPRESSOR).add(STEEL, FL_IN, 53, 63);
-        STEAM_FURNACE.getGui().add(BRONZE, FURNACE).add(BRONZE, FL_IN, 53, 63);
-        STEAM_FURNACE.getGui().add(STEEL, FURNACE).add(STEEL, FL_IN, 53, 63);
-        STEAM_EXTRACTOR.getGui().add(BRONZE, EXTRACTOR).add(BRONZE, FL_IN, 53, 63);
-        STEAM_EXTRACTOR.getGui().add(STEEL, EXTRACTOR).add(STEEL, FL_IN, 53, 63);
-        STEAM_MACERATOR.getGui().add(BRONZE, MACERATOR, LV).add(BRONZE, FL_IN, 53, 63);
-        STEAM_MACERATOR.getGui().add(STEEL, MACERATOR, LV).add(STEEL, FL_IN, 53, 63);
-        STEAM_FORGE_HAMMER.getGui().add(BRONZE, FORGE_HAMMER).add(BRONZE, FL_IN, 53, 63).setDir(BarDir.BOTTOM).setBarFill(false);
+        STEAM_ALLOY_SMELTER.add(BRONZE, ALLOY_SMELTER).add(BRONZE, FL_IN, 53, 63);
+        STEAM_ALLOY_SMELTER.add(STEEL, ALLOY_SMELTER).add(STEEL, FL_IN, 53, 63);
+        STEAM_COMPRESSOR.add(BRONZE, COMPRESSOR).add(BRONZE, FL_IN, 53, 63);
+        STEAM_COMPRESSOR.add(STEEL, COMPRESSOR).add(STEEL, FL_IN, 53, 63);
+        STEAM_FURNACE.add(BRONZE, FURNACE).add(BRONZE, FL_IN, 53, 63);
+        STEAM_FURNACE.add(STEEL, FURNACE).add(STEEL, FL_IN, 53, 63);
+        STEAM_EXTRACTOR.add(BRONZE, EXTRACTOR).add(BRONZE, FL_IN, 53, 63);
+        STEAM_EXTRACTOR.add(STEEL, EXTRACTOR).add(STEEL, FL_IN, 53, 63);
+        STEAM_MACERATOR.add(BRONZE, MACERATOR, LV).add(BRONZE, FL_IN, 53, 63);
+        STEAM_MACERATOR.add(STEEL, MACERATOR, LV).add(STEEL, FL_IN, 53, 63);
+        STEAM_FORGE_HAMMER.add(BRONZE, FORGE_HAMMER).add(BRONZE, FL_IN, 53, 63).getGui().removeWidget(0, null).widget(ProgressWidget.build(BarDir.BOTTOM, false));
 
-        STEAM_TURBINE.getGui().add(BASIC_TANK).setOverrideLocation(BASIC_TANK.getTexture(LV, "machine"));
-        GAS_TURBINE.getGui().add(BASIC_TANK).setOverrideLocation(BASIC_TANK.getTexture(LV, "machine"));
-        DIESEL_GENERATOR.getGui().add(BASIC_TANK).setOverrideLocation(BASIC_TANK.getTexture(LV, "machine"));
-        SEMIFLUID_GENERATOR.getGui().add(BASIC_TANK).setOverrideLocation(BASIC_TANK.getTexture(LV, "machine"));
-        HEAT_EXCHANGER.getGui().add(FL_IN, 35, 63).add(FL_IN, 53, 63).add(FL_OUT, 107, 63).add(FL_OUT, 125, 63);
+        STEAM_TURBINE.add(BASIC_TANK.getSlots()).getGui().setOverrideLocation(BASIC_TANK.getTexture(LV, "machine"));
+        GAS_TURBINE.add(BASIC_TANK.getSlots()).getGui().setOverrideLocation(BASIC_TANK.getTexture(LV, "machine"));
+        DIESEL_GENERATOR.add(BASIC_TANK.getSlots()).getGui().setOverrideLocation(BASIC_TANK.getTexture(LV, "machine"));
+        SEMIFLUID_GENERATOR.add(BASIC_TANK.getSlots()).getGui().setOverrideLocation(BASIC_TANK.getTexture(LV, "machine"));
+        HEAT_EXCHANGER.add(FL_IN, 35, 63).add(FL_IN, 53, 63).add(FL_OUT, 107, 63).add(FL_OUT, 125, 63);
 
 
-        INFINITE_STEAM.getGui().add(CELL_IN, 80, 17).add(CELL_OUT, 80, 53).add(FL_OUT, 60, 43);
+        INFINITE_STEAM.add(CELL_IN, 80, 17).add(CELL_OUT, 80, 53).add(FL_OUT, 60, 43);
 
-        QUANTUM_TANK.getGui().add(BASIC_TANK).setOverrideLocation(BASIC_TANK.getTexture(LV, "machine"));
-        QUANTUM_CHEST.getGui().add(IT_IN, 80, 17).add(DISPLAY, 60, 43).add(IT_OUT, 80, 53);
+        QUANTUM_TANK.add(BASIC_TANK.getSlots()).getGui().setOverrideLocation(BASIC_TANK.getTexture(LV, "machine"));
+        QUANTUM_CHEST.add(IT_IN, 80, 17).add(DISPLAY, 60, 43).add(IT_OUT, 80, 53);
 
-        HATCH_MUFFLER.getGui().add(IT_IN, 79, 34);
+        HATCH_MUFFLER.add(IT_IN, 79, 34);
 
-        HATCH_ITEM_I.getGui().add(LV, IT_IN, 70, 25).add(LV, IT_IN, 88, 25).add(LV, IT_IN, 70, 43).add(LV, IT_IN, 88, 43);
+        HATCH_ITEM_I.add(LV, IT_IN, 70, 25).add(LV, IT_IN, 88, 25).add(LV, IT_IN, 70, 43).add(LV, IT_IN, 88, 43);
 
-        HATCH_ITEM_O.getGui().add(LV, IT_OUT, 70, 25).add(LV, IT_OUT, 88, 25).add(LV, IT_OUT, 70, 43).add(LV, IT_OUT, 88, 43);
+        HATCH_ITEM_O.add(LV, IT_OUT, 70, 25).add(LV, IT_OUT, 88, 25).add(LV, IT_OUT, 70, 43).add(LV, IT_OUT, 88, 43);
 
-        HATCH_FLUID_I.getGui().add(FL_IN, 79, 34).add(CELL_IN, 9, 22).add(CELL_OUT, 9, 58);
+        HATCH_FLUID_I.add(FL_IN, 79, 34).add(CELL_IN, 9, 22).add(CELL_OUT, 9, 58);
 
-        HATCH_FLUID_O.getGui().add(FL_OUT, 79, 34).add(CELL_IN, 9, 22).add(CELL_OUT, 9, 58);
-        FUSION_FLUID_INJECTOR.getGui().add(HATCH_FLUID_I);
-        FUSION_FLUID_EXTRACTOR.getGui().add(HATCH_FLUID_O);
-        FUSION_ITEM_EXTRACTOR.getGui().add(IT_OUT, 79, 34);
-        FUSION_ITEM_INJECTOR.getGui().add(IT_IN, 79, 34);
+        HATCH_FLUID_O.add(FL_OUT, 79, 34).add(CELL_IN, 9, 22).add(CELL_OUT, 9, 58);
+        FUSION_FLUID_INJECTOR.add(HATCH_FLUID_I);
+        FUSION_FLUID_EXTRACTOR.add(HATCH_FLUID_O);
+        FUSION_ITEM_EXTRACTOR.add(IT_OUT, 79, 34);
+        FUSION_ITEM_INJECTOR.add(IT_IN, 79, 34);
 
         COVER_CRAFTING.setGui(new GuiData(COVER_CRAFTING, COVER_CRAFTING_HANDLER));
 
