@@ -5,23 +5,30 @@ import muramasa.antimatter.gui.BarDir;
 import muramasa.antimatter.gui.ButtonBody;
 import muramasa.antimatter.gui.GuiData;
 import muramasa.antimatter.gui.MenuHandlerMachine;
+import muramasa.antimatter.gui.container.AntimatterContainer;
 import muramasa.antimatter.gui.container.ContainerBasicMachine;
 import muramasa.antimatter.gui.container.ContainerMachine;
 import muramasa.antimatter.gui.container.ContainerMultiMachine;
+import muramasa.antimatter.gui.event.GuiEvent;
 import muramasa.antimatter.gui.slot.ISlotProvider;
+import muramasa.antimatter.gui.widget.ButtonWidget;
 import muramasa.antimatter.gui.widget.IOWidget;
+import muramasa.antimatter.gui.widget.MachineStateWidget;
 import muramasa.antimatter.gui.widget.ProgressWidget;
+import muramasa.antimatter.gui.widget.WidgetSupplier;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.tile.multi.TileEntityBasicMultiMachine;
 import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.client.ScreenFactories;
 import trinsdar.gt4r.gui.ContainerCabinet;
 import trinsdar.gt4r.gui.ContainerWorkbench;
+import trinsdar.gt4r.gui.MachineStateWidgetMoved;
 import trinsdar.gt4r.gui.MenuHandlerCrafting;
 import trinsdar.gt4r.gui.MenuHandlerCraftingItem;
 import trinsdar.gt4r.tile.multi.TileEntityDistillationTower;
@@ -52,17 +59,19 @@ public class Guis {
     public static GuiData<?> MULTI_DISPLAY_COMPACT = new GuiData<>("gt4r", "multi_display").setSlots(ISlotProvider.DEFAULT().add(MULTI_DISPLAY.getSlots())).setPadding(0, 0, 0, 0);
     public static GuiData<?> BASIC_TANK = new GuiData<>("gt4r", "basic_tank").setSlots(ISlotProvider.DEFAULT().add(CELL_IN, 80, 17).add(CELL_OUT, 80, 53).add(FL_IN, 60, 43));
 
-    public static GuiData<?> ORE_BYPRODUCTS = new GuiData<>("gt4r", "ore_byproducts") {
+    public static GuiData<?> ORE_BYPRODUCTS = new GuiData<Container>("gt4r", "ore_byproducts") {
         @Override
         public ResourceLocation getTexture(Tier tier,String type) {
             return new ResourceLocation(loc.getNamespace(), "textures/gui/" + loc.getPath() + ".png");
         }
     }.setPadding(0, 0, 0, 0).setSlots(ISlotProvider.DEFAULT().add(IT_IN, 17, 16).add(IT_IN, 35, 16).add(IT_IN, 53, 16).add(IT_IN, 17, 34).add(IT_IN, 35, 34).add(IT_IN, 53, 34).add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 142, 16).add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(IT_OUT, 143, 34));
 
-    public static GuiData WORKBENCH = new GuiData("gt4r","workbench");
-    public static GuiData CHARGING_WORKBENCH = new GuiData("gt4r","charging_workbench");
-    public static GuiData LOCKER = new GuiData("gt4r","locker").add(STORAGE, 80, 8).add(STORAGE, 80, 8 + (18)).add(STORAGE, 80, 8 + (2 * 18)).add(STORAGE, 80, 8 + (3 * 18));
-    public static GuiData CHARGING_LOCKER = new GuiData("gt4r","charging_locker").add(ENERGY, 80, 8).add(ENERGY, 80, 8 + (18)).add(ENERGY, 80, 8 + (2 * 18)).add(ENERGY, 80, 8 + (3 * 18));
+    public static GuiData<?> WORKBENCH = new GuiData<>("gt4r","workbench").setSlots(ISlotProvider.DEFAULT());
+    public static GuiData<?> CHARGING_WORKBENCH = new GuiData<>("gt4r","charging_workbench").setSlots(ISlotProvider.DEFAULT());
+    public static GuiData<?> LOCKER = new GuiData<>("gt4r","locker").setSlots(ISlotProvider.DEFAULT().add(STORAGE, 80, 8).add(STORAGE, 80, 8 + (18)).add(STORAGE, 80, 8 + (2 * 18)).add(STORAGE, 80, 8 + (3 * 18)));
+    public static GuiData<?> CHARGING_LOCKER = new GuiData<>("gt4r","charging_locker").setSlots(ISlotProvider.DEFAULT().add(ENERGY, 80, 8).add(ENERGY, 80, 8 + (18)).add(ENERGY, 80, 8 + (2 * 18)).add(ENERGY, 80, 8 + (3 * 18)));
+
+    static ResourceLocation buttonLocation = new ResourceLocation(Ref.ID, "textures/gui/button/gui_buttons.png");
 
     public static MenuHandlerMachine<TileEntityCoalBoiler,? extends ContainerMachine> COAL_BOILER_MENU_HANDLER = new MenuHandlerMachine(Ref.ID, "container_coal_boiler") {
         @Override
@@ -240,7 +249,7 @@ public class Guis {
         PRIMITIVE_BLAST_FURNACE.add(IT_IN, 35, 16).add(IT_IN, 35, 34).add(IT_IN, 35, 52).add(IT_IN, 53, 16).add(IT_IN, 53, 34).add(IT_IN, 53, 52).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25).add(IT_OUT, 143, 25).getGui().setPadding(0, 0, 0, 0);
         PYROLYSIS_OVEN.add(COKE_OVEN).add(SlotTypes.COIL, 8, 63);
         FUSION_REACTOR.getGui().setEnablePlayerSlots(false);
-        DISTILLATION_TOWER.add(FL_IN, 62, 41).add(FL_OUT, 98, 59).add(FL_OUT, 98, 41).add(FL_OUT, 98, 23).add(FL_OUT, 98, 5).add(FL_OUT, 116, 23).add(FL_OUT, 116, 5).add(IT_OUT, 116, 41).add(IT_OUT, 116, 59).add(ENERGY, 62, 59).getGui().removeWidget(0, null).setDir(BarDir.TOP).setProgress(80, 4, 16, 72).setState(66, 26, 8, 8).setStateLocation(176, 108).setHasIOButton(false);
+        DISTILLATION_TOWER.add(FL_IN, 62, 41).add(FL_OUT, 98, 59).add(FL_OUT, 98, 41).add(FL_OUT, 98, 23).add(FL_OUT, 98, 5).add(FL_OUT, 116, 23).add(FL_OUT, 116, 5).add(IT_OUT, 116, 41).add(IT_OUT, 116, 59).add(ENERGY, 62, 59).getGui().removeWidget(1, null).removeWidget(0, null).widget(ProgressWidget.build(BarDir.TOP, true).setSize(80, 4, 16, 72).cast()).widget(MachineStateWidgetMoved.build(176, 108).setPos(66, 26).setWH(8, 8).cast());
         VACUUM_FREEZER.add(COMPRESSOR);
         IMPLOSION_COMPRESSOR.add(ALLOY_SMELTER).add(IT_OUT, 125, 25);
         INDUSTRIAL_SAWMILL.add(ORE_WASHER);
@@ -302,87 +311,90 @@ public class Guis {
         COVER_CRAFTING.setGui(new GuiData(COVER_CRAFTING, COVER_CRAFTING_HANDLER));
 
         if (side.isClient()){
-            BRONZE_WORKBENCH.getGui().addButton(136, 28, 16, 16, NO_OVERLAY);
-            BRONZE_WORKBENCH.getGui().addButton(154, 28, 16, 16, NO_OVERLAY);
-            IRON_WORKBENCH.getGui().addButton(136, 28, 16, 16, NO_OVERLAY);
-            IRON_WORKBENCH.getGui().addButton(154, 28, 16, 16, NO_OVERLAY);
-            ALUMINIUM_WORKBENCH.getGui().addButton(136, 28, 16, 16, NO_OVERLAY);
-            ALUMINIUM_WORKBENCH.getGui().addButton(154, 28, 16, 16, NO_OVERLAY);
-            IRON_CHARGING_WORKBENCH.getGui().addButton(136, 28, 16, 16, NO_OVERLAY);
-            IRON_CHARGING_WORKBENCH.getGui().addButton(154, 28, 16, 16, NO_OVERLAY);
-            ALUMINIUM_CHARGING_WORKBENCH.getGui().addButton(136, 28, 16, 16, NO_OVERLAY);
-            ALUMINIUM_CHARGING_WORKBENCH.getGui().addButton(154, 28, 16, 16, NO_OVERLAY);
+
+            BRONZE_WORKBENCH.getGui().widget(addButton(136, 28, 16, 16, NO_OVERLAY, 0));
+            BRONZE_WORKBENCH.getGui().widget(addButton(154, 28, 16, 16, NO_OVERLAY, 1));
+            IRON_WORKBENCH.getGui().widget(addButton(136, 28, 16, 16, NO_OVERLAY, 0));
+            IRON_WORKBENCH.getGui().widget(addButton(154, 28, 16, 16, NO_OVERLAY, 1));
+            ALUMINIUM_WORKBENCH.getGui().widget(addButton(136, 28, 16, 16, NO_OVERLAY, 0));
+            ALUMINIUM_WORKBENCH.getGui().widget(addButton(154, 28, 16, 16, NO_OVERLAY, 1));
+            IRON_CHARGING_WORKBENCH.getGui().widget(addButton(136, 28, 16, 16, NO_OVERLAY, 0));
+            IRON_CHARGING_WORKBENCH.getGui().widget(addButton(154, 28, 16, 16, NO_OVERLAY, 1));
+            ALUMINIUM_CHARGING_WORKBENCH.getGui().widget(addButton(136, 28, 16, 16, NO_OVERLAY, 0));
+            ALUMINIUM_CHARGING_WORKBENCH.getGui().widget(addButton(154, 28, 16, 16, NO_OVERLAY, 1));
             ButtonBody[][] overlays = new ButtonBody[][]{{IMPORT, IMPORT_CONDITIONAL, IMPORT_INVERT_CONDITIONAL, EXPORT, EXPORT_CONDITIONAL, EXPORT_INVERT_CONDITIONAL}, {IMPORT_EXPORT, IMPORT_EXPORT_CONDITIONAL, IMPORT_EXPORT_INVERT_CONDITIONAL, EXPORT_IMPORT, EXPORT_IMPORT_CONDITIONAL, EXPORT_IMPORT_INVERT_CONDITIONAL}};
 
+            int i = 0;
             for (int x = 0; x < 6; x++){
                 for (int y = 0; y < 2; y++){
-                    COVER_CONVEYOR.getGui().addButton(35 + (x * 18), 25 + (y * 18), 16, 16, overlays[y][x]);
-                    COVER_PUMP.getGui().addButton(35 + (x * 18), 25 + (y * 18), 16, 16, overlays[y][x]);
+                    COVER_CONVEYOR.getGui().widget(addButton(35 + (x * 18), 25 + (y * 18), 16, 16, overlays[y][x], i));
+                    COVER_PUMP.getGui().widget(addButton(35 + (x * 18), 25 + (y * 18), 16, 16, overlays[y][x], i));
+                    i++;
                 }
             }
-            COVER_REDSTONE_MACHINE_CONTROLLER.getGui().addButton(61, 34, 16, 16, TORCH_ON).addButton(79, 34, 16, 16, TORCH_OFF).addButton(97, 34, 16, 16, REDSTONE);
-            FUSION_REACTOR.getGui().addButton(155, 23, 16, 16, NO_OVERLAY).addButton(155, 41, 16, 16, NO_OVERLAY).addButton(155, 59, 16, 16, NO_OVERLAY);
+            COVER_REDSTONE_MACHINE_CONTROLLER.getGui().widget(addButton(61, 34, 16, 16, TORCH_ON, 0)).widget(addButton(79, 34, 16, 16, TORCH_OFF, 1)).widget(addButton(97, 34, 16, 16, REDSTONE, 2));
+            FUSION_REACTOR.getGui().widget(addButton(155, 23, 16, 16, NO_OVERLAY, 0)).widget(addButton(155, 41, 16, 16, NO_OVERLAY, 1)).widget(addButton(155, 59, 16, 16, NO_OVERLAY, 2));
             TRANSFORMER_DIGITAL.getGui()
-                    .addButton(10, 18, 14, 14, APAD_LEFT)
-                    .addButton(25, 18, 14, 14, PAD_LEFT)
-                    .addButton(10, 33, 14, 14, APAD_LEFT)
-                    .addButton(25, 33, 14, 14, PAD_LEFT)
-                    .addButton(10, 48, 14, 14, APAD_LEFT)
-                    .addButton(25, 48, 14, 14, PAD_LEFT)
-                    .addButton(10, 63, 14, 14, APAD_LEFT)
-                    .addButton(25, 63, 14, 14, PAD_LEFT)
-                    .addButton(137, 18, 14, 14, PAD_RIGHT)
-                    .addButton(152, 18, 14, 14, APAD_RIGHT)
-                    .addButton(137, 33, 14, 14, PAD_RIGHT)
-                    .addButton(152, 33, 14, 14, APAD_RIGHT)
-                    .addButton(137, 48, 14, 14, PAD_RIGHT)
-                    .addButton(152, 48, 14, 14, APAD_RIGHT)
-                    .addButton(137, 63, 14, 14, PAD_RIGHT)
-                    .addButton(152, 63, 14, 14, APAD_RIGHT);
+                    .widget(addButton(10, 18, 14, 14, APAD_LEFT, 0))
+                    .widget(addButton(25, 18, 14, 14, PAD_LEFT, 1))
+                    .widget(addButton(10, 33, 14, 14, APAD_LEFT, 2))
+                    .widget(addButton(25, 33, 14, 14, PAD_LEFT, 3))
+                    .widget(addButton(10, 48, 14, 14, APAD_LEFT, 4))
+                    .widget(addButton(25, 48, 14, 14, PAD_LEFT, 5))
+                    .widget(addButton(10, 63, 14, 14, APAD_LEFT, 6))
+                    .widget(addButton(25, 63, 14, 14, PAD_LEFT, 7))
+                    .widget(addButton(137, 18, 14, 14, PAD_RIGHT, 8))
+                    .widget(addButton(152, 18, 14, 14, APAD_RIGHT, 9))
+                    .widget(addButton(137, 33, 14, 14, PAD_RIGHT, 10))
+                    .widget(addButton(152, 33, 14, 14, APAD_RIGHT, 11))
+                    .widget(addButton(137, 48, 14, 14, PAD_RIGHT, 12))
+                    .widget(addButton(152, 48, 14, 14, APAD_RIGHT, 13))
+                    .widget(addButton(137, 63, 14, 14, PAD_RIGHT, 14))
+                    .widget(addButton(152, 63, 14, 14, APAD_RIGHT, 15));
             INFINITE_STORAGE.getGui()
-                    .addButton(10, 18, 14, 14, APAD_LEFT)
-                    .addButton(25, 18, 14, 14, PAD_LEFT)
-                    .addButton(10, 33, 14, 14, APAD_LEFT)
-                    .addButton(25, 33, 14, 14, PAD_LEFT)
-                    .addButton(10, 48, 14, 14, APAD_LEFT)
-                    .addButton(25, 48, 14, 14, PAD_LEFT)
-                    .addButton(10, 63, 14, 14, APAD_LEFT)
-                    .addButton(25, 63, 14, 14, PAD_LEFT)
-                    .addButton(137, 18, 14, 14, PAD_RIGHT)
-                    .addButton(152, 18, 14, 14, APAD_RIGHT)
-                    .addButton(137, 33, 14, 14, PAD_RIGHT)
-                    .addButton(152, 33, 14, 14, APAD_RIGHT)
-                    .addButton(137, 48, 14, 14, PAD_RIGHT)
-                    .addButton(152, 48, 14, 14, APAD_RIGHT)
-                    .addButton(137, 63, 14, 14, PAD_RIGHT)
-                    .addButton(152, 63, 14, 14, APAD_RIGHT);
+                    .widget(addButton(10, 18, 14, 14, APAD_LEFT, 0))
+                    .widget(addButton(25, 18, 14, 14, PAD_LEFT, 1))
+                    .widget(addButton(10, 33, 14, 14, APAD_LEFT, 2))
+                    .widget(addButton(25, 33, 14, 14, PAD_LEFT, 3))
+                    .widget(addButton(10, 48, 14, 14, APAD_LEFT, 4))
+                    .widget(addButton(25, 48, 14, 14, PAD_LEFT, 5))
+                    .widget(addButton(10, 63, 14, 14, APAD_LEFT, 6))
+                    .widget(addButton(25, 63, 14, 14, PAD_LEFT, 7))
+                    .widget(addButton(137, 18, 14, 14, PAD_RIGHT, 8))
+                    .widget(addButton(152, 18, 14, 14, APAD_RIGHT, 9))
+                    .widget(addButton(137, 33, 14, 14, PAD_RIGHT, 10))
+                    .widget(addButton(152, 33, 14, 14, APAD_RIGHT, 11))
+                    .widget(addButton(137, 48, 14, 14, PAD_RIGHT, 12))
+                    .widget(addButton(152, 48, 14, 14, APAD_RIGHT, 13))
+                    .widget(addButton(137, 63, 14, 14, PAD_RIGHT, 14))
+                    .widget(addButton(152, 63, 14, 14, APAD_RIGHT, 15));
         }
     }
 
     private static void initMaterialMachine(Dist side){
         for (int y = 0; y < 4; y++){
             for (int x = 0; x < 4; x++){
-                WORKBENCH.add(STORAGE, 8 + (x * 18), 8 + (y * 18));
-                CHARGING_WORKBENCH.add(STORAGE, 8 + (x * 18), 8 + (y * 18));
+                WORKBENCH.getSlots().add(STORAGE, 8 + (x * 18), 8 + (y * 18));
+                CHARGING_WORKBENCH.getSlots().add(STORAGE, 8 + (x * 18), 8 + (y * 18));
             }
         }
         for (int y = 0; y < 3; y++){
             for (int x = 0; x < 3; x++){
-                WORKBENCH.add(CRAFTING, 82 + (x * 18), 28 + (y * 18));
-                CHARGING_WORKBENCH.add(CRAFTING, 82 + (x * 18), 28 + (y * 18));
+                WORKBENCH.getSlots().add(CRAFTING, 82 + (x * 18), 28 + (y * 18));
+                CHARGING_WORKBENCH.getSlots().add(CRAFTING, 82 + (x * 18), 28 + (y * 18));
             }
         }
         for (int x = 0; x < 5; x++){
-            WORKBENCH.add(TOOLS, 82 + (x * 18), 8);
-            CHARGING_WORKBENCH.add(TOOL_CHARGE, 82 + (x * 18), 8);
+            WORKBENCH.getSlots().add(TOOLS, 82 + (x * 18), 8);
+            CHARGING_WORKBENCH.getSlots().add(TOOL_CHARGE, 82 + (x * 18), 8);
         }
-        WORKBENCH.add(PARK, 154, 46);
-        CHARGING_WORKBENCH.add(PARK, 154, 46);
+        WORKBENCH.getSlots().add(PARK, 154, 46);
+        CHARGING_WORKBENCH.getSlots().add(PARK, 154, 46);
         if (side.isClient()){
-            WORKBENCH.addButton(136, 28, 16, 16, NO_OVERLAY, "Export Crafting stacks to storage");
-            WORKBENCH.addButton(154, 28, 16, 16, NO_OVERLAY, "Export Crafting stacks to player");
-            CHARGING_WORKBENCH.addButton(136, 28, 16, 16, NO_OVERLAY);
-            CHARGING_WORKBENCH.addButton(154, 28, 16, 16, NO_OVERLAY);
+            WORKBENCH.widget(addButton(136, 28, 16, 16, NO_OVERLAY, 0));
+            WORKBENCH.widget(addButton(154, 28, 16, 16, NO_OVERLAY, 1));
+            CHARGING_WORKBENCH.widget(addButton(136, 28, 16, 16, NO_OVERLAY, 0));
+            CHARGING_WORKBENCH.widget(addButton(154, 28, 16, 16, NO_OVERLAY, 1));
         }
         BRONZE_WORKBENCH.setGUI(WORKBENCH_HANDLER);
         IRON_WORKBENCH.setGUI(WORKBENCH_HANDLER);
@@ -393,15 +405,15 @@ public class Guis {
         ALUMINIUM_LOCKER.setGUI(LOCKER_HANDLER);
         IRON_CHARGING_LOCKER.setGUI(LOCKER_HANDLER);
         ALUMINIUM_CHARGING_LOCKER.setGUI(LOCKER_HANDLER);
-        BRONZE_WORKBENCH.getGui().add(WORKBENCH);
-        IRON_WORKBENCH.getGui().add(WORKBENCH);
-        ALUMINIUM_WORKBENCH.getGui().add(WORKBENCH);
-        IRON_CHARGING_WORKBENCH.getGui().add(CHARGING_WORKBENCH);
-        ALUMINIUM_CHARGING_WORKBENCH.getGui().add(CHARGING_WORKBENCH);
-        IRON_LOCKER.getGui().add(LOCKER);
-        ALUMINIUM_LOCKER.getGui().add(LOCKER);
-        IRON_CHARGING_LOCKER.getGui().add(CHARGING_LOCKER);
-        ALUMINIUM_CHARGING_LOCKER.getGui().add(CHARGING_LOCKER);
+        BRONZE_WORKBENCH.add(WORKBENCH.getSlots());
+        IRON_WORKBENCH.add(WORKBENCH.getSlots());
+        ALUMINIUM_WORKBENCH.add(WORKBENCH.getSlots());
+        IRON_CHARGING_WORKBENCH.add(CHARGING_WORKBENCH.getSlots());
+        ALUMINIUM_CHARGING_WORKBENCH.add(CHARGING_WORKBENCH.getSlots());
+        IRON_LOCKER.add(LOCKER.getSlots());
+        ALUMINIUM_LOCKER.add(LOCKER.getSlots());
+        IRON_CHARGING_LOCKER.add(CHARGING_LOCKER.getSlots());
+        ALUMINIUM_CHARGING_LOCKER.add(CHARGING_LOCKER.getSlots());
         COAL_BOILER.setGUI(COAL_BOILER_MENU_HANDLER);
         FUSION_REACTOR.setGUI(FUSION_MENU_HANDLER);
         //DISTILLATION_TOWER.setGUI(DISTILLATION_MENU_HANDLER);
@@ -420,23 +432,27 @@ public class Guis {
         for (int i = 0; i < 9; i++){
             for (int j = 0; j < 9; ++j) {
                 if (i < 6){
-                    IRON_CABINET.getGui().add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
-                    ALUMINIUM_CABINET.getGui().add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
-                    WROUGHT_IRON_CABINET.getGui().add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
-                    BRASS_CABINET.getGui().add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
-                    CUPRONICKEL_CABINET.getGui().add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
+                    IRON_CABINET.add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
+                    ALUMINIUM_CABINET.add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
+                    WROUGHT_IRON_CABINET.add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
+                    BRASS_CABINET.add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
+                    CUPRONICKEL_CABINET.add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
                 }
                 if (i < 7){
-                    ELECTRUM_CABINET.getGui().add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
-                    GOLD_CABINET.getGui().add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
-                    SILVER_CABINET.getGui().add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
-                    MAGNALIUM_CABINET.getGui().add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
+                    ELECTRUM_CABINET.add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
+                    GOLD_CABINET.add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
+                    SILVER_CABINET.add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
+                    MAGNALIUM_CABINET.add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
                 }
                 if (i < 8){
-                    PLATINUM_CABINET.getGui().add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
+                    PLATINUM_CABINET.add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
                 }
-                OSMIUM_CABINET.getGui().add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
+                OSMIUM_CABINET.add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
             }
         }
+    }
+
+    private static<T extends Container> WidgetSupplier.WidgetProvider<T> addButton(int x, int y, int w, int h, ButtonBody body, int id){
+        return ButtonWidget.build(buttonLocation, body, null, GuiEvent.EXTRA_BUTTON, id).setSize(x, y, w, h).cast();
     }
 }
