@@ -13,10 +13,10 @@ import net.minecraft.util.text.ITextComponent;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.tile.multi.TileEntityFusionReactor;
 
-public class FusionButtonWidget extends AntimatterWidget<ContainerMultiMachine<TileEntityFusionReactor>> {
+public class FusionButtonWidget<T extends ContainerMultiMachine<TileEntityFusionReactor>> extends AntimatterWidget<T> {
     ResourceLocation middle = new ResourceLocation(Ref.ID, "textures/gui/machine/fusion_computer_middle_overlay.png");
     ResourceLocation top_bottom = new ResourceLocation(Ref.ID, "textures/gui/machine/fusion_computer_top_bottom_overlay.png");
-    public FusionButtonWidget(AntimatterContainerScreen<? extends ContainerMultiMachine<TileEntityFusionReactor>> screen, IGuiHandler handler) {
+    public FusionButtonWidget(AntimatterContainerScreen<? extends T> screen, IGuiHandler handler) {
         super(screen, handler, 0, 0, 176, 182);
     }
 
