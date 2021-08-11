@@ -98,17 +98,6 @@ public class Guis {
         }
     };
 
-    public static MenuHandlerMachine<TileEntityDistillationTower, ? extends ContainerBasicMachine> DISTILLATION_MENU_HANDLER = new MenuHandlerMachine(Ref.ID, "container_distillation_tower") {
-        @Override
-        public ContainerBasicMachine getMenu(Object tile, PlayerInventory playerInv, int windowId) {
-            return tile instanceof TileEntityMachine ? new ContainerBasicMachine((TileEntityBasicMultiMachine) tile, playerInv, this, windowId) : null;
-        }
-        @Override
-        public Object screen() {
-            return ScreenFactories.SCREEN_DISTILLATION_TOWER;
-        }
-    };
-
     public static MenuHandlerMachine<TileEntityIndustrialBlastFurnace, ? extends ContainerBasicMachine> IBF_MENU_HANDLER = new MenuHandlerMachine(Ref.ID, "container_industrial_blast_furnace") {
         @Override
         public ContainerBasicMachine getMenu(Object tile, PlayerInventory playerInv, int windowId) {
@@ -385,7 +374,7 @@ public class Guis {
         BATTERY_BUFFER_EIGHT.getGui().removeWidget(2, null);
         COAL_BOILER.getGui().removeWidget(0, null);
         STEAM_FORGE_HAMMER.getGui().removeWidget(0, null).widget(ProgressWidget.build(BarDir.BOTTOM, false));
-        FUSION_REACTOR.getGui().removeWidget(0, null).widget(makeProgress(BarDir.LEFT, true, new int4(0, 235, 149, 16)).setSize(4,162, 149, 16).cast()).widget(FusionButtonWidget.build().cast());
+        FUSION_REACTOR.getGui().widget(makeProgress(BarDir.LEFT, true, new int4(0, 235, 149, 16)).setSize(4,162, 149, 16).cast()).widget(FusionButtonWidget.build().cast());
     }
 
     private static void initMaterialMachine(Dist side){

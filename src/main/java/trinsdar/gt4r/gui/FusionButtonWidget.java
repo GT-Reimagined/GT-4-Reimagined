@@ -8,8 +8,11 @@ import muramasa.antimatter.gui.screen.AntimatterContainerScreen;
 import muramasa.antimatter.gui.widget.AntimatterWidget;
 import muramasa.antimatter.gui.widget.MachineStateWidget;
 import muramasa.antimatter.gui.widget.WidgetSupplier;
+import muramasa.antimatter.integration.jei.AntimatterJEIPlugin;
+import muramasa.antimatter.machine.MachineFlag;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.tile.multi.TileEntityFusionReactor;
 
@@ -35,6 +38,24 @@ public class FusionButtonWidget<T extends ContainerMultiMachine<TileEntityFusion
                 drawTexture(stack, top_bottom, screen().getGuiLeft() + 6, screen().getGuiTop() + 6, 0, 0, 145, 145);
             }
         }
+    }
+
+    @Override
+    public void renderToolTip(MatrixStack matrixStack, int mouseX, int mouseY) {
+        super.renderToolTip(matrixStack, mouseX, mouseY);
+        if (container().getTile().getMachineType().has(MachineFlag.RECIPE))
+            screen().drawTooltipInArea(matrixStack, "Show Recipes", mouseX, mouseY, 154, 4, 18, 18);
+    }
+
+    @Override
+    protected boolean clicked(double mouseX, double mouseY) {
+        return super.clicked(mouseX, mouseY) && screen().isInGui(154, 4, 18, 18, mouseX, mouseY);
+    }
+
+    @Override
+    public void onClick(double mouseX, double mouseY) {
+        super.onClick(mouseX, mouseY);
+        AntimatterJEIPlugin.showCategory(container().getTile().getMachineType());
     }
 
     public static <T extends ContainerMultiMachine<TileEntityFusionReactor>> WidgetSupplier<T> build() {

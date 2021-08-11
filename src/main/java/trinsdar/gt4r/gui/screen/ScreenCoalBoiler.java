@@ -118,10 +118,6 @@ public class ScreenCoalBoiler<T extends ContainerMachine<TileEntityCoalBoiler>> 
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
-        if (!ModList.get().isLoaded("jei") || !container.getTile().has(MachineFlag.RECIPE)) return super.mouseClicked(mouseX, mouseY, mouseButton);
-        if (isInGui((xSize / 2) - 10, 24, 20, 18, mouseX, mouseY)) {
-            return false;
-        }
         if (isInGui(115, 43, 18, 18, mouseX, mouseY)){
             AntimatterJEIPlugin.showCategory(container.getTile().getMachineType());
             return true;
