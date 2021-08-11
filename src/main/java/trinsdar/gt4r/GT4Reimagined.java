@@ -9,10 +9,12 @@ import muramasa.antimatter.recipe.loader.IRecipeRegistrate;
 import muramasa.antimatter.registration.RegistrationEvent;
 import muramasa.antimatter.AntimatterMod;
 import muramasa.antimatter.tool.IAntimatterTool;
+import net.minecraft.block.AnvilBlock;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
@@ -225,8 +227,12 @@ public class GT4Reimagined extends AntimatterMod {
                                 }
                             }
                         } else if (player.getUniqueID().equals(new UUID(0x06c2928890db44c5L, 0xa642db906b52eb59L))) {
-
-                            //UT.Inventories.addStackToPlayerInventoryOrDrop(player, UT.NBT.addEnchantment(ST.make(Items.cookie, 1, 0, "Jr. Cookie"), Enchantment_WerewolfDamage.INSTANCE, 1), F);
+                            ItemStack cookie = new ItemStack(Items.COOKIE);
+                            cookie.getOrCreateTag().put("Enchantments", new ListNBT());
+                            cookie.setDisplayName(new StringTextComponent("Jr. Cookie"));
+                            if (!player.addItemStackToInventory(cookie)){
+                                player.dropItem(cookie, true);
+                            }
                             player.sendMessage(new StringTextComponent("Have a Jr. Cookie. Please tell Fatass to clean his Inventory, or smack him with it."), player.getUniqueID());
                         } /*else if ("CrazyJ1984".equalsIgnoreCase(player.getCommandSenderName())) {
                             ItemStack tArrow = ST.update(OP.arrowGtWood.mat(MT.Craponite, 1), aEvent.player);
