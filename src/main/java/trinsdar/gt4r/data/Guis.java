@@ -20,6 +20,7 @@ import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.tile.multi.TileEntityBasicMultiMachine;
 import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
+import muramasa.antimatter.util.int4;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.util.ResourceLocation;
@@ -28,6 +29,7 @@ import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.client.ScreenFactories;
 import trinsdar.gt4r.gui.ContainerCabinet;
 import trinsdar.gt4r.gui.ContainerWorkbench;
+import trinsdar.gt4r.gui.FusionButtonWidget;
 import trinsdar.gt4r.gui.MachineStateWidgetMoved;
 import trinsdar.gt4r.gui.MenuHandlerCrafting;
 import trinsdar.gt4r.gui.MenuHandlerCraftingItem;
@@ -39,6 +41,7 @@ import trinsdar.gt4r.tile.single.TileEntityMaterial;
 
 import static muramasa.antimatter.gui.ButtonBody.*;
 import static muramasa.antimatter.gui.SlotType.*;
+import static muramasa.antimatter.gui.widget.AntimatterWidget.builder;
 import static muramasa.antimatter.machine.Tier.*;
 import static trinsdar.gt4r.data.GT4RData.COVER_CONVEYOR;
 import static trinsdar.gt4r.data.GT4RData.COVER_CRAFTING;
@@ -382,6 +385,7 @@ public class Guis {
         BATTERY_BUFFER_EIGHT.getGui().removeWidget(2, null);
         COAL_BOILER.getGui().removeWidget(0, null);
         STEAM_FORGE_HAMMER.getGui().removeWidget(0, null).widget(ProgressWidget.build(BarDir.BOTTOM, false));
+        FUSION_REACTOR.getGui().removeWidget(0, null).widget(makeProgress(BarDir.LEFT, true, new int4(0, 235, 149, 16)).setSize(4,162, 149, 16).cast()).widget(FusionButtonWidget.build().cast());
     }
 
     private static void initMaterialMachine(Dist side){
@@ -467,5 +471,9 @@ public class Guis {
 
     private static<T extends Container> WidgetSupplier.WidgetProvider<T> addButton(int x, int y, int w, int h, ButtonBody body, int id){
         return ButtonWidget.build(buttonLocation, body, null, GuiEvent.EXTRA_BUTTON, id).setSize(x, y, w, h).cast();
+    }
+
+    public static<T extends ContainerMachine<?>> WidgetSupplier<T> makeProgress(BarDir dir, boolean barFill, int4 loc){
+        return builder((screen, handler) -> new ProgressWidget<>(screen, handler, loc, dir, dir.getPos().x + 6, dir.getPos().y + 6, dir.getUV().z, dir.getUV().w, barFill));
     }
 }

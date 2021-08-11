@@ -35,12 +35,11 @@ public class ScreenFusionReactor<T extends ContainerMultiMachine<TileEntityFusio
         }
     }
 
-    @Override
+    /*@Override
     protected void drawGuiContainerBackgroundLayer(MatrixStack stack, float partialTicks, int mouseX, int mouseY) {
         super.drawGuiContainerBackgroundLayer(stack, partialTicks, mouseX, mouseY);
-        drawProgress(stack, partialTicks, mouseX, mouseY);
-        if (container.getTile() instanceof TileEntityFusionReactor){
-            TileEntityFusionReactor tile = (TileEntityFusionReactor) container.getTile();
+        if (container.getTile() != null){
+            TileEntityFusionReactor tile = container.getTile();
             if (tile.getDisplay() == TileEntityFusionReactor.Display.REGULAR){
                 drawTexture(stack, gui, guiLeft + 154, guiTop + 22, 176, 0, 18, 18);
             } else if (tile.getDisplay() == TileEntityFusionReactor.Display.MIDDLE){
@@ -51,12 +50,8 @@ public class ScreenFusionReactor<T extends ContainerMultiMachine<TileEntityFusio
                 drawTexture(stack, top_bottom, guiLeft + 6, guiTop + 6, 0, 0, 145, 145);
             }
         }
-    }
+    }*/
 
-    protected void drawProgress(MatrixStack stack, float partialTicks, int mouseX, int mouseY) {
-        int progressTime = (int) (20 * container.getTile().recipeHandler.map(MachineRecipeHandler::getClientProgress).orElse(0F));
-        drawTexture(stack, gui, guiLeft + 4, guiTop + 162, 0, 235, progressTime, 16);
-    }
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
