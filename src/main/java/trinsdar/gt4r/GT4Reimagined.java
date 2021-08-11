@@ -14,6 +14,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.Hand;
@@ -228,32 +229,29 @@ public class GT4Reimagined extends AntimatterMod {
                             }
                         } else if (player.getUniqueID().equals(new UUID(0x06c2928890db44c5L, 0xa642db906b52eb59L))) {
                             ItemStack cookie = new ItemStack(Items.COOKIE);
-                            cookie.getOrCreateTag().put("Enchantments", new ListNBT());
+                            ListNBT list = new ListNBT();
+                            list.add(new CompoundNBT());
+                            cookie.getOrCreateTag().put("Enchantments", list);
                             cookie.setDisplayName(new StringTextComponent("Jr. Cookie"));
                             if (!player.addItemStackToInventory(cookie)){
                                 player.dropItem(cookie, true);
                             }
                             player.sendMessage(new StringTextComponent("Have a Jr. Cookie. Please tell Fatass to clean his Inventory, or smack him with it."), player.getUniqueID());
-                        } /*else if ("CrazyJ1984".equalsIgnoreCase(player.getCommandSenderName())) {
-                            ItemStack tArrow = ST.update(OP.arrowGtWood.mat(MT.Craponite, 1), aEvent.player);
-                            if (ST.valid(tArrow)) {
-                                UT.Inventories.addStackToPlayerInventoryOrDrop(player, tArrow, F);
-                                UT.Entities.chat(player, new ChatComponentText(CHAT_GREG + "I'm not trying to tell you what to do, but please don't hurt Bear with this."));
-                            } else {
-                                UT.Entities.chat(player, new ChatComponentText(CHAT_GREG + "I'm not trying to tell you what to do, but please don't hurt Bear."));
-                            }
-                        } else if ("GregoriusT".equalsIgnoreCase(player.getCommandSenderName())) {
-                            UT.Inventories.addStackToPlayerInventoryOrDrop(player, ST.update(OP.arrowGtPlastic.mat(MT.Tc, 1), aEvent.player), F);
-                            UT.Entities.chat(player, new ChatComponentText(LH.Chat.BOLD + "You have received an Arrow"));
-                        } else if ("Ilirith".equalsIgnoreCase(player.getCommandSenderName())) {
-                            UT.Entities.chat(player, new ChatComponentText(CHAT_GREG + "Could you tell Bear989Sr very gently, that his Inventory is a fucking mess again?"));
-                        } else if ("Shadowkn1ght18".equalsIgnoreCase(player.getCommandSenderName())) {
-                            UT.Entities.chat(player, new ChatComponentText(CHAT_GREG + "Here is your special Message to make you tell Bear989Sr to clean his Inventory."));
-                        } else if ("e99999".equalsIgnoreCase(player.getCommandSenderName())) {
-                            UT.Entities.chat(player, new ChatComponentText(LH.Chat.DGRAY + "You get the sneaking suspicion that Bears Inventory may or may not be full right now."));
+                        } else if (player.getUniqueID().equals(new UUID(0xd84f965487ea46a9L, 0x881fc6aa45dd5af8L))) {
+                            player.sendMessage(new StringTextComponent("I'm not trying to tell you what to do, but please don't hurt Bear."), player.getUniqueID());
+                        } else if (player.getUniqueID().equals(new UUID(0xf6728edb5a16449bL, 0xa8af8ae43bf79d63L))) {
+                            player.sendMessage(new StringTextComponent("Please moo at Bear989 to clean his inventory."), player.getUniqueID());
+                        } else if (player.getUniqueID().equals(new UUID(0xd8c0b6bd45504970L, 0xb7c00c4f8d8187c6L))) {
+                            player.sendMessage(new StringTextComponent("Could you tell Bear989Sr very gently, that his Inventory is a fucking mess again?"), player.getUniqueID());
+                        } else if (player.getUniqueID().equals(new UUID(0x91a59513e8ea45a4L, 0xb8afc275085b0451L))) {
+                            player.sendMessage(new StringTextComponent("Here is your special Message to make you tell Bear989Sr to clean his Inventory."), player.getUniqueID());
+                        } else if (player.getUniqueID().equals(new UUID(0x7c042366854c4582L, 0x8d2c6831646ba5c7L))) {
+                            player.sendMessage(new StringTextComponent("Let the mother fucker know he's full of shit."), player.getUniqueID());
                         } else {
-                            UT.Entities.chat(player, new ChatComponentText(CHAT_GREG + "There is this fella called Bear-Nine-Eight-Nine, needing be reminded of his Inventory being a major Pine."));
-                        }*/
+                            if (player.getPosition().withinDistance(event.player.getPosition(), 100D)) {
+                                player.sendMessage(new StringTextComponent("There is this fella called Bear-Nine-Eight-Nine, needing be reminded of his Inventory being a major Pine."), player.getUniqueID());
+                            }
+                        }
                     }
                 }
             }
