@@ -11,15 +11,20 @@ import muramasa.antimatter.AntimatterMod;
 import muramasa.antimatter.tool.IAntimatterTool;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.potion.Potion;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
@@ -59,6 +64,8 @@ import trinsdar.gt4r.proxy.ServerHandler;
 import trinsdar.gt4r.tile.TileEntityTypes;
 import trinsdar.gt4r.worldgen.GT4RFeatures;
 
+import java.util.UUID;
+
 import static muramasa.antimatter.Data.DRILL;
 import static muramasa.antimatter.Data.GEM;
 import static muramasa.antimatter.Data.PICKAXE;
@@ -80,6 +87,7 @@ public class GT4Reimagined extends AntimatterMod {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::serverSetup);
         MinecraftForge.EVENT_BUS.addListener(this::onRightlickBlock);
+        MinecraftForge.EVENT_BUS.addListener(this::onPlayerTick);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, GT4RConfig.COMMON_SPEC);
         //GregTechAPI.addRegistrar(new ForestryRegistrar());
         //GregTechAPI.addRegistrar(new GalacticraftRegistrar());
@@ -171,6 +179,77 @@ public class GT4Reimagined extends AntimatterMod {
         if (hand == Hand.OFF_HAND && server){
             if (player.getHeldItemMainhand().getItem() instanceof IAntimatterTool && (((IAntimatterTool)player.getHeldItemMainhand().getItem()).getAntimatterToolType() == PICKAXE || ((IAntimatterTool)player.getHeldItemMainhand().getItem()).getAntimatterToolType() == DRILL) && (player.getHeldItemOffhand().getItem() == Items.TORCH || player.getHeldItemOffhand().getItem() == Items.SOUL_TORCH)){
                 player.sendMessage(new TranslationTextComponent("message.gt4r.pickaxe_torch_right_click"), player.getUniqueID());
+            }
+        }
+    }
+
+    private int BEAR_INVENTORY_COOL_DOWN = 5;
+
+    public void onPlayerTick(TickEvent.PlayerTickEvent event){
+        if (event.phase == TickEvent.Phase.END && event.side.isServer() && event.player.getUniqueID().equals(new UUID(0x1964e3d1650040e7L, 0x9ff2e6161d41a8c2L))){
+            if (event.player.ticksExisted % 120 == 0) {
+                ItemStack tStack;
+                int tEmptySlots = 36, tCraponite = 0;
+                for (int i = 0; i < 36; i++) {
+                    tStack = event.player.inventory.getStackInSlot(i);
+
+                    if (!tStack.isEmpty()) {
+                        tEmptySlots--;
+                    }
+                }
+
+                // This Code is to tell Bear and all the people around him that he should clean up his always cluttered Inventory.
+                if (--BEAR_INVENTORY_COOL_DOWN < 0 && tEmptySlots < 4) {
+                    BEAR_INVENTORY_COOL_DOWN = 100;
+                    for (int i = 0; i < event.player.world.getPlayers().size(); i++) {
+                        PlayerEntity player = event.player.world.getPlayers().get(i);
+                        if (player == null) continue;
+                        if (player == event.player) {
+                            if (player.getPosition().getY() < 30) {
+                                player.sendMessage(new StringTextComponent("Stop making Holes in the Ground, Bear!"), player.getUniqueID());
+                            } else {
+                                // Bear does not like being called these names, so lets annoy him. XD
+                                switch (tEmptySlots) {
+                                    case 0:
+                                        player.sendMessage(new StringTextComponent("Alright Buttercup, your Inventory is full, time to go home."), player.getUniqueID());
+                                        break;
+                                    case 1:
+                                        player.sendMessage(new StringTextComponent("Your Inventory is starting to get full, Buttercup"), player.getUniqueID());
+                                        break;
+                                    case 2:
+                                        player.sendMessage(new StringTextComponent("Your Inventory is starting to get full, Bean989Sr"), player.getUniqueID());
+                                        break;
+                                    case 3:
+                                        player.sendMessage(new StringTextComponent("Your Inventory is starting to get full, Mr. Bear"), player.getUniqueID());
+                                        break;
+                                }
+                            }
+                        } else if (player.getUniqueID().equals(new UUID(0x06c2928890db44c5L, 0xa642db906b52eb59L))) {
+
+                            //UT.Inventories.addStackToPlayerInventoryOrDrop(player, UT.NBT.addEnchantment(ST.make(Items.cookie, 1, 0, "Jr. Cookie"), Enchantment_WerewolfDamage.INSTANCE, 1), F);
+                            player.sendMessage(new StringTextComponent("Have a Jr. Cookie. Please tell Fatass to clean his Inventory, or smack him with it."), player.getUniqueID());
+                        } /*else if ("CrazyJ1984".equalsIgnoreCase(player.getCommandSenderName())) {
+                            ItemStack tArrow = ST.update(OP.arrowGtWood.mat(MT.Craponite, 1), aEvent.player);
+                            if (ST.valid(tArrow)) {
+                                UT.Inventories.addStackToPlayerInventoryOrDrop(player, tArrow, F);
+                                UT.Entities.chat(player, new ChatComponentText(CHAT_GREG + "I'm not trying to tell you what to do, but please don't hurt Bear with this."));
+                            } else {
+                                UT.Entities.chat(player, new ChatComponentText(CHAT_GREG + "I'm not trying to tell you what to do, but please don't hurt Bear."));
+                            }
+                        } else if ("GregoriusT".equalsIgnoreCase(player.getCommandSenderName())) {
+                            UT.Inventories.addStackToPlayerInventoryOrDrop(player, ST.update(OP.arrowGtPlastic.mat(MT.Tc, 1), aEvent.player), F);
+                            UT.Entities.chat(player, new ChatComponentText(LH.Chat.BOLD + "You have received an Arrow"));
+                        } else if ("Ilirith".equalsIgnoreCase(player.getCommandSenderName())) {
+                            UT.Entities.chat(player, new ChatComponentText(CHAT_GREG + "Could you tell Bear989Sr very gently, that his Inventory is a fucking mess again?"));
+                        } else if ("Shadowkn1ght18".equalsIgnoreCase(player.getCommandSenderName())) {
+                            UT.Entities.chat(player, new ChatComponentText(CHAT_GREG + "Here is your special Message to make you tell Bear989Sr to clean his Inventory."));
+                        } else if ("e99999".equalsIgnoreCase(player.getCommandSenderName())) {
+                            UT.Entities.chat(player, new ChatComponentText(LH.Chat.DGRAY + "You get the sneaking suspicion that Bears Inventory may or may not be full right now."));
+                        } else {
+                            UT.Entities.chat(player, new ChatComponentText(CHAT_GREG + "There is this fella called Bear-Nine-Eight-Nine, needing be reminded of his Inventory being a major Pine."));
+                        }*/
+                    }
+                }
             }
         }
     }

@@ -208,7 +208,7 @@ public class Guis {
         CANNER.add(IT_IN, 35, 25).add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(ENERGY,80, 63);
         COMPRESSOR.add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(ENERGY,80, 63);
         CUTTER.add(IT_IN, 53, 25).add(FL_IN, 53, 63).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25).add(ENERGY,80, 63);
-        FORGE_HAMMER.add(COMPRESSOR).getGui().removeWidget(0, null).widget(ProgressWidget.build(BarDir.BOTTOM, false));
+        FORGE_HAMMER.add(COMPRESSOR);
         FURNACE.add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(ENERGY,80, 63);
         EXTRACTOR.add(COMPRESSOR);
         EXTRUDER.add(ALLOY_SMELTER);
@@ -217,8 +217,8 @@ public class Guis {
         MACERATOR.add(LV, COMPRESSOR);
         RECYCLER.add(COMPRESSOR);
         WIRE_MILL.add(COMPRESSOR);
-        CENTRIFUGE.add(IT_IN, 35, 25).add(IT_IN, 53, 25).add(FL_IN, 8, 63).add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 142, 16).add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(IT_OUT, 143, 34).add(ENERGY,26, 63).add(FL_OUT, 44, 63).add(FL_OUT, 62, 63).add(FL_OUT, 80, 63).add(FL_OUT, 98, 63).add(FL_OUT, 116, 63).add(FL_OUT, 134, 63).getGui().removeWidget(2, null).widget(IOWidget.build(9, 45, 16, 16));
-        ELECTROLYZER.add(CENTRIFUGE).getGui().removeWidget(2, null).widget(IOWidget.build(9, 45, 16, 16));
+        CENTRIFUGE.add(IT_IN, 35, 25).add(IT_IN, 53, 25).add(FL_IN, 8, 63).add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 142, 16).add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(IT_OUT, 143, 34).add(ENERGY,26, 63).add(FL_OUT, 44, 63).add(FL_OUT, 62, 63).add(FL_OUT, 80, 63).add(FL_OUT, 98, 63).add(FL_OUT, 116, 63).add(FL_OUT, 134, 63);
+        ELECTROLYZER.add(CENTRIFUGE);
 
         THERMAL_CENTRIFUGE.add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25).add(IT_OUT, 143, 25).add(ENERGY,80, 63);
         ORE_WASHER.add(THERMAL_CENTRIFUGE).add(FL_IN, 53, 63);
@@ -249,7 +249,7 @@ public class Guis {
         PRIMITIVE_BLAST_FURNACE.add(IT_IN, 35, 16).add(IT_IN, 35, 34).add(IT_IN, 35, 52).add(IT_IN, 53, 16).add(IT_IN, 53, 34).add(IT_IN, 53, 52).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25).add(IT_OUT, 143, 25).getGui().setPadding(0, 0, 0, 0);
         PYROLYSIS_OVEN.add(COKE_OVEN).add(SlotTypes.COIL, 8, 63);
         FUSION_REACTOR.getGui().setEnablePlayerSlots(false);
-        DISTILLATION_TOWER.add(FL_IN, 62, 41).add(FL_OUT, 98, 59).add(FL_OUT, 98, 41).add(FL_OUT, 98, 23).add(FL_OUT, 98, 5).add(FL_OUT, 116, 23).add(FL_OUT, 116, 5).add(IT_OUT, 116, 41).add(IT_OUT, 116, 59).add(ENERGY, 62, 59).getGui().removeWidget(1, null).removeWidget(0, null).widget(ProgressWidget.build(BarDir.TOP, true).setSize(80, 4, 16, 72).cast()).widget(MachineStateWidgetMoved.build(176, 108).setPos(66, 26).setWH(8, 8).cast());
+        DISTILLATION_TOWER.add(FL_IN, 62, 41).add(FL_OUT, 98, 59).add(FL_OUT, 98, 41).add(FL_OUT, 98, 23).add(FL_OUT, 98, 5).add(FL_OUT, 116, 23).add(FL_OUT, 116, 5).add(IT_OUT, 116, 41).add(IT_OUT, 116, 59).add(ENERGY, 62, 59);
         VACUUM_FREEZER.add(COMPRESSOR);
         IMPLOSION_COMPRESSOR.add(ALLOY_SMELTER).add(IT_OUT, 125, 25);
         INDUSTRIAL_SAWMILL.add(ORE_WASHER);
@@ -261,14 +261,15 @@ public class Guis {
 
 
 
-        BATTERY_BUFFER_ONE.add(ENERGY,80,40).getGui().removeWidget(2, null);
-        BATTERY_BUFFER_FOUR.add(ENERGY,71,27).add(ENERGY,89,27).add(ENERGY,71,45).add(ENERGY,89,45).getGui().removeWidget(2, null);
+        BATTERY_BUFFER_ONE.add(ENERGY,80,40);
+        BATTERY_BUFFER_FOUR.add(ENERGY,71,27).add(ENERGY,89,27).add(ENERGY,71,45).add(ENERGY,89,45);
         BATTERY_BUFFER_EIGHT
                 .add(ENERGY,53,27).add(ENERGY,71,27).add(ENERGY,89,27).add(ENERGY,107,27)
-                .add(ENERGY,53,45).add(ENERGY,71,45).add(ENERGY,89,45).add(ENERGY,107,45).getGui().removeWidget(2, null);
+                .add(ENERGY,53,45).add(ENERGY,71,45).add(ENERGY,89,45).add(ENERGY,107,45);
 
         COAL_BOILER.add(BRONZE, CELL_IN, 44, 26).add(BRONZE, CELL_OUT, 44, 62).add(BRONZE, IT_OUT, 116, 26).add(BRONZE, IT_IN, 116, 62);
         COAL_BOILER.add(STEEL, CELL_IN, 44, 26).add(STEEL, CELL_OUT, 44, 62).add(STEEL, IT_OUT, 116, 26).add(STEEL, IT_IN, 116, 62);
+
 
         STEAM_ALLOY_SMELTER.add(BRONZE, ALLOY_SMELTER).add(BRONZE, FL_IN, 53, 63);
         STEAM_ALLOY_SMELTER.add(STEEL, ALLOY_SMELTER).add(STEEL, FL_IN, 53, 63);
@@ -280,7 +281,7 @@ public class Guis {
         STEAM_EXTRACTOR.add(STEEL, EXTRACTOR).add(STEEL, FL_IN, 53, 63);
         STEAM_MACERATOR.add(BRONZE, MACERATOR, LV).add(BRONZE, FL_IN, 53, 63);
         STEAM_MACERATOR.add(STEEL, MACERATOR, LV).add(STEEL, FL_IN, 53, 63);
-        STEAM_FORGE_HAMMER.add(BRONZE, FORGE_HAMMER).add(BRONZE, FL_IN, 53, 63).getGui().removeWidget(0, null).widget(ProgressWidget.build(BarDir.BOTTOM, false));
+        STEAM_FORGE_HAMMER.add(BRONZE, FORGE_HAMMER).add(BRONZE, FL_IN, 53, 63);
 
         STEAM_TURBINE.add(BASIC_TANK.getSlots()).getGui().setOverrideLocation(BASIC_TANK.getTexture(LV, "machine"));
         GAS_TURBINE.add(BASIC_TANK.getSlots()).getGui().setOverrideLocation(BASIC_TANK.getTexture(LV, "machine"));
@@ -369,6 +370,18 @@ public class Guis {
                     .widget(addButton(137, 63, 14, 14, PAD_RIGHT, 14))
                     .widget(addButton(152, 63, 14, 14, APAD_RIGHT, 15));
         }
+    }
+
+    public static void initWidgets(){
+        FORGE_HAMMER.getGui().removeWidget(0, null).widget(ProgressWidget.build(BarDir.BOTTOM, false));
+        CENTRIFUGE.getGui().removeWidget(2, null).widget(IOWidget.build(9, 45, 16, 16));
+        ELECTROLYZER.getGui().removeWidget(2, null).widget(IOWidget.build(9, 45, 16, 16));
+        DISTILLATION_TOWER.getGui().removeWidget(1, null).removeWidget(0, null).widget(ProgressWidget.build(BarDir.TOP, true).setSize(80, 4, 16, 72).cast()).widget(MachineStateWidgetMoved.build(176, 108).setPos(66, 26).setWH(8, 8).cast());
+        BATTERY_BUFFER_ONE.getGui().removeWidget(2, null);
+        BATTERY_BUFFER_FOUR.getGui().removeWidget(2, null);
+        BATTERY_BUFFER_EIGHT.getGui().removeWidget(2, null);
+        COAL_BOILER.getGui().removeWidget(0, null);
+        STEAM_FORGE_HAMMER.getGui().removeWidget(0, null).widget(ProgressWidget.build(BarDir.BOTTOM, false));
     }
 
     private static void initMaterialMachine(Dist side){

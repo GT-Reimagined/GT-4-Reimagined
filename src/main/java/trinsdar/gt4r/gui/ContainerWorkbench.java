@@ -35,12 +35,12 @@ public class ContainerWorkbench<T extends TileEntityMaterial<T>> extends Contain
     }
 
     @Override
-    protected void addSlots(TileEntityMachine tile) {
+    protected void addSlots(TileEntityMachine<?> tile) {
         craftResult =  new CraftResultInventory();
         craftingGrid = new InventoryWorkbench(this, (MachineItemHandler<?>) tile.itemHandler.map(m -> m).orElse(null), 3, 3);
         addSlot(new SlotWorkTableResult((MachineItemHandler<?>) tile.itemHandler.map(m -> m).orElse(null), playerInv.player, craftingGrid, craftResult, 0, 136, 46));
         Object2IntMap<String> slotIndexMap = new Object2IntOpenHashMap<>();
-        for (SlotData slot : tile.getMachineType().getGui().getSlots(tile.getMachineTier())) {
+        for (SlotData slot : tile.getMachineType().getSlots(tile.getMachineTier())) {
             slotIndexMap.computeIntIfAbsent(slot.getType().getId(), k -> 0);
             Slot supplier;
             if (slot.getType().getId().equals("crafting")){

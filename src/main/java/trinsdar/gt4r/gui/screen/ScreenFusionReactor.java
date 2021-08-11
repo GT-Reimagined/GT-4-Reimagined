@@ -53,7 +53,6 @@ public class ScreenFusionReactor<T extends ContainerMultiMachine<TileEntityFusio
         }
     }
 
-    @Override
     protected void drawProgress(MatrixStack stack, float partialTicks, int mouseX, int mouseY) {
         int progressTime = (int) (20 * container.getTile().recipeHandler.map(MachineRecipeHandler::getClientProgress).orElse(0F));
         drawTexture(stack, gui, guiLeft + 4, guiTop + 162, 0, 235, progressTime, 16);

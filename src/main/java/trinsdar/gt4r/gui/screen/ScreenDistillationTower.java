@@ -23,12 +23,6 @@ public class ScreenDistillationTower extends ScreenMachine<TileEntityDistillatio
     }
 
     @Override
-    protected void drawProgress(MatrixStack stack, float partialTicks, int mouseX, int mouseY) {
-        int progressTime = (int) (20 * container.getTile().recipeHandler.map(MachineRecipeHandler::getClientProgress).orElse(0F));
-        drawTexture(stack, gui, guiLeft + 80, guiTop + 4, xSize, 72 - progressTime, 16, progressTime);
-    }
-
-    @Override
     protected void drawGuiContainerForegroundLayer(MatrixStack stack, int mouseX, int mouseY) {
         drawTitle(stack, mouseX, mouseY);
         if (container.getTile().has(MachineFlag.RECIPE)) {
@@ -50,19 +44,5 @@ public class ScreenDistillationTower extends ScreenMachine<TileEntityDistillatio
                 });
             });
         }*/
-    }
-
-    @Override
-    protected void drawGuiContainerBackgroundLayer(MatrixStack stack, float partialTicks, int mouseX, int mouseY) {
-        super.drawGuiContainerBackgroundLayer(stack, partialTicks, mouseX, mouseY);
-        drawProgress(stack, partialTicks, mouseX, mouseY);
-        //Draw error.
-        if (container.getTile().has(MachineFlag.RECIPE)) {
-            if (container.getTile().getMachineState() == MachineState.POWER_LOSS) {
-                drawTexture(stack, gui, guiLeft + 66, guiTop + 26, xSize, 108, 8, 8);
-            } /*else if (container.getTile().getMachineState() == MachineState.INVALID_STRUCTURE && container.getTile().getWorld().getGameTime() % 4 == 0){
-                drawTexture(stack, gui, guiLeft + 66, guiTop + 26, xSize, 108, 8, 8);
-            }*/
-        }
     }
 }
