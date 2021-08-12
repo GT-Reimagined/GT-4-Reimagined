@@ -1,5 +1,6 @@
 package trinsdar.gt4r.data;
 
+import com.google.common.collect.ImmutableMap;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.gui.BarDir;
 import muramasa.antimatter.gui.ButtonBody;
@@ -259,21 +260,21 @@ public class Guis {
                 .add(ENERGY,53,27).add(ENERGY,71,27).add(ENERGY,89,27).add(ENERGY,107,27)
                 .add(ENERGY,53,45).add(ENERGY,71,45).add(ENERGY,89,45).add(ENERGY,107,45);
 
-        COAL_BOILER.add(BRONZE, CELL_IN, 44, 26).add(BRONZE, CELL_OUT, 44, 62).add(BRONZE, IT_OUT, 116, 26).add(BRONZE, IT_IN, 116, 62);
+        COAL_BOILER.add(BRONZE, CELL_IN, 44, 26).add(BRONZE, CELL_OUT, 44, 62).add(BRONZE, IT_OUT, 116, 26).add(BRONZE, IT_IN, 116, 62).setGuiTiers(new ImmutableMap.Builder<Tier, Tier>().put(BRONZE, BRONZE).put(STEEL, STEEL));
         COAL_BOILER.add(STEEL, CELL_IN, 44, 26).add(STEEL, CELL_OUT, 44, 62).add(STEEL, IT_OUT, 116, 26).add(STEEL, IT_IN, 116, 62);
 
 
-        STEAM_ALLOY_SMELTER.add(BRONZE, ALLOY_SMELTER).add(BRONZE, FL_IN, 53, 63);
+        STEAM_ALLOY_SMELTER.add(BRONZE, ALLOY_SMELTER).add(BRONZE, FL_IN, 53, 63).setGuiTiers(new ImmutableMap.Builder<Tier, Tier>().put(BRONZE, BRONZE).put(STEEL, STEEL));
         STEAM_ALLOY_SMELTER.add(STEEL, ALLOY_SMELTER).add(STEEL, FL_IN, 53, 63);
-        STEAM_COMPRESSOR.add(BRONZE, COMPRESSOR).add(BRONZE, FL_IN, 53, 63);
+        STEAM_COMPRESSOR.add(BRONZE, COMPRESSOR).add(BRONZE, FL_IN, 53, 63).setGuiTiers(new ImmutableMap.Builder<Tier, Tier>().put(BRONZE, BRONZE).put(STEEL, STEEL));
         STEAM_COMPRESSOR.add(STEEL, COMPRESSOR).add(STEEL, FL_IN, 53, 63);
-        STEAM_FURNACE.add(BRONZE, FURNACE).add(BRONZE, FL_IN, 53, 63);
+        STEAM_FURNACE.add(BRONZE, FURNACE).add(BRONZE, FL_IN, 53, 63).setGuiTiers(new ImmutableMap.Builder<Tier, Tier>().put(BRONZE, BRONZE).put(STEEL, STEEL));
         STEAM_FURNACE.add(STEEL, FURNACE).add(STEEL, FL_IN, 53, 63);
-        STEAM_EXTRACTOR.add(BRONZE, EXTRACTOR).add(BRONZE, FL_IN, 53, 63);
+        STEAM_EXTRACTOR.add(BRONZE, EXTRACTOR).add(BRONZE, FL_IN, 53, 63).setGuiTiers(new ImmutableMap.Builder<Tier, Tier>().put(BRONZE, BRONZE).put(STEEL, STEEL));
         STEAM_EXTRACTOR.add(STEEL, EXTRACTOR).add(STEEL, FL_IN, 53, 63);
-        STEAM_MACERATOR.add(BRONZE, MACERATOR, LV).add(BRONZE, FL_IN, 53, 63);
+        STEAM_MACERATOR.add(BRONZE, MACERATOR, LV).add(BRONZE, FL_IN, 53, 63).setGuiTiers(new ImmutableMap.Builder<Tier, Tier>().put(BRONZE, BRONZE).put(STEEL, STEEL));
         STEAM_MACERATOR.add(STEEL, MACERATOR, LV).add(STEEL, FL_IN, 53, 63);
-        STEAM_FORGE_HAMMER.add(BRONZE, FORGE_HAMMER).add(BRONZE, FL_IN, 53, 63);
+        STEAM_FORGE_HAMMER.add(BRONZE, FORGE_HAMMER).add(BRONZE, FL_IN, 53, 63).setGuiTiers(new ImmutableMap.Builder<Tier, Tier>().put(BRONZE, BRONZE).put(STEEL, STEEL));
 
         STEAM_TURBINE.add(BASIC_TANK.getSlots()).getGui().setOverrideLocation(BASIC_TANK.getTexture(LV, "machine"));
         GAS_TURBINE.add(BASIC_TANK.getSlots()).getGui().setOverrideLocation(BASIC_TANK.getTexture(LV, "machine"));
@@ -326,7 +327,7 @@ public class Guis {
                 }
             }
             COVER_REDSTONE_MACHINE_CONTROLLER.getGui().widget(addButton(61, 34, 16, 16, TORCH_ON, 0)).widget(addButton(79, 34, 16, 16, TORCH_OFF, 1)).widget(addButton(97, 34, 16, 16, REDSTONE, 2));
-            FUSION_REACTOR.getGui().widget(addButton(155, 23, 16, 16, NO_OVERLAY, 0)).widget(addButton(155, 41, 16, 16, NO_OVERLAY, 1)).widget(addButton(155, 59, 16, 16, NO_OVERLAY, 2));
+            FUSION_REACTOR.getGui().widget(addButton(155, 23, 16, 16, NO_OVERLAY, 0)).widget(addButton(155, 41, 16, 16, NO_OVERLAY, 1)).widget(addButton(155, 59, 16, 16, NO_OVERLAY, 2)).widget(makeProgress(BarDir.LEFT, true, new int4(0, 235, 149, 16)).setSize(4,162, 149, 16).cast()).widget(FusionButtonWidget.build().cast());
             TRANSFORMER_DIGITAL.getGui()
                     .widget(addButton(10, 18, 14, 14, APAD_LEFT, 0))
                     .widget(addButton(25, 18, 14, 14, PAD_LEFT, 1))
@@ -374,7 +375,6 @@ public class Guis {
         BATTERY_BUFFER_EIGHT.getGui().removeWidget(2, null);
         COAL_BOILER.getGui().removeWidget(0, null);
         STEAM_FORGE_HAMMER.getGui().removeWidget(0, null).widget(ProgressWidget.build(BarDir.BOTTOM, false));
-        FUSION_REACTOR.getGui().widget(makeProgress(BarDir.LEFT, true, new int4(0, 235, 149, 16)).setSize(4,162, 149, 16).cast()).widget(FusionButtonWidget.build().cast());
     }
 
     private static void initMaterialMachine(Dist side){
