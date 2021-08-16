@@ -10,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -30,6 +31,11 @@ public class TileEntityWorkbench extends TileEntityMaterial<TileEntityWorkbench>
                 return false;
             }
         });
+    }
+
+    @Override
+    public ResourceLocation getGuiTexture() {
+        return super.getGuiTexture();
     }
 
     @Override

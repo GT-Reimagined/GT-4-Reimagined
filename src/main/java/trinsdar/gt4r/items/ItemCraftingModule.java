@@ -1,5 +1,6 @@
 package trinsdar.gt4r.items;
 
+import muramasa.antimatter.capability.IGuiHandler;
 import muramasa.antimatter.cover.CoverStack;
 import muramasa.antimatter.item.ItemCover;
 import net.minecraft.entity.player.PlayerEntity;
@@ -53,6 +54,7 @@ public class ItemCraftingModule extends ItemCover implements INamedContainerProv
     @Nullable
     @Override
     public Container createMenu(int windowId, PlayerInventory playerInv, PlayerEntity player) {
-        return Guis.ITEM_CRAFTING_HANDLER.getMenu(player, playerInv, windowId);
+        //TODO
+        return Guis.ITEM_CRAFTING_HANDLER.getMenu((IGuiHandler) player, playerInv, windowId);
     }
 }

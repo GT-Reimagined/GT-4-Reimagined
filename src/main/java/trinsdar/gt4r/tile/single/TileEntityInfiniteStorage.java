@@ -121,7 +121,8 @@ public class TileEntityInfiniteStorage<T extends TileEntityInfiniteStorage<T>> e
         });
         return info;
     }
-
+    //TODO
+/*
     @Override
     public void drawInfo(MatrixStack stack, FontRenderer renderer, int left, int top) {
         // TODO: Replace by new TranslationTextComponent()
@@ -133,5 +134,5 @@ public class TileEntityInfiniteStorage<T extends TileEntityInfiniteStorage<T>> e
             renderer.drawString(stack,"SUM: " + ((long) h.getOutputAmperage() * h.getOutputVoltage()), left + 43, top + 64, 16448255);
         });
 
-    }
+    }*/
 }

@@ -43,7 +43,8 @@ public class TileEntityPyrolysisOven extends TileEntityBasicMultiMachine<TileEnt
         }
         super.onMachineEvent(event, data);
     }
-
+    //TODO
+/*
     @Override
     public void drawInfo(MatrixStack stack, FontRenderer renderer, int left, int top) {
         // TODO: Replace by new TranslationTextComponent()
@@ -51,7 +52,7 @@ public class TileEntityPyrolysisOven extends TileEntityBasicMultiMachine<TileEnt
             renderer.drawString(stack,"Heat: " + ((PyrolysisRecipeHandler)r).heatingCapacity + "K", 27, 62, Color.BLACK.getRGB());
         });
     }
-
+*/
     public static class PyrolysisRecipeHandler extends MachineRecipeHandler<TileEntityPyrolysisOven> {
         protected final IIntArray GUI_SYNC_DATA = new IIntArray() {
 
@@ -90,11 +91,6 @@ public class TileEntityPyrolysisOven extends TileEntityBasicMultiMachine<TileEnt
         private int heatingCapacity;
         public PyrolysisRecipeHandler(TileEntityPyrolysisOven tile) {
             super(tile);
-        }
-
-        @Override
-        public IIntArray getProgressData() {
-            return GUI_SYNC_DATA;
         }
 
         @Override

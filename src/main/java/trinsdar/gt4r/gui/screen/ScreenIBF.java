@@ -12,10 +12,4 @@ public class ScreenIBF extends ScreenBasicMachine<TileEntityIndustrialBlastFurna
     public ScreenIBF(ContainerBasicMachine container, PlayerInventory inv, ITextComponent name) {
         super(container, inv, name);
     }
-
-    @Override
-    protected void drawGuiContainerForegroundLayer(MatrixStack stack, int mouseX, int mouseY) {
-        super.drawGuiContainerForegroundLayer(stack, mouseX, mouseY);
-        this.getContainer().getTile().drawInfo(stack, Minecraft.getInstance().fontRenderer, mouseX, mouseY);
-    }
 }

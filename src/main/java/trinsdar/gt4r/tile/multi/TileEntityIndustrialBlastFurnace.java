@@ -98,14 +98,14 @@ public class TileEntityIndustrialBlastFurnace extends TileEntityBasicMultiMachin
         this.recipeHandler.ifPresent(r -> integer.set(((IBFRecipeHandler)r).heatingCapacity));
         return integer.get();
     }
-
-    @Override
+    //TODO
+    /*@Override
     public void drawInfo(MatrixStack stack, FontRenderer renderer, int left, int top) {
         // TODO: Replace by new TranslationTextComponent()
         this.recipeHandler.ifPresent(r -> {
             renderer.drawString(stack,"Heat: " + ((IBFRecipeHandler)r).heatingCapacity + "K", 27, 62, Color.BLACK.getRGB());
         });
-    }
+    }*/
 
     public static class IBFRecipeHandler extends MachineRecipeHandler<TileEntityIndustrialBlastFurnace> {
         protected final IIntArray GUI_SYNC_DATA = new IIntArray() {
@@ -150,11 +150,6 @@ public class TileEntityIndustrialBlastFurnace extends TileEntityBasicMultiMachin
         @Override
         protected boolean validateRecipe(Recipe r) {
             return super.validateRecipe(r) && heatingCapacity >= r.getSpecialValue();
-        }
-
-        @Override
-        public IIntArray getProgressData() {
-            return GUI_SYNC_DATA;
         }
 
         @Override
