@@ -15,7 +15,7 @@ public class ScreenChargingMaterialBlock<T extends TileEntityMaterial<T>> extend
     public ScreenChargingMaterialBlock(ContainerMachine<T> container, PlayerInventory inv, ITextComponent name, String location) {
         super(container, inv, name);
         boolean charged = container.getTile().has(MachineFlag.ENERGY);
-        gui = new ResourceLocation(Ref.ID, "textures/gui/machine/" + (charged ? "charging_" : "") + location + ".png");
+        //gui = new ResourceLocation(Ref.ID, "textures/gui/machine/" + (charged ? "charging_" : "") + location + ".png");
     }
 
     @Override

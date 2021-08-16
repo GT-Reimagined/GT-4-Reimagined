@@ -2,6 +2,7 @@ package trinsdar.gt4r.gui;
 
 import muramasa.antimatter.capability.AntimatterCaps;
 import muramasa.antimatter.capability.ICoverHandler;
+import muramasa.antimatter.capability.IGuiHandler;
 import muramasa.antimatter.cover.CoverStack;
 import muramasa.antimatter.gui.MenuHandler;
 import muramasa.antimatter.util.Utils;
@@ -15,18 +16,19 @@ import net.minecraft.util.IWorldPosCallable;
 import net.minecraftforge.common.util.LazyOptional;
 import trinsdar.gt4r.data.client.ScreenFactories;
 
-public class MenuHandlerCraftingItem extends MenuHandler<WorkbenchContainer> {
+public class MenuHandlerCraftingItem extends MenuHandler<GTWorkbenchContainer> {
     public MenuHandlerCraftingItem(String domain, String id) {
         super(domain, id);
     }
 
     @Override
-    public WorkbenchContainer onContainerCreate(int windowId, PlayerInventory inv, PacketBuffer data) {
-        return getMenu(inv.player, inv, windowId);
+    public GTWorkbenchContainer onContainerCreate(int windowId, PlayerInventory inv, PacketBuffer data) {
+        //TODO
+        return menu((IGuiHandler) inv.player, inv, windowId);
     }
 
     @Override
-    public WorkbenchContainer getMenu(Object tile, PlayerInventory playerInv, int windowId) {
+    public GTWorkbenchContainer getMenu(IGuiHandler tile, PlayerInventory playerInv, int windowId) {
         return tile instanceof PlayerEntity ? new ContainerCraftingItem(windowId, playerInv, IWorldPosCallable.of(playerInv.player.world, playerInv.player.getPosition())) : null;
     }
 

@@ -12,8 +12,8 @@ public class TileEntityQuantumChest extends TileEntityMachine<TileEntityQuantumC
         super(type);
         this.itemHandler.set(() -> new QuantumChestItemHandler(this));
     }
-
-    @Override
+//TODO
+    /*@Override
     public void drawInfo(MatrixStack stack, FontRenderer renderer, int left, int top) {
         this.itemHandler.ifPresent(m -> {
             if (m instanceof QuantumChestItemHandler){
@@ -21,5 +21,5 @@ public class TileEntityQuantumChest extends TileEntityMachine<TileEntityQuantumC
                 handler.drawInfo(stack, renderer, left, top);
             }
         });
-    }
+    }*/
 }

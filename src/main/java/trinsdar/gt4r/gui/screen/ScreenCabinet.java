@@ -15,18 +15,19 @@ public abstract class ScreenCabinet<T extends TileEntityMaterial<T>> extends Scr
     int guiY;
     public ScreenCabinet(ContainerCabinet<T> container, PlayerInventory inv, ITextComponent name, String suffix, int maxY, int guiY) {
         super(container, inv, name);
-        gui = new ResourceLocation(Ref.ID, "textures/gui/machine/cabinet_" + suffix + ".png");
+        //TODO
+        //gui = new ResourceLocation(Ref.ID, "textures/gui/machine/cabinet_" + suffix + ".png");
         this.ySize = maxY;
         this.guiY = guiY;
         this.xSize = 184;
     }
-
-    @Override
+    //TODO
+    /*@Override
     protected void drawGuiContainerBackgroundLayer(MatrixStack stack, float partialTicks, int mouseX, int mouseY) {
         RenderSystem.color4f(1, 1, 1, 1);
-        Minecraft.getInstance().textureManager.bindTexture(gui);
+        //Minecraft.getInstance().textureManager.bindTexture(gui);
         blit(stack, guiLeft, guiTop, 0, 0, xSize, ySize, 256, guiY);
-    }
+    }*/
 
     public static class ScreenCabinetSix<T extends TileEntityMaterial<T>> extends ScreenCabinet<T> {
         public ScreenCabinetSix(ContainerCabinet<T> container, PlayerInventory inv, ITextComponent name) {

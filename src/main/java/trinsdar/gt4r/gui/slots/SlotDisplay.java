@@ -1,5 +1,6 @@
 package trinsdar.gt4r.gui.slots;
 
+import muramasa.antimatter.capability.IGuiHandler;
 import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.gui.slot.AbstractSlot;
 import muramasa.antimatter.tile.TileEntityMachine;
@@ -11,7 +12,7 @@ import net.minecraftforge.items.SlotItemHandler;
 import javax.annotation.Nonnull;
 
 public class SlotDisplay extends AbstractSlot<SlotDisplay> {
-    public SlotDisplay(SlotType<SlotDisplay> type, TileEntityMachine<?> tile, IItemHandler stackHandler, int index, int xPosition, int yPosition) {
+    public SlotDisplay(SlotType<SlotDisplay> type, IGuiHandler tile, IItemHandler stackHandler, int index, int xPosition, int yPosition) {
         super(type, tile, stackHandler, index, xPosition, yPosition);
     }
 

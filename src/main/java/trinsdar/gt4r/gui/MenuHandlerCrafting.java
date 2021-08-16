@@ -2,6 +2,7 @@ package trinsdar.gt4r.gui;
 
 import muramasa.antimatter.capability.AntimatterCaps;
 import muramasa.antimatter.capability.ICoverHandler;
+import muramasa.antimatter.capability.IGuiHandler;
 import muramasa.antimatter.cover.CoverStack;
 import muramasa.antimatter.gui.MenuHandler;
 import muramasa.antimatter.util.Utils;
@@ -14,13 +15,13 @@ import net.minecraft.util.IWorldPosCallable;
 import net.minecraftforge.common.util.LazyOptional;
 import trinsdar.gt4r.data.client.ScreenFactories;
 
-public class MenuHandlerCrafting extends MenuHandler<WorkbenchContainer> {
+public class MenuHandlerCrafting extends MenuHandler<GTWorkbenchContainer> {
     public MenuHandlerCrafting(String domain, String id) {
         super(domain, id);
     }
 
     @Override
-    public WorkbenchContainer onContainerCreate(int windowId, PlayerInventory inv, PacketBuffer data) {
+    public GTWorkbenchContainer onContainerCreate(int windowId, PlayerInventory inv, PacketBuffer data) {
         TileEntity tile = Utils.getTileFromBuf(data);
         if (tile != null) {
             Direction dir = Direction.byIndex(data.readInt());
@@ -31,7 +32,7 @@ public class MenuHandlerCrafting extends MenuHandler<WorkbenchContainer> {
     }
 
     @Override
-    public WorkbenchContainer getMenu(Object tile, PlayerInventory playerInv, int windowId) {
+    protected GTWorkbenchContainer getMenu(IGuiHandler tile, PlayerInventory playerInv, int windowId) {
         return tile instanceof CoverStack ? new ContainerCraftingCover(windowId, playerInv, IWorldPosCallable.of(((CoverStack<?>)tile).getTile().getWorld(), ((CoverStack<?>)tile).getTile().getPos()), ((CoverStack<?>) tile)) : null;
     }
 

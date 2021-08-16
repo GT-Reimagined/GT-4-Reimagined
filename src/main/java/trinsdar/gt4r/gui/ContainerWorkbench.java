@@ -5,6 +5,7 @@ import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import muramasa.antimatter.capability.machine.MachineItemHandler;
 import muramasa.antimatter.gui.MenuHandlerMachine;
 import muramasa.antimatter.gui.SlotData;
+import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.gui.container.ContainerMachine;
 import muramasa.antimatter.tile.TileEntityMachine;
 import net.minecraft.entity.player.PlayerEntity;
@@ -24,6 +25,7 @@ import net.minecraft.world.World;
 import trinsdar.gt4r.gui.slots.SlotWorkTableResult;
 import trinsdar.gt4r.tile.single.TileEntityMaterial;
 
+import java.util.Collections;
 import java.util.Optional;
 
 public class ContainerWorkbench<T extends TileEntityMaterial<T>> extends ContainerMachine<T> {
@@ -46,7 +48,7 @@ public class ContainerWorkbench<T extends TileEntityMaterial<T>> extends Contain
             if (slot.getType().getId().equals("crafting")){
                 supplier = new Slot(craftingGrid, slotIndexMap.getInt(slot.getType().getId()), slot.getX(), slot.getY());
             } else {
-                supplier = slot.getType().getSlotSupplier().get(slot.getType(), tile, slotIndexMap.getInt(slot.getType().getId()), slot);
+                supplier = slot.getType().getSlotSupplier().get((SlotType) slot.getType(), tile, tile.itemHandler.map(t -> t.getAll()).orElse(Collections.emptyMap()), slotIndexMap.getInt(slot.getType().getId()),(SlotData) slot);
             }
             addSlot(supplier);
             slotIndexMap.compute(slot.getType().getId(), (k, v) -> v + 1);

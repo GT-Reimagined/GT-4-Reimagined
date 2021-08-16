@@ -71,7 +71,7 @@ public class TileEntitySteamMachine extends TileEntityMachine<TileEntitySteamMac
         }
 
         @Override
-        protected int getOverclock() {
+        public int getOverclock() {
             return tile.getMachineTier() == BRONZE ? 0 : 1;
         }
 
