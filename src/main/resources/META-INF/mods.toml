@@ -6,8 +6,7 @@ issueTrackerURL="https://github.com/Trinsdar/GT-4-Reimagined/issues"
 
 [[mods]]
 modId="gt4r"
-#version="${version}"
-version="0.0.1"
+version="${version}"
 displayName="GT 4 Reimagined"
 #updateJSONURL="http://myurl.me/"
 displayURL="https://github.com/Trinsdar/GT-4-Reimagined"

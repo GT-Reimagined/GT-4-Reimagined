@@ -12,11 +12,13 @@ import muramasa.antimatter.gui.container.ContainerBasicMachine;
 import muramasa.antimatter.gui.container.ContainerMachine;
 import muramasa.antimatter.gui.container.ContainerMultiMachine;
 import muramasa.antimatter.gui.event.GuiEvent;
+import muramasa.antimatter.gui.screen.AntimatterContainerScreen;
 import muramasa.antimatter.gui.slot.ISlotProvider;
 import muramasa.antimatter.gui.widget.ButtonWidget;
 import muramasa.antimatter.gui.widget.IOWidget;
 import muramasa.antimatter.gui.widget.MachineStateWidget;
 import muramasa.antimatter.gui.widget.ProgressWidget;
+import muramasa.antimatter.gui.widget.TextWidget;
 import muramasa.antimatter.gui.widget.WidgetSupplier;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.tile.TileEntityMachine;
@@ -44,6 +46,9 @@ import trinsdar.gt4r.tile.single.TileEntityMaterial;
 import static muramasa.antimatter.gui.ButtonBody.*;
 import static muramasa.antimatter.gui.SlotType.*;
 import static muramasa.antimatter.gui.Widget.builder;
+import static muramasa.antimatter.machine.MachineFlag.FLUID;
+import static muramasa.antimatter.machine.MachineFlag.ITEM;
+import static muramasa.antimatter.machine.MachineFlag.RECIPE;
 import static muramasa.antimatter.machine.Tier.*;
 import static trinsdar.gt4r.data.GT4RData.COVER_CONVEYOR;
 import static trinsdar.gt4r.data.GT4RData.COVER_CRAFTING;
@@ -334,20 +339,16 @@ public class Guis {
             ButtonBody[][] overlays = new ButtonBody[][]{{IMPORT, IMPORT_CONDITIONAL, IMPORT_INVERT_CONDITIONAL, EXPORT, EXPORT_CONDITIONAL, EXPORT_INVERT_CONDITIONAL}, {IMPORT_EXPORT, IMPORT_EXPORT_CONDITIONAL, IMPORT_EXPORT_INVERT_CONDITIONAL, EXPORT_IMPORT, EXPORT_IMPORT_CONDITIONAL, EXPORT_IMPORT_INVERT_CONDITIONAL}};
 
             COVER_CONVEYOR.addGuiCallback(t -> {
-                int i = 0;
                 for (int x = 0; x < 6; x++){
                     for (int y = 0; y < 2; y++){
                         t.addButton(35 + (x * 18), 25 + (y * 18), 16, 16, overlays[y][x]);
-                        i++;
                     }
                 }
             });
             COVER_PUMP.addGuiCallback(t -> {
-                int i = 0;
                 for (int x = 0; x < 6; x++){
                     for (int y = 0; y < 2; y++){
                         t.addButton(35 + (x * 18), 25 + (y * 18), 16, 16, overlays[y][x]);
-                        i++;
                     }
                 }
             });
@@ -397,6 +398,13 @@ public class Guis {
     }
 
     public static void initWidgets(){
+        FORGE_HAMMER.getCallbacks().remove(1);
+        /*FORGE_HAMMER.addGuiCallback(t -> {
+            t.addWidget(WidgetSupplier.build((a, b) -> TextWidget.build(((AntimatterContainerScreen<?>)b).getTitle().getString(), 4210752).build(a,b)).setPos(9, 5).clientSide())
+                    .addWidget(ProgressWidget.build(BarDir.BOTTOM, false))
+                    .addWidget(MachineStateWidget.build().setPos(84,46).setWH(8,8))
+                    .addWidget(IOWidget.build(9,63,16,16));
+        });*/
         /*FORGE_HAMMER.getGui().removeWidget(0, null).widget(ProgressWidget.build(BarDir.BOTTOM, false));
         CENTRIFUGE.getGui().removeWidget(2, null).widget(IOWidget.build(9, 45, 16, 16));
         ELECTROLYZER.getGui().removeWidget(2, null).widget(IOWidget.build(9, 45, 16, 16));

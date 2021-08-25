@@ -192,19 +192,22 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:rhino-416294:${rhino_file}")
     runtimeOnly fg.deobf("curse.maven:architectury-forge-419699:${architectury_file}")
     runtimeOnly fg.deobf("curse.maven:kubejs-238086:${kubejs_file}")
+    runtimeOnly fg.deobf("curse.maven:bluepower-223099:3375771")
 
-    if (findProject(':AntimatterAPI') != null) {
-        implementation project(':AntimatterAPI')
-    } else {
-        runtimeOnly fg.deobf("com.github.GregTech-Intergalactical:AntimatterAPI:${antimatter_version}")
-        compileOnly ("com.github.GregTech-Intergalactical:AntimatterAPI:${antimatter_version}")
-    }
-    if (findProject(':TesseractAPI') != null) {
-        compileOnly project(':TesseractAPI')
-    } else {
-        runtimeOnly fg.deobf("com.github.GregTech-Intergalactical:TesseractAPI:${tesseract_version}")
-        compileOnly ("com.github.GregTech-Intergalactical:TesseractAPI:${tesseract_version}")
-    }
+//    if (findProject(':AntimatterAPI') != null) {
+    implementation project(path: ':AntimatterAPI')
+    //   } else {
+    //compileOnly sources jar.
+    //       runtimeOnly fg.deobf("com.github.GregTech-Intergalactical:AntimatterAPI:${antimatter_version}")
+    //       compileOnly ("com.github.GregTech-Intergalactical:AntimatterAPI:${antimatter_version}")
+    //   }
+    //   if (findProject(':TesseractAPI') != null) {
+    implementation project(':TesseractAPI')
+    //  } else {
+    //compileOnly sources jar.
+    //       runtimeOnly fg.deobf("com.github.GregTech-Intergalactical:TesseractAPI:${tesseract_version}")
+    //       compileOnly ("com.github.GregTech-Intergalactical:TesseractAPI:${tesseract_version}")
+    //   }
 
     annotationProcessor 'org.spongepowered:mixin:0.8.2:processor'
 
@@ -257,4 +260,10 @@ jar {
 processResources {
     exclude('gtuassets1.14')
     exclude('assets/gt4r/textures/old_textures')
+
+    inputs.property "version", project.version
+
+    filesMatching("META-INF/mods.toml") {
+        expand "version": project.version
+    }
 }

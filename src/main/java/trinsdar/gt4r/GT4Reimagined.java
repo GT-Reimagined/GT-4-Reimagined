@@ -12,6 +12,7 @@ import muramasa.antimatter.tool.IAntimatterTool;
 import net.minecraft.block.AnvilBlock;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
@@ -65,6 +66,7 @@ import org.apache.logging.log4j.Logger;
 import trinsdar.gt4r.proxy.CommonHandler;
 import trinsdar.gt4r.proxy.ServerHandler;
 import trinsdar.gt4r.tile.TileEntityTypes;
+import trinsdar.gt4r.tree.RubberFoliagePlacer;
 import trinsdar.gt4r.worldgen.GT4RFeatures;
 
 import java.util.UUID;
@@ -172,6 +174,9 @@ public class GT4Reimagined extends AntimatterMod {
         if (e.getRegistry() == ForgeRegistries.ENTITIES){
             IForgeRegistry<EntityType<?>> reg = (IForgeRegistry<EntityType<?>>) e.getRegistry();
             reg.register(GT4RData.SPEAR_ENTITY_TYPE.setRegistryName(new ResourceLocation(Ref.ID, "spear")));
+        }
+        if (e.getRegistry() == ForgeRegistries.FOLIAGE_PLACER_TYPES){
+            ((IForgeRegistry)e.getRegistry()).register(RubberFoliagePlacer.RUBBER);
         }
     }
 
