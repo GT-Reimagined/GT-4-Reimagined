@@ -1,5 +1,4 @@
 modLoader="javafml"
-#loaderVersion="[${loader_version},)"
 license="LGPLv3"
 loaderVersion="[31,)"
 issueTrackerURL="https://github.com/Trinsdar/GT-4-Reimagined/issues"
@@ -8,30 +7,25 @@ issueTrackerURL="https://github.com/Trinsdar/GT-4-Reimagined/issues"
 modId="gt4r"
 version="${version}"
 displayName="GT 4 Reimagined"
-#updateJSONURL="http://myurl.me/"
 displayURL="https://github.com/Trinsdar/GT-4-Reimagined"
-#logoFile="gregtech.png"
 credits="GregoriusTechneticies for his previous versions of GregTech. And the current GregTech community and Bear989 for suggestions and ideas."
 authors="Trinsdar"
 description='''My remake of GregTech 4'''
 [[dependencies.gt4r]]
     modId="antimatter"
     mandatory=true
-    #versionRange="[${antimatter_version},)"
-    versionRange="[0.0.1,)"
+    versionRange="[0.0.4,)"
     ordering="AFTER"
     side="BOTH"
 [[dependencies.gt4r]]
     modId="forge"
     mandatory=true
-    #versionRange="[${forge_version},)"
     versionRange="[36.1.0,)"
     ordering="AFTER"
     side="BOTH"
 [[dependencies.gt4r]]
     modId="minecraft"
     mandatory=true
-    #versionRange="[${minecraft_version}]"
     versionRange="[1.16.5,)"
     ordering="AFTER"
     side="BOTH"
