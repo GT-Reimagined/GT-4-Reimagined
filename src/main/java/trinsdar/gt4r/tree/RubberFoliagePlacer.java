@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.util.internal.MathUtil;
 import muramasa.antimatter.Antimatter;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.gen.IWorldGenerationReader;
@@ -12,6 +13,7 @@ import net.minecraft.world.gen.feature.FeatureSpread;
 import net.minecraft.world.gen.feature.TreeFeature;
 import net.minecraft.world.gen.foliageplacer.FoliagePlacer;
 import net.minecraft.world.gen.foliageplacer.FoliagePlacerType;
+import trinsdar.gt4r.Ref;
 
 import javax.swing.tree.TreeNode;
 import java.util.Random;

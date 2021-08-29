@@ -176,7 +176,7 @@ public class GT4Reimagined extends AntimatterMod {
             reg.register(GT4RData.SPEAR_ENTITY_TYPE.setRegistryName(new ResourceLocation(Ref.ID, "spear")));
         }
         if (e.getRegistry() == ForgeRegistries.FOLIAGE_PLACER_TYPES){
-            ((IForgeRegistry)e.getRegistry()).register(RubberFoliagePlacer.RUBBER);
+            ((IForgeRegistry)e.getRegistry()).register(RubberFoliagePlacer.RUBBER.setRegistryName(Ref.ID, "rubber_foilage_placer"));
         }
     }
 
