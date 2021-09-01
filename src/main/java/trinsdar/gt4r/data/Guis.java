@@ -43,6 +43,8 @@ import trinsdar.gt4r.tile.multi.TileEntityIndustrialBlastFurnace;
 import trinsdar.gt4r.tile.single.TileEntityCoalBoiler;
 import trinsdar.gt4r.tile.single.TileEntityMaterial;
 
+import java.util.function.BiFunction;
+
 import static muramasa.antimatter.gui.ButtonBody.*;
 import static muramasa.antimatter.gui.SlotType.*;
 import static muramasa.antimatter.gui.Widget.builder;
@@ -212,7 +214,7 @@ public class Guis {
         EXTRACTOR.add(COMPRESSOR);
         EXTRUDER.add(ALLOY_SMELTER);
         LATHE.add(CUTTER);
-        MACERATOR.add(MV, COMPRESSOR).add(MV, IT_OUT, 125, 25).add(MV, IT_OUT, 143, 25);
+        MACERATOR.add(MV, COMPRESSOR).add(MV, IT_OUT, 125, 25).add(MV, IT_OUT, 143, 25).setGuiTiers(new ImmutableMap.Builder<Tier, Tier>().put(LV, LV).put(MV, MV));;
         MACERATOR.add(LV, COMPRESSOR);
         RECYCLER.add(COMPRESSOR);
         WIRE_MILL.add(COMPRESSOR);
@@ -439,6 +441,8 @@ public class Guis {
         WORKBENCH.widget(addButton(154, 28, 16, 16, NO_OVERLAY, 1));
         CHARGING_WORKBENCH.widget(addButton(136, 28, 16, 16, NO_OVERLAY, 0));
         CHARGING_WORKBENCH.widget(addButton(154, 28, 16, 16, NO_OVERLAY, 1));*/
+        BiFunction<Boolean, String, ResourceLocation> textures = (c, l) -> new ResourceLocation(Ref.ID, "textures/gui/machine/" + (c ? "charging_" : "") + l + ".png");
+
         BRONZE_WORKBENCH.setGUI(WORKBENCH_HANDLER);
         IRON_WORKBENCH.setGUI(WORKBENCH_HANDLER);
         ALUMINIUM_WORKBENCH.setGUI(WORKBENCH_HANDLER);
@@ -448,15 +452,16 @@ public class Guis {
         ALUMINIUM_LOCKER.setGUI(LOCKER_HANDLER);
         IRON_CHARGING_LOCKER.setGUI(LOCKER_HANDLER);
         ALUMINIUM_CHARGING_LOCKER.setGUI(LOCKER_HANDLER);
-        BRONZE_WORKBENCH.add(WORKBENCH.getSlots());
-        IRON_WORKBENCH.add(WORKBENCH.getSlots());
-        ALUMINIUM_WORKBENCH.add(WORKBENCH.getSlots());
-        IRON_CHARGING_WORKBENCH.add(CHARGING_WORKBENCH.getSlots());
-        ALUMINIUM_CHARGING_WORKBENCH.add(CHARGING_WORKBENCH.getSlots());
-        IRON_LOCKER.add(LOCKER.getSlots());
-        ALUMINIUM_LOCKER.add(LOCKER.getSlots());
-        IRON_CHARGING_LOCKER.add(CHARGING_LOCKER.getSlots());
-        ALUMINIUM_CHARGING_LOCKER.add(CHARGING_LOCKER.getSlots());
+        BRONZE_WORKBENCH.add(WORKBENCH.getSlots()).getGui().setOverrideLocation(textures.apply(false, "workbench"));
+        IRON_WORKBENCH.add(WORKBENCH.getSlots()).getGui().setOverrideLocation(textures.apply(false, "workbench"));
+        ALUMINIUM_WORKBENCH.add(WORKBENCH.getSlots()).getGui().setOverrideLocation(textures.apply(false, "workbench"));
+        IRON_CHARGING_WORKBENCH.add(CHARGING_WORKBENCH.getSlots()).getGui().setOverrideLocation(textures.apply(true, "workbench"));
+        ALUMINIUM_CHARGING_WORKBENCH.add(CHARGING_WORKBENCH.getSlots()).getGui().setOverrideLocation(textures.apply(true, "workbench"));
+        IRON_LOCKER.add(LOCKER.getSlots()).getGui().setOverrideLocation(textures.apply(false, "locker"));
+        ALUMINIUM_LOCKER.add(LOCKER.getSlots()).getGui().setOverrideLocation(textures.apply(false, "locker"));
+        IRON_CHARGING_LOCKER.add(CHARGING_LOCKER.getSlots()).getGui().setOverrideLocation(textures.apply(true, "locker"));
+        ALUMINIUM_CHARGING_LOCKER.add(CHARGING_LOCKER.getSlots()).getGui().setOverrideLocation(textures.apply(true, "locker"));
+
         COAL_BOILER.setGUI(COAL_BOILER_MENU_HANDLER);
         FUSION_REACTOR.setGUI(FUSION_MENU_HANDLER);
         //DISTILLATION_TOWER.setGUI(DISTILLATION_MENU_HANDLER);
@@ -472,6 +477,17 @@ public class Guis {
         MAGNALIUM_CABINET.setGUI(CABINET_HANDLER_SEVEN);
         PLATINUM_CABINET.setGUI(CABINET_HANDLER_EIGHT);
         OSMIUM_CABINET.setGUI(CABINET_HANDLER_NINE);
+        IRON_CABINET.getGui().setOverrideLocation(textures.apply(false, "cabinet_six"));
+        ALUMINIUM_CABINET.getGui().setOverrideLocation(textures.apply(false, "cabinet_six"));
+        WROUGHT_IRON_CABINET.getGui().setOverrideLocation(textures.apply(false, "cabinet_six"));
+        BRASS_CABINET.getGui().setOverrideLocation(textures.apply(false, "cabinet_six"));
+        CUPRONICKEL_CABINET.getGui().setOverrideLocation(textures.apply(false, "cabinet_six"));
+        ELECTRUM_CABINET.getGui().setOverrideLocation(textures.apply(false, "cabinet_seven"));
+        GOLD_CABINET.getGui().setOverrideLocation(textures.apply(false, "cabinet_seven"));
+        SILVER_CABINET.getGui().setOverrideLocation(textures.apply(false, "cabinet_seven"));
+        MAGNALIUM_CABINET.getGui().setOverrideLocation(textures.apply(false, "cabinet_seven"));
+        PLATINUM_CABINET.getGui().setOverrideLocation(textures.apply(false, "cabinet_eight"));
+        OSMIUM_CABINET.getGui().setOverrideLocation(textures.apply(false, "cabinet_nine"));
         for (int i = 0; i < 9; i++){
             for (int j = 0; j < 9; ++j) {
                 if (i < 6){

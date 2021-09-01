@@ -80,10 +80,10 @@ public class GT4RConfig {
                     .worldRestart()
                     .define("ENABLE_REPLACEMENT_VANILLA_ORE_GEN", true);
 
-            GENERATE_STONE_LAYERS = builder.comment("Enables Generations of my stnes as stone layers in the world - Default: true")
+            GENERATE_STONE_LAYERS = builder.comment("Enables Generations of my stnes as stone layers in the world - Default: false")
                     .translation(Ref.ID + ".config.generate_stone_layers")
                     .worldRestart()
-                    .define("GENERATE_STONE_LAYERS", true);
+                    .define("GENERATE_STONE_LAYERS", false);
 
             builder.push("Ore Vein Flags");
 
