@@ -29,3 +29,9 @@ description='''My remake of GregTech 4'''
     versionRange="[1.16.5,)"
     ordering="AFTER"
     side="BOTH"
+[[dependencies.gt4r]]
+modId="terrestria"
+mandatory=false
+versionRange="[1.0.0,)"
+ordering="AFTER"
+side="BOTH"

@@ -106,33 +106,23 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
         if (GT4RConfig.GAMEPLAY.HARDER_WOOD){
             addStackRecipe(consumer, Ref.ID, "sticks_2", "wood_stuff", "has_planks", this.hasSafeItem(ItemTags.PLANKS), new ItemStack(Items.STICK, 2), of('P', ItemTags.PLANKS), "P", "P");
             addStackRecipe(consumer, Ref.ID, "sticks_4", "wood_stuff", "has_planks", this.hasSafeItem(ItemTags.PLANKS), new ItemStack(Items.STICK, 4), of('P', ItemTags.PLANKS, 'S', SAW.getTag()), "S", "P", "P");
-            shapeless(consumer, "oak_planks_2", "planks", "has_oak_wood", this.hasSafeItem(ItemTags.OAK_LOGS), new ItemStack(Items.OAK_PLANKS, 2), ItemTags.OAK_LOGS);
-            shapeless(consumer, "birch_planks_2", "planks", "has_birch_wood", this.hasSafeItem(ItemTags.BIRCH_LOGS), new ItemStack(Items.BIRCH_PLANKS, 2), ItemTags.BIRCH_LOGS);
-            shapeless(consumer, "spruce_planks_2", "planks", "has_spruce_wood", this.hasSafeItem(ItemTags.SPRUCE_LOGS), new ItemStack(Items.SPRUCE_PLANKS, 2), ItemTags.SPRUCE_LOGS);
-            shapeless(consumer, "jungle_planks_2", "planks", "has_jungle_wood", this.hasSafeItem(ItemTags.JUNGLE_LOGS), new ItemStack(Items.JUNGLE_PLANKS, 2), ItemTags.JUNGLE_LOGS);
-            shapeless(consumer, "acacia_planks_2", "planks", "has_acacia_wood", this.hasSafeItem(ItemTags.ACACIA_LOGS), new ItemStack(Items.ACACIA_PLANKS, 2), ItemTags.ACACIA_LOGS);
-            shapeless(consumer, "dark_oak_planks_2", "planks", "has_dark_oak_wood", this.hasSafeItem(ItemTags.DARK_OAK_LOGS), new ItemStack(Items.DARK_OAK_PLANKS, 2), ItemTags.DARK_OAK_LOGS);
-            shapeless(consumer, "crimson_planks_2", "planks", "has_crimson_wood", this.hasSafeItem(ItemTags.CRIMSON_STEMS), new ItemStack(Items.CRIMSON_PLANKS, 2), ItemTags.CRIMSON_STEMS);
-            shapeless(consumer, "warped_planks_2", "planks", "has_warped_wood", this.hasSafeItem(ItemTags.WARPED_STEMS), new ItemStack(Items.WARPED_PLANKS, 2), ItemTags.WARPED_STEMS);
-
-            addStackRecipe(consumer, Ref.ID, "oak_planks_4", "planks", "has_oak_wood", this.hasSafeItem(ItemTags.OAK_LOGS), new ItemStack(Items.OAK_PLANKS, 4), of('S', SAW.getTag(), 'P', ItemTags.OAK_LOGS), "S", "P");
-            addStackRecipe(consumer, Ref.ID, "birch_planks_4", "planks", "has_birch_wood", this.hasSafeItem(ItemTags.BIRCH_LOGS), new ItemStack(Items.BIRCH_PLANKS, 4), of('S', SAW.getTag(), 'P', ItemTags.BIRCH_LOGS), "S", "P");
-            addStackRecipe(consumer, Ref.ID, "spruce_planks_4", "planks", "has_spruce_wood", this.hasSafeItem(ItemTags.SPRUCE_LOGS), new ItemStack(Items.SPRUCE_PLANKS, 4), of('S', SAW.getTag(), 'P', ItemTags.SPRUCE_LOGS), "S", "P");
-            addStackRecipe(consumer, Ref.ID, "jungle_planks_4", "planks", "has_jungle_wood", this.hasSafeItem(ItemTags.JUNGLE_LOGS), new ItemStack(Items.JUNGLE_PLANKS, 4), of('S', SAW.getTag(), 'P', ItemTags.JUNGLE_LOGS), "S", "P");
-            addStackRecipe(consumer, Ref.ID, "acacia_planks_4", "planks", "has_acacia_wood", this.hasSafeItem(ItemTags.ACACIA_LOGS), new ItemStack(Items.ACACIA_PLANKS, 4), of('S', SAW.getTag(), 'P', ItemTags.ACACIA_LOGS), "S", "P");
-            addStackRecipe(consumer, Ref.ID, "dark_oak_planks_4", "planks", "has_dark_oak_wood", this.hasSafeItem(ItemTags.DARK_OAK_LOGS), new ItemStack(Items.DARK_OAK_PLANKS, 4), of('S', SAW.getTag(), 'P', ItemTags.DARK_OAK_LOGS), "S", "P");
-            addStackRecipe(consumer, Ref.ID, "crimson_planks_4", "planks", "has_crimson_wood", this.hasSafeItem(ItemTags.CRIMSON_STEMS), new ItemStack(Items.CRIMSON_PLANKS, 4), of('S', SAW.getTag(), 'P', ItemTags.CRIMSON_STEMS), "S", "P");
-            addStackRecipe(consumer, Ref.ID, "warped_planks_4", "planks", "has_warped_wood", this.hasSafeItem(ItemTags.WARPED_STEMS), new ItemStack(Items.WARPED_PLANKS, 4), of('S', SAW.getTag(), 'P', ItemTags.WARPED_STEMS), "S", "P");
         } else {
             addStackRecipe(consumer, Ref.ID, "sticks_4", "wood_stuff", "has_planks", this.hasSafeItem(ItemTags.PLANKS), new ItemStack(Items.STICK, 4), of('P', ItemTags.PLANKS), "P", "P");
-            shapeless(consumer, "oak_planks_4", "planks", "has_oak_wood", this.hasSafeItem(ItemTags.OAK_LOGS), new ItemStack(Items.OAK_PLANKS, 4), ItemTags.OAK_LOGS);
-            shapeless(consumer, "birch_planks_4", "planks", "has_birch_wood", this.hasSafeItem(ItemTags.BIRCH_LOGS), new ItemStack(Items.BIRCH_PLANKS, 4), ItemTags.BIRCH_LOGS);
-            shapeless(consumer, "spruce_planks_4", "planks", "has_spruce_wood", this.hasSafeItem(ItemTags.SPRUCE_LOGS), new ItemStack(Items.SPRUCE_PLANKS, 4), ItemTags.SPRUCE_LOGS);
-            shapeless(consumer, "jungle_planks_4", "planks", "has_jungle_wood", this.hasSafeItem(ItemTags.JUNGLE_LOGS), new ItemStack(Items.JUNGLE_PLANKS, 4), ItemTags.JUNGLE_LOGS);
-            shapeless(consumer, "acacia_planks_4", "planks", "has_acacia_wood", this.hasSafeItem(ItemTags.ACACIA_LOGS), new ItemStack(Items.ACACIA_PLANKS, 4), ItemTags.ACACIA_LOGS);
-            shapeless(consumer, "dark_oak_planks_4", "planks", "has_dark_oak_wood", this.hasSafeItem(ItemTags.DARK_OAK_LOGS), new ItemStack(Items.DARK_OAK_PLANKS, 4), ItemTags.DARK_OAK_LOGS);
-            shapeless(consumer, "crimson_planks_4", "planks", "has_crimson_wood", this.hasSafeItem(ItemTags.CRIMSON_STEMS), new ItemStack(Items.CRIMSON_PLANKS, 4), ItemTags.CRIMSON_STEMS);
-            shapeless(consumer, "warped_planks_4", "planks", "has_warped_wood", this.hasSafeItem(ItemTags.WARPED_STEMS), new ItemStack(Items.WARPED_PLANKS, 4), ItemTags.WARPED_STEMS);
+        }
+        addWoodRecipe(consumer, ItemTags.OAK_LOGS, Items.OAK_PLANKS);
+        addWoodRecipe(consumer, ItemTags.BIRCH_LOGS, Items.BIRCH_PLANKS);
+        addWoodRecipe(consumer, ItemTags.SPRUCE_LOGS, Items.SPRUCE_PLANKS);
+        addWoodRecipe(consumer, ItemTags.JUNGLE_LOGS, Items.JUNGLE_PLANKS);
+        addWoodRecipe(consumer, ItemTags.ACACIA_LOGS, Items.ACACIA_PLANKS);
+        addWoodRecipe(consumer, ItemTags.DARK_OAK_LOGS, Items.DARK_OAK_PLANKS);
+        addWoodRecipe(consumer, ItemTags.CRIMSON_STEMS, Items.CRIMSON_PLANKS);
+        addWoodRecipe(consumer, ItemTags.WARPED_STEMS, Items.WARPED_PLANKS);
+        if (AntimatterAPI.isModLoaded(Ref.MOD_TERRESTRIA)){
+            String[] woodTypes = {"cypress", "hemlock", "japanese_maple", "rainbow_eucalyptus", "redwood", "rubber", "sakura", "willow", "yucca_palm"};
+            for (String woodType : woodTypes) {
+                addWoodRecipe(consumer, TagUtils.getItemTag(new ResourceLocation(Ref.MOD_TERRESTRIA, woodType + "_logs")), ForgeRegistries.ITEMS.getValue(new ResourceLocation(Ref.MOD_TERRESTRIA, woodType + "_planks")));
+            }
+
         }
         String[] stones = {"stone", "smooth_stone", "sandstone", "cut_sandstone", "cobblestone", "red_sandstone", "cut_red_sandstone", "prismarine", "dark_prismarine", "polished_granite", "smooth_red_sandstone", "polished_diorite", "mossy_cobblestone", "smooth_sandstone", "smooth_quartz", "granite", "andesite", "polished_andesite", "diorite", "blackstone", "polished_blackstone", "purpur", "quartz", "brick", "stone_brick", "nether_brick", "prismarine_brick", "mossy_stone_brick", "end_stone_brick", "red_nether_brick", "polished_blackstone_brick"};
         for (String stone : stones) {
@@ -146,6 +136,15 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
             ResourceLocation name = new ResourceLocation(s + "_planks");
             ResourceLocation slab = new ResourceLocation(s + "_slab");
             addItemRecipe(consumer, Ref.ID, slab.getPath() + "_to_" + name.getPath(), "slabs", "has_stone", this.hasSafeItem(ForgeRegistries.ITEMS.getValue(slab)), ForgeRegistries.ITEMS.getValue(name), of('S', ForgeRegistries.ITEMS.getValue(slab)), "S", "S");
+        }
+    }
+
+    public void addWoodRecipe(Consumer<IFinishedRecipe> consumer, ITag.INamedTag<Item> log, Item plank){
+        if (GT4RConfig.GAMEPLAY.HARDER_WOOD){
+            shapeless(consumer, plank.getRegistryName().getPath() + "_2", "planks", "has_" + log.getName().getPath(), this.hasSafeItem(log), new ItemStack(plank, 2), log);
+            addStackRecipe(consumer, Ref.ID, plank.getRegistryName().getPath() + "_4", "planks", "has_" + log.getName().getPath(), this.hasSafeItem(log), new ItemStack(plank, 4), of('S', SAW.getTag(), 'P', log), "S", "P");
+        } else {
+            shapeless(consumer, plank.getRegistryName().getPath() + "_4", "planks", "has_" + log.getName().getPath(), this.hasSafeItem(log), new ItemStack(plank, 4), log);
         }
     }
 
