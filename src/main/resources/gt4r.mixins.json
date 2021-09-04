@@ -4,7 +4,8 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "gt4r.refmap.json",
   "client": [
-    "GameRendererMixin"
+    "GameRendererMixin",
+    "CapeLayerMixin"
   ],
   "server": [
     "ServerPlayNetHandlerMixin"

@@ -21,6 +21,7 @@ import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.IItemProvider;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Tuple;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
@@ -65,12 +66,18 @@ import net.minecraft.block.SoundType;
 import net.minecraft.item.Item;
 
 import javax.annotation.Nonnull;
+import java.util.Collection;
 import java.util.Map;
 
 import static muramasa.antimatter.Data.NULL;
 import static trinsdar.gt4r.data.Materials.*;
 
 public class GT4RData {
+
+    private static final String CAPE_PATH = "textures/capes/";
+    public static final ResourceLocation[] CAPE_LOCATIONS = new ResourceLocation[] {new ResourceLocation(Ref.ID,  CAPE_PATH + "braintech.png"), new ResourceLocation(Ref.ID, CAPE_PATH + "silver.png"), new ResourceLocation(Ref.ID, CAPE_PATH + "mrbrain.png"), new ResourceLocation(Ref.ID, CAPE_PATH + "dev.png"), new ResourceLocation(Ref.ID, CAPE_PATH + "gold.png"), new ResourceLocation(Ref.ID, CAPE_PATH + "crazy.png"), new ResourceLocation(Ref.ID, CAPE_PATH + "fake.png")};
+
+    public static Collection<String> mSupporterListSilver, mSupporterListGold;
 
     private static final boolean HC = AntimatterConfig.GAMEPLAY.HARDCORE_CABLES;
 
