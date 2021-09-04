@@ -17,7 +17,7 @@ public abstract class CapeLayerMixin extends LayerRenderer<AbstractClientPlayerE
         super(entityRendererIn);
     }
 
-    @Redirect(method = "render(Lcom/mojang/blaze3d/matrix/MatrixStack;Lnet/minecraft/client/renderer/IRenderTypeBuffer;I;Lnet/minecraft/client/entity/player/AbstractClientPlayerEntity;F;F;F;F;F;F;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/entity/player/AbstractClientPlayerEntity;getLocationCape()Lnet/minecraft/util/ResourceLocation;"))
+    @Redirect(method = "render(Lcom/mojang/blaze3d/matrix/MatrixStack;Lnet/minecraft/client/renderer/IRenderTypeBuffer;I;Lnet/minecraft/client/entity/player/AbstractClientPlayerEntity;FFFFFF)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/entity/player/AbstractClientPlayerEntity;getLocationCape()Lnet/minecraft/util/ResourceLocation;"))
     private ResourceLocation getLocationGTCape(AbstractClientPlayerEntity entity){
         if (entity.getDisplayName().equals("Dev")) return GT4RData.CAPE_LOCATIONS[3];
         return entity.getLocationCape();
