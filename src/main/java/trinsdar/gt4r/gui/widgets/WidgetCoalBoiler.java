@@ -6,13 +6,22 @@ import muramasa.antimatter.gui.GuiInstance;
 import muramasa.antimatter.gui.IGuiElement;
 import muramasa.antimatter.gui.Widget;
 import muramasa.antimatter.gui.container.ContainerMachine;
+import muramasa.antimatter.machine.MachineFlag;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.ITextProperties;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.client.gui.GuiUtils;
 import trinsdar.gt4r.tile.single.TileEntityCoalBoiler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class WidgetCoalBoiler extends Widget {
@@ -84,5 +93,26 @@ public class WidgetCoalBoiler extends Widget {
             int y = (gui.screen.getGuiTop() + 42 + 18) - lvl;
             drawTexture(stack, gui.handler.getGuiTexture(), gui.screen.getGuiLeft() + 115, y, gui.screen.getXSize(), 18 - lvl, 18, lvl);
         }
+    }
+
+    @Override
+    public void mouseOver(MatrixStack stack, double mouseX, double mouseY, float partialTicks) {
+        renderTooltip(stack,"Show Recipes", mouseX, mouseY, 115, 43, 18, 18);
+        if (water >= 1) {
+            renderTooltip(stack,"Water: " + water + " MB", mouseX, mouseY, 84, 25, 10, 54);
+        }
+        if (steam >= 1) {
+            renderTooltip(stack,"Steam: " + steam + " MB", mouseX, mouseY, 70, 25, 10, 54);
+        }
+        renderTooltip(stack,"Heat: " + heat + "K out of " + maxHeat, mouseX, mouseY, 96, 25, 10, 54);
+        renderTooltip(stack,"Fuel: " + fuel, mouseX, mouseY + 10, 115, 53, 18, 18);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    protected void renderTooltip(MatrixStack matrixStack, String text, double mouseX, double mouseY, int x, int y, int w, int h) {
+        if (gui.screen.isInGui(x, y, w, h, mouseX, mouseY)){
+            GuiUtils.drawHoveringText(matrixStack, Collections.singletonList(new StringTextComponent(text)), (int)mouseX, (int)mouseY, w, h, -1, Minecraft.getInstance().fontRenderer);
+        }
+
     }
 }
