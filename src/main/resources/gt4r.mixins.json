@@ -5,7 +5,7 @@
   "refmap": "gt4r.refmap.json",
   "client": [
     "GameRendererMixin",
-    "CapeLayerMixin"
+    "AbstractClientPlayerEntityMixin"
   ],
   "server": [
     "ServerPlayNetHandlerMixin"
