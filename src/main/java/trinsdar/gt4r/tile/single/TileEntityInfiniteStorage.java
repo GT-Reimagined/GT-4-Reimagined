@@ -1,13 +1,20 @@
 package trinsdar.gt4r.tile.single;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+import muramasa.antimatter.capability.EnergyHandler;
 import muramasa.antimatter.capability.machine.MachineEnergyHandler;
+import muramasa.antimatter.gui.GuiInstance;
+import muramasa.antimatter.gui.IGuiElement;
 import muramasa.antimatter.gui.event.GuiEvent;
 import muramasa.antimatter.gui.event.IGuiEvent;
+import muramasa.antimatter.gui.widget.InfoRenderWidget;
+import muramasa.antimatter.gui.widget.WidgetSupplier;
+import muramasa.antimatter.integration.jei.renderer.IInfoRenderer;
 import muramasa.antimatter.machine.MachineState;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.TileEntityMachine;
+import muramasa.antimatter.tile.single.TileEntityDigitalTransformer;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Direction;
@@ -15,7 +22,7 @@ import tesseract.api.capability.TesseractGTCapability;
 
 import java.util.List;
 
-public class TileEntityInfiniteStorage<T extends TileEntityInfiniteStorage<T>> extends TileEntityMachine<T> {
+public class TileEntityInfiniteStorage<T extends TileEntityInfiniteStorage<T>> extends TileEntityMachine<T> implements IInfoRenderer<TileEntityInfiniteStorage.InfiniteStorageWidget> {
 
     public TileEntityInfiniteStorage(Machine<?> type) {
         super(type);
@@ -135,4 +142,39 @@ public class TileEntityInfiniteStorage<T extends TileEntityInfiniteStorage<T>> e
         });
 
     }*/
+
+    @Override
+    public int drawInfo(InfiniteStorageWidget widget, MatrixStack stack, FontRenderer renderer, int left, int top) {
+        renderer.drawString(stack,"Control Panel", left + 43, top + 21, 16448255);
+        renderer.drawString(stack,"VOLT: " + widget.voltage, left + 43, top + 40, 16448255);
+        renderer.drawString(stack,"TIER: " + Tier.getTier(widget.voltage < 0 ? -widget.voltage : widget.voltage).getId().toUpperCase(), left + 43, top + 48, 16448255);
+        renderer.drawString(stack,"AMP: " + widget.amperage, left + 43, top + 56, 16448255);
+        renderer.drawString(stack,"SUM: " + (long)(widget.amperage * widget.voltage), left + 43, top + 64, 16448255);
+        return 72;
+    }
+
+    @Override
+    public void addWidgets(GuiInstance instance, IGuiElement parent) {
+        super.addWidgets(instance, parent);
+        instance.addWidget(InfiniteStorageWidget.build());
+    }
+
+    public static class InfiniteStorageWidget extends InfoRenderWidget<InfiniteStorageWidget> {
+        public int amperage = 0, voltage = 0;
+        protected InfiniteStorageWidget(GuiInstance gui, IGuiElement parent, IInfoRenderer<InfiniteStorageWidget> renderer) {
+            super(gui, parent, renderer);
+        }
+
+        @Override
+        public void init() {
+            super.init();
+            TileEntityInfiniteStorage<?> m = (TileEntityInfiniteStorage<?>) gui.handler;
+            gui.syncInt(() -> m.energyHandler.map(EnergyHandler::getOutputAmperage).orElse(0), i -> amperage = i);
+            gui.syncInt(() -> m.energyHandler.map(EnergyHandler::getOutputVoltage).orElse(0), i -> voltage = i);
+        }
+
+        public static WidgetSupplier build() {
+            return builder((a,b) -> new InfiniteStorageWidget(a,b, (IInfoRenderer) a.handler));
+        }
+    }
 }

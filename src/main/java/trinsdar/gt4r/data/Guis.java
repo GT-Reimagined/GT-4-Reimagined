@@ -7,14 +7,11 @@ import muramasa.antimatter.gui.BarDir;
 import muramasa.antimatter.gui.ButtonBody;
 import muramasa.antimatter.gui.GuiData;
 import muramasa.antimatter.gui.MenuHandlerMachine;
-import muramasa.antimatter.gui.container.AntimatterContainer;
 import muramasa.antimatter.gui.container.ContainerBasicMachine;
 import muramasa.antimatter.gui.container.ContainerMachine;
 import muramasa.antimatter.gui.container.ContainerMultiMachine;
-import muramasa.antimatter.gui.event.GuiEvent;
 import muramasa.antimatter.gui.screen.AntimatterContainerScreen;
 import muramasa.antimatter.gui.slot.ISlotProvider;
-import muramasa.antimatter.gui.widget.ButtonWidget;
 import muramasa.antimatter.gui.widget.IOWidget;
 import muramasa.antimatter.gui.widget.MachineStateWidget;
 import muramasa.antimatter.gui.widget.ProgressWidget;
@@ -26,7 +23,6 @@ import muramasa.antimatter.tile.multi.TileEntityBasicMultiMachine;
 import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
 import muramasa.antimatter.util.int4;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import trinsdar.gt4r.Ref;
@@ -34,10 +30,10 @@ import trinsdar.gt4r.data.client.ScreenFactories;
 import trinsdar.gt4r.gui.ContainerCabinet;
 import trinsdar.gt4r.gui.ContainerWorkbench;
 import trinsdar.gt4r.gui.FusionButtonWidget;
-import trinsdar.gt4r.gui.MachineStateWidgetMoved;
 import trinsdar.gt4r.gui.MenuHandlerCrafting;
 import trinsdar.gt4r.gui.MenuHandlerCraftingItem;
-import trinsdar.gt4r.tile.multi.TileEntityDistillationTower;
+import trinsdar.gt4r.gui.widgets.CoalBoilerWidget;
+import trinsdar.gt4r.gui.widgets.MachineStateWidgetMoved;
 import trinsdar.gt4r.tile.multi.TileEntityFusionReactor;
 import trinsdar.gt4r.tile.multi.TileEntityIndustrialBlastFurnace;
 import trinsdar.gt4r.tile.single.TileEntityCoalBoiler;
@@ -401,21 +397,39 @@ public class Guis {
 
     public static void initWidgets(){
         FORGE_HAMMER.getCallbacks().remove(1);
-        /*FORGE_HAMMER.addGuiCallback(t -> {
+        FORGE_HAMMER.addGuiCallback(t -> {
             t.addWidget(WidgetSupplier.build((a, b) -> TextWidget.build(((AntimatterContainerScreen<?>)b).getTitle().getString(), 4210752).build(a,b)).setPos(9, 5).clientSide())
                     .addWidget(ProgressWidget.build(BarDir.BOTTOM, false))
                     .addWidget(MachineStateWidget.build().setPos(84,46).setWH(8,8))
                     .addWidget(IOWidget.build(9,63,16,16));
-        });*/
-        /*FORGE_HAMMER.getGui().removeWidget(0, null).widget(ProgressWidget.build(BarDir.BOTTOM, false));
-        CENTRIFUGE.getGui().removeWidget(2, null).widget(IOWidget.build(9, 45, 16, 16));
-        ELECTROLYZER.getGui().removeWidget(2, null).widget(IOWidget.build(9, 45, 16, 16));
-        DISTILLATION_TOWER.getGui().removeWidget(1, null).removeWidget(0, null).widget(ProgressWidget.build(BarDir.TOP, true).setSize(80, 4, 16, 72).cast()).widget(MachineStateWidgetMoved.build(176, 108).setPos(66, 26).setWH(8, 8).cast());
-        BATTERY_BUFFER_ONE.getGui().removeWidget(2, null);
-        BATTERY_BUFFER_FOUR.getGui().removeWidget(2, null);
-        BATTERY_BUFFER_EIGHT.getGui().removeWidget(2, null);
-        COAL_BOILER.getGui().removeWidget(0, null);
-        STEAM_FORGE_HAMMER.getGui().removeWidget(0, null).widget(ProgressWidget.build(BarDir.BOTTOM, false));*/
+        });
+        STEAM_FORGE_HAMMER.getCallbacks().remove(1);
+        STEAM_FORGE_HAMMER.addGuiCallback(t -> {
+            t.addWidget(WidgetSupplier.build((a, b) -> TextWidget.build(((AntimatterContainerScreen<?>)b).getTitle().getString(), 4210752).build(a,b)).setPos(9, 5).clientSide())
+                    .addWidget(ProgressWidget.build(BarDir.BOTTOM, false))
+                    .addWidget(MachineStateWidget.build().setPos(84,46).setWH(8,8));
+        });
+        COAL_BOILER.getCallbacks().remove(1);
+        COAL_BOILER.addGuiCallback(t -> {
+            t.addWidget(WidgetSupplier.build((a, b) -> TextWidget.build(((AntimatterContainerScreen<?>)b).getTitle().getString(), 4210752).build(a,b)).setPos(9, 5).clientSide());
+            t.addWidget(CoalBoilerWidget.build().setSize(70, 25, 63, 54));
+        });
+        CENTRIFUGE.getCallbacks().remove(1);
+        ELECTROLYZER.getCallbacks().remove(1);
+        CENTRIFUGE.addGuiCallback(t -> {
+            t.addWidget(WidgetSupplier.build((a, b) -> TextWidget.build(((AntimatterContainerScreen<?>)b).getTitle().getString(), 4210752).build(a,b)).setPos(9, 5).clientSide())
+                    .addWidget(ProgressWidget.build(BarDir.LEFT, true))
+                    .addWidget(MachineStateWidget.build().setPos(84,46).setWH(8,8))
+                    .addWidget(IOWidget.build(9,45,16,16));
+        });
+        ELECTROLYZER.addGuiCallback(t -> {
+            t.addWidget(WidgetSupplier.build((a, b) -> TextWidget.build(((AntimatterContainerScreen<?>)b).getTitle().getString(), 4210752).build(a,b)).setPos(9, 5).clientSide())
+                    .addWidget(ProgressWidget.build(BarDir.LEFT, true))
+                    .addWidget(MachineStateWidget.build().setPos(84,46).setWH(8,8))
+                    .addWidget(IOWidget.build(9,45,16,16));
+        });
+        DISTILLATION_TOWER.getCallbacks().remove(1);
+        DISTILLATION_TOWER.addGuiCallback(t -> t.addWidget(ProgressWidget.build(BarDir.TOP, true).setSize(80, 4, 16, 72)).addWidget(MachineStateWidgetMoved.build(176, 108).setPos(66, 26).setWH(8, 8)));
     }
 
     private static void initMaterialMachine(Dist side){
@@ -462,7 +476,7 @@ public class Guis {
         IRON_CHARGING_LOCKER.add(CHARGING_LOCKER.getSlots()).getGui().setOverrideLocation(textures.apply(true, "locker"));
         ALUMINIUM_CHARGING_LOCKER.add(CHARGING_LOCKER.getSlots()).getGui().setOverrideLocation(textures.apply(true, "locker"));
 
-        COAL_BOILER.setGUI(COAL_BOILER_MENU_HANDLER);
+        //COAL_BOILER.setGUI(COAL_BOILER_MENU_HANDLER);
         FUSION_REACTOR.setGUI(FUSION_MENU_HANDLER);
         //DISTILLATION_TOWER.setGUI(DISTILLATION_MENU_HANDLER);
         BLAST_FURNACE.setGUI(IBF_MENU_HANDLER);

@@ -6,6 +6,9 @@ import muramasa.antimatter.gui.GuiInstance;
 import muramasa.antimatter.gui.IGuiElement;
 import muramasa.antimatter.gui.Widget;
 import muramasa.antimatter.gui.container.ContainerMachine;
+import muramasa.antimatter.gui.widget.MachineStateWidget;
+import muramasa.antimatter.gui.widget.WidgetSupplier;
+import muramasa.antimatter.integration.jei.AntimatterJEIPlugin;
 import muramasa.antimatter.machine.MachineFlag;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -24,11 +27,15 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class WidgetCoalBoiler extends Widget {
+public class CoalBoilerWidget extends Widget {
     private int heat = 0, maxHeat = 0, fuel = 0, maxFuel = 0, water = 0, steam = 0;
 
-    protected WidgetCoalBoiler(@Nonnull GuiInstance gui, @Nullable IGuiElement parent) {
+    protected CoalBoilerWidget(@Nonnull GuiInstance gui, @Nullable IGuiElement parent) {
         super(gui, parent);
+    }
+
+    public static WidgetSupplier build() {
+        return builder(CoalBoilerWidget::new);
     }
 
     @Override
@@ -53,8 +60,8 @@ public class WidgetCoalBoiler extends Widget {
             if (lvl < 0) {
                 return;
             }
-            int y = (gui.screen.getGuiTop() + 25 + 54) - lvl;
-            drawTexture(stack, gui.handler.getGuiTexture(), gui.screen.getGuiLeft() + 83, y, gui.screen.getXSize() + 28, 54 - lvl, 10, lvl);
+            int y = (realY() + 54) - lvl;
+            drawTexture(stack, gui.handler.getGuiTexture(), realX() + 13, y, gui.screen.getXSize() + 28, 54 - lvl, 10, lvl);
 
         }
         if (steam >= 1) {
@@ -66,8 +73,8 @@ public class WidgetCoalBoiler extends Widget {
             if (lvl < 0) {
                 return;
             }
-            int y = (gui.screen.getGuiTop() + 25 + 54) - lvl;
-            drawTexture(stack, gui.handler.getGuiTexture(), gui.screen.getGuiLeft() + 70, y, gui.screen.getXSize() + 18, 54 - lvl, 10, lvl);
+            int y = (realY() + 54) - lvl;
+            drawTexture(stack, gui.handler.getGuiTexture(), realX(), y, gui.screen.getXSize() + 18, 54 - lvl, 10, lvl);
         }
         if (heat >= 1) {
             float per = (float) heat / maxHeat;
@@ -79,7 +86,7 @@ public class WidgetCoalBoiler extends Widget {
                 return;
             }
             int y = (gui.screen.getGuiTop() + 25 + 54) - lvl;
-            drawTexture(stack, gui.handler.getGuiTexture(), gui.screen.getGuiLeft() + 96, y, gui.screen.getXSize() + 38, 54 - lvl, 10, lvl);
+            drawTexture(stack, gui.handler.getGuiTexture(), realX() + 26, y, gui.screen.getXSize() + 38, 54 - lvl, 10, lvl);
         }
         if (fuel > 0) {
             float per = (float) fuel / maxFuel;
@@ -90,8 +97,8 @@ public class WidgetCoalBoiler extends Widget {
             if (lvl < 0) {
                 return;
             }
-            int y = (gui.screen.getGuiTop() + 42 + 18) - lvl;
-            drawTexture(stack, gui.handler.getGuiTexture(), gui.screen.getGuiLeft() + 115, y, gui.screen.getXSize(), 18 - lvl, 18, lvl);
+            int y = (realY() + 36) - lvl;
+            drawTexture(stack, gui.handler.getGuiTexture(), realX() + 45, y, gui.screen.getXSize(), 18 - lvl, 18, lvl);
         }
     }
 
@@ -114,5 +121,14 @@ public class WidgetCoalBoiler extends Widget {
             GuiUtils.drawHoveringText(matrixStack, Collections.singletonList(new StringTextComponent(text)), (int)mouseX, (int)mouseY, w, h, -1, Minecraft.getInstance().fontRenderer);
         }
 
+    }
+
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        if (gui.screen.isInGui(115, 43, 18, 18, mouseX, mouseY)){
+            AntimatterJEIPlugin.showCategory(((ContainerMachine<?>)gui.container).getTile().getMachineType());
+            return true;
+        }
+        return super.mouseClicked(mouseX, mouseY, button);
     }
 }
