@@ -28,13 +28,6 @@ public abstract class AbstractClientPlayerEntityMixin extends PlayerEntity {
     @Inject(method = "getLocationCape()Lnet/minecraft/util/ResourceLocation;", at = @At(value = "HEAD"), cancellable = true)
     private void getLocationGTCape(CallbackInfoReturnable<ResourceLocation> info){
         if (this.getDisplayName().getString().equals("Dev")) info.setReturnValue(GT4RData.CAPE_LOCATIONS[3]);
-        if (this.getDisplayName().getString().equals("Trinsdar")){
-            NetworkPlayerInfo networkplayerinfo = getPlayerInfo();
-            if (networkplayerinfo != null){
-                GT4Reimagined.LOGGER.info(networkplayerinfo.getLocationCape().toString());
-                GT4Reimagined.LOGGER.info(networkplayerinfo.getLocationElytra().toString());
-            }
-        }
     }
 
     private boolean checkPlayerAgainstUUID(){
