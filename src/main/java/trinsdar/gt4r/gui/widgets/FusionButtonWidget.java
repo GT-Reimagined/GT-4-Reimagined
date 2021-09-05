@@ -1,19 +1,13 @@
-package trinsdar.gt4r.gui;
+package trinsdar.gt4r.gui.widgets;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import muramasa.antimatter.capability.IGuiHandler;
 import muramasa.antimatter.gui.GuiInstance;
 import muramasa.antimatter.gui.IGuiElement;
 import muramasa.antimatter.gui.Widget;
-import muramasa.antimatter.gui.container.ContainerMachine;
-import muramasa.antimatter.gui.container.ContainerMultiMachine;
-import muramasa.antimatter.gui.screen.AntimatterContainerScreen;
-import muramasa.antimatter.gui.widget.MachineStateWidget;
 import muramasa.antimatter.gui.widget.WidgetSupplier;
 import muramasa.antimatter.integration.jei.AntimatterJEIPlugin;
 import muramasa.antimatter.machine.MachineFlag;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.tile.multi.TileEntityFusionReactor;
