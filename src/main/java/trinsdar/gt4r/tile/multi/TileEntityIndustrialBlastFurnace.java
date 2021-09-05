@@ -2,7 +2,13 @@ package trinsdar.gt4r.tile.multi;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import it.unimi.dsi.fastutil.objects.ObjectCollection;
+import muramasa.antimatter.capability.EnergyHandler;
 import muramasa.antimatter.capability.machine.MachineRecipeHandler;
+import muramasa.antimatter.gui.GuiInstance;
+import muramasa.antimatter.gui.IGuiElement;
+import muramasa.antimatter.gui.widget.InfoRenderWidget;
+import muramasa.antimatter.gui.widget.WidgetSupplier;
+import muramasa.antimatter.integration.jei.renderer.IInfoRenderer;
 import muramasa.antimatter.machine.event.IMachineEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.recipe.Recipe;
@@ -16,6 +22,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.IIntArray;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.data.SlotTypes;
+import trinsdar.gt4r.tile.single.TileEntityInfiniteStorage;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -23,7 +30,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class TileEntityIndustrialBlastFurnace extends TileEntityBasicMultiMachine<TileEntityIndustrialBlastFurnace> {
+public class TileEntityIndustrialBlastFurnace extends TileEntityBasicMultiMachine<TileEntityIndustrialBlastFurnace> implements IInfoRenderer<TileEntityIndustrialBlastFurnace.IBFWidget> {
 
     public TileEntityIndustrialBlastFurnace(Machine type) {
         super(type);
@@ -98,14 +105,36 @@ public class TileEntityIndustrialBlastFurnace extends TileEntityBasicMultiMachin
         this.recipeHandler.ifPresent(r -> integer.set(((IBFRecipeHandler)r).heatingCapacity));
         return integer.get();
     }
-    //TODO
-    /*@Override
-    public void drawInfo(MatrixStack stack, FontRenderer renderer, int left, int top) {
+    @Override
+    public int drawInfo(IBFWidget widget, MatrixStack stack, FontRenderer renderer, int left, int top) {
         // TODO: Replace by new TranslationTextComponent()
-        this.recipeHandler.ifPresent(r -> {
-            renderer.drawString(stack,"Heat: " + ((IBFRecipeHandler)r).heatingCapacity + "K", 27, 62, Color.BLACK.getRGB());
-        });
-    }*/
+        renderer.drawString(stack,"Heat: " + widget.heat + "K", 27, 62, Color.BLACK.getRGB());
+        return 8;
+    }
+
+    @Override
+    public void addWidgets(GuiInstance instance, IGuiElement parent) {
+        super.addWidgets(instance, parent);
+        instance.addWidget(IBFWidget.build());
+    }
+
+    public static class IBFWidget extends InfoRenderWidget<IBFWidget> {
+        public int heat = 0;
+        protected IBFWidget(GuiInstance gui, IGuiElement parent, IInfoRenderer<IBFWidget> renderer) {
+            super(gui, parent, renderer);
+        }
+
+        @Override
+        public void init() {
+            super.init();
+            TileEntityIndustrialBlastFurnace m = (TileEntityIndustrialBlastFurnace) gui.handler;
+            gui.syncInt(m::getHeatingCapacity, i -> heat = i);
+        }
+
+        public static WidgetSupplier build() {
+            return builder((a,b) -> new IBFWidget(a,b, (IInfoRenderer) a.handler));
+        }
+    }
 
     public static class IBFRecipeHandler extends MachineRecipeHandler<TileEntityIndustrialBlastFurnace> {
         protected final IIntArray GUI_SYNC_DATA = new IIntArray() {

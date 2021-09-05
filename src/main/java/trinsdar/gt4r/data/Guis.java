@@ -81,17 +81,6 @@ public class Guis {
 
     static ResourceLocation buttonLocation = new ResourceLocation(Ref.ID, "textures/gui/button/gui_buttons.png");
 
-    public static MenuHandlerMachine<TileEntityCoalBoiler,? extends ContainerMachine> COAL_BOILER_MENU_HANDLER = new MenuHandlerMachine(Ref.ID, "container_coal_boiler") {
-        @Override
-        public ContainerBasicMachine getMenu(IGuiHandler tile, PlayerInventory playerInv, int windowId) {
-            return tile instanceof TileEntityMachine ? new ContainerBasicMachine( (TileEntityMachine<?>) tile, playerInv, this, windowId) : null;
-        }
-        @Override
-        public Object screen() {
-            return ScreenFactories.SCREEN_COAL_BOILER;
-        }
-    };
-
     public static MenuHandlerMachine<TileEntityFusionReactor, ? extends ContainerMultiMachine> FUSION_MENU_HANDLER = new MenuHandlerMachine(Ref.ID, "container_fusion_reactor") {
         @Override
         public ContainerMultiMachine getMenu(IGuiHandler tile, PlayerInventory playerInv, int windowId) {
@@ -100,17 +89,6 @@ public class Guis {
         @Override
         public Object screen() {
             return ScreenFactories.SCREEN_FUSION_REACTOR;
-        }
-    };
-
-    public static MenuHandlerMachine<TileEntityIndustrialBlastFurnace, ? extends ContainerBasicMachine> IBF_MENU_HANDLER = new MenuHandlerMachine(Ref.ID, "container_industrial_blast_furnace") {
-        @Override
-        public ContainerBasicMachine getMenu(IGuiHandler tile, PlayerInventory playerInv, int windowId) {
-            return tile instanceof TileEntityMachine ? new ContainerBasicMachine((TileEntityBasicMultiMachine) tile, playerInv, this, windowId) : null;
-        }
-        @Override
-        public Object screen() {
-            return ScreenFactories.SCREEN_IBF;
         }
     };
 
@@ -476,10 +454,7 @@ public class Guis {
         IRON_CHARGING_LOCKER.add(CHARGING_LOCKER.getSlots()).getGui().setOverrideLocation(textures.apply(true, "locker"));
         ALUMINIUM_CHARGING_LOCKER.add(CHARGING_LOCKER.getSlots()).getGui().setOverrideLocation(textures.apply(true, "locker"));
 
-        //COAL_BOILER.setGUI(COAL_BOILER_MENU_HANDLER);
         FUSION_REACTOR.setGUI(FUSION_MENU_HANDLER);
-        //DISTILLATION_TOWER.setGUI(DISTILLATION_MENU_HANDLER);
-        BLAST_FURNACE.setGUI(IBF_MENU_HANDLER);
         IRON_CABINET.setGUI(CABINET_HANDLER_SIX);
         ALUMINIUM_CABINET.setGUI(CABINET_HANDLER_SIX);
         WROUGHT_IRON_CABINET.setGUI(CABINET_HANDLER_SIX);
