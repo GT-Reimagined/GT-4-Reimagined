@@ -154,6 +154,6 @@ public class QuantumChestItemHandler extends MachineItemHandler<TileEntityQuantu
 
     @Override
     public IItemHandlerModifiable getFakeHandler() {
-        return inventories.get(SlotTypes.DISPLAY);
+        return inventories.get(SlotType.DISPLAY);
     }
 }

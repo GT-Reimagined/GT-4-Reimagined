@@ -4,6 +4,7 @@ import muramasa.antimatter.Antimatter;
 import muramasa.antimatter.capability.machine.MachineCoverHandler;
 import muramasa.antimatter.capability.machine.MachineItemHandler;
 import muramasa.antimatter.cover.ICover;
+import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.tool.AntimatterToolType;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -44,16 +45,16 @@ public class TileEntityLocker extends TileEntityMaterial<TileEntityLocker> {
             this.itemHandler.ifPresent(h -> {
                 for (int i = 0; i < 4; i++){
                     ItemStack armorStack = player.getItemStackFromSlot(getSlot(i));
-                    ItemStack inventoryStack = h.getHandler(SlotTypes.STORAGE).getStackInSlot(i);
+                    ItemStack inventoryStack = h.getHandler(SlotType.STORAGE).getStackInSlot(i);
                     if (!armorStack.isEmpty() && !inventoryStack.isEmpty()){
                         ItemStack copy = armorStack.copy();
                         ItemStack copy1 = inventoryStack.copy();
                         armorStack.shrink(armorStack.getCount());
                         inventoryStack.shrink(inventoryStack.getCount());
                         player.setItemStackToSlot(getSlot(i), copy1);
-                        h.getHandler(SlotTypes.STORAGE).setStackInSlot(i, copy);
+                        h.getHandler(SlotType.STORAGE).setStackInSlot(i, copy);
                     } else if (!armorStack.isEmpty()){
-                        h.getHandler(SlotTypes.STORAGE).setStackInSlot(i, armorStack.copy());
+                        h.getHandler(SlotType.STORAGE).setStackInSlot(i, armorStack.copy());
                         armorStack.shrink(armorStack.getCount());
                     } else if (!inventoryStack.isEmpty()){
                         player.setItemStackToSlot(getSlot(i), inventoryStack.copy());

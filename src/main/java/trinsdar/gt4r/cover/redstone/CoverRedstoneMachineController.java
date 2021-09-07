@@ -1,4 +1,4 @@
-package trinsdar.gt4r.cover;
+package trinsdar.gt4r.cover.redstone;
 
 import muramasa.antimatter.cover.BaseCover;
 import muramasa.antimatter.cover.CoverStack;
@@ -12,6 +12,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.cover.RedstoneMode;
 
 public class CoverRedstoneMachineController extends BaseCover implements ICoverModeHandler {
     public CoverRedstoneMachineController(){

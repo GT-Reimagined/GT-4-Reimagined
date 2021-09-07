@@ -1,6 +1,7 @@
 package trinsdar.gt4r.gui.slots;
 
 import muramasa.antimatter.capability.machine.MachineItemHandler;
+import muramasa.antimatter.gui.SlotType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.CraftResultInventory;
 import net.minecraft.inventory.CraftingInventory;
@@ -44,9 +45,9 @@ public class SlotWorkTableResult extends CraftingResultSlot {
     }
 
     private ItemStack extractFromTable(ItemStack itemStack){
-        for (int j = 0; j < projectTable.getHandler(SlotTypes.STORAGE).getSlots(); j++) {
-            if (projectTable.getHandler(SlotTypes.STORAGE).getStackInSlot(j).getItem().equals(itemStack.getItem()) && ItemStack.areItemStackTagsEqual(itemStack, projectTable.getHandler(SlotTypes.STORAGE).getStackInSlot(j))) {
-                projectTable.getHandler(SlotTypes.STORAGE).extractFromInput(j, 1, false);
+        for (int j = 0; j < projectTable.getHandler(SlotType.STORAGE).getSlots(); j++) {
+            if (projectTable.getHandler(SlotType.STORAGE).getStackInSlot(j).getItem().equals(itemStack.getItem()) && ItemStack.areItemStackTagsEqual(itemStack, projectTable.getHandler(SlotType.STORAGE).getStackInSlot(j))) {
+                projectTable.getHandler(SlotType.STORAGE).extractFromInput(j, 1, false);
                 itemStack.setCount(itemStack.getCount() + 1);
             }
         }

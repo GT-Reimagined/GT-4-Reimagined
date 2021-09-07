@@ -9,28 +9,17 @@ import muramasa.antimatter.item.ItemMultiTextureBattery;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.ore.CobbleStoneType;
 import muramasa.antimatter.pipe.types.ItemPipe;
-import muramasa.antimatter.recipe.ingredient.PropertyIngredient;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
-import muramasa.antimatter.recipe.material.MaterialRecipe;
-import muramasa.antimatter.tool.IAntimatterTool;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
-import net.minecraft.inventory.CraftingInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Tuple;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraftforge.api.distmarker.Dist;
-import tesseract.api.capability.TesseractGTCapability;
-import tesseract.api.gt.IGTNode;
 import trinsdar.gt4r.block.BlockCasing;
 import muramasa.antimatter.item.ItemBasic;
-import muramasa.antimatter.item.ItemBattery;
 import muramasa.antimatter.item.ItemFluidCell;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.ore.StoneType;
@@ -49,8 +38,9 @@ import trinsdar.gt4r.cover.CoverDrain;
 import trinsdar.gt4r.cover.CoverDynamoOld;
 import trinsdar.gt4r.cover.CoverFusionInput;
 import trinsdar.gt4r.cover.CoverFusionOutput;
+import trinsdar.gt4r.cover.CoverItemtransportValve;
 import trinsdar.gt4r.cover.CoverPump;
-import trinsdar.gt4r.cover.CoverRedstoneMachineController;
+import trinsdar.gt4r.cover.redstone.CoverRedstoneMachineController;
 import trinsdar.gt4r.cover.CoverSteamVent;
 import trinsdar.gt4r.data.client.RecipeRenderer;
 import trinsdar.gt4r.entity.SpearEntity;
@@ -65,13 +55,9 @@ import trinsdar.gt4r.tree.BlockRubberSapling;
 import net.minecraft.block.SoundType;
 import net.minecraft.item.Item;
 
-import javax.annotation.Nonnull;
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
-import static muramasa.antimatter.Data.NULL;
 import static trinsdar.gt4r.data.Materials.*;
 
 public class GT4RData {
@@ -152,6 +138,7 @@ public class GT4RData {
 
     public static final BaseCover COVER_CONVEYOR = new CoverConveyor();
     public static final BaseCover COVER_PUMP = new CoverPump();
+    public static final BaseCover COVER_ITEM_TRANSPORT_VALVE = new CoverItemtransportValve();
     public static final BaseCover COVER_FUSION_OUTPUT = new CoverFusionOutput();
     public static final BaseCover COVER_FUSION_INPUT = new CoverFusionInput();
     public static final BaseCover COVER_DYNAMO_OLD = new CoverDynamoOld("dynamo_old");
@@ -179,7 +166,7 @@ public class GT4RData {
     public static ItemCover ConveyorModule = new ItemCover(Ref.ID, COVER_CONVEYOR.getId()).tip("Can be placed on machines as a cover");
     public static ItemCover CraftingModule = new ItemCraftingModule().tip("Can be placed on machines as a cover");
     public static ItemCover Drain = new ItemCover(Ref.ID, "drain").tip("Can be placed on machines as a cover");
-    public static ItemBasic<?> ItemTransportValve = new ItemBasic<>(Ref.ID, "item_transport_valve").tip("Can be placed on machines as a cover");
+    public static ItemBasic<?> ItemTransportValve = new ItemCover(Ref.ID, "item_transport_valve").tip("Can be placed on machines as a cover");
     public static ItemCover PumpModule = new ItemCover(Ref.ID, COVER_PUMP.getId()).tip("Can be placed on machines as a cover");
     public static ItemCover RedstoneMachineController = new ItemCover(Ref.ID, COVER_REDSTONE_MACHINE_CONTROLLER.getId()).tip("Can be placed on machines as a cover");
     public static ItemBasic<?> Shutter = new ItemBasic<>(Ref.ID, "shutter").tip("Can be placed on machines as a cover");

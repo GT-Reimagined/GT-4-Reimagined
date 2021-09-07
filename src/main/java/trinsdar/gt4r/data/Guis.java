@@ -41,10 +41,7 @@ import static muramasa.antimatter.gui.ButtonBody.*;
 import static muramasa.antimatter.gui.SlotType.*;
 import static muramasa.antimatter.gui.Widget.builder;
 import static muramasa.antimatter.machine.Tier.*;
-import static trinsdar.gt4r.data.GT4RData.COVER_CONVEYOR;
-import static trinsdar.gt4r.data.GT4RData.COVER_CRAFTING;
-import static trinsdar.gt4r.data.GT4RData.COVER_PUMP;
-import static trinsdar.gt4r.data.GT4RData.COVER_REDSTONE_MACHINE_CONTROLLER;
+import static trinsdar.gt4r.data.GT4RData.*;
 import static trinsdar.gt4r.data.Machines.*;
 import static trinsdar.gt4r.data.SlotTypes.*;
 import static trinsdar.gt4r.gui.ButtonOverlays.*;
@@ -314,6 +311,13 @@ public class Guis {
                     }
                 }
             });
+            COVER_ITEM_TRANSPORT_VALVE.addGuiCallback(t -> {
+                for (int x = 0; x < 6; x++){
+                    for (int y = 0; y < 2; y++){
+                        t.addButton(35 + (x * 18), 25 + (y * 18), 16, 16, overlays[y][x]);
+                    }
+                }
+            });
             COVER_PUMP.addGuiCallback(t -> {
                 for (int x = 0; x < 6; x++){
                     for (int y = 0; y < 2; y++){
@@ -473,22 +477,22 @@ public class Guis {
         for (int i = 0; i < 9; i++){
             for (int j = 0; j < 9; ++j) {
                 if (i < 6){
-                    IRON_CABINET.add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
-                    ALUMINIUM_CABINET.add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
-                    WROUGHT_IRON_CABINET.add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
-                    BRASS_CABINET.add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
-                    CUPRONICKEL_CABINET.add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
+                    IRON_CABINET.add(STORAGE, 12 + j * 18, 18 + (i * 18));
+                    ALUMINIUM_CABINET.add(STORAGE, 12 + j * 18, 18 + (i * 18));
+                    WROUGHT_IRON_CABINET.add(STORAGE, 12 + j * 18, 18 + (i * 18));
+                    BRASS_CABINET.add(STORAGE, 12 + j * 18, 18 + (i * 18));
+                    CUPRONICKEL_CABINET.add(STORAGE, 12 + j * 18, 18 + (i * 18));
                 }
                 if (i < 7){
-                    ELECTRUM_CABINET.add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
-                    GOLD_CABINET.add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
-                    SILVER_CABINET.add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
-                    MAGNALIUM_CABINET.add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
+                    ELECTRUM_CABINET.add(STORAGE, 12 + j * 18, 18 + (i * 18));
+                    GOLD_CABINET.add(STORAGE, 12 + j * 18, 18 + (i * 18));
+                    SILVER_CABINET.add(STORAGE, 12 + j * 18, 18 + (i * 18));
+                    MAGNALIUM_CABINET.add(STORAGE, 12 + j * 18, 18 + (i * 18));
                 }
                 if (i < 8){
-                    PLATINUM_CABINET.add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
+                    PLATINUM_CABINET.add(STORAGE, 12 + j * 18, 18 + (i * 18));
                 }
-                OSMIUM_CABINET.add(SlotTypes.STORAGE, 12 + j * 18, 18 + (i * 18));
+                OSMIUM_CABINET.add(STORAGE, 12 + j * 18, 18 + (i * 18));
             }
         }
     }
