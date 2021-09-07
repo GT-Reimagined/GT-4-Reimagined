@@ -17,6 +17,7 @@ import tesseract.api.capability.TesseractGTCapability;
 import trinsdar.gt4r.data.SlotTypes;
 
 import java.util.List;
+import java.util.Objects;
 
 public class TileEntityItemFilter extends TileEntityMachine<TileEntityItemFilter> {
     boolean blacklist;
@@ -35,10 +36,15 @@ public class TileEntityItemFilter extends TileEntityMachine<TileEntityItemFilter
             for (int i = 0; i < outputs.getSlots(); i++) {
                 ItemStack slot = outputs.getStackInSlot(i);
                 if (!slot.isEmpty()) {
-                    list.add(slot.copy().getItem());
+                    if (slot.getItem() == stack.getItem()){
+                        boolean add = !nbt || Objects.equals(slot.getTag(), stack.getTag());
+                        if (add) {
+                            list.add(slot.copy().getItem());
+                        }
+                    }
                 }
             }
-            return list.contains(stack.getItem());
+            return !list.isEmpty();
         }).orElse(false);
         return hasItem != blacklist;
     }
