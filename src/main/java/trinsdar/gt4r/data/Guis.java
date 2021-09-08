@@ -224,7 +224,13 @@ public class Guis {
         THERMAL_BOILER.add(FILTER, 152, 5);
         PUMP.add(IT_IN, 53, 25).add(FL_OUT, 107, 25).add(ENERGY, 80, 63);
 
-
+        ELECTRIC_ITEM_FILTER
+                .add(DISPLAY_SETTABLE, 18, 6).add(DISPLAY_SETTABLE, 35, 6).add(DISPLAY_SETTABLE, 52, 6)
+                .add(DISPLAY_SETTABLE, 18, 23).add(DISPLAY_SETTABLE, 35, 23).add(DISPLAY_SETTABLE, 52, 23)
+                .add(DISPLAY_SETTABLE, 18, 40).add(DISPLAY_SETTABLE, 35, 40).add(DISPLAY_SETTABLE, 52, 40)
+                .add(FILTERABLE, 98, 5).add(FILTERABLE, 98+18, 5).add(FILTERABLE, 98+18*2, 5)
+                .add(FILTERABLE, 98, 23).add(FILTERABLE, 98+18, 23).add(FILTERABLE, 98+18*2, 23)
+                .add(FILTERABLE, 98, 41).add(FILTERABLE, 98+18, 41).add(FILTERABLE, 98+18*2, 41);
 
         BATTERY_BUFFER_ONE.add(ENERGY,80,40);
         BATTERY_BUFFER_FOUR.add(ENERGY,71,27).add(ENERGY,89,27).add(ENERGY,71,45).add(ENERGY,89,45);
