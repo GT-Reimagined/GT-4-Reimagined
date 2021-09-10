@@ -24,7 +24,6 @@ repositories {
     mavenCentral()
     maven { url = 'https://maven.minecraftforge.net/' }
     maven { url 'https://dvs1.progwml6.com/files/maven' }
-    //maven { url 'https://jitpack.io' }
     maven {
         url "https://maven.tterrag.com/"
     }
@@ -34,6 +33,7 @@ repositories {
             includeGroup "curse.maven"
         }
     }
+    maven { url 'https://jitpack.io' }
 }
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
