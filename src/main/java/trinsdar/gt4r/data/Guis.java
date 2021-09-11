@@ -27,6 +27,7 @@ import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.client.ScreenFactories;
 import trinsdar.gt4r.gui.ContainerCabinet;
 import trinsdar.gt4r.gui.ContainerWorkbench;
+import trinsdar.gt4r.gui.widgets.FilterButtonArrayWidget;
 import trinsdar.gt4r.gui.widgets.FusionButtonWidget;
 import trinsdar.gt4r.gui.MenuHandlerCrafting;
 import trinsdar.gt4r.gui.MenuHandlerCraftingItem;
@@ -377,6 +378,10 @@ public class Guis {
     }
 
     public static void initWidgets(){
+        ELECTRIC_ITEM_FILTER.getCallbacks().remove(1);
+        ELECTRIC_ITEM_FILTER.addGuiCallback(t -> {
+            t.addWidget(FilterButtonArrayWidget.build());
+        });
         FORGE_HAMMER.getCallbacks().remove(1);
         FORGE_HAMMER.addGuiCallback(t -> {
             t.addWidget(WidgetSupplier.build((a, b) -> TextWidget.build(((AntimatterContainerScreen<?>)b).getTitle().getString(), 4210752).build(a,b)).setPos(9, 5).clientSide())

@@ -15,14 +15,11 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.items.IItemHandlerModifiable;
-import tesseract.api.capability.TesseractGTCapability;
-import trinsdar.gt4r.data.SlotTypes;
 
 import java.util.List;
 import java.util.Objects;
 
 import static muramasa.antimatter.machine.MachineFlag.ENERGY;
-import static muramasa.antimatter.machine.MachineFlag.GENERATOR;
 
 public class TileEntityItemFilter extends TileEntityMachine<TileEntityItemFilter> {
     boolean blacklist = false;
@@ -63,7 +60,7 @@ public class TileEntityItemFilter extends TileEntityMachine<TileEntityItemFilter
 
     @Override
     public void onGuiEvent(IGuiEvent event, PlayerEntity playerEntity, int... data) {
-        if (event == GuiEvent.EXTRA_SWITCH) {
+        if (event == GuiEvent.EXTRA_BUTTON) {
             switch (data[0]) {
                 case 0:
                     emitEnergy = !emitEnergy;
@@ -108,5 +105,25 @@ public class TileEntityItemFilter extends TileEntityMachine<TileEntityItemFilter
         tag.putBoolean("invertRedstone", invertRedstone);
         tag.putBoolean("emitEnergy", emitEnergy);
         return tag;
+    }
+
+    public boolean isBlacklist() {
+        return blacklist;
+    }
+
+    public boolean isEmitEnergy() {
+        return emitEnergy;
+    }
+
+    public boolean isInvertRedstone() {
+        return invertRedstone;
+    }
+
+    public boolean isNbt() {
+        return nbt;
+    }
+
+    public boolean isOutputRedstone() {
+        return outputRedstone;
     }
 }
