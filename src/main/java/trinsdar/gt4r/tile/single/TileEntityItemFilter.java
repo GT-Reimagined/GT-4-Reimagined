@@ -1,20 +1,27 @@
 package trinsdar.gt4r.tile.single;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import muramasa.antimatter.Data;
 import muramasa.antimatter.capability.machine.MachineEnergyHandler;
+import muramasa.antimatter.cover.CoverOutput;
+import muramasa.antimatter.cover.CoverStack;
 import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.gui.event.GuiEvent;
 import muramasa.antimatter.gui.event.IGuiEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.TileEntityMachine;
+import muramasa.antimatter.util.Utils;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
+import trinsdar.gt4r.data.SlotTypes;
 
 import java.util.List;
 import java.util.Objects;
@@ -84,6 +91,31 @@ public class TileEntityItemFilter extends TileEntityMachine<TileEntityItemFilter
                     break;
             }
         }
+    }
+
+    @Override
+    public void onServerUpdate() {
+        super.onServerUpdate();
+        if (getCover(this.getFacing().getOpposite()).isEmpty()){
+            if (this.energyHandler.map(e -> e.getEnergy() > 0).orElse(false)){
+                if(processItemOutput()){
+                    this.energyHandler.ifPresent(e -> e.extractInternal(1, false, true));
+                }
+            }
+
+        }
+    }
+
+    protected boolean processItemOutput() {
+        Direction outputDir = this.getFacing().getOpposite();
+        TileEntity adjTile = Utils.getTile(this.getWorld(), this.getPos().offset(outputDir));
+        if (adjTile == null) return false;
+        boolean[] booleans = new boolean[1];
+        booleans[0] = false;
+        adjTile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, outputDir.getOpposite()).ifPresent(adjHandler -> {
+            booleans[0] = this.itemHandler.map(h -> Utils.transferItems(h.getHandler(SlotTypes.FILTERABLE), adjHandler,true)).orElse(false);
+        });
+        return booleans[0];
     }
 
     @Override
