@@ -22,7 +22,7 @@ public class SlotTypes {
             return ((TileEntityItemFilter)t).accepts(i);
         }
         return true;
-    },ContentEvent.ITEM_INPUT_CHANGED, true, true);
+    },ContentEvent.ITEM_OUTPUT_CHANGED, true, true);
     public static SlotType<AbstractSlot<?>> TOOLS = new SlotType<>("tools", (type, gui, item, i, d) -> new AbstractSlot<>(type, gui, item.getOrDefault(type, new EmptyHandler()), i, d.getX(), d.getY()), (t, i) -> i.getItem() instanceof IAntimatterTool || i.getItem().isDamageable(), ContentEvent.ITEM_INPUT_CHANGED);
     public static SlotType<AbstractSlot<?>> TOOL_CHARGE = new SlotType<>("tool_charge", (type, gui, item, i, d) -> new AbstractSlot<>(type,gui, item.getOrDefault(type, new EmptyHandler()), i, d.getX(), d.getY()), (t, i) -> {
         if (t instanceof ICapabilityProvider) {

@@ -1,13 +1,12 @@
 package trinsdar.gt4r.tile.single;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import muramasa.antimatter.Data;
 import muramasa.antimatter.capability.machine.MachineEnergyHandler;
-import muramasa.antimatter.cover.CoverOutput;
-import muramasa.antimatter.cover.CoverStack;
 import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.gui.event.GuiEvent;
 import muramasa.antimatter.gui.event.IGuiEvent;
+import muramasa.antimatter.machine.event.ContentEvent;
+import muramasa.antimatter.machine.event.IMachineEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.util.Utils;
@@ -76,10 +75,12 @@ public class TileEntityItemFilter extends TileEntityMachine<TileEntityItemFilter
                 case 1:
                     outputRedstone = !outputRedstone;
                     playerEntity.sendMessage(new StringTextComponent( (outputRedstone ? "Emit redstone if slots contain something" : "Don't emit redstone")), playerEntity.getUniqueID());
+                    world.markAndNotifyBlock(this.getPos(), this.world.getChunkAt(this.getPos()), this.getBlockState(), this.getBlockState(), 1, 512);
                     break;
                 case 2:
                     invertRedstone = !invertRedstone;
                     playerEntity.sendMessage(new StringTextComponent( (invertRedstone ? "I" : "Don't i") + "nvert redstone"), playerEntity.getUniqueID());
+                    world.markAndNotifyBlock(this.getPos(), this.world.getChunkAt(this.getPos()), this.getBlockState(), this.getBlockState(), 1, 512);
                     break;
                 case 3:
                     blacklist = !blacklist;
@@ -106,6 +107,14 @@ public class TileEntityItemFilter extends TileEntityMachine<TileEntityItemFilter
         }
     }
 
+    @Override
+    public void onMachineEvent(IMachineEvent event, Object... data) {
+        super.onMachineEvent(event, data);
+        if (event == ContentEvent.ITEM_OUTPUT_CHANGED && outputRedstone){
+            world.markAndNotifyBlock(this.getPos(), this.world.getChunkAt(this.getPos()), this.getBlockState(), this.getBlockState(), 1, 512);
+        }
+    }
+
     protected boolean processItemOutput() {
         Direction outputDir = this.getFacing().getOpposite();
         TileEntity adjTile = Utils.getTile(this.getWorld(), this.getPos().offset(outputDir));
@@ -116,6 +125,24 @@ public class TileEntityItemFilter extends TileEntityMachine<TileEntityItemFilter
             booleans[0] = this.itemHandler.map(h -> Utils.transferItems(h.getHandler(SlotTypes.FILTERABLE), adjHandler,true)).orElse(false);
         });
         return booleans[0];
+    }
+
+    @Override
+    public int getWeakRedstonePower(Direction facing) {
+        if (outputRedstone){
+            int[] redstone = new int[1];
+            redstone[0] = this.itemHandler.map(i -> {
+                for (int slot = 0; slot < i.getHandler(SlotTypes.FILTERABLE).getSlots(); slot++){
+                    ItemStack stack = i.getHandler(SlotTypes.FILTERABLE).getStackInSlot(slot);
+                    if (!stack.isEmpty()) return invertRedstone ? 0 : 15;
+                }
+                return invertRedstone ? 15 : 0;
+            }).orElse(0);
+            if (redstone[0] > 0){
+                return redstone[0];
+            }
+        }
+        return super.getWeakRedstonePower(facing);
     }
 
     @Override
