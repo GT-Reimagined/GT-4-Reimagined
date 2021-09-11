@@ -1,6 +1,8 @@
 package trinsdar.gt4r.datagen;
 
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectRBTreeMap;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.Data;
 import muramasa.antimatter.block.BlockStone;
@@ -28,6 +30,9 @@ import trinsdar.gt4r.items.ItemMatch;
 import trinsdar.gt4r.items.ItemPowerUnit;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 import static muramasa.antimatter.Data.GEM;
 import static muramasa.antimatter.Data.LIQUID;
@@ -50,13 +55,17 @@ public class GT4RLocalizations {
     public static class en_US extends AntimatterLanguageProvider {
 
         public en_US(DataGenerator gen) {
-            super(Ref.ID, Ref.NAME + " en_us Localization", "en_us", gen);
+            this("en_us", gen);
+        }
+
+        public en_US(String locale, DataGenerator gen) {
+            super(Ref.ID, Ref.NAME + " " + locale + " Localization", locale, gen);
         }
 
         @Override
         protected void addTranslations() {
             super.addTranslations();
-            add(Ref.ID + ".advancements.gt4r", "GT4 Renewed");
+            add(Ref.ID + ".advancements.gt4r", "GT4 Reimagined");
             add(Ref.ID + ".advancements.gt4r.desc", "Getting familiar with your surroundings");
             add(Ref.ID + ".tooltip.occurrence", "Indicates occurrence of ");
             add("block.gt4r.rubber_leaves", "Rubber Leaves");
@@ -127,6 +136,28 @@ public class GT4RLocalizations {
             AntimatterAPI.all(ItemFluidCell.class, domain).forEach(i -> override(i.getTranslationKey(), lowerUnderscoreToUpperSpacedRotated(i.getId())));
             GEM.all().forEach(m -> override(GEM.get(m).getTranslationKey(), lowerUnderscoreToUpperSpaced(m.getId())));
             BROKEN_TURBINE_ROTOR.all().forEach(m -> override(BROKEN_TURBINE_ROTOR.get(m).getTranslationKey(), lowerUnderscoreToUpperSpaced(m.getId() + "_" + BROKEN_TURBINE_ROTOR.getId())));
+        }
+    }
+
+    public static class en_GB extends en_US{
+        private final Map<String, String> usToGB = new HashMap<>();
+        public en_GB(DataGenerator gen) {
+            super("en_gb", gen);
+            usToGB.put("Gasoline", "Petrol");
+        }
+
+        @Override
+        public void add(String key, String value) {
+            boolean superCall = false;
+            for (String us : usToGB.keySet()){
+                if (value.contains(us)){
+                    value = value.replace(us, usToGB.get(us));
+                    superCall = true;
+                }
+            }
+            if (superCall) {
+                super.add(key, value);
+            }
         }
     }
 

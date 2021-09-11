@@ -84,12 +84,12 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         Builder<Item> add = this.getOrCreateBuilder(CORALS);
         String[] corals = {"tube", "brain", "bubble", "fire", "horn"};
         for (String coral : corals){
-            add.add(ForgeRegistries.ITEMS.getValue(new ResourceLocation(coral + "_coral")), ForgeRegistries.ITEMS.getValue(new ResourceLocation("dead_" + coral + "_coral")), ForgeRegistries.ITEMS.getValue(new ResourceLocation(coral + "_coral_fan")), ForgeRegistries.ITEMS.getValue(new ResourceLocation("dead_" + coral + "_coral_fan")));
+            add.add(ForgeRegistries.ITEMS.getValue(new ResourceLocation(coral + "_coral")), ForgeRegistries.ITEMS.getValue(new ResourceLocation("dead_" + coral + "_coral")), ForgeRegistries.ITEMS.getValue(new ResourceLocation(coral + "_coral_fan")), ForgeRegistries.ITEMS.getValue(new ResourceLocation("dead_" + coral + "_coral_fan"))).replace(false);
         }
         this.getOrCreateBuilder(VINES).add(Items.VINE, Items.TWISTING_VINES, Items.WEEPING_VINES);
         AntimatterAPI.all(BlockOre.class, o -> {
             if (o.getStoneType() != SAND && o.getStoneType() != SAND_RED && o.getStoneType() != GRAVEL){
-                this.getOrCreateBuilder(TagUtils.getForgeItemTag("sandless_" + getConventionalMaterialType(o.getOreType()) + "/" +  o.getMaterial().getId())).addTag(TagUtils.getForgeItemTag(String.join("", getConventionalStoneType(o.getStoneType()), "_", getConventionalMaterialType(o.getOreType()), "/", o.getMaterial().getId())));
+                this.getOrCreateBuilder(TagUtils.getForgeItemTag("sandless_" + getConventionalMaterialType(o.getOreType()) + "/" +  o.getMaterial().getId())).addTag(TagUtils.getForgeItemTag(String.join("", getConventionalStoneType(o.getStoneType()), "_", getConventionalMaterialType(o.getOreType()), "/", o.getMaterial().getId()))).replace(false);
             }
         });
         this.getOrCreateBuilder(TagUtils.getForgeItemTag("sandless_ores/"+ NetheriteScrap.getId())).add(Items.ANCIENT_DEBRIS);

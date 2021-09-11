@@ -59,9 +59,9 @@ public class TileEntityItemFilter extends TileEntityMachine<TileEntityItemFilter
                     }
                 }
             }
-            return !list.isEmpty();
+            return list.isEmpty() == blacklist;
         }).orElse(false);
-        return hasItem != blacklist;
+        return hasItem;
     }
 
     @Override

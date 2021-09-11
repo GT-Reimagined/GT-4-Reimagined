@@ -233,6 +233,12 @@ public class Guis {
                 .add(FILTERABLE, 98, 23).add(FILTERABLE, 98+18, 23).add(FILTERABLE, 98+18*2, 23)
                 .add(FILTERABLE, 98, 41).add(FILTERABLE, 98+18, 41).add(FILTERABLE, 98+18*2, 41);
 
+        ELECTRIC_TYPE_FILTER
+                .add(DISPLAY_SETTABLE, 35, 23)
+                .add(FILTERABLE, 98, 5).add(FILTERABLE, 98+18, 5).add(FILTERABLE, 98+18*2, 5)
+                .add(FILTERABLE, 98, 23).add(FILTERABLE, 98+18, 23).add(FILTERABLE, 98+18*2, 23)
+                .add(FILTERABLE, 98, 41).add(FILTERABLE, 98+18, 41).add(FILTERABLE, 98+18*2, 41);
+
         BATTERY_BUFFER_ONE.add(ENERGY,80,40);
         BATTERY_BUFFER_FOUR.add(ENERGY,71,27).add(ENERGY,89,27).add(ENERGY,71,45).add(ENERGY,89,45);
         BATTERY_BUFFER_EIGHT
@@ -380,6 +386,10 @@ public class Guis {
     public static void initWidgets(){
         ELECTRIC_ITEM_FILTER.getCallbacks().remove(1);
         ELECTRIC_ITEM_FILTER.addGuiCallback(t -> {
+            t.addWidget(FilterButtonArrayWidget.build());
+        });
+        ELECTRIC_TYPE_FILTER.getCallbacks().remove(1);
+        ELECTRIC_TYPE_FILTER.addGuiCallback(t -> {
             t.addWidget(FilterButtonArrayWidget.build());
         });
         FORGE_HAMMER.getCallbacks().remove(1);
