@@ -19,6 +19,7 @@ import trinsdar.gt4r.tile.single.TileEntityInfiniteFluid;
 import trinsdar.gt4r.tile.single.TileEntityInfiniteStorage;
 import trinsdar.gt4r.tile.single.TileEntityItemFilter;
 import trinsdar.gt4r.tile.single.TileEntityLocker;
+import trinsdar.gt4r.tile.single.TileEntityPump;
 import trinsdar.gt4r.tile.single.TileEntityQuantumChest;
 import trinsdar.gt4r.tile.single.TileEntityQuantumTank;
 import trinsdar.gt4r.tile.single.TileEntitySteamMachine;
@@ -68,7 +69,7 @@ public class Machines {
     public static BasicMachine THERMAL_CENTRIFUGE = new BasicMachine(Ref.ID, "thermal_centrifuge").setMap(THERMAL_CENTRIFUGING).setTiers(MV).addFlags(GUI, ITEM, FLUID);
     public static BasicMachine FLUID_EXTRACTOR = new BasicMachine(Ref.ID, "fluid_extractor").setMap(FLUID_EXTRACTING).setTiers(LV).addFlags(GUI, ITEM, FLUID);
     public static BasicMachine FLUID_SOLIDIFIER = new BasicMachine(Ref.ID, "fluid_solidifier").setMap(FLUID_SOLIDIFYING).setTiers(LV).addFlags(GUI, ITEM, FLUID);
-    public static BasicMachine PUMP = new BasicMachine(Ref.ID, "pump").addFlags(GUI, FLUID).setTiers(LV);
+    public static BasicMachine PUMP = new BasicMachine(Ref.ID, "pump").addFlags(GUI, ITEM, FLUID).setTiers(LV).setTile(m -> () -> new TileEntityPump(m));
     public static BasicMachine SIFTER = new BasicMachine(Ref.ID, "sifter").setMap(SIFTING).setTiers(LV).addFlags(GUI, ITEM);
     public static BasicMachine BATH = new BasicMachine(Ref.ID, "bath").setMap(BATHING).setTiers(LV).addFlags(GUI, ITEM);
     public static BasicMachine DISTILLERY = new BasicMachine(Ref.ID, "distillery").setMap(BASIC_DISTILLING).setTiers(LV).addFlags(GUI, ITEM, FLUID);

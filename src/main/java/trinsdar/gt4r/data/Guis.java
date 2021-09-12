@@ -223,7 +223,7 @@ public class Guis {
         LARGE_GAS_TURBINE.add(ROTOR, 152, 5);
         LARGE_STEAM_TURBINE.add(LARGE_GAS_TURBINE);
         THERMAL_BOILER.add(FILTER, 152, 5);
-        PUMP.add(IT_IN, 53, 25).add(FL_OUT, 107, 25).add(ENERGY, 80, 63);
+        PUMP.add(STORAGE, 53, 25).add(FL_OUT, 107, 25).add(ENERGY, 80, 63);
 
         ELECTRIC_ITEM_FILTER
                 .add(DISPLAY_SETTABLE, 18, 6).add(DISPLAY_SETTABLE, 35, 6).add(DISPLAY_SETTABLE, 52, 6)
