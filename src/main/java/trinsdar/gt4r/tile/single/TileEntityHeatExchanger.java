@@ -142,12 +142,6 @@ public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExc
         }
 
         @Override
-        public void onRemove() {
-            this.nullCap.invalidate();
-            this.sidedCaps.values().forEach(LazyOptional::invalidate);
-        }
-
-        @Override
         public void onUpdate() {
             super.onUpdate();
             Direction right = tile.getFacing().rotateYCCW();

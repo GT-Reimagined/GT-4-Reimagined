@@ -154,12 +154,6 @@ public class TileEntityDrum extends TileEntityMaterial<TileEntityDrum> {
         }
 
         @Override
-        public void onRemove() {
-            this.nullCap.invalidate();
-            this.sidedCaps.values().forEach(LazyOptional::invalidate);
-        }
-
-        @Override
         public CompoundNBT serializeNBT() {
             CompoundNBT nbt = super.serializeNBT();
             nbt.putBoolean("Output", output);
