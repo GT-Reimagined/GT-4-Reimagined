@@ -1,6 +1,7 @@
 package trinsdar.gt4r.tile.single;
 
 import muramasa.antimatter.Ref;
+import muramasa.antimatter.capability.CoverHandler;
 import muramasa.antimatter.capability.fluid.FluidHandlerSidedWrapper;
 import muramasa.antimatter.capability.fluid.FluidTanks;
 import muramasa.antimatter.capability.machine.MachineFluidHandler;
@@ -100,9 +101,6 @@ public class TileEntityDrum extends TileEntityMaterial<TileEntityDrum> {
                 b.tank(getCapacity(tile.material));
                 return b;
             }));
-            for (Direction dir : Direction.values()){
-                sidedCaps.put(dir, LazyOptional.of(() -> new DrumFluidHandlerSidedWrapper(this, tile, dir)));
-            }
         }
 
         public void setOutput(boolean output) {
@@ -166,18 +164,10 @@ public class TileEntityDrum extends TileEntityMaterial<TileEntityDrum> {
             this.output = nbt.getBoolean("Output");
         }
 
-        public static class DrumFluidHandlerSidedWrapper extends FluidHandlerSidedWrapper<TileEntityDrum> {
-            public DrumFluidHandlerSidedWrapper(DrumFluidHandler fluidHandler, TileEntityDrum drum, Direction side){
-                super(fluidHandler, drum, side);
-            }
-
-            @Override
-            public int fill(FluidStack resource, FluidAction action) {
-                if (((DrumFluidHandler)fluidHandler).isOutput() && (side == UP && resource.getFluid().getAttributes().isGaseous()) || (side == DOWN && !resource.getFluid().getAttributes().isGaseous())){
-                    return 0;
-                }
-                return super.fill(resource, action);
-            }
+        @Override
+        public boolean canInput(FluidStack fluid, Direction direction) {
+            if (output && (direction == UP && fluid.getFluid().getAttributes().isGaseous()) || (direction == DOWN && !fluid.getFluid().getAttributes().isGaseous())) return false;
+            return super.canInput(fluid, direction);
         }
     }
 }
