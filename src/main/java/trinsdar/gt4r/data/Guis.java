@@ -290,6 +290,7 @@ public class Guis {
         COVER_CRAFTING.setGui(new GuiData(COVER_CRAFTING, COVER_CRAFTING_HANDLER));
 
         if (side.isClient()){
+            PUMP.addGuiCallback(g -> g.addWidget(IOWidget.build(9,63,16,16)));
             BRONZE_WORKBENCH.addGuiCallback(t -> {
                 t.addButton(136, 28, 16, 16, NO_OVERLAY);
                 t.addButton(154, 28, 16, 16, NO_OVERLAY);

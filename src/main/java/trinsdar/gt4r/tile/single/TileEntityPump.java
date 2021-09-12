@@ -6,6 +6,7 @@ import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.util.int3;
 import muramasa.antimatter.worldgen.WorldGenHelper;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FlowingFluidBlock;
@@ -15,22 +16,29 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
 import java.util.ArrayList;
 
 public class TileEntityPump extends TileEntityMachine<TileEntityPump> {
-    int3 pump;
     Fluid fluid = Fluids.EMPTY;
     public ArrayList<BlockPos> mPumpList = new ArrayList<BlockPos>();
-    int pumpHeadY;
+    int pumpHeadY = - 1;
     public TileEntityPump(Machine<?> type) {
         super(type);
-        pump = new int3(this.getPos(), this.getFacing()).down(1);
-        pumpHeadY = this.pos.getY() - 1;
+    }
+
+    @Override
+    public void onFirstTick() {
+        super.onFirstTick();
+        if (this.pumpHeadY < 0) {
+            this.pumpHeadY = pos.getY() - 1;
+        }
     }
 
     @Override
@@ -80,27 +88,6 @@ public class TileEntityPump extends TileEntityMachine<TileEntityPump> {
             }
             this.setActive(!mPumpList.isEmpty());
         }
-        /*if (world.getGameTime() % 20 == 0){
-            FluidState fluidState = world.getFluidState(this.pump);
-            if (!fluidState.isEmpty()){
-                if (fluidState.getFluid() == Fluids.WATER && world.getBlockState(this.pump) != Blocks.WATER.getDefaultState()){
-                    this.pump.down(1);
-                    return;
-                }
-                boolean[] fill = new boolean[1];
-                FluidStack fluidStack = new FluidStack(fluidState.getFluid(), 1000);
-                fill[0] = false;
-                fluidHandler.ifPresent(f -> {
-                    if (f.canOutputsFit(new FluidStack[]{fluidStack})){
-                        f.fillOutput(fluidStack, IFluidHandler.FluidAction.EXECUTE);
-                        fill[0] = true;
-                    }
-                });
-                if (fill[0]){
-                    WorldGenHelper.setState(world, pump, Blocks.AIR.getDefaultState());
-                }
-            }
-        }*/
     }
 
     private void setActive(boolean active){
@@ -165,6 +152,12 @@ public class TileEntityPump extends TileEntityMachine<TileEntityPump> {
         BlockPos pos = new BlockPos(x, y, z);
         FluidState fluidState = world.getFluidState(pos);
         Fluid fluid = fluidState.getFluid();
+        if (!(this.itemHandler.map(i -> {
+            ItemStack stack = i.getHandler(SlotType.STORAGE).getStackInSlot(0);
+            return !stack.isEmpty() && stack.getItem() instanceof BlockItem;
+        })).orElse(false)){
+            return false;
+        }
         if (fluid == this.fluid && fluid != Fluids.EMPTY) {
             // waterlogged block
             if ((fluid == Fluids.WATER || fluid == Fluids.FLOWING_WATER) && world.getBlockState(pos).getBlock() != Blocks.WATER) {
@@ -181,37 +174,45 @@ public class TileEntityPump extends TileEntityMachine<TileEntityPump> {
             } else {
                 energyHandler.ifPresent(e -> e.extractInternal(250, false, true));
             }
-            world.setBlockState(pos, Blocks.AIR.getDefaultState());
+            Block block = this.itemHandler.map(i -> ((BlockItem)i.getHandler(SlotType.STORAGE).getStackInSlot(0).getItem()).getBlock()).orElse(Blocks.AIR);
+            if (x == this.pos.getX() && z == this.pos.getZ()) block = Blocks.AIR;
+            world.setBlockState(pos, block.getDefaultState());
+            if (block != Blocks.AIR) itemHandler.ifPresent(i -> i.getHandler(SlotType.STORAGE).extractFromInput(0, 1, false));
             return true;
         }
         return false;
     }
 
     @Override
-    public boolean setFacing(Direction side) {
-        boolean facing = super.setFacing(side);
-        if (facing) this.pump = new int3(pump.getX(), pump.getY(), pump.getZ(), side);
-        return facing;
-    }
-
-    @Override
     public CompoundNBT write(CompoundNBT tag) {
         super.write(tag);
-        CompoundNBT pump = new CompoundNBT();
-        pump.putInt("X", this.pump.getX());
-        pump.putInt("Y", this.pump.getY());
-        pump.putInt("Z", this.pump.getZ());
-        tag.put("pump", pump);
         tag.put("Fluid", new FluidStack(fluid, 1).writeToNBT(new CompoundNBT()));
         tag.putInt("pumpHeadY", pumpHeadY);
+        ListNBT nbtTagList = new ListNBT();
+        for (int i = 0; i < mPumpList.size(); i++) {
+            CompoundNBT itemTag = new CompoundNBT();
+            BlockPos pos = mPumpList.get(i);
+            itemTag.putInt("X", pos.getX());
+            itemTag.putInt("Y", pos.getY());
+            itemTag.putInt("Z", pos.getZ());
+            nbtTagList.add(itemTag);
+        }
+        CompoundNBT nbt = new CompoundNBT();
+        nbt.put("Positions", nbtTagList);
         return tag;
     }
 
     @Override
     public void read(BlockState state, CompoundNBT tag) {
         super.read(state, tag);
-        CompoundNBT pump = tag.getCompound("pump");
-        this.pump = new int3(pump.getInt("X"), pump.getInt("Y"), pump.getInt("Z"), this.getFacing());
+        mPumpList = new ArrayList<>();
+        ListNBT tagList = tag.getList("Positions", Constants.NBT.TAG_COMPOUND);
+        for (int i = 0; i < tagList.size(); i++)
+        {
+            CompoundNBT itemTags = tagList.getCompound(i);
+            BlockPos pos = new BlockPos(itemTags.getInt("X"), itemTags.getInt("Y"), itemTags.getInt("Z"));
+            mPumpList.add(pos);
+        }
         this.fluid = FluidStack.loadFluidStackFromNBT(tag.getCompound("Fluid")).getFluid();
         this.pumpHeadY = tag.getInt("pumpHeadY");
     }
