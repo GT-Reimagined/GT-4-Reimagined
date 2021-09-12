@@ -1,5 +1,6 @@
 package trinsdar.gt4r.tile.single;
 
+import muramasa.antimatter.capability.fluid.FluidHandlerSidedWrapper;
 import muramasa.antimatter.capability.fluid.FluidTanks;
 import muramasa.antimatter.capability.machine.MachineFluidHandler;
 import muramasa.antimatter.capability.machine.MachineRecipeHandler;
@@ -10,31 +11,23 @@ import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.world.Explosion;
-import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-import trinsdar.gt4r.GT4Reimagined;
-import trinsdar.gt4r.machine.FluidHandlerNullSideWrapper;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Predicate;
 
 import static net.minecraft.util.Direction.DOWN;
 import static net.minecraft.util.Direction.UP;
-import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
 import static net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE;
 import static net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.SIMULATE;
 import static trinsdar.gt4r.data.Materials.DistilledWater;
@@ -114,9 +107,6 @@ public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExc
 
     public static class HeatExchangerFluidHandler extends MachineFluidHandler<TileEntityHeatExchanger>{
 
-        Map<Direction, LazyOptional<IFluidHandler>> sidedCaps = new LinkedHashMap<>();
-        LazyOptional<IFluidHandler> nullCap;
-
         public HeatExchangerFluidHandler(TileEntityHeatExchanger tile) {
             this(tile, 8000 * (1 + tile.getMachineTier().getIntegerId()), 1000 * (250 + tile.getMachineTier().getIntegerId()));
         }
@@ -147,9 +137,8 @@ public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExc
                 return b;
             }));
             for (Direction dir : Direction.values()){
-                sidedCaps.put(dir, LazyOptional.of(() -> new FluidHandlerSidedWrapper(this, dir)));
+                sidedCaps.put(dir, LazyOptional.of(() -> new HeatExchangerFluidHandlerSidedWrapper(this, tile, dir)));
             }
-            nullCap = LazyOptional.of(() -> new FluidHandlerNullSideWrapper(this));
         }
 
         @Override
@@ -174,14 +163,14 @@ public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExc
             TileEntity leftTile = tile.world.getTileEntity(tile.getPos().offset(left));
             TileEntity upTile = tile.world.getTileEntity(tile.getPos().offset(UP));
             if (leftTile != null) {
-                this.sidedCaps.get(left).ifPresent(t -> leftTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, left.getOpposite()).ifPresent(f -> transferFluids(f, ((FluidHandlerSidedWrapper)t), 1000)));
+                this.sidedCaps.get(left).ifPresent(t -> leftTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, left.getOpposite()).ifPresent(f -> transferFluids(f, ((HeatExchangerFluidHandlerSidedWrapper)t), 1000)));
             }
             if (upTile != null) {
-                this.sidedCaps.get(UP).ifPresent(t -> upTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, DOWN).ifPresent(f -> transferFluids(f, ((FluidHandlerSidedWrapper)t), 1000)));
+                this.sidedCaps.get(UP).ifPresent(t -> upTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, DOWN).ifPresent(f -> transferFluids(f, ((HeatExchangerFluidHandlerSidedWrapper)t), 1000)));
             }
         }
 
-        public static void transferFluids(IFluidHandler from, FluidHandlerSidedWrapper to, int cap) {
+        public static void transferFluids(IFluidHandler from, HeatExchangerFluidHandlerSidedWrapper to, int cap) {
             for (int i = 0; i < to.getTanks(); i++) {
                 //if (i >= from.getTanks()) break;
                 FluidStack toInsert = FluidStack.EMPTY;
@@ -225,50 +214,14 @@ public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExc
             return super.fill(stack, action);
         }
 
-        @Override
-        public LazyOptional<? extends IFluidHandler> forNullSide() {
-            if (nullCap.isPresent()) return nullCap.cast();
-            return LazyOptional.empty();
-        }
-
-        @Override
-        public LazyOptional<IFluidHandler> forSide(Direction side) {
-            if (sidedCaps.get(side).isPresent()) return sidedCaps.get(side).cast();
-            return LazyOptional.empty();
-        }
-
-        public static class FluidHandlerSidedWrapper implements IFluidHandler{
-            HeatExchangerFluidHandler fluidHandler;
-            Direction side;
-            public FluidHandlerSidedWrapper(HeatExchangerFluidHandler fluidHandler, Direction side){
-                this.fluidHandler = fluidHandler;
-                this.side = side;
-            }
-
-            @Override
-            public int getTanks() {
-                return fluidHandler.getTanks();
-            }
-
-            @Nonnull
-            @Override
-            public FluidStack getFluidInTank(int tank) {
-                return fluidHandler.getFluidInTank(tank);
-            }
-
-            @Override
-            public int getTankCapacity(int tank) {
-                return fluidHandler.getTankCapacity(tank);
-            }
-
-            @Override
-            public boolean isFluidValid(int tank, @Nonnull FluidStack stack) {
-                return fluidHandler.isFluidValid(tank, stack);
+        public static class HeatExchangerFluidHandlerSidedWrapper extends FluidHandlerSidedWrapper<TileEntityHeatExchanger> {
+            public HeatExchangerFluidHandlerSidedWrapper(HeatExchangerFluidHandler fluidHandler, TileEntityHeatExchanger tile, Direction side){
+                super(fluidHandler, tile, side);
             }
 
             @Override
             public int fill(FluidStack resource, FluidAction action) {
-                if (side == DOWN || side == fluidHandler.tile.getFacing().rotateYCCW()) return 0;
+                if (side == DOWN || side == tile.getFacing().rotateYCCW()) return 0;
                 /*if (side == UP) {
                     int fill = fluidHandler.tanks.get(FluidDirection.INPUT).getTank(0).fill(resource, action);
                     return fill;
@@ -281,13 +234,13 @@ public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExc
             }
 
             public int fillInternal(FluidStack resource, FluidAction action) {
-                if (side == DOWN || side == fluidHandler.tile.getFacing().rotateYCCW()) return 0;
+                if (side == DOWN || side == tile.getFacing().rotateYCCW()) return 0;
                 if (side == UP) {
-                    int fill = fluidHandler.tanks.get(FluidDirection.INPUT).getTank(0).fill(resource, action);
+                    int fill = ((HeatExchangerFluidHandler)fluidHandler).tanks.get(FluidDirection.INPUT).getTank(0).fill(resource, action);
                     return fill;
                 }
-                if (side == fluidHandler.tile.getFacing().rotateY()) {
-                    int fill = fluidHandler.tanks.get(FluidDirection.INPUT).getTank(1).fill(resource, action);
+                if (side == tile.getFacing().rotateY()) {
+                    int fill = ((HeatExchangerFluidHandler)fluidHandler).tanks.get(FluidDirection.INPUT).getTank(1).fill(resource, action);
                     return fill;
                 }
                 return fluidHandler.fill(resource, action);
@@ -296,16 +249,16 @@ public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExc
             @Nonnull
             @Override
             public FluidStack drain(FluidStack resource, FluidAction action) {
-                if (side == DOWN) return fluidHandler.tanks.get(FluidDirection.OUTPUT).getTank(1).drain(resource, action);
-                if (side == fluidHandler.tile.getFacing().rotateYCCW()) return fluidHandler.tanks.get(FluidDirection.OUTPUT).getTank(0).drain(resource, action);
+                if (side == DOWN) return ((HeatExchangerFluidHandler)fluidHandler).tanks.get(FluidDirection.OUTPUT).getTank(1).drain(resource, action);
+                if (side == tile.getFacing().rotateYCCW()) return ((HeatExchangerFluidHandler)fluidHandler).tanks.get(FluidDirection.OUTPUT).getTank(0).drain(resource, action);
                 return FluidStack.EMPTY;
             }
 
             @Nonnull
             @Override
             public FluidStack drain(int maxDrain, FluidAction action) {
-                if (side == DOWN) return fluidHandler.tanks.get(FluidDirection.OUTPUT).getTank(1).drain(maxDrain, action);
-                if (side == fluidHandler.tile.getFacing().rotateYCCW()) return fluidHandler.tanks.get(FluidDirection.OUTPUT).getTank(0).drain(maxDrain, action);
+                if (side == DOWN) return ((HeatExchangerFluidHandler)fluidHandler).tanks.get(FluidDirection.OUTPUT).getTank(1).drain(maxDrain, action);
+                if (side == tile.getFacing().rotateYCCW()) return ((HeatExchangerFluidHandler)fluidHandler).tanks.get(FluidDirection.OUTPUT).getTank(0).drain(maxDrain, action);
                 return FluidStack.EMPTY;
             }
         }

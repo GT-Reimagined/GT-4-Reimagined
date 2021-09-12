@@ -1,11 +1,11 @@
 package trinsdar.gt4r.tile.single;
 
 import muramasa.antimatter.Ref;
+import muramasa.antimatter.capability.fluid.FluidHandlerSidedWrapper;
 import muramasa.antimatter.capability.fluid.FluidTanks;
 import muramasa.antimatter.capability.machine.MachineFluidHandler;
 import muramasa.antimatter.machine.event.ContentEvent;
 import muramasa.antimatter.material.Material;
-import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.tool.AntimatterToolType;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.block.BlockState;
@@ -20,27 +20,22 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
-import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
-import trinsdar.gt4r.machine.FluidHandlerNullSideWrapper;
 import trinsdar.gt4r.machine.MaterialMachine;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import static muramasa.antimatter.Data.ELECTRIC_WRENCH;
 import static muramasa.antimatter.Data.WRENCH;
 import static net.minecraft.util.Direction.DOWN;
 import static net.minecraft.util.Direction.UP;
-import static net.minecraftforge.fluids.capability.CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
 import static trinsdar.gt4r.data.Materials.*;
 
 public class TileEntityDrum extends TileEntityMaterial<TileEntityDrum> {
@@ -99,8 +94,6 @@ public class TileEntityDrum extends TileEntityMaterial<TileEntityDrum> {
 
     public static class DrumFluidHandler extends MachineFluidHandler<TileEntityDrum> {
         boolean output = false;
-        Map<Direction, LazyOptional<IFluidHandler>> sidedCaps = new LinkedHashMap<>();
-        LazyOptional<IFluidHandler> nullCap;
         public DrumFluidHandler(TileEntityDrum tile) {
             super(tile);
             tanks.put(FluidDirection.INPUT, FluidTanks.create(tile, ContentEvent.FLUID_INPUT_CHANGED, b -> {
@@ -108,9 +101,8 @@ public class TileEntityDrum extends TileEntityMaterial<TileEntityDrum> {
                 return b;
             }));
             for (Direction dir : Direction.values()){
-                sidedCaps.put(dir, LazyOptional.of(() -> new FluidHandlerSidedWrapper(this, dir)));
+                sidedCaps.put(dir, LazyOptional.of(() -> new DrumFluidHandlerSidedWrapper(this, tile, dir)));
             }
-            nullCap = LazyOptional.of(() -> new FluidHandlerNullSideWrapper(this));
         }
 
         public void setOutput(boolean output) {
@@ -180,65 +172,17 @@ public class TileEntityDrum extends TileEntityMaterial<TileEntityDrum> {
             this.output = nbt.getBoolean("Output");
         }
 
-        @Override
-        public LazyOptional<? extends IFluidHandler> forNullSide() {
-            if (nullCap.isPresent()) return nullCap.cast();
-            return LazyOptional.empty();
-        }
-
-        @Override
-        public LazyOptional<IFluidHandler> forSide(Direction side) {
-            if (sidedCaps.get(side).isPresent()) return sidedCaps.get(side).cast();
-            return LazyOptional.empty();
-        }
-
-        public static class FluidHandlerSidedWrapper implements IFluidHandler{
-            DrumFluidHandler fluidHandler;
-            Direction side;
-            public FluidHandlerSidedWrapper(DrumFluidHandler fluidHandler, Direction side){
-                this.fluidHandler = fluidHandler;
-                this.side = side;
-            }
-
-            @Override
-            public int getTanks() {
-                return fluidHandler.getTanks();
-            }
-
-            @Nonnull
-            @Override
-            public FluidStack getFluidInTank(int tank) {
-                return fluidHandler.getFluidInTank(tank);
-            }
-
-            @Override
-            public int getTankCapacity(int tank) {
-                return fluidHandler.getTankCapacity(tank);
-            }
-
-            @Override
-            public boolean isFluidValid(int tank, @Nonnull FluidStack stack) {
-                return fluidHandler.isFluidValid(tank, stack);
+        public static class DrumFluidHandlerSidedWrapper extends FluidHandlerSidedWrapper<TileEntityDrum> {
+            public DrumFluidHandlerSidedWrapper(DrumFluidHandler fluidHandler, TileEntityDrum drum, Direction side){
+                super(fluidHandler, drum, side);
             }
 
             @Override
             public int fill(FluidStack resource, FluidAction action) {
-                if (fluidHandler.isOutput() && (side == UP && resource.getFluid().getAttributes().isGaseous()) || (side == DOWN && !resource.getFluid().getAttributes().isGaseous())){
+                if (((DrumFluidHandler)fluidHandler).isOutput() && (side == UP && resource.getFluid().getAttributes().isGaseous()) || (side == DOWN && !resource.getFluid().getAttributes().isGaseous())){
                     return 0;
                 }
-                return fluidHandler.fill(resource, action);
-            }
-
-            @Nonnull
-            @Override
-            public FluidStack drain(FluidStack resource, FluidAction action) {
-                return fluidHandler.drain(resource, action);
-            }
-
-            @Nonnull
-            @Override
-            public FluidStack drain(int maxDrain, FluidAction action) {
-                return fluidHandler.drain(maxDrain, action);
+                return super.fill(resource, action);
             }
         }
     }
