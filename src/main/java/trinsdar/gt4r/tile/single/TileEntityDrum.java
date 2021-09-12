@@ -70,14 +70,6 @@ public class TileEntityDrum extends TileEntityMaterial<TileEntityDrum> {
         return ActionResultType.PASS;
     }
 
-    @Nonnull
-    @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
-        if (blocksCapability(cap, side)) return LazyOptional.empty();
-        else if (cap == FLUID_HANDLER_CAPABILITY && fluidHandler.isPresent()) return fluidHandler.map(f -> ((DrumFluidHandler)f).getCapability(cap, side)).orElse(LazyOptional.empty());
-        return super.getCapability(cap, side);
-    }
-
     @Override
     public void onRemove() {
         this.fluidHandler.ifPresent(f -> {
@@ -188,12 +180,14 @@ public class TileEntityDrum extends TileEntityMaterial<TileEntityDrum> {
             this.output = nbt.getBoolean("Output");
         }
 
-        @Nonnull
-        public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
-            if (side == null){
-                if (nullCap.isPresent()) return nullCap.cast();
-                return LazyOptional.empty();
-            }
+        @Override
+        public LazyOptional<? extends IFluidHandler> forNullSide() {
+            if (nullCap.isPresent()) return nullCap.cast();
+            return LazyOptional.empty();
+        }
+
+        @Override
+        public LazyOptional<IFluidHandler> forSide(Direction side) {
             if (sidedCaps.get(side).isPresent()) return sidedCaps.get(side).cast();
             return LazyOptional.empty();
         }

@@ -112,16 +112,6 @@ public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExc
         this.fluidHandler.set(() -> new HeatExchangerFluidHandler(this));
     }
 
-    @Nonnull
-    @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
-        if (blocksCapability(cap, side)) return LazyOptional.empty();
-        else if (cap == FLUID_HANDLER_CAPABILITY && fluidHandler.isPresent()) {
-            return fluidHandler.map(f -> ((HeatExchangerFluidHandler)f).getCapability(cap, side)).orElse(LazyOptional.empty());
-        }
-        return super.getCapability(cap, side);
-    }
-
     public static class HeatExchangerFluidHandler extends MachineFluidHandler<TileEntityHeatExchanger>{
 
         Map<Direction, LazyOptional<IFluidHandler>> sidedCaps = new LinkedHashMap<>();
@@ -235,12 +225,14 @@ public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExc
             return super.fill(stack, action);
         }
 
-        @Nonnull
-        public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
-            if (side == null){
-                if (nullCap.isPresent()) return nullCap.cast();
-                return LazyOptional.empty();
-            }
+        @Override
+        public LazyOptional<? extends IFluidHandler> forNullSide() {
+            if (nullCap.isPresent()) return nullCap.cast();
+            return LazyOptional.empty();
+        }
+
+        @Override
+        public LazyOptional<IFluidHandler> forSide(Direction side) {
             if (sidedCaps.get(side).isPresent()) return sidedCaps.get(side).cast();
             return LazyOptional.empty();
         }
