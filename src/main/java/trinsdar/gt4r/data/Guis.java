@@ -33,6 +33,7 @@ import trinsdar.gt4r.gui.MenuHandlerCrafting;
 import trinsdar.gt4r.gui.MenuHandlerCraftingItem;
 import trinsdar.gt4r.gui.widgets.CoalBoilerWidget;
 import trinsdar.gt4r.gui.widgets.MachineStateWidgetMoved;
+import trinsdar.gt4r.gui.widgets.TranslocatorButtonArrayWidget;
 import trinsdar.gt4r.tile.multi.TileEntityFusionReactor;
 import trinsdar.gt4r.tile.single.TileEntityMaterial;
 
@@ -239,6 +240,16 @@ public class Guis {
                 .add(FILTERABLE, 98, 23).add(FILTERABLE, 98+18, 23).add(FILTERABLE, 98+18*2, 23)
                 .add(FILTERABLE, 98, 41).add(FILTERABLE, 98+18, 41).add(FILTERABLE, 98+18*2, 41);
 
+        ELECTRIC_ITEM_TRANSLOCATOR
+                .add(DISPLAY_SETTABLE, 63, 6).add(DISPLAY_SETTABLE, 80, 6).add(DISPLAY_SETTABLE, 97, 6)
+                .add(DISPLAY_SETTABLE, 63, 23).add(DISPLAY_SETTABLE, 80, 23).add(DISPLAY_SETTABLE, 97, 23)
+                .add(DISPLAY_SETTABLE, 63, 40).add(DISPLAY_SETTABLE, 80, 40).add(DISPLAY_SETTABLE, 97, 40);
+
+        ELECTRIC_FLUID_TRANSLOCATOR
+                .add(FLUID_DISPLAY_SETTABLE, 63, 6).add(FLUID_DISPLAY_SETTABLE, 80, 6).add(FLUID_DISPLAY_SETTABLE, 97, 6)
+                .add(FLUID_DISPLAY_SETTABLE, 63, 23).add(FLUID_DISPLAY_SETTABLE, 80, 23).add(FLUID_DISPLAY_SETTABLE, 97, 23)
+                .add(FLUID_DISPLAY_SETTABLE, 63, 40).add(FLUID_DISPLAY_SETTABLE, 80, 40).add(FLUID_DISPLAY_SETTABLE, 97, 40);
+
         BATTERY_BUFFER_ONE.add(ENERGY,80,40);
         BATTERY_BUFFER_FOUR.add(ENERGY,71,27).add(ENERGY,89,27).add(ENERGY,71,45).add(ENERGY,89,45);
         BATTERY_BUFFER_EIGHT
@@ -392,6 +403,14 @@ public class Guis {
         ELECTRIC_TYPE_FILTER.getCallbacks().remove(1);
         ELECTRIC_TYPE_FILTER.addGuiCallback(t -> {
             t.addWidget(FilterButtonArrayWidget.build());
+        });
+        ELECTRIC_ITEM_TRANSLOCATOR.getCallbacks().remove(1);
+        ELECTRIC_ITEM_TRANSLOCATOR.addGuiCallback(t -> {
+            t.addWidget(TranslocatorButtonArrayWidget.build());
+        });
+        ELECTRIC_FLUID_TRANSLOCATOR.getCallbacks().remove(1);
+        ELECTRIC_FLUID_TRANSLOCATOR.addGuiCallback(t -> {
+            t.addWidget(TranslocatorButtonArrayWidget.build());
         });
         FORGE_HAMMER.getCallbacks().remove(1);
         FORGE_HAMMER.addGuiCallback(t -> {

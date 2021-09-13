@@ -25,6 +25,7 @@ import trinsdar.gt4r.tile.single.TileEntityQuantumTank;
 import trinsdar.gt4r.tile.single.TileEntitySteamMachine;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.tile.multi.*;
+import trinsdar.gt4r.tile.single.TileEntityTranslocator;
 import trinsdar.gt4r.tile.single.TileEntityTypeFilter;
 import trinsdar.gt4r.tile.single.TileEntityWorkbench;
 
@@ -86,6 +87,8 @@ public class Machines {
 
     public static BasicMachine ELECTRIC_ITEM_FILTER = new BasicMachine(Ref.ID, "electric_item_filter").setTiers(LV).addFlags(GUI, ITEM).setTile(m -> () -> new TileEntityItemFilter(m)).noCovers().allowFrontIO().setAllowVerticalFacing(true).overlayTexture(Textures.LEFT_RIGHT_HANDLER);
     public static BasicMachine ELECTRIC_TYPE_FILTER = new BasicMachine(Ref.ID, "electric_type_filter").setTiers(LV).addFlags(GUI, ITEM).setTile(m -> () -> new TileEntityTypeFilter(m)).noCovers().allowFrontIO().setAllowVerticalFacing(true).overlayTexture(Textures.LEFT_RIGHT_HANDLER);
+    public static BasicMachine ELECTRIC_ITEM_TRANSLOCATOR = new BasicMachine(Ref.ID, "electric_item_translocator").setTiers(LV).addFlags(GUI, ITEM).setTile(m -> () -> new TileEntityTranslocator.TileEntityItemTranslocator(m)).noCovers().allowFrontIO().setAllowVerticalFacing(true).overlayTexture(Textures.LEFT_RIGHT_HANDLER);
+    public static BasicMachine ELECTRIC_FLUID_TRANSLOCATOR = new BasicMachine(Ref.ID, "electric_fluid_translocator").setTiers(LV).addFlags(GUI, ITEM).setTile(m -> () -> new TileEntityTranslocator.TileEntityFluidTranslocator(m)).noCovers().allowFrontIO().setAllowVerticalFacing(true).overlayTexture(Textures.LEFT_RIGHT_HANDLER);
 
     public static BasicMultiMachine<?> COKE_OVEN = new BasicMultiMachine<>(Ref.ID, "coke_oven").setMap(COKING).setTiers(LV).addFlags(GUI, ITEM, FLUID).setTile(m -> () -> new TileEntityCokeOven(m));
     public static BasicMultiMachine<?> PRIMITIVE_BLAST_FURNACE = new BasicMultiMachine<>(Ref.ID, "primitive_blast_furnace").setMap(BASIC_BLASTING).setTiers(BRONZE).addFlags(GUI, ITEM).setTile(m -> () -> new TileEntityPrimitiveBlastFurnace(m));
