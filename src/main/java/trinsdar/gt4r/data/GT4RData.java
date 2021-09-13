@@ -280,8 +280,6 @@ public class GT4RData {
     public static StoneType BLUE_SCHIST = new CobbleStoneType(Ref.ID, "blue_schist", BlueSchist, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F);
     public static StoneType KIMBERLITE = new CobbleStoneType(Ref.ID, "kimberlite", Kimberlite, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(3.0F, 30.0F).setHarvestLevel(2);
     public static StoneType QUARTZITE = new CobbleStoneType(Ref.ID, "quartzite", Quartzite, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F);
-    public static StoneType SALT = new StoneType(Ref.ID, "salt", Salt, new Texture(Ref.ID, "block/stone/salt"), SoundType.STONE, true).setHardnessAndResistance(1.0F,7.5F);
-    public static StoneType ROCK_SALT = new StoneType(Ref.ID, "rock_salt", RockSalt, new Texture(Ref.ID, "block/stone/rock_salt"), SoundType.STONE, true).setHardnessAndResistance(1.0F,7.5F);
 
 
     public static final BlockTurbineCasing STANDARD_MACHINE_CASING = new BlockTurbineCasing(Ref.ID, "standard_machine_casing");

@@ -16,6 +16,7 @@ public class Ref {
     public static final String MOD_TFC = "tfc";
     public static final String MOD_BLUEPOWER = "bluepower";
     public static final String MOD_TERRESTRIA = "terrestria";
+    public static final String MOD_CINDERSCAPES = "cinderscapes";
 
     /** Config Values **/
     public static boolean mixedOreYieldsTwoThirdsPureOre = false; //TODO 5U remnant, determine if needed

@@ -124,6 +124,13 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
             }
 
         }
+        if (AntimatterAPI.isModLoaded(Ref.MOD_CINDERSCAPES)){
+            String[] woodTypes = {"scorched", "umbral"};
+            for (String woodType : woodTypes) {
+                addWoodRecipe(consumer, TagUtils.getItemTag(new ResourceLocation(Ref.MOD_CINDERSCAPES, woodType + "_stems")), ForgeRegistries.ITEMS.getValue(new ResourceLocation(Ref.MOD_CINDERSCAPES, woodType + "_planks")));
+            }
+
+        }
         String[] stones = {"stone", "smooth_stone", "sandstone", "cut_sandstone", "cobblestone", "red_sandstone", "cut_red_sandstone", "prismarine", "dark_prismarine", "polished_granite", "smooth_red_sandstone", "polished_diorite", "mossy_cobblestone", "smooth_sandstone", "smooth_quartz", "granite", "andesite", "polished_andesite", "diorite", "blackstone", "polished_blackstone", "purpur", "quartz", "brick", "stone_brick", "nether_brick", "prismarine_brick", "mossy_stone_brick", "end_stone_brick", "red_nether_brick", "polished_blackstone_brick"};
         for (String stone : stones) {
             Item full = ForgeRegistries.ITEMS.getValue(new ResourceLocation(stone + (stone.equals("purpur") || stone.equals("quartz") ? "_block" : stone.contains("brick") ? "s" : "")));
@@ -136,6 +143,24 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
             ResourceLocation name = new ResourceLocation(s + "_planks");
             ResourceLocation slab = new ResourceLocation(s + "_slab");
             addItemRecipe(consumer, Ref.ID, slab.getPath() + "_to_" + name.getPath(), "slabs", "has_stone", this.hasSafeItem(ForgeRegistries.ITEMS.getValue(slab)), ForgeRegistries.ITEMS.getValue(name), of('S', ForgeRegistries.ITEMS.getValue(slab)), "S", "S");
+        }
+        if (AntimatterAPI.isModLoaded(Ref.MOD_TERRESTRIA)){
+            String[] woodTypes = {"cypress", "hemlock", "japanese_maple", "rainbow_eucalyptus", "redwood", "rubber", "sakura", "willow", "yucca_palm"};
+            for (String woodType : woodTypes) {
+                ResourceLocation name = new ResourceLocation(Ref.MOD_TERRESTRIA,woodType + "_planks");
+                ResourceLocation slab = new ResourceLocation(Ref.MOD_TERRESTRIA,woodType + "_slab");
+                addItemRecipe(consumer, Ref.ID, slab.getPath() + "_to_" + name.getPath(), "slabs", "has_stone", this.hasSafeItem(ForgeRegistries.ITEMS.getValue(slab)), ForgeRegistries.ITEMS.getValue(name), of('S', ForgeRegistries.ITEMS.getValue(slab)), "S", "S");
+            }
+
+        }
+        if (AntimatterAPI.isModLoaded(Ref.MOD_CINDERSCAPES)){
+            String[] woodTypes = {"scorched", "umbral"};
+            for (String woodType : woodTypes) {
+                ResourceLocation name = new ResourceLocation(Ref.MOD_CINDERSCAPES,woodType + "_planks");
+                ResourceLocation slab = new ResourceLocation(Ref.MOD_CINDERSCAPES,woodType + "_slab");
+                addItemRecipe(consumer, Ref.ID, slab.getPath() + "_to_" + name.getPath(), "slabs", "has_stone", this.hasSafeItem(ForgeRegistries.ITEMS.getValue(slab)), ForgeRegistries.ITEMS.getValue(name), of('S', ForgeRegistries.ITEMS.getValue(slab)), "S", "S");
+            }
+
         }
     }
 
