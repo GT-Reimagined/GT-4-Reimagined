@@ -209,7 +209,7 @@ public class GT4Reimagined extends AntimatterMod {
                 // This Code is to tell Bear and all the people around him that he should clean up his always cluttered Inventory.
                 if (--BEAR_INVENTORY_COOL_DOWN < 0 && tEmptySlots < 4) {
                     BEAR_INVENTORY_COOL_DOWN = 100;
-                    if (event.player.openContainer != null) return;
+                    //if (event.player.openContainer != null) return;
                     for (int i = 0; i < event.player.world.getPlayers().size(); i++) {
                         PlayerEntity player = event.player.world.getPlayers().get(i);
                         if (player == null) continue;
