@@ -11,6 +11,7 @@ import muramasa.antimatter.gui.container.ContainerBasicMachine;
 import muramasa.antimatter.gui.container.ContainerMultiMachine;
 import muramasa.antimatter.gui.screen.AntimatterContainerScreen;
 import muramasa.antimatter.gui.slot.ISlotProvider;
+import muramasa.antimatter.gui.widget.BackgroundWidget;
 import muramasa.antimatter.gui.widget.IOWidget;
 import muramasa.antimatter.gui.widget.MachineStateWidget;
 import muramasa.antimatter.gui.widget.ProgressWidget;
@@ -446,6 +447,10 @@ public class Guis {
         });
         DISTILLATION_TOWER.getCallbacks().remove(1);
         DISTILLATION_TOWER.addGuiCallback(t -> t.addWidget(ProgressWidget.build(BarDir.TOP, true).setSize(80, 4, 16, 72)).addWidget(MachineStateWidgetMoved.build(176, 108).setPos(66, 26).setWH(8, 8)));
+        PLATINUM_CABINET.getCallbacks().remove(0);
+        OSMIUM_CABINET.getCallbacks().remove(0);
+        PLATINUM_CABINET.addGuiCallback(t -> t.addWidget(BackgroundWidget.build(t.handler.getGuiTexture(),t.handler.guiSize(), t.handler.guiHeight(), 256, 266)));
+        OSMIUM_CABINET.addGuiCallback(t -> t.addWidget(BackgroundWidget.build(t.handler.getGuiTexture(),t.handler.guiSize(), t.handler.guiHeight(), 256, 276)));
     }
 
     private static void initMaterialMachine(Dist side){
