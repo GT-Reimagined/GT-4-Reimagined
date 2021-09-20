@@ -1,6 +1,5 @@
 package trinsdar.gt4r.tile.multi;
 
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import muramasa.antimatter.Ref;
 import muramasa.antimatter.capability.machine.MachineRecipeHandler;
 import muramasa.antimatter.gui.SlotType;
@@ -10,6 +9,7 @@ import muramasa.antimatter.recipe.Recipe;
 import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import speiger.src.collections.objects.lists.ObjectArrayList;
 import trinsdar.gt4r.data.SlotTypes;
 
 import java.util.ArrayList;

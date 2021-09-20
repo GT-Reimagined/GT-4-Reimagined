@@ -1,37 +1,26 @@
 package trinsdar.gt4r.datagen;
 
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
-import it.unimi.dsi.fastutil.objects.Object2ObjectRBTreeMap;
 import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.Data;
-import muramasa.antimatter.block.BlockStone;
 import muramasa.antimatter.datagen.providers.AntimatterLanguageProvider;
 import muramasa.antimatter.fluid.AntimatterFluid;
 import muramasa.antimatter.item.ItemFluidCell;
-import muramasa.antimatter.machine.BlockMachine;
 import muramasa.antimatter.machine.MachineFlag;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.material.Material;
-import muramasa.antimatter.material.MaterialItem;
 import muramasa.antimatter.material.MaterialTag;
-import net.minecraft.block.Block;
+import net.minecraft.data.DataGenerator;
 import net.minecraft.item.Item;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.block.BlockCasing;
-import trinsdar.gt4r.block.BlockCasingMachine;
-import trinsdar.gt4r.block.BlockTurbineCasing;
 import trinsdar.gt4r.data.GT4RData;
-import trinsdar.gt4r.data.Machines;
 import trinsdar.gt4r.items.ItemIntCircuit;
-import net.minecraft.data.DataGenerator;
 import trinsdar.gt4r.items.ItemMatch;
 import trinsdar.gt4r.items.ItemPowerUnit;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 import static muramasa.antimatter.Data.GEM;
@@ -43,7 +32,6 @@ import static muramasa.antimatter.machine.Tier.MV;
 import static muramasa.antimatter.machine.Tier.STEEL;
 import static muramasa.antimatter.util.Utils.lowerUnderscoreToUpperSpaced;
 import static muramasa.antimatter.util.Utils.lowerUnderscoreToUpperSpacedRotated;
-import static muramasa.antimatter.util.Utils.validateNBT;
 import static trinsdar.gt4r.data.Machines.ELECTROLYZER;
 import static trinsdar.gt4r.data.Machines.HATCH_DYNAMO;
 import static trinsdar.gt4r.data.Machines.MACERATOR;

@@ -1,6 +1,5 @@
 package trinsdar.gt4r.tile.single;
 
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import muramasa.antimatter.capability.machine.MachineEnergyHandler;
 import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.gui.event.GuiEvent;
@@ -20,6 +19,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
+import speiger.src.collections.objects.lists.ObjectArrayList;
 import trinsdar.gt4r.data.SlotTypes;
 
 import java.util.List;

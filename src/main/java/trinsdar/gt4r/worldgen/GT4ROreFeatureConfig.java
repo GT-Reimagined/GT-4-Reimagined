@@ -2,7 +2,6 @@ package trinsdar.gt4r.worldgen;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import muramasa.antimatter.material.Material;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.RegistryKey;
@@ -13,6 +12,7 @@ import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.feature.template.RuleTest;
 import net.minecraftforge.common.BiomeDictionary;
+import speiger.src.collections.objects.sets.ObjectOpenHashSet;
 
 import java.util.ArrayList;
 import java.util.Arrays;

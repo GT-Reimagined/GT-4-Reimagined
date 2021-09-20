@@ -1,6 +1,5 @@
 package trinsdar.gt4r.data;
 
-import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import muramasa.antimatter.Antimatter;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.recipe.Recipe;

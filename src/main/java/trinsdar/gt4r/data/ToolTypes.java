@@ -1,7 +1,6 @@
 package trinsdar.gt4r.data;
 
 import com.google.common.collect.ImmutableMap;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.Data;
 import muramasa.antimatter.item.ItemBattery;
@@ -22,6 +21,7 @@ import net.minecraft.tags.ITag;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Tuple;
+import speiger.src.collections.objects.lists.ObjectArrayList;
 import tesseract.api.capability.TesseractGTCapability;
 import tesseract.api.gt.IGTNode;
 import trinsdar.gt4r.Ref;

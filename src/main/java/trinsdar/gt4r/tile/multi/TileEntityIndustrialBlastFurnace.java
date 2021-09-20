@@ -1,7 +1,6 @@
 package trinsdar.gt4r.tile.multi;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import it.unimi.dsi.fastutil.objects.ObjectCollection;
 import muramasa.antimatter.capability.EnergyHandler;
 import muramasa.antimatter.capability.machine.MachineRecipeHandler;
 import muramasa.antimatter.gui.GuiInstance;
@@ -20,6 +19,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.IIntArray;
+import speiger.src.collections.objects.collections.ObjectCollection;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.data.SlotTypes;
 import trinsdar.gt4r.tile.single.TileEntityInfiniteStorage;

@@ -1,9 +1,9 @@
 package trinsdar.gt4r.loader.machines;
 
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import net.minecraft.item.ItemStack;
+import speiger.src.collections.objects.lists.ObjectArrayList;
 
 import java.util.List;
 
