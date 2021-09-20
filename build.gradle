@@ -230,13 +230,12 @@ tasks.withType(JavaCompile) {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            artifact jar
+            artifact(jar) {
+                builtBy jar
+            }
         }
     }
     repositories {
-        maven {
-            url "file:///${project.projectDir}/mcmodsrepo"
-        }
     }
 }
 
