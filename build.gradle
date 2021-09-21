@@ -28,6 +28,9 @@ repositories {
         url "https://maven.tterrag.com/"
     }
     maven {
+        url = "https://maven.speiger.com/repository/main"
+    }
+    maven {
         url = "https://www.cursemaven.com"
         content {
             includeGroup "curse.maven"
@@ -197,6 +200,7 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:architectury-forge-419699:${architectury_file}")
     runtimeOnly fg.deobf("curse.maven:kubejs-238086:${kubejs_file}")
     runtimeOnly fg.deobf("curse.maven:bluepower-223099:3375771")
+    runtimeOnly fg.deobf("curse.maven:spartan_weaponry-278141:3164046")
 
 //    if (findProject(':AntimatterAPI') != null) {
     implementation project(path: ':AntimatterAPI')
@@ -207,6 +211,10 @@ dependencies {
     //   }
     compile fg.deobf("com.github.GregTech-Intergalactical:TesseractAPI:${tesseract_version}")
     annotationProcessor 'org.spongepowered:mixin:0.8.2:processor'
+
+    compile 'de.speiger:Primitive-Collections:0.4.0'
+
+    runtimeOnly fg.deobf("com.github.Trinsdar:GT-Spartan:7634a8d6de")//3ad506467f
 
     compileOnly fg.deobf("mezz.jei:jei-${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${jei_version}")
@@ -219,7 +227,6 @@ tasks.withType(JavaCompile) {
         options.release = targetVersion
     }
 }
-
 
 // Example configuration to allow publishing using the maven-publish task
 // This is the preferred method to reobfuscate your jar file

@@ -51,7 +51,7 @@ public class ContainerWorkbench<T extends TileEntityMaterial<T>> extends Contain
                 supplier = slot.getType().getSlotSupplier().get((SlotType) slot.getType(), tile, tile.itemHandler.map(t -> t.getAll()).orElse(Collections.emptyMap()), slotIndexMap.getInt(slot.getType().getId()),(SlotData) slot);
             }
             addSlot(supplier);
-            slotIndexMap.compute(slot.getType().getId(), (k, v) -> v + 1);
+            slotIndexMap.addTo(slot.getType().getId(), 1);
         }
     }
 
