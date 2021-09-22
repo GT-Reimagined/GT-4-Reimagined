@@ -16,7 +16,6 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.placement.DepthAverageConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.placement.TopSolidRangeConfig;
 import net.minecraftforge.common.BiomeDictionary;
@@ -27,7 +26,7 @@ import java.util.List;
 import java.util.Random;
 
 import static muramasa.antimatter.Data.ORE_STONE;
-import static trinsdar.gt4r.worldgen.GT4RFeatures.*;
+import static trinsdar.gt4r.worldgen.GT4RConfiguredFeatures.*;
 
 public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfig> {
     public FeatureVanillaTypeOre() {

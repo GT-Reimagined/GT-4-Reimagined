@@ -9,16 +9,12 @@ import muramasa.antimatter.recipe.loader.IRecipeRegistrate;
 import muramasa.antimatter.registration.RegistrationEvent;
 import muramasa.antimatter.AntimatterMod;
 import muramasa.antimatter.tool.IAntimatterTool;
-import net.minecraft.block.AnvilBlock;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.HorseArmorItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
-import net.minecraft.potion.Potion;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
@@ -29,7 +25,6 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
@@ -68,14 +63,13 @@ import trinsdar.gt4r.proxy.CommonHandler;
 import trinsdar.gt4r.proxy.ServerHandler;
 import trinsdar.gt4r.tile.TileEntityTypes;
 import trinsdar.gt4r.tree.RubberFoliagePlacer;
+import trinsdar.gt4r.worldgen.GT4RConfiguredFeatures;
 import trinsdar.gt4r.worldgen.GT4RFeatures;
 
 import java.util.UUID;
 
 import static muramasa.antimatter.Data.DRILL;
-import static muramasa.antimatter.Data.GEM;
 import static muramasa.antimatter.Data.PICKAXE;
-import static trinsdar.gt4r.data.Materials.Amethyst;
 
 
 @Mod(Ref.ID)
@@ -277,6 +271,7 @@ public class GT4Reimagined extends AntimatterMod {
                 RecipeMaps.init();
                 GT4RData.init(side);
                 Machines.init();
+                GT4RFeatures.init();
                 RecipeMaps.postInit();
                 TileEntityTypes.init();
                 Guis.init(side);
@@ -288,7 +283,7 @@ public class GT4Reimagined extends AntimatterMod {
                 }
                 GT4RData.buildTierMaps();
                 Structures.init();
-                GT4RFeatures.init();
+                GT4RConfiguredFeatures.init();
                 //GregTechAPI.registerFluidCell(Data.CellTin.get(1));
                 //GregTechAPI.registerFluidCell(Data.CellSteel.get(1));
                 //GregTechAPI.registerFluidCell(Data.CellTungstensteel.get(1));
