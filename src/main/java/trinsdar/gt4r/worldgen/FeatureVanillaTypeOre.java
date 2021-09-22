@@ -1,48 +1,32 @@
 package trinsdar.gt4r.worldgen;
 
-import com.mojang.serialization.Codec;
 import muramasa.antimatter.AntimatterConfig;
 import muramasa.antimatter.Data;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.ore.StoneType;
 import muramasa.antimatter.worldgen.WorldGenHelper;
 import muramasa.antimatter.worldgen.feature.AntimatterFeature;
-import muramasa.antimatter.worldgen.object.WorldGenVeinLayer;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.TallSeaGrassBlock;
-import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.util.RegistryKey;
-import net.minecraft.util.Tuple;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.ProbabilityConfig;
 import net.minecraft.world.gen.placement.DepthAverageConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.placement.TopSolidRangeConfig;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
-import trinsdar.gt4r.data.GT4RData;
 
-import java.util.Arrays;
 import java.util.BitSet;
 import java.util.List;
 import java.util.Random;
 
-import static muramasa.antimatter.Data.ORE;
 import static muramasa.antimatter.Data.ORE_STONE;
-import static trinsdar.gt4r.data.Materials.RockSalt;
-import static trinsdar.gt4r.data.Materials.Salt;
 import static trinsdar.gt4r.worldgen.GT4RFeatures.*;
 
 public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfig> {
@@ -68,38 +52,38 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
     @Override
     public void build(BiomeGenerationSettingsBuilder event) {
         if (AntimatterConfig.WORLD.ORE_VEINS){
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(COPPER));
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(TIN));
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(URANITE));
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(URANITE_DEAD));
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(CASSITERITE));
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(TETRAHEDRITE));
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(GALENA));
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(BAUXITE));
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(RUBY));
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(SAPPHIRE));
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(PLATINUM));
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(IRIDIUM));
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(EMERALD));
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(PYRITE));
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(SPHALERITE));
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(CINNABAR));
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(TUNGSTATE));
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(PLATINUM_END));
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(OLIVINE));
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(SODALITE));
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(CHROMITE));
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(SALT));
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(ROCK_SALT));
+            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, COPPER);
+            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, TIN);
+            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, URANITE);
+            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, URANITE_DEAD);
+            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CASSITERITE);
+            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, TETRAHEDRITE);
+            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, GALENA);
+            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, BAUXITE);
+            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, RUBY);
+            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, SAPPHIRE);
+            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, PLATINUM);
+            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, IRIDIUM);
+            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, EMERALD);
+            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, PYRITE);
+            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, SPHALERITE);
+            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CINNABAR);
+            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, TUNGSTATE);
+            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, PLATINUM_END);
+            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, OLIVINE);
+            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, SODALITE);
+            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CHROMITE);
+            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, SALT);
+            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ROCK_SALT);
             if (AntimatterConfig.WORLD.VANILLA_ORE_GEN){
-                event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(IRON));
-                event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(COAL));
-                event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(GOLD));
-                event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(GOLD_MESA));
-                event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(REDSTONE));
-                event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(DIAMOND));
-                event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.getConfiguration(EMERALD_VANILLA));
-                event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, this.withConfiguration(LAPIS).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(16, 16))).square());
+                event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, IRON);
+                event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, COAL);
+                event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, GOLD);
+                event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, GOLD_MESA);
+                event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, REDSTONE);
+                event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, DIAMOND);
+                event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, EMERALD_VANILLA);
+                event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, LAPIS);
             }
         }
     }
@@ -134,7 +118,7 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
             return false;
         }
 
-        if (config == SALT){
+        if (config == SALT_CONFIG){
             return generateOnOceanFloor(world, generator, rand, pos, config);
         }
         return generate2(world, rand, pos, config);
