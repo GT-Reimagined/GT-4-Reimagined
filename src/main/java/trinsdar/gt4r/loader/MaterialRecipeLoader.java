@@ -154,16 +154,16 @@ public class MaterialRecipeLoader {
                 String[] types = new String[]{"bricks_mossy", "cobble_mossy", "bricks", "cobble", "smooth", ""};
                 for (String type : types){
                     String i = type.isEmpty() ? "" : "_";
-                    provider.addStackRecipe(output, Ref.ID, m.getId() + i + type + "_slab", "slabs", "has_stone", provider.hasSafeItem(c.getBlock(type)), new ItemStack(c.getBlock(type + i + "slab"), 6), of('S', c.getBlock(type)), "SSS");
-                    provider.addStackRecipe(output, Ref.ID, m.getId() + i + type + "_stairs", "stairs", "has_stone", provider.hasSafeItem(c.getBlock(type)), new ItemStack(c.getBlock(type + i + "stairs"), 4), of('S', c.getBlock(type)), "S  ", "SS ", "SSS");
-                    provider.addStackRecipe(output, Ref.ID, m.getId() + i + type + "_wall", "walls", "has_stone", provider.hasSafeItem(c.getBlock(type)), new ItemStack(c.getBlock(type + i + "wall"), 6), of('S', c.getBlock(type)), "SSS", "SSS");
+                    provider.addStackRecipe(output, Ref.ID, "slab_" + m.getId() + i + type, "slabs", "has_stone", provider.hasSafeItem(c.getBlock(type)), new ItemStack(c.getBlock(type + i + "slab"), 6), of('S', c.getBlock(type)), "SSS");
+                    provider.addStackRecipe(output, Ref.ID, "stairs_" + m.getId() + i + type, "stairs", "has_stone", provider.hasSafeItem(c.getBlock(type)), new ItemStack(c.getBlock(type + i + "stairs"), 4), of('S', c.getBlock(type)), "S  ", "SS ", "SSS");
+                    provider.addStackRecipe(output, Ref.ID, "wall_" + m.getId() + i + type, "walls", "has_stone", provider.hasSafeItem(c.getBlock(type)), new ItemStack(c.getBlock(type + i + "wall"), 6), of('S', c.getBlock(type)), "SSS", "SSS");
                     String[] pattern = type.equals("bricks") ? new String[]{"SS"} : new String[]{"S", "S"};
                     provider.addStackRecipe(output, Ref.ID, m.getId() + i + type + "_from_slabs", "slabs", "has_stone", provider.hasSafeItem(c.getBlock(type + i + "slab")), new ItemStack(c.getBlock(type), 1), of('S', c.getBlock(type + i + "slab")), pattern);
                 }
-                provider.addStackRecipe(output, Ref.ID, m.getId() + "_bricks", "bricks", "has_stone", provider.hasSafeItem(c.getBlock("")), new ItemStack(c.getBlock("bricks"), 4), of('S', c.getBlock("")), "SS", "SS");
-                provider.addStackRecipe(output, Ref.ID, m.getId() + "_bricks_chiseled", "bricks", "has_stone", provider.hasSafeItem(c.getBlock("bricks_slab")), new ItemStack(c.getBlock("bricks_chiseled"), 1), of('S', c.getBlock("bricks_slab")), "S", "S");
-                provider.shapeless(output, m.getId() + "_bricks_mossy", "bricks", "has_vines", provider.hasSafeItem(Items.VINE), new ItemStack(c.getBlock("bricks_mossy")), c.getBlock("bricks"), Items.VINE);
-                provider.shapeless(output, m.getId() + "_cobble_mossy", "bricks", "has_vines", provider.hasSafeItem(Items.VINE), new ItemStack(c.getBlock("cobble_mossy")), c.getBlock("cobble"), Items.VINE);
+                provider.addStackRecipe(output, Ref.ID, "bricks_" + m.getId(), "bricks", "has_stone", provider.hasSafeItem(c.getBlock("")), new ItemStack(c.getBlock("bricks"), 4), of('S', c.getBlock("")), "SS", "SS");
+                provider.addStackRecipe(output, Ref.ID, "bricks_chiseled_" + m.getId(), "bricks", "has_stone", provider.hasSafeItem(c.getBlock("bricks_slab")), new ItemStack(c.getBlock("bricks_chiseled"), 1), of('S', c.getBlock("bricks_slab")), "S", "S");
+                provider.shapeless(output, "bricks_mossy_" + m.getId(), "bricks", "has_vines", provider.hasSafeItem(Items.VINE), new ItemStack(c.getBlock("bricks_mossy")), c.getBlock("bricks"), Items.VINE);
+                provider.shapeless(output, "cobble_mossy_" + m.getId(), "bricks", "has_vines", provider.hasSafeItem(Items.VINE), new ItemStack(c.getBlock("cobble_mossy")), c.getBlock("cobble"), Items.VINE);
                 types = new String[]{"stairs", "slab", "wall", "bricks_slab", "bricks_stairs", "bricks_chiseled", "bricks_wall", "bricks"};
                 for (String type : types){
                     int amount = type.contains("slab") ? 2 : 1;
