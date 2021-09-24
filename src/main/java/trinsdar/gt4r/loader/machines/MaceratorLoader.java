@@ -125,6 +125,10 @@ public class MaceratorLoader {
             if (s.getMaterial() == NULL || !s.getMaterial().has(DUST)) return;
             MACERATING.RB().ii(RecipeIngredient.of(s.getState().getBlock().asItem(), 1)).io(DUST.get(s.getMaterial(), 1)).add(400, 2);
         });
+        AntimatterAPI.all(StoneType.class, muramasa.antimatter.Ref.MOD_KJS, s -> {
+            if (s.getMaterial() == NULL || !s.getMaterial().has(DUST)) return;
+            MACERATING.RB().ii(RecipeIngredient.of(s.getState().getBlock().asItem(), 1)).io(DUST.get(s.getMaterial(), 1)).add(400, 2);
+        });
         if (AntimatterAPI.isModLoaded(Ref.MOD_CREATE)){
             MACERATING.RB().ii(RecipeIngredient.of(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(Ref.MOD_CREATE, "limestone")), 1)).io(DUST.get(Limestone, 1)).add(400, 2);
             MACERATING.RB().ii(RecipeIngredient.of(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(Ref.MOD_CREATE, "weathered_limestone")), 1)).io(DUST.get(Limestone, 1)).add(400, 2);
