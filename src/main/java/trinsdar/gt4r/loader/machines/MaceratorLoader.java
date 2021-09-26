@@ -90,6 +90,9 @@ public class MaceratorLoader {
             if (m.has(CRUSHED_CENTRIFUGED)) {
                 MACERATING.RB().ii(RecipeIngredient.of(CRUSHED_CENTRIFUGED.getMaterialTag(m), 1)).io(DUST.get(m.getMacerateInto(), 1), DUST.get(oreByProduct3, 1)).chances(100, 10).add(400, 2);
             }
+            if (m.has(RAW_ORE)){
+                MACERATING.RB().ii(RecipeIngredient.of(RAW_ORE.getMaterialTag(m), 1)).io(Utils.ca((m.getOreMulti() * multiplier) * 2, crushedStack), DUST.get(oreByProduct1, 1)).chances(100, 10 * multiplier * m.getByProductMulti()).add(400, 2);
+            }
         });
         DUST.all().forEach(m -> {
             if (m.has(PLATE) && m != Wood){

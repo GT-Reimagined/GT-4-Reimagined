@@ -193,11 +193,13 @@ public class GT4Reimagined extends AntimatterMod {
             if (event.player.ticksExisted % 120 == 0) {
                 ItemStack tStack;
                 int tEmptySlots = 36;
+                int tFullSlots = 0;
                 for (int i = 0; i < 36; i++) {
                     tStack = event.player.inventory.getStackInSlot(i);
 
                     if (!tStack.isEmpty()) {
                         tEmptySlots--;
+                        tFullSlots++;
                     }
                 }
 
