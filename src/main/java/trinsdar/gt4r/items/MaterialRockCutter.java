@@ -60,9 +60,11 @@ public class MaterialRockCutter extends MaterialTool {
 
     @Override
     public void onGenericFillItemGroup(ItemGroup group, NonNullList<ItemStack> list, long maxEnergy) {
-        ItemStack stack = asItemStack(Diamond, Titanium);
-        getDataTag(stack).putLong(Ref.KEY_TOOL_DATA_ENERGY, maxEnergy);
-        list.add(stack);
+        if (this.isInGroup(group)){
+            ItemStack stack = asItemStack(Diamond, Titanium);
+            getDataTag(stack).putLong(Ref.KEY_TOOL_DATA_ENERGY, maxEnergy);
+            list.add(stack);
+        }
     }
 
     @Override
