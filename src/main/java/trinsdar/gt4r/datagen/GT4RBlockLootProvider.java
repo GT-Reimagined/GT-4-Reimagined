@@ -86,7 +86,7 @@ public class GT4RBlockLootProvider extends AntimatterBlockLootProvider {
                 tables.put(block, b -> finalBuilder);
                 return;
             } else if (mat == Sodalite){
-                tables.put(block, b -> droppingWithSilkTouch(b, withExplosionDecay(b, ItemLootEntry.builder(DUST.get(mat)).acceptFunction(SetCount.builder(RandomValueRange.of(6.0F, 6.0F))).acceptFunction(GT4RRandomDropBonus.uniformBonusCount(Enchantments.FORTUNE, 3)))).addLootPool(LootPool.builder().rolls(ConstantRange.of(1)).acceptCondition(BlockLootTablesAccessor.getNoSilkTouch()).addEntry(ItemLootEntry.builder(DUST.get(Aluminium)).acceptFunction(GT4RRandomDropBonus.randomDrops(Enchantments.FORTUNE, 4)))));
+                tables.put(block, b -> droppingWithSilkTouch(b, withExplosionDecay(b, ItemLootEntry.builder(GEM.get(mat)).acceptFunction(SetCount.builder(RandomValueRange.of(6.0F, 6.0F))).acceptFunction(GT4RRandomDropBonus.uniformBonusCount(Enchantments.FORTUNE, 3)))).addLootPool(LootPool.builder().rolls(ConstantRange.of(1)).acceptCondition(BlockLootTablesAccessor.getNoSilkTouch()).addEntry(ItemLootEntry.builder(DUST.get(Aluminium)).acceptFunction(GT4RRandomDropBonus.randomDrops(Enchantments.FORTUNE, 4)))));
                 return;
             }
         }
