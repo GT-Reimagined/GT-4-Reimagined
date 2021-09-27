@@ -300,101 +300,98 @@ public class Guis {
         FUSION_ITEM_INJECTOR.add(IT_IN, 79, 34);
 
         COVER_CRAFTING.setGui(new GuiData(COVER_CRAFTING, COVER_CRAFTING_HANDLER));
+        PUMP.addGuiCallback(g -> g.addWidget(IOWidget.build(9,63,16,16)));
+        BRONZE_WORKBENCH.addGuiCallback(t -> {
+            t.addButton(136, 28, 16, 16, NO_OVERLAY);
+            t.addButton(154, 28, 16, 16, NO_OVERLAY);
+        });
 
-        if (side.isClient()){
-            PUMP.addGuiCallback(g -> g.addWidget(IOWidget.build(9,63,16,16)));
-            BRONZE_WORKBENCH.addGuiCallback(t -> {
-                t.addButton(136, 28, 16, 16, NO_OVERLAY);
-                t.addButton(154, 28, 16, 16, NO_OVERLAY);
-            });
+        IRON_WORKBENCH.addGuiCallback(t -> {
+            t.addButton(136, 28, 16, 16, NO_OVERLAY);
+            t.addButton(154, 28, 16, 16, NO_OVERLAY);
+        });
 
-            IRON_WORKBENCH.addGuiCallback(t -> {
-                t.addButton(136, 28, 16, 16, NO_OVERLAY);
-                t.addButton(154, 28, 16, 16, NO_OVERLAY);
-            });
+        ALUMINIUM_WORKBENCH.addGuiCallback(t -> {
+            t.addButton(136, 28, 16, 16, NO_OVERLAY);
+            t.addButton(154, 28, 16, 16, NO_OVERLAY);
+        });
 
-            ALUMINIUM_WORKBENCH.addGuiCallback(t -> {
-                t.addButton(136, 28, 16, 16, NO_OVERLAY);
-                t.addButton(154, 28, 16, 16, NO_OVERLAY);
-            });
+        ALUMINIUM_CHARGING_WORKBENCH.addGuiCallback(t -> {
+            t.addButton(136, 28, 16, 16, NO_OVERLAY);
+            t.addButton(154, 28, 16, 16, NO_OVERLAY);
+        });
 
-            ALUMINIUM_CHARGING_WORKBENCH.addGuiCallback(t -> {
-                t.addButton(136, 28, 16, 16, NO_OVERLAY);
-                t.addButton(154, 28, 16, 16, NO_OVERLAY);
-            });
+        IRON_CHARGING_WORKBENCH.addGuiCallback(t -> {
+            t.addButton(136, 28, 16, 16, NO_OVERLAY);
+            t.addButton(154, 28, 16, 16, NO_OVERLAY);
+        });
 
-            IRON_CHARGING_WORKBENCH.addGuiCallback(t -> {
-                t.addButton(136, 28, 16, 16, NO_OVERLAY);
-                t.addButton(154, 28, 16, 16, NO_OVERLAY);
-            });
+        ButtonBody[][] overlays = new ButtonBody[][]{{IMPORT, IMPORT_CONDITIONAL, IMPORT_INVERT_CONDITIONAL, EXPORT, EXPORT_CONDITIONAL, EXPORT_INVERT_CONDITIONAL}, {IMPORT_EXPORT, IMPORT_EXPORT_CONDITIONAL, IMPORT_EXPORT_INVERT_CONDITIONAL, EXPORT_IMPORT, EXPORT_IMPORT_CONDITIONAL, EXPORT_IMPORT_INVERT_CONDITIONAL}};
 
-            ButtonBody[][] overlays = new ButtonBody[][]{{IMPORT, IMPORT_CONDITIONAL, IMPORT_INVERT_CONDITIONAL, EXPORT, EXPORT_CONDITIONAL, EXPORT_INVERT_CONDITIONAL}, {IMPORT_EXPORT, IMPORT_EXPORT_CONDITIONAL, IMPORT_EXPORT_INVERT_CONDITIONAL, EXPORT_IMPORT, EXPORT_IMPORT_CONDITIONAL, EXPORT_IMPORT_INVERT_CONDITIONAL}};
-
-            COVER_CONVEYOR.addGuiCallback(t -> {
-                for (int x = 0; x < 6; x++){
-                    for (int y = 0; y < 2; y++){
-                        t.addButton(35 + (x * 18), 25 + (y * 18), 16, 16, overlays[y][x]);
-                    }
+        COVER_CONVEYOR.addGuiCallback(t -> {
+            for (int x = 0; x < 6; x++){
+                for (int y = 0; y < 2; y++){
+                    t.addButton(35 + (x * 18), 25 + (y * 18), 16, 16, overlays[y][x]);
                 }
-            });
-            COVER_ITEM_TRANSPORT_VALVE.addGuiCallback(t -> {
-                for (int x = 0; x < 6; x++){
-                    for (int y = 0; y < 2; y++){
-                        t.addButton(35 + (x * 18), 25 + (y * 18), 16, 16, overlays[y][x]);
-                    }
+            }
+        });
+        COVER_ITEM_TRANSPORT_VALVE.addGuiCallback(t -> {
+            for (int x = 0; x < 6; x++){
+                for (int y = 0; y < 2; y++){
+                    t.addButton(35 + (x * 18), 25 + (y * 18), 16, 16, overlays[y][x]);
                 }
-            });
-            COVER_PUMP.addGuiCallback(t -> {
-                for (int x = 0; x < 6; x++){
-                    for (int y = 0; y < 2; y++){
-                        t.addButton(35 + (x * 18), 25 + (y * 18), 16, 16, overlays[y][x]);
-                    }
+            }
+        });
+        COVER_PUMP.addGuiCallback(t -> {
+            for (int x = 0; x < 6; x++){
+                for (int y = 0; y < 2; y++){
+                    t.addButton(35 + (x * 18), 25 + (y * 18), 16, 16, overlays[y][x]);
                 }
-            });
-            COVER_REDSTONE_MACHINE_CONTROLLER.addGuiCallback(t -> {
-                t.addButton(61, 34, 16, 16, TORCH_ON).addButton(79, 34, 16, 16, TORCH_OFF).addButton(97, 34, 16, 16, REDSTONE);
-            });
-            FUSION_REACTOR.addGuiCallback(t -> {
-                t.addButton(155, 23, 16, 16, NO_OVERLAY).addButton(155, 41, 16, 16, NO_OVERLAY).addButton(155, 59, 16, 16, NO_OVERLAY).addWidget(makeProgress(BarDir.LEFT, true, new int4(0, 235, 149, 16)).setSize(4,162, 149, 16)).addWidget(FusionButtonWidget.build());
-            });
-            TRANSFORMER_DIGITAL.addGuiCallback(t -> {
-                t.addButton(10, 18, 14, 14, APAD_LEFT)
-                        .addButton(25, 18, 14, 14, PAD_LEFT)
-                        .addButton(10, 33, 14, 14, APAD_LEFT)
-                        .addButton(25, 33, 14, 14, PAD_LEFT)
-                        .addButton(10, 48, 14, 14, APAD_LEFT)
-                        .addButton(25, 48, 14, 14, PAD_LEFT)
-                        .addButton(10, 63, 14, 14, APAD_LEFT)
-                        .addButton(25, 63, 14, 14, PAD_LEFT)
-                        .addButton(137, 18, 14, 14, PAD_RIGHT)
-                        .addButton(152, 18, 14, 14, APAD_RIGHT)
-                        .addButton(137, 33, 14, 14, PAD_RIGHT)
-                        .addButton(152, 33, 14, 14, APAD_RIGHT)
-                        .addButton(137, 48, 14, 14, PAD_RIGHT)
-                        .addButton(152, 48, 14, 14, APAD_RIGHT)
-                        .addButton(137, 63, 14, 14, PAD_RIGHT)
-                        .addButton(152, 63, 14, 14, APAD_RIGHT);
-            });
-            INFINITE_STORAGE.addGuiCallback(t -> {
-                        t.addButton(10, 18, 14, 14, APAD_LEFT)
-                        .addButton(25, 18, 14, 14, PAD_LEFT)
-                        .addButton(10, 33, 14, 14, APAD_LEFT)
-                        .addButton(25, 33, 14, 14, PAD_LEFT)
-                        .addButton(10, 48, 14, 14, APAD_LEFT)
-                        .addButton(25, 48, 14, 14, PAD_LEFT)
-                        .addButton(10, 63, 14, 14, APAD_LEFT)
-                        .addButton(25, 63, 14, 14, PAD_LEFT)
-                        .addButton(137, 18, 14, 14, PAD_RIGHT)
-                        .addButton(152, 18, 14, 14, APAD_RIGHT)
-                        .addButton(137, 33, 14, 14, PAD_RIGHT)
-                        .addButton(152, 33, 14, 14, APAD_RIGHT)
-                        .addButton(137, 48, 14, 14, PAD_RIGHT)
-                        .addButton(152, 48, 14, 14, APAD_RIGHT)
-                        .addButton(137, 63, 14, 14, PAD_RIGHT)
-                        .addButton(152, 63, 14, 14, APAD_RIGHT);
-            });
-            initWidgets();
-        }
+            }
+        });
+        COVER_REDSTONE_MACHINE_CONTROLLER.addGuiCallback(t -> {
+            t.addButton(61, 34, 16, 16, TORCH_ON).addButton(79, 34, 16, 16, TORCH_OFF).addButton(97, 34, 16, 16, REDSTONE);
+        });
+        FUSION_REACTOR.addGuiCallback(t -> {
+            t.addButton(155, 23, 16, 16, NO_OVERLAY).addButton(155, 41, 16, 16, NO_OVERLAY).addButton(155, 59, 16, 16, NO_OVERLAY).addWidget(makeProgress(BarDir.LEFT, true, new int4(0, 235, 149, 16)).setSize(4,162, 149, 16)).addWidget(FusionButtonWidget.build());
+        });
+        TRANSFORMER_DIGITAL.addGuiCallback(t -> {
+            t.addButton(10, 18, 14, 14, APAD_LEFT)
+                    .addButton(25, 18, 14, 14, PAD_LEFT)
+                    .addButton(10, 33, 14, 14, APAD_LEFT)
+                    .addButton(25, 33, 14, 14, PAD_LEFT)
+                    .addButton(10, 48, 14, 14, APAD_LEFT)
+                    .addButton(25, 48, 14, 14, PAD_LEFT)
+                    .addButton(10, 63, 14, 14, APAD_LEFT)
+                    .addButton(25, 63, 14, 14, PAD_LEFT)
+                    .addButton(137, 18, 14, 14, PAD_RIGHT)
+                    .addButton(152, 18, 14, 14, APAD_RIGHT)
+                    .addButton(137, 33, 14, 14, PAD_RIGHT)
+                    .addButton(152, 33, 14, 14, APAD_RIGHT)
+                    .addButton(137, 48, 14, 14, PAD_RIGHT)
+                    .addButton(152, 48, 14, 14, APAD_RIGHT)
+                    .addButton(137, 63, 14, 14, PAD_RIGHT)
+                    .addButton(152, 63, 14, 14, APAD_RIGHT);
+        });
+        INFINITE_STORAGE.addGuiCallback(t -> {
+            t.addButton(10, 18, 14, 14, APAD_LEFT)
+                    .addButton(25, 18, 14, 14, PAD_LEFT)
+                    .addButton(10, 33, 14, 14, APAD_LEFT)
+                    .addButton(25, 33, 14, 14, PAD_LEFT)
+                    .addButton(10, 48, 14, 14, APAD_LEFT)
+                    .addButton(25, 48, 14, 14, PAD_LEFT)
+                    .addButton(10, 63, 14, 14, APAD_LEFT)
+                    .addButton(25, 63, 14, 14, PAD_LEFT)
+                    .addButton(137, 18, 14, 14, PAD_RIGHT)
+                    .addButton(152, 18, 14, 14, APAD_RIGHT)
+                    .addButton(137, 33, 14, 14, PAD_RIGHT)
+                    .addButton(152, 33, 14, 14, APAD_RIGHT)
+                    .addButton(137, 48, 14, 14, PAD_RIGHT)
+                    .addButton(152, 48, 14, 14, APAD_RIGHT)
+                    .addButton(137, 63, 14, 14, PAD_RIGHT)
+                    .addButton(152, 63, 14, 14, APAD_RIGHT);
+        });
+        initWidgets();
     }
 
     public static void initWidgets(){
