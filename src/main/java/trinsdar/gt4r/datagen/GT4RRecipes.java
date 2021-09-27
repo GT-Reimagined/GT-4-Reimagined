@@ -78,6 +78,16 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
     public void registerRecipes(Consumer<IFinishedRecipe> consumer) {
         super.registerRecipes(consumer);
         //registerMaterialRecipes(consumer, Ref.ID);
+        addItemRecipe(consumer, Ref.ID, "tiny_wooden_fluid_pipe", "pipes", "has_saw", hasSafeItem(SAW.getTag()),
+                GT4RData.FLUID_PIPE_WOOD.getBlockItem(PipeSize.TINY), of('S', SAW.getTag(), 's', ItemTags.WOODEN_SLABS, 'H', SOFT_HAMMER.getTag()), "  S", " s ", "H  ");
+        addItemRecipe(consumer, Ref.ID, "small_wooden_fluid_pipe", "pipes", "has_saw", hasSafeItem(SAW.getTag()),
+                GT4RData.FLUID_PIPE_WOOD.getBlockItem(PipeSize.SMALL), of('S', SAW.getTag(), 's', ItemTags.PLANKS, 'H', SOFT_HAMMER.getTag()), "  S", " s ", "H  ");
+        addItemRecipe(consumer, Ref.ID, "normal_wooden_fluid_pipe", "pipes", "has_saw", hasSafeItem(SAW.getTag()),
+                GT4RData.FLUID_PIPE_WOOD.getBlockItem(PipeSize.NORMAL), of('S', SAW.getTag(), 's', ItemTags.PLANKS, 'H', SOFT_HAMMER.getTag()), "  S", "sss", "H  ");
+        addItemRecipe(consumer, Ref.ID, "large_wooden_fluid_pipe", "pipes", "has_saw", hasSafeItem(SAW.getTag()),
+                GT4RData.FLUID_PIPE_WOOD.getBlockItem(PipeSize.LARGE), of('S', SAW.getTag(), 's', ItemTags.PLANKS, 'H', SOFT_HAMMER.getTag()), "ssS", "s s", "Hss");
+        addItemRecipe(consumer, Ref.ID, "huge_wooden_fluid_pipe", "pipes", "has_saw", hasSafeItem(SAW.getTag()),
+                GT4RData.FLUID_PIPE_WOOD.getBlockItem(PipeSize.HUGE), of('S', SAW.getTag(), 's', ItemTags.LOGS, 'H', SOFT_HAMMER.getTag()), "  S", "s s", "H  ");
         shapeless(consumer, "sodalite_to_blue_dye", "", "has_sodalite", hasSafeItem(GEM.getMaterialTag(Sodalite)), new ItemStack(Items.BLUE_DYE), GEM.getMaterialTag(Sodalite));
         addConditionalRecipe(consumer, getStackRecipe("", "has_sulfur_dust", criterion(getForgeItemTag("dusts/sulfur"), this),
                 new ItemStack(Blocks.TORCH, 6), of('D', getForgeItemTag("dusts/sulfur"), 'R', Tags.Items.RODS_WOODEN), "D", "R"), Ref.class, "sulfurTorch", Ref.ID, "sulfur_torch");
