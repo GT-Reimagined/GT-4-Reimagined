@@ -237,24 +237,24 @@ public class Materials {
     //Brittle Gems
     public static Material CoalCoke = AntimatterAPI.registerIfAbsent(Material.class,"coal_coke",() -> new Material(Ref.ID, "coal_coke", 0x8c8caa, LIGNITE).asGemBasic(false));
     public static Material Charcoal = AntimatterAPI.registerIfAbsent(Material.class,"charcoal",() -> new Material(Ref.ID, "charcoal", 0x644646, LIGNITE).asDust(BLOCK).mats(of(Carbon, 1)));
-    public static Material Coal = AntimatterAPI.registerIfAbsent(Material.class,"coal",() -> new Material(Ref.ID, "coal", 0x464646, LIGNITE).asGemBasic(false).asOre(0, 2, true).mats(of(Carbon, 2)));
+    public static Material Coal = AntimatterAPI.registerIfAbsent(Material.class,"coal",() -> new Material(Ref.ID, "coal", 0x464646, LIGNITE).asGemBasic(false).asOre(0, 2, true, RAW_ORE).mats(of(Carbon, 2)));
 
-    public static Material Diamond = AntimatterAPI.registerIfAbsent(Material.class,"diamond",() -> new Material(Ref.ID, "diamond", /*0x3de0e5*/0xc8ffff, DIAMOND).asGemBasic(false).asOre(3, 7,true).mats(of(Carbon, 128)).addTools(ItemTier.DIAMOND.getAttackDamage(), ItemTier.DIAMOND.getEfficiency(), ItemTier.DIAMOND.getMaxUses(), ItemTier.DIAMOND.getHarvestLevel()));
-    public static Material Emerald = AntimatterAPI.registerIfAbsent(Material.class,"emerald",() -> new Material(Ref.ID, "emerald", 0x50ff50, GEM_V).asGemBasic(false).asOre(3, 7,false).mats(of(Beryllium, 3, Aluminium, 2, Silicon, 3, Oxygen, 18)));
+    public static Material Diamond = AntimatterAPI.registerIfAbsent(Material.class,"diamond",() -> new Material(Ref.ID, "diamond", /*0x3de0e5*/0xc8ffff, DIAMOND).asGemBasic(false).asOre(3, 7,true, RAW_ORE).mats(of(Carbon, 128)).addTools(ItemTier.DIAMOND.getAttackDamage(), ItemTier.DIAMOND.getEfficiency(), ItemTier.DIAMOND.getMaxUses(), ItemTier.DIAMOND.getHarvestLevel()));
+    public static Material Emerald = AntimatterAPI.registerIfAbsent(Material.class,"emerald",() -> new Material(Ref.ID, "emerald", 0x50ff50, GEM_V).asGemBasic(false).asOre(3, 7,true, RAW_ORE).mats(of(Beryllium, 3, Aluminium, 2, Silicon, 3, Oxygen, 18)));
     public static Material Lazurite = AntimatterAPI.registerIfAbsent(Material.class,"lazurite",() -> new Material(Ref.ID, "lazurite", 0x6478ff, LAPIS).asDust().mats(of(Aluminium, 3, Silicon, 3, Calcium, 4, Sodium, 4)));
-    public static Material Ruby = AntimatterAPI.registerIfAbsent(Material.class,"ruby",() -> new Material(Ref.ID, "ruby", 0xff6464, RUBY).asGemBasic(false).asOre(3, 7,true).addTools(3.0F, 7.0F, 1024, 3).addArmor(new int[]{1, 1, 2, 1}, 1.0F, 0.0F, 30).mats(of(Chrome, 1, Aluminium, 2, Oxygen, 3)));
-    public static Material Sapphire = AntimatterAPI.registerIfAbsent(Material.class,"sapphire",() -> new Material(Ref.ID, "sapphire", 0x6464c8, GEM_V).asGemBasic(false).asOre(3, 7,true).addTools(3.0F, 7.0F, 1024, 3).addArmor(new int[]{1, 1, 2, 1}, 1.0F, 0.0F, 30).mats(of(Aluminium, 2, Oxygen, 3)));
-    public static Material Sodalite = AntimatterAPI.registerIfAbsent(Material.class,"sodalite",() -> new Material(Ref.ID, "sodalite", 0x1414ff, LAPIS).asGemBasic(false).asOre(1, 5,true).mats(of(Aluminium, 3, Silicon, 3, Sodium, 4, Chlorine, 1)).setOreMulti(6).harvestLevel(2));
+    public static Material Ruby = AntimatterAPI.registerIfAbsent(Material.class,"ruby",() -> new Material(Ref.ID, "ruby", 0xff6464, RUBY).asGemBasic(false).asOre(3, 7,true, RAW_ORE).addTools(3.0F, 7.0F, 1024, 3).addArmor(new int[]{1, 1, 2, 1}, 1.0F, 0.0F, 30).mats(of(Chrome, 1, Aluminium, 2, Oxygen, 3)));
+    public static Material Sapphire = AntimatterAPI.registerIfAbsent(Material.class,"sapphire",() -> new Material(Ref.ID, "sapphire", 0x6464c8, GEM_V).asGemBasic(false).asOre(3, 7,true, RAW_ORE).addTools(3.0F, 7.0F, 1024, 3).addArmor(new int[]{1, 1, 2, 1}, 1.0F, 0.0F, 30).mats(of(Aluminium, 2, Oxygen, 3)));
+    public static Material Sodalite = AntimatterAPI.registerIfAbsent(Material.class,"sodalite",() -> new Material(Ref.ID, "sodalite", 0x1414ff, LAPIS).asGemBasic(false).asOre(1, 5,true, RAW_ORE).mats(of(Aluminium, 3, Silicon, 3, Sodium, 4, Chlorine, 1)).setOreMulti(6).harvestLevel(2));
     //public static Material Glass = AntimatterAPI.registerIfAbsent(Material.class,"glass",() -> new Material(Ref.ID, "glass", 0xfafafa, SHINY).asDust(PLATE, LENS).mats(of(SiliconDioxide, 1)));
-    public static Material Olivine = AntimatterAPI.registerIfAbsent(Material.class,"olivine",() -> new Material(Ref.ID, "olivine", 0x96ff96, RUBY).asGemBasic(false).asOre(3, 7,true).mats(of(Magnesium, 2, Iron, 1, Silicon, 1, Oxygen, 4)).harvestLevel(3));
+    public static Material Olivine = AntimatterAPI.registerIfAbsent(Material.class,"olivine",() -> new Material(Ref.ID, "olivine", 0x96ff96, RUBY).asGemBasic(false).asOre(3, 7,true, RAW_ORE).mats(of(Magnesium, 2, Iron, 1, Silicon, 1, Oxygen, 4)).harvestLevel(3));
     public static Material EnderPearl = AntimatterAPI.registerIfAbsent(Material.class,"enderpearl",() -> new Material(Ref.ID, "enderpearl", 0x6cdcc8, SHINY).asGemBasic(false).mats(of(Beryllium, 1, Potassium, 4, Nitrogen, 5, Chlorine, 6)));
     public static Material EnderEye = AntimatterAPI.registerIfAbsent(Material.class,"endereye",() -> new Material(Ref.ID, "endereye", 0xa0fae6, SHINY).asGemBasic(false).mats(of(EnderPearl, 1, Blaze, 1)));
-    public static Material Lapis = AntimatterAPI.registerIfAbsent(Material.class,"lapis",() -> new Material(Ref.ID, "lapis", 0x4646dc, LAPIS).asGemBasic(false).asOre(2, 5,true).mats(of(Lazurite, 12, Sodalite, 2, Pyrite, 1, Calcite, 1)).setOreMulti(6));
+    public static Material Lapis = AntimatterAPI.registerIfAbsent(Material.class,"lapis",() -> new Material(Ref.ID, "lapis", 0x4646dc, LAPIS).asGemBasic(false).asOre(2, 5,true, RAW_ORE).mats(of(Lazurite, 12, Sodalite, 2, Pyrite, 1, Calcite, 1)).setOreMulti(6));
     //public static Material Phosphorus = AntimatterAPI.registerIfAbsent(Material.class,"phosphorus",() -> new Material(Ref.ID, "phosphorus", 0xffff00, FLINT).asDust().mats(of(Calcium, 3, Phosphate, 2)));
     public static Material RedGarnet = AntimatterAPI.registerIfAbsent(Material.class,"red_garnet",() -> new Material(Ref.ID, "red_garnet", 0xc85050, GARNET).asGemBasic(false).mats(of(Pyrope, 3, Almandine, 5, Spessartine, 8)));
     public static Material YellowGarnet = AntimatterAPI.registerIfAbsent(Material.class,"yellow_garnet",() -> new Material(Ref.ID, "yellow_garnet", 0xc8c850, GARNET).asGemBasic(false).mats(of(Uvarovite, 3, Andradite, 5, Grossular, 8)));
 
-    public static Material Amethyst = AntimatterAPI.registerIfAbsent(Material.class,"amethyst",() -> new Material(Ref.ID, "amethyst", 0xd232d2, RUBY, Ref.MOD_BLUEPOWER).asGemBasic(false).asOre(3, 7,true).addTools(3.0F, 7.0F, 1024, 3).addArmor(new int[]{1, 1, 2, 1}, 1.0F, 0.0F, 30).mats(of(SiliconDioxide, 4, Iron, 1)));
+    public static Material Amethyst = AntimatterAPI.registerIfAbsent(Material.class,"amethyst",() -> new Material(Ref.ID, "amethyst", 0xd232d2, RUBY, Ref.MOD_BLUEPOWER).asGemBasic(false).asOre(3, 7,true, RAW_ORE).addTools(3.0F, 7.0F, 1024, 3).addArmor(new int[]{1, 1, 2, 1}, 1.0F, 0.0F, 30).mats(of(SiliconDioxide, 4, Iron, 1)));
 
     /** **/
     public static Material Redstone = AntimatterAPI.registerIfAbsent(Material.class,"redstone",() -> new Material(Ref.ID, "redstone", 0xc80000, REDSTONE).asDust().asOre(1, 5,true).mats(of(Silicon, 1, Pyrite, 5, Ruby, 1, Mercury, 3)).setOreMulti(4));
@@ -405,11 +405,6 @@ public class Materials {
         Granite.mats(of(Aluminium, 2, Flint, 1, Clay, 1));
         Glowstone.mats(of(Redstone, 8, Gold, 8, Helium, 1));
         Diorite.mats(of(Nickel, 1));
-
-        Redstone.remove(RAW_ORE);
-        Cinnabar.remove(RAW_ORE);
-        Pyrite.remove(RAW_ORE);
-        Sphalerite.remove(RAW_ORE);
 
         Bronze.remove(BOLT, SCREW);
         Iron.remove(BOLT, SCREW);
