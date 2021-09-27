@@ -25,6 +25,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
@@ -52,6 +53,7 @@ import trinsdar.gt4r.loader.multi.ImplosionCompressor;
 import trinsdar.gt4r.loader.multi.IndustrialGrinder;
 import trinsdar.gt4r.loader.multi.IndustrialSawmill;
 import trinsdar.gt4r.loader.multi.VacFreezer;
+import trinsdar.gt4r.network.GT4RNetwork;
 import trinsdar.gt4r.proxy.ClientHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -161,6 +163,7 @@ public class GT4Reimagined extends AntimatterMod {
 
     private void setup(final FMLCommonSetupEvent e) {
         CommonHandler.setup(e);
+        DeferredWorkQueue.runLater(GT4RNetwork::init);
 
     }
 

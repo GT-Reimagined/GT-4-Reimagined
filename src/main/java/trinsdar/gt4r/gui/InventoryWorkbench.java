@@ -8,6 +8,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import trinsdar.gt4r.data.SlotTypes;
+import trinsdar.gt4r.network.GT4RNetwork;
+import trinsdar.gt4r.network.MessageCraftingSync;
 
 import javax.annotation.Nonnull;
 
@@ -47,7 +49,7 @@ public class InventoryWorkbench extends CraftingInventory {
         this.projectTable.getTile().markDirty();
         this.eventHandler.onCraftMatrixChanged(this);
         if(FMLEnvironment.dist == Dist.CLIENT);
-            //BPNetworkHandler.wrapper.sendToServer(new MessageCraftingSync());
+            GT4RNetwork.handler.sendToServer(new MessageCraftingSync());
     }
 
     @Nonnull
