@@ -46,7 +46,6 @@ public class ClientHandler implements IProxyHandler {
             AntimatterAPI.all(BlockCasing.class, t -> RenderTypeLookup.setRenderLayer(t, RenderType.getCutout()));
             AntimatterAPI.all(BlockMachineMaterial.class, b -> RenderTypeLookup.setRenderLayer(b, RenderType.getCutout()));
         });
-        AntimatterAPI.runLaterClient(Guis::initWidgets);
         ClientUtil.registerEntityRenders();
         copyProgrammerArtIfMissing();
     }

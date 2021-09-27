@@ -104,28 +104,34 @@ public class CoalBoilerWidget extends Widget {
 
     @Override
     public void mouseOver(MatrixStack stack, double mouseX, double mouseY, float partialTicks) {
-        renderTooltip(stack,"Show Recipes", mouseX, mouseY, 115, 43, 18, 18);
+        renderTooltip(stack,"Show Recipes", mouseX, mouseY, 45, 18, 18, 18);
         if (water >= 1) {
-            renderTooltip(stack,"Water: " + water + " MB", mouseX, mouseY, 84, 25, 10, 54);
+            renderTooltip(stack,"Water: " + water + " MB", mouseX, mouseY, 14, 0, 10, 54);
         }
         if (steam >= 1) {
-            renderTooltip(stack,"Steam: " + steam + " MB", mouseX, mouseY, 70, 25, 10, 54);
+            renderTooltip(stack,"Steam: " + steam + " MB", mouseX, mouseY, 0, 0, 10, 54);
         }
-        renderTooltip(stack,"Heat: " + heat + "K out of " + maxHeat, mouseX, mouseY, 96, 25, 10, 54);
-        renderTooltip(stack,"Fuel: " + fuel, mouseX, mouseY + 10, 115, 53, 18, 18);
+        renderTooltip(stack,"Heat: " + heat + "K out of " + maxHeat, mouseX, mouseY, 26, 0, 10, 54);
+        renderTooltip(stack,"Fuel: " + fuel, mouseX, mouseY + 10, 45, 28, 18, 18);
     }
 
     @OnlyIn(Dist.CLIENT)
     protected void renderTooltip(MatrixStack matrixStack, String text, double mouseX, double mouseY, int x, int y, int w, int h) {
-        if (gui.screen.isInGui(x, y, w, h, mouseX, mouseY)){
-            GuiUtils.drawHoveringText(matrixStack, Collections.singletonList(new StringTextComponent(text)), (int)mouseX, (int)mouseY, w, h, -1, Minecraft.getInstance().fontRenderer);
+        if (isInside(x, y, w, h, mouseX, mouseY)){
+            renderTooltip(matrixStack, new StringTextComponent(text), mouseX, mouseY);
         }
 
     }
 
+    public boolean isInside(int x, int y, int w, int h, double mouseX, double mouseY) {
+        int realX = realX() + x;
+        int realY = realY() + y;
+        return ((mouseX >= realX && mouseX <= realX + w) && (mouseY >= realY && mouseY <= realY + h));
+    }
+
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (gui.screen.isInGui(115, 43, 18, 18, mouseX, mouseY)){
+        if (isInside(45, 18, 18, 18, mouseX, mouseY)){
             AntimatterJEIPlugin.showCategory(((ContainerMachine<?>)gui.container).getTile().getMachineType());
             return true;
         }

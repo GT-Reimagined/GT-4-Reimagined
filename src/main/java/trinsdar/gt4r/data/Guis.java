@@ -393,6 +393,7 @@ public class Guis {
                         .addButton(137, 63, 14, 14, PAD_RIGHT)
                         .addButton(152, 63, 14, 14, APAD_RIGHT);
             });
+            initWidgets();
         }
     }
 
