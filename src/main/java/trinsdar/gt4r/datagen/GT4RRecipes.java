@@ -102,6 +102,7 @@ public class GT4RRecipes extends AntimatterRecipeProvider {
         addItemRecipe(consumer, Ref.ID, "saddle", "", "has_leather", hasSafeItem(Items.LEATHER), Items.SADDLE,
                 of('L', Items.LEATHER, 'R', RING.getMaterialTag(Steel), 'S', SCREW.getMaterialTag(Steel)), "LLL", "LSL", "R R");
         addItemRecipe(consumer,  Ref.ID,"sticky_piston_from_resin", "", "has_piston", criterion(Blocks.PISTON, this), Blocks.STICKY_PISTON, of('S', GT4RData.StickyResin, 'P', Blocks.PISTON), "S", "P");
+        addStackRecipe(consumer, Ref.ID, "lead_from_resin", "", "has_resin", this.hasSafeItem(GT4RData.StickyResin), new ItemStack(Items.LEAD, 2), of('S', Items.STRING, 'R', GT4RData.StickyResin), "SS ", "SR ", "  S");
         shapeless(consumer, "gravel_to_flint", "mortar_recipes", "has_mortar", hasSafeItem(MORTAR.getTag()), new ItemStack(Items.FLINT), MORTAR.getTag(), Items.GRAVEL);
         Material[] mats = new Material[]{Bronze, WroughtIron, Aluminium, Steel, Titanium};
         for (Material m : mats){
