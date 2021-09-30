@@ -2,6 +2,7 @@ package trinsdar.gt4r.cover;
 
 import muramasa.antimatter.cover.BaseCover;
 import muramasa.antimatter.cover.CoverStack;
+import muramasa.antimatter.tile.pipe.TileEntityFluidPipe;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -41,13 +42,16 @@ public class CoverDrain extends BaseCover {
 
     @Override
     public void onUpdate(CoverStack<?> instance, Direction side) {
-        if (instance.getTile().getWorld().isRemote) return;
         TileEntity tile = instance.getTile();
         if (tile == null) {
             return;
         }
+        if (tile.getWorld().isRemote) return;
         World world = tile.getWorld();
         LazyOptional<IFluidHandler> cap = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);
+        if (tile instanceof TileEntityFluidPipe){
+            cap = ((TileEntityFluidPipe)tile).getPipeCapHolder().side(side).cast();
+        }
         BlockPos offset = tile.getPos().offset(side);
         if (side == Direction.UP && world.isRainingAt(offset) && world.getGameTime() % 60 == 0){
             cap.ifPresent(f -> {
