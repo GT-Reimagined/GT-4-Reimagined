@@ -48,7 +48,7 @@ public class InventoryWorkbench extends CraftingInventory {
     public void markDirty() {
         this.projectTable.getTile().markDirty();
         this.eventHandler.onCraftMatrixChanged(this);
-        if(FMLEnvironment.dist == Dist.CLIENT);
+        if(FMLEnvironment.dist == Dist.CLIENT)
             GT4RNetwork.handler.sendToServer(new MessageCraftingSync());
     }
 
