@@ -132,9 +132,10 @@ public class CoalBoilerWidget extends Widget {
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         if (isInside(45, 18, 18, 18, mouseX, mouseY)){
+            this.clickSound(Minecraft.getInstance().getSoundHandler());
             AntimatterJEIPlugin.showCategory(((ContainerMachine<?>)gui.container).getTile().getMachineType());
             return true;
         }
-        return super.mouseClicked(mouseX, mouseY, button);
+        return false;
     }
 }
