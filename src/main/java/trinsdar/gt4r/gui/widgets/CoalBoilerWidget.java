@@ -28,7 +28,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class CoalBoilerWidget extends Widget {
-    private int heat = 0, maxHeat = 0, fuel = 0, maxFuel = 0, water = 0, steam = 0;
+    private int heat = 0, maxHeat = 0, water = 0, steam = 0;
 
     protected CoalBoilerWidget(@Nonnull GuiInstance gui, @Nullable IGuiElement parent) {
         super(gui, parent);
@@ -43,8 +43,6 @@ public class CoalBoilerWidget extends Widget {
         super.init();
         gui.syncInt(() -> ((TileEntityCoalBoiler)((ContainerMachine<?>)gui.container).getTile()).getHeat(), i -> heat = i);
         gui.syncInt(() -> ((TileEntityCoalBoiler)((ContainerMachine<?>)gui.container).getTile()).getMaxHeat(), i -> maxHeat = i);
-        gui.syncInt(() -> ((TileEntityCoalBoiler)((ContainerMachine<?>)gui.container).getTile()).getFuel(), i -> fuel = i);
-        gui.syncInt(() -> ((TileEntityCoalBoiler)((ContainerMachine<?>)gui.container).getTile()).getMaxFuel(), i -> maxFuel = i);
         gui.syncInt(() -> ((ContainerMachine<?>)gui.container).getTile().fluidHandler.map(t -> t.getInputs()[0].getAmount()).orElse(0), i -> water = i);
         gui.syncInt(() -> ((ContainerMachine<?>)gui.container).getTile().fluidHandler.map(t -> t.getOutputs()[0].getAmount()).orElse(0), i -> steam = i);
     }
@@ -88,23 +86,10 @@ public class CoalBoilerWidget extends Widget {
             int y = (gui.screen.getGuiTop() + 25 + 54) - lvl;
             drawTexture(stack, gui.handler.getGuiTexture(), realX() + 26, y, gui.screen.getXSize() + 38, 54 - lvl, 10, lvl);
         }
-        if (fuel > 0) {
-            float per = (float) fuel / maxFuel;
-            if (per > 1.0F) {
-                per = 1.0F;
-            }
-            int lvl = (int) (per * (float) 18);
-            if (lvl < 0) {
-                return;
-            }
-            int y = (realY() + 36) - lvl;
-            drawTexture(stack, gui.handler.getGuiTexture(), realX() + 45, y, gui.screen.getXSize(), 18 - lvl, 18, lvl);
-        }
     }
 
     @Override
     public void mouseOver(MatrixStack stack, double mouseX, double mouseY, float partialTicks) {
-        renderTooltip(stack,"Show Recipes", mouseX, mouseY, 45, 18, 18, 18);
         if (water >= 1) {
             renderTooltip(stack,"Water: " + water + " MB", mouseX, mouseY, 14, 0, 10, 54);
         }
@@ -112,7 +97,6 @@ public class CoalBoilerWidget extends Widget {
             renderTooltip(stack,"Steam: " + steam + " MB", mouseX, mouseY, 0, 0, 10, 54);
         }
         renderTooltip(stack,"Heat: " + heat + "K out of " + maxHeat, mouseX, mouseY, 26, 0, 10, 54);
-        renderTooltip(stack,"Fuel: " + fuel, mouseX, mouseY + 10, 45, 28, 18, 18);
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -131,11 +115,6 @@ public class CoalBoilerWidget extends Widget {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (isInside(45, 18, 18, 18, mouseX, mouseY)){
-            this.clickSound(Minecraft.getInstance().getSoundHandler());
-            AntimatterJEIPlugin.showCategory(((ContainerMachine<?>)gui.container).getTile().getMachineType());
-            return true;
-        }
         return false;
     }
 }

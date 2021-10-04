@@ -28,6 +28,7 @@ import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.client.ScreenFactories;
 import trinsdar.gt4r.gui.ContainerCabinet;
 import trinsdar.gt4r.gui.ContainerWorkbench;
+import trinsdar.gt4r.gui.widgets.CoalBoilerFuelWidget;
 import trinsdar.gt4r.gui.widgets.FilterButtonArrayWidget;
 import trinsdar.gt4r.gui.widgets.FusionButtonWidget;
 import trinsdar.gt4r.gui.MenuHandlerCrafting;
@@ -427,7 +428,7 @@ public class Guis {
         COAL_BOILER.getCallbacks().remove(1);
         COAL_BOILER.addGuiCallback(t -> {
             t.addWidget(WidgetSupplier.build((a, b) -> TextWidget.build(((AntimatterContainerScreen<?>)b).getTitle().getString(), 4210752).build(a,b)).setPos(9, 5).clientSide());
-            t.addWidget(CoalBoilerWidget.build().setSize(70, 25, 63, 54));
+            t.addWidget(CoalBoilerWidget.build().setSize(70, 25, 36, 54)).addWidget(CoalBoilerFuelWidget.build().setSize(115, 43, 18, 18));
         });
         CENTRIFUGE.getCallbacks().remove(1);
         ELECTROLYZER.getCallbacks().remove(1);
