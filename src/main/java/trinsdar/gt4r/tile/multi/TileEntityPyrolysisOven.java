@@ -54,40 +54,6 @@ public class TileEntityPyrolysisOven extends TileEntityBasicMultiMachine<TileEnt
     }
 */
     public static class PyrolysisRecipeHandler extends MachineRecipeHandler<TileEntityPyrolysisOven> {
-        protected final IIntArray GUI_SYNC_DATA = new IIntArray() {
-
-            @Override
-            public int get(int index) {
-                switch (index) {
-                    case 0:
-                        return PyrolysisRecipeHandler.this.currentProgress;
-                    case 1:
-                        return PyrolysisRecipeHandler.this.maxProgress;
-                    case 2:
-                        return PyrolysisRecipeHandler.this.heatingCapacity;
-                }
-                return 0;
-            }
-
-            @Override
-            public void set(int index, int value) {
-                switch (index) {
-                    case 0:
-                        PyrolysisRecipeHandler.this.currentProgress = value;
-                        break;
-                    case 1:
-                        PyrolysisRecipeHandler.this.maxProgress = value;
-                        break;
-                    case 2:
-                        PyrolysisRecipeHandler.this.heatingCapacity = value;
-                }
-            }
-
-            @Override
-            public int size() {
-                return 3;
-            }
-        };
         private int heatingCapacity;
         public PyrolysisRecipeHandler(TileEntityPyrolysisOven tile) {
             super(tile);
@@ -107,7 +73,6 @@ public class TileEntityPyrolysisOven extends TileEntityBasicMultiMachine<TileEnt
             tickTimer = 0;
             if (reset) {
                 currentProgress = 0;
-                tile.onRecipeActivated(activeRecipe);
             }
             lastRecipe = activeRecipe;
         }

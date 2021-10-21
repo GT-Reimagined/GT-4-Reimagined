@@ -1,6 +1,7 @@
 package trinsdar.gt4r.tree;
 
 import com.google.common.collect.ImmutableList;
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import muramasa.antimatter.worldgen.object.WorldGenBase;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -16,7 +17,6 @@ import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.treedecorator.LeaveVineTreeDecorator;
 import net.minecraft.world.gen.trunkplacer.StraightTrunkPlacer;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
-import speiger.src.collections.objects.sets.ObjectOpenHashSet;
 import trinsdar.gt4r.data.GT4RData;
 
 import java.util.Random;

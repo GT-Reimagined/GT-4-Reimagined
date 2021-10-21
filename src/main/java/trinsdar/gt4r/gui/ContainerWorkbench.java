@@ -1,5 +1,7 @@
 package trinsdar.gt4r.gui;
 
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import muramasa.antimatter.capability.machine.MachineItemHandler;
 import muramasa.antimatter.gui.MenuHandlerMachine;
 import muramasa.antimatter.gui.SlotData;
@@ -20,8 +22,6 @@ import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.network.play.server.SSetSlotPacket;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
-import speiger.src.collections.objects.maps.impl.hash.Object2IntOpenHashMap;
-import speiger.src.collections.objects.maps.interfaces.Object2IntMap;
 import trinsdar.gt4r.gui.slots.SlotWorkTableResult;
 import trinsdar.gt4r.tile.single.TileEntityMaterial;
 
@@ -51,7 +51,10 @@ public class ContainerWorkbench<T extends TileEntityMaterial<T>> extends Contain
                 supplier = slot.getType().getSlotSupplier().get((SlotType) slot.getType(), tile, tile.itemHandler.map(t -> t.getAll()).orElse(Collections.emptyMap()), slotIndexMap.getInt(slot.getType().getId()),(SlotData) slot);
             }
             addSlot(supplier);
-            slotIndexMap.addTo(slot.getType().getId(), 1);
+            slotIndexMap.computeInt(slot.getType().getId(),(a,b) -> {
+                if (b == null) return 0;
+                return b + 1;
+            });
         }
     }
 

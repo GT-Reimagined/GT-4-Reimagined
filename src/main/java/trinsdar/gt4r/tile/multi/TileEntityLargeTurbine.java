@@ -9,16 +9,13 @@ import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
 import muramasa.antimatter.util.Utils;
 import muramasa.antimatter.util.int3;
 import net.minecraft.block.Block;
-import net.minecraft.command.arguments.EntitySelector;
 import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import trinsdar.gt4r.data.GT4RData;
@@ -71,8 +68,8 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
                             1, flow,1);
                 }
                 @Override
-                public void consumeInputs() {
-
+                public boolean consumeInputs() {
+                    return false;
                 }
 
                 @Override

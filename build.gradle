@@ -218,7 +218,7 @@ dependencies {
     compile fg.deobf("com.github.GregTech-Intergalactical:TesseractAPI:${tesseract_version}")
     annotationProcessor 'org.spongepowered:mixin:0.8.2:processor'
 
-    compile 'de.speiger:Primitive-Collections:0.4.0'
+    //compile 'de.speiger:Primitive-Collections:0.4.0'
 
     runtimeOnly fg.deobf("com.github.Trinsdar:GT-Spartan:7634a8d6de")//3ad506467f
 

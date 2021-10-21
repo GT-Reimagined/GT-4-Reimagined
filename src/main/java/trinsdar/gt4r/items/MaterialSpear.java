@@ -1,6 +1,7 @@
 package trinsdar.gt4r.items;
 
 import com.google.common.collect.Multimap;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import muramasa.antimatter.datagen.providers.AntimatterItemModelProvider;
 import muramasa.antimatter.texture.Texture;
 import muramasa.antimatter.tool.AntimatterToolType;
@@ -30,7 +31,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.fml.loading.FMLEnvironment;
-import speiger.src.collections.objects.lists.ObjectArrayList;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.client.ClientUtil;
 import trinsdar.gt4r.data.Attributes;

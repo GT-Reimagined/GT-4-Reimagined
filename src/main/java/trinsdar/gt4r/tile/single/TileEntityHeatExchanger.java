@@ -71,10 +71,10 @@ public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExc
             }
 
             @Override
-            public void consumeInputs() {
-                super.consumeInputs();
+            public boolean consumeInputs() {
+                boolean flag = super.consumeInputs();
                 consumedWater = false;
-                if (this.heat + activeRecipe.getSpecialValue() >= 80){
+                if (flag && this.heat + activeRecipe.getSpecialValue() >= 80){
                     tile.fluidHandler.ifPresent(h -> {
                         FluidStack stack = h.drainInput(new FluidStack(h.getInputTanks().getFluidInTank(0).getFluid(), 1), IFluidHandler.FluidAction.EXECUTE);
                         if (!stack.isEmpty()){
@@ -82,6 +82,7 @@ public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExc
                         }
                     });
                 }
+                return flag;
             }
 
             @Override

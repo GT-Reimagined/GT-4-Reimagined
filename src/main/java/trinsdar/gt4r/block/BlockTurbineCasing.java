@@ -1,5 +1,7 @@
 package trinsdar.gt4r.block;
 
+import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
+import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import muramasa.antimatter.datagen.builder.AntimatterBlockModelBuilder;
 import muramasa.antimatter.datagen.providers.AntimatterBlockStateProvider;
 import muramasa.antimatter.dynamic.ModelConfig;
@@ -8,8 +10,6 @@ import muramasa.antimatter.registration.ITextureProvider;
 import muramasa.antimatter.texture.Texture;
 import muramasa.antimatter.util.int3;
 import net.minecraft.util.math.vector.Vector3i;
-import speiger.src.collections.longs.maps.impl.hash.Long2ObjectOpenHashMap;
-import speiger.src.collections.longs.maps.interfaces.Long2ObjectMap;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.tile.multi.TileEntityLargeTurbine;
 import net.minecraft.block.Block;

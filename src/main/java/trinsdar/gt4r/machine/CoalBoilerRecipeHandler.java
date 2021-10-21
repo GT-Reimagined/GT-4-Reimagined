@@ -42,50 +42,8 @@ public class CoalBoilerRecipeHandler extends MachineRecipeHandler<TileEntityCoal
     int maxHeat = 500, heat, fuel = 0, maxFuel, lossTimer = 0;
     boolean hadNoWater;
 
-    protected final IIntArray GUI_SYNC_DATA2 = new IIntArray() {
-
-        @Override
-        public int get(int index) {
-            switch (index) {
-                case 0:
-                    return CoalBoilerRecipeHandler.this.heat;
-                case 1:
-                    return CoalBoilerRecipeHandler.this.maxHeat;
-                case 2:
-                    return CoalBoilerRecipeHandler.this.fuel;
-                case 3:
-                    return CoalBoilerRecipeHandler.this.maxFuel;
-            }
-            return 0;
-        }
-
-        @Override
-        public void set(int index, int value) {
-            switch (index) {
-                case 0:
-                    CoalBoilerRecipeHandler.this.heat = value;
-                    break;
-                case 1:
-                    CoalBoilerRecipeHandler.this.maxHeat = value;
-                    break;
-                case 2:
-                    CoalBoilerRecipeHandler.this.fuel = value;
-                    break;
-                case 3:
-                    CoalBoilerRecipeHandler.this.maxFuel = value;
-                    break;
-            }
-        }
-
-        @Override
-        public int size() {
-            return 4;
-        }
-    };
-
     public CoalBoilerRecipeHandler(TileEntityCoalBoiler tile) {
         super(tile);
-        GUI_SYNC_DATA2.set(0, 0);
         maxHeat = tile.getMachineTier() == BRONZE ? 500 : 1000;
     }
 
@@ -103,11 +61,6 @@ public class CoalBoilerRecipeHandler extends MachineRecipeHandler<TileEntityCoal
 
     public int getMaxHeat() {
         return maxHeat;
-    }
-
-    @Override
-    public void setClientProgress(int progress) {
-        fuel = progress;
     }
 
     @Override
