@@ -5,6 +5,7 @@ import muramasa.antimatter.AntimatterDynamics;
 import muramasa.antimatter.Data;
 import muramasa.antimatter.datagen.ExistingFileHelperOverride;
 import muramasa.antimatter.datagen.providers.*;
+import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialType;
 import muramasa.antimatter.material.MaterialTypeBlock;
 import muramasa.antimatter.ore.BlockOre;
@@ -78,6 +79,7 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static muramasa.antimatter.Data.DRILL;
+import static muramasa.antimatter.Data.NULL;
 import static muramasa.antimatter.Data.PICKAXE;
 
 
@@ -277,15 +279,13 @@ public class GT4Reimagined extends AntimatterMod {
         for (RegistryEvent.MissingMappings.Mapping<Block> map : event.getMappings(Ref.ID)) {
             String domain = map.key.getNamespace();
             String id = map.key.getPath();
-            AtomicBoolean breakLoop = new AtomicBoolean(false);
-            Data.BLOCK.all().forEach(m -> {
-                if (breakLoop.get()) return;
-                if (id.equals("block_" + m.getId())){
-                    breakLoop.set(true);
-                    map.remap(Data.BLOCK.get().get(m).asBlock());
+            if (id.startsWith("block_")){
+                Material mat = Material.get(id.replace("block_", ""));
+                if (mat != NULL){
+                    map.remap(Data.BLOCK.get().get(mat).asBlock());
+                    continue;
                 }
-            });
-            if (breakLoop.get()) continue;
+            }
             if (id.equals("ore_stone_salt")){
                 map.remap(Data.ORE_STONE.get().get(Materials.Salt).asBlock());
                 continue;
