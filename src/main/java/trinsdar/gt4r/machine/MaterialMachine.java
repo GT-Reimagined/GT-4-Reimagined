@@ -35,6 +35,6 @@ public class MaterialMachine extends Machine<MaterialMachine> {
 
     @Override
     public Item getItem(Tier tier) {
-        return BlockItem.BLOCK_TO_ITEM.get(AntimatterAPI.get(BlockMachineMaterial.class,this.getId() + "_" + tier.getId()));
+        return BlockItem.BLOCK_TO_ITEM.get(AntimatterAPI.get(BlockMachineMaterial.class,this.getId() + "_" + tier.getId(), getDomain()));
     }
 }

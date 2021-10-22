@@ -9,6 +9,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.Tags;
+import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.Machines;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class TileEntityCharcoalPit extends TileEntityMultiMachine<TileEntityChar
     private boolean isCovered(BlockPos pos) {
         return world.getBlockState(pos).getMaterial() == Material.EARTH
                 || world.getBlockState(pos).getMaterial() == Material.ORGANIC
-                || world.getBlockState(pos).getBlock() == AntimatterAPI.get(BlockMultiMachine.class,Machines.CHARCOAL_PIT.getId() + "_" + Tier.LV.getId()) || isLog(pos);
+                || world.getBlockState(pos).getBlock() == AntimatterAPI.get(BlockMultiMachine.class,Machines.CHARCOAL_PIT.getId() + "_" + Tier.LV.getId(), Ref.ID) || isLog(pos);
     }
 
     private boolean isLog(BlockPos pos) {

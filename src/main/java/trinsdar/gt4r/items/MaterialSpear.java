@@ -46,7 +46,6 @@ public class MaterialSpear extends MaterialTool {
 
     public MaterialSpear(String domain, AntimatterToolType type, Properties properties) {
         super(domain, type, properties);
-        setRegistryName(Ref.ID, "spear");
         if (FMLEnvironment.dist.isClient()) {
             ClientUtil.registerThrowingWeaponPropertyOverrides(this);
         }
@@ -82,7 +81,7 @@ public class MaterialSpear extends MaterialTool {
     }
 
     public String getId() {
-        return "spear_gt";
+        return "spear";
     }
 
     public float getReach(){

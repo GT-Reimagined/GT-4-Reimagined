@@ -2,15 +2,21 @@ package trinsdar.gt4r;
 
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.AntimatterDynamics;
+import muramasa.antimatter.Data;
 import muramasa.antimatter.datagen.ExistingFileHelperOverride;
 import muramasa.antimatter.datagen.providers.*;
+import muramasa.antimatter.material.MaterialType;
+import muramasa.antimatter.material.MaterialTypeBlock;
+import muramasa.antimatter.ore.BlockOre;
 import muramasa.antimatter.proxy.IProxyHandler;
 import muramasa.antimatter.recipe.loader.IRecipeRegistrate;
 import muramasa.antimatter.registration.RegistrationEvent;
 import muramasa.antimatter.AntimatterMod;
 import muramasa.antimatter.tool.IAntimatterTool;
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
@@ -69,6 +75,7 @@ import trinsdar.gt4r.worldgen.GT4RConfiguredFeatures;
 import trinsdar.gt4r.worldgen.GT4RFeatures;
 
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import static muramasa.antimatter.Data.DRILL;
 import static muramasa.antimatter.Data.PICKAXE;
@@ -115,7 +122,7 @@ public class GT4Reimagined extends AntimatterMod {
     }
 
     private void registerRecipeLoaders() {
-        IRecipeRegistrate loader = AntimatterAPI.getRecipeRegistrate();
+        IRecipeRegistrate loader = AntimatterAPI.getRecipeRegistrate(Ref.ID);
         loader.add(WiremillLoader::init);
         loader.add(WasherLoader::init);
         loader.add(Blasting::init);
@@ -263,6 +270,45 @@ public class GT4Reimagined extends AntimatterMod {
             }
         }
     }
+
+    @SubscribeEvent
+    public void remapMissingBlocks(final RegistryEvent.MissingMappings<Block> event){
+        LOGGER.info("event called");
+        for (RegistryEvent.MissingMappings.Mapping<Block> map : event.getMappings(Ref.ID)) {
+            String domain = map.key.getNamespace();
+            String id = map.key.getPath();
+            AtomicBoolean breakLoop = new AtomicBoolean(false);
+            Data.BLOCK.all().forEach(m -> {
+                if (breakLoop.get()) return;
+                if (id.equals("block_" + m.getId())){
+                    breakLoop.set(true);
+                    map.remap(Data.BLOCK.get().get(m).asBlock());
+                }
+            });
+            if (breakLoop.get()) continue;
+            if (id.equals("ore_stone_salt")){
+                map.remap(Data.ORE_STONE.get().get(Materials.Salt).asBlock());
+                continue;
+            }
+            if (id.equals("ore_stone_rock_salt")){
+                map.remap(Data.ORE_STONE.get().get(Materials.RockSalt).asBlock());
+                continue;
+            }
+            if (id.startsWith("ore_")){
+                Block replacement = AntimatterAPI.get(BlockOre.class, id, Ref.ANTIMATTER);
+                if (replacement != null){
+                    map.remap(replacement);
+                }
+            }
+        }
+    }
+
+    /*@SubscribeEvent
+    public void remapMissingItems(final RegistryEvent.MissingMappings<Item> event){
+        for (RegistryEvent.MissingMappings.Mapping<Item> map : event.getMappings()) {
+
+        }
+    }*/
 
     private void serverSetup(final FMLDedicatedServerSetupEvent event){
     }

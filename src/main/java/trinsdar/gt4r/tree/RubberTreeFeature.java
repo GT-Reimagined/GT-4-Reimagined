@@ -29,9 +29,7 @@ public class RubberTreeFeature extends TreeFeature {
     }
 
     public void init() {
-        AntimatterWorldGenerator.register(a -> {
-            RubberTreeWorldGen.onEvent(a);
-        }, "rubber_tree", RubberTreeWorldGen.getValidBiomesStatic());
+        AntimatterWorldGenerator.register(RubberTreeWorldGen::onEvent, "rubber_tree", Ref.ID, RubberTreeWorldGen.getValidBiomesStatic());
     }
 
     public boolean generateRubber(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, BaseTreeFeatureConfig config) {

@@ -220,7 +220,7 @@ dependencies {
 
     //compile 'de.speiger:Primitive-Collections:0.4.0'
 
-    runtimeOnly fg.deobf("com.github.Trinsdar:GT-Spartan:7634a8d6de")//3ad506467f
+    //runtimeOnly fg.deobf("com.github.Trinsdar:GT-Spartan:7634a8d6de")//3ad506467f
 
     compileOnly fg.deobf("mezz.jei:jei-${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${jei_version}")

@@ -10,22 +10,22 @@ import trinsdar.gt4r.Ref;
 
 public class Textures {
 
-    public static TextureSet DULL = AntimatterAPI.registerIfAbsent(TextureSet.class, "dull", () -> new TextureSet(Ref.ID, "dull"));
-    public static TextureSet METALLIC = AntimatterAPI.registerIfAbsent(TextureSet.class, "metallic", () -> new TextureSet(Ref.ID, "metallic"));
-    public static TextureSet SHINY = AntimatterAPI.registerIfAbsent(TextureSet.class, "shiny", () -> new TextureSet(Ref.ID, "shiny"));
-    public static TextureSet ROUGH = AntimatterAPI.registerIfAbsent(TextureSet.class, "rough", () -> new TextureSet(Ref.ID, "rough"));
-    public static TextureSet MAGNETIC = AntimatterAPI.registerIfAbsent(TextureSet.class, "magnetic", () -> new TextureSet(Ref.ID, "magnetic"));
-    public static TextureSet DIAMOND = AntimatterAPI.registerIfAbsent(TextureSet.class, "diamond", () -> new TextureSet(Ref.ID, "diamond"));
-    public static TextureSet RUBY = AntimatterAPI.registerIfAbsent(TextureSet.class, "ruby", () -> new TextureSet(Ref.ID, "ruby"));
-    public static TextureSet LAPIS = AntimatterAPI.registerIfAbsent(TextureSet.class, "lapis", () -> new TextureSet(Ref.ID, "lapis"));
-    public static TextureSet GEM_V = AntimatterAPI.registerIfAbsent(TextureSet.class, "gem_v", () -> new TextureSet(Ref.ID, "gem_v"));
-    public static TextureSet GARNET = AntimatterAPI.registerIfAbsent(TextureSet.class, "garnet", () -> new TextureSet(Ref.ID, "garnet"));
-    public static TextureSet QUARTZ = AntimatterAPI.registerIfAbsent(TextureSet.class, "quartz", () -> new TextureSet(Ref.ID, "quartz"));
-    public static TextureSet FINE = AntimatterAPI.registerIfAbsent(TextureSet.class, "fine", () -> new TextureSet(Ref.ID, "fine"));
-    public static TextureSet FLINT = AntimatterAPI.registerIfAbsent(TextureSet.class, "flint", () -> new TextureSet(Ref.ID, "flint"));
-    public static TextureSet LIGNITE = AntimatterAPI.registerIfAbsent(TextureSet.class, "lignite", () -> new TextureSet(Ref.ID, "lignite"));
-    public static TextureSet WOOD = AntimatterAPI.registerIfAbsent(TextureSet.class, "wood", () -> new TextureSet(Ref.ID, "wood"));
-    public static TextureSet REDSTONE = AntimatterAPI.registerIfAbsent(TextureSet.class, "redstone", () -> new TextureSet(Ref.ID, "redstone"));
+    public static TextureSet DULL = new TextureSet(Ref.ID, "dull");
+    public static TextureSet METALLIC = new TextureSet(Ref.ID, "metallic");
+    public static TextureSet SHINY = new TextureSet(Ref.ID, "shiny");
+    public static TextureSet ROUGH = new TextureSet(Ref.ID, "rough");
+    public static TextureSet MAGNETIC = new TextureSet(Ref.ID, "magnetic");
+    public static TextureSet DIAMOND = new TextureSet(Ref.ID, "diamond");
+    public static TextureSet RUBY = new TextureSet(Ref.ID, "ruby");
+    public static TextureSet LAPIS = new TextureSet(Ref.ID, "lapis");
+    public static TextureSet GEM_V = new TextureSet(Ref.ID, "gem_v");
+    public static TextureSet GARNET = new TextureSet(Ref.ID, "garnet");
+    public static TextureSet QUARTZ = new TextureSet(Ref.ID, "quartz");
+    public static TextureSet FINE = new TextureSet(Ref.ID, "fine");
+    public static TextureSet FLINT = new TextureSet(Ref.ID, "flint");
+    public static TextureSet LIGNITE = new TextureSet(Ref.ID, "lignite");
+    public static TextureSet WOOD = new TextureSet(Ref.ID, "wood");
+    public static TextureSet REDSTONE = new TextureSet(Ref.ID, "redstone");
 
     public static final Texture ROTOR = new Texture(Ref.ID, "material/rotor");
     public static final Texture MACHINE_BASE = new Texture(Ref.ID, "block/machine/base/machine_base");

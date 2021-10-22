@@ -32,6 +32,7 @@ import trinsdar.gt4r.items.MaterialSpear;
 import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 import static muramasa.antimatter.Data.NULL;
@@ -39,13 +40,13 @@ import static net.minecraft.block.material.Material.*;
 import static trinsdar.gt4r.data.GT4RData.*;
 
 public class ToolTypes {
-    public static final MaterialRecipe.Provider POWERED_TOOL_BUILDER = MaterialRecipe.registerProvider("powered-tool", id -> new MaterialRecipe.ItemBuilder() {
+    public static final MaterialRecipe.Provider POWERED_TOOL_BUILDER = MaterialRecipe.registerProvider("powered-tool", Ref.ID, id -> new MaterialRecipe.ItemBuilder() {
 
         @Override
         public ItemStack build(CraftingInventory inv, MaterialRecipe.Result mats) {
             Material m = (Material) mats.mats.get("secondary");
             Tuple<Long, Long> battery = (Tuple<Long, Long>) mats.mats.get("battery");
-            IAntimatterTool type = AntimatterAPI.get(IAntimatterTool.class, id.replace('-', '_'));
+            IAntimatterTool type = AntimatterAPI.get(IAntimatterTool.class, id.replace('-', '_'), Ref.ANTIMATTER);
             return type.resolveStack((Material) mats.mats.get("primary"), m == null ? NULL : m, battery.getA(), battery.getB());
         }
 
@@ -58,12 +59,12 @@ public class ToolTypes {
         }
     });
 
-    public static final MaterialRecipe.Provider UNIT_POWERED_TOOL_BUILDER = MaterialRecipe.registerProvider("powered-tool-from-unit", id -> new MaterialRecipe.ItemBuilder() {
+    public static final MaterialRecipe.Provider UNIT_POWERED_TOOL_BUILDER = MaterialRecipe.registerProvider("powered-tool-from-unit", Ref.ID, id -> new MaterialRecipe.ItemBuilder() {
 
         @Override
         public ItemStack build(CraftingInventory inv, MaterialRecipe.Result mats) {
             Tuple<Long, Tuple<Long, Material>> t = (Tuple<Long, Tuple<Long, Material>>) mats.mats.get("secondary");
-            IAntimatterTool type = AntimatterAPI.get(IAntimatterTool.class, id.replace('-', '_'));
+            IAntimatterTool type = AntimatterAPI.get(IAntimatterTool.class, id.replace('-', '_'), Ref.ANTIMATTER);
             t.getB().getB();
             return type.resolveStack((Material) mats.mats.get("primary"), t.getB().getB(), t.getA(), t.getB().getA());
         }
@@ -145,7 +146,7 @@ public class ToolTypes {
         private ITag.INamedTag<Item> tag, forgeTag; // Set?
         public SpearToolType(String domain, String id, int useDurability, int attackDurability, int craftingDurability, float baseAttackDamage, float baseAttackSpeed) {
             super(domain, id, useDurability, attackDurability, craftingDurability, baseAttackDamage, baseAttackSpeed);
-            this.tag = TagUtils.getItemTag(new ResourceLocation(muramasa.antimatter.Ref.ID, "spear"));
+            this.tag = TagUtils.getItemTag(new ResourceLocation(Ref.ANTIMATTER, "spear"));
             this.forgeTag = TagUtils.getForgeItemTag("tools/".concat("spear"));
         }
 
@@ -162,6 +163,11 @@ public class ToolTypes {
         @Override
         public ITag.INamedTag<Item> getForgeTag() {
             return forgeTag;
+        }
+
+        @Override
+        public ItemStack getToolStack(Material primary, Material secondary) {
+            return Objects.requireNonNull(AntimatterAPI.get(IAntimatterTool.class, "spear", getDomain())).asItemStack(primary, secondary);
         }
 
         @Override

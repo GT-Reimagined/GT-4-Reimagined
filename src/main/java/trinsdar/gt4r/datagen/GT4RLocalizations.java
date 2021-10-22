@@ -100,7 +100,7 @@ public class GT4RLocalizations {
                     });
                 }
             });
-            AntimatterAPI.all(AntimatterFluid.class, domain).forEach(s -> {
+            AntimatterAPI.all(AntimatterFluid.class).forEach(s -> {
                 String mat;
                 if (s.getId().startsWith("liquid") || s.getId().startsWith("plasma")){
                     mat = s.getId().substring(7);
@@ -117,7 +117,7 @@ public class GT4RLocalizations {
                         id = "molten_" + mat;
                     }
                     override(s.getAttributes().getTranslationKey(), lowerUnderscoreToUpperSpaced(id));
-                    Item bucket = AntimatterAPI.get(Item.class, s.getId()+ "_bucket");
+                    Item bucket = AntimatterAPI.get(Item.class, s.getId()+ "_bucket", s.getDomain());
                     if (bucket != null) override(bucket.getTranslationKey(), lowerUnderscoreToUpperSpaced(id) + " Bucket");
                 }
             });

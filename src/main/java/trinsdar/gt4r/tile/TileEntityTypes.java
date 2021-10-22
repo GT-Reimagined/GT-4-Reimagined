@@ -12,6 +12,6 @@ public class TileEntityTypes {
     public static final TileEntityType<?> SAP_BAG_TYPE = new TileEntityType<>(TileEntitySapBag::new, Collections.singleton(GT4RData.SAP_BAG), null).setRegistryName(Ref.ID, "sap_bag");
 
     public static void init(){
-        AntimatterAPI.register(TileEntityType.class, "sap_bag", SAP_BAG_TYPE);
+        AntimatterAPI.register(TileEntityType.class, "sap_bag", Ref.ID, SAP_BAG_TYPE);
     }
 }

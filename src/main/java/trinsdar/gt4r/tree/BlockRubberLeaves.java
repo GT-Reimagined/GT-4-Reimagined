@@ -25,7 +25,7 @@ public class BlockRubberLeaves extends LeavesBlock implements IAntimatterObject,
         super(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT).notSolid().setAllowsSpawn(BlockRubberLeaves::allowsSpawnOnLeaves).setSuffocates(GT4RData::isntSolid).setBlocksVision(GT4RData::isntSolid));
         this.domain = domain;
         this.id = id;
-        AntimatterAPI.register(BlockRubberLeaves.class, id, this);
+        AntimatterAPI.register(BlockRubberLeaves.class, this);
     }
 
     @Override
