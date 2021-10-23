@@ -1,0 +1,63 @@
+package trinsdar.gt4r.events;
+
+import muramasa.antimatter.AntimatterAPI;
+import muramasa.antimatter.Data;
+import muramasa.antimatter.material.Material;
+import muramasa.antimatter.ore.BlockOre;
+import net.minecraft.block.Block;
+import net.minecraft.fluid.Fluid;
+import net.minecraft.item.Item;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import trinsdar.gt4r.GT4Reimagined;
+import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.data.Materials;
+
+import static muramasa.antimatter.Data.NULL;
+
+public class RemappingEvents {
+
+    @SubscribeEvent
+    public static void remapMissingBlocks(final RegistryEvent.MissingMappings<Block> event){
+        GT4Reimagined.LOGGER.info("event called");
+        for (RegistryEvent.MissingMappings.Mapping<Block> map : event.getMappings(Ref.ID)) {
+            String domain = map.key.getNamespace();
+            String id = map.key.getPath();
+            if (id.startsWith("block_")){
+                Material mat = Material.get(id.replace("block_", ""));
+                if (mat != NULL){
+                    map.remap(Data.BLOCK.get().get(mat).asBlock());
+                    continue;
+                }
+            }
+            if (id.equals("ore_stone_salt")){
+                map.remap(Data.ORE_STONE.get().get(Materials.Salt).asBlock());
+                continue;
+            }
+            if (id.equals("ore_stone_rock_salt")){
+                map.remap(Data.ORE_STONE.get().get(Materials.RockSalt).asBlock());
+                continue;
+            }
+            if (id.startsWith("ore_")){
+                Block replacement = AntimatterAPI.get(BlockOre.class, id, Ref.ANTIMATTER);
+                if (replacement != null){
+                    map.remap(replacement);
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void remapMissingItems(final RegistryEvent.MissingMappings<Item> event){
+        for (RegistryEvent.MissingMappings.Mapping<Item> map : event.getMappings(Ref.ID)) {
+
+        }
+    }
+
+    @SubscribeEvent
+    public static void remapMissingFluids(final RegistryEvent.MissingMappings<Fluid> event){
+        for (RegistryEvent.MissingMappings.Mapping<Fluid> map : event.getMappings(Ref.ID)) {
+
+        }
+    }
+}
