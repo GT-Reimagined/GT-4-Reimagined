@@ -269,17 +269,17 @@ public class GT4RData {
     public static ItemBasic<?> ShapeGear = new ItemBasic<>(Ref.ID, "shape_gear").tip("Shape for making Gears");
     public static ItemBasic<?> ShapeBottle = new ItemBasic<>(Ref.ID, "shape_bottle").tip("Shape for making Bottles"); //TODO needed?
 
-    public static StoneType GRANITE_RED = new CobbleStoneType(Ref.ID, "red_granite", Materials.RedGranite, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(4.5F, 60.0F).setHarvestLevel(3);
-    public static StoneType GRANITE_BLACK = new CobbleStoneType(Ref.ID, "black_granite", Materials.BlackGranite, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(4.5F, 60.0F).setHarvestLevel(3);
-    public static StoneType MARBLE = new CobbleStoneType(Ref.ID, "marble", Materials.Marble, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F);
-    public static StoneType BASALT = new CobbleStoneType(Ref.ID, "basalt", Materials.Basalt, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(3.0F, 30.0F).setHarvestLevel(2);
+    public static StoneType GRANITE_RED = AntimatterAPI.registerIfAbsent(StoneType.class,"red_granite", () -> new CobbleStoneType(Ref.ID, "red_granite", Materials.RedGranite, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(4.5F, 60.0F).setHarvestLevel(3));
+    public static StoneType GRANITE_BLACK = AntimatterAPI.registerIfAbsent(StoneType.class,"black_granite", () -> new CobbleStoneType(Ref.ID, "black_granite", Materials.BlackGranite, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(4.5F, 60.0F).setHarvestLevel(3));
+    public static StoneType MARBLE = AntimatterAPI.registerIfAbsent(StoneType.class,"marble", () -> new CobbleStoneType(Ref.ID, "marble", Materials.Marble, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F));
+    public static StoneType BASALT = AntimatterAPI.registerIfAbsent(StoneType.class,"basalt", () -> new CobbleStoneType(Ref.ID, "basalt", Materials.Basalt, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(3.0F, 30.0F).setHarvestLevel(2));
 
-    public static StoneType KOMATIITE = new CobbleStoneType(Ref.ID, "komatiite", Materials.Komatiite, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(3.0F, 30.0F).setHarvestLevel(2);
-    public static StoneType LIMESTONE = new CobbleStoneType(Ref.ID, "limestone", Limestone, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F);
-    public static StoneType GREEN_SCHIST = new CobbleStoneType(Ref.ID, "green_schist", GreenSchist, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F);
-    public static StoneType BLUE_SCHIST = new CobbleStoneType(Ref.ID, "blue_schist", BlueSchist, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F);
-    public static StoneType KIMBERLITE = new CobbleStoneType(Ref.ID, "kimberlite", Kimberlite, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(3.0F, 30.0F).setHarvestLevel(2);
-    public static StoneType QUARTZITE = new CobbleStoneType(Ref.ID, "quartzite", Quartzite, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F);
+    public static StoneType KOMATIITE = AntimatterAPI.registerIfAbsent(StoneType.class,"komatiite", () -> new CobbleStoneType(Ref.ID, "komatiite", Materials.Komatiite, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(3.0F, 30.0F).setHarvestLevel(2));
+    public static StoneType LIMESTONE = AntimatterAPI.registerIfAbsent(StoneType.class,"limestone", () -> new CobbleStoneType(Ref.ID, "limestone", Limestone, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F));
+    public static StoneType GREEN_SCHIST = AntimatterAPI.registerIfAbsent(StoneType.class,"green_schist", () -> new CobbleStoneType(Ref.ID, "green_schist", GreenSchist, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F));
+    public static StoneType BLUE_SCHIST = AntimatterAPI.registerIfAbsent(StoneType.class,"blue_schist", () -> new CobbleStoneType(Ref.ID, "blue_schist", BlueSchist, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F));
+    public static StoneType KIMBERLITE = AntimatterAPI.registerIfAbsent(StoneType.class,"kimberlite", () -> new CobbleStoneType(Ref.ID, "kimberlite", Kimberlite, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(3.0F, 30.0F).setHarvestLevel(2));
+    public static StoneType QUARTZITE = AntimatterAPI.registerIfAbsent(StoneType.class,"quartzite", () -> new CobbleStoneType(Ref.ID, "quartzite", Quartzite, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F));
 
 
     public static final BlockTurbineCasing STANDARD_MACHINE_CASING = new BlockTurbineCasing(Ref.ID, "standard_machine_casing");

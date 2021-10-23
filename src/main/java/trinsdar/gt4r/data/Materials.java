@@ -534,7 +534,7 @@ public class Materials {
 //        }
 
         //TODO move to antimatter
-        LIQUID.all().stream().filter(l -> !l.equals(Water) || !l.equals(Lava)).forEach(m -> {
+        /*LIQUID.all().stream().filter(l -> !l.equals(Water) || !l.equals(Lava)).forEach(m -> {
             if (m == HotCoolant || m == PahoehoeLava) {
                 new AntimatterMaterialFluid(Ref.ID, m, LIQUID, prepareAttributes(Ref.ID, m, LIQUID), prepareProperties(m, LIQUID));
                 return;
@@ -544,7 +544,7 @@ public class Materials {
         GAS.all().forEach(m -> new AntimatterMaterialFluid(Ref.ID, m, GAS));
         PLASMA.all().forEach(m -> new AntimatterMaterialFluid(Ref.ID, m, PLASMA));
 
-        AntimatterAPI.all(Material.class, Material::setChemicalFormula);
+        AntimatterAPI.all(Material.class, Material::setChemicalFormula);*/
     }
 
     private static FluidAttributes.Builder prepareAttributes(String domain, Material material, MaterialType<?> type) {
