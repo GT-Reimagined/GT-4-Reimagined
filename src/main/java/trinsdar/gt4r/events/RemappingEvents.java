@@ -4,6 +4,7 @@ import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.Data;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.ore.BlockOre;
+import muramasa.antimatter.ore.CobbleStoneType;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
@@ -39,10 +40,15 @@ public class RemappingEvents {
                 continue;
             }
             if (id.startsWith("ore_")){
-                Block replacement = AntimatterAPI.get(BlockOre.class, id, Ref.ANTIMATTER);
+                Block replacement = AntimatterAPI.get(BlockOre.class, id);
                 if (replacement != null){
                     map.remap(replacement);
+                    continue;
                 }
+            }
+            Block replacement = AntimatterAPI.get(Block.class, id, Ref.ANTIMATTER);
+            if (replacement != null){
+                map.remap(replacement);
             }
         }
     }
@@ -50,7 +56,10 @@ public class RemappingEvents {
     @SubscribeEvent
     public static void remapMissingItems(final RegistryEvent.MissingMappings<Item> event){
         for (RegistryEvent.MissingMappings.Mapping<Item> map : event.getMappings(Ref.ID)) {
-
+            Item replacement = AntimatterAPI.get(Item.class, map.key.getPath(), Ref.ANTIMATTER);
+            if (replacement != null){
+                map.remap(replacement);
+            }
         }
     }
 
