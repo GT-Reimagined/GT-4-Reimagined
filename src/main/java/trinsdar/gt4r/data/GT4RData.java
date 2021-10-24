@@ -269,17 +269,17 @@ public class GT4RData {
     public static ItemBasic<?> ShapeGear = new ItemBasic<>(Ref.ID, "shape_gear").tip("Shape for making Gears");
     public static ItemBasic<?> ShapeBottle = new ItemBasic<>(Ref.ID, "shape_bottle").tip("Shape for making Bottles"); //TODO needed?
 
-    public static StoneType GRANITE_RED = AntimatterAPI.registerIfAbsent(StoneType.class,"red_granite", () -> new CobbleStoneType(Ref.ID, "red_granite", Materials.RedGranite, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(4.5F, 60.0F).setHarvestLevel(3));
-    public static StoneType GRANITE_BLACK = AntimatterAPI.registerIfAbsent(StoneType.class,"black_granite", () -> new CobbleStoneType(Ref.ID, "black_granite", Materials.BlackGranite, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(4.5F, 60.0F).setHarvestLevel(3));
-    public static StoneType MARBLE = AntimatterAPI.registerIfAbsent(StoneType.class,"marble", () -> new CobbleStoneType(Ref.ID, "marble", Materials.Marble, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F));
-    public static StoneType BASALT = AntimatterAPI.registerIfAbsent(StoneType.class,"basalt", () -> new CobbleStoneType(Ref.ID, "basalt", Materials.Basalt, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(3.0F, 30.0F).setHarvestLevel(2));
+    public static StoneType GRANITE_RED = AntimatterAPI.register(StoneType.class, new CobbleStoneType(Ref.ID, "red_granite", Materials.RedGranite, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(4.5F, 60.0F).setHarvestLevel(3));
+    public static StoneType GRANITE_BLACK = AntimatterAPI.register(StoneType.class, new CobbleStoneType(Ref.ID, "black_granite", Materials.BlackGranite, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(4.5F, 60.0F).setHarvestLevel(3));
+    public static StoneType MARBLE = AntimatterAPI.register(StoneType.class, new CobbleStoneType(Ref.ID, "marble", Materials.Marble, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F));
+    public static StoneType BASALT = AntimatterAPI.register(StoneType.class, new CobbleStoneType(Ref.ID, "basalt", Materials.Basalt, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(3.0F, 30.0F).setHarvestLevel(2));
 
-    public static StoneType KOMATIITE = AntimatterAPI.registerIfAbsent(StoneType.class,"komatiite", () -> new CobbleStoneType(Ref.ID, "komatiite", Materials.Komatiite, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(3.0F, 30.0F).setHarvestLevel(2));
-    public static StoneType LIMESTONE = AntimatterAPI.registerIfAbsent(StoneType.class,"limestone", () -> new CobbleStoneType(Ref.ID, "limestone", Limestone, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F));
-    public static StoneType GREEN_SCHIST = AntimatterAPI.registerIfAbsent(StoneType.class,"green_schist", () -> new CobbleStoneType(Ref.ID, "green_schist", GreenSchist, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F));
-    public static StoneType BLUE_SCHIST = AntimatterAPI.registerIfAbsent(StoneType.class,"blue_schist", () -> new CobbleStoneType(Ref.ID, "blue_schist", BlueSchist, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F));
-    public static StoneType KIMBERLITE = AntimatterAPI.registerIfAbsent(StoneType.class,"kimberlite", () -> new CobbleStoneType(Ref.ID, "kimberlite", Kimberlite, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(3.0F, 30.0F).setHarvestLevel(2));
-    public static StoneType QUARTZITE = AntimatterAPI.registerIfAbsent(StoneType.class,"quartzite", () -> new CobbleStoneType(Ref.ID, "quartzite", Quartzite, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F));
+    public static StoneType KOMATIITE = AntimatterAPI.register(StoneType.class, new CobbleStoneType(Ref.ID, "komatiite", Materials.Komatiite, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(3.0F, 30.0F).setHarvestLevel(2));
+    public static StoneType LIMESTONE = AntimatterAPI.register(StoneType.class, new CobbleStoneType(Ref.ID, "limestone", Limestone, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F));
+    public static StoneType GREEN_SCHIST = AntimatterAPI.register(StoneType.class, new CobbleStoneType(Ref.ID, "green_schist", GreenSchist, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F));
+    public static StoneType BLUE_SCHIST = AntimatterAPI.register(StoneType.class, new CobbleStoneType(Ref.ID, "blue_schist", BlueSchist, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F));
+    public static StoneType KIMBERLITE = AntimatterAPI.register(StoneType.class, new CobbleStoneType(Ref.ID, "kimberlite", Kimberlite, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(3.0F, 30.0F).setHarvestLevel(2));
+    public static StoneType QUARTZITE = AntimatterAPI.register(StoneType.class, new CobbleStoneType(Ref.ID, "quartzite", Quartzite, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F));
 
 
     public static final BlockTurbineCasing STANDARD_MACHINE_CASING = new BlockTurbineCasing(Ref.ID, "standard_machine_casing");
@@ -301,49 +301,49 @@ public class GT4RData {
 
     public static final EntityType<SpearEntity> SPEAR_ENTITY_TYPE = EntityType.Builder.<SpearEntity>create(SpearEntity::new, EntityClassification.MISC).size(0.5F, 0.5F).setShouldReceiveVelocityUpdates(true).trackingRange(4).updateInterval(20).setCustomClientFactory(SpearEntity::new).build("gt4r:spear");
 
-    public static final Cable<?> CABLE_LEAD = new Cable<>(Ref.ID, Lead, 2, Tier.LV).amps(2);
-    public static final Cable<?> CABLE_TIN = new Cable<>(Ref.ID, Tin, 1, Tier.LV).amps(1);
-    public static final Cable<?> CABLE_COPPER = new Cable<>(Ref.ID, Copper, 2, Tier.MV).amps(1);
-    public static final Cable<?> CABLE_NICKEL = new Cable<>(Ref.ID, Nickel, 3, Tier.MV).amps(3);
-    public static final Cable<?> CABLE_GOLD = new Cable<>(Ref.ID, Gold, 2, Tier.HV).amps(3);
-    public static final Cable<?> CABLE_ELECTRUM = new Cable<>(Ref.ID, Electrum, 2, Tier.HV).amps(2);
-    public static final Cable<?> CABLE_STEEL = new Cable<>(Ref.ID, Steel, 2, Tier.EV).amps(2);
-    public static final Cable<?> CABLE_ALUMINIUM = new Cable<>(Ref.ID, Aluminium, 1, Tier.EV).amps(1);
-    public static final Cable<?> CABLE_OSMIUM = new Cable<>(Ref.ID, Osmium, 2, Tier.IV).amps(4);
-    public static final Cable<?> CABLE_TUNGSTEN = new Cable<>(Ref.ID, Tungsten, 2, Tier.IV).amps(2);
+    public static final Cable<?> CABLE_LEAD = AntimatterAPI.register(Cable.class, new Cable<>(Ref.ID, Lead, 2, Tier.LV).amps(2));
+    public static final Cable<?> CABLE_TIN = AntimatterAPI.register(Cable.class, new Cable<>(Ref.ID, Tin, 1, Tier.LV).amps(1));
+    public static final Cable<?> CABLE_COPPER = AntimatterAPI.register(Cable.class, new Cable<>(Ref.ID, Copper, 2, Tier.MV).amps(1));
+    public static final Cable<?> CABLE_NICKEL = AntimatterAPI.register(Cable.class, new Cable<>(Ref.ID, Nickel, 3, Tier.MV).amps(3));
+    public static final Cable<?> CABLE_GOLD = AntimatterAPI.register(Cable.class, new Cable<>(Ref.ID, Gold, 2, Tier.HV).amps(3));
+    public static final Cable<?> CABLE_ELECTRUM = AntimatterAPI.register(Cable.class, new Cable<>(Ref.ID, Electrum, 2, Tier.HV).amps(2));
+    public static final Cable<?> CABLE_STEEL = AntimatterAPI.register(Cable.class, new Cable<>(Ref.ID, Steel, 2, Tier.EV).amps(2));
+    public static final Cable<?> CABLE_ALUMINIUM = AntimatterAPI.register(Cable.class, new Cable<>(Ref.ID, Aluminium, 1, Tier.EV).amps(1));
+    public static final Cable<?> CABLE_OSMIUM = AntimatterAPI.register(Cable.class, new Cable<>(Ref.ID, Osmium, 2, Tier.IV).amps(4));
+    public static final Cable<?> CABLE_TUNGSTEN = AntimatterAPI.register(Cable.class, new Cable<>(Ref.ID, Tungsten, 2, Tier.IV).amps(2));
 
-    public static final Wire<?> WIRE_LEAD = new Wire<>(Ref.ID, Lead, 4, Tier.LV).amps(2);
-    public static final Wire<?> WIRE_TIN = new Wire<>(Ref.ID, Tin, 2, Tier.LV).amps(1);
-    public static final Wire<?> WIRE_COPPER = new Wire<>(Ref.ID, Copper, 4, Tier.MV).amps(1);
-    public static final Wire<?> WIRE_NICKEL = new Wire<>(Ref.ID, Nickel, 6, Tier.MV).amps(3);
-    public static final Wire<?> WIRE_GOLD = new Wire<>(Ref.ID, Gold, 6, Tier.HV).amps(3);
-    public static final Wire<?> WIRE_ELECTRUM = new Wire<>(Ref.ID, Electrum, 4, Tier.HV).amps(2);
-    public static final Wire<?> WIRE_STEEL = new Wire<>(Ref.ID, Steel, 4, Tier.EV).amps(2);
-    public static final Wire<?> WIRE_ALUMINIUM = new Wire<>(Ref.ID, Aluminium, 1, Tier.EV).amps(1);
-    public static final Wire<?> WIRE_OSMIUM = new Wire<>(Ref.ID, Osmium, 4, Tier.IV).amps(4);
-    public static final Wire<?> WIRE_TUNGSTEN = new Wire<>(Ref.ID, Tungsten, 4, Tier.IV).amps(2);
-    public static final Wire<?> WIRE_SUPERCONDUCTOR = new Wire<>(Ref.ID, Superconductor, 0, Tier.MAX).amps(4); //MAX
+    public static final Wire<?> WIRE_LEAD = AntimatterAPI.register(Wire.class, new Wire<>(Ref.ID, Lead, 4, Tier.LV).amps(2));
+    public static final Wire<?> WIRE_TIN = AntimatterAPI.register(Wire.class, new Wire<>(Ref.ID, Tin, 2, Tier.LV).amps(1));
+    public static final Wire<?> WIRE_COPPER = AntimatterAPI.register(Wire.class, new Wire<>(Ref.ID, Copper, 4, Tier.MV).amps(1));
+    public static final Wire<?> WIRE_NICKEL = AntimatterAPI.register(Wire.class, new Wire<>(Ref.ID, Nickel, 6, Tier.MV).amps(3));
+    public static final Wire<?> WIRE_GOLD = AntimatterAPI.register(Wire.class, new Wire<>(Ref.ID, Gold, 6, Tier.HV).amps(3));
+    public static final Wire<?> WIRE_ELECTRUM = AntimatterAPI.register(Wire.class, new Wire<>(Ref.ID, Electrum, 4, Tier.HV).amps(2));
+    public static final Wire<?> WIRE_STEEL = AntimatterAPI.register(Wire.class, new Wire<>(Ref.ID, Steel, 4, Tier.EV).amps(2));
+    public static final Wire<?> WIRE_ALUMINIUM = AntimatterAPI.register(Wire.class, new Wire<>(Ref.ID, Aluminium, 1, Tier.EV).amps(1));
+    public static final Wire<?> WIRE_OSMIUM = AntimatterAPI.register(Wire.class, new Wire<>(Ref.ID, Osmium, 4, Tier.IV).amps(4));
+    public static final Wire<?> WIRE_TUNGSTEN = AntimatterAPI.register(Wire.class, new Wire<>(Ref.ID, Tungsten, 4, Tier.IV).amps(2));
+    public static final Wire<?> WIRE_SUPERCONDUCTOR = AntimatterAPI.register(Wire.class, new Wire<>(Ref.ID, Superconductor, 0, Tier.MAX).amps(4)); //MAX
 
-    public static final FluidPipe<?> FLUID_PIPE_WOOD = new FluidPipe<>(Ref.ID, Wood, 350, false).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1).pressures(getPressures(150));
-    public static final FluidPipe<?> FLUID_PIPE_COPPER = new FluidPipe<>(Ref.ID, Copper, 1696, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1).pressures(getPressures(300));
-    public static final FluidPipe<?> FLUID_PIPE_BRONZE = new FluidPipe<>(Ref.ID, Bronze, 1696, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1).pressures(getPressures(450));
-    public static final FluidPipe<?> FLUID_PIPE_INVAR = new FluidPipe<>(Ref.ID, Invar, 2395, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1).pressures(getPressures(600));
-    public static final FluidPipe<?> FLUID_PIPE_STEEL = new FluidPipe<>(Ref.ID, Steel, 2557, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1).pressures(getPressures(600));
-    public static final FluidPipe<?> FLUID_PIPE_STAINLESS_STEEL = new FluidPipe<>(Ref.ID, StainlessSteel, 2428, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1).pressures(getPressures(750));
-    public static final FluidPipe<?> FLUID_PIPE_NETHERRITE = new FluidPipe<>(Ref.ID, Netherite, 2807, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1).pressures(getPressures(900));
-    public static final FluidPipe<?> FLUID_PIPE_TUNGSTEN = new FluidPipe<>(Ref.ID, Tungsten, 4618, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1).pressures(getPressures(1050));
-    public static final FluidPipe<?> FLUID_PIPE_TUNGSTEN_STEEL = new FluidPipe<>(Ref.ID, TungstenSteel, 3587, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1).pressures(getPressures(1200));
-    public static final FluidPipe<?> FLUID_PIPE_TUNGSTEN_CARBIDE = new FluidPipe<>(Ref.ID, TungstenCarbide, 3837, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1).pressures(getPressures(1350));
-    public static final FluidPipe<?> FLUID_PIPE_HP = new FluidPipe<>(Ref.ID, HighPressure, 3422, true).sizes(PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE).caps(1).pressures(10000);
+    public static final FluidPipe<?> FLUID_PIPE_WOOD = AntimatterAPI.register(FluidPipe.class,new FluidPipe<>(Ref.ID, Wood, 350, false).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1).pressures(getPressures(150)));
+    public static final FluidPipe<?> FLUID_PIPE_COPPER = AntimatterAPI.register(FluidPipe.class,new FluidPipe<>(Ref.ID, Copper, 1696, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1).pressures(getPressures(300)));
+    public static final FluidPipe<?> FLUID_PIPE_BRONZE = AntimatterAPI.register(FluidPipe.class,new FluidPipe<>(Ref.ID, Bronze, 1696, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1).pressures(getPressures(450)));
+    public static final FluidPipe<?> FLUID_PIPE_INVAR = AntimatterAPI.register(FluidPipe.class,new FluidPipe<>(Ref.ID, Invar, 2395, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1).pressures(getPressures(600)));
+    public static final FluidPipe<?> FLUID_PIPE_STEEL = AntimatterAPI.register(FluidPipe.class,new FluidPipe<>(Ref.ID, Steel, 2557, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1).pressures(getPressures(600)));
+    public static final FluidPipe<?> FLUID_PIPE_STAINLESS_STEEL = AntimatterAPI.register(FluidPipe.class,new FluidPipe<>(Ref.ID, StainlessSteel, 2428, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1).pressures(getPressures(750)));
+    public static final FluidPipe<?> FLUID_PIPE_NETHERRITE = AntimatterAPI.register(FluidPipe.class,new FluidPipe<>(Ref.ID, Netherite, 2807, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1).pressures(getPressures(900)));
+    public static final FluidPipe<?> FLUID_PIPE_TUNGSTEN = AntimatterAPI.register(FluidPipe.class,new FluidPipe<>(Ref.ID, Tungsten, 4618, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1).pressures(getPressures(1050)));
+    public static final FluidPipe<?> FLUID_PIPE_TUNGSTEN_STEEL = AntimatterAPI.register(FluidPipe.class,new FluidPipe<>(Ref.ID, TungstenSteel, 3587, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1).pressures(getPressures(1200)));
+    public static final FluidPipe<?> FLUID_PIPE_TUNGSTEN_CARBIDE = AntimatterAPI.register(FluidPipe.class,new FluidPipe<>(Ref.ID, TungstenCarbide, 3837, true).sizes(PipeSize.TINY, PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(1).pressures(getPressures(1350)));
+    public static final FluidPipe<?> FLUID_PIPE_HP = AntimatterAPI.register(FluidPipe.class,new FluidPipe<>(Ref.ID, HighPressure, 3422, true).sizes(PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE).caps(1).pressures(10000));
 
-    public static final ItemPipe<?> ITEM_PIPE_BRASS = new ItemPipe<>(Ref.ID, Brass).sizes(PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(0, 0, 0, 1, 2, 4);
-    public static final ItemPipe<?> ITEM_PIPE_CUPRONICKEL = new ItemPipe<>(Ref.ID, Cupronickel).sizes(PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(0, 0, 0, 1, 2, 4);
-    public static final ItemPipe<?> ITEM_PIPE_ELECTRUM = new ItemPipe<>(Ref.ID, Electrum).sizes(PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(0, 0, 0, 2, 4, 8);
-    public static final ItemPipe<?> ITEM_PIPE_MAGNALIUM = new ItemPipe<>(Ref.ID, Magnalium).sizes(PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(0, 0, 0, 2, 4, 8);
-    public static final ItemPipe<?> ITEM_PIPE_PLATINUM = new ItemPipe<>(Ref.ID, Platinum).sizes(PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(0, 0, 0, 4, 8, 16);
-    public static final ItemPipe<?> ITEM_PIPE_OSMIUM = new ItemPipe<>(Ref.ID, Osmium).sizes(PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(0, 0, 0, 8, 16, 32);
-    public static final ItemPipe<?> ITEM_PIPE_HC = new ItemPipe<>(Ref.ID, HighCapacity).sizes(PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(64);
-    public static final ItemPipe<?> ITEM_PIPE_OSMIRIDIUM = new ItemPipe<>(Ref.ID, Osmiridium).sizes(PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(0, 0, 0, 32, 64, 128);
+    public static final ItemPipe<?> ITEM_PIPE_BRASS = AntimatterAPI.register(ItemPipe.class, new ItemPipe<>(Ref.ID, Brass).sizes(PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(0, 0, 0, 1, 2, 4));
+    public static final ItemPipe<?> ITEM_PIPE_CUPRONICKEL = AntimatterAPI.register(ItemPipe.class, new ItemPipe<>(Ref.ID, Cupronickel).sizes(PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(0, 0, 0, 1, 2, 4));
+    public static final ItemPipe<?> ITEM_PIPE_ELECTRUM = AntimatterAPI.register(ItemPipe.class, new ItemPipe<>(Ref.ID, Electrum).sizes(PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(0, 0, 0, 2, 4, 8));
+    public static final ItemPipe<?> ITEM_PIPE_MAGNALIUM = AntimatterAPI.register(ItemPipe.class, new ItemPipe<>(Ref.ID, Magnalium).sizes(PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(0, 0, 0, 2, 4, 8));
+    public static final ItemPipe<?> ITEM_PIPE_PLATINUM = AntimatterAPI.register(ItemPipe.class, new ItemPipe<>(Ref.ID, Platinum).sizes(PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(0, 0, 0, 4, 8, 16));
+    public static final ItemPipe<?> ITEM_PIPE_OSMIUM = AntimatterAPI.register(ItemPipe.class, new ItemPipe<>(Ref.ID, Osmium).sizes(PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(0, 0, 0, 8, 16, 32));
+    public static final ItemPipe<?> ITEM_PIPE_HC = AntimatterAPI.register(ItemPipe.class, new ItemPipe<>(Ref.ID, HighCapacity).sizes(PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(64));
+    public static final ItemPipe<?> ITEM_PIPE_OSMIRIDIUM = AntimatterAPI.register(ItemPipe.class, new ItemPipe<>(Ref.ID, Osmiridium).sizes(PipeSize.NORMAL, PipeSize.LARGE, PipeSize.HUGE).caps(0, 0, 0, 32, 64, 128));
 
     // Rubber Tree
     public static final BlockRubberLeaves RUBBER_LEAVES = new BlockRubberLeaves(Ref.ID, "rubber_leaves");
