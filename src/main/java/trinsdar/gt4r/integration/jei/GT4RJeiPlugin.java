@@ -42,9 +42,9 @@ public class GT4RJeiPlugin implements IModPlugin {
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         WORKBENCH.all().forEach(m -> {
-            registration.addRecipeCatalyst(new ItemStack(Machine.get(Ref.ID, m.getId() + "_workbench").map(mch -> mch.getItem(LV)).orElse(Items.AIR)), VanillaRecipeCategoryUid.CRAFTING);
+            registration.addRecipeCatalyst(new ItemStack(Machine.get(m.getId() + "_workbench", Ref.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR)), VanillaRecipeCategoryUid.CRAFTING);
             if (m.has(CHARGING_WORKBENCH)){
-                registration.addRecipeCatalyst(new ItemStack(Machine.get(Ref.ID, m.getId() + "_charging_workbench").map(mch -> mch.getItem(HV)).orElse(Items.AIR)), VanillaRecipeCategoryUid.CRAFTING);
+                registration.addRecipeCatalyst(new ItemStack(Machine.get(m.getId() + "_charging_workbench", Ref.ID).map(mch -> mch.getItem(HV)).orElse(Items.AIR)), VanillaRecipeCategoryUid.CRAFTING);
             }
         });
     }

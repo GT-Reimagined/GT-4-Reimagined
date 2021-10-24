@@ -2,6 +2,7 @@ package trinsdar.gt4r.events;
 
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.Data;
+import muramasa.antimatter.fluid.AntimatterFluid;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.ore.BlockOre;
 import muramasa.antimatter.ore.CobbleStoneType;
@@ -66,7 +67,12 @@ public class RemappingEvents {
     @SubscribeEvent
     public static void remapMissingFluids(final RegistryEvent.MissingMappings<Fluid> event){
         for (RegistryEvent.MissingMappings.Mapping<Fluid> map : event.getMappings(Ref.ID)) {
-
+            String id = map.key.getPath();
+            String liquid = id.startsWith("flowing_") ? id.replace("flowing_", "") : id;
+            AntimatterFluid fluid = AntimatterAPI.get(AntimatterFluid.class, liquid);
+            if (fluid != null){
+                map.remap(id.startsWith("flowing_") ? fluid.getFlowingFluid() : fluid.getFluid());
+            }
         }
     }
 }
