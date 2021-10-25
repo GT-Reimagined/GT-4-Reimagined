@@ -53,8 +53,8 @@ public abstract class GameRendererMixin {
     private float getRedirectedAttackReach(PlayerController controller){
         if (mc.player == null) return controller.getBlockReachDistance();
         float reach = (float) mc.player.getAttributeValue(Attributes.ATTACK_REACH.get());
-        Antimatter.LOGGER.info(controller.getBlockReachDistance());
-        Antimatter.LOGGER.info(reach);
+        //Antimatter.LOGGER.info(controller.getBlockReachDistance());
+        //Antimatter.LOGGER.info(reach);
         return controller.getCurrentGameType().isCreative() ? reach : reach - 0.5F;
     }
 }
