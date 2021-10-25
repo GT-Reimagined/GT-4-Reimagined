@@ -406,22 +406,22 @@ public class Materials {
         Glowstone.mats(of(Redstone, 8, Gold, 8, Helium, 1));
         Diorite.mats(of(Nickel, 1));
 
-        Bronze.remove(BOLT, SCREW);
-        Iron.remove(BOLT, SCREW);
-        IronMagnetic.remove(BOLT, SCREW);
-        SteelMagnetic.remove(BOLT, SCREW);
+        //Bronze.remove(BOLT, SCREW);
+        //Iron.remove(BOLT, SCREW);
+        //IronMagnetic.remove(BOLT, SCREW);
+        //SteelMagnetic.remove(BOLT, SCREW);
         //Steel.remove(BOLT, SCREW);
         //TungstenSteel.remove(BOLT, SCREW);
         //Titanium.remove(BOLT, SCREW);
-        Tungsten.remove(BOLT, SCREW);
-        Netherite.remove(BOLT, SCREW);
-        Rubber.remove(BOLT, SCREW);
-        Plastic.remove(BOLT, SCREW);
-        NetherizedDiamond.remove(BOLT, SCREW);
-        Invar.remove(BOLT, SCREW);
-        WroughtIron.remove(BOLT, SCREW);
-        TungstenCarbide.remove(BOLT, SCREW);
-        Carbon.remove(INGOT, NUGGET, BLOCK);
+        //Tungsten.remove(BOLT, SCREW);
+        //Netherite.remove(BOLT, SCREW);
+        //Rubber.remove(BOLT, SCREW);
+        //Plastic.remove(BOLT, SCREW);
+        //NetherizedDiamond.remove(BOLT, SCREW);
+        //Invar.remove(BOLT, SCREW);
+        //WroughtIron.remove(BOLT, SCREW);
+        //TungstenCarbide.remove(BOLT, SCREW);
+        //Carbon.remove(INGOT, NUGGET, BLOCK);
         //Lithium.remove(INGOT, NUGGET, BLOCK);
 
         Coal.remove(CRUSHED, CRUSHED_PURIFIED, CRUSHED_CENTRIFUGED, DUST_IMPURE, DUST_PURE);
