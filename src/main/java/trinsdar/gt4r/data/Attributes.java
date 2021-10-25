@@ -14,7 +14,7 @@ public class Attributes {
 
     public static final RegistryObject<Attribute> ATTACK_REACH = ATTRIBUTES.register("attack_reach", () -> new RangedAttribute(
             "attribute.name.generic.gt4r.attackReach",
-            4.5D,
+            5.0D,
             0.0D,
             1024.0D)
             .setShouldWatch(true));

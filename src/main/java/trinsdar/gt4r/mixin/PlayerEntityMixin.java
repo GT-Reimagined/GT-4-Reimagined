@@ -22,7 +22,6 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     }
 
     @ModifyConstant(
-            remap = false,
             method = "attackTargetEntityWithCurrentItem",
             constant = @Constant(doubleValue = 9.0D)
     )

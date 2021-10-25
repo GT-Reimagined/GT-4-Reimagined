@@ -1,5 +1,6 @@
 package trinsdar.gt4r.events;
 
+import muramasa.antimatter.Antimatter;
 import muramasa.antimatter.tool.IAntimatterTool;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -11,7 +12,10 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.Event;
+import trinsdar.gt4r.data.Attributes;
 
 import java.util.UUID;
 
@@ -19,9 +23,15 @@ import static muramasa.antimatter.Data.DRILL;
 import static muramasa.antimatter.Data.PICKAXE;
 
 public class ForgeEventBusEvents {
+    private static boolean initialized = false;
     public ForgeEventBusEvents(){
+        if (initialized){
+            throw new IllegalStateException("Forge event bus utility class can't be initialized!");
+        }
         MinecraftForge.EVENT_BUS.addListener(this::onRightlickBlock);
         MinecraftForge.EVENT_BUS.addListener(this::onPlayerTick);
+        MinecraftForge.EVENT_BUS.addListener(this::playerJoin);
+        initialized = true;
     }
 
     public void onRightlickBlock(PlayerInteractEvent.RightClickBlock event){
@@ -107,6 +117,13 @@ public class ForgeEventBusEvents {
                     }
                 }
             }
+        }
+    }
+
+    public void playerJoin(PlayerEvent.PlayerLoggedInEvent e){
+        double base = e.getPlayer().getAttribute(Attributes.ATTACK_REACH.get()).getBaseValue();
+        if (base == 4.5){
+            e.getPlayer().getAttribute(Attributes.ATTACK_REACH.get()).setBaseValue(5.0);
         }
     }
 }

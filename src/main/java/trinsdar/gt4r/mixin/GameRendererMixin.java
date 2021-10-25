@@ -1,11 +1,15 @@
 package trinsdar.gt4r.mixin;
 
+import muramasa.antimatter.Antimatter;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.PlayerController;
 import net.minecraft.client.renderer.GameRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import trinsdar.gt4r.data.Attributes;
 
 
@@ -15,7 +19,6 @@ public abstract class GameRendererMixin {
     private Minecraft mc;
 
     @ModifyConstant(
-            remap = false,
             method = "getMouseOver",
             constant = @Constant(doubleValue = 6.0D)
     )
@@ -25,7 +28,6 @@ public abstract class GameRendererMixin {
     }
 
     @ModifyConstant(
-            remap = false,
             method = "getMouseOver",
             constant = @Constant(doubleValue = 3.0D)
     )
@@ -35,7 +37,6 @@ public abstract class GameRendererMixin {
     }
 
     @ModifyConstant(
-            remap = false,
             method = "getMouseOver",
             constant = @Constant(doubleValue = 9.0D)
     )
@@ -43,5 +44,17 @@ public abstract class GameRendererMixin {
         if (mc.player == null) return value;
         double attackReachValue = mc.player.getAttributeValue(Attributes.ATTACK_REACH.get());
         return attackReachValue * attackReachValue;
+    }
+
+    @Redirect(
+            method = "getMouseOver",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/PlayerController;getBlockReachDistance()F")
+    )
+    private float getRedirectedAttackReach(PlayerController controller){
+        if (mc.player == null) return controller.getBlockReachDistance();
+        float reach = (float) mc.player.getAttributeValue(Attributes.ATTACK_REACH.get());
+        Antimatter.LOGGER.info(controller.getBlockReachDistance());
+        Antimatter.LOGGER.info(reach);
+        return controller.getCurrentGameType().isCreative() ? reach : reach - 0.5F;
     }
 }
