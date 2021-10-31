@@ -23,9 +23,7 @@ import trinsdar.gt4r.block.BlockMachineMaterial;
 import trinsdar.gt4r.block.BlockNonSolidMachine;
 import trinsdar.gt4r.data.GT4RData;
 
-import static muramasa.antimatter.Data.DUST;
-import static muramasa.antimatter.Data.GEM;
-import static muramasa.antimatter.Data.ORE;
+import static muramasa.antimatter.Data.*;
 import static trinsdar.gt4r.data.Materials.*;
 
 public class GT4RBlockLootProvider extends AntimatterBlockLootProvider {

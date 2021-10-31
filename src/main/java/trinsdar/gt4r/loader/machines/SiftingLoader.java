@@ -4,9 +4,7 @@ import muramasa.antimatter.util.TagUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 
-import static muramasa.antimatter.Data.CRUSHED_PURIFIED;
-import static muramasa.antimatter.Data.DUST;
-import static muramasa.antimatter.Data.GEM;
+import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.SIFTING;

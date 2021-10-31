@@ -93,9 +93,7 @@ public class Materials {
     public static Material Bismuth = AntimatterAPI.register(Material.class, new Material(Ref.ID, "bismuth", 0x64a0a0, METALLIC, Bi, Ref.MOD_TFC)).asMetal(544, 0, PLATE).asOre();
     public static Material Carbon = AntimatterAPI.register(Material.class, new Material(Ref.ID, "carbon", 0x141414, DULL, C)).asMetal(3800, 1000, PLATE);
     public static Material Chrome = AntimatterAPI.register(Material.class, new Material(Ref.ID, "chrome", 0xffe6e6, SHINY, Cr)).asMetal(2180, 1700, PLATE);
-    public static Material Gold = AntimatterAPI.register(Material.class, new Material(Ref.ID, "gold", 0xffe650, SHINY, Au)).asMetal(1337, 0, ROD, GEAR, PLATE, ROD).asOre(1, 5, true).harvestLevel(2);
     public static Material Iridium = AntimatterAPI.register(Material.class, new Material(Ref.ID, "iridium", 0xf0f0f5, DULL, Ir)).asMetal(2719, 3000, PLATE).asOre(3, 7, true).harvestLevel(3);
-    public static Material Iron = AntimatterAPI.register(Material.class, new Material(Ref.ID, "iron", 0xc8c8c8, METALLIC, Fe)).asMetal(1811, 500, PLATE, ROD).asOre(1, 5, true).asPlasma().addTools(IRON.getAttackDamage(), IRON.getEfficiency(), 256, IRON.getHarvestLevel(),  of(Enchantments.SHARPNESS, 1));
     public static Material Lead = AntimatterAPI.register(Material.class, new Material(Ref.ID, "lead", 0x8c648c, DULL, Pb)).asMetal(600, 0, PLATE, PLATE_DENSE, ROD).harvestLevel(2);
     public static Material Manganese = AntimatterAPI.register(Material.class, new Material(Ref.ID, "manganese", 0xfafafa, DULL, Mn)).asMetal(1519, 0);
     public static Material Nickel = AntimatterAPI.register(Material.class, new Material(Ref.ID, "nickel", 0xc8c8fa, METALLIC, Ni)).asMetal(1728, 0, PLATE).asPlasma();
@@ -113,7 +111,6 @@ public class Materials {
     public static Material Calcium = AntimatterAPI.register(Material.class, new Material(Ref.ID, "calcium", 0xfff5f5, METALLIC, Ca)).asDust(1115);
     public static Material Cadmium = AntimatterAPI.register(Material.class, new Material(Ref.ID, "cadmium", 0x32323c, SHINY, Cd)).asDust(594);
     public static Material Chlorine = AntimatterAPI.register(Material.class, new Material(Ref.ID, "chlorine", 0xffffff, NONE, Cr)).asGas();
-    public static Material Copper = AntimatterAPI.register(Material.class, new Material(Ref.ID, "copper", 0xff6400, SHINY, Cu)).asMetal(1357, 0, PLATE, ROD, GEAR).asOre(1, 5, true);
     public static Material Deuterium = AntimatterAPI.register(Material.class, new Material(Ref.ID, "deuterium", 0xffff00, NONE, D)).asGas();
     public static Material Fluorine = AntimatterAPI.register(Material.class, new Material(Ref.ID, "fluorine", 0xffffff, NONE, F)).asGas();
     public static Material Hydrogen = AntimatterAPI.register(Material.class, new Material(Ref.ID, "hydrogen", 0x0000ff, NONE, H)).asGas(15);
@@ -152,9 +149,7 @@ public class Materials {
     public static Material NitricOxide = AntimatterAPI.register(Material.class, new Material(Ref.ID, "nitric_oxide", 0x7dc8f0, NONE)).asGas().mats(of(Nitrogen, 1, Oxygen, 1));
 
     /** Fluids **/
-    public static Material Lava = AntimatterAPI.register(Material.class, new Material(Ref.ID, "lava", 0xff4000, NONE)).asFluid(0, 1300);
     public static Material PahoehoeLava = AntimatterAPI.register(Material.class, new Material(Ref.ID, "pahoehoe_lava", 0xffffff, NONE)).asFluid(0, 1200);
-    public static Material Water = AntimatterAPI.register(Material.class, new Material(Ref.ID, "water", 0x0000ff, NONE)).asFluid().mats(of(Hydrogen, 2, Oxygen, 1));
     public static Material Steam = AntimatterAPI.register(Material.class, new Material(Ref.ID, "steam", 0xa0a0a0, NONE)).asGas(0, 373);
     public static Material HotCoolant = AntimatterAPI.register(Material.class, new Material(Ref.ID, "hot_coolant", 0xe20000, NONE)).asFluid(0, 1200);
     public static Material ColdCoolant = AntimatterAPI.register(Material.class, new Material(Ref.ID, "cold_coolant", 0x01b2ed, NONE)).asFluid(0, 300);
@@ -235,19 +230,13 @@ public class Materials {
     //Brittle Gems
     public static Material CoalCoke = AntimatterAPI.register(Material.class, new Material(Ref.ID, "coal_coke", 0x8c8caa, LIGNITE)).asGemBasic(false);
     public static Material Charcoal = AntimatterAPI.register(Material.class, new Material(Ref.ID, "charcoal", 0x644646, LIGNITE)).asDust(BLOCK).mats(of(Carbon, 1));
-    public static Material Coal = AntimatterAPI.register(Material.class, new Material(Ref.ID, "coal", 0x464646, LIGNITE)).asGemBasic(false).asOre(0, 2, true, RAW_ORE).mats(of(Carbon, 2));
 
-    public static Material Diamond = AntimatterAPI.register(Material.class, new Material(Ref.ID, "diamond", /*0x3de0e5*/0xc8ffff, DIAMOND)).asGemBasic(false).asOre(3, 7,true, RAW_ORE).mats(of(Carbon, 128)).addTools(ItemTier.DIAMOND.getAttackDamage(), ItemTier.DIAMOND.getEfficiency(), ItemTier.DIAMOND.getMaxUses(), ItemTier.DIAMOND.getHarvestLevel());
-    public static Material Emerald = AntimatterAPI.register(Material.class, new Material(Ref.ID, "emerald", 0x50ff50, GEM_V)).asGemBasic(false).asOre(3, 7,true, RAW_ORE).mats(of(Beryllium, 3, Aluminium, 2, Silicon, 3, Oxygen, 18));
     public static Material Lazurite = AntimatterAPI.register(Material.class, new Material(Ref.ID, "lazurite", 0x6478ff, LAPIS)).asDust().mats(of(Aluminium, 3, Silicon, 3, Calcium, 4, Sodium, 4));
     public static Material Ruby = AntimatterAPI.register(Material.class, new Material(Ref.ID, "ruby", 0xff6464, RUBY)).asGemBasic(false).asOre(3, 7,true, RAW_ORE).addTools(3.0F, 7.0F, 1024, 3).addArmor(new int[]{1, 1, 2, 1}, 1.0F, 0.0F, 30).mats(of(Chrome, 1, Aluminium, 2, Oxygen, 3));
     public static Material Sapphire = AntimatterAPI.register(Material.class, new Material(Ref.ID, "sapphire", 0x6464c8, GEM_V)).asGemBasic(false).asOre(3, 7,true, RAW_ORE).addTools(3.0F, 7.0F, 1024, 3).addArmor(new int[]{1, 1, 2, 1}, 1.0F, 0.0F, 30).mats(of(Aluminium, 2, Oxygen, 3));
     public static Material Sodalite = AntimatterAPI.register(Material.class, new Material(Ref.ID, "sodalite", 0x1414ff, LAPIS)).asGemBasic(false).asOre(1, 5,true, RAW_ORE).mats(of(Aluminium, 3, Silicon, 3, Sodium, 4, Chlorine, 1)).setOreMulti(6).harvestLevel(2);
     //public static Material Glass = AntimatterAPI.register(Material.class, new Material(Ref.ID, "glass", 0xfafafa, SHINY)).asDust(PLATE, LENS).mats(of(SiliconDioxide, 1));
     public static Material Olivine = AntimatterAPI.register(Material.class, new Material(Ref.ID, "olivine", 0x96ff96, RUBY)).asGemBasic(false).asOre(3, 7,true, RAW_ORE).mats(of(Magnesium, 2, Iron, 1, Silicon, 1, Oxygen, 4)).harvestLevel(3);
-    public static Material EnderPearl = AntimatterAPI.register(Material.class, new Material(Ref.ID, "enderpearl", 0x6cdcc8, SHINY)).asGemBasic(false).mats(of(Beryllium, 1, Potassium, 4, Nitrogen, 5, Chlorine, 6));
-    public static Material EnderEye = AntimatterAPI.register(Material.class, new Material(Ref.ID, "endereye", 0xa0fae6, SHINY)).asGemBasic(false).mats(of(EnderPearl, 1, Blaze, 1));
-    public static Material Lapis = AntimatterAPI.register(Material.class, new Material(Ref.ID, "lapis", 0x4646dc, LAPIS)).asGemBasic(false).asOre(2, 5,true, RAW_ORE).mats(of(Lazurite, 12, Sodalite, 2, Pyrite, 1, Calcite, 1)).setOreMulti(6);
     //public static Material Phosphorus = AntimatterAPI.register(Material.class, new Material(Ref.ID, "phosphorus", 0xffff00, FLINT).asDust().mats(of(Calcium, 3, Phosphate, 2));
     public static Material RedGarnet = AntimatterAPI.register(Material.class, new Material(Ref.ID, "red_garnet", 0xc85050, GARNET)).asGemBasic(false).mats(of(Pyrope, 3, Almandine, 5, Spessartine, 8));
     public static Material YellowGarnet = AntimatterAPI.register(Material.class, new Material(Ref.ID, "yellow_garnet", 0xc8c850, GARNET)).asGemBasic(false).mats(of(Uvarovite, 3, Andradite, 5, Grossular, 8));
@@ -255,7 +244,6 @@ public class Materials {
     public static Material Amethyst = AntimatterAPI.register(Material.class, new Material(Ref.ID, "amethyst", 0xd232d2, RUBY, Ref.MOD_BLUEPOWER)).asGemBasic(false).asOre(3, 7,true, RAW_ORE).addTools(3.0F, 7.0F, 1024, 3).addArmor(new int[]{1, 1, 2, 1}, 1.0F, 0.0F, 30).mats(of(SiliconDioxide, 4, Iron, 1));
 
     /** **/
-    public static Material Redstone = AntimatterAPI.register(Material.class, new Material(Ref.ID, "redstone", 0xc80000, REDSTONE)).asDust().asOre(1, 5,true).mats(of(Silicon, 1, Pyrite, 5, Ruby, 1, Mercury, 3)).setOreMulti(4);
     public static Material Cinnabar = AntimatterAPI.register(Material.class, new Material(Ref.ID, "cinnabar", 0x960000, REDSTONE)).asDust().asOre(1, 5,true).mats(of(Mercury, 1, Sulfur, 1)).setOreMulti(2).harvestLevel(2);
 
     /** Metals **/
@@ -297,16 +285,12 @@ public class Materials {
     public static Material RedGranite = AntimatterAPI.register(Material.class, new Material(Ref.ID, "red_granite", 0xff0080, ROUGH)).asDust(ROCK).addHandleStat(74, 1.0F, of(Enchantments.UNBREAKING, 1)).mats(of(Aluminium, 2, PotassiumFeldspar, 1, Oxygen, 3));
     public static Material BlackGranite = AntimatterAPI.register(Material.class, new Material(Ref.ID, "black_granite", 0x0a0a0a, ROUGH)).asDust(ROCK).addHandleStat(74, 1.0F, of(Enchantments.UNBREAKING, 1)).mats(of(SiliconDioxide, 4, Biotite, 1));
     public static Material Marble = AntimatterAPI.register(Material.class, new Material(Ref.ID, "marble", 0xc8c8c8, NONE)).asDust(ROCK).mats(of(Magnesium, 1, Calcite, 7));
-    public static Material Basalt = AntimatterAPI.register(Material.class, new Material(Ref.ID, "basalt", 0x1e1414, ROUGH)).asDust(ROCK).mats(of(Olivine, 1, Calcite, 3, Flint, 8, DarkAsh, 4));
     public static Material Komatiite = AntimatterAPI.register(Material.class, new Material(Ref.ID, "komatiite", 0xbebe69, NONE)).asDust(ROCK).mats(of(Olivine, 1, Magnesite, 2, Flint, 6, DarkAsh, 3));
     public static Material Limestone = AntimatterAPI.register(Material.class, new Material(Ref.ID, "limestone", 0xe6c882, NONE)).asDust(ROCK).mats(of(Calcite, 1));
     public static Material GreenSchist = AntimatterAPI.register(Material.class, new Material(Ref.ID, "green_schist", 0x69be69, NONE)).asDust(ROCK);
     public static Material BlueSchist = AntimatterAPI.register(Material.class, new Material(Ref.ID, "blue_schist", 0x0569be, NONE)).asDust(ROCK);
     public static Material Kimberlite = AntimatterAPI.register(Material.class, new Material(Ref.ID, "kimberlite", 0x64460a, NONE)).asDust(ROCK);
     public static Material Quartzite = AntimatterAPI.register(Material.class, new Material(Ref.ID, "quartzite", 0xe6cdcd, QUARTZ)).asGemBasic(false, ROCK).mats(of(Silicon, 1, Oxygen, 2));
-    public static Material Prismarine = AntimatterAPI.register(Material.class, new Material(Ref.ID, "prismarine", 0x6eb2a5, NONE)).asDust().mats(of(Potassium, 2, Oxygen, 8, Manganese, 1, Silicon, 5));
-    public static Material DarkPrismarine = AntimatterAPI.register(Material.class, new Material(Ref.ID, "dark_prismarine", 0x587d6c, NONE)).asDust();
-
 
     public static Material Scoria = AntimatterAPI.register(Material.class, new Material(Ref.ID, "scoria", 0x1e1414, ROUGH, Ref.MOD_CREATE)).asDust().mats(of(SiliconDioxide, 6, Calcium, 1, Carbon, 1, Iron, 1));
 
@@ -322,12 +306,6 @@ public class Materials {
     public static Material HighPressure = AntimatterAPI.register(Material.class, new Material(Ref.ID, "high_pressure", 0xc80000, NONE));
     public static Material HighCapacity = AntimatterAPI.register(Material.class, new Material(Ref.ID, "high_capacity", 0xb00b69, NONE));
     public static Material PlasmaContainment = AntimatterAPI.register(Material.class, new Material(Ref.ID, "plasma_containment", 0xffff00, NONE));
-    public static Material Quartz = AntimatterAPI.register(Material.class, new Material(Ref.ID, "quartz", 0xffffff, NONE)).asDust();
-
-    /** VANILLA **/
-    public static Material Netherite = AntimatterAPI.register(Material.class, new Material(Ref.ID, "netherite", 0x504650, DULL)).asMetal(2246,1300, PLATE, ROD).addTools(3.0F, 10, 500, NETHERITE.getHarvestLevel(), of(Enchantments.FIRE_ASPECT, 3)).addArmor(new int[]{0, 1, 1, 0}, 0.5F, 0.1F, 20);
-    public static Material NetherizedDiamond = AntimatterAPI.register(Material.class, new Material(Ref.ID, "netherized_diamond", 0x5a505a, DIAMOND)).asGemBasic(false).addTools(4.0F, 12, NETHERITE.getMaxUses(), NETHERITE.getHarvestLevel(), of(Enchantments.FIRE_ASPECT, 3, Enchantments.SHARPNESS, 4)).addArmor(new int[]{1, 1, 2, 1}, 3.0F, 0.1F, 37, of(Enchantments.PROTECTION, 4));
-    public static Material NetheriteScrap = AntimatterAPI.register(Material.class, new Material(Ref.ID, "netherite_scrap", 0x6e505a, ROUGH)).asDust(CRUSHED, CRUSHED_PURIFIED, CRUSHED_CENTRIFUGED, DUST_IMPURE, DUST_PURE);
 
 
     static {
@@ -341,6 +319,22 @@ public class Materials {
         /*if (!AntimatterAPI.isModLoaded("gtsp")){
             Flint.getToolTypes().add(ToolTypes.SPEAR);
         }*/
+
+        //Vanilla additions
+        //Data.Netherite.flags(PLATE, ROD);
+        Data.Redstone.mats(of(Silicon, 1, Pyrite, 5, Ruby, 1, Mercury, 3)).setOreMulti(4);
+        Data.Prismarine.mats(of(Potassium, 2, Oxygen, 8, Manganese, 1, Silicon, 5));
+        Data.Basalt.mats(of(Olivine, 1, Calcite, 3, Flint, 8, DarkAsh, 4));
+        Data.Lapis.mats(of(Lazurite, 12, Sodalite, 2, Pyrite, 1, Calcite, 1)).setOreMulti(6);
+        Data.EnderEye.mats(of(EnderPearl, 1, Blaze, 1));
+        Data.EnderPearl.mats(of(Beryllium, 1, Potassium, 4, Nitrogen, 5, Chlorine, 6));
+        Data.Diamond.mats(of(Carbon, 128));
+        Data.Emerald.mats(of(Beryllium, 3, Aluminium, 2, Silicon, 3, Oxygen, 18));
+        Data.Coal.mats(of(Carbon, 2));
+        //Data.Iron.flags(PLATE, ROD);
+        Data.Gold.flags(GEAR);
+        Data.Copper.flags(PLATE, ROD, GEAR);
+        Data.Water.mats(of(Hydrogen, 2, Oxygen, 1));
 
         ELEC30.add(Charcoal, Prismarine, Salt, RockSalt, Quartzite);
         ELEC60.add(Cassiterite, SodiumSulfide, Sapphire, SiliconDioxide, Methane, Pyrite, Sphalerite, NitrogenDioxide, Phosphate, Magnesite);

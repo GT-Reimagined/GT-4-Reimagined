@@ -5,9 +5,7 @@ import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import trinsdar.gt4r.GT4RConfig;
 import trinsdar.gt4r.data.GT4RData;
 
-import static muramasa.antimatter.Data.DUST;
-import static muramasa.antimatter.Data.INGOT;
-import static muramasa.antimatter.Data.PLATE;
+import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.material.MaterialTag.RUBBERTOOLS;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.ALLOY_SMELTING;

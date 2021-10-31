@@ -38,7 +38,6 @@ public class MaceratorLoader {
             Material sm = o.getStoneType().getMaterial();
             if (!m.has(DUST) || !m.has(CRUSHED)) return;
             ItemStack stoneDust = sm.has(DUST) ? DUST.get(sm, 1) : ItemStack.EMPTY;
-            if (sm == BasaltVanilla) stoneDust = DUST.get(Basalt, 1);
             ITag.INamedTag<Item> oreTag = TagUtils.getForgeItemTag(String.join("", getConventionalStoneType(o.getStoneType()), "_", getConventionalMaterialType(o.getOreType()), "/", o.getMaterial().getId()));
             RecipeIngredient ore = RecipeIngredient.of(oreTag,1);
             ItemStack crushedStack = CRUSHED.get(m,m.getOreMulti());
@@ -113,7 +112,7 @@ public class MaceratorLoader {
         MACERATING.RB().ii(RecipeIngredient.of(Items.DARK_PRISMARINE, 1)).io(DUST.get(DarkPrismarine, 1)).add(400, 2);
         AntimatterAPI.all(StoneType.class, s -> {
             if (s.getMaterial() == NULL || !s.getMaterial().has(DUST)) return;
-            MACERATING.RB().ii(RecipeIngredient.of(s.getState().getBlock().asItem(), 1)).io(DUST.get((s.getMaterial() == BasaltVanilla ? Basalt : s.getMaterial()), 1)).add(400, 2);
+            MACERATING.RB().ii(RecipeIngredient.of(s.getState().getBlock().asItem(), 1)).io(DUST.get(s.getMaterial(), 1)).add(400, 2);
         });
         if (AntimatterAPI.isModLoaded(Ref.MOD_CREATE)){
             MACERATING.RB().ii(RecipeIngredient.of(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(Ref.MOD_CREATE, "limestone")), 1)).io(DUST.get(Limestone, 1)).add(400, 2);

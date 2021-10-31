@@ -9,7 +9,7 @@ import net.minecraft.world.gen.placement.DepthAverageConfig;
 import net.minecraft.world.gen.placement.Placement;
 import trinsdar.gt4r.Ref;
 
-import static muramasa.antimatter.Data.NULL;
+import static muramasa.antimatter.Data.*;
 import static net.minecraftforge.common.BiomeDictionary.Type.*;
 import static trinsdar.gt4r.data.Materials.*;
 

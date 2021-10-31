@@ -19,7 +19,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Map;
 
-import static trinsdar.gt4r.data.Materials.Diamond;
+import static muramasa.antimatter.Data.Diamond;
 import static trinsdar.gt4r.data.Materials.Titanium;
 
 public class MaterialRockCutter extends MaterialTool {

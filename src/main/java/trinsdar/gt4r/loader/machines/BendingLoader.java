@@ -6,7 +6,6 @@ import net.minecraft.item.Items;
 import trinsdar.gt4r.data.GT4RData;
 
 import static muramasa.antimatter.Data.*;
-import static trinsdar.gt4r.data.Materials.Iron;
 import static trinsdar.gt4r.data.Materials.Tin;
 import static trinsdar.gt4r.data.RecipeMaps.BENDING;
 

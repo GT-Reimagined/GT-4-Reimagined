@@ -6,6 +6,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraftforge.common.Tags;
 
 import static muramasa.antimatter.Data.BLOCK;
+import static muramasa.antimatter.Data.Coal;
 import static muramasa.antimatter.Data.DUST;
 import static muramasa.antimatter.Data.GEM;
 import static trinsdar.gt4r.data.Materials.*;
