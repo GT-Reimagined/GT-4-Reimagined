@@ -4,17 +4,14 @@ import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.datagen.ExistingFileHelperOverride;
 import muramasa.antimatter.datagen.providers.AntimatterItemTagProvider;
 import muramasa.antimatter.ore.BlockOre;
-import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import muramasa.antimatter.util.TagUtils;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 import trinsdar.gt4r.Ref;
-import trinsdar.gt4r.data.CustomTags;
 
 import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.util.Utils.getConventionalMaterialType;
@@ -22,7 +19,6 @@ import static muramasa.antimatter.util.Utils.getConventionalStoneType;
 import static trinsdar.gt4r.data.CustomTags.*;
 import static trinsdar.gt4r.data.GT4RData.*;
 import static trinsdar.gt4r.data.Materials.*;
-import static trinsdar.gt4r.data.RecipeMaps.COMPRESSING;
 
 public class GT4RItemTagProvider extends AntimatterItemTagProvider {
     public GT4RItemTagProvider(String providerDomain, String providerName, boolean replace, DataGenerator gen, BlockTagsProvider p, ExistingFileHelperOverride fh) {

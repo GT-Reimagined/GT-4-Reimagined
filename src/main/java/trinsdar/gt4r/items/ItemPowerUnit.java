@@ -1,6 +1,5 @@
 package trinsdar.gt4r.items;
 
-import muramasa.antimatter.Data;
 import muramasa.antimatter.Ref;
 import muramasa.antimatter.capability.energy.ItemEnergyHandler;
 import muramasa.antimatter.item.ItemBasic;
@@ -20,7 +19,6 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static muramasa.antimatter.Data.NULL;
 import static trinsdar.gt4r.data.GT4RData.RockCutterPowerUnit;
 import static trinsdar.gt4r.data.GT4RData.SmallPowerUnit;
 

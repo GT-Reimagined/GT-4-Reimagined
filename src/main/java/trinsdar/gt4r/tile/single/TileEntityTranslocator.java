@@ -1,7 +1,6 @@
 package trinsdar.gt4r.tile.single;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import muramasa.antimatter.capability.Dispatch;
 import muramasa.antimatter.capability.item.FakeTrackedItemHandler;
 import muramasa.antimatter.capability.machine.MachineEnergyHandler;
 import muramasa.antimatter.capability.machine.MachineItemHandler;
@@ -14,7 +13,6 @@ import muramasa.antimatter.util.Utils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
@@ -24,22 +22,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
-import net.minecraftforge.items.ItemHandlerHelper;
-import tesseract.api.capability.TesseractGTCapability;
-import tesseract.api.gt.IEnergyHandler;
-import tesseract.api.gt.IGTCable;
 import trinsdar.gt4r.data.SlotTypes;
 
 import java.util.List;
-import java.util.Objects;
-import java.util.function.Predicate;
 
 public abstract class TileEntityTranslocator<T extends TileEntityTranslocator<T>> extends TileEntityMachine<T> {
     Capability<?> cap;
@@ -59,7 +49,7 @@ public abstract class TileEntityTranslocator<T extends TileEntityTranslocator<T>
     @Override
     public void onServerUpdate() {
         super.onServerUpdate();
-        if (coverHandler.map(c -> !c.get(this.getFacing().getOpposite()).getCover().blocksOutput(c.get(this.getFacing().getOpposite()), cap, this.getFacing().getOpposite()) && !c.get(this.getFacing()).getCover().blocksInput(c.get(this.getFacing()), cap, this.getFacing())).orElse(true)){
+        if (coverHandler.map(c -> !c.get(this.getFacing().getOpposite()).blocksOutput(cap, this.getFacing().getOpposite()) && !c.get(this.getFacing()).blocksInput(cap, this.getFacing())).orElse(true)){
             this.processOutput();
         }
     }

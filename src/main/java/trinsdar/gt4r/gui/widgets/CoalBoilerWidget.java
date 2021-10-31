@@ -1,31 +1,18 @@
 package trinsdar.gt4r.gui.widgets;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import muramasa.antimatter.capability.machine.MachineRecipeHandler;
 import muramasa.antimatter.gui.GuiInstance;
 import muramasa.antimatter.gui.IGuiElement;
 import muramasa.antimatter.gui.Widget;
 import muramasa.antimatter.gui.container.ContainerMachine;
-import muramasa.antimatter.gui.widget.MachineStateWidget;
 import muramasa.antimatter.gui.widget.WidgetSupplier;
-import muramasa.antimatter.integration.jei.AntimatterJEIPlugin;
-import muramasa.antimatter.machine.MachineFlag;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.ITextProperties;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.client.gui.GuiUtils;
 import trinsdar.gt4r.tile.single.TileEntityCoalBoiler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 public class CoalBoilerWidget extends Widget {
     private int heat = 0, maxHeat = 0, water = 0, steam = 0;

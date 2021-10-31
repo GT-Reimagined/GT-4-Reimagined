@@ -2,7 +2,6 @@ package trinsdar.gt4r.gui;
 
 import muramasa.antimatter.capability.machine.MachineItemHandler;
 import net.minecraft.inventory.CraftingInventory;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;

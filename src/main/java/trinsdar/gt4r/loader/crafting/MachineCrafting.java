@@ -19,7 +19,6 @@ import static trinsdar.gt4r.data.CustomTags.*;
 import static trinsdar.gt4r.data.GT4RData.*;
 import static trinsdar.gt4r.data.Machines.*;
 import static trinsdar.gt4r.data.Materials.*;
-import static trinsdar.gt4r.loader.crafting.CraftingHelper.criterion;
 import static trinsdar.gt4r.loader.crafting.CraftingHelper.of2;
 
 public class MachineCrafting {

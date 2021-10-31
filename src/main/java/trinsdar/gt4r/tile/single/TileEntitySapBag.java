@@ -1,17 +1,14 @@
 package trinsdar.gt4r.tile.single;
 
-import muramasa.antimatter.Ref;
 import muramasa.antimatter.tile.TileEntityTickable;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.tile.TileEntityTypes;
 import trinsdar.gt4r.tree.BlockRubberLog;
 import trinsdar.gt4r.tree.ResinState;
-import trinsdar.gt4r.tree.RubberTree;
 
 public class TileEntitySapBag extends TileEntityTickable<TileEntitySapBag> {
     ItemStack sap = ItemStack.EMPTY;

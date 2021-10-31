@@ -5,7 +5,6 @@ import muramasa.antimatter.Data;
 import muramasa.antimatter.fluid.AntimatterFluid;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.ore.BlockOre;
-import muramasa.antimatter.ore.CobbleStoneType;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;

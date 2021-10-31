@@ -1,12 +1,9 @@
 package trinsdar.gt4r.loader.multi;
 
-import muramasa.antimatter.Antimatter;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
-import muramasa.antimatter.util.TagUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.Tags;
 
 import static muramasa.antimatter.Data.BLOCK;
 import static muramasa.antimatter.Data.GEM;

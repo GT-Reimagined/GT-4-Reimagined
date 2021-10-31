@@ -3,7 +3,6 @@ package trinsdar.gt4r.data.client;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import muramasa.antimatter.integration.jei.renderer.IRecipeInfoRenderer;
 import muramasa.antimatter.integration.jei.renderer.InfoRenderers;
-import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.recipe.Recipe;
 import net.minecraft.client.gui.FontRenderer;
 import trinsdar.gt4r.data.RecipeMaps;

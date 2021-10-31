@@ -1,16 +1,13 @@
 package trinsdar.gt4r.datagen;
 
 
-
 import muramasa.antimatter.client.AntimatterModelManager;
 import muramasa.antimatter.datagen.providers.AntimatterItemModelProvider;
 import muramasa.antimatter.machine.MachineState;
 import muramasa.antimatter.texture.Texture;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.util.IItemProvider;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import trinsdar.gt4r.Ref;
-import trinsdar.gt4r.data.Machines;
 
 import static muramasa.antimatter.machine.Tier.LV;
 import static trinsdar.gt4r.data.Machines.DUSTBIN;

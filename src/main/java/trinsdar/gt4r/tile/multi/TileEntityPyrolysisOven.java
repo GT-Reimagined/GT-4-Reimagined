@@ -1,19 +1,12 @@
 package trinsdar.gt4r.tile.multi;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import muramasa.antimatter.capability.machine.MachineRecipeHandler;
 import muramasa.antimatter.machine.event.IMachineEvent;
 import muramasa.antimatter.machine.types.Machine;
-import muramasa.antimatter.recipe.Recipe;
 import muramasa.antimatter.tile.multi.TileEntityBasicMultiMachine;
-import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.IIntArray;
 import trinsdar.gt4r.data.GT4RData;
-
-import java.awt.Color;
 
 public class TileEntityPyrolysisOven extends TileEntityBasicMultiMachine<TileEntityPyrolysisOven> {
 

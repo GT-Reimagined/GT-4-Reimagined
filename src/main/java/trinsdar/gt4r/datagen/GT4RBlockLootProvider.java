@@ -1,44 +1,27 @@
 package trinsdar.gt4r.datagen;
 
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSerializationContext;
 import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.block.BlockStone;
 import muramasa.antimatter.datagen.providers.AntimatterBlockLootProvider;
-import muramasa.antimatter.machine.BlockMachine;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.mixin.BlockLootTablesAccessor;
 import muramasa.antimatter.ore.BlockOre;
 import muramasa.antimatter.ore.BlockOreStone;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.loot.BlockLootTables;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.loot.ConstantRange;
 import net.minecraft.loot.ItemLootEntry;
-import net.minecraft.loot.LootFunction;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.RandomValueRange;
-import net.minecraft.loot.conditions.ILootCondition;
 import net.minecraft.loot.functions.ApplyBonus;
-import net.minecraft.loot.functions.ILootFunction;
 import net.minecraft.loot.functions.SetCount;
-import net.minecraft.util.ResourceLocation;
-import org.apache.logging.log4j.core.pattern.AbstractStyleNameConverter;
 import trinsdar.gt4r.block.BlockCasing;
 import trinsdar.gt4r.block.BlockMachineMaterial;
 import trinsdar.gt4r.block.BlockNonSolidMachine;
 import trinsdar.gt4r.data.GT4RData;
-import trinsdar.gt4r.data.Machines;
-import trinsdar.gt4r.data.Materials;
-
-import java.util.Random;
-import java.util.function.Function;
 
 import static muramasa.antimatter.Data.DUST;
 import static muramasa.antimatter.Data.GEM;

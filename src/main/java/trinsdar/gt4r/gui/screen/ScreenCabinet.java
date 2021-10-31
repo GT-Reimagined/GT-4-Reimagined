@@ -1,13 +1,8 @@
 package trinsdar.gt4r.gui.screen;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.systems.RenderSystem;
 import muramasa.antimatter.gui.screen.ScreenMachine;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
-import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.gui.ContainerCabinet;
 import trinsdar.gt4r.tile.single.TileEntityMaterial;
 

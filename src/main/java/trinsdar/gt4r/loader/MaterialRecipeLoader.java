@@ -15,14 +15,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.item.crafting.StonecuttingRecipe;
 import net.minecraft.tags.ITag;
-import net.minecraft.util.LazyValue;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 import trinsdar.gt4r.GT4RConfig;
 import trinsdar.gt4r.Ref;
-import trinsdar.gt4r.data.GT4RData;
 
 import java.util.function.Consumer;
 import java.util.stream.Collectors;

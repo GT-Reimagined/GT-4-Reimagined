@@ -1,13 +1,10 @@
 package trinsdar.gt4r.loader.machines;
 
 import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.Data;
-import muramasa.antimatter.datagen.builder.AntimatterCookingRecipeBuilder;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.ore.BlockOre;
 import muramasa.antimatter.ore.StoneType;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
-import muramasa.antimatter.recipe.map.RecipeBuilder;
 import muramasa.antimatter.recipe.map.RecipeMap;
 import muramasa.antimatter.util.TagUtils;
 import muramasa.antimatter.util.Utils;
@@ -17,19 +14,14 @@ import net.minecraft.item.Items;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 import trinsdar.gt4r.Ref;
-import trinsdar.gt4r.data.Materials;
-import trinsdar.gt4r.data.RecipeMaps;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static muramasa.antimatter.Data.*;
-import static muramasa.antimatter.util.Utils.addNoConsumeTag;
-import static muramasa.antimatter.util.Utils.formatNumber;
 import static muramasa.antimatter.util.Utils.getConventionalMaterialType;
 import static muramasa.antimatter.util.Utils.getConventionalStoneType;
 import static trinsdar.gt4r.data.GT4RData.Biochaff;

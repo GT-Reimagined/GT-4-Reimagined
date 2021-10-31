@@ -1,14 +1,33 @@
 package trinsdar.gt4r.data;
 
-import muramasa.antimatter.cover.ICover;
 import muramasa.antimatter.machine.Tier;
-import muramasa.antimatter.machine.types.*;
+import muramasa.antimatter.machine.types.BasicMachine;
+import muramasa.antimatter.machine.types.BasicMultiMachine;
+import muramasa.antimatter.machine.types.GeneratorMachine;
+import muramasa.antimatter.machine.types.HatchMachine;
+import muramasa.antimatter.machine.types.MultiMachine;
+import muramasa.antimatter.machine.types.TankMachine;
 import muramasa.antimatter.tile.single.TileEntityBatteryBuffer;
 import muramasa.antimatter.tile.single.TileEntityDigitalTransformer;
 import muramasa.antimatter.tile.single.TileEntityTransformer;
+import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.machine.MaterialMachine;
 import trinsdar.gt4r.machine.NonSolidMachine;
 import trinsdar.gt4r.machine.StorageMachine;
+import trinsdar.gt4r.tile.multi.TileEntityCharcoalPit;
+import trinsdar.gt4r.tile.multi.TileEntityCokeOven;
+import trinsdar.gt4r.tile.multi.TileEntityDistillationTower;
+import trinsdar.gt4r.tile.multi.TileEntityFusionReactor;
+import trinsdar.gt4r.tile.multi.TileEntityImplosionCompressor;
+import trinsdar.gt4r.tile.multi.TileEntityIndustrialBlastFurnace;
+import trinsdar.gt4r.tile.multi.TileEntityIndustrialGrinder;
+import trinsdar.gt4r.tile.multi.TileEntityIndustrialSawmill;
+import trinsdar.gt4r.tile.multi.TileEntityLargeHeatExchanger;
+import trinsdar.gt4r.tile.multi.TileEntityLargeTurbine;
+import trinsdar.gt4r.tile.multi.TileEntityPrimitiveBlastFurnace;
+import trinsdar.gt4r.tile.multi.TileEntityPyrolysisOven;
+import trinsdar.gt4r.tile.multi.TileEntityThermalBoiler;
+import trinsdar.gt4r.tile.multi.TileEntityVacuumFreezer;
 import trinsdar.gt4r.tile.single.TileEntityCabinet;
 import trinsdar.gt4r.tile.single.TileEntityCoalBoiler;
 import trinsdar.gt4r.tile.single.TileEntityCoveredGenerator;
@@ -24,19 +43,17 @@ import trinsdar.gt4r.tile.single.TileEntityPump;
 import trinsdar.gt4r.tile.single.TileEntityQuantumChest;
 import trinsdar.gt4r.tile.single.TileEntityQuantumTank;
 import trinsdar.gt4r.tile.single.TileEntitySteamMachine;
-import trinsdar.gt4r.Ref;
-import trinsdar.gt4r.tile.multi.*;
 import trinsdar.gt4r.tile.single.TileEntityTranslocator;
 import trinsdar.gt4r.tile.single.TileEntityTypeFilter;
 import trinsdar.gt4r.tile.single.TileEntityWorkbench;
 
-
 import java.util.Arrays;
 
-import static muramasa.antimatter.Data.*;
+import static muramasa.antimatter.Data.COVERINPUT;
+import static muramasa.antimatter.Data.COVERMUFFLER;
+import static muramasa.antimatter.Data.COVEROUTPUT;
 import static muramasa.antimatter.cover.ICover.emptyFactory;
 import static muramasa.antimatter.machine.MachineFlag.*;
-import static muramasa.antimatter.machine.MachineFlag.CELL;
 import static muramasa.antimatter.machine.Tier.*;
 import static trinsdar.gt4r.data.GT4RData.COVER_DYNAMO_OLD;
 import static trinsdar.gt4r.data.GT4RData.COVER_FUSION_INPUT;

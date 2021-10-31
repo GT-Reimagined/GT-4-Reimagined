@@ -8,7 +8,6 @@ import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
 import net.minecraft.block.material.Material;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.common.Tags;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.Machines;
 

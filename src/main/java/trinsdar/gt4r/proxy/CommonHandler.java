@@ -1,13 +1,8 @@
 package trinsdar.gt4r.proxy;
 
-import muramasa.antimatter.tool.IAntimatterTool;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import trinsdar.gt4r.GT4Reimagined;
 import trinsdar.gt4r.Ref;
@@ -17,7 +12,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.Scanner;
 
-import static trinsdar.gt4r.data.GT4RData.*;
+import static trinsdar.gt4r.data.GT4RData.SupporterListGold;
+import static trinsdar.gt4r.data.GT4RData.SupporterListSilver;
 
 public class CommonHandler {
 

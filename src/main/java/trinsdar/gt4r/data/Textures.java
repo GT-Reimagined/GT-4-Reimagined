@@ -1,6 +1,5 @@
 package trinsdar.gt4r.data;
 
-import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.machine.MachineState;
 import muramasa.antimatter.material.TextureSet;
 import muramasa.antimatter.texture.IOverlayTexturer;

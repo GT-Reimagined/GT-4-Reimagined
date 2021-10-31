@@ -1,10 +1,7 @@
 package trinsdar.gt4r.tile.single;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.TileEntityMachine;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraftforge.common.util.LazyOptional;
 import trinsdar.gt4r.machine.QuantumChestItemHandler;
 
 public class TileEntityQuantumChest extends TileEntityMachine<TileEntityQuantumChest> {

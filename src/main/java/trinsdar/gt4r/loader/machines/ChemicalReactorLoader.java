@@ -1,11 +1,9 @@
 package trinsdar.gt4r.loader.machines;
 
-import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraftforge.fluids.FluidStack;
-import trinsdar.gt4r.data.GT4RData;
 
 import static muramasa.antimatter.Data.DUST;
 import static muramasa.antimatter.Data.DUST_TINY;

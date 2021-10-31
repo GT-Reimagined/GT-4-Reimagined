@@ -7,7 +7,6 @@ import net.minecraft.inventory.CraftResultInventory;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.inventory.container.CraftingResultSlot;
 import net.minecraft.item.ItemStack;
-import trinsdar.gt4r.data.SlotTypes;
 
 public class SlotWorkTableResult extends CraftingResultSlot {
     private final CraftingInventory craftMatrix;

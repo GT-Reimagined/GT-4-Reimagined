@@ -3,8 +3,6 @@ package trinsdar.gt4r.machine;
 import muramasa.antimatter.capability.fluid.FluidTanks;
 import muramasa.antimatter.capability.machine.MachineFluidHandler;
 import muramasa.antimatter.machine.event.ContentEvent;
-import muramasa.antimatter.tile.TileEntityMachine;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
@@ -12,7 +10,6 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import trinsdar.gt4r.tile.single.TileEntityCoalBoiler;
 
 import static net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE;
-import static trinsdar.gt4r.data.Materials.DistilledWater;
 
 public class CoalBoilerFluidHandler extends MachineFluidHandler<TileEntityCoalBoiler> {
 

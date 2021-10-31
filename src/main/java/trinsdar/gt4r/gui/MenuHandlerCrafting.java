@@ -3,11 +3,11 @@ package trinsdar.gt4r.gui;
 import muramasa.antimatter.capability.AntimatterCaps;
 import muramasa.antimatter.capability.ICoverHandler;
 import muramasa.antimatter.capability.IGuiHandler;
-import muramasa.antimatter.cover.CoverStack;
+import muramasa.antimatter.cover.ICover;
 import muramasa.antimatter.gui.MenuHandler;
+import muramasa.antimatter.item.ItemCover;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.WorkbenchContainer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
@@ -33,7 +33,7 @@ public class MenuHandlerCrafting extends MenuHandler<GTWorkbenchContainer> {
 
     @Override
     protected GTWorkbenchContainer getMenu(IGuiHandler tile, PlayerInventory playerInv, int windowId) {
-        return tile instanceof CoverStack ? new ContainerCraftingCover(windowId, playerInv, IWorldPosCallable.of(((CoverStack<?>)tile).getTile().getWorld(), ((CoverStack<?>)tile).getTile().getPos()), ((CoverStack<?>) tile)) : null;
+        return tile instanceof ICover ? new ContainerCraftingCover(windowId, playerInv, IWorldPosCallable.of(((ICover)tile).source().getTile().getWorld(), ((ICover)tile).source().getTile().getPos()), ((ICover) tile)) : null;
     }
 
     @Override

@@ -8,7 +8,6 @@ import muramasa.antimatter.gui.Widget;
 import muramasa.antimatter.gui.container.ContainerMachine;
 import muramasa.antimatter.gui.event.GuiEvent;
 import muramasa.antimatter.gui.widget.WidgetSupplier;
-import trinsdar.gt4r.tile.single.TileEntityItemFilter;
 import trinsdar.gt4r.tile.single.TileEntityTranslocator;
 
 import javax.annotation.Nonnull;

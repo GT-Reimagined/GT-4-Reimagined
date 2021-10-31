@@ -2,7 +2,6 @@ package trinsdar.gt4r.data;
 
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.Data;
-import muramasa.antimatter.fluid.AntimatterMaterialFluid;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialItem;
 import muramasa.antimatter.material.MaterialTag;
@@ -15,7 +14,6 @@ import net.minecraft.item.ItemTier;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidAttributes;
-import net.minecraftforge.registries.ForgeRegistries;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.items.ItemTurbineRotor;
 

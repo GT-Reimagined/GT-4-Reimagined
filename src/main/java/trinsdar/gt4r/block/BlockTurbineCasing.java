@@ -9,17 +9,16 @@ import muramasa.antimatter.machine.MachineState;
 import muramasa.antimatter.registration.ITextureProvider;
 import muramasa.antimatter.texture.Texture;
 import muramasa.antimatter.util.int3;
-import net.minecraft.util.math.vector.Vector3i;
-import trinsdar.gt4r.data.GT4RData;
-import trinsdar.gt4r.tile.multi.TileEntityLargeTurbine;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.world.IBlockReader;
+import trinsdar.gt4r.data.GT4RData;
+import trinsdar.gt4r.tile.multi.TileEntityLargeTurbine;
 
-import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.List;
 

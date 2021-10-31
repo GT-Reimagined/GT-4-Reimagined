@@ -21,7 +21,6 @@ import static muramasa.antimatter.util.TagUtils.getForgeItemTag;
 import static trinsdar.gt4r.data.CustomTags.*;
 import static trinsdar.gt4r.data.GT4RData.*;
 import static trinsdar.gt4r.data.Machines.PUMP;
-import static trinsdar.gt4r.data.Machines.WATERMILL;
 import static trinsdar.gt4r.data.Machines.WINDMILL;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.ASSEMBLING;
@@ -48,7 +47,6 @@ public class AssemblyLoader {
         ASSEMBLING.RB().ii(of(CircuitBoardProcessor, 1), of(CircuitDataStorage, 1)).io(new ItemStack(CircuitDataControl, 2)).add(3200, 4);
         ASSEMBLING.RB().ii(of(CircuitBoardProcessor, 1), of(LapotronCrystal, 1)).io(new ItemStack(CircuitEnergyFlow, 1)).add(3200, 4);
         ASSEMBLING.RB().ii(of(CircuitDataControl, 1), of(CircuitDataStorage, 8)).io(new ItemStack(CircuitDataOrb, 1)).add(12800, 16);
-        ASSEMBLING.RB().ii(of(ConveyorModule, 1), of(PumpModule, 1)).io(new ItemStack(ItemTransportValve)).add(3200, 4);
         ASSEMBLING.RB().ii(of(CarbonFibre, 2), INT_CIRCUITS.get(2)).io(new ItemStack(CarbonMesh)).add(800, 2);
         ASSEMBLING.RB().ii(of(CarbonMesh, 16), INT_CIRCUITS.get(16)).io(new ItemStack(LavaFilter)).add(1600, 8);
         ASSEMBLING.RB().ii(of(PLATES_IRON_ALUMINIUM, 1), of(PUMP.getItem(LV), 1)).io(new ItemStack(PumpModule)).add(800, 16);

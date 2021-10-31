@@ -1,17 +1,15 @@
 package trinsdar.gt4r.datagen;
 
-import muramasa.antimatter.Data;
-import trinsdar.gt4r.Ref;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.FrameType;
 import net.minecraft.util.ResourceLocation;
+import trinsdar.gt4r.Ref;
 
 import java.util.function.Consumer;
 
 import static muramasa.antimatter.Data.GEM;
 import static muramasa.antimatter.datagen.providers.AntimatterAdvancementProvider.buildRootAdvancement;
 import static muramasa.antimatter.datagen.providers.AntimatterAdvancementProvider.getLoc;
-import static muramasa.antimatter.util.TagUtils.getForgeItemTag;
 import static muramasa.antimatter.util.Utils.hasItem;
 import static trinsdar.gt4r.data.Materials.Flint;
 

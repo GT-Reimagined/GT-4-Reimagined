@@ -1,6 +1,5 @@
 package trinsdar.gt4r.gui;
 
-import muramasa.antimatter.Antimatter;
 import muramasa.antimatter.gui.MenuHandlerMachine;
 import muramasa.antimatter.gui.container.ContainerBasicMachine;
 import muramasa.antimatter.material.Material;

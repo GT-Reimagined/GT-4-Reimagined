@@ -18,6 +18,10 @@ import trinsdar.gt4r.cover.RedstoneMode;
 
 import javax.annotation.Nullable;
 
+import static trinsdar.gt4r.gui.ButtonOverlays.REDSTONE;
+import static trinsdar.gt4r.gui.ButtonOverlays.TORCH_OFF;
+import static trinsdar.gt4r.gui.ButtonOverlays.TORCH_ON;
+
 public class CoverRedstoneMachineController extends BaseCover implements ICoverModeHandler {
 
     protected RedstoneMode coverMode;
@@ -26,6 +30,9 @@ public class CoverRedstoneMachineController extends BaseCover implements ICoverM
     public CoverRedstoneMachineController(ICoverHandler<?> source, @Nullable Tier tier, Direction side, CoverFactory factory) {
         super(source, tier, side, factory);
         this.coverMode = RedstoneMode.NORMAL;
+        addGuiCallback(t -> {
+            t.addButton(61, 34, 16, 16, TORCH_ON).addButton(79, 34, 16, 16, TORCH_OFF).addButton(97, 34, 16, 16, REDSTONE);
+        });
     }
 
     @Override

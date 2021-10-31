@@ -3,14 +3,9 @@ package trinsdar.gt4r.loader.crafting;
 import com.google.common.collect.ImmutableMap;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import net.minecraft.advancements.ICriterionInstance;
-import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.Item;
 import net.minecraft.tags.ITag;
-import net.minecraft.tags.Tag;
 import net.minecraft.util.IItemProvider;
-
-import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 public class CraftingHelper {
     public static ICriterionInstance criterion(IItemProvider item, AntimatterRecipeProvider provider){

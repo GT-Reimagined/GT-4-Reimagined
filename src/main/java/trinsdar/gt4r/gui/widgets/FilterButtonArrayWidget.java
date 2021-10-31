@@ -2,15 +2,12 @@ package trinsdar.gt4r.gui.widgets;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import muramasa.antimatter.gui.ButtonBody;
-import muramasa.antimatter.gui.ButtonOverlay;
 import muramasa.antimatter.gui.GuiInstance;
 import muramasa.antimatter.gui.IGuiElement;
 import muramasa.antimatter.gui.Widget;
 import muramasa.antimatter.gui.container.ContainerMachine;
 import muramasa.antimatter.gui.event.GuiEvent;
-import muramasa.antimatter.gui.widget.ButtonWidget;
 import muramasa.antimatter.gui.widget.WidgetSupplier;
-import muramasa.antimatter.util.int4;
 import trinsdar.gt4r.tile.single.TileEntityItemFilter;
 
 import javax.annotation.Nonnull;

@@ -13,7 +13,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import trinsdar.gt4r.GT4Reimagined;
 import trinsdar.gt4r.data.GT4RData;
 
 @Mixin(AbstractClientPlayerEntity.class)

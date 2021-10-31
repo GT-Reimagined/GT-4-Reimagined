@@ -1,10 +1,8 @@
 package trinsdar.gt4r.data;
 
-import muramasa.antimatter.integration.jei.renderer.InfoRenderers;
-import muramasa.antimatter.machine.Tier;
+import muramasa.antimatter.recipe.RecipeProxies;
 import muramasa.antimatter.recipe.map.RecipeBuilder;
 import muramasa.antimatter.recipe.map.RecipeMap;
-import muramasa.antimatter.recipe.RecipeProxies;
 import trinsdar.gt4r.Ref;
 
 import static muramasa.antimatter.machine.Tier.MV;

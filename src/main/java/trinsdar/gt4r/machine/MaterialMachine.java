@@ -20,7 +20,7 @@ public class MaterialMachine extends Machine<MaterialMachine> {
         this.material = material;
         setTile(() -> new TileEntityMaterial<>(this));
         addFlags(COVERABLE);
-        covers((ICover[]) null);
+        noCovers();
         frontCovers();
     }
 

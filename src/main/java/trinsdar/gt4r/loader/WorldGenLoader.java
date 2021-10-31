@@ -1,24 +1,11 @@
 package trinsdar.gt4r.loader;
 
-import muramasa.antimatter.Antimatter;
 import muramasa.antimatter.AntimatterConfig;
 import muramasa.antimatter.Data;
 import muramasa.antimatter.worldgen.object.WorldGenStoneLayer;
-import muramasa.antimatter.worldgen.object.WorldGenVeinLayer;
-import muramasa.antimatter.worldgen.old.WorldGenAsteroid;
 import net.minecraft.world.World;
-import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.BiomeDictionary.Type;
 import trinsdar.gt4r.GT4RConfig;
 import trinsdar.gt4r.data.GT4RData;
-import trinsdar.gt4r.tree.RubberTreeWorldGen;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static muramasa.antimatter.Ref.*;
-import static net.minecraftforge.common.BiomeDictionary.Type.*;
-import static trinsdar.gt4r.data.Materials.*;
 
 public class WorldGenLoader {
 

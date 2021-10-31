@@ -1,20 +1,15 @@
 package trinsdar.gt4r.machine;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import muramasa.antimatter.capability.item.TrackedItemHandler;
 import muramasa.antimatter.capability.machine.MachineItemHandler;
 import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.machine.event.ContentEvent;
-import muramasa.antimatter.machine.event.IMachineEvent;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.items.IItemHandlerModifiable;
-import trinsdar.gt4r.data.SlotTypes;
 import trinsdar.gt4r.tile.single.TileEntityQuantumChest;
-
-import static muramasa.antimatter.machine.MachineFlag.ITEM_INPUT;
 
 public class QuantumChestItemHandler extends MachineItemHandler<TileEntityQuantumChest> implements IFakeSlotHandler {
     int maxSize = Integer.MAX_VALUE;

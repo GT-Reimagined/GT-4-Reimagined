@@ -9,20 +9,18 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraftforge.fluids.FluidStack;
-import trinsdar.gt4r.data.Materials;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static muramasa.antimatter.Data.*;
-import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.*;
+import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
 import static net.minecraft.item.Items.*;
 import static trinsdar.gt4r.data.GT4RData.Plantball;
 import static trinsdar.gt4r.data.GT4RData.RUBBER_LOG;
 import static trinsdar.gt4r.data.GT4RData.StickyResin;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.CENTRIFUGING;
-import static trinsdar.gt4r.data.RecipeMaps.ELECTROLYZING;
 
 public class CentrifugingLoader {
     public static void init() {

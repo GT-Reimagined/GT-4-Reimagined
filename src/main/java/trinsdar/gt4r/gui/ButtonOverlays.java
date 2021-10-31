@@ -1,8 +1,6 @@
 package trinsdar.gt4r.gui;
 
 import muramasa.antimatter.gui.ButtonBody;
-import muramasa.antimatter.gui.ButtonOverlay;
-import org.lwjgl.system.CallbackI;
 
 public class ButtonOverlays {
     public static ButtonBody NO_OVERLAY = new ButtonBody("no_overlay", 96, 0, 0, 0, 16, 16);

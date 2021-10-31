@@ -16,7 +16,6 @@ import trinsdar.gt4r.block.BlockMachineMaterial;
 import trinsdar.gt4r.client.BakedModels;
 import trinsdar.gt4r.client.ClientUtil;
 import trinsdar.gt4r.data.GT4RData;
-import trinsdar.gt4r.data.Guis;
 import trinsdar.gt4r.data.Machines;
 
 import java.io.File;
@@ -29,11 +28,6 @@ import static muramasa.antimatter.machine.Tier.LV;
 public class ClientHandler implements IProxyHandler {
 
     public ClientHandler(){
-        if (Minecraft.getInstance() != null){
-            BakedModels.init();
-            ModelLoaderRegistry.registerLoader(BakedModels.LOADER_SAP_BAG.getLoc(), BakedModels.LOADER_SAP_BAG);
-        }
-
     }
 
     @SuppressWarnings("RedundantTypeArguments")

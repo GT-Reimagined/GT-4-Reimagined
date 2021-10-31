@@ -1,28 +1,13 @@
 package trinsdar.gt4r.cover;
 
-import muramasa.antimatter.capability.AntimatterCaps;
 import muramasa.antimatter.capability.ICoverHandler;
 import muramasa.antimatter.cover.CoverFactory;
 import muramasa.antimatter.machine.Tier;
-import muramasa.antimatter.tile.TileEntityMachine;
-import muramasa.antimatter.util.Utils;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
-import trinsdar.gt4r.data.GT4RData;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
-
-import static net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
 
 public class CoverItemtransportValve extends CoverBasicTransport{
     public static String ID = "item_transport_valve";

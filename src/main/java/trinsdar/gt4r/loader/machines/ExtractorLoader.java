@@ -5,7 +5,7 @@ import net.minecraft.item.Items;
 import trinsdar.gt4r.data.GT4RData;
 
 import static muramasa.antimatter.Data.DUST;
-import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.*;
+import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
 import static trinsdar.gt4r.data.Materials.Rubber;
 import static trinsdar.gt4r.data.RecipeMaps.EXTRACTING;
 

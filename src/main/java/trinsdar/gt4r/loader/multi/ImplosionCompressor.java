@@ -2,9 +2,7 @@ package trinsdar.gt4r.loader.multi;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import org.lwjgl.system.CallbackI;
 import trinsdar.gt4r.data.GT4RData;
-import trinsdar.gt4r.data.Materials;
 
 import static muramasa.antimatter.Data.DUST;
 import static muramasa.antimatter.Data.GEM;

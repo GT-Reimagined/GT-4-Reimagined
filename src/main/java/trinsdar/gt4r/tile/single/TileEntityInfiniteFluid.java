@@ -2,12 +2,12 @@ package trinsdar.gt4r.tile.single;
 
 import muramasa.antimatter.capability.fluid.FluidTanks;
 import muramasa.antimatter.capability.machine.MachineFluidHandler;
-import muramasa.antimatter.cover.CoverStack;
+import muramasa.antimatter.cover.CoverOutput;
+import muramasa.antimatter.cover.ICover;
 import muramasa.antimatter.machine.event.ContentEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.TileEntityMachine;
 import net.minecraft.util.Direction;
-import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 
@@ -30,8 +30,8 @@ public class TileEntityInfiniteFluid extends TileEntityMachine<TileEntityInfinit
     public void onServerUpdate() {
         super.onServerUpdate();
         coverHandler.ifPresent(c -> {
-            CoverStack<?> stack = c.get(c.getOutputFacing());
-            COVEROUTPUT.manualOutput(stack);
+            ICover stack = c.get(c.getOutputFacing());
+            ((CoverOutput)stack).manualOutput();
         });
     }
 
@@ -39,8 +39,8 @@ public class TileEntityInfiniteFluid extends TileEntityMachine<TileEntityInfinit
     public void onFirstTick() {
         super.onFirstTick();
         coverHandler.ifPresent(c -> {
-            CoverStack<?> stack = c.get(c.getOutputFacing());
-            COVEROUTPUT.setEjects(stack, true, false);
+            ICover stack = c.get(c.getOutputFacing());
+            ((CoverOutput)stack).setEjects(true, false);
         });
     }
 

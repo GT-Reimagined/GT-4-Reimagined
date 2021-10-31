@@ -1,33 +1,23 @@
 package trinsdar.gt4r.loader.crafting;
 
-import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.pipe.PipeSize;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
-import muramasa.antimatter.util.TagUtils;
 import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
-import org.lwjgl.system.CallbackI;
 import trinsdar.gt4r.Ref;
-import trinsdar.gt4r.data.GT4RData;
-import trinsdar.gt4r.data.Materials;
 
 import java.util.function.Consumer;
 
 import static com.google.common.collect.ImmutableMap.of;
 import static muramasa.antimatter.Data.*;
-import static muramasa.antimatter.machine.Tier.LV;
 import static muramasa.antimatter.util.TagUtils.getForgeItemTag;
 import static trinsdar.gt4r.data.CustomTags.*;
 import static trinsdar.gt4r.data.GT4RData.*;
-import static trinsdar.gt4r.data.Machines.PUMP;
-import static trinsdar.gt4r.data.Machines.VACUUM_FREEZER;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.loader.crafting.CraftingHelper.of2;
 

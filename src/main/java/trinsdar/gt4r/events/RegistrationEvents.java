@@ -1,19 +1,13 @@
 package trinsdar.gt4r.events;
 
-import muramasa.antimatter.Antimatter;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.foliageplacer.FoliagePlacerType;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import trinsdar.gt4r.Ref;
-import trinsdar.gt4r.data.Attributes;
 import trinsdar.gt4r.data.GT4RData;
-import trinsdar.gt4r.mixin.PlayerEntityMixin;
 import trinsdar.gt4r.tree.RubberFoliagePlacer;
 
 public class RegistrationEvents {

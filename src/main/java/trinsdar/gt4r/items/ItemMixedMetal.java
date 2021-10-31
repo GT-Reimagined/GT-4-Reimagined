@@ -17,7 +17,6 @@ import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.Materials;
 
 import javax.annotation.Nullable;
-
 import java.util.List;
 
 import static muramasa.antimatter.Data.NULL;

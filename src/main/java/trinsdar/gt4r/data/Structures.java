@@ -1,6 +1,5 @@
 package trinsdar.gt4r.data;
 
-import muramasa.antimatter.registration.IAntimatterObject;
 import muramasa.antimatter.structure.BlockStateElement;
 import muramasa.antimatter.structure.FakeTileElement;
 import net.minecraft.fluid.Fluids;

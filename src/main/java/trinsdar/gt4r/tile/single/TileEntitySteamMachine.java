@@ -6,8 +6,6 @@ import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.recipe.Recipe;
 import muramasa.antimatter.tile.TileEntityMachine;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import trinsdar.gt4r.data.Materials;
 

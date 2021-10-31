@@ -2,13 +2,9 @@ package trinsdar.gt4r.data;
 
 import com.google.common.collect.ImmutableMap;
 import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.capability.IGuiHandler;
 import muramasa.antimatter.gui.BarDir;
 import muramasa.antimatter.gui.ButtonBody;
 import muramasa.antimatter.gui.GuiData;
-import muramasa.antimatter.gui.MenuHandlerMachine;
-import muramasa.antimatter.gui.container.ContainerBasicMachine;
-import muramasa.antimatter.gui.container.ContainerMultiMachine;
 import muramasa.antimatter.gui.screen.AntimatterContainerScreen;
 import muramasa.antimatter.gui.slot.ISlotProvider;
 import muramasa.antimatter.gui.widget.BackgroundWidget;
@@ -18,41 +14,34 @@ import muramasa.antimatter.gui.widget.ProgressWidget;
 import muramasa.antimatter.gui.widget.TextWidget;
 import muramasa.antimatter.gui.widget.WidgetSupplier;
 import muramasa.antimatter.machine.Tier;
-import muramasa.antimatter.tile.TileEntityMachine;
-import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
 import muramasa.antimatter.util.int4;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import trinsdar.gt4r.Ref;
-import trinsdar.gt4r.data.client.ScreenFactories;
-import trinsdar.gt4r.gui.ContainerCabinet;
-import trinsdar.gt4r.gui.ContainerWorkbench;
-import trinsdar.gt4r.gui.widgets.CoalBoilerFuelWidget;
-import trinsdar.gt4r.gui.widgets.FilterButtonArrayWidget;
-import trinsdar.gt4r.gui.widgets.FusionButtonWidget;
 import trinsdar.gt4r.gui.MenuHandlerCrafting;
 import trinsdar.gt4r.gui.MenuHandlerCraftingItem;
+import trinsdar.gt4r.gui.widgets.CoalBoilerFuelWidget;
 import trinsdar.gt4r.gui.widgets.CoalBoilerWidget;
+import trinsdar.gt4r.gui.widgets.FilterButtonArrayWidget;
+import trinsdar.gt4r.gui.widgets.FusionButtonWidget;
 import trinsdar.gt4r.gui.widgets.MachineStateWidgetMoved;
 import trinsdar.gt4r.gui.widgets.TranslocatorButtonArrayWidget;
-import trinsdar.gt4r.tile.multi.TileEntityFusionReactor;
-import trinsdar.gt4r.tile.single.TileEntityMaterial;
 
 import java.util.function.BiFunction;
 
-import static muramasa.antimatter.gui.ButtonBody.*;
+import static muramasa.antimatter.gui.ButtonBody.APAD_LEFT;
+import static muramasa.antimatter.gui.ButtonBody.APAD_RIGHT;
+import static muramasa.antimatter.gui.ButtonBody.PAD_LEFT;
+import static muramasa.antimatter.gui.ButtonBody.PAD_RIGHT;
 import static muramasa.antimatter.gui.SlotType.*;
 import static muramasa.antimatter.gui.Widget.builder;
-import static muramasa.antimatter.machine.Tier.*;
-import static trinsdar.gt4r.data.GT4RData.*;
+import static muramasa.antimatter.machine.Tier.BRONZE;
+import static muramasa.antimatter.machine.Tier.LV;
+import static muramasa.antimatter.machine.Tier.MV;
+import static muramasa.antimatter.machine.Tier.STEEL;
 import static trinsdar.gt4r.data.Machines.*;
 import static trinsdar.gt4r.data.SlotTypes.*;
 import static trinsdar.gt4r.gui.ButtonOverlays.*;
-import static trinsdar.gt4r.gui.ButtonOverlays.EXPORT;
-import static trinsdar.gt4r.gui.ButtonOverlays.IMPORT;
-import static trinsdar.gt4r.gui.ButtonOverlays.TORCH_OFF;
-import static trinsdar.gt4r.gui.ButtonOverlays.TORCH_ON;
 
 public class Guis {
 
@@ -74,92 +63,6 @@ public class Guis {
     public static GuiData CHARGING_LOCKER = new GuiData("gt4r","charging_locker").setSlots(ISlotProvider.DEFAULT().add(ENERGY, 80, 8).add(ENERGY, 80, 8 + (18)).add(ENERGY, 80, 8 + (2 * 18)).add(ENERGY, 80, 8 + (3 * 18)));
 
     static ResourceLocation buttonLocation = new ResourceLocation(Ref.ID, "textures/gui/button/gui_buttons.png");
-
-    public static MenuHandlerMachine<TileEntityFusionReactor, ? extends ContainerMultiMachine> FUSION_MENU_HANDLER = new MenuHandlerMachine(Ref.ID, "container_fusion_reactor") {
-        @Override
-        public ContainerMultiMachine getMenu(IGuiHandler tile, PlayerInventory playerInv, int windowId) {
-            return tile instanceof TileEntityMachine ? new ContainerMultiMachine((TileEntityMultiMachine<?>) tile, playerInv, this, windowId) : null;
-        }
-        @Override
-        public Object screen() {
-            return ScreenFactories.SCREEN_FUSION_REACTOR;
-        }
-    };
-
-    public static MenuHandlerMachine<? extends TileEntityMaterial, ? extends ContainerCabinet> CABINET_HANDLER_SIX = new MenuHandlerMachine(Ref.ID, "container_cabinet_six") {
-        @Override
-        public ContainerCabinet getMenu(IGuiHandler tile, PlayerInventory playerInv, int windowId) {
-            return tile instanceof TileEntityMaterial ? new ContainerCabinet((TileEntityMaterial) tile, playerInv, this, windowId) : null;
-        }
-
-        @Override
-        public Object screen() {
-            return ScreenFactories.SCREEN_CABINET_SIX;
-        }
-    };
-
-    public static MenuHandlerMachine<? extends TileEntityMaterial, ? extends ContainerCabinet> CABINET_HANDLER_SEVEN = new MenuHandlerMachine(Ref.ID, "container_cabinet_seven") {
-        @Override
-        public ContainerCabinet getMenu(IGuiHandler tile, PlayerInventory playerInv, int windowId) {
-            return tile instanceof TileEntityMaterial ? new ContainerCabinet((TileEntityMaterial) tile, playerInv, this, windowId) : null;
-        }
-
-        @Override
-        public Object screen() {
-            return ScreenFactories.SCREEN_CABINET_SEVEN;
-        }
-    };
-
-    public static MenuHandlerMachine<? extends TileEntityMaterial, ? extends ContainerCabinet> CABINET_HANDLER_EIGHT = new MenuHandlerMachine(Ref.ID, "container_cabinet_eight") {
-        @Override
-        public ContainerCabinet getMenu(IGuiHandler tile, PlayerInventory playerInv, int windowId) {
-            return tile instanceof TileEntityMaterial ? new ContainerCabinet((TileEntityMaterial) tile, playerInv, this, windowId) : null;
-        }
-
-        @Override
-        public Object screen() {
-            return ScreenFactories.SCREEN_CABINET_EIGHT;
-        }
-    };
-
-    public static MenuHandlerMachine<? extends TileEntityMaterial, ? extends ContainerCabinet> CABINET_HANDLER_NINE = new MenuHandlerMachine(Ref.ID, "container_cabinet_nine") {
-        @Override
-        public ContainerCabinet getMenu(IGuiHandler tile, PlayerInventory playerInv, int windowId) {
-            return tile instanceof TileEntityMaterial ? new ContainerCabinet((TileEntityMaterial) tile, playerInv, this, windowId) : null;
-        }
-
-        @Override
-        public Object screen() {
-            return ScreenFactories.SCREEN_CABINET_NINE;
-        }
-    };
-
-    public static MenuHandlerMachine<? extends TileEntityMaterial, ? extends ContainerWorkbench> WORKBENCH_HANDLER = new MenuHandlerMachine(Ref.ID, "container_workbench") {
-        @Override
-        public ContainerWorkbench getMenu(IGuiHandler tile, PlayerInventory playerInv, int windowId) {
-            return tile instanceof TileEntityMaterial ? new ContainerWorkbench((TileEntityMaterial) tile, playerInv, this, windowId) : null;
-        }
-
-        @Override
-        public Object screen() {
-            return ScreenFactories.SCREEN_WORKBENCH;
-        }
-    };
-
-    public static MenuHandlerMachine<? extends TileEntityMaterial, ? extends ContainerBasicMachine> LOCKER_HANDLER = new MenuHandlerMachine(Ref.ID, "container_locker") {
-        @Override
-        public ContainerBasicMachine getMenu(IGuiHandler tile, PlayerInventory playerInv, int windowId) {
-            return tile instanceof TileEntityMaterial ? new ContainerBasicMachine<>((TileEntityMaterial) tile, playerInv, this, windowId) : null;
-        }
-
-        @Override
-        public Object screen() {
-            return ScreenFactories.SCREEN_LOCKER;
-        }
-    };
-
-    public static MenuHandlerCrafting COVER_CRAFTING_HANDLER = new MenuHandlerCrafting(Ref.ID, "crafting_grid");
-    public static MenuHandlerCraftingItem ITEM_CRAFTING_HANDLER = new MenuHandlerCraftingItem(Ref.ID, "crafting_item");
 
     public static void init(Dist side) {
 
@@ -300,7 +203,6 @@ public class Guis {
         FUSION_ITEM_EXTRACTOR.add(IT_OUT, 79, 34);
         FUSION_ITEM_INJECTOR.add(IT_IN, 79, 34);
 
-        //COVER_CRAFTING.setGui(new GuiData(COVER_CRAFTING, COVER_CRAFTING_HANDLER));
         PUMP.addGuiCallback(g -> g.addWidget(IOWidget.build(9,63,16,16)));
         BRONZE_WORKBENCH.addGuiCallback(t -> {
             t.addButton(136, 28, 16, 16, NO_OVERLAY);
@@ -326,26 +228,6 @@ public class Guis {
             t.addButton(136, 28, 16, 16, NO_OVERLAY);
             t.addButton(154, 28, 16, 16, NO_OVERLAY);
         });
-
-        ButtonBody[][] overlays = new ButtonBody[][]{{IMPORT, IMPORT_CONDITIONAL, IMPORT_INVERT_CONDITIONAL, EXPORT, EXPORT_CONDITIONAL, EXPORT_INVERT_CONDITIONAL}, {IMPORT_EXPORT, IMPORT_EXPORT_CONDITIONAL, IMPORT_EXPORT_INVERT_CONDITIONAL, EXPORT_IMPORT, EXPORT_IMPORT_CONDITIONAL, EXPORT_IMPORT_INVERT_CONDITIONAL}};
-
-        /*COVER_CONVEYOR.addGuiCallback(t -> {
-            for (int x = 0; x < 6; x++){
-                for (int y = 0; y < 2; y++){
-                    t.addButton(35 + (x * 18), 25 + (y * 18), 16, 16, overlays[y][x]);
-                }
-            }
-        });
-        COVER_PUMP.addGuiCallback(t -> {
-            for (int x = 0; x < 6; x++){
-                for (int y = 0; y < 2; y++){
-                    t.addButton(35 + (x * 18), 25 + (y * 18), 16, 16, overlays[y][x]);
-                }
-            }
-        });
-        COVER_REDSTONE_MACHINE_CONTROLLER.addGuiCallback(t -> {
-            t.addButton(61, 34, 16, 16, TORCH_ON).addButton(79, 34, 16, 16, TORCH_OFF).addButton(97, 34, 16, 16, REDSTONE);
-        });*/
         FUSION_REACTOR.addGuiCallback(t -> {
             t.addButton(155, 23, 16, 16, NO_OVERLAY).addButton(155, 41, 16, 16, NO_OVERLAY).addButton(155, 59, 16, 16, NO_OVERLAY).addWidget(makeProgress(BarDir.LEFT, true, new int4(0, 235, 149, 16)).setSize(4,162, 149, 16)).addWidget(FusionButtonWidget.build());
         });
@@ -470,15 +352,15 @@ public class Guis {
         CHARGING_WORKBENCH.widget(addButton(154, 28, 16, 16, NO_OVERLAY, 1));*/
         BiFunction<Boolean, String, ResourceLocation> textures = (c, l) -> new ResourceLocation(Ref.ID, "textures/gui/machine/" + (c ? "charging_" : "") + l + ".png");
 
-        BRONZE_WORKBENCH.setGUI(WORKBENCH_HANDLER);
-        IRON_WORKBENCH.setGUI(WORKBENCH_HANDLER);
-        ALUMINIUM_WORKBENCH.setGUI(WORKBENCH_HANDLER);
-        IRON_CHARGING_WORKBENCH.setGUI(WORKBENCH_HANDLER);
-        ALUMINIUM_CHARGING_WORKBENCH.setGUI(WORKBENCH_HANDLER);
-        IRON_LOCKER.setGUI(LOCKER_HANDLER);
-        ALUMINIUM_LOCKER.setGUI(LOCKER_HANDLER);
-        IRON_CHARGING_LOCKER.setGUI(LOCKER_HANDLER);
-        ALUMINIUM_CHARGING_LOCKER.setGUI(LOCKER_HANDLER);
+        BRONZE_WORKBENCH.setGUI(MenuHandlers.WORKBENCH_HANDLER);
+        IRON_WORKBENCH.setGUI(MenuHandlers.WORKBENCH_HANDLER);
+        ALUMINIUM_WORKBENCH.setGUI(MenuHandlers.WORKBENCH_HANDLER);
+        IRON_CHARGING_WORKBENCH.setGUI(MenuHandlers.WORKBENCH_HANDLER);
+        ALUMINIUM_CHARGING_WORKBENCH.setGUI(MenuHandlers.WORKBENCH_HANDLER);
+        IRON_LOCKER.setGUI(MenuHandlers.LOCKER_HANDLER);
+        ALUMINIUM_LOCKER.setGUI(MenuHandlers.LOCKER_HANDLER);
+        IRON_CHARGING_LOCKER.setGUI(MenuHandlers.LOCKER_HANDLER);
+        ALUMINIUM_CHARGING_LOCKER.setGUI(MenuHandlers.LOCKER_HANDLER);
         BRONZE_WORKBENCH.add(WORKBENCH.getSlots()).getGui().setOverrideLocation(textures.apply(false, "workbench"));
         IRON_WORKBENCH.add(WORKBENCH.getSlots()).getGui().setOverrideLocation(textures.apply(false, "workbench"));
         ALUMINIUM_WORKBENCH.add(WORKBENCH.getSlots()).getGui().setOverrideLocation(textures.apply(false, "workbench"));
@@ -489,18 +371,18 @@ public class Guis {
         IRON_CHARGING_LOCKER.add(CHARGING_LOCKER.getSlots()).getGui().setOverrideLocation(textures.apply(true, "locker"));
         ALUMINIUM_CHARGING_LOCKER.add(CHARGING_LOCKER.getSlots()).getGui().setOverrideLocation(textures.apply(true, "locker"));
 
-        FUSION_REACTOR.setGUI(FUSION_MENU_HANDLER);
-        IRON_CABINET.setGUI(CABINET_HANDLER_SIX);
-        ALUMINIUM_CABINET.setGUI(CABINET_HANDLER_SIX);
-        WROUGHT_IRON_CABINET.setGUI(CABINET_HANDLER_SIX);
-        BRASS_CABINET.setGUI(CABINET_HANDLER_SIX);
-        CUPRONICKEL_CABINET.setGUI(CABINET_HANDLER_SIX);
-        ELECTRUM_CABINET.setGUI(CABINET_HANDLER_SEVEN);
-        GOLD_CABINET.setGUI(CABINET_HANDLER_SEVEN);
-        SILVER_CABINET.setGUI(CABINET_HANDLER_SEVEN);
-        MAGNALIUM_CABINET.setGUI(CABINET_HANDLER_SEVEN);
-        PLATINUM_CABINET.setGUI(CABINET_HANDLER_EIGHT);
-        OSMIUM_CABINET.setGUI(CABINET_HANDLER_NINE);
+        FUSION_REACTOR.setGUI(MenuHandlers.FUSION_MENU_HANDLER);
+        IRON_CABINET.setGUI(MenuHandlers.CABINET_HANDLER_SIX);
+        ALUMINIUM_CABINET.setGUI(MenuHandlers.CABINET_HANDLER_SIX);
+        WROUGHT_IRON_CABINET.setGUI(MenuHandlers.CABINET_HANDLER_SIX);
+        BRASS_CABINET.setGUI(MenuHandlers.CABINET_HANDLER_SIX);
+        CUPRONICKEL_CABINET.setGUI(MenuHandlers.CABINET_HANDLER_SIX);
+        ELECTRUM_CABINET.setGUI(MenuHandlers.CABINET_HANDLER_SEVEN);
+        GOLD_CABINET.setGUI(MenuHandlers.CABINET_HANDLER_SEVEN);
+        SILVER_CABINET.setGUI(MenuHandlers.CABINET_HANDLER_SEVEN);
+        MAGNALIUM_CABINET.setGUI(MenuHandlers.CABINET_HANDLER_SEVEN);
+        PLATINUM_CABINET.setGUI(MenuHandlers.CABINET_HANDLER_EIGHT);
+        OSMIUM_CABINET.setGUI(MenuHandlers.CABINET_HANDLER_NINE);
         IRON_CABINET.getGui().setOverrideLocation(textures.apply(false, "cabinet_six"));
         ALUMINIUM_CABINET.getGui().setOverrideLocation(textures.apply(false, "cabinet_six"));
         WROUGHT_IRON_CABINET.getGui().setOverrideLocation(textures.apply(false, "cabinet_six"));

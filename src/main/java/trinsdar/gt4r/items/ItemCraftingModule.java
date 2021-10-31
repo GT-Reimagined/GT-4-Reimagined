@@ -10,19 +10,13 @@ import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
-import net.minecraft.util.IWorldPosCallable;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
-import org.lwjgl.system.CallbackI;
 import trinsdar.gt4r.Ref;
-import trinsdar.gt4r.data.GT4RData;
-import trinsdar.gt4r.data.Guis;
-import trinsdar.gt4r.gui.ContainerCraftingCover;
-import trinsdar.gt4r.gui.ContainerCraftingItem;
+import trinsdar.gt4r.data.MenuHandlers;
 
 import javax.annotation.Nullable;
 
@@ -54,6 +48,6 @@ public class ItemCraftingModule extends ItemCover implements INamedContainerProv
     @Override
     public Container createMenu(int windowId, PlayerInventory playerInv, PlayerEntity player) {
         //TODO
-        return Guis.ITEM_CRAFTING_HANDLER.getMenu((IGuiHandler) player, playerInv, windowId);
+        return MenuHandlers.ITEM_CRAFTING_HANDLER.getMenu((IGuiHandler) player, playerInv, windowId);
     }
 }

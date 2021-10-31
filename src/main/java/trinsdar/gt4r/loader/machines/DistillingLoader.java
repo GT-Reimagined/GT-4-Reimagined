@@ -2,7 +2,6 @@ package trinsdar.gt4r.loader.machines;
 
 import net.minecraft.fluid.Fluids;
 import net.minecraftforge.fluids.FluidStack;
-import trinsdar.gt4r.data.GT4RData;
 
 import static muramasa.antimatter.Data.DUST_SMALL;
 import static trinsdar.gt4r.data.GT4RData.INT_CIRCUITS;

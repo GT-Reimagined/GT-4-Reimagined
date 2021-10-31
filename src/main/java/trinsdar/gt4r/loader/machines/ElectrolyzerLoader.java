@@ -1,6 +1,5 @@
 package trinsdar.gt4r.loader.machines;
 
-import muramasa.antimatter.Antimatter;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialStack;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;

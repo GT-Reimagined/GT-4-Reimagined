@@ -2,7 +2,6 @@ package trinsdar.gt4r.gui;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.WorkbenchContainer;
 import net.minecraft.util.IWorldPosCallable;
 
 public class ContainerCraftingItem extends GTWorkbenchContainer {

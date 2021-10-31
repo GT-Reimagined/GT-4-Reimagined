@@ -1,8 +1,6 @@
 package trinsdar.gt4r.tile.single;
 
 import muramasa.antimatter.Ref;
-import muramasa.antimatter.capability.CoverHandler;
-import muramasa.antimatter.capability.fluid.FluidHandlerSidedWrapper;
 import muramasa.antimatter.capability.fluid.FluidTanks;
 import muramasa.antimatter.capability.machine.MachineFluidHandler;
 import muramasa.antimatter.machine.event.ContentEvent;
@@ -28,9 +26,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import trinsdar.gt4r.machine.MaterialMachine;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import java.util.List;
 
 import static muramasa.antimatter.Data.ELECTRIC_WRENCH;

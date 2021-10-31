@@ -1,6 +1,5 @@
 package trinsdar.gt4r.mixin;
 
-import muramasa.antimatter.Antimatter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.PlayerController;
 import net.minecraft.client.renderer.GameRenderer;

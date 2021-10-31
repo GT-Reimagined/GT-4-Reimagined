@@ -7,11 +7,7 @@ import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.items.CapabilityItemHandler;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static net.minecraft.util.Direction.DOWN;
 

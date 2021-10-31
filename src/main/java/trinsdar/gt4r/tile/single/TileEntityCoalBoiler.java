@@ -2,7 +2,6 @@ package trinsdar.gt4r.tile.single;
 
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.TileEntityMachine;
-import net.minecraftforge.common.util.LazyOptional;
 import trinsdar.gt4r.machine.CoalBoilerFluidHandler;
 import trinsdar.gt4r.machine.CoalBoilerRecipeHandler;
 

@@ -1,6 +1,5 @@
 package trinsdar.gt4r.block;
 
-import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.texture.Texture;
 import net.minecraft.block.Block;
 

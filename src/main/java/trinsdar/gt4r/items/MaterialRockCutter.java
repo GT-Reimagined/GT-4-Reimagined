@@ -1,50 +1,24 @@
 package trinsdar.gt4r.items;
 
-import com.google.common.collect.ImmutableSet;
-import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.Ref;
-import muramasa.antimatter.capability.energy.ItemEnergyHandler;
-import muramasa.antimatter.item.ItemBasic;
 import muramasa.antimatter.material.Material;
-import muramasa.antimatter.registration.IAntimatterObject;
-import muramasa.antimatter.registration.IModelProvider;
-import muramasa.antimatter.registration.ITextureProvider;
-import muramasa.antimatter.texture.Texture;
 import muramasa.antimatter.tool.AntimatterToolType;
-import muramasa.antimatter.tool.IAntimatterTool;
 import muramasa.antimatter.tool.MaterialTool;
-import muramasa.antimatter.util.Utils;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTier;
-import net.minecraft.item.Items;
-import net.minecraft.item.ToolItem;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ToolType;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.common.util.LazyOptional;
-import tesseract.api.capability.TesseractGTCapability;
 
 import javax.annotation.Nullable;
-
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
-import java.util.function.Consumer;
 
-import static muramasa.antimatter.Data.NULL;
 import static trinsdar.gt4r.data.Materials.Diamond;
 import static trinsdar.gt4r.data.Materials.Titanium;
 

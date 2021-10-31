@@ -1,6 +1,5 @@
 package trinsdar.gt4r.block;
 
-import muramasa.antimatter.Antimatter;
 import muramasa.antimatter.machine.BlockMachine;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.Machine;
@@ -9,7 +8,6 @@ import muramasa.antimatter.registration.IColorHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootContext;
 import net.minecraft.loot.LootParameters;
@@ -22,10 +20,8 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import trinsdar.gt4r.machine.MaterialMachine;
 import trinsdar.gt4r.tile.single.TileEntityDrum;
-import trinsdar.gt4r.tile.single.TileEntitySapBag;
 
 import javax.annotation.Nullable;
-
 import java.util.List;
 
 import static muramasa.antimatter.Data.NULL;

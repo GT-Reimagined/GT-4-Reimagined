@@ -10,7 +10,6 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.util.IItemProvider;
 import net.minecraftforge.fluids.FluidStack;
 import trinsdar.gt4r.data.GT4RData;
-import trinsdar.gt4r.data.RecipeMaps;
 
 import static muramasa.antimatter.Data.DUST;
 import static trinsdar.gt4r.data.Materials.DistilledWater;

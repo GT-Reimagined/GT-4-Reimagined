@@ -1,7 +1,5 @@
 package trinsdar.gt4r.block;
 
-import com.google.common.collect.ImmutableList;
-import muramasa.antimatter.Antimatter;
 import muramasa.antimatter.datagen.builder.AntimatterBlockModelBuilder;
 import muramasa.antimatter.datagen.builder.DynamicConfigBuilder;
 import muramasa.antimatter.datagen.providers.AntimatterBlockStateProvider;
@@ -46,14 +44,12 @@ import trinsdar.gt4r.tile.TileEntityTypes;
 import trinsdar.gt4r.tile.single.TileEntitySapBag;
 
 import javax.annotation.Nullable;
-
-import java.util.Arrays;
 import java.util.List;
 
 import static com.google.common.collect.ImmutableMap.of;
 import static net.minecraft.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 import static net.minecraft.state.properties.BlockStateProperties.WATERLOGGED;
-import static net.minecraft.util.Direction.*;
+import static net.minecraft.util.Direction.getFacingFromVector;
 
 public class BlockSapBag  extends BlockDynamic implements IWaterLoggable {
     protected ModelConfig config = new ModelConfig();

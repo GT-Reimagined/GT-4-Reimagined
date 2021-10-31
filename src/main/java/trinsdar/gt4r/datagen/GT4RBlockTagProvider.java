@@ -2,18 +2,13 @@ package trinsdar.gt4r.datagen;
 
 import muramasa.antimatter.datagen.providers.AntimatterBlockTagProvider;
 import muramasa.antimatter.util.TagUtils;
-import muramasa.antimatter.util.Utils;
-import net.minecraft.block.Blocks;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import trinsdar.gt4r.data.GT4RData;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.tags.BlockTags;
 
 import static trinsdar.gt4r.data.GT4RData.*;
-import static trinsdar.gt4r.data.Materials.HULL;
-import static trinsdar.gt4r.data.Materials.Titanium;
-import static trinsdar.gt4r.data.Materials.Tungsten;
 
 public class GT4RBlockTagProvider extends AntimatterBlockTagProvider {
 

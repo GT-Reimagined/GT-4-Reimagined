@@ -18,7 +18,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.UseAction;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -37,7 +36,6 @@ import trinsdar.gt4r.data.Attributes;
 import trinsdar.gt4r.entity.SpearEntity;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.UUID;
 
 public class MaterialSpear extends MaterialTool {

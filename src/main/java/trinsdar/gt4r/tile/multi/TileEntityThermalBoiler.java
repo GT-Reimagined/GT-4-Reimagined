@@ -1,9 +1,7 @@
 package trinsdar.gt4r.tile.multi;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import muramasa.antimatter.Ref;
 import muramasa.antimatter.capability.machine.MachineRecipeHandler;
-import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.machine.event.MachineEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.recipe.Recipe;
@@ -12,11 +10,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import trinsdar.gt4r.data.SlotTypes;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 public class TileEntityThermalBoiler extends TileEntityMultiMachine<TileEntityThermalBoiler> {

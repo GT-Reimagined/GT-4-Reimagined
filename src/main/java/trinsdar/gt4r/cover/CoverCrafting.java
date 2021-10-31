@@ -1,8 +1,11 @@
 package trinsdar.gt4r.cover;
 
+import muramasa.antimatter.Data;
 import muramasa.antimatter.capability.ICoverHandler;
 import muramasa.antimatter.cover.BaseCover;
 import muramasa.antimatter.cover.CoverFactory;
+import muramasa.antimatter.gui.GuiData;
+import muramasa.antimatter.gui.widget.BackgroundWidget;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.tool.AntimatterToolType;
 import net.minecraft.entity.player.PlayerEntity;
@@ -10,7 +13,6 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.network.NetworkHooks;
 import trinsdar.gt4r.Ref;

@@ -1,16 +1,12 @@
 package trinsdar.gt4r.tile.single;
 
-import muramasa.antimatter.Antimatter;
 import muramasa.antimatter.capability.machine.MachineCoverHandler;
-import muramasa.antimatter.capability.machine.MachineItemHandler;
 import muramasa.antimatter.cover.ICover;
 import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.tool.AntimatterToolType;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
@@ -22,7 +18,6 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
-import trinsdar.gt4r.data.SlotTypes;
 import trinsdar.gt4r.machine.MaterialMachine;
 
 import javax.annotation.Nonnull;

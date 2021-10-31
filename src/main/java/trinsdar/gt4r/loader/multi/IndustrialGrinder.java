@@ -6,7 +6,6 @@ import muramasa.antimatter.util.TagUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import trinsdar.gt4r.data.GT4RData;
-import trinsdar.gt4r.data.Materials;
 
 import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;

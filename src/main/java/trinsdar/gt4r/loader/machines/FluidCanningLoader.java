@@ -1,7 +1,6 @@
 package trinsdar.gt4r.loader.machines;
 
 import net.minecraft.fluid.FlowingFluid;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -12,7 +11,6 @@ import tesseract.api.capability.TesseractGTCapability;
 
 import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
 import static trinsdar.gt4r.data.GT4RData.*;
-import static trinsdar.gt4r.data.Materials.Biomass;
 import static trinsdar.gt4r.data.Materials.Mercury;
 import static trinsdar.gt4r.data.Materials.Propane;
 import static trinsdar.gt4r.data.Materials.SulfuricAcid;

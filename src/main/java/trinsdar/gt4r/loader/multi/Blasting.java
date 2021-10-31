@@ -2,21 +2,18 @@ package trinsdar.gt4r.loader.multi;
 
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.util.TagUtils;
-import muramasa.antimatter.util.Utils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.Tags;
-import org.lwjgl.system.CallbackI;
 import trinsdar.gt4r.Ref;
 
 import static muramasa.antimatter.Data.*;
+import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
 import static trinsdar.gt4r.data.CustomTags.DUSTS_COALS;
 import static trinsdar.gt4r.data.GT4RData.INT_CIRCUITS;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.BASIC_BLASTING;
 import static trinsdar.gt4r.data.RecipeMaps.BLASTING;
-import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.*;
 
 public class Blasting {
     public static int mixedOreYield = Ref.mixedOreYieldsTwoThirdsPureOre ? 2 : 3;

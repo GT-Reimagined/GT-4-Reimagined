@@ -3,29 +3,31 @@ package trinsdar.gt4r.cover;
 import muramasa.antimatter.capability.AntimatterCaps;
 import muramasa.antimatter.capability.ICoverHandler;
 import muramasa.antimatter.cover.CoverFactory;
-import muramasa.antimatter.cover.ICover;
+import muramasa.antimatter.gui.ButtonBody;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.util.Utils;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import trinsdar.gt4r.cover.redstone.CoverRedstoneMachineController;
-import trinsdar.gt4r.data.GT4RData;
 
 import javax.annotation.Nullable;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import static net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
+import static trinsdar.gt4r.gui.ButtonOverlays.*;
+import static trinsdar.gt4r.gui.ButtonOverlays.EXPORT_IMPORT;
+import static trinsdar.gt4r.gui.ButtonOverlays.EXPORT_IMPORT_CONDITIONAL;
+import static trinsdar.gt4r.gui.ButtonOverlays.EXPORT_IMPORT_INVERT_CONDITIONAL;
 
 public class CoverConveyor extends CoverBasicTransport {
 
@@ -33,6 +35,14 @@ public class CoverConveyor extends CoverBasicTransport {
 
     public CoverConveyor(ICoverHandler<?> source, @Nullable Tier tier, Direction side, CoverFactory factory) {
         super(source, tier, side, factory);
+        ButtonBody[][] overlays = new ButtonBody[][]{{IMPORT, IMPORT_CONDITIONAL, IMPORT_INVERT_CONDITIONAL, EXPORT, EXPORT_CONDITIONAL, EXPORT_INVERT_CONDITIONAL}, {IMPORT_EXPORT, IMPORT_EXPORT_CONDITIONAL, IMPORT_EXPORT_INVERT_CONDITIONAL, EXPORT_IMPORT, EXPORT_IMPORT_CONDITIONAL, EXPORT_IMPORT_INVERT_CONDITIONAL}};
+        addGuiCallback(t -> {
+            for (int x = 0; x < 6; x++){
+                for (int y = 0; y < 2; y++){
+                    t.addButton(35 + (x * 18), 25 + (y * 18), 16, 16, overlays[y][x]);
+                }
+            }
+        });
     }
 
     @Override

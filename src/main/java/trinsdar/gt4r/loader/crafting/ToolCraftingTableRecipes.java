@@ -5,7 +5,6 @@ import com.mojang.datafixers.util.Pair;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.pipe.PipeSize;
-
 import muramasa.antimatter.pipe.types.Cable;
 import muramasa.antimatter.pipe.types.Wire;
 import muramasa.antimatter.util.TagUtils;

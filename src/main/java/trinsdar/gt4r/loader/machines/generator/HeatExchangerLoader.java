@@ -4,8 +4,6 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraftforge.fluids.FluidStack;
-import org.lwjgl.system.CallbackI;
-import trinsdar.gt4r.data.Materials;
 
 import static muramasa.antimatter.Data.NUGGET;
 import static trinsdar.gt4r.data.Materials.*;

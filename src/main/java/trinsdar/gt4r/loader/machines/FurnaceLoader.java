@@ -12,8 +12,6 @@ import java.util.function.Consumer;
 
 import static muramasa.antimatter.Data.*;
 import static trinsdar.gt4r.data.Materials.*;
-import static trinsdar.gt4r.data.Materials.Quartz;
-import static trinsdar.gt4r.data.RecipeMaps.SMELTING;
 
 public class FurnaceLoader {
     public static void loadRecipes(Consumer<IFinishedRecipe> output, AntimatterRecipeProvider provider){

@@ -7,7 +7,6 @@ import muramasa.antimatter.recipe.Recipe;
 import muramasa.antimatter.tile.TileEntityMachine;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
-import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.data.RecipeMaps;
 import trinsdar.gt4r.tile.multi.TileEntityIndustrialBlastFurnace;
 
