@@ -1,7 +1,10 @@
 package trinsdar.gt4r.cover;
 
 import muramasa.antimatter.capability.AntimatterCaps;
-import muramasa.antimatter.cover.CoverStack;
+import muramasa.antimatter.capability.ICoverHandler;
+import muramasa.antimatter.cover.CoverFactory;
+import muramasa.antimatter.cover.ICover;
+import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.util.ResourceLocation;
@@ -14,6 +17,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
+import trinsdar.gt4r.cover.redstone.CoverRedstoneMachineController;
 import trinsdar.gt4r.data.GT4RData;
 
 import javax.annotation.Nullable;
@@ -27,20 +31,19 @@ public class CoverConveyor extends CoverBasicTransport {
 
     public static String ID = "conveyor_module";
 
-    public CoverConveyor() {
-        super();
-        register();
+    public CoverConveyor(ICoverHandler<?> source, @Nullable Tier tier, Direction side, CoverFactory factory) {
+        super(source, tier, side, factory);
     }
 
     @Override
-    public <T> boolean blocksInput(CoverStack<?> stack, Capability<T> cap, @Nullable Direction side) {
-        int mode = stack.getNbt().getInt("coverMode");
+    public <T> boolean blocksInput(Capability<T> cap, @Nullable Direction side) {
+        int mode = coverMode.ordinal();
         return mode == 0 || mode == 2 || mode == 4;
     }
 
     @Override
-    public <T> boolean blocksOutput(CoverStack<?> stack, Capability<T> cap, @Nullable Direction side) {
-        int mode = stack.getNbt().getInt("coverMode");
+    public <T> boolean blocksOutput(Capability<T> cap, @Nullable Direction side) {
+        int mode = coverMode.ordinal();
         return mode == 1 || mode == 3 || mode == 5;
     }
 
@@ -56,59 +59,55 @@ public class CoverConveyor extends CoverBasicTransport {
     }
 
     @Override
-    public void onUpdate(CoverStack<?> instance, Direction side) {
-        if (instance.getTile().getWorld().isRemote) return;
-        if (instance.getTile() == null)
+    public void onUpdate() {
+        if (handler.getTile().getWorld().isRemote) return;
+        if (handler.getTile() == null)
             return;
-        boolean isMachine = instance.getTile() instanceof TileEntityMachine;
-        BlockState state = instance.getTile().getWorld().getBlockState(instance.getTile().getPos().offset(side));
-        ImportExportMode mode = ImportExportMode.values()[instance.getNbt().getInt("coverMode")];
+        boolean isMachine = handler.getTile() instanceof TileEntityMachine;
+        BlockState state = handler.getTile().getWorld().getBlockState(handler.getTile().getPos().offset(side));
         //Drop into world.
-        if (state == Blocks.AIR.getDefaultState() && isMachine && mode.getName().startsWith("Export")) {
-            World world = instance.getTile().getWorld();
-            BlockPos pos = instance.getTile().getPos();
-            ItemStack stack = instance.getTile().getCapability(ITEM_HANDLER_CAPABILITY, side).map(Utils::extractAny).orElse(ItemStack.EMPTY);
+        if (state == Blocks.AIR.getDefaultState() && isMachine && coverMode.getName().startsWith("Export")) {
+            World world = handler.getTile().getWorld();
+            BlockPos pos = handler.getTile().getPos();
+            ItemStack stack = handler.getTile().getCapability(ITEM_HANDLER_CAPABILITY, side).map(Utils::extractAny).orElse(ItemStack.EMPTY);
             if (stack.isEmpty()) return;
             world.addEntity(new ItemEntity(world,pos.getX()+side.getXOffset(), pos.getY()+side.getYOffset(), pos.getZ()+side.getZOffset(),stack));
         }
         if (!(state.hasTileEntity())) return;
-        TileEntity adjTile = instance.getTile().getWorld().getTileEntity(instance.getTile().getPos().offset(side));
+        TileEntity adjTile = handler.getTile().getWorld().getTileEntity(handler.getTile().getPos().offset(side));
         if (adjTile == null) {
             return;
         }
-        if (canMove(instance, side)) {
-            if (mode.getName().startsWith("Export")) {
-                if (isMachine) instance.getTile().getCapability(ITEM_HANDLER_CAPABILITY, side).ifPresent(ih -> adjTile.getCapability(ITEM_HANDLER_CAPABILITY, side.getOpposite()).ifPresent(other -> Utils.transferItems(ih, other,true)));
+        if (canMove(side)) {
+            if (coverMode.getName().startsWith("Export")) {
+                if (isMachine) handler.getTile().getCapability(ITEM_HANDLER_CAPABILITY, side).ifPresent(ih -> adjTile.getCapability(ITEM_HANDLER_CAPABILITY, side.getOpposite()).ifPresent(other -> Utils.transferItems(ih, other,true)));
             } else {
-                instance.getTile().getCapability(ITEM_HANDLER_CAPABILITY, side).ifPresent(ih -> adjTile.getCapability(ITEM_HANDLER_CAPABILITY, side.getOpposite()).ifPresent(other -> Utils.transferItems(other, ih,true)));
+                handler.getTile().getCapability(ITEM_HANDLER_CAPABILITY, side).ifPresent(ih -> adjTile.getCapability(ITEM_HANDLER_CAPABILITY, side.getOpposite()).ifPresent(other -> Utils.transferItems(other, ih,true)));
             }
         }
     }
 
-    protected boolean canMove(CoverStack<?> instance, Direction side){
-        String name = getCoverMode(instance).getName();
+    protected boolean canMove(Direction side){
+        String name = getCoverMode().getName();
         if (name.contains("Conditional")){
-            boolean powered = instance.getTile().getCapability(AntimatterCaps.COVERABLE_HANDLER_CAPABILITY, side).map(h -> {
-                List<CoverStack<?>> list = new ArrayList<>();
+            boolean powered = handler.getTile().getCapability(AntimatterCaps.COVERABLE_HANDLER_CAPABILITY, side).map(h -> {
+                List<CoverRedstoneMachineController> list = new ArrayList<>();
                 for (Direction dir : Direction.values()){
-                    if (h.get(dir).getCover() == GT4RData.COVER_REDSTONE_MACHINE_CONTROLLER){
-                        list.add(h.get(dir));
+                    if (h.get(dir) instanceof CoverRedstoneMachineController){
+                        list.add((CoverRedstoneMachineController) h.get(dir));
                     }
                 }
                 int i = 0;
                 int j = 0;
-                for (CoverStack<?> coverStack : list){
+                for (CoverRedstoneMachineController coverStack : list){
                     j++;
-                    if (GT4RData.COVER_REDSTONE_MACHINE_CONTROLLER.isPowered(coverStack)){
+                    if (coverStack.isPowered()){
                         i++;
                     }
                 }
                 return i > 0 && i == j;
-            }).orElse(true);
-            if (name.contains("Invert")){
-                powered = !powered;
-            }
-            return powered;
+            }).orElse(false);
+            return name.contains("Invert") != powered;
         }
         return true;
     }

@@ -117,20 +117,11 @@ public class MaceratorLoader {
         MACERATING.RB().ii(RecipeIngredient.of(Items.CLAY, 1)).io(DUST.get(Clay, 2)).add(30, 4);
         MACERATING.RB().ii(RecipeIngredient.of(Items.BRICKS, 1)).io(DUST.get(Brick, 1)).add(400, 2);
         MACERATING.RB().ii(RecipeIngredient.of(ItemTags.LOGS, 1)).io(DUST.get(Wood, 6)).add(400, 2);
-        MACERATING.RB().ii(RecipeIngredient.of(Items.BASALT, 1)).io(DUST.get(Basalt, 1)).add(400, 2);
-        MACERATING.RB().ii(RecipeIngredient.of(Items.BLACKSTONE, 1)).io(DUST.get(Blackstone, 1)).add(400, 2);
-        MACERATING.RB().ii(RecipeIngredient.of(Items.GRANITE, 1)).io(DUST.get(Granite, 1)).add(400, 2);
-        MACERATING.RB().ii(RecipeIngredient.of(Items.DIORITE, 1)).io(DUST.get(Diorite, 1)).add(400, 2);
-        MACERATING.RB().ii(RecipeIngredient.of(Items.ANDESITE, 1)).io(DUST.get(Andesite, 1)).add(400, 2);
         MACERATING.RB().ii(RecipeIngredient.of(Items.PRISMARINE, 1)).io(DUST.get(Prismarine, 1)).add(400, 2);
         MACERATING.RB().ii(RecipeIngredient.of(Items.DARK_PRISMARINE, 1)).io(DUST.get(DarkPrismarine, 1)).add(400, 2);
-        AntimatterAPI.all(StoneType.class, Ref.ID, s -> {
+        AntimatterAPI.all(StoneType.class, s -> {
             if (s.getMaterial() == NULL || !s.getMaterial().has(DUST)) return;
-            MACERATING.RB().ii(RecipeIngredient.of(s.getState().getBlock().asItem(), 1)).io(DUST.get(s.getMaterial(), 1)).add(400, 2);
-        });
-        AntimatterAPI.all(StoneType.class, muramasa.antimatter.Ref.MOD_KJS, s -> {
-            if (s.getMaterial() == NULL || !s.getMaterial().has(DUST)) return;
-            MACERATING.RB().ii(RecipeIngredient.of(s.getState().getBlock().asItem(), 1)).io(DUST.get(s.getMaterial(), 1)).add(400, 2);
+            MACERATING.RB().ii(RecipeIngredient.of(s.getState().getBlock().asItem(), 1)).io(DUST.get((s.getMaterial() == BasaltVanilla ? Basalt : s.getMaterial()), 1)).add(400, 2);
         });
         if (AntimatterAPI.isModLoaded(Ref.MOD_CREATE)){
             MACERATING.RB().ii(RecipeIngredient.of(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(Ref.MOD_CREATE, "limestone")), 1)).io(DUST.get(Limestone, 1)).add(400, 2);

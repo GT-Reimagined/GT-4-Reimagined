@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.AntimatterConfig;
 import muramasa.antimatter.cover.BaseCover;
+import muramasa.antimatter.cover.CoverFactory;
 import muramasa.antimatter.item.ItemCover;
 import muramasa.antimatter.item.ItemMultiTextureBattery;
 import muramasa.antimatter.material.Material;
@@ -136,16 +137,24 @@ public class GT4RData {
         }
     }
 
-    public static final BaseCover COVER_CONVEYOR = new CoverConveyor();
-    public static final BaseCover COVER_PUMP = new CoverPump();
-    public static final BaseCover COVER_ITEM_TRANSPORT_VALVE = new CoverItemtransportValve();
-    public static final BaseCover COVER_FUSION_OUTPUT = new CoverFusionOutput();
-    public static final BaseCover COVER_FUSION_INPUT = new CoverFusionInput();
-    public static final BaseCover COVER_DYNAMO_OLD = new CoverDynamoOld("dynamo_old");
-    public static final BaseCover COVER_DRAIN = new CoverDrain();
-    public static final BaseCover COVER_STEAM_VENT = new CoverSteamVent();
-    public static final BaseCover COVER_CRAFTING = new CoverCrafting();
-    public static final CoverRedstoneMachineController COVER_REDSTONE_MACHINE_CONTROLLER = new CoverRedstoneMachineController();
+    public static final CoverFactory COVER_CONVEYOR = CoverFactory.builder(CoverConveyor::new).gui().item((a, b) ->
+            new ItemCover(Ref.ID, "conveyor_module").tip("Can be placed on machines as a cover")).addTextures(new Texture(Ref.ID, "block/cover/conveyor_module")).build(Ref.ID, "conveyor_module");
+    public static final CoverFactory COVER_PUMP = CoverFactory.builder(CoverPump::new).gui().item((a, b) ->
+            new ItemCover(Ref.ID, "pump_module").tip("Can be placed on machines as a cover")).addTextures(new Texture(Ref.ID, "block/cover/pump_module")).build(Ref.ID, "pump_module");
+    public static final CoverFactory COVER_FUSION_OUTPUT = CoverFactory.builder(CoverFusionOutput::new)
+            .addTextures(new Texture(Ref.ID, "block/cover/fusion_output")).build(Ref.ID, "fusion_output");
+    public static final CoverFactory COVER_FUSION_INPUT = CoverFactory.builder(CoverFusionInput::new)
+            .addTextures(new Texture(Ref.ID, "block/cover/fusion_input")).build(Ref.ID, "fusion_input");
+    public static final CoverFactory COVER_DYNAMO_OLD = CoverFactory.builder(CoverDynamoOld::new)
+            .addTextures(new Texture(Ref.ID, "block/cover/dynamo")).build(Ref.ID, "dynamo_old");
+    public static final CoverFactory COVER_DRAIN = CoverFactory.builder(CoverDrain::new).item((a, b) ->
+            new ItemCover(Ref.ID, "drain").tip("Can be placed on machines as a cover")).addTextures(new Texture(Ref.ID, "block/cover/drain")).build(Ref.ID, "drain");
+    public static final CoverFactory COVER_STEAM_VENT = CoverFactory.builder(CoverSteamVent::new)
+            .addTextures(new Texture(Ref.ID, "block/cover/output")).build(Ref.ID, "steam_vent");;
+    public static final CoverFactory COVER_CRAFTING = CoverFactory.builder(CoverCrafting::new).gui().item((a, b) ->
+            new ItemCraftingModule().tip("Can be placed on machines as a cover")).addTextures(new Texture(Ref.ID, "block/cover/crafting_module")).build(Ref.ID, "crafting_module");
+    public static final CoverFactory COVER_REDSTONE_MACHINE_CONTROLLER = CoverFactory.builder(CoverRedstoneMachineController::new).item((a, b) ->
+            new ItemCover(Ref.ID, "redstone_machine_controller").tip("Can be placed on machines as a cover")).addTextures(new Texture(Ref.ID, "block/cover/redstone_machine_controller")).build(Ref.ID, "redstone_machine_controller");
 
     public static ItemBasic<?> StickyResin = new ItemBasic<>(Ref.ID, "sticky_resin");
     public static ItemBasic<?> Plantball = new ItemBasic<>(Ref.ID, "plantball");
@@ -163,12 +172,11 @@ public class GT4RData {
     public static ItemPowerUnit RockCutterPowerUnit = new ItemPowerUnit(Ref.ID, "rock_cutter_power_unit", Aluminium);
 
     public static ItemBasic<?> ComputerMonitor = new ItemBasic<>(Ref.ID, "computer_monitor").tip("Can be placed on machines as a cover");
-    public static ItemCover ConveyorModule = new ItemCover(Ref.ID, COVER_CONVEYOR.getId()).tip("Can be placed on machines as a cover");
-    public static ItemCover CraftingModule = new ItemCraftingModule().tip("Can be placed on machines as a cover");
-    public static ItemCover Drain = new ItemCover(Ref.ID, "drain").tip("Can be placed on machines as a cover");
-    public static ItemBasic<?> ItemTransportValve = new ItemCover(Ref.ID, "item_transport_valve").tip("Can be placed on machines as a cover");
-    public static ItemCover PumpModule = new ItemCover(Ref.ID, COVER_PUMP.getId()).tip("Can be placed on machines as a cover");
-    public static ItemCover RedstoneMachineController = new ItemCover(Ref.ID, COVER_REDSTONE_MACHINE_CONTROLLER.getId()).tip("Can be placed on machines as a cover");
+    public static ItemCover ConveyorModule = AntimatterAPI.get(ItemCover.class, COVER_CONVEYOR.getId(), Ref.ID);
+    public static ItemCover CraftingModule = AntimatterAPI.get(ItemCraftingModule.class, COVER_CRAFTING.getId(), Ref.ID);
+    public static ItemCover Drain = AntimatterAPI.get(ItemCover.class, COVER_DRAIN.getId(), Ref.ID);
+    public static ItemCover PumpModule = AntimatterAPI.get(ItemCover.class, COVER_PUMP.getId(), Ref.ID);
+    public static ItemCover RedstoneMachineController = AntimatterAPI.get(ItemCover.class, COVER_REDSTONE_MACHINE_CONTROLLER.getId(), Ref.ID);
     public static ItemBasic<?> Shutter = new ItemBasic<>(Ref.ID, "shutter").tip("Can be placed on machines as a cover");
 
     public static ItemFluidCell CellTin = new ItemFluidCell(Ref.ID,Tin, 1000);

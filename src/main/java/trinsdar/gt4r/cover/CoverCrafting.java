@@ -1,7 +1,9 @@
 package trinsdar.gt4r.cover;
 
+import muramasa.antimatter.capability.ICoverHandler;
 import muramasa.antimatter.cover.BaseCover;
-import muramasa.antimatter.cover.CoverStack;
+import muramasa.antimatter.cover.CoverFactory;
+import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.tool.AntimatterToolType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -16,9 +18,10 @@ import trinsdar.gt4r.Ref;
 import javax.annotation.Nullable;
 
 public class CoverCrafting extends BaseCover {
-    public CoverCrafting() {
-        super();
-        register();
+
+
+    public CoverCrafting(ICoverHandler<?> source, @Nullable Tier tier, Direction side, CoverFactory factory) {
+        super(source, tier, side, factory);
     }
 
     @Override
@@ -37,22 +40,22 @@ public class CoverCrafting extends BaseCover {
     }
 
     @Override
-    public boolean openGui(CoverStack<?> instance, PlayerEntity player, Direction side) {
+    public boolean openGui(PlayerEntity player, Direction side) {
         if (!hasGui()) return false;
-        NetworkHooks.openGui((ServerPlayerEntity) player, instance, packetBuffer -> {
-            packetBuffer.writeBlockPos(instance.getTile().getPos());
+        NetworkHooks.openGui((ServerPlayerEntity) player, this, packetBuffer -> {
+            packetBuffer.writeBlockPos(handler.getTile().getPos());
             packetBuffer.writeInt(side.getIndex());
         });
         return true;
     }
 
     @Override
-    public boolean onInteract(CoverStack<?> instance, PlayerEntity player, Hand hand, Direction side, @Nullable AntimatterToolType type) {
-        return openGui(instance, player, side);
+    public boolean onInteract(PlayerEntity player, Hand hand, Direction side, @Nullable AntimatterToolType type) {
+        return openGui(player, side);
     }
 
     @Override
-    public <T> boolean blocksCapability(CoverStack<?> stack, Capability<T> cap, @Nullable Direction side) {
+    public <T> boolean blocksCapability(Capability<T> cap, @Nullable Direction side) {
         return true;
     }
 

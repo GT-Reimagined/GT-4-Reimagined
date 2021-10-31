@@ -1,7 +1,6 @@
 package trinsdar.gt4r.items;
 
 import muramasa.antimatter.capability.IGuiHandler;
-import muramasa.antimatter.cover.CoverStack;
 import muramasa.antimatter.item.ItemCover;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -29,7 +28,7 @@ import javax.annotation.Nullable;
 
 public class ItemCraftingModule extends ItemCover implements INamedContainerProvider {
     public ItemCraftingModule() {
-        super(Ref.ID, GT4RData.COVER_CRAFTING.getId());
+        super(Ref.ID, "crafting_module");
     }
 
     @Override

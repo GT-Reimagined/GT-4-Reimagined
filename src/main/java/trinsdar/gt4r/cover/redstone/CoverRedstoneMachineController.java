@@ -1,12 +1,14 @@
 package trinsdar.gt4r.cover.redstone;
 
+import muramasa.antimatter.capability.ICoverHandler;
 import muramasa.antimatter.cover.BaseCover;
-import muramasa.antimatter.cover.CoverStack;
+import muramasa.antimatter.cover.CoverFactory;
 import muramasa.antimatter.cover.ICoverMode;
 import muramasa.antimatter.cover.ICoverModeHandler;
 import muramasa.antimatter.gui.event.GuiEvent;
 import muramasa.antimatter.gui.event.IGuiEvent;
 import muramasa.antimatter.machine.MachineState;
+import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.tile.TileEntityMachine;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Direction;
@@ -14,10 +16,16 @@ import net.minecraft.util.ResourceLocation;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.cover.RedstoneMode;
 
+import javax.annotation.Nullable;
+
 public class CoverRedstoneMachineController extends BaseCover implements ICoverModeHandler {
-    public CoverRedstoneMachineController(){
-        super();
-        register();
+
+    protected RedstoneMode coverMode;
+    protected int redstonePower;
+    
+    public CoverRedstoneMachineController(ICoverHandler<?> source, @Nullable Tier tier, Direction side, CoverFactory factory) {
+        super(source, tier, side, factory);
+        this.coverMode = RedstoneMode.NORMAL;
     }
 
     @Override
@@ -31,52 +39,48 @@ public class CoverRedstoneMachineController extends BaseCover implements ICoverM
     }
 
     @Override
-    public void onRemove(CoverStack<?> instance, Direction side) {
-        if (instance.getTile() instanceof TileEntityMachine){
-            TileEntityMachine<?> machine = (TileEntityMachine<?>) instance.getTile();
+    public void onRemove() {
+        if (handler.getTile() instanceof TileEntityMachine){
+            TileEntityMachine<?> machine = (TileEntityMachine<?>) handler.getTile();
             if (machine.getMachineState() == MachineState.DISABLED){
                 machine.toggleMachine();
             }
         }
     }
 
-    public boolean isPowered(CoverStack<?> instance){
-        ICoverMode coverMode = getCoverMode(instance);
-        int redstone = instance.getNbt().getInt("redstonePower");
+    public boolean isPowered(){
         if (coverMode == RedstoneMode.NORMAL){
-            return redstone > 0;
+            return redstonePower > 0;
         }
         if (coverMode == RedstoneMode.INVERTED){
-            return redstone == 0;
+            return redstonePower == 0;
         }
         return false;
     }
 
     @Override
-    public void onUpdate(CoverStack<?> instance, Direction side) {
-        if (instance.getTile() instanceof TileEntityMachine){
-            TileEntityMachine<?> machine = (TileEntityMachine<?>) instance.getTile();
-            ICoverMode coverMode = getCoverMode(instance);
-            int redstone = instance.getNbt().getInt("redstonePower");
+    public void onUpdate() {
+        if (handler.getTile() instanceof TileEntityMachine){
+            TileEntityMachine<?> machine = (TileEntityMachine<?>) handler.getTile();
             if (machine.getMachineState() != MachineState.DISABLED){
                 if (coverMode == RedstoneMode.NO_WORK){
                     machine.toggleMachine();
                 } else if (coverMode == RedstoneMode.NORMAL){
-                    if (redstone == 0){
+                    if (redstonePower == 0){
                         machine.toggleMachine();
                     }
                 } else {
-                    if (redstone > 0){
+                    if (redstonePower > 0){
                         machine.toggleMachine();
                     }
                 }
             } else {
                 if (coverMode == RedstoneMode.NORMAL){
-                    if (redstone > 0){
+                    if (redstonePower > 0){
                         machine.toggleMachine();
                     }
                 } else if (coverMode == RedstoneMode.INVERTED){
-                    if (redstone == 0){
+                    if (redstonePower == 0){
                         machine.toggleMachine();
                     }
                 }
@@ -86,21 +90,20 @@ public class CoverRedstoneMachineController extends BaseCover implements ICoverM
     }
 
     @Override
-    public void onBlockUpdate(CoverStack<?> instance, Direction side) {
-        int redstonePower = instance.getTile().getWorld().getRedstonePower(instance.getTile().getPos().offset(side), side);
-        instance.getNbt().putInt("redstonePower", redstonePower);
+    public void onBlockUpdate() {
+        redstonePower = handler.getTile().getWorld().getRedstonePower(handler.getTile().getPos().offset(side), side);
     }
 
     @Override
-    public void onGuiEvent(CoverStack<?> stack, IGuiEvent event, PlayerEntity playerEntity, int... data) {
+    public void onGuiEvent(IGuiEvent event, PlayerEntity playerEntity, int... data) {
         if (event == GuiEvent.EXTRA_BUTTON){
-            stack.getNbt().putInt("coverMode", Math.min(data[0], 2));
+            coverMode = RedstoneMode.values()[Math.min(data[0], 2)];
         }
     }
 
     @Override
-    public ICoverMode getCoverMode(CoverStack<?> stack) {
-        return RedstoneMode.values()[stack.getNbt().getInt("coverMode")];
+    public ICoverMode getCoverMode() {
+        return coverMode;
     }
 
     @Override

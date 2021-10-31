@@ -1,13 +1,18 @@
 package trinsdar.gt4r.cover;
 
 import muramasa.antimatter.capability.AntimatterCaps;
-import muramasa.antimatter.cover.CoverStack;
+import muramasa.antimatter.capability.ICoverHandler;
+import muramasa.antimatter.cover.CoverFactory;
+import muramasa.antimatter.cover.ICover;
+import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
+import sun.tools.asm.Cover;
+import trinsdar.gt4r.cover.redstone.CoverRedstoneMachineController;
 import trinsdar.gt4r.data.GT4RData;
 
 import javax.annotation.Nullable;
@@ -20,11 +25,10 @@ public class CoverPump extends CoverBasicTransport {
 
     public static String ID = "pump_module";
 
-
-    public CoverPump() {
-        super();
-        register();
+    public CoverPump(ICoverHandler<?> source, @Nullable Tier tier, Direction side, CoverFactory factory) {
+        super(source, tier, side, factory);
     }
+
 
     @Override
     public String getId() {
@@ -32,51 +36,51 @@ public class CoverPump extends CoverBasicTransport {
     }
 
     @Override
-    public <T> boolean blocksInput(CoverStack<?> stack, Capability<T> cap, @Nullable Direction side) {
-        int mode = stack.getNbt().getInt("coverMode");
+    public <T> boolean blocksInput(Capability<T> cap, @Nullable Direction side) {
+        int mode = coverMode.ordinal();
         return mode == 0 || mode == 2 || mode == 4;
     }
 
     @Override
-    public <T> boolean blocksOutput(CoverStack<?> stack, Capability<T> cap, @Nullable Direction side) {
-        int mode = stack.getNbt().getInt("coverMode");
+    public <T> boolean blocksOutput(Capability<T> cap, @Nullable Direction side) {
+        int mode = coverMode.ordinal();
         return mode == 1 || mode == 3 || mode == 5;
     }
 
 
     @Override
-    public void onUpdate(CoverStack<?> instance, Direction side) {
-        if (instance.getTile().getWorld().isRemote) return;
-        if (instance.getTile() == null) return;
-        TileEntity adjTile = instance.getTile().getWorld().getTileEntity(instance.getTile().getPos().offset(side));
+    public void onUpdate() {
+        if (handler.getTile().getWorld().isRemote) return;
+        if (handler.getTile() == null) return;
+        TileEntity adjTile = handler.getTile().getWorld().getTileEntity(handler.getTile().getPos().offset(side));
         if (adjTile == null) return;
-        TileEntity from = instance.getTile();
+        TileEntity from = handler.getTile();
         TileEntity to = adjTile;
-        if (getCoverMode(instance).getName().startsWith("Input")){
+        if (getCoverMode().getName().startsWith("Input")){
             from = adjTile;
-            to = instance.getTile();
+            to = handler.getTile();
         }
         TileEntity finalTo = to;
-        if (canMove(instance, side)) {
+        if (canMove(side)) {
             from.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side).ifPresent(ih -> finalTo.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side.getOpposite()).ifPresent(other -> Utils.transferFluids(ih, other, Integer.MAX_VALUE)));
         }
     }
 
-    protected boolean canMove(CoverStack<?> instance, Direction side){
-        String name = getCoverMode(instance).getName();
+    protected boolean canMove(Direction side){
+        String name = getCoverMode().getName();
         if (name.contains("Conditional")){
-            boolean powered = instance.getTile().getCapability(AntimatterCaps.COVERABLE_HANDLER_CAPABILITY, side).map(h -> {
-                List<CoverStack<?>> list = new ArrayList<>();
+            boolean powered = handler.getTile().getCapability(AntimatterCaps.COVERABLE_HANDLER_CAPABILITY, side).map(h -> {
+                List<CoverRedstoneMachineController> list = new ArrayList<>();
                 for (Direction dir : Direction.values()){
-                    if (h.get(dir).getCover() == GT4RData.COVER_REDSTONE_MACHINE_CONTROLLER){
-                        list.add(h.get(dir));
+                    if (h.get(dir) instanceof CoverRedstoneMachineController){
+                        list.add((CoverRedstoneMachineController) h.get(dir));
                     }
                 }
                 int i = 0;
                 int j = 0;
-                for (CoverStack<?> coverStack : list){
+                for (CoverRedstoneMachineController coverStack : list){
                     j++;
-                    if (GT4RData.COVER_REDSTONE_MACHINE_CONTROLLER.isPowered(coverStack)){
+                    if (coverStack.isPowered()){
                         i++;
                     }
                 }

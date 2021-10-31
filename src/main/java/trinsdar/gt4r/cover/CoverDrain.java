@@ -1,7 +1,9 @@
 package trinsdar.gt4r.cover;
 
+import muramasa.antimatter.capability.ICoverHandler;
 import muramasa.antimatter.cover.BaseCover;
-import muramasa.antimatter.cover.CoverStack;
+import muramasa.antimatter.cover.CoverFactory;
+import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.tile.pipe.TileEntityFluidPipe;
 import muramasa.antimatter.tile.pipe.TileEntityPipe;
 import muramasa.antimatter.util.Utils;
@@ -25,15 +27,16 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import trinsdar.gt4r.Ref;
 
+import javax.annotation.Nullable;
+
 import static net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE;
 import static net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.SIMULATE;
 
 public class CoverDrain extends BaseCover {
     public static String ID = "drain";
 
-    public CoverDrain() {
-        super();
-        register();
+    public CoverDrain(ICoverHandler<?> source, @Nullable Tier tier, Direction side, CoverFactory factory) {
+        super(source, tier, side, factory);
     }
 
     @Override
@@ -42,8 +45,8 @@ public class CoverDrain extends BaseCover {
     }
 
     @Override
-    public void onUpdate(CoverStack<?> instance, Direction side) {
-        TileEntity tile = instance.getTile();
+    public void onUpdate() {
+        TileEntity tile = handler.getTile();
         if (tile == null) {
             return;
         }
