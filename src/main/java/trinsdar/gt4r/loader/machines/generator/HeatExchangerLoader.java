@@ -6,6 +6,7 @@ import net.minecraft.item.Items;
 import net.minecraftforge.fluids.FluidStack;
 
 import static muramasa.antimatter.Data.Copper;
+import static muramasa.antimatter.Data.Lava;
 import static muramasa.antimatter.Data.NUGGET;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.HOT_FUELS;

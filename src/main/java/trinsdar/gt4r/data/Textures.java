@@ -9,23 +9,6 @@ import trinsdar.gt4r.Ref;
 
 public class Textures {
 
-    public static TextureSet DULL = new TextureSet(Ref.ID, "dull");
-    public static TextureSet METALLIC = new TextureSet(Ref.ID, "metallic");
-    public static TextureSet SHINY = new TextureSet(Ref.ID, "shiny");
-    public static TextureSet ROUGH = new TextureSet(Ref.ID, "rough");
-    public static TextureSet MAGNETIC = new TextureSet(Ref.ID, "magnetic");
-    public static TextureSet DIAMOND = new TextureSet(Ref.ID, "diamond");
-    public static TextureSet RUBY = new TextureSet(Ref.ID, "ruby");
-    public static TextureSet LAPIS = new TextureSet(Ref.ID, "lapis");
-    public static TextureSet GEM_V = new TextureSet(Ref.ID, "gem_v");
-    public static TextureSet GARNET = new TextureSet(Ref.ID, "garnet");
-    public static TextureSet QUARTZ = new TextureSet(Ref.ID, "quartz");
-    public static TextureSet FINE = new TextureSet(Ref.ID, "fine");
-    public static TextureSet FLINT = new TextureSet(Ref.ID, "flint");
-    public static TextureSet LIGNITE = new TextureSet(Ref.ID, "lignite");
-    public static TextureSet WOOD = new TextureSet(Ref.ID, "wood");
-    public static TextureSet REDSTONE = new TextureSet(Ref.ID, "redstone");
-
     public static final Texture ROTOR = new Texture(Ref.ID, "material/rotor");
     public static final Texture MACHINE_BASE = new Texture(Ref.ID, "block/machine/base/machine_base");
     public static final Texture BRONZE_MACHINE_BASE = new Texture(Ref.ID, "block/machine/base/tiers/bronze");

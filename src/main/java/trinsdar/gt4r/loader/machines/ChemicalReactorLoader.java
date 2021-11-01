@@ -5,8 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraftforge.fluids.FluidStack;
 
-import static muramasa.antimatter.Data.DUST;
-import static muramasa.antimatter.Data.DUST_TINY;
+import static muramasa.antimatter.Data.*;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.CHEMICAL_REACTING;
 

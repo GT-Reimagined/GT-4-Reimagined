@@ -5,7 +5,6 @@ import net.minecraft.item.ItemStack;
 
 import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
-import static trinsdar.gt4r.data.Materials.Water;
 import static trinsdar.gt4r.data.RecipeMaps.ORE_WASHING;
 
 public class WasherLoader {

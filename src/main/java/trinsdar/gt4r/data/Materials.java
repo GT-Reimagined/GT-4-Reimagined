@@ -25,10 +25,8 @@ import static muramasa.antimatter.fluid.AntimatterFluid.OVERLAY_TEXTURE;
 import static muramasa.antimatter.material.Element.*;
 import static muramasa.antimatter.material.MaterialTag.ELEC;
 import static muramasa.antimatter.material.MaterialTag.RUBBERTOOLS;
-import static muramasa.antimatter.material.TextureSet.NONE;
+import static muramasa.antimatter.material.TextureSet.*;
 import static net.minecraft.item.ItemTier.IRON;
-import static net.minecraft.item.ItemTier.NETHERITE;
-import static trinsdar.gt4r.data.Textures.*;
 
 public class Materials {
 
@@ -363,31 +361,11 @@ public class Materials {
         ELEC.add(ELEC90.all().toArray(new Material[0]));
         ELEC.add(ELEC120.all().toArray(new Material[0]));
 
-        NUGGET.forceOverride(Iron, Items.IRON_NUGGET);
-        NUGGET.forceOverride(Gold, Items.GOLD_NUGGET);
-        INGOT.forceOverride(Iron, Items.IRON_INGOT);
-        INGOT.forceOverride(Gold, Items.GOLD_INGOT);
-        INGOT.forceOverride(Netherite, Items.NETHERITE_INGOT);
-        DUST.forceOverride(Redstone, Items.REDSTONE);
         DUST.forceOverride(Glowstone, Items.GLOWSTONE_DUST);
         DUST.forceOverride(Blaze, Items.BLAZE_POWDER);
         DUST.forceOverride(Sugar, Items.SUGAR);
         GEM.forceOverride(Flint, Items.FLINT);
-        GEM.forceOverride(Diamond, Items.DIAMOND);
-        GEM.forceOverride(Emerald, Items.EMERALD);
-        GEM.forceOverride(Lapis, Items.LAPIS_LAZULI);
-        GEM.forceOverride(Coal, Items.COAL);
         GEM.forceOverride(Charcoal, Items.CHARCOAL);
-        GEM.forceOverride(EnderEye, Items.ENDER_EYE);
-        GEM.forceOverride(EnderPearl, Items.ENDER_PEARL);
-
-
-        BLOCK.forceOverride(Iron, Items.IRON_BLOCK);
-        BLOCK.forceOverride(Gold, Items.GOLD_BLOCK);
-        BLOCK.forceOverride(Diamond, Items.DIAMOND_BLOCK);
-        BLOCK.forceOverride(Emerald, Items.EMERALD_BLOCK);
-        BLOCK.forceOverride(Lapis, Items.LAPIS_BLOCK);
-        BLOCK.forceOverride(Netherite, Items.NETHERITE_BLOCK);
 
         ROD.forceOverride(Blaze, Items.BLAZE_ROD);
         ROD.forceOverride(Bone, Items.BONE);
