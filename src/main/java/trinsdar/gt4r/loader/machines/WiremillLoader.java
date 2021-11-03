@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import trinsdar.gt4r.data.GT4RData;
 
+import static muramasa.antimatter.Data.Charcoal;
 import static muramasa.antimatter.Data.Coal;
 import static muramasa.antimatter.Data.DUST;
 import static muramasa.antimatter.Data.INGOT;

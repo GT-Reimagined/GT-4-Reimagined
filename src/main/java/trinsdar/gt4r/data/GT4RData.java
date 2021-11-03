@@ -57,10 +57,7 @@ import trinsdar.gt4r.tree.BlockRubberSapling;
 import java.util.HashSet;
 import java.util.Set;
 
-import static muramasa.antimatter.Data.Basalt;
-import static muramasa.antimatter.Data.Copper;
-import static muramasa.antimatter.Data.Gold;
-import static muramasa.antimatter.Data.Netherite;
+import static muramasa.antimatter.Data.*;
 import static trinsdar.gt4r.data.Materials.*;
 
 public class GT4RData {

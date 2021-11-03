@@ -42,6 +42,8 @@ public class GT4RBlockLootProvider extends AntimatterBlockLootProvider {
         this.add(GT4RData.RUBBER_LOG);
         this.add(GT4RData.RUBBER_SAPLING);
         this.add(GT4RData.SAP_BAG);
+        AntimatterAPI.all(BlockOre.class, this::addToFortune);
+        AntimatterAPI.all(BlockOreStone.class, this::add);
     }
 
     @Override
@@ -74,16 +76,12 @@ public class GT4RBlockLootProvider extends AntimatterBlockLootProvider {
         super.addToFortune(block);
     }
 
-    @Override
-    protected void add(Block block) {
+    protected void addToStone(Block block) {
         if (block instanceof BlockOreStone)
             if (((BlockOreStone) block).getMaterial() == Salt || ((BlockOreStone) block).getMaterial() == RockSalt) {
                 tables.put(block, b -> droppingItemWithFortune(b, DUST.get(((BlockOreStone) block).getMaterial())));
-                return;
             } else if (((BlockOreStone) block).getMaterial() == Coal){
                 tables.put(block, b -> droppingItemWithFortune(b, GEM.get(((BlockOreStone) block).getMaterial())));
-                return;
             }
-        tables.put(block, this::build);
     }
 }

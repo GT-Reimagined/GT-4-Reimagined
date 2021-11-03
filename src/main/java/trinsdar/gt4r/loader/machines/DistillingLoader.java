@@ -4,6 +4,7 @@ import net.minecraft.fluid.Fluids;
 import net.minecraftforge.fluids.FluidStack;
 
 import static muramasa.antimatter.Data.DUST_SMALL;
+import static muramasa.antimatter.Data.Sugar;
 import static trinsdar.gt4r.data.GT4RData.INT_CIRCUITS;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.BASIC_DISTILLING;

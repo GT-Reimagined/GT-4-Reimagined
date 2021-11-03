@@ -7,11 +7,11 @@ import trinsdar.gt4r.Ref;
 
 import java.util.function.Consumer;
 
+import static muramasa.antimatter.Data.Flint;
 import static muramasa.antimatter.Data.GEM;
 import static muramasa.antimatter.datagen.providers.AntimatterAdvancementProvider.buildRootAdvancement;
 import static muramasa.antimatter.datagen.providers.AntimatterAdvancementProvider.getLoc;
 import static muramasa.antimatter.util.Utils.hasItem;
-import static trinsdar.gt4r.data.Materials.Flint;
 
 public class ProgressionAdvancements implements Consumer<Consumer<Advancement>> {
 

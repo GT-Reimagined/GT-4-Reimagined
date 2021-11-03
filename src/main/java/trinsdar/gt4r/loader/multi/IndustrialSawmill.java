@@ -12,9 +12,9 @@ import net.minecraftforge.fluids.FluidStack;
 import trinsdar.gt4r.data.GT4RData;
 
 import static muramasa.antimatter.Data.DUST;
+import static muramasa.antimatter.Data.Wood;
 import static trinsdar.gt4r.data.Materials.DistilledWater;
 import static trinsdar.gt4r.data.Materials.Lubricant;
-import static trinsdar.gt4r.data.Materials.Wood;
 import static trinsdar.gt4r.data.RecipeMaps.INDUSTRIAL_SAWMILLING;
 
 public class IndustrialSawmill {
