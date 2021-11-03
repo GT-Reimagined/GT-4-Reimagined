@@ -25,6 +25,7 @@ import java.util.BitSet;
 import java.util.List;
 import java.util.Random;
 
+import static muramasa.antimatter.Data.Coal;
 import static muramasa.antimatter.Data.ORE_STONE;
 import static trinsdar.gt4r.worldgen.GT4RConfiguredFeatures.*;
 
@@ -244,7 +245,7 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
                                             bitset.set(l2);
                                             blockpos$mutable.setPos(i2, j2, k2);
                                             Material mat = Material.get(config.getPrimary());
-                                            if (mat.has(ORE_STONE)){
+                                            if (mat.has(ORE_STONE) && mat != Coal){
                                                 StoneType stone = WorldGenHelper.STONE_MAP.get(worldIn.getBlockState(blockpos$mutable));
                                                 if (stone == null) continue;
                                                 if (WorldGenHelper.setState(worldIn, blockpos$mutable, ORE_STONE.get().get(mat).asState())) {
