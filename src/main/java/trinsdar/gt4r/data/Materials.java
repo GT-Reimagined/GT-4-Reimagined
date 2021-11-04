@@ -76,7 +76,6 @@ public class Materials {
     public static MaterialTypeItem<?> HAMMER_HEAD = new MaterialTypeItem<>("hammer_head", 2, true, muramasa.antimatter.Ref.U * 6);
     public static MaterialTypeItem<?> FILE_HEAD = new MaterialTypeItem<>("file_head", 2, true, muramasa.antimatter.Ref.U * 2);
     public static MaterialTypeItem<?> SAW_HEAD = new MaterialTypeItem<>("saw_head", 2, true, muramasa.antimatter.Ref.U * 2);
-    public static MaterialTag FLINT_TAG = new MaterialTag("flint");
     public static MaterialTag SEMIFLUID = new MaterialTag("semifluid");
     public static MaterialTag CABINET = new MaterialTag("cabinet");
     public static MaterialTag WORKBENCH = new MaterialTag("workbench");
@@ -351,7 +350,7 @@ public class Materials {
             hull.flags(HULL);
         }
         SEMIFLUID.add(Biomass, Creosote, FishOil, Oil, SeedOil);
-        FLINT_TAG.add(Flint);
+        MaterialTag.FLINT.add(Flint);
 
         ELEC.add(ELEC30.all().toArray(new Material[0]));
         ELEC.add(ELEC60.all().toArray(new Material[0]));
