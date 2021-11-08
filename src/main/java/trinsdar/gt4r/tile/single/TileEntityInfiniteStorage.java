@@ -4,6 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import muramasa.antimatter.capability.EnergyHandler;
 import muramasa.antimatter.capability.machine.MachineEnergyHandler;
 import muramasa.antimatter.gui.GuiInstance;
+import muramasa.antimatter.gui.ICanSyncData;
 import muramasa.antimatter.gui.IGuiElement;
 import muramasa.antimatter.gui.event.GuiEvent;
 import muramasa.antimatter.gui.event.IGuiEvent;
@@ -19,6 +20,8 @@ import net.minecraft.util.Direction;
 import tesseract.api.capability.TesseractGTCapability;
 
 import java.util.List;
+
+import static muramasa.antimatter.gui.ICanSyncData.SyncDirection.SERVER_TO_CLIENT;
 
 public class TileEntityInfiniteStorage<T extends TileEntityInfiniteStorage<T>> extends TileEntityMachine<T> implements IInfoRenderer<TileEntityInfiniteStorage.InfiniteStorageWidget> {
 
@@ -167,8 +170,8 @@ public class TileEntityInfiniteStorage<T extends TileEntityInfiniteStorage<T>> e
         public void init() {
             super.init();
             TileEntityInfiniteStorage<?> m = (TileEntityInfiniteStorage<?>) gui.handler;
-            gui.syncInt(() -> m.energyHandler.map(EnergyHandler::getOutputAmperage).orElse(0), i -> amperage = i);
-            gui.syncInt(() -> m.energyHandler.map(EnergyHandler::getOutputVoltage).orElse(0), i -> voltage = i);
+            gui.syncInt(() -> m.energyHandler.map(EnergyHandler::getOutputAmperage).orElse(0), i -> amperage = i, SERVER_TO_CLIENT);
+            gui.syncInt(() -> m.energyHandler.map(EnergyHandler::getOutputVoltage).orElse(0), i -> voltage = i, SERVER_TO_CLIENT);
         }
 
         public static WidgetSupplier build() {

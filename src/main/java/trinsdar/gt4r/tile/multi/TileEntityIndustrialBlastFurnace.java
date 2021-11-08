@@ -4,6 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import it.unimi.dsi.fastutil.objects.ObjectCollection;
 import muramasa.antimatter.capability.machine.MachineRecipeHandler;
 import muramasa.antimatter.gui.GuiInstance;
+import muramasa.antimatter.gui.ICanSyncData;
 import muramasa.antimatter.gui.IGuiElement;
 import muramasa.antimatter.gui.widget.InfoRenderWidget;
 import muramasa.antimatter.gui.widget.WidgetSupplier;
@@ -126,7 +127,7 @@ public class TileEntityIndustrialBlastFurnace extends TileEntityBasicMultiMachin
         public void init() {
             super.init();
             TileEntityIndustrialBlastFurnace m = (TileEntityIndustrialBlastFurnace) gui.handler;
-            gui.syncInt(m::getHeatingCapacity, i -> heat = i);
+            gui.syncInt(m::getHeatingCapacity, i -> heat = i, ICanSyncData.SyncDirection.SERVER_TO_CLIENT);
         }
 
         public static WidgetSupplier build() {

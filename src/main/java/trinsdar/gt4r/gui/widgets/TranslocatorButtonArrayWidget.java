@@ -3,6 +3,7 @@ package trinsdar.gt4r.gui.widgets;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import muramasa.antimatter.gui.ButtonBody;
 import muramasa.antimatter.gui.GuiInstance;
+import muramasa.antimatter.gui.ICanSyncData;
 import muramasa.antimatter.gui.IGuiElement;
 import muramasa.antimatter.gui.Widget;
 import muramasa.antimatter.gui.container.ContainerMachine;
@@ -53,8 +54,8 @@ public class TranslocatorButtonArrayWidget extends Widget {
         super.init();
         ContainerMachine<?> m = (ContainerMachine<?>) gui.container;
         TileEntityTranslocator filter = (TileEntityTranslocator) m.getTile();
-        gui.syncBoolean(filter::isBlacklist, b -> blacklist = b);
-        gui.syncBoolean(filter::isEmitEnergy, b -> emitEnergy = b);
+        gui.syncBoolean(filter::isBlacklist, b -> blacklist = b, ICanSyncData.SyncDirection.SERVER_TO_CLIENT);
+        gui.syncBoolean(filter::isEmitEnergy, b -> emitEnergy = b, ICanSyncData.SyncDirection.SERVER_TO_CLIENT);
     }
 
     @Override
