@@ -20,7 +20,7 @@ public class Structures {
     public static void init() {
         COKE_OVEN.setStructure(b -> b
             .of("CCC", "CCC", "CCC").of("CCC", "CAM", "CCC").of(0)
-            .at("C", FIRE_BRICKS).at("M", COKE_OVEN)
+            .at("C", BRICK).at("M", COKE_OVEN)
             .build().offset(2, -1)
         );
         PYROLYSIS_OVEN.setStructure(b -> b
@@ -30,7 +30,7 @@ public class Structures {
         );
         PRIMITIVE_BLAST_FURNACE.setStructure(b -> b
             .of("CCC", "CCC", "CCC").of("CCC", "CBM", "CCC").of("CCC", "CBC", "CCC").of(2).of("CCC", "CAC", "CCC")
-            .at("C", FIRE_BRICKS).at("B", AIR_OR_LAVA).at("M", PRIMITIVE_BLAST_FURNACE)
+            .at("C", BRICK).at("B", AIR_OR_LAVA).at("M", PRIMITIVE_BLAST_FURNACE)
             .build().offset(2, -1)
         );
         BLAST_FURNACE.setStructure(b -> b
