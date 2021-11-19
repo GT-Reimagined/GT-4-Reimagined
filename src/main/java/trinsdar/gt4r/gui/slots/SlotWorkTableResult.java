@@ -18,7 +18,7 @@ public class SlotWorkTableResult extends CraftingResultSlot {
     }
 
     @Override
-    public void onSlotChange(ItemStack p_75220_1_, ItemStack p_75220_2_) {
+    public void onQuickCraft(ItemStack p_75220_1_, ItemStack p_75220_2_) {
 
     }
 
@@ -31,10 +31,10 @@ public class SlotWorkTableResult extends CraftingResultSlot {
     private boolean extractedFromTable(){
         boolean remaining = true;
         for (int i = 0; i < 10; i++) {
-            ItemStack itemStack = craftMatrix.getStackInSlot(i);
+            ItemStack itemStack = craftMatrix.getItem(i);
             if (itemStack.getCount() == 1) {
                 extractFromTable(itemStack);
-                craftMatrix.setInventorySlotContents(i, itemStack);
+                craftMatrix.setItem(i, itemStack);
             }
             if (itemStack.getCount() == 1) {
                 remaining  =  false;
@@ -45,7 +45,7 @@ public class SlotWorkTableResult extends CraftingResultSlot {
 
     private ItemStack extractFromTable(ItemStack itemStack){
         for (int j = 0; j < projectTable.getHandler(SlotType.STORAGE).getSlots(); j++) {
-            if (projectTable.getHandler(SlotType.STORAGE).getStackInSlot(j).getItem().equals(itemStack.getItem()) && ItemStack.areItemStackTagsEqual(itemStack, projectTable.getHandler(SlotType.STORAGE).getStackInSlot(j))) {
+            if (projectTable.getHandler(SlotType.STORAGE).getStackInSlot(j).getItem().equals(itemStack.getItem()) && ItemStack.tagMatches(itemStack, projectTable.getHandler(SlotType.STORAGE).getStackInSlot(j))) {
                 projectTable.getHandler(SlotType.STORAGE).extractFromInput(j, 1, false);
                 itemStack.setCount(itemStack.getCount() + 1);
             }

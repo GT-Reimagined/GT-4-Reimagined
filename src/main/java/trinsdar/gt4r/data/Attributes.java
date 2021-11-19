@@ -17,7 +17,7 @@ public class Attributes {
             5.0D,
             0.0D,
             1024.0D)
-            .setShouldWatch(true));
+            .setSyncable(true));
 
     public static void init(){
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();

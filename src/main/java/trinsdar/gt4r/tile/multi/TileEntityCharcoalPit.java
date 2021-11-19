@@ -22,13 +22,13 @@ public class TileEntityCharcoalPit extends TileEntityMultiMachine<TileEntityChar
     }
 
     private boolean isCovered(BlockPos pos) {
-        return world.getBlockState(pos).getMaterial() == Material.EARTH
-                || world.getBlockState(pos).getMaterial() == Material.ORGANIC
-                || world.getBlockState(pos).getBlock() == AntimatterAPI.get(BlockMultiMachine.class,Machines.CHARCOAL_PIT.getId() + "_" + Tier.LV.getId(), Ref.ID) || isLog(pos);
+        return level.getBlockState(pos).getMaterial() == Material.DIRT
+                || level.getBlockState(pos).getMaterial() == Material.GRASS
+                || level.getBlockState(pos).getBlock() == AntimatterAPI.get(BlockMultiMachine.class,Machines.CHARCOAL_PIT.getId() + "_" + Tier.LV.getId(), Ref.ID) || isLog(pos);
     }
 
     private boolean isLog(BlockPos pos) {
-        return world.getBlockState(pos).isIn(BlockTags.LOGS);
+        return level.getBlockState(pos).is(BlockTags.LOGS);
     }
 
     private List<BlockPos> getLogs() {

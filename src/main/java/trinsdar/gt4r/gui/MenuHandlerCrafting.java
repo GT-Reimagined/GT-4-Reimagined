@@ -24,7 +24,7 @@ public class MenuHandlerCrafting extends MenuHandler<GTWorkbenchContainer> {
     public GTWorkbenchContainer onContainerCreate(int windowId, PlayerInventory inv, PacketBuffer data) {
         TileEntity tile = Utils.getTileFromBuf(data);
         if (tile != null) {
-            Direction dir = Direction.byIndex(data.readInt());
+            Direction dir = Direction.from3DDataValue(data.readInt());
             LazyOptional<ICoverHandler> coverHandler = tile.getCapability(AntimatterCaps.COVERABLE_HANDLER_CAPABILITY, dir);
             return getMenu(coverHandler.map(ch -> ch.get(dir)).orElse(null), inv, windowId);
         }
@@ -33,7 +33,7 @@ public class MenuHandlerCrafting extends MenuHandler<GTWorkbenchContainer> {
 
     @Override
     protected GTWorkbenchContainer getMenu(IGuiHandler tile, PlayerInventory playerInv, int windowId) {
-        return tile instanceof ICover ? new ContainerCraftingCover(windowId, playerInv, IWorldPosCallable.of(((ICover)tile).source().getTile().getWorld(), ((ICover)tile).source().getTile().getPos()), ((ICover) tile)) : null;
+        return tile instanceof ICover ? new ContainerCraftingCover(windowId, playerInv, IWorldPosCallable.create(((ICover)tile).source().getTile().getLevel(), ((ICover)tile).source().getTile().getBlockPos()), ((ICover) tile)) : null;
     }
 
     @Override

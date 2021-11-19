@@ -17,7 +17,7 @@ public class SlotFluidDisplaySettable extends SlotFake {
 
     @Override
     public ItemStack clickSlot(int clickedButton, ClickType clickType, PlayerEntity playerEntity, Container container) {
-        if (playerEntity.inventory.getItemStack().isEmpty() || playerEntity.inventory.getItemStack().getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).map(f -> !f.getFluidInTank(0).isEmpty()).orElse(false)){
+        if (playerEntity.inventory.getCarried().isEmpty() || playerEntity.inventory.getCarried().getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).map(f -> !f.getFluidInTank(0).isEmpty()).orElse(false)){
             return super.clickSlot(clickedButton, clickType, playerEntity, container);
         }
         return ItemStack.EMPTY;

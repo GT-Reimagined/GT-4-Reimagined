@@ -11,6 +11,8 @@ import trinsdar.gt4r.tile.single.TileEntityCoalBoiler;
 
 import static net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE;
 
+import muramasa.antimatter.capability.FluidHandler.FluidDirection;
+
 public class CoalBoilerFluidHandler extends MachineFluidHandler<TileEntityCoalBoiler> {
 
     private boolean fillingCell = false;

@@ -17,14 +17,14 @@ public class GT4RBlockTagProvider extends AntimatterBlockTagProvider {
     }
 
     @Override
-    public void registerTags() {
-        super.registerTags();
-        this.getOrCreateBuilder(BlockTags.LOGS).add(GT4RData.RUBBER_LOG);
-        this.getOrCreateBuilder(BlockTags.LEAVES).add(GT4RData.RUBBER_LEAVES);
-        this.getOrCreateBuilder(BlockTags.SAPLINGS).add(GT4RData.RUBBER_SAPLING);
-        this.getOrCreateBuilder(TagUtils.getForgeBlockTag("machine_hull/advanced")).add(ADVANCED_MACHINE_BLOCK);
-        this.getOrCreateBuilder(TagUtils.getForgeBlockTag("wg_stone")).add(GRANITE_BLACK.getState().getBlock(), GRANITE_RED.getState().getBlock(), MARBLE.getState().getBlock(), BASALT.getState().getBlock(), KOMATIITE.getState().getBlock(), LIMESTONE.getState().getBlock(), GREEN_SCHIST.getState().getBlock(), BLUE_SCHIST.getState().getBlock(), KIMBERLITE.getState().getBlock(), QUARTZITE.getState().getBlock());
-        this.getOrCreateBuilder(TagUtils.getBlockTag(new ResourceLocation("minecraft","base_stone_overworld"))).add(GRANITE_BLACK.getState().getBlock(), GRANITE_RED.getState().getBlock(), MARBLE.getState().getBlock(), BASALT.getState().getBlock(), KOMATIITE.getState().getBlock(), LIMESTONE.getState().getBlock(), GREEN_SCHIST.getState().getBlock(), BLUE_SCHIST.getState().getBlock(), KIMBERLITE.getState().getBlock(), QUARTZITE.getState().getBlock());
-        this.getOrCreateBuilder(TagUtils.getBlockTag(new ResourceLocation("minecraft", "logs_that_burn"))).add(RUBBER_LOG);
+    public void addTags() {
+        super.addTags();
+        this.tag(BlockTags.LOGS).add(GT4RData.RUBBER_LOG);
+        this.tag(BlockTags.LEAVES).add(GT4RData.RUBBER_LEAVES);
+        this.tag(BlockTags.SAPLINGS).add(GT4RData.RUBBER_SAPLING);
+        this.tag(TagUtils.getForgeBlockTag("machine_hull/advanced")).add(ADVANCED_MACHINE_BLOCK);
+        this.tag(TagUtils.getForgeBlockTag("wg_stone")).add(GRANITE_BLACK.getState().getBlock(), GRANITE_RED.getState().getBlock(), MARBLE.getState().getBlock(), BASALT.getState().getBlock(), KOMATIITE.getState().getBlock(), LIMESTONE.getState().getBlock(), GREEN_SCHIST.getState().getBlock(), BLUE_SCHIST.getState().getBlock(), KIMBERLITE.getState().getBlock(), QUARTZITE.getState().getBlock());
+        this.tag(TagUtils.getBlockTag(new ResourceLocation("minecraft","base_stone_overworld"))).add(GRANITE_BLACK.getState().getBlock(), GRANITE_RED.getState().getBlock(), MARBLE.getState().getBlock(), BASALT.getState().getBlock(), KOMATIITE.getState().getBlock(), LIMESTONE.getState().getBlock(), GREEN_SCHIST.getState().getBlock(), BLUE_SCHIST.getState().getBlock(), KIMBERLITE.getState().getBlock(), QUARTZITE.getState().getBlock());
+        this.tag(TagUtils.getBlockTag(new ResourceLocation("minecraft", "logs_that_burn"))).add(RUBBER_LOG);
     }
 }

@@ -24,12 +24,12 @@ public class GT4RItemModelProvider extends AntimatterItemModelProvider {
             Texture[] base = DUSTBIN.getBaseTexture(LV);
             if (base.length >= 6){
                 for (int s = 0; s < 6; s++){
-                    b.texture("base" +  muramasa.antimatter.Ref.DIRS[s].getString(), base[s]);
+                    b.texture("base" +  muramasa.antimatter.Ref.DIRS[s].getSerializedName(), base[s]);
                 }
             }
             Texture[] overlays = DUSTBIN.getOverlayTextures(MachineState.ACTIVE, LV);
             for (int s = 0; s < 6; s++) {
-                b.texture("overlay" + muramasa.antimatter.Ref.DIRS[s].getString(), overlays[s]);
+                b.texture("overlay" + muramasa.antimatter.Ref.DIRS[s].getSerializedName(), overlays[s]);
             }
         });
         super.processItemModels(domain);

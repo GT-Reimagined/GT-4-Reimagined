@@ -29,11 +29,11 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     }
 
    @Inject(
-            method = "func_234570_el_",
+            method = "createAttributes",
             at = @At(value = "RETURN"),
             cancellable = true
     )
     private static void initAttributes(CallbackInfoReturnable<AttributeModifierMap.MutableAttribute> ci) {
-       ci.getReturnValue().createMutableAttribute(Attributes.ATTACK_REACH.get());
+       ci.getReturnValue().add(Attributes.ATTACK_REACH.get());
     }
 }

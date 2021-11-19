@@ -50,7 +50,7 @@ public class TileEntitySteamMachine extends TileEntityMachine<TileEntitySteamMac
 
         @Override
         protected boolean canRecipeContinue() {
-            isSteamClear = tile.world.isAirBlock(tile.pos.offset(tile.getOutputFacing()));
+            isSteamClear = tile.level.isEmptyBlock(tile.worldPosition.relative(tile.getOutputFacing()));
             return super.canRecipeContinue() && isSteamClear;
         }
 

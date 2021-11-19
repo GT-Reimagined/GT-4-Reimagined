@@ -15,7 +15,7 @@ import java.util.function.Consumer;
 public class ModCompatRecipes {
 
     public static void loadIE(Consumer<IFinishedRecipe> output, AntimatterRecipeProvider provider){
-        provider.addStackRecipe(output, Ref.ID, "treated_wood", "mod_compat", "has_wood", provider.hasSafeItem(ItemTags.PLANKS), new ItemStack(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(Ref.MOD_IE, "treated_wood_horizontal")), 8), ImmutableMap.of('P', ItemTags.PLANKS, 'C', Materials.Creosote.getLiquid().getFilledBucket()), "PPP", "PCP", "PPP");
+        provider.addStackRecipe(output, Ref.ID, "treated_wood", "mod_compat", "has_wood", provider.hasSafeItem(ItemTags.PLANKS), new ItemStack(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(Ref.MOD_IE, "treated_wood_horizontal")), 8), ImmutableMap.of('P', ItemTags.PLANKS, 'C', Materials.Creosote.getLiquid().getBucket()), "PPP", "PCP", "PPP");
     }
 
 }

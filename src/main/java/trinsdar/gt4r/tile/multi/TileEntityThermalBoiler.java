@@ -34,7 +34,7 @@ public class TileEntityThermalBoiler extends TileEntityMultiMachine<TileEntityTh
                                 if (ticker < 80){
                                     ticker++;
                                 } else {
-                                    if (!h.getHandler(SlotTypes.FILTER).getStackInSlot(0).attemptDamageItem(1, tile.getWorld().rand, null)){
+                                    if (!h.getHandler(SlotTypes.FILTER).getStackInSlot(0).hurt(1, tile.getLevel().random, null)){
                                         h.getHandler(SlotTypes.FILTER).getStackInSlot(0).shrink(1);
                                     }
                                     ticker = 0;
@@ -73,7 +73,7 @@ public class TileEntityThermalBoiler extends TileEntityMultiMachine<TileEntityTh
                         if (Arrays.stream(r.getChances()).sum() != 100 && chance){
                             return null;
                         }
-                        int rng = tile.world.rand.nextInt(100);
+                        int rng = tile.level.random.nextInt(100);
                         List<ItemStack> evaluated = new ObjectArrayList<>();
                         List<Integer> chanceCompare = Arrays.stream(r.getChances()).boxed().collect(Collectors.toList());
                         for (int i = 0; i < outputs.length; i++) {

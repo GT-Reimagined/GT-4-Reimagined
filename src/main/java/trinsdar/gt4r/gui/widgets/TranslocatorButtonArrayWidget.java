@@ -7,7 +7,7 @@ import muramasa.antimatter.gui.ICanSyncData;
 import muramasa.antimatter.gui.IGuiElement;
 import muramasa.antimatter.gui.Widget;
 import muramasa.antimatter.gui.container.ContainerMachine;
-import muramasa.antimatter.gui.event.GuiEvent;
+import muramasa.antimatter.gui.event.GuiEvents;
 import muramasa.antimatter.gui.widget.WidgetSupplier;
 import trinsdar.gt4r.tile.single.TileEntityTranslocator;
 
@@ -27,9 +27,9 @@ public class TranslocatorButtonArrayWidget extends Widget {
         this.setW(90);
         this.setH(18);
         this.setVisible(false);
-        this.energyWidget = (ChangingButtonWidget) ChangingButtonWidget.build(instance.handler.getGuiTexture(), energyLoc, null, GuiEvent.EXTRA_BUTTON,0).setSize(1, 1, 16, 16).buildAndAdd(instance, this);
+        this.energyWidget = (ChangingButtonWidget) ChangingButtonWidget.build(instance.handler.getGuiTexture(), energyLoc, null, GuiEvents.EXTRA_BUTTON,0).setSize(1, 1, 16, 16).buildAndAdd(instance, this);
         this.energyWidget.setStateHandler(w -> emitEnergy).setDepth(depth() + 1);
-        this.blacklistWidget = (ChangingButtonWidget) ChangingButtonWidget.build(instance.handler.getGuiTexture(), blacklistLoc, null, GuiEvent.EXTRA_BUTTON,1).setSize(19, 1, 16, 16).buildAndAdd(instance, this);
+        this.blacklistWidget = (ChangingButtonWidget) ChangingButtonWidget.build(instance.handler.getGuiTexture(), blacklistLoc, null, GuiEvents.EXTRA_BUTTON,1).setSize(19, 1, 16, 16).buildAndAdd(instance, this);
         this.blacklistWidget.setStateHandler(w -> blacklist).setDepth(depth() + 1);
     }
 

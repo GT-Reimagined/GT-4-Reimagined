@@ -5,7 +5,7 @@ import muramasa.antimatter.cover.BaseCover;
 import muramasa.antimatter.cover.CoverFactory;
 import muramasa.antimatter.cover.ICoverMode;
 import muramasa.antimatter.cover.ICoverModeHandler;
-import muramasa.antimatter.gui.event.GuiEvent;
+import muramasa.antimatter.gui.event.GuiEvents;
 import muramasa.antimatter.gui.event.IGuiEvent;
 import muramasa.antimatter.machine.Tier;
 import net.minecraft.entity.player.PlayerEntity;
@@ -34,9 +34,10 @@ public abstract class CoverBasicTransport extends BaseCover implements ICoverMod
     }
 
     @Override
-    public void onGuiEvent(IGuiEvent event, PlayerEntity playerEntity, int... data) {
-        if (event == GuiEvent.EXTRA_BUTTON){
-            coverMode = getCoverMode(data[0]);
+    public void onGuiEvent(IGuiEvent event, PlayerEntity playerEntity) {
+        if (event.getFactory() == GuiEvents.EXTRA_BUTTON){
+            GuiEvents.GuiEvent ev = (GuiEvents.GuiEvent) event;
+            coverMode = getCoverMode(ev.data[0]);
         }
     }
 

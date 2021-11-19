@@ -139,12 +139,12 @@ public class QuantumChestItemHandler extends MachineItemHandler<TileEntityQuantu
     public void deserializeNBT(CompoundNBT nbt) {
         super.deserializeNBT(nbt);
         digitalCount = nbt.getInt("DCount");
-        d = ItemStack.read(nbt.getCompound("display"));
+        d = ItemStack.of(nbt.getCompound("display"));
     }
 
     public void drawInfo(MatrixStack stack, FontRenderer renderer, int left, int top) {
         // TODO: Replace by new TranslationTextComponent()
-        renderer.drawString(stack,"Item amount: " + digitalCount, left + 10, top + 19, 16448255);
+        renderer.draw(stack,"Item amount: " + digitalCount, left + 10, top + 19, 16448255);
     }
 
     @Override

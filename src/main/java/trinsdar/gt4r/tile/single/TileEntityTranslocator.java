@@ -5,7 +5,7 @@ import muramasa.antimatter.capability.item.FakeTrackedItemHandler;
 import muramasa.antimatter.capability.machine.MachineEnergyHandler;
 import muramasa.antimatter.capability.machine.MachineItemHandler;
 import muramasa.antimatter.gui.SlotType;
-import muramasa.antimatter.gui.event.GuiEvent;
+import muramasa.antimatter.gui.event.GuiEvents;
 import muramasa.antimatter.gui.event.IGuiEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.TileEntityMachine;
@@ -55,31 +55,32 @@ public abstract class TileEntityTranslocator<T extends TileEntityTranslocator<T>
     }
 
     @Override
-    public void onGuiEvent(IGuiEvent event, PlayerEntity playerEntity, int... data) {
-        if (event == GuiEvent.EXTRA_BUTTON) {
+    public void onGuiEvent(IGuiEvent event, PlayerEntity playerEntity) {
+        if (event.getFactory() == GuiEvents.EXTRA_BUTTON) {
+            int[] data = ((GuiEvents.GuiEvent)event).data;
             switch (data[0]) {
                 case 0:
                     emitEnergy = !emitEnergy;
-                    playerEntity.sendMessage(new StringTextComponent( (emitEnergy ? "Emit energy to output side" : "Don't emit energy")), playerEntity.getUniqueID());
+                    playerEntity.sendMessage(new StringTextComponent( (emitEnergy ? "Emit energy to output side" : "Don't emit energy")), playerEntity.getUUID());
                     break;
                 case 1:
                     blacklist = !blacklist;
-                    playerEntity.sendMessage(new StringTextComponent( (blacklist ? "I" : "Don't i") + "nvert filter"), playerEntity.getUniqueID());
+                    playerEntity.sendMessage(new StringTextComponent( (blacklist ? "I" : "Don't i") + "nvert filter"), playerEntity.getUUID());
                     break;
             }
         }
     }
 
     @Override
-    public void read(BlockState state, CompoundNBT tag) {
-        super.read(state, tag);
+    public void load(BlockState state, CompoundNBT tag) {
+        super.load(state, tag);
         blacklist = tag.getBoolean("blacklist");
         emitEnergy = tag.getBoolean("emitsEnergy");
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT tag) {
-        super.write(tag);
+    public CompoundNBT save(CompoundNBT tag) {
+        super.save(tag);
         tag.putBoolean("blacklist", blacklist);
         tag.putBoolean("emitEnergy", emitEnergy);
         return tag;
@@ -103,9 +104,9 @@ public abstract class TileEntityTranslocator<T extends TileEntityTranslocator<T>
         protected boolean processOutput() {
             Direction outputDir = this.getFacing().getOpposite();
             Direction inputDir = this.getFacing();
-            TileEntity outputTile = Utils.getTile(this.getWorld(), this.getPos().offset(outputDir));
+            TileEntity outputTile = Utils.getTile(this.getLevel(), this.getBlockPos().relative(outputDir));
             if (outputTile == null) return false;
-            TileEntity inputTile = Utils.getTile(this.getWorld(), this.getPos().offset(inputDir));
+            TileEntity inputTile = Utils.getTile(this.getLevel(), this.getBlockPos().relative(inputDir));
             if (inputTile == null) return false;
             boolean[] booleans = new boolean[1];
             booleans[0] = false;
@@ -144,20 +145,20 @@ public abstract class TileEntityTranslocator<T extends TileEntityTranslocator<T>
         protected boolean processOutput() {
             Direction outputDir = this.getFacing().getOpposite();
             Direction inputDir = this.getFacing();
-            TileEntity outputTile = Utils.getTile(this.getWorld(), this.getPos().offset(outputDir));
+            TileEntity outputTile = Utils.getTile(this.getLevel(), this.getBlockPos().relative(outputDir));
             if (outputTile == null) return false;
-            TileEntity inputTile = Utils.getTile(this.getWorld(), this.getPos().offset(inputDir));
+            TileEntity inputTile = Utils.getTile(this.getLevel(), this.getBlockPos().relative(inputDir));
             if (inputTile == null) {
-                FluidState state = world.getFluidState(this.getPos().offset(inputDir));
-                if (!state.isEmpty() && this.accepts(new FluidStack(state.getFluid(), 1)) && !((state.getFluid() == Fluids.WATER || state.getFluid() == Fluids.FLOWING_WATER) && world.getBlockState(this.getPos().offset(inputDir)).getBlock() != Blocks.WATER)){
+                FluidState state = level.getFluidState(this.getBlockPos().relative(inputDir));
+                if (!state.isEmpty() && this.accepts(new FluidStack(state.getType(), 1)) && !((state.getType() == Fluids.WATER || state.getType() == Fluids.FLOWING_WATER) && level.getBlockState(this.getBlockPos().relative(inputDir)).getBlock() != Blocks.WATER)){
                     boolean[] booleans = new boolean[1];
                     booleans[0] = false;
                     outputTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, outputDir.getOpposite()).ifPresent(out -> {
-                        int fill = out.fill(new FluidStack(state.getFluid(), 1000), IFluidHandler.FluidAction.SIMULATE);
+                        int fill = out.fill(new FluidStack(state.getType(), 1000), IFluidHandler.FluidAction.SIMULATE);
                         if (fill == 1000){
-                            out.fill(new FluidStack(state.getFluid(), 1000), IFluidHandler.FluidAction.EXECUTE);
+                            out.fill(new FluidStack(state.getType(), 1000), IFluidHandler.FluidAction.EXECUTE);
                             booleans[0] = true;
-                            world.setBlockState(this.getPos().offset(inputDir), Blocks.AIR.getDefaultState());
+                            level.setBlockAndUpdate(this.getBlockPos().relative(inputDir), Blocks.AIR.defaultBlockState());
                         }
                     });
                     return booleans[0];

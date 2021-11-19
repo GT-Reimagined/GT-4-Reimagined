@@ -33,12 +33,12 @@ public class ClientHandler implements IProxyHandler {
     @SuppressWarnings("RedundantTypeArguments")
     public static void setup(FMLClientSetupEvent e) {
         e.enqueueWork(() -> {
-            RenderTypeLookup.setRenderLayer(GT4RData.RUBBER_SAPLING, RenderType.getCutout());
-            RenderTypeLookup.setRenderLayer(GT4RData.RUBBER_LEAVES, RenderType.getCutout());
-            RenderTypeLookup.setRenderLayer(GT4RData.SAP_BAG, RenderType.getCutout());
-            RenderTypeLookup.setRenderLayer(((BlockItem)Machines.DUSTBIN.getItem(LV)).getBlock(), RenderType.getCutout());
-            AntimatterAPI.all(BlockCasing.class, t -> RenderTypeLookup.setRenderLayer(t, RenderType.getCutout()));
-            AntimatterAPI.all(BlockMachineMaterial.class, b -> RenderTypeLookup.setRenderLayer(b, RenderType.getCutout()));
+            RenderTypeLookup.setRenderLayer(GT4RData.RUBBER_SAPLING, RenderType.cutout());
+            RenderTypeLookup.setRenderLayer(GT4RData.RUBBER_LEAVES, RenderType.cutout());
+            RenderTypeLookup.setRenderLayer(GT4RData.SAP_BAG, RenderType.cutout());
+            RenderTypeLookup.setRenderLayer(((BlockItem)Machines.DUSTBIN.getItem(LV)).getBlock(), RenderType.cutout());
+            AntimatterAPI.all(BlockCasing.class, t -> RenderTypeLookup.setRenderLayer(t, RenderType.cutout()));
+            AntimatterAPI.all(BlockMachineMaterial.class, b -> RenderTypeLookup.setRenderLayer(b, RenderType.cutout()));
         });
         ClientUtil.registerEntityRenders();
         copyProgrammerArtIfMissing();
@@ -79,7 +79,7 @@ public class ClientHandler implements IProxyHandler {
 
     @Override
     public World getClientWorld() {
-        return Minecraft.getInstance().world;
+        return Minecraft.getInstance().level;
     }
 
     @Override

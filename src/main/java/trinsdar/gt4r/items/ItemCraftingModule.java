@@ -26,22 +26,22 @@ public class ItemCraftingModule extends ItemCover implements INamedContainerProv
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        if (openGui(playerIn)) return new ActionResult<>(ActionResultType.SUCCESS, playerIn.getHeldItem(handIn));
-        return super.onItemRightClick(worldIn, playerIn, handIn);
+    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+        if (openGui(playerIn)) return new ActionResult<>(ActionResultType.SUCCESS, playerIn.getItemInHand(handIn));
+        return super.use(worldIn, playerIn, handIn);
     }
 
     public boolean openGui(PlayerEntity player) {
-        if (player.world.isRemote) return false;
+        if (player.level.isClientSide) return false;
         NetworkHooks.openGui((ServerPlayerEntity) player, this, packetBuffer -> {
-            packetBuffer.writeBlockPos(player.getPosition());
+            packetBuffer.writeBlockPos(player.blockPosition());
         });
         return true;
     }
 
     @Override
     public ITextComponent getDisplayName() {
-        return new TranslationTextComponent(this.getTranslationKey());
+        return new TranslationTextComponent(this.getDescriptionId());
     }
 
     @Nullable

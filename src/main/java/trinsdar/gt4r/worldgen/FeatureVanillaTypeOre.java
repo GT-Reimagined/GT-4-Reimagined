@@ -52,44 +52,44 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
     @Override
     public void build(BiomeGenerationSettingsBuilder event) {
         if (AntimatterConfig.WORLD.ORE_VEINS){
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, COPPER);
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, TIN);
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, URANITE);
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, URANITE_DEAD);
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CASSITERITE);
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, TETRAHEDRITE);
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, GALENA);
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, BAUXITE);
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, RUBY);
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, SAPPHIRE);
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, PLATINUM);
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, IRIDIUM);
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, EMERALD);
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, PYRITE);
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, SPHALERITE);
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CINNABAR);
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, TUNGSTATE);
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, PLATINUM_END);
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, OLIVINE);
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, SODALITE);
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CHROMITE);
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, SALT);
-            event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ROCK_SALT);
+            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, COPPER);
+            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, TIN);
+            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, URANITE);
+            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, URANITE_DEAD);
+            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CASSITERITE);
+            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, TETRAHEDRITE);
+            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, GALENA);
+            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, BAUXITE);
+            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, RUBY);
+            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, SAPPHIRE);
+            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, PLATINUM);
+            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, IRIDIUM);
+            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, EMERALD);
+            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, PYRITE);
+            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, SPHALERITE);
+            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CINNABAR);
+            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, TUNGSTATE);
+            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, PLATINUM_END);
+            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, OLIVINE);
+            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, SODALITE);
+            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CHROMITE);
+            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, SALT);
+            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ROCK_SALT);
             if (AntimatterConfig.WORLD.VANILLA_ORE_GEN){
-                event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, IRON);
-                event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, COAL);
-                event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, GOLD);
-                event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, GOLD_MESA);
-                event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, REDSTONE);
-                event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, DIAMOND);
-                event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, EMERALD_VANILLA);
-                event.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, LAPIS);
+                event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, IRON);
+                event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, COAL);
+                event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, GOLD);
+                event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, GOLD_MESA);
+                event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, REDSTONE);
+                event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, DIAMOND);
+                event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, EMERALD_VANILLA);
+                event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, LAPIS);
             }
         }
     }
 
     public ConfiguredFeature<?, ?> getConfiguration(GT4ROreFeatureConfig config){
-        return this.withConfiguration(config).withPlacement(Placement.RANGE.configure(getRange(config.getMinY(), config.getMaxY()))).square().count(config.getWeight());
+        return this.configured(config).decorated(Placement.RANGE.configured(getRange(config.getMinY(), config.getMaxY()))).squared().count(config.getWeight());
     }
 
     public TopSolidRangeConfig getRange(int min, int max){
@@ -97,15 +97,15 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
     }
 
     @Override
-    public boolean generate(ISeedReader world, ChunkGenerator generator, Random rand, BlockPos pos, GT4ROreFeatureConfig config) {
+    public boolean place(ISeedReader world, ChunkGenerator generator, Random rand, BlockPos pos, GT4ROreFeatureConfig config) {
         int chunkX = pos.getX() >> 4;
         int chunkZ = pos.getZ() >> 4;
         //Feature.ORE.generate()
-        if (!config.getDimensionLocations().contains(world.getWorld().getDimensionKey().getLocation())) return false;
+        if (!config.getDimensionLocations().contains(world.getLevel().dimension().location())) return false;
         List<BiomeDictionary.Type> types = config.getBiomeTypes();
         List<BiomeDictionary.Type> invalidTypes = config.getInvalidBiomeTypes();
         boolean hasType = types.isEmpty();
-        for (BiomeDictionary.Type type : BiomeDictionary.getTypes(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, world.getBiome(pos).getRegistryName()))) {
+        for (BiomeDictionary.Type type : BiomeDictionary.getTypes(RegistryKey.create(Registry.BIOME_REGISTRY, world.getBiome(pos).getRegistryName()))) {
             if (types.contains(type)) {
                 hasType = true;
             }
@@ -243,7 +243,7 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
                                         int l2 = i2 - x + (j2 - y) * p_207803_19_ + (k2 - z) * p_207803_19_ * p_207803_20_;
                                         if (!bitset.get(l2)) {
                                             bitset.set(l2);
-                                            blockpos$mutable.setPos(i2, j2, k2);
+                                            blockpos$mutable.set(i2, j2, k2);
                                             Material mat = Material.get(config.getPrimary());
                                             if (mat.has(ORE_STONE) && mat != Coal){
                                                 StoneType stone = WorldGenHelper.STONE_MAP.get(worldIn.getBlockState(blockpos$mutable));

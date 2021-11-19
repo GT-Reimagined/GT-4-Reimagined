@@ -8,6 +8,8 @@ import trinsdar.gt4r.data.Textures;
 
 import static trinsdar.gt4r.data.Materials.*;
 
+import net.minecraft.item.Item.Properties;
+
 public class ItemTurbineRotor extends MaterialItem {
 
     public ItemTurbineRotor(String domain, MaterialType<?> type, Material material, Properties properties) {

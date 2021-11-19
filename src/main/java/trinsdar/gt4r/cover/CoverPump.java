@@ -59,9 +59,9 @@ public class CoverPump extends CoverBasicTransport {
 
     @Override
     public void onUpdate() {
-        if (handler.getTile().getWorld().isRemote) return;
+        if (handler.getTile().getLevel().isClientSide) return;
         if (handler.getTile() == null) return;
-        TileEntity adjTile = handler.getTile().getWorld().getTileEntity(handler.getTile().getPos().offset(side));
+        TileEntity adjTile = handler.getTile().getLevel().getBlockEntity(handler.getTile().getBlockPos().relative(side));
         if (adjTile == null) return;
         TileEntity from = handler.getTile();
         TileEntity to = adjTile;

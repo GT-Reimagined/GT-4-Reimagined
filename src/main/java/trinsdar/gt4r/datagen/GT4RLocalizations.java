@@ -81,8 +81,8 @@ public class GT4RLocalizations {
             add(GT4RData.MixedMetal, lowerUnderscoreToUpperSpaced(GT4RData.MixedMetal.getId()));
             add(GT4RData.SAP_BAG, lowerUnderscoreToUpperSpaced(GT4RData.SAP_BAG.getId()));
             add(GT4RData.CraftingModule, lowerUnderscoreToUpperSpaced(GT4RData.CraftingModule.getId()));
-            override(ROCK_CUTTER.getToolStack(NULL, NULL).getItem().getTranslationKey(), "Rock Cutter");
-            override(GT4RData.LighterEmpty.getTranslationKey(), "Lighter (Empty)");
+            override(ROCK_CUTTER.getToolStack(NULL, NULL).getItem().getDescriptionId(), "Rock Cutter");
+            override(GT4RData.LighterEmpty.getDescriptionId(), "Lighter (Empty)");
             AntimatterAPI.all(Machine.class, domain).forEach(i -> {
                 Collection<Tier> tiers =  i.getTiers();
                 if (i.has(MachineFlag.BASIC)) {
@@ -118,12 +118,12 @@ public class GT4RLocalizations {
                     }
                     override(s.getAttributes().getTranslationKey(), lowerUnderscoreToUpperSpaced(id));
                     Item bucket = AntimatterAPI.get(Item.class, s.getId()+ "_bucket", s.getDomain());
-                    if (bucket != null) override(bucket.getTranslationKey(), lowerUnderscoreToUpperSpaced(id) + " Bucket");
+                    if (bucket != null) override(bucket.getDescriptionId(), lowerUnderscoreToUpperSpaced(id) + " Bucket");
                 }
             });
-            AntimatterAPI.all(ItemFluidCell.class, domain).forEach(i -> override(i.getTranslationKey(), lowerUnderscoreToUpperSpacedRotated(i.getId())));
-            GEM.all().forEach(m -> override(GEM.get(m).getTranslationKey(), lowerUnderscoreToUpperSpaced(m.getId())));
-            BROKEN_TURBINE_ROTOR.all().forEach(m -> override(BROKEN_TURBINE_ROTOR.get(m).getTranslationKey(), lowerUnderscoreToUpperSpaced(m.getId() + "_" + BROKEN_TURBINE_ROTOR.getId())));
+            AntimatterAPI.all(ItemFluidCell.class, domain).forEach(i -> override(i.getDescriptionId(), lowerUnderscoreToUpperSpacedRotated(i.getId())));
+            GEM.all().forEach(m -> override(GEM.get(m).getDescriptionId(), lowerUnderscoreToUpperSpaced(m.getId())));
+            BROKEN_TURBINE_ROTOR.all().forEach(m -> override(BROKEN_TURBINE_ROTOR.get(m).getDescriptionId(), lowerUnderscoreToUpperSpaced(m.getId() + "_" + BROKEN_TURBINE_ROTOR.getId())));
         }
     }
 

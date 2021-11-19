@@ -27,28 +27,30 @@ import static trinsdar.gt4r.data.GT4RData.Lighter;
 import static trinsdar.gt4r.data.GT4RData.LighterEmpty;
 import static trinsdar.gt4r.data.GT4RData.MatchBook;
 
+import net.minecraft.item.Item.Properties;
+
 public class ItemMatch extends ItemBasic<ItemMatch> {
     public ItemMatch(String domain, String id, Properties properties) {
         super(domain, id, properties);
     }
 
     @Override
-    public ActionResultType onItemUse(ItemUseContext context) {
+    public ActionResultType useOn(ItemUseContext context) {
         PlayerEntity playerentity = context.getPlayer();
-        World world = context.getWorld();
-        BlockPos blockpos = context.getPos();
+        World world = context.getLevel();
+        BlockPos blockpos = context.getClickedPos();
         BlockState blockstate = world.getBlockState(blockpos);
-        ItemStack stack = context.getItem();
-        if ((this.isDamageable() && stack.getCount() == 1) || !this.isDamageable()){
-            if (CampfireBlock.canBeLit(blockstate)) {
-                world.playSound(playerentity, blockpos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, random.nextFloat() * 0.4F + 0.8F);
-                world.setBlockState(blockpos, blockstate.with(BlockStateProperties.LIT, true), 11);
+        ItemStack stack = context.getItemInHand();
+        if ((this.canBeDepleted() && stack.getCount() == 1) || !this.canBeDepleted()){
+            if (CampfireBlock.canLight(blockstate)) {
+                world.playSound(playerentity, blockpos, SoundEvents.FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, random.nextFloat() * 0.4F + 0.8F);
+                world.setBlock(blockpos, blockstate.setValue(BlockStateProperties.LIT, true), 11);
                 if (playerentity != null) {
-                    if (this.isDamageable()){
-                        stack.damageItem(1, playerentity, (player) -> {
-                            player.sendBreakAnimation(context.getHand());
+                    if (this.canBeDepleted()){
+                        stack.hurtAndBreak(1, playerentity, (player) -> {
+                            player.broadcastBreakEvent(context.getHand());
                             if (this == Lighter) {
-                                if (!player.addItemStackToInventory(new ItemStack(LighterEmpty))) player.dropItem(new ItemStack(LighterEmpty), true);
+                                if (!player.addItem(new ItemStack(LighterEmpty))) player.drop(new ItemStack(LighterEmpty), true);
                             }
                         });
                     } else {
@@ -56,20 +58,20 @@ public class ItemMatch extends ItemBasic<ItemMatch> {
                     }
                 }
 
-                return ActionResultType.func_233537_a_(world.isRemote());
+                return ActionResultType.sidedSuccess(world.isClientSide());
             } else {
-                BlockPos blockpos1 = blockpos.offset(context.getFace());
-                if (AbstractFireBlock.canLightBlock(world, blockpos1, context.getPlacementHorizontalFacing())) {
-                    world.playSound(playerentity, blockpos1, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, random.nextFloat() * 0.4F + 0.8F);
-                    BlockState blockstate1 = AbstractFireBlock.getFireForPlacement(world, blockpos1);
-                    world.setBlockState(blockpos1, blockstate1, 11);
+                BlockPos blockpos1 = blockpos.relative(context.getClickedFace());
+                if (AbstractFireBlock.canBePlacedAt(world, blockpos1, context.getHorizontalDirection())) {
+                    world.playSound(playerentity, blockpos1, SoundEvents.FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, random.nextFloat() * 0.4F + 0.8F);
+                    BlockState blockstate1 = AbstractFireBlock.getState(world, blockpos1);
+                    world.setBlock(blockpos1, blockstate1, 11);
                     if (playerentity instanceof ServerPlayerEntity) {
                         CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayerEntity)playerentity, blockpos1, stack);
-                        if (this.isDamageable()){
-                            stack.damageItem(1, playerentity, (player) -> {
-                                player.sendBreakAnimation(context.getHand());
+                        if (this.canBeDepleted()){
+                            stack.hurtAndBreak(1, playerentity, (player) -> {
+                                player.broadcastBreakEvent(context.getHand());
                                 if (this == Lighter) {
-                                    if (!player.addItemStackToInventory(new ItemStack(LighterEmpty))) player.dropItem(new ItemStack(LighterEmpty), true);
+                                    if (!player.addItem(new ItemStack(LighterEmpty))) player.drop(new ItemStack(LighterEmpty), true);
                                 }
                             });
                         } else {
@@ -77,7 +79,7 @@ public class ItemMatch extends ItemBasic<ItemMatch> {
                         }
                     }
 
-                    return ActionResultType.func_233537_a_(world.isRemote());
+                    return ActionResultType.sidedSuccess(world.isClientSide());
                 }
             }
         }

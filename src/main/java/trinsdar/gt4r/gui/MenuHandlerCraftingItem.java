@@ -21,7 +21,7 @@ public class MenuHandlerCraftingItem extends MenuHandler<GTWorkbenchContainer> {
 
     @Override
     public GTWorkbenchContainer getMenu(IGuiHandler tile, PlayerInventory playerInv, int windowId) {
-        return tile instanceof PlayerEntity ? new ContainerCraftingItem(windowId, playerInv, IWorldPosCallable.of(playerInv.player.world, playerInv.player.getPosition())) : null;
+        return tile instanceof PlayerEntity ? new ContainerCraftingItem(windowId, playerInv, IWorldPosCallable.create(playerInv.player.level, playerInv.player.blockPosition())) : null;
     }
 
     @Override

@@ -12,9 +12,9 @@ public abstract class ScreenCabinet<T extends TileEntityMaterial<T>> extends Scr
         super(container, inv, name);
         //TODO
         //gui = new ResourceLocation(Ref.ID, "textures/gui/machine/cabinet_" + suffix + ".png");
-        this.ySize = maxY;
+        this.imageHeight = maxY;
         this.guiY = guiY;
-        this.xSize = 184;
+        this.imageWidth = 184;
     }
     //TODO
     /*@Override

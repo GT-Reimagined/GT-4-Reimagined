@@ -10,7 +10,7 @@ import trinsdar.gt4r.tile.multi.TileEntityFusionReactor;
 public class ScreenFusionReactor<T extends ContainerMultiMachine<TileEntityFusionReactor>> extends ScreenMultiMachine<TileEntityFusionReactor, T> {
     public ScreenFusionReactor(T container, PlayerInventory inv, ITextComponent name) {
         super(container, inv, name);
-        this.ySize = 182;
+        this.imageHeight = 182;
     }
 
     @Override

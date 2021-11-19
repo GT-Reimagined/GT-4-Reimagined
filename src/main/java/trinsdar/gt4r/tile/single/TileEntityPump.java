@@ -34,25 +34,25 @@ public class TileEntityPump extends TileEntityMachine<TileEntityPump> {
     public void onFirstTick() {
         super.onFirstTick();
         if (this.pumpHeadY < 0) {
-            this.pumpHeadY = pos.getY() - 1;
+            this.pumpHeadY = worldPosition.getY() - 1;
         }
     }
 
     @Override
     public void onServerUpdate() {
         super.onServerUpdate();
-        if (this.isServerSide() && world.getGameTime()%10==0 && this.machineState != MachineState.DISABLED && this.itemHandler.map(i -> {
+        if (this.isServerSide() && level.getGameTime()%10==0 && this.machineState != MachineState.DISABLED && this.itemHandler.map(i -> {
             ItemStack stack = i.getHandler(SlotType.STORAGE).getStackInSlot(0);
             return !stack.isEmpty() && stack.getItem() instanceof BlockItem;
         }).orElse(false)) {
             if (fluidHandler.map(f -> f.getOutputTanks().getTank(0).getFluidAmount() + 1000 <= f.getOutputTanks().getTank(0).getCapacity()).orElse(false) && energyHandler.map(e -> e.getEnergy() >= 2000).orElse(false)) {
                 boolean tMovedOneDown = false;
 
-                if (world.getGameTime()%100==0) {
+                if (level.getGameTime()%100==0) {
                     tMovedOneDown = moveOneDown();
                 }
-                int x = pos.getX();
-                int z = pos.getZ();
+                int x = worldPosition.getX();
+                int z = worldPosition.getZ();
 
                 if (fluid == Fluids.EMPTY) {
                     getFluidAt(x, getPumpHeadY(), z);
@@ -69,10 +69,10 @@ public class TileEntityPump extends TileEntityMachine<TileEntityPump> {
                         getFluidAt(x - 1, getPumpHeadY(), z);
                     }
                 } else {
-                    if (getPumpHeadY() < pos.getY()) {
-                        if (tMovedOneDown || (mPumpList.isEmpty() && world.getGameTime() % 200 == 100) || world.getGameTime() % 72000 == 100) {
+                    if (getPumpHeadY() < worldPosition.getY()) {
+                        if (tMovedOneDown || (mPumpList.isEmpty() && level.getGameTime() % 200 == 100) || level.getGameTime() % 72000 == 100) {
                             mPumpList.clear();
-                            for (int y = pos.getY() - 1; mPumpList.isEmpty() && y >= pumpHeadY; y--) {
+                            for (int y = worldPosition.getY() - 1; mPumpList.isEmpty() && y >= pumpHeadY; y--) {
                                 scanForFluid(x, y, z, mPumpList, x, z, 64);
                             }
                         }
@@ -95,8 +95,8 @@ public class TileEntityPump extends TileEntityMachine<TileEntityPump> {
 
     private boolean moveOneDown() {
         if (pumpHeadY <= 0) return false;
-        BlockState state = world.getBlockState(new BlockPos(pos.getX(), pumpHeadY - 1, pos.getZ()));
-        if (!(state.getBlock() instanceof FlowingFluidBlock) && !state.getBlock().isAir(state, world, new BlockPos(pos.getX(), pumpHeadY - 1, pos.getZ()))) return false;
+        BlockState state = level.getBlockState(new BlockPos(worldPosition.getX(), pumpHeadY - 1, worldPosition.getZ()));
+        if (!(state.getBlock() instanceof FlowingFluidBlock) && !state.getBlock().isAir(state, level, new BlockPos(worldPosition.getX(), pumpHeadY - 1, worldPosition.getZ()))) return false;
         pumpHeadY--;
         return true;
     }
@@ -123,7 +123,7 @@ public class TileEntityPump extends TileEntityMachine<TileEntityPump> {
         if (nZ && aZ > mZ - mDist) {
             scanForFluid(aX, aY, aZ - 1, aList, mX, mZ, mDist);
         }
-        if (addIfFluidAndNotAlreadyAdded(aX, aY + 1, aZ, aList) || (aX == mX && aZ == mZ && aY < pos.getY())) {
+        if (addIfFluidAndNotAlreadyAdded(aX, aY + 1, aZ, aList) || (aX == mX && aZ == mZ && aY < worldPosition.getY())) {
             scanForFluid(aX, aY + 1, aZ, aList, mX, mZ, mDist);
         }
     }
@@ -131,7 +131,7 @@ public class TileEntityPump extends TileEntityMachine<TileEntityPump> {
     private boolean addIfFluidAndNotAlreadyAdded(int aX, int aY, int aZ, ArrayList<BlockPos> aList) {
         BlockPos tCoordinate = new BlockPos(aX, aY, aZ);
         if (!aList.contains(tCoordinate)) {
-            Fluid fluid = world.getFluidState(new BlockPos(aX, aY, aZ)).getFluid();
+            Fluid fluid = level.getFluidState(new BlockPos(aX, aY, aZ)).getType();
             if (this.fluid == fluid && fluid != Fluids.EMPTY) {
                 aList.add(tCoordinate);
                 return true;
@@ -141,14 +141,14 @@ public class TileEntityPump extends TileEntityMachine<TileEntityPump> {
     }
 
     private void getFluidAt(int x, int y, int z) {
-        fluid = world.getFluidState(new BlockPos(x, y, z)).getFluid();
-        if (fluid == Fluids.WATER && world.getBlockState(new BlockPos(x, y, z)) != Blocks.WATER.getDefaultState()) fluid = Fluids.EMPTY;
+        fluid = level.getFluidState(new BlockPos(x, y, z)).getType();
+        if (fluid == Fluids.WATER && level.getBlockState(new BlockPos(x, y, z)) != Blocks.WATER.defaultBlockState()) fluid = Fluids.EMPTY;
     }
 
     private boolean consumeFluid(int x, int y, int z) {
         BlockPos pos = new BlockPos(x, y, z);
-        FluidState fluidState = world.getFluidState(pos);
-        Fluid fluid = fluidState.getFluid();
+        FluidState fluidState = level.getFluidState(pos);
+        Fluid fluid = fluidState.getType();
         if (!(this.itemHandler.map(i -> {
             ItemStack stack = i.getHandler(SlotType.STORAGE).getStackInSlot(0);
             return !stack.isEmpty() && stack.getItem() instanceof BlockItem;
@@ -157,7 +157,7 @@ public class TileEntityPump extends TileEntityMachine<TileEntityPump> {
         }
         if (fluid == this.fluid && fluid != Fluids.EMPTY) {
             // waterlogged block
-            if ((fluid == Fluids.WATER || fluid == Fluids.FLOWING_WATER) && world.getBlockState(pos).getBlock() != Blocks.WATER) {
+            if ((fluid == Fluids.WATER || fluid == Fluids.FLOWING_WATER) && level.getBlockState(pos).getBlock() != Blocks.WATER) {
                 return false;
             }
             if (fluid.isSource(fluidState)) {
@@ -172,8 +172,8 @@ public class TileEntityPump extends TileEntityMachine<TileEntityPump> {
                 energyHandler.ifPresent(e -> e.extractInternal(250, false, true));
             }
             Block block = this.itemHandler.map(i -> ((BlockItem)i.getHandler(SlotType.STORAGE).getStackInSlot(0).getItem()).getBlock()).orElse(Blocks.AIR);
-            if (x == this.pos.getX() && z == this.pos.getZ()) block = Blocks.AIR;
-            world.setBlockState(pos, block.getDefaultState());
+            if (x == this.worldPosition.getX() && z == this.worldPosition.getZ()) block = Blocks.AIR;
+            level.setBlockAndUpdate(pos, block.defaultBlockState());
             if (block != Blocks.AIR) itemHandler.ifPresent(i -> i.getHandler(SlotType.STORAGE).extractFromInput(0, 1, false));
             return true;
         }
@@ -181,8 +181,8 @@ public class TileEntityPump extends TileEntityMachine<TileEntityPump> {
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT tag) {
-        super.write(tag);
+    public CompoundNBT save(CompoundNBT tag) {
+        super.save(tag);
         tag.put("Fluid", new FluidStack(fluid, 1).writeToNBT(new CompoundNBT()));
         tag.putInt("pumpHeadY", pumpHeadY);
         ListNBT nbtTagList = new ListNBT();
@@ -200,8 +200,8 @@ public class TileEntityPump extends TileEntityMachine<TileEntityPump> {
     }
 
     @Override
-    public void read(BlockState state, CompoundNBT tag) {
-        super.read(state, tag);
+    public void load(BlockState state, CompoundNBT tag) {
+        super.load(state, tag);
         mPumpList = new ArrayList<>();
         ListNBT tagList = tag.getList("Positions", Constants.NBT.TAG_COMPOUND);
         for (int i = 0; i < tagList.size(); i++)

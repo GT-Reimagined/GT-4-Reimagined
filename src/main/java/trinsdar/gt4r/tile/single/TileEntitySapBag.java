@@ -19,11 +19,11 @@ public class TileEntitySapBag extends TileEntityTickable<TileEntitySapBag> {
 
     @Override
     public void onFirstTick() {
-        BlockState state = world.getBlockState(this.getPos().offset(facing));
+        BlockState state = level.getBlockState(this.getBlockPos().relative(facing));
         if (state.getBlock() == GT4RData.RUBBER_LOG){
-            if(state.get(BlockRubberLog.RESIN_STATE) ==  ResinState.FILLED && state.get(BlockRubberLog.RESIN_FACING) == facing.getOpposite()){
+            if(state.getValue(BlockRubberLog.RESIN_STATE) ==  ResinState.FILLED && state.getValue(BlockRubberLog.RESIN_FACING) == facing.getOpposite()){
                 boolean successful = false;
-                int amount = (1 + world.rand.nextInt(3));
+                int amount = (1 + level.random.nextInt(3));
                 if (sap.isEmpty()){
                     setSap(new ItemStack(GT4RData.StickyResin, amount));
                     successful = true;
@@ -32,7 +32,7 @@ public class TileEntitySapBag extends TileEntityTickable<TileEntitySapBag> {
                     successful = true;
                 }
                 if (successful){
-                    world.setBlockState(this.getPos().offset(facing), state.with(BlockRubberLog.RESIN_STATE, ResinState.EMPTY));
+                    level.setBlockAndUpdate(this.getBlockPos().relative(facing), state.setValue(BlockRubberLog.RESIN_STATE, ResinState.EMPTY));
                 }
             }
         }
@@ -65,25 +65,25 @@ public class TileEntitySapBag extends TileEntityTickable<TileEntitySapBag> {
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT tag) {
-        super.write(tag);
-        tag.putInt("F", facing.getIndex());
-        tag.put("S", sap.write(new CompoundNBT()));
+    public CompoundNBT save(CompoundNBT tag) {
+        super.save(tag);
+        tag.putInt("F", facing.get3DDataValue());
+        tag.put("S", sap.save(new CompoundNBT()));
         return tag;
     }
 
     @Override
-    public void read(BlockState state, CompoundNBT nbt) {
-        super.read(state, nbt);
-        this.facing = Direction.byIndex(nbt.getInt("F"));
-        this.sap = ItemStack.read(nbt.getCompound("S"));
+    public void load(BlockState state, CompoundNBT nbt) {
+        super.load(state, nbt);
+        this.facing = Direction.from3DDataValue(nbt.getInt("F"));
+        this.sap = ItemStack.of(nbt.getCompound("S"));
     }
 
     @Override
     public CompoundNBT getUpdateTag() {
         CompoundNBT tag = super.getUpdateTag();
-        tag.putInt("F", facing.getIndex());
-        tag.put("S", sap.write(new CompoundNBT()));
+        tag.putInt("F", facing.get3DDataValue());
+        tag.put("S", sap.save(new CompoundNBT()));
         return tag;
     }
 }

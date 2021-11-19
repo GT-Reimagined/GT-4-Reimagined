@@ -5,7 +5,7 @@ import muramasa.antimatter.cover.BaseCover;
 import muramasa.antimatter.cover.CoverFactory;
 import muramasa.antimatter.cover.ICoverMode;
 import muramasa.antimatter.cover.ICoverModeHandler;
-import muramasa.antimatter.gui.event.GuiEvent;
+import muramasa.antimatter.gui.event.GuiEvents;
 import muramasa.antimatter.gui.event.IGuiEvent;
 import muramasa.antimatter.machine.MachineState;
 import muramasa.antimatter.machine.Tier;
@@ -98,13 +98,14 @@ public class CoverRedstoneMachineController extends BaseCover implements ICoverM
 
     @Override
     public void onBlockUpdate() {
-        redstonePower = handler.getTile().getWorld().getRedstonePower(handler.getTile().getPos().offset(side), side);
+        redstonePower = handler.getTile().getLevel().getSignal(handler.getTile().getBlockPos().relative(side), side);
     }
 
     @Override
-    public void onGuiEvent(IGuiEvent event, PlayerEntity playerEntity, int... data) {
-        if (event == GuiEvent.EXTRA_BUTTON){
-            coverMode = RedstoneMode.values()[Math.min(data[0], 2)];
+    public void onGuiEvent(IGuiEvent event, PlayerEntity playerEntity) {
+        if (event.getFactory() == GuiEvents.EXTRA_BUTTON){
+            GuiEvents.GuiEvent ev = (GuiEvents.GuiEvent) event;
+            coverMode = RedstoneMode.values()[Math.min(ev.data[0], 2)];
         }
     }
 

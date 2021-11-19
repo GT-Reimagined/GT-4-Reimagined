@@ -17,6 +17,9 @@ import java.util.List;
 import static muramasa.antimatter.Data.COVEROUTPUT;
 import static trinsdar.gt4r.data.Materials.Steam;
 
+import muramasa.antimatter.capability.FluidHandler.FluidDirection;
+import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
+
 public class TileEntityInfiniteFluid extends TileEntityMachine<TileEntityInfiniteFluid> {
 
     public TileEntityInfiniteFluid(Machine<?> type) {

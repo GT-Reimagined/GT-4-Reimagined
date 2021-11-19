@@ -1,6 +1,6 @@
 package trinsdar.gt4r.tile.multi;
 
-import muramasa.antimatter.gui.event.GuiEvent;
+import muramasa.antimatter.gui.event.GuiEvents;
 import muramasa.antimatter.gui.event.IGuiEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
@@ -28,22 +28,24 @@ public class TileEntityFusionReactor extends TileEntityMultiMachine<TileEntityFu
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT tag) {
-        super.write(tag);
+    public CompoundNBT save(CompoundNBT tag) {
+        super.save(tag);
         tag.putInt("display", display.ordinal());
         return tag;
     }
 
     @Override
-    public void read(BlockState state, CompoundNBT tag) {
-        super.read(state, tag);
+    public void load(BlockState state, CompoundNBT tag) {
+        super.load(state, tag);
         this.display = Display.values()[tag.getInt("display")];
     }
 
     @Override
-    public void onGuiEvent(IGuiEvent event, PlayerEntity playerEntity, int... data) {
-        super.onGuiEvent(event, playerEntity, data);
-        if (event == GuiEvent.EXTRA_BUTTON){
+    public void onGuiEvent(IGuiEvent event, PlayerEntity playerEntity) {
+        super.onGuiEvent(event, playerEntity);
+        if (event.getFactory() == GuiEvents.EXTRA_BUTTON){
+            GuiEvents.GuiEvent ev =(GuiEvents.GuiEvent) event;
+            int[] data = ev.data;
             if (data[0] == 0){
                 this.display = Display.REGULAR;
             } else if (data[0] == 1){

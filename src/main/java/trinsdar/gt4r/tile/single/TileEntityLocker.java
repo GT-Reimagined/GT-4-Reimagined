@@ -36,28 +36,28 @@ public class TileEntityLocker extends TileEntityMaterial<TileEntityLocker> {
 
     @Override
     public ActionResultType onInteract(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit, @Nullable AntimatterToolType type) {
-        if (player.getHeldItem(hand).isEmpty() && hit.getFace() == this.getFacing()){
+        if (player.getItemInHand(hand).isEmpty() && hit.getDirection() == this.getFacing()){
             this.itemHandler.ifPresent(h -> {
                 for (int i = 0; i < 4; i++){
-                    ItemStack armorStack = player.getItemStackFromSlot(getSlot(i));
+                    ItemStack armorStack = player.getItemBySlot(getSlot(i));
                     ItemStack inventoryStack = h.getHandler(SlotType.STORAGE).getStackInSlot(i);
                     if (!armorStack.isEmpty() && !inventoryStack.isEmpty()){
                         ItemStack copy = armorStack.copy();
                         ItemStack copy1 = inventoryStack.copy();
                         armorStack.shrink(armorStack.getCount());
                         inventoryStack.shrink(inventoryStack.getCount());
-                        player.setItemStackToSlot(getSlot(i), copy1);
+                        player.setItemSlot(getSlot(i), copy1);
                         h.getHandler(SlotType.STORAGE).setStackInSlot(i, copy);
                     } else if (!armorStack.isEmpty()){
                         h.getHandler(SlotType.STORAGE).setStackInSlot(i, armorStack.copy());
                         armorStack.shrink(armorStack.getCount());
                     } else if (!inventoryStack.isEmpty()){
-                        player.setItemStackToSlot(getSlot(i), inventoryStack.copy());
+                        player.setItemSlot(getSlot(i), inventoryStack.copy());
                         inventoryStack.shrink(inventoryStack.getCount());
                     }
                 }
             });
-            world.playSound(null, this.getPos(), SoundEvents.UI_BUTTON_CLICK, SoundCategory.PLAYERS, 1.0F, 1.0F);
+            world.playSound(null, this.getBlockPos(), SoundEvents.UI_BUTTON_CLICK, SoundCategory.PLAYERS, 1.0F, 1.0F);
             return ActionResultType.SUCCESS;
         }
         return super.onInteract(state, world, pos, player, hand, hit, type);

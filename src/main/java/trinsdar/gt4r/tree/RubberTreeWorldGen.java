@@ -42,16 +42,16 @@ public class RubberTreeWorldGen  extends WorldGenBase<RubberTreeWorldGen> {
     }
 
     final static BaseTreeFeatureConfig RUBBER_TREE_CONFIG_SWAMP =
-            (new BaseTreeFeatureConfig.Builder(RubberTree.TRUNK_BLOCKS, new SimpleBlockStateProvider(GT4RData.RUBBER_LEAVES.getDefaultState()),
-                    new RubberFoliagePlacer(), new StraightTrunkPlacer(4, 3, 0), new TwoLayerFeature(1, 0, 2))).setIgnoreVines().setMaxWaterDepth(1).setDecorators(ImmutableList.of(new LeaveVineTreeDecorator())).build();
+            (new BaseTreeFeatureConfig.Builder(RubberTree.TRUNK_BLOCKS, new SimpleBlockStateProvider(GT4RData.RUBBER_LEAVES.defaultBlockState()),
+                    new RubberFoliagePlacer(), new StraightTrunkPlacer(4, 3, 0), new TwoLayerFeature(1, 0, 2))).ignoreVines().maxWaterDepth(1).decorators(ImmutableList.of(new LeaveVineTreeDecorator())).build();
 
     final static BaseTreeFeatureConfig RUBBER_TREE_CONFIG_JUNGLE =
-            (new BaseTreeFeatureConfig.Builder(RubberTree.TRUNK_BLOCKS, new SimpleBlockStateProvider(GT4RData.RUBBER_LEAVES.getDefaultState()),
-                    new RubberFoliagePlacer(), new StraightTrunkPlacer(6, 3, 0), new TwoLayerFeature(1, 0, 2))).setIgnoreVines().setDecorators(ImmutableList.of(new LeaveVineTreeDecorator())).build();
+            (new BaseTreeFeatureConfig.Builder(RubberTree.TRUNK_BLOCKS, new SimpleBlockStateProvider(GT4RData.RUBBER_LEAVES.defaultBlockState()),
+                    new RubberFoliagePlacer(), new StraightTrunkPlacer(6, 3, 0), new TwoLayerFeature(1, 0, 2))).ignoreVines().decorators(ImmutableList.of(new LeaveVineTreeDecorator())).build();
 
     final static BaseTreeFeatureConfig RUBBER_TREE_CONFIG_NORMAL =
-            (new BaseTreeFeatureConfig.Builder(RubberTree.TRUNK_BLOCKS, new SimpleBlockStateProvider(GT4RData.RUBBER_LEAVES.getDefaultState()),
-                    new RubberFoliagePlacer(), new StraightTrunkPlacer(4, 3, 0), new TwoLayerFeature(1, 0, 2))).setIgnoreVines().build();
+            (new BaseTreeFeatureConfig.Builder(RubberTree.TRUNK_BLOCKS, new SimpleBlockStateProvider(GT4RData.RUBBER_LEAVES.defaultBlockState()),
+                    new RubberFoliagePlacer(), new StraightTrunkPlacer(4, 3, 0), new TwoLayerFeature(1, 0, 2))).ignoreVines().build();
 
 
 
@@ -70,14 +70,14 @@ public class RubberTreeWorldGen  extends WorldGenBase<RubberTreeWorldGen> {
                 p += 0.04F;
         }
         float finalp = p;
-        builder.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(() -> RubberTree.TREE_FEATURE.withConfiguration(getTreeConfig(biomeCategory))
-                .withPlacement(new RubberTreePlacement().configure(new AtSurfaceWithExtraConfig(0, finalp, 1))));
+        builder.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(() -> RubberTree.TREE_FEATURE.configured(getTreeConfig(biomeCategory))
+                .decorated(new RubberTreePlacement().configured(new AtSurfaceWithExtraConfig(0, finalp, 1))));
         if (RNG.nextInt(4) == 0){
-            builder.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(() -> RubberTree.TREE_FEATURE.withConfiguration(getTreeConfig(biomeCategory))
-                    .withPlacement(new RubberTreePlacement().configure(new AtSurfaceWithExtraConfig(0, finalp, 1))));
+            builder.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(() -> RubberTree.TREE_FEATURE.configured(getTreeConfig(biomeCategory))
+                    .decorated(new RubberTreePlacement().configured(new AtSurfaceWithExtraConfig(0, finalp, 1))));
             if (RNG.nextInt(6) == 0){
-                builder.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(() -> RubberTree.TREE_FEATURE.withConfiguration(getTreeConfig(biomeCategory))
-                        .withPlacement(new RubberTreePlacement().configure(new AtSurfaceWithExtraConfig(0, finalp, 1))));
+                builder.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(() -> RubberTree.TREE_FEATURE.configured(getTreeConfig(biomeCategory))
+                        .decorated(new RubberTreePlacement().configured(new AtSurfaceWithExtraConfig(0, finalp, 1))));
             }
         }
     }
@@ -103,7 +103,7 @@ public class RubberTreeWorldGen  extends WorldGenBase<RubberTreeWorldGen> {
             return IntStream.range(0, i).mapToObj((ix) -> {
                 int j = random.nextInt(16) + pos.getX();
                 int k = random.nextInt(16) + pos.getZ();
-                return new BlockPos(j, helper.func_242893_a(Heightmap.Type.MOTION_BLOCKING, j, k), k);
+                return new BlockPos(j, helper.getHeight(Heightmap.Type.MOTION_BLOCKING, j, k), k);
             });
         }
 

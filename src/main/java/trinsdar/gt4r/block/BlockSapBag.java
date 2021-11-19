@@ -49,14 +49,14 @@ import java.util.List;
 import static com.google.common.collect.ImmutableMap.of;
 import static net.minecraft.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 import static net.minecraft.state.properties.BlockStateProperties.WATERLOGGED;
-import static net.minecraft.util.Direction.getFacingFromVector;
+import static net.minecraft.util.Direction.getNearest;
 
 public class BlockSapBag  extends BlockDynamic implements IWaterLoggable {
     protected ModelConfig config = new ModelConfig();
     final VoxelShape[] SHAPES;
     final Texture[] TEXTURES;
     public BlockSapBag() {
-        super(Ref.ID, "sap_bag", Block.Properties.create(Material.ORGANIC, MaterialColor.RED_TERRACOTTA).notSolid().hardnessAndResistance(0.5F).sound(SoundType.CLOTH));
+        super(Ref.ID, "sap_bag", Block.Properties.of(Material.GRASS, MaterialColor.TERRACOTTA_RED).noOcclusion().strength(0.5F).sound(SoundType.WOOL));
         SHAPES = setBlockBounds2();
         TEXTURES = new Texture[]{new Texture(Ref.ID, "block/sapbag/bottom"), new Texture(Ref.ID, "block/sapbag/top"), new Texture(Ref.ID, "block/sapbag/side"), new Texture(Ref.ID, "block/sapbag/top_filled")};
     }
@@ -71,34 +71,34 @@ public class BlockSapBag  extends BlockDynamic implements IWaterLoggable {
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context) {
-        return SHAPES[state.get(HORIZONTAL_FACING).getHorizontalIndex()];
+        return SHAPES[state.getValue(HORIZONTAL_FACING).get2DDataValue()];
     }
 
     @Override
     public ModelConfig getConfig(BlockState state, IBlockReader world, BlockPos.Mutable mut, BlockPos pos) {
-        TileEntitySapBag tile = (TileEntitySapBag) world.getTileEntity(pos);
+        TileEntitySapBag tile = (TileEntitySapBag) world.getBlockEntity(pos);
         int filled = tile != null ? (tile.getSap().isEmpty() || tile.getSap().getCount() == 0 ? 0 : tile.getSap().getCount() < 11 ? 1 : tile.getSap().getCount() < 21 ? 2 : tile.getSap().getCount() < 31 ? 3 : tile.getSap().getCount() < 41 ? 4 : tile.getSap().getCount() < 51 ? 5 : 6 ) : 0;
-        return config.set(new int[]{getModelId(state.get(HORIZONTAL_FACING), filled)});
+        return config.set(new int[]{getModelId(state.getValue(HORIZONTAL_FACING), filled)});
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(HORIZONTAL_FACING, WATERLOGGED);
     }
 
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        FluidState fluidstate = context.getWorld().getFluidState(context.getPos());
-        return this.getDefaultState().with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing()).with(WATERLOGGED, fluidstate.getFluid() == Fluids.WATER);
+        FluidState fluidstate = context.getLevel().getFluidState(context.getClickedPos());
+        return this.defaultBlockState().setValue(HORIZONTAL_FACING, context.getHorizontalDirection()).setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER);
     }
 
     @Override
-    public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+    public void setPlacedBy(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         if (placer != null) { //Y = 0 , reduce to xz plane
-            Direction dir = getFacingFromVector((float) placer.getLookVec().x, (float) 0, (float) placer.getLookVec().z);
-            world.setBlockState(pos, state.with(HORIZONTAL_FACING, dir));
-            TileEntity tile = world.getTileEntity(pos);
+            Direction dir = getNearest((float) placer.getLookAngle().x, (float) 0, (float) placer.getLookAngle().z);
+            world.setBlockAndUpdate(pos, state.setValue(HORIZONTAL_FACING, dir));
+            TileEntity tile = world.getBlockEntity(pos);
             if (tile instanceof TileEntitySapBag){
                 ((TileEntitySapBag)tile).setFacing(dir);
             }
@@ -108,33 +108,33 @@ public class BlockSapBag  extends BlockDynamic implements IWaterLoggable {
     @Override
     public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
         super.neighborChanged(state, worldIn, pos, blockIn, fromPos, isMoving);
-        TileEntity tile = worldIn.getTileEntity(pos);
+        TileEntity tile = worldIn.getBlockEntity(pos);
         if (tile instanceof TileEntitySapBag){
             ((TileEntitySapBag)tile).onBlockUpdate();
         }
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        TileEntity tile = worldIn.getTileEntity(pos);
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        TileEntity tile = worldIn.getBlockEntity(pos);
         if (tile instanceof TileEntitySapBag){
             TileEntitySapBag sapBag = (TileEntitySapBag) tile;
             if (!sapBag.getSap().isEmpty()){
-                if (!player.addItemStackToInventory(sapBag.getSap().copy())){
-                    player.dropItem(sapBag.getSap().copy(), false);
+                if (!player.addItem(sapBag.getSap().copy())){
+                    player.drop(sapBag.getSap().copy(), false);
                 }
                 sapBag.setSap(ItemStack.EMPTY);
                 sapBag.onFirstTick();
                 return ActionResultType.SUCCESS;
             }
         }
-        return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+        return super.use(state, worldIn, pos, player, handIn, hit);
     }
 
     @Override
     public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
         List<ItemStack> list = super.getDrops(state, builder);
-        TileEntity tileentity = builder.get(LootParameters.BLOCK_ENTITY);
+        TileEntity tileentity = builder.getOptionalParameter(LootParameters.BLOCK_ENTITY);
         if (tileentity instanceof TileEntitySapBag){
             ItemStack stack = ((TileEntitySapBag)tileentity).getSap();
             if (!stack.isEmpty()){
@@ -170,19 +170,19 @@ public class BlockSapBag  extends BlockDynamic implements IWaterLoggable {
     }
 
     private int getModelId(Direction facing, int filled) {
-        return facing.getHorizontalIndex() +  (filled * 10);
+        return facing.get2DDataValue() +  (filled * 10);
     }
 
     AntimatterBlockModelBuilder buildModelsForState(AntimatterBlockModelBuilder builder, BlockState state) {
         builder.staticConfigId("sap_bag");
-        Direction f = state.get(HORIZONTAL_FACING);
-        boolean waterlogged = state.get(WATERLOGGED);
+        Direction f = state.getValue(HORIZONTAL_FACING);
+        boolean waterlogged = state.getValue(WATERLOGGED);
         if (!waterlogged){
             for (int i = 0; i < 7; i++){
                 String addition = i == 0 ? "" : "_filled_" + i;
                 int finalI = i;
                 builder.config(getModelId(f, i), (b, l) -> {
-                    DynamicConfigBuilder build = b.of(new ResourceLocation(domain, "block/sapbag/" + f.getString() + addition)).tex(of("side", TEXTURES[2], "bottom", TEXTURES[0], "top", TEXTURES[1]));
+                    DynamicConfigBuilder build = b.of(new ResourceLocation(domain, "block/sapbag/" + f.getSerializedName() + addition)).tex(of("side", TEXTURES[2], "bottom", TEXTURES[0], "top", TEXTURES[1]));
                     if (finalI != 0){
                         build.tex(of("side", TEXTURES[2], "bottom", TEXTURES[0], "top", TEXTURES[1],"topfilled", TEXTURES[3]));
                     }
@@ -196,6 +196,6 @@ public class BlockSapBag  extends BlockDynamic implements IWaterLoggable {
 
     @Override
     public FluidState getFluidState(BlockState state) {
-        return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 }

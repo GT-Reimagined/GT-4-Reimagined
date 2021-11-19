@@ -34,6 +34,8 @@ import static net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.SIM
 import static trinsdar.gt4r.data.Materials.DistilledWater;
 import static trinsdar.gt4r.data.Materials.Steam;
 
+import muramasa.antimatter.capability.FluidHandler.FluidDirection;
+
 public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExchanger> {
     public TileEntityHeatExchanger(Machine<?> type) {
         super(type);
@@ -57,8 +59,8 @@ public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExc
                 super.addOutputs();
                 heat += activeRecipe.getSpecialValue();
                 if (heat > maxHeat){
-                    tile.getWorld().createExplosion(null, tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ(), 4.0F, Explosion.Mode.DESTROY);
-                    tile.getWorld().setBlockState(tile.getPos(), Blocks.AIR.getDefaultState());
+                    tile.getLevel().explode(null, tile.getBlockPos().getX(), tile.getBlockPos().getY(), tile.getBlockPos().getZ(), 4.0F, Explosion.Mode.DESTROY);
+                    tile.getLevel().setBlockAndUpdate(tile.getBlockPos(), Blocks.AIR.defaultBlockState());
                     return;
                 }
                 if (heat >= 80 && consumedWater){
@@ -143,18 +145,18 @@ public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExc
         @Override
         public void onUpdate() {
             super.onUpdate();
-            Direction right = tile.getFacing().rotateYCCW();
-            Direction left = tile.getFacing().rotateY();
-            TileEntity rightTile = tile.world.getTileEntity(tile.getPos().offset(right));
-            TileEntity downTile = tile.world.getTileEntity(tile.getPos().offset(DOWN));
+            Direction right = tile.getFacing().getCounterClockWise();
+            Direction left = tile.getFacing().getClockWise();
+            TileEntity rightTile = tile.level.getBlockEntity(tile.getBlockPos().relative(right));
+            TileEntity downTile = tile.level.getBlockEntity(tile.getBlockPos().relative(DOWN));
             if (rightTile != null) {
                 tile.fluidHandler.side(right).ifPresent(f -> rightTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, right.getOpposite()).ifPresent(t -> Utils.transferFluids(f, t, 1000)));
             }
             if (downTile != null) {
                 tile.fluidHandler.side(DOWN).ifPresent(f -> downTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, UP).ifPresent(t -> Utils.transferFluids(f, t, 1000)));
             }
-            TileEntity leftTile = tile.world.getTileEntity(tile.getPos().offset(left));
-            TileEntity upTile = tile.world.getTileEntity(tile.getPos().offset(UP));
+            TileEntity leftTile = tile.level.getBlockEntity(tile.getBlockPos().relative(left));
+            TileEntity upTile = tile.level.getBlockEntity(tile.getBlockPos().relative(UP));
             if (leftTile != null) {
                 tile.fluidHandler.side(left).ifPresent(t -> leftTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, left.getOpposite()).ifPresent(f -> transferFluids(f, ((HeatExchangerFluidHandlerSidedWrapper)t), 1000)));
             }
@@ -204,8 +206,8 @@ public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExc
             if (stack.getFluid() == Fluids.WATER || stack.getFluid() == DistilledWater.getLiquid()){
                 int fillSim = super.fill(stack, FluidAction.SIMULATE);
                 if (fillSim > 0 && tile.recipeHandler.map(h -> h.serializeNBT().getInt("heat") >= 80).orElse(false)){
-                    tile.getWorld().createExplosion(null, tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ(), 4.0F, Explosion.Mode.DESTROY);
-                    tile.getWorld().setBlockState(tile.getPos(), Blocks.AIR.getDefaultState());
+                    tile.getLevel().explode(null, tile.getBlockPos().getX(), tile.getBlockPos().getY(), tile.getBlockPos().getZ(), 4.0F, Explosion.Mode.DESTROY);
+                    tile.getLevel().setBlockAndUpdate(tile.getBlockPos(), Blocks.AIR.defaultBlockState());
                     return 0;
                 }
             }
@@ -219,7 +221,7 @@ public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExc
 
             @Override
             public int fill(FluidStack resource, FluidAction action) {
-                if (side == DOWN || side == ((HeatExchangerFluidHandler)fluidHandler).tile.getFacing().rotateYCCW()) return 0;
+                if (side == DOWN || side == ((HeatExchangerFluidHandler)fluidHandler).tile.getFacing().getCounterClockWise()) return 0;
                 /*if (side == UP) {
                     int fill = fluidHandler.tanks.get(FluidDirection.INPUT).getTank(0).fill(resource, action);
                     return fill;
@@ -232,12 +234,12 @@ public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExc
             }
 
             public int fillInternal(FluidStack resource, FluidAction action) {
-                if (side == DOWN || side == ((HeatExchangerFluidHandler)fluidHandler).tile.getFacing().rotateYCCW()) return 0;
+                if (side == DOWN || side == ((HeatExchangerFluidHandler)fluidHandler).tile.getFacing().getCounterClockWise()) return 0;
                 if (side == UP) {
                     int fill = ((HeatExchangerFluidHandler)fluidHandler).tanks.get(FluidDirection.INPUT).getTank(0).fill(resource, action);
                     return fill;
                 }
-                if (side == ((HeatExchangerFluidHandler)fluidHandler).tile.getFacing().rotateY()) {
+                if (side == ((HeatExchangerFluidHandler)fluidHandler).tile.getFacing().getClockWise()) {
                     int fill = ((HeatExchangerFluidHandler)fluidHandler).tanks.get(FluidDirection.INPUT).getTank(1).fill(resource, action);
                     return fill;
                 }
@@ -248,7 +250,7 @@ public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExc
             @Override
             public FluidStack drain(FluidStack resource, FluidAction action) {
                 if (side == DOWN) return ((HeatExchangerFluidHandler)fluidHandler).tanks.get(FluidDirection.OUTPUT).getTank(1).drain(resource, action);
-                if (side == ((HeatExchangerFluidHandler)fluidHandler).tile.getFacing().rotateYCCW()) return ((HeatExchangerFluidHandler)fluidHandler).tanks.get(FluidDirection.OUTPUT).getTank(0).drain(resource, action);
+                if (side == ((HeatExchangerFluidHandler)fluidHandler).tile.getFacing().getCounterClockWise()) return ((HeatExchangerFluidHandler)fluidHandler).tanks.get(FluidDirection.OUTPUT).getTank(0).drain(resource, action);
                 return FluidStack.EMPTY;
             }
 
@@ -256,7 +258,7 @@ public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExc
             @Override
             public FluidStack drain(int maxDrain, FluidAction action) {
                 if (side == DOWN) return ((HeatExchangerFluidHandler)fluidHandler).tanks.get(FluidDirection.OUTPUT).getTank(1).drain(maxDrain, action);
-                if (side == ((HeatExchangerFluidHandler)fluidHandler).tile.getFacing().rotateYCCW()) return ((HeatExchangerFluidHandler)fluidHandler).tanks.get(FluidDirection.OUTPUT).getTank(0).drain(maxDrain, action);
+                if (side == ((HeatExchangerFluidHandler)fluidHandler).tile.getFacing().getCounterClockWise()) return ((HeatExchangerFluidHandler)fluidHandler).tanks.get(FluidDirection.OUTPUT).getTank(0).drain(maxDrain, action);
                 return FluidStack.EMPTY;
             }
         }

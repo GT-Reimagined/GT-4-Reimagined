@@ -39,10 +39,10 @@ public class ItemMixedMetal extends ItemBasic<ItemMixedMetal> implements IColorH
     }
 
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         CompoundNBT stackNbt = stack.getTag();
         if (stackNbt == null){
-            super.addInformation(stack, worldIn, tooltip, flagIn);
+            super.appendHoverText(stack, worldIn, tooltip, flagIn);
             return;
         }
         CompoundNBT nbt = stackNbt.getCompound(muramasa.antimatter.Ref.TAG_TOOL_DATA);
@@ -52,12 +52,12 @@ public class ItemMixedMetal extends ItemBasic<ItemMixedMetal> implements IColorH
         tooltip.add(new StringTextComponent("Top Material: " + t.getDisplayName().getString()));
         tooltip.add(new StringTextComponent("Middle Material: " + m.getDisplayName().getString()));
         tooltip.add(new StringTextComponent("Bottom Material: " + b.getDisplayName().getString()));
-        super.addInformation(stack, worldIn, tooltip, flagIn);
+        super.appendHoverText(stack, worldIn, tooltip, flagIn);
     }
 
     @Override
-    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-        if (this.isInGroup(group)) {
+    public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
+        if (this.allowdedIn(group)) {
             ItemStack itemStack = new ItemStack(this);
             CompoundNBT nbt = new CompoundNBT();
             nbt.putString("tm", Materials.WroughtIron.getId());

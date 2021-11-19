@@ -3,7 +3,7 @@ package trinsdar.gt4r.tile.single;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import muramasa.antimatter.capability.machine.MachineEnergyHandler;
 import muramasa.antimatter.gui.SlotType;
-import muramasa.antimatter.gui.event.GuiEvent;
+import muramasa.antimatter.gui.event.GuiEvents;
 import muramasa.antimatter.gui.event.IGuiEvent;
 import muramasa.antimatter.machine.event.ContentEvent;
 import muramasa.antimatter.machine.event.IMachineEvent;
@@ -65,30 +65,31 @@ public class TileEntityItemFilter extends TileEntityMachine<TileEntityItemFilter
     }
 
     @Override
-    public void onGuiEvent(IGuiEvent event, PlayerEntity playerEntity, int... data) {
-        if (event == GuiEvent.EXTRA_BUTTON) {
+    public void onGuiEvent(IGuiEvent event, PlayerEntity playerEntity) {
+        if (event.getFactory() == GuiEvents.EXTRA_BUTTON) {
+            int[] data = ((GuiEvents.GuiEvent)event).data;
             switch (data[0]) {
                 case 0:
                     emitEnergy = !emitEnergy;
-                    playerEntity.sendMessage(new StringTextComponent( (emitEnergy ? "Emit energy to output side" : "Don't emit energy")), playerEntity.getUniqueID());
+                    playerEntity.sendMessage(new StringTextComponent( (emitEnergy ? "Emit energy to output side" : "Don't emit energy")), playerEntity.getUUID());
                     break;
                 case 1:
                     outputRedstone = !outputRedstone;
-                    playerEntity.sendMessage(new StringTextComponent( (outputRedstone ? "Emit redstone if slots contain something" : "Don't emit redstone")), playerEntity.getUniqueID());
-                    world.markAndNotifyBlock(this.getPos(), this.world.getChunkAt(this.getPos()), this.getBlockState(), this.getBlockState(), 1, 512);
+                    playerEntity.sendMessage(new StringTextComponent( (outputRedstone ? "Emit redstone if slots contain something" : "Don't emit redstone")), playerEntity.getUUID());
+                    level.markAndNotifyBlock(this.getBlockPos(), this.level.getChunkAt(this.getBlockPos()), this.getBlockState(), this.getBlockState(), 1, 512);
                     break;
                 case 2:
                     invertRedstone = !invertRedstone;
-                    playerEntity.sendMessage(new StringTextComponent( (invertRedstone ? "I" : "Don't i") + "nvert redstone"), playerEntity.getUniqueID());
-                    world.markAndNotifyBlock(this.getPos(), this.world.getChunkAt(this.getPos()), this.getBlockState(), this.getBlockState(), 1, 512);
+                    playerEntity.sendMessage(new StringTextComponent( (invertRedstone ? "I" : "Don't i") + "nvert redstone"), playerEntity.getUUID());
+                    level.markAndNotifyBlock(this.getBlockPos(), this.level.getChunkAt(this.getBlockPos()), this.getBlockState(), this.getBlockState(), 1, 512);
                     break;
                 case 3:
                     blacklist = !blacklist;
-                    playerEntity.sendMessage(new StringTextComponent( (blacklist ? "I" : "Don't i") + "nvert filter"), playerEntity.getUniqueID());
+                    playerEntity.sendMessage(new StringTextComponent( (blacklist ? "I" : "Don't i") + "nvert filter"), playerEntity.getUUID());
                     break;
                 case 4:
                     nbt = !nbt;
-                    playerEntity.sendMessage(new StringTextComponent( (nbt ? "NBT has to match" : "Ignore NBT")), playerEntity.getUniqueID());
+                    playerEntity.sendMessage(new StringTextComponent( (nbt ? "NBT has to match" : "Ignore NBT")), playerEntity.getUUID());
                     break;
             }
         }
@@ -111,13 +112,13 @@ public class TileEntityItemFilter extends TileEntityMachine<TileEntityItemFilter
     public void onMachineEvent(IMachineEvent event, Object... data) {
         super.onMachineEvent(event, data);
         if (event == ContentEvent.ITEM_OUTPUT_CHANGED && outputRedstone){
-            world.markAndNotifyBlock(this.getPos(), this.world.getChunkAt(this.getPos()), this.getBlockState(), this.getBlockState(), 1, 512);
+            level.markAndNotifyBlock(this.getBlockPos(), this.level.getChunkAt(this.getBlockPos()), this.getBlockState(), this.getBlockState(), 1, 512);
         }
     }
 
     protected boolean processItemOutput() {
         Direction outputDir = this.getFacing().getOpposite();
-        TileEntity adjTile = Utils.getTile(this.getWorld(), this.getPos().offset(outputDir));
+        TileEntity adjTile = Utils.getTile(this.getLevel(), this.getBlockPos().relative(outputDir));
         if (adjTile == null) return false;
         boolean[] booleans = new boolean[1];
         booleans[0] = false;
@@ -146,8 +147,8 @@ public class TileEntityItemFilter extends TileEntityMachine<TileEntityItemFilter
     }
 
     @Override
-    public void read(BlockState state, CompoundNBT tag) {
-        super.read(state, tag);
+    public void load(BlockState state, CompoundNBT tag) {
+        super.load(state, tag);
         blacklist = tag.getBoolean("blacklist");
         nbt = tag.getBoolean("nbt");
         outputRedstone = tag.getBoolean("outputRedstone");
@@ -156,8 +157,8 @@ public class TileEntityItemFilter extends TileEntityMachine<TileEntityItemFilter
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT tag) {
-        super.write(tag);
+    public CompoundNBT save(CompoundNBT tag) {
+        super.save(tag);
         tag.putBoolean("blacklist", blacklist);
         tag.putBoolean("nbt", nbt);
         tag.putBoolean("outputRedstone", outputRedstone);

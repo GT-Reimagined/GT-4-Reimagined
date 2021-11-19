@@ -45,8 +45,8 @@ public class CoverCrafting extends BaseCover {
     public boolean openGui(PlayerEntity player, Direction side) {
         if (!hasGui()) return false;
         NetworkHooks.openGui((ServerPlayerEntity) player, this, packetBuffer -> {
-            packetBuffer.writeBlockPos(handler.getTile().getPos());
-            packetBuffer.writeInt(side.getIndex());
+            packetBuffer.writeBlockPos(handler.getTile().getBlockPos());
+            packetBuffer.writeInt(side.get3DDataValue());
         });
         return true;
     }

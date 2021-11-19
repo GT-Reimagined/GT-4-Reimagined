@@ -7,8 +7,10 @@ import net.minecraft.block.SoundType;
 
 import static muramasa.antimatter.Data.WRENCH_MATERIAL;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class BlockNonSolidMachine extends BlockMachine {
     public BlockNonSolidMachine(Machine<?> type, Tier tier) {
-        super(type, tier, Properties.create(WRENCH_MATERIAL).hardnessAndResistance(1.0f, 10.0f).sound(SoundType.METAL).setRequiresTool().notSolid());
+        super(type, tier, Properties.of(WRENCH_MATERIAL).strength(1.0f, 10.0f).sound(SoundType.METAL).requiresCorrectToolForDrops().noOcclusion());
     }
 }

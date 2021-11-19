@@ -22,7 +22,7 @@ public class BlockRubberLeaves extends LeavesBlock implements IAntimatterObject,
     protected String domain, id;
 
     public BlockRubberLeaves(String domain, String id) {
-        super(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT).notSolid().setAllowsSpawn(BlockRubberLeaves::allowsSpawnOnLeaves).setSuffocates(GT4RData::isntSolid).setBlocksVision(GT4RData::isntSolid));
+        super(Block.Properties.of(Material.LEAVES).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isValidSpawn(BlockRubberLeaves::allowsSpawnOnLeaves).isSuffocating(GT4RData::isntSolid).isViewBlocking(GT4RData::isntSolid));
         this.domain = domain;
         this.id = id;
         AntimatterAPI.register(BlockRubberLeaves.class, this);
@@ -30,12 +30,12 @@ public class BlockRubberLeaves extends LeavesBlock implements IAntimatterObject,
 
     @Override
     public int getFlammability(BlockState state, IBlockReader world, BlockPos pos, Direction face) {
-        return state.hasProperty(BlockStateProperties.WATERLOGGED) && state.get(BlockStateProperties.WATERLOGGED) ? 0 : 60;
+        return state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED) ? 0 : 60;
     }
 
     @Override
     public int getFireSpreadSpeed(BlockState state, IBlockReader world, BlockPos pos, Direction face) {
-        return state.hasProperty(BlockStateProperties.WATERLOGGED) && state.get(BlockStateProperties.WATERLOGGED) ? 0 : 30;
+        return state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED) ? 0 : 30;
     }
 
     @Override

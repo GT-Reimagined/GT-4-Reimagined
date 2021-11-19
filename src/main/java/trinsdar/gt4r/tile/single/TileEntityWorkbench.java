@@ -2,7 +2,7 @@ package trinsdar.gt4r.tile.single;
 
 import muramasa.antimatter.capability.machine.MachineCoverHandler;
 import muramasa.antimatter.cover.ICover;
-import muramasa.antimatter.gui.event.GuiEvent;
+import muramasa.antimatter.gui.event.GuiEvents;
 import muramasa.antimatter.gui.event.IGuiEvent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -32,18 +32,19 @@ public class TileEntityWorkbench extends TileEntityMaterial<TileEntityWorkbench>
     }
 
     @Override
-    public void onGuiEvent(IGuiEvent event, PlayerEntity playerEntity, int... data) {
-        super.onGuiEvent(event, playerEntity, data);
-        if (event == GuiEvent.EXTRA_BUTTON && !openContainers.isEmpty()){
+    public void onGuiEvent(IGuiEvent event, PlayerEntity playerEntity) {
+        super.onGuiEvent(event, playerEntity);
+        if (event.getFactory() == GuiEvents.EXTRA_BUTTON && !openContainers.isEmpty()){
+            final int[] data = ((GuiEvents.GuiEvent)event).data;
             if (data[0] == 0){
                 openContainers.forEach(o -> {
-                    if (playerEntity.getUniqueID().compareTo(o.getPlayerInv().player.getUniqueID()) == 0){
+                    if (playerEntity.getUUID().compareTo(o.getPlayerInv().player.getUUID()) == 0){
                         ((ContainerWorkbench<?>)o).clearCraftingGrid();
                     }
                 });
             } else if (data[0] == 1){
                 openContainers.forEach(o -> {
-                    if (playerEntity.getUniqueID().compareTo(o.getPlayerInv().player.getUniqueID()) == 0){
+                    if (playerEntity.getUUID().compareTo(o.getPlayerInv().player.getUUID()) == 0){
                         ((ContainerWorkbench<?>)o).clearCraftingGridToPlayer();
                     }
                 });

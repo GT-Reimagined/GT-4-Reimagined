@@ -15,7 +15,7 @@ public class ContainerCraftingCover extends GTWorkbenchContainer {
         this.cover = cover;
     }
 
-    public boolean canInteractWith(PlayerEntity playerIn) {
-        return isWithinUsableDistance(this.worldPosCallable, playerIn, cover.source().getTile().getWorld().getBlockState(cover.source().getTile().getPos()).getBlock());
+    public boolean stillValid(PlayerEntity playerIn) {
+        return stillValid(this.worldPosCallable, playerIn, cover.source().getTile().getLevel().getBlockState(cover.source().getTile().getBlockPos()).getBlock());
     }
 }

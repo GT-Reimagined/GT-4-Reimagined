@@ -37,18 +37,18 @@ public class GT4RRandomDropBonus extends LootFunction {
         this.formula = formula;
     }
 
-    public LootFunctionType getFunctionType() {
+    public LootFunctionType getType() {
         return RANDOM_DROP_BONUS;
     }
 
-    public Set<LootParameter<?>> getRequiredParameters() {
+    public Set<LootParameter<?>> getReferencedContextParams() {
         return ImmutableSet.of(LootParameters.TOOL);
     }
 
-    public ItemStack doApply(ItemStack stack, LootContext context) {
-        ItemStack itemstack = context.get(LootParameters.TOOL);
+    public ItemStack run(ItemStack stack, LootContext context) {
+        ItemStack itemstack = context.getParamOrNull(LootParameters.TOOL);
         if (itemstack != null) {
-            int i = EnchantmentHelper.getEnchantmentLevel(this.enchantment, itemstack);
+            int i = EnchantmentHelper.getItemEnchantmentLevel(this.enchantment, itemstack);
             int j = this.formula.getValue(context.getRandom(), stack.getCount(), i);
             if (j == 0) return ItemStack.EMPTY;
             stack.setCount(j);
@@ -58,13 +58,13 @@ public class GT4RRandomDropBonus extends LootFunction {
     }
 
     public static LootFunction.Builder<?> randomDrops(Enchantment enchantment, int dividend) {
-        return builder((conditions) -> {
+        return simpleBuilder((conditions) -> {
             return new GT4RRandomDropBonus(conditions, enchantment, new RandomDropsFormula(dividend));
         });
     }
 
     public static LootFunction.Builder<?> uniformBonusCount(Enchantment enchantment, int multiplier) {
-        return builder((conditions) -> {
+        return simpleBuilder((conditions) -> {
             return new GT4RRandomDropBonus(conditions, enchantment, new UniformMultipliedFormula(multiplier));
         });
     }
@@ -156,18 +156,18 @@ public class GT4RRandomDropBonus extends LootFunction {
         }
 
         public GT4RRandomDropBonus deserialize(JsonObject object, JsonDeserializationContext deserializationContext, ILootCondition[] conditionsIn) {
-            ResourceLocation resourcelocation = new ResourceLocation(JSONUtils.getString(object, "enchantment"));
+            ResourceLocation resourcelocation = new ResourceLocation(JSONUtils.getAsString(object, "enchantment"));
             Enchantment enchantment = Registry.ENCHANTMENT.getOptional(resourcelocation).orElseThrow(() -> {
                 return new JsonParseException("Invalid enchantment id: " + resourcelocation);
             });
-            ResourceLocation resourcelocation1 = new ResourceLocation(JSONUtils.getString(object, "formula"));
+            ResourceLocation resourcelocation1 = new ResourceLocation(JSONUtils.getAsString(object, "formula"));
             IFormulaDeserializer applybonus$iformuladeserializer = GT4RRandomDropBonus.DESERIALIZER_HASH_MAP.get(resourcelocation1);
             if (applybonus$iformuladeserializer == null) {
                 throw new JsonParseException("Invalid formula id: " + resourcelocation1);
             } else {
                 IFormula applybonus$iformula;
                 if (object.has("parameters")) {
-                    applybonus$iformula = applybonus$iformuladeserializer.deserialize(JSONUtils.getJsonObject(object, "parameters"), deserializationContext);
+                    applybonus$iformula = applybonus$iformuladeserializer.deserialize(JSONUtils.getAsJsonObject(object, "parameters"), deserializationContext);
                 } else {
                     applybonus$iformula = applybonus$iformuladeserializer.deserialize(new JsonObject(), deserializationContext);
                 }

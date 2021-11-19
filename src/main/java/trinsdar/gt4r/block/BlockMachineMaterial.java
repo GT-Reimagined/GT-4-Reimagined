@@ -48,7 +48,7 @@ public class BlockMachineMaterial extends BlockMachine implements IColorHandler 
     @Override
     public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
         List<ItemStack> list = super.getDrops(state, builder);
-        TileEntity tileentity = builder.get(LootParameters.BLOCK_ENTITY);
+        TileEntity tileentity = builder.getOptionalParameter(LootParameters.BLOCK_ENTITY);
         if (!list.isEmpty() && tileentity instanceof TileEntityDrum){
             ItemStack stack = list.get(0);
             TileEntityDrum drum = (TileEntityDrum) tileentity;
@@ -65,11 +65,11 @@ public class BlockMachineMaterial extends BlockMachine implements IColorHandler 
     }
 
     @Override
-    public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        super.onBlockPlacedBy(world, pos, state, placer, stack);
+    public void setPlacedBy(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        super.setPlacedBy(world, pos, state, placer, stack);
         CompoundNBT nbt = stack.getTag();
         if (nbt != null && (nbt.contains("Fluid") || nbt.contains("Outputs"))){
-            TileEntity tileEntity = world.getTileEntity(pos);
+            TileEntity tileEntity = world.getBlockEntity(pos);
             if (tileEntity instanceof TileEntityDrum){
                 TileEntityDrum drum = (TileEntityDrum) tileEntity;
                 drum.fluidHandler.ifPresent(f -> {

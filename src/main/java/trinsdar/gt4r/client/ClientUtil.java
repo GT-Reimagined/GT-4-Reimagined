@@ -12,9 +12,9 @@ import trinsdar.gt4r.data.GT4RData;
 @OnlyIn(Dist.CLIENT)
 public class ClientUtil {
     public static void registerThrowingWeaponPropertyOverrides(Item throwingWeapon) {
-        ItemModelsProperties.registerProperty(throwingWeapon, new ResourceLocation("throwing"), (stack, world, living) -> {
-            if (living != null && stack.isItemEqual(living.getActiveItemStack())) {
-                return living.getItemInUseCount() > 0 ? 1.0F : 0.0F;
+        ItemModelsProperties.register(throwingWeapon, new ResourceLocation("throwing"), (stack, world, living) -> {
+            if (living != null && stack.sameItem(living.getUseItem())) {
+                return living.getUseItemRemainingTicks() > 0 ? 1.0F : 0.0F;
             } else {
                 return 0.0F;
             }

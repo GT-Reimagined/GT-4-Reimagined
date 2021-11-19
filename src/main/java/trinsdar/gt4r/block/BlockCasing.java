@@ -27,7 +27,7 @@ public class BlockCasing extends BlockDynamic {
     }
 
     public BlockCasing(String domain, String id) {
-        this(domain, id, Block.Properties.create(Material.IRON).hardnessAndResistance(1.0f, 10.0f).sound(SoundType.METAL).setRequiresTool());
+        this(domain, id, Block.Properties.of(Material.METAL).strength(1.0f, 10.0f).sound(SoundType.METAL).requiresCorrectToolForDrops());
     }
 
     @Override
@@ -50,8 +50,8 @@ public class BlockCasing extends BlockDynamic {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public float getAmbientOcclusionLightValue(BlockState state, IBlockReader worldIn, BlockPos pos) {
-        return this == GT4RData.REINFORCED_GLASS ? 1.0F : super.getAmbientOcclusionLightValue(state, worldIn, pos);
+    public float getShadeBrightness(BlockState state, IBlockReader worldIn, BlockPos pos) {
+        return this == GT4RData.REINFORCED_GLASS ? 1.0F : super.getShadeBrightness(state, worldIn, pos);
     }
 
    /* public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos) {
@@ -59,8 +59,8 @@ public class BlockCasing extends BlockDynamic {
     }*/
 
     @OnlyIn(Dist.CLIENT)
-    public boolean isSideInvisible(BlockState state, BlockState adjacentBlockState, Direction side) {
-        return (this == GT4RData.REINFORCED_GLASS && adjacentBlockState.matchesBlock(this)) || super.isSideInvisible(state, adjacentBlockState, side);
+    public boolean skipRendering(BlockState state, BlockState adjacentBlockState, Direction side) {
+        return (this == GT4RData.REINFORCED_GLASS && adjacentBlockState.is(this)) || super.skipRendering(state, adjacentBlockState, side);
     }
 
     @Override

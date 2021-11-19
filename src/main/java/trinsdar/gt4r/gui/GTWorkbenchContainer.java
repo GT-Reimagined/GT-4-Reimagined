@@ -22,8 +22,8 @@ public class GTWorkbenchContainer extends WorkbenchContainer implements IAntimat
     }
 
     @Override
-    public void detectAndSendChanges() {
-        super.detectAndSendChanges();
+    public void broadcastChanges() {
+        super.broadcastChanges();
         instance.update();
     }
 

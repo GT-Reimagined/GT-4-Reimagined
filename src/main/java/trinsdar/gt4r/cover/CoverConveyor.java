@@ -70,21 +70,21 @@ public class CoverConveyor extends CoverBasicTransport {
 
     @Override
     public void onUpdate() {
-        if (handler.getTile().getWorld().isRemote) return;
+        if (handler.getTile().getLevel().isClientSide) return;
         if (handler.getTile() == null)
             return;
         boolean isMachine = handler.getTile() instanceof TileEntityMachine;
-        BlockState state = handler.getTile().getWorld().getBlockState(handler.getTile().getPos().offset(side));
+        BlockState state = handler.getTile().getLevel().getBlockState(handler.getTile().getBlockPos().relative(side));
         //Drop into world.
-        if (state == Blocks.AIR.getDefaultState() && isMachine && coverMode.getName().startsWith("Export")) {
-            World world = handler.getTile().getWorld();
-            BlockPos pos = handler.getTile().getPos();
+        if (state == Blocks.AIR.defaultBlockState() && isMachine && coverMode.getName().startsWith("Export")) {
+            World world = handler.getTile().getLevel();
+            BlockPos pos = handler.getTile().getBlockPos();
             ItemStack stack = handler.getTile().getCapability(ITEM_HANDLER_CAPABILITY, side).map(Utils::extractAny).orElse(ItemStack.EMPTY);
             if (stack.isEmpty()) return;
-            world.addEntity(new ItemEntity(world,pos.getX()+side.getXOffset(), pos.getY()+side.getYOffset(), pos.getZ()+side.getZOffset(),stack));
+            world.addFreshEntity(new ItemEntity(world,pos.getX()+side.getStepX(), pos.getY()+side.getStepY(), pos.getZ()+side.getStepZ(),stack));
         }
         if (!(state.hasTileEntity())) return;
-        TileEntity adjTile = handler.getTile().getWorld().getTileEntity(handler.getTile().getPos().offset(side));
+        TileEntity adjTile = handler.getTile().getLevel().getBlockEntity(handler.getTile().getBlockPos().relative(side));
         if (adjTile == null) {
             return;
         }

@@ -20,17 +20,17 @@ public class TileEntityDustBin extends TileEntityMachine<TileEntityDustBin> {
     public void onServerUpdate() {
         super.onServerUpdate();
         itemHandler.ifPresent(i -> {
-            TileEntity up = world.getTileEntity(this.getPos().up(1));
-            TileEntity down = world.getTileEntity(this.getPos().down(1));
+            TileEntity up = level.getBlockEntity(this.getBlockPos().above(1));
+            TileEntity down = level.getBlockEntity(this.getBlockPos().below(1));
             if (up != null){
                 up.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, DOWN).ifPresent(f -> Utils.transferItems(f, i.getInputHandler(), true));
             }
             if (down != null){
                 down.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.UP).ifPresent(t -> Utils.transferItems(i.getOutputHandler(), t, true));
-            } else if (world.isAirBlock(this.getPos().down(1))){
+            } else if (level.isEmptyBlock(this.getBlockPos().below(1))){
                 ItemStack stack = Utils.extractAny(i.getOutputHandler());
                 if (stack.isEmpty()) return;
-                world.addEntity(new ItemEntity(world,getPos().getX(), getPos().getY() - 1, getPos().getZ(),stack));
+                level.addFreshEntity(new ItemEntity(level,getBlockPos().getX(), getBlockPos().getY() - 1, getBlockPos().getZ(),stack));
             }
         });
     }

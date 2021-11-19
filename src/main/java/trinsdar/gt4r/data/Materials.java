@@ -43,7 +43,7 @@ public class Materials {
     public static MaterialTypeItem<?> TURBINE_ROTOR = new MaterialTypeItem<>("turbine_rotor", 1, true, muramasa.antimatter.Ref.U * 17, new MaterialTypeItem.ItemSupplier() {
         @Override
         public MaterialItem supply(String domain, MaterialType<?> type, Material material) {
-            return new ItemTurbineRotor(domain, type, material, new Item.Properties().defaultMaxDamage(getMaxDamage(material)).group(muramasa.antimatter.Ref.TAB_MATERIALS));
+            return new ItemTurbineRotor(domain, type, material, new Item.Properties().defaultDurability(getMaxDamage(material)).tab(muramasa.antimatter.Ref.TAB_MATERIALS));
         }
 
         private int getMaxDamage(Material material){
@@ -248,10 +248,10 @@ public class Materials {
     public static Material Magnalium = AntimatterAPI.register(Material.class, new Material(Ref.ID, "magnalium", 0xc8beff, DULL)).asMetal(870, 0,  PLATE, ROD).mats(of(Magnesium, 1, Aluminium, 2));
     public static Material Nichrome = AntimatterAPI.register(Material.class, new Material(Ref.ID, "nichrome", 0xcdcef6, METALLIC)).asMetal(2700, 2500).mats(of(Nickel, 4, Chrome, 1));
     public static Material SolderingAlloy = AntimatterAPI.register(Material.class, new Material(Ref.ID, "soldering_alloy", 0xdcdce6, DULL)).asMetal(400, 400, PLATE, ROD).mats(of(Tin, 9, Antimony, 1));
-    public static Material Steel = AntimatterAPI.register(Material.class, new Material(Ref.ID, "steel", 0x808080, METALLIC)).asMetal(1811, 1500, PLATE, ROD, GEAR, RING).addTools(2.5F, 6.0F, 512, 2,  of(Enchantments.SHARPNESS, 2)).addArmor(new int[]{0, 1, 1, 0}, 1.0F, 0.0F, 21, of(Enchantments.PROTECTION, 1)).mats(of(Iron, 50, Carbon, 1));
-    public static Material StainlessSteel = AntimatterAPI.register(Material.class, new Material(Ref.ID, "stainless_steel", 0xc8c8dc, SHINY)).asMetal(1700, 1700, PLATE, ROD, GEAR).mats(of(Iron, 6, Chrome, 1, Manganese, 1, Nickel, 1)).addTools(2.5F, 7.0F, 480, 2, of(Enchantments.SHARPNESS, 3)).addArmor(new int[]{0, 1, 1, 0}, 2.0F, 0.0F, 20, of(Enchantments.PROTECTION, 2));
-    public static Material WroughtIron = AntimatterAPI.register(Material.class, new Material(Ref.ID, "wrought_iron", 0xc8b4b4, METALLIC)).asMetal(1811, 0, PLATE, ROD, GEAR).mats(of(Iron, 1)).addTools(IRON.getAttackDamage(), IRON.getEfficiency(), (int)(256 * 1.5F), IRON.getHarvestLevel(),  of(Enchantments.SHARPNESS, 2)).addArmor(new int[]{0, 0, 0, 0}, 1.0F, 0.0F, 17, of(Enchantments.PROTECTION, 1));
-    public static Material TungstenSteel = AntimatterAPI.register(Material.class, new Material(Ref.ID, "tungstensteel", 0x6464a0, METALLIC)).asMetal(3000, 3000, PLATE, ROD, GEAR).addTools(6.0F, 10.0F, 5120, 4).mats(of(Steel, 1, Tungsten, 1)).addArmor(new int[]{1, 2, 3, 1}, 3.0F, 0.0F, 18, of(Enchantments.PROTECTION, 3));
+    public static Material Steel = AntimatterAPI.register(Material.class, new Material(Ref.ID, "steel", 0x808080, METALLIC)).asMetal(1811, 1500, PLATE, ROD, GEAR, RING).addTools(2.5F, 6.0F, 512, 2,  of(Enchantments.SHARPNESS, 2)).addArmor(new int[]{0, 1, 1, 0}, 1.0F, 0.0F, 21, of(Enchantments.ALL_DAMAGE_PROTECTION, 1)).mats(of(Iron, 50, Carbon, 1));
+    public static Material StainlessSteel = AntimatterAPI.register(Material.class, new Material(Ref.ID, "stainless_steel", 0xc8c8dc, SHINY)).asMetal(1700, 1700, PLATE, ROD, GEAR).mats(of(Iron, 6, Chrome, 1, Manganese, 1, Nickel, 1)).addTools(2.5F, 7.0F, 480, 2, of(Enchantments.SHARPNESS, 3)).addArmor(new int[]{0, 1, 1, 0}, 2.0F, 0.0F, 20, of(Enchantments.ALL_DAMAGE_PROTECTION, 2));
+    public static Material WroughtIron = AntimatterAPI.register(Material.class, new Material(Ref.ID, "wrought_iron", 0xc8b4b4, METALLIC)).asMetal(1811, 0, PLATE, ROD, GEAR).mats(of(Iron, 1)).addTools(IRON.getAttackDamageBonus(), IRON.getSpeed(), (int)(256 * 1.5F), IRON.getLevel(),  of(Enchantments.SHARPNESS, 2)).addArmor(new int[]{0, 0, 0, 0}, 1.0F, 0.0F, 17, of(Enchantments.ALL_DAMAGE_PROTECTION, 1));
+    public static Material TungstenSteel = AntimatterAPI.register(Material.class, new Material(Ref.ID, "tungstensteel", 0x6464a0, METALLIC)).asMetal(3000, 3000, PLATE, ROD, GEAR).addTools(6.0F, 10.0F, 5120, 4).mats(of(Steel, 1, Tungsten, 1)).addArmor(new int[]{1, 2, 3, 1}, 3.0F, 0.0F, 18, of(Enchantments.ALL_DAMAGE_PROTECTION, 3));
     public static Material TungstenCarbide = AntimatterAPI.register(Material.class, new Material(Ref.ID, "tungsten_carbide", 0x330066, METALLIC)).asMetal(2460, 2460).addTools(5.0F, 14.0F, 2560, 4, of(Enchantments.SHARPNESS, 5)).mats(of(Tungsten, 1, Carbon, 1));
     public static Material RedAlloy = AntimatterAPI.register(Material.class, new Material(Ref.ID, "red_alloy", 0xc80000, DULL)).asMetal(295, 0, PLATE, ROD).mats(of(Copper, 1, Redstone, 4));
     public static Material Osmiridium = AntimatterAPI.register(Material.class, new Material(Ref.ID, "osmiridium", 0x6464ff, METALLIC)).asMetal(3333, 3300,  PLATE, ROD).mats(of(Iridium, 1, Osmium, 1));
@@ -261,7 +261,7 @@ public class Materials {
     /** TFC Materials **/
     public static Material SterlingSilver = AntimatterAPI.register(Material.class, new Material(Ref.ID, "sterling_silver", 0xfadce1, SHINY, Ref.MOD_TFC)).asMetal(1700, 1700).mats(of(Copper, 1, Silver, 4));
     public static Material RoseGold = AntimatterAPI.register(Material.class, new Material(Ref.ID, "rose_gold", 0xffe61e, SHINY, Ref.MOD_TFC)).asMetal(1600, 1600).mats(of(Copper, 1, Gold, 4));
-    public static Material BlackBronze = AntimatterAPI.register(Material.class, new Material(Ref.ID, "black_bronze", 0x64327d, DULL, Ref.MOD_TFC)).asMetal(2000, 2000).addTools(Bronze, of(Enchantments.SWEEPING, 1)).mats(of(Gold, 1, Silver, 1, Copper, 3));
+    public static Material BlackBronze = AntimatterAPI.register(Material.class, new Material(Ref.ID, "black_bronze", 0x64327d, DULL, Ref.MOD_TFC)).asMetal(2000, 2000).addTools(Bronze, of(Enchantments.SWEEPING_EDGE, 1)).mats(of(Gold, 1, Silver, 1, Copper, 3));
     public static Material BismuthBronze = AntimatterAPI.register(Material.class, new Material(Ref.ID, "bismuth_bronze", 0x647d7d, DULL, Ref.MOD_TFC)).asMetal(1100, 900, PLATE).addTools(2.5F, Bronze.getToolSpeed() + 2.0F, 350, 2, of(Enchantments.BANE_OF_ARTHROPODS, 4)).mats(of(Bismuth, 1, Zinc, 1, Copper, 3));
     public static Material BlackSteel = AntimatterAPI.register(Material.class, new Material(Ref.ID, "black_steel", 0x646464, METALLIC, Ref.MOD_TFC)).asMetal(1200, 1200, FRAME, PLATE).addTools(3.5F, 6.5F, 768, 2).mats(of(Nickel, 1, BlackBronze, 1, Steel, 3));
     public static Material RedSteel = AntimatterAPI.register(Material.class, new Material(Ref.ID, "red_steel", 0x8c6464, METALLIC, Ref.MOD_TFC)).asMetal(1300, 1300).addTools(3.5F, 7.0F, 896, 2).mats(of(SterlingSilver, 1, BismuthBronze, 1, Steel, 2, BlackSteel, 4));
@@ -512,6 +512,6 @@ public class Materials {
     }
 
     private static Block.Properties prepareProperties(Material m, MaterialType<?> type) {
-        return Block.Properties.create(net.minecraft.block.material.Material.WATER).hardnessAndResistance(100.0F).noDrops().setLightLevel(s -> type == Data.PLASMA ? 15 : m == PahoehoeLava ? 9: 0);
+        return Block.Properties.of(net.minecraft.block.material.Material.WATER).strength(100.0F).noDrops().lightLevel(s -> type == Data.PLASMA ? 15 : m == PahoehoeLava ? 9: 0);
     }
 }

@@ -19,7 +19,7 @@ import static trinsdar.gt4r.data.RecipeMaps.FLUID_CANNING;
 public class FluidCanningLoader {
     public static void init() {
         ForgeRegistries.FLUIDS.forEach(fluid -> {
-            Item bucket = fluid.getFilledBucket();
+            Item bucket = fluid.getBucket();
             //Only the source.
             if (fluid instanceof FlowingFluid) return;
             if (bucket != Items.AIR){

@@ -66,7 +66,7 @@ public class CoalBoilerRecipeHandler extends MachineRecipeHandler<TileEntityCoal
         }
         Arrays.stream(Direction.values()).filter(f -> f != Direction.DOWN).collect(Collectors.toList()).forEach(this::exportFluidFromMachineToSide);
         delay = tile.getMachineTier() == BRONZE ? 25 : 10;
-        if (tile.getWorld().getGameTime() % delay == 0){
+        if (tile.getLevel().getGameTime() % delay == 0){
             tile.fluidHandler.ifPresent(f -> {
                 FluidStack[] inputs = f.getInputs();
                 if (this.heat > 100){
@@ -74,8 +74,8 @@ public class CoalBoilerRecipeHandler extends MachineRecipeHandler<TileEntityCoal
                         hadNoWater = true;
                     } else {
                         if (hadNoWater){
-                            tile.getWorld().createExplosion(null, tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ(), 4.0F, Explosion.Mode.DESTROY);
-                            tile.getWorld().setBlockState(tile.getPos(), Blocks.AIR.getDefaultState());
+                            tile.getLevel().explode(null, tile.getBlockPos().getX(), tile.getBlockPos().getY(), tile.getBlockPos().getZ(), 4.0F, Explosion.Mode.DESTROY);
+                            tile.getLevel().setBlockAndUpdate(tile.getBlockPos(), Blocks.AIR.defaultBlockState());
                             return;
                         }
                         f.drainInput(new FluidStack(Fluids.WATER, 1), IFluidHandler.FluidAction.EXECUTE);
@@ -86,8 +86,8 @@ public class CoalBoilerRecipeHandler extends MachineRecipeHandler<TileEntityCoal
                         }
                         if (fill < 150){
                             //TODO:steam sounds
-                            tile.getWorld().playSound(null, tile.getPos(), SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1.0f, 1.0f);
-                            if (tile.getWorld() instanceof ServerWorld) ((ServerWorld)tile.getWorld()).spawnParticle(ParticleTypes.SMOKE, tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ(), tile.getWorld().getRandom().nextInt(8) + 1, 0.0D, 0.2D, 0.0D, 0.0D);
+                            tile.getLevel().playSound(null, tile.getBlockPos(), SoundEvents.FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1.0f, 1.0f);
+                            if (tile.getLevel() instanceof ServerWorld) ((ServerWorld)tile.getLevel()).sendParticles(ParticleTypes.SMOKE, tile.getBlockPos().getX(), tile.getBlockPos().getY(), tile.getBlockPos().getZ(), tile.getLevel().getRandom().nextInt(8) + 1, 0.0D, 0.2D, 0.0D, 0.0D);
                             f.drain(4000, IFluidHandler.FluidAction.EXECUTE);
                         }
                     }
@@ -100,7 +100,7 @@ public class CoalBoilerRecipeHandler extends MachineRecipeHandler<TileEntityCoal
     }
 
     public void exportFluidFromMachineToSide(Direction side){
-        TileEntity adjTile = tile.getWorld().getTileEntity(tile.getPos().offset(side));
+        TileEntity adjTile = tile.getLevel().getBlockEntity(tile.getBlockPos().relative(side));
         if (adjTile == null) return;
         LazyOptional<IFluidHandler> cap = adjTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side.getOpposite());
         tile.fluidHandler.ifPresent(f -> cap.ifPresent(other -> Utils.transferFluids(f, other, 1000)));
@@ -133,7 +133,7 @@ public class CoalBoilerRecipeHandler extends MachineRecipeHandler<TileEntityCoal
                 this.fuel += maxFuel;
                 consumeInputs();
             }
-            if ((this.heat < maxHeat) && (this.fuel > 0) && (tile.getWorld().getGameTime() % 12L == 0L)) {
+            if ((this.heat < maxHeat) && (this.fuel > 0) && (tile.getLevel().getGameTime() % 12L == 0L)) {
                 int fuelSubtract = tile.getMachineTier() == BRONZE ? 1 : 2;
                 this.fuel -= fuelSubtract;
                 this.heat += 1;

@@ -39,7 +39,7 @@ public class GT4ROreFeatureConfig implements IFeatureConfig {
             return config.secondary;
         }), Codec.INT.fieldOf("secondaryChance").forGetter((config) -> {
             return config.secondaryChance;
-        }), Codec.list(World.CODEC).fieldOf("dimension").forGetter((config) ->{
+        }), Codec.list(World.RESOURCE_KEY_CODEC).fieldOf("dimension").forGetter((config) ->{
             return config.dimensions;
         }), Codec.list(Codec.STRING).fieldOf("biomeTypesID").forGetter((config) ->{
             return config.biomeTypesID;
@@ -83,7 +83,7 @@ public class GT4ROreFeatureConfig implements IFeatureConfig {
             this.secondary = secondary;
         }
         this.dimensions = Arrays.stream(dimensions).collect(Collectors.toList());
-        this.dimensionLocations = this.dimensions.stream().map(RegistryKey::getLocation).collect(Collectors.toCollection(ObjectOpenHashSet::new));
+        this.dimensionLocations = this.dimensions.stream().map(RegistryKey::location).collect(Collectors.toCollection(ObjectOpenHashSet::new));
     }
 
     public GT4ROreFeatureConfig(String id, int minY, int maxY, int weight, int size, Material primary, Material secondary, int secondaryChance, RegistryKey<World>... dimensions) {
@@ -93,7 +93,7 @@ public class GT4ROreFeatureConfig implements IFeatureConfig {
     private GT4ROreFeatureConfig(String id, int minY, int maxY, int weight, int size, String primary, String secondary, int secondaryChance, List<RegistryKey<World>> dimensions, List<String> biomeTypes, List<String> invalidBiomeTypes) {
         this(id, minY, maxY, weight, size, primary, secondary, secondaryChance);
         this.dimensions = dimensions;
-        this.dimensionLocations = this.dimensions.stream().map(RegistryKey::getLocation).collect(Collectors.toCollection(ObjectOpenHashSet::new));
+        this.dimensionLocations = this.dimensions.stream().map(RegistryKey::location).collect(Collectors.toCollection(ObjectOpenHashSet::new));
         this.biomeTypes = biomeTypes.stream().map(BiomeDictionary.Type::getType).collect(Collectors.toList());
         this.invalidBiomeTypes = invalidBiomeTypes.stream().map(BiomeDictionary.Type::getType).collect(Collectors.toList());
         this.biomeTypesID = biomeTypes;

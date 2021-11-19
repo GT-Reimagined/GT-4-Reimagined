@@ -11,7 +11,7 @@ public class ContainerCraftingItem extends GTWorkbenchContainer {
     }
 
     @Override
-    public boolean canInteractWith(PlayerEntity playerIn) {
+    public boolean stillValid(PlayerEntity playerIn) {
         return true;
     }
 }

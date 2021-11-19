@@ -23,12 +23,12 @@ public class RubberTreeFeature extends TreeFeature {
     }
 
     public boolean generateRubber(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, BaseTreeFeatureConfig config) {
-        if (reader.getBiome(pos).getCategory() != Biome.Category.SWAMP && config == RubberTreeWorldGen.RUBBER_TREE_CONFIG_SWAMP) return false;
-        if (reader.getBiome(pos).getCategory() != Biome.Category.JUNGLE && config == RubberTreeWorldGen.RUBBER_TREE_CONFIG_JUNGLE) return false;
-        return super.generate(reader, generator, rand, pos, config);
+        if (reader.getBiome(pos).getBiomeCategory() != Biome.Category.SWAMP && config == RubberTreeWorldGen.RUBBER_TREE_CONFIG_SWAMP) return false;
+        if (reader.getBiome(pos).getBiomeCategory() != Biome.Category.JUNGLE && config == RubberTreeWorldGen.RUBBER_TREE_CONFIG_JUNGLE) return false;
+        return super.place(reader, generator, rand, pos, config);
     }
 
-    /*public boolean func_225557_a_(IWorldGenerationReader world, Random random, BlockPos pos, Set<BlockPos> set, Set<BlockPos> set1, MutableBoundingBox boundingBox, TreeFeatureConfig config) {
+    /*public boolean doPlace(IWorldGenerationReader world, Random random, BlockPos pos, Set<BlockPos> set, Set<BlockPos> set1, MutableBoundingBox boundingBox, TreeFeatureConfig config) {
         int baseHeight = config.baseHeight + random.nextInt(config.heightRandA + 1) + random.nextInt(config.heightRandB + 1);
         int trunkHeight = config.trunkHeight >= 0 ? config.trunkHeight + random.nextInt(config.trunkHeightRandom + 1) : baseHeight - (config.foliageHeight + random.nextInt(config.foliageHeightRandom + 1));
 

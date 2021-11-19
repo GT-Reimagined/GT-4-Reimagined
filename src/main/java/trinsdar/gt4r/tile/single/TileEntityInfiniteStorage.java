@@ -6,7 +6,7 @@ import muramasa.antimatter.capability.machine.MachineEnergyHandler;
 import muramasa.antimatter.gui.GuiInstance;
 import muramasa.antimatter.gui.ICanSyncData;
 import muramasa.antimatter.gui.IGuiElement;
-import muramasa.antimatter.gui.event.GuiEvent;
+import muramasa.antimatter.gui.event.GuiEvents;
 import muramasa.antimatter.gui.event.IGuiEvent;
 import muramasa.antimatter.gui.widget.InfoRenderWidget;
 import muramasa.antimatter.gui.widget.WidgetSupplier;
@@ -48,8 +48,9 @@ public class TileEntityInfiniteStorage<T extends TileEntityInfiniteStorage<T>> e
     }
 
     @Override
-    public void onGuiEvent(IGuiEvent event, PlayerEntity playerEntity, int... data) {
-        if (event == GuiEvent.EXTRA_BUTTON) {
+    public void onGuiEvent(IGuiEvent event, PlayerEntity playerEntity) {
+        if (event.getFactory() == GuiEvents.EXTRA_BUTTON) {
+            final int[] data = ((GuiEvents.GuiEvent)event).data;
             energyHandler.ifPresent(h -> {
                 int voltage = h.getOutputVoltage();
                 int amperage = h.getOutputAmperage();
@@ -146,11 +147,11 @@ public class TileEntityInfiniteStorage<T extends TileEntityInfiniteStorage<T>> e
 
     @Override
     public int drawInfo(InfiniteStorageWidget widget, MatrixStack stack, FontRenderer renderer, int left, int top) {
-        renderer.drawString(stack,"Control Panel", left + 43, top + 21, 16448255);
-        renderer.drawString(stack,"VOLT: " + widget.voltage, left + 43, top + 40, 16448255);
-        renderer.drawString(stack,"TIER: " + Tier.getTier(widget.voltage < 0 ? -widget.voltage : widget.voltage).getId().toUpperCase(), left + 43, top + 48, 16448255);
-        renderer.drawString(stack,"AMP: " + widget.amperage, left + 43, top + 56, 16448255);
-        renderer.drawString(stack,"SUM: " + (long)(widget.amperage * widget.voltage), left + 43, top + 64, 16448255);
+        renderer.draw(stack,"Control Panel", left + 43, top + 21, 16448255);
+        renderer.draw(stack,"VOLT: " + widget.voltage, left + 43, top + 40, 16448255);
+        renderer.draw(stack,"TIER: " + Tier.getTier(widget.voltage < 0 ? -widget.voltage : widget.voltage).getId().toUpperCase(), left + 43, top + 48, 16448255);
+        renderer.draw(stack,"AMP: " + widget.amperage, left + 43, top + 56, 16448255);
+        renderer.draw(stack,"SUM: " + (long)(widget.amperage * widget.voltage), left + 43, top + 64, 16448255);
         return 72;
     }
 

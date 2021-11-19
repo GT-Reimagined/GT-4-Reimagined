@@ -48,13 +48,13 @@ public class CoverDrain extends BaseCover {
         if (tile == null) {
             return;
         }
-        if (tile.getWorld().isRemote) return;
-        World world = tile.getWorld();
+        if (tile.getLevel().isClientSide) return;
+        World world = tile.getLevel();
         LazyOptional<IFluidHandler> cap = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);
         if (tile instanceof TileEntityPipe){
             cap = ((TileEntityPipe<?>)tile).getCoverCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);
         }
-        BlockPos offset = tile.getPos().offset(side);
+        BlockPos offset = tile.getBlockPos().relative(side);
         if (side == Direction.UP && world.isRainingAt(offset) && world.getGameTime() % 60 == 0){
             cap.ifPresent(f -> {
                 for (int i = 0; i < f.getTanks(); i++) {
@@ -71,20 +71,20 @@ public class CoverDrain extends BaseCover {
         }
         BlockState blockState = world.getBlockState(offset);
         FluidState state = world.getFluidState(offset);
-        if (state.getFluid() == Fluids.EMPTY) return;
-        Fluid fluid = state.getFluid();
+        if (state.getType() == Fluids.EMPTY) return;
+        Fluid fluid = state.getType();
         cap.ifPresent(f -> {
             for (int i = 0; i < f.getTanks(); i++) {
                 FluidStack toInsert = new FluidStack(fluid, 1000);
                 int filled = f.fill(toInsert, SIMULATE);
                 if (filled > 0) {
                     f.fill(new FluidStack(toInsert.getFluid(), filled), EXECUTE);
-                    if (fluid != Fluids.WATER || (!BiomeDictionary.hasType(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, world.getBiome(offset).getRegistryName()), BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, world.getBiome(offset).getRegistryName()), BiomeDictionary.Type.RIVER))){
-                        BlockState newState = Blocks.AIR.getDefaultState();
-                        if (fluid == Fluids.WATER && blockState.getBlock() != Blocks.WATER && blockState.hasProperty(BlockStateProperties.WATERLOGGED) && blockState.get(BlockStateProperties.WATERLOGGED)){
-                            newState = blockState.with(BlockStateProperties.WATERLOGGED, false);
+                    if (fluid != Fluids.WATER || (!BiomeDictionary.hasType(RegistryKey.create(Registry.BIOME_REGISTRY, world.getBiome(offset).getRegistryName()), BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(RegistryKey.create(Registry.BIOME_REGISTRY, world.getBiome(offset).getRegistryName()), BiomeDictionary.Type.RIVER))){
+                        BlockState newState = Blocks.AIR.defaultBlockState();
+                        if (fluid == Fluids.WATER && blockState.getBlock() != Blocks.WATER && blockState.hasProperty(BlockStateProperties.WATERLOGGED) && blockState.getValue(BlockStateProperties.WATERLOGGED)){
+                            newState = blockState.setValue(BlockStateProperties.WATERLOGGED, false);
                         }
-                        world.setBlockState(offset, newState);
+                        world.setBlockAndUpdate(offset, newState);
                     }
                     break;
                 }

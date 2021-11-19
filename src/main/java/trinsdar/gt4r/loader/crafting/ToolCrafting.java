@@ -163,7 +163,7 @@ public class ToolCrafting {
         tool.validateTag(stack, primary, secondary, startingEnergy, maxEnergy);
         Map<Enchantment, Integer> mainEnchants = primary.getToolEnchantments();
         if (!mainEnchants.isEmpty()) {
-            mainEnchants.entrySet().stream().filter(e -> e.getKey().canApply(stack)).forEach(e -> stack.addEnchantment(e.getKey(), e.getValue()));
+            mainEnchants.entrySet().stream().filter(e -> e.getKey().canEnchant(stack)).forEach(e -> stack.enchant(e.getKey(), e.getValue()));
         }
         return stack;
     }

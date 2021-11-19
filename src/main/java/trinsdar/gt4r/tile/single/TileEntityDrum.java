@@ -36,6 +36,8 @@ import static net.minecraft.util.Direction.DOWN;
 import static net.minecraft.util.Direction.UP;
 import static trinsdar.gt4r.data.Materials.*;
 
+import muramasa.antimatter.capability.FluidHandler.FluidDirection;
+
 public class TileEntityDrum extends TileEntityMaterial<TileEntityDrum> {
     FluidStack drop = FluidStack.EMPTY;
     boolean output = false;
@@ -49,12 +51,12 @@ public class TileEntityDrum extends TileEntityMaterial<TileEntityDrum> {
         boolean[] success = new boolean[1];
         this.fluidHandler.ifPresent(f -> {
             DrumFluidHandler dF = (DrumFluidHandler) f;
-            if ((type == WRENCH || type == ELECTRIC_WRENCH) && !player.isSneaking()){
+            if ((type == WRENCH || type == ELECTRIC_WRENCH) && !player.isShiftKeyDown()){
                 dF.setOutput(!dF.isOutput());
                 success[0] = true;
-                player.playSound(Ref.WRENCH, SoundCategory.BLOCKS, 1.0f, 1.0f);
+                player.playNotifySound(Ref.WRENCH, SoundCategory.BLOCKS, 1.0f, 1.0f);
                 // TODO: Replace by new TranslationTextComponent()
-                player.sendMessage(new StringTextComponent((dF.isOutput() ? "Will" : "Won't") + " fill adjacent Tanks"), player.getUniqueID());
+                player.sendMessage(new StringTextComponent((dF.isOutput() ? "Will" : "Won't") + " fill adjacent Tanks"), player.getUUID());
             }
         });
         if (success[0]){
@@ -136,10 +138,10 @@ public class TileEntityDrum extends TileEntityMaterial<TileEntityDrum> {
         @Override
         public void onUpdate() {
             super.onUpdate();
-            if (tile.getWorld().getGameTime() % 20 == 0 && output){
+            if (tile.getLevel().getGameTime() % 20 == 0 && output){
                 Direction dir = getTank(0).getFluid().getFluid().getAttributes().isGaseous() ? UP : Direction.DOWN;
                 if (getTank(0).getFluidAmount() > 0){
-                    TileEntity adjacent = tile.getWorld().getTileEntity(tile.getPos().offset(dir));
+                    TileEntity adjacent = tile.getLevel().getBlockEntity(tile.getBlockPos().relative(dir));
                     if (adjacent != null){
                         LazyOptional<IFluidHandler> cap = adjacent.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, dir.getOpposite());
                         cap.ifPresent(other -> Utils.transferFluids(this, other, 1000));

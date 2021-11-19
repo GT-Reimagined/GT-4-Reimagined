@@ -29,14 +29,14 @@ public class GT4RConfiguredFeatures {
     public static final GT4ROreFeatureConfig PLATINUM_CONFIG = new GT4ROreFeatureConfig("platinum", 10, 30, 3, 6, Platinum, Sphalerite, 5, World.OVERWORLD).setValidBiomes(JUNGLE);
     public static final GT4ROreFeatureConfig IRIDIUM_CONFIG = new GT4ROreFeatureConfig("iridium", 0, 128, 1, 2, Iridium, NULL, 0, World.OVERWORLD);
     public static final GT4ROreFeatureConfig EMERALD_CONFIG = new GT4ROreFeatureConfig("emerald", 0, 32, 4, 6, Emerald, NULL, 0, World.OVERWORLD).setValidBiomes(MOUNTAIN);
-    public static final GT4ROreFeatureConfig PYRITE_CONFIG = new GT4ROreFeatureConfig("pyrite", 0, 64, 8, 16, Pyrite, NULL, 0, World.THE_NETHER);
-    public static final GT4ROreFeatureConfig SPHALERITE_CONFIG = new GT4ROreFeatureConfig("sphalerite", 32, 96, 8, 16, Sphalerite, NULL, 0, World.THE_NETHER);
-    public static final GT4ROreFeatureConfig CINNABAR_CONFIG = new GT4ROreFeatureConfig("cinnabar",64, 128, 7, 16, Cinnabar, NULL, 0, World.THE_NETHER);
-    public static final GT4ROreFeatureConfig TUNGSTATE_CONFIG = new GT4ROreFeatureConfig("tungstate", 0, 80, 2, 16, Tungstate, NULL, 0, World.THE_END);
-    public static final GT4ROreFeatureConfig PLATINUM_END_CONFIG = new GT4ROreFeatureConfig("platinum_end", 0, 80, 2, 6, Platinum, NULL, 0, World.THE_END);
-    public static final GT4ROreFeatureConfig OLIVINE_CONFIG = new GT4ROreFeatureConfig("olivine", 0, 80, 5, 8, Olivine, NULL, 0, World.THE_END);
-    public static final GT4ROreFeatureConfig SODALITE_CONFIG = new GT4ROreFeatureConfig("sodalite", 0, 80, 6, 16, Sodalite, Lapis, 3, World.THE_END);
-    public static final GT4ROreFeatureConfig CHROMITE_CONFIG = new GT4ROreFeatureConfig("chromite", 0, 80, 4, 5, Chromite, NULL, 0, World.THE_END);
+    public static final GT4ROreFeatureConfig PYRITE_CONFIG = new GT4ROreFeatureConfig("pyrite", 0, 64, 8, 16, Pyrite, NULL, 0, World.NETHER);
+    public static final GT4ROreFeatureConfig SPHALERITE_CONFIG = new GT4ROreFeatureConfig("sphalerite", 32, 96, 8, 16, Sphalerite, NULL, 0, World.NETHER);
+    public static final GT4ROreFeatureConfig CINNABAR_CONFIG = new GT4ROreFeatureConfig("cinnabar",64, 128, 7, 16, Cinnabar, NULL, 0, World.NETHER);
+    public static final GT4ROreFeatureConfig TUNGSTATE_CONFIG = new GT4ROreFeatureConfig("tungstate", 0, 80, 2, 16, Tungstate, NULL, 0, World.END);
+    public static final GT4ROreFeatureConfig PLATINUM_END_CONFIG = new GT4ROreFeatureConfig("platinum_end", 0, 80, 2, 6, Platinum, NULL, 0, World.END);
+    public static final GT4ROreFeatureConfig OLIVINE_CONFIG = new GT4ROreFeatureConfig("olivine", 0, 80, 5, 8, Olivine, NULL, 0, World.END);
+    public static final GT4ROreFeatureConfig SODALITE_CONFIG = new GT4ROreFeatureConfig("sodalite", 0, 80, 6, 16, Sodalite, Lapis, 3, World.END);
+    public static final GT4ROreFeatureConfig CHROMITE_CONFIG = new GT4ROreFeatureConfig("chromite", 0, 80, 4, 5, Chromite, NULL, 0, World.END);
     public static final GT4ROreFeatureConfig SALT_CONFIG = new GT4ROreFeatureConfig("salt", 0, 62, 6, 64, Salt, NULL, 0, World.OVERWORLD).setValidBiomes(OCEAN);
     public static final GT4ROreFeatureConfig ROCK_SALT_CONFIG = new GT4ROreFeatureConfig("rock_salt", 0, 80, 4, 64, RockSalt, NULL, 0, World.OVERWORLD).setValidBiomes(SANDY);
 
@@ -81,7 +81,7 @@ public class GT4RConfiguredFeatures {
     public static final ConfiguredFeature<?, ?> REDSTONE = register("redstone", GT4RFeatures.ORE.getConfiguration(REDSTONE_CONFIG));
     public static final ConfiguredFeature<?, ?> DIAMOND = register("diamond", GT4RFeatures.ORE.getConfiguration(DIAMOND_CONFIG));
     public static final ConfiguredFeature<?, ?> EMERALD_VANILLA = register("emerald_vanilla", GT4RFeatures.ORE.getConfiguration(EMERALD_VANILLA_CONFIG));
-    public static final ConfiguredFeature<?, ?> LAPIS = register("lapis", GT4RFeatures.ORE.withConfiguration(LAPIS_CONFIG).withPlacement(Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(16, 16))).square());
+    public static final ConfiguredFeature<?, ?> LAPIS = register("lapis", GT4RFeatures.ORE.configured(LAPIS_CONFIG).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(16, 16))).squared());
 
     public static ConfiguredFeature<?,?> register(String id, ConfiguredFeature<?,?> feature){
         return Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(Ref.ID, id), feature);

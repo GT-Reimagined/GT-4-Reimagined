@@ -30,7 +30,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import trinsdar.gt4r.data.GT4RData;
 
 public class SpearEntity extends AbstractArrowEntity  implements IEntityAdditionalSpawnData {
-    private static final DataParameter<Byte> LOYALTY_LEVEL = EntityDataManager.createKey(SpearEntity.class, DataSerializers.BYTE);
+    private static final DataParameter<Byte> LOYALTY_LEVEL = EntityDataManager.defineId(SpearEntity.class, DataSerializers.BYTE);
     protected ItemStack weapon = ItemStack.EMPTY;
     public int returningTicks;
     private boolean dealtDamage;
@@ -41,7 +41,7 @@ public class SpearEntity extends AbstractArrowEntity  implements IEntityAddition
     public SpearEntity(World worldIn, LivingEntity thrower, ItemStack thrownStackIn) {
         super(GT4RData.SPEAR_ENTITY_TYPE, thrower, worldIn);
         weapon = thrownStackIn.copy();
-        this.dataManager.set(LOYALTY_LEVEL, (byte)EnchantmentHelper.getLoyaltyModifier(thrownStackIn));
+        this.entityData.set(LOYALTY_LEVEL, (byte)EnchantmentHelper.getLoyalty(thrownStackIn));
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -54,42 +54,42 @@ public class SpearEntity extends AbstractArrowEntity  implements IEntityAddition
     }
 
     @Override
-    protected void registerData() {
-        super.registerData();
-        this.dataManager.register(LOYALTY_LEVEL, (byte)0);
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(LOYALTY_LEVEL, (byte)0);
     }
 
     @Override
-    public ItemStack getArrowStack() {
+    public ItemStack getPickupItem() {
         return weapon;
     }
 
     public void tick() {
-        if (this.timeInGround > 4) {
+        if (this.inGroundTime > 4) {
             this.dealtDamage = true;
         }
 
-        Entity entity = this.getShooter();
-        if ((this.dealtDamage || this.getNoClip()) && entity != null) {
-            int i = this.dataManager.get(LOYALTY_LEVEL);
+        Entity entity = this.getOwner();
+        if ((this.dealtDamage || this.isNoPhysics()) && entity != null) {
+            int i = this.entityData.get(LOYALTY_LEVEL);
             if (i > 0 && !this.shouldReturnToThrower()) {
-                if (!this.world.isRemote && this.pickupStatus == AbstractArrowEntity.PickupStatus.ALLOWED) {
-                    this.entityDropItem(this.getArrowStack(), 0.1F);
+                if (!this.level.isClientSide && this.pickup == AbstractArrowEntity.PickupStatus.ALLOWED) {
+                    this.spawnAtLocation(this.getPickupItem(), 0.1F);
                 }
 
                 this.remove();
             } else if (i > 0) {
-                this.setNoClip(true);
-                Vector3d vector3d = new Vector3d(entity.getPosX() - this.getPosX(), entity.getPosYEye() - this.getPosY(), entity.getPosZ() - this.getPosZ());
-                this.setRawPosition(this.getPosX(), this.getPosY() + vector3d.y * 0.015D * (double)i, this.getPosZ());
-                if (this.world.isRemote) {
-                    this.lastTickPosY = this.getPosY();
+                this.setNoPhysics(true);
+                Vector3d vector3d = new Vector3d(entity.getX() - this.getX(), entity.getEyeY() - this.getY(), entity.getZ() - this.getZ());
+                this.setPosRaw(this.getX(), this.getY() + vector3d.y * 0.015D * (double)i, this.getZ());
+                if (this.level.isClientSide) {
+                    this.yOld = this.getY();
                 }
 
                 double d0 = 0.05D * (double)i;
-                this.setMotion(this.getMotion().scale(0.95D).add(vector3d.normalize().scale(d0)));
+                this.setDeltaMovement(this.getDeltaMovement().scale(0.95D).add(vector3d.normalize().scale(d0)));
                 if (this.returningTicks == 0) {
-                    this.playSound(SoundEvents.ITEM_TRIDENT_RETURN, 10.0F, 1.0F);
+                    this.playSound(SoundEvents.TRIDENT_RETURN, 10.0F, 1.0F);
                 }
 
                 ++this.returningTicks;
@@ -100,7 +100,7 @@ public class SpearEntity extends AbstractArrowEntity  implements IEntityAddition
     }
 
     private boolean shouldReturnToThrower() {
-        Entity entity = this.getShooter();
+        Entity entity = this.getOwner();
         if (entity != null && entity.isAlive()) {
             return !(entity instanceof ServerPlayerEntity) || !entity.isSpectator();
         } else {
@@ -108,15 +108,15 @@ public class SpearEntity extends AbstractArrowEntity  implements IEntityAddition
         }
     }
 
-    protected void onEntityHit(EntityRayTraceResult result) {
+    protected void onHitEntity(EntityRayTraceResult result) {
         Entity target = result.getEntity();
-        float f = (float) this.getDamage();
+        float f = (float) this.getBaseDamage();
         if (target instanceof LivingEntity) {
             LivingEntity livingentity = (LivingEntity)target;
-            f += EnchantmentHelper.getModifierForCreature(this.weapon, livingentity.getCreatureAttribute());
+            f += EnchantmentHelper.getDamageBonus(this.weapon, livingentity.getMobType());
         }
 
-        Entity shooter = this.getShooter();
+        Entity shooter = this.getOwner();
         DamageSource damagesource;
         if (shooter == null) {
             damagesource = (new IndirectEntityDamageSource("mob", this, this)).setProjectile();
@@ -126,8 +126,8 @@ public class SpearEntity extends AbstractArrowEntity  implements IEntityAddition
             damagesource = (new IndirectEntityDamageSource("mob", this, shooter)).setProjectile();
         }
         this.dealtDamage = true;
-        SoundEvent soundevent = SoundEvents.ITEM_TRIDENT_HIT;
-        if (target.attackEntityFrom(damagesource, f)) {
+        SoundEvent soundevent = SoundEvents.TRIDENT_HIT;
+        if (target.hurt(damagesource, f)) {
             if (target.getType() == EntityType.ENDERMAN) {
                 return;
             }
@@ -135,36 +135,36 @@ public class SpearEntity extends AbstractArrowEntity  implements IEntityAddition
             if (target instanceof LivingEntity) {
                 LivingEntity livingTarget = (LivingEntity)target;
                 if (shooter instanceof LivingEntity) {
-                    EnchantmentHelper.applyThornEnchantments(livingTarget, shooter);
-                    EnchantmentHelper.applyArthropodEnchantments((LivingEntity)shooter, livingTarget);
+                    EnchantmentHelper.doPostHurtEffects(livingTarget, shooter);
+                    EnchantmentHelper.doPostDamageEffects((LivingEntity)shooter, livingTarget);
                 }
 
-                this.arrowHit(livingTarget);
+                this.doPostHurtEffects(livingTarget);
             }
         }
 
-        this.setMotion(this.getMotion().mul(-0.01D, -0.1D, -0.01D));
+        this.setDeltaMovement(this.getDeltaMovement().multiply(-0.01D, -0.1D, -0.01D));
         float f1 = 1.0F;
 
         this.playSound(soundevent, f1, 1.0F);
     }
 
     @Override
-    protected void arrowHit(LivingEntity living) {
-        super.arrowHit(living);
-        if (weapon.getItem().isDamageable()){
-            if (weapon.attemptDamageItem(1, this.world.rand, null)){
+    protected void doPostHurtEffects(LivingEntity living) {
+        super.doPostHurtEffects(living);
+        if (weapon.getItem().canBeDepleted()){
+            if (weapon.hurt(1, this.level.random, null)){
                 weapon.shrink(1);
-                this.world.playSound(null, this.getPosX(), this.getPosY(), this.getPosZ(), SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                this.level.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.ITEM_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 this.remove();
             }
         }
     }
 
-    public void readAdditional(CompoundNBT compound) {
-        super.readAdditional(compound);
+    public void readAdditionalSaveData(CompoundNBT compound) {
+        super.readAdditionalSaveData(compound);
         CompoundNBT weaponNBT = compound.getCompound("Weapon");
-        this.weapon = ItemStack.read(weaponNBT);
+        this.weapon = ItemStack.of(weaponNBT);
     }
 
     public void writeSpawnData(PacketBuffer buffer) {
@@ -172,17 +172,17 @@ public class SpearEntity extends AbstractArrowEntity  implements IEntityAddition
     }
 
     public void readSpawnData(PacketBuffer additionalData) {
-        ItemStack stack = additionalData.readItemStack();
+        ItemStack stack = additionalData.readItem();
         weapon = stack.copy();
     }
 
-    public void writeAdditional(CompoundNBT compound) {
-        super.writeAdditional(compound);
-        CompoundNBT weaponNBT = this.weapon.write(new CompoundNBT());
+    public void addAdditionalSaveData(CompoundNBT compound) {
+        super.addAdditionalSaveData(compound);
+        CompoundNBT weaponNBT = this.weapon.save(new CompoundNBT());
         compound.put("Weapon", weaponNBT);
     }
 
-    public IPacket<?> createSpawnPacket() {
+    public IPacket<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 

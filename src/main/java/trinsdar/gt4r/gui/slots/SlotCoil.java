@@ -22,7 +22,7 @@ public class SlotCoil extends AbstractSlot<SlotCoil> {
     }
 
     @Override
-    public boolean isItemValid(@Nonnull ItemStack stack) {
+    public boolean mayPlace(@Nonnull ItemStack stack) {
         if (holder instanceof TileEntityFluidExtractor){
             return RecipeMaps.FLUID_EXTRACTOR_COILS.acceptsItem(stack);
         }
@@ -31,12 +31,12 @@ public class SlotCoil extends AbstractSlot<SlotCoil> {
     }
 
     @Override
-    public boolean canTakeStack(PlayerEntity playerIn) {
+    public boolean mayPickup(PlayerEntity playerIn) {
         return true;
     }
 
     @Override
-    public int getSlotStackLimit() {
+    public int getMaxStackSize() {
         if (holder instanceof TileEntityFluidExtractor){
             return 6;
         }
@@ -44,7 +44,7 @@ public class SlotCoil extends AbstractSlot<SlotCoil> {
     }
 
     @Override
-    public int getItemStackLimit(@Nonnull ItemStack stack) {
+    public int getMaxStackSize(@Nonnull ItemStack stack) {
         if (holder instanceof TileEntityFluidExtractor){
             return 6;
         }
@@ -52,8 +52,8 @@ public class SlotCoil extends AbstractSlot<SlotCoil> {
     }
 
     @Override
-    public void onSlotChanged() {
-        super.onSlotChanged();
-        if (holder instanceof IMachineHandler) ((IMachineHandler)holder).onMachineEvent(TileEntityIndustrialBlastFurnace.BFEvent.SLOT_COIL_CHANGED, this.getStack());
+    public void setChanged() {
+        super.setChanged();
+        if (holder instanceof IMachineHandler) ((IMachineHandler)holder).onMachineEvent(TileEntityIndustrialBlastFurnace.BFEvent.SLOT_COIL_CHANGED, this.getItem());
     }
 }

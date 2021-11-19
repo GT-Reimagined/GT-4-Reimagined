@@ -76,7 +76,7 @@ public class ToolTypes {
     });
 
     public static AntimatterToolType SPEAR = new SpearToolType(Ref.ID, "spear_gt", 2, 1, 10, 3.0F, -2.9F).setUseAction(UseAction.SPEAR);
-    public static AntimatterToolType ROCK_CUTTER = new RockCutterToolType(Ref.ID, "rock_cutter", 1, 1, 1, -1.0F, -3.0F).setPowered(100000L, 1).setRepairability(false).addToolTypes("pickaxe").setOverlayLayers(2).addEffectiveMaterials(PACKED_ICE, IRON, ROCK, ANVIL, PISTON).setBrokenItems(ImmutableMap.of("rock_cutter", i -> getBrokenItem(i, RockCutterPowerUnit)));
+    public static AntimatterToolType ROCK_CUTTER = new RockCutterToolType(Ref.ID, "rock_cutter", 1, 1, 1, -1.0F, -3.0F).setPowered(100000L, 1).setRepairability(false).addToolTypes("pickaxe").setOverlayLayers(2).addEffectiveMaterials(ICE_SOLID, METAL, STONE, HEAVY_METAL, PISTON).setBrokenItems(ImmutableMap.of("rock_cutter", i -> getBrokenItem(i, RockCutterPowerUnit)));
 
     static {
         PropertyIngredient.addGetter(CustomTags.BATTERIES_RE.getName(), ToolTypes::getEnergy);
@@ -106,7 +106,7 @@ public class ToolTypes {
     private static ItemStack getBrokenItem(ItemStack tool, IItemProvider broken){
         ItemStack powerUnit = new ItemStack(broken);
         Tuple<Long, Long> tuple = getEnergy(tool);
-        CompoundNBT dataTag = powerUnit.getOrCreateChildTag(muramasa.antimatter.Ref.TAG_TOOL_DATA);
+        CompoundNBT dataTag = powerUnit.getOrCreateTagElement(muramasa.antimatter.Ref.TAG_TOOL_DATA);
         dataTag.putLong(muramasa.antimatter.Ref.KEY_TOOL_DATA_ENERGY, tuple.getA());
         dataTag.putLong(muramasa.antimatter.Ref.KEY_TOOL_DATA_MAX_ENERGY, tuple.getB());
         if (broken.asItem() == PowerUnitHV || broken.asItem() == SmallPowerUnit){
@@ -178,7 +178,7 @@ public class ToolTypes {
         private Item.Properties prepareInstantiation(String domain) {
             if (domain.isEmpty())
                 Utils.onInvalidData("An AntimatterToolType was instantiated with an empty domain name!");
-            Item.Properties properties = new Item.Properties().group(getItemGroup());
+            Item.Properties properties = new Item.Properties().tab(getItemGroup());
             if (!getRepairability()) properties.setNoRepair();
             return properties;
         }
@@ -208,7 +208,7 @@ public class ToolTypes {
         private Item.Properties prepareInstantiation(String domain) {
             if (domain.isEmpty())
                 Utils.onInvalidData("An AntimatterToolType was instantiated with an empty domain name!");
-            Item.Properties properties = new Item.Properties().group(getItemGroup());
+            Item.Properties properties = new Item.Properties().tab(getItemGroup());
             if (!getRepairability()) properties.setNoRepair();
             return properties;
         }

@@ -38,28 +38,28 @@ public class BlockRubberLog extends BlockBasic {
     public final static EnumProperty<Direction.Axis> AXIS = BlockStateProperties.AXIS;
 
     public BlockRubberLog(String domain, String id) {
-        super(domain, id, Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F).sound(SoundType.WOOD).tickRandomly());
-        setDefaultState(getDefaultState().with(RESIN_STATE, ResinState.NONE).with(RESIN_FACING, Direction.NORTH).with(AXIS, Direction.Axis.Y));
+        super(domain, id, Block.Properties.of(Material.WOOD).strength(2.0F).sound(SoundType.WOOD).randomTicks());
+        registerDefaultState(defaultBlockState().setValue(RESIN_STATE, ResinState.NONE).setValue(RESIN_FACING, Direction.NORTH).setValue(AXIS, Direction.Axis.Y));
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(RESIN_STATE, RESIN_FACING, AXIS);
     }
 
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return this.getDefaultState().with(AXIS, context.getFace().getAxis()).with(RESIN_FACING, context.getPlacementHorizontalFacing().getOpposite()).with(RESIN_STATE, ResinState.NONE);
+        return this.defaultBlockState().setValue(AXIS, context.getClickedFace().getAxis()).setValue(RESIN_FACING, context.getHorizontalDirection().getOpposite()).setValue(RESIN_STATE, ResinState.NONE);
     }
 
     @Override
     public int getFlammability(BlockState state, IBlockReader world, BlockPos pos, Direction face) {
-        return state.hasProperty(BlockStateProperties.WATERLOGGED) && state.get(BlockStateProperties.WATERLOGGED) ? 0 : 5;
+        return state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED) ? 0 : 5;
     }
 
     @Override
     public int getFireSpreadSpeed(BlockState state, IBlockReader world, BlockPos pos, Direction face) {
-        return state.hasProperty(BlockStateProperties.WATERLOGGED) && state.get(BlockStateProperties.WATERLOGGED) ? 0 : 5;
+        return state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED) ? 0 : 5;
     }
 
     @Override
@@ -73,39 +73,39 @@ public class BlockRubberLog extends BlockBasic {
         ModelFile rubberLogEmpty = prov.existing(Ref.ID, "block/rubber_log_empty");
         ModelFile rubberLogFilled = prov.existing(Ref.ID, "block/rubber_log_filled");
         prov.getVariantBuilder(block).forAllStates(s ->
-            ConfiguredModel.builder().modelFile(s.get(RESIN_STATE) == ResinState.NONE ? rubberLog : s.get(RESIN_STATE) == ResinState.EMPTY ? rubberLogEmpty : rubberLogFilled)
-                .rotationY((int) s.get(RESIN_FACING).getOpposite().getHorizontalAngle())
-                .rotationX(s.get(AXIS) == Direction.Axis.Y ? 0 : 90).build()
+            ConfiguredModel.builder().modelFile(s.getValue(RESIN_STATE) == ResinState.NONE ? rubberLog : s.getValue(RESIN_STATE) == ResinState.EMPTY ? rubberLogEmpty : rubberLogFilled)
+                .rotationY((int) s.getValue(RESIN_FACING).getOpposite().toYRot())
+                .rotationX(s.getValue(AXIS) == Direction.Axis.Y ? 0 : 90).build()
         );
     }
 
     @Override
     public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
         List<ItemStack> drops = super.getDrops(state, builder);
-        if (state.get(RESIN_STATE) == ResinState.FILLED){
+        if (state.getValue(RESIN_STATE) == ResinState.FILLED){
             drops.add(new ItemStack(GT4RData.StickyResin));
         }
         return drops;
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        ItemStack stack = player.getHeldItem(handIn);
-        if ((stack.isEmpty() || stack.getItem() == GT4RData.StickyResin) && state.get(RESIN_FACING) == hit.getFace() && state.get(RESIN_STATE) == ResinState.FILLED){
-            state = state.with(RESIN_STATE, ResinState.EMPTY);
-            worldIn.setBlockState(pos, state);
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        ItemStack stack = player.getItemInHand(handIn);
+        if ((stack.isEmpty() || stack.getItem() == GT4RData.StickyResin) && state.getValue(RESIN_FACING) == hit.getDirection() && state.getValue(RESIN_STATE) == ResinState.FILLED){
+            state = state.setValue(RESIN_STATE, ResinState.EMPTY);
+            worldIn.setBlockAndUpdate(pos, state);
             ItemStack drop = new ItemStack(GT4RData.StickyResin, 1);
-            if (!player.addItemStackToInventory(drop)){
-                player.dropItem(drop, true, false);
+            if (!player.addItem(drop)){
+                player.drop(drop, true, false);
             }
         }
-        return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+        return super.use(state, worldIn, pos, player, handIn, hit);
     }
 
     @Override
     public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-        if (state.get(RESIN_STATE) == ResinState.EMPTY && random.nextInt(50) == 0){
-            worldIn.setBlockState(pos, state.with(RESIN_STATE, ResinState.FILLED));
+        if (state.getValue(RESIN_STATE) == ResinState.EMPTY && random.nextInt(50) == 0){
+            worldIn.setBlockAndUpdate(pos, state.setValue(RESIN_STATE, ResinState.FILLED));
         }
     }
 }

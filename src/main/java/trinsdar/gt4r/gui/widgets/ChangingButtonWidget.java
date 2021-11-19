@@ -7,6 +7,7 @@ import muramasa.antimatter.gui.ButtonBody;
 import muramasa.antimatter.gui.ButtonOverlay;
 import muramasa.antimatter.gui.GuiInstance;
 import muramasa.antimatter.gui.IGuiElement;
+import muramasa.antimatter.gui.event.GuiEvents;
 import muramasa.antimatter.gui.event.IGuiEvent;
 import muramasa.antimatter.gui.widget.ButtonWidget;
 import muramasa.antimatter.gui.widget.ScreenWidget;
@@ -23,14 +24,14 @@ public class ChangingButtonWidget extends ButtonWidget {
         super(instance, parent, res, body, overlay, onPress);
     }
 
-    public static WidgetSupplier build(ResourceLocation res, ButtonBody body, ButtonOverlay overlay, IGuiEvent ev, int id) {
-        return builder(((a,b) -> new ChangingButtonWidget(a,b, res, body, overlay, but -> Antimatter.NETWORK.sendToServer(but.gui.handler.createGuiPacket(ev, id, Screen.hasShiftDown() ? 1 : 0))))).clientSide();
+    public static WidgetSupplier build(ResourceLocation res, ButtonBody body, ButtonOverlay overlay, IGuiEvent.IGuiEventFactory ev, int id) {
+        return builder(((a,b) -> new ChangingButtonWidget(a,b, res, body, overlay, but -> Antimatter.NETWORK.sendToServer(but.gui.handler.createGuiPacket(new GuiEvents.GuiEvent(ev, id, Screen.hasShiftDown() ? 1 : 0)))))).clientSide();
     }
 
     @Override
     public void render(MatrixStack matrixStack, double mouseX, double mouseY, float partialTicks) {
         Minecraft minecraft = Minecraft.getInstance();
-        minecraft.getTextureManager().bindTexture(res);
+        minecraft.getTextureManager().bind(res);
         RenderSystem.disableDepthTest();
         boolean isActive = activeHandler == null || activeHandler.apply(this);
         if (body != null) {

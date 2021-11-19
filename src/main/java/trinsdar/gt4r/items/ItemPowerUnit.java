@@ -50,9 +50,9 @@ public class ItemPowerUnit extends ItemBasic<ItemPowerUnit> implements IColorHan
     }
 
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         if (flagIn.isAdvanced()) tooltip.add(new StringTextComponent("Energy: " + getCurrentEnergy(stack) + " / " + getMaxEnergy(stack)));
-        super.addInformation(stack, worldIn, tooltip, flagIn);
+        super.appendHoverText(stack, worldIn, tooltip, flagIn);
     }
 
     @Override
@@ -90,12 +90,12 @@ public class ItemPowerUnit extends ItemBasic<ItemPowerUnit> implements IColorHan
     }
 
     public CompoundNBT getDataTag(ItemStack stack) {
-        CompoundNBT dataTag = stack.getChildTag(Ref.TAG_TOOL_DATA);
+        CompoundNBT dataTag = stack.getTagElement(Ref.TAG_TOOL_DATA);
         return dataTag != null ? dataTag : validateTag(stack, 0, 100000);
     }
 
     public CompoundNBT validateTag(ItemStack stack, long startingEnergy, long maxEnergy) {
-        CompoundNBT dataTag = stack.getOrCreateChildTag(Ref.TAG_TOOL_DATA);
+        CompoundNBT dataTag = stack.getOrCreateTagElement(Ref.TAG_TOOL_DATA);
         dataTag.putLong(Ref.KEY_TOOL_DATA_ENERGY, startingEnergy);
         dataTag.putLong(Ref.KEY_TOOL_DATA_MAX_ENERGY, maxEnergy);
         return dataTag;

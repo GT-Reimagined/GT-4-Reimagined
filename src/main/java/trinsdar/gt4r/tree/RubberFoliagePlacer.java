@@ -15,9 +15,11 @@ import java.util.Random;
 import java.util.Set;
 import java.util.function.Consumer;
 
+import net.minecraft.world.gen.foliageplacer.FoliagePlacer.Foliage;
+
 public class RubberFoliagePlacer extends FoliagePlacer {
     public static final Codec<RubberFoliagePlacer> CODEC = RecordCodecBuilder.create((p_242834_0_) -> {
-        return func_242830_b(p_242834_0_).apply(p_242834_0_, RubberFoliagePlacer::new);
+        return foliagePlacerParts(p_242834_0_).apply(p_242834_0_, RubberFoliagePlacer::new);
     });
     public static final FoliagePlacerType<RubberFoliagePlacer> RUBBER = new FoliagePlacerType<>(CODEC);
     protected RubberFoliagePlacer(FeatureSpread radius, FeatureSpread offset) {
@@ -25,22 +27,22 @@ public class RubberFoliagePlacer extends FoliagePlacer {
     }
 
     public RubberFoliagePlacer() {
-        super(FeatureSpread.create(2), FeatureSpread.create(-1));
+        super(FeatureSpread.fixed(2), FeatureSpread.fixed(-1));
     }
 
     @Override
-    protected FoliagePlacerType<?> getPlacerType() {
+    protected FoliagePlacerType<?> type() {
         return RUBBER;
     }
 
     @Override
-    protected void func_230372_a_(IWorldGenerationReader world, Random random, BaseTreeFeatureConfig config, int trunkHeight, Foliage treeNode, int foilageHeight, int radius, Set<BlockPos> leaves, int offset, MutableBoundingBox box) {
+    protected void createFoliage(IWorldGenerationReader world, Random random, BaseTreeFeatureConfig config, int trunkHeight, Foliage treeNode, int foilageHeight, int radius, Set<BlockPos> leaves, int offset, MutableBoundingBox box) {
         generate(world, random, config, trunkHeight, treeNode, foilageHeight, radius, leaves, offset, box);
     }
 
     protected void generate(IWorldGenerationReader world, Random random, BaseTreeFeatureConfig config, int trunkHeight, Foliage treeNode, int foliageHeight, int radius, Set<BlockPos> leaves, int offset, MutableBoundingBox box) {
-        BlockPos center = treeNode.func_236763_a_();
-        BlockPos.Mutable pos = center.toMutable();
+        BlockPos center = treeNode.foliagePos();
+        BlockPos.Mutable pos = center.mutable();
 
         int x = pos.getX();
         int y = pos.getY();
@@ -48,26 +50,26 @@ public class RubberFoliagePlacer extends FoliagePlacer {
         double treeRadius = 2.5;
         for(int i = offset; i >= offset - foliageHeight; --i) {
             if (i == offset){
-                this.func_236753_a_(world, random, config, center, 1, leaves, i, treeNode.func_236765_c_(), box);
+                this.placeLeavesRow(world, random, config, center, 1, leaves, i, treeNode.doubleTrunk(), box);
                 continue;
             }
-            pos.setPos(x, y + i, z);
-            circle(pos.toMutable(), treeRadius, position -> {
-                if (TreeFeature.isAirOrLeavesAt(world, position)) {
-                    world.setBlockState(position, config.leavesProvider.getBlockState(random, position), 19);
-                    box.expandTo(new MutableBoundingBox(position, position));
-                    leaves.add(position.toImmutable());
+            pos.set(x, y + i, z);
+            circle(pos.mutable(), treeRadius, position -> {
+                if (TreeFeature.isAirOrLeaves(world, position)) {
+                    world.setBlock(position, config.leavesProvider.getState(random, position), 19);
+                    box.expand(new MutableBoundingBox(position, position));
+                    leaves.add(position.immutable());
                 }
             });
         }
 
         int spikeHeight = 2 + random.nextInt(3);
         for (int i = 0; i < spikeHeight; i++){
-            BlockPos leaf = center.up(i);
-            if (TreeFeature.isAirOrLeavesAt(world, leaf)) {
-                world.setBlockState(leaf, config.leavesProvider.getBlockState(random, leaf), 19);
-                box.expandTo(new MutableBoundingBox(leaf, leaf));
-                leaves.add(leaf.toImmutable());
+            BlockPos leaf = center.above(i);
+            if (TreeFeature.isAirOrLeaves(world, leaf)) {
+                world.setBlock(leaf, config.leavesProvider.getState(random, leaf), 19);
+                box.expand(new MutableBoundingBox(leaf, leaf));
+                leaves.add(leaf.immutable());
             }
         }
 
@@ -95,7 +97,7 @@ public class RubberFoliagePlacer extends FoliagePlacer {
                 int dxSq = dx * dx;
 
                 if (dzSq + dxSq <= radiusSq) {
-                    origin.setPos(x + dx, origin.getY(), z + dz);
+                    origin.set(x + dx, origin.getY(), z + dz);
                     consumer.accept(origin);
                 }
             }
@@ -103,12 +105,12 @@ public class RubberFoliagePlacer extends FoliagePlacer {
     }
 
     @Override
-    public int func_230374_a_(Random p_230374_1_, int p_230374_2_, BaseTreeFeatureConfig p_230374_3_) {
+    public int foliageHeight(Random p_230374_1_, int p_230374_2_, BaseTreeFeatureConfig p_230374_3_) {
         return Math.max(2, p_230374_2_ - (3 + p_230374_1_.nextInt(2)));
     }
 
     @Override
-    protected boolean func_230373_a_(Random p_230373_1_, int p_230373_2_, int p_230373_3_, int p_230373_4_, int p_230373_5_, boolean p_230373_6_) {
+    protected boolean shouldSkipLocation(Random p_230373_1_, int p_230373_2_, int p_230373_3_, int p_230373_4_, int p_230373_5_, boolean p_230373_6_) {
         return false;
     }
 }

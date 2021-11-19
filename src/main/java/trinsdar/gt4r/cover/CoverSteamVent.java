@@ -39,7 +39,7 @@ public class CoverSteamVent extends BaseCover {
         if (handler.getTile() instanceof TileEntityMachine){
             ((TileEntityMachine<?>)handler.getTile()).recipeHandler.ifPresent(h -> {
                 if (h instanceof TileEntitySteamMachine.SteamMachineRecipeHandler){
-                    ((TileEntitySteamMachine.SteamMachineRecipeHandler) h).setSteamClear(handler.getTile().getWorld().isAirBlock(handler.getTile().getPos().offset(side)));
+                    ((TileEntitySteamMachine.SteamMachineRecipeHandler) h).setSteamClear(handler.getTile().getLevel().isEmptyBlock(handler.getTile().getBlockPos().relative(side)));
                 }
             });
         }

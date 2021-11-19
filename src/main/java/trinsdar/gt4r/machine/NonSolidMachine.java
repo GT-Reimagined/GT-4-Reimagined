@@ -27,6 +27,6 @@ public class NonSolidMachine extends Machine<NonSolidMachine> {
     }
 
     public Item getItem(Tier tier) {
-        return BlockItem.BLOCK_TO_ITEM.get(AntimatterAPI.get(BlockNonSolidMachine.class,this.getId() + "_" + tier.getId(), getDomain()));
+        return BlockItem.BY_BLOCK.get(AntimatterAPI.get(BlockNonSolidMachine.class,this.getId() + "_" + tier.getId(), getDomain()));
     }
 }

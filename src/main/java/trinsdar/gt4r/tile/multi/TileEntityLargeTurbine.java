@@ -108,15 +108,15 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
                                 ticker = 0;
                                 tile.itemHandler.ifPresent(h -> {
                                     ItemStack copy = h.getHandler(SlotTypes.ROTOR).getStackInSlot(0).copy();
-                                    if (h.getHandler(SlotTypes.ROTOR).getStackInSlot(0).attemptDamageItem(1, tile.world.rand, null)){
+                                    if (h.getHandler(SlotTypes.ROTOR).getStackInSlot(0).hurt(1, tile.level.random, null)){
                                         if (copy.getItem() instanceof ItemTurbineRotor){
                                             h.getHandler(SlotTypes.ROTOR).setStackInSlot(0, Materials.BROKEN_TURBINE_ROTOR.get(((ItemTurbineRotor)copy.getItem()).getMaterial(), 1));
                                         }
-                                        for (PlayerEntity player : world.getTargettablePlayersWithinAABB(new EntityPredicate().setDistance(5.0D), null, new AxisAlignedBB(new int3(tile.getPos(), tile.getFacing()).left(2).back(5), new int3(tile.getPos(), tile.getFacing()).right(2)))){
-                                            if (EntityPredicates.NOT_SPECTATING.test(player) && !player.isCreative()) {
-                                                double d0 = player.getDistanceSq(tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ());
+                                        for (PlayerEntity player : level.getNearbyPlayers(new EntityPredicate().range(5.0D), null, new AxisAlignedBB(new int3(tile.getBlockPos(), tile.getFacing()).left(2).back(5), new int3(tile.getBlockPos(), tile.getFacing()).right(2)))){
+                                            if (EntityPredicates.NO_SPECTATORS.test(player) && !player.isCreative()) {
+                                                double d0 = player.distanceToSqr(tile.getBlockPos().getX(), tile.getBlockPos().getY(), tile.getBlockPos().getZ());
                                                 if (d0 < 5 * 5) {
-                                                    player.attackEntityFrom(DamageSource.GENERIC, 8);
+                                                    player.hurt(DamageSource.GENERIC, 8);
                                                 }
                                             }
                                         }
