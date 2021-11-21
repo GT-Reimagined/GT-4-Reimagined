@@ -16,15 +16,13 @@ public abstract class ServerPlayNetHandlerMixin {
     public ServerPlayerEntity player;
 
     @ModifyConstant(
-            method = "processUseEntity",
+            method = "handleInteract",
             constant = {
                     @Constant(doubleValue = 36.0D)
             }
     )
     private double getExtendedAttackReachSquared(double value) {
         double extendedAttackReachValue = player.getAttributeValue(Attributes.ATTACK_REACH.get()) * 2.0D;
-        Antimatter.LOGGER.info("Extended: " + extendedAttackReachValue);
-        Antimatter.LOGGER.info("Extended Squared: " + (extendedAttackReachValue * extendedAttackReachValue));
         return extendedAttackReachValue * extendedAttackReachValue;
     }
 }

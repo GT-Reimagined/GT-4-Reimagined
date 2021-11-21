@@ -18,7 +18,7 @@ public abstract class GameRendererMixin {
     private Minecraft minecraft;
 
     @ModifyConstant(
-            method = "getMouseOver",
+            method = "pick",
             constant = @Constant(doubleValue = 6.0D)
     )
     private double getExtendedAttackReach(double value) {
@@ -27,7 +27,7 @@ public abstract class GameRendererMixin {
     }
 
     @ModifyConstant(
-            method = "getMouseOver",
+            method = "pick",
             constant = @Constant(doubleValue = 3.0D)
     )
     private double getAttackReach(double value) {
@@ -36,7 +36,7 @@ public abstract class GameRendererMixin {
     }
 
     @ModifyConstant(
-            method = "getMouseOver",
+            method = "pick",
             constant = @Constant(doubleValue = 9.0D)
     )
     private double getAttackReachSquared(double value) {
@@ -46,8 +46,8 @@ public abstract class GameRendererMixin {
     }
 
     @Redirect(
-            method = "getMouseOver",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/PlayerController;getBlockReachDistance()F")
+            method = "pick",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/PlayerController;getPickRange()F")
     )
     private float getRedirectedAttackReach(PlayerController controller){
         if (minecraft.player == null) return controller.getPickRange();
