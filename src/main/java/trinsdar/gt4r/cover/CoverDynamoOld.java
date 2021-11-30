@@ -22,7 +22,7 @@ public class CoverDynamoOld extends CoverDynamo {
     }
 
     @Override
-    public ResourceLocation getModel(String type, Direction dir, Direction facing) {
+    public ResourceLocation getModel(String type, Direction dir) {
         if (type.equals("pipe")) return PIPE_COVER_MODEL;
         return getBasicModel();
     }
