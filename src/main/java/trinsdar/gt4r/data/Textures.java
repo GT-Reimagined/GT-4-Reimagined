@@ -2,9 +2,11 @@ package trinsdar.gt4r.data;
 
 import muramasa.antimatter.machine.MachineState;
 import muramasa.antimatter.material.TextureSet;
+import muramasa.antimatter.texture.IOverlayModeler;
 import muramasa.antimatter.texture.IOverlayTexturer;
 import muramasa.antimatter.texture.ITextureHandler;
 import muramasa.antimatter.texture.Texture;
+import net.minecraft.util.ResourceLocation;
 import trinsdar.gt4r.Ref;
 
 public class Textures {
@@ -14,6 +16,8 @@ public class Textures {
     public static final Texture BRONZE_MACHINE_BASE = new Texture(Ref.ID, "block/machine/base/tiers/bronze");
     public static final Texture FUSION_IN = new Texture(Ref.ID, "block/machine/base/fusion_control_computer");
     public static final Texture FUSION_OUT = new Texture(Ref.ID, "block/machine/base/fusion_out");
+
+    public static final IOverlayModeler STANDARD_MACHINE_MODELS = (a,d) -> new ResourceLocation(Ref.ANTIMATTER, "block/machine/overlay/invalid/" + d.getName());
 
     public static final ITextureHandler BOILER_HANDLER = (m, t) -> new Texture[] {
         new Texture(Ref.ID, "block/machine/base/brick"),
