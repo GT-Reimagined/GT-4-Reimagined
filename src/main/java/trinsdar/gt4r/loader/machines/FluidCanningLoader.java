@@ -1,5 +1,6 @@
 package trinsdar.gt4r.loader.machines;
 
+import muramasa.antimatter.util.Utils;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -47,7 +48,7 @@ public class FluidCanningLoader {
     private static ItemStack getFullBattery(IItemProvider battery){
         ItemStack stack = new ItemStack(battery);
         stack.getCapability(TesseractGTCapability.ENERGY_HANDLER_CAPABILITY).ifPresent(e -> {
-            e.insert(e.getCapacity(), false);
+            Utils.addEnergy(e, e.getCapacity());
         });
         return stack;
     }

@@ -101,7 +101,7 @@ public class TileEntityItemFilter extends TileEntityMachine<TileEntityItemFilter
         if (getCover(this.getFacing().getOpposite()).isEmpty()){
             if (this.energyHandler.map(e -> e.getEnergy() > 0).orElse(false)){
                 if(processItemOutput()){
-                    this.energyHandler.ifPresent(e -> e.extractInternal(1, false, true));
+                    this.energyHandler.ifPresent(e -> Utils.extractEnergy(e, 1));
                 }
             }
 

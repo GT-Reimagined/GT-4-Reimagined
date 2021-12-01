@@ -125,7 +125,7 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
                             }
 
                             tile.energyHandler.ifPresent(handler -> {
-                                handler.insert((long) (efficiency*activeRecipe.getPower()/* *finalConsumed/ recipeAmount*/), false);
+                                Utils.addEnergy(handler, (long) (efficiency*activeRecipe.getPower()/* *finalConsumed/ recipeAmount*/));
                             });
                         }
                         return true;

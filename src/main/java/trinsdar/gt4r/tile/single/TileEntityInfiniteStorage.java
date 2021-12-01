@@ -18,6 +18,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Direction;
 import tesseract.api.capability.TesseractGTCapability;
+import tesseract.api.gt.GTTransaction;
 
 import java.util.List;
 
@@ -29,14 +30,14 @@ public class TileEntityInfiniteStorage<T extends TileEntityInfiniteStorage<T>> e
         super(type);
         energyHandler.set(() -> new MachineEnergyHandler<T>((T)this, Long.MAX_VALUE, Long.MAX_VALUE, 0, 32, 0, 4) {
             @Override
-            public long extract(long maxExtract, boolean simulate) {
-                if (simulate && !getState().extract(true, 1, maxExtract)) {
-                    return 0;
-                }
-                if (!simulate) {
-                    getState().extract(false, 1, maxExtract);
-                }
-                return maxExtract;
+            public GTTransaction extract(GTTransaction.Mode mode) {
+                return new GTTransaction(availableAmpsOutput(), this.getOutputVoltage(), this::extractEnergy);
+            }
+
+            @Override
+            public boolean extractEnergy(GTTransaction.TransferData data) {
+                getState().receive(false, data.getAmps(false));
+                return true;
             }
 
             @Override
@@ -52,8 +53,8 @@ public class TileEntityInfiniteStorage<T extends TileEntityInfiniteStorage<T>> e
         if (event.getFactory() == GuiEvents.EXTRA_BUTTON) {
             final int[] data = ((GuiEvents.GuiEvent)event).data;
             energyHandler.ifPresent(h -> {
-                int voltage = h.getOutputVoltage();
-                int amperage = h.getOutputAmperage();
+                int voltage = (int) h.getOutputVoltage();
+                int amperage = (int) h.getOutputAmperage();
                 boolean shiftHold = data[1] != 0;
                 switch (data[0]) {
                     case 0:
@@ -171,8 +172,8 @@ public class TileEntityInfiniteStorage<T extends TileEntityInfiniteStorage<T>> e
         public void init() {
             super.init();
             TileEntityInfiniteStorage<?> m = (TileEntityInfiniteStorage<?>) gui.handler;
-            gui.syncInt(() -> m.energyHandler.map(EnergyHandler::getOutputAmperage).orElse(0), i -> amperage = i, SERVER_TO_CLIENT);
-            gui.syncInt(() -> m.energyHandler.map(EnergyHandler::getOutputVoltage).orElse(0), i -> voltage = i, SERVER_TO_CLIENT);
+            gui.syncInt(() -> Math.toIntExact(m.energyHandler.map(EnergyHandler::getOutputAmperage).orElse(0L)), i -> amperage = i, SERVER_TO_CLIENT);
+            gui.syncInt(() -> Math.toIntExact(m.energyHandler.map(EnergyHandler::getOutputVoltage).orElse(0L)), i -> voltage = i, SERVER_TO_CLIENT);
         }
 
         public static WidgetSupplier build() {

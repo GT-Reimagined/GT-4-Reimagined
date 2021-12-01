@@ -4,6 +4,7 @@ import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.machine.MachineState;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.TileEntityMachine;
+import muramasa.antimatter.util.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -164,12 +165,12 @@ public class TileEntityPump extends TileEntityMachine<TileEntityPump> {
                 FluidStack stack = new FluidStack(fluid, 1000);
                 if (fluidHandler.map(f -> f.canOutputsFit(new FluidStack[]{stack})).orElse(false) && energyHandler.map(e -> e.getEnergy() >= 1000).orElse(false)){
                     fluidHandler.ifPresent(f -> f.fillOutput(stack, IFluidHandler.FluidAction.EXECUTE));
-                    energyHandler.ifPresent(e -> e.extractInternal(1000, false, true));
+                    energyHandler.ifPresent(e -> Utils.extractEnergy(e, 1000));
                 } else {
                     return false;
                 }
             } else {
-                energyHandler.ifPresent(e -> e.extractInternal(250, false, true));
+                energyHandler.ifPresent(e -> Utils.extractEnergy(e, 250));
             }
             Block block = this.itemHandler.map(i -> ((BlockItem)i.getHandler(SlotType.STORAGE).getStackInSlot(0).getItem()).getBlock()).orElse(Blocks.AIR);
             if (x == this.worldPosition.getX() && z == this.worldPosition.getZ()) block = Blocks.AIR;
