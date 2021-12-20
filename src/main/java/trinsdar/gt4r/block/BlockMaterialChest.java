@@ -1,5 +1,6 @@
 package trinsdar.gt4r.block;
 
+import muramasa.antimatter.datagen.providers.AntimatterItemModelProvider;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.TileEntityMachine;
@@ -12,6 +13,7 @@ import net.minecraft.entity.passive.CatEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.container.Container;
+import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.pathfinding.PathType;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
@@ -21,6 +23,7 @@ import net.minecraft.stats.Stat;
 import net.minecraft.stats.Stats;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
+import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -29,9 +32,14 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.generators.ItemModelBuilder;
+import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.tile.single.TileEntityCabinet;
 
 import java.util.List;
+
+import static net.minecraft.state.properties.BlockStateProperties.HORIZONTAL_FACING;
+import static net.minecraft.state.properties.BlockStateProperties.WATERLOGGED;
 
 public class BlockMaterialChest extends BlockMachineMaterial implements IWaterLoggable {
 
@@ -113,5 +121,23 @@ public class BlockMaterialChest extends BlockMachineMaterial implements IWaterLo
     protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> pBuilder) {
         super.createBlockStateDefinition(pBuilder);
         pBuilder.add(WATERLOGGED);
+    }
+
+    @Override
+    public void onItemModelBuild(IItemProvider item, AntimatterItemModelProvider prov) {
+        ItemModelBuilder b = prov.getBuilder(item).parent(prov.existing(Ref.ID, "block/machine/overlay/material_chest/full"));
+    }
+
+    @Override
+    public BlockState getStateForPlacement(BlockItemUseContext context) {
+        FluidState fluidstate = context.getLevel().getFluidState(context.getClickedPos());
+        return this.defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING, context.getHorizontalDirection()).setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER);
+    }
+
+    @Override
+    public boolean triggerEvent(BlockState state, World worldIn, BlockPos pos, int id, int param) {
+        super.triggerEvent(state, worldIn, pos, id, param);
+        TileEntity tileentity = worldIn.getBlockEntity(pos);
+        return tileentity != null && tileentity.triggerEvent(id, param);
     }
 }
