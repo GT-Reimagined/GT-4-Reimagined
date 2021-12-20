@@ -1,0 +1,32 @@
+{
+	"elements": [
+		{
+			"from": [1, 14, 1],
+			"to": [15, 14, 15],
+			"faces": {
+				"up": {"uv": [3.5, 0, 7, 3.5], "texture": "#base", "tintindex": 0}
+			}
+		},
+		{
+			"from": [1, 10, 1],
+			"to": [15, 10, 15],
+			"faces": {
+				"up": {"uv": [3.5, 4.75, 7, 8.25], "texture": "#base", "tintindex": 0}
+			}
+		},
+		{
+			"from": [1, 14, 1],
+			"to": [15, 14, 15],
+			"faces": {
+				"up": {"uv": [3.5, 0, 7, 3.5], "texture": "#overlay", "tintindex": 1}
+			}
+		},
+		{
+			"from": [1, 10, 1],
+			"to": [15, 10, 15],
+			"faces": {
+				"up": {"uv": [3.5, 4.75, 7, 8.25], "texture": "#overlay", "tintindex": 1}
+			}
+		}
+	]
+}

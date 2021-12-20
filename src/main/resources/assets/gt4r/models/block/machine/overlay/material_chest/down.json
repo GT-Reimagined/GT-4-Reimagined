@@ -1,0 +1,32 @@
+{
+	"elements": [
+		{
+			"from": [1, 9, 1],
+			"to": [15, 9, 15],
+			"faces": {
+				"down": {"uv": [7, 0, 10.5, 3.5], "texture": "#base", "tintindex": 0}
+			}
+		},
+		{
+			"from": [1, 0, 1],
+			"to": [15, 0, 15],
+			"faces": {
+				"down": {"uv": [7, 4.75, 10.5, 8.25], "texture": "#base", "tintindex": 0}
+			}
+		},
+		{
+			"from": [1, 9, 1],
+			"to": [15, 9, 15],
+			"faces": {
+				"down": {"uv": [7, 0, 10.5, 3.5], "texture": "#overlay", "tintindex": 1}
+			}
+		},
+		{
+			"from": [1, 0, 1],
+			"to": [15, 0, 15],
+			"faces": {
+				"down": {"uv": [7, 4.75, 10.5, 8.25], "texture": "#overlay", "tintindex": 1}
+			}
+		}
+	]
+}

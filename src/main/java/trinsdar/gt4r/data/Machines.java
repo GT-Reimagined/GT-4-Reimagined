@@ -11,6 +11,7 @@ import muramasa.antimatter.tile.single.TileEntityBatteryBuffer;
 import muramasa.antimatter.tile.single.TileEntityDigitalTransformer;
 import muramasa.antimatter.tile.single.TileEntityTransformer;
 import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.machine.ChestMachine;
 import trinsdar.gt4r.machine.MaterialMachine;
 import trinsdar.gt4r.machine.NonSolidMachine;
 import trinsdar.gt4r.machine.StorageMachine;
@@ -158,6 +159,18 @@ public class Machines {
     public static MaterialMachine MAGNALIUM_CABINET = new MaterialMachine(Ref.ID, "magnalium_cabinet", Materials.Magnalium).addFlags(ITEM, GUI, COVERABLE).overlayTexture(Textures.CABINET_OVERLAY_HANDLER).baseTexture(Textures.CABINET_HANDLER).setTiers(LV).setTile(m -> () -> new TileEntityCabinet(m, 240));
     public static MaterialMachine PLATINUM_CABINET = new MaterialMachine(Ref.ID, "platinum_cabinet", Materials.Platinum).addFlags(ITEM, GUI, COVERABLE).overlayTexture(Textures.CABINET_OVERLAY_HANDLER).baseTexture(Textures.CABINET_HANDLER).setTiers(LV).setTile(m -> () -> new TileEntityCabinet(m, 258));
     public static MaterialMachine OSMIUM_CABINET = new MaterialMachine(Ref.ID, "osmium_cabinet", Materials.Osmium).addFlags(ITEM, GUI, COVERABLE).overlayTexture(Textures.CABINET_OVERLAY_HANDLER).baseTexture(Textures.CABINET_HANDLER).setTiers(LV).setTile(m -> () -> new TileEntityCabinet(m, 276));
+
+    public static MaterialMachine IRON_CHEST = new ChestMachine(Ref.ID, "iron_chest",Iron).addFlags(ITEM, GUI).overlayTexture(Textures.CABINET_OVERLAY_HANDLER).baseTexture(Textures.CABINET_HANDLER).setTiers(LV).setTile(m -> () -> new TileEntityCabinet(m, 222));
+    public static MaterialMachine ALUMINIUM_CHEST = new ChestMachine(Ref.ID, "aluminium_chest", Materials.Aluminium).addFlags(ITEM, GUI).overlayTexture(Textures.CABINET_OVERLAY_HANDLER).baseTexture(Textures.CABINET_HANDLER).setTiers(LV).setTile(m -> () -> new TileEntityCabinet(m, 222));
+    public static MaterialMachine WROUGHT_IRON_CHEST = new ChestMachine(Ref.ID, "wrought_iron_chest", Materials.WroughtIron).addFlags(ITEM, GUI).overlayTexture(Textures.CABINET_OVERLAY_HANDLER).baseTexture(Textures.CABINET_HANDLER).setTiers(LV).setTile(m -> () -> new TileEntityCabinet(m, 222));
+    public static MaterialMachine BRASS_CHEST = new ChestMachine(Ref.ID, "brass_chest", Materials.Brass).addFlags(ITEM, GUI).overlayTexture(Textures.CABINET_OVERLAY_HANDLER).baseTexture(Textures.CABINET_HANDLER).setTiers(LV).setTile(m -> () -> new TileEntityCabinet(m, 222));
+    public static MaterialMachine CUPRONICKEL_CHEST = new ChestMachine(Ref.ID, "cupronickel_chest", Materials.Cupronickel).addFlags(ITEM, GUI).overlayTexture(Textures.CABINET_OVERLAY_HANDLER).baseTexture(Textures.CABINET_HANDLER).setTiers(LV).setTile(m -> () -> new TileEntityCabinet(m, 222));
+    public static MaterialMachine ELECTRUM_CHEST = new ChestMachine(Ref.ID, "electrum_chest", Materials.Electrum).addFlags(ITEM, GUI).overlayTexture(Textures.CABINET_OVERLAY_HANDLER).baseTexture(Textures.CABINET_HANDLER).setTiers(LV).setTile(m -> () -> new TileEntityCabinet(m, 240));
+    public static MaterialMachine GOLD_CHEST = new ChestMachine(Ref.ID, "gold_chest", Gold).addFlags(ITEM, GUI).overlayTexture(Textures.CABINET_OVERLAY_HANDLER).baseTexture(Textures.CABINET_HANDLER).setTiers(LV).setTile(m -> () -> new TileEntityCabinet(m, 240));
+    public static MaterialMachine SILVER_CHEST = new ChestMachine(Ref.ID, "silver_chest", Materials.Silver).addFlags(ITEM, GUI).overlayTexture(Textures.CABINET_OVERLAY_HANDLER).baseTexture(Textures.CABINET_HANDLER).setTiers(LV).setTile(m -> () -> new TileEntityCabinet(m, 240));
+    public static MaterialMachine MAGNALIUM_CHEST = new ChestMachine(Ref.ID, "magnalium_chest", Materials.Magnalium).addFlags(ITEM, GUI).overlayTexture(Textures.CABINET_OVERLAY_HANDLER).baseTexture(Textures.CABINET_HANDLER).setTiers(LV).setTile(m -> () -> new TileEntityCabinet(m, 240));
+    public static MaterialMachine PLATINUM_CHEST = new ChestMachine(Ref.ID, "platinum_chest", Materials.Platinum).addFlags(ITEM, GUI).overlayTexture(Textures.CABINET_OVERLAY_HANDLER).baseTexture(Textures.CABINET_HANDLER).setTiers(LV).setTile(m -> () -> new TileEntityCabinet(m, 258));
+    public static MaterialMachine OSMIUM_CHEST = new ChestMachine(Ref.ID, "osmium_chest", Materials.Osmium).addFlags(ITEM, GUI).overlayTexture(Textures.CABINET_OVERLAY_HANDLER).baseTexture(Textures.CABINET_HANDLER).setTiers(LV).setTile(m -> () -> new TileEntityCabinet(m, 276));
 
     public static MaterialMachine BRONZE_WORKBENCH = new MaterialMachine(Ref.ID, "bronze_workbench", Materials.Bronze).setTiers(LV).baseTexture(Textures.WORKBENCH_HANDLER).overlayTexture(Textures.WORKBENCH_OVERLAY_HANDLER).addFlags(ITEM, GUI).setTile(m -> () -> new TileEntityWorkbench(m));
     public static MaterialMachine IRON_WORKBENCH = new MaterialMachine(Ref.ID, "iron_workbench", Iron).setTiers(LV).baseTexture(Textures.WORKBENCH_HANDLER).overlayTexture(Textures.WORKBENCH_OVERLAY_HANDLER).addFlags(ITEM, GUI).setTile(m -> () -> new TileEntityWorkbench(m));
