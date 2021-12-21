@@ -1,5 +1,6 @@
 package trinsdar.gt4r.block;
 
+import muramasa.antimatter.Antimatter;
 import muramasa.antimatter.machine.BlockMachine;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.Machine;

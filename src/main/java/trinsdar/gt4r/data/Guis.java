@@ -325,6 +325,10 @@ public class Guis {
         OSMIUM_CABINET.getCallbacks().remove(0);
         PLATINUM_CABINET.addGuiCallback(t -> t.addWidget(BackgroundWidget.build(t.handler.getGuiTexture(),t.handler.guiSize(), t.handler.guiHeight(), 256, 266)));
         OSMIUM_CABINET.addGuiCallback(t -> t.addWidget(BackgroundWidget.build(t.handler.getGuiTexture(),t.handler.guiSize(), t.handler.guiHeight(), 256, 276)));
+        PLATINUM_CHEST.getCallbacks().remove(0);
+        OSMIUM_CHEST.getCallbacks().remove(0);
+        PLATINUM_CHEST.addGuiCallback(t -> t.addWidget(BackgroundWidget.build(t.handler.getGuiTexture(),t.handler.guiSize(), t.handler.guiHeight(), 256, 266)));
+        OSMIUM_CHEST.addGuiCallback(t -> t.addWidget(BackgroundWidget.build(t.handler.getGuiTexture(),t.handler.guiSize(), t.handler.guiHeight(), 256, 276)));
     }
 
     private static void initMaterialMachine(Dist side){

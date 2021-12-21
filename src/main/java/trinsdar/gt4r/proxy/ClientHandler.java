@@ -13,6 +13,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import trinsdar.gt4r.GT4Reimagined;
 import trinsdar.gt4r.block.BlockCasing;
 import trinsdar.gt4r.block.BlockMachineMaterial;
+import trinsdar.gt4r.block.BlockMaterialChest;
 import trinsdar.gt4r.client.BakedModels;
 import trinsdar.gt4r.client.ClientUtil;
 import trinsdar.gt4r.data.GT4RData;
@@ -39,6 +40,7 @@ public class ClientHandler implements IProxyHandler {
             RenderTypeLookup.setRenderLayer(((BlockItem)Machines.DUSTBIN.getItem(LV)).getBlock(), RenderType.cutout());
             AntimatterAPI.all(BlockCasing.class, t -> RenderTypeLookup.setRenderLayer(t, RenderType.cutout()));
             AntimatterAPI.all(BlockMachineMaterial.class, b -> RenderTypeLookup.setRenderLayer(b, RenderType.cutout()));
+            AntimatterAPI.all(BlockMaterialChest.class, b -> RenderTypeLookup.setRenderLayer(b, RenderType.cutout()));
         });
         ClientUtil.registerEntityRenders();
         copyProgrammerArtIfMissing();

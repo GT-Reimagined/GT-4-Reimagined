@@ -1,5 +1,6 @@
 package trinsdar.gt4r.block;
 
+import it.unimi.dsi.fastutil.floats.Float2FloatFunction;
 import muramasa.antimatter.datagen.providers.AntimatterItemModelProvider;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.Machine;
@@ -21,7 +22,9 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.ChestType;
 import net.minecraft.stats.Stat;
 import net.minecraft.stats.Stats;
+import net.minecraft.tileentity.IChestLid;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityMerger;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
@@ -32,11 +35,15 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.tile.single.TileEntityCabinet;
+import trinsdar.gt4r.tile.single.TileEntityChest;
 
 import java.util.List;
+import java.util.function.BiPredicate;
 
 import static net.minecraft.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 import static net.minecraft.state.properties.BlockStateProperties.WATERLOGGED;
@@ -68,10 +75,10 @@ public class BlockMaterialChest extends BlockMachineMaterial implements IWaterLo
         return false;
     }
 
-    @Override
+    /*@Override
     public BlockRenderType getRenderShape(BlockState pState) {
         return BlockRenderType.ENTITYBLOCK_ANIMATED;
-    }
+    }*/
 
     @Override
     public VoxelShape getShape(BlockState pState, IBlockReader pLevel, BlockPos pPos, ISelectionContext pContext) {
@@ -112,8 +119,8 @@ public class BlockMaterialChest extends BlockMachineMaterial implements IWaterLo
     @Override
     public int getAnalogOutputSignal(BlockState pBlockState, World pLevel, BlockPos pPos) {
         TileEntity tile = pLevel.getBlockEntity(pPos);
-        if (tile instanceof TileEntityCabinet){
-            return Container.getRedstoneSignalFromContainer(((TileEntityCabinet) tile).getContents());
+        if (tile instanceof TileEntityChest){
+            return Container.getRedstoneSignalFromContainer((TileEntityChest) tile);
         }
         return 0;
     }
@@ -139,5 +146,27 @@ public class BlockMaterialChest extends BlockMachineMaterial implements IWaterLo
         super.triggerEvent(state, worldIn, pos, id, param);
         TileEntity tileentity = worldIn.getBlockEntity(pos);
         return tileentity != null && tileentity.triggerEvent(id, param);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static TileEntityMerger.ICallback<TileEntityChest, Float2FloatFunction> getLid(final IChestLid p_226917_0_) {
+        return new TileEntityMerger.ICallback<TileEntityChest, Float2FloatFunction>() {
+            @Override
+            public Float2FloatFunction acceptDouble(TileEntityChest p_225539_1_, TileEntityChest p_225539_2_) {
+                return (p_226921_2_) -> {
+                    return Math.max(p_225539_1_.getOpenNess(p_226921_2_), p_225539_2_.getOpenNess(p_226921_2_));
+                };
+            }
+
+            @Override
+            public Float2FloatFunction acceptSingle(TileEntityChest p_225538_1_) {
+                return p_225538_1_::getOpenNess;
+            }
+
+            @Override
+            public Float2FloatFunction acceptNone() {
+                return p_226917_0_::getOpenNess;
+            }
+        };
     }
 }

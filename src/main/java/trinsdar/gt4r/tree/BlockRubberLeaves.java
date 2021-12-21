@@ -50,7 +50,7 @@ public class BlockRubberLeaves extends LeavesBlock implements IAntimatterObject,
 
     @Override
     public Texture[] getTextures() {
-        return new Texture[]{new Texture(getRegistryName().getNamespace(), "block/tree/" + getId())};
+        return new Texture[]{new Texture(getDomain(), "block/tree/" + getId())};
     }
 
     private static Boolean allowsSpawnOnLeaves(BlockState state, IBlockReader reader, BlockPos pos, EntityType<?> entity) {
