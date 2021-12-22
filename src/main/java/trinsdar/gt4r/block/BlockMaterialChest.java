@@ -75,10 +75,10 @@ public class BlockMaterialChest extends BlockMachineMaterial implements IWaterLo
         return false;
     }
 
-    /*@Override
+    @Override
     public BlockRenderType getRenderShape(BlockState pState) {
         return BlockRenderType.ENTITYBLOCK_ANIMATED;
-    }*/
+    }
 
     @Override
     public VoxelShape getShape(BlockState pState, IBlockReader pLevel, BlockPos pPos, ISelectionContext pContext) {
@@ -87,28 +87,6 @@ public class BlockMaterialChest extends BlockMachineMaterial implements IWaterLo
 
     protected Stat<ResourceLocation> getOpenChestStat() {
         return Stats.CUSTOM.get(Stats.OPEN_CHEST);
-    }
-
-    public static boolean isChestBlockedAt(IWorld p_220108_0_, BlockPos p_220108_1_) {
-        return isBlockedChestByBlock(p_220108_0_, p_220108_1_) || isCatSittingOnChest(p_220108_0_, p_220108_1_);
-    }
-
-    private static boolean isBlockedChestByBlock(IBlockReader pLevel, BlockPos pPos) {
-        BlockPos blockpos = pPos.above();
-        return pLevel.getBlockState(blockpos).isRedstoneConductor(pLevel, blockpos);
-    }
-
-    private static boolean isCatSittingOnChest(IWorld pLevel, BlockPos pPos) {
-        List<CatEntity> list = pLevel.getEntitiesOfClass(CatEntity.class, new AxisAlignedBB((double)pPos.getX(), (double)(pPos.getY() + 1), (double)pPos.getZ(), (double)(pPos.getX() + 1), (double)(pPos.getY() + 2), (double)(pPos.getZ() + 1)));
-        if (!list.isEmpty()) {
-            for(CatEntity catentity : list) {
-                if (catentity.isInSittingPose()) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
     }
 
     @Override

@@ -4,6 +4,7 @@ import muramasa.antimatter.capability.item.ITrackedHandler;
 import muramasa.antimatter.gui.SlotType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.passive.CatEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -17,12 +18,15 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import trinsdar.gt4r.block.BlockMaterialChest;
 import trinsdar.gt4r.gui.ContainerCabinet;
 import trinsdar.gt4r.machine.MaterialMachine;
+
+import java.util.List;
 
 @OnlyIn(value = Dist.CLIENT, _interface = IChestLid.class)
 public class TileEntityChest extends TileEntityCabinet implements IChestLid, IInventory {
@@ -71,6 +75,34 @@ public class TileEntityChest extends TileEntityCabinet implements IChestLid, IIn
             }
         }
     }
+
+    @Override
+    public boolean canPlayerOpenGui(PlayerEntity playerEntity) {
+        return super.canPlayerOpenGui(playerEntity) && !isChestBlockedAt(playerEntity.level, this.getBlockPos());
+    }
+
+    public static boolean isChestBlockedAt(IWorld p_220108_0_, BlockPos p_220108_1_) {
+        return isBlockedChestByBlock(p_220108_0_, p_220108_1_) || isCatSittingOnChest(p_220108_0_, p_220108_1_);
+    }
+
+    private static boolean isBlockedChestByBlock(IBlockReader pLevel, BlockPos pPos) {
+        BlockPos blockpos = pPos.above();
+        return pLevel.getBlockState(blockpos).isRedstoneConductor(pLevel, blockpos);
+    }
+
+    private static boolean isCatSittingOnChest(IWorld pLevel, BlockPos pPos) {
+        List<CatEntity> list = pLevel.getEntitiesOfClass(CatEntity.class, new AxisAlignedBB((double)pPos.getX(), (double)(pPos.getY() + 1), (double)pPos.getZ(), (double)(pPos.getX() + 1), (double)(pPos.getY() + 2), (double)(pPos.getZ() + 1)));
+        if (!list.isEmpty()) {
+            for(CatEntity catentity : list) {
+                if (catentity.isInSittingPose()) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     public static int getNumberOfPlayersUsing(World worldIn, TileEntityChest lockableTileEntity, int ticksSinceSync, int x, int y, int z, int numPlayersUsing) {
         if (!worldIn.isClientSide && numPlayersUsing != 0 && (ticksSinceSync + x + y + z) % 200 == 0) {
             numPlayersUsing = getNumberOfPlayersUsing(worldIn, lockableTileEntity, x, y, z);
@@ -105,12 +137,12 @@ public class TileEntityChest extends TileEntityCabinet implements IChestLid, IIn
     }
 
 
-    public boolean receiveClientEvent(int id, int type) {
+    public boolean triggerEvent(int id, int type) {
         if (id == 1) {
             this.numPlayersUsing = type;
             return true;
         }
-        else return false;
+        else return super.triggerEvent(id, type);
     }
 
     protected void onOpenOrClose() {
