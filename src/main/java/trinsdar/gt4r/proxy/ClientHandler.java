@@ -9,6 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import trinsdar.gt4r.GT4Reimagined;
 import trinsdar.gt4r.block.BlockCasing;
@@ -16,6 +17,7 @@ import trinsdar.gt4r.block.BlockMachineMaterial;
 import trinsdar.gt4r.block.BlockMaterialChest;
 import trinsdar.gt4r.client.BakedModels;
 import trinsdar.gt4r.client.ClientUtil;
+import trinsdar.gt4r.client.MaterialChestRenderer;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.data.Machines;
 
@@ -42,6 +44,7 @@ public class ClientHandler implements IProxyHandler {
             AntimatterAPI.all(BlockMachineMaterial.class, b -> RenderTypeLookup.setRenderLayer(b, RenderType.cutout()));
             AntimatterAPI.all(BlockMaterialChest.class, b -> RenderTypeLookup.setRenderLayer(b, RenderType.cutout()));
         });
+        AntimatterAPI.all(BlockMaterialChest.class, b -> ClientRegistry.bindTileEntityRenderer(b.getType().getTileType(), MaterialChestRenderer::new));
         ClientUtil.registerEntityRenders();
         copyProgrammerArtIfMissing();
     }

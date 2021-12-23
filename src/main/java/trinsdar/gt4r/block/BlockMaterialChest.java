@@ -147,4 +147,25 @@ public class BlockMaterialChest extends BlockMachineMaterial implements IWaterLo
             }
         };
     }
+
+    public TileEntityMerger.ICallbackWrapper<? extends TileEntityChest> getWrapper(BlockState blockState, World world, BlockPos blockPos, boolean p_225536_4_) {
+        BiPredicate<IWorld, BlockPos> biPredicate;
+        if (p_225536_4_) {
+            biPredicate = (p_226918_0_, p_226918_1_) -> false;
+        }
+        else {
+            biPredicate = TileEntityChest::isChestBlockedAt;
+        }
+
+        return TileEntityMerger.combineWithNeigbour(this.getType().getTileType(), BlockMaterialChest::getMergerType, BlockMaterialChest::getDirectionToAttached, BlockStateProperties.HORIZONTAL_FACING, blockState, world, blockPos, biPredicate);
+    }
+
+    public static TileEntityMerger.Type getMergerType(BlockState blockState) {
+        return TileEntityMerger.Type.SINGLE;
+    }
+
+    public static Direction getDirectionToAttached(BlockState state) {
+        Direction direction = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+        return direction.getCounterClockWise();
+    }
 }
