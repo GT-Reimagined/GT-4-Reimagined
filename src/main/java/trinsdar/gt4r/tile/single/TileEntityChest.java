@@ -8,9 +8,12 @@ import net.minecraft.entity.passive.CatEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.stats.Stat;
+import net.minecraft.stats.Stats;
 import net.minecraft.tileentity.IChestLid;
 import net.minecraft.tileentity.LockableTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
@@ -181,7 +184,12 @@ public class TileEntityChest extends TileEntityCabinet implements IChestLid, IIn
 
             ++this.numPlayersUsing;
             this.onOpenOrClose();
+            player.awardStat(this.getOpenChestStat());
         }
+    }
+
+    protected Stat<ResourceLocation> getOpenChestStat() {
+        return Stats.CUSTOM.get(Stats.OPEN_CHEST);
     }
 
 

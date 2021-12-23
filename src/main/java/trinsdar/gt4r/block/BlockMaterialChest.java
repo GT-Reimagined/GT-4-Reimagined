@@ -25,6 +25,7 @@ import net.minecraft.stats.Stats;
 import net.minecraft.tileentity.IChestLid;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityMerger;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
@@ -83,10 +84,6 @@ public class BlockMaterialChest extends BlockMachineMaterial implements IWaterLo
     @Override
     public VoxelShape getShape(BlockState pState, IBlockReader pLevel, BlockPos pPos, ISelectionContext pContext) {
         return AABB;
-    }
-
-    protected Stat<ResourceLocation> getOpenChestStat() {
-        return Stats.CUSTOM.get(Stats.OPEN_CHEST);
     }
 
     @Override
@@ -157,7 +154,7 @@ public class BlockMaterialChest extends BlockMachineMaterial implements IWaterLo
             biPredicate = TileEntityChest::isChestBlockedAt;
         }
 
-        return TileEntityMerger.combineWithNeigbour(this.getType().getTileType(), BlockMaterialChest::getMergerType, BlockMaterialChest::getDirectionToAttached, BlockStateProperties.HORIZONTAL_FACING, blockState, world, blockPos, biPredicate);
+        return TileEntityMerger.combineWithNeigbour(((TileEntityType<TileEntityChest>)this.getType().getTileType()), BlockMaterialChest::getMergerType, BlockMaterialChest::getDirectionToAttached, BlockStateProperties.HORIZONTAL_FACING, blockState, world, blockPos, biPredicate);
     }
 
     public static TileEntityMerger.Type getMergerType(BlockState blockState) {

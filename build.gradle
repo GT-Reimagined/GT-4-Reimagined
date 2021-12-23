@@ -223,7 +223,7 @@ dependencies {
     //   }
     implementation fg.deobf("com.github.GregTech-Intergalactical:TesseractAPI:${tesseract_version}")
 
-    runtimeOnly fg.deobf("com.github.GregTech-Intergalactical.GregTech:build:${gregtech_version}")
+    //runtimeOnly fg.deobf("com.github.GregTech-Intergalactical.GregTech:build:${gregtech_version}")
     //compileOnly ("com.github.GregTech-Intergalactical.GregTech:build:${gregtech_version}")
 
     //implementation fg.deobf("com.github.GregTech-Intergalactical:AntimatterAPI:${antimatter_version}")
