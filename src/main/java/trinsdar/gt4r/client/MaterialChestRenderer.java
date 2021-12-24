@@ -25,6 +25,8 @@ import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.block.BlockMaterialChest;
 import trinsdar.gt4r.tile.single.TileEntityChest;
 
+import java.awt.Color;
+
 public class MaterialChestRenderer <T extends TileEntity> extends TileEntityRenderer<T> {
     public static final ResourceLocation MATERIAL_CHEST_BASE = new ResourceLocation(Ref.ID, "model/material_chest_base");
     public static final ResourceLocation MATERIAL_CHEST_OVERLAY = new ResourceLocation(Ref.ID, "model/material_chest_overlay");
@@ -58,7 +60,7 @@ public class MaterialChestRenderer <T extends TileEntity> extends TileEntityRend
 
 
         if (block instanceof BlockMaterialChest) {
-            BlockMaterialChest ironChestBlock = (BlockMaterialChest) block;
+            BlockMaterialChest materialChest = (BlockMaterialChest) block;
 
             pMatrixStack.pushPose();
             float f = blockstate.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot();
@@ -68,7 +70,7 @@ public class MaterialChestRenderer <T extends TileEntity> extends TileEntityRend
 
             TileEntityMerger.ICallbackWrapper<? extends TileEntityChest> iCallbackWrapper;
             if (flag) {
-                iCallbackWrapper = ironChestBlock.getWrapper(blockstate, world, tileEntity.getBlockPos(), true);
+                iCallbackWrapper = materialChest.getWrapper(blockstate, world, tileEntity.getBlockPos(), true);
             } else {
                 iCallbackWrapper = TileEntityMerger.ICallback::acceptNone;
             }
@@ -78,20 +80,27 @@ public class MaterialChestRenderer <T extends TileEntity> extends TileEntityRend
             f1 = 1.0F - f1 * f1 * f1;
             int i = iCallbackWrapper.apply(new DualBrightnessCallback<>()).applyAsInt(pCombinedLight);
 
-            RenderMaterial material = new RenderMaterial(MATERIAL_CHEST_OVERLAY, MATERIAL_CHEST_BASE);
+            RenderMaterial material = new RenderMaterial(Atlases.CHEST_SHEET, MATERIAL_CHEST_BASE);
             IVertexBuilder ivertexbuilder = material.buffer(pBuffer, RenderType::entityCutout);
 
-            this.handleModelRender(pMatrixStack, ivertexbuilder, this.chestLid, this.chestLock, this.chestBottom, f1, i, pCombinedOverlay);
+            this.handleModelRender(pMatrixStack, ivertexbuilder, this.chestLid, this.chestLock, this.chestBottom, f1, i, pCombinedOverlay, materialChest.getBlockColor(blockstate, world, tileEntity.getBlockPos(), 0));
+
+            material = new RenderMaterial(Atlases.CHEST_SHEET, MATERIAL_CHEST_OVERLAY);
+            ivertexbuilder = material.buffer(pBuffer, RenderType::entityCutout);
+
+            this.handleModelRender(pMatrixStack, ivertexbuilder, this.chestLid, this.chestLock, this.chestBottom, f1, i, pCombinedOverlay, materialChest.getBlockColor(blockstate, world, tileEntity.getBlockPos(), 1));
 
             pMatrixStack.popPose();
         }
     }
 
-    private void handleModelRender(MatrixStack matrixStackIn, IVertexBuilder iVertexBuilder, ModelRenderer firstModel, ModelRenderer secondModel, ModelRenderer thirdModel, float f1, int p_228871_7_, int p_228871_8_) {
+    private void handleModelRender(MatrixStack matrixStackIn, IVertexBuilder iVertexBuilder, ModelRenderer firstModel, ModelRenderer secondModel, ModelRenderer thirdModel, float f1, int i, int pCombinedOverlay, int color) {
         firstModel.xRot = -(f1 * ((float) Math.PI / 2F));
         secondModel.xRot = firstModel.xRot;
-        firstModel.render(matrixStackIn, iVertexBuilder, p_228871_7_, p_228871_8_);
-        secondModel.render(matrixStackIn, iVertexBuilder, p_228871_7_, p_228871_8_);
-        thirdModel.render(matrixStackIn, iVertexBuilder, p_228871_7_, p_228871_8_);
+        Color colorValue = new Color(color);
+        float[] colorArray = colorValue.getRGBColorComponents(null);
+        firstModel.render(matrixStackIn, iVertexBuilder, i, pCombinedOverlay, colorArray[0], colorArray[1], colorArray[2], 1.0F);
+        secondModel.render(matrixStackIn, iVertexBuilder, i, pCombinedOverlay);
+        thirdModel.render(matrixStackIn, iVertexBuilder, i, pCombinedOverlay, colorArray[0], colorArray[1], colorArray[2], 1.0F);
     }
 }

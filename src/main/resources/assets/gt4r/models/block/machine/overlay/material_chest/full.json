@@ -2,19 +2,19 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"overlay": "gt4r:model/material_chest_overlay",
-		"base": "gt4r:model/material_chest_base",
+		"overlay": "gt4r:model/material_chest_overlay_inventory",
+		"base": "gt4r:model/material_chest_base_inventory",
 		"particle": "gt4r:model/material_chest_particle"
 	},
 	"elements": [
 		{
-			"from": [1, 10, 1],
+			"from": [1, 9, 1],
 			"to": [15, 14, 15],
 			"faces": {
-				"north": {"uv": [3.5, 3.5, 7, 4.5], "texture": "#base", "tintindex":  0},
-				"east": {"uv": [0, 3.5, 3.5, 4.5], "texture": "#base", "tintindex":  0},
-				"south": {"uv": [10.5, 3.5, 14, 4.5], "texture": "#base", "tintindex":  0},
-				"west": {"uv": [7, 3.5, 10.5, 4.5], "texture": "#base", "tintindex":  0},
+				"north": {"uv": [3.5, 3.5, 7, 4.75], "texture": "#base", "tintindex":  0},
+				"east": {"uv": [0, 3.5, 3.5, 4.75], "texture": "#base", "tintindex":  0},
+				"south": {"uv": [10.5, 3.5, 14, 4.75], "texture": "#base", "tintindex":  0},
+				"west": {"uv": [7, 3.5, 10.5, 4.75], "texture": "#base", "tintindex":  0},
 				"up": {"uv": [3.5, 0, 7, 3.5], "texture": "#base", "tintindex":  0},
 				"down": {"uv": [7, 0, 10.5, 3.5], "texture": "#base", "tintindex":  0}
 			}
@@ -68,7 +68,6 @@
 			}
 		}
 	],
-	"display": {},
 	"groups": [
 		{
 			"name": "base",

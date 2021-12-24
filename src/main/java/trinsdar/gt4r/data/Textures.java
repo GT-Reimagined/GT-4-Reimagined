@@ -19,8 +19,6 @@ public class Textures {
 
     public static final IOverlayModeler STANDARD_MACHINE_MODELS = (a,d) -> new ResourceLocation(Ref.ANTIMATTER, "block/machine/overlay/invalid/" + d.getName());
 
-    public static final IOverlayModeler CHEST_MODELS = (a,d) -> new ResourceLocation(Ref.ID, "block/machine/overlay/material_chest/" + d.getName());
-
     public static final ITextureHandler BOILER_HANDLER = (m, t) -> new Texture[] {
         new Texture(Ref.ID, "block/machine/base/brick"),
         new Texture(Ref.ID, "block/machine/base/" + t.getId()),
@@ -81,12 +79,12 @@ public class Textures {
     };
 
     public static final ITextureHandler CHEST_HANDLER = (m, t) -> new Texture[] {
-            new Texture(Ref.ID, "model/material_chest_base"),
-            new Texture(Ref.ID, "model/material_chest_base"),
-            new Texture(Ref.ID, "model/material_chest_base"),
-            new Texture(Ref.ID, "model/material_chest_base"),
-            new Texture(Ref.ID, "model/material_chest_base"),
-            new Texture(Ref.ID, "model/material_chest_base"),
+            new Texture(Ref.ID, "model/material_chest_particle"),
+            new Texture(Ref.ID, "model/material_chest_particle"),
+            new Texture(Ref.ID, "model/material_chest_particle"),
+            new Texture(Ref.ID, "model/material_chest_particle"),
+            new Texture(Ref.ID, "model/material_chest_particle"),
+            new Texture(Ref.ID, "model/material_chest_particle"),
     };
 
     public static final IOverlayTexturer CABINET_OVERLAY_HANDLER = (type, state, tier) -> new Texture[] {
@@ -99,12 +97,12 @@ public class Textures {
     };
 
     public static final IOverlayTexturer CHEST_OVERLAY_HANDLER = (type, state, tier) -> new Texture[] {
-            new Texture(Ref.ID, "model/material_chest_overlay"),
-            new Texture(Ref.ID, "model/material_chest_overlay"),
-            new Texture(Ref.ID, "model/material_chest_overlay"),
-            new Texture(Ref.ID, "model/material_chest_overlay"),
-            new Texture(Ref.ID, "model/material_chest_overlay"),
-            new Texture(Ref.ID, "model/material_chest_overlay"),
+            new Texture(Ref.ID, "model/material_chest_overlay_inventory"),
+            new Texture(Ref.ID, "model/material_chest_overlay_inventory"),
+            new Texture(Ref.ID, "model/material_chest_overlay_inventory"),
+            new Texture(Ref.ID, "model/material_chest_overlay_inventory"),
+            new Texture(Ref.ID, "model/material_chest_overlay_inventory"),
+            new Texture(Ref.ID, "model/material_chest_overlay_inventory"),
     };
 
     public static final ITextureHandler WORKBENCH_HANDLER = (m, t) -> new Texture[] {
