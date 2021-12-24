@@ -107,7 +107,7 @@ public class BlockMaterialChest extends BlockMachineMaterial implements IWaterLo
 
     @Override
     public void onItemModelBuild(IItemProvider item, AntimatterItemModelProvider prov) {
-        ItemModelBuilder b = prov.getBuilder(item).parent(prov.existing(Ref.ID, "block/machine/overlay/material_chest/full"));
+        ItemModelBuilder b = prov.getBuilder(item).parent(prov.existing(Ref.ID, "block/material_chest"));
     }
 
     @Override
