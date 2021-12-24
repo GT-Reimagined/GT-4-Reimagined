@@ -11,7 +11,8 @@
     "ServerPlayNetHandlerMixin"
   ],
   "mixins": [
-    "PlayerEntityMixin"
+    "PlayerEntityMixin",
+    "GTCapabilityProviderAccessor"
   ],
   "minVersion": "0.8"
 }

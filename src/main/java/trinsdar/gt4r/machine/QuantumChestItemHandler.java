@@ -1,154 +1,133 @@
 package trinsdar.gt4r.machine;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+import muramasa.antimatter.Antimatter;
+import muramasa.antimatter.capability.IGuiHandler;
+import muramasa.antimatter.capability.item.TrackedItemHandler;
 import muramasa.antimatter.capability.machine.MachineItemHandler;
 import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.machine.event.ContentEvent;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.registry.Registry;
+import net.minecraftforge.common.capabilities.CapabilityDispatcher;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.items.IItemHandlerModifiable;
+import trinsdar.gt4r.data.SlotTypes;
+import trinsdar.gt4r.mixin.GTCapabilityProviderAccessor;
 import trinsdar.gt4r.tile.single.TileEntityQuantumChest;
 
-public class QuantumChestItemHandler extends MachineItemHandler<TileEntityQuantumChest> implements IFakeSlotHandler {
+import javax.annotation.Nonnull;
+import java.util.function.BiPredicate;
+
+import static net.minecraft.item.ItemStack.EMPTY;
+
+public class QuantumChestItemHandler extends MachineItemHandler<TileEntityQuantumChest> {
     int maxSize = Integer.MAX_VALUE;
     int digitalCount;
-    ItemStack d = ItemStack.EMPTY;
+    ItemStack d = EMPTY;
     public QuantumChestItemHandler(TileEntityQuantumChest tile) {
         super(tile);
+        int count = tile.getMachineType().getCount(tile.getMachineTier(), SlotTypes.QUANTUM);
+        inventories.put(SlotTypes.QUANTUM, new QuantumSlotTrackedHandler(tile, count, SlotTypes.QUANTUM.output, SlotTypes.QUANTUM.input, SlotTypes.QUANTUM.tester, SlotTypes.QUANTUM.ev, Integer.MAX_VALUE));
     }
 
-    /*@Override
-    public void onMachineEvent(IMachineEvent event, Object... data) {
-        if (event instanceof ContentEvent) {
-            switch ((ContentEvent) event) {
-                case ITEM_INPUT_CHANGED:
-                case ITEM_OUTPUT_CHANGED:
-                    inputLogic();
-                    outputLogic();
-                    break;
+    public static class QuantumSlotTrackedHandler extends TrackedItemHandler<TileEntityQuantumChest> {
+
+        public QuantumSlotTrackedHandler(TileEntityQuantumChest tile, int size, boolean output, boolean input, BiPredicate<IGuiHandler, ItemStack> validator, ContentEvent contentEvent, int limit) {
+            super(tile, size, output, input, validator, contentEvent, limit);
+        }
+
+        @Override
+        protected int getStackLimit(int slot, @Nonnull ItemStack stack) {
+            return stack.getMaxStackSize() == 1 ? stack.getMaxStackSize() : getSlotLimit(slot);
+        }
+
+        @Override
+        public CompoundNBT serializeNBT()
+        {
+            ListNBT nbtTagList = new ListNBT();
+            for (int i = 0; i < stacks.size(); i++)
+            {
+                if (!stacks.get(i).isEmpty())
+                {
+                    CompoundNBT itemTag = new CompoundNBT();
+                    itemTag.putInt("Slot", i);
+                    save(itemTag, stacks.get(i));
+                    nbtTagList.add(itemTag);
+                }
+            }
+            CompoundNBT nbt = new CompoundNBT();
+            nbt.put("Items", nbtTagList);
+            return nbt;
+        }
+
+        @Override
+        public void deserializeNBT(CompoundNBT nbt)
+        {
+            ListNBT tagList = nbt.getList("Items", Constants.NBT.TAG_COMPOUND);
+            for (int i = 0; i < tagList.size(); i++)
+            {
+                CompoundNBT itemTags = tagList.getCompound(i);
+                int slot = itemTags.getInt("Slot");
+
+                if (slot >= 0 && slot < stacks.size())
+                {
+                    stacks.set(slot, of(itemTags));
+                }
+            }
+            onLoad();
+        }
+
+        public static ItemStack of(CompoundNBT pCompoundTag) {
+            try {
+                CompoundNBT capNBT = pCompoundTag.contains("ForgeCaps") ? pCompoundTag.getCompound("ForgeCaps") : null;
+                Item rawItem = Registry.ITEM.get(new ResourceLocation(pCompoundTag.getString("id")));
+                int count = pCompoundTag.getInt("Count");
+                ItemStack stack = new ItemStack(rawItem, count, capNBT);
+                if (pCompoundTag.contains("tag", 10)) {
+                    CompoundNBT tag = pCompoundTag.getCompound("tag");
+                    stack.setTag(tag);
+                    stack.getItem().verifyTagAfterLoad(pCompoundTag);
+                }
+
+                if (stack.getItem().isDamageable(stack)) {
+                    stack.setDamageValue(stack.getDamageValue());
+                }
+                return stack;
+            } catch (RuntimeException runtimeexception) {
+                Antimatter.LOGGER.debug("Tried to load invalid item: {}", pCompoundTag, runtimeexception);
+                return EMPTY;
             }
         }
-    }*/
 
-    @Override
-    public void onUpdate() {
-        inputLogic();
-        outputLogic();
-    }
-
-    ItemStack input(){
-        return getInputHandler().getStackInSlot(0);
-    }
-
-    ItemStack output(){
-        if (getOutputList().isEmpty()){
-            return ItemStack.EMPTY;
-        }
-        return getOutputList().get(0);
-    }
-
-    void input(ItemStack stack){
-        this.getInputHandler().setStackInSlot(0, stack);
-    }
-
-    void output(ItemStack stack){
-        this.getOutputHandler().setStackInSlot(0, stack);
-    }
-
-    /** Logic for stack input **/
-    public void inputLogic() {
-        if (input().isEmpty()) {
-            return;
-        }
-        if (canDigitizeStack(input())) {
-            display(input().copy());
-            this.digitalCount = this.digitalCount + input().getCount();
-            input(ItemStack.EMPTY);
-        }
-    }
-
-    /** Logic for stack output **/
-    public void outputLogic() {
-        if (!display().isEmpty() && canOutputsFit(new ItemStack[]{display()})) {
-            int max = display().getMaxStackSize();
-            int amount = Math.min(this.digitalCount, max);
-            // if output is empty set the stack
-            if (output().isEmpty()) {
-                output(Utils.ca(amount, display()));
-                this.digitalCount -= amount;
-                // if can merge but not empty grow the stack
-            } else {
-                int difference = output().getMaxStackSize() - output().getCount();
-                int count = Math.min(this.digitalCount, difference);
-                output().grow(count);
-                this.digitalCount -= count;
+        public CompoundNBT save(CompoundNBT pCompoundTag, ItemStack stack) {
+            ResourceLocation resourcelocation = Registry.ITEM.getKey(stack.getItem());
+            pCompoundTag.putString("id", resourcelocation == null ? "minecraft:air" : resourcelocation.toString());
+            pCompoundTag.putInt("Count", stack.getCount());
+            if (stack.getTag() != null) {
+                pCompoundTag.put("tag", stack.getTag().copy());
             }
-            emptyCheck();
+            final CapabilityDispatcher disp = ((GTCapabilityProviderAccessor)(Object)stack).getCapabilitiesGT();
+            if (disp != null)
+            {
+                CompoundNBT cnbt = disp.serializeNBT();
+                if (!cnbt.isEmpty()) {
+                    pCompoundTag.put("ForgeCaps", cnbt);
+                }
+            }
+
+            return pCompoundTag;
         }
     }
 
-    public ItemStack getD() {
-        return d;
-    }
-
-    public ItemStack display() {
-        return this.getFakeHandler().getStackInSlot(0);
-    }
-
-    public void display(ItemStack stack) {
-        this.getFakeHandler().setStackInSlot(0, Utils.ca(1, stack));
-        d = Utils.ca(1, stack.copy());
-        tile.onMachineEvent(ContentEvent.ITEM_INPUT_CHANGED);
-    }
-
-    public void emptyCheck() {
-        if (this.digitalCount <= 0) {
-            display(ItemStack.EMPTY);
-        }
-    }
-
-    /** Checks to see if the given stack can go into the digital storage **/
-    public boolean canDigitizeStack(ItemStack stack) {
-        if (display().isEmpty() && this.digitalCount <= 0) {
-            return true;
-        }
-        return (this.digitalCount + stack.getCount() <= maxSize) && Utils.equals(display(), stack);
-    }
-
-    /** Sets the digital count, called when the block is placed for NBT stuff **/
-    public void setDigtialCount(int count) {
-        this.digitalCount = count;
-    }
-
-    @Override
-    public CompoundNBT serializeNBT() {
-        CompoundNBT nbt = super.serializeNBT();
-        return nbtForItem(nbt);
-    }
-
-    CompoundNBT nbtForItem(CompoundNBT nbt){
-        nbt.putInt("DCount", digitalCount);
-        CompoundNBT stack = display().copy().serializeNBT();
-        nbt.put("display", stack);
-        return nbt;
-    }
-
-    @Override
-    public void deserializeNBT(CompoundNBT nbt) {
-        super.deserializeNBT(nbt);
-        digitalCount = nbt.getInt("DCount");
-        d = ItemStack.of(nbt.getCompound("display"));
-    }
-
-    public void drawInfo(MatrixStack stack, FontRenderer renderer, int left, int top) {
+    /*public void drawInfo(MatrixStack stack, FontRenderer renderer, int left, int top) {
         // TODO: Replace by new TranslationTextComponent()
         renderer.draw(stack,"Item amount: " + digitalCount, left + 10, top + 19, 16448255);
-    }
-
-    @Override
-    public IItemHandlerModifiable getFakeHandler() {
-        return inventories.get(SlotType.DISPLAY);
-    }
+    }*/
 }

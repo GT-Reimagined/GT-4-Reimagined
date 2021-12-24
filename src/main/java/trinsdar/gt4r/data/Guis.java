@@ -5,6 +5,7 @@ import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.gui.BarDir;
 import muramasa.antimatter.gui.ButtonBody;
 import muramasa.antimatter.gui.GuiData;
+import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.gui.screen.AntimatterContainerScreen;
 import muramasa.antimatter.gui.slot.ISlotProvider;
 import muramasa.antimatter.gui.widget.BackgroundWidget;
@@ -187,7 +188,7 @@ public class Guis {
         INFINITE_STEAM.add(CELL_IN, 80, 17).add(CELL_OUT, 80, 53).add(FL_OUT, 60, 43);
 
         QUANTUM_TANK.add(BASIC_TANK.getSlots()).getGui().setOverrideLocation(BASIC_TANK.getTexture(LV, "machine"));
-        QUANTUM_CHEST.add(IT_IN, 80, 17).add(DISPLAY, 60, 43).add(IT_OUT, 80, 53);
+        QUANTUM_CHEST.add(QUANTUM, 80, 35);
 
         HATCH_MUFFLER.add(IT_IN, 79, 34);
 
@@ -376,6 +377,7 @@ public class Guis {
         ALUMINIUM_CHARGING_LOCKER.add(CHARGING_LOCKER.getSlots()).getGui().setOverrideLocation(textures.apply(true, "locker"));
 
         FUSION_REACTOR.setGUI(MenuHandlers.FUSION_MENU_HANDLER);
+        QUANTUM_CHEST.setGUI(MenuHandlers.QUANTUM_CHEST_HANDLER);
         IRON_CABINET.setGUI(MenuHandlers.CABINET_HANDLER_SIX);
         ALUMINIUM_CABINET.setGUI(MenuHandlers.CABINET_HANDLER_SIX);
         WROUGHT_IRON_CABINET.setGUI(MenuHandlers.CABINET_HANDLER_SIX);

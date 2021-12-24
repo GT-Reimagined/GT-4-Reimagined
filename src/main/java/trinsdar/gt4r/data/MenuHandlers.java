@@ -1,6 +1,7 @@
 package trinsdar.gt4r.data;
 
 import muramasa.antimatter.capability.IGuiHandler;
+import muramasa.antimatter.client.ClientData;
 import muramasa.antimatter.gui.MenuHandlerMachine;
 import muramasa.antimatter.gui.container.ContainerBasicMachine;
 import muramasa.antimatter.gui.container.ContainerMultiMachine;
@@ -10,11 +11,13 @@ import net.minecraft.entity.player.PlayerInventory;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.client.ScreenFactories;
 import trinsdar.gt4r.gui.ContainerCabinet;
+import trinsdar.gt4r.gui.ContainerQuantumChest;
 import trinsdar.gt4r.gui.ContainerWorkbench;
 import trinsdar.gt4r.gui.MenuHandlerCrafting;
 import trinsdar.gt4r.gui.MenuHandlerCraftingItem;
 import trinsdar.gt4r.tile.multi.TileEntityFusionReactor;
 import trinsdar.gt4r.tile.single.TileEntityMaterial;
+import trinsdar.gt4r.tile.single.TileEntityQuantumChest;
 
 public class MenuHandlers {
     public static MenuHandlerMachine<TileEntityFusionReactor, ? extends ContainerMultiMachine> FUSION_MENU_HANDLER = new MenuHandlerMachine(Ref.ID, "container_fusion_reactor") {
@@ -91,6 +94,18 @@ public class MenuHandlers {
         @Override
         public Object screen() {
             return ScreenFactories.SCREEN_LOCKER;
+        }
+    };
+
+    public static MenuHandlerMachine<TileEntityQuantumChest, ContainerQuantumChest> QUANTUM_CHEST_HANDLER = new MenuHandlerMachine(Ref.ID, "container_quantum_chest") {
+        @Override
+        public ContainerBasicMachine getMenu(IGuiHandler tile, PlayerInventory playerInv, int windowId) {
+            return tile instanceof TileEntityQuantumChest ? new ContainerQuantumChest((TileEntityQuantumChest) tile, playerInv, this, windowId) : null;
+        }
+
+        @Override
+        public Object screen() {
+            return ClientData.SCREEN_BASIC;
         }
     };
     public static MenuHandlerCrafting COVER_CRAFTING_HANDLER = new MenuHandlerCrafting(Ref.ID, "crafting_grid");

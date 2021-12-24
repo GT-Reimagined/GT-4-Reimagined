@@ -11,6 +11,7 @@ import tesseract.api.capability.TesseractGTCapability;
 import trinsdar.gt4r.gui.slots.SlotCoil;
 import trinsdar.gt4r.gui.slots.SlotCrafting;
 import trinsdar.gt4r.gui.slots.SlotFluidDisplaySettable;
+import trinsdar.gt4r.gui.slots.SlotQuantum;
 import trinsdar.gt4r.items.ItemTurbineRotor;
 import trinsdar.gt4r.tile.single.TileEntityItemFilter;
 
@@ -34,4 +35,5 @@ public class SlotTypes {
     public static SlotType<AbstractSlot<?>> PARK = new SlotType<>("park", (type, gui, item, i, d) -> new AbstractSlot<>(type, gui, item.getOrDefault(type, new EmptyHandler()), i, d.getX(), d.getY()), (t, i) -> true, ContentEvent.ITEM_INPUT_CHANGED);
     public static SlotType<AbstractSlot<?>> ROTOR = new SlotType<>("rotor", ((type, gui, item, i, d) -> new AbstractSlot<>(type, gui, item.getOrDefault(type, new EmptyHandler()), i, d.getX(), d.getY())), (t, i) -> i.getItem() instanceof ItemTurbineRotor, ContentEvent.ITEM_INPUT_CHANGED);
     public static SlotType<AbstractSlot<?>> FILTER = new SlotType<>("filter", (type, gui, item, i, d) -> new AbstractSlot<>(type, gui, item.getOrDefault(type, new EmptyHandler()), i, d.getX(), d.getY()), (t, i) -> i.getItem() == GT4RData.LavaFilter, ContentEvent.ITEM_INPUT_CHANGED);
+    public static SlotType<SlotQuantum> QUANTUM = new SlotType<>("quantum", (type, gui, item, i, d) -> new SlotQuantum(type, gui, item.getOrDefault(type, new EmptyHandler()), i, d.getX(), d.getY()), (t, i) -> true, ContentEvent.ITEM_INPUT_CHANGED);
 }
