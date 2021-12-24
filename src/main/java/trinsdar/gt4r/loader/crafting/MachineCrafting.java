@@ -178,6 +178,7 @@ public class MachineCrafting {
                 ELECTRIC_TYPE_FILTER.getItem(LV), of2('B', ItemFilter, 'E', PLATES_IRON_ALUMINIUM, 'C', CIRCUITS_ADVANCED, 'c', ConveyorModule, 'M', MACHINE_HULLS_BASIC, 'h', Tags.Items.CHESTS_WOODEN), "EBE", "hMc", "ECE");
         CABINET.all().forEach(m -> {
             provider.addItemRecipe(output, Ref.ID, "cabinet_" + m.getId(), "machines", "has_chest", provider.hasSafeItem(Tags.Items.CHESTS_WOODEN), Machine.get(m.getId() + "_cabinet", Ref.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR), of('P', PLATE.getMaterialTag(m), 'C', Tags.Items.CHESTS_WOODEN), "PPP", "CPC", "PPP");
+            provider.addItemRecipe(output, Ref.ID, "chest_" + m.getId(), "machines", "has_chest", provider.hasSafeItem(Tags.Items.CHESTS_WOODEN), Machine.get(m.getId() + "_chest", Ref.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR), of('P', PLATE.getMaterialTag(m), 'C', Tags.Items.CHESTS_WOODEN, 'R', ROD.getMaterialTag(m), 'S', SAW.getTag(), 'W', WRENCH.getTag()), "SPW", "RCR", "PPP");
         });
         WORKBENCH.all().forEach(m -> {
             provider.addItemRecipe(output, Ref.ID, "workbench_" + m.getId(), "machines", "has_chest", provider.hasSafeItem(Tags.Items.CHESTS_WOODEN), Machine.get(m.getId() + "_workbench", Ref.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR), of('P', PLATE.getMaterialTag(m), 'C', Tags.Items.CHESTS_WOODEN, 'c', Items.CRAFTING_TABLE, 'S', SCREWDRIVER.getTag()), "PSP", "PcP", "PCP");

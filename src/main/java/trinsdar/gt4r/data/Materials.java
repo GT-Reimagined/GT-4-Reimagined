@@ -337,6 +337,7 @@ public class Materials {
         ROCK_CUTTER.add(Diamond, Ruby, Sapphire, NetherizedDiamond, Amethyst);
 
         CABINET.add(Iron, Aluminium, WroughtIron, Brass, Cupronickel, Electrum, Gold, Silver, Magnalium, Platinum, Osmium);
+        CABINET.all().forEach(m -> m.flags(ROD));
         WORKBENCH.add(Bronze, Iron, Aluminium);
         CHARGING_WORKBENCH.add(Iron, Aluminium);
         LOCKER.add(Iron, Aluminium);
