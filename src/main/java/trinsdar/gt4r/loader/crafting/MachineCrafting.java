@@ -1,5 +1,6 @@
 package trinsdar.gt4r.loader.crafting;
 
+import com.google.common.collect.ImmutableMap;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.Machine;
@@ -8,6 +9,8 @@ import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.Items;
 import net.minecraftforge.common.Tags;
 import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.data.CustomTags;
+import trinsdar.gt4r.data.GT4RData;
 
 import java.util.function.Consumer;
 
@@ -176,6 +179,14 @@ public class MachineCrafting {
                 ELECTRIC_ITEM_FILTER.getItem(LV), of2('B', ItemFilter, 'E', PLATES_IRON_ALUMINIUM, 'C', CIRCUITS_BASIC, 'c', ConveyorModule, 'M', MACHINE_HULLS_BASIC, 'h', Tags.Items.CHESTS_WOODEN), "EBE", "hMc", "ECE");
         provider.addItemRecipe(output, Ref.ID, "electric_type_filter", "machines", "has_machine_hull_basic", provider.hasSafeItem(MACHINE_HULLS_BASIC),
                 ELECTRIC_TYPE_FILTER.getItem(LV), of2('B', ItemFilter, 'E', PLATES_IRON_ALUMINIUM, 'C', CIRCUITS_ADVANCED, 'c', ConveyorModule, 'M', MACHINE_HULLS_BASIC, 'h', Tags.Items.CHESTS_WOODEN), "EBE", "hMc", "ECE");
+        provider.addItemRecipe(output, Ref.ID, "digital_tank", "machines", "has_data_orb", provider.hasSafeItem(CircuitDataOrb),
+                DIGITAL_TANK.getItem(LV), of('S', PLATES_STEELS, 'D', CircuitDataOrb, 'C', ComputerMonitor), "SSS", "SDS", "SCS");
+        provider.addItemRecipe(output, Ref.ID, "digital_chest", "machines", "has_data_orb", provider.hasSafeItem(CircuitDataOrb),
+                DIGITAL_CHEST.getItem(LV), of('P', PLATE.getMaterialTag(Platinum), 'D', CircuitDataOrb, 'C', ComputerMonitor, 'S', CIRCUITS_ELITE), "PPP", "SDS", "PCP");
+        provider.addItemRecipe(output, Ref.ID, "quantum_tank", "machines", "has_quantum_chest", provider.hasSafeItem(QUANTUM_CHEST.getItem(MAX)),
+                QUANTUM_TANK.getItem(MAX), of('P', PLATE.getMaterialTag(Platinum), 'Q', QUANTUM_CHEST.getItem(MAX), 'C', CIRCUITS_MASTER), "CPC", "PQP", "CPC");
+        provider.addItemRecipe(output, Ref.ID, "quantum_chest", "machines", "has_data_orb", provider.hasSafeItem(CircuitDataOrb),
+                QUANTUM_CHEST.getItem(MAX), ImmutableMap.<Character, Object>builder().put('D', CircuitDataOrb).put('C', ComputerMonitor).put('H', HIGHLY_ADVANCED_MACHINE_BLOCK).put('T', TELEPORTER.getItem(HV)).put('d', DIGITAL_CHEST.getItem(LV)).build(), "DCD", "HTH", "DdD");
         CABINET.all().forEach(m -> {
             provider.addItemRecipe(output, Ref.ID, "cabinet_" + m.getId(), "machines", "has_chest", provider.hasSafeItem(Tags.Items.CHESTS_WOODEN), Machine.get(m.getId() + "_cabinet", Ref.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR), of('P', PLATE.getMaterialTag(m), 'C', Tags.Items.CHESTS_WOODEN), "PPP", "CPC", "PPP");
             provider.addItemRecipe(output, Ref.ID, "chest_" + m.getId(), "machines", "has_chest", provider.hasSafeItem(Tags.Items.CHESTS_WOODEN), Machine.get(m.getId() + "_chest", Ref.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR), of('P', PLATE.getMaterialTag(m), 'C', Tags.Items.CHESTS_WOODEN, 'R', ROD.getMaterialTag(m), 'S', SAW.getTag(), 'W', WRENCH.getTag()), "SPW", "RCR", "PPP");
