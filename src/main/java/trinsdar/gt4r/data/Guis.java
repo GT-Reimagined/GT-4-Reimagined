@@ -50,7 +50,7 @@ public class Guis {
     public static GuiData MULTI_DISPLAY = new GuiData("gt4r", "multi_display").setSlots(ISlotProvider.DEFAULT().add(IT_IN, 17, 16).add(IT_IN, 35, 16).add(IT_IN, 53, 16).add(IT_IN, 17, 34).add(IT_IN, 35, 34).add(IT_IN, 53, 34).add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 143, 16).add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(IT_OUT, 143, 34).add(FL_IN, 17, 63).add(FL_IN, 35, 63).add(FL_IN, 53, 63).add(FL_OUT, 107, 63).add(FL_OUT, 125, 63).add(FL_OUT, 143, 63));
     public static GuiData MULTI_DISPLAY_MORE_FLUID = new GuiData("gt4r", "multi_display_more_fluid").setSlots(ISlotProvider.DEFAULT().add(IT_IN, 17, 16).add(IT_IN, 35, 16).add(IT_IN, 53, 16).add(IT_IN, 17, 34).add(IT_IN, 35, 34).add(IT_IN, 53, 34).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25).add(IT_OUT, 143, 25).add(FL_IN, 17, 63).add(FL_IN, 35, 63).add(FL_IN, 53, 63).add(FL_OUT, 107, 63).add(FL_OUT, 125, 63).add(FL_OUT, 143, 63).add(FL_OUT, 107, 45).add(FL_OUT, 125, 45).add(FL_OUT, 143, 45));
     public static GuiData MULTI_DISPLAY_COMPACT = new GuiData("gt4r", "multi_display").setSlots(ISlotProvider.DEFAULT().add(MULTI_DISPLAY.getSlots())).setPadding(0, 0, 0, 0);
-    public static GuiData BASIC_TANK = new GuiData("gt4r", "basic_tank").setSlots(ISlotProvider.DEFAULT().add(CELL_IN, 80, 17).add(CELL_OUT, 80, 53).add(FL_IN, 60, 43));
+    public static GuiData BASIC_TANK = new GuiData("gt4r", "basic_tank").setSlots(ISlotProvider.DEFAULT().add(CELL_IN, 8, 17).add(CELL_OUT, 8, 53).add(FL_IN, 55, 43));
 
     public static GuiData ORE_BYPRODUCTS = new GuiData("gt4r", "ore_byproducts") {
         @Override
@@ -204,7 +204,7 @@ public class Guis {
         FUSION_FLUID_EXTRACTOR.add(HATCH_FLUID_O);
         FUSION_ITEM_EXTRACTOR.add(IT_OUT, 79, 34);
         FUSION_ITEM_INJECTOR.add(IT_IN, 79, 34);
-        DIGITAL_TANK.add(BASIC_TANK.getSlots()).add(DATA, 61, 64);
+        DIGITAL_TANK.add(BASIC_TANK.getSlots()).add(DATA, 107, 64);
 
         PUMP.addGuiCallback(g -> g.addWidget(IOWidget.build(9,63,16,16)));
         BRONZE_WORKBENCH.addGuiCallback(t -> {
@@ -275,8 +275,8 @@ public class Guis {
            t.addWidget(TooltipWidget.build("upload_chest").setSize(8, 119, 16, 16)).addWidget(TooltipWidget.build("download_orb").setSize(26, 119, 16, 16));
         });
         DIGITAL_TANK.addGuiCallback(t -> {
-            t.addButton(8, 64, 16, 16, NO_OVERLAY).addButton(26, 64, 16, 16, NO_OVERLAY);
-            t.addWidget(TooltipWidget.build("upload_chest").setSize(8, 64, 16, 16)).addWidget(TooltipWidget.build("download_orb").setSize(26, 64, 16, 16));
+            t.addButton(54, 64, 16, 16, NO_OVERLAY).addButton(72, 64, 16, 16, NO_OVERLAY);
+            t.addWidget(TooltipWidget.build("upload_chest").setSize(54, 64, 16, 16)).addWidget(TooltipWidget.build("download_orb").setSize(72, 64, 16, 16));
         });
         initWidgets();
     }
