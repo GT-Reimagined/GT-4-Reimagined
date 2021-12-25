@@ -11,6 +11,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.util.Constants;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.data.SlotTypes;
@@ -49,6 +50,10 @@ public class TileEntityDigitalChest extends TileEntityMachine<TileEntityDigitalC
                                     ITrackedHandler storage = i.getHandler(SlotTypes.FILTERABLE);
                                     ListNBT tagList = nbt.getList("Items", Constants.NBT.TAG_COMPOUND);
                                     if (!tagList.isEmpty()){
+                                        if (!isInventoryEmpty(storage)){
+                                            playerEntity.sendMessage(new TranslationTextComponent("message.gt4r.digital_chest_inventory"), playerEntity.getUUID());
+                                            return;
+                                        }
                                         ItemStack newStack = new ItemStack(GT4RData.CircuitDataOrb);
                                         for (int j = 0; j < tagList.size(); j++)
                                         {
@@ -74,8 +79,8 @@ public class TileEntityDigitalChest extends TileEntityMachine<TileEntityDigitalC
                 itemHandler.ifPresent(i -> {
                     if (i.getHandler(SlotTypes.DATA).getStackInSlot(0).getItem() == GT4RData.CircuitDataOrb){
                         ITrackedHandler storage = i.getHandler(SlotTypes.FILTERABLE);
-                        CompoundNBT nbt = ((TrackedItemHandler<?>)storage).serializeNBT();
-                        if (!nbt.getList("Items", Constants.NBT.TAG_COMPOUND).isEmpty()){
+                        if (!isInventoryEmpty(storage)){
+                            CompoundNBT nbt = ((TrackedItemHandler<?>)storage).serializeNBT();
                             ItemStack newStack = new ItemStack(GT4RData.StorageDataOrb);
                             newStack.getOrCreateTag().put("Data", nbt);
                             i.getHandler(SlotTypes.DATA).setStackInSlot(0, newStack);
@@ -87,5 +92,16 @@ public class TileEntityDigitalChest extends TileEntityMachine<TileEntityDigitalC
                 });
             }
         }
+    }
+
+    private boolean isInventoryEmpty(ITrackedHandler handler){
+        boolean empty = true;
+        for (int i = 0; i < handler.getSlots(); i++){
+            if (!handler.getStackInSlot(i).isEmpty()){
+                empty = false;
+                break;
+            }
+        }
+        return empty;
     }
 }
