@@ -27,7 +27,7 @@ import java.util.Objects;
 
 import static muramasa.antimatter.machine.MachineFlag.ENERGY;
 
-public class TileEntityItemFilter extends TileEntityMachine<TileEntityItemFilter> {
+public class TileEntityItemFilter extends TileEntityMachine<TileEntityItemFilter> implements IFilterable {
     boolean blacklist = false;
     boolean nbt = true;
     boolean outputRedstone = false;
@@ -68,7 +68,7 @@ public class TileEntityItemFilter extends TileEntityMachine<TileEntityItemFilter
     public void onGuiEvent(IGuiEvent event, PlayerEntity playerEntity) {
         if (event.getFactory() == GuiEvents.EXTRA_BUTTON) {
             int[] data = ((GuiEvents.GuiEvent)event).data;
-            switch (data[0]) {
+            switch (data[1]) {
                 case 0:
                     emitEnergy = !emitEnergy;
                     playerEntity.sendMessage(new StringTextComponent( (emitEnergy ? "Emit energy to output side" : "Don't emit energy")), playerEntity.getUUID());

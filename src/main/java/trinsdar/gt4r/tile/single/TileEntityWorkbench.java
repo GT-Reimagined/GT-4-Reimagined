@@ -36,13 +36,13 @@ public class TileEntityWorkbench extends TileEntityMaterial<TileEntityWorkbench>
         super.onGuiEvent(event, playerEntity);
         if (event.getFactory() == GuiEvents.EXTRA_BUTTON && !openContainers.isEmpty()){
             final int[] data = ((GuiEvents.GuiEvent)event).data;
-            if (data[0] == 0){
+            if (data[1] == 0){
                 openContainers.forEach(o -> {
                     if (playerEntity.getUUID().compareTo(o.getPlayerInv().player.getUUID()) == 0){
                         ((ContainerWorkbench<?>)o).clearCraftingGrid();
                     }
                 });
-            } else if (data[0] == 1){
+            } else if (data[1] == 1){
                 openContainers.forEach(o -> {
                     if (playerEntity.getUUID().compareTo(o.getPlayerInv().player.getUUID()) == 0){
                         ((ContainerWorkbench<?>)o).clearCraftingGridToPlayer();

@@ -50,6 +50,7 @@ import trinsdar.gt4r.items.ItemIntCircuit;
 import trinsdar.gt4r.items.ItemMatch;
 import trinsdar.gt4r.items.ItemMixedMetal;
 import trinsdar.gt4r.items.ItemPowerUnit;
+import trinsdar.gt4r.items.ItemStorageOrb;
 import trinsdar.gt4r.tree.BlockRubberLeaves;
 import trinsdar.gt4r.tree.BlockRubberLog;
 import trinsdar.gt4r.tree.BlockRubberSapling;
@@ -214,6 +215,7 @@ public class GT4RData {
     public static ItemBasic<?> CircuitDataControl = new ItemBasic<>(Ref.ID, "data_control_circuit").tip("A Data Control Processor");
     public static ItemBasic<?> CircuitEnergyFlow = new ItemBasic<>(Ref.ID, "energy_flow_circuit").tip("A High Voltage Processor");
     public static ItemBasic<?> CircuitDataOrb = new ItemBasic<>(Ref.ID, "data_orb").tip("A High Capacity Data Storage");
+    public static ItemBasic<?> StorageDataOrb = new ItemStorageOrb(Ref.ID, "storage_data_orb").tip("A High Capacity Data Storage");
     public static ItemBasic<?> MotorLV = new ItemBasic<>(Ref.ID, "lv_motor");
     public static ItemBasic<?> MotorMV = new ItemBasic<>(Ref.ID, "mv_motor");
     public static ItemBasic<?> MotorHV = new ItemBasic<>(Ref.ID, "hv_motor");

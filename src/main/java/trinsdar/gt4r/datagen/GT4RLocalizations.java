@@ -61,6 +61,10 @@ public class GT4RLocalizations {
             add("block.gt4r.rubber_sapling", "Rubber Sapling");
             add("attribute.name.generic.gt4r.attackReach", "Attack Reach");;
             add("message.gt4r.pickaxe_torch_right_click", "Fyi there is no need to put a torch in your offhand, just right click with a pickaxe");
+            add("tooltip.gt4r.upload_chest", "Upload to Chest");
+            add("tooltip.gt4r.upload_tank", "Upload to Tank");
+            add("tooltip.gt4r.download_orb", "Download to Data Orb");
+            add("tooltip.gt4r.sort_inventory", "Sort Inventory");
         }
 
         @Override
@@ -83,6 +87,7 @@ public class GT4RLocalizations {
             add(GT4RData.CraftingModule, lowerUnderscoreToUpperSpaced(GT4RData.CraftingModule.getId()));
             override(ROCK_CUTTER.getToolStack(NULL, NULL).getItem().getDescriptionId(), "Rock Cutter");
             override(GT4RData.LighterEmpty.getDescriptionId(), "Lighter (Empty)");
+            override(GT4RData.StorageDataOrb.getDescriptionId(), "Data Orb");
             AntimatterAPI.all(Machine.class, domain).forEach(i -> {
                 Collection<Tier> tiers =  i.getTiers();
                 if (i.has(MachineFlag.BASIC)) {

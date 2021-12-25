@@ -33,6 +33,7 @@ import trinsdar.gt4r.tile.single.TileEntityCabinet;
 import trinsdar.gt4r.tile.single.TileEntityChest;
 import trinsdar.gt4r.tile.single.TileEntityCoalBoiler;
 import trinsdar.gt4r.tile.single.TileEntityCoveredGenerator;
+import trinsdar.gt4r.tile.single.TileEntityDigitalChest;
 import trinsdar.gt4r.tile.single.TileEntityDrum;
 import trinsdar.gt4r.tile.single.TileEntityDustBin;
 import trinsdar.gt4r.tile.single.TileEntityForgeHammer;
@@ -139,7 +140,8 @@ public class Machines {
     public static HatchMachine FUSION_ENERGY_EXTRACTOR = new HatchMachine(Ref.ID, "fusion_energy_extractor", COVER_DYNAMO_OLD).addFlags(ENERGY).baseTexture(Textures.FUSION_OUT).setTiers(UV).setAllowVerticalFacing(false).allowFrontIO();
 
     public static TankMachine QUANTUM_TANK = new TankMachine(Ref.ID, "quantum_tank").addFlags(GUI, CELL).setTiers(MAX).setTile(m -> () -> new TileEntityQuantumTank(m)).frontCovers().allowFrontIO();
-    public static StorageMachine QUANTUM_CHEST = new StorageMachine(Ref.ID, "quantum_chest").addFlags(GUI, CELL).setTiers(MAX).setTile(m -> () -> new TileEntityQuantumChest(m));
+    public static StorageMachine QUANTUM_CHEST = new StorageMachine(Ref.ID, "quantum_chest").addFlags(GUI, ITEM).setTiers(MAX).setTile(m -> () -> new TileEntityQuantumChest(m));
+    public static StorageMachine DIGITAL_CHEST = new StorageMachine(Ref.ID, "digital_chest").addFlags(GUI, ITEM).setTiers(LV).setTile(m -> () -> new TileEntityDigitalChest(m));
 
     public static MaterialMachine BRONZE_DRUM = new MaterialMachine(Ref.ID, "bronze_drum", Materials.Bronze).setTiers(LV).baseTexture(Textures.DRUM_HANDLER).overlayTexture(Textures.DRUM_OVERLAY_HANDLER).addFlags(COVERABLE, FLUID).setTile(m -> () -> new TileEntityDrum(m)).allowFrontIO();
     public static MaterialMachine STEEL_DRUM = new MaterialMachine(Ref.ID, "steel_drum", Materials.Steel).setTiers(LV).baseTexture(Textures.DRUM_HANDLER).overlayTexture(Textures.DRUM_OVERLAY_HANDLER).addFlags(COVERABLE, FLUID).setTile(m -> () -> new TileEntityDrum(m)).allowFrontIO();

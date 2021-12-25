@@ -26,6 +26,7 @@ import trinsdar.gt4r.gui.widgets.CoalBoilerWidget;
 import trinsdar.gt4r.gui.widgets.FilterButtonArrayWidget;
 import trinsdar.gt4r.gui.widgets.FusionButtonWidget;
 import trinsdar.gt4r.gui.widgets.MachineStateWidgetMoved;
+import trinsdar.gt4r.gui.widgets.TooltipWidget;
 import trinsdar.gt4r.gui.widgets.TranslocatorButtonArrayWidget;
 
 import java.util.function.BiFunction;
@@ -268,6 +269,10 @@ public class Guis {
                     .addButton(137, 63, 14, 14, PAD_RIGHT)
                     .addButton(152, 63, 14, 14, APAD_RIGHT);
         });
+        DIGITAL_CHEST.addGuiCallback(t -> {
+           t.addButton(8, 119, 16, 16, NO_OVERLAY).addButton(26, 119, 16, 16, NO_OVERLAY).addButton(44, 119, 16, 16, NO_OVERLAY);
+           t.addWidget(TooltipWidget.build("upload_chest").setSize(8, 119, 16, 16)).addWidget(TooltipWidget.build("download_orb").setSize(26, 119, 16, 16));
+        });
         initWidgets();
     }
 
@@ -378,6 +383,7 @@ public class Guis {
 
         FUSION_REACTOR.setGUI(MenuHandlers.FUSION_MENU_HANDLER);
         QUANTUM_CHEST.setGUI(MenuHandlers.QUANTUM_CHEST_HANDLER);
+        DIGITAL_CHEST.setGUI(MenuHandlers.DIGITAL_CHEST_HANDLER);
         IRON_CABINET.setGUI(MenuHandlers.CABINET_HANDLER_SIX);
         ALUMINIUM_CABINET.setGUI(MenuHandlers.CABINET_HANDLER_SIX);
         WROUGHT_IRON_CABINET.setGUI(MenuHandlers.CABINET_HANDLER_SIX);
@@ -436,6 +442,7 @@ public class Guis {
                     WROUGHT_IRON_CHEST.add(STORAGE, 12 + j * 18, 18 + (i * 18));
                     BRASS_CHEST.add(STORAGE, 12 + j * 18, 18 + (i * 18));
                     CUPRONICKEL_CHEST.add(STORAGE, 12 + j * 18, 18 + (i * 18));
+                    DIGITAL_CHEST.add(FILTERABLE, 8 + j * 18, 8 + (i * 18));
                 }
                 if (i < 7){
                     ELECTRUM_CABINET.add(STORAGE, 12 + j * 18, 18 + (i * 18));
@@ -455,6 +462,7 @@ public class Guis {
                 OSMIUM_CHEST.add(STORAGE, 12 + j * 18, 18 + (i * 18));
             }
         }
+        DIGITAL_CHEST.add(DATA, 80, 119);
     }
 
     public static WidgetSupplier makeProgress(BarDir dir, boolean barFill, int4 loc){

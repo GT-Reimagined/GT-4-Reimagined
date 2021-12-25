@@ -11,11 +11,13 @@ import net.minecraft.entity.player.PlayerInventory;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.client.ScreenFactories;
 import trinsdar.gt4r.gui.ContainerCabinet;
+import trinsdar.gt4r.gui.ContainerDigitalChest;
 import trinsdar.gt4r.gui.ContainerQuantumChest;
 import trinsdar.gt4r.gui.ContainerWorkbench;
 import trinsdar.gt4r.gui.MenuHandlerCrafting;
 import trinsdar.gt4r.gui.MenuHandlerCraftingItem;
 import trinsdar.gt4r.tile.multi.TileEntityFusionReactor;
+import trinsdar.gt4r.tile.single.TileEntityDigitalChest;
 import trinsdar.gt4r.tile.single.TileEntityMaterial;
 import trinsdar.gt4r.tile.single.TileEntityQuantumChest;
 
@@ -106,6 +108,18 @@ public class MenuHandlers {
         @Override
         public Object screen() {
             return ClientData.SCREEN_BASIC;
+        }
+    };
+
+    public static MenuHandlerMachine<TileEntityDigitalChest, ContainerDigitalChest> DIGITAL_CHEST_HANDLER = new MenuHandlerMachine(Ref.ID, "container_digital_chest") {
+        @Override
+        public ContainerBasicMachine getMenu(IGuiHandler tile, PlayerInventory playerInv, int windowId) {
+            return tile instanceof TileEntityDigitalChest ? new ContainerDigitalChest((TileEntityDigitalChest) tile, playerInv, this, windowId) : null;
+        }
+
+        @Override
+        public Object screen() {
+            return ScreenFactories.SCREEN_DIGITAL_CHEST;
         }
     };
     public static MenuHandlerCrafting COVER_CRAFTING_HANDLER = new MenuHandlerCrafting(Ref.ID, "crafting_grid");
