@@ -34,6 +34,7 @@ import trinsdar.gt4r.tile.single.TileEntityChest;
 import trinsdar.gt4r.tile.single.TileEntityCoalBoiler;
 import trinsdar.gt4r.tile.single.TileEntityCoveredGenerator;
 import trinsdar.gt4r.tile.single.TileEntityDigitalChest;
+import trinsdar.gt4r.tile.single.TileEntityDigitalTank;
 import trinsdar.gt4r.tile.single.TileEntityDrum;
 import trinsdar.gt4r.tile.single.TileEntityDustBin;
 import trinsdar.gt4r.tile.single.TileEntityForgeHammer;
@@ -140,6 +141,7 @@ public class Machines {
     public static HatchMachine FUSION_ENERGY_EXTRACTOR = new HatchMachine(Ref.ID, "fusion_energy_extractor", COVER_DYNAMO_OLD).addFlags(ENERGY).baseTexture(Textures.FUSION_OUT).setTiers(UV).setAllowVerticalFacing(false).allowFrontIO();
 
     public static TankMachine QUANTUM_TANK = new TankMachine(Ref.ID, "quantum_tank").addFlags(GUI, CELL).setTiers(MAX).setTile(m -> () -> new TileEntityQuantumTank(m)).frontCovers().allowFrontIO();
+    public static TankMachine DIGITAL_TANK = new TankMachine(Ref.ID, "digital_tank").addFlags(GUI, CELL, ITEM).setTiers(LV).setTile(m -> () -> new TileEntityDigitalTank(m)).frontCovers().allowFrontIO();
     public static StorageMachine QUANTUM_CHEST = new StorageMachine(Ref.ID, "quantum_chest").addFlags(GUI, ITEM).setTiers(MAX).setTile(m -> () -> new TileEntityQuantumChest(m));
     public static StorageMachine DIGITAL_CHEST = new StorageMachine(Ref.ID, "digital_chest").addFlags(GUI, ITEM).setTiers(LV).setTile(m -> () -> new TileEntityDigitalChest(m));
 

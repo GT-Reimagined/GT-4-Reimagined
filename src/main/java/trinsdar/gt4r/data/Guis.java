@@ -204,6 +204,7 @@ public class Guis {
         FUSION_FLUID_EXTRACTOR.add(HATCH_FLUID_O);
         FUSION_ITEM_EXTRACTOR.add(IT_OUT, 79, 34);
         FUSION_ITEM_INJECTOR.add(IT_IN, 79, 34);
+        DIGITAL_TANK.add(BASIC_TANK.getSlots()).add(DATA, 61, 64);
 
         PUMP.addGuiCallback(g -> g.addWidget(IOWidget.build(9,63,16,16)));
         BRONZE_WORKBENCH.addGuiCallback(t -> {
@@ -272,6 +273,10 @@ public class Guis {
         DIGITAL_CHEST.addGuiCallback(t -> {
            t.addButton(8, 119, 16, 16, NO_OVERLAY).addButton(26, 119, 16, 16, NO_OVERLAY).addButton(44, 119, 16, 16, NO_OVERLAY);
            t.addWidget(TooltipWidget.build("upload_chest").setSize(8, 119, 16, 16)).addWidget(TooltipWidget.build("download_orb").setSize(26, 119, 16, 16));
+        });
+        DIGITAL_TANK.addGuiCallback(t -> {
+            t.addButton(8, 64, 16, 16, NO_OVERLAY).addButton(26, 64, 16, 16, NO_OVERLAY);
+            t.addWidget(TooltipWidget.build("upload_chest").setSize(8, 64, 16, 16)).addWidget(TooltipWidget.build("download_orb").setSize(26, 64, 16, 16));
         });
         initWidgets();
     }

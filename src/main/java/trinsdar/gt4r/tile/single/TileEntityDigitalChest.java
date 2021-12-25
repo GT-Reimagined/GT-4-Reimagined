@@ -2,7 +2,6 @@ package trinsdar.gt4r.tile.single;
 
 import muramasa.antimatter.capability.item.ITrackedHandler;
 import muramasa.antimatter.capability.item.TrackedItemHandler;
-import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.gui.event.GuiEvents;
 import muramasa.antimatter.gui.event.IGuiEvent;
 import muramasa.antimatter.machine.types.Machine;
@@ -15,8 +14,6 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.util.Constants;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.data.SlotTypes;
-import trinsdar.gt4r.gui.ContainerWorkbench;
-import trinsdar.gt4r.machine.MaterialMachine;
 
 public class TileEntityDigitalChest extends TileEntityMachine<TileEntityDigitalChest> implements IFilterable{
     public TileEntityDigitalChest(Machine<?> type) {
