@@ -1,10 +1,14 @@
 package trinsdar.gt4r.tile.single;
 
 import muramasa.antimatter.Antimatter;
+import muramasa.antimatter.machine.MachineState;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.TileEntityMachine;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 
 import java.util.Arrays;
@@ -52,6 +56,18 @@ public class TileEntityTeleporter extends TileEntityMachine<TileEntityTeleporter
     }
 
     public void findEntityToTeleport(){
+        List<Entity> entites = this.getLevel().getEntities(null, new AxisAlignedBB(this.getBlockPos().offset(-2, -3, -2), this.getBlockPos().offset(2, 3, 2)));
+        if (!entites.isEmpty()){
+            if (destination == null) return;
+            TileEntity teleporter = level.getBlockEntity(destination);
+            if (teleporter instanceof TileEntityTeleporter){
+                setMachineState(MachineState.ACTIVE);
+                double minimumDistance = Double.MAX_VALUE;
+
+            } else {
+                destination = null;
+            }
+        }
 
     }
 }
