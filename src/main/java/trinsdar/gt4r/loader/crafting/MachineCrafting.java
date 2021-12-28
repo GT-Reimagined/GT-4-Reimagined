@@ -9,8 +9,6 @@ import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.Items;
 import net.minecraftforge.common.Tags;
 import trinsdar.gt4r.Ref;
-import trinsdar.gt4r.data.CustomTags;
-import trinsdar.gt4r.data.GT4RData;
 
 import java.util.function.Consumer;
 
@@ -148,10 +146,8 @@ public class MachineCrafting {
         provider.addItemRecipe(output, Ref.ID, "drum_tungstensteel", "drums", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),
                 TUNGSTENSTEEL_DRUM.getItem(LV), of('H', HAMMER.getTag(), 'R', ROD.getMaterialTag(TungstenSteel), 'P', PLATE.getMaterialTag(TungstenSteel)), " H ", "PRP", "PRP");
         TRANSFORMER.getTiers().forEach(t -> {
-            if (t.getVoltage() <= EV.getVoltage()){
-                provider.addItemRecipe(output, Ref.ID, t.getId() + "_transformer", "machines", "has_machine_hull", provider.hasSafeItem(HULL.getMaterialTag(TIER_MATERIALS.get(t))),
-                        TRANSFORMER.getItem(t), of( 'C', TIER_CABLES.get(t).getBlockItem(PipeSize.VTINY), 'M', HULL.getMaterialTag(TIER_MATERIALS.get(t)), 'c', TIER_CABLES.get(Tier.getTier(t.getVoltage() * 4)).getBlockItem(PipeSize.VTINY))," CC", "cM ", " CC");
-            }
+            provider.addItemRecipe(output, Ref.ID, t.getId() + "_transformer", "machines", "has_machine_hull", provider.hasSafeItem(HULL.getMaterialTag(TIER_MATERIALS.get(t))),
+                    TRANSFORMER.getItem(t), of( 'C', TIER_CABLES.get(t).getBlockItem(PipeSize.VTINY), 'M', HULL.getMaterialTag(TIER_MATERIALS.get(t)), 'c', TIER_CABLES.get(Tier.getTier(t.getVoltage() * 4)).getBlockItem(PipeSize.VTINY))," CC", "cM ", " CC");
         });
         provider.addItemRecipe(output, Ref.ID, "pump", "machines", "has_hull", provider.hasSafeItem(MACHINE_HULLS_BASIC),
                 PUMP.getItem(LV), of('c', CellTin, 'C', CIRCUITS_BASIC, 'M', MACHINE_HULLS_BASIC, 'P', FLUID_PIPE_BRONZE.getBlockItem(PipeSize.SMALL)),"cCc", "cMc", "PPP");
@@ -213,6 +209,12 @@ public class MachineCrafting {
         provider.addItemRecipe(output, Ref.ID, "fluid_output_hatch", "hatches", "has_machine_hull_basic", provider.hasSafeItem(MACHINE_HULLS_BASIC), HATCH_FLUID_O.getItem(LV), of('P', PLATE.getMaterialTag(StainlessSteel), 'G', GEARS_STEELS, 'M', MACHINE_HULLS_BASIC, 'C', Tags.Items.GLASS), "PPP", "GMG", "PCP");
         provider.addItemRecipe(output, Ref.ID, "ev_dynamo_hatch", "hatches", "has_machine_hull_basic", provider.hasSafeItem(MACHINE_HULLS_BASIC), HATCH_DYNAMO.getItem(EV), of('P', PLATE.getMaterialTag(StainlessSteel), 'G', GEARS_STEELS, 'M', MACHINE_HULLS_BASIC, 'C', TIER_CABLES.get(EV).getBlock(PipeSize.VTINY)), "PPP", "GMG", "PCP");
         provider.addItemRecipe(output, Ref.ID, "iv_dynamo_hatch", "hatches", "has_machine_hull_basic", provider.hasSafeItem(MACHINE_HULLS_BASIC), HATCH_DYNAMO.getItem(IV), of('P', PLATE.getMaterialTag(StainlessSteel), 'G', GEARS_STEELS, 'M', MACHINE_HULLS_BASIC, 'C', TIER_CABLES.get(IV).getBlock(PipeSize.VTINY)), "PPP", "GMG", "PCP");
+        provider.addItemRecipe(output, Ref.ID, "fusion_item_injector", "hatches", "has_machine_hull_highly_advanced", provider.hasSafeItem(HIGHLY_ADVANCED_MACHINE_BLOCK), FUSION_ITEM_INJECTOR.getItem(LV), of('P', ConveyorModule, 'c', CIRCUITS_MASTER, 'M', HIGHLY_ADVANCED_MACHINE_BLOCK, 'C', Tags.Items.CHESTS_WOODEN), "PCP", "cMc", "PcP");
+        provider.addItemRecipe(output, Ref.ID, "fusion_item_extractor", "hatches", "has_machine_hull_highly_advanced", provider.hasSafeItem(HIGHLY_ADVANCED_MACHINE_BLOCK), FUSION_ITEM_EXTRACTOR.getItem(LV), of('P', ConveyorModule, 'c', CIRCUITS_MASTER, 'M', HIGHLY_ADVANCED_MACHINE_BLOCK, 'C', Tags.Items.CHESTS_WOODEN), "PcP", "cMc", "PCP");
+        provider.addItemRecipe(output, Ref.ID, "fusion_fluid_injector", "hatches", "has_machine_hull_highly_advanced", provider.hasSafeItem(HIGHLY_ADVANCED_MACHINE_BLOCK), FUSION_FLUID_INJECTOR.getItem(LV), of('P', PumpModule, 'c', CIRCUITS_MASTER, 'M', HIGHLY_ADVANCED_MACHINE_BLOCK, 'C', Tags.Items.GLASS), "PCP", "cMc", "PcP");
+        provider.addItemRecipe(output, Ref.ID, "fusion_fluid_extractor", "hatches", "has_machine_hull_highly_advanced", provider.hasSafeItem(HIGHLY_ADVANCED_MACHINE_BLOCK), FUSION_FLUID_EXTRACTOR.getItem(LV), of('P', PumpModule, 'c', CIRCUITS_MASTER, 'M', HIGHLY_ADVANCED_MACHINE_BLOCK, 'C', Tags.Items.GLASS), "PcP", "cMc", "PCP");
+        provider.addItemRecipe(output, Ref.ID, "fusion_energy_injector", "hatches", "has_supercondensator", provider.hasSafeItem(SUPERCONDENSATOR.getItem(LUV)), FUSION_ENERGY_INJECTOR.getItem(IV), of('S', ItemSuperconductor, 'C', CIRCUITS_MASTER, 'T', SUPERCONDENSATOR.getItem(LUV)), "SCS", "CTC", "SCS");
+        provider.addItemRecipe(output, Ref.ID, "supercondensator", "machines", "has_machine_hull_highly_advanced", provider.hasSafeItem(HIGHLY_ADVANCED_MACHINE_BLOCK), SUPERCONDENSATOR.getItem(LUV), of('C', CIRCUITS_MASTER, 'L', LapotronicEnergyOrb, 'S', ItemSuperconductor, 'M', HIGHLY_ADVANCED_MACHINE_BLOCK), "CLC", "SMS", "CLC");
         provider.addItemRecipe(output, Ref.ID, "muffler_hatch", "hatches", "has_machine_hull_basic", provider.hasSafeItem(MACHINE_HULLS_BASIC), HATCH_MUFFLER.getItem(LV), of('P', PLATE.getMaterialTag(StainlessSteel), 'G', GEARS_STEELS, 'M', MACHINE_HULLS_BASIC, 'C', REINFORCED_GLASS), "PMP", "GCG", "PCP");
     }
 }

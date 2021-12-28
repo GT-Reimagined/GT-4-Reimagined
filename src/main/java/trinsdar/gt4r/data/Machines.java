@@ -47,6 +47,7 @@ import trinsdar.gt4r.tile.single.TileEntityPump;
 import trinsdar.gt4r.tile.single.TileEntityQuantumChest;
 import trinsdar.gt4r.tile.single.TileEntityQuantumTank;
 import trinsdar.gt4r.tile.single.TileEntitySteamMachine;
+import trinsdar.gt4r.tile.single.TileEntitySupercondensator;
 import trinsdar.gt4r.tile.single.TileEntityTeleporter;
 import trinsdar.gt4r.tile.single.TileEntityTranslocator;
 import trinsdar.gt4r.tile.single.TileEntityTypeFilter;
@@ -140,7 +141,7 @@ public class Machines {
     public static HatchMachine FUSION_FLUID_INJECTOR = new HatchMachine(Ref.ID, "fusion_fluid_injector", COVER_FUSION_INPUT).addFlags(GUI, FLUID, CELL).baseTexture(Textures.FUSION_IN).setTiers(LV).setAllowVerticalFacing(false).allowFrontIO();
     public static HatchMachine FUSION_FLUID_EXTRACTOR = new HatchMachine(Ref.ID, "fusion_fluid_extractor", COVER_FUSION_OUTPUT).addFlags(GUI, FLUID, CELL).baseTexture(Textures.FUSION_OUT).setTiers(LV).setAllowVerticalFacing(false).allowFrontIO();
     public static HatchMachine FUSION_ENERGY_INJECTOR = new HatchMachine(Ref.ID, "fusion_energy_injector", emptyFactory).addFlags(ENERGY).baseTexture(Textures.FUSION_IN).setTiers(IV).setAllowVerticalFacing(false).allowFrontIO();
-    public static HatchMachine FUSION_ENERGY_EXTRACTOR = new HatchMachine(Ref.ID, "fusion_energy_extractor", COVER_DYNAMO_OLD).addFlags(ENERGY).baseTexture(Textures.FUSION_OUT).setTiers(UV).setAllowVerticalFacing(false).allowFrontIO();
+    //public static HatchMachine FUSION_ENERGY_EXTRACTOR = new HatchMachine(Ref.ID, "fusion_energy_extractor", COVER_DYNAMO_OLD).addFlags(ENERGY).baseTexture(Textures.FUSION_OUT).setTiers(UV).setAllowVerticalFacing(false).allowFrontIO();
 
     public static TankMachine QUANTUM_TANK = new TankMachine(Ref.ID, "quantum_tank").addFlags(GUI, CELL).setTiers(MAX).setTile(m -> () -> new TileEntityQuantumTank(m)).frontCovers().allowFrontIO();
     public static TankMachine DIGITAL_TANK = new TankMachine(Ref.ID, "digital_tank").addFlags(GUI, CELL, ITEM).setTiers(LV).setTile(m -> () -> new TileEntityDigitalTank(m)).frontCovers().allowFrontIO();
@@ -203,7 +204,8 @@ public class Machines {
     public static BasicMachine BATTERY_BUFFER_ONE = new BasicMachine(Ref.ID, "battery_buffer_one").noCovers().addFlags(GUI, ENERGY, ITEM).setTile(m -> () -> new TileEntityBatteryBuffer<>(m)).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).allowFrontIO().setAllowVerticalFacing(true);
     public static BasicMachine BATTERY_BUFFER_FOUR = new BasicMachine(Ref.ID, "battery_buffer_four").noCovers().addFlags(GUI, ENERGY, ITEM).setTile(m -> () -> new TileEntityBatteryBuffer<>(m)).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).allowFrontIO().setAllowVerticalFacing(true);
     public static BasicMachine BATTERY_BUFFER_EIGHT = new BasicMachine(Ref.ID, "battery_buffer_eight").noCovers().addFlags(GUI, ENERGY, ITEM).setTile(m -> () -> new TileEntityBatteryBuffer<>(m)).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).allowFrontIO().setAllowVerticalFacing(true);
-    public static BasicMachine TRANSFORMER = new BasicMachine(Ref.ID, "transformer").addFlags(ENERGY).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).setTile(m -> () -> new TileEntityTransformer<>(m, 1)).setTiers(Arrays.stream(getAllElectric()).filter(t -> t != ULV && t != MAX).toArray(Tier[]::new)).noCovers().setAllowVerticalFacing(true);
+    public static BasicMachine TRANSFORMER = new BasicMachine(Ref.ID, "transformer").addFlags(ENERGY).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).setTile(m -> () -> new TileEntityTransformer<>(m, 1)).noCovers().setAllowVerticalFacing(true);
+    public static BasicMachine SUPERCONDENSATOR = new BasicMachine(Ref.ID, "supercondensator").addFlags(ENERGY).setTile(m -> () -> new TileEntitySupercondensator(m, 1)).setTiers(LUV).noCovers().setAllowVerticalFacing(true);
     public static BasicMachine TRANSFORMER_DIGITAL = new BasicMachine(Ref.ID, "transformer_digital").addFlags(GUI, ENERGY).setTiers(EV, IV).setTile(m -> () -> new TileEntityDigitalTransformer<>(m)).noCovers();//.setTiers();
 
     public static void init() {

@@ -103,6 +103,7 @@ public class GT4RData {
             builder.put(Tier.HV, WIRE_GOLD);
             builder.put(Tier.EV, WIRE_ALUMINIUM);
             builder.put(Tier.IV, WIRE_TUNGSTEN);
+            builder.put(Tier.LUV, WIRE_SUPERCONDUCTOR);
             TIER_WIRES = builder.build();
         }
         {
@@ -113,6 +114,7 @@ public class GT4RData {
             builder.put(Tier.HV, CABLE_GOLD);
             builder.put(Tier.EV, CABLE_ALUMINIUM);
             builder.put(Tier.IV, CABLE_TUNGSTEN);
+            builder.put(Tier.LUV, WIRE_SUPERCONDUCTOR);
             TIER_CABLES = builder.build();
         }
         {
