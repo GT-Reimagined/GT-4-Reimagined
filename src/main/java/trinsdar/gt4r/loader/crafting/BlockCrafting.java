@@ -37,6 +37,7 @@ public class BlockCrafting {
                 new ItemStack(ADVANCED_MACHINE_BLOCK, 1), of('A', AdvancedAlloy, 'C', PLATE.getMaterialTag(Carbon), 'M', MACHINE_HULLS_BASIC), " C ", "AMA", " C ");
         provider.addStackRecipe(output, Ref.ID, "machine_block_advanced_2", "blocks", "has_machine_hull_basic", provider.hasSafeItem(MACHINE_HULLS_BASIC),
                 new ItemStack(ADVANCED_MACHINE_BLOCK, 1), of('A', AdvancedAlloy, 'C', PLATE.getMaterialTag(Carbon), 'M', MACHINE_HULLS_BASIC), " A ", "CMC", " A ");
+        provider.addItemRecipe(output, Ref.ID, "coil_fusion", "blocks", "has_machine_hull_highly_advanced", provider.hasSafeItem(HIGHLY_ADVANCED_MACHINE_BLOCK), FUSION_COIL, of('C', CIRCUITS_MASTER, 'S', ItemSuperconductor, 'N', NichromeHeatingCoil, 'H', HIGHLY_ADVANCED_MACHINE_BLOCK, 'I', IridiumNeutronReflector), "CSC", "NHN", "CIC");
         provider.addStackRecipe(output, Ref.ID, "sapbag", "blocks", "has_saw", provider.hasSafeItem(SAW.getTag()),
                 new ItemStack(SAP_BAG), of('L', Tags.Items.LEATHER, 'S', SAW.getTag(), 's', getTag("rods/wooden")), "sss", "LSL", "LLL");
     }
