@@ -261,5 +261,11 @@ public class Parts {
         provider.addStackRecipe(output, Ref.ID, "fluid_cell", "parts", "has_tin", provider.hasSafeItem(PLATE.getMaterialTag(Tin)),
                 new ItemStack(CellTin, 2), of('T', PLATE.getMaterialTag(Tin)), " T ", "T T", " T ");
         provider.shapeless(output, "resin_torch", "parts", "has_sticky_resin", provider.hasSafeItem(StickyResin), new ItemStack(Items.TORCH, 4), StickyResin, getForgeItemTag("rods/wooden"));
+        provider.addItemRecipe(output, Ref.ID, "neutron_reflector_iridium", "parts", "has_iridium_reinforced_plate", provider.hasSafeItem(IridiumReinforcedPlate),
+                IridiumNeutronReflector, of('N', ThickNeutronReflector, 'I', IridiumReinforcedPlate), "NNN", "NIN", "NNN");
+        provider.addItemRecipe(output, Ref.ID, "neutron_reflector_thick", "parts", "has_beryllium_dust", provider.hasSafeItem(DUST.get(Beryllium)),
+                ThickNeutronReflector, of('N', NeutronReflector, 'I', DUST.get(Beryllium)), " N ", "NIN", " N ");
+        provider.addItemRecipe(output, Ref.ID, "neutron_reflector_normal", "parts", "has_copper_plate", provider.hasSafeItem(PLATE.get(Copper)),
+                NeutronReflector, of('C', DUST.get(Coal), 'T', DUST.get(Tin), 'I', PLATE.get(Copper)), "TCT", "CIC", "TCT");
     }
 }

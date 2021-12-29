@@ -194,6 +194,8 @@ public class GT4RData {
     public static ItemBasic<?> IridiumAlloyIngot = new ItemBasic<>(Ref.ID, "iridium_alloy_ingot").tip("Used to make Iridium Plates");
     public static ItemBasic<?> IridiumReinforcedPlate = new ItemBasic<>(Ref.ID, "iridium_reinforced_plate").tip("GT2s Most Expensive Component");
     public static ItemBasic<?> IridiumNeutronReflector = new ItemBasic<>(Ref.ID, "iridium_neutron_reflector").tip("Indestructible");
+    public static ItemBasic<?> ThickNeutronReflector = new ItemBasic<>(Ref.ID, "thick_neutron_reflector");
+    public static ItemBasic<?> NeutronReflector = new ItemBasic<>(Ref.ID, "neutron_reflector");
     public static ItemBasic<?> CompressedFireClay = new ItemBasic<>(Ref.ID, "compressed_fire_clay").tip("Brick Shaped");
     public static ItemBasic<?> FireBrick = new ItemBasic<>(Ref.ID, "fire_brick").tip("Heat Resistant");
     public static ItemBasic<?> ItemSuperconductor = new ItemBasic<>(Ref.ID, "superconductor").tip("Conducts Energy Losslessly");
