@@ -1,5 +1,7 @@
 package trinsdar.gt4r.tile.multi;
 
+import muramasa.antimatter.capability.machine.MachineEnergyHandler;
+import muramasa.antimatter.capability.machine.MultiMachineEnergyHandler;
 import muramasa.antimatter.gui.event.GuiEvents;
 import muramasa.antimatter.gui.event.IGuiEvent;
 import muramasa.antimatter.machine.types.Machine;
@@ -7,6 +9,10 @@ import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
+import tesseract.api.gt.IEnergyHandler;
+import tesseract.api.gt.IGTNode;
+
+import java.util.Arrays;
 
 public class TileEntityFusionReactor extends TileEntityMultiMachine<TileEntityFusionReactor> {
 
@@ -14,13 +20,19 @@ public class TileEntityFusionReactor extends TileEntityMultiMachine<TileEntityFu
 
     public TileEntityFusionReactor(Machine<?> type) {
         super(type);
+        this.energyHandler.set(() -> new MultiMachineEnergyHandler<TileEntityFusionReactor>( this){
+            public void onStructureBuild() {
+                super.onStructureBuild();
+
+            }
+        });
     }
 
-//    @Override
-//    public void onRecipeFound() {
-//        consumeEnergy(activeRecipe.getSpecialValue());
-//        System.out.println("Consumed Starting Energy");
-//    }
+    /*@Override
+    public void onRecipeFound() {
+        consumeEnergy(activeRecipe.getSpecialValue());
+        System.out.println("Consumed Starting Energy");
+    }*/
 
 
     public Display getDisplay() {
@@ -46,11 +58,11 @@ public class TileEntityFusionReactor extends TileEntityMultiMachine<TileEntityFu
         if (event.getFactory() == GuiEvents.EXTRA_BUTTON){
             GuiEvents.GuiEvent ev =(GuiEvents.GuiEvent) event;
             int[] data = ev.data;
-            if (data[0] == 0){
+            if (data[1] == 0){
                 this.display = Display.REGULAR;
-            } else if (data[0] == 1){
+            } else if (data[1] == 1){
                 this.display = Display.MIDDLE;
-            } else if (data[0] == 2){
+            } else if (data[1] == 2){
                 this.display = Display.TOP_BOTTOM;
             }
         }
