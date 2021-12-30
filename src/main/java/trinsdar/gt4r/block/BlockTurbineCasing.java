@@ -2,6 +2,7 @@ package trinsdar.gt4r.block;
 
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
+import muramasa.antimatter.Antimatter;
 import muramasa.antimatter.datagen.builder.AntimatterBlockModelBuilder;
 import muramasa.antimatter.datagen.providers.AntimatterBlockStateProvider;
 import muramasa.antimatter.dynamic.ModelConfig;
@@ -19,8 +20,10 @@ import net.minecraft.world.IBlockReader;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.tile.multi.TileEntityLargeTurbine;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.BiConsumer;
 
 import static muramasa.antimatter.client.AntimatterModelManager.LOADER_DYNAMIC;
 
@@ -39,20 +42,15 @@ public class BlockTurbineCasing extends BlockConnectedCasing {
         TileEntityLargeTurbine turbine = getTurbine(world, pos);
         if (turbine != null) {
             BlockPos controllerPos = turbine.getBlockPos();
-            Vector3i vec = new Vector3i(-(pos.getX()-controllerPos.getX()), -(pos.getY()-controllerPos.getY()), -(pos.getZ()-controllerPos.getZ()));
-            int c = getOffset(vec);
-            c += turbine.getFacing().get3DDataValue()*1000;
-            c += (turbine.getMachineState() == MachineState.ACTIVE ? 10000 : 0);
+            Vector3i vec = new Vector3i((pos.getX() - controllerPos.getX()), (pos.getY() - controllerPos.getY()), (pos.getZ() - controllerPos.getZ()));
+            int c = getOffset(vec, turbine.getFacing()) + 10000;
+            c += (turbine.getMachineState() == MachineState.ACTIVE ? 100000 : 0);
             ct[1] = c;
+            ct[0] = conf[0];
+            return config.set(ct);
+        } else {
+            return config.set(conf);
         }
-        ct[0] = conf[0];
-        ModelConfig con = config.set(ct);
-        //This is what you call a "hack". This ensures that if there is no turbine
-        //It returns a config of size 1 instead, otherwise it will incorrectly render the textures.
-        if (con.getConfig()[0] == -1) {
-            con.set(new int[]{con.getConfig()[1]});
-        }
-        return con;
     }
 
     protected Texture[] turbineTextures() {
@@ -83,24 +81,13 @@ public class BlockTurbineCasing extends BlockConnectedCasing {
     protected int getOffset(Vector3i vec) {
         return vec.getX() + vec.getY()*10 + vec.getZ()*100;
     }
-
+    
     //essentially a facing transformation
     protected int getOffset(Vector3i vec, Direction dir) {
-        switch (dir) {
-            case NORTH:
-                return vec.getY()*10 - vec.getX();
-            case SOUTH:
-                return vec.getY()*10 + vec.getX();
-            case WEST:
-                return vec.getY()*10 + vec.getX()*100;
-            case EAST:
-                return vec.getY()*10 - vec.getX()*100;
-        }
-        return 0;
+        return getOffset(vec) + (dir.get2DDataValue() + 1)*1000;
     }
 
     private final static String SIDED = "antimatter:block/preset/simple_overlay";
-    private final static String SIMPLE = "antimatter:block/preset/simple";
 
     private final Vector3i[] VECS = new Vector3i[]{
             new Vector3i(1,-1,0),
@@ -114,22 +101,49 @@ public class BlockTurbineCasing extends BlockConnectedCasing {
             new Vector3i(-1,1,0),
     };
 
+    private final void forSides(Direction dir, BiConsumer<int3, Integer> consumer) {
+        int3 pos = new int3(dir);
+        int i = 0;
+        pos.set(0, 0, 0);
+        pos = pos.above(1);
+        pos = pos.right(1);
+        consumer.accept(pos,i++);
+        pos = pos.left(1);
+        consumer.accept(pos,i++);
+        pos = pos.left(1);
+        consumer.accept(pos,i++);
+        pos = pos.right(2);
+        pos = pos.below(1);
+        consumer.accept(pos,i++);
+        i++;
+        pos = pos.left(2);
+        consumer.accept(pos,i++);
+        pos = pos.right(2);
+        pos = pos.below(1);
+        consumer.accept(pos,i++);
+        pos = pos.left(1);
+        consumer.accept(pos,i++);
+        pos = pos.left(1);
+        consumer.accept(pos,i++);
+    }
+
     @Override
     public AntimatterBlockModelBuilder buildBlock(Block block, AntimatterBlockStateProvider prov) {
         Texture[] tex = turbineTextures();
         Texture[] inactive = turbineTexturesInactive();
         AntimatterBlockModelBuilder builder = super.buildBlock(block, prov);
         for (Direction dir : dirs) {
-            for (int i = 0; i < VECS.length; i++) {
-                if (i == 4) continue;
-                final int ii = i;
-                builder.config(getOffset(VECS[i], dir)+dir.get3DDataValue()*1000, SIDED, a ->
-                    a.tex(t -> t.put("base",inactive[ii])).rot(dir));
-                builder.config(getOffset(VECS[i], dir)+dir.get3DDataValue()*1000+10000, SIDED, a ->
-                    a.tex(t -> t.put("base",tex[ii])).rot(dir));
-            }
+            forSides(dir, (b,c) -> {
+                int offset = getOffset(b, dir);
+                int offsetX1000 = offset * 10000;
+                int offsetPlus10000 = offsetX1000 + 100000;
+                //Antimatter.LOGGER.info(this.getId() + " Offset 1: " + offset + " Offset 2: " + offsetX1000 + " Offset 3: " + offsetPlus10000);
+                builder.config(offsetX1000, SIDED, a ->
+                        a.tex(t -> t.put("base", inactive[c])).rot(dir));
+                builder.config(offsetPlus10000, SIDED, a ->
+                        a.tex(t -> t.put("base", tex[c])).rot(dir));
+            });
         }
-        builder.model(SIMPLE, ((ITextureProvider)block).getTextures());
         builder.loader(LOADER_DYNAMIC);
         return builder;
     }
