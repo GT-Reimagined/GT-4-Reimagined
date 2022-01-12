@@ -9,6 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraftforge.common.BiomeDictionary;
+import trinsdar.gt4r.config.OreConfig;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,6 +51,7 @@ public class GT4ROreFeatureConfig implements IFeatureConfig {
     private final String id;
     private Material[] materials;
     private String primary, secondary;
+    //private final OreConfig oreConfig;
     private final int minY;
     private final int maxY;
     private final int weight;
