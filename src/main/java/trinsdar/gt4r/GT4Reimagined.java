@@ -20,6 +20,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import trinsdar.gt4r.client.BakedModels;
+import trinsdar.gt4r.config.OreConfigHandler;
 import trinsdar.gt4r.data.Attributes;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.data.Guis;
@@ -113,6 +114,7 @@ public class GT4Reimagined extends AntimatterMod {
                 GT4RData.buildTierMaps();
                 Structures.init();
                 GT4RConfiguredFeatures.init();
+                OreConfigHandler.ORE_CONFIG_HANDLER.save();
                 //GregTechAPI.registerFluidCell(Data.CellTin.get(1));
                 //GregTechAPI.registerFluidCell(Data.CellSteel.get(1));
                 //GregTechAPI.registerFluidCell(Data.CellTungstensteel.get(1));

@@ -9,7 +9,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraftforge.common.BiomeDictionary;
-import trinsdar.gt4r.config.OreConfig;
+import trinsdar.gt4r.config.OreConfigHandler;
+import trinsdar.gt4r.config.OreConfigNode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,23 +24,14 @@ import static trinsdar.gt4r.data.Materials.RockSalt;
 import static trinsdar.gt4r.data.Materials.Salt;
 
 public class GT4ROreFeatureConfig implements IFeatureConfig {
+
     public static final Codec<GT4ROreFeatureConfig> CODEC = RecordCodecBuilder.create((p_236568_0_) -> {
         return p_236568_0_.group(Codec.STRING.fieldOf("id").forGetter((config) -> {
             return config.id;
-        }), Codec.intRange(0, 256).fieldOf("minY").forGetter((config) -> {
-            return config.minY;
-        }), Codec.intRange(0, 256).fieldOf("maxY").forGetter((config) -> {
-            return config.maxY;
-        }), Codec.intRange(0, 32).fieldOf("weight").forGetter((config) -> {
-            return config.weight;
-        }), Codec.intRange(0, 64).fieldOf("size").forGetter((config) -> {
-            return config.size;
+        }),OreConfigNode.ORE_CONFIG_NODE_CODEC.fieldOf("configNode").forGetter((config) -> {
+            return config.configNode;
         }),Codec.STRING.fieldOf("primary").forGetter((config) -> {
             return config.primary;
-        }), Codec.STRING.fieldOf("secondary").forGetter((config) -> {
-            return config.secondary;
-        }), Codec.INT.fieldOf("secondaryChance").forGetter((config) -> {
-            return config.secondaryChance;
         }), Codec.list(World.RESOURCE_KEY_CODEC).fieldOf("dimension").forGetter((config) ->{
             return config.dimensions;
         }), Codec.list(Codec.STRING).fieldOf("biomeTypesID").forGetter((config) ->{
@@ -51,12 +43,7 @@ public class GT4ROreFeatureConfig implements IFeatureConfig {
     private final String id;
     private Material[] materials;
     private String primary, secondary;
-    //private final OreConfig oreConfig;
-    private final int minY;
-    private final int maxY;
-    private final int weight;
-    private final int secondaryChance;
-    private final int size;
+    private final OreConfigNode configNode;
     private boolean invertBiomeFilter;
     private List<RegistryKey<World>> dimensions;
     private Set<ResourceLocation> dimensionLocations;
@@ -65,35 +52,31 @@ public class GT4ROreFeatureConfig implements IFeatureConfig {
     private List<String> biomeTypesID = new ArrayList<>();
     private List<String> invalidBiomeTypesID = new ArrayList<>();
 
-    public GT4ROreFeatureConfig(String id , int minY, int maxY, int weight, int size, String primary, String secondary, int secondaryChance, RegistryKey<World>... dimensions) {
+    public GT4ROreFeatureConfig(String id, OreConfigNode configNode, String primary, RegistryKey<World>... dimensions) {
         this.id = id;
-        this.minY = minY;
-        this.maxY = maxY;
-        this.weight = weight;
-        this.secondaryChance = secondaryChance;
-        this.size = size;
+        this.configNode = OreConfigHandler.ORE_CONFIG_HANDLER.getBiomeConfig().ore(id, configNode);
         this.invertBiomeFilter = false;
         if (primary == null || (!Material.get(primary).has(ORE) && Material.get(primary) != Salt && Material.get(primary) != RockSalt)) throw new IllegalArgumentException("GT4ROreFeatureConfig - " + id + ": " + primary + " material either doesn't exist or doesn't have the ORE tag");
-        if (secondary != null && !Material.get(secondary).has(ORE) && Material.get(secondary) != NULL) throw new IllegalArgumentException("GT4ROreFeatureConfig - " + id + ": " + secondary + " material doesn't have the ORE tag");
+        //if (secondary != null && !Material.get(secondary).has(ORE) && Material.get(secondary) != NULL) throw new IllegalArgumentException("GT4ROreFeatureConfig - " + id + ": " + secondary + " material doesn't have the ORE tag");
         if (secondary != null){
             materials = new Material[] {Material.get(primary), Material.get(secondary)};
         } else {
             materials = new Material[] {Material.get(primary)};
         }
         this.primary = primary;
-        if (secondary != null){
+        /*if (secondary != null){
             this.secondary = secondary;
-        }
+        }*/
         this.dimensions = Arrays.stream(dimensions).collect(Collectors.toList());
         this.dimensionLocations = this.dimensions.stream().map(RegistryKey::location).collect(Collectors.toCollection(ObjectOpenHashSet::new));
     }
 
-    public GT4ROreFeatureConfig(String id, int minY, int maxY, int weight, int size, Material primary, Material secondary, int secondaryChance, RegistryKey<World>... dimensions) {
-        this(id, minY, maxY, weight, size, primary.getId(), secondary.getId(), secondaryChance, dimensions);
+    public GT4ROreFeatureConfig(String id, OreConfigNode configNode, Material primary, RegistryKey<World>... dimensions) {
+        this(id, configNode, primary.getId(), dimensions);
     }
 
-    private GT4ROreFeatureConfig(String id, int minY, int maxY, int weight, int size, String primary, String secondary, int secondaryChance, List<RegistryKey<World>> dimensions, List<String> biomeTypes, List<String> invalidBiomeTypes) {
-        this(id, minY, maxY, weight, size, primary, secondary, secondaryChance);
+    private GT4ROreFeatureConfig(String id, OreConfigNode configNode, String primary, List<RegistryKey<World>> dimensions, List<String> biomeTypes, List<String> invalidBiomeTypes) {
+        this(id, configNode, primary);
         this.dimensions = dimensions;
         this.dimensionLocations = this.dimensions.stream().map(RegistryKey::location).collect(Collectors.toCollection(ObjectOpenHashSet::new));
         this.biomeTypes = biomeTypes.stream().map(BiomeDictionary.Type::getType).collect(Collectors.toList());
@@ -119,24 +102,28 @@ public class GT4ROreFeatureConfig implements IFeatureConfig {
         return this;
     }
 
+    public OreConfigNode getConfigNode() {
+        return configNode;
+    }
+
     public String getId() {
         return id;
     }
 
     public int getMinY() {
-        return minY;
+        return configNode.getMinY();
     }
 
     public int getMaxY() {
-        return maxY;
+        return configNode.getMaxY();
     }
 
     public int getWeight() {
-        return weight;
+        return configNode.getWeight();
     }
 
     public int getSize() {
-        return size;
+        return configNode.getSize();
     }
 
     public String getPrimary() {
@@ -144,11 +131,11 @@ public class GT4ROreFeatureConfig implements IFeatureConfig {
     }
 
     public String getSecondary() {
-        return secondary;
+        return configNode.getSecondary();
     }
 
     public int getSecondaryChance() {
-        return secondaryChance;
+        return configNode.getSecondaryChance();
     }
 
     public boolean isInvertBiomeFilter() {

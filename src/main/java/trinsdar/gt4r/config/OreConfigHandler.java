@@ -10,12 +10,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class OreConfigHandler {
-    private String namespace;
+    public static final OreConfigHandler ORE_CONFIG_HANDLER = new OreConfigHandler();
     private File file;
     private OreConfig config;
 
-    public OreConfigHandler(String namespace) {
-        this.namespace = namespace;
+    private OreConfigHandler() {
     }
 
     private void prepareBiomeConfigFile() {
@@ -52,7 +51,7 @@ public class OreConfigHandler {
                 config = gson.fromJson(br, OreConfig.class);
             }
         } catch (Exception e) {
-            System.err.println("Couldn't load ore configuration file for " + namespace + ", reverting to defaults");
+            System.err.println("Couldn't load ore configuration file for  gt4r, reverting to defaults");
             e.printStackTrace();
         }
     }
@@ -66,7 +65,7 @@ public class OreConfigHandler {
         try (FileWriter fileWriter = new FileWriter(file)) {
             fileWriter.write(jsonString);
         } catch (IOException e) {
-            System.err.println("Couldn't save ore configuration file for " + namespace);
+            System.err.println("Couldn't save ore configuration file for gt4r");
             e.printStackTrace();
         }
     }

@@ -102,6 +102,7 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
         int chunkZ = pos.getZ() >> 4;
         //Feature.ORE.generate()
         if (!config.getDimensionLocations().contains(world.getLevel().dimension().location())) return false;
+        if (!config.getConfigNode().isEnabled()) return false;
         List<BiomeDictionary.Type> types = config.getBiomeTypes();
         List<BiomeDictionary.Type> invalidTypes = config.getInvalidBiomeTypes();
         boolean hasType = types.isEmpty();
