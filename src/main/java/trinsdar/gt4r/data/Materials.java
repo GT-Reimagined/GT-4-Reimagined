@@ -14,6 +14,7 @@ import net.minecraft.item.ItemTier;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidAttributes;
+import net.minecraftforge.registries.ForgeRegistries;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.items.ItemTurbineRotor;
 
@@ -309,6 +310,9 @@ public class Materials {
         /*if (!AntimatterAPI.isModLoaded("gtsp")){
             Flint.getToolTypes().add(ToolTypes.SPEAR);
         }*/
+        if (AntimatterAPI.isModLoaded(Ref.MOD_BLUEPOWER)){
+            GEM.forceOverride(Amethyst, ForgeRegistries.ITEMS.getValue(new ResourceLocation(Ref.MOD_BLUEPOWER, "amethyst_gem")));
+        }
 
         //Vanilla additions
         //Data.Netherite.flags(PLATE, ROD);
