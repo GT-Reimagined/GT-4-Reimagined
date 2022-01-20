@@ -310,9 +310,9 @@ public class Materials {
         /*if (!AntimatterAPI.isModLoaded("gtsp")){
             Flint.getToolTypes().add(ToolTypes.SPEAR);
         }*/
-        if (AntimatterAPI.isModLoaded(Ref.MOD_BLUEPOWER)){
+        /*if (AntimatterAPI.isModLoaded(Ref.MOD_BLUEPOWER)){
             GEM.forceOverride(Amethyst, ForgeRegistries.ITEMS.getValue(new ResourceLocation(Ref.MOD_BLUEPOWER, "amethyst_gem")));
-        }
+        }*/
 
         //Vanilla additions
         //Data.Netherite.flags(PLATE, ROD);
