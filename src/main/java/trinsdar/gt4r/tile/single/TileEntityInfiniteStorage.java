@@ -116,8 +116,6 @@ public class TileEntityInfiniteStorage<T extends TileEntityInfiniteStorage<T>> e
 
                 h.setOutputVoltage(voltage);
                 h.setOutputAmperage(amperage);
-
-                this.refreshCap(TesseractGTCapability.ENERGY_HANDLER_CAPABILITY);
             });
         }
     }
