@@ -1,8 +1,10 @@
 package trinsdar.gt4r.data;
 
+import muramasa.antimatter.Data;
 import muramasa.antimatter.structure.BlockStateElement;
 import muramasa.antimatter.structure.FakeTileElement;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.util.Direction;
 
 import static trinsdar.gt4r.data.GT4RData.*;
 import static trinsdar.gt4r.data.Machines.*;
@@ -19,8 +21,8 @@ public class Structures {
 
     public static void init() {
         COKE_OVEN.setStructure(b -> b
-            .of("CCC", "CCC", "CCC").of("CCC", "CAM", "CCC").of(0)
-            .at("C", BRICK).at("M", COKE_OVEN)
+            .of("CCC", "CCC", "CCC").of("CCC", "CAM", "CCC").of("ccc", "ccc", "ccc")
+            .at("C", BRICK).at("M", COKE_OVEN).at("c", BRICK.cover(Direction.DOWN, Data.COVEROUTPUT))
             .build().offset(2, -1)
         );
         PYROLYSIS_OVEN.setStructure(b -> b
