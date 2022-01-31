@@ -209,10 +209,14 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:top-245211:${top_file}")
     runtimeOnly fg.deobf("curse.maven:mmmm-225738:3279930")
     runtimeOnly fg.deobf("curse.maven:rhino-416294:${rhino_file}")
-    runtimeOnly fg.deobf("curse.maven:architectury-forge-419699:${architectury_file}")
+    runtimeOnly fg.deobf("curse.maven:architectury_forge-419699:${architectury_file}")
+    runtimeOnly fg.deobf("curse.maven:cloth_config_api-348521:3559634")
+    compileOnly fg.deobf("curse.maven:rei-310111:3625895")
+    runtimeOnly fg.deobf("curse.maven:rei-310111:3625895")
     runtimeOnly fg.deobf("curse.maven:kubejs-238086:${kubejs_file}")
     runtimeOnly fg.deobf("curse.maven:bluepower-223099:3375771")
     runtimeOnly fg.deobf("curse.maven:spartan_weaponry-278141:3164046")
+    runtimeOnly fg.deobf("curse.maven:iron_chests-228756:3543538")
 
 //    if (findProject(':AntimatterAPI') != null) {
     implementation project(path: ':AntimatterAPI')
@@ -234,7 +238,7 @@ dependencies {
     //runtimeOnly fg.deobf("com.github.Trinsdar:GT-Spartan:7634a8d6de")//3ad506467f
 
     compileOnly fg.deobf("mezz.jei:jei-${jei_version}:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-${jei_version}")
+    //runtimeOnly fg.deobf("mezz.jei:jei-${jei_version}")
 }
 
 
