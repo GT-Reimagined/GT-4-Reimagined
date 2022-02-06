@@ -44,8 +44,8 @@ public class Textures {
         return new Texture[] {
                 new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + stateDir + "bottom"),
                 new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + stateDir + "top"),
-                new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + stateDir + "front"),
                 new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + stateDir + "back"),
+                new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + stateDir + "front"),
                 new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + stateDir + "right"),
                 new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + stateDir + "left"),
         };
@@ -72,8 +72,8 @@ public class Textures {
     public static final ITextureHandler CABINET_HANDLER = (m, t) -> new Texture[] {
             new Texture(Ref.ID, "block/machine/base/cabinet/bottom"),
             new Texture(Ref.ID, "block/machine/base/cabinet/top"),
-            new Texture(Ref.ID, "block/machine/base/cabinet/front"),
             new Texture(Ref.ID, "block/machine/base/cabinet/back"),
+            new Texture(Ref.ID, "block/machine/base/cabinet/front"),
             new Texture(Ref.ID, "block/machine/base/cabinet/side"),
             new Texture(Ref.ID, "block/machine/base/cabinet/side"),
     };
@@ -90,8 +90,8 @@ public class Textures {
     public static final IOverlayTexturer CABINET_OVERLAY_HANDLER = (type, state, tier) -> new Texture[] {
             new Texture(Ref.ID, "block/machine/overlay/cabinet/bottom"),
             new Texture(Ref.ID, "block/machine/overlay/cabinet/top"),
-            new Texture(Ref.ID, "block/machine/overlay/cabinet/front"),
             new Texture(Ref.ID, "block/machine/overlay/cabinet/back"),
+            new Texture(Ref.ID, "block/machine/overlay/cabinet/front"),
             new Texture(Ref.ID, "block/machine/overlay/cabinet/side"),
             new Texture(Ref.ID, "block/machine/overlay/cabinet/side"),
     };
@@ -108,8 +108,8 @@ public class Textures {
     public static final ITextureHandler WORKBENCH_HANDLER = (m, t) -> new Texture[] {
             new Texture(Ref.ID, "block/machine/base/workbench/bottom"),
             new Texture(Ref.ID, "block/machine/base/workbench/top"),
-            new Texture(Ref.ID, "block/machine/base/workbench/front"),
             new Texture(Ref.ID, "block/machine/base/workbench/back"),
+            new Texture(Ref.ID, "block/machine/base/workbench/front"),
             new Texture(Ref.ID, "block/machine/base/workbench/side"),
             new Texture(Ref.ID, "block/machine/base/workbench/side"),
     };
@@ -117,8 +117,8 @@ public class Textures {
     public static final IOverlayTexturer WORKBENCH_OVERLAY_HANDLER = (type, state, tier) -> new Texture[] {
             new Texture(Ref.ID, "block/machine/overlay/workbench/bottom"),
             new Texture(Ref.ID, "block/machine/overlay/workbench/top"),
-            new Texture(Ref.ID, "block/machine/overlay/workbench/front"),
             new Texture(Ref.ID, "block/machine/overlay/workbench/back"),
+            new Texture(Ref.ID, "block/machine/overlay/workbench/front"),
             new Texture(Ref.ID, "block/machine/overlay/workbench/side"),
             new Texture(Ref.ID, "block/machine/overlay/workbench/side"),
     };
@@ -126,8 +126,8 @@ public class Textures {
     public static final IOverlayTexturer CHARGING_WORKBENCH_OVERLAY_HANDLER = (type, state, tier) -> new Texture[] {
             new Texture(Ref.ID, "block/machine/overlay/charging_workbench/bottom"),
             new Texture(Ref.ID, "block/machine/overlay/charging_workbench/top"),
-            new Texture(Ref.ID, "block/machine/overlay/charging_workbench/front"),
             new Texture(Ref.ID, "block/machine/overlay/charging_workbench/back"),
+            new Texture(Ref.ID, "block/machine/overlay/charging_workbench/front"),
             new Texture(Ref.ID, "block/machine/overlay/charging_workbench/side"),
             new Texture(Ref.ID, "block/machine/overlay/charging_workbench/side"),
     };
@@ -135,8 +135,8 @@ public class Textures {
     public static final ITextureHandler LOCKER_HANDLER = (m, t) -> new Texture[] {
             new Texture(Ref.ID, "block/machine/base/locker/bottom"),
             new Texture(Ref.ID, "block/machine/base/locker/top"),
-            new Texture(Ref.ID, "block/machine/base/locker/front"),
             new Texture(Ref.ID, "block/machine/base/locker/back"),
+            new Texture(Ref.ID, "block/machine/base/locker/front"),
             new Texture(Ref.ID, "block/machine/base/locker/side"),
             new Texture(Ref.ID, "block/machine/base/locker/side"),
     };
@@ -144,8 +144,8 @@ public class Textures {
     public static final IOverlayTexturer LOCKER_OVERLAY_HANDLER = (type, state, tier) -> new Texture[] {
             new Texture(Ref.ID, "block/machine/overlay/locker/bottom"),
             new Texture(Ref.ID, "block/machine/overlay/locker/top"),
-            new Texture(Ref.ID, "block/machine/overlay/locker/front"),
             new Texture(Ref.ID, "block/machine/overlay/locker/back"),
+            new Texture(Ref.ID, "block/machine/overlay/locker/front"),
             new Texture(Ref.ID, "block/machine/overlay/locker/side"),
             new Texture(Ref.ID, "block/machine/overlay/locker/side"),
     };
@@ -153,8 +153,8 @@ public class Textures {
     public static final IOverlayTexturer CHARGING_LOCKER_OVERLAY_HANDLER = (type, state, tier) -> new Texture[] {
             new Texture(Ref.ID, "block/machine/overlay/charging_locker/bottom"),
             new Texture(Ref.ID, "block/machine/overlay/charging_locker/top"),
-            new Texture(Ref.ID, "block/machine/overlay/charging_locker/front"),
             new Texture(Ref.ID, "block/machine/overlay/charging_locker/back"),
+            new Texture(Ref.ID, "block/machine/overlay/charging_locker/front"),
             new Texture(Ref.ID, "block/machine/overlay/charging_locker/side"),
             new Texture(Ref.ID, "block/machine/overlay/charging_locker/side"),
     };
@@ -166,8 +166,8 @@ public class Textures {
         return new Texture[] {
                 new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + tier.getId() + "/" + stateDir + "bottom"),
                 new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + tier.getId() + "/" + stateDir + "top"),
-                new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + tier.getId() + "/" + stateDir + "front"),
                 new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + tier.getId() + "/" + stateDir + "back"),
+                new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + tier.getId() + "/" + stateDir + "front"),
                 new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + tier.getId() + "/" + stateDir + "side"),
                 new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + tier.getId() + "/" + stateDir + "side"),
         };
