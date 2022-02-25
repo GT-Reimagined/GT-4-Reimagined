@@ -20,7 +20,7 @@ description='''My remake of GregTech 4'''
 [[dependencies.gt4r]]
     modId="forge"
     mandatory=true
-    versionRange="[36.1.0,)"
+    versionRange="[36.2.26,)"
     ordering="AFTER"
     side="BOTH"
 [[dependencies.gt4r]]
