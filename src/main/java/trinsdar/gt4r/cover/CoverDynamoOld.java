@@ -17,6 +17,11 @@ public class CoverDynamoOld extends CoverDynamo {
     }
 
     @Override
+    protected String getRenderId() {
+        return "dynamo";
+    }
+
+    @Override
     public String getDomain() {
         return Ref.ID;
     }
