@@ -8,6 +8,7 @@ import muramasa.antimatter.material.Material;
 import muramasa.antimatter.registration.IColorHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.SoundType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootContext;
@@ -26,11 +27,16 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 import static muramasa.antimatter.Data.NULL;
+import static muramasa.antimatter.Data.WRENCH_MATERIAL;
 
 public class BlockMachineMaterial extends BlockMachine implements IColorHandler {
     Material material = NULL;
     public BlockMachineMaterial(Machine<?> type, Tier tier) {
-        super(type, tier);
+        this(type, tier, Properties.of(WRENCH_MATERIAL).strength(1.0f, 10.0f).sound(SoundType.METAL).requiresCorrectToolForDrops());
+    }
+
+    public BlockMachineMaterial(Machine<?> type, Tier tier, Properties properties) {
+        super(type, tier, properties);
         if (type instanceof MaterialMachine){
             this.material = ((MaterialMachine)type).getMaterial();
         }
