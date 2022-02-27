@@ -24,7 +24,7 @@ jobs:
       packages: write
 
     steps:
-    - name: Checkout GregTech
+    - name: Checkout GT4R
       uses: actions/checkout@v2
       with:
           submodules: recursive
