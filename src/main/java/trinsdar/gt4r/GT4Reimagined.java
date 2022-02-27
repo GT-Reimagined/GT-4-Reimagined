@@ -113,6 +113,7 @@ public class GT4Reimagined extends AntimatterMod {
                 }
                 GT4RData.buildTierMaps();
                 Structures.init();
+                Structures.initPatterns();
                 GT4RConfiguredFeatures.init();
                 OreConfigHandler.ORE_CONFIG_HANDLER.save();
                 //GregTechAPI.registerFluidCell(Data.CellTin.get(1));
