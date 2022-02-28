@@ -52,12 +52,26 @@ public class Guis {
     public static GuiData MULTI_DISPLAY_COMPACT = new GuiData("gt4r", "multi_display").setSlots(ISlotProvider.DEFAULT().add(MULTI_DISPLAY.getSlots())).setPadding(0, 0, 0, 0);
     public static GuiData BASIC_TANK = new GuiData("gt4r", "basic_tank").setSlots(ISlotProvider.DEFAULT().add(CELL_IN, 8, 17).add(CELL_OUT, 8, 53).add(FL_IN, 55, 43));
 
-    public static GuiData ORE_BYPRODUCTS = new GuiData("gt4r", "ore_byproducts") {
+    public static GuiData ORE_BYPRODUCTS_OLD = new GuiData("gt4r", "ore_byproducts_old") {
         @Override
         public ResourceLocation getTexture(Tier tier,String type) {
             return new ResourceLocation(loc.getNamespace(), "textures/gui/" + loc.getPath() + ".png");
         }
     }.setPadding(0, 0, 0, 0).setSlots(ISlotProvider.DEFAULT().add(IT_IN, 17, 16).add(IT_IN, 35, 16).add(IT_IN, 53, 16).add(IT_IN, 17, 34).add(IT_IN, 35, 34).add(IT_IN, 53, 34).add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 142, 16).add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(IT_OUT, 143, 34));
+
+    public static GuiData ORE_BYPRODUCTS = new GuiData("gt4r", "ore_byproducts") {
+        @Override
+        public ResourceLocation getTexture(Tier tier,String type) {
+            return new ResourceLocation(loc.getNamespace(), "textures/gui/" + loc.getPath() + ".png");
+        }
+    }.setPadding(0, 0, 0, 0).setArea(3, 3, 170, 160).setSlots(ISlotProvider.DEFAULT()
+            .add(IT_IN, 25, 4).add(IT_IN,4, 25).add(IT_IN, 25, 26).add(IT_IN, 25, 49).add(IT_IN, 115, 48).add(IT_IN, 24, 72).add(IT_IN, 51, 81).add(IT_IN, 71, 81).add(IT_IN, 98,72).add(IT_IN, 134,72).add(IT_IN, 4, 124)
+            .add(IT_IN, 4, 4).add(IT_IN, 4, 48).add(IT_IN, 4, 106).add(IT_IN, 65, 26).add(IT_IN, 138, 48).add(IT_IN, 24, 93).add(IT_IN, 98, 93)
+            .add(IT_IN, 65, 49)
+            .add(FL_IN, 43, 26).add(FL_IN, 43, 49)
+            .add(IT_OUT, 47, 4).add(IT_OUT, 83, 26).add(IT_OUT, 156, 48).add(IT_OUT, 4, 67).add(IT_OUT, 24, 110).add(IT_OUT, 51, 102).add(IT_OUT, 51, 120).add(IT_OUT, 71, 102).add(IT_OUT, 71, 120).add(IT_OUT, 98, 111).add(IT_OUT, 134, 93).add(IT_OUT, 134, 111).add(IT_OUT, 4, 146).add(IT_OUT, 24, 146)
+            .add(IT_OUT, 83, 49)
+    );
 
     public static GuiData WORKBENCH = new GuiData("gt4r","workbench").setSlots(ISlotProvider.DEFAULT());
     public static GuiData CHARGING_WORKBENCH = new GuiData("gt4r","charging_workbench").setSlots(ISlotProvider.DEFAULT());

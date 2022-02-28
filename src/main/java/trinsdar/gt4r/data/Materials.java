@@ -1,5 +1,6 @@
 package trinsdar.gt4r.data;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.Data;
 import muramasa.antimatter.material.Material;
@@ -10,11 +11,8 @@ import muramasa.antimatter.material.MaterialTypeItem;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemTier;
-import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidAttributes;
-import net.minecraftforge.registries.ForgeRegistries;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.items.ItemTurbineRotor;
 
@@ -38,6 +36,11 @@ public class Materials {
     public static MaterialTag ELEC90 = new MaterialTag("elec90");
     public static MaterialTag ELEC120 = new MaterialTag("elec120");
     public static MaterialTag ROCK_CUTTER = new MaterialTag("rock_cutter");
+    public static MaterialTag BATHING_PERSULFATE = new MaterialTag("bathing_nas");
+    public static MaterialTag BATHING_MERCURY = new MaterialTag("bathing_mercury");
+
+    public static final Object2ObjectArrayMap<Material, Material> BATHING_MAP_PERSULFATE = new Object2ObjectArrayMap<>();
+    public static final Object2ObjectArrayMap<Material, Material> BATHING_MAP_MERCURY = new Object2ObjectArrayMap<>();
 
     public static MaterialTypeItem<?> HULL = new MaterialTypeItem<>("hull", 2, true, muramasa.antimatter.Ref.U * 8);
     public static MaterialTypeItem<?> TURBINE_BLADE = new MaterialTypeItem<>("turbine_blade", 1, true, muramasa.antimatter.Ref.U * 3);//.unSplitName();
@@ -316,6 +319,21 @@ public class Materials {
 
         //Vanilla additions
         //Data.Netherite.flags(PLATE, ROD);
+        BATHING_PERSULFATE.add(Copper, Gold, Iron, Sphalerite, Tetrahedrite, Tin, Platinum);
+        BATHING_MERCURY.add(Galena, Tungstate, Gold, Iridium, Copper, Platinum);
+        BATHING_MAP_PERSULFATE.put(Copper, Copper);
+        BATHING_MAP_PERSULFATE.put(Gold, Copper);
+        BATHING_MAP_PERSULFATE.put(Iron, Nickel);
+        BATHING_MAP_PERSULFATE.put(Sphalerite, Zinc);
+        BATHING_MAP_PERSULFATE.put(Tetrahedrite, Tetrahedrite);
+        BATHING_MAP_PERSULFATE.put(Tin, Zinc);
+        BATHING_MAP_PERSULFATE.put(Platinum, Nickel);
+        BATHING_MAP_MERCURY.put(Galena, Silver);
+        BATHING_MAP_MERCURY.put(Tungstate, Silver);
+        BATHING_MAP_MERCURY.put(Gold, Gold);
+        BATHING_MAP_MERCURY.put(Iridium, Platinum);
+        BATHING_MAP_MERCURY.put(Copper, Gold);
+        BATHING_MAP_MERCURY.put(Platinum, Platinum);
         Data.Redstone.mats(of(Silicon, 1, Pyrite, 5, Ruby, 1, Mercury, 3)).setOreMulti(4);
         Data.Prismarine.mats(of(Potassium, 2, Oxygen, 8, Manganese, 1, Silicon, 5));
         Data.Basalt.mats(of(Olivine, 1, Calcite, 3, Flint, 8, DarkAsh, 4));

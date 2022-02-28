@@ -25,13 +25,13 @@ import static trinsdar.gt4r.data.RecipeMaps.CENTRIFUGING;
 public class CentrifugingLoader {
     public static void init() {
         DUST_IMPURE.all().forEach(dust -> {
-            if (dust.hasByProducts()) CENTRIFUGING.RB().ii(of(DUST_IMPURE.get(dust),1)).io(new ItemStack(DUST.get(dust), 1), DUST_TINY.get(dust.getByProducts().get(0), 1)).add(400, 2);
-            else CENTRIFUGING.RB().ii(of(DUST_IMPURE.getMaterialTag(dust),1)).io(new ItemStack(DUST.get(dust), 1)).chances(100, 10).add(400, 2);
+            Material oreByProduct1 = dust.getByProducts().size() > 0 ? dust.getByProducts().get(0) : dust;
+            CENTRIFUGING.RB().ii(of(DUST_IMPURE.get(dust),1)).io(new ItemStack(DUST.get(dust), 1), DUST_TINY.get(oreByProduct1, 1)).chances(100, 10).add(400, 2);
         });
 
         DUST_PURE.all().forEach(dust -> {
-            if (dust.hasByProducts()) CENTRIFUGING.RB().ii(of(DUST_PURE.get(dust),1)).io(new ItemStack(DUST.get(dust), 1), DUST_TINY.get((dust.getByProducts().size() > 1 ? dust.getByProducts().get(1) : dust.getByProducts().get(0)), 1)).add(400, 2);
-            else CENTRIFUGING.RB().ii(of(DUST_PURE.getMaterialTag(dust),1)).io(new ItemStack(DUST.get(dust), 1)).chances(100, 10).add(400, 2);
+            Material oreByProduct = dust.getByProducts().size() > 1 ? dust.getByProducts().get(1) : dust.getByProducts().size() > 0 ? dust.getByProducts().get(0) : dust;
+            CENTRIFUGING.RB().ii(of(DUST_PURE.get(dust),1)).io(new ItemStack(DUST.get(dust), 1), DUST_TINY.get(oreByProduct, 1)).chances(100, 10).add(400, 2);
         });
         ItemStack[] itemStacks = Lava.getProcessInto().stream().filter(t -> t.m.has(DUST_TINY)).map(t -> new ItemStack(DUST_TINY.get(t.m), t.s))
                 .toArray(ItemStack[]::new);

@@ -6,6 +6,7 @@ import muramasa.antimatter.util.TagUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
+import trinsdar.gt4r.data.Materials;
 
 import static muramasa.antimatter.Data.*;
 import static trinsdar.gt4r.data.Materials.*;
@@ -14,20 +15,13 @@ import static trinsdar.gt4r.data.RecipeMaps.BATHING;
 public class BathingLoader {
     public static void init(){
         ItemStack stoneDust = DUST.get(Stone, 1);
-        addBathRecipe(Copper, SodiumPersulfate, i(100, 70, 40), CRUSHED_PURIFIED.get(Copper, 1), DUST.get(Copper, 1), stoneDust);
-        addBathRecipe(Gold, SodiumPersulfate, i(100, 70, 40), CRUSHED_PURIFIED.get(Gold, 1), DUST.get(Copper, 1), stoneDust);
-        addBathRecipe(Iron, SodiumPersulfate, i(100, 70, 40), CRUSHED_PURIFIED.get(Iron, 1), DUST.get(Nickel, 1), stoneDust);
-        addBathRecipe(Sphalerite, SodiumPersulfate, i(100, 70, 40), CRUSHED_PURIFIED.get(Sphalerite, 1), DUST.get(Zinc, 1), stoneDust);
-        addBathRecipe(Tetrahedrite, SodiumPersulfate, i(100, 70, 40), CRUSHED_PURIFIED.get(Tetrahedrite, 1), DUST.get(Tetrahedrite, 1), stoneDust);
-        addBathRecipe(Tin, SodiumPersulfate, i(100, 70, 40), CRUSHED_PURIFIED.get(Tin, 1), DUST.get(Zinc, 1), stoneDust);
-        addBathRecipe(Platinum, SodiumPersulfate, i(100, 70, 40), CRUSHED_PURIFIED.get(Platinum, 1), DUST.get(Nickel, 1), stoneDust);
+        BATHING_PERSULFATE.all().forEach(m -> {
+            addBathRecipe(m, SodiumPersulfate, i(100, 70, 40), CRUSHED_PURIFIED.get(m, 1), DUST.get(BATHING_MAP_PERSULFATE.get(m), 1), stoneDust);
+        });
+        BATHING_MERCURY.all().forEach(m -> {
+            addBathRecipe(m, Mercury, i(100, 70, 40), CRUSHED_PURIFIED.get(m, 1), DUST.get(BATHING_MAP_MERCURY.get(m), 1), stoneDust);
+        });
         //addBathRecipe(Zinc, SodiumPersulfate, i(100, 70, 40), CRUSHED_PURIFIED.get(Zinc, 1), DUST.get(Zinc, 1), stoneDust);
-        addBathRecipe(Galena, Mercury, i(100, 70, 40), CRUSHED_PURIFIED.get(Galena, 1), DUST.get(Silver, 1), stoneDust);
-        addBathRecipe(Tungstate, Mercury, i(100, 70, 40), CRUSHED_PURIFIED.get(Tungstate, 1), DUST.get(Silver, 1), stoneDust);
-        addBathRecipe(Gold, Mercury, i(100, 70, 40), CRUSHED_PURIFIED.get(Gold, 1), DUST.get(Gold, 1), stoneDust);
-        addBathRecipe(Iridium, Mercury, i(100, 70, 40), CRUSHED_PURIFIED.get(Iridium, 1), DUST.get(Platinum, 1), stoneDust);
-        addBathRecipe(Copper, Mercury, i(100, 70, 40), CRUSHED_PURIFIED.get(Copper, 1), DUST.get(Gold, 1), stoneDust);
-        addBathRecipe(Platinum, Mercury, i(100, 70, 40), CRUSHED_PURIFIED.get(Platinum, 1), DUST.get(Platinum, 1), stoneDust);
         BATHING.RB().ii(RecipeIngredient.of(DUST.getMaterialTag(Wood), 1)).fi(Water.getLiquid(100)).io(new ItemStack(Items.PAPER)).chances(100).add(200);
         BATHING.RB().ii(RecipeIngredient.of(Items.SUGAR_CANE, 1)).fi(Water.getLiquid(100)).io(new ItemStack(Items.PAPER)).chances(100).add(100);
         BATHING.RB().ii(RecipeIngredient.of(TagUtils.getItemTag(new ResourceLocation("minecraft", "wool")), 1)).fi(Chlorine.getGas(125)).io(new ItemStack(Items.WHITE_WOOL)).chances(100).add(12);
