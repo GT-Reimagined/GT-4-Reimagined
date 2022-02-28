@@ -1,6 +1,7 @@
 package trinsdar.gt4r.datagen;
 
 import muramasa.antimatter.AntimatterAPI;
+import muramasa.antimatter.Data;
 import muramasa.antimatter.datagen.providers.AntimatterBlockLootProvider;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.mixin.BlockLootTablesAccessor;
@@ -49,6 +50,10 @@ public class GT4RBlockLootProvider extends AntimatterBlockLootProvider {
     @Override
     protected void addToFortune(BlockOre block) {
         if (block.getOreType() == ORE){
+            if (block.getStoneType() == SAND || block.getStoneType() == SAND_RED || block.getStoneType() == GRAVEL){
+                tables.put(block, this::build);
+                return;
+            }
             Material mat = block.getMaterial();
             if (mat == Lapis || mat == Redstone){
                 Item item = mat == Redstone ? Items.REDSTONE : GEM.get(mat);
@@ -57,7 +62,6 @@ public class GT4RBlockLootProvider extends AntimatterBlockLootProvider {
                 } else if (mat == Redstone){
                     tables.put(block, b -> createSilkTouchDispatchTable(b, applyExplosionDecay(b, ItemLootEntry.lootTableItem(item).apply(SetCount.setCount(RandomValueRange.between(4.0F, 5.0F))).apply(ApplyBonus.addUniformBonusCount(Enchantments.BLOCK_FORTUNE)))));
                 }
-                return;
             } else if (mat == Cinnabar || mat == Sphalerite || mat == Pyrite){
                 LootTable.Builder builder = createSilkTouchDispatchTable(block, applyExplosionDecay(block, ItemLootEntry.lootTableItem(DUST.get(mat)).apply(SetCount.setCount(RandomValueRange.between(2.0F, 2.0F))).apply(ApplyBonus.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))));
                 if (mat == Cinnabar){
@@ -67,10 +71,8 @@ public class GT4RBlockLootProvider extends AntimatterBlockLootProvider {
                 }
                 LootTable.Builder finalBuilder = builder;
                 tables.put(block, b -> finalBuilder);
-                return;
             } else if (mat == Sodalite){
                 tables.put(block, b -> createSilkTouchDispatchTable(b, applyExplosionDecay(b, ItemLootEntry.lootTableItem(GEM.get(mat)).apply(SetCount.setCount(RandomValueRange.between(6.0F, 6.0F))).apply(GT4RRandomDropBonus.uniformBonusCount(Enchantments.BLOCK_FORTUNE, 3)))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).when(BlockLootTablesAccessor.getNoSilkTouch()).add(ItemLootEntry.lootTableItem(DUST.get(Aluminium)).apply(GT4RRandomDropBonus.randomDrops(Enchantments.BLOCK_FORTUNE, 4)))));
-                return;
             }
         }
         //super.addToFortune(block);
