@@ -41,12 +41,15 @@ jobs:
       with:
         arguments: build
 
+    - name: Set outputs
+      id: vars
+      run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
     # The USERNAME and TOKEN need to correspond to the credentials environment variables used in
     # the publishing section of your build.gradle
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: GT4R JAR
+        name: GT4R-nightly-${{ steps.vars.outputs.sha_short }}
         path: build/libs
       env:
         USERNAME: ${{ github.actor }}
