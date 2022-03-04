@@ -165,7 +165,7 @@ public class TileEntityDrum extends TileEntityMaterial<TileEntityDrum> {
 
         @Override
         public boolean canInput(FluidStack fluid, Direction direction) {
-            if (output && (direction == UP && fluid.getFluid().getAttributes().isGaseous()) || (direction == DOWN && !fluid.getFluid().getAttributes().isGaseous())) return false;
+            if (output && ((direction == UP && fluid.getFluid().getAttributes().isGaseous()) || (direction == DOWN && !fluid.getFluid().getAttributes().isGaseous()))) return false;
             return super.canInput(fluid, direction);
         }
     }
