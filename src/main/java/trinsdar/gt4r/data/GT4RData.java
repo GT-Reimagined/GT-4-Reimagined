@@ -5,6 +5,7 @@ import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.AntimatterConfig;
 import muramasa.antimatter.cover.CoverFactory;
 import muramasa.antimatter.item.ItemBasic;
+import muramasa.antimatter.item.ItemBattery;
 import muramasa.antimatter.item.ItemCover;
 import muramasa.antimatter.item.ItemFluidCell;
 import muramasa.antimatter.item.ItemMultiTextureBattery;
@@ -246,6 +247,7 @@ public class GT4RData {
     public static ItemBasic<?> EnergyCrystal = new ItemMultiTextureBattery(Ref.ID, "energy_crystal", Tier.HV, 1000000, true).tip("Reusable");
     public static ItemBasic<?> BatteryRE = new ItemMultiTextureBattery(Ref.ID, "battery_re", Tier.LV, 10000, true).tip("Reusable");
     public static ItemBasic<?> LapotronicEnergyOrb = new ItemMultiTextureBattery(Ref.ID, "lapotronic_energy_orb", Tier.IV,100000000, true);
+    public static ItemBasic<?> ZPM = new ItemBattery(Ref.ID, "zpm", Tier.ZPM, 100000000000L, false);
     //public static ItemBasic<?> BatteryEnergyOrbCluster = new ItemBasic<>(Ref.ID, "battery_energy_orb_cluster");
 
     public static ItemBasic<?> EmptyShape = new ItemBasic<>(Ref.ID, "empty_shape_plate").tip("Raw plate to make Molds and Extruder Shapes");
