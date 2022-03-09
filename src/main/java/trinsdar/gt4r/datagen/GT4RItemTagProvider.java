@@ -44,7 +44,8 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.tag(MACHINE_HULLS_CHEAP).add(HULL.get(Bronze), HULL.get(Brass), HULL.get(WroughtIron), HULL.get(Iron), HULL.get(Aluminium));
         this.tag(MACHINE_HULLS_SEMI_CHEAP).add(HULL.get(WroughtIron), HULL.get(Aluminium));
         this.tag(MACHINE_HULLS_BASIC).add(HULL.get(Steel), HULL.get(StainlessSteel), HULL.get(Aluminium));
-        this.tag(MACHINE_HULLS_ADVANCED).add(HULL.get(TungstenSteel), HULL.get(Titanium));
+        this.tag(MACHINE_HULLS_ADVANCED).add(HULL.get(Aluminium), HULL.get(StainlessSteel));
+        this.tag(MACHINE_HULLS_STABILIZED).add(HULL.get(StainlessSteel), HULL.get(TungstenSteel), HULL.get(Titanium));
         this.tag(MACHINE_HULLS_VERY_ADVANCED).add(HULL.get(TungstenSteel), HULL.get(Titanium));
         this.tag(GRINDING_HEAD).add(DiamondGrindHead, TungstenGrindHead);
         this.tag(PISTONS).add(Items.PISTON, Items.STICKY_PISTON);

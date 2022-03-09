@@ -22,6 +22,7 @@ public class CustomTags {
     public static ITag.INamedTag<Item> MACHINE_HULLS_SEMI_CHEAP = getTag("machine_hulls/semi_cheap");
     public static ITag.INamedTag<Item> MACHINE_HULLS_BASIC = getTag("machine_hulls/basic");
     public static ITag.INamedTag<Item> MACHINE_HULLS_ADVANCED = getTag("machine_hulls/advanced");
+    public static ITag.INamedTag<Item> MACHINE_HULLS_STABILIZED = getTag("machine_hulls/stabilized");
     public static ITag.INamedTag<Item> MACHINE_HULLS_VERY_ADVANCED = getTag("machine_hulls/very_advanced");
     public static ITag.INamedTag<Item> GRINDING_HEAD = getTag("grinding_head");
     public static ITag.INamedTag<Item> PISTONS = getTag("pistons");
