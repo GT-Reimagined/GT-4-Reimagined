@@ -135,6 +135,7 @@ public class Parts {
                 CopperCoil, of('L', WIRE_COPPER.getBlockItem(PipeSize.VTINY), 'I', INGOT.getMaterialTag(Iron)), "LLL", "LIL", "LLL");
         provider.addItemRecipe(output, Ref.ID, "ingot_iridium_alloy", "parts", "has_diamond", provider.hasSafeItem(GEM.getMaterialTag(Diamond)),
                 IridiumAlloyIngot, of('I', PLATE.getMaterialTag(Iridium), 'D', GEM.getMaterialTag(Diamond), 'A', AdvancedAlloy), "IAI", "ADA", "IAI");
+        provider.addItemRecipe(output, Ref.ID, "freq_transmitter", "parts", "has_circuit", provider.hasSafeItem(CIRCUITS_BASIC), FrequencyTransmitter, of('C', CIRCUITS_BASIC, 'c', CABLE_COPPER.getBlockItem(PipeSize.VTINY)), "Cc");
         provider.addItemRecipe(output, Ref.ID, "magnetic_steel_ingot", "parts", "has_redstone", provider.hasSafeItem(DUST.getMaterialTag(Redstone)), INGOT.get(SteelMagnetic), of('R', DUST.getMaterialTag(Redstone), 'I', INGOT.getMaterialTag(Steel)), "RRR", "RIR", "RRR");
         provider.shapeless(output, "magnetic_steel_rod", "parts", "has_redstone", provider.hasSafeItem(DUST.getMaterialTag(Redstone)), ROD.get(SteelMagnetic, 1), ROD.getMaterialTag(Steel), DUST.getMaterialTag(Redstone), DUST.getMaterialTag(Redstone), DUST.getMaterialTag(Redstone), DUST.getMaterialTag(Redstone));
         provider.addItemRecipe(output, Ref.ID, "magnetic_iron_ingot", "parts", "has_redstone", provider.hasSafeItem(DUST.getMaterialTag(Redstone)), INGOT.get(IronMagnetic), of('R', DUST.getMaterialTag(Redstone), 'I', INGOT.getMaterialTag(Iron)), "RRR", "RIR", "RRR");

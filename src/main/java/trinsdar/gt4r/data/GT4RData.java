@@ -200,6 +200,7 @@ public class GT4RData {
     public static ItemBasic<?> CompressedFireClay = new ItemBasic<>(Ref.ID, "compressed_fire_clay").tip("Brick Shaped");
     public static ItemBasic<?> FireBrick = new ItemBasic<>(Ref.ID, "fire_brick").tip("Heat Resistant");
     public static ItemBasic<?> ItemSuperconductor = new ItemBasic<>(Ref.ID, "superconductor").tip("Conducts Energy Losslessly");
+    public static ItemBasic<?> FrequencyTransmitter = new ItemBasic<>(Ref.ID, "frequency_transmitter", new Item.Properties().tab(muramasa.antimatter.Ref.TAB_ITEMS).stacksTo(1));
 
     public static ItemBasic<?> LavaFilter = new ItemBasic<>(Ref.ID, "lava_filter", new Item.Properties().tab(muramasa.antimatter.Ref.TAB_ITEMS).defaultDurability(100));
     public static ItemBasic<?> LighterEmpty = new ItemBasic<>(Ref.ID, "lighter_empty");
