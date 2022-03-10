@@ -1,5 +1,6 @@
 package trinsdar.gt4r.mixin;
 
+import muramasa.antimatter.Data;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.PlayerController;
 import net.minecraft.client.renderer.GameRenderer;
@@ -10,6 +11,7 @@ import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import trinsdar.gt4r.data.Attributes;
+import trinsdar.gt4r.data.ToolTypes;
 
 
 @Mixin(GameRenderer.class)
@@ -22,7 +24,7 @@ public abstract class GameRendererMixin {
             constant = @Constant(doubleValue = 6.0D)
     )
     private double getExtendedAttackReach(double value) {
-        if (minecraft.player == null) return value;
+        if (minecraft.player == null || minecraft.player.getMainHandItem().getItem() != ToolTypes.SPEAR.getToolStack(Data.NULL, Data.NULL).getItem()) return value;
         return minecraft.player.getAttributeValue(Attributes.ATTACK_REACH.get()) * 2.0D;
     }
 
@@ -31,7 +33,7 @@ public abstract class GameRendererMixin {
             constant = @Constant(doubleValue = 3.0D)
     )
     private double getAttackReach(double value) {
-        if (minecraft.player == null) return value;
+        if (minecraft.player == null || minecraft.player.getMainHandItem().getItem() != ToolTypes.SPEAR.getToolStack(Data.NULL, Data.NULL).getItem()) return value;
         return minecraft.player.getAttributeValue(Attributes.ATTACK_REACH.get());
     }
 
@@ -40,7 +42,7 @@ public abstract class GameRendererMixin {
             constant = @Constant(doubleValue = 9.0D)
     )
     private double getAttackReachSquared(double value) {
-        if (minecraft.player == null) return value;
+        if (minecraft.player == null || minecraft.player.getMainHandItem().getItem() != ToolTypes.SPEAR.getToolStack(Data.NULL, Data.NULL).getItem()) return value;
         double attackReachValue = minecraft.player.getAttributeValue(Attributes.ATTACK_REACH.get());
         return attackReachValue * attackReachValue;
     }
@@ -50,7 +52,7 @@ public abstract class GameRendererMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/PlayerController;getPickRange()F")
     )
     private float getRedirectedAttackReach(PlayerController controller){
-        if (minecraft.player == null) return controller.getPickRange();
+        if (minecraft.player == null || minecraft.player.getMainHandItem().getItem() != ToolTypes.SPEAR.getToolStack(Data.NULL, Data.NULL).getItem()) return controller.getPickRange();
         float reach = (float) minecraft.player.getAttributeValue(Attributes.ATTACK_REACH.get());
         //Antimatter.LOGGER.info(controller.getBlockReachDistance());
         //Antimatter.LOGGER.info(reach);

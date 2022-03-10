@@ -1,5 +1,6 @@
 package trinsdar.gt4r.mixin;
 
+import muramasa.antimatter.Data;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -12,6 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import trinsdar.gt4r.data.Attributes;
+import trinsdar.gt4r.data.ToolTypes;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
@@ -24,6 +26,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
             constant = @Constant(doubleValue = 9.0D)
     )
     private double getAttackReachSquared(double value) {
+        if (this.getMainHandItem().getItem() != ToolTypes.SPEAR.getToolStack(Data.NULL, Data.NULL).getItem()) return value;
         double attackReachValue = this.getAttributeValue(Attributes.ATTACK_REACH.get());
         return attackReachValue * attackReachValue;
     }
