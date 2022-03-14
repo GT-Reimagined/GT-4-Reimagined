@@ -104,7 +104,7 @@ public class BlockRubberLog extends BlockBasic {
 
     @Override
     public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-        if (state.getValue(RESIN_STATE) == ResinState.EMPTY && random.nextInt(50) == 0){
+        if (state.getValue(RESIN_STATE) == ResinState.EMPTY && random.nextInt(25) == 0){
             worldIn.setBlockAndUpdate(pos, state.setValue(RESIN_STATE, ResinState.FILLED));
         }
     }
