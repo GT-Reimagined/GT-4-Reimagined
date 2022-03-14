@@ -26,12 +26,12 @@ public class CentrifugingLoader {
     public static void init() {
         DUST_IMPURE.all().forEach(dust -> {
             Material oreByProduct1 = dust.getByProducts().size() > 0 ? dust.getByProducts().get(0) : dust;
-            CENTRIFUGING.RB().ii(of(DUST_IMPURE.get(dust),1)).io(new ItemStack(DUST.get(dust), 1), DUST_TINY.get(oreByProduct1, 1)).chances(100, 10).add(400, 2);
+            CENTRIFUGING.RB().ii(of(DUST_IMPURE.get(dust),1)).io(new ItemStack(DUST.get(dust), 1), DUST_TINY.get(oreByProduct1, 1)).add(400, 2);
         });
 
         DUST_PURE.all().forEach(dust -> {
             Material oreByProduct = dust.getByProducts().size() > 1 ? dust.getByProducts().get(1) : dust.getByProducts().size() > 0 ? dust.getByProducts().get(0) : dust;
-            CENTRIFUGING.RB().ii(of(DUST_PURE.get(dust),1)).io(new ItemStack(DUST.get(dust), 1), DUST_TINY.get(oreByProduct, 1)).chances(100, 10).add(400, 2);
+            CENTRIFUGING.RB().ii(of(DUST_PURE.get(dust),1)).io(new ItemStack(DUST.get(dust), 1), DUST_TINY.get(oreByProduct, 1)).add(400, 2);
         });
         ItemStack[] itemStacks = Lava.getProcessInto().stream().filter(t -> t.m.has(DUST_TINY)).map(t -> new ItemStack(DUST_TINY.get(t.m), t.s))
                 .toArray(ItemStack[]::new);
