@@ -3,6 +3,7 @@ package trinsdar.gt4r.loader.machines;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.ore.BlockOre;
+import muramasa.antimatter.ore.CobbleStoneType;
 import muramasa.antimatter.ore.StoneType;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import muramasa.antimatter.recipe.map.RecipeMap;
@@ -35,7 +36,6 @@ import static trinsdar.gt4r.data.RecipeMaps.SIFTING;
 
 public class MaceratorLoader {
     public static void initManual(){
-        MACERATING.RB().ii(RecipeIngredient.of(Tags.Items.COBBLESTONE, 1)).io(new ItemStack(Items.SAND)).add(400, 2);
         MACERATING.RB().ii(RecipeIngredient.of(Items.STONE, 1)).io(new ItemStack(Items.GRAVEL)).add(400, 2);
         MACERATING.RB().ii(RecipeIngredient.of(Items.BRICK, 1)).io(DUST_SMALL.get(Brick, 1)).add(25, 2);
         MACERATING.RB().ii(RecipeIngredient.of(Items.CLAY_BALL, 1)).io(DUST_SMALL.get(Clay, 2)).add(16, 4);
@@ -124,6 +124,9 @@ public class MaceratorLoader {
         AntimatterAPI.all(StoneType.class, s -> {
             if (s.getMaterial() == NULL || !s.getMaterial().has(DUST)) return;
             MACERATING.RB().ii(RecipeIngredient.of(s.getState().getBlock().asItem(), 1)).io(DUST.get(s.getMaterial(), 1)).add(400, 2);
+            if (s instanceof CobbleStoneType){
+                MACERATING.RB().ii(RecipeIngredient.of(((CobbleStoneType)s).getBlock("cobble").asItem(), 1)).io(DUST.get(s.getMaterial(), 1)).add(400, 2);
+            }
         });
 
     }

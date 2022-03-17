@@ -18,8 +18,6 @@ public class FurnaceLoader {
         CookingRecipeBuilder.blasting(INGOT.getMaterialIngredient(Iron, 1).get(), INGOT.get(WroughtIron), 0.5F, 100).unlockedBy("has_iron_ingot", provider.hasSafeItem(INGOT.getMaterialTag(Iron))).save(output, "iron_to_wrought_bl");
         CookingRecipeBuilder.smelting(INGOT.getMaterialIngredient(Iron, 1).get(), INGOT.get(WroughtIron), 0.5F, 200).unlockedBy("has_iron_ingot", provider.hasSafeItem(INGOT.getMaterialTag(Iron))).save(output, "iron_to_wrought");
         CookingRecipeBuilder.smelting(RecipeIngredient.of(GT4RData.CompressedFireClay, 1).get(), GT4RData.FireBrick, 0.5F, 200).unlockedBy("has_compressed_fire_clay", provider.hasSafeItem(GT4RData.CompressedFireClay)).save(output, "firebrick");
-        CookingRecipeBuilder.blasting(DUST.getMaterialIngredient(Quartz, 1).get(), Items.QUARTZ, 0.5F, 100).unlockedBy("has_quartz_dust", provider.hasSafeItem(DUST.getMaterialTag(Quartz))).save(output, "quartz_dust_to_gem_bl");
-        CookingRecipeBuilder.smelting(DUST.getMaterialIngredient(Quartz, 1).get(), Items.QUARTZ, 0.5F, 200).unlockedBy("has_quartz_dust", provider.hasSafeItem(DUST.getMaterialTag(Quartz))).save(output, "quartz_dust_to_gem");
         DUST.all().forEach(m -> {
             if (m.needsBlastFurnace()) return;
             if (!m.getDirectSmeltInto().has(INGOT) || m == Tetrahedrite) return;

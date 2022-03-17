@@ -284,7 +284,7 @@ public class Materials {
     public static Material GreenSchist = AntimatterAPI.register(Material.class, new Material(Ref.ID, "green_schist", 0x69be69, NONE)).asDust(ROCK);
     public static Material BlueSchist = AntimatterAPI.register(Material.class, new Material(Ref.ID, "blue_schist", 0x0569be, NONE)).asDust(ROCK);
     public static Material Kimberlite = AntimatterAPI.register(Material.class, new Material(Ref.ID, "kimberlite", 0x64460a, NONE)).asDust(ROCK);
-    public static Material Quartzite = AntimatterAPI.register(Material.class, new Material(Ref.ID, "quartzite", 0xe6cdcd, QUARTZ)).asGemBasic(false, ROCK).mats(of(Silicon, 1, Oxygen, 2));
+    public static Material Quartzite = AntimatterAPI.register(Material.class, new Material(Ref.ID, "quartzite", 0xe6cdcd, QUARTZ)).mats(of(Silicon, 1, Oxygen, 2));
 
     public static Material Scoria = AntimatterAPI.register(Material.class, new Material(Ref.ID, "scoria", 0x1e1414, ROUGH, Ref.MOD_CREATE)).asDust().mats(of(SiliconDioxide, 6, Calcium, 1, Carbon, 1, Iron, 1));
 
