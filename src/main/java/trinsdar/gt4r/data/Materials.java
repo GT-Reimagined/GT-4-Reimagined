@@ -195,7 +195,7 @@ public class Materials {
     public static Material Andradite = AntimatterAPI.register(Material.class, new Material(Ref.ID, "andradite", 0x967800, ROUGH)).asDust().mats(of(Calcium, 3, Iron, 2, Silicon, 3, Oxygen, 12));
     public static Material Ash = AntimatterAPI.register(Material.class, new Material(Ref.ID, "ash", 0x969696, DULL)).asDust();
     public static Material Calcite = AntimatterAPI.register(Material.class, new Material(Ref.ID, "calcite", 0xfae6dc, DULL)).asDust().mats(of(Calcium, 1, Carbon, 1, Oxygen, 3));
-    public static Material Cassiterite = AntimatterAPI.register(Material.class, new Material(Ref.ID, "cassiterite", 0xdcdcdc, METALLIC)).asOre(1, 5, true).mats(of(Tin, 1, Oxygen, 2)).setOreMulti(2);
+    public static Material Cassiterite = AntimatterAPI.register(Material.class, new Material(Ref.ID, "cassiterite", 0xdcdcdc, DULL)).asOre(1, 5, true).mats(of(Tin, 1, Oxygen, 2)).setOreMulti(2);
     public static Material Chromite = AntimatterAPI.register(Material.class, new Material(Ref.ID, "chromite", 0x23140F, DULL)).asOre(1, 5, true).mats(of(Iron, 1, Chrome, 2, Oxygen, 4)).harvestLevel(3);
     public static Material Clay = AntimatterAPI.register(Material.class, new Material(Ref.ID, "clay", 0xc8c8dc, ROUGH)).asDust().mats(of(Sodium, 2, Lithium, 1, Aluminium, 2, Silicon, 2));
     public static Material DarkAsh = AntimatterAPI.register(Material.class, new Material(Ref.ID, "dark_ash", 0x323232, DULL)).asDust().mats(of(Carbon, 2));

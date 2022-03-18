@@ -46,8 +46,8 @@ public class Textures {
                 new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + stateDir + "top"),
                 new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + stateDir + "back"),
                 new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + stateDir + "front"),
-                new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + stateDir + "right"),
                 new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + stateDir + "left"),
+                new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + stateDir + "right"),
         };
     };
 
