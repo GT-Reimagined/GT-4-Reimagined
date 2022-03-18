@@ -1,7 +1,10 @@
 package trinsdar.gt4r.events;
 
+import muramasa.antimatter.Antimatter;
 import muramasa.antimatter.tool.IAntimatterTool;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
@@ -62,7 +65,7 @@ public class ForgeEventBusEvents {
 
                 // This Code is to tell Bear and all the people around him that he should clean up his always cluttered Inventory.
                 if (--BEAR_INVENTORY_COOL_DOWN < 0 && tEmptySlots < 4) {
-                    if (event.player.containerMenu != null) return;
+                    PlayerContainer playerContainer = event.player.inventoryMenu;
                     BEAR_INVENTORY_COOL_DOWN = 100;
                     for (int i = 0; i < event.player.level.players().size(); i++) {
                         PlayerEntity player = event.player.level.players().get(i);
