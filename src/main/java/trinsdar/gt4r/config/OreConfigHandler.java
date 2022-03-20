@@ -17,16 +17,19 @@ public class OreConfigHandler {
     private OreConfigHandler() {
     }
 
-    private void prepareBiomeConfigFile() {
+    private boolean prepareBiomeConfigFile() {
         if (file != null) {
-            return;
+            return false;
         }
         File configDirectory = new File(".", "config/gt4r");
         file = new File(configDirectory, "ores.json");
-
+        if (file.exists()){
+            return false;
+        }
         if (!configDirectory.exists()) {
             configDirectory.mkdir();
         }
+        return true;
     }
 
     public OreConfig getBiomeConfig() {
@@ -57,7 +60,7 @@ public class OreConfigHandler {
     }
 
     public void save() {
-        prepareBiomeConfigFile();
+        if (!prepareBiomeConfigFile()) return;
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String jsonString = gson.toJson(config);
