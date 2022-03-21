@@ -21,6 +21,7 @@ import static trinsdar.gt4r.data.GT4RData.*;
 import static trinsdar.gt4r.data.Materials.*;
 
 import net.minecraft.data.TagsProvider.Builder;
+import trinsdar.gt4r.data.Materials;
 
 public class GT4RItemTagProvider extends AntimatterItemTagProvider {
     public GT4RItemTagProvider(String providerDomain, String providerName, boolean replace, DataGenerator gen, BlockTagsProvider p, ExistingFileHelperOverride fh) {
@@ -92,6 +93,8 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
             }
         });
         this.tag(TagUtils.getForgeItemTag("sandless_ores/"+ NetheriteScrap.getId())).add(Items.ANCIENT_DEBRIS);
+        this.tag(TagUtils.getForgeItemTag("dyes/black")).add(DUST.get(DarkAsh));
+        this.tag(TagUtils.getForgeItemTag("dyes/gray")).add(DUST.get(Ash));
 
     }
 
