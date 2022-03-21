@@ -166,23 +166,14 @@ public class ContainerWorkbench<T extends TileEntityMaterial<T>> extends Contain
      * 0 result, 17-25 matrix,  1 - 16 inventory, 32 - 67 player inv.
      */
     @Override
-    public ItemStack quickMoveStack(PlayerEntity player, int par2) {
-
-        ItemStack itemstack = ItemStack.EMPTY;
-        Slot slot = slots.get(par2);
-        if (slot != null && slot.hasItem()) {
+    public ItemStack quickMoveStack(PlayerEntity player, int slotId) {
+        ItemStack itemstack;
+        Slot slot = slots.get(slotId);
+        if (slot != null && slot.hasItem() && slotId == 0) {
             ItemStack itemstack1 = slot.getItem();
             itemstack = itemstack1.copy();
-            if (16 < par2 && par2 < 26) {
-                if (!moveItemStackTo(itemstack1, 1, 17, false))
-                    return ItemStack.EMPTY;
-            } else if (par2 < 16) {
-                if (!moveItemStackTo(itemstack1, 32, 68, false))
-                    return ItemStack.EMPTY;
-            } else {
-                if (!moveItemStackTo(itemstack1, 1, 17, false))
-                    return ItemStack.EMPTY;
-            }
+            if (!moveItemStackTo(itemstack1, 32, 68, false))
+                return ItemStack.EMPTY;
             if (itemstack1.getCount() == 0) {
                 slot.set(ItemStack.EMPTY);
             } else {
@@ -197,13 +188,11 @@ public class ContainerWorkbench<T extends TileEntityMaterial<T>> extends Contain
             }
             ItemStack itemstack2 = slot.onTake(player, itemstack1);
 
-            if (par2 == 0)
-            {
-                player.drop(itemstack2, false);
-            }
+            player.drop(itemstack2, false);
+            this.slotsChanged(this.craftingGrid);
+            return itemstack;
+        } else {
+           return super.quickMoveStack(player, slotId);
         }
-
-        this.slotsChanged(this.craftingGrid);
-        return itemstack;
     }
 }
