@@ -107,7 +107,7 @@ public class TileEntityIndustrialBlastFurnace extends TileEntityBasicMultiMachin
     @Override
     public int drawInfo(IBFWidget widget, MatrixStack stack, FontRenderer renderer, int left, int top) {
         // TODO: Replace by new TranslationTextComponent()
-        renderer.draw(stack,"Heat: " + widget.heat + "K", 27, 62, Color.BLACK.getRGB());
+        renderer.draw(stack,"Heat: " + widget.heat + "K", widget.realX() + 27, widget.realY() + 62, Color.BLACK.getRGB());
         return 8;
     }
 
