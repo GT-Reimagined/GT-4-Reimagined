@@ -67,6 +67,8 @@ public class GT4RLocalizations {
             add("tooltip.gt4r.upload_tank", "Upload to Tank");
             add("tooltip.gt4r.download_orb", "Download to Data Orb");
             add("tooltip.gt4r.sort_inventory", "Sort Inventory");
+            add("machine.drum.fluid", "Contains %s mb of %s");
+            add("machine.drum.output", "Currently set to auto output");
         }
 
         @Override

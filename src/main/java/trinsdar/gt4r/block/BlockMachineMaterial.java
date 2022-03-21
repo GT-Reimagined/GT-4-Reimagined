@@ -9,6 +9,7 @@ import muramasa.antimatter.registration.IColorHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootContext;
@@ -16,6 +17,8 @@ import net.minecraft.loot.LootParameters;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
@@ -90,6 +93,23 @@ public class BlockMachineMaterial extends BlockMachine implements IColorHandler 
                 });
             }
 
+        }
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, @Nullable IBlockReader world, List<ITextComponent> tooltip, ITooltipFlag flag) {
+        super.appendHoverText(stack, world, tooltip, flag);
+        if (this.getId().contains("drum")){
+            CompoundNBT nbt = stack.getTag();
+            if (nbt != null && (nbt.contains("Fluid") || nbt.contains("Outputs"))){
+                FluidStack fluid = nbt.contains("Fluid") ? FluidStack.loadFluidStackFromNBT(nbt.getCompound("Fluid")) : FluidStack.EMPTY;
+                if (fluid != null && !fluid.isEmpty()){
+                    tooltip.add(new TranslationTextComponent("machine.drum.fluid", fluid.getAmount(), fluid.getDisplayName()));
+                }
+                if (nbt.contains("Outputs")){
+                    tooltip.add(new TranslationTextComponent("machine.drum.output"));
+                }
+            }
         }
     }
 }
