@@ -35,6 +35,7 @@ import static trinsdar.gt4r.data.Materials.DistilledWater;
 import static trinsdar.gt4r.data.Materials.Steam;
 
 import muramasa.antimatter.capability.FluidHandler.FluidDirection;
+import trinsdar.gt4r.GT4Reimagined;
 
 public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExchanger> {
     public TileEntityHeatExchanger(Machine<?> type) {
@@ -46,6 +47,7 @@ public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExc
 
             @Override
             public boolean canOutput() {
+                if (heat > maxHeat) return false;
                 List<FluidStack> output = new ArrayList<>();
                 output.add(Steam.getGas(160));
                 if (activeRecipe != null && activeRecipe.hasOutputFluids()){
@@ -59,8 +61,8 @@ public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExc
                 super.addOutputs();
                 heat += activeRecipe.getSpecialValue();
                 if (heat > maxHeat){
-                    tile.getLevel().explode(null, tile.getBlockPos().getX(), tile.getBlockPos().getY(), tile.getBlockPos().getZ(), 4.0F, Explosion.Mode.DESTROY);
-                    tile.getLevel().setBlockAndUpdate(tile.getBlockPos(), Blocks.AIR.defaultBlockState());
+                    GT4Reimagined.LOGGER.info("Heat Exchanger Exploded Active heat: " + heat + " Max heat: "+ maxHeat);
+                    Utils.createExplosion(this.tile.getLevel(), tile.getBlockPos(), 4.0F, Explosion.Mode.DESTROY);
                     return;
                 }
                 if (heat >= 80 && consumedWater){
