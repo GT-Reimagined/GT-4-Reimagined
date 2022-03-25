@@ -60,11 +60,11 @@ public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExc
             protected void addOutputs() {
                 super.addOutputs();
                 heat += activeRecipe.getSpecialValue();
-                if (heat > maxHeat){
+                /*if (heat > maxHeat){
                     GT4Reimagined.LOGGER.info("Heat Exchanger Exploded Active heat: " + heat + " Max heat: "+ maxHeat);
                     Utils.createExplosion(this.tile.getLevel(), tile.getBlockPos(), 4.0F, Explosion.Mode.DESTROY);
                     return;
-                }
+                }*/
                 if (heat >= 80 && consumedWater){
                     tile.fluidHandler.ifPresent(h -> {
                         h.addOutputs(Steam.getGas(160));
@@ -105,6 +105,14 @@ public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExc
             @Override
             public boolean accepts(FluidStack stack) {
                 return super.accepts(stack) || stack.getFluid() == Fluids.WATER || stack.getFluid() == DistilledWater.getLiquid();
+            }
+
+            @Override
+            public void onServerUpdate() {
+                super.onServerUpdate();
+                if (activeRecipe == null && heat > 0){
+                    heat--;
+                }
             }
         });
 
@@ -205,14 +213,14 @@ public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExc
 
         @Override
         public int fill(FluidStack stack, FluidAction action) {
-            if (stack.getFluid() == Fluids.WATER || stack.getFluid() == DistilledWater.getLiquid()){
+           /* if (stack.getFluid() == Fluids.WATER || stack.getFluid() == DistilledWater.getLiquid()){
                 int fillSim = super.fill(stack, FluidAction.SIMULATE);
                 if (fillSim > 0 && tile.recipeHandler.map(h -> h.serializeNBT().getInt("heat") >= 80).orElse(false)){
                     tile.getLevel().explode(null, tile.getBlockPos().getX(), tile.getBlockPos().getY(), tile.getBlockPos().getZ(), 4.0F, Explosion.Mode.DESTROY);
                     tile.getLevel().setBlockAndUpdate(tile.getBlockPos(), Blocks.AIR.defaultBlockState());
                     return 0;
                 }
-            }
+            }*/
             return super.fill(stack, action);
         }
 
