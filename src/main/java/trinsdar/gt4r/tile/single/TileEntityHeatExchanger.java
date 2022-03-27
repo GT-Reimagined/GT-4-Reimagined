@@ -213,14 +213,15 @@ public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExc
 
         @Override
         public int fill(FluidStack stack, FluidAction action) {
-           /* if (stack.getFluid() == Fluids.WATER || stack.getFluid() == DistilledWater.getLiquid()){
+            if (stack.getFluid() == Fluids.WATER || stack.getFluid() == DistilledWater.getLiquid()){
                 int fillSim = super.fill(stack, FluidAction.SIMULATE);
-                if (fillSim > 0 && tile.recipeHandler.map(h -> h.serializeNBT().getInt("heat") >= 80).orElse(false)){
+                boolean hasWater = this.getInputTanks().getFluidInTank(0).getFluid() == Fluids.WATER || this.getInputTanks().getFluidInTank(1).getFluid() == Fluids.WATER || this.getInputTanks().getFluidInTank(0).getFluid() == DistilledWater.getLiquid() || this.getInputTanks().getFluidInTank(1).getFluid() == DistilledWater.getLiquid();
+                if (fillSim > 0 && !hasWater && tile.recipeHandler.map(h -> h.serializeNBT().getInt("heat") >= 80).orElse(false)){
                     tile.getLevel().explode(null, tile.getBlockPos().getX(), tile.getBlockPos().getY(), tile.getBlockPos().getZ(), 4.0F, Explosion.Mode.DESTROY);
                     tile.getLevel().setBlockAndUpdate(tile.getBlockPos(), Blocks.AIR.defaultBlockState());
                     return 0;
                 }
-            }*/
+            }
             return super.fill(stack, action);
         }
 
