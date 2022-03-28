@@ -10,9 +10,12 @@ import net.minecraft.item.Item;
 import trinsdar.gt4r.block.BlockMachineMaterial;
 import trinsdar.gt4r.block.BlockMaterialChest;
 
+import static muramasa.antimatter.machine.MachineFlag.COVERABLE;
+
 public class ChestMachine extends MaterialMachine{
     public ChestMachine(String domain, String id, Material material) {
         super(domain, id, material);
+        COVERABLE.remove(this);
     }
 
     @Override
