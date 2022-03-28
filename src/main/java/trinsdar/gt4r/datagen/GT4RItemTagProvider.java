@@ -92,6 +92,9 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
                 this.tag(TagUtils.getForgeItemTag("sandless_" + getConventionalMaterialType(o.getOreType()) + "/" +  o.getMaterial().getId())).addTag(TagUtils.getForgeItemTag(String.join("", getConventionalStoneType(o.getStoneType()), "_", getConventionalMaterialType(o.getOreType()), "/", o.getMaterial().getId()))).replace(false);
             }
         });
+        RAW_ORE.all().forEach(m -> {
+            this.tag(TagUtils.getForgeItemTag("sandless_ores/"+ m.getId())).add(RAW_ORE.get(m));
+        });
         this.tag(TagUtils.getForgeItemTag("sandless_ores/"+ NetheriteScrap.getId())).add(Items.ANCIENT_DEBRIS);
         this.tag(TagUtils.getForgeItemTag("dyes/black")).add(DUST.get(DarkAsh));
         this.tag(TagUtils.getForgeItemTag("dyes/gray")).add(DUST.get(Ash));
