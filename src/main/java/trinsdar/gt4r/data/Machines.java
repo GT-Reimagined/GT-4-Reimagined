@@ -204,9 +204,9 @@ public class Machines {
     public static BasicMachine BATTERY_BUFFER_ONE = new BasicMachine(Ref.ID, "battery_buffer_one").noCovers().addFlags(GUI, ENERGY, ITEM).setTile(m -> () -> new TileEntityBatteryBuffer<>(m)).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).allowFrontIO().setAllowVerticalFacing(true);
     public static BasicMachine BATTERY_BUFFER_FOUR = new BasicMachine(Ref.ID, "battery_buffer_four").noCovers().addFlags(GUI, ENERGY, ITEM).setTile(m -> () -> new TileEntityBatteryBuffer<>(m)).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).allowFrontIO().setAllowVerticalFacing(true);
     public static BasicMachine BATTERY_BUFFER_EIGHT = new BasicMachine(Ref.ID, "battery_buffer_eight").noCovers().addFlags(GUI, ENERGY, ITEM).setTile(m -> () -> new TileEntityBatteryBuffer<>(m)).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).allowFrontIO().setAllowVerticalFacing(true);
-    public static BasicMachine TRANSFORMER = new BasicMachine(Ref.ID, "transformer").addFlags(ENERGY).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).setTile(m -> () -> new TileEntityTransformer<>(m, 1)).noCovers().setAllowVerticalFacing(true);
-    public static BasicMachine SUPERCONDENSATOR = new BasicMachine(Ref.ID, "supercondensator").addFlags(ENERGY).setTile(m -> () -> new TileEntitySupercondensator(m, 1)).setTiers(LUV).noCovers().setAllowVerticalFacing(true);
-    public static BasicMachine TRANSFORMER_DIGITAL = new BasicMachine(Ref.ID, "transformer_digital").addFlags(GUI, ENERGY).setTiers(EV, IV).setTile(m -> () -> new TileEntityDigitalTransformer<>(m)).noCovers();//.setTiers();
+    public static BasicMachine TRANSFORMER = new BasicMachine(Ref.ID, "transformer").addFlags(ENERGY).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).setTile(m -> () -> new TileEntityTransformer<>(m, 1)).noCovers().setAllowVerticalFacing(true).allowFrontIO();
+    public static BasicMachine SUPERCONDENSATOR = new BasicMachine(Ref.ID, "supercondensator").addFlags(ENERGY).setTile(m -> () -> new TileEntitySupercondensator(m, 1)).setTiers(LUV).noCovers().setAllowVerticalFacing(true).allowFrontIO();
+    public static BasicMachine TRANSFORMER_DIGITAL = new BasicMachine(Ref.ID, "transformer_digital").addFlags(GUI, ENERGY).setTiers(EV, IV).setTile(m -> () -> new TileEntityDigitalTransformer<>(m)).noCovers().allowFrontIO();
 
     public static void init() {
         STEAM_TURBINE.setOutputCover(COVER_DYNAMO_OLD);
