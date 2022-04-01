@@ -55,8 +55,8 @@ public class TileEntityInfiniteStorage<T extends TileEntityInfiniteStorage<T>> e
             energyHandler.ifPresent(h -> {
                 int voltage = (int) h.getOutputVoltage();
                 int amperage = (int) h.getOutputAmperage();
-                boolean shiftHold = data[1] != 0;
-                switch (data[0]) {
+                boolean shiftHold = data[0] != 0;
+                switch (data[1]) {
                     case 0:
                         voltage /= shiftHold ? 512 : 64;
                         break;
