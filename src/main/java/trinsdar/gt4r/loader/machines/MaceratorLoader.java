@@ -5,6 +5,9 @@ import muramasa.antimatter.material.Material;
 import muramasa.antimatter.ore.BlockOre;
 import muramasa.antimatter.ore.CobbleStoneType;
 import muramasa.antimatter.ore.StoneType;
+import muramasa.antimatter.pipe.PipeSize;
+import muramasa.antimatter.pipe.types.FluidPipe;
+import muramasa.antimatter.pipe.types.ItemPipe;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import muramasa.antimatter.recipe.map.RecipeMap;
 import muramasa.antimatter.util.TagUtils;
@@ -18,6 +21,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.data.GT4RData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +35,7 @@ import static trinsdar.gt4r.data.Materials.Brick;
 import static trinsdar.gt4r.data.Materials.Clay;
 import static trinsdar.gt4r.data.Materials.Limestone;
 import static trinsdar.gt4r.data.Materials.Scoria;
+import static trinsdar.gt4r.data.RecipeMaps.EXTRUDING;
 import static trinsdar.gt4r.data.RecipeMaps.MACERATING;
 import static trinsdar.gt4r.data.RecipeMaps.SIFTING;
 
@@ -127,6 +132,29 @@ public class MaceratorLoader {
             if (s instanceof CobbleStoneType){
                 MACERATING.RB().ii(RecipeIngredient.of(((CobbleStoneType)s).getBlock("cobble").asItem(), 1)).io(DUST.get(s.getMaterial(), 1)).add(400, 2);
             }
+        });
+        AntimatterAPI.all(FluidPipe.class).forEach(t -> {
+            if (!t.getMaterial().has(DUST) || t.getMaterial() == Wood) return;
+            Item pipeTiny = t.getBlockItem(PipeSize.TINY);
+            Item pipeSmall = t.getBlockItem(PipeSize.SMALL);
+            Item pipeNormal = t.getBlockItem(PipeSize.NORMAL);
+            Item pipeLarge = t.getBlockItem(PipeSize.LARGE);
+            Item pipeHuge = t.getBlockItem(PipeSize.HUGE);
+            MACERATING.RB().ii(RecipeIngredient.of(pipeTiny, 1)).io(DUST_SMALL.get(t.getMaterial(), 2)).add(t.getMaterial().getMass()/2,128);
+            MACERATING.RB().ii(RecipeIngredient.of(pipeSmall, 1)).io(DUST.get(t.getMaterial(), 1)).add(t.getMaterial().getMass(),128);
+            MACERATING.RB().ii(RecipeIngredient.of(pipeNormal, 1)).io(DUST.get(t.getMaterial(), 3)).add(t.getMaterial().getMass()*3,128);
+            MACERATING.RB().ii(RecipeIngredient.of(pipeLarge, 1)).io(DUST.get(t.getMaterial(), 6)).add(t.getMaterial().getMass()*6,128);
+            MACERATING.RB().ii(RecipeIngredient.of(pipeHuge, 1)).io(DUST.get(t.getMaterial(), 12)).add(t.getMaterial().getMass()*12,128);
+        });
+
+        AntimatterAPI.all(ItemPipe.class).forEach(t -> {
+            if (!t.getMaterial().has(INGOT)) return;
+            Item pipeNormal = t.getBlockItem(PipeSize.NORMAL);
+            Item pipeLarge = t.getBlockItem(PipeSize.LARGE);
+            Item pipeHuge = t.getBlockItem(PipeSize.HUGE);
+            MACERATING.RB().ii(RecipeIngredient.of(pipeNormal, 1)).io(DUST.get(t.getMaterial(), 3)).add(t.getMaterial().getMass()*3,128);
+            MACERATING.RB().ii(RecipeIngredient.of(pipeLarge, 1)).io(DUST.get(t.getMaterial(), 6)).add(t.getMaterial().getMass()*6,128);
+            MACERATING.RB().ii(RecipeIngredient.of(pipeHuge, 1)).io(DUST.get(t.getMaterial(), 12)).add(t.getMaterial().getMass()*12,128);
         });
 
     }
