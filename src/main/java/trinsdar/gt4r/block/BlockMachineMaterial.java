@@ -6,21 +6,21 @@ import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.registration.IColorHandler;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.loot.LootContext;
-import net.minecraft.loot.LootParameters;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import trinsdar.gt4r.machine.MaterialMachine;
@@ -31,6 +31,8 @@ import java.util.List;
 
 import static muramasa.antimatter.Data.NULL;
 import static muramasa.antimatter.Data.WRENCH_MATERIAL;
+
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class BlockMachineMaterial extends BlockMachine implements IColorHandler {
     Material material = NULL;
@@ -46,7 +48,7 @@ public class BlockMachineMaterial extends BlockMachine implements IColorHandler 
     }
 
     @Override
-    public int getBlockColor(BlockState state, @Nullable IBlockReader world, @Nullable BlockPos pos, int i) {
+    public int getBlockColor(BlockState state, @Nullable BlockGetter world, @Nullable BlockPos pos, int i) {
         return i == 0 ? material.getRGB() : -1;
     }
 
@@ -58,16 +60,16 @@ public class BlockMachineMaterial extends BlockMachine implements IColorHandler 
     @Override
     public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
         List<ItemStack> list = super.getDrops(state, builder);
-        TileEntity tileentity = builder.getOptionalParameter(LootParameters.BLOCK_ENTITY);
+        BlockEntity tileentity = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
         if (!list.isEmpty() && tileentity instanceof TileEntityDrum){
             ItemStack stack = list.get(0);
             TileEntityDrum drum = (TileEntityDrum) tileentity;
             if (!drum.getDrop().isEmpty()){
-                CompoundNBT nbt = stack.getOrCreateTag();
-                nbt.put("Fluid", drum.getDrop().writeToNBT(new CompoundNBT()));
+                CompoundTag nbt = stack.getOrCreateTag();
+                nbt.put("Fluid", drum.getDrop().writeToNBT(new CompoundTag()));
             }
             if (drum.isOutput()){
-                CompoundNBT nbt = stack.getOrCreateTag();
+                CompoundTag nbt = stack.getOrCreateTag();
                 nbt.putBoolean("Outputs", drum.isOutput());
             }
         }
@@ -75,11 +77,11 @@ public class BlockMachineMaterial extends BlockMachine implements IColorHandler 
     }
 
     @Override
-    public void setPlacedBy(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+    public void setPlacedBy(Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         super.setPlacedBy(world, pos, state, placer, stack);
-        CompoundNBT nbt = stack.getTag();
+        CompoundTag nbt = stack.getTag();
         if (nbt != null && (nbt.contains("Fluid") || nbt.contains("Outputs"))){
-            TileEntity tileEntity = world.getBlockEntity(pos);
+            BlockEntity tileEntity = world.getBlockEntity(pos);
             if (tileEntity instanceof TileEntityDrum){
                 TileEntityDrum drum = (TileEntityDrum) tileEntity;
                 drum.fluidHandler.ifPresent(f -> {
@@ -97,17 +99,17 @@ public class BlockMachineMaterial extends BlockMachine implements IColorHandler 
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable IBlockReader world, List<ITextComponent> tooltip, ITooltipFlag flag) {
+    public void appendHoverText(ItemStack stack, @Nullable BlockGetter world, List<Component> tooltip, TooltipFlag flag) {
         super.appendHoverText(stack, world, tooltip, flag);
         if (this.getId().contains("drum")){
-            CompoundNBT nbt = stack.getTag();
+            CompoundTag nbt = stack.getTag();
             if (nbt != null && (nbt.contains("Fluid") || nbt.contains("Outputs"))){
                 FluidStack fluid = nbt.contains("Fluid") ? FluidStack.loadFluidStackFromNBT(nbt.getCompound("Fluid")) : FluidStack.EMPTY;
                 if (fluid != null && !fluid.isEmpty()){
-                    tooltip.add(new TranslationTextComponent("machine.drum.fluid", fluid.getAmount(), fluid.getDisplayName()));
+                    tooltip.add(new TranslatableComponent("machine.drum.fluid", fluid.getAmount(), fluid.getDisplayName()));
                 }
                 if (nbt.contains("Outputs")){
-                    tooltip.add(new TranslationTextComponent("machine.drum.output"));
+                    tooltip.add(new TranslatableComponent("machine.drum.output"));
                 }
             }
         }

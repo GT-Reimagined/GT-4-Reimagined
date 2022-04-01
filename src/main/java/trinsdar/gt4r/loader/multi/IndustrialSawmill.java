@@ -1,13 +1,13 @@
 package trinsdar.gt4r.loader.multi;
 
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.tags.ITag;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.tags.Tag;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.util.IItemProvider;
+import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.fluids.FluidStack;
 import trinsdar.gt4r.data.GT4RData;
 
@@ -35,7 +35,7 @@ public class IndustrialSawmill {
     }
 
 
-    private static void addWoodRecipe(ITag.INamedTag<Item> log, IItemProvider wood){
+    private static void addWoodRecipe(Tag.Named<Item> log, ItemLike wood){
         INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(log, 1)).fi(new FluidStack(Fluids.WATER, 40)).io(new ItemStack(wood, 6), DUST.get(Wood, 1)).add(200, 30);
         INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(log, 1)).fi(Lubricant.getLiquid(10)).io(new ItemStack(wood, 6), DUST.get(Wood, 1)).add(100, 30);
         INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(log, 1)).fi(DistilledWater.getLiquid(30)).io(new ItemStack(wood, 6), DUST.get(Wood, 1)).add(200, 30);

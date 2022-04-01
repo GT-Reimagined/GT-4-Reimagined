@@ -8,10 +8,10 @@ import muramasa.antimatter.structure.FakeTileElement;
 import muramasa.antimatter.structure.PatternBuilder;
 import muramasa.antimatter.structure.StructureBuilder;
 import muramasa.antimatter.util.Dir;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.util.Direction;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.core.Direction;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;

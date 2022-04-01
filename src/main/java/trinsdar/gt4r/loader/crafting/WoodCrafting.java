@@ -6,13 +6,13 @@ import muramasa.antimatter.material.Material;
 import muramasa.antimatter.pipe.PipeSize;
 import muramasa.antimatter.util.TagUtils;
 import net.minecraft.block.Blocks;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.tags.ITag;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.tags.Tag;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 import trinsdar.gt4r.GT4RConfig;
@@ -32,7 +32,7 @@ import static trinsdar.gt4r.loader.crafting.CraftingHelper.criterion;
 
 public class WoodCrafting {
 
-    public static void loadRecipes(Consumer<IFinishedRecipe> consumer, AntimatterRecipeProvider provider) {
+    public static void loadRecipes(Consumer<FinishedRecipe> consumer, AntimatterRecipeProvider provider) {
 
         if (GT4RConfig.GAMEPLAY.HARDER_WOOD){
             provider.addStackRecipe(consumer, Ref.ID, "sticks_2", "wood_stuff", "has_planks", provider.hasSafeItem(ItemTags.PLANKS), new ItemStack(Items.STICK, 2), of('P', ItemTags.PLANKS), "P", "P");
@@ -94,7 +94,7 @@ public class WoodCrafting {
         }
     }
 
-    public static void addWoodRecipe(Consumer<IFinishedRecipe> consumer, AntimatterRecipeProvider provider, ITag.INamedTag<Item> log, Item plank){
+    public static void addWoodRecipe(Consumer<FinishedRecipe> consumer, AntimatterRecipeProvider provider, Tag.Named<Item> log, Item plank){
         if (GT4RConfig.GAMEPLAY.HARDER_WOOD){
             provider.shapeless(consumer, plank.getRegistryName().getPath() + "_2", "planks", "has_" + log.getName().getPath(), provider.hasSafeItem(log), new ItemStack(plank, 2), log);
             provider.addStackRecipe(consumer, Ref.ID, plank.getRegistryName().getPath() + "_4", "planks", "has_" + log.getName().getPath(), provider.hasSafeItem(log), new ItemStack(plank, 4), of('S', SAW.getTag(), 'P', log), "S", "P");

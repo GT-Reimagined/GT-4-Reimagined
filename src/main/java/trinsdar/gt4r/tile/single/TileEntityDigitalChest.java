@@ -6,11 +6,11 @@ import muramasa.antimatter.gui.event.GuiEvents;
 import muramasa.antimatter.gui.event.IGuiEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.TileEntityMachine;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.common.util.Constants;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.data.SlotTypes;
@@ -31,7 +31,7 @@ public class TileEntityDigitalChest extends TileEntityMachine<TileEntityDigitalC
     }
 
     @Override
-    public void onGuiEvent(IGuiEvent event, PlayerEntity playerEntity) {
+    public void onGuiEvent(IGuiEvent event, Player playerEntity) {
         super.onGuiEvent(event, playerEntity);
         if (event.getFactory() == GuiEvents.EXTRA_BUTTON){
             final int[] data = ((GuiEvents.GuiEvent)event).data;
@@ -39,22 +39,22 @@ public class TileEntityDigitalChest extends TileEntityMachine<TileEntityDigitalC
                 itemHandler.ifPresent(i -> {
                     ItemStack orb = i.getHandler(SlotTypes.DATA).getStackInSlot(0);
                     if (orb.getItem() == GT4RData.StorageDataOrb){
-                        CompoundNBT tag = orb.getTag();
+                        CompoundTag tag = orb.getTag();
                         if (tag != null){
                             if (tag.contains("Data")){
-                                CompoundNBT nbt = tag.getCompound("Data");
+                                CompoundTag nbt = tag.getCompound("Data");
                                 if (nbt.contains("Items")){
                                     ITrackedHandler storage = i.getHandler(SlotTypes.FILTERABLE);
-                                    ListNBT tagList = nbt.getList("Items", Constants.NBT.TAG_COMPOUND);
+                                    ListTag tagList = nbt.getList("Items", Constants.NBT.TAG_COMPOUND);
                                     if (!tagList.isEmpty()){
                                         if (!isInventoryEmpty(storage)){
-                                            playerEntity.sendMessage(new TranslationTextComponent("message.gt4r.digital_chest_inventory"), playerEntity.getUUID());
+                                            playerEntity.sendMessage(new TranslatableComponent("message.gt4r.digital_chest_inventory"), playerEntity.getUUID());
                                             return;
                                         }
                                         ItemStack newStack = new ItemStack(GT4RData.CircuitDataOrb);
                                         for (int j = 0; j < tagList.size(); j++)
                                         {
-                                            CompoundNBT itemTags = tagList.getCompound(j);
+                                            CompoundTag itemTags = tagList.getCompound(j);
                                             int slot = itemTags.getInt("Slot");
 
                                             if (slot >= 0 && slot < storage.getSlots())
@@ -77,7 +77,7 @@ public class TileEntityDigitalChest extends TileEntityMachine<TileEntityDigitalC
                     if (i.getHandler(SlotTypes.DATA).getStackInSlot(0).getItem() == GT4RData.CircuitDataOrb){
                         ITrackedHandler storage = i.getHandler(SlotTypes.FILTERABLE);
                         if (!isInventoryEmpty(storage)){
-                            CompoundNBT nbt = ((TrackedItemHandler<?>)storage).serializeNBT();
+                            CompoundTag nbt = ((TrackedItemHandler<?>)storage).serializeNBT();
                             ItemStack newStack = new ItemStack(GT4RData.StorageDataOrb);
                             newStack.getOrCreateTag().put("Data", nbt);
                             i.getHandler(SlotTypes.DATA).setStackInSlot(0, newStack);

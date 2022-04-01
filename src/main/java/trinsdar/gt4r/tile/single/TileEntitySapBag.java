@@ -1,10 +1,10 @@
 package trinsdar.gt4r.tile.single;
 
 import muramasa.antimatter.tile.TileEntityTickable;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.Direction;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.core.Direction;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.tile.TileEntityTypes;
 import trinsdar.gt4r.tree.BlockRubberLog;
@@ -65,25 +65,25 @@ public class TileEntitySapBag extends TileEntityTickable<TileEntitySapBag> {
     }
 
     @Override
-    public CompoundNBT save(CompoundNBT tag) {
+    public CompoundTag save(CompoundTag tag) {
         super.save(tag);
         tag.putInt("F", facing.get3DDataValue());
-        tag.put("S", sap.save(new CompoundNBT()));
+        tag.put("S", sap.save(new CompoundTag()));
         return tag;
     }
 
     @Override
-    public void load(BlockState state, CompoundNBT nbt) {
+    public void load(BlockState state, CompoundTag nbt) {
         super.load(state, nbt);
         this.facing = Direction.from3DDataValue(nbt.getInt("F"));
         this.sap = ItemStack.of(nbt.getCompound("S"));
     }
 
     @Override
-    public CompoundNBT getUpdateTag() {
-        CompoundNBT tag = super.getUpdateTag();
+    public CompoundTag getUpdateTag() {
+        CompoundTag tag = super.getUpdateTag();
         tag.putInt("F", facing.get3DDataValue());
-        tag.put("S", sap.save(new CompoundNBT()));
+        tag.put("S", sap.save(new CompoundTag()));
         return tag;
     }
 }

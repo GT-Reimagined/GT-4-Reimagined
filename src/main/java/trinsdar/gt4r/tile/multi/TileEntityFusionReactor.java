@@ -6,9 +6,9 @@ import muramasa.antimatter.gui.event.GuiEvents;
 import muramasa.antimatter.gui.event.IGuiEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.nbt.CompoundTag;
 import tesseract.api.gt.IEnergyHandler;
 import tesseract.api.gt.IGTNode;
 
@@ -40,20 +40,20 @@ public class TileEntityFusionReactor extends TileEntityMultiMachine<TileEntityFu
     }
 
     @Override
-    public CompoundNBT save(CompoundNBT tag) {
+    public CompoundTag save(CompoundTag tag) {
         super.save(tag);
         tag.putInt("display", display.ordinal());
         return tag;
     }
 
     @Override
-    public void load(BlockState state, CompoundNBT tag) {
+    public void load(BlockState state, CompoundTag tag) {
         super.load(state, tag);
         this.display = Display.values()[tag.getInt("display")];
     }
 
     @Override
-    public void onGuiEvent(IGuiEvent event, PlayerEntity playerEntity) {
+    public void onGuiEvent(IGuiEvent event, Player playerEntity) {
         super.onGuiEvent(event, playerEntity);
         if (event.getFactory() == GuiEvents.EXTRA_BUTTON){
             GuiEvents.GuiEvent ev =(GuiEvents.GuiEvent) event;

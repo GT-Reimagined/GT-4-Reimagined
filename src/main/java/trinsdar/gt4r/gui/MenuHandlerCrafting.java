@@ -7,11 +7,11 @@ import muramasa.antimatter.cover.ICover;
 import muramasa.antimatter.gui.MenuHandler;
 import muramasa.antimatter.item.ItemCover;
 import muramasa.antimatter.util.Utils;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.IWorldPosCallable;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.Direction;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraftforge.common.util.LazyOptional;
 import trinsdar.gt4r.data.client.ScreenFactories;
 
@@ -21,8 +21,8 @@ public class MenuHandlerCrafting extends MenuHandler<GTWorkbenchContainer> {
     }
 
     @Override
-    public GTWorkbenchContainer onContainerCreate(int windowId, PlayerInventory inv, PacketBuffer data) {
-        TileEntity tile = Utils.getTileFromBuf(data);
+    public GTWorkbenchContainer onContainerCreate(int windowId, Inventory inv, FriendlyByteBuf data) {
+        BlockEntity tile = Utils.getTileFromBuf(data);
         if (tile != null) {
             Direction dir = Direction.from3DDataValue(data.readInt());
             LazyOptional<ICoverHandler> coverHandler = tile.getCapability(AntimatterCaps.COVERABLE_HANDLER_CAPABILITY, dir);
@@ -32,8 +32,8 @@ public class MenuHandlerCrafting extends MenuHandler<GTWorkbenchContainer> {
     }
 
     @Override
-    protected GTWorkbenchContainer getMenu(IGuiHandler tile, PlayerInventory playerInv, int windowId) {
-        return tile instanceof ICover ? new ContainerCraftingCover(windowId, playerInv, IWorldPosCallable.create(((ICover)tile).source().getTile().getLevel(), ((ICover)tile).source().getTile().getBlockPos()), ((ICover) tile)) : null;
+    protected GTWorkbenchContainer getMenu(IGuiHandler tile, Inventory playerInv, int windowId) {
+        return tile instanceof ICover ? new ContainerCraftingCover(windowId, playerInv, ContainerLevelAccess.create(((ICover)tile).source().getTile().getLevel(), ((ICover)tile).source().getTile().getBlockPos()), ((ICover) tile)) : null;
     }
 
     @Override

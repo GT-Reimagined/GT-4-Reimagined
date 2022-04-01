@@ -8,14 +8,14 @@ import muramasa.antimatter.recipe.Recipe;
 import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
 import muramasa.antimatter.util.Utils;
 import muramasa.antimatter.util.int3;
-import net.minecraft.block.Block;
-import net.minecraft.entity.EntityPredicate;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EntityPredicates;
-import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EntitySelector;
+import net.minecraft.world.phys.AABB;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import trinsdar.gt4r.data.GT4RData;
@@ -112,8 +112,8 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
                                         if (copy.getItem() instanceof ItemTurbineRotor){
                                             h.getHandler(SlotTypes.ROTOR).setStackInSlot(0, Materials.BROKEN_TURBINE_ROTOR.get(((ItemTurbineRotor)copy.getItem()).getMaterial(), 1));
                                         }
-                                        for (PlayerEntity player : level.getNearbyPlayers(new EntityPredicate().range(5.0D), null, new AxisAlignedBB(new int3(tile.getBlockPos(), tile.getFacing()).left(2).back(5), new int3(tile.getBlockPos(), tile.getFacing()).right(2)))){
-                                            if (EntityPredicates.NO_SPECTATORS.test(player) && !player.isCreative()) {
+                                        for (Player player : level.getNearbyPlayers(new TargetingConditions().range(5.0D), null, new AABB(new int3(tile.getBlockPos(), tile.getFacing()).left(2).back(5), new int3(tile.getBlockPos(), tile.getFacing()).right(2)))){
+                                            if (EntitySelector.NO_SPECTATORS.test(player) && !player.isCreative()) {
                                                 double d0 = player.distanceToSqr(tile.getBlockPos().getX(), tile.getBlockPos().getY(), tile.getBlockPos().getZ());
                                                 if (d0 < 5 * 5) {
                                                     player.hurt(DamageSource.GENERIC, 8);
@@ -148,15 +148,15 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
                 }
 
                 @Override
-                public CompoundNBT serializeNBT() {
-                    CompoundNBT nbt = super.serializeNBT();
+                public CompoundTag serializeNBT() {
+                    CompoundTag nbt = super.serializeNBT();
                     nbt.putInt("ticker", ticker);
                     nbt.putDouble("efficiency", efficiency);
                     return nbt;
                 }
 
                 @Override
-                public void deserializeNBT(CompoundNBT nbt) {
+                public void deserializeNBT(CompoundTag nbt) {
                     super.deserializeNBT(nbt);
                     ticker = nbt.getInt("ticker");
                     efficiency = nbt.getDouble("efficiency");

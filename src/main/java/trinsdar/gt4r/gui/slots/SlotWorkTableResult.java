@@ -2,16 +2,16 @@ package trinsdar.gt4r.gui.slots;
 
 import muramasa.antimatter.capability.machine.MachineItemHandler;
 import muramasa.antimatter.gui.SlotType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.CraftResultInventory;
-import net.minecraft.inventory.CraftingInventory;
-import net.minecraft.inventory.container.CraftingResultSlot;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ResultContainer;
+import net.minecraft.world.inventory.CraftingContainer;
+import net.minecraft.world.inventory.ResultSlot;
+import net.minecraft.world.item.ItemStack;
 
-public class SlotWorkTableResult extends CraftingResultSlot {
-    private final CraftingInventory craftMatrix;
+public class SlotWorkTableResult extends ResultSlot {
+    private final CraftingContainer craftMatrix;
     private final MachineItemHandler<?> projectTable;
-    public SlotWorkTableResult(MachineItemHandler<?> table, PlayerEntity player, CraftingInventory craftingInventory, CraftResultInventory result, int slotIndex, int xPosition, int yPosition) {
+    public SlotWorkTableResult(MachineItemHandler<?> table, Player player, CraftingContainer craftingInventory, ResultContainer result, int slotIndex, int xPosition, int yPosition) {
         super(player, craftingInventory, result, slotIndex, xPosition, yPosition);
         projectTable = table;
         craftMatrix = craftingInventory;
@@ -23,7 +23,7 @@ public class SlotWorkTableResult extends CraftingResultSlot {
     }
 
     @Override
-    public ItemStack onTake(PlayerEntity thePlayer, ItemStack stack) {
+    public ItemStack onTake(Player thePlayer, ItemStack stack) {
         extractedFromTable();
         return super.onTake(thePlayer, stack);
     }

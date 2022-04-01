@@ -4,17 +4,15 @@ import muramasa.antimatter.capability.IGuiHandler;
 import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.gui.slot.AbstractSlot;
 import muramasa.antimatter.gui.slot.IClickableSlot;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.ClickType;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.ClickType;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nonnull;
-
-import static net.minecraft.inventory.container.Container.consideredTheSameItem;
 
 public class SlotQuantum extends AbstractSlot<SlotQuantum> implements IClickableSlot {
     public SlotQuantum(SlotType<SlotQuantum> type, IGuiHandler tile, IItemHandler stackHandler, int index, int x, int y) {
@@ -22,9 +20,9 @@ public class SlotQuantum extends AbstractSlot<SlotQuantum> implements IClickable
     }
 
     @Override
-    public ItemStack clickSlot(int pDragType, ClickType pClickType, PlayerEntity pPlayer, Container container) {
+    public ItemStack clickSlot(int pDragType, ClickType pClickType, Player pPlayer, AbstractContainerMenu container) {
         ItemStack itemstack = ItemStack.EMPTY;
-        PlayerInventory playerinventory = pPlayer.inventory;
+        Inventory playerinventory = pPlayer.getInventory();
         /*if (pClickType == ClickType.QUICK_CRAFT) {
             int i1 = this.quickcraftStatus;
             this.quickcraftStatus = getQuickcraftHeader(pDragType);
@@ -88,7 +86,7 @@ public class SlotQuantum extends AbstractSlot<SlotQuantum> implements IClickable
                 }
             } else {
                 ItemStack containedStack = this.getItem();
-                ItemStack heldStack = playerinventory.getCarried();
+                ItemStack heldStack = container.getCarried();
                 if (!containedStack.isEmpty()) {
                     itemstack = containedStack.copy();
                 }
@@ -106,18 +104,18 @@ public class SlotQuantum extends AbstractSlot<SlotQuantum> implements IClickable
                     if (heldStack.isEmpty()) {
                         if (containedStack.isEmpty()) {
                             this.set(ItemStack.EMPTY);
-                            playerinventory.setCarried(ItemStack.EMPTY);
+                            container.setCarried(ItemStack.EMPTY);
                         } else {
                             int k2 = pDragType == 0 ? containedStack.getCount() : (containedStack.getCount() + 1) / 2;
-                            playerinventory.setCarried(this.remove(k2));
+                            container.setCarried(this.remove(k2));
                             if (containedStack.isEmpty()) {
                                 this.set(ItemStack.EMPTY);
                             }
 
-                            this.onTake(pPlayer, playerinventory.getCarried());
+                            this.onTake(pPlayer, container.getCarried());
                         }
                     } else if (this.mayPlace(heldStack)) {
-                        if (consideredTheSameItem(containedStack, heldStack)) {
+                        if (ItemStack.isSame(containedStack, heldStack)) {
                             int l2 = pDragType == 0 ? heldStack.getCount() : 1;
                             if (l2 > this.getMaxStackSize(heldStack) - containedStack.getCount()) {
                                 l2 = this.getMaxStackSize(heldStack) - containedStack.getCount();
@@ -127,9 +125,9 @@ public class SlotQuantum extends AbstractSlot<SlotQuantum> implements IClickable
                             containedStack.grow(l2);
                         } else if (heldStack.getCount() <= containedStack.getMaxStackSize() && containedStack.getCount() <= containedStack.getMaxStackSize()) {
                             this.set(heldStack);
-                            playerinventory.setCarried(containedStack);
+                            container.setCarried(containedStack);
                         }
-                    } else if (heldStack.getMaxStackSize() > 1 && consideredTheSameItem(containedStack, heldStack) && !containedStack.isEmpty()) {
+                    } else if (heldStack.getMaxStackSize() > 1 && ItemStack.isSame(containedStack, heldStack) && !containedStack.isEmpty()) {
                         int i3 = containedStack.getCount();
                         if (i3 + heldStack.getCount() <= heldStack.getMaxStackSize()) {
                             heldStack.grow(i3);
@@ -138,7 +136,7 @@ public class SlotQuantum extends AbstractSlot<SlotQuantum> implements IClickable
                                 this.set(ItemStack.EMPTY);
                             }
 
-                            this.onTake(pPlayer, playerinventory.getCarried());
+                            this.onTake(pPlayer, container.getCarried());
                         }
                     }
                 }
@@ -181,20 +179,20 @@ public class SlotQuantum extends AbstractSlot<SlotQuantum> implements IClickable
                     }
                 }
             }
-        } else if (pClickType == ClickType.CLONE && pPlayer.abilities.instabuild && playerinventory.getCarried().isEmpty()) {
+        } else if (pClickType == ClickType.CLONE && pPlayer.getAbilities().instabuild && container.getCarried().isEmpty()) {
             if (this.hasItem()) {
                 ItemStack itemstack7 = this.getItem().copy();
                 itemstack7.setCount(itemstack7.getMaxStackSize());
-                playerinventory.setCarried(itemstack7);
+                container.setCarried(itemstack7);
             }
-        } else if (pClickType == ClickType.THROW && playerinventory.getCarried().isEmpty()) {
+        } else if (pClickType == ClickType.THROW && container.getCarried().isEmpty()) {
             if (this.hasItem() && this.mayPickup(pPlayer)) {
                 ItemStack itemstack6 = this.remove(pDragType == 0 ? 1 : this.getItem().getCount());
                 this.onTake(pPlayer, itemstack6);
                 pPlayer.drop(itemstack6, true);
             }
         } else if (pClickType == ClickType.PICKUP_ALL) {
-            ItemStack itemstack5 = playerinventory.getCarried();
+            ItemStack itemstack5 = container.getCarried();
             if (!itemstack5.isEmpty() && (!this.hasItem() || !this.mayPickup(pPlayer))) {
                 int j1 = pDragType == 0 ? 0 : container.slots.size() - 1;
                 int i2 = pDragType == 0 ? 1 : -1;
@@ -202,7 +200,7 @@ public class SlotQuantum extends AbstractSlot<SlotQuantum> implements IClickable
                 for(int j = 0; j < 2; ++j) {
                     for(int k = j1; k >= 0 && k < container.slots.size() && itemstack5.getCount() < itemstack5.getMaxStackSize(); k += i2) {
                         Slot slot1 = container.slots.get(k);
-                        if (slot1.hasItem() && Container.canItemQuickReplace(slot1, itemstack5, true) && slot1.mayPickup(pPlayer) && container.canTakeItemForPickAll(itemstack5, slot1)) {
+                        if (slot1.hasItem() && AbstractContainerMenu.canItemQuickReplace(slot1, itemstack5, true) && slot1.mayPickup(pPlayer) && container.canTakeItemForPickAll(itemstack5, slot1)) {
                             ItemStack itemstack3 = slot1.getItem();
                             if (j != 0 || itemstack3.getCount() != itemstack3.getMaxStackSize()) {
                                 int l = Math.min(itemstack5.getMaxStackSize() - itemstack5.getCount(), itemstack3.getCount());

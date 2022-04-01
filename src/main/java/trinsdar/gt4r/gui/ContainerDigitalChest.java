@@ -3,12 +3,12 @@ package trinsdar.gt4r.gui;
 import muramasa.antimatter.gui.MenuHandlerMachine;
 import muramasa.antimatter.gui.container.ContainerBasicMachine;
 import muramasa.antimatter.gui.container.ContainerMachine;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Slot;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.Slot;
 import trinsdar.gt4r.tile.single.TileEntityDigitalChest;
 
 public class ContainerDigitalChest extends ContainerBasicMachine<TileEntityDigitalChest> {
-    public ContainerDigitalChest(TileEntityDigitalChest tile, PlayerInventory playerInv, MenuHandlerMachine<TileEntityDigitalChest, ContainerMachine<TileEntityDigitalChest>> handler, int windowId) {
+    public ContainerDigitalChest(TileEntityDigitalChest tile, Inventory playerInv, MenuHandlerMachine<TileEntityDigitalChest, ContainerMachine<TileEntityDigitalChest>> handler, int windowId) {
         super(tile, playerInv, handler, windowId);
     }
 

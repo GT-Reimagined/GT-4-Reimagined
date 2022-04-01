@@ -6,18 +6,18 @@ import muramasa.antimatter.material.Material;
 import muramasa.antimatter.ore.StoneType;
 import muramasa.antimatter.worldgen.WorldGenHelper;
 import muramasa.antimatter.worldgen.feature.AntimatterFeature;
-import net.minecraft.util.RegistryKey;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.ISeedReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.placement.Placement;
-import net.minecraft.world.gen.placement.TopSolidRangeConfig;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
+import net.minecraft.core.Registry;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.placement.FeatureDecorator;
+import net.minecraft.world.level.levelgen.feature.configurations.RangeDecoratorConfiguration;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 
@@ -52,52 +52,52 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
     @Override
     public void build(BiomeGenerationSettingsBuilder event) {
         if (AntimatterConfig.WORLD.ORE_VEINS){
-            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, COPPER);
-            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, TIN);
-            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, URANITE);
-            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, URANITE_DEAD);
-            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CASSITERITE);
-            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, TETRAHEDRITE);
-            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, GALENA);
-            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, BAUXITE);
-            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, RUBY);
-            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, SAPPHIRE);
-            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, PLATINUM);
-            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, IRIDIUM);
-            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, EMERALD);
-            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, PYRITE);
-            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, SPHALERITE);
-            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CINNABAR);
-            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, TUNGSTATE);
-            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, PLATINUM_END);
-            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, OLIVINE);
-            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, SODALITE);
-            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, CHROMITE);
-            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, SALT);
-            event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ROCK_SALT);
+            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, COPPER);
+            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, TIN);
+            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, URANITE);
+            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, URANITE_DEAD);
+            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, CASSITERITE);
+            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, TETRAHEDRITE);
+            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, GALENA);
+            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, BAUXITE);
+            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, RUBY);
+            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, SAPPHIRE);
+            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, PLATINUM);
+            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, IRIDIUM);
+            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, EMERALD);
+            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, PYRITE);
+            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, SPHALERITE);
+            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, CINNABAR);
+            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, TUNGSTATE);
+            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, PLATINUM_END);
+            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OLIVINE);
+            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, SODALITE);
+            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, CHROMITE);
+            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, SALT);
+            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ROCK_SALT);
             if (AntimatterConfig.WORLD.VANILLA_ORE_GEN){
-                event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, IRON);
-                event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, COAL);
-                event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, GOLD);
-                event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, GOLD_MESA);
-                event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, REDSTONE);
-                event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, DIAMOND);
-                event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, EMERALD_VANILLA);
-                event.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, LAPIS);
+                event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, IRON);
+                event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, COAL);
+                event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, GOLD);
+                event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, GOLD_MESA);
+                event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, REDSTONE);
+                event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, DIAMOND);
+                event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, EMERALD_VANILLA);
+                event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, LAPIS);
             }
         }
     }
 
     public ConfiguredFeature<?, ?> getConfiguration(GT4ROreFeatureConfig config){
-        return this.configured(config).decorated(Placement.RANGE.configured(getRange(config.getMinY(), config.getMaxY()))).squared().count(config.getWeight());
+        return this.configured(config).decorated(FeatureDecorator.RANGE.configured(getRange(config.getMinY(), config.getMaxY()))).squared().count(config.getWeight());
     }
 
-    public TopSolidRangeConfig getRange(int min, int max){
-        return new TopSolidRangeConfig(min, min, max);
+    public RangeDecoratorConfiguration getRange(int min, int max){
+        return new RangeDecoratorConfiguration(min, min, max);
     }
 
     @Override
-    public boolean place(ISeedReader world, ChunkGenerator generator, Random rand, BlockPos pos, GT4ROreFeatureConfig config) {
+    public boolean place(WorldGenLevel world, ChunkGenerator generator, Random rand, BlockPos pos, GT4ROreFeatureConfig config) {
         int chunkX = pos.getX() >> 4;
         int chunkZ = pos.getZ() >> 4;
         //Feature.ORE.generate()
@@ -106,7 +106,7 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
         List<BiomeDictionary.Type> types = config.getBiomeTypes();
         List<BiomeDictionary.Type> invalidTypes = config.getInvalidBiomeTypes();
         boolean hasType = types.isEmpty();
-        for (BiomeDictionary.Type type : BiomeDictionary.getTypes(RegistryKey.create(Registry.BIOME_REGISTRY, world.getBiome(pos).getRegistryName()))) {
+        for (BiomeDictionary.Type type : BiomeDictionary.getTypes(ResourceKey.create(Registry.BIOME_REGISTRY, world.getBiome(pos).getRegistryName()))) {
             if (types.contains(type)) {
                 hasType = true;
             }
@@ -125,24 +125,24 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
         return generate2(world, rand, pos, config);
     }
 
-    public boolean generateOnOceanFloor(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, GT4ROreFeatureConfig config) {
+    public boolean generateOnOceanFloor(WorldGenLevel reader, ChunkGenerator generator, Random rand, BlockPos pos, GT4ROreFeatureConfig config) {
 
         float f = rand.nextFloat() * (float)Math.PI;
         float f1 = (float)config.getSize() / 8.0F;
-        int i = MathHelper.ceil(((float)config.getSize() / 16.0F * 2.0F + 1.0F) / 2.0F);
+        int i = Mth.ceil(((float)config.getSize() / 16.0F * 2.0F + 1.0F) / 2.0F);
         double x0 = (double)pos.getX() + Math.sin(f) * (double)f1;
         double x1 = (double)pos.getX() - Math.sin(f) * (double)f1;
         double z0 = (double)pos.getZ() + Math.cos(f) * (double)f1;
         double z1 = (double)pos.getZ() - Math.cos(f) * (double)f1;
-        int x = pos.getX() - MathHelper.ceil(f1) - i;
+        int x = pos.getX() - Mth.ceil(f1) - i;
         int y;
-        int z = pos.getZ() - MathHelper.ceil(f1) - i;
-        int j1 = 2 * (MathHelper.ceil(f1) + i);
+        int z = pos.getZ() - Mth.ceil(f1) - i;
+        int j1 = 2 * (Mth.ceil(f1) + i);
         int k1 = 2 * (2 + i);
 
         for(int ix = x; ix <= x + j1; ++ix) {
             for(int iz = z; iz <= z + j1; ++iz) {
-                y = reader.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, ix, iz);
+                y = reader.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, ix, iz);
                 double y0 = y + rand.nextInt(3) - 2;
                 double y1 = y + rand.nextInt(3) - 2;
                 return generateVein(reader, rand, config, x0, x1, z0, z1, y0, y1, x, y, z, j1, k1);
@@ -152,25 +152,25 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
         return false;
     }
 
-    public boolean generate2(ISeedReader reader, Random rand, BlockPos pos, GT4ROreFeatureConfig config) {
+    public boolean generate2(WorldGenLevel reader, Random rand, BlockPos pos, GT4ROreFeatureConfig config) {
         float f = rand.nextFloat() * (float)Math.PI;
         float f1 = (float)config.getSize() / 8.0F;
-        int i = MathHelper.ceil(((float)config.getSize() / 16.0F * 2.0F + 1.0F) / 2.0F);
+        int i = Mth.ceil(((float)config.getSize() / 16.0F * 2.0F + 1.0F) / 2.0F);
         double x0 = (double)pos.getX() + Math.sin(f) * (double)f1;
         double x1 = (double)pos.getX() - Math.sin(f) * (double)f1;
         double z0 = (double)pos.getZ() + Math.cos(f) * (double)f1;
         double z1 = (double)pos.getZ() - Math.cos(f) * (double)f1;
         double y0 = pos.getY() + rand.nextInt(3) - 2;
         double y1 = pos.getY() + rand.nextInt(3) - 2;
-        int x = pos.getX() - MathHelper.ceil(f1) - i;
+        int x = pos.getX() - Mth.ceil(f1) - i;
         int y = pos.getY() - 2 - i;
-        int z = pos.getZ() - MathHelper.ceil(f1) - i;
-        int j1 = 2 * (MathHelper.ceil(f1) + i);
+        int z = pos.getZ() - Mth.ceil(f1) - i;
+        int j1 = 2 * (Mth.ceil(f1) + i);
         int k1 = 2 * (2 + i);
 
         for(int ix = x; ix <= x + j1; ++ix) {
             for(int iz = z; iz <= z + j1; ++iz) {
-                if (y <= reader.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, ix, iz)) {
+                if (y <= reader.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, ix, iz)) {
                     return generateVein(reader, rand, config, x0, x1, z0, z1, y0, y1, x, y, z, j1, k1);
                 }
             }
@@ -179,20 +179,20 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
         return false;
     }
 
-    protected boolean generateVein(IWorld worldIn, Random random, GT4ROreFeatureConfig config, double x0, double x1, double z0, double z1, double y0, double y1, int x, int y, int z, int p_207803_19_, int p_207803_20_) {
+    protected boolean generateVein(LevelAccessor worldIn, Random random, GT4ROreFeatureConfig config, double x0, double x1, double z0, double z1, double y0, double y1, int x, int y, int z, int p_207803_19_, int p_207803_20_) {
         int i = 0;
         BitSet bitset = new BitSet(p_207803_19_ * p_207803_20_ * p_207803_19_);
-        BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
+        BlockPos.MutableBlockPos blockpos$mutable = new BlockPos.MutableBlockPos();
         int j = config.getSize();
         double[] adouble = new double[j * 4];
 
         for(int k = 0; k < j; ++k) {
             float f = (float)k / (float)j;
-            double d0 = MathHelper.lerp(f, x0, x1);
-            double d2 = MathHelper.lerp(f, y0, y1);
-            double d4 = MathHelper.lerp(f, z0, z1);
+            double d0 = Mth.lerp(f, x0, x1);
+            double d2 = Mth.lerp(f, y0, y1);
+            double d4 = Mth.lerp(f, z0, z1);
             double d6 = random.nextDouble() * (double)j / 16.0D;
-            double d7 = ((double)(MathHelper.sin((float)Math.PI * f) + 1.0F) * d6 + 1.0D) / 2.0D;
+            double d7 = ((double)(Mth.sin((float)Math.PI * f) + 1.0F) * d6 + 1.0D) / 2.0D;
             adouble[k * 4] = d0;
             adouble[k * 4 + 1] = d2;
             adouble[k * 4 + 2] = d4;
@@ -225,12 +225,12 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
                 double d1 = adouble[j3 * 4];
                 double d3 = adouble[j3 * 4 + 1];
                 double d5 = adouble[j3 * 4 + 2];
-                int l = Math.max(MathHelper.floor(d1 - d11), x);
-                int l3 = Math.max(MathHelper.floor(d3 - d11), y);
-                int i1 = Math.max(MathHelper.floor(d5 - d11), z);
-                int j1 = Math.max(MathHelper.floor(d1 + d11), l);
-                int k1 = Math.max(MathHelper.floor(d3 + d11), l3);
-                int l1 = Math.max(MathHelper.floor(d5 + d11), i1);
+                int l = Math.max(Mth.floor(d1 - d11), x);
+                int l3 = Math.max(Mth.floor(d3 - d11), y);
+                int i1 = Math.max(Mth.floor(d5 - d11), z);
+                int j1 = Math.max(Mth.floor(d1 + d11), l);
+                int k1 = Math.max(Mth.floor(d3 + d11), l3);
+                int l1 = Math.max(Mth.floor(d5 + d11), i1);
 
                 for(int i2 = l; i2 <= j1; ++i2) {
                     double d8 = ((double)i2 + 0.5D - d1) / d11;

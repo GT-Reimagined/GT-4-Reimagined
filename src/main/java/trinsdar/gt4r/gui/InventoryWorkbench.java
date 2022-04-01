@@ -1,9 +1,9 @@
 package trinsdar.gt4r.gui;
 
 import muramasa.antimatter.capability.machine.MachineItemHandler;
-import net.minecraft.inventory.CraftingInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.inventory.CraftingContainer;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import trinsdar.gt4r.data.SlotTypes;
@@ -12,11 +12,11 @@ import trinsdar.gt4r.network.MessageCraftingSync;
 
 import javax.annotation.Nonnull;
 
-public class InventoryWorkbench extends CraftingInventory {
+public class InventoryWorkbench extends CraftingContainer {
     private final int length;
     private final MachineItemHandler<?> projectTable;
-    private final Container eventHandler;
-    public InventoryWorkbench(Container eventHandlerIn, MachineItemHandler<?> table, int width, int height) {
+    private final AbstractContainerMenu eventHandler;
+    public InventoryWorkbench(AbstractContainerMenu eventHandlerIn, MachineItemHandler<?> table, int width, int height) {
         super(eventHandlerIn, width, height);
         this.length = width * height;
         this.projectTable = table;

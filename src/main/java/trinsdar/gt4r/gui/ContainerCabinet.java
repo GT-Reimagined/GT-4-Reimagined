@@ -3,29 +3,29 @@ package trinsdar.gt4r.gui;
 import muramasa.antimatter.gui.MenuHandlerMachine;
 import muramasa.antimatter.gui.container.ContainerBasicMachine;
 import muramasa.antimatter.material.Material;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.container.Slot;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.Container;
+import net.minecraft.world.inventory.Slot;
 import trinsdar.gt4r.tile.single.TileEntityMaterial;
 
 import static muramasa.antimatter.Data.Gold;
 import static trinsdar.gt4r.data.Materials.*;
 
 public class ContainerCabinet<T extends TileEntityMaterial<T>> extends ContainerBasicMachine<T> {
-    public ContainerCabinet(T tile, PlayerInventory playerInv, MenuHandlerMachine handler, int windowId) {
+    public ContainerCabinet(T tile, Inventory playerInv, MenuHandlerMachine handler, int windowId) {
         super(tile, playerInv, handler, windowId);
-        if (tile instanceof IInventory){
-            ((IInventory)tile).startOpen(playerInv.player);
+        if (tile instanceof Container){
+            ((Container)tile).startOpen(playerInv.player);
         }
 
     }
 
     @Override
-    public void removed(PlayerEntity playerIn) {
+    public void removed(Player playerIn) {
         super.removed(playerIn);
-        if (tile instanceof IInventory){
-            ((IInventory)tile).stopOpen(playerIn);
+        if (tile instanceof Container){
+            ((Container)tile).stopOpen(playerIn);
         }
     }
 

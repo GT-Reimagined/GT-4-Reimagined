@@ -7,18 +7,18 @@ import muramasa.antimatter.machine.event.ContentEvent;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.tool.AntimatterToolType;
 import muramasa.antimatter.util.Utils;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
@@ -34,7 +34,7 @@ import static muramasa.antimatter.Data.Netherite;
 import static muramasa.antimatter.Data.WRENCH;
 import static net.minecraft.util.Direction.DOWN;
 import static net.minecraft.util.Direction.UP;
-import static trinsdar.gt4r.data.Materials.*;
+import staticnet.minecraft.core.Directions.*;
 
 import muramasa.antimatter.capability.FluidHandler.FluidDirection;
 
@@ -47,22 +47,22 @@ public class TileEntityDrum extends TileEntityMaterial<TileEntityDrum> {
     }
 
     @Override
-    public ActionResultType onInteract(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit, @Nullable AntimatterToolType type) {
+    public InteractionResult onInteract(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit, @Nullable AntimatterToolType type) {
         boolean[] success = new boolean[1];
         this.fluidHandler.ifPresent(f -> {
             DrumFluidHandler dF = (DrumFluidHandler) f;
             if ((type == WRENCH || type == ELECTRIC_WRENCH) && !player.isShiftKeyDown()){
                 dF.setOutput(!dF.isOutput());
                 success[0] = true;
-                player.playNotifySound(Ref.WRENCH, SoundCategory.BLOCKS, 1.0f, 1.0f);
+                player.playNotifySound(Ref.WRENCH, SoundSource.BLOCKS, 1.0f, 1.0f);
                 // TODO: Replace by new TranslationTextComponent()
-                player.sendMessage(new StringTextComponent((dF.isOutput() ? "Will" : "Won't") + " fill adjacent Tanks"), player.getUUID());
+                player.sendMessage(new TextComponent((dF.isOutput() ? "Will" : "Won't") + " fill adjacent Tanks"), player.getUUID());
             }
         });
         if (success[0]){
-            return ActionResultType.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
-        return ActionResultType.PASS;
+        return InteractionResult.PASS;
     }
 
     @Override
@@ -141,7 +141,7 @@ public class TileEntityDrum extends TileEntityMaterial<TileEntityDrum> {
             if (tile.getLevel().getGameTime() % 20 == 0 && output){
                 Direction dir = getTank(0).getFluid().getFluid().getAttributes().isGaseous() ? UP : Direction.DOWN;
                 if (getTank(0).getFluidAmount() > 0){
-                    TileEntity adjacent = tile.getLevel().getBlockEntity(tile.getBlockPos().relative(dir));
+                    BlockEntity adjacent = tile.getLevel().getBlockEntity(tile.getBlockPos().relative(dir));
                     if (adjacent != null){
                         LazyOptional<IFluidHandler> cap = adjacent.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, dir.getOpposite());
                         cap.ifPresent(other -> Utils.transferFluids(this, other, 1000));
@@ -151,14 +151,14 @@ public class TileEntityDrum extends TileEntityMaterial<TileEntityDrum> {
         }
 
         @Override
-        public CompoundNBT serializeNBT() {
-            CompoundNBT nbt = super.serializeNBT();
+        public CompoundTag serializeNBT() {
+            CompoundTag nbt = super.serializeNBT();
             nbt.putBoolean("Output", output);
             return nbt;
         }
 
         @Override
-        public void deserializeNBT(CompoundNBT nbt) {
+        public void deserializeNBT(CompoundTag nbt) {
             super.deserializeNBT(nbt);
             this.output = nbt.getBoolean("Output");
         }

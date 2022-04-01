@@ -1,8 +1,8 @@
 package trinsdar.gt4r.proxy;
 
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.Registry;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import trinsdar.gt4r.GT4Reimagined;
 import trinsdar.gt4r.Ref;

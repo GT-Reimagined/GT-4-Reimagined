@@ -16,7 +16,7 @@ import muramasa.antimatter.gui.widget.TextWidget;
 import muramasa.antimatter.gui.widget.WidgetSupplier;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.util.int4;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.gui.MenuHandlerCrafting;

@@ -1,58 +1,53 @@
 package trinsdar.gt4r.client;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import muramasa.antimatter.machine.Tier;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.client.renderer.Atlases;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.model.geom.ModelLayers;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.client.renderer.model.RenderMaterial;
-import net.minecraft.client.renderer.tileentity.DualBrightnessCallback;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tileentity.IChestLid;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityMerger;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.vector.Vector3f;
-import net.minecraft.world.World;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.resources.model.Material;
+import net.minecraft.client.renderer.blockentity.BrightnessCombiner;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.DoubleBlockCombiner;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import com.mojang.math.Vector3f;
+import net.minecraft.world.level.Level;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.block.BlockMaterialChest;
 import trinsdar.gt4r.tile.single.TileEntityChest;
 
 import java.awt.Color;
 
-public class MaterialChestRenderer <T extends TileEntity> extends TileEntityRenderer<T> {
+public class MaterialChestRenderer <T extends BlockEntity> implements BlockEntityRenderer<T> {
     public static final ResourceLocation MATERIAL_CHEST_BASE = new ResourceLocation(Ref.ID, "model/material_chest_base");
     public static final ResourceLocation MATERIAL_CHEST_OVERLAY = new ResourceLocation(Ref.ID, "model/material_chest_overlay");
-    private final ModelRenderer chestLid;
-    private final ModelRenderer chestBottom;
-    private final ModelRenderer chestLock;
+    private final ModelPart chestLid;
+    private final ModelPart chestBottom;
+    private final ModelPart chestLock;
 
-    public MaterialChestRenderer(TileEntityRendererDispatcher p_i226006_1_) {
-        super(p_i226006_1_);
+    public MaterialChestRenderer(BlockEntityRendererProvider.Context ctx) {
 
-        this.chestBottom = new ModelRenderer(64, 64, 0, 19);
-        this.chestBottom.addBox(1.0F, 0.0F, 1.0F, 14.0F, 10.0F, 14.0F, 0.0F);
-        this.chestLid = new ModelRenderer(64, 64, 0, 0);
-        this.chestLid.addBox(1.0F, 0.0F, 0.0F, 14.0F, 5.0F, 14.0F, 0.0F);
-        this.chestLid.y = 9.0F;
-        this.chestLid.z = 1.0F;
-        this.chestLock = new ModelRenderer(64, 64, 0, 0);
-        this.chestLock.addBox(7.0F, -1.0F, 15.0F, 2.0F, 4.0F, 1.0F, 0.0F);
-        this.chestLock.y = 8.0F;
+        ModelPart modelpart = ctx.bakeLayer(ModelLayers.CHEST);
+        this.chestBottom = modelpart.getChild("bottom");
+        this.chestLid = modelpart.getChild("lid");
+        this.chestLock = modelpart.getChild("lock");
     }
 
     @Override
-    public void render(T pBlockEntity, float pPartialTicks, MatrixStack pMatrixStack, IRenderTypeBuffer pBuffer, int pCombinedLight, int pCombinedOverlay) {
+    public void render(T pBlockEntity, float pPartialTicks, PoseStack pMatrixStack, MultiBufferSource pBuffer, int pCombinedLight, int pCombinedOverlay) {
         TileEntityChest tileEntity = (TileEntityChest) pBlockEntity;
 
-        World world = tileEntity.getLevel();
+        Level world = tileEntity.getLevel();
         boolean flag = world != null;
 
         BlockState blockstate = flag ? tileEntity.getBlockState() : tileEntity.getMachineType().getBlockState(Tier.LV).defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING, Direction.SOUTH);
@@ -68,24 +63,24 @@ public class MaterialChestRenderer <T extends TileEntity> extends TileEntityRend
             pMatrixStack.mulPose(Vector3f.YP.rotationDegrees(-f));
             pMatrixStack.translate(-0.5D, -0.5D, -0.5D);
 
-            TileEntityMerger.ICallbackWrapper<? extends TileEntityChest> iCallbackWrapper;
+            DoubleBlockCombiner.NeighborCombineResult<? extends TileEntityChest> iCallbackWrapper;
             if (flag) {
                 iCallbackWrapper = materialChest.getWrapper(blockstate, world, tileEntity.getBlockPos(), true);
             } else {
-                iCallbackWrapper = TileEntityMerger.ICallback::acceptNone;
+                iCallbackWrapper = DoubleBlockCombiner.Combiner::acceptNone;
             }
 
             float f1 = iCallbackWrapper.apply(BlockMaterialChest.getLid(tileEntity)).get(pPartialTicks);
             f1 = 1.0F - f1;
             f1 = 1.0F - f1 * f1 * f1;
-            int i = iCallbackWrapper.apply(new DualBrightnessCallback<>()).applyAsInt(pCombinedLight);
+            int i = iCallbackWrapper.apply(new BrightnessCombiner<>()).applyAsInt(pCombinedLight);
 
-            RenderMaterial material = new RenderMaterial(Atlases.CHEST_SHEET, MATERIAL_CHEST_BASE);
-            IVertexBuilder ivertexbuilder = material.buffer(pBuffer, RenderType::entityCutout);
+            Material material = new Material(Sheets.CHEST_SHEET, MATERIAL_CHEST_BASE);
+            VertexConsumer ivertexbuilder = material.buffer(pBuffer, RenderType::entityCutout);
 
             this.handleModelRender(pMatrixStack, ivertexbuilder, this.chestLid, this.chestLock, this.chestBottom, f1, i, pCombinedOverlay, materialChest.getBlockColor(blockstate, world, tileEntity.getBlockPos(), 0));
 
-            material = new RenderMaterial(Atlases.CHEST_SHEET, MATERIAL_CHEST_OVERLAY);
+            material = new Material(Sheets.CHEST_SHEET, MATERIAL_CHEST_OVERLAY);
             ivertexbuilder = material.buffer(pBuffer, RenderType::entityCutout);
 
             this.handleModelRender(pMatrixStack, ivertexbuilder, this.chestLid, this.chestLock, this.chestBottom, f1, i, pCombinedOverlay, materialChest.getBlockColor(blockstate, world, tileEntity.getBlockPos(), 1));
@@ -94,7 +89,7 @@ public class MaterialChestRenderer <T extends TileEntity> extends TileEntityRend
         }
     }
 
-    private void handleModelRender(MatrixStack matrixStackIn, IVertexBuilder iVertexBuilder, ModelRenderer firstModel, ModelRenderer secondModel, ModelRenderer thirdModel, float f1, int i, int pCombinedOverlay, int color) {
+    private void handleModelRender(PoseStack matrixStackIn, VertexConsumer iVertexBuilder, ModelPart firstModel, ModelPart secondModel, ModelPart thirdModel, float f1, int i, int pCombinedOverlay, int color) {
         firstModel.xRot = -(f1 * ((float) Math.PI / 2F));
         secondModel.xRot = firstModel.xRot;
         Color colorValue = new Color(color);

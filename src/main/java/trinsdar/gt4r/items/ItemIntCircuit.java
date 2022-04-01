@@ -1,14 +1,14 @@
 package trinsdar.gt4r.items;
 
 import muramasa.antimatter.item.ItemBasic;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.level.Level;
 import trinsdar.gt4r.data.GT4RData;
 
-import net.minecraft.item.Item.Properties;
+import net.minecraft.world.item.Item.Properties;
 
 public class ItemIntCircuit extends ItemBasic<ItemIntCircuit> {
 
@@ -30,12 +30,12 @@ public class ItemIntCircuit extends ItemBasic<ItemIntCircuit> {
     }
 
     @Override
-    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+    public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
         int newId = playerIn.isCrouching() ? this.getNewCircuitIdBackward() : this.getNewCircuitIdForward();
         ItemStack stack = playerIn.getItemInHand(handIn);
         ItemStack newStack = new ItemStack(GT4RData.INT_CIRCUITS_ITEMS.get(newId), stack.getCount());
         playerIn.setItemInHand(handIn, newStack);
-        return ActionResult.consume(stack);
+        return InteractionResultHolder.consume(stack);
     }
 
     private int getNewCircuitIdForward(){

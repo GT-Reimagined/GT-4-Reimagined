@@ -5,18 +5,18 @@ import muramasa.antimatter.machine.MachineState;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.util.Utils;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.FlowingFluidBlock;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.core.BlockPos;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -97,7 +97,7 @@ public class TileEntityPump extends TileEntityMachine<TileEntityPump> {
     private boolean moveOneDown() {
         if (pumpHeadY <= 0) return false;
         BlockState state = level.getBlockState(new BlockPos(worldPosition.getX(), pumpHeadY - 1, worldPosition.getZ()));
-        if (!(state.getBlock() instanceof FlowingFluidBlock) && !state.getBlock().isAir(state, level, new BlockPos(worldPosition.getX(), pumpHeadY - 1, worldPosition.getZ()))) return false;
+        if (!(state.getBlock() instanceof LiquidBlock) && !state.getBlock().isAir(state, level, new BlockPos(worldPosition.getX(), pumpHeadY - 1, worldPosition.getZ()))) return false;
         pumpHeadY--;
         return true;
     }
@@ -182,32 +182,32 @@ public class TileEntityPump extends TileEntityMachine<TileEntityPump> {
     }
 
     @Override
-    public CompoundNBT save(CompoundNBT tag) {
+    public CompoundTag save(CompoundTag tag) {
         super.save(tag);
-        tag.put("Fluid", new FluidStack(fluid, 1).writeToNBT(new CompoundNBT()));
+        tag.put("Fluid", new FluidStack(fluid, 1).writeToNBT(new CompoundTag()));
         tag.putInt("pumpHeadY", pumpHeadY);
-        ListNBT nbtTagList = new ListNBT();
+        ListTag nbtTagList = new ListTag();
         for (int i = 0; i < mPumpList.size(); i++) {
-            CompoundNBT itemTag = new CompoundNBT();
+            CompoundTag itemTag = new CompoundTag();
             BlockPos pos = mPumpList.get(i);
             itemTag.putInt("X", pos.getX());
             itemTag.putInt("Y", pos.getY());
             itemTag.putInt("Z", pos.getZ());
             nbtTagList.add(itemTag);
         }
-        CompoundNBT nbt = new CompoundNBT();
+        CompoundTag nbt = new CompoundTag();
         nbt.put("Positions", nbtTagList);
         return tag;
     }
 
     @Override
-    public void load(BlockState state, CompoundNBT tag) {
+    public void load(BlockState state, CompoundTag tag) {
         super.load(state, tag);
         mPumpList = new ArrayList<>();
-        ListNBT tagList = tag.getList("Positions", Constants.NBT.TAG_COMPOUND);
+        ListTag tagList = tag.getList("Positions", Constants.NBT.TAG_COMPOUND);
         for (int i = 0; i < tagList.size(); i++)
         {
-            CompoundNBT itemTags = tagList.getCompound(i);
+            CompoundTag itemTags = tagList.getCompound(i);
             BlockPos pos = new BlockPos(itemTags.getInt("X"), itemTags.getInt("Y"), itemTags.getInt("Z"));
             mPumpList.add(pos);
         }

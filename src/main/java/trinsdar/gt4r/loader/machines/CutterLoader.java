@@ -1,8 +1,8 @@
 package trinsdar.gt4r.loader.machines;
 
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 import static muramasa.antimatter.Data.BLOCK;
 import static muramasa.antimatter.Data.BOLT;

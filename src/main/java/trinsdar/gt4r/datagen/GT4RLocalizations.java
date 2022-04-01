@@ -11,7 +11,7 @@ import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialTag;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.item.Item;
+import net.minecraft.world.item.Item;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.block.BlockCasing;
 import trinsdar.gt4r.data.GT4RData;

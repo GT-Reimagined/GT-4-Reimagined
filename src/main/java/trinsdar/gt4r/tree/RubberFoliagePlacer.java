@@ -2,32 +2,32 @@ package trinsdar.gt4r.tree;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MutableBoundingBox;
-import net.minecraft.world.gen.IWorldGenerationReader;
-import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
-import net.minecraft.world.gen.feature.FeatureSpread;
-import net.minecraft.world.gen.feature.TreeFeature;
-import net.minecraft.world.gen.foliageplacer.FoliagePlacer;
-import net.minecraft.world.gen.foliageplacer.FoliagePlacerType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.LevelSimulatedRW;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.util.UniformInt;
+import net.minecraft.world.level.levelgen.feature.TreeFeature;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Consumer;
 
-import net.minecraft.world.gen.foliageplacer.FoliagePlacer.Foliage;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer.FoliageAttachment;
 
 public class RubberFoliagePlacer extends FoliagePlacer {
     public static final Codec<RubberFoliagePlacer> CODEC = RecordCodecBuilder.create((p_242834_0_) -> {
         return foliagePlacerParts(p_242834_0_).apply(p_242834_0_, RubberFoliagePlacer::new);
     });
     public static final FoliagePlacerType<RubberFoliagePlacer> RUBBER = new FoliagePlacerType<>(CODEC);
-    protected RubberFoliagePlacer(FeatureSpread radius, FeatureSpread offset) {
+    protected RubberFoliagePlacer(UniformInt radius, UniformInt offset) {
         super(radius, offset);
     }
 
     public RubberFoliagePlacer() {
-        super(FeatureSpread.fixed(2), FeatureSpread.fixed(-1));
+        super(UniformInt.fixed(2), UniformInt.fixed(-1));
     }
 
     @Override
@@ -36,13 +36,13 @@ public class RubberFoliagePlacer extends FoliagePlacer {
     }
 
     @Override
-    protected void createFoliage(IWorldGenerationReader world, Random random, BaseTreeFeatureConfig config, int trunkHeight, Foliage treeNode, int foilageHeight, int radius, Set<BlockPos> leaves, int offset, MutableBoundingBox box) {
+    protected void createFoliage(LevelSimulatedRW world, Random random, TreeConfiguration config, int trunkHeight, FoliageAttachment treeNode, int foilageHeight, int radius, Set<BlockPos> leaves, int offset, BoundingBox box) {
         generate(world, random, config, trunkHeight, treeNode, foilageHeight, radius, leaves, offset, box);
     }
 
-    protected void generate(IWorldGenerationReader world, Random random, BaseTreeFeatureConfig config, int trunkHeight, Foliage treeNode, int foliageHeight, int radius, Set<BlockPos> leaves, int offset, MutableBoundingBox box) {
+    protected void generate(LevelSimulatedRW world, Random random, TreeConfiguration config, int trunkHeight, FoliageAttachment treeNode, int foliageHeight, int radius, Set<BlockPos> leaves, int offset, BoundingBox box) {
         BlockPos center = treeNode.foliagePos();
-        BlockPos.Mutable pos = center.mutable();
+        BlockPos.MutableBlockPos pos = center.mutable();
 
         int x = pos.getX();
         int y = pos.getY();
@@ -57,7 +57,7 @@ public class RubberFoliagePlacer extends FoliagePlacer {
             circle(pos.mutable(), treeRadius, position -> {
                 if (TreeFeature.isAirOrLeaves(world, position)) {
                     world.setBlock(position, config.leavesProvider.getState(random, position), 19);
-                    box.expand(new MutableBoundingBox(position, position));
+                    box.expand(new BoundingBox(position, position));
                     leaves.add(position.immutable());
                 }
             });
@@ -68,7 +68,7 @@ public class RubberFoliagePlacer extends FoliagePlacer {
             BlockPos leaf = center.above(i);
             if (TreeFeature.isAirOrLeaves(world, leaf)) {
                 world.setBlock(leaf, config.leavesProvider.getState(random, leaf), 19);
-                box.expand(new MutableBoundingBox(leaf, leaf));
+                box.expand(new BoundingBox(leaf, leaf));
                 leaves.add(leaf.immutable());
             }
         }
@@ -83,7 +83,7 @@ public class RubberFoliagePlacer extends FoliagePlacer {
      * @param radius The radius of the circle
      * @param consumer The target of the positions; it passes the same BlockPos.Mutable object each time
      */
-    private static void circle(BlockPos.Mutable origin, double radius, Consumer<BlockPos.Mutable> consumer) {
+    private static void circle(BlockPos.MutableBlockPos origin, double radius, Consumer<BlockPos.MutableBlockPos> consumer) {
         int x = origin.getX();
         int z = origin.getZ();
 
@@ -105,7 +105,7 @@ public class RubberFoliagePlacer extends FoliagePlacer {
     }
 
     @Override
-    public int foliageHeight(Random p_230374_1_, int p_230374_2_, BaseTreeFeatureConfig p_230374_3_) {
+    public int foliageHeight(Random p_230374_1_, int p_230374_2_, TreeConfiguration p_230374_3_) {
         return Math.max(2, p_230374_2_ - (3 + p_230374_1_.nextInt(2)));
     }
 

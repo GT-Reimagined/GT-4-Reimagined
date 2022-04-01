@@ -3,11 +3,11 @@ package trinsdar.gt4r.block;
 import muramasa.antimatter.machine.BlockMachine;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.Machine;
-import net.minecraft.block.SoundType;
+import net.minecraft.world.level.block.SoundType;
 
 import static muramasa.antimatter.Data.WRENCH_MATERIAL;
 
-import net.minecraft.block.AbstractBlock.Properties;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class BlockNonSolidMachine extends BlockMachine {
     public BlockNonSolidMachine(Machine<?> type, Tier tier) {

@@ -8,9 +8,9 @@ import muramasa.antimatter.pipe.PipeSize;
 import muramasa.antimatter.pipe.types.Cable;
 import muramasa.antimatter.pipe.types.Wire;
 import muramasa.antimatter.util.TagUtils;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import trinsdar.gt4r.GT4RConfig;
 
 import java.util.Map;
@@ -25,7 +25,7 @@ import static trinsdar.gt4r.loader.crafting.CraftingHelper.criterion;
 
 public class ToolCraftingTableRecipes {
     @SuppressWarnings("unchecked")
-    public static void loadRecipes(Consumer<IFinishedRecipe> output, AntimatterRecipeProvider provider) {
+    public static void loadRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider) {
         int wireAmount = GT4RConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 1 : 2;
         AntimatterAPI.all(Wire.class, wire -> {
             Cable<?> cable = AntimatterAPI.get(Cable.class, "cable" + "_" + wire.getMaterial().getId());
@@ -79,17 +79,17 @@ public class ToolCraftingTableRecipes {
         });
     }
 
-    private static void twoToOne(Map<PipeSize, Item> wires, PipeSize from, PipeSize to, Consumer<IFinishedRecipe> output, AntimatterRecipeProvider provider) {
+    private static void twoToOne(Map<PipeSize, Item> wires, PipeSize from, PipeSize to, Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider) {
         provider.shapeless(output,"twoone","wire","has_cutter",criterion(WIRE_CUTTER.getTag(), provider),
                 new ItemStack(wires.get(to),1),wires.get(from),wires.get(from));
     }
 
-    private static void oneToTwo(Map<PipeSize, Item> wires, PipeSize from, PipeSize to, Consumer<IFinishedRecipe> output, AntimatterRecipeProvider provider) {
+    private static void oneToTwo(Map<PipeSize, Item> wires, PipeSize from, PipeSize to, Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider) {
         provider.shapeless(output,"onetwo","wire","has_cutter",criterion(WIRE_CUTTER.getTag(), provider),
                 new ItemStack(wires.get(to),2),wires.get(from));
     }
 
-    private static void fourToOne(Map<PipeSize, Item> wires, PipeSize from, PipeSize to, Consumer<IFinishedRecipe> output, AntimatterRecipeProvider provider) {
+    private static void fourToOne(Map<PipeSize, Item> wires, PipeSize from, PipeSize to, Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider) {
         provider.shapeless(output,"fourone","wire","has_cutter",criterion(WIRE_CUTTER.getTag(), provider),
                 new ItemStack(wires.get(to),1),wires.get(from),wires.get(from),wires.get(from),wires.get(from));
     }

@@ -6,27 +6,27 @@ import muramasa.antimatter.datagen.providers.AntimatterItemModelProvider;
 import muramasa.antimatter.texture.Texture;
 import muramasa.antimatter.tool.AntimatterToolType;
 import muramasa.antimatter.tool.MaterialTool;
-import net.minecraft.block.BlockState;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.Attribute;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.AbstractArrowEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.fml.loading.FMLEnvironment;
@@ -38,7 +38,7 @@ import trinsdar.gt4r.entity.SpearEntity;
 import java.util.List;
 import java.util.UUID;
 
-import net.minecraft.item.Item.Properties;
+import net.minecraft.world.item.Item.Properties;
 
 public class MaterialSpear extends MaterialTool {
     public UUID attUUID = UUID.fromString("0fb96bd2-8064-11ea-bc55-0242ac130003");
@@ -52,7 +52,7 @@ public class MaterialSpear extends MaterialTool {
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+    public void inventoryTick(ItemStack stack, Level worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
         /*if(isSelected && entityIn instanceof PlayerEntity &&  !this.hasReach((PlayerEntity) entityIn)) {
             this.extendReach((PlayerEntity) entityIn);
         }
@@ -62,7 +62,7 @@ public class MaterialSpear extends MaterialTool {
     }
 
     @Override
-    public void onItemModelBuild(IItemProvider item, AntimatterItemModelProvider prov) {
+    public void onItemModelBuild(ItemLike item, AntimatterItemModelProvider prov) {
         prov.tex(item, "minecraft:item/handheld", getTextures()).override().predicate(new ResourceLocation("throwing"), 1).model(new ModelFile.UncheckedModelFile(new ResourceLocation(Ref.ID, "item/spear_throwing")));
     }
 
@@ -88,49 +88,49 @@ public class MaterialSpear extends MaterialTool {
         return 7.0F;
     };
 
-    public void extendReach(PlayerEntity player) {
+    public void extendReach(Player player) {
         AttributeModifier extended = new AttributeModifier(attUUID, "extend-reach", getReach(), AttributeModifier.Operation.ADDITION);
 
         if(!player.getAttribute(ForgeMod.REACH_DISTANCE.get()).hasModifier(extended))
             player.getAttribute(ForgeMod.REACH_DISTANCE.get()).addPermanentModifier(extended);
     }
 
-    public boolean hasReach(PlayerEntity player) {
+    public boolean hasReach(Player player) {
         AttributeModifier extended = new AttributeModifier(attUUID, "extend-reach", getReach(), AttributeModifier.Operation.ADDITION);
         return player.getAttribute(ForgeMod.REACH_DISTANCE.get()).hasModifier(extended);
     }
 
-    public void removeReach(PlayerEntity player) {
+    public void removeReach(Player player) {
         player.getAttribute(ForgeMod.REACH_DISTANCE.get()).removeModifier(attUUID);
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-        if (enchantment.category == EnchantmentType.WEAPON || enchantment == Enchantments.LOYALTY){
+        if (enchantment.category == EnchantmentCategory.WEAPON || enchantment == Enchantments.LOYALTY){
             return true;
         }
         return type.isPowered() ? enchantment != Enchantments.UNBREAKING : super.canApplyAtEnchantingTable(stack, enchantment);
     }
 
     @Override
-    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType slotType, ItemStack stack) {
+    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slotType, ItemStack stack) {
         Multimap<Attribute, AttributeModifier>modifiers = super.getAttributeModifiers(slotType, stack);
-        if (slotType == EquipmentSlotType.MAINHAND) {
+        if (slotType == EquipmentSlot.MAINHAND) {
             modifiers.put(Attributes.ATTACK_REACH.get(), new AttributeModifier(ATTACK_REACH_MODIFIER, "Tool modifier", getReach(), AttributeModifier.Operation.ADDITION));
         }
         return modifiers;
     }
 
     @Override
-    public ActionResult<ItemStack> use(World worldIn, PlayerEntity player, Hand hand) {
+    public InteractionResultHolder<ItemStack> use(Level worldIn, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         player.startUsingItem(hand);
-        return ActionResult.consume(stack);
+        return InteractionResultHolder.consume(stack);
     }
 
-    public void releaseUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
-        if (entityLiving instanceof PlayerEntity) {
-            PlayerEntity player = (PlayerEntity)entityLiving;
+    public void releaseUsing(ItemStack stack, Level worldIn, LivingEntity entityLiving, int timeLeft) {
+        if (entityLiving instanceof Player) {
+            Player player = (Player)entityLiving;
             int charge = this.getUseDuration(stack) - timeLeft;
             if (charge >= 5) {
                 charge = 5;
@@ -149,7 +149,7 @@ public class MaterialSpear extends MaterialTool {
                 thrown.setBaseDamage(damage);
 
                 if (player.abilities.instabuild) {
-                    thrown.pickup = AbstractArrowEntity.PickupStatus.CREATIVE_ONLY;
+                    thrown.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
                 } else if (thrown.isValidThrowingWeapon()) {
                     stack.shrink(1);
                     if (stack.getCount() <= 0) {
@@ -158,7 +158,7 @@ public class MaterialSpear extends MaterialTool {
                 }
 
                 if (thrown.isValidThrowingWeapon()) {
-                    worldIn.playSound((PlayerEntity)null, player.getX(), player.getY(), player.getZ(), SoundEvents.TRIDENT_THROW, SoundCategory.PLAYERS, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
+                    worldIn.playSound((Player)null, player.getX(), player.getY(), player.getZ(), SoundEvents.TRIDENT_THROW, SoundSource.PLAYERS, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
                     worldIn.addFreshEntity(thrown);
                 }
 
@@ -169,7 +169,7 @@ public class MaterialSpear extends MaterialTool {
         super.releaseUsing(stack, worldIn, entityLiving, timeLeft);
     }
 
-    public SpearEntity createThrowingWeaponEntity(World worldIn, PlayerEntity player, ItemStack stack, int charge) {
+    public SpearEntity createThrowingWeaponEntity(Level worldIn, Player player, ItemStack stack, int charge) {
         return new SpearEntity(worldIn, player, stack);
     }
 
@@ -183,7 +183,7 @@ public class MaterialSpear extends MaterialTool {
         return 72000;
     }*/
 
-    public boolean canAttackBlock(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
+    public boolean canAttackBlock(BlockState state, Level worldIn, BlockPos pos, Player player) {
         return !player.isCreative();
     }
 }

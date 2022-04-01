@@ -3,7 +3,7 @@ package trinsdar.gt4r.tile.single;
 import muramasa.antimatter.capability.machine.MachineEnergyHandler;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.single.TileEntityTransformer;
-import net.minecraft.util.Direction;
+import net.minecraft.core.Direction;
 
 public class TileEntitySupercondensator extends TileEntityTransformer<TileEntitySupercondensator> {
     public TileEntitySupercondensator(Machine<?> type, int amps) {

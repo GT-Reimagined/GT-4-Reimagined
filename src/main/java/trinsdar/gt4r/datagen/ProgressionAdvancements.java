@@ -2,7 +2,7 @@ package trinsdar.gt4r.datagen;
 
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.FrameType;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import trinsdar.gt4r.Ref;
 
 import java.util.function.Consumer;

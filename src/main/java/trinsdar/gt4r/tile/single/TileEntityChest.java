@@ -2,27 +2,27 @@ package trinsdar.gt4r.tile.single;
 
 import muramasa.antimatter.capability.item.ITrackedHandler;
 import muramasa.antimatter.gui.SlotType;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.passive.CatEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.animal.Cat;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.stats.Stat;
 import net.minecraft.stats.Stats;
-import net.minecraft.tileentity.IChestLid;
+import net.minecraft.world.level.block.entity.LidBlockEntity;
 import net.minecraft.tileentity.LockableTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import trinsdar.gt4r.block.BlockMaterialChest;
@@ -31,8 +31,8 @@ import trinsdar.gt4r.machine.MaterialMachine;
 
 import java.util.List;
 
-@OnlyIn(value = Dist.CLIENT, _interface = IChestLid.class)
-public class TileEntityChest extends TileEntityCabinet implements IChestLid, IInventory {
+@OnlyIn(value = Dist.CLIENT, _interface = LidBlockEntity.class)
+public class TileEntityChest extends TileEntityCabinet implements LidBlockEntity, Container {
     protected float lidAngle;
     protected float prevLidAngle;
     protected int numPlayersUsing;
@@ -80,23 +80,23 @@ public class TileEntityChest extends TileEntityCabinet implements IChestLid, IIn
     }
 
     @Override
-    public boolean canPlayerOpenGui(PlayerEntity playerEntity) {
+    public boolean canPlayerOpenGui(Player playerEntity) {
         return super.canPlayerOpenGui(playerEntity) && !isChestBlockedAt(playerEntity.level, this.getBlockPos());
     }
 
-    public static boolean isChestBlockedAt(IWorld p_220108_0_, BlockPos p_220108_1_) {
+    public static boolean isChestBlockedAt(LevelAccessor p_220108_0_, BlockPos p_220108_1_) {
         return isBlockedChestByBlock(p_220108_0_, p_220108_1_) || isCatSittingOnChest(p_220108_0_, p_220108_1_);
     }
 
-    private static boolean isBlockedChestByBlock(IBlockReader pLevel, BlockPos pPos) {
+    private static boolean isBlockedChestByBlock(BlockGetter pLevel, BlockPos pPos) {
         BlockPos blockpos = pPos.above();
         return pLevel.getBlockState(blockpos).isRedstoneConductor(pLevel, blockpos);
     }
 
-    private static boolean isCatSittingOnChest(IWorld pLevel, BlockPos pPos) {
-        List<CatEntity> list = pLevel.getEntitiesOfClass(CatEntity.class, new AxisAlignedBB((double)pPos.getX(), (double)(pPos.getY() + 1), (double)pPos.getZ(), (double)(pPos.getX() + 1), (double)(pPos.getY() + 2), (double)(pPos.getZ() + 1)));
+    private static boolean isCatSittingOnChest(LevelAccessor pLevel, BlockPos pPos) {
+        List<Cat> list = pLevel.getEntitiesOfClass(Cat.class, new AABB((double)pPos.getX(), (double)(pPos.getY() + 1), (double)pPos.getZ(), (double)(pPos.getX() + 1), (double)(pPos.getY() + 2), (double)(pPos.getZ() + 1)));
         if (!list.isEmpty()) {
-            for(CatEntity catentity : list) {
+            for(Cat catentity : list) {
                 if (catentity.isInSittingPose()) {
                     return true;
                 }
@@ -106,7 +106,7 @@ public class TileEntityChest extends TileEntityCabinet implements IChestLid, IIn
         return false;
     }
 
-    public static int getNumberOfPlayersUsing(World worldIn, TileEntityChest lockableTileEntity, int ticksSinceSync, int x, int y, int z, int numPlayersUsing) {
+    public static int getNumberOfPlayersUsing(Level worldIn, TileEntityChest lockableTileEntity, int ticksSinceSync, int x, int y, int z, int numPlayersUsing) {
         if (!worldIn.isClientSide && numPlayersUsing != 0 && (ticksSinceSync + x + y + z) % 200 == 0) {
             numPlayersUsing = getNumberOfPlayersUsing(worldIn, lockableTileEntity, x, y, z);
         }
@@ -114,10 +114,10 @@ public class TileEntityChest extends TileEntityCabinet implements IChestLid, IIn
         return numPlayersUsing;
     }
 
-    public static int getNumberOfPlayersUsing(World world, TileEntityChest lockableTileEntity, int x, int y, int z) {
+    public static int getNumberOfPlayersUsing(Level world, TileEntityChest lockableTileEntity, int x, int y, int z) {
         int i = 0;
 
-        for (PlayerEntity playerentity : world.getEntitiesOfClass(PlayerEntity.class, new AxisAlignedBB((double) ((float) x - 5.0F), (double) ((float) y - 5.0F), (double) ((float) z - 5.0F), (double) ((float) (x + 1) + 5.0F), (double) ((float) (y + 1) + 5.0F), (double) ((float) (z + 1) + 5.0F)))) {
+        for (Player playerentity : world.getEntitiesOfClass(Player.class, new AABB((double) ((float) x - 5.0F), (double) ((float) y - 5.0F), (double) ((float) z - 5.0F), (double) ((float) (x + 1) + 5.0F), (double) ((float) (y + 1) + 5.0F), (double) ((float) (z + 1) + 5.0F)))) {
             if (playerentity.containerMenu instanceof ContainerCabinet) {
                 ContainerCabinet<?> chest = (ContainerCabinet<?>)playerentity.containerMenu;
                 if (chest.handler.handler instanceof TileEntityChest){
@@ -136,7 +136,7 @@ public class TileEntityChest extends TileEntityCabinet implements IChestLid, IIn
         double d1 = (double) this.getBlockPos().getY() + 0.5D;
         double d2 = (double) this.getBlockPos().getZ() + 0.5D;
 
-        this.getLevel().playSound((PlayerEntity) null, d0, d1, d2, soundIn, SoundCategory.BLOCKS, 0.5F, this.getLevel().random.nextFloat() * 0.1F + 0.9F);
+        this.getLevel().playSound((Player) null, d0, d1, d2, soundIn, SoundSource.BLOCKS, 0.5F, this.getLevel().random.nextFloat() * 0.1F + 0.9F);
     }
 
 
@@ -160,13 +160,13 @@ public class TileEntityChest extends TileEntityCabinet implements IChestLid, IIn
     @Override
     @OnlyIn(Dist.CLIENT)
     public float getOpenNess(float partialTicks) {
-        return MathHelper.lerp(partialTicks, this.prevLidAngle, this.lidAngle);
+        return Mth.lerp(partialTicks, this.prevLidAngle, this.lidAngle);
     }
 
-    public static int getPlayersUsing(IBlockReader reader, BlockPos posIn) {
+    public static int getPlayersUsing(BlockGetter reader, BlockPos posIn) {
         BlockState blockstate = reader.getBlockState(posIn);
         if (blockstate.hasTileEntity()) {
-            TileEntity tileentity = reader.getBlockEntity(posIn);
+            BlockEntity tileentity = reader.getBlockEntity(posIn);
             if (tileentity instanceof TileEntityChest) {
                 return ((TileEntityChest) tileentity).numPlayersUsing;
             }
@@ -176,7 +176,7 @@ public class TileEntityChest extends TileEntityCabinet implements IChestLid, IIn
     }
 
     @Override
-    public void startOpen(PlayerEntity player) {
+    public void startOpen(Player player) {
         if (!player.isSpectator()) {
             if (this.numPlayersUsing < 0) {
                 this.numPlayersUsing = 0;
@@ -194,7 +194,7 @@ public class TileEntityChest extends TileEntityCabinet implements IChestLid, IIn
 
 
     @Override
-    public void stopOpen(PlayerEntity player) {
+    public void stopOpen(Player player) {
         if (!player.isSpectator()) {
             --this.numPlayersUsing;
             this.onOpenOrClose();
@@ -246,7 +246,7 @@ public class TileEntityChest extends TileEntityCabinet implements IChestLid, IIn
     }
 
     @Override
-    public boolean stillValid(PlayerEntity pPlayer) {
+    public boolean stillValid(Player pPlayer) {
         return true;
     }
 

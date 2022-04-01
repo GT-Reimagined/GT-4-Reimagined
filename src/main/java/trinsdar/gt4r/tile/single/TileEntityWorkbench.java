@@ -4,10 +4,10 @@ import muramasa.antimatter.capability.machine.MachineCoverHandler;
 import muramasa.antimatter.cover.ICover;
 import muramasa.antimatter.gui.event.GuiEvents;
 import muramasa.antimatter.gui.event.IGuiEvent;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import trinsdar.gt4r.gui.ContainerWorkbench;
@@ -20,7 +20,7 @@ public class TileEntityWorkbench extends TileEntityMaterial<TileEntityWorkbench>
         super(type);
         coverHandler.set(() -> new MachineCoverHandler<TileEntityWorkbench>(this){
             @Override
-            public boolean placeCover(PlayerEntity player, Direction side, ItemStack stack, ICover cover) {
+            public boolean placeCover(Player player, Direction side, ItemStack stack, ICover cover) {
                 return false;
             }
         });
@@ -32,7 +32,7 @@ public class TileEntityWorkbench extends TileEntityMaterial<TileEntityWorkbench>
     }
 
     @Override
-    public void onGuiEvent(IGuiEvent event, PlayerEntity playerEntity) {
+    public void onGuiEvent(IGuiEvent event, Player playerEntity) {
         super.onGuiEvent(event, playerEntity);
         if (event.getFactory() == GuiEvents.EXTRA_BUTTON && !openContainers.isEmpty()){
             final int[] data = ((GuiEvents.GuiEvent)event).data;

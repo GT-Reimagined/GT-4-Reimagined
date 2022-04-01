@@ -8,20 +8,20 @@ import muramasa.antimatter.gui.SlotData;
 import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.gui.container.ContainerMachine;
 import muramasa.antimatter.tile.TileEntityMachine;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.CraftResultInventory;
-import net.minecraft.inventory.CraftingInventory;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.container.ClickType;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.ICraftingRecipe;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.network.play.server.SSetSlotPacket;
-import net.minecraft.util.NonNullList;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.inventory.ResultContainer;
+import net.minecraft.world.inventory.CraftingContainer;
+import net.minecraft.world.Container;
+import net.minecraft.world.inventory.ClickType;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingRecipe;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
+import net.minecraft.core.NonNullList;
+import net.minecraft.world.level.Level;
 import trinsdar.gt4r.gui.slots.SlotWorkTableResult;
 import trinsdar.gt4r.tile.single.TileEntityMaterial;
 
@@ -29,16 +29,16 @@ import java.util.Collections;
 import java.util.Optional;
 
 public class ContainerWorkbench<T extends TileEntityMaterial<T>> extends ContainerMachine<T> {
-    private CraftingInventory craftingGrid;
-    private CraftResultInventory craftResult;
-    public ContainerWorkbench(T tile, PlayerInventory playerInv, MenuHandlerMachine<T, ContainerMachine<T>> menuHandler, int windowId) {
+    private CraftingContainer craftingGrid;
+    private ResultContainer craftResult;
+    public ContainerWorkbench(T tile, Inventory playerInv, MenuHandlerMachine<T, ContainerMachine<T>> menuHandler, int windowId) {
         super(tile, playerInv, menuHandler, windowId);
         this.slotsChanged(this.craftingGrid);
     }
 
     @Override
     protected void addSlots(TileEntityMachine<?> tile) {
-        craftResult =  new CraftResultInventory();
+        craftResult =  new ResultContainer();
         craftingGrid = new InventoryWorkbench(this, (MachineItemHandler<?>) tile.itemHandler.map(m -> m).orElse(null), 3, 3);
         addSlot(new SlotWorkTableResult((MachineItemHandler<?>) tile.itemHandler.map(m -> m).orElse(null), playerInv.player, craftingGrid, craftResult, 0, 136, 46));
         Object2IntMap<String> slotIndexMap = new Object2IntOpenHashMap<>();
@@ -59,7 +59,7 @@ public class ContainerWorkbench<T extends TileEntityMaterial<T>> extends Contain
     }
 
     @Override
-    public ItemStack clicked(int slotId, int dragType, ClickType clickTypeIn, PlayerEntity player) {
+    public ItemStack clicked(int slotId, int dragType, ClickType clickTypeIn, Player player) {
 
         boolean clickTypeCrafting = slotId == 0 && slots.get(slotId).hasItem() &&
                 (clickTypeIn.equals(ClickType.PICKUP) || clickTypeIn.equals(ClickType.QUICK_MOVE));
@@ -102,32 +102,32 @@ public class ContainerWorkbench<T extends TileEntityMaterial<T>> extends Contain
         return itemStack;
     }
 
-    protected static void updateCrafting(int id, World world, PlayerEntity playerEntity, CraftingInventory craftingInventory, CraftResultInventory craftResultInventory) {
+    protected static void updateCrafting(int id, Level world, Player playerEntity, CraftingContainer craftingInventory, ResultContainer craftResultInventory) {
         if (!world.isClientSide) {
-            ServerPlayerEntity serverplayerentity = (ServerPlayerEntity)playerEntity;
+            ServerPlayer serverplayerentity = (ServerPlayer)playerEntity;
             ItemStack itemstack = ItemStack.EMPTY;
-            Optional<ICraftingRecipe> optional = world.getServer().getRecipeManager().getRecipeFor(IRecipeType.CRAFTING, craftingInventory, world);
+            Optional<CraftingRecipe> optional = world.getServer().getRecipeManager().getRecipeFor(RecipeType.CRAFTING, craftingInventory, world);
             if (optional.isPresent()) {
-                ICraftingRecipe icraftingrecipe = optional.get();
+                CraftingRecipe icraftingrecipe = optional.get();
                 if (craftResultInventory.setRecipeUsed(world, serverplayerentity, icraftingrecipe)) {
                     itemstack = icraftingrecipe.assemble(craftingInventory);
                 }
             }
 
             craftResultInventory.setItem(0, itemstack);
-            serverplayerentity.connection.send(new SSetSlotPacket(id, 0, itemstack));
+            serverplayerentity.connection.send(new ClientboundContainerSetSlotPacket(id, 0, itemstack));
         }
     }
 
     /**
      * Callback for when the crafting matrix is changed.
      */
-    public void slotsChanged(IInventory inventoryIn) {
+    public void slotsChanged(Container inventoryIn) {
         updateCrafting(this.containerId, this.playerInv.player.getCommandSenderWorld(), this.playerInv.player, this.craftingGrid, this.craftResult);
     }
 
     @Override
-    public boolean stillValid(PlayerEntity playerIn) {
+    public boolean stillValid(Player playerIn) {
         return true;
     }
 
@@ -158,7 +158,7 @@ public class ContainerWorkbench<T extends TileEntityMaterial<T>> extends Contain
         return slotIn.container != this.craftResult && super.canTakeItemForPickAll(stack, slotIn);
     }
 
-    public CraftingInventory getCraftingGrid() {
+    public CraftingContainer getCraftingGrid() {
         return craftingGrid;
     }
 
@@ -166,7 +166,7 @@ public class ContainerWorkbench<T extends TileEntityMaterial<T>> extends Contain
      * 0 result, 17-25 matrix,  1 - 16 inventory, 32 - 67 player inv.
      */
     @Override
-    public ItemStack quickMoveStack(PlayerEntity player, int slotId) {
+    public ItemStack quickMoveStack(Player player, int slotId) {
         ItemStack itemstack;
         Slot slot = slots.get(slotId);
         if (slot != null && slot.hasItem() && slotId == 0) {

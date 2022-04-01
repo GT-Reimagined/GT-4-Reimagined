@@ -1,20 +1,20 @@
 package trinsdar.gt4r.tree;
 
 import muramasa.antimatter.worldgen.AntimatterWorldGenerator;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ISeedReader;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
-import net.minecraft.world.gen.feature.TreeFeature;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import trinsdar.gt4r.Ref;
 
 import java.util.Random;
 
 public class RubberTreeFeature extends TreeFeature {
     public RubberTreeFeature() {
-        super(BaseTreeFeatureConfig.CODEC);
+        super(TreeConfiguration.CODEC);
         this.setRegistryName(new ResourceLocation(Ref.ID, "rubber_tree"));
     }
 
@@ -22,9 +22,9 @@ public class RubberTreeFeature extends TreeFeature {
         AntimatterWorldGenerator.register(RubberTreeWorldGen::onEvent, "rubber_tree", Ref.ID, RubberTreeWorldGen.getValidBiomesStatic());
     }
 
-    public boolean generateRubber(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, BaseTreeFeatureConfig config) {
-        if (reader.getBiome(pos).getBiomeCategory() != Biome.Category.SWAMP && config == RubberTreeWorldGen.RUBBER_TREE_CONFIG_SWAMP) return false;
-        if (reader.getBiome(pos).getBiomeCategory() != Biome.Category.JUNGLE && config == RubberTreeWorldGen.RUBBER_TREE_CONFIG_JUNGLE) return false;
+    public boolean generateRubber(WorldGenLevel reader, ChunkGenerator generator, Random rand, BlockPos pos, TreeConfiguration config) {
+        if (reader.getBiome(pos).getBiomeCategory() != Biome.BiomeCategory.SWAMP && config == RubberTreeWorldGen.RUBBER_TREE_CONFIG_SWAMP) return false;
+        if (reader.getBiome(pos).getBiomeCategory() != Biome.BiomeCategory.JUNGLE && config == RubberTreeWorldGen.RUBBER_TREE_CONFIG_JUNGLE) return false;
         return super.place(reader, generator, rand, pos, config);
     }
 

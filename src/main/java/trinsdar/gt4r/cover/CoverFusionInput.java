@@ -4,8 +4,8 @@ import muramasa.antimatter.capability.ICoverHandler;
 import muramasa.antimatter.cover.CoverFactory;
 import muramasa.antimatter.cover.CoverInput;
 import muramasa.antimatter.machine.Tier;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import trinsdar.gt4r.Ref;
 
 import javax.annotation.Nullable;

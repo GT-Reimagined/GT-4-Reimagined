@@ -1,6 +1,6 @@
 package trinsdar.gt4r.gui.widgets;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import muramasa.antimatter.gui.GuiInstance;
 import muramasa.antimatter.gui.IGuiElement;
 import muramasa.antimatter.gui.widget.MachineStateWidget;
@@ -18,7 +18,7 @@ public class MachineStateWidgetMoved extends MachineStateWidget {
     }
 
     @Override
-    public void render(MatrixStack stack, double mouseX, double mouseY, float partialTicks) {
+    public void render(PoseStack stack, double mouseX, double mouseY, float partialTicks) {
         TileEntityMachine<?> m = ((TileEntityMachine<?>) gui.handler);
         MachineState state = m.getMachineState();
         //Draw error.

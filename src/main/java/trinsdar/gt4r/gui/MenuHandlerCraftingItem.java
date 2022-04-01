@@ -2,10 +2,10 @@ package trinsdar.gt4r.gui;
 
 import muramasa.antimatter.capability.IGuiHandler;
 import muramasa.antimatter.gui.MenuHandler;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.IWorldPosCallable;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 import trinsdar.gt4r.data.client.ScreenFactories;
 
 public class MenuHandlerCraftingItem extends MenuHandler<GTWorkbenchContainer> {
@@ -14,14 +14,14 @@ public class MenuHandlerCraftingItem extends MenuHandler<GTWorkbenchContainer> {
     }
 
     @Override
-    public GTWorkbenchContainer onContainerCreate(int windowId, PlayerInventory inv, PacketBuffer data) {
+    public GTWorkbenchContainer onContainerCreate(int windowId, Inventory inv, FriendlyByteBuf data) {
         //TODO
         return menu((IGuiHandler) inv.player, inv, windowId);
     }
 
     @Override
-    public GTWorkbenchContainer getMenu(IGuiHandler tile, PlayerInventory playerInv, int windowId) {
-        return tile instanceof PlayerEntity ? new ContainerCraftingItem(windowId, playerInv, IWorldPosCallable.create(playerInv.player.level, playerInv.player.blockPosition())) : null;
+    public GTWorkbenchContainer getMenu(IGuiHandler tile, Inventory playerInv, int windowId) {
+        return tile instanceof Player ? new ContainerCraftingItem(windowId, playerInv, ContainerLevelAccess.create(playerInv.player.level, playerInv.player.blockPosition())) : null;
     }
 
     @Override

@@ -12,15 +12,15 @@ import muramasa.antimatter.tool.AntimatterToolType;
 import muramasa.antimatter.tool.IAntimatterTool;
 import muramasa.antimatter.util.TagUtils;
 import muramasa.antimatter.util.Utils;
-import net.minecraft.block.Blocks;
-import net.minecraft.inventory.CraftingInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.UseAction;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tags.ITag;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.inventory.CraftingContainer;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.UseAnim;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Tuple;
 import tesseract.api.capability.TesseractGTCapability;
 import tesseract.api.gt.IGTNode;
@@ -43,7 +43,7 @@ public class ToolTypes {
     public static final MaterialRecipe.Provider POWERED_TOOL_BUILDER = MaterialRecipe.registerProvider("powered-tool", Ref.ID, id -> new MaterialRecipe.ItemBuilder() {
 
         @Override
-        public ItemStack build(CraftingInventory inv, MaterialRecipe.Result mats) {
+        public ItemStack build(CraftingContainer inv, MaterialRecipe.Result mats) {
             Material m = (Material) mats.mats.get("secondary");
             Tuple<Long, Long> battery = (Tuple<Long, Long>) mats.mats.get("battery");
             String domain = id.equals(ROCK_CUTTER.getId()) ? Ref.ID : Ref.ANTIMATTER;
@@ -53,7 +53,7 @@ public class ToolTypes {
 
         @Override
         public Map<String, Object> getFromResult(@Nonnull ItemStack stack) {
-            CompoundNBT nbt = stack.getTag().getCompound(muramasa.antimatter.Ref.TAG_TOOL_DATA);
+            CompoundTag nbt = stack.getTag().getCompound(muramasa.antimatter.Ref.TAG_TOOL_DATA);
             Material primary = AntimatterAPI.get(Material.class, nbt.getString(muramasa.antimatter.Ref.KEY_TOOL_DATA_PRIMARY_MATERIAL));
             Material secondary = AntimatterAPI.get(Material.class, nbt.getString(muramasa.antimatter.Ref.KEY_TOOL_DATA_SECONDARY_MATERIAL));
             return ImmutableMap.of("primary", primary, "secondary", secondary, "energy", getEnergy(stack).getA(), "maxEnergy", getEnergy(stack).getB());
@@ -63,7 +63,7 @@ public class ToolTypes {
     public static final MaterialRecipe.Provider UNIT_POWERED_TOOL_BUILDER = MaterialRecipe.registerProvider("powered-tool-from-unit", Ref.ID, id -> new MaterialRecipe.ItemBuilder() {
 
         @Override
-        public ItemStack build(CraftingInventory inv, MaterialRecipe.Result mats) {
+        public ItemStack build(CraftingContainer inv, MaterialRecipe.Result mats) {
             Tuple<Long, Tuple<Long, Material>> t = (Tuple<Long, Tuple<Long, Material>>) mats.mats.get("secondary");
             IAntimatterTool type = AntimatterAPI.get(IAntimatterTool.class, id.replace('-', '_'), Ref.ANTIMATTER);
             t.getB().getB();
@@ -76,7 +76,7 @@ public class ToolTypes {
         }
     });
 
-    public static AntimatterToolType SPEAR = new SpearToolType(Ref.ID, "spear_gt", 2, 1, 10, 3.0F, -2.9F).setUseAction(UseAction.SPEAR);
+    public static AntimatterToolType SPEAR = new SpearToolType(Ref.ID, "spear_gt", 2, 1, 10, 3.0F, -2.9F).setUseAction(UseAnim.SPEAR);
     public static AntimatterToolType ROCK_CUTTER = new RockCutterToolType(Ref.ID, "rock_cutter", 1, 1, 1, -1.0F, -3.0F).setPowered(100000L, 1).setRepairability(false).addToolTypes("pickaxe").setOverlayLayers(2).addEffectiveMaterials(ICE_SOLID, METAL, STONE, HEAVY_METAL, PISTON).setBrokenItems(ImmutableMap.of("rock_cutter", i -> getBrokenItem(i, RockCutterPowerUnit)));
 
     static {
@@ -104,10 +104,10 @@ public class ToolTypes {
         Data.ELECTRIC_WRENCH.addEffectiveBlocks(Blocks.HOPPER);
     }
 
-    private static ItemStack getBrokenItem(ItemStack tool, IItemProvider broken){
+    private static ItemStack getBrokenItem(ItemStack tool, ItemLike broken){
         ItemStack powerUnit = new ItemStack(broken);
         Tuple<Long, Long> tuple = getEnergy(tool);
-        CompoundNBT dataTag = powerUnit.getOrCreateTagElement(muramasa.antimatter.Ref.TAG_TOOL_DATA);
+        CompoundTag dataTag = powerUnit.getOrCreateTagElement(muramasa.antimatter.Ref.TAG_TOOL_DATA);
         dataTag.putLong(muramasa.antimatter.Ref.KEY_TOOL_DATA_ENERGY, tuple.getA());
         dataTag.putLong(muramasa.antimatter.Ref.KEY_TOOL_DATA_MAX_ENERGY, tuple.getB());
         if (broken.asItem() == PowerUnitHV || broken.asItem() == SmallPowerUnit){
@@ -144,7 +144,7 @@ public class ToolTypes {
 
     public static class SpearToolType extends AntimatterToolType{
 
-        private ITag.INamedTag<Item> tag, forgeTag; // Set?
+        private Tag.Named<Item> tag, forgeTag; // Set?
         public SpearToolType(String domain, String id, int useDurability, int attackDurability, int craftingDurability, float baseAttackDamage, float baseAttackSpeed) {
             super(domain, id, useDurability, attackDurability, craftingDurability, baseAttackDamage, baseAttackSpeed);
             this.tag = TagUtils.getItemTag(new ResourceLocation(Ref.ANTIMATTER, "spear"));
@@ -157,12 +157,12 @@ public class ToolTypes {
         }
 
         @Override
-        public ITag.INamedTag<Item> getTag() {
+        public Tag.Named<Item> getTag() {
             return tag;
         }
 
         @Override
-        public ITag.INamedTag<Item> getForgeTag() {
+        public Tag.Named<Item> getForgeTag() {
             return forgeTag;
         }
 

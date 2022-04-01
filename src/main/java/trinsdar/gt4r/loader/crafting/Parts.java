@@ -4,10 +4,10 @@ import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.pipe.PipeSize;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.Tags;
 import trinsdar.gt4r.Ref;
 
@@ -23,7 +23,7 @@ import static trinsdar.gt4r.loader.crafting.CraftingHelper.of2;
 
 public class Parts {
 
-    public static void loadRecipes(Consumer<IFinishedRecipe> output, AntimatterRecipeProvider provider) {
+    public static void loadRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider) {
         provider.addStackRecipe(output, Ref.ID, "circuit_energy_flow", "parts", "has_iridium_plate", provider.hasSafeItem(IridiumReinforcedPlate),
                 new ItemStack(CircuitEnergyFlow, 4), of('C', CIRCUITS_ADVANCED, 'T', PLATE.getMaterialTag(Tungsten), 'L', LapotronCrystal, 'P', IridiumReinforcedPlate), "CTC", "LPL", "CTC");
         provider.addStackRecipe(output, Ref.ID, "circuit_data_control", "parts", "has_iridium_plate", provider.hasSafeItem(IridiumReinforcedPlate),
@@ -146,7 +146,7 @@ public class Parts {
         for (Material it : in){
             for (Material im : b){
                 for (Material ib : tz){
-                    CompoundNBT nbt = new CompoundNBT();
+                    CompoundTag nbt = new CompoundTag();
                     nbt.putString("tm", it.getId());
                     nbt.putString("mm", im.getId());
                     nbt.putString("bm", ib.getId());
@@ -162,7 +162,7 @@ public class Parts {
         for (Material it : is){
             for (Material im : b){
                 for (Material ib : tz){
-                    CompoundNBT nbt = new CompoundNBT();
+                    CompoundTag nbt = new CompoundTag();
                     nbt.putString("tm", it.getId());
                     nbt.putString("mm", im.getId());
                     nbt.putString("bm", ib.getId());
@@ -176,7 +176,7 @@ public class Parts {
         for (Material it : is){
             for (Material im : b){
                 for (Material ib : ase){
-                    CompoundNBT nbt = new CompoundNBT();
+                    CompoundTag nbt = new CompoundTag();
                     nbt.putString("tm", it.getId());
                     nbt.putString("mm", im.getId());
                     nbt.putString("bm", ib.getId());
@@ -191,7 +191,7 @@ public class Parts {
         for (Material it : st){
             for (Material im : b){
                 for (Material ib : tz){
-                    CompoundNBT nbt = new CompoundNBT();
+                    CompoundTag nbt = new CompoundTag();
                     nbt.putString("tm", it.getId());
                     nbt.putString("mm", im.getId());
                     nbt.putString("bm", ib.getId());
@@ -205,7 +205,7 @@ public class Parts {
         for (Material it : st){
             for (Material im : b){
                 for (Material ib : ase){
-                    CompoundNBT nbt = new CompoundNBT();
+                    CompoundTag nbt = new CompoundTag();
                     nbt.putString("tm", it.getId());
                     nbt.putString("mm", im.getId());
                     nbt.putString("bm", ib.getId());
@@ -218,7 +218,7 @@ public class Parts {
         }
         for (Material im : b){
             for (Material ib : tz){
-                CompoundNBT nbt = new CompoundNBT();
+                CompoundTag nbt = new CompoundTag();
                 nbt.putString("tm", TungstenSteel.getId());
                 nbt.putString("mm", im.getId());
                 nbt.putString("bm", ib.getId());
@@ -230,7 +230,7 @@ public class Parts {
         }
         for (Material im : b){
             for (Material ib : ase){
-                CompoundNBT nbt = new CompoundNBT();
+                CompoundTag nbt = new CompoundTag();
                 nbt.putString("tm", TungstenSteel.getId());
                 nbt.putString("mm", im.getId());
                 nbt.putString("bm", ib.getId());

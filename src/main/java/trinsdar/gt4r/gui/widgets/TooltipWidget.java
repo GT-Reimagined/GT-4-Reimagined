@@ -1,13 +1,13 @@
 package trinsdar.gt4r.gui.widgets;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import muramasa.antimatter.gui.GuiInstance;
 import muramasa.antimatter.gui.IGuiElement;
 import muramasa.antimatter.gui.Widget;
 import muramasa.antimatter.gui.widget.WidgetSupplier;
 import muramasa.antimatter.machine.MachineFlag;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -29,13 +29,13 @@ public class TooltipWidget extends Widget {
     }
 
     @Override
-    public void render(MatrixStack matrixStack, double mouseX, double mouseY, float partialTicks) {
+    public void render(PoseStack matrixStack, double mouseX, double mouseY, float partialTicks) {
 
     }
 
     @Override
-    public void mouseOver(MatrixStack stack, double mouseX, double mouseY, float partialTicks) {
+    public void mouseOver(PoseStack stack, double mouseX, double mouseY, float partialTicks) {
         super.mouseOver(stack, mouseX, mouseY, partialTicks);
-        renderTooltip(stack, new TranslationTextComponent("tooltip.gt4r." + tooltipKey), mouseX, mouseY);
+        renderTooltip(stack, new TranslatableComponent("tooltip.gt4r." + tooltipKey), mouseX, mouseY);
     }
 }

@@ -4,12 +4,11 @@ import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.proxy.IProxyHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.RenderTypeLookup;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.BlockItem;
-import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoaderRegistry;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import trinsdar.gt4r.GT4Reimagined;
 import trinsdar.gt4r.block.BlockCasing;
@@ -36,15 +35,15 @@ public class ClientHandler implements IProxyHandler {
     @SuppressWarnings("RedundantTypeArguments")
     public static void setup(FMLClientSetupEvent e) {
         e.enqueueWork(() -> {
-            RenderTypeLookup.setRenderLayer(GT4RData.RUBBER_SAPLING, RenderType.cutout());
-            RenderTypeLookup.setRenderLayer(GT4RData.RUBBER_LEAVES, RenderType.cutout());
-            RenderTypeLookup.setRenderLayer(GT4RData.SAP_BAG, RenderType.cutout());
-            RenderTypeLookup.setRenderLayer(((BlockItem)Machines.DUSTBIN.getItem(LV)).getBlock(), RenderType.cutout());
-            AntimatterAPI.all(BlockCasing.class, t -> RenderTypeLookup.setRenderLayer(t, RenderType.cutout()));
-            AntimatterAPI.all(BlockMachineMaterial.class, b -> RenderTypeLookup.setRenderLayer(b, RenderType.cutout()));
-            AntimatterAPI.all(BlockMaterialChest.class, b -> RenderTypeLookup.setRenderLayer(b, RenderType.cutout()));
+            ItemBlockRenderTypes.setRenderLayer(GT4RData.RUBBER_SAPLING, RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(GT4RData.RUBBER_LEAVES, RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(GT4RData.SAP_BAG, RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(((BlockItem)Machines.DUSTBIN.getItem(LV)).getBlock(), RenderType.cutout());
+            AntimatterAPI.all(BlockCasing.class, t -> ItemBlockRenderTypes.setRenderLayer(t, RenderType.cutout()));
+            AntimatterAPI.all(BlockMachineMaterial.class, b -> ItemBlockRenderTypes.setRenderLayer(b, RenderType.cutout()));
+            AntimatterAPI.all(BlockMaterialChest.class, b -> ItemBlockRenderTypes.setRenderLayer(b, RenderType.cutout()));
         });
-        AntimatterAPI.all(BlockMaterialChest.class, b -> ClientRegistry.bindTileEntityRenderer(b.getType().getTileType(), MaterialChestRenderer::new));
+        AntimatterAPI.all(BlockMaterialChest.class, b -> BlockEntityRenderers.register(b.getType().getTileType(), MaterialChestRenderer::new));
         ClientUtil.registerEntityRenders();
         copyProgrammerArtIfMissing();
     }
@@ -83,12 +82,12 @@ public class ClientHandler implements IProxyHandler {
     }
 
     @Override
-    public World getClientWorld() {
+    public Level getClientWorld() {
         return Minecraft.getInstance().level;
     }
 
     @Override
-    public PlayerEntity getClientPlayer() {
+    public Player getClientPlayer() {
         return Minecraft.getInstance().player;
     }
 }

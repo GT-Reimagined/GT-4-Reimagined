@@ -9,11 +9,11 @@ import muramasa.antimatter.gui.event.IGuiEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.tile.TileEntityTank;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListNBT;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -46,7 +46,7 @@ public class TileEntityDigitalTank extends TileEntityTank<TileEntityDigitalTank>
     }
 
     @Override
-    public void onGuiEvent(IGuiEvent event, PlayerEntity playerEntity) {
+    public void onGuiEvent(IGuiEvent event, Player playerEntity) {
         super.onGuiEvent(event, playerEntity);
         if (event.getFactory() == GuiEvents.EXTRA_BUTTON){
             final int[] data = ((GuiEvents.GuiEvent)event).data;
@@ -54,15 +54,15 @@ public class TileEntityDigitalTank extends TileEntityTank<TileEntityDigitalTank>
                 fluidHandler.ifPresent(f -> {
                     ItemStack orb = itemHandler.map(i -> i.getHandler(SlotTypes.DATA).getStackInSlot(0)).orElse(ItemStack.EMPTY);
                     if (orb.getItem() == GT4RData.StorageDataOrb){
-                        CompoundNBT tag = orb.getTag();
+                        CompoundTag tag = orb.getTag();
                         if (tag != null && tag.contains("Data")) {
-                            CompoundNBT dataTag = tag.getCompound("Data");
+                            CompoundTag dataTag = tag.getCompound("Data");
                             if (dataTag.contains("Fluid")) {
-                                CompoundNBT nbt = dataTag.getCompound("Fluid");
+                                CompoundTag nbt = dataTag.getCompound("Fluid");
                                 FluidStack fluidStack = FluidStack.loadFluidStackFromNBT(nbt);
                                 int fill = f.fill(fluidStack, IFluidHandler.FluidAction.SIMULATE);
                                 if (fill != fluidStack.getAmount()) {
-                                    playerEntity.sendMessage(new TranslationTextComponent("message.gt4r.digital_tank_inventory"), playerEntity.getUUID());
+                                    playerEntity.sendMessage(new TranslatableComponent("message.gt4r.digital_tank_inventory"), playerEntity.getUUID());
                                     return;
                                 }
                                 ItemStack newStack = new ItemStack(GT4RData.CircuitDataOrb);
@@ -81,8 +81,8 @@ public class TileEntityDigitalTank extends TileEntityTank<TileEntityDigitalTank>
                     if (orb.getItem() == GT4RData.CircuitDataOrb){
                         if (f.getInputTanks().getTank(0).getFluidAmount() > 0){
                             ItemStack newStack = new ItemStack(GT4RData.StorageDataOrb);
-                            CompoundNBT nbt = f.getInputTanks().getTank(0).getFluid().writeToNBT(new CompoundNBT());
-                            CompoundNBT dataTag = new CompoundNBT();
+                            CompoundTag nbt = f.getInputTanks().getTank(0).getFluid().writeToNBT(new CompoundTag());
+                            CompoundTag dataTag = new CompoundTag();
                             dataTag.put("Fluid", nbt);
                             newStack.getOrCreateTag().put("Data", dataTag);
                             f.drainInput(f.getInputTanks().getTank(0).getFluidAmount(), IFluidHandler.FluidAction.EXECUTE);

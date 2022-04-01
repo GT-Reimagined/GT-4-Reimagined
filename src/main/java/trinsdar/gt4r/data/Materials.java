@@ -8,10 +8,10 @@ import muramasa.antimatter.material.MaterialItem;
 import muramasa.antimatter.material.MaterialTag;
 import muramasa.antimatter.material.MaterialType;
 import muramasa.antimatter.material.MaterialTypeItem;
-import net.minecraft.block.Block;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.item.Item;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fluids.FluidAttributes;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.items.ItemTurbineRotor;
@@ -25,7 +25,7 @@ import static muramasa.antimatter.material.Element.*;
 import static muramasa.antimatter.material.MaterialTag.ELEC;
 import static muramasa.antimatter.material.MaterialTag.RUBBERTOOLS;
 import static muramasa.antimatter.material.TextureSet.*;
-import static net.minecraft.item.ItemTier.IRON;
+import static net.minecraft.world.item.Tiers.IRON;
 
 public class Materials {
 
@@ -46,8 +46,8 @@ public class Materials {
     public static MaterialTypeItem<?> TURBINE_BLADE = new MaterialTypeItem<>("turbine_blade", 1, true, muramasa.antimatter.Ref.U * 3);//.unSplitName();
     public static MaterialTypeItem<?> TURBINE_ROTOR = new MaterialTypeItem<>("turbine_rotor", 1, true, muramasa.antimatter.Ref.U * 17, new MaterialTypeItem.ItemSupplier() {
         @Override
-        public MaterialItem supply(String domain, MaterialType<?> type, Material material) {
-            return new ItemTurbineRotor(domain, type, material, new Item.Properties().defaultDurability(getMaxDamage(material)).tab(muramasa.antimatter.Ref.TAB_MATERIALS));
+        public void createItems(String domain, MaterialType<?> type, Material material) {
+            new ItemTurbineRotor(domain, type, material, new Item.Properties().defaultDurability(getMaxDamage(material)).tab(muramasa.antimatter.Ref.TAB_MATERIALS));
         }
 
         private int getMaxDamage(Material material){
@@ -347,7 +347,7 @@ public class Materials {
         Data.Gold.flags(GEAR);
         Data.Copper.flags(PLATE, ROD, GEAR);
         Data.Water.mats(of(Hydrogen, 2, Oxygen, 1));
-        Data.Flint.setAllowedToolTypes(PICKAXE, AXE, SHOVEL, SWORD, HOE, MORTAR, KNIFE, ToolTypes.SPEAR).mats(of(SiliconDioxide, 1));
+        Data.Flint.setAllowedTypes(PICKAXE, AXE, SHOVEL, SWORD, HOE, MORTAR, KNIFE, ToolTypes.SPEAR).mats(of(SiliconDioxide, 1));
         Data.Wood.mats(of(Carbon, 1, Oxygen, 1, Hydrogen, 1));
         Data.Blaze.mats(of(Sulfur, 1, DarkAsh, 1/*, Magic, 1*/));
         Data.Charcoal.mats(of(Carbon, 1));
@@ -535,6 +535,6 @@ public class Materials {
     }
 
     private static Block.Properties prepareProperties(Material m, MaterialType<?> type) {
-        return Block.Properties.of(net.minecraft.block.material.Material.WATER).strength(100.0F).noDrops().lightLevel(s -> type == Data.PLASMA ? 15 : m == PahoehoeLava ? 9: 0);
+        return Block.Properties.of(net.minecraft.world.level.material.Material.WATER).strength(100.0F).noDrops().lightLevel(s -> type == Data.PLASMA ? 15 : m == PahoehoeLava ? 9: 0);
     }
 }

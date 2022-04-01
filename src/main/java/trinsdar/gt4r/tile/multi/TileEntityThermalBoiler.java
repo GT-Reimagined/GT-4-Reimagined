@@ -6,8 +6,8 @@ import muramasa.antimatter.machine.event.MachineEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.recipe.Recipe;
 import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
 import trinsdar.gt4r.data.SlotTypes;
 
 import java.util.Arrays;
@@ -54,14 +54,14 @@ public class TileEntityThermalBoiler extends TileEntityMultiMachine<TileEntityTh
             }
 
             @Override
-            public CompoundNBT serializeNBT() {
-                CompoundNBT nbt = super.serializeNBT();
+            public CompoundTag serializeNBT() {
+                CompoundTag nbt = super.serializeNBT();
                 nbt.putInt("ticker", ticker);
                 return nbt;
             }
 
             @Override
-            public void deserializeNBT(CompoundNBT nbt) {
+            public void deserializeNBT(CompoundTag nbt) {
                 super.deserializeNBT(nbt);
                 ticker = nbt.getInt("ticker");
             }

@@ -2,17 +2,17 @@ package trinsdar.gt4r.loader.crafting;
 
 import com.google.common.collect.ImmutableMap;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
-import net.minecraft.advancements.ICriterionInstance;
-import net.minecraft.item.Item;
-import net.minecraft.tags.ITag;
-import net.minecraft.util.IItemProvider;
+import net.minecraft.advancements.CriterionTriggerInstance;
+import net.minecraft.world.item.Item;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.level.ItemLike;
 
 public class CraftingHelper {
-    public static ICriterionInstance criterion(IItemProvider item, AntimatterRecipeProvider provider){
+    public static CriterionTriggerInstance criterion(ItemLike item, AntimatterRecipeProvider provider){
         return provider.hasSafeItem(item);
     }
 
-    public static ICriterionInstance criterion(ITag.INamedTag<Item> item, AntimatterRecipeProvider provider){
+    public static CriterionTriggerInstance criterion(Tag.Named<Item> item, AntimatterRecipeProvider provider){
         return provider.hasSafeItem(item);
     }
 

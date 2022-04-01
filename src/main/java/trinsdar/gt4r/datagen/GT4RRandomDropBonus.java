@@ -6,47 +6,47 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.item.ItemStack;
-import net.minecraft.loot.LootContext;
-import net.minecraft.loot.LootFunction;
-import net.minecraft.loot.LootFunctionType;
-import net.minecraft.loot.LootParameter;
-import net.minecraft.loot.LootParameters;
-import net.minecraft.loot.conditions.ILootCondition;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParam;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.Registry;
 import trinsdar.gt4r.Ref;
 
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-public class GT4RRandomDropBonus extends LootFunction {
+public class GT4RRandomDropBonus extends LootItemConditionalFunction {
     private static final Map<ResourceLocation, IFormulaDeserializer> DESERIALIZER_HASH_MAP = Maps.newHashMap();
     private final Enchantment enchantment;
     private final IFormula formula;
 
-    public static final LootFunctionType RANDOM_DROP_BONUS = new LootFunctionType(new Serializer());
+    public static final LootItemFunctionType RANDOM_DROP_BONUS = new LootItemFunctionType(new Serializer());
 
-    public GT4RRandomDropBonus(ILootCondition[] conditionsIn, Enchantment enchantmentIn, IFormula formula) {
+    public GT4RRandomDropBonus(LootItemCondition[] conditionsIn, Enchantment enchantmentIn, IFormula formula) {
         super(conditionsIn);
         this.enchantment = enchantmentIn;
         this.formula = formula;
     }
 
-    public LootFunctionType getType() {
+    public LootItemFunctionType getType() {
         return RANDOM_DROP_BONUS;
     }
 
-    public Set<LootParameter<?>> getReferencedContextParams() {
-        return ImmutableSet.of(LootParameters.TOOL);
+    public Set<LootContextParam<?>> getReferencedContextParams() {
+        return ImmutableSet.of(LootContextParams.TOOL);
     }
 
     public ItemStack run(ItemStack stack, LootContext context) {
-        ItemStack itemstack = context.getParamOrNull(LootParameters.TOOL);
+        ItemStack itemstack = context.getParamOrNull(LootContextParams.TOOL);
         if (itemstack != null) {
             int i = EnchantmentHelper.getItemEnchantmentLevel(this.enchantment, itemstack);
             int j = this.formula.getValue(context.getRandom(), stack.getCount(), i);
@@ -57,13 +57,13 @@ public class GT4RRandomDropBonus extends LootFunction {
         return stack;
     }
 
-    public static LootFunction.Builder<?> randomDrops(Enchantment enchantment, int dividend) {
+    public static LootItemConditionalFunction.Builder<?> randomDrops(Enchantment enchantment, int dividend) {
         return simpleBuilder((conditions) -> {
             return new GT4RRandomDropBonus(conditions, enchantment, new RandomDropsFormula(dividend));
         });
     }
 
-    public static LootFunction.Builder<?> uniformBonusCount(Enchantment enchantment, int multiplier) {
+    public static LootItemConditionalFunction.Builder<?> uniformBonusCount(Enchantment enchantment, int multiplier) {
         return simpleBuilder((conditions) -> {
             return new GT4RRandomDropBonus(conditions, enchantment, new UniformMultipliedFormula(multiplier));
         });
@@ -142,7 +142,7 @@ public class GT4RRandomDropBonus extends LootFunction {
         }
     }
 
-    public static class Serializer extends LootFunction.Serializer<GT4RRandomDropBonus> {
+    public static class Serializer extends LootItemConditionalFunction.Serializer<GT4RRandomDropBonus> {
         public void serialize(JsonObject json, GT4RRandomDropBonus bonus, JsonSerializationContext context) {
             super.serialize(json, bonus, context);
             json.addProperty("enchantment", Registry.ENCHANTMENT.getKey(bonus.enchantment).toString());
@@ -155,19 +155,19 @@ public class GT4RRandomDropBonus extends LootFunction {
 
         }
 
-        public GT4RRandomDropBonus deserialize(JsonObject object, JsonDeserializationContext deserializationContext, ILootCondition[] conditionsIn) {
-            ResourceLocation resourcelocation = new ResourceLocation(JSONUtils.getAsString(object, "enchantment"));
+        public GT4RRandomDropBonus deserialize(JsonObject object, JsonDeserializationContext deserializationContext, LootItemCondition[] conditionsIn) {
+            ResourceLocation resourcelocation = new ResourceLocation(GsonHelper.getAsString(object, "enchantment"));
             Enchantment enchantment = Registry.ENCHANTMENT.getOptional(resourcelocation).orElseThrow(() -> {
                 return new JsonParseException("Invalid enchantment id: " + resourcelocation);
             });
-            ResourceLocation resourcelocation1 = new ResourceLocation(JSONUtils.getAsString(object, "formula"));
+            ResourceLocation resourcelocation1 = new ResourceLocation(GsonHelper.getAsString(object, "formula"));
             IFormulaDeserializer applybonus$iformuladeserializer = GT4RRandomDropBonus.DESERIALIZER_HASH_MAP.get(resourcelocation1);
             if (applybonus$iformuladeserializer == null) {
                 throw new JsonParseException("Invalid formula id: " + resourcelocation1);
             } else {
                 IFormula applybonus$iformula;
                 if (object.has("parameters")) {
-                    applybonus$iformula = applybonus$iformuladeserializer.deserialize(JSONUtils.getAsJsonObject(object, "parameters"), deserializationContext);
+                    applybonus$iformula = applybonus$iformuladeserializer.deserialize(GsonHelper.getAsJsonObject(object, "parameters"), deserializationContext);
                 } else {
                     applybonus$iformula = applybonus$iformuladeserializer.deserialize(new JsonObject(), deserializationContext);
                 }

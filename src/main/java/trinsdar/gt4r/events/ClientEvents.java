@@ -1,6 +1,6 @@
 package trinsdar.gt4r.events;
 
-import net.minecraft.client.renderer.Atlases;
+import net.minecraft.client.renderer.Sheets;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -13,7 +13,7 @@ import trinsdar.gt4r.client.MaterialChestRenderer;
 public class ClientEvents {
     @SubscribeEvent
     public static void onStitch(TextureStitchEvent.Pre event) {
-        if (!event.getMap().location().equals(Atlases.CHEST_SHEET)) {
+        if (!event.getMap().location().equals(Sheets.CHEST_SHEET)) {
             return;
         }
 

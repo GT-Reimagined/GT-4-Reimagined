@@ -4,21 +4,21 @@ import muramasa.antimatter.datagen.providers.AntimatterItemModelProvider;
 import muramasa.antimatter.item.ItemBasic;
 import muramasa.antimatter.texture.Texture;
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.block.AbstractFireBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.CampfireBlock;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUseContext;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.BaseFireBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.CampfireBlock;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ModelFile;
 import trinsdar.gt4r.Ref;
@@ -27,7 +27,7 @@ import static trinsdar.gt4r.data.GT4RData.Lighter;
 import static trinsdar.gt4r.data.GT4RData.LighterEmpty;
 import static trinsdar.gt4r.data.GT4RData.MatchBook;
 
-import net.minecraft.item.Item.Properties;
+import net.minecraft.world.item.Item.Properties;
 
 public class ItemMatch extends ItemBasic<ItemMatch> {
     public ItemMatch(String domain, String id, Properties properties) {
@@ -35,15 +35,15 @@ public class ItemMatch extends ItemBasic<ItemMatch> {
     }
 
     @Override
-    public ActionResultType useOn(ItemUseContext context) {
-        PlayerEntity playerentity = context.getPlayer();
-        World world = context.getLevel();
+    public InteractionResult useOn(UseOnContext context) {
+        Player playerentity = context.getPlayer();
+        Level world = context.getLevel();
         BlockPos blockpos = context.getClickedPos();
         BlockState blockstate = world.getBlockState(blockpos);
         ItemStack stack = context.getItemInHand();
         if ((this.canBeDepleted() && stack.getCount() == 1) || !this.canBeDepleted()){
             if (CampfireBlock.canLight(blockstate)) {
-                world.playSound(playerentity, blockpos, SoundEvents.FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, random.nextFloat() * 0.4F + 0.8F);
+                world.playSound(playerentity, blockpos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, random.nextFloat() * 0.4F + 0.8F);
                 world.setBlock(blockpos, blockstate.setValue(BlockStateProperties.LIT, true), 11);
                 if (playerentity != null) {
                     if (this.canBeDepleted()){
@@ -58,15 +58,15 @@ public class ItemMatch extends ItemBasic<ItemMatch> {
                     }
                 }
 
-                return ActionResultType.sidedSuccess(world.isClientSide());
+                return InteractionResult.sidedSuccess(world.isClientSide());
             } else {
                 BlockPos blockpos1 = blockpos.relative(context.getClickedFace());
-                if (AbstractFireBlock.canBePlacedAt(world, blockpos1, context.getHorizontalDirection())) {
-                    world.playSound(playerentity, blockpos1, SoundEvents.FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, random.nextFloat() * 0.4F + 0.8F);
-                    BlockState blockstate1 = AbstractFireBlock.getState(world, blockpos1);
+                if (BaseFireBlock.canBePlacedAt(world, blockpos1, context.getHorizontalDirection())) {
+                    world.playSound(playerentity, blockpos1, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, random.nextFloat() * 0.4F + 0.8F);
+                    BlockState blockstate1 = BaseFireBlock.getState(world, blockpos1);
                     world.setBlock(blockpos1, blockstate1, 11);
-                    if (playerentity instanceof ServerPlayerEntity) {
-                        CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayerEntity)playerentity, blockpos1, stack);
+                    if (playerentity instanceof ServerPlayer) {
+                        CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayer)playerentity, blockpos1, stack);
                         if (this.canBeDepleted()){
                             stack.hurtAndBreak(1, playerentity, (player) -> {
                                 player.broadcastBreakEvent(context.getHand());
@@ -79,11 +79,11 @@ public class ItemMatch extends ItemBasic<ItemMatch> {
                         }
                     }
 
-                    return ActionResultType.sidedSuccess(world.isClientSide());
+                    return InteractionResult.sidedSuccess(world.isClientSide());
                 }
             }
         }
-        return ActionResultType.FAIL;
+        return InteractionResult.FAIL;
     }
 
     @Override
@@ -92,7 +92,7 @@ public class ItemMatch extends ItemBasic<ItemMatch> {
     }
 
     @Override
-    public void onItemModelBuild(IItemProvider item, AntimatterItemModelProvider prov) {
+    public void onItemModelBuild(ItemLike item, AntimatterItemModelProvider prov) {
         if (this != MatchBook && this != Lighter) {
             super.onItemModelBuild(item, prov);
             return;

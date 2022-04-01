@@ -4,7 +4,7 @@ import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.recipe.RecipeProxies;
 import muramasa.antimatter.recipe.map.RecipeBuilder;
 import muramasa.antimatter.recipe.map.RecipeMap;
-import net.minecraft.block.Blocks;
+import net.minecraft.world.level.block.Blocks;
 import trinsdar.gt4r.Ref;
 
 import static muramasa.antimatter.machine.Tier.MV;

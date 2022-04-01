@@ -4,14 +4,14 @@ import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.pipe.PipeSize;
 import muramasa.antimatter.util.TagUtils;
-import net.minecraft.block.Blocks;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.tags.ITag;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.tags.Tag;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 import trinsdar.gt4r.Ref;
@@ -28,7 +28,7 @@ import static trinsdar.gt4r.data.Materials.*;
 
 public class VanillaOverrides {
 
-    public static void loadRecipes(Consumer<IFinishedRecipe> consumer, AntimatterRecipeProvider provider){
+    public static void loadRecipes(Consumer<FinishedRecipe> consumer, AntimatterRecipeProvider provider){
         provider.addItemRecipe(consumer, Ref.ID, "tiny_wooden_fluid_pipe", "pipes", "has_saw", provider.hasSafeItem(SAW.getTag()),
                 GT4RData.FLUID_PIPE_WOOD.getBlockItem(PipeSize.TINY), of('S', SAW.getTag(), 's', ItemTags.WOODEN_SLABS, 'H', SOFT_HAMMER.getTag()), "  S", " s ", "H  ");
         provider.addItemRecipe(consumer, Ref.ID, "small_wooden_fluid_pipe", "pipes", "has_saw", provider.hasSafeItem(SAW.getTag()),
@@ -64,7 +64,7 @@ public class VanillaOverrides {
         }
         String[] colors = {"white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray", "light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black"};
         for (String color : colors){
-            ITag.INamedTag<Item> tag = TagUtils.getForgeItemTag("dyes/" + color);
+            Tag.Named<Item> tag = TagUtils.getForgeItemTag("dyes/" + color);
             provider.shapeless(consumer, "concrete_" + color, "concretes", "has_dye", provider.hasSafeItem(tag), new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(color + "_concrete_powder")), 8), tag, Items.SAND, Items.SAND, Items.SAND, Items.SAND, DUST.get(Stone), DUST.get(Stone), DUST.get(Stone), DUST.get(Stone));
         }
         // todo: bucket, minecart, iron door

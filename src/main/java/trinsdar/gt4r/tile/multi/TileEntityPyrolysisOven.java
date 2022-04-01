@@ -4,8 +4,8 @@ import muramasa.antimatter.capability.machine.MachineRecipeHandler;
 import muramasa.antimatter.machine.event.IMachineEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.multi.TileEntityBasicMultiMachine;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
 import trinsdar.gt4r.data.GT4RData;
 
 public class TileEntityPyrolysisOven extends TileEntityBasicMultiMachine<TileEntityPyrolysisOven> {
@@ -71,14 +71,14 @@ public class TileEntityPyrolysisOven extends TileEntityBasicMultiMachine<TileEnt
         }
 
         @Override
-        public CompoundNBT serializeNBT() {
-            CompoundNBT nbt = super.serializeNBT();
+        public CompoundTag serializeNBT() {
+            CompoundTag nbt = super.serializeNBT();
             nbt.putInt("H", heatingCapacity);
             return nbt;
         }
 
         @Override
-        public void deserializeNBT(CompoundNBT nbt) {
+        public void deserializeNBT(CompoundTag nbt) {
             super.deserializeNBT(nbt);
             this.heatingCapacity = nbt.getInt("H");
         }

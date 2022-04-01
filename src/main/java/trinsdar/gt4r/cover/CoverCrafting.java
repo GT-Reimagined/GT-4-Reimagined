@@ -8,11 +8,11 @@ import muramasa.antimatter.gui.GuiData;
 import muramasa.antimatter.gui.widget.BackgroundWidget;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.tool.AntimatterToolType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.network.NetworkHooks;
 import trinsdar.gt4r.Ref;
@@ -42,9 +42,9 @@ public class CoverCrafting extends BaseCover {
     }
 
     @Override
-    public boolean openGui(PlayerEntity player, Direction side) {
+    public boolean openGui(Player player, Direction side) {
         if (!hasGui()) return false;
-        NetworkHooks.openGui((ServerPlayerEntity) player, this, packetBuffer -> {
+        NetworkHooks.openGui((ServerPlayer) player, this, packetBuffer -> {
             packetBuffer.writeBlockPos(handler.getTile().getBlockPos());
             packetBuffer.writeInt(side.get3DDataValue());
         });
@@ -52,7 +52,7 @@ public class CoverCrafting extends BaseCover {
     }
 
     @Override
-    public boolean onInteract(PlayerEntity player, Hand hand, Direction side, @Nullable AntimatterToolType type) {
+    public boolean onInteract(Player player, InteractionHand hand, Direction side, @Nullable AntimatterToolType type) {
         return openGui(player, side);
     }
 

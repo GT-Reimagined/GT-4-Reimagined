@@ -1,6 +1,6 @@
 package trinsdar.gt4r.loader.machines;
 
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 
 import static muramasa.antimatter.Data.DUST;
 import static muramasa.antimatter.Data.Redstone;

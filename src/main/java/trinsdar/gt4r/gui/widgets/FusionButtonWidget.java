@@ -1,14 +1,14 @@
 package trinsdar.gt4r.gui.widgets;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import muramasa.antimatter.gui.GuiInstance;
 import muramasa.antimatter.gui.IGuiElement;
 import muramasa.antimatter.gui.Widget;
 import muramasa.antimatter.gui.widget.WidgetSupplier;
 import muramasa.antimatter.integration.jei.AntimatterJEIPlugin;
 import muramasa.antimatter.machine.MachineFlag;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.TextComponent;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.tile.multi.TileEntityFusionReactor;
 
@@ -26,10 +26,10 @@ public class FusionButtonWidget extends Widget {
     }
 
     @Override
-    public void mouseOver(MatrixStack stack, double mouseX, double mouseY, float partialTicks) {
+    public void mouseOver(PoseStack stack, double mouseX, double mouseY, float partialTicks) {
         super.mouseOver(stack, mouseX, mouseY, partialTicks);
         if (getTile().has(MachineFlag.RECIPE)) {
-            renderTooltip(stack, new StringTextComponent("Show Recipes"), mouseX, mouseY);
+            renderTooltip(stack, new TextComponent("Show Recipes"), mouseX, mouseY);
         }
     }
 
@@ -48,7 +48,7 @@ public class FusionButtonWidget extends Widget {
     }
 
     @Override
-    public void render(MatrixStack matrixStack, double mouseX, double mouseY, float partialTicks) {
+    public void render(PoseStack matrixStack, double mouseX, double mouseY, float partialTicks) {
         TileEntityFusionReactor tile = getTile();
         if (tile.getDisplay() == TileEntityFusionReactor.Display.REGULAR){
             drawTexture(matrixStack, gui.handler.getGuiTexture(), realX() + 154, realY() + 22, 176, 0, 18, 18);

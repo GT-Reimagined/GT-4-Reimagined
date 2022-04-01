@@ -2,9 +2,9 @@ package trinsdar.gt4r.loader.multi;
 
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.util.TagUtils;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.resources.ResourceLocation;
 import trinsdar.gt4r.Ref;
 
 import static muramasa.antimatter.Data.*;

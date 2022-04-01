@@ -4,18 +4,18 @@ import muramasa.antimatter.capability.machine.MachineCoverHandler;
 import muramasa.antimatter.cover.ICover;
 import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.tool.AntimatterToolType;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import trinsdar.gt4r.machine.MaterialMachine;
@@ -28,14 +28,14 @@ public class TileEntityLocker extends TileEntityMaterial<TileEntityLocker> {
         super(type);
         coverHandler.set(() -> new MachineCoverHandler<TileEntityLocker>(this){
             @Override
-            public boolean placeCover(PlayerEntity player, Direction side, ItemStack stack, ICover cover) {
+            public boolean placeCover(Player player, Direction side, ItemStack stack, ICover cover) {
                 return false;
             }
         });
     }
 
     @Override
-    public ActionResultType onInteract(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit, @Nullable AntimatterToolType type) {
+    public InteractionResult onInteract(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit, @Nullable AntimatterToolType type) {
         if (player.getItemInHand(hand).isEmpty() && hit.getDirection() == this.getFacing()){
             this.itemHandler.ifPresent(h -> {
                 for (int i = 0; i < 4; i++){
@@ -57,14 +57,14 @@ public class TileEntityLocker extends TileEntityMaterial<TileEntityLocker> {
                     }
                 }
             });
-            world.playSound(null, this.getBlockPos(), SoundEvents.UI_BUTTON_CLICK, SoundCategory.PLAYERS, 1.0F, 1.0F);
-            return ActionResultType.SUCCESS;
+            world.playSound(null, this.getBlockPos(), SoundEvents.UI_BUTTON_CLICK, SoundSource.PLAYERS, 1.0F, 1.0F);
+            return InteractionResult.SUCCESS;
         }
         return super.onInteract(state, world, pos, player, hand, hit, type);
     }
 
     @Override
-    public boolean canPlayerOpenGui(PlayerEntity player) {
+    public boolean canPlayerOpenGui(Player player) {
         return player.isCreative();
     }
 
@@ -73,15 +73,15 @@ public class TileEntityLocker extends TileEntityMaterial<TileEntityLocker> {
         return super.blocksCapability(cap, side) || cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
     }
 
-    private EquipmentSlotType getSlot(int slot){
+    private EquipmentSlot getSlot(int slot){
         if (slot == 0){
-            return EquipmentSlotType.HEAD;
+            return EquipmentSlot.HEAD;
         } else if (slot == 1){
-            return EquipmentSlotType.CHEST;
+            return EquipmentSlot.CHEST;
         } else if (slot == 2){
-            return EquipmentSlotType.LEGS;
+            return EquipmentSlot.LEGS;
         } else {
-            return EquipmentSlotType.FEET;
+            return EquipmentSlot.FEET;
         }
     }
 }

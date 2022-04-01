@@ -3,7 +3,9 @@ package trinsdar.gt4r.items;
 import muramasa.antimatter.Ref;
 import muramasa.antimatter.item.ItemBasic;
 import muramasa.antimatter.texture.Texture;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
+
+import net.minecraft.world.item.Item.Properties;
 
 public class ItemStorageOrb extends ItemBasic<ItemStorageOrb> {
     public ItemStorageOrb(String domain, String id) {

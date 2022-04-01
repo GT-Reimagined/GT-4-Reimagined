@@ -1,6 +1,6 @@
 package trinsdar.gt4r.loader.machines;
 
-import net.minecraft.fluid.Fluids;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
 
 import static muramasa.antimatter.Data.DUST_SMALL;

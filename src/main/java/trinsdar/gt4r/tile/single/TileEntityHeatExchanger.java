@@ -10,12 +10,12 @@ import muramasa.antimatter.machine.event.MachineEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.util.Utils;
-import net.minecraft.block.Blocks;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.world.Explosion;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.Explosion;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import static net.minecraft.util.Direction.DOWN;
-import static net.minecraft.util.Direction.UP;
+import staticnet.minecraft.core.Directionn.UP;
 import static net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE;
 import static net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.SIMULATE;
 import static trinsdar.gt4r.data.Materials.DistilledWater;
@@ -90,14 +90,14 @@ public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExc
             }
 
             @Override
-            public CompoundNBT serializeNBT() {
-                CompoundNBT nbt = super.serializeNBT();
+            public CompoundTag serializeNBT() {
+                CompoundTag nbt = super.serializeNBT();
                 nbt.putInt("heat", this.heat);
                 return nbt;
             }
 
             @Override
-            public void deserializeNBT(CompoundNBT nbt) {
+            public void deserializeNBT(CompoundTag nbt) {
                 super.deserializeNBT(nbt);
                 this.heat = nbt.getInt("heat");
             }
@@ -157,16 +157,16 @@ public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExc
             super.onUpdate();
             Direction right = tile.getFacing().getCounterClockWise();
             Direction left = tile.getFacing().getClockWise();
-            TileEntity rightTile = tile.level.getBlockEntity(tile.getBlockPos().relative(right));
-            TileEntity downTile = tile.level.getBlockEntity(tile.getBlockPos().relative(DOWN));
+            BlockEntity rightTile = tile.level.getBlockEntity(tile.getBlockPos().relative(right));
+            BlockEntity downTile = tile.level.getBlockEntity(tile.getBlockPos().relative(DOWN));
             if (rightTile != null) {
                 tile.fluidHandler.side(right).ifPresent(f -> rightTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, right.getOpposite()).ifPresent(t -> Utils.transferFluids(f, t, 1000)));
             }
             if (downTile != null) {
                 tile.fluidHandler.side(DOWN).ifPresent(f -> downTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, UP).ifPresent(t -> Utils.transferFluids(f, t, 1000)));
             }
-            TileEntity leftTile = tile.level.getBlockEntity(tile.getBlockPos().relative(left));
-            TileEntity upTile = tile.level.getBlockEntity(tile.getBlockPos().relative(UP));
+            BlockEntity leftTile = tile.level.getBlockEntity(tile.getBlockPos().relative(left));
+            BlockEntity upTile = tile.level.getBlockEntity(tile.getBlockPos().relative(UP));
             if (leftTile != null) {
                 tile.fluidHandler.side(left).ifPresent(t -> leftTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, left.getOpposite()).ifPresent(f -> transferFluids(f, ((HeatExchangerFluidHandlerSidedWrapper)t), 1000)));
             }
@@ -217,7 +217,7 @@ public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExc
                 int fillSim = super.fill(stack, FluidAction.SIMULATE);
                 boolean hasWater = this.getInputTanks().getFluidInTank(0).getFluid() == Fluids.WATER || this.getInputTanks().getFluidInTank(1).getFluid() == Fluids.WATER || this.getInputTanks().getFluidInTank(0).getFluid() == DistilledWater.getLiquid() || this.getInputTanks().getFluidInTank(1).getFluid() == DistilledWater.getLiquid();
                 if (fillSim > 0 && !hasWater && tile.recipeHandler.map(h -> h.serializeNBT().getInt("heat") >= 80).orElse(false)){
-                    tile.getLevel().explode(null, tile.getBlockPos().getX(), tile.getBlockPos().getY(), tile.getBlockPos().getZ(), 4.0F, Explosion.Mode.DESTROY);
+                    tile.getLevel().explode(null, tile.getBlockPos().getX(), tile.getBlockPos().getY(), tile.getBlockPos().getZ(), 4.0F, Explosion.BlockInteraction.DESTROY);
                     tile.getLevel().setBlockAndUpdate(tile.getBlockPos(), Blocks.AIR.defaultBlockState());
                     return 0;
                 }

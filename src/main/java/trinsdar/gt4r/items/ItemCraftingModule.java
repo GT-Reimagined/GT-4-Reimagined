@@ -2,51 +2,51 @@ package trinsdar.gt4r.items;
 
 import muramasa.antimatter.capability.IGuiHandler;
 import muramasa.antimatter.item.ItemCover;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.network.NetworkHooks;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.MenuHandlers;
 
 import javax.annotation.Nullable;
 
-public class ItemCraftingModule extends ItemCover implements INamedContainerProvider {
+public class ItemCraftingModule extends ItemCover implements MenuProvider {
     public ItemCraftingModule() {
         super(Ref.ID, "crafting_module");
     }
 
     @Override
-    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        if (openGui(playerIn)) return new ActionResult<>(ActionResultType.SUCCESS, playerIn.getItemInHand(handIn));
+    public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
+        if (openGui(playerIn)) return new InteractionResultHolder<>(InteractionResult.SUCCESS, playerIn.getItemInHand(handIn));
         return super.use(worldIn, playerIn, handIn);
     }
 
-    public boolean openGui(PlayerEntity player) {
+    public boolean openGui(Player player) {
         if (player.level.isClientSide) return false;
-        NetworkHooks.openGui((ServerPlayerEntity) player, this, packetBuffer -> {
+        NetworkHooks.openGui((ServerPlayer) player, this, packetBuffer -> {
             packetBuffer.writeBlockPos(player.blockPosition());
         });
         return true;
     }
 
     @Override
-    public ITextComponent getDisplayName() {
-        return new TranslationTextComponent(this.getDescriptionId());
+    public Component getDisplayName() {
+        return new TranslatableComponent(this.getDescriptionId());
     }
 
     @Nullable
     @Override
-    public Container createMenu(int windowId, PlayerInventory playerInv, PlayerEntity player) {
+    public AbstractContainerMenu createMenu(int windowId, Inventory playerInv, Player player) {
         //TODO
         return MenuHandlers.ITEM_CRAFTING_HANDLER.getMenu((IGuiHandler) player, playerInv, windowId);
     }

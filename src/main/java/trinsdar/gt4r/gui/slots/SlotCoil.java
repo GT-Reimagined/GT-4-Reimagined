@@ -5,8 +5,8 @@ import muramasa.antimatter.capability.IMachineHandler;
 import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.gui.slot.AbstractSlot;
 import muramasa.antimatter.tile.TileEntityMachine;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.data.Machines;
@@ -31,7 +31,7 @@ public class SlotCoil extends AbstractSlot<SlotCoil> {
     }
 
     @Override
-    public boolean mayPickup(PlayerEntity playerIn) {
+    public boolean mayPickup(Player playerIn) {
         return true;
     }
 

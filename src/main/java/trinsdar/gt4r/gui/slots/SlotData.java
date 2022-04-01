@@ -3,7 +3,7 @@ package trinsdar.gt4r.gui.slots;
 import muramasa.antimatter.capability.IGuiHandler;
 import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.gui.slot.AbstractSlot;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nonnull;

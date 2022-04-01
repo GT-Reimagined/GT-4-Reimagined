@@ -10,13 +10,13 @@ import muramasa.antimatter.machine.MachineState;
 import muramasa.antimatter.registration.ITextureProvider;
 import muramasa.antimatter.texture.Texture;
 import muramasa.antimatter.util.int3;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Vector3i;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.Direction;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Vec3i;
+import net.minecraft.world.level.BlockGetter;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.tile.multi.TileEntityLargeTurbine;
 
@@ -34,7 +34,7 @@ public class BlockTurbineCasing extends BlockConnectedCasing {
     }
 
     @Override
-    public ModelConfig getConfig(BlockState state, IBlockReader world, BlockPos.Mutable mut, BlockPos pos) {
+    public ModelConfig getConfig(BlockState state, BlockGetter world, BlockPos.MutableBlockPos mut, BlockPos pos) {
         int[] conf = super.getConfig(state, world, mut, pos).getConfig();
         int[] ct = new int[conf.length+1];
         int3 mutable = new int3();
@@ -42,7 +42,7 @@ public class BlockTurbineCasing extends BlockConnectedCasing {
         TileEntityLargeTurbine turbine = getTurbine(world, pos);
         if (turbine != null) {
             BlockPos controllerPos = turbine.getBlockPos();
-            Vector3i vec = new Vector3i((pos.getX() - controllerPos.getX()), (pos.getY() - controllerPos.getY()), (pos.getZ() - controllerPos.getZ()));
+            Vec3i vec = new Vec3i((pos.getX() - controllerPos.getX()), (pos.getY() - controllerPos.getY()), (pos.getZ() - controllerPos.getZ()));
             int c = getOffset(vec, turbine.getFacing()) + 10000;
             c += (turbine.getMachineState() == MachineState.ACTIVE ? 100000 : 0);
             ct[1] = c;
@@ -78,27 +78,27 @@ public class BlockTurbineCasing extends BlockConnectedCasing {
     }
 
 
-    protected int getOffset(Vector3i vec) {
+    protected int getOffset(Vec3i vec) {
         return vec.getX() + vec.getY()*10 + vec.getZ()*100;
     }
     
     //essentially a facing transformation
-    protected int getOffset(Vector3i vec, Direction dir) {
+    protected int getOffset(Vec3i vec, Direction dir) {
         return getOffset(vec) + (dir.get2DDataValue() + 1)*1000;
     }
 
     private final static String SIDED = "antimatter:block/preset/simple_overlay";
 
-    private final Vector3i[] VECS = new Vector3i[]{
-            new Vector3i(1,-1,0),
-            new Vector3i(0,-1,0),
-            new Vector3i(-1,-1,0),
-            new Vector3i(1,0,0),
-            new Vector3i(0,0,0),
-            new Vector3i(-1,0,0),
-            new Vector3i(1,1,0),
-            new Vector3i(0,1,0),
-            new Vector3i(-1,1,0),
+    private final Vec3i[] VECS = new Vec3i[]{
+            new Vec3i(1,-1,0),
+            new Vec3i(0,-1,0),
+            new Vec3i(-1,-1,0),
+            new Vec3i(1,0,0),
+            new Vec3i(0,0,0),
+            new Vec3i(-1,0,0),
+            new Vec3i(1,1,0),
+            new Vec3i(0,1,0),
+            new Vec3i(-1,1,0),
     };
 
     private final void forSides(Direction dir, BiConsumer<int3, Integer> consumer) {
@@ -152,12 +152,12 @@ public class BlockTurbineCasing extends BlockConnectedCasing {
     //cache.
     private static final Long2ObjectMap<TileEntityLargeTurbine> MAP = new Long2ObjectOpenHashMap<>();
 
-    private TileEntityLargeTurbine checkTurbine(IBlockReader reader, BlockPos pos) {
-        TileEntity tile = reader.getBlockEntity(pos);
+    private TileEntityLargeTurbine checkTurbine(BlockGetter reader, BlockPos pos) {
+        BlockEntity tile = reader.getBlockEntity(pos);
         return tile instanceof TileEntityLargeTurbine && ((TileEntityLargeTurbine)tile).getCasing() == this ? (TileEntityLargeTurbine) tile : null;
     }
 
-    protected TileEntityLargeTurbine getTurbine(IBlockReader world, BlockPos pos) {
+    protected TileEntityLargeTurbine getTurbine(BlockGetter world, BlockPos pos) {
         int3 mutable = new int3();
         mutable.set(pos);
         return MAP.compute(pos.asLong(), (a, b) -> {

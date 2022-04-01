@@ -1,6 +1,6 @@
 package trinsdar.gt4r.tile.multi;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import it.unimi.dsi.fastutil.objects.ObjectCollection;
 import muramasa.antimatter.capability.machine.MachineRecipeHandler;
 import muramasa.antimatter.gui.GuiInstance;
@@ -13,13 +13,13 @@ import muramasa.antimatter.machine.event.IMachineEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.recipe.Recipe;
 import muramasa.antimatter.tile.multi.TileEntityBasicMultiMachine;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.IIntArray;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.client.gui.Font;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.inventory.ContainerData;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.data.SlotTypes;
 
@@ -105,7 +105,7 @@ public class TileEntityIndustrialBlastFurnace extends TileEntityBasicMultiMachin
         return integer.get();
     }
     @Override
-    public int drawInfo(IBFWidget widget, MatrixStack stack, FontRenderer renderer, int left, int top) {
+    public int drawInfo(IBFWidget widget, PoseStack stack, Font renderer, int left, int top) {
         // TODO: Replace by new TranslationTextComponent()
         renderer.draw(stack,"Heat: " + widget.heat + "K", widget.realX() + 27, widget.realY() + 62, Color.BLACK.getRGB());
         return 8;
@@ -136,7 +136,7 @@ public class TileEntityIndustrialBlastFurnace extends TileEntityBasicMultiMachin
     }
 
     public static class IBFRecipeHandler extends MachineRecipeHandler<TileEntityIndustrialBlastFurnace> {
-        protected final IIntArray GUI_SYNC_DATA = new IIntArray() {
+        protected final ContainerData GUI_SYNC_DATA = new ContainerData() {
 
             @Override
             public int get(int index) {
@@ -181,14 +181,14 @@ public class TileEntityIndustrialBlastFurnace extends TileEntityBasicMultiMachin
         }
 
         @Override
-        public CompoundNBT serializeNBT() {
-            CompoundNBT nbt = super.serializeNBT();
+        public CompoundTag serializeNBT() {
+            CompoundTag nbt = super.serializeNBT();
             nbt.putInt("H", heatingCapacity);
             return nbt;
         }
 
         @Override
-        public void deserializeNBT(CompoundNBT nbt) {
+        public void deserializeNBT(CompoundTag nbt) {
             super.deserializeNBT(nbt);
             this.heatingCapacity = nbt.getInt("H");
         }

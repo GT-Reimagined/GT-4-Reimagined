@@ -10,17 +10,17 @@ import muramasa.antimatter.gui.event.IGuiEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.util.Utils;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
@@ -55,31 +55,31 @@ public abstract class TileEntityTranslocator<T extends TileEntityTranslocator<T>
     }
 
     @Override
-    public void onGuiEvent(IGuiEvent event, PlayerEntity playerEntity) {
+    public void onGuiEvent(IGuiEvent event, Player playerEntity) {
         if (event.getFactory() == GuiEvents.EXTRA_BUTTON) {
             int[] data = ((GuiEvents.GuiEvent)event).data;
             switch (data[0]) {
                 case 0:
                     emitEnergy = !emitEnergy;
-                    playerEntity.sendMessage(new StringTextComponent( (emitEnergy ? "Emit energy to output side" : "Don't emit energy")), playerEntity.getUUID());
+                    playerEntity.sendMessage(new TextComponent( (emitEnergy ? "Emit energy to output side" : "Don't emit energy")), playerEntity.getUUID());
                     break;
                 case 1:
                     blacklist = !blacklist;
-                    playerEntity.sendMessage(new StringTextComponent( (blacklist ? "I" : "Don't i") + "nvert filter"), playerEntity.getUUID());
+                    playerEntity.sendMessage(new TextComponent( (blacklist ? "I" : "Don't i") + "nvert filter"), playerEntity.getUUID());
                     break;
             }
         }
     }
 
     @Override
-    public void load(BlockState state, CompoundNBT tag) {
+    public void load(BlockState state, CompoundTag tag) {
         super.load(state, tag);
         blacklist = tag.getBoolean("blacklist");
         emitEnergy = tag.getBoolean("emitsEnergy");
     }
 
     @Override
-    public CompoundNBT save(CompoundNBT tag) {
+    public CompoundTag save(CompoundTag tag) {
         super.save(tag);
         tag.putBoolean("blacklist", blacklist);
         tag.putBoolean("emitEnergy", emitEnergy);
@@ -104,9 +104,9 @@ public abstract class TileEntityTranslocator<T extends TileEntityTranslocator<T>
         protected boolean processOutput() {
             Direction outputDir = this.getFacing().getOpposite();
             Direction inputDir = this.getFacing();
-            TileEntity outputTile = Utils.getTile(this.getLevel(), this.getBlockPos().relative(outputDir));
+            BlockEntity outputTile = Utils.getTile(this.getLevel(), this.getBlockPos().relative(outputDir));
             if (outputTile == null) return false;
-            TileEntity inputTile = Utils.getTile(this.getLevel(), this.getBlockPos().relative(inputDir));
+            BlockEntity inputTile = Utils.getTile(this.getLevel(), this.getBlockPos().relative(inputDir));
             if (inputTile == null) return false;
             boolean[] booleans = new boolean[1];
             booleans[0] = false;
@@ -145,9 +145,9 @@ public abstract class TileEntityTranslocator<T extends TileEntityTranslocator<T>
         protected boolean processOutput() {
             Direction outputDir = this.getFacing().getOpposite();
             Direction inputDir = this.getFacing();
-            TileEntity outputTile = Utils.getTile(this.getLevel(), this.getBlockPos().relative(outputDir));
+            BlockEntity outputTile = Utils.getTile(this.getLevel(), this.getBlockPos().relative(outputDir));
             if (outputTile == null) return false;
-            TileEntity inputTile = Utils.getTile(this.getLevel(), this.getBlockPos().relative(inputDir));
+            BlockEntity inputTile = Utils.getTile(this.getLevel(), this.getBlockPos().relative(inputDir));
             if (inputTile == null) {
                 FluidState state = level.getFluidState(this.getBlockPos().relative(inputDir));
                 if (!state.isEmpty() && this.accepts(new FluidStack(state.getType(), 1)) && !((state.getType() == Fluids.WATER || state.getType() == Fluids.FLOWING_WATER) && level.getBlockState(this.getBlockPos().relative(inputDir)).getBlock() != Blocks.WATER)){

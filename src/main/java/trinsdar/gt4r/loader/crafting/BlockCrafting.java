@@ -1,8 +1,8 @@
 package trinsdar.gt4r.loader.crafting;
 
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.item.ItemStack;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.Tags;
 import trinsdar.gt4r.Ref;
 
@@ -18,7 +18,7 @@ import static trinsdar.gt4r.data.Materials.Chrome;
 import static trinsdar.gt4r.data.Materials.Titanium;
 
 public class BlockCrafting {
-    public static void loadRecipes(Consumer<IFinishedRecipe> output, AntimatterRecipeProvider provider) {
+    public static void loadRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider) {
         provider.addStackRecipe(output, Ref.ID, "firebricks", "blocks", "has_fire_brick", provider.hasSafeItem(FireBrick),
                 new ItemStack(FIRE_BRICKS), of('F', FireBrick), "FF", "FF");
         provider.addStackRecipe(output, Ref.ID, "reinforce_glass_v", "blocks", "has_advanced_alloy", provider.hasSafeItem(AdvancedAlloy),

@@ -2,8 +2,8 @@ package trinsdar.gt4r.mixin;
 
 import muramasa.antimatter.Antimatter;
 import muramasa.antimatter.Data;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.network.play.ServerPlayNetHandler;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.Constant;
@@ -11,11 +11,11 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import trinsdar.gt4r.data.Attributes;
 import trinsdar.gt4r.data.ToolTypes;
 
-@Mixin(ServerPlayNetHandler.class)
+@Mixin(ServerGamePacketListenerImpl.class)
 public abstract class ServerPlayNetHandlerMixin {
 
     @Shadow
-    public ServerPlayerEntity player;
+    public ServerPlayer player;
 
     @ModifyConstant(
             method = "handleInteract",

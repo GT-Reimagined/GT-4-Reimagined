@@ -5,19 +5,19 @@ import muramasa.antimatter.cover.BaseCover;
 import muramasa.antimatter.cover.CoverFactory;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.tile.pipe.TileEntityPipe;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.RegistryKey;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
@@ -44,12 +44,12 @@ public class CoverDrain extends BaseCover {
 
     @Override
     public void onUpdate() {
-        TileEntity tile = handler.getTile();
+        BlockEntity tile = handler.getTile();
         if (tile == null) {
             return;
         }
         if (tile.getLevel().isClientSide) return;
-        World world = tile.getLevel();
+        Level world = tile.getLevel();
         LazyOptional<IFluidHandler> cap = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);
         if (tile instanceof TileEntityPipe){
             cap = ((TileEntityPipe<?>)tile).getCoverCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);
@@ -79,7 +79,7 @@ public class CoverDrain extends BaseCover {
                 int filled = f.fill(toInsert, SIMULATE);
                 if (filled > 0) {
                     f.fill(new FluidStack(toInsert.getFluid(), filled), EXECUTE);
-                    if (fluid != Fluids.WATER || (!BiomeDictionary.hasType(RegistryKey.create(Registry.BIOME_REGISTRY, world.getBiome(offset).getRegistryName()), BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(RegistryKey.create(Registry.BIOME_REGISTRY, world.getBiome(offset).getRegistryName()), BiomeDictionary.Type.RIVER))){
+                    if (fluid != Fluids.WATER || (!BiomeDictionary.hasType(ResourceKey.create(Registry.BIOME_REGISTRY, world.getBiome(offset).getRegistryName()), BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(ResourceKey.create(Registry.BIOME_REGISTRY, world.getBiome(offset).getRegistryName()), BiomeDictionary.Type.RIVER))){
                         BlockState newState = Blocks.AIR.defaultBlockState();
                         if (fluid == Fluids.WATER && blockState.getBlock() != Blocks.WATER && blockState.hasProperty(BlockStateProperties.WATERLOGGED) && blockState.getValue(BlockStateProperties.WATERLOGGED)){
                             newState = blockState.setValue(BlockStateProperties.WATERLOGGED, false);

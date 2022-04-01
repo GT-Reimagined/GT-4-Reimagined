@@ -5,15 +5,15 @@ import muramasa.antimatter.gui.MenuHandlerMachine;
 import muramasa.antimatter.gui.container.ContainerBasicMachine;
 import muramasa.antimatter.gui.container.ContainerMachine;
 import muramasa.antimatter.gui.slot.SlotFake;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import trinsdar.gt4r.tile.single.TileEntityQuantumChest;
 
 public class ContainerQuantumChest extends ContainerBasicMachine<TileEntityQuantumChest> {
-    public ContainerQuantumChest(TileEntityQuantumChest tile, PlayerInventory playerInv, MenuHandlerMachine<TileEntityQuantumChest, ContainerMachine<TileEntityQuantumChest>> handler, int windowId) {
+    public ContainerQuantumChest(TileEntityQuantumChest tile, Inventory playerInv, MenuHandlerMachine<TileEntityQuantumChest, ContainerMachine<TileEntityQuantumChest>> handler, int windowId) {
         super(tile, playerInv, handler, windowId);
     }
 

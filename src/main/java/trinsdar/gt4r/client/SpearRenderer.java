@@ -1,18 +1,20 @@
 package trinsdar.gt4r.client;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.ArrowRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.client.renderer.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.texture.AtlasTexture;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Vector3f;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import com.mojang.math.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import trinsdar.gt4r.entity.SpearEntity;
@@ -20,15 +22,15 @@ import trinsdar.gt4r.entity.SpearEntity;
 @OnlyIn(Dist.CLIENT)
 public class SpearRenderer extends EntityRenderer<SpearEntity> {
     private final ItemRenderer itemRenderer;
-    public SpearRenderer(EntityRendererManager renderManager, ItemRenderer renderer) {
-        super(renderManager);
+    public SpearRenderer(EntityRendererProvider.Context context, ItemRenderer renderer) {
+        super(context);
         this.itemRenderer = renderer;
     }
 
     @Override
-    public void render(SpearEntity entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
+    public void render(SpearEntity entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
         matrixStackIn.pushPose();
-        RenderSystem.enableRescaleNormal();
+        //RenderSystem.enableRescaleNormal();
         doRenderTransformations(entityIn, partialTicks, matrixStackIn);
         Vector3f nextRotateAxis = new Vector3f(1.0F, 1.0F, 0.0F);
         nextRotateAxis.normalize();
@@ -36,20 +38,19 @@ public class SpearRenderer extends EntityRenderer<SpearEntity> {
         matrixStackIn.translate(-0.1D, -0.2D, 0.0D);
         ItemStack weapon = entityIn.getPickupItem();
         if (!weapon.isEmpty())
-            this.itemRenderer.renderStatic(weapon, ItemCameraTransforms.TransformType.GROUND, packedLightIn, OverlayTexture.NO_OVERLAY, matrixStackIn, bufferIn);
+            this.itemRenderer.renderStatic(weapon, ItemTransforms.TransformType.GROUND, packedLightIn, OverlayTexture.NO_OVERLAY, matrixStackIn, bufferIn, 0);
         matrixStackIn.popPose();
-        RenderSystem.disableRescaleNormal();
         super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
     }
 
-    protected void doRenderTransformations(SpearEntity entity, float partialTicks, MatrixStack matrixStack) {
+    protected void doRenderTransformations(SpearEntity entity, float partialTicks, PoseStack matrixStack) {
         matrixStack.scale(2.0F, 2.0F, 2.0F);
-        matrixStack.mulPose(Vector3f.YP.rotationDegrees(MathHelper.lerp(partialTicks, (entity).yRotO, (entity).yRot) - 90.0F));
-        matrixStack.mulPose(Vector3f.ZP.rotationDegrees(MathHelper.lerp(partialTicks, (entity).xRotO, (entity).xRot) - 45.0F));
+        matrixStack.mulPose(Vector3f.YP.rotationDegrees(Mth.lerp(partialTicks, (entity).yRotO, (entity).getYRot()) - 90.0F));
+        matrixStack.mulPose(Vector3f.ZP.rotationDegrees(Mth.lerp(partialTicks, (entity).xRotO, (entity).getXRot()) - 45.0F));
     }
 
     @Override
     public ResourceLocation getTextureLocation(SpearEntity entity) {
-        return AtlasTexture.LOCATION_BLOCKS;
+        return TextureAtlas.LOCATION_BLOCKS;
     }
 }

@@ -1,6 +1,6 @@
 package trinsdar.gt4r.tile.single;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import muramasa.antimatter.capability.EnergyHandler;
 import muramasa.antimatter.capability.machine.MachineEnergyHandler;
 import muramasa.antimatter.gui.GuiInstance;
@@ -14,9 +14,9 @@ import muramasa.antimatter.integration.jei.renderer.IInfoRenderer;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.TileEntityMachine;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.Direction;
+import net.minecraft.client.gui.Font;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.core.Direction;
 import tesseract.api.capability.TesseractGTCapability;
 import tesseract.api.gt.GTTransaction;
 
@@ -49,7 +49,7 @@ public class TileEntityInfiniteStorage<T extends TileEntityInfiniteStorage<T>> e
     }
 
     @Override
-    public void onGuiEvent(IGuiEvent event, PlayerEntity playerEntity) {
+    public void onGuiEvent(IGuiEvent event, Player playerEntity) {
         if (event.getFactory() == GuiEvents.EXTRA_BUTTON) {
             final int[] data = ((GuiEvents.GuiEvent)event).data;
             energyHandler.ifPresent(h -> {
@@ -145,7 +145,7 @@ public class TileEntityInfiniteStorage<T extends TileEntityInfiniteStorage<T>> e
     }*/
 
     @Override
-    public int drawInfo(InfiniteStorageWidget widget, MatrixStack stack, FontRenderer renderer, int left, int top) {
+    public int drawInfo(InfiniteStorageWidget widget, PoseStack stack, Font renderer, int left, int top) {
         renderer.draw(stack,"Control Panel", left + 43, top + 21, 16448255);
         renderer.draw(stack,"VOLT: " + widget.voltage, left + 43, top + 40, 16448255);
         renderer.draw(stack,"TIER: " + Tier.getTier(widget.voltage < 0 ? -widget.voltage : widget.voltage).getId().toUpperCase(), left + 43, top + 48, 16448255);

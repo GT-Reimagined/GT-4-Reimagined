@@ -6,9 +6,9 @@ import muramasa.antimatter.cover.CoverFactory;
 import muramasa.antimatter.gui.ButtonBody;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.util.Utils;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import trinsdar.gt4r.cover.redstone.CoverRedstoneMachineController;
@@ -61,15 +61,15 @@ public class CoverPump extends CoverBasicTransport {
     public void onUpdate() {
         if (handler.getTile().getLevel().isClientSide) return;
         if (handler.getTile() == null) return;
-        TileEntity adjTile = handler.getTile().getLevel().getBlockEntity(handler.getTile().getBlockPos().relative(side));
+        BlockEntity adjTile = handler.getTile().getLevel().getBlockEntity(handler.getTile().getBlockPos().relative(side));
         if (adjTile == null) return;
-        TileEntity from = handler.getTile();
-        TileEntity to = adjTile;
+        BlockEntity from = handler.getTile();
+        BlockEntity to = adjTile;
         if (getCoverMode().getName().startsWith("Input")){
             from = adjTile;
             to = handler.getTile();
         }
-        TileEntity finalTo = to;
+        BlockEntity finalTo = to;
         if (canMove(side)) {
             from.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side).ifPresent(ih -> finalTo.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side.getOpposite()).ifPresent(other -> Utils.transferFluids(ih, other, Integer.MAX_VALUE)));
         }

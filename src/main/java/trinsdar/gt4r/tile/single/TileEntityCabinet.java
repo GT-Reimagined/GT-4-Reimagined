@@ -2,9 +2,9 @@ package trinsdar.gt4r.tile.single;
 
 import muramasa.antimatter.capability.item.ITrackedHandler;
 import muramasa.antimatter.gui.SlotType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.ItemStack;
 import trinsdar.gt4r.machine.MaterialMachine;
 
 public class TileEntityCabinet extends TileEntityMaterial<TileEntityCabinet>{
@@ -24,11 +24,11 @@ public class TileEntityCabinet extends TileEntityMaterial<TileEntityCabinet>{
         return 184;
     }
 
-    public IInventory getContents(){
+    public Container getContents(){
         return this.itemHandler.map(i -> new HandlerWrapper(i.getHandler(SlotType.STORAGE))).orElse(null);
     }
 
-    public static class HandlerWrapper implements IInventory {
+    public static class HandlerWrapper implements Container {
         final ITrackedHandler trackedHandler;
 
         public HandlerWrapper(ITrackedHandler trackedHandler){
@@ -77,7 +77,7 @@ public class TileEntityCabinet extends TileEntityMaterial<TileEntityCabinet>{
         }
 
         @Override
-        public boolean stillValid(PlayerEntity pPlayer) {
+        public boolean stillValid(Player pPlayer) {
             return true;
         }
 

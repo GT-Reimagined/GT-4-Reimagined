@@ -6,13 +6,13 @@ import muramasa.antimatter.item.ItemBasic;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.registration.IColorHandler;
 import muramasa.antimatter.texture.Texture;
-import net.minecraft.block.Block;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 import javax.annotation.Nullable;
@@ -34,13 +34,13 @@ public class ItemPowerUnit extends ItemBasic<ItemPowerUnit> implements IColorHan
     }
 
     public Material getMaterial(ItemStack stack){
-        CompoundNBT nbt = stack.getTag();
+        CompoundTag nbt = stack.getTag();
         if (nbt == null || !nbt.contains("M")) return material;
         return Material.get(nbt.getString("M"));
     }
 
     public void setMaterial(Material mat, ItemStack stack){
-        CompoundNBT nbt = stack.getOrCreateTag();
+        CompoundTag nbt = stack.getOrCreateTag();
         nbt.putString("M", mat.getId());
     }
 
@@ -50,8 +50,8 @@ public class ItemPowerUnit extends ItemBasic<ItemPowerUnit> implements IColorHan
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        if (flagIn.isAdvanced()) tooltip.add(new StringTextComponent("Energy: " + getCurrentEnergy(stack) + " / " + getMaxEnergy(stack)));
+    public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
+        if (flagIn.isAdvanced()) tooltip.add(new TextComponent("Energy: " + getCurrentEnergy(stack) + " / " + getMaxEnergy(stack)));
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
     }
 
@@ -77,7 +77,7 @@ public class ItemPowerUnit extends ItemBasic<ItemPowerUnit> implements IColorHan
 
     @Nullable
     @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt) {
+    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
         return new ItemEnergyHandler.Provider(() -> {
             ItemEnergyHandler handler = new ItemEnergyHandler(getMaxEnergy(stack), 0, 32, 0, 1);
             handler.setEnergy(getCurrentEnergy(stack));
@@ -89,13 +89,13 @@ public class ItemPowerUnit extends ItemBasic<ItemPowerUnit> implements IColorHan
         return getDataTag(stack).getLong(Ref.KEY_TOOL_DATA_ENERGY);
     }
 
-    public CompoundNBT getDataTag(ItemStack stack) {
-        CompoundNBT dataTag = stack.getTagElement(Ref.TAG_TOOL_DATA);
+    public CompoundTag getDataTag(ItemStack stack) {
+        CompoundTag dataTag = stack.getTagElement(Ref.TAG_TOOL_DATA);
         return dataTag != null ? dataTag : validateTag(stack, 0, 100000);
     }
 
-    public CompoundNBT validateTag(ItemStack stack, long startingEnergy, long maxEnergy) {
-        CompoundNBT dataTag = stack.getOrCreateTagElement(Ref.TAG_TOOL_DATA);
+    public CompoundTag validateTag(ItemStack stack, long startingEnergy, long maxEnergy) {
+        CompoundTag dataTag = stack.getOrCreateTagElement(Ref.TAG_TOOL_DATA);
         dataTag.putLong(Ref.KEY_TOOL_DATA_ENERGY, startingEnergy);
         dataTag.putLong(Ref.KEY_TOOL_DATA_MAX_ENERGY, maxEnergy);
         return dataTag;

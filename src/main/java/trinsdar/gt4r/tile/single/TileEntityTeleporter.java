@@ -5,24 +5,24 @@ import muramasa.antimatter.AntimatterConfig;
 import muramasa.antimatter.machine.MachineState;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.TileEntityMachine;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.CreatureEntity;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.item.BoatEntity;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.item.minecart.MinecartEntity;
-import net.minecraft.entity.monster.GhastEntity;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.vehicle.Boat;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.vehicle.Minecart;
+import net.minecraft.world.entity.monster.Ghast;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.Direction;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.core.BlockPos;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
@@ -40,22 +40,22 @@ public class TileEntityTeleporter extends TileEntityMachine<TileEntityTeleporter
     }
 
     @Override
-    public void load(BlockState state, CompoundNBT tag) {
+    public void load(BlockState state, CompoundTag tag) {
         super.load(state, tag);
         this.redstoneTicked = tag.getBoolean("redstoneTicked");
         if (tag.contains("destination")){
-            CompoundNBT pos = tag.getCompound("destination");
+            CompoundTag pos = tag.getCompound("destination");
             destination = new BlockPos(pos.getInt("X"), pos.getInt("Y"), pos.getInt("Z"));
         }
     }
 
 
     @Override
-    public CompoundNBT save(CompoundNBT tag) {
+    public CompoundTag save(CompoundTag tag) {
         super.save(tag);
         tag.putBoolean("redstoneTicked", redstoneTicked);
         if (destination == null) return tag;
-        CompoundNBT pos = new CompoundNBT();
+        CompoundTag pos = new CompoundTag();
         pos.putInt("X", destination.getX());
         pos.putInt("Y", destination.getY());
         pos.putInt("Z", destination.getZ());
@@ -77,10 +77,10 @@ public class TileEntityTeleporter extends TileEntityMachine<TileEntityTeleporter
     }
 
     public void findEntityToTeleport(){
-        List<Entity> entites = this.getLevel().getEntities(null, new AxisAlignedBB(this.getBlockPos().offset(-2, -3, -2), this.getBlockPos().offset(2, 3, 2)));
+        List<Entity> entites = this.getLevel().getEntities(null, new AABB(this.getBlockPos().offset(-2, -3, -2), this.getBlockPos().offset(2, 3, 2)));
         if (!entites.isEmpty()){
             if (destination == null) return;
-            TileEntity teleporter = level.getBlockEntity(destination);
+            BlockEntity teleporter = level.getBlockEntity(destination);
             if (teleporter instanceof TileEntityTeleporter){
                 setMachineState(MachineState.ACTIVE);
                 final double[] minimumDistance = {Double.MAX_VALUE};
@@ -125,12 +125,12 @@ public class TileEntityTeleporter extends TileEntityMachine<TileEntityTeleporter
             ItemStack stack = ((ItemEntity)entity).getItem();
             totalWeight += (stack.getCount() / stack.getMaxStackSize()) * 100;
         }
-        else if (entity instanceof AnimalEntity || entity instanceof MinecartEntity || entity instanceof BoatEntity){
+        else if (entity instanceof Animal || entity instanceof Minecart || entity instanceof Boat){
             totalWeight += 100;
         }
-        else if (entity instanceof PlayerEntity){
+        else if (entity instanceof Player){
             totalWeight += 1000;
-            PlayerInventory inventory = ((PlayerEntity)entity).inventory;
+            Inventory inventory = ((Player)entity).inventory;
             for (ItemStack stack : inventory.items) {
                 if (stack.isEmpty()) continue;
                 totalWeight += (stack.getCount() / stack.getMaxStackSize()) * 100;
@@ -144,14 +144,14 @@ public class TileEntityTeleporter extends TileEntityMachine<TileEntityTeleporter
                 totalWeight += (stack.getCount() / stack.getMaxStackSize()) * 100;
             }
         }
-        else if (entity instanceof GhastEntity){
+        else if (entity instanceof Ghast){
             totalWeight += 2500;
         }
-        else if (entity instanceof CreatureEntity){
+        else if (entity instanceof PathfinderMob){
             totalWeight += 500;
         }
-        if (entity instanceof LivingEntity && !(entity instanceof PlayerEntity)){
-            for (EquipmentSlotType slot : EquipmentSlotType.values()) {
+        if (entity instanceof LivingEntity && !(entity instanceof Player)){
+            for (EquipmentSlot slot : EquipmentSlot.values()) {
                 ItemStack stack = ((LivingEntity)entity).getItemBySlot(slot);
                 if (!stack.isEmpty()) totalWeight += (stack.getCount() / stack.getMaxStackSize()) * 100;
             }

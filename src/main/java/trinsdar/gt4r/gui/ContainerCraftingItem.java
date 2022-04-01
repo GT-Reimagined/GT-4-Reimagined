@@ -1,17 +1,17 @@
 package trinsdar.gt4r.gui;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.IWorldPosCallable;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 
 public class ContainerCraftingItem extends GTWorkbenchContainer {
-    public ContainerCraftingItem(int id, PlayerInventory playerInventory, IWorldPosCallable p_i50090_3_) {
+    public ContainerCraftingItem(int id, Inventory playerInventory, ContainerLevelAccess p_i50090_3_) {
     //TODO
         super(null, id, playerInventory, p_i50090_3_);
     }
 
     @Override
-    public boolean stillValid(PlayerEntity playerIn) {
+    public boolean stillValid(Player playerIn) {
         return true;
     }
 }
