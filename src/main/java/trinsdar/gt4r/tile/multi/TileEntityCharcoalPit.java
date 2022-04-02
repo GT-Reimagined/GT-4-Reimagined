@@ -5,6 +5,7 @@ import muramasa.antimatter.machine.BlockMultiMachine;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.core.BlockPos;
@@ -17,8 +18,8 @@ import java.util.List;
 public class TileEntityCharcoalPit extends TileEntityMultiMachine<TileEntityCharcoalPit> {
     List<BlockPos> logPositions;
 
-    public TileEntityCharcoalPit(Machine type) {
-        super(type);
+    public TileEntityCharcoalPit(Machine<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
     }
 
     private boolean isCovered(BlockPos pos) {

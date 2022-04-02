@@ -21,7 +21,6 @@ import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.material.MaterialTag.RUBBERTOOLS;
 import static muramasa.antimatter.pipe.PipeSize.*;
 import static trinsdar.gt4r.data.Materials.Rubber;
-import static trinsdar.gt4r.loader.crafting.CraftingHelper.criterion;
 
 public class ToolCraftingTableRecipes {
     @SuppressWarnings("unchecked")
@@ -35,9 +34,9 @@ public class ToolCraftingTableRecipes {
             for (int i = 1; i < val.length; i ++) {
                 int offset = val[i] == HUGE ? 1 : 0;
                 if (val[i] == LARGE){
-                    provider.shapeless(output,"threeone","wire","has_cutter",criterion(WIRE_CUTTER.getTag(), provider),
+                    provider.shapeless(output,"threeone","wire","has_cutter",provider.hasSafeItem(WIRE_CUTTER.getTag()),
                             new ItemStack(wires.get(val[i]),1),wires.get(SMALL),wires.get(SMALL),wires.get(SMALL));
-                    provider.shapeless(output,"onethree","wire","has_cutter",criterion(WIRE_CUTTER.getTag(), provider),
+                    provider.shapeless(output,"onethree","wire","has_cutter",provider.hasSafeItem(WIRE_CUTTER.getTag()),
                             new ItemStack(wires.get(SMALL),3),wires.get(val[i]));
                     continue;
                 }
@@ -56,7 +55,7 @@ public class ToolCraftingTableRecipes {
                 provider.shapeless(output, wire.getId() + "_cable_16x", "cables", "has_wire16x", provider.hasSafeItem(wire.getBlockItem(HUGE)), new ItemStack(cable.getBlockItem(HUGE)), wire.getBlockItem(HUGE), PLATE.getMaterialTag(Rubber), PLATE.getMaterialTag(Rubber), PLATE.getMaterialTag(Rubber), PLATE.getMaterialTag(Rubber), PLATE.getMaterialTag(Rubber));
             }
             if (wire.getMaterial().has(PLATE)) {
-                provider.shapeless(output, "platewire","wire","has_cutter", criterion(WIRE_CUTTER.getTag(), provider),
+                provider.shapeless(output, "platewire","wire","has_cutter", provider.hasSafeItem(WIRE_CUTTER.getTag()),
                         new ItemStack(wires.get(VTINY), wireAmount),
                         WIRE_CUTTER.getTag(), PLATE.getMaterialTag(wire.getMaterial()));
             }
@@ -80,17 +79,17 @@ public class ToolCraftingTableRecipes {
     }
 
     private static void twoToOne(Map<PipeSize, Item> wires, PipeSize from, PipeSize to, Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider) {
-        provider.shapeless(output,"twoone","wire","has_cutter",criterion(WIRE_CUTTER.getTag(), provider),
+        provider.shapeless(output,"twoone","wire","has_cutter",provider.hasSafeItem(WIRE_CUTTER.getTag()),
                 new ItemStack(wires.get(to),1),wires.get(from),wires.get(from));
     }
 
     private static void oneToTwo(Map<PipeSize, Item> wires, PipeSize from, PipeSize to, Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider) {
-        provider.shapeless(output,"onetwo","wire","has_cutter",criterion(WIRE_CUTTER.getTag(), provider),
+        provider.shapeless(output,"onetwo","wire","has_cutter",provider.hasSafeItem(WIRE_CUTTER.getTag()),
                 new ItemStack(wires.get(to),2),wires.get(from));
     }
 
     private static void fourToOne(Map<PipeSize, Item> wires, PipeSize from, PipeSize to, Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider) {
-        provider.shapeless(output,"fourone","wire","has_cutter",criterion(WIRE_CUTTER.getTag(), provider),
+        provider.shapeless(output,"fourone","wire","has_cutter",provider.hasSafeItem(WIRE_CUTTER.getTag()),
                 new ItemStack(wires.get(to),1),wires.get(from),wires.get(from),wires.get(from),wires.get(from));
     }
 }

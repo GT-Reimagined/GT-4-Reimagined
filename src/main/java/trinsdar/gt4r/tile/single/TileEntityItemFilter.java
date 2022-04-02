@@ -10,6 +10,8 @@ import muramasa.antimatter.machine.event.IMachineEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.util.Utils;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -33,8 +35,8 @@ public class TileEntityItemFilter extends TileEntityMachine<TileEntityItemFilter
     boolean outputRedstone = false;
     boolean invertRedstone = false;
     boolean emitEnergy = false;
-    public TileEntityItemFilter(Machine<?> type) {
-        super(type);
+    public TileEntityItemFilter(Machine<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
         if (type.has(ENERGY)) {
             energyHandler.set(() -> new MachineEnergyHandler<TileEntityItemFilter>(this, 0L, this.getMachineTier().getVoltage() * 66L, this.getMachineTier().getVoltage(), this.getMachineTier().getVoltage(), 1, 1){
                 @Override
@@ -96,8 +98,8 @@ public class TileEntityItemFilter extends TileEntityMachine<TileEntityItemFilter
     }
 
     @Override
-    public void onServerUpdate() {
-        super.onServerUpdate();
+    public void serverTick(Level level, BlockPos pos, BlockState state) {
+        super.serverTick(level, pos, state);
         if (getCover(this.getFacing().getOpposite()).isEmpty()){
             if (this.energyHandler.map(e -> e.getEnergy() > 0).orElse(false)){
                 if(processItemOutput()){
@@ -147,8 +149,8 @@ public class TileEntityItemFilter extends TileEntityMachine<TileEntityItemFilter
     }
 
     @Override
-    public void load(BlockState state, CompoundTag tag) {
-        super.load(state, tag);
+    public void load(CompoundTag tag) {
+        super.load(tag);
         blacklist = tag.getBoolean("blacklist");
         nbt = tag.getBoolean("nbt");
         outputRedstone = tag.getBoolean("outputRedstone");
@@ -157,14 +159,13 @@ public class TileEntityItemFilter extends TileEntityMachine<TileEntityItemFilter
     }
 
     @Override
-    public CompoundTag save(CompoundTag tag) {
-        super.save(tag);
+    public void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
         tag.putBoolean("blacklist", blacklist);
         tag.putBoolean("nbt", nbt);
         tag.putBoolean("outputRedstone", outputRedstone);
         tag.putBoolean("invertRedstone", invertRedstone);
         tag.putBoolean("emitEnergy", emitEnergy);
-        return tag;
     }
 
     public boolean isBlacklist() {

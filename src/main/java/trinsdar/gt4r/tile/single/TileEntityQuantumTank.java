@@ -5,14 +5,16 @@ import muramasa.antimatter.capability.machine.MachineFluidHandler;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.tile.TileEntityTank;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 import javax.annotation.Nullable;
 
 public class TileEntityQuantumTank extends TileEntityTank<TileEntityQuantumTank> {
 
-    public TileEntityQuantumTank(Machine<?> type) {
-        super(type);
+    public TileEntityQuantumTank(Machine<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
         this.fluidHandler.set(() -> new MachineFluidHandler<TileEntityQuantumTank>(this, Integer.MAX_VALUE, 265000){
             @Nullable
             @Override

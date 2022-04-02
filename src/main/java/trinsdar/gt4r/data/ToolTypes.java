@@ -12,13 +12,13 @@ import muramasa.antimatter.tool.AntimatterToolType;
 import muramasa.antimatter.tool.IAntimatterTool;
 import muramasa.antimatter.util.TagUtils;
 import muramasa.antimatter.util.Utils;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.tags.Tag;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Tuple;
@@ -36,7 +36,7 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 import static muramasa.antimatter.Data.NULL;
-import static net.minecraft.block.material.Material.*;
+import static net.minecraft.world.level.material.Material.*;
 import static trinsdar.gt4r.data.GT4RData.*;
 
 public class ToolTypes {
@@ -77,18 +77,18 @@ public class ToolTypes {
     });
 
     public static AntimatterToolType SPEAR = new SpearToolType(Ref.ID, "spear_gt", 2, 1, 10, 3.0F, -2.9F).setUseAction(UseAnim.SPEAR);
-    public static AntimatterToolType ROCK_CUTTER = new RockCutterToolType(Ref.ID, "rock_cutter", 1, 1, 1, -1.0F, -3.0F).setPowered(100000L, 1).setRepairability(false).addToolTypes("pickaxe").setOverlayLayers(2).addEffectiveMaterials(ICE_SOLID, METAL, STONE, HEAVY_METAL, PISTON).setBrokenItems(ImmutableMap.of("rock_cutter", i -> getBrokenItem(i, RockCutterPowerUnit)));
+    public static AntimatterToolType ROCK_CUTTER = new RockCutterToolType(Ref.ID, "rock_cutter", 1, 1, 1, -1.0F, -3.0F).setPowered(100000L, 1).setRepairability(false).setOverlayLayers(2).addEffectiveMaterials(ICE_SOLID, METAL, STONE, HEAVY_METAL, PISTON).setBrokenItems(ImmutableMap.of("rock_cutter", i -> getBrokenItem(i, RockCutterPowerUnit)));
 
     static {
-        PropertyIngredient.addGetter(CustomTags.BATTERIES_RE.getName(), ToolTypes::getEnergy);
-        PropertyIngredient.addGetter(CustomTags.BATTERIES_SMALL.getName(), ToolTypes::getEnergy);
-        PropertyIngredient.addGetter(CustomTags.BATTERIES_MEDIUM.getName(), ToolTypes::getEnergy);
-        PropertyIngredient.addGetter(CustomTags.BATTERIES_LARGE.getName(), ToolTypes::getEnergy);
-        PropertyIngredient.addGetter(CustomTags.POWER_UNIT_LV.getName(), ToolTypes::getEnergyAndMat);
-        PropertyIngredient.addGetter(CustomTags.POWER_UNIT_MV.getName(), ToolTypes::getEnergyAndMat);
-        PropertyIngredient.addGetter(CustomTags.POWER_UNIT_HV.getName(), ToolTypes::getEnergyAndMat);
-        PropertyIngredient.addGetter(CustomTags.POWER_UNIT_SMALL.getName(), ToolTypes::getEnergyAndMat);
-        PropertyIngredient.addGetter(CustomTags.POWER_UNIT_ROCK_CUTTER.getName(), ToolTypes::getEnergyAndMat);
+        PropertyIngredient.addGetter(CustomTags.BATTERIES_RE.location(), ToolTypes::getEnergy);
+        PropertyIngredient.addGetter(CustomTags.BATTERIES_SMALL.location(), ToolTypes::getEnergy);
+        PropertyIngredient.addGetter(CustomTags.BATTERIES_MEDIUM.location(), ToolTypes::getEnergy);
+        PropertyIngredient.addGetter(CustomTags.BATTERIES_LARGE.location(), ToolTypes::getEnergy);
+        PropertyIngredient.addGetter(CustomTags.POWER_UNIT_LV.location(), ToolTypes::getEnergyAndMat);
+        PropertyIngredient.addGetter(CustomTags.POWER_UNIT_MV.location(), ToolTypes::getEnergyAndMat);
+        PropertyIngredient.addGetter(CustomTags.POWER_UNIT_HV.location(), ToolTypes::getEnergyAndMat);
+        PropertyIngredient.addGetter(CustomTags.POWER_UNIT_SMALL.location(), ToolTypes::getEnergyAndMat);
+        PropertyIngredient.addGetter(CustomTags.POWER_UNIT_ROCK_CUTTER.location(), ToolTypes::getEnergyAndMat);
     }
 
     public static void init(){
@@ -144,9 +144,9 @@ public class ToolTypes {
 
     public static class SpearToolType extends AntimatterToolType{
 
-        private Tag.Named<Item> tag, forgeTag; // Set?
+        private TagKey<Item> tag, forgeTag; // Set?
         public SpearToolType(String domain, String id, int useDurability, int attackDurability, int craftingDurability, float baseAttackDamage, float baseAttackSpeed) {
-            super(domain, id, useDurability, attackDurability, craftingDurability, baseAttackDamage, baseAttackSpeed);
+            super(domain, id, useDurability, attackDurability, craftingDurability, baseAttackDamage, baseAttackSpeed, false);
             this.tag = TagUtils.getItemTag(new ResourceLocation(Ref.ANTIMATTER, "spear"));
             this.forgeTag = TagUtils.getForgeItemTag("tools/".concat("spear"));
         }
@@ -157,12 +157,12 @@ public class ToolTypes {
         }
 
         @Override
-        public Tag.Named<Item> getTag() {
+        public TagKey<Item> getTag() {
             return tag;
         }
 
         @Override
-        public Tag.Named<Item> getForgeTag() {
+        public TagKey<Item> getForgeTag() {
             return forgeTag;
         }
 
@@ -188,7 +188,8 @@ public class ToolTypes {
     public static class RockCutterToolType extends AntimatterToolType{
 
         public RockCutterToolType(String domain, String id, int useDurability, int attackDurability, int craftingDurability, float baseAttackDamage, float baseAttackSpeed) {
-            super(domain, id, useDurability, attackDurability, craftingDurability, baseAttackDamage, baseAttackSpeed);
+            super(domain, id, useDurability, attackDurability, craftingDurability, baseAttackDamage, baseAttackSpeed, false);
+            setType(Data.PICKAXE);
         }
 
         @Override

@@ -15,8 +15,10 @@ import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.TileEntityMachine;
 import net.minecraft.client.gui.Font;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.state.BlockState;
 import tesseract.api.capability.TesseractGTCapability;
 import tesseract.api.gt.GTTransaction;
 
@@ -26,8 +28,8 @@ import static muramasa.antimatter.gui.ICanSyncData.SyncDirection.SERVER_TO_CLIEN
 
 public class TileEntityInfiniteStorage<T extends TileEntityInfiniteStorage<T>> extends TileEntityMachine<T> implements IInfoRenderer<TileEntityInfiniteStorage.InfiniteStorageWidget> {
 
-    public TileEntityInfiniteStorage(Machine<?> type) {
-        super(type);
+    public TileEntityInfiniteStorage(Machine<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
         energyHandler.set(() -> new MachineEnergyHandler<T>((T)this, Long.MAX_VALUE, Long.MAX_VALUE, 0, 32, 0, 4) {
             @Override
             public GTTransaction extract(GTTransaction.Mode mode) {

@@ -10,6 +10,8 @@ import muramasa.antimatter.gui.event.IGuiEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.util.Utils;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.entity.player.Player;
@@ -35,8 +37,8 @@ public abstract class TileEntityTranslocator<T extends TileEntityTranslocator<T>
     Capability<?> cap;
     boolean blacklist = false;
     boolean emitEnergy = false;
-    public TileEntityTranslocator(Machine<?> type, Capability<?> cap) {
-        super(type);
+    public TileEntityTranslocator(Machine<?> type, BlockPos pos, BlockState state, Capability<?> cap) {
+        super(type, pos, state);
         this.cap = cap;
         energyHandler.set(() -> new MachineEnergyHandler<T>(((T)this), 0L, 32 * 66, this.getMachineTier().getVoltage(), this.getMachineTier().getVoltage(), 1, 1){
             @Override
@@ -47,8 +49,8 @@ public abstract class TileEntityTranslocator<T extends TileEntityTranslocator<T>
     }
 
     @Override
-    public void onServerUpdate() {
-        super.onServerUpdate();
+    public void serverTick(Level level, BlockPos pos, BlockState state) {
+        super.serverTick(level, pos, state);
         if (coverHandler.map(c -> !c.get(this.getFacing().getOpposite()).blocksOutput(cap, this.getFacing().getOpposite()) && !c.get(this.getFacing()).blocksInput(cap, this.getFacing())).orElse(true)){
             this.processOutput();
         }
@@ -72,18 +74,17 @@ public abstract class TileEntityTranslocator<T extends TileEntityTranslocator<T>
     }
 
     @Override
-    public void load(BlockState state, CompoundTag tag) {
-        super.load(state, tag);
+    public void load(CompoundTag tag) {
+        super.load(tag);
         blacklist = tag.getBoolean("blacklist");
         emitEnergy = tag.getBoolean("emitsEnergy");
     }
 
     @Override
-    public CompoundTag save(CompoundTag tag) {
-        super.save(tag);
+    public void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
         tag.putBoolean("blacklist", blacklist);
         tag.putBoolean("emitEnergy", emitEnergy);
-        return tag;
     }
 
     public boolean isBlacklist() {
@@ -97,8 +98,8 @@ public abstract class TileEntityTranslocator<T extends TileEntityTranslocator<T>
     protected abstract boolean processOutput();
 
     public static class TileEntityItemTranslocator extends TileEntityTranslocator<TileEntityItemTranslocator>{
-        public TileEntityItemTranslocator(Machine<?> type) {
-            super(type, CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
+        public TileEntityItemTranslocator(Machine<?> type, BlockPos pos, BlockState state) {
+            super(type, pos, state, CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
         }
 
         protected boolean processOutput() {
@@ -137,8 +138,8 @@ public abstract class TileEntityTranslocator<T extends TileEntityTranslocator<T>
     }
 
     public static class TileEntityFluidTranslocator extends TileEntityTranslocator<TileEntityFluidTranslocator> {
-        public TileEntityFluidTranslocator(Machine<?> type) {
-            super(type, CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY);
+        public TileEntityFluidTranslocator(Machine<?> type, BlockPos pos, BlockState state) {
+            super(type, pos, state, CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY);
             this.itemHandler.set(() -> new FluidTranslocatorItemHandler(this));
         }
 

@@ -10,12 +10,14 @@ import muramasa.antimatter.machine.event.MachineEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.util.Utils;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.material.Fluids;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
@@ -27,19 +29,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
-import static net.minecraft.util.Direction.DOWN;
-import staticnet.minecraft.core.Directionn.UP;
+import static net.minecraft.core.Direction.DOWN;
+import static net.minecraft.core.Direction.UP;
 import static net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE;
 import static net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.SIMULATE;
 import static trinsdar.gt4r.data.Materials.DistilledWater;
 import static trinsdar.gt4r.data.Materials.Steam;
 
-import muramasa.antimatter.capability.FluidHandler.FluidDirection;
-import trinsdar.gt4r.GT4Reimagined;
-
 public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExchanger> {
-    public TileEntityHeatExchanger(Machine<?> type) {
-        super(type);
+    public TileEntityHeatExchanger(Machine<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
         this.recipeHandler.set(() -> new MachineRecipeHandler<TileEntityHeatExchanger>(this){
             int heat = 0;
             final int maxHeat = 500;

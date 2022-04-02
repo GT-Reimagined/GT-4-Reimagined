@@ -1,6 +1,5 @@
 package trinsdar.gt4r.mixin;
 
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.capabilities.CapabilityDispatcher;
 import net.minecraftforge.common.capabilities.CapabilityProvider;
 import org.spongepowered.asm.mixin.Mixin;

@@ -25,7 +25,7 @@ public abstract class AbstractClientPlayerEntityMixin extends Player {
         super(p_i241920_1_, p_i241920_2_, p_i241920_3_, p_i241920_4_);
     }
 
-    @Inject(method = "getCloakTextureLocation()Lnet/minecraft/util/ResourceLocation;", at = @At(value = "HEAD"), cancellable = true)
+    //@Inject(method = "getCloakTextureLocation()Lnet/minecraft/util/ResourceLocation;", at = @At(value = "HEAD"), cancellable = true)
     private void getLocationGTCape(CallbackInfoReturnable<ResourceLocation> info){
         String playerName = this.getDisplayName().getString();
         if (!FMLEnvironment.production) info.setReturnValue(GT4RData.CAPE_LOCATIONS[3]);

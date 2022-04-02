@@ -6,18 +6,20 @@ import muramasa.antimatter.gui.event.GuiEvents;
 import muramasa.antimatter.gui.event.IGuiEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.TileEntityMachine;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraftforge.common.util.Constants;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.data.SlotTypes;
 
 public class TileEntityDigitalChest extends TileEntityMachine<TileEntityDigitalChest> implements IFilterable{
-    public TileEntityDigitalChest(Machine<?> type) {
-        super(type);
+    public TileEntityDigitalChest(Machine<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
     }
 
     @Override
@@ -45,7 +47,7 @@ public class TileEntityDigitalChest extends TileEntityMachine<TileEntityDigitalC
                                 CompoundTag nbt = tag.getCompound("Data");
                                 if (nbt.contains("Items")){
                                     ITrackedHandler storage = i.getHandler(SlotTypes.FILTERABLE);
-                                    ListTag tagList = nbt.getList("Items", Constants.NBT.TAG_COMPOUND);
+                                    ListTag tagList = nbt.getList("Items", Tag.TAG_COMPOUND);
                                     if (!tagList.isEmpty()){
                                         if (!isInventoryEmpty(storage)){
                                             playerEntity.sendMessage(new TranslatableComponent("message.gt4r.digital_chest_inventory"), playerEntity.getUUID());

@@ -5,7 +5,12 @@ import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.recipe.Recipe;
 import muramasa.antimatter.tile.TileEntityMachine;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import trinsdar.gt4r.data.Materials;
 
@@ -16,8 +21,10 @@ import static trinsdar.gt4r.data.Machines.STEAM_FORGE_HAMMER;
 
 public class TileEntitySteamMachine extends TileEntityMachine<TileEntitySteamMachine> {
 
-    public TileEntitySteamMachine(Machine<?> type) {
-        super(type);
+    public static final TagKey<Fluid> STEAM =  TagKey.create(Registry.FLUID_REGISTRY, new ResourceLocation("forge", "steam"));
+
+    public TileEntitySteamMachine(Machine<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
         recipeHandler.set(() -> new SteamMachineRecipeHandler(this));
     }
 
@@ -35,7 +42,7 @@ public class TileEntitySteamMachine extends TileEntityMachine<TileEntitySteamMac
 
         @Override
         public boolean consumeResourceForRecipe(boolean simulate) {
-            return tile.fluidHandler.map(t -> t.consumeAndReturnInputs(Arrays.asList(Materials.Steam.getGas((int)activeRecipe.getPower())), simulate).size() == 0)
+            return tile.fluidHandler.map(t -> t.consumeTaggedInput(STEAM, (int) getPower(), simulate).getAmount() > 0)
                     .orElse(false);
         }
         //Allow up to 16 .
@@ -75,7 +82,7 @@ public class TileEntitySteamMachine extends TileEntityMachine<TileEntitySteamMac
 
         @Override
         public boolean accepts(FluidStack stack) {
-            return stack.getFluid().getTags().contains(new ResourceLocation("forge", "steam"));
+            return stack.getFluid().builtInRegistryHolder().is(STEAM);
         }
 
         @Override

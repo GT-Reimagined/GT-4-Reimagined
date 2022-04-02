@@ -2,6 +2,8 @@ package trinsdar.gt4r.tile.single;
 
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.TileEntityMachine;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.state.BlockState;
 import trinsdar.gt4r.machine.CoalBoilerFluidHandler;
 import trinsdar.gt4r.machine.CoalBoilerRecipeHandler;
 
@@ -10,8 +12,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class TileEntityCoalBoiler extends TileEntityMachine<TileEntityCoalBoiler> {
     int maxHeat = 500, heat, fuel = 0, maxFuel, lossTimer = 0;
     boolean hadNoWater;
-    public TileEntityCoalBoiler(Machine<?> type) {
-        super(type);
+    public TileEntityCoalBoiler(Machine<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
         this.fluidHandler.set(() -> new CoalBoilerFluidHandler(this));
         this.recipeHandler.set(() -> new CoalBoilerRecipeHandler(this));
     }

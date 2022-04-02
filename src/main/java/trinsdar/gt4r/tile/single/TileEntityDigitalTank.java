@@ -1,20 +1,17 @@
 package trinsdar.gt4r.tile.single;
 
 import muramasa.antimatter.capability.fluid.FluidTanks;
-import muramasa.antimatter.capability.item.ITrackedHandler;
-import muramasa.antimatter.capability.item.TrackedItemHandler;
 import muramasa.antimatter.capability.machine.MachineFluidHandler;
 import muramasa.antimatter.gui.event.GuiEvents;
 import muramasa.antimatter.gui.event.IGuiEvent;
 import muramasa.antimatter.machine.types.Machine;
-import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.tile.TileEntityTank;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListNBT;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraftforge.common.util.Constants;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
@@ -24,8 +21,8 @@ import trinsdar.gt4r.data.SlotTypes;
 import javax.annotation.Nullable;
 
 public class TileEntityDigitalTank extends TileEntityTank<TileEntityDigitalTank> {
-    public TileEntityDigitalTank(Machine<?> type) {
-        super(type);
+    public TileEntityDigitalTank(Machine<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
         this.fluidHandler.set(() -> new MachineFluidHandler<TileEntityDigitalTank>(this, 256000, 251000){
             @Nullable
             @Override

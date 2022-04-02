@@ -3,16 +3,21 @@ package trinsdar.gt4r.tree;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.LevelSimulatedRW;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
-import net.minecraft.util.UniformInt;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 
 import java.util.Random;
 import java.util.Set;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer.FoliageAttachment;
@@ -22,12 +27,12 @@ public class RubberFoliagePlacer extends FoliagePlacer {
         return foliagePlacerParts(p_242834_0_).apply(p_242834_0_, RubberFoliagePlacer::new);
     });
     public static final FoliagePlacerType<RubberFoliagePlacer> RUBBER = new FoliagePlacerType<>(CODEC);
-    protected RubberFoliagePlacer(UniformInt radius, UniformInt offset) {
+    protected RubberFoliagePlacer(IntProvider radius, IntProvider offset) {
         super(radius, offset);
     }
 
     public RubberFoliagePlacer() {
-        super(UniformInt.fixed(2), UniformInt.fixed(-1));
+        super(ConstantInt.of(2), ConstantInt.of(-1));
     }
 
     @Override
@@ -36,12 +41,12 @@ public class RubberFoliagePlacer extends FoliagePlacer {
     }
 
     @Override
-    protected void createFoliage(LevelSimulatedRW world, Random random, TreeConfiguration config, int trunkHeight, FoliageAttachment treeNode, int foilageHeight, int radius, Set<BlockPos> leaves, int offset, BoundingBox box) {
-        generate(world, random, config, trunkHeight, treeNode, foilageHeight, radius, leaves, offset, box);
+    protected void createFoliage(LevelSimulatedReader pLevel, BiConsumer<BlockPos, BlockState> pBlockSetter, Random pRandom, TreeConfiguration pConfig, int pMaxFreeTreeHeight, FoliageAttachment pAttachment, int pFoliageHeight, int pFoliageRadius, int pOffset) {
+        generate(pLevel);
     }
 
-    protected void generate(LevelSimulatedRW world, Random random, TreeConfiguration config, int trunkHeight, FoliageAttachment treeNode, int foliageHeight, int radius, Set<BlockPos> leaves, int offset, BoundingBox box) {
-        BlockPos center = treeNode.foliagePos();
+    protected void generate(LevelSimulatedReader world, Random random, TreeConfiguration config, int trunkHeight, FoliageAttachment treeNode, int foliageHeight, int radius, Set<BlockPos> leaves, int offset, BoundingBox box) {
+        BlockPos center = treeNode.pos();
         BlockPos.MutableBlockPos pos = center.mutable();
 
         int x = pos.getX();
@@ -56,7 +61,7 @@ public class RubberFoliagePlacer extends FoliagePlacer {
             pos.set(x, y + i, z);
             circle(pos.mutable(), treeRadius, position -> {
                 if (TreeFeature.isAirOrLeaves(world, position)) {
-                    world.setBlock(position, config.leavesProvider.getState(random, position), 19);
+                    world.setBlock(position, config.foliageProvider.getState(random, position), 19);
                     box.expand(new BoundingBox(position, position));
                     leaves.add(position.immutable());
                 }

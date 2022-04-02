@@ -32,17 +32,17 @@ import java.util.List;
 import static muramasa.antimatter.Data.ELECTRIC_WRENCH;
 import static muramasa.antimatter.Data.Netherite;
 import static muramasa.antimatter.Data.WRENCH;
-import static net.minecraft.util.Direction.DOWN;
-import static net.minecraft.util.Direction.UP;
-import staticnet.minecraft.core.Directions.*;
+import static net.minecraft.core.Direction.DOWN;
+import static net.minecraft.core.Direction.UP;
+import static trinsdar.gt4r.data.Materials.*;
 
 import muramasa.antimatter.capability.FluidHandler.FluidDirection;
 
 public class TileEntityDrum extends TileEntityMaterial<TileEntityDrum> {
     FluidStack drop = FluidStack.EMPTY;
     boolean output = false;
-    public TileEntityDrum(MaterialMachine type) {
-        super(type);
+    public TileEntityDrum(MaterialMachine type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
         this.fluidHandler.set(() -> new DrumFluidHandler(this));
     }
 
@@ -139,7 +139,7 @@ public class TileEntityDrum extends TileEntityMaterial<TileEntityDrum> {
         public void onUpdate() {
             super.onUpdate();
             if (tile.getLevel().getGameTime() % 20 == 0 && output){
-                Direction dir = getTank(0).getFluid().getFluid().getAttributes().isGaseous() ? UP : Direction.DOWN;
+                Direction dir = getTank(0).getFluid().getFluid().getAttributes().isGaseous() ? UP : DOWN;
                 if (getTank(0).getFluidAmount() > 0){
                     BlockEntity adjacent = tile.getLevel().getBlockEntity(tile.getBlockPos().relative(dir));
                     if (adjacent != null){

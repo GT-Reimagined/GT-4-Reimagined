@@ -2,8 +2,6 @@ package trinsdar.gt4r.config;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.world.World;
-import trinsdar.gt4r.worldgen.GT4ROreFeatureConfig;
 
 public class OreConfigNode {
     public static final Codec<OreConfigNode> ORE_CONFIG_NODE_CODEC = RecordCodecBuilder.create((instance) -> {

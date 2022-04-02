@@ -5,8 +5,6 @@ import muramasa.antimatter.gui.GuiInstance;
 import muramasa.antimatter.gui.IGuiElement;
 import muramasa.antimatter.gui.Widget;
 import muramasa.antimatter.gui.widget.WidgetSupplier;
-import muramasa.antimatter.machine.MachineFlag;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 
 import javax.annotation.Nonnull;

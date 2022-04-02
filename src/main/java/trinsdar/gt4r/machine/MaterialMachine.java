@@ -1,13 +1,11 @@
 package trinsdar.gt4r.machine;
 
 import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.cover.ICover;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.material.Material;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.block.SoundType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import trinsdar.gt4r.block.BlockMachineMaterial;
@@ -21,7 +19,7 @@ public class MaterialMachine extends Machine<MaterialMachine> {
     public MaterialMachine(String domain, String id, Material material) {
         super(domain, id);
         this.material = material;
-        setTile(() -> new TileEntityMaterial<>(this));
+        setTile(TileEntityMaterial::new);
         addFlags(COVERABLE);
         noCovers();
         frontCovers();

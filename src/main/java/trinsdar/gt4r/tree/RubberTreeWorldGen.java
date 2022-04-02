@@ -90,6 +90,11 @@ public class RubberTreeWorldGen  extends WorldGenBase<RubberTreeWorldGen> {
             config = RUBBER_TREE_CONFIG_JUNGLE;
         return config;
     }
+
+    public record RubberTreePlacementModifier(int min, int max){
+
+    }
+
     public static class RubberTreePlacement extends FeatureDecorator<FrequencyWithExtraChanceDecoratorConfiguration> {
         public RubberTreePlacement() {
             super(FrequencyWithExtraChanceDecoratorConfiguration.CODEC);

@@ -5,8 +5,8 @@ import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.pipe.PipeSize;
 import muramasa.antimatter.util.TagUtils;
-import net.minecraft.block.Blocks;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -94,12 +94,12 @@ public class WoodCrafting {
         }
     }
 
-    public static void addWoodRecipe(Consumer<FinishedRecipe> consumer, AntimatterRecipeProvider provider, Tag.Named<Item> log, Item plank){
+    public static void addWoodRecipe(Consumer<FinishedRecipe> consumer, AntimatterRecipeProvider provider, TagKey<Item> log, Item plank){
         if (GT4RConfig.GAMEPLAY.HARDER_WOOD){
-            provider.shapeless(consumer, plank.getRegistryName().getPath() + "_2", "planks", "has_" + log.getName().getPath(), provider.hasSafeItem(log), new ItemStack(plank, 2), log);
-            provider.addStackRecipe(consumer, Ref.ID, plank.getRegistryName().getPath() + "_4", "planks", "has_" + log.getName().getPath(), provider.hasSafeItem(log), new ItemStack(plank, 4), of('S', SAW.getTag(), 'P', log), "S", "P");
+            provider.shapeless(consumer, plank.getRegistryName().getPath() + "_2", "planks", "has_" + log.location().getPath(), provider.hasSafeItem(log), new ItemStack(plank, 2), log);
+            provider.addStackRecipe(consumer, Ref.ID, plank.getRegistryName().getPath() + "_4", "planks", "has_" + log.location().getPath(), provider.hasSafeItem(log), new ItemStack(plank, 4), of('S', SAW.getTag(), 'P', log), "S", "P");
         } else {
-            provider.shapeless(consumer, plank.getRegistryName().getPath() + "_4", "planks", "has_" + log.getName().getPath(), provider.hasSafeItem(log), new ItemStack(plank, 4), log);
+            provider.shapeless(consumer, plank.getRegistryName().getPath() + "_4", "planks", "has_" + log.location().getPath(), provider.hasSafeItem(log), new ItemStack(plank, 4), log);
         }
     }
 }

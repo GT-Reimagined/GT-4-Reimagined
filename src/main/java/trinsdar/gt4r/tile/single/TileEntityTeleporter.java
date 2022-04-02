@@ -35,13 +35,13 @@ public class TileEntityTeleporter extends TileEntityMachine<TileEntityTeleporter
     BlockPos destination = null;
     boolean redstoneTicked = false;
 
-    public TileEntityTeleporter(Machine<?> type) {
-        super(type);
+    public TileEntityTeleporter(Machine<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
     }
 
     @Override
-    public void load(BlockState state, CompoundTag tag) {
-        super.load(state, tag);
+    public void load(CompoundTag tag) {
+        super.load(tag);
         this.redstoneTicked = tag.getBoolean("redstoneTicked");
         if (tag.contains("destination")){
             CompoundTag pos = tag.getCompound("destination");
@@ -51,16 +51,15 @@ public class TileEntityTeleporter extends TileEntityMachine<TileEntityTeleporter
 
 
     @Override
-    public CompoundTag save(CompoundTag tag) {
-        super.save(tag);
+    public void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
         tag.putBoolean("redstoneTicked", redstoneTicked);
-        if (destination == null) return tag;
+        if (destination == null) return;
         CompoundTag pos = new CompoundTag();
         pos.putInt("X", destination.getX());
         pos.putInt("Y", destination.getY());
         pos.putInt("Z", destination.getZ());
         tag.put("destination", pos);
-        return tag;
     }
 
     @Override
@@ -130,7 +129,7 @@ public class TileEntityTeleporter extends TileEntityMachine<TileEntityTeleporter
         }
         else if (entity instanceof Player){
             totalWeight += 1000;
-            Inventory inventory = ((Player)entity).inventory;
+            Inventory inventory = ((Player)entity).getInventory();
             for (ItemStack stack : inventory.items) {
                 if (stack.isEmpty()) continue;
                 totalWeight += (stack.getCount() / stack.getMaxStackSize()) * 100;

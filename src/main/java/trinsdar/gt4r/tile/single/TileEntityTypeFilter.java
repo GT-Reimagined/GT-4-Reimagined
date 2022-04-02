@@ -2,14 +2,16 @@ package trinsdar.gt4r.tile.single;
 
 import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.machine.types.Machine;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Set;
 
 public class TileEntityTypeFilter extends TileEntityItemFilter {
-    public TileEntityTypeFilter(Machine<?> type) {
-        super(type);
+    public TileEntityTypeFilter(Machine<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
     }
 
     @Override
@@ -17,17 +19,14 @@ public class TileEntityTypeFilter extends TileEntityItemFilter {
         boolean proceed = itemHandler.map(i -> {
             ItemStack tagStack = i.getHandler(SlotType.DISPLAY_SETTABLE).getStackInSlot(0);
             if (tagStack.isEmpty()) return false;
-            Set<ResourceLocation> list = tagStack.getItem().getTags();
-            if (list.isEmpty()) return false;
-            boolean hasTag = false;
-            for (ResourceLocation tag : list){
-                if ((tag.getNamespace().equals("forge") || tag.getNamespace().equals("minecraft")) && !tag.getPath().contains("/")){
-                    if (stack.getItem().getTags().contains(tag)){
-                        hasTag = true;
-                        break;
-                    }
+            boolean hasTag = tagStack.getItem().builtInRegistryHolder().tags().filter(tag -> {
+                ResourceLocation loc = tag.location();
+                if ((loc.getNamespace().equals("forge") || loc.getNamespace().equals("minecraft")) && !loc.getPath().contains("/")){
+                    return true;
                 }
-            }
+                return false;
+            }).count() > 0;
+
             return blacklist != hasTag;
         }).orElse(false);
         return proceed;

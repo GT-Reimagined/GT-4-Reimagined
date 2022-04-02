@@ -1,13 +1,16 @@
 package trinsdar.gt4r.tile.multi;
 
+import muramasa.antimatter.capability.machine.MachineFluidHandler;
 import muramasa.antimatter.capability.machine.MachineRecipeHandler;
 import muramasa.antimatter.machine.event.ContentEvent;
 import muramasa.antimatter.machine.event.IMachineEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.recipe.Recipe;
+import muramasa.antimatter.recipe.ingredient.FluidIngredient;
 import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
 import muramasa.antimatter.util.Utils;
 import muramasa.antimatter.util.int3;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.player.Player;
@@ -15,6 +18,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntitySelector;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -24,11 +28,14 @@ import trinsdar.gt4r.data.Materials;
 import trinsdar.gt4r.data.SlotTypes;
 import trinsdar.gt4r.items.ItemTurbineRotor;
 
+import java.util.Collections;
+import java.util.List;
+
 
 public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLargeTurbine> {
 
-    public TileEntityLargeTurbine(Machine type) {
-        super(type);
+    public TileEntityLargeTurbine(Machine<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
         this.recipeHandler.set(() ->
             new MachineRecipeHandler<TileEntityLargeTurbine>(this) {
 
@@ -52,8 +59,8 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
                     if (r == null) return null;
                     sourceRecipe = r;
                     //Source recipe contains fluid amounts, map to turbine
-                    FluidStack[] stacks = r.getInputFluids();
-                    if (stacks == null || stacks.length == 0) return null;
+                    List<FluidIngredient> stacks = r.getInputFluids();
+                    if (stacks.size() == 0) return null;
                     //ItemStack t = tile.itemHandler.map(tt -> tt.getSpecial()).orElse(ItemStack.EMPTY);
                     //if (!(t.getItem() instanceof ItemTurbine)) return null;
                    // ItemTurbine turbine = (ItemTurbine) t.getItem();
@@ -62,7 +69,7 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
                     if (efficiency <= 0.0F) return null;
                     long toConsume = calculateGeneratorConsumption((int) flow, sourceRecipe);
 
-                    return Utils.getFluidPoweredRecipe(new FluidStack[]{new FluidStack(stacks[0].getFluid(),(int) toConsume)},
+                    return Utils.getFluidPoweredRecipe(Collections.singletonList(stacks.get(0).copy((int)toConsume)),
                             r.getOutputFluids(),
                            // new FluidStack[]{new FluidStack(DistilledWater.getLiquid(), stacks[0].getAmount())},// Arrays.stream(sourceRecipe.getOutputFluids()).map(tt -> new FluidStack(tt.getFluid(), (int) (tt.getAmount()*toConsume))).toArray(FluidStack[]::new),
                             1, flow,1);
@@ -79,18 +86,18 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
                     }
                     //boolean shouldRun = tile.energyHandler.map(h -> h.insert((long)(tile.getMachineType().getMachineEfficiency()*(double)tile.getMachineTier().getVoltage()),true) > 0).orElse(false);
                     ///if (!shouldRun) return false;
-                    int recipeAmount = activeRecipe.getInputFluids()[0].getAmount();
-                    long toConsume = recipeAmount; // calculateGeneratorConsumption(tile.getMachineTier().getVoltage(), activeRecipe);// (long) ((double)tile.getMachineTier().getVoltage() / (activeRecipe.getPower() /(double) Objects.requireNonNull(activeRecipe.getInputFluids())[0].getAmount()));
+                    int recipeAmount = activeRecipe.getInputFluids().get(0).getAmount();
+                    int toConsume = recipeAmount; // calculateGeneratorConsumption(tile.getMachineTier().getVoltage(), activeRecipe);// (long) ((double)tile.getMachineTier().getVoltage() / (activeRecipe.getPower() /(double) Objects.requireNonNull(activeRecipe.getInputFluids())[0].getAmount()));
                     int consumed = tile.fluidHandler.map(h -> {
                         /*
                             How much wiggle room? So, at optimal flow : generate regular. Otherwise, dampen by a factor of 1/(optimal-current) or 1/(current-optimal). Allow
                             consuming up to 1.5x optimal
                          */
-                        int amount = h.getInputTanks().drain(new FluidStack(activeRecipe.getInputFluids()[0],(int)(toConsume)), IFluidHandler.FluidAction.SIMULATE).getAmount();
+                        int amount = activeRecipe.getInputFluids().get(0).drainedAmount(toConsume, h, true, true);
 
                         if (amount == toConsume) {
                             if (!simulate)
-                                h.getInputTanks().drain(new FluidStack(activeRecipe.getInputFluids()[0], amount), IFluidHandler.FluidAction.EXECUTE);
+                                activeRecipe.getInputFluids().get(0).drain(toConsume, h, true, false);
                             return amount;
                         }
                         return 0;
@@ -112,7 +119,7 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
                                         if (copy.getItem() instanceof ItemTurbineRotor){
                                             h.getHandler(SlotTypes.ROTOR).setStackInSlot(0, Materials.BROKEN_TURBINE_ROTOR.get(((ItemTurbineRotor)copy.getItem()).getMaterial(), 1));
                                         }
-                                        for (Player player : level.getNearbyPlayers(new TargetingConditions().range(5.0D), null, new AABB(new int3(tile.getBlockPos(), tile.getFacing()).left(2).back(5), new int3(tile.getBlockPos(), tile.getFacing()).right(2)))){
+                                        for (Player player : level.getNearbyPlayers(TargetingConditions.DEFAULT.range(5.0D), null, new AABB(new int3(tile.getBlockPos(), tile.getFacing()).left(2).back(5), new int3(tile.getBlockPos(), tile.getFacing()).right(2)))){
                                             if (EntitySelector.NO_SPECTATORS.test(player) && !player.isCreative()) {
                                                 double d0 = player.distanceToSqr(tile.getBlockPos().getX(), tile.getBlockPos().getY(), tile.getBlockPos().getZ());
                                                 if (d0 < 5 * 5) {

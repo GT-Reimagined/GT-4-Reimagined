@@ -6,6 +6,7 @@ import muramasa.antimatter.pipe.PipeSize;
 import muramasa.antimatter.pipe.types.Cable;
 import muramasa.antimatter.pipe.types.Wire;
 import muramasa.antimatter.util.TagUtils;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -117,7 +118,7 @@ public class AssemblyLoader {
         }
     }
 
-    public static Tag.Named<Item> getTag(String domain, String path){
+    public static TagKey<Item> getTag(String domain, String path){
         return TagUtils.getItemTag(new ResourceLocation(domain, path));
     }
 }

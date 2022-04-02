@@ -2,15 +2,17 @@ package trinsdar.gt4r.tile.single;
 
 import muramasa.antimatter.capability.item.ITrackedHandler;
 import muramasa.antimatter.gui.SlotType;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
 import trinsdar.gt4r.machine.MaterialMachine;
 
 public class TileEntityCabinet extends TileEntityMaterial<TileEntityCabinet>{
     final int ySize;
-    public TileEntityCabinet(MaterialMachine type, int ySize) {
-        super(type);
+    public TileEntityCabinet(MaterialMachine type, BlockPos pos, BlockState state, int ySize) {
+        super(type, pos, state);
         this.ySize = ySize;
     }
 

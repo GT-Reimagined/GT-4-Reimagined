@@ -6,6 +6,7 @@ import muramasa.antimatter.pipe.types.FluidPipe;
 import muramasa.antimatter.pipe.types.ItemPipe;
 import muramasa.antimatter.pipe.types.Wire;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -100,7 +101,7 @@ public class ExtruderLoader {
         EXTRUDING.RB().ii(DUST.getMaterialIngredient(SiliconDioxide, 1), getReusable(GT4RData.ShapeBottle)).io(new ItemStack(Items.GLASS_BOTTLE)).add(32, 16);
     }
 
-    private static RecipeIngredient getReusable(Tag.Named<Item> tag){
+    private static RecipeIngredient getReusable(TagKey<Item> tag){
         return RecipeIngredient.of(tag, 1).setNoConsume();
     }
 

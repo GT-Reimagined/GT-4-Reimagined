@@ -2,11 +2,13 @@ package trinsdar.gt4r.tile.single;
 
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.TileEntityMachine;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.state.BlockState;
 import trinsdar.gt4r.machine.QuantumChestItemHandler;
 
 public class TileEntityQuantumChest extends TileEntityMachine<TileEntityQuantumChest> {
-    public TileEntityQuantumChest(Machine<?> type) {
-        super(type);
+    public TileEntityQuantumChest(Machine<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
         this.itemHandler.set(() -> new QuantumChestItemHandler(this));
     }
 //TODO

@@ -5,6 +5,8 @@ import muramasa.antimatter.machine.MachineState;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.util.Utils;
+import net.minecraft.nbt.Tag;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
@@ -17,7 +19,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.core.BlockPos;
-import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
@@ -27,8 +28,8 @@ public class TileEntityPump extends TileEntityMachine<TileEntityPump> {
     Fluid fluid = Fluids.EMPTY;
     public ArrayList<BlockPos> mPumpList = new ArrayList<BlockPos>();
     int pumpHeadY = - 1;
-    public TileEntityPump(Machine<?> type) {
-        super(type);
+    public TileEntityPump(Machine<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
     }
 
     @Override
@@ -40,8 +41,8 @@ public class TileEntityPump extends TileEntityMachine<TileEntityPump> {
     }
 
     @Override
-    public void onServerUpdate() {
-        super.onServerUpdate();
+    public void serverTick(Level level, BlockPos pos, BlockState state) {
+        super.serverTick(level, pos, state);
         if (this.isServerSide() && level.getGameTime()%10==0 && this.machineState != MachineState.DISABLED && this.itemHandler.map(i -> {
             ItemStack stack = i.getHandler(SlotType.STORAGE).getStackInSlot(0);
             return !stack.isEmpty() && stack.getItem() instanceof BlockItem;
@@ -97,7 +98,7 @@ public class TileEntityPump extends TileEntityMachine<TileEntityPump> {
     private boolean moveOneDown() {
         if (pumpHeadY <= 0) return false;
         BlockState state = level.getBlockState(new BlockPos(worldPosition.getX(), pumpHeadY - 1, worldPosition.getZ()));
-        if (!(state.getBlock() instanceof LiquidBlock) && !state.getBlock().isAir(state, level, new BlockPos(worldPosition.getX(), pumpHeadY - 1, worldPosition.getZ()))) return false;
+        if (!(state.getBlock() instanceof LiquidBlock) && !state.isAir()) return false;
         pumpHeadY--;
         return true;
     }
@@ -182,8 +183,8 @@ public class TileEntityPump extends TileEntityMachine<TileEntityPump> {
     }
 
     @Override
-    public CompoundTag save(CompoundTag tag) {
-        super.save(tag);
+    public void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
         tag.put("Fluid", new FluidStack(fluid, 1).writeToNBT(new CompoundTag()));
         tag.putInt("pumpHeadY", pumpHeadY);
         ListTag nbtTagList = new ListTag();
@@ -197,14 +198,13 @@ public class TileEntityPump extends TileEntityMachine<TileEntityPump> {
         }
         CompoundTag nbt = new CompoundTag();
         nbt.put("Positions", nbtTagList);
-        return tag;
     }
 
     @Override
-    public void load(BlockState state, CompoundTag tag) {
-        super.load(state, tag);
+    public void load(CompoundTag tag) {
+        super.load(tag);
         mPumpList = new ArrayList<>();
-        ListTag tagList = tag.getList("Positions", Constants.NBT.TAG_COMPOUND);
+        ListTag tagList = tag.getList("Positions", Tag.TAG_COMPOUND);
         for (int i = 0; i < tagList.size(); i++)
         {
             CompoundTag itemTags = tagList.getCompound(i);

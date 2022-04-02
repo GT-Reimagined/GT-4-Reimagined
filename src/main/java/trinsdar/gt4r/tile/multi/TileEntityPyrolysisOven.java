@@ -4,14 +4,16 @@ import muramasa.antimatter.capability.machine.MachineRecipeHandler;
 import muramasa.antimatter.machine.event.IMachineEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.multi.TileEntityBasicMultiMachine;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.state.BlockState;
 import trinsdar.gt4r.data.GT4RData;
 
 public class TileEntityPyrolysisOven extends TileEntityBasicMultiMachine<TileEntityPyrolysisOven> {
 
-    public TileEntityPyrolysisOven(Machine<?> type) {
-        super(type);
+    public TileEntityPyrolysisOven(Machine<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
         recipeHandler.set(() -> new PyrolysisRecipeHandler(this));
     }
 

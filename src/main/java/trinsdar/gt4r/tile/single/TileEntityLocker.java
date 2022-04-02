@@ -24,8 +24,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class TileEntityLocker extends TileEntityMaterial<TileEntityLocker> {
-    public TileEntityLocker(MaterialMachine type) {
-        super(type);
+    public TileEntityLocker(MaterialMachine type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
         coverHandler.set(() -> new MachineCoverHandler<TileEntityLocker>(this){
             @Override
             public boolean placeCover(Player player, Direction side, ItemStack stack, ICover cover) {

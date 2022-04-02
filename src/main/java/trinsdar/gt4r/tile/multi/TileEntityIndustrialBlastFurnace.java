@@ -13,6 +13,7 @@ import muramasa.antimatter.machine.event.IMachineEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.recipe.Recipe;
 import muramasa.antimatter.tile.multi.TileEntityBasicMultiMachine;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
@@ -31,8 +32,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class TileEntityIndustrialBlastFurnace extends TileEntityBasicMultiMachine<TileEntityIndustrialBlastFurnace> implements IInfoRenderer<TileEntityIndustrialBlastFurnace.IBFWidget> {
 
-    public TileEntityIndustrialBlastFurnace(Machine type) {
-        super(type);
+    public TileEntityIndustrialBlastFurnace(Machine<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
         this.recipeHandler.set(() -> new IBFRecipeHandler(this));
     }
 

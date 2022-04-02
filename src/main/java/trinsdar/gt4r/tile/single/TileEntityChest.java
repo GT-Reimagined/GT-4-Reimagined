@@ -3,6 +3,7 @@ package trinsdar.gt4r.tile.single;
 import muramasa.antimatter.capability.item.ITrackedHandler;
 import muramasa.antimatter.gui.SlotType;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.entity.player.Player;
@@ -11,7 +12,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.stats.Stat;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.level.block.entity.LidBlockEntity;
-import net.minecraft.tileentity.LockableTileEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
@@ -38,13 +38,13 @@ public class TileEntityChest extends TileEntityCabinet implements LidBlockEntity
     protected int numPlayersUsing;
     private int ticksSinceSync;
 
-    public TileEntityChest(MaterialMachine type, int ySize) {
-        super(type, ySize);
+    public TileEntityChest(MaterialMachine type, BlockPos pos, BlockState state, int ySize) {
+        super(type, pos, state, ySize);
     }
 
     @Override
-    public void tick() {
-        super.tick();
+    protected void tick(Level level, BlockPos pos, BlockState state) {
+        super.tick(level, pos, state);
         int i = this.getBlockPos().getX();
         int j = this.getBlockPos().getY();
         int k = this.getBlockPos().getZ();
@@ -118,10 +118,9 @@ public class TileEntityChest extends TileEntityCabinet implements LidBlockEntity
         int i = 0;
 
         for (Player playerentity : world.getEntitiesOfClass(Player.class, new AABB((double) ((float) x - 5.0F), (double) ((float) y - 5.0F), (double) ((float) z - 5.0F), (double) ((float) (x + 1) + 5.0F), (double) ((float) (y + 1) + 5.0F), (double) ((float) (z + 1) + 5.0F)))) {
-            if (playerentity.containerMenu instanceof ContainerCabinet) {
-                ContainerCabinet<?> chest = (ContainerCabinet<?>)playerentity.containerMenu;
-                if (chest.handler.handler instanceof TileEntityChest){
-                    if (((TileEntityChest)chest.handler.handler).getBlockPos().equals(lockableTileEntity.getBlockPos())){
+            if (playerentity.containerMenu instanceof ContainerCabinet<?> chest) {
+                if (chest.handler.handler instanceof TileEntityChest chest1){
+                    if (chest1.getBlockPos().equals(lockableTileEntity.getBlockPos())){
                         ++i;
                     }
                 }
@@ -165,10 +164,10 @@ public class TileEntityChest extends TileEntityCabinet implements LidBlockEntity
 
     public static int getPlayersUsing(BlockGetter reader, BlockPos posIn) {
         BlockState blockstate = reader.getBlockState(posIn);
-        if (blockstate.hasTileEntity()) {
+        if (blockstate.getBlock() instanceof EntityBlock) {
             BlockEntity tileentity = reader.getBlockEntity(posIn);
-            if (tileentity instanceof TileEntityChest) {
-                return ((TileEntityChest) tileentity).numPlayersUsing;
+            if (tileentity instanceof TileEntityChest chest) {
+                return chest.numPlayersUsing;
             }
         }
 

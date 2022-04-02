@@ -6,8 +6,10 @@ import muramasa.antimatter.machine.event.MachineEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.recipe.Recipe;
 import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.state.BlockState;
 import trinsdar.gt4r.data.SlotTypes;
 
 import java.util.Arrays;
@@ -15,8 +17,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TileEntityThermalBoiler extends TileEntityMultiMachine<TileEntityThermalBoiler> {
-    public TileEntityThermalBoiler(Machine<?> type) {
-        super(type);
+    public TileEntityThermalBoiler(Machine<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
         this.recipeHandler.set(() -> new MachineRecipeHandler<TileEntityThermalBoiler>(this){
 
             int ticker = 0;

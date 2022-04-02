@@ -1,25 +1,21 @@
 package trinsdar.gt4r.tile.multi;
 
-import muramasa.antimatter.capability.machine.MachineEnergyHandler;
 import muramasa.antimatter.capability.machine.MultiMachineEnergyHandler;
 import muramasa.antimatter.gui.event.GuiEvents;
 import muramasa.antimatter.gui.event.IGuiEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.nbt.CompoundTag;
-import tesseract.api.gt.IEnergyHandler;
-import tesseract.api.gt.IGTNode;
-
-import java.util.Arrays;
 
 public class TileEntityFusionReactor extends TileEntityMultiMachine<TileEntityFusionReactor> {
 
     Display display = Display.REGULAR;
 
-    public TileEntityFusionReactor(Machine<?> type) {
-        super(type);
+    public TileEntityFusionReactor(Machine<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
         this.energyHandler.set(() -> new MultiMachineEnergyHandler<TileEntityFusionReactor>( this){
             public void onStructureBuild() {
                 super.onStructureBuild();
@@ -40,15 +36,14 @@ public class TileEntityFusionReactor extends TileEntityMultiMachine<TileEntityFu
     }
 
     @Override
-    public CompoundTag save(CompoundTag tag) {
-        super.save(tag);
+    public void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
         tag.putInt("display", display.ordinal());
-        return tag;
     }
 
     @Override
-    public void load(BlockState state, CompoundTag tag) {
-        super.load(state, tag);
+    public void load(CompoundTag tag) {
+        super.load(tag);
         this.display = Display.values()[tag.getInt("display")];
     }
 

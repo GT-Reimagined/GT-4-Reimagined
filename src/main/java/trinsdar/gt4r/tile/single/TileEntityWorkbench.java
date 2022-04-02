@@ -4,10 +4,12 @@ import muramasa.antimatter.capability.machine.MachineCoverHandler;
 import muramasa.antimatter.cover.ICover;
 import muramasa.antimatter.gui.event.GuiEvents;
 import muramasa.antimatter.gui.event.IGuiEvent;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import trinsdar.gt4r.gui.ContainerWorkbench;
@@ -16,8 +18,8 @@ import trinsdar.gt4r.machine.MaterialMachine;
 import javax.annotation.Nonnull;
 
 public class TileEntityWorkbench extends TileEntityMaterial<TileEntityWorkbench>{
-    public TileEntityWorkbench(MaterialMachine type) {
-        super(type);
+    public TileEntityWorkbench(MaterialMachine type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
         coverHandler.set(() -> new MachineCoverHandler<TileEntityWorkbench>(this){
             @Override
             public boolean placeCover(Player player, Direction side, ItemStack stack, ICover cover) {

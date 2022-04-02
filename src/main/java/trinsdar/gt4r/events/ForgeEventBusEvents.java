@@ -3,7 +3,6 @@ package trinsdar.gt4r.events;
 import muramasa.antimatter.Antimatter;
 import muramasa.antimatter.tool.IAntimatterTool;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.inventory.container.Container;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -55,7 +54,7 @@ public class ForgeEventBusEvents {
                 int tEmptySlots = 36;
                 int tFullSlots = 0;
                 for (int i = 0; i < 36; i++) {
-                    tStack = event.player.inventory.getItem(i);
+                    tStack = event.player.getInventory().getItem(i);
 
                     if (!tStack.isEmpty()) {
                         tEmptySlots--;

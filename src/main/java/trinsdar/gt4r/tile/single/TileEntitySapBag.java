@@ -1,6 +1,7 @@
 package trinsdar.gt4r.tile.single;
 
 import muramasa.antimatter.tile.TileEntityTickable;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
@@ -13,8 +14,8 @@ import trinsdar.gt4r.tree.ResinState;
 public class TileEntitySapBag extends TileEntityTickable<TileEntitySapBag> {
     ItemStack sap = ItemStack.EMPTY;
     Direction facing = Direction.NORTH;
-    public TileEntitySapBag() {
-        super(TileEntityTypes.SAP_BAG_TYPE);
+    public TileEntitySapBag(BlockPos pos, BlockState state) {
+        super(TileEntityTypes.SAP_BAG_TYPE, pos, state);
     }
 
     @Override
@@ -65,16 +66,15 @@ public class TileEntitySapBag extends TileEntityTickable<TileEntitySapBag> {
     }
 
     @Override
-    public CompoundTag save(CompoundTag tag) {
-        super.save(tag);
+    public void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
         tag.putInt("F", facing.get3DDataValue());
         tag.put("S", sap.save(new CompoundTag()));
-        return tag;
     }
 
     @Override
-    public void load(BlockState state, CompoundTag nbt) {
-        super.load(state, nbt);
+    public void load(CompoundTag nbt) {
+        super.load(nbt);
         this.facing = Direction.from3DDataValue(nbt.getInt("F"));
         this.sap = ItemStack.of(nbt.getCompound("S"));
     }
