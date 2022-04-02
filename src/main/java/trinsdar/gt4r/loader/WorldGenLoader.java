@@ -4,6 +4,7 @@ import muramasa.antimatter.AntimatterConfig;
 import muramasa.antimatter.event.AntimatterWorldGenEvent;
 import muramasa.antimatter.worldgen.vein.WorldGenVein;
 import muramasa.antimatter.worldgen.vein.WorldGenVeinBuilder;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import trinsdar.gt4r.GT4RConfig;
 
 import static muramasa.antimatter.Data.ANDESITE;

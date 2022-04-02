@@ -43,6 +43,7 @@ import trinsdar.gt4r.proxy.ClientHandler;
 import trinsdar.gt4r.proxy.CommonHandler;
 import trinsdar.gt4r.proxy.ServerHandler;
 import trinsdar.gt4r.tile.TileEntityTypes;
+import trinsdar.gt4r.tree.RubberTreeWorldGen;
 import trinsdar.gt4r.worldgen.GT4RConfiguredFeatures;
 import trinsdar.gt4r.worldgen.GT4RFeatures;
 
@@ -65,9 +66,9 @@ public class GT4Reimagined extends AntimatterMod {
         MinecraftForge.EVENT_BUS.register(RemappingEvents.class);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, GT4RConfig.COMMON_SPEC);
         FMLJavaModLoadingContext.get().getModEventBus().register(RegistrationEvents.class);
-        AntimatterDynamics.addProvider(Ref.ID, g -> new AntimatterBlockStateProvider(Ref.ID, Ref.NAME + " BlockStates", g));
-        AntimatterDynamics.addProvider(Ref.ID, g -> new GT4RItemModelProvider(Ref.ID, Ref.NAME + " Item Models", g));
-        AntimatterDynamics.addProvider(Ref.ID, GT4RLocalizations.en_US::new);
+        AntimatterDynamics.clientProvider(Ref.ID, g -> new AntimatterBlockStateProvider(Ref.ID, Ref.NAME + " BlockStates", g));
+        AntimatterDynamics.clientProvider(Ref.ID, g -> new GT4RItemModelProvider(Ref.ID, Ref.NAME + " Item Models", g));
+        AntimatterDynamics.clientProvider(Ref.ID, GT4RLocalizations.en_US::new);
 
         Attributes.init();
         MinecraftForge.EVENT_BUS.register(AntimatterEvents.class);
@@ -114,6 +115,7 @@ public class GT4Reimagined extends AntimatterMod {
                 GT4RData.buildTierMaps();
                 Structures.init();
                 Structures.initPatterns();
+                RubberTreeWorldGen.init();
                 GT4RConfiguredFeatures.init();
                 OreConfigHandler.ORE_CONFIG_HANDLER.save();
                 //GregTechAPI.registerFluidCell(Data.CellTin.get(1));
@@ -137,7 +139,7 @@ public class GT4Reimagined extends AntimatterMod {
 //                MaterialType.PLATE.all().forEach(m -> AntimatterAPI.registerCoverStack(MaterialType.PLATE.get(m, 1), Data.COVER_PLATE));
                 break;
             case WORLDGEN_INIT:
-                WorldGenLoader.init();
+                //WorldGenLoader.init();
                 break;
         }
     }

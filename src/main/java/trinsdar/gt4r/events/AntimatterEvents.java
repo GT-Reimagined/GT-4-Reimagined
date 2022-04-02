@@ -8,6 +8,7 @@ import muramasa.antimatter.datagen.providers.AntimatterFluidTagProvider;
 import muramasa.antimatter.event.AntimatterCraftingEvent;
 import muramasa.antimatter.event.AntimatterLoaderEvent;
 import muramasa.antimatter.event.AntimatterProvidersEvent;
+import muramasa.antimatter.event.AntimatterWorldGenEvent;
 import muramasa.antimatter.recipe.loader.IRecipeRegistrate;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -18,6 +19,7 @@ import trinsdar.gt4r.datagen.GT4RItemTagProvider;
 import trinsdar.gt4r.datagen.ProgressionAdvancements;
 import trinsdar.gt4r.loader.IntCircuitJeiLoader;
 import trinsdar.gt4r.loader.MaterialRecipeLoader;
+import trinsdar.gt4r.loader.WorldGenLoader;
 import trinsdar.gt4r.loader.crafting.BlockCrafting;
 import trinsdar.gt4r.loader.crafting.MachineCrafting;
 import trinsdar.gt4r.loader.crafting.ModCompatRecipes;
@@ -67,6 +69,11 @@ import trinsdar.gt4r.loader.multi.VacFreezer;
 import java.util.function.BiConsumer;
 
 public class AntimatterEvents {
+
+    public static void registerWorldgen(AntimatterWorldGenEvent event){
+        WorldGenLoader.init(event);
+    }
+
     @SubscribeEvent
     public static void registerRecipeLoaders(AntimatterLoaderEvent event) {
         BiConsumer<String, IRecipeRegistrate.IRecipeLoader> loader = (a, b) -> event.registrat.add(Ref.ID, a, b);
