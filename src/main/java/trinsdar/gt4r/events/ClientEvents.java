@@ -13,7 +13,7 @@ import trinsdar.gt4r.client.MaterialChestRenderer;
 public class ClientEvents {
     @SubscribeEvent
     public static void onStitch(TextureStitchEvent.Pre event) {
-        if (!event.getMap().location().equals(Sheets.CHEST_SHEET)) {
+        if (!event.getAtlas().location().equals(Sheets.CHEST_SHEET)) {
             return;
         }
 

@@ -59,7 +59,7 @@ public class ContainerWorkbench<T extends TileEntityMaterial<T>> extends Contain
     }
 
     @Override
-    public ItemStack clicked(int slotId, int dragType, ClickType clickTypeIn, Player player) {
+    public void clicked(int slotId, int dragType, ClickType clickTypeIn, Player player) {
 
         boolean clickTypeCrafting = slotId == 0 && slots.get(slotId).hasItem() &&
                 (clickTypeIn.equals(ClickType.PICKUP) || clickTypeIn.equals(ClickType.QUICK_MOVE));
@@ -74,7 +74,7 @@ public class ContainerWorkbench<T extends TileEntityMaterial<T>> extends Contain
             }
         }
 
-        ItemStack itemStack = super.clicked(slotId, dragType, clickTypeIn, player);
+        super.clicked(slotId, dragType, clickTypeIn, player);
 
         //Try to pull from the Project Table Inventory if the last of an item for a recipe.
         if(clickTypeCrafting){
@@ -98,8 +98,6 @@ public class ContainerWorkbench<T extends TileEntityMaterial<T>> extends Contain
                 }
             }
         }
-
-        return itemStack;
     }
 
     protected static void updateCrafting(int id, Level world, Player playerEntity, CraftingContainer craftingInventory, ResultContainer craftResultInventory) {
@@ -169,7 +167,7 @@ public class ContainerWorkbench<T extends TileEntityMaterial<T>> extends Contain
     public ItemStack quickMoveStack(Player player, int slotId) {
         ItemStack itemstack;
         Slot slot = slots.get(slotId);
-        if (slot != null && slot.hasItem() && slotId == 0) {
+        if (slot.hasItem() && slotId == 0) {
             ItemStack itemstack1 = slot.getItem();
             itemstack = itemstack1.copy();
             if (!moveItemStackTo(itemstack1, 32, 68, false))

@@ -144,21 +144,21 @@ public class MaterialSpear extends MaterialTool {
                     return;
                 }
                 //thrown.setDirectionAndMovement(player, player.rotationPitch, player.rotationYaw, 0.0F, 2.0F * ((float)charge / 10.0F + 0.5F), 0.5F);
-                thrown.shootFromRotation(player, player.xRot, player.yRot, 0.0F, 1.5F * ((float) charge / 10.0F + 0.5F), 0.5F);
+                thrown.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F * ((float) charge / 10.0F + 0.5F), 0.5F);
                 float damage = (type.getBaseAttackDamage() + getTier(stack).getAttackDamageBonus() + 1.0F);
                 thrown.setBaseDamage(damage);
 
-                if (player.abilities.instabuild) {
+                if (player.getAbilities().instabuild) {
                     thrown.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
                 } else if (thrown.isValidThrowingWeapon()) {
                     stack.shrink(1);
                     if (stack.getCount() <= 0) {
-                        player.inventory.removeItem(stack);
+                        player.getInventory().removeItem(stack);
                     }
                 }
 
                 if (thrown.isValidThrowingWeapon()) {
-                    worldIn.playSound((Player)null, player.getX(), player.getY(), player.getZ(), SoundEvents.TRIDENT_THROW, SoundSource.PLAYERS, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
+                    worldIn.playSound((Player)null, player.getX(), player.getY(), player.getZ(), SoundEvents.TRIDENT_THROW, SoundSource.PLAYERS, 0.5F, 0.4F / (worldIn.random.nextFloat() * 0.4F + 0.8F));
                     worldIn.addFreshEntity(thrown);
                 }
 

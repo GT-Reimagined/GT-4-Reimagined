@@ -31,7 +31,7 @@ public class ChangingButtonWidget extends ButtonWidget {
     @Override
     public void render(PoseStack matrixStack, double mouseX, double mouseY, float partialTicks) {
         Minecraft minecraft = Minecraft.getInstance();
-        minecraft.getTextureManager().bind(res);
+        minecraft.getTextureManager().bindForSetup(res);
         RenderSystem.disableDepthTest();
         boolean isActive = activeHandler == null || activeHandler.apply(this);
         if (body != null) {

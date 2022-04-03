@@ -307,9 +307,9 @@ public class GT4RData {
     public static final BlockCasing ADVANCED_MACHINE_BLOCK = new BlockCasing(Ref.ID, "advanced_machine_block");
 
     public static final BlockCasing FIRE_BRICKS = new BlockCasing(Ref.ID, "fire_bricks");
-    public static final BlockCasing REINFORCED_GLASS = new BlockCasing(Ref.ID, "reinforced_glass", Block.Properties.of(net.minecraft.world.level.material.Material.GLASS).strength(15.0f, 150.0f).sound(SoundType.GLASS).requiresCorrectToolForDrops().harvestLevel(2).noOcclusion().isValidSpawn(GT4RData::neverAllowSpawn).isRedstoneConductor(GT4RData::isntSolid).isSuffocating(GT4RData::isntSolid).isViewBlocking(GT4RData::isntSolid));
-    public static final BlockCasing REINFORCED_STONE = new BlockCasing(Ref.ID, "reinforced_stone", Block.Properties.of(net.minecraft.world.level.material.Material.STONE).strength(80.0f, 150.0f).sound(SoundType.STONE).requiresCorrectToolForDrops().harvestLevel(2));
-    public static final BlockCasing IRIDIUM_REINFORCED_STONE = new BlockCasing(Ref.ID, "iridium_reinforced_stone", Block.Properties.of(net.minecraft.world.level.material.Material.STONE).strength(80.0f, 150.0f).sound(SoundType.STONE).requiresCorrectToolForDrops().harvestLevel(2));
+    public static final BlockCasing REINFORCED_GLASS = new BlockCasing(Ref.ID, "reinforced_glass", Block.Properties.of(net.minecraft.world.level.material.Material.GLASS).strength(15.0f, 150.0f).sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion().isValidSpawn(GT4RData::neverAllowSpawn).isRedstoneConductor(GT4RData::isntSolid).isSuffocating(GT4RData::isntSolid).isViewBlocking(GT4RData::isntSolid));
+    public static final BlockCasing REINFORCED_STONE = new BlockCasing(Ref.ID, "reinforced_stone", Block.Properties.of(net.minecraft.world.level.material.Material.STONE).strength(80.0f, 150.0f).sound(SoundType.STONE).requiresCorrectToolForDrops());
+    public static final BlockCasing IRIDIUM_REINFORCED_STONE = new BlockCasing(Ref.ID, "iridium_reinforced_stone", Block.Properties.of(net.minecraft.world.level.material.Material.STONE).strength(80.0f, 150.0f).sound(SoundType.STONE).requiresCorrectToolForDrops());
 
     public static final BlockCasing FUSION_COIL = new BlockCasing(Ref.ID, "fusion_coil");
 

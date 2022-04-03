@@ -41,7 +41,7 @@ public class ContainerQuantumChest extends ContainerBasicMachine<TileEntityQuant
                     continueLoop = true;
                 }
                 ItemStack itemstack = slot.getItem();
-                if (!continueLoop && !itemstack.isEmpty() && consideredTheSameItem(stack, itemstack)) {
+                if (!continueLoop && !itemstack.isEmpty() && ItemStack.isSame(stack, itemstack)) {
                     int j = itemstack.getCount() + stack.getCount();
                     int maxSize = slot.getMaxStackSize(stack);
                     if (j <= maxSize) {

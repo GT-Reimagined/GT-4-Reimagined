@@ -17,7 +17,7 @@ public class NonSolidMachine extends Machine<NonSolidMachine> {
     public NonSolidMachine(String domain, String id) {
         super(domain, id);
         addFlags(BASIC, ENERGY);
-        setTile(() -> new TileEntityMachine(this));
+        setTile(TileEntityMachine::new);
         setGUI(Data.BASIC_MENU_HANDLER);
     }
 

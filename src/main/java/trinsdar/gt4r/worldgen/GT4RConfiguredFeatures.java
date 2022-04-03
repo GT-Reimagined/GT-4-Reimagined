@@ -95,7 +95,7 @@ public class GT4RConfiguredFeatures {
         if (!invalidBiomes.isEmpty()){
             config.setValidBiomes(invalidBiomes);
         }
-        Holder<ConfiguredFeature<GT4ROreFeatureConfig, ?>> configuredFeature = RubberTreeWorldGen.register(id, new ConfiguredFeature<>(AntimatterAPI.get(AntimatterFeature.class, "feature_vanilla_type_ore", Ref.ID), config));
+        Holder<ConfiguredFeature<GT4ROreFeatureConfig, ?>> configuredFeature = RubberTreeWorldGen.register(id, new ConfiguredFeature<>(GT4RFeatures.ORE, config));
         List<PlacementModifier> list = new ArrayList<>();
         list.addAll(List.of(BiomeFilter.biome(), InSquarePlacement.spread()));
         list.add(node.isTriangle() ? HeightRangePlacement.triangle(VerticalAnchor.absolute(minY), VerticalAnchor.absolute(maxY)) : HeightRangePlacement.uniform(VerticalAnchor.absolute(minY), VerticalAnchor.absolute(maxY)));

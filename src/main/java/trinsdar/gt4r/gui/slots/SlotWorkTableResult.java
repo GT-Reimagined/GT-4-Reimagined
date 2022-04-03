@@ -23,9 +23,9 @@ public class SlotWorkTableResult extends ResultSlot {
     }
 
     @Override
-    public ItemStack onTake(Player thePlayer, ItemStack stack) {
+    public void onTake(Player thePlayer, ItemStack stack) {
         extractedFromTable();
-        return super.onTake(thePlayer, stack);
+        super.onTake(thePlayer, stack);
     }
 
     private boolean extractedFromTable(){

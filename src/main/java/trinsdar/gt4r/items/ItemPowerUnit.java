@@ -14,6 +14,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -56,22 +57,22 @@ public class ItemPowerUnit extends ItemBasic<ItemPowerUnit> implements IColorHan
     }
 
     @Override
-    public double getDurabilityForDisplay(ItemStack stack) {
+    public int getBarWidth(@NotNull ItemStack stack) {
         long currentEnergy = getCurrentEnergy(stack);
         if (currentEnergy > 0) {
             double maxAmount = getMaxEnergy(stack), difference = maxAmount - currentEnergy;
-            return difference / maxAmount;
+            return (int)( 13*(difference / maxAmount));
         }
-        return 1.0;
+        return super.getBarWidth(stack);
     }
 
     @Override
-    public int getRGBDurabilityForDisplay(ItemStack stack) {
+    public int getBarColor(@NotNull ItemStack stack) {
         return 0x00BFFF;
     }
 
     @Override
-    public boolean showDurabilityBar(ItemStack stack) {
+    public boolean isBarVisible(@NotNull ItemStack stack) {
         return true;
     }
 
