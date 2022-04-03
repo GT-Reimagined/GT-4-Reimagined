@@ -29,10 +29,16 @@ public class GT4ROreFeatureConfig implements FeatureConfiguration {
     public static final Codec<GT4ROreFeatureConfig> CODEC = RecordCodecBuilder.create((p_236568_0_) -> {
         return p_236568_0_.group(Codec.STRING.fieldOf("id").forGetter((config) -> {
             return config.id;
-        }),OreConfigNode.ORE_CONFIG_NODE_CODEC.fieldOf("configNode").forGetter((config) -> {
-            return config.configNode;
-        }),Codec.STRING.fieldOf("primary").forGetter((config) -> {
+        }),Codec.INT.fieldOf("size").forGetter(config -> {
+            return config.size;
+        }), Codec.FLOAT.fieldOf("discardOnExposureChance").forGetter(config -> {
+            return config.discardOnExposureChance;
+        }), Codec.STRING.fieldOf("primary").forGetter((config) -> {
             return config.primary;
+        }), Codec.STRING.fieldOf("secondary").forGetter((config) -> {
+            return config.secondary;
+        }), Codec.FLOAT.fieldOf("secondaryChance").forGetter(config -> {
+            return config.secondaryChance;
         }), Codec.list(Level.RESOURCE_KEY_CODEC).fieldOf("dimension").forGetter((config) ->{
             return config.dimensions;
         }), Codec.list(Codec.STRING).fieldOf("biomeTypesID").forGetter((config) ->{
@@ -46,7 +52,6 @@ public class GT4ROreFeatureConfig implements FeatureConfiguration {
     private String primary, secondary;
     final int size;
     final float secondaryChance, discardOnExposureChance;
-    private boolean invertBiomeFilter;
     private List<ResourceKey<Level>> dimensions;
     private Set<ResourceLocation> dimensionLocations;
     private List<BiomeDictionary.Type> biomeTypes = new ArrayList<>();
@@ -59,7 +64,6 @@ public class GT4ROreFeatureConfig implements FeatureConfiguration {
         this.size = size;
         this.secondaryChance = secondaryChance;
         this.discardOnExposureChance = discardOnExposureChance;
-        this.invertBiomeFilter = false;
         if (primary == null || (!Material.get(primary).has(ORE) && Material.get(primary) != Salt && Material.get(primary) != RockSalt)) throw new IllegalArgumentException("GT4ROreFeatureConfig - " + id + ": " + primary + " material either doesn't exist or doesn't have the ORE tag");
         //if (secondary != null && !Material.get(secondary).has(ORE) && Material.get(secondary) != NULL) throw new IllegalArgumentException("GT4ROreFeatureConfig - " + id + ": " + secondary + " material doesn't have the ORE tag");
         if (secondary != null){
@@ -76,6 +80,14 @@ public class GT4ROreFeatureConfig implements FeatureConfiguration {
         this.dimensionLocations = this.dimensions.stream().map(ResourceKey::location).collect(Collectors.toCollection(ObjectOpenHashSet::new));
     }
 
+    public GT4ROreFeatureConfig(String id, int size, float discardOnExposureChance, String primary, String secondary, float secondaryChance, List<ResourceKey<Level>> dimensions, List<String> validBiomes, List<String> invalidBiomes) {
+        this(id, size, discardOnExposureChance, primary, secondary, secondaryChance, dimensions);
+        this.biomeTypes = validBiomes.stream().map(BiomeDictionary.Type::getType).collect(Collectors.toList());
+        this.invalidBiomeTypes = invalidBiomes.stream().map(BiomeDictionary.Type::getType).collect(Collectors.toList());
+        this.biomeTypesID = validBiomes;
+        this.invalidBiomeTypesID = invalidBiomes;
+    }
+
     public GT4ROreFeatureConfig(String id, int size, float discardOnExposureChance, Material primary, Material secondary, float secondaryChance, List<ResourceKey<Level>> dimensions) {
         this(id, size, discardOnExposureChance, primary.getId(), secondary.getId(), secondaryChance, dimensions);
     }
@@ -89,11 +101,6 @@ public class GT4ROreFeatureConfig implements FeatureConfiguration {
     public GT4ROreFeatureConfig setInvalidBiomes(List<BiomeDictionary.Type> types){
         invalidBiomeTypes = types;
         invalidBiomeTypesID = types.stream().map(BiomeDictionary.Type::getName).collect(Collectors.toList());
-        return this;
-    }
-
-    public GT4ROreFeatureConfig setInvertBiomeFilter(boolean invert){
-        this.invertBiomeFilter = invert;
         return this;
     }
 
@@ -119,10 +126,6 @@ public class GT4ROreFeatureConfig implements FeatureConfiguration {
 
     public float getDiscardOnExposureChance() {
         return discardOnExposureChance;
-    }
-
-    public boolean isInvertBiomeFilter() {
-        return invertBiomeFilter;
     }
 
     public Set<ResourceLocation> getDimensionLocations() {

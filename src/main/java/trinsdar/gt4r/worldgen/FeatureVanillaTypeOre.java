@@ -112,7 +112,7 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
         List<BiomeDictionary.Type> types = config.getBiomeTypes();
         List<BiomeDictionary.Type> invalidTypes = config.getInvalidBiomeTypes();
         boolean hasType = types.isEmpty();
-        for (BiomeDictionary.Type type : BiomeDictionary.getTypes(ResourceKey.create(Registry.BIOME_REGISTRY, world.getBiome(pos).unwrapKey().get()))) {
+        for (BiomeDictionary.Type type : BiomeDictionary.getTypes(world.getBiome(pos).unwrapKey().get())) {
             if (types.contains(type)) {
                 hasType = true;
             }
@@ -121,11 +121,11 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
                 break;
             }
         }
-        if (hasType == config.isInvertBiomeFilter()){
+        if (!hasType){
             return false;
         }
 
-        if (config == SALT_CONFIG){
+        if (config.getId().equals("salt")){
             return generateOnOceanFloor(world, generator, rand, pos, config);
         }
         return generate2(world, rand, pos, config);

@@ -43,7 +43,7 @@ public class ItemMatch extends ItemBasic<ItemMatch> {
         ItemStack stack = context.getItemInHand();
         if ((this.canBeDepleted() && stack.getCount() == 1) || !this.canBeDepleted()){
             if (CampfireBlock.canLight(blockstate)) {
-                world.playSound(playerentity, blockpos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, random.nextFloat() * 0.4F + 0.8F);
+                world.playSound(playerentity, blockpos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, context.getLevel().random.nextFloat() * 0.4F + 0.8F);
                 world.setBlock(blockpos, blockstate.setValue(BlockStateProperties.LIT, true), 11);
                 if (playerentity != null) {
                     if (this.canBeDepleted()){
@@ -62,7 +62,7 @@ public class ItemMatch extends ItemBasic<ItemMatch> {
             } else {
                 BlockPos blockpos1 = blockpos.relative(context.getClickedFace());
                 if (BaseFireBlock.canBePlacedAt(world, blockpos1, context.getHorizontalDirection())) {
-                    world.playSound(playerentity, blockpos1, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, random.nextFloat() * 0.4F + 0.8F);
+                    world.playSound(playerentity, blockpos1, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, context.getLevel().random.nextFloat() * 0.4F + 0.8F);
                     BlockState blockstate1 = BaseFireBlock.getState(world, blockpos1);
                     world.setBlock(blockpos1, blockstate1, 11);
                     if (playerentity instanceof ServerPlayer) {

@@ -47,9 +47,9 @@ public class BlockTurbineCasing extends BlockConnectedCasing {
             c += (turbine.getMachineState() == MachineState.ACTIVE ? 100000 : 0);
             ct[1] = c;
             ct[0] = conf[0];
-            return config.set(ct);
+            return config.set(pos, ct);
         } else {
-            return config.set(conf);
+            return config.set(pos, conf);
         }
     }
 

@@ -20,14 +20,16 @@ public class OreConfigNode {
             return config.secondary;
         }), Codec.FLOAT.fieldOf("secondaryChance").forGetter((config) -> {
             return config.secondaryChance;
+        }), Codec.BOOL.fieldOf("triangle").forGetter((config) -> {
+            return config.triangle;
         })).apply(instance, OreConfigNode::new);
     });
-    private boolean enable;
+    private boolean enable, triangle;
     private int minY, maxY, weight, size;
     private String secondary;
     private float secondaryChance;
 
-    public OreConfigNode(boolean enable, int minY, int maxY, int weight, int size, String secondary, float secondaryChance) {
+    public OreConfigNode(boolean enable, int minY, int maxY, int weight, int size, String secondary, float secondaryChance, boolean triangle) {
         this.enable = enable;
         this.minY = minY;
         this.maxY = maxY;
@@ -35,6 +37,7 @@ public class OreConfigNode {
         this.size = size;
         this.secondary = secondary;
         this.secondaryChance = secondaryChance;
+        this.triangle = triangle;
     }
 
     public boolean isEnabled() {
@@ -65,6 +68,10 @@ public class OreConfigNode {
         return secondaryChance;
     }
 
+    public boolean isTriangle() {
+        return triangle;
+    }
+
     public void setEnabled(boolean enable) {
         this.enable = enable;
     }
@@ -91,6 +98,10 @@ public class OreConfigNode {
 
     public void setSecondaryChance(int secondaryChance) {
         this.secondaryChance = secondaryChance;
+    }
+
+    public void setTriangle(boolean triangle) {
+        this.triangle = triangle;
     }
 
     public enum OreConfigDistributionShape{
