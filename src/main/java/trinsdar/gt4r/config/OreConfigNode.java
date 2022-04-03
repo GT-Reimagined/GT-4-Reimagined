@@ -18,16 +18,16 @@ public class OreConfigNode {
             return config.size;
         }), Codec.STRING.fieldOf("secondary").forGetter((config) -> {
             return config.secondary;
-        }), Codec.INT.fieldOf("secondaryChance").forGetter((config) -> {
+        }), Codec.FLOAT.fieldOf("secondaryChance").forGetter((config) -> {
             return config.secondaryChance;
         })).apply(instance, OreConfigNode::new);
     });
     private boolean enable;
     private int minY, maxY, weight, size;
     private String secondary;
-    private int secondaryChance;
+    private float secondaryChance;
 
-    public OreConfigNode(boolean enable, int minY, int maxY, int weight, int size, String secondary, int secondaryChance) {
+    public OreConfigNode(boolean enable, int minY, int maxY, int weight, int size, String secondary, float secondaryChance) {
         this.enable = enable;
         this.minY = minY;
         this.maxY = maxY;
@@ -61,7 +61,7 @@ public class OreConfigNode {
         return secondary;
     }
 
-    public int getSecondaryChance() {
+    public float getSecondaryChance() {
         return secondaryChance;
     }
 
@@ -91,5 +91,10 @@ public class OreConfigNode {
 
     public void setSecondaryChance(int secondaryChance) {
         this.secondaryChance = secondaryChance;
+    }
+
+    public enum OreConfigDistributionShape{
+        UNIFORM,
+        TRAPEZOID
     }
 }

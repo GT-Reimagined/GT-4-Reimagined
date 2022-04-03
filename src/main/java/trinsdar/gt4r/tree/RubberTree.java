@@ -1,5 +1,8 @@
 package trinsdar.gt4r.tree;
 
+import net.minecraft.core.Holder;
+import net.minecraft.util.random.SimpleWeightedRandomList;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
@@ -16,32 +19,36 @@ import java.util.Random;
 
 public class RubberTree extends AbstractTreeGrower {
     public static final RubberTreeFeature TREE_FEATURE = new RubberTreeFeature();
-    public static final WeightedStateProvider TRUNK_BLOCKS = new WeightedStateProvider();
+    public static final WeightedStateProvider TRUNK_BLOCKS = new WeightedStateProvider(list());
 
     public RubberTree() {
+    }
+
+    public static SimpleWeightedRandomList<BlockState> list(){
+        SimpleWeightedRandomList.Builder<BlockState> builder = new SimpleWeightedRandomList.Builder<>();
         BlockStateProperties.HORIZONTAL_FACING.getPossibleValues().forEach(d -> {
-            TRUNK_BLOCKS.add(GT4RData.RUBBER_LOG.defaultBlockState()
+            builder.add(GT4RData.RUBBER_LOG.defaultBlockState()
                     .setValue(BlockRubberLog.RESIN_STATE, ResinState.FILLED)
                     .setValue(BlockRubberLog.RESIN_FACING, d), 1);
-            TRUNK_BLOCKS.add(GT4RData.RUBBER_LOG.defaultBlockState()
+            builder.add(GT4RData.RUBBER_LOG.defaultBlockState()
                     .setValue(BlockRubberLog.RESIN_STATE, ResinState.EMPTY)
                     .setValue(BlockRubberLog.RESIN_FACING, d), 1);
         });
-        TRUNK_BLOCKS.add(GT4RData.RUBBER_LOG.defaultBlockState()
+        builder.add(GT4RData.RUBBER_LOG.defaultBlockState()
                 .setValue(BlockRubberLog.RESIN_STATE, ResinState.NONE), 20);
+        return builder.build();
     }
 
     @Override
-    protected ConfiguredFeature<TreeConfiguration, ?> getConfiguredFeature(Random rand, boolean flowers) {
-        return TREE_FEATURE.configured(RubberTreeWorldGen.RUBBER_TREE_CONFIG_NORMAL);
+    protected Holder<ConfiguredFeature<TreeConfiguration, ?>> getConfiguredFeature(Random rand, boolean flowers) {
+        return RubberTreeWorldGen.RUBBER_TREE_CONFIGURED_NORMAL;
     }
 
     @Override
     public boolean growTree(ServerLevel world, ChunkGenerator chunkGenerator, BlockPos pos, BlockState state, Random random) {
-        ConfiguredFeature<TreeConfiguration, ?> configuredFeature = TREE_FEATURE
-                .configured(RubberTreeWorldGen.getTreeConfig(world.getBiome(pos).getBiomeCategory()));
+        ConfiguredFeature<TreeConfiguration, ?> configuredFeature = RubberTreeWorldGen.getTreeConfigured(Biome.getBiomeCategory(world.getBiome(pos))).value();
         world.setBlock(pos, Blocks.AIR.defaultBlockState(), 4);
-        configuredFeature.config.setFromSapling();
+        //configuredFeature.config();
         if (!configuredFeature.place(world, chunkGenerator, random, pos)) {
             world.setBlock(pos, state, 4);
             return false;

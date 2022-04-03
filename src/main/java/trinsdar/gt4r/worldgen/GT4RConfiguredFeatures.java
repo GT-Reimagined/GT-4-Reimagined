@@ -1,27 +1,43 @@
 package trinsdar.gt4r.worldgen;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
+import muramasa.antimatter.material.Material;
+import net.minecraft.core.Holder;
+import net.minecraft.data.worldgen.features.OreFeatures;
+import net.minecraft.data.worldgen.placement.OrePlacements;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.placement.BiomeFilter;
+import net.minecraft.world.level.levelgen.placement.CountPlacement;
 import net.minecraft.world.level.levelgen.placement.DepthAverageConfigation;
 import net.minecraft.world.level.levelgen.placement.FeatureDecorator;
+import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
+import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraft.world.level.levelgen.placement.PlacementModifier;
+import net.minecraft.world.level.levelgen.placement.RarityFilter;
+import net.minecraftforge.common.BiomeDictionary;
 import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.config.OreConfigHandler;
 import trinsdar.gt4r.config.OreConfigNode;
+import trinsdar.gt4r.tree.RubberTreeWorldGen;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static muramasa.antimatter.Data.*;
 import static net.minecraftforge.common.BiomeDictionary.Type.*;
 import static trinsdar.gt4r.data.Materials.*;
 
 public class GT4RConfiguredFeatures {
-
-    public static final GT4ROreFeatureConfig COPPER_CONFIG = new GT4ROreFeatureConfig("copper", new OreConfigNode(true, 0, 100, 15, 10, "gold", 2), Copper, Level.OVERWORLD).setValidBiomes(JUNGLE, SWAMP, MOUNTAIN, MUSHROOM).setInvalidBiomes(COLD).setInvertBiomeFilter(true);
-    public static final GT4ROreFeatureConfig TIN_CONFIG = new GT4ROreFeatureConfig("tin", new OreConfigNode(true, 0, 65, 25, 8, "iron", 1), Tin, Level.OVERWORLD);
-    public static final GT4ROreFeatureConfig URANITE_CONFIG = new GT4ROreFeatureConfig("uranite", new OreConfigNode(true, 0, 100, 8, 4, "null", 0), Uraninite, Level.OVERWORLD).setInvalidBiomes(DEAD);
-    public static final GT4ROreFeatureConfig URANITE_DEAD_CONFIG = new GT4ROreFeatureConfig("uranite_dead", new OreConfigNode(true, 0, 100, 20, 4, "null", 0), Uraninite, Level.OVERWORLD).setValidBiomes(DEAD);
-    public static final GT4ROreFeatureConfig CASSITERITE_CONFIG = new GT4ROreFeatureConfig("cassiterite", new OreConfigNode(true, 30, 80, 2, 32, "tin", 5), Cassiterite, Level.OVERWORLD).setValidBiomes(MUSHROOM, MOUNTAIN, CONIFEROUS, COLD).setInvalidBiomes(JUNGLE);
-    public static final GT4ROreFeatureConfig TETRAHEDRITE_CONFIG = new GT4ROreFeatureConfig("tetrahedrite", new OreConfigNode(true, 40, 90, 10, 12, "copper", 25), Tetrahedrite, Level.OVERWORLD).setValidBiomes(JUNGLE, SWAMP, MOUNTAIN, MUSHROOM).setInvalidBiomes(COLD);
+    public static final Object2ObjectArrayMap<String, Holder<PlacedFeature>> FEATURE_MAP = new Object2ObjectArrayMap<>();
     public static final GT4ROreFeatureConfig GALENA_CONFIG = new GT4ROreFeatureConfig("galena", new OreConfigNode(true, 0, 64, 12, 10, "null", 0), Galena, Level.OVERWORLD);
     public static final GT4ROreFeatureConfig BAUXITE_CONFIG = new GT4ROreFeatureConfig("bauxite", new OreConfigNode(true, 50, 120, 6, 16, "null", 0), Bauxite, Level.OVERWORLD).setValidBiomes(FOREST, PLAINS);
     public static final GT4ROreFeatureConfig RUBY_CONFIG = new GT4ROreFeatureConfig("ruby", new OreConfigNode(true, 0, 48, 3, 6, "null", 0), Ruby, Level.OVERWORLD).setValidBiomes(HOT).setInvalidBiomes(JUNGLE, OCEAN);
@@ -40,53 +56,60 @@ public class GT4RConfiguredFeatures {
     public static final GT4ROreFeatureConfig SALT_CONFIG = new GT4ROreFeatureConfig("salt", new OreConfigNode(true, 0, 62, 6, 64, "null", 0), Salt, Level.OVERWORLD).setValidBiomes(OCEAN);
     public static final GT4ROreFeatureConfig ROCK_SALT_CONFIG = new GT4ROreFeatureConfig("rock_salt", new OreConfigNode(true, 0, 80, 4, 64, "null", 0), RockSalt, Level.OVERWORLD).setValidBiomes(SANDY);
 
-    //Vanilla
-    public static final GT4ROreFeatureConfig IRON_CONFIG = new GT4ROreFeatureConfig("iron", new OreConfigNode(true, 0, 64, 20, 9, "tin", 2), Iron, Level.OVERWORLD);
-    public static final GT4ROreFeatureConfig GOLD_CONFIG = new GT4ROreFeatureConfig("gold", new OreConfigNode(true, 0, 100, 2, 9, "copper", 2), Gold, Level.OVERWORLD);
-    public static final GT4ROreFeatureConfig GOLD_MESA_CONFIG = new GT4ROreFeatureConfig("gold_mesa", new OreConfigNode(true, 32, 80, 20, 9, "copper", 2), Gold, Level.OVERWORLD).setValidBiomes(MESA);
-    public static final GT4ROreFeatureConfig EMERALD_VANILLA_CONFIG = new GT4ROreFeatureConfig("emerald_vanilla", new OreConfigNode(true, 0, 100, 15, 10, "null", 0), Emerald, Level.OVERWORLD).setValidBiomes(MOUNTAIN);
-    public static final GT4ROreFeatureConfig DIAMOND_CONFIG = new GT4ROreFeatureConfig("diamond", new OreConfigNode(true, 0, 16, 1, 8, "null", 0), Diamond, Level.OVERWORLD);
-    public static final GT4ROreFeatureConfig COAL_CONFIG = new GT4ROreFeatureConfig("coal", new OreConfigNode(true, 0, 128, 20, 17, "null", 0), Coal, Level.OVERWORLD);
-    public static final GT4ROreFeatureConfig LAPIS_CONFIG = new GT4ROreFeatureConfig("lapis", new OreConfigNode(true, 0, 100, 1, 7, "null", 0), Lapis, Level.OVERWORLD);
-    public static final GT4ROreFeatureConfig REDSTONE_CONFIG = new GT4ROreFeatureConfig("redstone", new OreConfigNode(true, 0, 16, 8, 8, "cinnabar", 1), Redstone, Level.OVERWORLD);
 
-    public static final ConfiguredFeature<?, ?> COPPER = register("copper", GT4RFeatures.ORE.getConfiguration(COPPER_CONFIG));
-    public static final ConfiguredFeature<?, ?> TIN = register("tim", GT4RFeatures.ORE.getConfiguration(TIN_CONFIG));
-    public static final ConfiguredFeature<?, ?> URANITE = register("uranite", GT4RFeatures.ORE.getConfiguration(URANITE_CONFIG));
-    public static final ConfiguredFeature<?, ?> URANITE_DEAD = register("uranite_dead", GT4RFeatures.ORE.getConfiguration(URANITE_DEAD_CONFIG));
-    public static final ConfiguredFeature<?, ?> CASSITERITE = register("cassiterite", GT4RFeatures.ORE.getConfiguration(CASSITERITE_CONFIG));
-    public static final ConfiguredFeature<?, ?> TETRAHEDRITE = register("tetrahedrite", GT4RFeatures.ORE.getConfiguration(TETRAHEDRITE_CONFIG));
-    public static final ConfiguredFeature<?, ?> GALENA = register("galena", GT4RFeatures.ORE.getConfiguration(GALENA_CONFIG));
-    public static final ConfiguredFeature<?, ?> BAUXITE = register("bauxite", GT4RFeatures.ORE.getConfiguration(BAUXITE_CONFIG));
-    public static final ConfiguredFeature<?, ?> RUBY = register("ruby", GT4RFeatures.ORE.getConfiguration(RUBY_CONFIG));
-    public static final ConfiguredFeature<?, ?> SAPPHIRE = register("sapphire", GT4RFeatures.ORE.getConfiguration(SAPPHIRE_CONFIG));
-    public static final ConfiguredFeature<?, ?> PLATINUM = register("platinum", GT4RFeatures.ORE.getConfiguration(PLATINUM_CONFIG));
-    public static final ConfiguredFeature<?, ?> IRIDIUM = register("iridium", GT4RFeatures.ORE.getConfiguration(IRIDIUM_CONFIG));
-    public static final ConfiguredFeature<?, ?> EMERALD = register("emerald", GT4RFeatures.ORE.getConfiguration(EMERALD_CONFIG));
-    public static final ConfiguredFeature<?, ?> PYRITE = register("pyrite", GT4RFeatures.ORE.getConfiguration(PYRITE_CONFIG));
-    public static final ConfiguredFeature<?, ?> SPHALERITE = register("sphalerite", GT4RFeatures.ORE.getConfiguration(SPHALERITE_CONFIG));
-    public static final ConfiguredFeature<?, ?> CINNABAR = register("cinnabar", GT4RFeatures.ORE.getConfiguration(CINNABAR_CONFIG));
-    public static final ConfiguredFeature<?, ?> TUNGSTATE = register("tungstate", GT4RFeatures.ORE.getConfiguration(TUNGSTATE_CONFIG));
-    public static final ConfiguredFeature<?, ?> PLATINUM_END = register("platinum_end", GT4RFeatures.ORE.getConfiguration(PLATINUM_END_CONFIG));
-    public static final ConfiguredFeature<?, ?> OLIVINE = register("olivine", GT4RFeatures.ORE.getConfiguration(OLIVINE_CONFIG));
-    public static final ConfiguredFeature<?, ?> SODALITE = register("sodalite", GT4RFeatures.ORE.getConfiguration(SODALITE_CONFIG));
-    public static final ConfiguredFeature<?, ?> CHROMITE = register("chromite", GT4RFeatures.ORE.getConfiguration(CHROMITE_CONFIG));
-    public static final ConfiguredFeature<?, ?> SALT = register("salt", GT4RFeatures.ORE.getConfiguration(SALT_CONFIG));
-    public static final ConfiguredFeature<?, ?> ROCK_SALT = register("rock_salt", GT4RFeatures.ORE.getConfiguration(ROCK_SALT_CONFIG));
-
-    public static final ConfiguredFeature<?, ?> IRON = register("iron", GT4RFeatures.ORE.getConfiguration(IRON_CONFIG));
-    public static final ConfiguredFeature<?, ?> COAL = register("coal", GT4RFeatures.ORE.getConfiguration(COAL_CONFIG));
-    public static final ConfiguredFeature<?, ?> GOLD = register("gold", GT4RFeatures.ORE.getConfiguration(GOLD_CONFIG));
-    public static final ConfiguredFeature<?, ?> GOLD_MESA = register("gold_mesa", GT4RFeatures.ORE.getConfiguration(GOLD_MESA_CONFIG));
-    public static final ConfiguredFeature<?, ?> REDSTONE = register("redstone", GT4RFeatures.ORE.getConfiguration(REDSTONE_CONFIG));
-    public static final ConfiguredFeature<?, ?> DIAMOND = register("diamond", GT4RFeatures.ORE.getConfiguration(DIAMOND_CONFIG));
-    public static final ConfiguredFeature<?, ?> EMERALD_VANILLA = register("emerald_vanilla", GT4RFeatures.ORE.getConfiguration(EMERALD_VANILLA_CONFIG));
-    public static final ConfiguredFeature<?, ?> LAPIS = register("lapis", GT4RFeatures.ORE.configured(LAPIS_CONFIG).decorated(FeatureDecorator.DEPTH_AVERAGE.configured(new DepthAverageConfigation(16, 16))).squared());
 
     public static ConfiguredFeature<?,?> register(String id, ConfiguredFeature<?,?> feature){
         return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new ResourceLocation(Ref.ID, id), feature);
     }
 
     public static void init(){
+        createOrePlacedFeature("tin", Tin, -64, 0, 25, 8, "iron", 0.01f, 0.0f, false, false, Level.OVERWORLD);
+        createOrePlacedFeature("uranite", Uraninite, -16, 100, 8, 4, null, 0.0f, 0.0f, List.of(Level.OVERWORLD), List.of(), List.of(DEAD), false, false, false);
+        createOrePlacedFeature("uranite_dead", Uraninite, -16, 100, 20, 4, null, 0.0f, 0.0f, List.of(Level.OVERWORLD), List.of(DEAD), List.of(), false, false, false);
+        createOrePlacedFeature("cassiterite", Cassiterite, -30, 30, 2, 32, "tin", 0.05f, 0.0f, List.of(Level.OVERWORLD), List.of(MUSHROOM, MOUNTAIN, CONIFEROUS, COLD), List.of(JUNGLE), false, false, false);
+        createOrePlacedFeature("tetrahedrite", Tetrahedrite, -20, 40, 10, 12, "copper", 0.225f, 0.0f, List.of(Level.OVERWORLD), List.of(MUSHROOM, MOUNTAIN, JUNGLE, SWAMP), List.of(COLD), false, false, false);
+
+        createOrePlacedFeature("coal_upper", Coal, 136, 320, 30, 17, null, 0.0f, 0.0f, false, false, Level.OVERWORLD);
+        createOrePlacedFeature("coal_lower", Coal, 0, 192, 20, 17, null, 0.0f, 0.5f, false, false, Level.OVERWORLD);
+        createOrePlacedFeature("iron_upper", Iron, 80, 384, 90, 9, "tin", 0.02f, 0.0f, true, false, Level.OVERWORLD);
+        createOrePlacedFeature("iron_middle", Iron, -24, 56, 10, 9, "tin", 0.02f, 0.0f, true, false, Level.OVERWORLD);
+        createOrePlacedFeature("iron_small", Iron, -64, 72, 10, 4, "tin", 0.02f, 0.0f, false, false, Level.OVERWORLD);
+        createOrePlacedFeature("gold_extra", Gold, 32, 256, 50, 9, "copper", 0.02f, 0.0f, false, false, Level.OVERWORLD);
+        createOrePlacedFeature("gold", Gold, -64, 32, 4, 9, "copper", 0.02f, 0.5f, true, false, Level.OVERWORLD);
+        createOrePlacedFeature("redstone", Redstone, -64, 15, 4, 8, "cinnabar", 0.01f, 0, false, false, Level.OVERWORLD);
+        createOrePlacedFeature("redstone_lower", Redstone, -96, -32, 8, 8, "cinnabar", 0.01f, 0, true, false, Level.OVERWORLD);
+        createOrePlacedFeature("diamond", Diamond, -144, 16, 7, 4, null, 0.0f, 0.5f, true, false, Level.OVERWORLD);
+        createOrePlacedFeature("diamond_large", Diamond, -144, 16, 9, 12, null, 0.0f, 0.7f, true, true, Level.OVERWORLD);
+        createOrePlacedFeature("diamond_buried", Diamond, -144, 16, 4, 8, null, 0.0f, 1.0f, true, false, Level.OVERWORLD);
+        createOrePlacedFeature("lapis", Lapis, -32, 32, 2, 7, null, 0.0f, 0.0f, true, false, Level.OVERWORLD);
+        createOrePlacedFeature("lapis_buried", Lapis, -64, 64, 4, 7, null, 0.0f, 1.0f, false, false, Level.OVERWORLD);
+        createOrePlacedFeature("emerald", Emerald, -16, 480, 100, 3, null, 0.0f, 0.0f, true, false, Level.OVERWORLD);
+        createOrePlacedFeature("copper", Copper, -16, 112, 16, 10, "gold", 0.02f, 0.0f, true, false, Level.OVERWORLD);
+        createOrePlacedFeature("copper_buried", Copper, -16, 112, 16, 20, "gold", 0.02f, 0.0f, true, false, Level.OVERWORLD);
+    }
+
+    public static void createOrePlacedFeature(String id, Material material, int minY, int maxY, int weight, int size, String secondary, float secondaryChance, float discardChance, List<ResourceKey<Level>> dimensions, List<BiomeDictionary.Type> validBiomes, List<BiomeDictionary.Type> invalidBiomes, boolean invertBiomeFilter, boolean triangle, boolean rare){
+        OreConfigNode node = OreConfigHandler.ORE_CONFIG_HANDLER.getBiomeConfig().ore(id, new OreConfigNode(true, minY, maxY, weight, size, secondary, secondaryChance));
+        if (!node.isEnabled()) return;
+        GT4ROreFeatureConfig config = new GT4ROreFeatureConfig(id, node.getSize(), discardChance, material.getId(), node.getSecondary(), node.getSecondaryChance(), dimensions);
+        if (!validBiomes.isEmpty()){
+            config.setValidBiomes(validBiomes);
+        }
+        if (!invalidBiomes.isEmpty()){
+            config.setValidBiomes(invalidBiomes);
+        }
+        config.setInvertBiomeFilter(invertBiomeFilter);
+        Holder<ConfiguredFeature<GT4ROreFeatureConfig, ?>> configuredFeature = RubberTreeWorldGen.register(id, new ConfiguredFeature<>(FeatureVanillaTypeOre.ORE, config));
+        List<PlacementModifier> list = new ArrayList<>();
+        list.addAll(List.of(BiomeFilter.biome(), InSquarePlacement.spread()));
+        list.add(triangle ? HeightRangePlacement.triangle(VerticalAnchor.absolute(minY), VerticalAnchor.absolute(maxY)) : HeightRangePlacement.uniform(VerticalAnchor.absolute(minY), VerticalAnchor.absolute(maxY)));
+        list.add(rare ? RarityFilter.onAverageOnceEvery(weight) : CountPlacement.of(weight));
+        Holder<PlacedFeature> placedFeature = RubberTreeWorldGen.createPlacedFeature(id, configuredFeature, list.toArray(new PlacementModifier[0]));
+        FEATURE_MAP.put(id, placedFeature);
+    }
+
+    @SafeVarargs
+    public static void createOrePlacedFeature(String id, Material material, int minY, int maxY, int weight, int size, String secondary, float secondaryChance, float discardChance, boolean triangle, boolean rare, ResourceKey<Level>... dimensions){
+        createOrePlacedFeature(id, material, minY, maxY, weight, size, secondary, secondaryChance, discardChance, List.of(dimensions), List.of(), List.of(), false, triangle, rare);
     }
 }

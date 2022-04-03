@@ -24,9 +24,9 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
-import net.minecraftforge.fml.network.FMLPlayMessages;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.entity.IEntityAdditionalSpawnData;
+import net.minecraftforge.network.NetworkHooks;
+import net.minecraftforge.network.PlayMessages;
 import trinsdar.gt4r.data.GT4RData;
 
 public class SpearEntity extends AbstractArrow  implements IEntityAdditionalSpawnData {
@@ -49,7 +49,7 @@ public class SpearEntity extends AbstractArrow  implements IEntityAdditionalSpaw
         super(GT4RData.SPEAR_ENTITY_TYPE, x, y, z, worldIn);
     }
 
-    public SpearEntity(FMLPlayMessages.SpawnEntity spawnEntity, Level world) {
+    public SpearEntity(PlayMessages.SpawnEntity spawnEntity, Level world) {
         this(GT4RData.SPEAR_ENTITY_TYPE, world);
     }
 
@@ -77,7 +77,7 @@ public class SpearEntity extends AbstractArrow  implements IEntityAdditionalSpaw
                     this.spawnAtLocation(this.getPickupItem(), 0.1F);
                 }
 
-                this.remove();
+                this.remove(RemovalReason.DISCARDED);
             } else if (i > 0) {
                 this.setNoPhysics(true);
                 Vec3 vector3d = new Vec3(entity.getX() - this.getX(), entity.getEyeY() - this.getY(), entity.getZ() - this.getZ());
@@ -156,7 +156,7 @@ public class SpearEntity extends AbstractArrow  implements IEntityAdditionalSpaw
             if (weapon.hurt(1, this.level.random, null)){
                 weapon.shrink(1);
                 this.level.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.ITEM_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
-                this.remove();
+                this.remove(RemovalReason.DISCARDED);
             }
         }
     }

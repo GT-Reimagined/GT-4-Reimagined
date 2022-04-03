@@ -12,14 +12,17 @@ import net.minecraft.util.Mth;
 import net.minecraft.core.Registry;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.placement.FeatureDecorator;
 import net.minecraft.world.level.levelgen.feature.configurations.RangeDecoratorConfiguration;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
 
 import java.util.BitSet;
 import java.util.List;
@@ -50,10 +53,11 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
     }
 
     @Override
-    public void build(BiomeGenerationSettingsBuilder event) {
+    public void build(BiomeLoadingEvent event) {
         if (AntimatterConfig.WORLD.ORE_VEINS){
-            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, COPPER);
-            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, TIN);
+            BiomeGenerationSettingsBuilder builder = event.getGeneration();
+
+            /*event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, TIN);
             event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, URANITE);
             event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, URANITE_DEAD);
             event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, CASSITERITE);
@@ -74,39 +78,43 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
             event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, SODALITE);
             event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, CHROMITE);
             event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, SALT);
-            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ROCK_SALT);
+            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ROCK_SALT);*/
             if (AntimatterConfig.WORLD.VANILLA_ORE_GEN){
-                event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, IRON);
-                event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, COAL);
-                event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, GOLD);
-                event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, GOLD_MESA);
-                event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, REDSTONE);
-                event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, DIAMOND);
-                event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, EMERALD_VANILLA);
-                event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, LAPIS);
+                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("coal_upper"));
+                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("coal_lower"));
+                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("iron_upper"));
+                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("iron_middle"));
+                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("iron_small"));
+                if (event.getCategory() == Biome.BiomeCategory.MESA){
+                    builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("gold_extra"));
+                }
+                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("gold"));
+                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("copper"));
+                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("copper_buried"));
+                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("redstone"));
+                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("redstone_lower"));
+                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("diamond_large"));
+                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("diamond"));
+                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("diamond_buried"));
+                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("lapis"));
+                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("lapis_buried"));
+                if (event.getCategory() == Biome.BiomeCategory.EXTREME_HILLS){
+                    builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("emerald"));
+                }
             }
         }
     }
 
-    public ConfiguredFeature<?, ?> getConfiguration(GT4ROreFeatureConfig config){
-        return this.configured(config).decorated(FeatureDecorator.RANGE.configured(getRange(config.getMinY(), config.getMaxY()))).squared().count(config.getWeight());
-    }
-
-    public RangeDecoratorConfiguration getRange(int min, int max){
-        return new RangeDecoratorConfiguration(min, min, max);
-    }
-
-    @Override
+    //@Override
     public boolean place(WorldGenLevel world, ChunkGenerator generator, Random rand, BlockPos pos, GT4ROreFeatureConfig config) {
         int chunkX = pos.getX() >> 4;
         int chunkZ = pos.getZ() >> 4;
         //Feature.ORE.generate()
         if (!config.getDimensionLocations().contains(world.getLevel().dimension().location())) return false;
-        if (!config.getConfigNode().isEnabled()) return false;
         List<BiomeDictionary.Type> types = config.getBiomeTypes();
         List<BiomeDictionary.Type> invalidTypes = config.getInvalidBiomeTypes();
         boolean hasType = types.isEmpty();
-        for (BiomeDictionary.Type type : BiomeDictionary.getTypes(ResourceKey.create(Registry.BIOME_REGISTRY, world.getBiome(pos).getRegistryName()))) {
+        for (BiomeDictionary.Type type : BiomeDictionary.getTypes(ResourceKey.create(Registry.BIOME_REGISTRY, world.getBiome(pos).unwrapKey().get()))) {
             if (types.contains(type)) {
                 hasType = true;
             }
@@ -254,8 +262,8 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
                                                     continue;
                                                 }
                                             }
-                                            if (config.getSecondary() != null && !config.getSecondary().equals("null") && config.getSecondaryChance()> 0 && config.getSecondaryChance() < 100){
-                                                mat = random.nextInt(100) < config.getSecondaryChance() ? Material.get(config.getSecondary()) : Material.get(config.getPrimary());
+                                            if (config.getSecondary() != null && !config.getSecondary().equals("null") && config.getSecondaryChance() > 0 && config.getSecondaryChance() < 1.0F){
+                                                mat = random.nextFloat() < config.getSecondaryChance() ? Material.get(config.getSecondary()) : Material.get(config.getPrimary());
                                             }
                                             if (WorldGenHelper.setOre(worldIn, blockpos$mutable, worldIn.getBlockState(blockpos$mutable), mat, Data.ORE)) {
                                                 ++i;
@@ -271,5 +279,10 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
         }
 
         return i > 0;
+    }
+
+    @Override
+    public boolean place(FeaturePlaceContext<GT4ROreFeatureConfig> pContext) {
+        return false;
     }
 }

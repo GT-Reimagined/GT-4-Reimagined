@@ -25,6 +25,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.TreeConfigurati
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.treedecorators.LeaveVineDecorator;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
+import net.minecraft.world.level.levelgen.placement.BiomeFilter;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.placement.PlacementContext;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
@@ -75,9 +76,9 @@ public class RubberTreeWorldGen  extends WorldGenBase<RubberTreeWorldGen> {
     static final Holder<ConfiguredFeature<TreeConfiguration, ?>> RUBBER_TREE_CONFIGURED_JUNGLE = register("rubber_tree_jungle", new ConfiguredFeature<>(RubberTree.TREE_FEATURE, RUBBER_TREE_CONFIG_JUNGLE));
     static final Holder<ConfiguredFeature<TreeConfiguration, ?>> RUBBER_TREE_CONFIGURED_SWAMP = register("rubber_tree_swamp", new ConfiguredFeature<>(RubberTree.TREE_FEATURE, RUBBER_TREE_CONFIG_SWAMP));
 
-    static final Holder<PlacedFeature> RUBBER_TREE_NORMAL = createPlacedFeature("rubber_tree_normal", RUBBER_TREE_CONFIGURED_NORMAL, new RubberTreePlacementModifier());
-    static final Holder<PlacedFeature> RUBBER_TREE_JUNGLE = createPlacedFeature("rubber_tree_jungle", RUBBER_TREE_CONFIGURED_JUNGLE, new RubberTreePlacementModifier());
-    static final Holder<PlacedFeature> RUBBER_TREE_SWAMP = createPlacedFeature("rubber_tree_swamp", RUBBER_TREE_CONFIGURED_SWAMP, SurfaceWaterDepthFilter.forMaxDepth(1), new RubberTreePlacementModifier());
+    static final Holder<PlacedFeature> RUBBER_TREE_NORMAL = createPlacedFeature("rubber_tree_normal", RUBBER_TREE_CONFIGURED_NORMAL, new RubberTreePlacementModifier(), BiomeFilter.biome());
+    static final Holder<PlacedFeature> RUBBER_TREE_JUNGLE = createPlacedFeature("rubber_tree_jungle", RUBBER_TREE_CONFIGURED_JUNGLE, new RubberTreePlacementModifier(), BiomeFilter.biome());
+    static final Holder<PlacedFeature> RUBBER_TREE_SWAMP = createPlacedFeature("rubber_tree_swamp", RUBBER_TREE_CONFIGURED_SWAMP, SurfaceWaterDepthFilter.forMaxDepth(1), new RubberTreePlacementModifier(), BiomeFilter.biome());
 
     public static final PlacementModifierType<RubberTreePlacementModifier> RUBBER_TREE_PLACEMENT_MODIFIER  = () -> RubberTreePlacementModifier.CODEC;
 
@@ -85,13 +86,13 @@ public class RubberTreeWorldGen  extends WorldGenBase<RubberTreeWorldGen> {
         Registry.register(Registry.PLACEMENT_MODIFIERS, new ResourceLocation(Ref.ID, "rubber_tree_placement_modifier"), RUBBER_TREE_PLACEMENT_MODIFIER);
     }
 
-    private static <FC extends FeatureConfiguration, F extends Feature<FC>> Holder<ConfiguredFeature<FC, ?>> register(String id, ConfiguredFeature<FC, F> cf) {
+    public static <FC extends FeatureConfiguration, F extends Feature<FC>> Holder<ConfiguredFeature<FC, ?>> register(String id, ConfiguredFeature<FC, F> cf) {
         ResourceLocation realId = new ResourceLocation(Ref.ID, id);
         Preconditions.checkState(!BuiltinRegistries.CONFIGURED_FEATURE.keySet().contains(realId), "Duplicate ID: %s", id);
         return BuiltinRegistries.registerExact(BuiltinRegistries.CONFIGURED_FEATURE, realId.toString(), cf);
     }
 
-    private static <FC extends FeatureConfiguration> Holder<PlacedFeature> createPlacedFeature(String id, Holder<ConfiguredFeature<FC, ?>> feature, PlacementModifier... placementModifiers) {
+    public static <FC extends FeatureConfiguration> Holder<PlacedFeature> createPlacedFeature(String id, Holder<ConfiguredFeature<FC, ?>> feature, PlacementModifier... placementModifiers) {
         ResourceLocation realID = new ResourceLocation(Ref.ID, id);
         if (BuiltinRegistries.PLACED_FEATURE.keySet().contains(realID))
             throw new IllegalStateException("Placed Feature ID: \"" + realID.toString() + "\" already exists in the Placed Features registry!");
@@ -114,24 +115,31 @@ public class RubberTreeWorldGen  extends WorldGenBase<RubberTreeWorldGen> {
                 p += 0.04F;
         }
         float finalp = p;
-        /*builder.getGeneration().getFeatures(GenerationStep.Decoration.VEGETAL_DECORATION).add(() -> RubberTree.TREE_FEATURE.configured(getTreeConfig(biomeCategory))
-                .decorated(new RubberTreePlacement().configured(new FrequencyWithExtraChanceDecoratorConfiguration(0, finalp, 1))));
+
+        builder.getGeneration().addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,  getTreeConfig(biomeCategory));
         if (RNG.nextInt(4) == 0){
-            builder.getGeneration().getFeatures(GenerationStep.Decoration.VEGETAL_DECORATION).add(() -> RubberTree.TREE_FEATURE.configured(getTreeConfig(biomeCategory))
-                    .decorated(new RubberTreePlacement().configured(new FrequencyWithExtraChanceDecoratorConfiguration(0, finalp, 1))));
+            builder.getGeneration().addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,  getTreeConfig(biomeCategory));
             if (RNG.nextInt(6) == 0){
-                builder.getGeneration().getFeatures(GenerationStep.Decoration.VEGETAL_DECORATION).add(() -> RubberTree.TREE_FEATURE.configured(getTreeConfig(biomeCategory))
-                        .decorated(new RubberTreePlacement().configured(new FrequencyWithExtraChanceDecoratorConfiguration(0, finalp, 1))));
+                builder.getGeneration().addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,  getTreeConfig(biomeCategory));
             }
-        }*/
+        }
     }
 
-    static TreeConfiguration getTreeConfig(Biome.BiomeCategory biome){
-        TreeConfiguration config = RUBBER_TREE_CONFIG_NORMAL;
+    static Holder<PlacedFeature> getTreeConfig(Biome.BiomeCategory biome){
+        Holder<PlacedFeature> config = RUBBER_TREE_NORMAL;
         if (biome == Biome.BiomeCategory.SWAMP)
-            config = RUBBER_TREE_CONFIG_SWAMP;
+            config = RUBBER_TREE_SWAMP;
         else if (biome == Biome.BiomeCategory.JUNGLE)
-            config = RUBBER_TREE_CONFIG_JUNGLE;
+            config = RUBBER_TREE_JUNGLE;
+        return config;
+    }
+
+    static Holder<ConfiguredFeature<TreeConfiguration, ?>> getTreeConfigured(Biome.BiomeCategory biome){
+        Holder<ConfiguredFeature<TreeConfiguration, ?>> config = RUBBER_TREE_CONFIGURED_NORMAL;
+        if (biome == Biome.BiomeCategory.SWAMP)
+            config = RUBBER_TREE_CONFIGURED_SWAMP;
+        else if (biome == Biome.BiomeCategory.JUNGLE)
+            config = RUBBER_TREE_CONFIGURED_JUNGLE;
         return config;
     }
 
