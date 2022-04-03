@@ -15,7 +15,9 @@ import java.util.stream.Collectors;
 
 import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
-import static net.minecraft.item.Items.*;
+import static net.minecraft.world.item.Items.*;
+import static net.minecraft.world.item.Items.DIRT;
+import static net.minecraft.world.level.block.Blocks.GRASS_BLOCK;
 import static trinsdar.gt4r.data.GT4RData.Plantball;
 import static trinsdar.gt4r.data.GT4RData.RUBBER_LOG;
 import static trinsdar.gt4r.data.GT4RData.StickyResin;
@@ -65,7 +67,7 @@ public class CentrifugingLoader {
         CENTRIFUGING.RB().fi(Helium.getGas(16000)).fo(Helium3.getGas(1000)).add(900, 20);
         add(Glowstone, 16,1562, 16);
         add(Redstone, 20, 1750);
-        CENTRIFUGING.RB().ii(of(MAGMA_BLOCK, 64)).fo(new FluidStack(Fluids.LAVA.getFluid(), 64000)).add(187, 16);
+        CENTRIFUGING.RB().ii(of(MAGMA_BLOCK, 64)).fo(new FluidStack(Fluids.LAVA, 64000)).add(187, 16);
         CENTRIFUGING.RB().ii(of(ROTTEN_FLESH, 16)).io(new ItemStack(LEATHER, 4), new ItemStack(SLIME_BALL)).fo(Methane.getGas(4000)).add(375, 16);
         addMethaneRecipe(PORKCHOP, 12);
         addMethaneRecipe(BEEF, 12);
