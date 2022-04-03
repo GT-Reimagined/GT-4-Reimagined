@@ -12,6 +12,7 @@ import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import muramasa.antimatter.recipe.map.RecipeMap;
 import muramasa.antimatter.util.TagUtils;
 import muramasa.antimatter.util.Utils;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -67,7 +68,7 @@ public class MaceratorLoader {
             Material sm = o.getStoneType().getMaterial();
             if (!m.has(DUST) || !m.has(CRUSHED)) return;
             ItemStack stoneDust = sm.has(DUST) ? DUST.get(sm, 1) : ItemStack.EMPTY;
-            Tag.Named<Item> oreTag = TagUtils.getForgeItemTag(String.join("", getConventionalStoneType(o.getStoneType()), "_", getConventionalMaterialType(o.getOreType()), "/", o.getMaterial().getId()));
+            TagKey<Item> oreTag = TagUtils.getForgeItemTag(String.join("", getConventionalStoneType(o.getStoneType()), "_", getConventionalMaterialType(o.getOreType()), "/", o.getMaterial().getId()));
             RecipeIngredient ore = RecipeIngredient.of(oreTag,1);
             ItemStack crushedStack = CRUSHED.get(m,m.getOreMulti());
             Material oreByProduct1 = m.getByProducts().size() > 0 ? m.getByProducts().get(0) : m.getMacerateInto();

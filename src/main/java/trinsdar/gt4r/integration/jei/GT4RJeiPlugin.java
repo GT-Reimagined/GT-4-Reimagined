@@ -2,7 +2,9 @@ package trinsdar.gt4r.integration.jei;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.constants.VanillaRecipeCategoryUid;
+import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.transfer.IRecipeTransferInfo;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeTransferRegistration;
@@ -12,6 +14,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.CraftingRecipe;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.gui.ContainerWorkbench;
 
@@ -49,24 +52,24 @@ public class GT4RJeiPlugin implements IModPlugin {
         });
     }
 
-    public static class GT4RRecipeTransferInfo implements IRecipeTransferInfo<ContainerWorkbench>{
+    public static class GT4RRecipeTransferInfo implements IRecipeTransferInfo<ContainerWorkbench, CraftingRecipe>{
         @Override
         public Class<ContainerWorkbench> getContainerClass() {
             return ContainerWorkbench.class;
         }
 
         @Override
-        public ResourceLocation getRecipeCategoryUid() {
-            return VanillaRecipeCategoryUid.CRAFTING;
+        public RecipeType<CraftingRecipe> getRecipeType() {
+            return RecipeTypes.CRAFTING;
         }
 
         @Override
-        public boolean canHandle(ContainerWorkbench containerWorkbench) {
+        public boolean canHandle(ContainerWorkbench containerWorkbench, CraftingRecipe recipe) {
             return true;
         }
 
         @Override
-        public List<Slot> getRecipeSlots(ContainerWorkbench containerWorkbench) {
+        public List<Slot> getRecipeSlots(ContainerWorkbench containerWorkbench, CraftingRecipe recipe) {
             List<Slot> slots = new ArrayList<>();
             for (int i = 17; i < 26; i++) {
                 slots.add(containerWorkbench.getSlot(i));
@@ -75,7 +78,7 @@ public class GT4RJeiPlugin implements IModPlugin {
         }
 
         @Override
-        public List<Slot> getInventorySlots(ContainerWorkbench containerWorkbench) {
+        public List<Slot> getInventorySlots(ContainerWorkbench containerWorkbench, CraftingRecipe recipe) {
             List<Slot> slots = new ArrayList<>();
             for (int i = 1; i < 17; i++) {
                 slots.add(containerWorkbench.getSlot(i));
@@ -84,6 +87,16 @@ public class GT4RJeiPlugin implements IModPlugin {
                 slots.add(containerWorkbench.getSlot(i));
             }
             return slots;
+        }
+
+        @Override
+        public Class<CraftingRecipe> getRecipeClass() {
+            return CraftingRecipe.class;
+        }
+
+        @Override
+        public ResourceLocation getRecipeCategoryUid() {
+            return VanillaRecipeCategoryUid.CRAFTING;
         }
     }
 }

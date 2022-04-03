@@ -82,8 +82,7 @@ public class GT4Reimagined extends AntimatterMod {
 
     private void setup(final FMLCommonSetupEvent e) {
         CommonHandler.setup(e);
-        DeferredWorkQueue.runLater(GT4RNetwork::init);
-
+        e.enqueueWork(GT4RNetwork::init);
     }
 
     private void serverSetup(final FMLDedicatedServerSetupEvent event){

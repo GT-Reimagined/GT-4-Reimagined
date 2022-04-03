@@ -3,6 +3,7 @@ package trinsdar.gt4r.loader.machines;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.item.ItemStack;
@@ -28,7 +29,7 @@ public class OreByproducts {
                 List<Material> byProducts = m.getByProducts();
                 int byProductsCount = byProducts.size();
 
-                List<RecipeIngredient> ores = new ObjectArrayList<>();
+                List<Ingredient> ores = new ObjectArrayList<>();
                 ores.add(RecipeIngredient.of(1, new ItemStack(Blocks.FURNACE), new ItemStack(Blocks.BLAST_FURNACE)));
                 RecipeIngredient macerator = RecipeIngredient.of(Machines.MACERATOR.getItem(LV), 1);
                 ores.add(macerator);

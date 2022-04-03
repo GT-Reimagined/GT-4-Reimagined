@@ -13,8 +13,8 @@ public class RecipeRenderer {
     static final IRecipeInfoRenderer FUEL_RENDERER = new IRecipeInfoRenderer() {
         @Override
         public void render(PoseStack stack, Recipe recipe, Font fontRenderer, int guiOffsetX, int guiOffsetY) {
-            String fuelPerMb = "Fuel content(mb): " + ((double) (recipe.getPower() * recipe.getDuration()) / (double) Objects.requireNonNull(recipe.getInputFluids())[0].getAmount());
-            String fuelPerB = "Fuel content(bb): " + ((double) (recipe.getPower() * recipe.getDuration()) / (double) Objects.requireNonNull(recipe.getInputFluids())[0].getAmount()) * 1000;
+            String fuelPerMb = "Fuel content(mb): " + ((double) (recipe.getPower() * recipe.getDuration()) / (double) recipe.getInputFluids().get(0).getAmount());
+            String fuelPerB = "Fuel content(bb): " + ((double) (recipe.getPower() * recipe.getDuration()) / (double) recipe.getInputFluids().get(0).getAmount()) * 1000;
             renderString(stack, fuelPerMb, fontRenderer, 5, 0, guiOffsetX, guiOffsetY);
             renderString(stack, fuelPerB, fontRenderer, 5, 10, guiOffsetX, guiOffsetY);
             renderString(stack, "Ticks: " + recipe.getDuration(), fontRenderer, 5, 20, guiOffsetX, guiOffsetY);
@@ -31,8 +31,8 @@ public class RecipeRenderer {
     static final IRecipeInfoRenderer LARGE_FUEL_RENDERER = new IRecipeInfoRenderer() {
         @Override
         public void render(PoseStack stack, Recipe recipe, Font fontRenderer, int guiOffsetX, int guiOffsetY) {
-            String fuelPerMb = "Fuel content(mb): " + ((double) (recipe.getPower() * recipe.getDuration()) / (double) Objects.requireNonNull(recipe.getInputFluids())[0].getAmount());
-            String fuelPerB = "Fuel content(bb): " + ((double) (recipe.getPower() * recipe.getDuration()) / (double) Objects.requireNonNull(recipe.getInputFluids())[0].getAmount()) * 1000;
+            String fuelPerMb = "Fuel content(mb): " + ((double) (recipe.getPower() * recipe.getDuration()) / (double) recipe.getInputFluids().get(0).getAmount());
+            String fuelPerB = "Fuel content(bb): " + ((double) (recipe.getPower() * recipe.getDuration()) / (double) recipe.getInputFluids().get(0).getAmount()) * 1000;
             renderString(stack, fuelPerMb, fontRenderer, 5, 0, guiOffsetX, guiOffsetY);
             renderString(stack, fuelPerB, fontRenderer, 5, 10, guiOffsetX, guiOffsetY);
             renderString(stack, "Base total eu/tick generated: " + recipe.getPower(), fontRenderer, 5, 20, guiOffsetX, guiOffsetY);

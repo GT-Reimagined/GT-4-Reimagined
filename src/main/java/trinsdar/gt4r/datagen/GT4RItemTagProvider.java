@@ -24,8 +24,8 @@ import net.minecraft.data.tags.TagsProvider.TagAppender;
 import trinsdar.gt4r.data.Materials;
 
 public class GT4RItemTagProvider extends AntimatterItemTagProvider {
-    public GT4RItemTagProvider(String providerDomain, String providerName, boolean replace, DataGenerator gen, BlockTagsProvider p, ExistingFileHelperOverride fh) {
-        super(providerDomain, providerName, replace, gen, p, fh);
+    public GT4RItemTagProvider(String providerDomain, String providerName, boolean replace, DataGenerator gen, BlockTagsProvider p) {
+        super(providerDomain, providerName, replace, gen, p);
     }
 
     @Override

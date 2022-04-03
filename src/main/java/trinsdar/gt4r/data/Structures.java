@@ -23,8 +23,8 @@ import static trinsdar.gt4r.data.Machines.*;
 public class Structures {
 
     /** Special Case Elements **/
-    public static BlockStateElement AIR_OR_LAVA = new BlockStateElement("air_or_lava", (w, p, s) -> s.getBlock().isAir(s, w, p) || s.getFluidState().getType() == Fluids.LAVA/* || s.getBlock() == Blocks.FLOWING_LAVA*/);
-    public static BlockStateElement AIR = new BlockStateElement("air", (w, p, s) -> s.getBlock().isAir(s, w, p));
+    public static BlockStateElement AIR_OR_LAVA = new BlockStateElement("air_or_lava", (w, p, s) -> s.isAir() || s.getFluidState().getType() == Fluids.LAVA/* || s.getBlock() == Blocks.FLOWING_LAVA*/);
+    public static BlockStateElement AIR = new BlockStateElement("air", (w, p, s) -> s.isAir());
     public static BlockStateElement WATER = new BlockStateElement("water", (w, p, s) -> s.getFluidState().getType() == Fluids.WATER);
 
 

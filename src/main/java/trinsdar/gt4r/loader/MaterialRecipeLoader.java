@@ -11,6 +11,7 @@ import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.SingleItemRecipeBuilder;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -54,7 +55,7 @@ public class MaterialRecipeLoader {
         });
         TURBINE_ROTOR.all().forEach(m -> {
             if (m.has(TURBINE_BLADE) && (m.has(BLOCK) || m == Carbon)){
-                Tag.Named<Item> center = m == Carbon ? PLATE.getMaterialTag(Carbon) : BLOCK.getMaterialTag(m);
+                TagKey<Item> center = m == Carbon ? PLATE.getMaterialTag(Carbon) : BLOCK.getMaterialTag(m);
                 provider.addItemRecipe(output, Ref.ID, m.getId() + "_turbine_rotor", "turbine_rotors", "has_turbine_blade", provider.hasSafeItem(TURBINE_BLADE.getMaterialTag(m)), TURBINE_ROTOR.get(m), ImmutableMap.of('T', TURBINE_BLADE.getMaterialTag(m), 'C', center), "TTT", "TCT", "TTT");
             }
 
@@ -82,7 +83,7 @@ public class MaterialRecipeLoader {
         });*/
         ROD.all().forEach(m -> {
             if (m.has(INGOT) || m.has(GEM)){
-                Tag.Named<?> input = m.has(GEM) ? GEM.getMaterialTag(m) : INGOT.getMaterialTag(m);
+                TagKey<?> input = m.has(GEM) ? GEM.getMaterialTag(m) : INGOT.getMaterialTag(m);
                 provider.shapeless(output, m.getId() + "_rod", "rods", "has_file", provider.hasSafeItem(FILE.getTag()), ROD.get(m, craftingMultiplier), input, FILE.getTag());
             }
         });
@@ -94,7 +95,7 @@ public class MaterialRecipeLoader {
         });
         GEAR.all().forEach(m -> {
             if ((m.has(PLATE) || m.has(GEM)) && m.has(ROD)){
-                Tag.Named<?> plate = m.has(PLATE) ? PLATE.getMaterialTag(m) : GEM.getMaterialTag(m);
+                TagKey<?> plate = m.has(PLATE) ? PLATE.getMaterialTag(m) : GEM.getMaterialTag(m);
                 provider.addItemRecipe(output, Ref.ID, m.getId() + "_gear", "gears", "has_wrench", provider.hasSafeItem(WRENCH.getTag()), GEAR.get(m), ImmutableMap.of('P', plate, 'R', ROD.getMaterialTag(m), 'W', WRENCH.getTag()), "RPR", "PWP", "RPR");
             }
         });
@@ -110,25 +111,25 @@ public class MaterialRecipeLoader {
         });
         DRILLBIT.all().forEach(m -> {
             if (m.has(PLATE) || m.has(GEM)){
-                Tag.Named<?> plate = m.has(PLATE) ? PLATE.getMaterialTag(m) : GEM.getMaterialTag(m);
+                TagKey<?> plate = m.has(PLATE) ? PLATE.getMaterialTag(m) : GEM.getMaterialTag(m);
                 provider.addItemRecipe(output, Ref.ID, m.getId() + "_drillbit", "drillbits", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), DRILLBIT.get(m), ImmutableMap.of('H', HAMMER.getTag(), 'P', plate, 'S', PLATE.getMaterialTag(Steel)), "PSP", "PSP", "SHS");
             }
         });
         CHAINSAWBIT.all().forEach(m -> {
             if (m.has(PLATE) || m.has(GEM)){
-                Tag.Named<?> plate = m.has(PLATE) ? PLATE.getMaterialTag(m) : GEM.getMaterialTag(m);
+                TagKey<?> plate = m.has(PLATE) ? PLATE.getMaterialTag(m) : GEM.getMaterialTag(m);
                 provider.addItemRecipe(output, Ref.ID, m.getId() + "_chainsawbit", "chainsawbits", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), CHAINSAWBIT.get(m), ImmutableMap.of('H', HAMMER.getTag(), 'P', plate, 'S', PLATE.getMaterialTag(Steel), 'R', RING.getMaterialTag(Steel)), "SRS", "PHP", "SRS");
             }
         });
         WRENCHBIT.all().forEach(m -> {
             if (m.has(PLATE) || m.has(GEM)){
-                Tag.Named<?> plate = m.has(PLATE) ? PLATE.getMaterialTag(m) : GEM.getMaterialTag(m);
+                TagKey<?> plate = m.has(PLATE) ? PLATE.getMaterialTag(m) : GEM.getMaterialTag(m);
                 provider.addItemRecipe(output, Ref.ID, m.getId() + "_wrenchbit", "wrenchbits", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), WRENCHBIT.get(m), ImmutableMap.of('H', HAMMER.getTag(), 'P', plate, 'S', SCREW.getMaterialTag(Steel), 'R', RING.getMaterialTag(Steel), 's', SCREWDRIVER.getTag()), "HPS", "PRP", "SPs");
             }
         });
         BUZZSAW_BLADE.all().forEach(m -> {
             if (m.has(PLATE) || m.has(GEM)){
-                Tag.Named<?> plate = m.has(PLATE) ? PLATE.getMaterialTag(m) : GEM.getMaterialTag(m);
+                TagKey<?> plate = m.has(PLATE) ? PLATE.getMaterialTag(m) : GEM.getMaterialTag(m);
                 provider.addItemRecipe(output, Ref.ID, m.getId() + "_buzzsaw_blade", "buzzsaw_blades", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), BUZZSAW_BLADE.get(m), ImmutableMap.of('H', HAMMER.getTag(), 'P', plate, 'F', FILE.getTag(), 'W', WRENCH.getTag(), 'C', WIRE_CUTTER.getTag()), "WPH", "P P", "FPC");
             }
         });
@@ -164,24 +165,24 @@ public class MaterialRecipeLoader {
                 types = new String[]{"stairs", "slab", "wall", "bricks_slab", "bricks_stairs", "bricks_chiseled", "bricks_wall", "bricks"};
                 for (String type : types){
                     int amount = type.contains("slab") ? 2 : 1;
-                    SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("")), c.getBlock(type), amount).unlocks("has_stone", provider.hasSafeItem(c.getBlock(""))).save(output, m.getId() + "_stone_" + type);
+                    SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("")), c.getBlock(type), amount).unlockedBy("has_stone", provider.hasSafeItem(c.getBlock(""))).save(output, m.getId() + "_stone_" + type);
                 }
-                SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("cobble")), c.getBlock("cobble_slab"), 2).unlocks("has_cobble", provider.hasSafeItem(c.getBlock("cobble"))).save(output, m.getId() + "_cobble_slab");
-                SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("cobble")), c.getBlock("cobble_stairs")).unlocks("has_cobble", provider.hasSafeItem(c.getBlock("cobble"))).save(output, m.getId() + "_cobble_stairs");
-                SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("cobble")), c.getBlock("cobble_wall")).unlocks("has_cobble", provider.hasSafeItem(c.getBlock("cobble"))).save(output, m.getId() + "_cobble_wall");
-                SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("cobble_mossy")), c.getBlock("cobble_mossy_slab"), 2).unlocks("has_cobble_mossy", provider.hasSafeItem(c.getBlock("cobble_mossy"))).save(output, m.getId() + "_cobble_mossy_slab");
-                SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("cobble_mossy")), c.getBlock("cobble_mossy_stairs")).unlocks("has_cobble_mossy", provider.hasSafeItem(c.getBlock("cobble_mossy"))).save(output, m.getId() + "_cobble_mossy_stairs");
-                SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("cobble_mossy")), c.getBlock("cobble_mossy_wall")).unlocks("has_cobble_mossy", provider.hasSafeItem(c.getBlock("cobble_mossy"))).save(output, m.getId() + "_cobble_mossy_wall");
-                SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("bricks")), c.getBlock("bricks_slab"), 2).unlocks("has_bricks", provider.hasSafeItem(c.getBlock("bricks"))).save(output, m.getId() + "_bricks_slab2");
-                SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("bricks")), c.getBlock("bricks_stairs")).unlocks("has_bricks", provider.hasSafeItem(c.getBlock("bricks"))).save(output, m.getId() + "_bricks_stairs2");
-                SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("bricks")), c.getBlock("bricks_wall")).unlocks("has_bricks", provider.hasSafeItem(c.getBlock("bricks"))).save(output, m.getId() + "_bricks_wall2");
-                SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("bricks")), c.getBlock("bricks_chiseled")).unlocks("has_bricks", provider.hasSafeItem(c.getBlock("bricks"))).save(output, m.getId() + "_bricks_chiseled2");
-                SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("bricks_mossy")), c.getBlock("bricks_mossy_slab"), 2).unlocks("has_bricks_mossy", provider.hasSafeItem(c.getBlock("bricks_mossy"))).save(output, m.getId() + "_bricks_mossy_slab");
-                SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("bricks_mossy")), c.getBlock("bricks_mossy_stairs")).unlocks("has_bricks_mossy", provider.hasSafeItem(c.getBlock("bricks_mossy"))).save(output, m.getId() + "_bricks_mossy_stairs");
-                SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("bricks_mossy")), c.getBlock("bricks_mossy_wall")).unlocks("has_bricks_mossy", provider.hasSafeItem(c.getBlock("bricks_mossy"))).save(output, m.getId() + "_bricks_mossy_wall");
-                SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("smooth")), c.getBlock("smooth_slab"), 2).unlocks("has_smooth", provider.hasSafeItem(c.getBlock("smooth"))).save(output, m.getId() + "_smooth_slab");
-                SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("smooth")), c.getBlock("smooth_stairs")).unlocks("has_smooth", provider.hasSafeItem(c.getBlock("smooth"))).save(output, m.getId() + "_smooth_stairs");
-                SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("smooth")), c.getBlock("smooth_wall")).unlocks("has_smooth", provider.hasSafeItem(c.getBlock("smooth"))).save(output, m.getId() + "_smooth_wall");
+                SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("cobble")), c.getBlock("cobble_slab"), 2).unlockedBy("has_cobble", provider.hasSafeItem(c.getBlock("cobble"))).save(output, m.getId() + "_cobble_slab");
+                SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("cobble")), c.getBlock("cobble_stairs")).unlockedBy("has_cobble", provider.hasSafeItem(c.getBlock("cobble"))).save(output, m.getId() + "_cobble_stairs");
+                SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("cobble")), c.getBlock("cobble_wall")).unlockedBy("has_cobble", provider.hasSafeItem(c.getBlock("cobble"))).save(output, m.getId() + "_cobble_wall");
+                SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("cobble_mossy")), c.getBlock("cobble_mossy_slab"), 2).unlockedBy("has_cobble_mossy", provider.hasSafeItem(c.getBlock("cobble_mossy"))).save(output, m.getId() + "_cobble_mossy_slab");
+                SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("cobble_mossy")), c.getBlock("cobble_mossy_stairs")).unlockedBy("has_cobble_mossy", provider.hasSafeItem(c.getBlock("cobble_mossy"))).save(output, m.getId() + "_cobble_mossy_stairs");
+                SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("cobble_mossy")), c.getBlock("cobble_mossy_wall")).unlockedBy("has_cobble_mossy", provider.hasSafeItem(c.getBlock("cobble_mossy"))).save(output, m.getId() + "_cobble_mossy_wall");
+                SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("bricks")), c.getBlock("bricks_slab"), 2).unlockedBy("has_bricks", provider.hasSafeItem(c.getBlock("bricks"))).save(output, m.getId() + "_bricks_slab2");
+                SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("bricks")), c.getBlock("bricks_stairs")).unlockedBy("has_bricks", provider.hasSafeItem(c.getBlock("bricks"))).save(output, m.getId() + "_bricks_stairs2");
+                SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("bricks")), c.getBlock("bricks_wall")).unlockedBy("has_bricks", provider.hasSafeItem(c.getBlock("bricks"))).save(output, m.getId() + "_bricks_wall2");
+                SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("bricks")), c.getBlock("bricks_chiseled")).unlockedBy("has_bricks", provider.hasSafeItem(c.getBlock("bricks"))).save(output, m.getId() + "_bricks_chiseled2");
+                SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("bricks_mossy")), c.getBlock("bricks_mossy_slab"), 2).unlockedBy("has_bricks_mossy", provider.hasSafeItem(c.getBlock("bricks_mossy"))).save(output, m.getId() + "_bricks_mossy_slab");
+                SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("bricks_mossy")), c.getBlock("bricks_mossy_stairs")).unlockedBy("has_bricks_mossy", provider.hasSafeItem(c.getBlock("bricks_mossy"))).save(output, m.getId() + "_bricks_mossy_stairs");
+                SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("bricks_mossy")), c.getBlock("bricks_mossy_wall")).unlockedBy("has_bricks_mossy", provider.hasSafeItem(c.getBlock("bricks_mossy"))).save(output, m.getId() + "_bricks_mossy_wall");
+                SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("smooth")), c.getBlock("smooth_slab"), 2).unlockedBy("has_smooth", provider.hasSafeItem(c.getBlock("smooth"))).save(output, m.getId() + "_smooth_slab");
+                SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("smooth")), c.getBlock("smooth_stairs")).unlockedBy("has_smooth", provider.hasSafeItem(c.getBlock("smooth"))).save(output, m.getId() + "_smooth_stairs");
+                SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("smooth")), c.getBlock("smooth_wall")).unlockedBy("has_smooth", provider.hasSafeItem(c.getBlock("smooth"))).save(output, m.getId() + "_smooth_wall");
             }
         });
         provider.addToolRecipe(DUST_BUILDER.get(PICKAXE_HEAD.getId()), output, Ref.ANTIMATTER, "pickaxe_head", "antimatter_dusts",

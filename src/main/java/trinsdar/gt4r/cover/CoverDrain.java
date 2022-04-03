@@ -79,7 +79,7 @@ public class CoverDrain extends BaseCover {
                 int filled = f.fill(toInsert, SIMULATE);
                 if (filled > 0) {
                     f.fill(new FluidStack(toInsert.getFluid(), filled), EXECUTE);
-                    if (fluid != Fluids.WATER || (!BiomeDictionary.hasType(ResourceKey.create(Registry.BIOME_REGISTRY, world.getBiome(offset).getRegistryName()), BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(ResourceKey.create(Registry.BIOME_REGISTRY, world.getBiome(offset).getRegistryName()), BiomeDictionary.Type.RIVER))){
+                    if (fluid != Fluids.WATER || (!BiomeDictionary.hasType(world.getBiome(offset).unwrapKey().get(), BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(world.getBiome(offset).unwrapKey().get(), BiomeDictionary.Type.RIVER))){
                         BlockState newState = Blocks.AIR.defaultBlockState();
                         if (fluid == Fluids.WATER && blockState.getBlock() != Blocks.WATER && blockState.hasProperty(BlockStateProperties.WATERLOGGED) && blockState.getValue(BlockStateProperties.WATERLOGGED)){
                             newState = blockState.setValue(BlockStateProperties.WATERLOGGED, false);

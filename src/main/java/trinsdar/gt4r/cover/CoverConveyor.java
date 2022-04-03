@@ -7,6 +7,7 @@ import muramasa.antimatter.gui.ButtonBody;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.util.Utils;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -83,7 +84,7 @@ public class CoverConveyor extends CoverBasicTransport {
             if (stack.isEmpty()) return;
             world.addFreshEntity(new ItemEntity(world,pos.getX()+side.getStepX(), pos.getY()+side.getStepY(), pos.getZ()+side.getStepZ(),stack));
         }
-        if (!(state.hasTileEntity())) return;
+        if (!(state.getBlock() instanceof EntityBlock)) return;
         BlockEntity adjTile = handler.getTile().getLevel().getBlockEntity(handler.getTile().getBlockPos().relative(side));
         if (adjTile == null) {
             return;

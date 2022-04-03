@@ -12,7 +12,7 @@ import static trinsdar.gt4r.data.GT4RData.*;
 
 public class GT4RBlockTagProvider extends AntimatterBlockTagProvider {
 
-    public GT4RBlockTagProvider(String providerDomain, String providerName, boolean replace, DataGenerator gen, ExistingFileHelper helper) {
+    public GT4RBlockTagProvider(String providerDomain, String providerName, boolean replace, DataGenerator gen) {
         super(providerDomain, providerName, replace, gen);
     }
 

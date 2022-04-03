@@ -23,9 +23,9 @@ public class RubberTreeFeature extends TreeFeature {
     }
 
     public boolean generateRubber(WorldGenLevel reader, ChunkGenerator generator, Random rand, BlockPos pos, TreeConfiguration config) {
-        if (reader.getBiome(pos).getBiomeCategory() != Biome.BiomeCategory.SWAMP && config == RubberTreeWorldGen.RUBBER_TREE_CONFIG_SWAMP) return false;
-        if (reader.getBiome(pos).getBiomeCategory() != Biome.BiomeCategory.JUNGLE && config == RubberTreeWorldGen.RUBBER_TREE_CONFIG_JUNGLE) return false;
-        return super.place(reader, generator, rand, pos, config);
+        if (Biome.getBiomeCategory(reader.getBiome(pos)) != Biome.BiomeCategory.SWAMP && config == RubberTreeWorldGen.RUBBER_TREE_CONFIG_SWAMP) return false;
+        if (Biome.getBiomeCategory(reader.getBiome(pos)) != Biome.BiomeCategory.JUNGLE && config == RubberTreeWorldGen.RUBBER_TREE_CONFIG_JUNGLE) return false;
+        return super.place(config, reader, generator, rand, pos);
     }
 
     /*public boolean doPlace(IWorldGenerationReader world, Random random, BlockPos pos, Set<BlockPos> set, Set<BlockPos> set1, MutableBoundingBox boundingBox, TreeFeatureConfig config) {

@@ -42,10 +42,10 @@ public class RubberFoliagePlacer extends FoliagePlacer {
 
     @Override
     protected void createFoliage(LevelSimulatedReader pLevel, BiConsumer<BlockPos, BlockState> pBlockSetter, Random pRandom, TreeConfiguration pConfig, int pMaxFreeTreeHeight, FoliageAttachment pAttachment, int pFoliageHeight, int pFoliageRadius, int pOffset) {
-        generate(pLevel);
+        generate(pLevel, pBlockSetter, pRandom, pConfig, pMaxFreeTreeHeight, pAttachment, pFoliageHeight, pFoliageRadius, pOffset);
     }
 
-    protected void generate(LevelSimulatedReader world, Random random, TreeConfiguration config, int trunkHeight, FoliageAttachment treeNode, int foliageHeight, int radius, Set<BlockPos> leaves, int offset, BoundingBox box) {
+    protected void generate(LevelSimulatedReader world,  BiConsumer<BlockPos, BlockState> pBlockSetter, Random random, TreeConfiguration config, int trunkHeight, FoliageAttachment treeNode, int foliageHeight, int radius, int offset) {
         BlockPos center = treeNode.pos();
         BlockPos.MutableBlockPos pos = center.mutable();
 
@@ -55,15 +55,13 @@ public class RubberFoliagePlacer extends FoliagePlacer {
         double treeRadius = 2.5;
         for(int i = offset; i >= offset - foliageHeight; --i) {
             if (i == offset){
-                this.placeLeavesRow(world, random, config, center, 1, leaves, i, treeNode.doubleTrunk(), box);
+                this.placeLeavesRow(world, pBlockSetter, random, config, center, 1, i, treeNode.doubleTrunk());
                 continue;
             }
             pos.set(x, y + i, z);
             circle(pos.mutable(), treeRadius, position -> {
                 if (TreeFeature.isAirOrLeaves(world, position)) {
-                    world.setBlock(position, config.foliageProvider.getState(random, position), 19);
-                    box.expand(new BoundingBox(position, position));
-                    leaves.add(position.immutable());
+                    pBlockSetter.accept(position, config.foliageProvider.getState(random, position));
                 }
             });
         }
@@ -72,9 +70,7 @@ public class RubberFoliagePlacer extends FoliagePlacer {
         for (int i = 0; i < spikeHeight; i++){
             BlockPos leaf = center.above(i);
             if (TreeFeature.isAirOrLeaves(world, leaf)) {
-                world.setBlock(leaf, config.leavesProvider.getState(random, leaf), 19);
-                box.expand(new BoundingBox(leaf, leaf));
-                leaves.add(leaf.immutable());
+                pBlockSetter.accept(leaf, config.foliageProvider.getState(random, leaf));
             }
         }
 

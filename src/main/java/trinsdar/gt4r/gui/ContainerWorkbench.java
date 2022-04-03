@@ -100,7 +100,7 @@ public class ContainerWorkbench<T extends TileEntityMaterial<T>> extends Contain
         }
     }
 
-    protected static void updateCrafting(int id, Level world, Player playerEntity, CraftingContainer craftingInventory, ResultContainer craftResultInventory) {
+    protected static void updateCrafting(int id, int stateID, Level world, Player playerEntity, CraftingContainer craftingInventory, ResultContainer craftResultInventory) {
         if (!world.isClientSide) {
             ServerPlayer serverplayerentity = (ServerPlayer)playerEntity;
             ItemStack itemstack = ItemStack.EMPTY;
@@ -113,7 +113,7 @@ public class ContainerWorkbench<T extends TileEntityMaterial<T>> extends Contain
             }
 
             craftResultInventory.setItem(0, itemstack);
-            serverplayerentity.connection.send(new ClientboundContainerSetSlotPacket(id, 0, itemstack));
+            serverplayerentity.connection.send(new ClientboundContainerSetSlotPacket(id, stateID, 0, itemstack));
         }
     }
 
@@ -121,7 +121,7 @@ public class ContainerWorkbench<T extends TileEntityMaterial<T>> extends Contain
      * Callback for when the crafting matrix is changed.
      */
     public void slotsChanged(Container inventoryIn) {
-        updateCrafting(this.containerId, this.playerInv.player.getCommandSenderWorld(), this.playerInv.player, this.craftingGrid, this.craftResult);
+        updateCrafting(this.containerId, this.getStateId(), this.playerInv.player.getCommandSenderWorld(), this.playerInv.player, this.craftingGrid, this.craftResult);
     }
 
     @Override
@@ -184,9 +184,9 @@ public class ContainerWorkbench<T extends TileEntityMaterial<T>> extends Contain
                 this.slotsChanged(this.craftingGrid);
                 return ItemStack.EMPTY;
             }
-            ItemStack itemstack2 = slot.onTake(player, itemstack1);
+            slot.onTake(player, itemstack1);
 
-            player.drop(itemstack2, false);
+            player.drop(itemstack1, false);
             this.slotsChanged(this.craftingGrid);
             return itemstack;
         } else {
