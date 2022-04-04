@@ -424,7 +424,7 @@ public class Materials {
         Gold.addByProduct(Copper, Nickel);
         Iron.addByProduct(Nickel, Tin);
         Iridium.addByProduct(Platinum, Osmium);
-        Uraninite.addByProduct(Lead, Uranium235, Thorium);
+        Uraninite.addByProduct(Lead, Uranium238, Thorium);
         Copper.addByProduct(Gold, Nickel);
         Tin.addByProduct(Iron, Zinc);
         Cassiterite.addByProduct(Tin);
