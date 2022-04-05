@@ -96,8 +96,7 @@ public class GT4RPlacedFeatures {
             config.setValidBiomes(invalidBiomes);
         }
         Holder<ConfiguredFeature<GT4ROreFeatureConfig, ?>> configuredFeature = RubberTreeWorldGen.register(id, new ConfiguredFeature<>(GT4RFeatures.ORE, config));
-        List<PlacementModifier> list = new ArrayList<>();
-        list.addAll(List.of(BiomeFilter.biome(), InSquarePlacement.spread()));
+        List<PlacementModifier> list = new ArrayList<>(List.of(BiomeFilter.biome(), InSquarePlacement.spread()));
         list.add(node.isTriangle() ? HeightRangePlacement.triangle(VerticalAnchor.absolute(minY), VerticalAnchor.absolute(maxY)) : HeightRangePlacement.uniform(VerticalAnchor.absolute(minY), VerticalAnchor.absolute(maxY)));
         list.add(rare ? RarityFilter.onAverageOnceEvery(weight) : CountPlacement.of(weight));
         Holder<PlacedFeature> placedFeature = RubberTreeWorldGen.createPlacedFeature(id, configuredFeature, list.toArray(new PlacementModifier[0]));

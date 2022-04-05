@@ -81,62 +81,39 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
                     }
                     return;
                 }
-
+                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, v.feature());
             });
-            /*event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, TIN);
-            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, URANITE);
-            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, URANITE_DEAD);
-            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, CASSITERITE);
-            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, TETRAHEDRITE);
-            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, GALENA);
-            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, BAUXITE);
-            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, RUBY);
-            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, SAPPHIRE);
-            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, PLATINUM);
-            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, IRIDIUM);
-            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, EMERALD);
-            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, PYRITE);
-            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, SPHALERITE);
-            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, CINNABAR);
-            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, TUNGSTATE);
-            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, PLATINUM_END);
-            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OLIVINE);
-            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, SODALITE);
-            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, CHROMITE);
-            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, SALT);
-            event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ROCK_SALT);*/
         }
     }
 
-    //@Override
-    public boolean place(WorldGenLevel world, ChunkGenerator generator, Random rand, BlockPos pos, GT4ROreFeatureConfig config) {
-        if (config.getId().equals("salt")){
-            return generateOnOceanFloor(world, generator, rand, pos, config);
-        }
-        return false;
-    }
+    public boolean place(WorldGenLevel worldgenlevel, Random random, BlockPos blockpos, GT4ROreFeatureConfig config) {
 
-    public boolean generateOnOceanFloor(WorldGenLevel reader, ChunkGenerator generator, Random rand, BlockPos pos, GT4ROreFeatureConfig config) {
+        float f = random.nextFloat() * (float)Math.PI;
+        float f1 = (float)config.size / 8.0F;
+        int i = Mth.ceil(((float)config.size / 16.0F * 2.0F + 1.0F) / 2.0F);
+        double minX = (double)blockpos.getX() + Math.sin(f) * (double)f1;
+        double maxX = (double)blockpos.getX() - Math.sin(f) * (double)f1;
+        double minZ = (double)blockpos.getZ() + Math.cos(f) * (double)f1;
+        double maxZ = (double)blockpos.getZ() - Math.cos(f) * (double)f1;
+        double minY = blockpos.getY() + random.nextInt(3) - 2;
+        double maxY = blockpos.getY() + random.nextInt(3) - 2;
+        int x = blockpos.getX() - Mth.ceil(f1) - i;
+        int y = blockpos.getY() - 2 - i;
+        int z = blockpos.getZ() - Mth.ceil(f1) - i;
+        int width = 2 * (Mth.ceil(f1) + i);
+        int height = 2 * (2 + i);
 
-        float f = rand.nextFloat() * (float)Math.PI;
-        float f1 = (float)config.getSize() / 8.0F;
-        int i = Mth.ceil(((float)config.getSize() / 16.0F * 2.0F + 1.0F) / 2.0F);
-        double x0 = (double)pos.getX() + Math.sin(f) * (double)f1;
-        double x1 = (double)pos.getX() - Math.sin(f) * (double)f1;
-        double z0 = (double)pos.getZ() + Math.cos(f) * (double)f1;
-        double z1 = (double)pos.getZ() - Math.cos(f) * (double)f1;
-        int x = pos.getX() - Mth.ceil(f1) - i;
-        int y;
-        int z = pos.getZ() - Mth.ceil(f1) - i;
-        int j1 = 2 * (Mth.ceil(f1) + i);
-        int k1 = 2 * (2 + i);
-
-        for(int ix = x; ix <= x + j1; ++ix) {
-            for(int iz = z; iz <= z + j1; ++iz) {
-                y = reader.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, ix, iz);
-                double y0 = y + rand.nextInt(3) - 2;
-                double y1 = y + rand.nextInt(3) - 2;
-                return true; //generateVein(reader, rand, config, x0, x1, z0, z1, y0, y1, x, y, z, j1, k1);
+        for(int ix = x; ix <= x + width; ++ix) {
+            for(int iz = z; iz <= z + width; ++iz) {
+                if (config.getId().equals("salt")){
+                    int y2 = worldgenlevel.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, ix, iz);
+                    double minY0 = y + random.nextInt(3) - 2;
+                    double maxY0 = y + random.nextInt(3) - 2;
+                    return this.doPlace(worldgenlevel, random, config, minX, maxX, minZ, maxZ, minY0, maxY0, x, y2, z, width, height);
+                }
+                if (y <= worldgenlevel.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, ix, iz)) {
+                    return this.doPlace(worldgenlevel, random, config, minX, maxX, minZ, maxZ, minY, maxY, x, y, z, width, height);
+                }
             }
         }
 
@@ -164,30 +141,7 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
         if (!hasType){
             return false;
         }
-        float f = random.nextFloat() * (float)Math.PI;
-        float f1 = (float)config.size / 8.0F;
-        int i = Mth.ceil(((float)config.size / 16.0F * 2.0F + 1.0F) / 2.0F);
-        double d0 = (double)blockpos.getX() + Math.sin(f) * (double)f1;
-        double d1 = (double)blockpos.getX() - Math.sin(f) * (double)f1;
-        double d2 = (double)blockpos.getZ() + Math.cos(f) * (double)f1;
-        double d3 = (double)blockpos.getZ() - Math.cos(f) * (double)f1;
-        double d4 = blockpos.getY() + random.nextInt(3) - 2;
-        double d5 = blockpos.getY() + random.nextInt(3) - 2;
-        int k = blockpos.getX() - Mth.ceil(f1) - i;
-        int l = blockpos.getY() - 2 - i;
-        int i1 = blockpos.getZ() - Mth.ceil(f1) - i;
-        int j1 = 2 * (Mth.ceil(f1) + i);
-        int k1 = 2 * (2 + i);
-
-        for(int l1 = k; l1 <= k + j1; ++l1) {
-            for(int i2 = i1; i2 <= i1 + j1; ++i2) {
-                if (l <= worldgenlevel.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, l1, i2)) {
-                    return this.doPlace(worldgenlevel, random, config, d0, d1, d2, d3, d4, d5, k, l, i1, j1, k1);
-                }
-            }
-        }
-
-        return false;
+        return place(worldgenlevel, random, blockpos, config);
     }
 
     protected boolean doPlace(WorldGenLevel pLevel, Random pRandom, GT4ROreFeatureConfig config, double pMinX, double pMaxX, double pMinZ, double pMaxZ, double pMinY, double pMaxY, int pX, int pY, int pZ, int pWidth, int pHeight) {
