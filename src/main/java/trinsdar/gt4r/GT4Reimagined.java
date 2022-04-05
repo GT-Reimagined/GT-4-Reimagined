@@ -8,7 +8,6 @@ import muramasa.antimatter.proxy.IProxyHandler;
 import muramasa.antimatter.registration.RegistrationEvent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -37,14 +36,13 @@ import trinsdar.gt4r.events.AntimatterEvents;
 import trinsdar.gt4r.events.ForgeEventBusEvents;
 import trinsdar.gt4r.events.RegistrationEvents;
 import trinsdar.gt4r.events.RemappingEvents;
-import trinsdar.gt4r.loader.WorldGenLoader;
 import trinsdar.gt4r.network.GT4RNetwork;
 import trinsdar.gt4r.proxy.ClientHandler;
 import trinsdar.gt4r.proxy.CommonHandler;
 import trinsdar.gt4r.proxy.ServerHandler;
 import trinsdar.gt4r.tile.TileEntityTypes;
 import trinsdar.gt4r.tree.RubberTreeWorldGen;
-import trinsdar.gt4r.worldgen.GT4RConfiguredFeatures;
+import trinsdar.gt4r.worldgen.GT4RPlacedFeatures;
 import trinsdar.gt4r.worldgen.GT4RFeatures;
 
 
@@ -115,7 +113,7 @@ public class GT4Reimagined extends AntimatterMod {
                 Structures.init();
                 Structures.initPatterns();
                 RubberTreeWorldGen.init();
-                GT4RConfiguredFeatures.init();
+                GT4RPlacedFeatures.init();
                 OreConfigHandler.ORE_CONFIG_HANDLER.save();
                 //GregTechAPI.registerFluidCell(Data.CellTin.get(1));
                 //GregTechAPI.registerFluidCell(Data.CellSteel.get(1));

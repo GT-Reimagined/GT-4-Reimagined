@@ -3,9 +3,11 @@ package trinsdar.gt4r.worldgen;
 import muramasa.antimatter.AntimatterConfig;
 import muramasa.antimatter.Data;
 import muramasa.antimatter.material.Material;
+import muramasa.antimatter.material.MaterialType;
 import muramasa.antimatter.ore.StoneType;
 import muramasa.antimatter.worldgen.WorldGenHelper;
 import muramasa.antimatter.worldgen.feature.AntimatterFeature;
+import net.minecraft.core.SectionPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
@@ -13,11 +15,15 @@ import net.minecraft.core.Registry;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.BulkSectionAccess;
 import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
@@ -25,10 +31,12 @@ import net.minecraftforge.event.world.BiomeLoadingEvent;
 import java.util.BitSet;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Function;
 
 import static muramasa.antimatter.Data.Coal;
 import static muramasa.antimatter.Data.ORE_STONE;
-import static trinsdar.gt4r.worldgen.GT4RConfiguredFeatures.*;
+import static muramasa.antimatter.worldgen.WorldGenHelper.ORE_PREDICATE;
+import static trinsdar.gt4r.worldgen.GT4RPlacedFeatures.*;
 
 public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfig> {
     public FeatureVanillaTypeOre() {
@@ -54,7 +62,27 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
     public void build(BiomeLoadingEvent event) {
         if (AntimatterConfig.WORLD.ORE_VEINS){
             BiomeGenerationSettingsBuilder builder = event.getGeneration();
+            FEATURE_MAP.forEach((k, v) -> {
+                if (k.contains("emerald") || k.contains("coal") || k.contains("iron") || k.contains("copper") || k.contains("gold") || k.contains("diamond") || k.contains("lapis") || k.contains("redstone")){
+                    if (AntimatterConfig.WORLD.VANILLA_ORE_GEN && event.getCategory() != Biome.BiomeCategory.NETHER && event.getCategory() != Biome.BiomeCategory.THEEND){
+                        if (k.contains("emerald")){
+                            if (event.getCategory() == Biome.BiomeCategory.EXTREME_HILLS){
+                                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, v.feature());
+                            }
+                            return;
+                        }
+                        if (k.equals("gold_extra")){
+                            if (event.getCategory() == Biome.BiomeCategory.MESA){
+                                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, v.feature());
+                            }
+                            return;
+                        }
+                        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, v.feature());
+                    }
+                    return;
+                }
 
+            });
             /*event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, TIN);
             event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, URANITE);
             event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, URANITE_DEAD);
@@ -77,58 +105,15 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
             event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, CHROMITE);
             event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, SALT);
             event.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ROCK_SALT);*/
-            if (AntimatterConfig.WORLD.VANILLA_ORE_GEN){
-                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("coal_upper"));
-                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("coal_lower"));
-                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("iron_upper"));
-                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("iron_middle"));
-                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("iron_small"));
-                if (event.getCategory() == Biome.BiomeCategory.MESA){
-                    builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("gold_extra"));
-                }
-                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("gold"));
-                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("copper"));
-                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("copper_buried"));
-                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("redstone"));
-                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("redstone_lower"));
-                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("diamond_large"));
-                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("diamond"));
-                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("diamond_buried"));
-                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("lapis"));
-                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("lapis_buried"));
-                if (event.getCategory() == Biome.BiomeCategory.EXTREME_HILLS){
-                    builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, FEATURE_MAP.get("emerald"));
-                }
-            }
         }
     }
 
     //@Override
     public boolean place(WorldGenLevel world, ChunkGenerator generator, Random rand, BlockPos pos, GT4ROreFeatureConfig config) {
-        int chunkX = pos.getX() >> 4;
-        int chunkZ = pos.getZ() >> 4;
-        //Feature.ORE.generate()
-        if (!config.getDimensionLocations().contains(world.getLevel().dimension().location())) return false;
-        List<BiomeDictionary.Type> types = config.getBiomeTypes();
-        List<BiomeDictionary.Type> invalidTypes = config.getInvalidBiomeTypes();
-        boolean hasType = types.isEmpty();
-        for (BiomeDictionary.Type type : BiomeDictionary.getTypes(world.getBiome(pos).unwrapKey().get())) {
-            if (types.contains(type)) {
-                hasType = true;
-            }
-            if (invalidTypes.contains(type)){
-                hasType = false;
-                break;
-            }
-        }
-        if (!hasType){
-            return false;
-        }
-
         if (config.getId().equals("salt")){
             return generateOnOceanFloor(world, generator, rand, pos, config);
         }
-        return generate2(world, rand, pos, config);
+        return false;
     }
 
     public boolean generateOnOceanFloor(WorldGenLevel reader, ChunkGenerator generator, Random rand, BlockPos pos, GT4ROreFeatureConfig config) {
@@ -151,33 +136,53 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
                 y = reader.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, ix, iz);
                 double y0 = y + rand.nextInt(3) - 2;
                 double y1 = y + rand.nextInt(3) - 2;
-                return generateVein(reader, rand, config, x0, x1, z0, z1, y0, y1, x, y, z, j1, k1);
+                return true; //generateVein(reader, rand, config, x0, x1, z0, z1, y0, y1, x, y, z, j1, k1);
             }
         }
 
         return false;
     }
 
-    public boolean generate2(WorldGenLevel reader, Random rand, BlockPos pos, GT4ROreFeatureConfig config) {
-        float f = rand.nextFloat() * (float)Math.PI;
-        float f1 = (float)config.getSize() / 8.0F;
-        int i = Mth.ceil(((float)config.getSize() / 16.0F * 2.0F + 1.0F) / 2.0F);
-        double x0 = (double)pos.getX() + Math.sin(f) * (double)f1;
-        double x1 = (double)pos.getX() - Math.sin(f) * (double)f1;
-        double z0 = (double)pos.getZ() + Math.cos(f) * (double)f1;
-        double z1 = (double)pos.getZ() - Math.cos(f) * (double)f1;
-        double y0 = pos.getY() + rand.nextInt(3) - 2;
-        double y1 = pos.getY() + rand.nextInt(3) - 2;
-        int x = pos.getX() - Mth.ceil(f1) - i;
-        int y = pos.getY() - 2 - i;
-        int z = pos.getZ() - Mth.ceil(f1) - i;
+    public boolean place(FeaturePlaceContext<GT4ROreFeatureConfig> pContext) {
+        Random random = pContext.random();
+        BlockPos blockpos = pContext.origin();
+        WorldGenLevel worldgenlevel = pContext.level();
+        GT4ROreFeatureConfig config = pContext.config();
+        if (!config.getDimensionLocations().contains(worldgenlevel.getLevel().dimension().location())) return false;
+        List<BiomeDictionary.Type> types = config.getBiomeTypes();
+        List<BiomeDictionary.Type> invalidTypes = config.getInvalidBiomeTypes();
+        boolean hasType = types.isEmpty();
+        for (BiomeDictionary.Type type : BiomeDictionary.getTypes(worldgenlevel.getBiome(blockpos).unwrapKey().get())) {
+            if (types.contains(type)) {
+                hasType = true;
+            }
+            if (invalidTypes.contains(type)){
+                hasType = false;
+                break;
+            }
+        }
+        if (!hasType){
+            return false;
+        }
+        float f = random.nextFloat() * (float)Math.PI;
+        float f1 = (float)config.size / 8.0F;
+        int i = Mth.ceil(((float)config.size / 16.0F * 2.0F + 1.0F) / 2.0F);
+        double d0 = (double)blockpos.getX() + Math.sin(f) * (double)f1;
+        double d1 = (double)blockpos.getX() - Math.sin(f) * (double)f1;
+        double d2 = (double)blockpos.getZ() + Math.cos(f) * (double)f1;
+        double d3 = (double)blockpos.getZ() - Math.cos(f) * (double)f1;
+        double d4 = blockpos.getY() + random.nextInt(3) - 2;
+        double d5 = blockpos.getY() + random.nextInt(3) - 2;
+        int k = blockpos.getX() - Mth.ceil(f1) - i;
+        int l = blockpos.getY() - 2 - i;
+        int i1 = blockpos.getZ() - Mth.ceil(f1) - i;
         int j1 = 2 * (Mth.ceil(f1) + i);
         int k1 = 2 * (2 + i);
 
-        for(int ix = x; ix <= x + j1; ++ix) {
-            for(int iz = z; iz <= z + j1; ++iz) {
-                if (y <= reader.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, ix, iz)) {
-                    return generateVein(reader, rand, config, x0, x1, z0, z1, y0, y1, x, y, z, j1, k1);
+        for(int l1 = k; l1 <= k + j1; ++l1) {
+            for(int i2 = i1; i2 <= i1 + j1; ++i2) {
+                if (l <= worldgenlevel.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, l1, i2)) {
+                    return this.doPlace(worldgenlevel, random, config, d0, d1, d2, d3, d4, d5, k, l, i1, j1, k1);
                 }
             }
         }
@@ -185,39 +190,39 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
         return false;
     }
 
-    protected boolean generateVein(LevelAccessor worldIn, Random random, GT4ROreFeatureConfig config, double x0, double x1, double z0, double z1, double y0, double y1, int x, int y, int z, int p_207803_19_, int p_207803_20_) {
+    protected boolean doPlace(WorldGenLevel pLevel, Random pRandom, GT4ROreFeatureConfig config, double pMinX, double pMaxX, double pMinZ, double pMaxZ, double pMinY, double pMaxY, int pX, int pY, int pZ, int pWidth, int pHeight) {
         int i = 0;
-        BitSet bitset = new BitSet(p_207803_19_ * p_207803_20_ * p_207803_19_);
-        BlockPos.MutableBlockPos blockpos$mutable = new BlockPos.MutableBlockPos();
-        int j = config.getSize();
+        BitSet bitset = new BitSet(pWidth * pHeight * pWidth);
+        BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+        int j = config.size;
         double[] adouble = new double[j * 4];
 
         for(int k = 0; k < j; ++k) {
             float f = (float)k / (float)j;
-            double d0 = Mth.lerp(f, x0, x1);
-            double d2 = Mth.lerp(f, y0, y1);
-            double d4 = Mth.lerp(f, z0, z1);
-            double d6 = random.nextDouble() * (double)j / 16.0D;
-            double d7 = ((double)(Mth.sin((float)Math.PI * f) + 1.0F) * d6 + 1.0D) / 2.0D;
-            adouble[k * 4] = d0;
-            adouble[k * 4 + 1] = d2;
-            adouble[k * 4 + 2] = d4;
-            adouble[k * 4 + 3] = d7;
+            double d0 = Mth.lerp(f, pMinX, pMaxX);
+            double d1 = Mth.lerp(f, pMinY, pMaxY);
+            double d2 = Mth.lerp(f, pMinZ, pMaxZ);
+            double d3 = pRandom.nextDouble() * (double)j / 16.0D;
+            double d4 = ((double)(Mth.sin((float)Math.PI * f) + 1.0F) * d3 + 1.0D) / 2.0D;
+            adouble[k * 4 + 0] = d0;
+            adouble[k * 4 + 1] = d1;
+            adouble[k * 4 + 2] = d2;
+            adouble[k * 4 + 3] = d4;
         }
 
-        for(int i3 = 0; i3 < j - 1; ++i3) {
-            if (!(adouble[i3 * 4 + 3] <= 0.0D)) {
-                for(int k3 = i3 + 1; k3 < j; ++k3) {
-                    if (!(adouble[k3 * 4 + 3] <= 0.0D)) {
-                        double d12 = adouble[i3 * 4] - adouble[k3 * 4];
-                        double d13 = adouble[i3 * 4 + 1] - adouble[k3 * 4 + 1];
-                        double d14 = adouble[i3 * 4 + 2] - adouble[k3 * 4 + 2];
-                        double d15 = adouble[i3 * 4 + 3] - adouble[k3 * 4 + 3];
-                        if (d15 * d15 > d12 * d12 + d13 * d13 + d14 * d14) {
-                            if (d15 > 0.0D) {
-                                adouble[k3 * 4 + 3] = -1.0D;
+        for(int l3 = 0; l3 < j - 1; ++l3) {
+            if (!(adouble[l3 * 4 + 3] <= 0.0D)) {
+                for(int i4 = l3 + 1; i4 < j; ++i4) {
+                    if (!(adouble[i4 * 4 + 3] <= 0.0D)) {
+                        double d8 = adouble[l3 * 4 + 0] - adouble[i4 * 4 + 0];
+                        double d10 = adouble[l3 * 4 + 1] - adouble[i4 * 4 + 1];
+                        double d12 = adouble[l3 * 4 + 2] - adouble[i4 * 4 + 2];
+                        double d14 = adouble[l3 * 4 + 3] - adouble[i4 * 4 + 3];
+                        if (d14 * d14 > d8 * d8 + d10 * d10 + d12 * d12) {
+                            if (d14 > 0.0D) {
+                                adouble[i4 * 4 + 3] = -1.0D;
                             } else {
-                                adouble[i3 * 4 + 3] = -1.0D;
+                                adouble[l3 * 4 + 3] = -1.0D;
                             }
                         }
                     }
@@ -225,46 +230,60 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
             }
         }
 
-        for(int j3 = 0; j3 < j; ++j3) {
-            double d11 = adouble[j3 * 4 + 3];
-            if (!(d11 < 0.0D)) {
-                double d1 = adouble[j3 * 4];
-                double d3 = adouble[j3 * 4 + 1];
-                double d5 = adouble[j3 * 4 + 2];
-                int l = Math.max(Mth.floor(d1 - d11), x);
-                int l3 = Math.max(Mth.floor(d3 - d11), y);
-                int i1 = Math.max(Mth.floor(d5 - d11), z);
-                int j1 = Math.max(Mth.floor(d1 + d11), l);
-                int k1 = Math.max(Mth.floor(d3 + d11), l3);
-                int l1 = Math.max(Mth.floor(d5 + d11), i1);
+        BulkSectionAccess bulksectionaccess = new BulkSectionAccess(pLevel);
 
-                for(int i2 = l; i2 <= j1; ++i2) {
-                    double d8 = ((double)i2 + 0.5D - d1) / d11;
-                    if (d8 * d8 < 1.0D) {
-                        for(int j2 = l3; j2 <= k1; ++j2) {
-                            double d9 = ((double)j2 + 0.5D - d3) / d11;
-                            if (d8 * d8 + d9 * d9 < 1.0D) {
-                                for(int k2 = i1; k2 <= l1; ++k2) {
-                                    double d10 = ((double)k2 + 0.5D - d5) / d11;
-                                    if (d8 * d8 + d9 * d9 + d10 * d10 < 1.0D) {
-                                        int l2 = i2 - x + (j2 - y) * p_207803_19_ + (k2 - z) * p_207803_19_ * p_207803_20_;
-                                        if (!bitset.get(l2)) {
-                                            bitset.set(l2);
-                                            blockpos$mutable.set(i2, j2, k2);
-                                            Material mat = Material.get(config.getPrimary());
-                                            if (mat.has(ORE_STONE) && mat != Coal){
-                                                StoneType stone = WorldGenHelper.STONE_MAP.get(worldIn.getBlockState(blockpos$mutable));
-                                                if (stone == null) continue;
-                                                if (WorldGenHelper.setState(worldIn, blockpos$mutable, ORE_STONE.get().get(mat).asState())) {
-                                                    ++i;
-                                                    continue;
+        try {
+            for(int j4 = 0; j4 < j; ++j4) {
+                double d9 = adouble[j4 * 4 + 3];
+                if (!(d9 < 0.0D)) {
+                    double d11 = adouble[j4 * 4 + 0];
+                    double d13 = adouble[j4 * 4 + 1];
+                    double d15 = adouble[j4 * 4 + 2];
+                    int k4 = Math.max(Mth.floor(d11 - d9), pX);
+                    int l = Math.max(Mth.floor(d13 - d9), pY);
+                    int i1 = Math.max(Mth.floor(d15 - d9), pZ);
+                    int j1 = Math.max(Mth.floor(d11 + d9), k4);
+                    int k1 = Math.max(Mth.floor(d13 + d9), l);
+                    int l1 = Math.max(Mth.floor(d15 + d9), i1);
+
+                    for(int i2 = k4; i2 <= j1; ++i2) {
+                        double d5 = ((double)i2 + 0.5D - d11) / d9;
+                        if (d5 * d5 < 1.0D) {
+                            for(int j2 = l; j2 <= k1; ++j2) {
+                                double d6 = ((double)j2 + 0.5D - d13) / d9;
+                                if (d5 * d5 + d6 * d6 < 1.0D) {
+                                    for(int k2 = i1; k2 <= l1; ++k2) {
+                                        double d7 = ((double)k2 + 0.5D - d15) / d9;
+                                        if (d5 * d5 + d6 * d6 + d7 * d7 < 1.0D && !pLevel.isOutsideBuildHeight(j2)) {
+                                            int l2 = i2 - pX + (j2 - pY) * pWidth + (k2 - pZ) * pWidth * pHeight;
+                                            if (!bitset.get(l2)) {
+                                                bitset.set(l2);
+                                                blockpos$mutableblockpos.set(i2, j2, k2);
+                                                if (pLevel.ensureCanWrite(blockpos$mutableblockpos)) {
+                                                    LevelChunkSection levelchunksection = bulksectionaccess.getSection(blockpos$mutableblockpos);
+                                                    if (levelchunksection != null) {
+                                                        int i3 = SectionPos.sectionRelative(i2);
+                                                        int j3 = SectionPos.sectionRelative(j2);
+                                                        int k3 = SectionPos.sectionRelative(k2);
+                                                        BlockState blockstate = levelchunksection.getBlockState(i3, j3, k3);
+
+                                                        Material mat = Material.get(config.getPrimary());
+                                                        if (mat.has(ORE_STONE) && mat != Coal){
+                                                            StoneType stone = WorldGenHelper.STONE_MAP.get(blockstate);
+                                                            if (stone == null) continue;
+                                                            if (WorldGenHelper.setState(pLevel, new BlockPos(i3, j3, k3), ORE_STONE.get().get(mat).asState())) {
+                                                                ++i;
+                                                                continue;
+                                                            }
+                                                        }
+                                                        if (config.getSecondary() != null && !config.getSecondary().equals("null") && config.getSecondaryChance() > 0 && config.getSecondaryChance() < 1.0F){
+                                                            mat = pRandom.nextFloat() < config.getSecondaryChance() ? Material.get(config.getSecondary()) : Material.get(config.getPrimary());
+                                                        }
+                                                        if (canPlaceOre(blockstate, bulksectionaccess::getBlockState, pRandom, config, mat, Data.ORE, blockpos$mutableblockpos) && WorldGenHelper.setOre(pLevel, new BlockPos(i3, j3, k3), blockstate, mat, Data.ORE)) {
+                                                            ++i;
+                                                        }
+                                                    }
                                                 }
-                                            }
-                                            if (config.getSecondary() != null && !config.getSecondary().equals("null") && config.getSecondaryChance() > 0 && config.getSecondaryChance() < 1.0F){
-                                                mat = random.nextFloat() < config.getSecondaryChance() ? Material.get(config.getSecondary()) : Material.get(config.getPrimary());
-                                            }
-                                            if (WorldGenHelper.setOre(worldIn, blockpos$mutable, worldIn.getBlockState(blockpos$mutable), mat, Data.ORE)) {
-                                                ++i;
                                             }
                                         }
                                     }
@@ -274,13 +293,50 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
                     }
                 }
             }
+        } catch (Throwable throwable1) {
+            try {
+                bulksectionaccess.close();
+            } catch (Throwable throwable) {
+                throwable1.addSuppressed(throwable);
+            }
+
+            throw throwable1;
         }
 
+        bulksectionaccess.close();
         return i > 0;
     }
 
-    @Override
-    public boolean place(FeaturePlaceContext<GT4ROreFeatureConfig> pContext) {
-        return false;
+    public static BlockState getOre(BlockState existing, Material material,
+                                 MaterialType<?> type) {
+
+        StoneType stone = WorldGenHelper.STONE_MAP.get(existing);
+        if (stone == null)
+            return null;
+        BlockState oreState = type == Data.ORE ? Data.ORE.get().get(material, stone).asState()
+                : Data.ORE_SMALL.get().get(material, stone).asState();
+        if (!ORE_PREDICATE.test(existing))
+            return null;
+        return oreState;
+    }
+
+    public static boolean canPlaceOre(BlockState pState, Function<BlockPos, BlockState> pAdjacentStateAccessor, Random pRandom, GT4ROreFeatureConfig pConfig, Material material, MaterialType<?> type, BlockPos.MutableBlockPos pMatablePos) {
+        if (getOre(pState, material, type) == null) {
+            return false;
+        } else if (shouldSkipAirCheck(pRandom, pConfig.getDiscardOnExposureChance())) {
+            return true;
+        } else {
+            return !isAdjacentToAir(pAdjacentStateAccessor, pMatablePos);
+        }
+    }
+
+    protected static boolean shouldSkipAirCheck(Random pRandom, float pChance) {
+        if (pChance <= 0.0F) {
+            return true;
+        } else if (pChance >= 1.0F) {
+            return false;
+        } else {
+            return pRandom.nextFloat() >= pChance;
+        }
     }
 }

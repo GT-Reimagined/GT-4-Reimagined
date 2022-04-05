@@ -1,15 +1,15 @@
 package trinsdar.gt4r.worldgen;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
-import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.material.Material;
-import muramasa.antimatter.worldgen.feature.AntimatterFeature;
 import net.minecraft.core.Holder;
+import net.minecraft.data.worldgen.features.OreFeatures;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.BiomeFilter;
@@ -32,8 +32,8 @@ import static muramasa.antimatter.Data.*;
 import static net.minecraftforge.common.BiomeDictionary.Type.*;
 import static trinsdar.gt4r.data.Materials.*;
 
-public class GT4RConfiguredFeatures {
-    public static final Object2ObjectArrayMap<String, Holder<PlacedFeature>> FEATURE_MAP = new Object2ObjectArrayMap<>();
+public class GT4RPlacedFeatures {
+    public static final Object2ObjectArrayMap<String, MapWrapper> FEATURE_MAP = new Object2ObjectArrayMap<>();
 
     public static ConfiguredFeature<?,?> register(String id, ConfiguredFeature<?,?> feature){
         return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new ResourceLocation(Ref.ID, id), feature);
@@ -101,8 +101,10 @@ public class GT4RConfiguredFeatures {
         list.add(node.isTriangle() ? HeightRangePlacement.triangle(VerticalAnchor.absolute(minY), VerticalAnchor.absolute(maxY)) : HeightRangePlacement.uniform(VerticalAnchor.absolute(minY), VerticalAnchor.absolute(maxY)));
         list.add(rare ? RarityFilter.onAverageOnceEvery(weight) : CountPlacement.of(weight));
         Holder<PlacedFeature> placedFeature = RubberTreeWorldGen.createPlacedFeature(id, configuredFeature, list.toArray(new PlacementModifier[0]));
-        FEATURE_MAP.put(id, placedFeature);
+        FEATURE_MAP.put(id, new MapWrapper(placedFeature, dimensions, validBiomes, invalidBiomes));
     }
+
+    record MapWrapper(Holder<PlacedFeature> feature, List<ResourceKey<Level>> dimensions, List<BiomeDictionary.Type> validBiomes, List<BiomeDictionary.Type> invalidBiomes){}
 
     @SafeVarargs
     public static void createOrePlacedFeature(String id, Material material, int minY, int maxY, int weight, int size, String secondary, float secondaryChance, float discardChance, boolean triangle, boolean rare, ResourceKey<Level>... dimensions){
