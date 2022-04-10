@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static muramasa.antimatter.Data.*;
+import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
 import static muramasa.antimatter.util.Utils.getConventionalMaterialType;
 import static muramasa.antimatter.util.Utils.getConventionalStoneType;
 import static trinsdar.gt4r.data.GT4RData.Biochaff;
@@ -36,6 +37,7 @@ import static trinsdar.gt4r.data.Materials.Clay;
 import static trinsdar.gt4r.data.Materials.Limestone;
 import static trinsdar.gt4r.data.Materials.Scoria;
 import static trinsdar.gt4r.data.RecipeMaps.EXTRUDING;
+import static trinsdar.gt4r.data.RecipeMaps.INDUSTRIAL_GRINDING;
 import static trinsdar.gt4r.data.RecipeMaps.MACERATING;
 import static trinsdar.gt4r.data.RecipeMaps.SIFTING;
 
@@ -57,6 +59,12 @@ public class MaceratorLoader {
             MACERATING.RB().ii(RecipeIngredient.of(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(Ref.MOD_CREATE, "weathered_limestone")), 1)).io(DUST.get(Limestone, 1)).add(400, 2);
             MACERATING.RB().ii(RecipeIngredient.of(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(Ref.MOD_CREATE, "scoria")), 1)).io(DUST.get(Scoria, 1)).add(400, 2);
             MACERATING.RB().ii(RecipeIngredient.of(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(Ref.MOD_CREATE, "dark_scoria")), 1)).io(DUST.get(Scoria, 1)).add(400, 2);
+        }
+        MACERATING.RB().ii(RecipeIngredient.of(Items.NETHER_QUARTZ_ORE, 1)).io(new ItemStack(Items.QUARTZ, 2)).add(200, 2);
+        if (AntimatterAPI.isModLoaded("cinderscapes")){
+            MACERATING.RB().ii(RecipeIngredient.of(ForgeRegistries.ITEMS.getValue(new ResourceLocation("cinderscapes", "rose_quartz_ore")), 1)).io(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("cinderscapes", "rose_quartz_ore")), 2)).add(200, 2);
+            MACERATING.RB().ii(RecipeIngredient.of(ForgeRegistries.ITEMS.getValue(new ResourceLocation("cinderscapes", "smoky_quartz_ore")), 1)).io(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("cinderscapes", "smoky_quartz_ore")), 2)).add(200, 2);
+            MACERATING.RB().ii(RecipeIngredient.of(ForgeRegistries.ITEMS.getValue(new ResourceLocation("cinderscapes", "sulfur_quartz_ore")), 1)).io(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("cinderscapes", "sulfur_quartz_ore")), 2)).add(200, 2);
         }
     }
 
