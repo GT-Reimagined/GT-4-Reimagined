@@ -14,7 +14,7 @@ description='''My remake of GregTech 4'''
 [[dependencies.gt4r]]
     modId="antimatter"
     mandatory=true
-    versionRange="[0.0.5,)"
+    versionRange="[0.1,)"
     ordering="AFTER"
     side="BOTH"
 [[dependencies.gt4r]]
