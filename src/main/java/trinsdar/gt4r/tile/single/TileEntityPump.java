@@ -23,6 +23,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TileEntityPump extends TileEntityMachine<TileEntityPump> {
     Fluid fluid = Fluids.EMPTY;
@@ -45,7 +46,7 @@ public class TileEntityPump extends TileEntityMachine<TileEntityPump> {
         super.serverTick(level, pos, state);
         if (this.isServerSide() && level.getGameTime()%10==0 && this.machineState != MachineState.DISABLED && this.itemHandler.map(i -> {
             ItemStack stack = i.getHandler(SlotType.STORAGE).getStackInSlot(0);
-            return !stack.isEmpty() && stack.getItem() instanceof BlockItem;
+            return stack.isEmpty() || stack.getItem() instanceof BlockItem;
         }).orElse(false)) {
             if (fluidHandler.map(f -> f.getOutputTanks().getTank(0).getFluidAmount() + 1000 <= f.getOutputTanks().getTank(0).getCapacity()).orElse(false) && energyHandler.map(e -> e.getEnergy() >= 2000).orElse(false)) {
                 boolean tMovedOneDown = false;
@@ -153,7 +154,7 @@ public class TileEntityPump extends TileEntityMachine<TileEntityPump> {
         Fluid fluid = fluidState.getType();
         if (!(this.itemHandler.map(i -> {
             ItemStack stack = i.getHandler(SlotType.STORAGE).getStackInSlot(0);
-            return !stack.isEmpty() && stack.getItem() instanceof BlockItem;
+            return stack.isEmpty() || stack.getItem() instanceof BlockItem;
         })).orElse(false)){
             return false;
         }
@@ -173,9 +174,14 @@ public class TileEntityPump extends TileEntityMachine<TileEntityPump> {
             } else {
                 energyHandler.ifPresent(e -> Utils.extractEnergy(e, 250));
             }
-            Block block = this.itemHandler.map(i -> ((BlockItem)i.getHandler(SlotType.STORAGE).getStackInSlot(0).getItem()).getBlock()).orElse(Blocks.AIR);
+            Block block = this.itemHandler.map(i -> {
+                ItemStack stack = i.getHandler(SlotType.STORAGE).getStackInSlot(0);
+                if (stack.isEmpty()) return Blocks.AIR;
+                return ((BlockItem)stack.getItem()).getBlock();
+            }).orElse(Blocks.AIR);
             if (x == this.worldPosition.getX() && z == this.worldPosition.getZ()) block = Blocks.AIR;
-            level.setBlockAndUpdate(pos, block.defaultBlockState());
+            int flag = block.defaultBlockState().isAir() ? 0 : 3;
+            level.setBlock(pos, block.defaultBlockState(), flag);
             if (block != Blocks.AIR) itemHandler.ifPresent(i -> i.getHandler(SlotType.STORAGE).extractFromInput(0, 1, false));
             return true;
         }
@@ -213,5 +219,12 @@ public class TileEntityPump extends TileEntityMachine<TileEntityPump> {
         }
         this.fluid = FluidStack.loadFluidStackFromNBT(tag.getCompound("Fluid")).getFluid();
         this.pumpHeadY = tag.getInt("pumpHeadY");
+    }
+
+    @Override
+    public List<String> getInfo() {
+        List<String> list = super.getInfo();
+        list.add(mPumpList.toString());
+        return list;
     }
 }

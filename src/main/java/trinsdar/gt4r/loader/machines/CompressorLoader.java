@@ -65,5 +65,6 @@ public class CompressorLoader {
         COMPRESSING.RB().ii(RecipeIngredient.of(Items.MELON_SLICE, 8)).io(new ItemStack(Plantball)).add(300, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(Items.SUGAR_CANE, 8)).io(new ItemStack(Plantball)).add(300, 2);
         COMPRESSING.RB().ii(DUST.getMaterialIngredient(Quartz, 1)).io(new ItemStack(Items.QUARTZ)).add(200, 2);
+        COMPRESSING.RB().ii(RecipeIngredient.of(Items.BLAZE_POWDER, 5)).io(new ItemStack(Items.BLAZE_ROD)).add(200, 2);
     }
 }
