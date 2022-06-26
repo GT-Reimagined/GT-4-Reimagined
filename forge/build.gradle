@@ -1,0 +1,107 @@
+archivesBaseName = rootProject.archive_base_name
+version = "${rootProject.minecraft_version}-${rootProject.mod_version}"
+
+architectury {
+    forge()
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+        resources {
+            include '**/**'
+            srcDirs += 'src/generated/resources'
+            exclude '.cache'
+            exclude 'Thumbs.db'
+        }
+    }
+
+}
+
+loom{
+    forge {
+        mixinConfigs = [
+                "gt4r.mixins.json"
+        ]
+        dataGen {
+            mod project.modid
+        }
+
+        launches {
+            data {
+                arg "--existing", file("src/main/resources").absolutePath
+            }
+        }
+    }
+}
+
+
+dependencies {
+    forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
+    implementation 'org.apache.commons:commons-collections4:4.4'
+    //GT
+    implementation(project(path: ":tesseract-forge", configuration: "namedElements"))
+    implementation(project(path: ":tesseract-common", configuration: "namedElements"))
+
+    //MIXIN
+    if (System.getProperty('idea.sync.active') != 'true') {
+        annotationProcessor 'org.spongepowered:mixin:0.8.5-SNAPSHOT:processor'
+    }
+
+    implementation(project(path: ":antimatter-forge", configuration: "namedElements")){
+        transitive = false;
+    }
+    implementation(project(path: ":antimatter-common", configuration: "namedElements")){
+        transitive = false;
+    }
+    //JEI
+    modCompileOnly("mezz.jei:jei-${jei_version}:api")
+    modRuntimeOnly("mezz.jei:jei-${jei_version}")
+
+
+    //runtimeOnly fg.deobf("curse.maven:world_stripper-250603:3142092")
+    //runtimeOnly fg.deobf("curse.maven:world_edit-225608:3172951")
+    //runtimeOnly fg.deobf("curse.maven:spartan_weaponry-278141:3164046")
+    //runtimeOnly fg.deobf("curse.maven:mmmm-225738:3279930")
+    //runtimeOnly fg.deobf("curse.maven:cloth_config_api-348521:3559634")
+    //compileOnly fg.deobf("curse.maven:rei-310111:3625895")
+    //runtimeOnly fg.deobf("curse.maven:rei-310111:3625895")
+    //runtimeOnly fg.deobf("curse.maven:bluepower-223099:3375771")
+    //runtimeOnly fg.deobf("curse.maven:spartan_weaponry-278141:3164046")
+    //runtimeOnly fg.deobf("curse.maven:iron_chests-228756:3543538")
+
+    /** KUBEJS STUFF **/
+   // modImplementation("curse.maven:rhino-416294:${rhino_file}")
+   // modImplementation("curse.maven:architecturyforge-419699:${architectury_file}")
+  //  modImplementation("curse.maven:kubejs-238086:${kubejs_file}")
+//    modImplementation("curse.maven:top-245211:${top_file}")
+}
+
+jar {
+    zip64 true
+    manifest {
+        attributes([
+                "MixinConfigs": "gt4r.mixins.json",
+                "Specification-Title": project.name,
+                "Specification-Vendor": "GT4 Reimagined",
+                "Specification-Version": project.version,
+                "Implementation-Title": project.name,
+                "Implementation-Version": project.version,
+                "Implementation-Vendor": "GT4 Reimagined",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}
+
+processResources {
+    exclude('gtuassets1.14')
+    exclude('assets/gt4r/textures/old_textures')
+
+    inputs.property "version", project.version
+
+    filesMatching("META-INF/mods.toml") {
+        expand "version": project.version
+    }
+}

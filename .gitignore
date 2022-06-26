@@ -22,18 +22,18 @@ eclipse
 run
 
 # generated
-src/generated/*
+forge/src/generated/*
 
 # Files from Forge MDK
 forge*changelog.txt
 *.db
 
-src/main/resources/assets/gt4r/textures/ic2-texture-reference.zip
+forge/src/main/resources/assets/gt4r/textures/ic2-texture-reference.zip
 
-src/main/resources/assets/gt4r/textures/ic2.zip
+forge/src/main/resources/assets/gt4r/textures/ic2.zip
 
-src/main/resources/assets/gt4r/textures/minecraft.zip
+forge/src/main/resources/assets/gt4r/textures/minecraft.zip
 
-src/main/resources/assets/gt4r/textures/old_textures/
+forge/src/main/resources/assets/gt4r/textures/old_textures/
 
 latest.zip

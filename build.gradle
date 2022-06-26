@@ -1,294 +1,133 @@
-buildscript {
-    repositories {
-        maven { url = 'https://maven.minecraftforge.net/' }
-        jcenter()
-        mavenCentral()
-        gradlePluginPortal()
-        maven {
-            name = 'sponge'
-            url = 'https://repo.spongepowered.org/maven'
+plugins {
+    id "maven-publish"
+    id "architectury-plugin" version "3.4-SNAPSHOT"
+    id "dev.architectury.loom" version "0.12.0-SNAPSHOT" apply(false)
+    id "com.github.johnrengelman.shadow" version "7.0.0" apply(false)
+}
+
+
+architectury {
+    minecraft = rootProject.minecraft_version
+}
+
+//Print out JVM information so that we know what version is running. Extreamly useful for people to know when helping you.
+println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
+
+def isCI = System.getenv("GITHUB_ACTION")
+def isRELEASE = System.getenv("GITHUB_RELEASE")
+
+subprojects {
+    apply plugin: "dev.architectury.loom"
+    java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+    loom {
+        silentMojangMappingsLicense()
+    }
+
+    dependencies {
+        minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
+        // The following line declares the mojmap mappings, you may use other mappings as well
+        mappings loom.layered() {
+            officialMojangMappings()
+            parchment("org.parchmentmc.data:parchment-${rootProject.minecraft_version}:${rootProject.mappings_version}@zip")
         }
+        // The following line declares the yarn mappings you may select this one as well.
+        // mappings "net.fabricmc:yarn:1.17.1+build.32:v2"
+    }
+
+    processResources {
+        exclude('gtuassets1.14')
+    }
+
+}
+
+allprojects {
+    apply plugin: "maven-publish"
+    apply plugin: "java"
+    apply plugin: "architectury-plugin"
+
+
+    group = rootProject.maven_group
+
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net' }
         maven {
             name = 'parchment'
             url = 'https://maven.parchmentmc.org'
         }
         maven { url 'https://dvs1.progwml6.com/files/maven' }
+        //Needed for intellij
         maven {
-            url "https://plugins.gradle.org/m2/"
+            name = 'sponge'
+            url = 'https://repo.spongepowered.org/repository/maven-public/'
         }
-    }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1+', changing: true
-        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
-        classpath 'org.parchmentmc:librarian:1.+'
-    }
-}
-
-repositories {
-    maven { url = 'https://libraries.minecraft.net/' }
-    mavenCentral()
-    maven { url = 'https://maven.minecraftforge.net/' }
-    maven { url 'https://dvs1.progwml6.com/files/maven' }
-    maven {
-        url "https://maven.tterrag.com/"
-    }
-    maven {
-        url = "https://maven.speiger.com/repository/main"
-    }
-    maven {
-        url = "https://www.cursemaven.com"
-        content {
-            includeGroup "curse.maven"
-        }
-    }
-    maven { url 'https://jitpack.io' }
-}
-apply plugin: 'net.minecraftforge.gradle'
-// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
-apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
-apply plugin: 'org.parchmentmc.librarian.forgegradle'
-
-version = "${mod_version}"
-group = 'trinsdar.gt4r' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'gt4r'
-
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
-//Print out JVM information so that we know what version is running. Extreamly useful for people to know when helping you.
-println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
-sourceSets {
-    main {
-        java {
-            srcDir 'src/main/java'
-        }
-        resources {
-            include '**/**'
-            srcDirs += 'src/generated/resources'
-            exclude '.cache'
-            exclude 'Thumbs.db'
-        }
-    }
-}
-
-def isVSTask() {
-    return gradle.startParameter.taskNames[0].equals("genVSCodeRuns")
-}
-
-def shouldCheckEnv() {
-    return findProject(':AntimatterAPI') != null || findProject(':TesseractAPI') != null
-}
-
-def getEnv() {
-    boolean vscode = isVSTask()
-    String resourcePath = vscode ? 'bin/main' : 'build/resources/main'
-    String codePath = vscode ? 'bin/main' : 'build/classes/java/main'
-    String s = "gt4r%%${project.file(resourcePath)}" + getPathSeparator() + "gt4r%%${project.file(codePath)}"
-    if (findProject(':AntimatterAPI') != null) {
-        s += getPathSeparator() + "antimatter%%${project(':AntimatterAPI').file(resourcePath)}" + getPathSeparator() + "antimatter%%${project(':AntimatterAPI').file(codePath)}"
-    }
-    if (findProject(':TesseractAPI') != null) {
-        s += getPathSeparator() + "tesseract%%${project(':TesseractAPI').file(resourcePath)}" + getPathSeparator() + "tesseract%%${project(':TesseractAPI').file(codePath)}"
-    }
-    return s
-}
-import org.apache.tools.ant.taskdefs.condition.Os
-import org.gradle.api.JavaVersion
-import org.gradle.api.tasks.compile.JavaCompile
-
-def getPathSeparator() {
-    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
-        return ";"
-    }
-    return ":"
-}
-
-minecraft {
-    // The mappings can be changed at any time, and must be in the following format.
-    // snapshot_YYYYMMDD   Snapshot are built nightly.
-    // stable_#            Stables are built at the discretion of the MCP team.
-    // Use non-default mappings at your own risk. they may not always work.
-    // Simply re-run your setup task after changing the mappings to update your workspace.
-    mappings channel: 'parchment', version: "${mappings_version}"
-    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
-
-    //accessTransformer = file('AntimatterAPI/src/main/resources/META-INF/accesstransformer.cfg')
-    //accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
-
-    // Default run configurations.
-    // These can be tweaked, removed, or duplicated as needed.
-    runs {
-        client {
-            workingDirectory project.file('run')
-
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'DEBUG'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'DEBUG'
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
-            arg "-mixin.config=gt4r.mixins.json"
-            if (findProject(':AntimatterAPI') != null) arg "-mixin.config=antimatter.mixins.json"
-            if (shouldCheckEnv()) {
-                environment 'MOD_CLASSES', getEnv()
-            }
-
-            mods {
-                gt4r {
-                    source sourceSets.main
-                }
+        maven {
+            // Shedaniel's maven (Architectury API)
+            url = "https://maven.architectury.dev"
+            content {
+                includeGroup "dev.architectury"
             }
         }
-
-        client2 {
-            parent(null, "client")
-            workingDirectory project.file('run/2')
-            args '--username', 'Dev2'
+        maven {
+            url = 'https://maven.blamejared.com'
+            name = 'BlameJared Maven'
         }
-
-        server {
-            workingDirectory project.file('run/server')
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'DEBUG'
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
-            //jvmArgs '-javaagent:/opt/JavaHot/hotswap-agent.jar -XX:TraceRedefineClasses=1'
-            //Comment this if you aren't developing against antimatter locally.
-
-            if (findProject(':AntimatterAPI') != null) arg "-mixin.config=antimatter.mixins.json"
-            arg "-mixin.config=gt4r.mixins.json"
-            if (shouldCheckEnv()) {
-                environment 'MOD_CLASSES', getEnv()
-            }
-
-            mods {
-                gt4r {
-                    source sourceSets.main
-                }
+        maven {
+            // saps.dev Maven (KubeJS and Rhino)
+            url = "https://maven.saps.dev/minecraft"
+            content {
+                includeGroup "dev.latvian.mods"
             }
         }
+        //GT and felt
+        maven { url 'https://jitpack.io' }
+    }
 
-        data {
-            workingDirectory project.file('run')
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'DEBUG'
-            //jvmArgs '-javaagent:/opt/JavaHot/hotswap-agent.jar -XX:TraceRedefineClasses=1'
-            //Comment this if you aren't developing against antimatter locally.
-            if (findProject(':AntimatterAPI') != null) arg "-mixin.config=antimatter.mixins.json"
+    java {
+        withSourcesJar()
+    }
 
-            if (shouldCheckEnv()) {
-                environment 'MOD_CLASSES', getEnv()
-            }
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
-            arg "-mixin.config=gt4r.mixins.json"
-            args '--mod', 'gt4r', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources')
+    tasks.withType(JavaCompile).configureEach {
+        it.options.encoding = 'UTF-8'
+    }
 
-            mods {
-                gt4r {
-                    source sourceSets.main
-                }
-            }
-        }
+    if (isCI) {
+        version = version + "-" + gitHash()
+        println("In CI mode")
     }
 }
 
-dependencies {
-    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+subprojects{
+    if (!project.path.contains("common")){
+        apply plugin: "com.github.johnrengelman.shadow"
 
-    implementation 'org.apache.commons:commons-collections4:4.4'
+        configurations {
+            common
+            shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
+            compileClasspath.extendsFrom common
+            runtimeClasspath.extendsFrom common
+            developmentForge.extendsFrom common
+        }
 
-    runtimeOnly fg.deobf("curse.maven:world_stripper-250603:3142092")
-    runtimeOnly fg.deobf("curse.maven:world_edit-225608:3172951")
-    runtimeOnly fg.deobf("curse.maven:spartan_weaponry-278141:3164046")
-    runtimeOnly fg.deobf("curse.maven:top-245211:${top_file}")
-    runtimeOnly fg.deobf("curse.maven:mmmm-225738:3279930")
-    runtimeOnly fg.deobf("curse.maven:rhino-416294:${rhino_file}")
-    runtimeOnly fg.deobf("curse.maven:architectury_forge-419699:${architectury_file}")
-    runtimeOnly fg.deobf("curse.maven:cloth_config_api-348521:3559634")
-    //compileOnly fg.deobf("curse.maven:rei-310111:3625895")
-    //runtimeOnly fg.deobf("curse.maven:rei-310111:3625895")
-    runtimeOnly fg.deobf("curse.maven:kubejs-238086:${kubejs_file}")
-    runtimeOnly fg.deobf("curse.maven:bluepower-223099:3375771")
-    runtimeOnly fg.deobf("curse.maven:spartan_weaponry-278141:3164046")
-    runtimeOnly fg.deobf("curse.maven:iron_chests-228756:3543538")
+        shadowJar {
+            configurations = [project.configurations.shadowCommon]
+            classifier "dev-shadow"
+        }
 
-//    if (findProject(':AntimatterAPI') != null) {
-    implementation project(path: ':AntimatterAPI')
-    //   } else {
-    //compileOnly sources jar.
-    //       runtimeOnly fg.deobf("com.github.GregTech-Intergalactical:AntimatterAPI:${antimatter_version}")
-    //       compileOnly ("com.github.GregTech-Intergalactical:AntimatterAPI:${antimatter_version}")
-    //   }
-    implementation fg.deobf("com.github.GregTech-Intergalactical:TesseractAPI:${tesseract_version}")
+        remapJar {
+            input.set shadowJar.archiveFile
+            dependsOn shadowJar
+            classifier null
+        }
 
-    //runtimeOnly fg.deobf("com.github.GregTech-Intergalactical.GregTech:build:${gregtech_version}")
-    //compileOnly ("com.github.GregTech-Intergalactical.GregTech:build:${gregtech_version}")
+        jar {
+            classifier "dev"
+        }
 
-    //implementation fg.deobf("com.github.GregTech-Intergalactical:AntimatterAPI:${antimatter_version}")
-    annotationProcessor 'org.spongepowered:mixin:0.8.4:processor'
-
-    //compile 'de.speiger:Primitive-Collections:0.4.0'
-
-    //runtimeOnly fg.deobf("com.github.Trinsdar:GT-Spartan:7634a8d6de")//3ad506467f
-
-    compileOnly fg.deobf("mezz.jei:jei-${jei_version}:api")
-    //runtimeOnly fg.deobf("mezz.jei:jei-${jei_version}")
-}
-
-
-// Example configuration to allow publishing using the maven-publish task
-// This is the preferred method to reobfuscate your jar file
-//jar.finalizedBy('reobfJar')
-// However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
-//publish.dependsOn('reobfJar')
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact(jar) {
-                builtBy jar
+        components.java {
+            withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
+                skip()
             }
         }
-    }
-    repositories {
-    }
-}
-
-apply plugin: 'org.spongepowered.mixin'
-
-mixin {
-    add sourceSets.main, "gt4r.refmap.json"
-}
-
-jar {
-    zip64 true
-    manifest {
-        attributes([
-                "MixinConfigs": "gt4r.mixins.json",
-                "Specification-Title": project.name,
-                "Specification-Vendor": "GT4 Reimagined",
-                "Specification-Version": project.version,
-                "Implementation-Title": project.name,
-                "Implementation-Version": project.version,
-                "Implementation-Vendor": "GT4 Reimagined",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ])
-    }
-}
-
-processResources {
-    exclude('gtuassets1.14')
-    exclude('assets/gt4r/textures/old_textures')
-
-    inputs.property "version", project.version
-
-    filesMatching("META-INF/mods.toml") {
-        expand "version": project.version
     }
 }
