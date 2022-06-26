@@ -1,0 +1,28 @@
+archivesBaseName = rootProject.antimatter_archive_base_name
+version = "${rootProject.minecraft_version}-${project.mod_version}"
+
+loom {
+    //accessWidenerPath = file("src/main/resources/gt4r.accesswidener")
+}
+
+
+dependencies{
+    modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
+    compileOnly("com.blamejared.crafttweaker:CraftTweaker-common-1.18.2:${rootProject.crafttweaker_version}")
+    modCompileOnly("dev.latvian.mods:kubejs-fabric:${rootProject.kubejs_version}")
+    implementation(project(path: ":tesseract-common", configuration: "namedElements"))
+    implementation(project(path: ":antimatter-common", configuration: "namedElements"))
+    modImplementation("com.github.FeltMC.Fabricated-Forge-API:fabricated-forge-caps:${rootProject.fabricated_forge_hash}")
+    modImplementation("com.github.FeltMC.Fabricated-Forge-API:fabricated-forge-recipe-api:${rootProject.fabricated_forge_hash}")
+    modImplementation("com.github.FeltMC.Fabricated-Forge-API:fabricated-forge-modeldata:${rootProject.fabricated_forge_hash}")
+    modImplementation("com.github.FeltMC.Fabricated-Forge-API:fabricated-forge-datagen:${rootProject.fabricated_forge_hash}")
+    compileOnly("com.electronwill.night-config:toml:${rootProject.nightconfig_version}")
+    compileOnly("com.electronwill.night-config:core:${rootProject.nightconfig_version}")
+    implementation("com.github.Trinsdar:forgeconfigapiport-fabric:abc19f9a99"){
+        transitive = false
+    }
+}
+
+architectury {
+    common("forge", "fabric")
+}

@@ -121,9 +121,9 @@ public class ForgeEventBusEvents {
     }
 
     public void playerJoin(PlayerEvent.PlayerLoggedInEvent e){
-        double base = e.getPlayer().getAttribute(Attributes.ATTACK_REACH.get()).getBaseValue();
+        double base = e.getPlayer().getAttribute(Attributes.ATTACK_REACH).getBaseValue();
         if (base == 4.5){
-            e.getPlayer().getAttribute(Attributes.ATTACK_REACH.get()).setBaseValue(5.0);
+            e.getPlayer().getAttribute(Attributes.ATTACK_REACH).setBaseValue(5.0);
         }
     }
 }

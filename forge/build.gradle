@@ -49,6 +49,8 @@ dependencies {
     if (System.getProperty('idea.sync.active') != 'true') {
         annotationProcessor 'org.spongepowered:mixin:0.8.5-SNAPSHOT:processor'
     }
+    common(project(path: ":common", configuration: "namedElements")) { transitive false }
+    shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive false }
 
     implementation(project(path: ":antimatter-forge", configuration: "namedElements")){
         transitive = false;

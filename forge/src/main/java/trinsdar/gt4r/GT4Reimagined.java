@@ -6,6 +6,7 @@ import muramasa.antimatter.AntimatterMod;
 import muramasa.antimatter.datagen.providers.AntimatterBlockStateProvider;
 import muramasa.antimatter.proxy.IProxyHandler;
 import muramasa.antimatter.registration.RegistrationEvent;
+import muramasa.antimatter.registration.Side;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.DistExecutor;
@@ -67,8 +68,6 @@ public class GT4Reimagined extends AntimatterMod {
         AntimatterDynamics.clientProvider(Ref.ID, g -> new AntimatterBlockStateProvider(Ref.ID, Ref.NAME + " BlockStates", g));
         AntimatterDynamics.clientProvider(Ref.ID, g -> new GT4RItemModelProvider(Ref.ID, Ref.NAME + " Item Models", g));
         AntimatterDynamics.clientProvider(Ref.ID, GT4RLocalizations.en_US::new);
-
-        Attributes.init();
         MinecraftForge.EVENT_BUS.register(AntimatterEvents.class);
     }
 
@@ -87,11 +86,12 @@ public class GT4Reimagined extends AntimatterMod {
     }
 
     @Override
-    public void onRegistrationEvent(RegistrationEvent event, Dist side) {
+    public void onRegistrationEvent(RegistrationEvent event, Side side) {
         switch (event) {
             case DATA_INIT:
                 ToolTypes.init();
                 Materials.init();
+                Attributes.init();
                 RecipeMaps.init();
                 MenuHandlers.init();
                 GT4RData.init(side);
@@ -101,7 +101,7 @@ public class GT4Reimagined extends AntimatterMod {
                 TileEntityTypes.init();
                 Guis.init(side);
                 Models.init();
-                if (side == Dist.CLIENT){
+                if (side == Side.CLIENT){
                     BakedModels.init();
                 }
                 break;
