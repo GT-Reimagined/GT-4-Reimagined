@@ -1,6 +1,7 @@
 package trinsdar.gt4r.loader.machines;
 
 import com.google.common.collect.ImmutableSet;
+import me.alphamode.forgetags.Tags;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.pipe.PipeSize;
 import muramasa.antimatter.pipe.types.Cable;
@@ -12,13 +13,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.tags.Tag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.common.Tags;
 
 import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.machine.Tier.LV;
 import static muramasa.antimatter.machine.Tier.ULV;
 import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
-import static muramasa.antimatter.util.TagUtils.getForgeItemTag;
+import static muramasa.antimatter.util.TagUtils.getForgelikeItemTag;
 import static trinsdar.gt4r.data.CustomTags.*;
 import static trinsdar.gt4r.data.GT4RData.*;
 import static trinsdar.gt4r.data.Machines.PUMP;
@@ -94,13 +94,13 @@ public class AssemblyLoader {
         ASSEMBLING.RB().ii(of(CompressedCoalBall, 8), of(BLOCK.getMaterialTag(Iron), 1)).io(new ItemStack(CoalChunk)).add(400, 4);
         ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Carbon, 4), of(MACHINE_HULLS_BASIC, 1), of(BatteryRE, 1).setIgnoreNbt()).io(new ItemStack(WINDMILL.getItem(ULV), 1)).add(6400, 8);
         //missing
-        ASSEMBLING.RB().ii(of(AdvancedAlloy, 1), of(getForgeItemTag("stone"), 8)).io(new ItemStack(REINFORCED_STONE, 8)).add(400, 4);
+        ASSEMBLING.RB().ii(of(AdvancedAlloy, 1), of(getForgelikeItemTag("stone"), 8)).io(new ItemStack(REINFORCED_STONE, 8)).add(400, 4);
         ASSEMBLING.RB().ii(of(PLATE.getMaterialTag(Wood), 8), DUST.getMaterialIngredient(Redstone, 1)).io(new ItemStack(Items.NOTE_BLOCK)).add(800, 1);
         ASSEMBLING.RB().ii(of(PLATE.getMaterialTag(Wood), 8), GEM.getMaterialIngredient(Diamond, 1)).io(new ItemStack(Items.JUKEBOX)).add(1600, 1);
         ASSEMBLING.RB().ii(of(AdvancedAlloy, 2), of(Tags.Items.GLASS, 7)).io(new ItemStack(REINFORCED_GLASS, 7)).add(400, 4);
         ASSEMBLING.RB().ii(of(getTag("minecraft", "planks"), 8), DUST.getMaterialIngredient(Redstone, 1)).io(new ItemStack(Items.NOTE_BLOCK)).add(800, 1);
         ASSEMBLING.RB().ii(of(getTag("minecraft", "planks"), 8), GEM.getMaterialIngredient(Diamond, 1)).io(new ItemStack(Items.JUKEBOX)).add(1600, 1);
-        ASSEMBLING.RB().ii(of(CompressedCoalBall, 8), of(getForgeItemTag("obsidian"), 1)).io(new ItemStack(CoalChunk)).add(400, 4);
+        ASSEMBLING.RB().ii(of(CompressedCoalBall, 8), of(getForgelikeItemTag("obsidian"), 1)).io(new ItemStack(CoalChunk)).add(400, 4);
         ASSEMBLING.RB().ii(of(CABLE_TIN.getBlockItem(PipeSize.VTINY), 1), PLATE.getMaterialIngredient(BatteryAlloy, 1)).io(new ItemStack(BatteryHullSmall)).add(800, 1);
         ASSEMBLING.RB().ii(of(CABLE_COPPER.getBlockItem(PipeSize.VTINY), 2), PLATE.getMaterialIngredient(BatteryAlloy, 3)).io(new ItemStack(BatteryHullMedium)).add(1600, 2);
         ASSEMBLING.RB().ii(of(CABLE_GOLD.getBlockItem(PipeSize.VTINY), 4), PLATE.getMaterialIngredient(BatteryAlloy, 9)).io(new ItemStack(BatteryHullLarge)).add(6400, 4);

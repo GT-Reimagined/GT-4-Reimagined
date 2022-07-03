@@ -2,33 +2,22 @@ package trinsdar.gt4r.loader.crafting;
 
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
-import muramasa.antimatter.material.Material;
-import muramasa.antimatter.pipe.PipeSize;
+import muramasa.antimatter.util.AntimatterPlatformUtils;
 import muramasa.antimatter.util.TagUtils;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.tags.Tag;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.registries.ForgeRegistries;
 import trinsdar.gt4r.GT4RConfig;
 import trinsdar.gt4r.Ref;
-import trinsdar.gt4r.data.GT4RData;
 
 import java.util.function.Consumer;
 
 import static com.google.common.collect.ImmutableMap.of;
-import static muramasa.antimatter.Data.*;
-import static muramasa.antimatter.Data.DUST;
 import static muramasa.antimatter.Data.SAW;
-import static muramasa.antimatter.Data.Stone;
-import static muramasa.antimatter.util.TagUtils.getForgeItemTag;
-import static trinsdar.gt4r.data.Materials.*;
-import static trinsdar.gt4r.loader.crafting.CraftingHelper.criterion;
 
 public class WoodCrafting {
 
@@ -51,21 +40,21 @@ public class WoodCrafting {
         if (AntimatterAPI.isModLoaded(Ref.MOD_TERRESTRIA)){
             String[] woodTypes = {"cypress", "hemlock", "japanese_maple", "rainbow_eucalyptus", "redwood", "rubber", "sakura", "willow", "yucca_palm"};
             for (String woodType : woodTypes) {
-                addWoodRecipe(consumer, provider, TagUtils.getItemTag(new ResourceLocation(Ref.MOD_TERRESTRIA, woodType + "_logs")), ForgeRegistries.ITEMS.getValue(new ResourceLocation(Ref.MOD_TERRESTRIA, woodType + "_planks")));
+                addWoodRecipe(consumer, provider, TagUtils.getItemTag(new ResourceLocation(Ref.MOD_TERRESTRIA, woodType + "_logs")), AntimatterPlatformUtils.getItemFromID(new ResourceLocation(Ref.MOD_TERRESTRIA, woodType + "_planks")));
             }
 
         }
         if (AntimatterAPI.isModLoaded(Ref.MOD_CINDERSCAPES)){
             String[] woodTypes = {"scorched", "umbral"};
             for (String woodType : woodTypes) {
-                addWoodRecipe(consumer, provider, TagUtils.getItemTag(new ResourceLocation(Ref.MOD_CINDERSCAPES, woodType + "_stems")), ForgeRegistries.ITEMS.getValue(new ResourceLocation(Ref.MOD_CINDERSCAPES, woodType + "_planks")));
+                addWoodRecipe(consumer, provider, TagUtils.getItemTag(new ResourceLocation(Ref.MOD_CINDERSCAPES, woodType + "_stems")), AntimatterPlatformUtils.getItemFromID(new ResourceLocation(Ref.MOD_CINDERSCAPES, woodType + "_planks")));
             }
 
         }
         String[] stones = {"stone", "smooth_stone", "sandstone", "cut_sandstone", "cobblestone", "red_sandstone", "cut_red_sandstone", "prismarine", "dark_prismarine", "polished_granite", "smooth_red_sandstone", "polished_diorite", "mossy_cobblestone", "smooth_sandstone", "smooth_quartz", "granite", "andesite", "polished_andesite", "diorite", "blackstone", "polished_blackstone", "purpur", "quartz", "brick", "stone_brick", "nether_brick", "prismarine_brick", "mossy_stone_brick", "end_stone_brick", "red_nether_brick", "polished_blackstone_brick"};
         for (String stone : stones) {
-            Item full = ForgeRegistries.ITEMS.getValue(new ResourceLocation(stone + (stone.equals("purpur") || stone.equals("quartz") ? "_block" : stone.contains("brick") ? "s" : "")));
-            Item slab = ForgeRegistries.ITEMS.getValue(new ResourceLocation(stone + "_slab"));
+            Item full = AntimatterPlatformUtils.getItemFromID(new ResourceLocation(stone + (stone.equals("purpur") || stone.equals("quartz") ? "_block" : stone.contains("brick") ? "s" : "")));
+            Item slab = AntimatterPlatformUtils.getItemFromID(new ResourceLocation(stone + "_slab"));
             String[] pattern = stone.equals("purpur") || stone.equals("quartz") || stone.equals("sandstone") || stone.equals("red_sandstone") || stone.equals("stone_brick") || stone.equals("nether_brick") || stone.equals("polished_blackstone") ? new String[]{"SS"} : new String[]{"S", "S"};
             provider.addItemRecipe(consumer, Ref.ID, stone + "_slab_to_" + stone, "slabs", "has_stone", provider.hasSafeItem(slab), full, of('S', slab), pattern);
         }
@@ -73,14 +62,14 @@ public class WoodCrafting {
         for (String s : wood) {
             ResourceLocation name = new ResourceLocation(s + "_planks");
             ResourceLocation slab = new ResourceLocation(s + "_slab");
-            provider.addItemRecipe(consumer, Ref.ID, slab.getPath() + "_to_" + name.getPath(), "slabs", "has_stone", provider.hasSafeItem(ForgeRegistries.ITEMS.getValue(slab)), ForgeRegistries.ITEMS.getValue(name), of('S', ForgeRegistries.ITEMS.getValue(slab)), "S", "S");
+            provider.addItemRecipe(consumer, Ref.ID, slab.getPath() + "_to_" + name.getPath(), "slabs", "has_stone", provider.hasSafeItem(AntimatterPlatformUtils.getItemFromID(slab)), AntimatterPlatformUtils.getItemFromID(name), of('S', AntimatterPlatformUtils.getItemFromID(slab)), "S", "S");
         }
         if (AntimatterAPI.isModLoaded(Ref.MOD_TERRESTRIA)){
             String[] woodTypes = {"cypress", "hemlock", "japanese_maple", "rainbow_eucalyptus", "redwood", "rubber", "sakura", "willow", "yucca_palm"};
             for (String woodType : woodTypes) {
                 ResourceLocation name = new ResourceLocation(Ref.MOD_TERRESTRIA,woodType + "_planks");
                 ResourceLocation slab = new ResourceLocation(Ref.MOD_TERRESTRIA,woodType + "_slab");
-                provider.addItemRecipe(consumer, Ref.ID, slab.getPath() + "_to_" + name.getPath(), "slabs", "has_stone", provider.hasSafeItem(ForgeRegistries.ITEMS.getValue(slab)), ForgeRegistries.ITEMS.getValue(name), of('S', ForgeRegistries.ITEMS.getValue(slab)), "S", "S");
+                provider.addItemRecipe(consumer, Ref.ID, slab.getPath() + "_to_" + name.getPath(), "slabs", "has_stone", provider.hasSafeItem(AntimatterPlatformUtils.getItemFromID(slab)), AntimatterPlatformUtils.getItemFromID(name), of('S', AntimatterPlatformUtils.getItemFromID(slab)), "S", "S");
             }
 
         }
@@ -89,7 +78,7 @@ public class WoodCrafting {
             for (String woodType : woodTypes) {
                 ResourceLocation name = new ResourceLocation(Ref.MOD_CINDERSCAPES,woodType + "_planks");
                 ResourceLocation slab = new ResourceLocation(Ref.MOD_CINDERSCAPES,woodType + "_slab");
-                provider.addItemRecipe(consumer, Ref.ID, slab.getPath() + "_to_" + name.getPath(), "slabs", "has_stone", provider.hasSafeItem(ForgeRegistries.ITEMS.getValue(slab)), ForgeRegistries.ITEMS.getValue(name), of('S', ForgeRegistries.ITEMS.getValue(slab)), "S", "S");
+                provider.addItemRecipe(consumer, Ref.ID, slab.getPath() + "_to_" + name.getPath(), "slabs", "has_stone", provider.hasSafeItem(AntimatterPlatformUtils.getItemFromID(slab)), AntimatterPlatformUtils.getItemFromID(name), of('S', AntimatterPlatformUtils.getItemFromID(slab)), "S", "S");
             }
         }
     }

@@ -7,8 +7,12 @@ import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.tile.pipe.TileEntityPipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -16,7 +20,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
@@ -77,7 +80,8 @@ public class CoverDrain extends BaseCover {
                 int filled = f.fill(toInsert, SIMULATE);
                 if (filled > 0) {
                     f.fill(new FluidStack(toInsert.getFluid(), filled), EXECUTE);
-                    if (fluid != Fluids.WATER || (!BiomeDictionary.hasType(world.getBiome(offset).unwrapKey().get(), BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(world.getBiome(offset).unwrapKey().get(), BiomeDictionary.Type.RIVER))){
+                    Holder<Biome> biome = world.getBiome(offset);
+                    if (fluid != Fluids.WATER || (!biome.is(BiomeTags.IS_DEEP_OCEAN) && !biome.is(BiomeTags.IS_OCEAN) && !biome.is(BiomeTags.IS_RIVER))){
                         BlockState newState = Blocks.AIR.defaultBlockState();
                         if (fluid == Fluids.WATER && blockState.getBlock() != Blocks.WATER && blockState.hasProperty(BlockStateProperties.WATERLOGGED) && blockState.getValue(BlockStateProperties.WATERLOGGED)){
                             newState = blockState.setValue(BlockStateProperties.WATERLOGGED, false);

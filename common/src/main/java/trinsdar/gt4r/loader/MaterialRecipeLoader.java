@@ -8,6 +8,7 @@ import muramasa.antimatter.material.MaterialTags;
 import muramasa.antimatter.ore.CobbleStoneType;
 import muramasa.antimatter.ore.StoneType;
 import muramasa.antimatter.recipe.ingredient.PropertyIngredient;
+import muramasa.antimatter.util.AntimatterPlatformUtils;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -19,7 +20,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.tags.Tag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.registries.ForgeRegistries;
 import trinsdar.gt4r.GT4RConfig;
 import trinsdar.gt4r.Ref;
 
@@ -46,7 +46,7 @@ public class MaterialRecipeLoader {
         final CriterionTriggerInstance in = provider.hasSafeItem(WRENCH.getTag());
         int craftingMultiplier = GT4RConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 1 : 2;
         if (AntimatterAPI.isModLoaded(Ref.MOD_BLUEPOWER)){
-            provider.shapeless(output, "amethyst_gem_convert", "gems", "has_gem", provider.hasSafeItem(GEM.getMaterialTag(Amethyst)), GEM.get(Amethyst, 1), ForgeRegistries.ITEMS.getValue(new ResourceLocation(Ref.MOD_BLUEPOWER, "amethyst_gem")));
+            provider.shapeless(output, "amethyst_gem_convert", "gems", "has_gem", provider.hasSafeItem(GEM.getMaterialTag(Amethyst)), GEM.get(Amethyst, 1), AntimatterPlatformUtils.getItemFromID(new ResourceLocation(Ref.MOD_BLUEPOWER, "amethyst_gem")));
         }
         HULL.all().forEach(m -> {
             provider.addItemRecipe(output, Ref.ID, m.getId() + "_hull", "hulls", "has_wrench", provider.hasSafeItem(WRENCH.getTag()), HULL.get(m), ImmutableMap.of('P', PLATE.getMaterialTag(m), 'W', WRENCH.getTag()), "PPP", "PWP", "PPP");

@@ -15,7 +15,6 @@ import java.util.Random;
 public class RubberTreeFeature extends TreeFeature {
     public RubberTreeFeature() {
         super(TreeConfiguration.CODEC);
-        this.setRegistryName(new ResourceLocation(Ref.ID, "rubber_tree"));
     }
 
     public void init() {

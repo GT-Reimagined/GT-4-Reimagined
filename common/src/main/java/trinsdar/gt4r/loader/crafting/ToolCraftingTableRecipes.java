@@ -18,7 +18,7 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import static muramasa.antimatter.Data.*;
-import static muramasa.antimatter.material.MaterialTag.RUBBERTOOLS;
+import static muramasa.antimatter.material.MaterialTags.RUBBERTOOLS;
 import static muramasa.antimatter.pipe.PipeSize.*;
 import static trinsdar.gt4r.data.Materials.Rubber;
 
@@ -74,7 +74,7 @@ public class ToolCraftingTableRecipes {
         DUST.all().stream().filter(p -> p.has(GEM) || p.has(INGOT)).forEach(p -> {
             String gemIngot = p.has(GEM) ? "gems" : "ingots";
             provider.shapeless(output, "dust_" + p.getId() + "_from_id", "mortar_uses", "has_mortar", provider.hasSafeItem(MORTAR.getTag()),
-                    DUST.get(p, 1), MORTAR.getTag(), TagUtils.getForgeItemTag(gemIngot+ "/" + p.getId()));
+                    DUST.get(p, 1), MORTAR.getTag(), TagUtils.getForgelikeItemTag(gemIngot+ "/" + p.getId()));
         });
     }
 

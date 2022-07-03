@@ -5,7 +5,7 @@ import muramasa.antimatter.gui.GuiInstance;
 import muramasa.antimatter.gui.IGuiElement;
 import muramasa.antimatter.gui.Widget;
 import muramasa.antimatter.gui.widget.WidgetSupplier;
-import muramasa.antimatter.integration.jei.AntimatterJEIPlugin;
+import muramasa.antimatter.integration.jeirei.AntimatterJEIREIPlugin;
 import muramasa.antimatter.machine.MachineFlag;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -40,7 +40,7 @@ public class FusionButtonWidget extends Widget {
     @Override
     public void onClick(double mouseX, double mouseY, int button) {
         super.onClick(mouseX, mouseY, button);
-        AntimatterJEIPlugin.showCategory(getTile().getMachineType());
+        AntimatterJEIREIPlugin.showCategory(getTile().getMachineType());
     }
 
     public static WidgetSupplier build() {

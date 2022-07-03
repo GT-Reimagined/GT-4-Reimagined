@@ -2,6 +2,8 @@ package trinsdar.gt4r.tile.single;
 
 import muramasa.antimatter.capability.item.ITrackedHandler;
 import muramasa.antimatter.gui.SlotType;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -23,15 +25,14 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.LidBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import trinsdar.gt4r.block.BlockMaterialChest;
 import trinsdar.gt4r.gui.ContainerCabinet;
 import trinsdar.gt4r.machine.MaterialMachine;
 
 import java.util.List;
 
-@OnlyIn(value = Dist.CLIENT, _interface = LidBlockEntity.class)
+//TODO needed?
+//@Environment(value = EnvType.CLIENT, _interface = LidBlockEntity.class)
 public class TileEntityChest extends TileEntityCabinet implements LidBlockEntity, Container {
     protected float lidAngle;
     protected float prevLidAngle;
@@ -157,7 +158,7 @@ public class TileEntityChest extends TileEntityCabinet implements LidBlockEntity
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @Environment(EnvType.CLIENT)
     public float getOpenNess(float partialTicks) {
         return Mth.lerp(partialTicks, this.prevLidAngle, this.lidAngle);
     }

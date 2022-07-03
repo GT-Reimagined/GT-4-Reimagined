@@ -5,6 +5,7 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import muramasa.antimatter.mixin.BiomeAccessor;
+import muramasa.antimatter.worldgen.AntimatterWorldGenerator;
 import muramasa.antimatter.worldgen.object.WorldGenBase;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -13,6 +14,9 @@ import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeGenerationSettings;
+import net.minecraft.world.level.biome.BiomeSpecialEffects;
+import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -29,7 +33,6 @@ import net.minecraft.world.level.levelgen.placement.PlacementContext;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
 import net.minecraft.world.level.levelgen.placement.SurfaceWaterDepthFilter;
-import net.minecraftforge.event.world.BiomeLoadingEvent;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.GT4RData;
 
@@ -101,22 +104,22 @@ public class RubberTreeWorldGen  extends WorldGenBase<RubberTreeWorldGen> {
     }
 
 
-    public static void onEvent(BiomeLoadingEvent builder){
-        Biome.BiomeCategory biomeCategory = builder.getCategory();
-        if (!getValidBiomesStatic().test(biomeCategory)) return;
+    public static void onEvent(ResourceLocation name, Biome.ClimateSettings climate, Biome.BiomeCategory category, BiomeSpecialEffects effects, BiomeGenerationSettings.Builder gen, MobSpawnSettings.Builder spawns){
+
+        if (!getValidBiomesStatic().test(category)) return;
         float p = 0.15F;
-        if (builder.getClimate().temperature > 0.8f) {
+        if (climate.temperature > 0.8f) {
             p = 0.04F;
-            if (builder.getClimate().precipitation == Biome.Precipitation.RAIN)
+            if (climate.precipitation == Biome.Precipitation.RAIN)
                 p += 0.04F;
         }
         float finalp = p;
 
-        builder.getGeneration().addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,  getTreeConfig(biomeCategory));
+        gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,  getTreeConfig(category));
         if (RNG.nextInt(4) == 0){
-            builder.getGeneration().addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,  getTreeConfig(biomeCategory));
+            gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,  getTreeConfig(category));
             if (RNG.nextInt(6) == 0){
-                builder.getGeneration().addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,  getTreeConfig(biomeCategory));
+                gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,  getTreeConfig(category));
             }
         }
     }

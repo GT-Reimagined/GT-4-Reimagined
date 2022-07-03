@@ -1,9 +1,9 @@
 package trinsdar.gt4r.loader.crafting;
 
+import me.alphamode.forgetags.Tags;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.Tags;
 import trinsdar.gt4r.Ref;
 
 import java.util.function.Consumer;

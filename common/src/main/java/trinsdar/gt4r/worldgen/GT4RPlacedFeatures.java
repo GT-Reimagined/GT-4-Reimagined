@@ -29,7 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static muramasa.antimatter.Data.*;
-import static net.minecraftforge.common.BiomeDictionary.Type.*;
 import static trinsdar.gt4r.data.Materials.*;
 
 public class GT4RPlacedFeatures {

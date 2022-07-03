@@ -19,6 +19,6 @@ public class SiftingLoader {
         // for when ic2 comes along to 1.16
         //SIFTING.RB().ii(of(CRUSHED_PURIFIED.getMaterialTag(Iridium), 1)).io(new ItemStack(Items.Iridium_ore, 1), new ItemStack(Items.Iridium_ore, 1), new ItemStack(Items.Iridium_ore, 1), new ItemStack(Items.Iridium_ore, 1), new ItemStack(Items.Iridium_ore, 1), DUST.get(Iridium, 1)).chances(1, 4, 15, 20, 40, 50).add(800, 16);
         SIFTING.RB().ii(of(CRUSHED_PURIFIED.getMaterialTag(Lapis), 1)).io(new ItemStack(Items.LAPIS_LAZULI, 1), new ItemStack(Items.LAPIS_LAZULI, 1), new ItemStack(Items.LAPIS_LAZULI, 1), new ItemStack(Items.LAPIS_LAZULI, 1), new ItemStack(Items.LAPIS_LAZULI, 1), DUST.get(Lapis, 1)).chances(1, 4, 15, 20, 40, 50).add(800, 16);
-        SIFTING.RB().ii(of(TagUtils.getForgeItemTag("gravel"), 1)).io(new ItemStack(Items.FLINT, 1)).add(800, 16);
+        SIFTING.RB().ii(of(TagUtils.getForgelikeItemTag("gravel"), 1)).io(new ItemStack(Items.FLINT, 1)).add(800, 16);
     }
 }

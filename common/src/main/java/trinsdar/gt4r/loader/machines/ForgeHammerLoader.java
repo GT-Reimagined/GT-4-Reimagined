@@ -1,5 +1,6 @@
 package trinsdar.gt4r.loader.machines;
 
+import me.alphamode.forgetags.Tags;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.ore.CobbleStoneType;
 import muramasa.antimatter.ore.StoneType;
@@ -8,12 +9,13 @@ import muramasa.antimatter.util.TagUtils;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.common.Tags;
 import trinsdar.gt4r.GT4RConfig;
 import trinsdar.gt4r.Ref;
 
 import static muramasa.antimatter.Data.*;
-import static muramasa.antimatter.material.MaterialTag.RUBBERTOOLS;
+import static muramasa.antimatter.material.MaterialTags.MACERATE_INTO;
+import static muramasa.antimatter.material.MaterialTags.ORE_MULTI;
+import static muramasa.antimatter.material.MaterialTags.RUBBERTOOLS;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.HAMMERING;
 
@@ -22,17 +24,17 @@ public class ForgeHammerLoader {
         CRUSHED.all().forEach(m -> {
             if (!m.has(ORE) && m != Gold && m != Iron && m != Diamond && m != Emerald && m != Lapis && m != Redstone) return;
             int multiplier = 1;
-            RecipeIngredient ore = RecipeIngredient.of(TagUtils.getForgeItemTag("sandless_ores/" + m.getId()),1), crushed = CRUSHED.getIngredient(m, 1);
+            RecipeIngredient ore = RecipeIngredient.of(TagUtils.getForgelikeItemTag("sandless_ores/" + m.getId()),1), crushed = CRUSHED.getIngredient(m, 1);
             ItemStack crushedStack = CRUSHED.get(m,1);
 
-            HAMMERING.RB().ii(ore).io(Utils.ca(m.getOreMulti() * multiplier, crushedStack)).add(16, 10);
-            HAMMERING.RB().ii(crushed).io(DUST_IMPURE.get(m.getMacerateInto(), 1)).add(16, 10);
-            HAMMERING.RB().ii(RecipeIngredient.of(CRUSHED_PURIFIED.get(m,1))).io(DUST_PURE.get(m.getMacerateInto(), 1)).add(16, 10);
+            HAMMERING.RB().ii(ore).io(Utils.ca(ORE_MULTI.getInt(m) * multiplier, crushedStack)).add(16, 10);
+            HAMMERING.RB().ii(crushed).io(DUST_IMPURE.get(MACERATE_INTO.getMapping(m), 1)).add(16, 10);
+            HAMMERING.RB().ii(RecipeIngredient.of(CRUSHED_PURIFIED.get(m,1))).io(DUST_PURE.get(MACERATE_INTO.getMapping(m), 1)).add(16, 10);
             if (m.has(CRUSHED_CENTRIFUGED)) {
-                HAMMERING.RB().ii(RecipeIngredient.of(CRUSHED_CENTRIFUGED.get(m,1))).io(DUST.get(m.getMacerateInto(), 1)).add(16, 10);
+                HAMMERING.RB().ii(RecipeIngredient.of(CRUSHED_CENTRIFUGED.get(m,1))).io(DUST.get(MACERATE_INTO.getMapping(m), 1)).add(16, 10);
             }
             if (m.has(RAW_ORE)){
-                HAMMERING.RB().ii(RecipeIngredient.of(RAW_ORE.getMaterialTag(m), 1)).io(Utils.ca((m.getOreMulti() * multiplier), crushedStack)).add(16, 10);
+                HAMMERING.RB().ii(RecipeIngredient.of(RAW_ORE.getMaterialTag(m), 1)).io(Utils.ca((ORE_MULTI.getInt(m) * multiplier), crushedStack)).add(16, 10);
             }
         });
         PLATE.all().stream().filter(m -> m.has(INGOT) && !m.has(RUBBERTOOLS)).forEach(m -> {

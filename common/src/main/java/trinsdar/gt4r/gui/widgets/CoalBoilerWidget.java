@@ -7,9 +7,10 @@ import muramasa.antimatter.gui.IGuiElement;
 import muramasa.antimatter.gui.Widget;
 import muramasa.antimatter.gui.container.ContainerMachine;
 import muramasa.antimatter.gui.widget.WidgetSupplier;
+import muramasa.antimatter.mixin.client.AbstractContainerAccessor;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.network.chat.TextComponent;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import trinsdar.gt4r.tile.single.TileEntityCoalBoiler;
 
 import javax.annotation.Nonnull;
@@ -47,7 +48,7 @@ public class CoalBoilerWidget extends Widget {
                 return;
             }
             int y = (realY() + 54) - lvl;
-            drawTexture(stack, gui.handler.getGuiTexture(), realX() + 13, y, gui.screen.getXSize() + 28, 54 - lvl, 10, lvl);
+            drawTexture(stack, gui.handler.getGuiTexture(), realX() + 13, y, ((AbstractContainerAccessor)gui.screen).getImageWidth() + 28, 54 - lvl, 10, lvl);
 
         }
         if (steam >= 1) {
@@ -60,7 +61,7 @@ public class CoalBoilerWidget extends Widget {
                 return;
             }
             int y = (realY() + 54) - lvl;
-            drawTexture(stack, gui.handler.getGuiTexture(), realX(), y, gui.screen.getXSize() + 18, 54 - lvl, 10, lvl);
+            drawTexture(stack, gui.handler.getGuiTexture(), realX(), y, ((AbstractContainerAccessor)gui.screen).getImageWidth() + 18, 54 - lvl, 10, lvl);
         }
         if (heat >= 1) {
             float per = (float) heat / maxHeat;
@@ -72,7 +73,7 @@ public class CoalBoilerWidget extends Widget {
                 return;
             }
             int y = (gui.screen.getGuiTop() + 25 + 54) - lvl;
-            drawTexture(stack, gui.handler.getGuiTexture(), realX() + 26, y, gui.screen.getXSize() + 38, 54 - lvl, 10, lvl);
+            drawTexture(stack, gui.handler.getGuiTexture(), realX() + 26, y, ((AbstractContainerAccessor)gui.screen).getImageWidth() + 38, 54 - lvl, 10, lvl);
         }
     }
 
@@ -87,7 +88,7 @@ public class CoalBoilerWidget extends Widget {
         renderTooltip(stack,"Heat: " + heat + "K out of " + maxHeat, mouseX, mouseY, 26, 0, 10, 54);
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @Environment(EnvType.CLIENT)
     protected void renderTooltip(PoseStack matrixStack, String text, double mouseX, double mouseY, int x, int y, int w, int h) {
         if (isInside(x, y, w, h, mouseX, mouseY)){
             renderTooltip(matrixStack, new TextComponent(text), mouseX, mouseY);

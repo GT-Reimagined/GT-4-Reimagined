@@ -1,12 +1,13 @@
 package trinsdar.gt4r.loader.machines;
 
+import me.alphamode.forgetags.Tags;
 import muramasa.antimatter.material.Material;
+import muramasa.antimatter.material.MaterialTags;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.tags.ItemTags;
-import net.minecraftforge.common.Tags;
 import trinsdar.gt4r.data.GT4RData;
 
 import static muramasa.antimatter.Data.*;
@@ -60,6 +61,6 @@ public class FluidExtractorLoader {
         FLUID_EXTRACTING.RB()
                 .ii(RecipeIngredient.of(i,1))
                 .fo(m.getLiquid(amount))
-                .add((long)(m.getMass()*((float)amount/144F)), 64, m.getMeltingPoint());
+                .add((long)(m.getMass()*((float)amount/144F)), 64, MaterialTags.MELTING_POINT.getInt(m));
     }
 }

@@ -2,13 +2,9 @@ package trinsdar.gt4r;
 
 import muramasa.antimatter.Ref;
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.config.ModConfigEvent;
 import org.apache.commons.lang3.tuple.Pair;
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class GT4RConfig {
 
     public static final Data DATA = new Data();
@@ -27,10 +23,10 @@ public class GT4RConfig {
 
     }
 
-    @SubscribeEvent
-    public static void onModConfigEvent(final ModConfigEvent e) {
-        if (e.getConfig().getSpec() == COMMON_SPEC) bakeCommonConfig();
-
+    public static void onModConfigEvent(final ModConfig config) {
+        if (config.getModId().equals(Ref.ID)){
+            if (config.getSpec() == COMMON_SPEC) bakeCommonConfig();
+        }
     }
 
     public static class Data {

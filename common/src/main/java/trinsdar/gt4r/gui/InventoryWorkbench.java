@@ -1,11 +1,10 @@
 package trinsdar.gt4r.gui;
 
 import muramasa.antimatter.capability.machine.MachineItemHandler;
+import muramasa.antimatter.util.AntimatterPlatformUtils;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.loading.FMLEnvironment;
 import trinsdar.gt4r.data.SlotTypes;
 import trinsdar.gt4r.network.GT4RNetwork;
 import trinsdar.gt4r.network.MessageCraftingSync;
@@ -47,7 +46,7 @@ public class InventoryWorkbench extends CraftingContainer {
     public void setChanged() {
         this.projectTable.getTile().setChanged();
         this.eventHandler.slotsChanged(this);
-        if(FMLEnvironment.dist == Dist.CLIENT)
+        if(AntimatterPlatformUtils.isClient())
             GT4RNetwork.handler.sendToServer(new MessageCraftingSync());
     }
 

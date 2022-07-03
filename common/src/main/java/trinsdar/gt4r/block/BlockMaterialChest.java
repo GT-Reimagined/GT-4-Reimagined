@@ -4,6 +4,8 @@ import it.unimi.dsi.fastutil.floats.Float2FloatFunction;
 import muramasa.antimatter.datagen.providers.AntimatterItemModelProvider;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.Machine;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -28,8 +30,6 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.tile.single.TileEntityChest;
@@ -111,7 +111,7 @@ public class BlockMaterialChest extends BlockMachineMaterial implements SimpleWa
         return tileentity != null && tileentity.triggerEvent(id, param);
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @Environment(EnvType.CLIENT)
     public static DoubleBlockCombiner.Combiner<TileEntityChest, Float2FloatFunction> getLid(final LidBlockEntity p_226917_0_) {
         return new DoubleBlockCombiner.Combiner<TileEntityChest, Float2FloatFunction>() {
             @Override

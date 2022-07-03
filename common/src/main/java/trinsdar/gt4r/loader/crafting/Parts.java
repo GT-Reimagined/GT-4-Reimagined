@@ -1,5 +1,6 @@
 package trinsdar.gt4r.loader.crafting;
 
+import me.alphamode.forgetags.Tags;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.pipe.PipeSize;
@@ -8,14 +9,13 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraftforge.common.Tags;
 import trinsdar.gt4r.Ref;
 
 import java.util.function.Consumer;
 
 import static com.google.common.collect.ImmutableMap.of;
 import static muramasa.antimatter.Data.*;
-import static muramasa.antimatter.util.TagUtils.getForgeItemTag;
+import static muramasa.antimatter.util.TagUtils.getForgelikeItemTag;
 import static trinsdar.gt4r.data.CustomTags.*;
 import static trinsdar.gt4r.data.GT4RData.*;
 import static trinsdar.gt4r.data.Materials.*;
@@ -45,9 +45,9 @@ public class Parts {
         provider.addStackRecipe(output, Ref.ID, "circuit_basic_v", "parts", "has_copper_cable", provider.hasSafeItem(CABLE_COPPER.getBlockItem(PipeSize.VTINY)),
                 new ItemStack(CircuitBasic, 1), of('C', CABLE_COPPER.getBlockItem(PipeSize.VTINY), 'R', PLATE.getMaterialTag(RedAlloy), 'I', PLATE.getMaterialTag(WroughtIron)), "CRC", "CIC", "CRC");
         provider.addStackRecipe(output, Ref.ID, "circuit_advanced_h", "parts", "has_basic_circuit", provider.hasSafeItem(CIRCUITS_BASIC),
-                new ItemStack(CircuitAdv, 1), of('C', CIRCUITS_BASIC, 'R', PLATE.getMaterialTag(RedAlloy), 'L', getForgeItemTag("dusts/lapislaz"), 'G', DUST.getMaterialTag(Glowstone)), "RGR", "LCL", "RGR");
+                new ItemStack(CircuitAdv, 1), of('C', CIRCUITS_BASIC, 'R', PLATE.getMaterialTag(RedAlloy), 'L', getForgelikeItemTag("dusts/lapislaz"), 'G', DUST.getMaterialTag(Glowstone)), "RGR", "LCL", "RGR");
         provider.addStackRecipe(output, Ref.ID, "circuit_advanced_v", "parts", "has_basic_circuit", provider.hasSafeItem(CIRCUITS_BASIC),
-                new ItemStack(CircuitAdv, 1), of('C', CIRCUITS_BASIC, 'R', PLATE.getMaterialTag(RedAlloy), 'L', getForgeItemTag("dusts/lapislaz"), 'G', DUST.getMaterialTag(Glowstone)), "RLR", "GCG", "RLR");
+                new ItemStack(CircuitAdv, 1), of('C', CIRCUITS_BASIC, 'R', PLATE.getMaterialTag(RedAlloy), 'L', getForgelikeItemTag("dusts/lapislaz"), 'G', DUST.getMaterialTag(Glowstone)), "RLR", "GCG", "RLR");
         provider.shapeless(output, "mesh_carbon", "parts", "has_carbon_fibre", provider.hasSafeItem(CarbonFibre), new ItemStack(CarbonMesh), CarbonFibre, CarbonFibre);
         provider.addItemRecipe(output, Ref.ID, "re_battery", "parts", "has_tin_cable", provider.hasSafeItem(CABLE_TIN.getBlockItem(PipeSize.VTINY)),
                 BatteryRE, of('T', PLATE.getMaterialTag(Tin), 'C', CABLE_TIN.getBlockItem(PipeSize.VTINY), 'R', DUST.getMaterialTag(Redstone)), " C ", "TRT", "TRT");
@@ -258,10 +258,10 @@ public class Parts {
                 MotorMV, of('T', CABLE_COPPER.getBlockItem(PipeSize.VTINY), 'C', WIRE_COPPER.getBlockItem(PipeSize.TINY), 'I', ROD.getMaterialTag(Aluminium), 'M', RODS_MAGNETIC), "TCI", "CMC", "ICT");
         provider.addItemRecipe(output, Ref.ID, "motor_hv", "parts", "has_gold_cable", provider.hasSafeItem(CABLE_GOLD.getBlockItem(PipeSize.VTINY)),
                 MotorHV, of('T', CABLE_GOLD.getBlockItem(PipeSize.VTINY), 'C', WIRE_COPPER.getBlockItem(PipeSize.SMALL), 'I', ROD.getMaterialTag(StainlessSteel), 'M', RODS_MAGNETIC), "TCI", "CMC", "ICT");
-        provider.shapeless(output, "match_r", "parts", "has_stick", provider.hasSafeItem(getForgeItemTag("rods/wooden")), new ItemStack(Match, 4), DUST.getMaterialTag(Phosphor), getForgeItemTag("rods/wooden"));
+        provider.shapeless(output, "match_r", "parts", "has_stick", provider.hasSafeItem(getForgelikeItemTag("rods/wooden")), new ItemStack(Match, 4), DUST.getMaterialTag(Phosphor), getForgelikeItemTag("rods/wooden"));
         provider.addStackRecipe(output, Ref.ID, "fluid_cell", "parts", "has_tin", provider.hasSafeItem(PLATE.getMaterialTag(Tin)),
                 new ItemStack(CellTin, 2), of('T', PLATE.getMaterialTag(Tin)), " T ", "T T", " T ");
-        provider.shapeless(output, "resin_torch", "parts", "has_sticky_resin", provider.hasSafeItem(StickyResin), new ItemStack(Items.TORCH, 4), StickyResin, getForgeItemTag("rods/wooden"));
+        provider.shapeless(output, "resin_torch", "parts", "has_sticky_resin", provider.hasSafeItem(StickyResin), new ItemStack(Items.TORCH, 4), StickyResin, getForgelikeItemTag("rods/wooden"));
         provider.addItemRecipe(output, Ref.ID, "neutron_reflector_iridium", "parts", "has_iridium_reinforced_plate", provider.hasSafeItem(IridiumReinforcedPlate),
                 IridiumNeutronReflector, of('N', ThickNeutronReflector, 'I', IridiumReinforcedPlate), "NNN", "NIN", "NNN");
         provider.addItemRecipe(output, Ref.ID, "neutron_reflector_thick", "parts", "has_beryllium_dust", provider.hasSafeItem(DUST.get(Beryllium)),

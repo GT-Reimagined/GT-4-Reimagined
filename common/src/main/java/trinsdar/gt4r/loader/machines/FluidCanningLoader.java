@@ -1,5 +1,6 @@
 package trinsdar.gt4r.loader.machines;
 
+import muramasa.antimatter.util.AntimatterPlatformUtils;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.item.Item;
@@ -7,8 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.registries.ForgeRegistries;
-import tesseract.api.capability.TesseractGTCapability;
+import tesseract.api.TesseractCaps;
 
 import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
 import static trinsdar.gt4r.data.GT4RData.*;
@@ -19,7 +19,7 @@ import static trinsdar.gt4r.data.RecipeMaps.FLUID_CANNING;
 
 public class FluidCanningLoader {
     public static void init() {
-        ForgeRegistries.FLUIDS.forEach(fluid -> {
+        AntimatterPlatformUtils.getAllFluids().forEach(fluid -> {
             Item bucket = fluid.getBucket();
             //Only the source.
             if (fluid instanceof FlowingFluid) return;
@@ -29,7 +29,7 @@ public class FluidCanningLoader {
             }
             ItemStack cell = CellTin.fill(fluid);
             ItemStack emptyCell = new ItemStack(CellTin);
-            if (cell.equals(emptyCell, false)) return;
+            if (cell.equals(emptyCell)) return;
             FLUID_CANNING.RB().ii(of(cell)).fo(new FluidStack(fluid,1000)).io(emptyCell).add(20, 8);
             FLUID_CANNING.RB().ii(of(emptyCell)).fi(new FluidStack(fluid,1000)).io(cell).add(20, 8);
 
@@ -47,7 +47,7 @@ public class FluidCanningLoader {
 
     private static ItemStack getFullBattery(ItemLike battery){
         ItemStack stack = new ItemStack(battery);
-        stack.getCapability(TesseractGTCapability.ENERGY_HANDLER_CAPABILITY).ifPresent(e -> {
+        stack.getCapability(TesseractCaps.getENERGY_HANDLER_CAPABILITY()).ifPresent(e -> {
             Utils.addEnergy(e, e.getCapacity());
         });
         return stack;

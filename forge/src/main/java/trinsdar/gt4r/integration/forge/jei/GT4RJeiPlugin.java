@@ -1,4 +1,4 @@
-package trinsdar.gt4r.integration.jei;
+package trinsdar.gt4r.integration.forge.jei;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -10,10 +10,10 @@ import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeTransferRegistration;
 import muramasa.antimatter.Antimatter;
 import muramasa.antimatter.machine.types.Machine;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.gui.ContainerWorkbench;

@@ -1,8 +1,10 @@
 package trinsdar.gt4r.loader.crafting;
 
+import me.alphamode.forgetags.Tags;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.pipe.PipeSize;
+import muramasa.antimatter.util.AntimatterPlatformUtils;
 import muramasa.antimatter.util.TagUtils;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Blocks;
@@ -13,8 +15,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.tags.Tag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.registries.ForgeRegistries;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.GT4RData;
 
@@ -24,7 +24,7 @@ import static com.google.common.collect.ImmutableMap.of;
 import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.Data.DUST;
 import static muramasa.antimatter.Data.Stone;
-import static muramasa.antimatter.util.TagUtils.getForgeItemTag;
+import static muramasa.antimatter.util.TagUtils.getForgelikeItemTag;
 import static trinsdar.gt4r.data.Materials.*;
 
 public class VanillaOverrides {
@@ -41,8 +41,8 @@ public class VanillaOverrides {
         provider.addItemRecipe(consumer, Ref.ID, "huge_wooden_fluid_pipe", "pipes", "has_saw", provider.hasSafeItem(SAW.getTag()),
                 GT4RData.FLUID_PIPE_WOOD.getBlockItem(PipeSize.HUGE), of('S', SAW.getTag(), 's', ItemTags.LOGS, 'H', SOFT_HAMMER.getTag()), "  S", "s s", "H  ");
         provider.shapeless(consumer, "sodalite_to_blue_dye", "", "has_sodalite", provider.hasSafeItem(GEM.getMaterialTag(Sodalite)), new ItemStack(Items.BLUE_DYE), GEM.getMaterialTag(Sodalite));
-        provider.addConditionalRecipe(consumer, provider.getStackRecipe("", "has_sulfur_dust", provider.hasSafeItem(getForgeItemTag("dusts/sulfur")),
-                new ItemStack(Blocks.TORCH, 6), of('D', getForgeItemTag("dusts/sulfur"), 'R', Tags.Items.RODS_WOODEN), "D", "R"), Ref.class, "sulfurTorch", Ref.ID, "sulfur_torch");
+        provider.addConditionalRecipe(consumer, provider.getStackRecipe("", "has_sulfur_dust", provider.hasSafeItem(getForgelikeItemTag("dusts/sulfur")),
+                new ItemStack(Blocks.TORCH, 6), of('D', getForgelikeItemTag("dusts/sulfur"), 'R', Tags.Items.RODS_WOODEN), "D", "R"), Ref.class, "sulfurTorch", Ref.ID, "sulfur_torch");
         provider.addItemRecipe(consumer, Ref.ID, "chainmail_helmet", "chainmail_armor", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),
                 Items.CHAINMAIL_HELMET, of('R', RING.getMaterialTag(Steel), 'H', HAMMER.getTag()), "RRR", "RHR");
         provider.addItemRecipe(consumer, Ref.ID, "chainmail_chestplate", "chainmail_armor", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),
@@ -65,8 +65,8 @@ public class VanillaOverrides {
         }
         String[] colors = {"white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray", "light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black"};
         for (String color : colors){
-            TagKey<Item> tag = TagUtils.getForgeItemTag("dyes/" + color);
-            provider.shapeless(consumer, "concrete_" + color, "concretes", "has_dye", provider.hasSafeItem(tag), new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(color + "_concrete_powder")), 8), tag, Items.SAND, Items.SAND, Items.SAND, Items.SAND, DUST.get(Stone), DUST.get(Stone), DUST.get(Stone), DUST.get(Stone));
+            TagKey<Item> tag = TagUtils.getForgelikeItemTag("dyes/" + color);
+            provider.shapeless(consumer, "concrete_" + color, "concretes", "has_dye", provider.hasSafeItem(tag), new ItemStack(AntimatterPlatformUtils.getItemFromID(new ResourceLocation(color + "_concrete_powder")), 8), tag, Items.SAND, Items.SAND, Items.SAND, Items.SAND, DUST.get(Stone), DUST.get(Stone), DUST.get(Stone), DUST.get(Stone));
         }
         // todo: bucket, minecart, iron door
     }

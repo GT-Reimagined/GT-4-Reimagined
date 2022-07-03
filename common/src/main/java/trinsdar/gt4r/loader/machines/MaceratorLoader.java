@@ -2,6 +2,7 @@ package trinsdar.gt4r.loader.machines;
 
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.material.Material;
+import muramasa.antimatter.material.MaterialTags;
 import muramasa.antimatter.ore.BlockOre;
 import muramasa.antimatter.ore.CobbleStoneType;
 import muramasa.antimatter.ore.StoneType;
@@ -10,6 +11,7 @@ import muramasa.antimatter.pipe.types.FluidPipe;
 import muramasa.antimatter.pipe.types.ItemPipe;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import muramasa.antimatter.recipe.map.RecipeMap;
+import muramasa.antimatter.util.AntimatterPlatformUtils;
 import muramasa.antimatter.util.TagUtils;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.tags.TagKey;
@@ -19,8 +21,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.tags.Tag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.registries.ForgeRegistries;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.GT4RData;
 
@@ -28,6 +28,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static muramasa.antimatter.Data.*;
+import static muramasa.antimatter.material.MaterialTags.BY_PRODUCT_MULTI;
+import static muramasa.antimatter.material.MaterialTags.MACERATE_INTO;
+import static muramasa.antimatter.material.MaterialTags.ORE_MULTI;
 import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
 import static muramasa.antimatter.util.Utils.getConventionalMaterialType;
 import static muramasa.antimatter.util.Utils.getConventionalStoneType;
@@ -56,16 +59,16 @@ public class MaceratorLoader {
         MACERATING.RB().ii(RecipeIngredient.of(Items.PRISMARINE, 1)).io(DUST.get(Prismarine, 1)).add(400, 2);
         MACERATING.RB().ii(RecipeIngredient.of(Items.DARK_PRISMARINE, 1)).io(DUST.get(DarkPrismarine, 1)).add(400, 2);
         if (AntimatterAPI.isModLoaded(Ref.MOD_CREATE)){
-            MACERATING.RB().ii(RecipeIngredient.of(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(Ref.MOD_CREATE, "limestone")), 1)).io(DUST.get(Limestone, 1)).add(400, 2);
-            MACERATING.RB().ii(RecipeIngredient.of(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(Ref.MOD_CREATE, "weathered_limestone")), 1)).io(DUST.get(Limestone, 1)).add(400, 2);
-            MACERATING.RB().ii(RecipeIngredient.of(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(Ref.MOD_CREATE, "scoria")), 1)).io(DUST.get(Scoria, 1)).add(400, 2);
-            MACERATING.RB().ii(RecipeIngredient.of(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(Ref.MOD_CREATE, "dark_scoria")), 1)).io(DUST.get(Scoria, 1)).add(400, 2);
+            MACERATING.RB().ii(RecipeIngredient.of(AntimatterPlatformUtils.getBlockFromId(new ResourceLocation(Ref.MOD_CREATE, "limestone")), 1)).io(DUST.get(Limestone, 1)).add(400, 2);
+            MACERATING.RB().ii(RecipeIngredient.of(AntimatterPlatformUtils.getBlockFromId(new ResourceLocation(Ref.MOD_CREATE, "weathered_limestone")), 1)).io(DUST.get(Limestone, 1)).add(400, 2);
+            MACERATING.RB().ii(RecipeIngredient.of(AntimatterPlatformUtils.getBlockFromId(new ResourceLocation(Ref.MOD_CREATE, "scoria")), 1)).io(DUST.get(Scoria, 1)).add(400, 2);
+            MACERATING.RB().ii(RecipeIngredient.of(AntimatterPlatformUtils.getBlockFromId(new ResourceLocation(Ref.MOD_CREATE, "dark_scoria")), 1)).io(DUST.get(Scoria, 1)).add(400, 2);
         }
         MACERATING.RB().ii(RecipeIngredient.of(Items.NETHER_QUARTZ_ORE, 1)).io(new ItemStack(Items.QUARTZ, 2)).add(200, 2);
         if (AntimatterAPI.isModLoaded("cinderscapes")){
-            MACERATING.RB().ii(RecipeIngredient.of(ForgeRegistries.ITEMS.getValue(new ResourceLocation("cinderscapes", "rose_quartz_ore")), 1)).io(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("cinderscapes", "rose_quartz_ore")), 2)).add(200, 2);
-            MACERATING.RB().ii(RecipeIngredient.of(ForgeRegistries.ITEMS.getValue(new ResourceLocation("cinderscapes", "smoky_quartz_ore")), 1)).io(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("cinderscapes", "smoky_quartz_ore")), 2)).add(200, 2);
-            MACERATING.RB().ii(RecipeIngredient.of(ForgeRegistries.ITEMS.getValue(new ResourceLocation("cinderscapes", "sulfur_quartz_ore")), 1)).io(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("cinderscapes", "sulfur_quartz_ore")), 2)).add(200, 2);
+            MACERATING.RB().ii(RecipeIngredient.of(AntimatterPlatformUtils.getItemFromID(new ResourceLocation("cinderscapes", "rose_quartz_ore")), 1)).io(new ItemStack(AntimatterPlatformUtils.getItemFromID(new ResourceLocation("cinderscapes", "rose_quartz_ore")), 2)).add(200, 2);
+            MACERATING.RB().ii(RecipeIngredient.of(AntimatterPlatformUtils.getItemFromID(new ResourceLocation("cinderscapes", "smoky_quartz_ore")), 1)).io(new ItemStack(AntimatterPlatformUtils.getItemFromID(new ResourceLocation("cinderscapes", "smoky_quartz_ore")), 2)).add(200, 2);
+            MACERATING.RB().ii(RecipeIngredient.of(AntimatterPlatformUtils.getItemFromID(new ResourceLocation("cinderscapes", "sulfur_quartz_ore")), 1)).io(new ItemStack(AntimatterPlatformUtils.getItemFromID(new ResourceLocation("cinderscapes", "sulfur_quartz_ore")), 2)).add(200, 2);
         }
     }
 
@@ -76,16 +79,16 @@ public class MaceratorLoader {
             Material sm = o.getStoneType().getMaterial();
             if (!m.has(DUST) || !m.has(CRUSHED)) return;
             ItemStack stoneDust = sm.has(DUST) ? DUST.get(sm, 1) : ItemStack.EMPTY;
-            TagKey<Item> oreTag = TagUtils.getForgeItemTag(String.join("", getConventionalStoneType(o.getStoneType()), "_", getConventionalMaterialType(o.getOreType()), "/", o.getMaterial().getId()));
+            TagKey<Item> oreTag = TagUtils.getForgelikeItemTag(String.join("", getConventionalStoneType(o.getStoneType()), "_", getConventionalMaterialType(o.getOreType()), "/", o.getMaterial().getId()));
             RecipeIngredient ore = RecipeIngredient.of(oreTag,1);
-            ItemStack crushedStack = CRUSHED.get(m,m.getOreMulti());
-            Material oreByProduct1 = m.getByProducts().size() > 0 ? m.getByProducts().get(0) : m.getMacerateInto();
+            ItemStack crushedStack = CRUSHED.get(m, ORE_MULTI.getInt(m));
+            Material oreByProduct1 = m.getByProducts().size() > 0 ? m.getByProducts().get(0) : MACERATE_INTO.getMapping(m);
             RecipeMap rm = MACERATING;
             if (sm == Sand || sm == RedSand || sm == Gravel){
                 rm = SIFTING;
             }
             List<ItemStack> stacks = new ArrayList<>();
-            stacks.add(Utils.ca((m.getOreMulti()) * (rm == SIFTING ? 1 : 2), crushedStack));
+            stacks.add(Utils.ca((ORE_MULTI.getInt(m)) * (rm == SIFTING ? 1 : 2), crushedStack));
             if (rm == SIFTING) stacks.add(crushedStack);
             stacks.add(DUST.get(oreByProduct1, 1));
             if (!stoneDust.isEmpty()) stacks.add(stoneDust);
@@ -93,7 +96,7 @@ public class MaceratorLoader {
             List<Integer> ints = new ArrayList<>();
             ints.add(100);
             if (rm == SIFTING) ints.add(50);
-            ints.add(10 * m.getByProductMulti());
+            ints.add(10 * BY_PRODUCT_MULTI.getInt(m));
             if (!stoneDust.isEmpty()) ints.add(50);
             int[] chances = ints.stream().mapToInt(i -> i).toArray();
             rm.RB().ii(ore).io(stackArray).chances(chances).add(400, 2);
@@ -107,18 +110,18 @@ public class MaceratorLoader {
             ItemStack stoneDust = DUST.get(Stone, 1);
 
             //TODO better way to do this
-            Material oreByProduct1 = m.getByProducts().size() > 0 ? m.getByProducts().get(0) : m.getMacerateInto();
+            Material oreByProduct1 = m.getByProducts().size() > 0 ? m.getByProducts().get(0) : MACERATE_INTO.getMapping(m);
             Material oreByProduct2 = m.getByProducts().size() > 1 ? m.getByProducts().get(1) : oreByProduct1;
             Material oreByProduct3 = m.getByProducts().size() > 2 ? m.getByProducts().get(2) : oreByProduct2;
 
             if (m == NetheriteScrap){
-                MACERATING.RB().ii(ore).io(Utils.ca((m.getOreMulti() * multiplier) * 2, crushedStack), DUST.get(oreByProduct1, 1), DUST.get(Netherrack, 1)).chances(100, 10 * multiplier * m.getByProductMulti(), 50).add(400, 2);
+                MACERATING.RB().ii(ore).io(Utils.ca((ORE_MULTI.getInt(m) * multiplier) * 2, crushedStack), DUST.get(oreByProduct1, 1), DUST.get(Netherrack, 1)).chances(100, 10 * multiplier * BY_PRODUCT_MULTI.getInt(m), 50).add(400, 2);
             }
-            MACERATING.RB().ii(crushed).io(DUST_IMPURE.get(m.getMacerateInto(), 1), DUST.get(oreByProduct1, 1)).chances(100, 10).add(400, 2);
-            MACERATING.RB().ii(RecipeIngredient.of(CRUSHED_PURIFIED.getMaterialTag(m), 1)).io(DUST_PURE.get(m.getMacerateInto(), 1), DUST.get(oreByProduct2, 1)).chances(100, 10).add(400, 2);
-            MACERATING.RB().ii(RecipeIngredient.of(CRUSHED_CENTRIFUGED.getMaterialTag(m), 1)).io(DUST.get(m.getMacerateInto(), 1), DUST.get(oreByProduct3, 1)).chances(100, 10).add(400, 2);
+            MACERATING.RB().ii(crushed).io(DUST_IMPURE.get(MACERATE_INTO.getMapping(m), 1), DUST.get(oreByProduct1, 1)).chances(100, 10).add(400, 2);
+            MACERATING.RB().ii(RecipeIngredient.of(CRUSHED_PURIFIED.getMaterialTag(m), 1)).io(DUST_PURE.get(MACERATE_INTO.getMapping(m), 1), DUST.get(oreByProduct2, 1)).chances(100, 10).add(400, 2);
+            MACERATING.RB().ii(RecipeIngredient.of(CRUSHED_CENTRIFUGED.getMaterialTag(m), 1)).io(DUST.get(MACERATE_INTO.getMapping(m), 1), DUST.get(oreByProduct3, 1)).chances(100, 10).add(400, 2);
             if (m.has(RAW_ORE)){
-                MACERATING.RB().ii(RecipeIngredient.of(RAW_ORE.getMaterialTag(m), 1)).io(Utils.ca((m.getOreMulti() * multiplier) * 2, crushedStack), DUST.get(oreByProduct1, 1)).chances(100, 10 * multiplier * m.getByProductMulti()).add(400, 2);
+                MACERATING.RB().ii(RecipeIngredient.of(RAW_ORE.getMaterialTag(m), 1)).io(Utils.ca((ORE_MULTI.getInt(m) * multiplier) * 2, crushedStack), DUST.get(oreByProduct1, 1)).chances(100, 10 * multiplier * BY_PRODUCT_MULTI.getInt(m)).add(400, 2);
             }
         });
         DUST.all().forEach(m -> {
