@@ -72,6 +72,7 @@ allprojects {
             url = 'https://maven.blamejared.com'
             name = 'BlameJared Maven'
         }
+        maven { url = "https://mvn.devos.one/snapshots/" }
         maven {
             // saps.dev Maven (KubeJS and Rhino)
             url = "https://maven.saps.dev/minecraft"

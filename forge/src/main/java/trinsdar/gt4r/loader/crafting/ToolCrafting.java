@@ -3,6 +3,7 @@ package trinsdar.gt4r.loader.crafting;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.material.Material;
+import muramasa.antimatter.material.MaterialTags;
 import muramasa.antimatter.recipe.ingredient.PropertyIngredient;
 import muramasa.antimatter.tool.IAntimatterTool;
 import net.minecraft.advancements.CriterionTriggerInstance;
@@ -20,8 +21,8 @@ import java.util.function.Consumer;
 
 import static com.google.common.collect.ImmutableMap.of;
 import static muramasa.antimatter.Data.*;
-import static muramasa.antimatter.material.MaterialTag.FLINT;
-import static muramasa.antimatter.material.MaterialTag.HANDLE;
+import static muramasa.antimatter.material.MaterialTags.FLINT;
+import static muramasa.antimatter.material.MaterialTags.HANDLE;
 import static muramasa.antimatter.recipe.RecipeBuilders.TOOL_BUILDER;
 import static trinsdar.gt4r.data.CustomTags.*;
 import static trinsdar.gt4r.data.GT4RData.MotorLV;
@@ -161,7 +162,8 @@ public class ToolCrafting {
     public static ItemStack resolveStack(IAntimatterTool tool, Material primary, Material secondary, long startingEnergy, long maxEnergy) {
         ItemStack stack = new ItemStack(tool.getItem());
         tool.validateTag(stack, primary, secondary, startingEnergy, maxEnergy);
-        Map<Enchantment, Integer> mainEnchants = primary.getToolEnchantments();
+        if (!primary.has(MaterialTags.TOOLS)) return stack;
+        Map<Enchantment, Integer> mainEnchants = MaterialTags.TOOLS.getToolData(primary).toolEnchantment();
         if (!mainEnchants.isEmpty()) {
             mainEnchants.entrySet().stream().filter(e -> e.getKey().canEnchant(stack)).forEach(e -> stack.enchant(e.getKey(), e.getValue()));
         }

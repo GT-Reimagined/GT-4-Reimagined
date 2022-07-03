@@ -2,6 +2,7 @@ package trinsdar.gt4r.items;
 
 import muramasa.antimatter.Ref;
 import muramasa.antimatter.material.Material;
+import muramasa.antimatter.material.MaterialTags;
 import muramasa.antimatter.tool.AntimatterToolType;
 import muramasa.antimatter.tool.MaterialTool;
 import net.minecraft.core.NonNullList;
@@ -16,6 +17,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -44,7 +46,10 @@ public class MaterialRockCutter extends MaterialTool {
     @Override
     public ItemStack resolveStack(Material primary, Material secondary, long startingEnergy, long maxEnergy) {
         ItemStack stack = super.resolveStack(primary, secondary, startingEnergy, maxEnergy);
-        Map<Enchantment, Integer> mainEnchants = primary.getToolEnchantments(), handleEnchants = secondary.getHandleEnchantments();
+        if (!primary.has(MaterialTags.TOOLS) || !secondary.has(MaterialTags.HANDLE)){
+            return stack;
+        }
+        Map<Enchantment, Integer> mainEnchants = MaterialTags.TOOLS.getToolData(primary).toolEnchantment(), handleEnchants = MaterialTags.HANDLE.getHandleData(secondary).toolEnchantment();
         if (!mainEnchants.containsKey(Enchantments.SILK_TOUCH) && !handleEnchants.containsKey(Enchantments.SILK_TOUCH)) {
             stack.enchant(Enchantments.SILK_TOUCH, 1);
         }
