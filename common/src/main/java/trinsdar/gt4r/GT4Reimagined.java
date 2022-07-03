@@ -7,16 +7,8 @@ import muramasa.antimatter.datagen.providers.AntimatterBlockStateProvider;
 import muramasa.antimatter.proxy.IProxyHandler;
 import muramasa.antimatter.registration.RegistrationEvent;
 import muramasa.antimatter.registration.Side;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import trinsdar.gt4r.client.BakedModels;
@@ -33,21 +25,13 @@ import trinsdar.gt4r.data.Structures;
 import trinsdar.gt4r.data.ToolTypes;
 import trinsdar.gt4r.datagen.GT4RItemModelProvider;
 import trinsdar.gt4r.datagen.GT4RLocalizations;
-import trinsdar.gt4r.events.AntimatterEvents;
-import trinsdar.gt4r.events.ForgeEventBusEvents;
-import trinsdar.gt4r.events.RegistrationEvents;
-import trinsdar.gt4r.events.RemappingEvents;
-import trinsdar.gt4r.network.GT4RNetwork;
-import trinsdar.gt4r.proxy.ClientHandler;
-import trinsdar.gt4r.proxy.CommonHandler;
-import trinsdar.gt4r.proxy.ServerHandler;
+import trinsdar.gt4r.datagen.GT4RRandomDropBonus;
 import trinsdar.gt4r.tile.TileEntityTypes;
 import trinsdar.gt4r.tree.RubberTreeWorldGen;
 import trinsdar.gt4r.worldgen.GT4RPlacedFeatures;
 import trinsdar.gt4r.worldgen.GT4RFeatures;
 
 
-@Mod(Ref.ID)
 public class GT4Reimagined extends AntimatterMod {
 
     public static GT4Reimagined INSTANCE;
@@ -57,32 +41,14 @@ public class GT4Reimagined extends AntimatterMod {
     public GT4Reimagined() {
         super();
         INSTANCE = this;
-        PROXY = DistExecutor.runForDist(() -> ClientHandler::new, () -> ServerHandler::new); // todo: scheduled to change in new Forge
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::serverSetup);
-        new ForgeEventBusEvents();
-        MinecraftForge.EVENT_BUS.register(RemappingEvents.class);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, GT4RConfig.COMMON_SPEC);
-        FMLJavaModLoadingContext.get().getModEventBus().register(RegistrationEvents.class);
+    }
+
+    @Override
+    public void onRegistrarInit() {
+        super.onRegistrarInit();
         AntimatterDynamics.clientProvider(Ref.ID, g -> new AntimatterBlockStateProvider(Ref.ID, Ref.NAME + " BlockStates", g));
         AntimatterDynamics.clientProvider(Ref.ID, g -> new GT4RItemModelProvider(Ref.ID, Ref.NAME + " Item Models", g));
         AntimatterDynamics.clientProvider(Ref.ID, GT4RLocalizations.en_US::new);
-        MinecraftForge.EVENT_BUS.register(AntimatterEvents.class);
-    }
-
-
-
-    private void clientSetup(final FMLClientSetupEvent e) {
-        ClientHandler.setup(e);
-    }
-
-    private void setup(final FMLCommonSetupEvent e) {
-        CommonHandler.setup(e);
-        e.enqueueWork(GT4RNetwork::init);
-    }
-
-    private void serverSetup(final FMLDedicatedServerSetupEvent event){
     }
 
     @Override
@@ -104,6 +70,7 @@ public class GT4Reimagined extends AntimatterMod {
                 if (side == Side.CLIENT){
                     BakedModels.init();
                 }
+                Registry.register(Registry.LOOT_FUNCTION_TYPE, new ResourceLocation(Ref.ID, "random_drop_bonus"), GT4RRandomDropBonus.RANDOM_DROP_BONUS);
                 break;
             case DATA_READY:
                 if (AntimatterAPI.isModLoaded(Ref.MOD_BLUEPOWER)){

@@ -1,10 +1,9 @@
 package trinsdar.gt4r.loader;
 
 import muramasa.antimatter.AntimatterConfig;
-import muramasa.antimatter.event.AntimatterWorldGenEvent;
+import muramasa.antimatter.event.WorldGenEvent;
 import muramasa.antimatter.worldgen.vein.WorldGenVein;
 import muramasa.antimatter.worldgen.vein.WorldGenVeinBuilder;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import trinsdar.gt4r.GT4RConfig;
 
 import static muramasa.antimatter.Data.ANDESITE;
@@ -17,7 +16,7 @@ import static trinsdar.gt4r.data.GT4RData.*;
 public class WorldGenLoader {
 
 
-    public static void init(AntimatterWorldGenEvent event) {
+    public static void init(WorldGenEvent event) {
         if (GT4RConfig.WORLD.GENERATE_STONE_LAYERS){
             WorldGenVein.setLayerChance(WorldGenVein.STONE_VEIN_LAYER, 0.25f);
             event.vein(new WorldGenVeinBuilder("vein_granite_black")

@@ -1,4 +1,4 @@
-package trinsdar.gt4r.events;
+package trinsdar.gt4r.events.forge;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.resources.ResourceLocation;
@@ -6,12 +6,14 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistry;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.Attributes;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.tree.RubberFoliagePlacer;
 
+@Mod.EventBusSubscriber(modid = Ref.ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class RegistrationEvents {
     @SubscribeEvent
     public static void onRegisterEntities(final RegistryEvent.Register<EntityType<?>> e){

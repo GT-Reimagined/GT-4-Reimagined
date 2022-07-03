@@ -1,17 +1,15 @@
 package trinsdar.gt4r.events;
 
 import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.datagen.ExistingFileHelperOverride;
 import muramasa.antimatter.datagen.providers.AntimatterAdvancementProvider;
 import muramasa.antimatter.datagen.providers.AntimatterBlockTagProvider;
 import muramasa.antimatter.datagen.providers.AntimatterFluidTagProvider;
-import muramasa.antimatter.event.AntimatterCraftingEvent;
-import muramasa.antimatter.event.AntimatterLoaderEvent;
-import muramasa.antimatter.event.AntimatterProvidersEvent;
-import muramasa.antimatter.event.AntimatterWorldGenEvent;
+import muramasa.antimatter.event.CraftingEvent;
+import muramasa.antimatter.event.ProvidersEvent;
+import muramasa.antimatter.event.WorldGenEvent;
 import muramasa.antimatter.recipe.loader.IRecipeRegistrate;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import muramasa.antimatter.registration.IAntimatterRegistrar;
+import muramasa.antimatter.registration.Side;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.datagen.GT4RBlockLootProvider;
 import trinsdar.gt4r.datagen.GT4RBlockTagProvider;
@@ -70,13 +68,12 @@ import java.util.function.BiConsumer;
 
 public class AntimatterEvents {
 
-    public static void registerWorldgen(AntimatterWorldGenEvent event){
+    public static void registerWorldgen(WorldGenEvent event){
         WorldGenLoader.init(event);
     }
 
-    @SubscribeEvent
-    public static void registerRecipeLoaders(AntimatterLoaderEvent event) {
-        BiConsumer<String, IRecipeRegistrate.IRecipeLoader> loader = (a, b) -> event.registrat.add(Ref.ID, a, b);
+    public static void registerRecipeLoaders(IAntimatterRegistrar registrar, IRecipeRegistrate reg) {
+        BiConsumer<String, IRecipeRegistrate.IRecipeLoader> loader = (a, b) -> reg.add(Ref.ID, a, b);
         loader.accept("wiremill", WiremillLoader::init);
         loader.accept("washer", WasherLoader::init);
         loader.accept("blasting", Blasting::init);
@@ -119,8 +116,7 @@ public class AntimatterEvents {
         loader.accept("int_circuit_jei", IntCircuitJeiLoader::init);
     }
 
-    @SubscribeEvent
-    public static void registerCraftingLoaders(AntimatterCraftingEvent event){
+    public static void registerCraftingLoaders(CraftingEvent event){
         event.addLoader(Parts::loadRecipes);
         event.addLoader(ToolCraftingTableRecipes::loadRecipes);
         event.addLoader(MachineCrafting::loadRecipes);
@@ -135,9 +131,8 @@ public class AntimatterEvents {
         }
     }
 
-    @SubscribeEvent
-    public static void onProviders(AntimatterProvidersEvent event){
-        if (event.getSide() == Dist.CLIENT) return;
+    public static void onProviders(ProvidersEvent event){
+        if (event.getSide() == Side.CLIENT) return;
         final AntimatterBlockTagProvider[] p = new AntimatterBlockTagProvider[1];
         event.addProvider(Ref.ID, g -> {
             p[0] = new GT4RBlockTagProvider(Ref.ID, Ref.NAME.concat(" Block Tags"), false, g);

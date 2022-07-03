@@ -1,20 +1,17 @@
 package trinsdar.gt4r.proxy;
 
 import muramasa.antimatter.AntimatterAPI;
+import muramasa.antimatter.client.ModelUtils;
 import muramasa.antimatter.proxy.IProxyHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import trinsdar.gt4r.GT4Reimagined;
 import trinsdar.gt4r.block.BlockCasing;
 import trinsdar.gt4r.block.BlockMachineMaterial;
 import trinsdar.gt4r.block.BlockMaterialChest;
-import trinsdar.gt4r.client.BakedModels;
 import trinsdar.gt4r.client.ClientUtil;
 import trinsdar.gt4r.client.MaterialChestRenderer;
 import trinsdar.gt4r.data.GT4RData;
@@ -33,17 +30,17 @@ public class ClientHandler implements IProxyHandler {
     }
 
     @SuppressWarnings("RedundantTypeArguments")
-    public static void setup(FMLClientSetupEvent e) {
-        e.enqueueWork(() -> {
-            ItemBlockRenderTypes.setRenderLayer(GT4RData.RUBBER_SAPLING, RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(GT4RData.RUBBER_LEAVES, RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(GT4RData.SAP_BAG, RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(((BlockItem)Machines.DUSTBIN.getItem(LV)).getBlock(), RenderType.cutout());
-            AntimatterAPI.all(BlockCasing.class, t -> ItemBlockRenderTypes.setRenderLayer(t, RenderType.cutout()));
-            AntimatterAPI.all(BlockMachineMaterial.class, b -> ItemBlockRenderTypes.setRenderLayer(b, RenderType.cutout()));
-            AntimatterAPI.all(BlockMaterialChest.class, b -> ItemBlockRenderTypes.setRenderLayer(b, RenderType.cutout()));
+    public static void setup() {
+        AntimatterAPI.runLaterClient(() -> {
+            ModelUtils.setRenderLayer(GT4RData.RUBBER_SAPLING, RenderType.cutout());
+            ModelUtils.setRenderLayer(GT4RData.RUBBER_LEAVES, RenderType.cutout());
+            ModelUtils.setRenderLayer(GT4RData.SAP_BAG, RenderType.cutout());
+            ModelUtils.setRenderLayer(((BlockItem)Machines.DUSTBIN.getItem(LV)).getBlock(), RenderType.cutout());
+            AntimatterAPI.all(BlockCasing.class, t -> ModelUtils.setRenderLayer(t, RenderType.cutout()));
+            AntimatterAPI.all(BlockMachineMaterial.class, b -> ModelUtils.setRenderLayer(b, RenderType.cutout()));
+            AntimatterAPI.all(BlockMaterialChest.class, b -> ModelUtils.setRenderLayer(b, RenderType.cutout()));
         });
-        AntimatterAPI.all(BlockMaterialChest.class, b -> BlockEntityRenderers.register(b.getType().getTileType(), MaterialChestRenderer::new));
+        AntimatterAPI.all(BlockMaterialChest.class, b -> muramasa.antimatter.proxy.ClientHandler.registerBlockEntityRenderer(b.getType().getTileType(), MaterialChestRenderer::new));
         ClientUtil.registerEntityRenders();
         copyProgrammerArtIfMissing();
     }

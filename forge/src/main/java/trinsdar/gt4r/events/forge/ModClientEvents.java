@@ -1,23 +1,17 @@
-package trinsdar.gt4r.events;
+package trinsdar.gt4r.events.forge;
 
-import net.minecraft.client.renderer.Sheets;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import trinsdar.gt4r.Ref;
-import trinsdar.gt4r.client.MaterialChestRenderer;
+import trinsdar.gt4r.events.ClientEvents;
 
 
 @Mod.EventBusSubscriber(modid = Ref.ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class ClientEvents {
+public class ModClientEvents {
     @SubscribeEvent
     public static void onStitch(TextureStitchEvent.Pre event) {
-        if (!event.getAtlas().location().equals(Sheets.CHEST_SHEET)) {
-            return;
-        }
-
-        event.addSprite(MaterialChestRenderer.MATERIAL_CHEST_BASE);
-        event.addSprite(MaterialChestRenderer.MATERIAL_CHEST_OVERLAY);
+        ClientEvents.onStitch(event.getAtlas(), event::addSprite);
     }
 }

@@ -1,12 +1,7 @@
 package trinsdar.gt4r.proxy;
 
 import net.minecraft.core.NonNullList;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.core.Registry;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import trinsdar.gt4r.GT4Reimagined;
-import trinsdar.gt4r.Ref;
-import trinsdar.gt4r.datagen.GT4RRandomDropBonus;
 
 import java.net.URL;
 import java.util.List;
@@ -17,10 +12,7 @@ import static trinsdar.gt4r.data.GT4RData.SupporterListSilver;
 
 public class CommonHandler {
 
-    public static void setup(FMLCommonSetupEvent e){
-        e.enqueueWork(() -> {
-            Registry.register(Registry.LOOT_FUNCTION_TYPE, new ResourceLocation(Ref.ID, "random_drop_bonus"), GT4RRandomDropBonus.RANDOM_DROP_BONUS);
-        });
+    public static void setup(){
         new Thread(() -> {
 
             List<String>
