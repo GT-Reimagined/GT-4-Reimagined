@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:mushroom_fields",
+    "minecraft:frozen_peaks",
+    "minecraft:jagged_peaks",
+    "minecraft:snowy_slopes",
+    "minecraft:frozen_river",
+    "minecraft:snowy_plains",
+    "minecraft:snowy_beach",
+    "minecraft:grove",
+    "minecraft:ice_spikes",
+    "#minecraft:is_taiga"
+  ]
+}

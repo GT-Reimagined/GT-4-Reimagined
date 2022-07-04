@@ -2,14 +2,17 @@ package trinsdar.gt4r.worldgen;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import muramasa.antimatter.material.Material;
+import muramasa.antimatter.util.TagUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.data.worldgen.features.OreFeatures;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.BiomeFilter;
@@ -19,7 +22,6 @@ import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 import net.minecraft.world.level.levelgen.placement.RarityFilter;
-import net.minecraftforge.common.BiomeDictionary;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.config.OreConfigHandler;
 import trinsdar.gt4r.config.OreConfigNode;
@@ -29,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static muramasa.antimatter.Data.*;
+import static muramasa.antimatter.util.TagUtils.getBiomeTag;
 import static trinsdar.gt4r.data.Materials.*;
 
 public class GT4RPlacedFeatures {
@@ -41,19 +44,19 @@ public class GT4RPlacedFeatures {
     public static void init(){
         // GT4R Overworld Ores
         createOrePlacedFeature("tin", Tin, -64, 0, 25, 8, "iron", 0.01f, 0.0f, false, false, Level.OVERWORLD);
-        createOrePlacedFeature("uranite", Uraninite, -16, 100, 8, 4, null, 0.0f, 0.0f, List.of(Level.OVERWORLD), List.of(), List.of(DEAD), false, false);
-        createOrePlacedFeature("uranite_dead", Uraninite, -16, 100, 20, 4, null, 0.0f, 0.0f, List.of(Level.OVERWORLD), List.of(DEAD), List.of(), false, false);
-        createOrePlacedFeature("cassiterite", Cassiterite, -30, 30, 2, 32, "tin", 0.05f, 0.0f, List.of(Level.OVERWORLD), List.of(MUSHROOM, MOUNTAIN, CONIFEROUS, COLD), List.of(JUNGLE), false, false);
-        createOrePlacedFeature("tetrahedrite", Tetrahedrite, -20, 40, 10, 12, "copper", 0.225f, 0.0f, List.of(Level.OVERWORLD), List.of(MUSHROOM, MOUNTAIN, JUNGLE, SWAMP), List.of(COLD), false, false);
+        createOrePlacedFeature("uranite", Uraninite, -16, 100, 8, 4, null, 0.0f, 0.0f, List.of(Level.OVERWORLD), b -> !b.is(getBiomeTag(new ResourceLocation(Ref.ID, "is_dead"))), false, false);
+        createOrePlacedFeature("uranite_dead", Uraninite, -16, 100, 20, 4, null, 0.0f, 0.0f, List.of(Level.OVERWORLD), b -> b.is(getBiomeTag(new ResourceLocation(Ref.ID, "is_dead"))), false, false);
+        createOrePlacedFeature("cassiterite", Cassiterite, -30, 30, 2, 32, "tin", 0.05f, 0.0f, List.of(Level.OVERWORLD), b -> b.is(getBiomeTag(new ResourceLocation(Ref.ID, "has_cassiterite"))), false, false);
+        createOrePlacedFeature("tetrahedrite", Tetrahedrite, -20, 40, 10, 12, "copper", 0.225f, 0.0f, List.of(Level.OVERWORLD), b -> b.is(getBiomeTag(new ResourceLocation(Ref.ID, "has_tetra"))), false, false);
         createOrePlacedFeature("galena", Galena, -32, 32, 12, 10, null, 0.0f, 0.2f, true, false, Level.OVERWORLD);
-        createOrePlacedFeature("bauxite", Bauxite, 50, 120, 6, 16, null, 0.0f, 0.0f, List.of(Level.OVERWORLD), List.of(FOREST, PLAINS), List.of(), false, false);
-        createOrePlacedFeature("ruby", Ruby, -16, 32, 3, 6, null, 0.0f, 0.0f, List.of(Level.OVERWORLD), List.of(HOT), List.of(JUNGLE, OCEAN), false, false);
-        createOrePlacedFeature("sapphire", Sapphire, -16, 32, 3, 6,null, 0.0f, 0.0f, List.of(Level.OVERWORLD), List.of(OCEAN, BEACH), List.of(), false, false);
-        createOrePlacedFeature("platinum", Platinum, -40, 20, 3, 6, "sphalerite", 0.05f, 0.0f, List.of(Level.OVERWORLD), List.of(JUNGLE), List.of(), false, false);
+        createOrePlacedFeature("bauxite", Bauxite, 50, 120, 6, 16, null, 0.0f, 0.0f, List.of(Level.OVERWORLD), b -> b.is(getBiomeTag(new ResourceLocation(Ref.ID, "has_bauxite"))), false, false);
+        createOrePlacedFeature("ruby", Ruby, -16, 32, 3, 6, null, 0.0f, 0.0f, List.of(Level.OVERWORLD), b -> b.is(getBiomeTag(new ResourceLocation(Ref.ID, "has_ruby"))), false, false);
+        createOrePlacedFeature("sapphire", Sapphire, -16, 32, 3, 6,null, 0.0f, 0.0f, List.of(Level.OVERWORLD), b -> b.is(getBiomeTag(new ResourceLocation(Ref.ID, "has_sapphire"))), false, false);
+        createOrePlacedFeature("platinum", Platinum, -40, 20, 3, 6, "sphalerite", 0.05f, 0.0f, List.of(Level.OVERWORLD), b -> b.is(getBiomeTag(new ResourceLocation(Ref.ID, "has_platinum"))), false, false);
         createOrePlacedFeature("iridium", Iridium, -64, 128, 1, 4, null, 0.0f, 0.0f, false, true, Level.OVERWORLD);
         //createOrePlacedFeature("emerald_extra", Emerald, -16, 480, 100, 3, null, 0.0f, 0.0f, true, false, Level.OVERWORLD);
-        createOrePlacedFeature("salt", Salt, 0, 62, 6, 64, null, 0.0f, 0.0f, List.of(Level.OVERWORLD), List.of(OCEAN), List.of(), false, false);
-        createOrePlacedFeature("rock_salt", RockSalt, 0, 80, 4, 64, null, 0.0f, 0.0f, List.of(Level.OVERWORLD), List.of(SANDY), List.of(), false, false);
+        createOrePlacedFeature("salt", Salt, 0, 62, 6, 64, null, 0.0f, 0.0f, List.of(Level.OVERWORLD), (b) -> b.is(getBiomeTag(new ResourceLocation(Ref.ID, "has_salt"))), false, false);
+        createOrePlacedFeature("rock_salt", RockSalt, 0, 80, 4, 64, null, 0.0f, 0.0f, List.of(Level.OVERWORLD), (b) -> b.is(getBiomeTag(new ResourceLocation(Ref.ID, "has_rock_salt"))), false, false);
         // GT4R Nether Ores
         createOrePlacedFeature("pyrite", Pyrite, 0, 64, 8, 16, null, 0.0f, 0.0f, false, false, Level.NETHER);
         createOrePlacedFeature("sphalerite", Sphalerite, 32, 96, 8, 16, null, 0.0f, 0.0f, false, false, Level.NETHER);
@@ -84,28 +87,22 @@ public class GT4RPlacedFeatures {
         createOrePlacedFeature("copper_buried", Copper, -16, 112, 16, 20, "gold", 0.02f, 0.0f, true, false, Level.OVERWORLD);
     }
 
-    public static void createOrePlacedFeature(String id, Material material, int minY, int maxY, int weight, int size, String secondary, float secondaryChance, float discardChance, List<ResourceKey<Level>> dimensions, List<BiomeDictionary.Type> validBiomes, List<BiomeDictionary.Type> invalidBiomes, boolean triangle, boolean rare){
+    public static void createOrePlacedFeature(String id, Material material, int minY, int maxY, int weight, int size, String secondary, float secondaryChance, float discardChance, List<ResourceKey<Level>> dimensions, GT4ROreFeatureConfig.FilterContext filter, boolean triangle, boolean rare){
         OreConfigNode node = OreConfigHandler.ORE_CONFIG_HANDLER.getBiomeConfig().ore(id, new OreConfigNode(true, minY, maxY, weight, size, secondary, secondaryChance, triangle));
         if (!node.isEnabled()) return;
         GT4ROreFeatureConfig config = new GT4ROreFeatureConfig(id, node.getSize(), discardChance, material.getId(), node.getSecondary(), node.getSecondaryChance(), dimensions);
-        if (!validBiomes.isEmpty()){
-            config.setValidBiomes(validBiomes);
-        }
-        if (!invalidBiomes.isEmpty()){
-            config.setValidBiomes(invalidBiomes);
-        }
         Holder<ConfiguredFeature<GT4ROreFeatureConfig, ?>> configuredFeature = RubberTreeWorldGen.register(id, new ConfiguredFeature<>(GT4RFeatures.ORE, config));
         List<PlacementModifier> list = new ArrayList<>(List.of(BiomeFilter.biome(), InSquarePlacement.spread()));
         list.add(node.isTriangle() ? HeightRangePlacement.triangle(VerticalAnchor.absolute(minY), VerticalAnchor.absolute(maxY)) : HeightRangePlacement.uniform(VerticalAnchor.absolute(minY), VerticalAnchor.absolute(maxY)));
         list.add(rare ? RarityFilter.onAverageOnceEvery(weight) : CountPlacement.of(weight));
         Holder<PlacedFeature> placedFeature = RubberTreeWorldGen.createPlacedFeature(id, configuredFeature, list.toArray(new PlacementModifier[0]));
-        FEATURE_MAP.put(id, new MapWrapper(placedFeature, dimensions, validBiomes, invalidBiomes));
+        FEATURE_MAP.put(id, new MapWrapper(placedFeature, dimensions, filter));
     }
 
-    record MapWrapper(Holder<PlacedFeature> feature, List<ResourceKey<Level>> dimensions, List<BiomeDictionary.Type> validBiomes, List<BiomeDictionary.Type> invalidBiomes){}
+    record MapWrapper(Holder<PlacedFeature> feature, List<ResourceKey<Level>> dimensions, GT4ROreFeatureConfig.FilterContext filterContext){}
 
     @SafeVarargs
     public static void createOrePlacedFeature(String id, Material material, int minY, int maxY, int weight, int size, String secondary, float secondaryChance, float discardChance, boolean triangle, boolean rare, ResourceKey<Level>... dimensions){
-        createOrePlacedFeature(id, material, minY, maxY, weight, size, secondary, secondaryChance, discardChance, List.of(dimensions), List.of(), List.of(), triangle, rare);
+        createOrePlacedFeature(id, material, minY, maxY, weight, size, secondary, secondaryChance, discardChance, List.of(dimensions), (b) -> true, triangle, rare);
     }
 }

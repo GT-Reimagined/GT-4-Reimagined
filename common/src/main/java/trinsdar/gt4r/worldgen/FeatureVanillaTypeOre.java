@@ -7,36 +7,30 @@ import muramasa.antimatter.material.MaterialType;
 import muramasa.antimatter.ore.StoneType;
 import muramasa.antimatter.worldgen.WorldGenHelper;
 import muramasa.antimatter.worldgen.feature.AntimatterFeature;
-import net.minecraft.core.SectionPos;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.SectionPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.core.Registry;
 import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeGenerationSettings;
+import net.minecraft.world.level.biome.BiomeSpecialEffects;
+import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.BulkSectionAccess;
-import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
-import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
-import net.minecraftforge.event.world.BiomeLoadingEvent;
 
 import java.util.BitSet;
-import java.util.List;
 import java.util.Random;
 import java.util.function.Function;
 
 import static muramasa.antimatter.Data.Coal;
 import static muramasa.antimatter.Data.ORE_STONE;
 import static muramasa.antimatter.worldgen.WorldGenHelper.ORE_PREDICATE;
-import static trinsdar.gt4r.worldgen.GT4RPlacedFeatures.*;
+import static trinsdar.gt4r.worldgen.GT4RPlacedFeatures.FEATURE_MAP;
 
 public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfig> {
     public FeatureVanillaTypeOre() {
@@ -58,30 +52,30 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
 
     }
 
+
     @Override
-    public void build(BiomeLoadingEvent event) {
+    public void build(ResourceLocation name, Biome.ClimateSettings climate, Biome.BiomeCategory category, BiomeSpecialEffects effects, BiomeGenerationSettings.Builder gen, MobSpawnSettings.Builder spawns) {
         if (AntimatterConfig.WORLD.ORE_VEINS){
-            BiomeGenerationSettingsBuilder builder = event.getGeneration();
             FEATURE_MAP.forEach((k, v) -> {
                 if (k.contains("emerald") || k.contains("coal") || k.contains("iron") || k.contains("copper") || k.contains("gold") || k.contains("diamond") || k.contains("lapis") || k.contains("redstone")){
-                    if (AntimatterConfig.WORLD.VANILLA_ORE_GEN && event.getCategory() != Biome.BiomeCategory.NETHER && event.getCategory() != Biome.BiomeCategory.THEEND){
+                    if (AntimatterConfig.WORLD.VANILLA_ORE_GEN && category != Biome.BiomeCategory.NETHER && category != Biome.BiomeCategory.THEEND){
                         if (k.contains("emerald")){
-                            if (event.getCategory() == Biome.BiomeCategory.EXTREME_HILLS){
-                                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, v.feature());
+                            if (category == Biome.BiomeCategory.EXTREME_HILLS){
+                                gen.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, v.feature());
                             }
                             return;
                         }
                         if (k.equals("gold_extra")){
-                            if (event.getCategory() == Biome.BiomeCategory.MESA){
-                                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, v.feature());
+                            if (category == Biome.BiomeCategory.MESA){
+                                gen.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, v.feature());
                             }
                             return;
                         }
-                        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, v.feature());
+                        gen.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, v.feature());
                     }
                     return;
                 }
-                builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, v.feature());
+                gen.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, v.feature());
             });
         }
     }
@@ -126,21 +120,7 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
         WorldGenLevel worldgenlevel = pContext.level();
         GT4ROreFeatureConfig config = pContext.config();
         if (!config.getDimensionLocations().contains(worldgenlevel.getLevel().dimension().location())) return false;
-        List<BiomeDictionary.Type> types = config.getBiomeTypes();
-        List<BiomeDictionary.Type> invalidTypes = config.getInvalidBiomeTypes();
-        boolean hasType = types.isEmpty();
-        for (BiomeDictionary.Type type : BiomeDictionary.getTypes(worldgenlevel.getBiome(blockpos).unwrapKey().get())) {
-            if (types.contains(type)) {
-                hasType = true;
-            }
-            if (invalidTypes.contains(type)){
-                hasType = false;
-                break;
-            }
-        }
-        if (!hasType){
-            return false;
-        }
+        if (!config.getFilter().test(worldgenlevel.getBiome(blockpos))) return false;
         return place(worldgenlevel, random, blockpos, config);
     }
 

@@ -4,9 +4,11 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import muramasa.antimatter.material.Material;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraftforge.common.BiomeDictionary;
 import org.lwjgl.system.macosx.LibSystem;
@@ -54,8 +56,8 @@ public class GT4ROreFeatureConfig implements FeatureConfiguration {
     final float secondaryChance, discardOnExposureChance;
     private List<ResourceKey<Level>> dimensions;
     private Set<ResourceLocation> dimensionLocations;
-    private List<BiomeDictionary.Type> biomeTypes = new ArrayList<>();
-    private List<BiomeDictionary.Type> invalidBiomeTypes = new ArrayList<>();
+
+   private FilterContext filter;
     private List<String> biomeTypesID = new ArrayList<>();
     private List<String> invalidBiomeTypesID = new ArrayList<>();
 
@@ -78,14 +80,12 @@ public class GT4ROreFeatureConfig implements FeatureConfiguration {
         }*/
         this.dimensions = dimensions;
         this.dimensionLocations = this.dimensions.stream().map(ResourceKey::location).collect(Collectors.toCollection(ObjectOpenHashSet::new));
+        this.filter = b -> true;
     }
 
-    public GT4ROreFeatureConfig(String id, int size, float discardOnExposureChance, String primary, String secondary, float secondaryChance, List<ResourceKey<Level>> dimensions, List<String> validBiomes, List<String> invalidBiomes) {
+    public GT4ROreFeatureConfig(String id, int size, float discardOnExposureChance, String primary, String secondary, float secondaryChance, List<ResourceKey<Level>> dimensions, FilterContext filter) {
         this(id, size, discardOnExposureChance, primary, secondary, secondaryChance, dimensions);
-        this.biomeTypes = validBiomes.stream().map(BiomeDictionary.Type::getType).collect(Collectors.toList());
-        this.invalidBiomeTypes = invalidBiomes.stream().map(BiomeDictionary.Type::getType).collect(Collectors.toList());
-        this.biomeTypesID = validBiomes;
-        this.invalidBiomeTypesID = invalidBiomes;
+        this.filter = filter;
     }
 
     public GT4ROreFeatureConfig(String id, int size, float discardOnExposureChance, Material primary, Material secondary, float secondaryChance, List<ResourceKey<Level>> dimensions) {
@@ -95,12 +95,6 @@ public class GT4ROreFeatureConfig implements FeatureConfiguration {
     public GT4ROreFeatureConfig setValidBiomes(List<BiomeDictionary.Type> types){
         biomeTypes = types;
         biomeTypesID = types.stream().map(BiomeDictionary.Type::getName).collect(Collectors.toList());
-        return this;
-    }
-
-    public GT4ROreFeatureConfig setInvalidBiomes(List<BiomeDictionary.Type> types){
-        invalidBiomeTypes = types;
-        invalidBiomeTypesID = types.stream().map(BiomeDictionary.Type::getName).collect(Collectors.toList());
         return this;
     }
 
@@ -132,11 +126,12 @@ public class GT4ROreFeatureConfig implements FeatureConfiguration {
         return dimensionLocations;
     }
 
-    public List<BiomeDictionary.Type> getBiomeTypes() {
-        return biomeTypes;
+    public FilterContext getFilter() {
+        return filter;
     }
 
-    public List<BiomeDictionary.Type> getInvalidBiomeTypes() {
-        return invalidBiomeTypes;
+    @FunctionalInterface
+    public interface FilterContext{
+        boolean test(Holder<Biome> biomeHolder);
     }
 }

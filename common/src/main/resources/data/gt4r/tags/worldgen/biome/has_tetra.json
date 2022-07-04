@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:mushroom_fields",
+    "minecraft:meadow",
+    "minecraft:stony_peaks",
+    "#minecraft:is_jungle",
+    "#minecraft:is_swamp"
+  ]
+}
