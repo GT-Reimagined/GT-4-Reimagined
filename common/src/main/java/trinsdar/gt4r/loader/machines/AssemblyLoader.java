@@ -1,7 +1,6 @@
 package trinsdar.gt4r.loader.machines;
 
 import com.google.common.collect.ImmutableSet;
-import me.alphamode.forgetags.Tags;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.pipe.PipeSize;
 import muramasa.antimatter.pipe.types.Cable;
@@ -12,6 +11,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.resources.ResourceLocation;
+import trinsdar.gt4r.data.ForgeCTags;
 import trinsdar.gt4r.data.GT4RMaterialTags;
 
 import static muramasa.antimatter.Data.*;
@@ -61,7 +61,7 @@ public class AssemblyLoader {
         ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Plastic, 1), PLATE.getMaterialIngredient(RedAlloy, 2)).io(new ItemStack(CircuitBoardBasic)).add(800, 1);
         ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Plastic, 1), PLATE.getMaterialIngredient(Electrum, 2)).io(new ItemStack(CircuitBoardBasic, 2)).add(800, 1);
         ASSEMBLING.RB().ii(of(PLATES_IRON_ALUMINIUM, 1), of(Items.IRON_TRAPDOOR, 1)).io(new ItemStack(Shutter, 1)).add(400, 16);
-        ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Iron, 5), of(Tags.Items.CHESTS, 1)).io(new ItemStack(Items.HOPPER, 1)).add(800, 2);
+        ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Iron, 5), of(ForgeCTags.CHESTS, 1)).io(new ItemStack(Items.HOPPER, 1)).add(800, 2);
         ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(WroughtIron, 2), of(CIRCUITS_BASIC, 1)).io(new ItemStack(MachineParts, 4)).add(800, 16);
         ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Plastic, 2), of(CIRCUITS_BASIC, 1)).io(new ItemStack(MachineParts, 2)).add(800, 16);
         ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Electrum, 2), of(CIRCUITS_BASIC, 1)).io(new ItemStack(CircuitBoardAdv)).add(1600,2);
@@ -81,7 +81,7 @@ public class AssemblyLoader {
 
         ASSEMBLING.RB().ii(DUST.getMaterialIngredient(Phosphor, 1), of(getTag("forge", "rods/wooden"), 1)).io(new ItemStack(Match, 4)).add(400, 1);
         ASSEMBLING.RB().ii(of(Match, 64), of(Items.PAPER, 2)).io(new ItemStack(MatchBook)).add(400, 1);
-        ASSEMBLING.RB().ii(of(Items.GUNPOWDER, 4), of(Tags.Items.SAND, 1)).io(new ItemStack(Items.TNT, 1)).add(400, 1);
+        ASSEMBLING.RB().ii(of(Items.GUNPOWDER, 4), of(ForgeCTags.SAND, 1)).io(new ItemStack(Items.TNT, 1)).add(400, 1);
         ASSEMBLING.RB().ii(DUST.getMaterialIngredient(Glowstone, 1), of(DUSTS_LAPIS_LAZ, 1)).io(new ItemStack(AdvCircuitParts, 2)).add(800,2);
         ASSEMBLING.RB().ii(DUST.getMaterialIngredient(Redstone, 4), DUST.getMaterialIngredient(Glowstone, 4)).io(new ItemStack(Items.REDSTONE_LAMP)).add(400, 1);
         ASSEMBLING.RB().ii(of(getTag("forge", "rods/wooden"), 1), DUST.getMaterialIngredient(Redstone, 1)).io(new ItemStack(Items.REDSTONE_TORCH)).add(400, 1);
@@ -89,7 +89,7 @@ public class AssemblyLoader {
         ASSEMBLING.RB().ii(INGOT.getMaterialIngredient(Gold, 4), DUST.getMaterialIngredient(Redstone, 1)).io(new ItemStack(Items.CLOCK)).add(400, 4);
         ASSEMBLING.RB().ii(of(getTag("forge", "rods/wooden"), 1), of(StickyResin, 1)).io(new ItemStack(Items.TORCH, 6)).add(400, 1);
         ASSEMBLING.RB().ii(of(Items.COAL, 8), GEM.getMaterialIngredient(Flint, 1)).io(new ItemStack(CompressedCoalBall)).add(400, 4);
-        ASSEMBLING.RB().ii(of(getTag("forge", "rods/wooden"), 1), of(Tags.Items.COBBLESTONE, 1)).io(new ItemStack(Items.LEVER, 1)).add(400, 1);
+        ASSEMBLING.RB().ii(of(getTag("forge", "rods/wooden"), 1), of(ForgeCTags.COBBLESTONE, 1)).io(new ItemStack(Items.LEVER, 1)).add(400, 1);
         ASSEMBLING.RB().ii(of(CircuitBoardBasic, 1), of(CABLE_COPPER.getBlockItem(PipeSize.VTINY), 3)).io(new ItemStack(CircuitBasic)).add(800, 1);
         ASSEMBLING.RB().ii(of(CompressedCoalBall, 8), of(BLOCK.getMaterialTag(Iron), 1)).io(new ItemStack(CoalChunk)).add(400, 4);
         ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Carbon, 4), of(MACHINE_HULLS_BASIC, 1), of(BatteryRE, 1).setIgnoreNbt()).io(new ItemStack(WINDMILL.getItem(ULV), 1)).add(6400, 8);
@@ -97,7 +97,7 @@ public class AssemblyLoader {
         ASSEMBLING.RB().ii(of(AdvancedAlloy, 1), of(getForgelikeItemTag("stone"), 8)).io(new ItemStack(REINFORCED_STONE, 8)).add(400, 4);
         ASSEMBLING.RB().ii(of(PLATE.getMaterialTag(Wood), 8), DUST.getMaterialIngredient(Redstone, 1)).io(new ItemStack(Items.NOTE_BLOCK)).add(800, 1);
         ASSEMBLING.RB().ii(of(PLATE.getMaterialTag(Wood), 8), GEM.getMaterialIngredient(Diamond, 1)).io(new ItemStack(Items.JUKEBOX)).add(1600, 1);
-        ASSEMBLING.RB().ii(of(AdvancedAlloy, 2), of(Tags.Items.GLASS, 7)).io(new ItemStack(REINFORCED_GLASS, 7)).add(400, 4);
+        ASSEMBLING.RB().ii(of(AdvancedAlloy, 2), of(ForgeCTags.GLASS, 7)).io(new ItemStack(REINFORCED_GLASS, 7)).add(400, 4);
         ASSEMBLING.RB().ii(of(getTag("minecraft", "planks"), 8), DUST.getMaterialIngredient(Redstone, 1)).io(new ItemStack(Items.NOTE_BLOCK)).add(800, 1);
         ASSEMBLING.RB().ii(of(getTag("minecraft", "planks"), 8), GEM.getMaterialIngredient(Diamond, 1)).io(new ItemStack(Items.JUKEBOX)).add(1600, 1);
         ASSEMBLING.RB().ii(of(CompressedCoalBall, 8), of(getForgelikeItemTag("obsidian"), 1)).io(new ItemStack(CoalChunk)).add(400, 4);

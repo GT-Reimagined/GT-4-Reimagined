@@ -1,10 +1,10 @@
 package trinsdar.gt4r.loader.crafting;
 
-import me.alphamode.forgetags.Tags;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.item.ItemStack;
 import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.data.ForgeCTags;
 
 import java.util.function.Consumer;
 
@@ -22,9 +22,9 @@ public class BlockCrafting {
         provider.addStackRecipe(output, Ref.ID, "firebricks", "blocks", "has_fire_brick", provider.hasSafeItem(FireBrick),
                 new ItemStack(FIRE_BRICKS), of('F', FireBrick), "FF", "FF");
         provider.addStackRecipe(output, Ref.ID, "reinforce_glass_v", "blocks", "has_advanced_alloy", provider.hasSafeItem(AdvancedAlloy),
-                new ItemStack(REINFORCED_GLASS, 7), of('G', Tags.Items.GLASS, 'A', AdvancedAlloy), "GAG", "GGG", "GAG");
+                new ItemStack(REINFORCED_GLASS, 7), of('G', ForgeCTags.GLASS, 'A', AdvancedAlloy), "GAG", "GGG", "GAG");
         provider.addStackRecipe(output, Ref.ID, "reinforce_glass_h", "blocks", "has_advanced_alloy", provider.hasSafeItem(AdvancedAlloy),
-                new ItemStack(REINFORCED_GLASS, 7), of('G', Tags.Items.GLASS, 'A', AdvancedAlloy), "GGG", "AGA", "GGG");
+                new ItemStack(REINFORCED_GLASS, 7), of('G', ForgeCTags.GLASS, 'A', AdvancedAlloy), "GGG", "AGA", "GGG");
         provider.addStackRecipe(output, Ref.ID, "standard_machine", "blocks", "has_circuit_basic", provider.hasSafeItem(CIRCUITS_BASIC),
                 new ItemStack(STANDARD_MACHINE_CASING, 4), of('I', PLATES_WROUGHT_ALUMINIUM, 'C', CIRCUITS_BASIC, 'M', MACHINE_HULLS_SEMI_CHEAP), "III", "CMC", "III");
         provider.addStackRecipe(output, Ref.ID, "reinforced_machine", "blocks", "has_circuit_advanced", provider.hasSafeItem(CIRCUITS_ADVANCED),
@@ -39,6 +39,6 @@ public class BlockCrafting {
                 new ItemStack(ADVANCED_MACHINE_BLOCK, 1), of('A', AdvancedAlloy, 'C', PLATE.getMaterialTag(Carbon), 'M', MACHINE_HULLS_BASIC), " A ", "CMC", " A ");
         provider.addItemRecipe(output, Ref.ID, "coil_fusion", "blocks", "has_machine_hull_highly_advanced", provider.hasSafeItem(HIGHLY_ADVANCED_MACHINE_BLOCK), FUSION_COIL, of('C', CIRCUITS_MASTER, 'S', ItemSuperconductor, 'N', NichromeHeatingCoil, 'H', HIGHLY_ADVANCED_MACHINE_BLOCK, 'I', IridiumNeutronReflector), "CSC", "NHN", "CIC");
         provider.addStackRecipe(output, Ref.ID, "sapbag", "blocks", "has_saw", provider.hasSafeItem(SAW.getTag()),
-                new ItemStack(SAP_BAG), of('L', Tags.Items.LEATHER, 'S', SAW.getTag(), 's', getTag("rods/wooden")), "sss", "LSL", "LLL");
+                new ItemStack(SAP_BAG), of('L', ForgeCTags.LEATHER, 'S', SAW.getTag(), 's', getTag("rods/wooden")), "sss", "LSL", "LLL");
     }
 }

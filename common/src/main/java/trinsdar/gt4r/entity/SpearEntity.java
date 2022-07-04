@@ -25,12 +25,9 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.entity.IEntityAdditionalSpawnData;
-import net.minecraftforge.network.NetworkHooks;
-import net.minecraftforge.network.PlayMessages;
 import trinsdar.gt4r.data.GT4RData;
 
-public class SpearEntity extends AbstractArrow  implements IEntityAdditionalSpawnData {
+public class SpearEntity extends AbstractArrow {
     private static final EntityDataAccessor<Byte> LOYALTY_LEVEL = SynchedEntityData.defineId(SpearEntity.class, EntityDataSerializers.BYTE);
     protected ItemStack weapon = ItemStack.EMPTY;
     public int returningTicks;
@@ -48,10 +45,6 @@ public class SpearEntity extends AbstractArrow  implements IEntityAdditionalSpaw
     @Environment(EnvType.CLIENT)
     public SpearEntity(Level worldIn, double x, double y, double z) {
         super(GT4RData.SPEAR_ENTITY_TYPE, x, y, z, worldIn);
-    }
-
-    public SpearEntity(PlayMessages.SpawnEntity spawnEntity, Level world) {
-        this(GT4RData.SPEAR_ENTITY_TYPE, world);
     }
 
     @Override
@@ -168,23 +161,10 @@ public class SpearEntity extends AbstractArrow  implements IEntityAdditionalSpaw
         this.weapon = ItemStack.of(weaponNBT);
     }
 
-    public void writeSpawnData(FriendlyByteBuf buffer) {
-        buffer.writeItemStack(this.weapon, false);
-    }
-
-    public void readSpawnData(FriendlyByteBuf additionalData) {
-        ItemStack stack = additionalData.readItem();
-        weapon = stack.copy();
-    }
-
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         CompoundTag weaponNBT = this.weapon.save(new CompoundTag());
         compound.put("Weapon", weaponNBT);
-    }
-
-    public Packet<?> getAddEntityPacket() {
-        return NetworkHooks.getEntitySpawningPacket(this);
     }
 
     public boolean isValidThrowingWeapon() {

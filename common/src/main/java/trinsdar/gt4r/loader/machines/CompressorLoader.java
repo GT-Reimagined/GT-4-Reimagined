@@ -1,11 +1,11 @@
 package trinsdar.gt4r.loader.machines;
 
-import me.alphamode.forgetags.Tags;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.tags.ItemTags;
 import trinsdar.gt4r.data.CustomTags;
+import trinsdar.gt4r.data.ForgeCTags;
 import trinsdar.gt4r.data.GT4RData;
 
 import static muramasa.antimatter.Data.*;
@@ -25,10 +25,10 @@ public class CompressorLoader {
         });
         GEM.all().forEach(gem -> {
             if (gem.has(BLOCK)) {
-                COMPRESSING.RB().ii(RecipeIngredient.of(GEM.getMaterialTag(gem),9)).io(BLOCK.get().get(gem).asStack(1)).add(Math.max(40,gem.getMass()*2), 16);
+                COMPRESSING.RB().ii(RecipeIngredient.of(GEM.getMaterialTag(gem), 9)).io(BLOCK.get().get(gem).asStack(1)).add(Math.max(40, gem.getMass() * 2), 16);
             }
-            if (gem.has(PLATE)){
-                COMPRESSING.RB().ii(RecipeIngredient.of(DUST.getMaterialTag(gem),9)).io(PLATE.get(gem, 1)).add(Math.max(40,gem.getMass()*2), 16);
+            if (gem.has(PLATE)) {
+                COMPRESSING.RB().ii(RecipeIngredient.of(DUST.getMaterialTag(gem), 9)).io(PLATE.get(gem, 1)).add(Math.max(40, gem.getMass() * 2), 16);
             }
         });
         COMPRESSING.RB().ii(RecipeIngredient.of(GT4RData.CarbonMesh, 1)).io(PLATE.get(Carbon, 1)).add(400, 2);
@@ -44,13 +44,13 @@ public class CompressorLoader {
         COMPRESSING.RB().ii(DUST.getMaterialIngredient(Fireclay, 1)).io(new ItemStack(CompressedFireClay)).add(200, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(ItemTags.SAPLINGS, 4)).io(new ItemStack(Plantball)).add(300, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(ItemTags.SMALL_FLOWERS, 8)).io(new ItemStack(Plantball)).add(300, 2);
-        COMPRESSING.RB().ii(RecipeIngredient.of(Tags.Items.CROPS, 8)).io(new ItemStack(Plantball)).add(300, 2);
-        COMPRESSING.RB().ii(RecipeIngredient.of(Tags.Items.SEEDS, 16)).io(new ItemStack(Plantball)).add(300, 2);
+        COMPRESSING.RB().ii(RecipeIngredient.of(ForgeCTags.CROPS, 8)).io(new ItemStack(Plantball)).add(300, 2);
+        COMPRESSING.RB().ii(RecipeIngredient.of(ForgeCTags.SEEDS, 16)).io(new ItemStack(Plantball)).add(300, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(ItemTags.LEAVES, 8)).io(new ItemStack(Plantball)).add(300, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(Items.CACTUS, 8)).io(new ItemStack(Plantball)).add(300, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(Items.DEAD_BUSH, 8)).io(new ItemStack(Plantball)).add(300, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(CORALS, 8)).io(new ItemStack(Plantball)).add(300, 2);
-        COMPRESSING.RB().ii(RecipeIngredient.of(Tags.Items.MUSHROOMS, 8)).io(new ItemStack(Plantball)).add(300, 2);
+        COMPRESSING.RB().ii(RecipeIngredient.of(ForgeCTags.MUSHROOMS, 8)).io(new ItemStack(Plantball)).add(300, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(Items.NETHER_WART_BLOCK, 8)).io(new ItemStack(Plantball)).add(300, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(Items.WARPED_FUNGUS, 4)).io(new ItemStack(Plantball)).add(300, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(Items.WARPED_ROOTS, 8)).io(new ItemStack(Plantball)).add(300, 2);

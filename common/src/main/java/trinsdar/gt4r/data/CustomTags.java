@@ -50,4 +50,6 @@ public class CustomTags {
     public static TagKey<Item> getTag(String id){
         return TagUtils.getForgelikeItemTag(id);
     }
+
+    public static void init(){}
 }

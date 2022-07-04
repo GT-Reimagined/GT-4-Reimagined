@@ -1,6 +1,5 @@
 package trinsdar.gt4r.loader.machines;
 
-import me.alphamode.forgetags.Tags;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.ore.CobbleStoneType;
 import muramasa.antimatter.ore.StoneType;
@@ -11,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import trinsdar.gt4r.GT4RConfig;
 import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.data.ForgeCTags;
 
 import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.material.MaterialTags.MACERATE_INTO;
@@ -46,9 +46,9 @@ public class ForgeHammerLoader {
             if (!(s instanceof CobbleStoneType)) return;
             HAMMERING.RB().ii(RecipeIngredient.of(((CobbleStoneType)s).getBlock(""), 1)).io(new ItemStack(((CobbleStoneType)s).getBlock("cobble"))).add(10, 16);
         });
-        HAMMERING.RB().ii(RecipeIngredient.of(Tags.Items.COBBLESTONE, 1)).io(new ItemStack(Items.GRAVEL)).add(10, 16);
+        HAMMERING.RB().ii(RecipeIngredient.of(ForgeCTags.COBBLESTONE, 1)).io(new ItemStack(Items.GRAVEL)).add(10, 16);
         HAMMERING.RB().ii(RecipeIngredient.of(Items.STONE, 1)).io(new ItemStack(Items.COBBLESTONE)).add(10, 16);
-        HAMMERING.RB().ii(RecipeIngredient.of(Tags.Items.GRAVEL, 1)).io(new ItemStack(Items.SAND)).add(10, 16);
+        HAMMERING.RB().ii(RecipeIngredient.of(ForgeCTags.GRAVEL, 1)).io(new ItemStack(Items.SAND)).add(10, 16);
         HAMMERING.RB().ii(RecipeIngredient.of(Items.BRICK, 1)).io(DUST_SMALL.get(Brick, 1)).add(10, 16);
         HAMMERING.RB().ii(RecipeIngredient.of(Items.BRICKS, 1)).io(DUST.get(Brick, 1)).add(40, 16);
     }

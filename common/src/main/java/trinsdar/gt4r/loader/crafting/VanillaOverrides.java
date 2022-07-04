@@ -1,6 +1,5 @@
 package trinsdar.gt4r.loader.crafting;
 
-import me.alphamode.forgetags.Tags;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.pipe.PipeSize;
@@ -16,6 +15,7 @@ import net.minecraft.tags.Tag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.resources.ResourceLocation;
 import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.data.ForgeCTags;
 import trinsdar.gt4r.data.GT4RData;
 
 import java.util.function.Consumer;
@@ -42,7 +42,7 @@ public class VanillaOverrides {
                 GT4RData.FLUID_PIPE_WOOD.getBlockItem(PipeSize.HUGE), of('S', SAW.getTag(), 's', ItemTags.LOGS, 'H', SOFT_HAMMER.getTag()), "  S", "s s", "H  ");
         provider.shapeless(consumer, "sodalite_to_blue_dye", "", "has_sodalite", provider.hasSafeItem(GEM.getMaterialTag(Sodalite)), new ItemStack(Items.BLUE_DYE), GEM.getMaterialTag(Sodalite));
         provider.addConditionalRecipe(consumer, provider.getStackRecipe("", "has_sulfur_dust", provider.hasSafeItem(getForgelikeItemTag("dusts/sulfur")),
-                new ItemStack(Blocks.TORCH, 6), of('D', getForgelikeItemTag("dusts/sulfur"), 'R', Tags.Items.RODS_WOODEN), "D", "R"), Ref.class, "sulfurTorch", Ref.ID, "sulfur_torch");
+                new ItemStack(Blocks.TORCH, 6), of('D', getForgelikeItemTag("dusts/sulfur"), 'R', ForgeCTags.RODS_WOODEN), "D", "R"), Ref.class, "sulfurTorch", Ref.ID, "sulfur_torch");
         provider.addItemRecipe(consumer, Ref.ID, "chainmail_helmet", "chainmail_armor", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),
                 Items.CHAINMAIL_HELMET, of('R', RING.getMaterialTag(Steel), 'H', HAMMER.getTag()), "RRR", "RHR");
         provider.addItemRecipe(consumer, Ref.ID, "chainmail_chestplate", "chainmail_armor", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),
@@ -61,7 +61,7 @@ public class VanillaOverrides {
         Material[] mats = new Material[]{Bronze, WroughtIron, Aluminium, Steel, Titanium};
         for (Material m : mats){
             provider.addItemRecipe(consumer, Ref.ID, "piston_" + m.getId(), "pistons", "has_" + m.getId(), provider.hasSafeItem(INGOT.getMaterialTag(m)),
-                    Items.PISTON, of('W', ItemTags.PLANKS, 'C', Tags.Items.COBBLESTONE, 'R', DUST.getMaterialTag(Redstone), 'I', INGOT.getMaterialTag(m)), "WWW", "CIC", "CRC");
+                    Items.PISTON, of('W', ItemTags.PLANKS, 'C', ForgeCTags.COBBLESTONE, 'R', DUST.getMaterialTag(Redstone), 'I', INGOT.getMaterialTag(m)), "WWW", "CIC", "CRC");
         }
         String[] colors = {"white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray", "light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black"};
         for (String color : colors){

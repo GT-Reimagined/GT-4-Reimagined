@@ -8,7 +8,7 @@ import muramasa.antimatter.gui.Widget;
 import muramasa.antimatter.gui.container.ContainerMachine;
 import muramasa.antimatter.gui.widget.WidgetSupplier;
 import muramasa.antimatter.integration.jeirei.AntimatterJEIREIPlugin;
-import muramasa.antimatter.mixin.client.AbstractContainerAccessor;
+import muramasa.antimatter.mixin.client.AbstractContainerScreenAccessor;
 import muramasa.antimatter.tile.TileEntityMachine;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -47,7 +47,7 @@ public class CoalBoilerFuelWidget extends Widget {
                 return;
             }
             int y = (realY() + 18) - lvl;
-            drawTexture(stack, gui.handler.getGuiTexture(), realX(), y, ((AbstractContainerAccessor)gui.screen).getImageWidth(), 18 - lvl, 18, lvl);
+            drawTexture(stack, gui.handler.getGuiTexture(), realX(), y, ((AbstractContainerScreenAccessor)gui.screen).getImageWidth(), 18 - lvl, 18, lvl);
         }
     }
 
