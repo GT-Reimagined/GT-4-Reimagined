@@ -90,7 +90,7 @@ public class GT4RPlacedFeatures {
     public static void createOrePlacedFeature(String id, Material material, int minY, int maxY, int weight, int size, String secondary, float secondaryChance, float discardChance, List<ResourceKey<Level>> dimensions, GT4ROreFeatureConfig.FilterContext filter, boolean triangle, boolean rare){
         OreConfigNode node = OreConfigHandler.ORE_CONFIG_HANDLER.getBiomeConfig().ore(id, new OreConfigNode(true, minY, maxY, weight, size, secondary, secondaryChance, triangle));
         if (!node.isEnabled()) return;
-        GT4ROreFeatureConfig config = new GT4ROreFeatureConfig(id, node.getSize(), discardChance, material.getId(), node.getSecondary(), node.getSecondaryChance(), dimensions);
+        GT4ROreFeatureConfig config = new GT4ROreFeatureConfig(id, node.getSize(), discardChance, material.getId(), node.getSecondary(), node.getSecondaryChance());
         Holder<ConfiguredFeature<GT4ROreFeatureConfig, ?>> configuredFeature = RubberTreeWorldGen.register(id, new ConfiguredFeature<>(GT4RFeatures.ORE, config));
         List<PlacementModifier> list = new ArrayList<>(List.of(BiomeFilter.biome(), InSquarePlacement.spread()));
         list.add(node.isTriangle() ? HeightRangePlacement.triangle(VerticalAnchor.absolute(minY), VerticalAnchor.absolute(maxY)) : HeightRangePlacement.uniform(VerticalAnchor.absolute(minY), VerticalAnchor.absolute(maxY)));

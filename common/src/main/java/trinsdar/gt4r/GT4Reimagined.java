@@ -15,6 +15,7 @@ import trinsdar.gt4r.client.BakedModels;
 import trinsdar.gt4r.config.OreConfigHandler;
 import trinsdar.gt4r.data.Attributes;
 import trinsdar.gt4r.data.GT4RData;
+import trinsdar.gt4r.data.GT4RMaterialTags;
 import trinsdar.gt4r.data.Guis;
 import trinsdar.gt4r.data.Machines;
 import trinsdar.gt4r.data.Materials;
@@ -56,6 +57,7 @@ public class GT4Reimagined extends AntimatterMod {
         switch (event) {
             case DATA_INIT:
                 ToolTypes.init();
+                GT4RMaterialTags.init();
                 Materials.init();
                 Attributes.init();
                 RecipeMaps.init();

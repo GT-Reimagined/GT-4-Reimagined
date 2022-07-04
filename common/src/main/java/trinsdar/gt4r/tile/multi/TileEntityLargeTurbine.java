@@ -20,8 +20,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import trinsdar.gt4r.data.GT4RData;
+import trinsdar.gt4r.data.GT4RMaterialTags;
 import trinsdar.gt4r.data.Machines;
-import trinsdar.gt4r.data.Materials;
 import trinsdar.gt4r.data.SlotTypes;
 import trinsdar.gt4r.items.ItemTurbineRotor;
 
@@ -114,7 +114,7 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
                                     ItemStack copy = h.getHandler(SlotTypes.ROTOR).getStackInSlot(0).copy();
                                     if (h.getHandler(SlotTypes.ROTOR).getStackInSlot(0).hurt(1, tile.level.random, null)){
                                         if (copy.getItem() instanceof ItemTurbineRotor){
-                                            h.getHandler(SlotTypes.ROTOR).setStackInSlot(0, Materials.BROKEN_TURBINE_ROTOR.get(((ItemTurbineRotor)copy.getItem()).getMaterial(), 1));
+                                            h.getHandler(SlotTypes.ROTOR).setStackInSlot(0, GT4RMaterialTags.BROKEN_TURBINE_ROTOR.get(((ItemTurbineRotor)copy.getItem()).getMaterial(), 1));
                                         }
                                         for (Player player : level.getNearbyPlayers(TargetingConditions.DEFAULT.range(5.0D), null, new AABB(new int3(tile.getBlockPos(), tile.getFacing()).left(2).back(5), new int3(tile.getBlockPos(), tile.getFacing()).right(2)))){
                                             if (EntitySelector.NO_SPECTATORS.test(player) && !player.isCreative()) {

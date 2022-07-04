@@ -23,8 +23,8 @@ import java.util.List;
 
 import static muramasa.antimatter.machine.Tier.HV;
 import static muramasa.antimatter.machine.Tier.LV;
-import static trinsdar.gt4r.data.Materials.CHARGING_WORKBENCH;
-import static trinsdar.gt4r.data.Materials.WORKBENCH;
+import static trinsdar.gt4r.data.GT4RMaterialTags.CHARGING_WORKBENCH;
+import static trinsdar.gt4r.data.GT4RMaterialTags.WORKBENCH;
 
 @JeiPlugin
 public class GT4RJeiPlugin implements IModPlugin {

@@ -119,8 +119,8 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
         BlockPos blockpos = pContext.origin();
         WorldGenLevel worldgenlevel = pContext.level();
         GT4ROreFeatureConfig config = pContext.config();
-        if (!config.getDimensionLocations().contains(worldgenlevel.getLevel().dimension().location())) return false;
-        if (!config.getFilter().test(worldgenlevel.getBiome(blockpos))) return false;
+        if (!FEATURE_MAP.get(config.getId()).dimensions().contains(worldgenlevel.getLevel().dimension().location())) return false;
+        if (!FEATURE_MAP.get(config.getId()).filterContext().test(worldgenlevel.getBiome(blockpos))) return false;
         return place(worldgenlevel, random, blockpos, config);
     }
 

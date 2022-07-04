@@ -10,6 +10,7 @@ import muramasa.antimatter.recipe.ingredient.PropertyIngredient;
 import muramasa.antimatter.recipe.material.MaterialRecipe;
 import muramasa.antimatter.tool.AntimatterToolType;
 import muramasa.antimatter.tool.IAntimatterTool;
+import muramasa.antimatter.tool.ToolUtils;
 import muramasa.antimatter.util.TagUtils;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.nbt.CompoundTag;
@@ -22,6 +23,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
+import tesseract.api.TesseractCaps;
 import tesseract.api.capability.TesseractGTCapability;
 import tesseract.api.gt.IGTNode;
 import trinsdar.gt4r.Ref;
@@ -118,7 +120,7 @@ public class ToolTypes {
 
     public static Tuple<Long, Long> getEnergy(ItemStack stack){
         if (stack.getItem() instanceof ItemBattery){
-            long energy = stack.getCapability(TesseractGTCapability.ENERGY_HANDLER_CAPABILITY).map(IGTNode::getEnergy).orElse((long)0);
+            long energy = stack.getCapability(TesseractCaps.getENERGY_HANDLER_CAPABILITY()).map(IGTNode::getEnergy).orElse((long)0);
             return new Tuple<>(energy, ((ItemBattery)stack.getItem()).getCapacity());
         }
         if (stack.getItem() instanceof IAntimatterTool){
@@ -143,8 +145,6 @@ public class ToolTypes {
     }
 
     public static class SpearToolType extends AntimatterToolType{
-
-        private TagKey<Item> tag, forgeTag; // Set?
         public SpearToolType(String domain, String id, int useDurability, int attackDurability, int craftingDurability, float baseAttackDamage, float baseAttackSpeed) {
             super(domain, id, useDurability, attackDurability, craftingDurability, baseAttackDamage, baseAttackSpeed, false);
             this.tag = TagUtils.getItemTag(new ResourceLocation(Ref.ANTIMATTER, "spear"));
@@ -175,14 +175,6 @@ public class ToolTypes {
         public IAntimatterTool instantiateTools(String domain, Supplier<Item.Properties> properties) {
             return new MaterialSpear(domain, this, properties.get());
         }
-
-        private Item.Properties prepareInstantiation(String domain) {
-            if (domain.isEmpty())
-                Utils.onInvalidData("An AntimatterToolType was instantiated with an empty domain name!");
-            Item.Properties properties = new Item.Properties().tab(getItemGroup());
-            if (!getRepairability()) properties.setNoRepair();
-            return properties;
-        }
     }
 
     public static class RockCutterToolType extends AntimatterToolType{
@@ -205,14 +197,6 @@ public class ToolTypes {
             List<IAntimatterTool> poweredTools = new ObjectArrayList<>();
             poweredTools.add(new MaterialRockCutter(domain, this, properties.get(), 1));
             return poweredTools;
-        }
-
-        private Item.Properties prepareInstantiation(String domain) {
-            if (domain.isEmpty())
-                Utils.onInvalidData("An AntimatterToolType was instantiated with an empty domain name!");
-            Item.Properties properties = new Item.Properties().tab(getItemGroup());
-            if (!getRepairability()) properties.setNoRepair();
-            return properties;
         }
     }
 }

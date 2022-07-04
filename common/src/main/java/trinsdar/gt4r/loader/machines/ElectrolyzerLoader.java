@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.fluids.FluidStack;
+import trinsdar.gt4r.data.GT4RMaterialTags;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,10 +23,10 @@ public class ElectrolyzerLoader {
     public static void init() {
         ELEC.all().forEach(m -> {
             int power = 0;
-            if (m.has(ELEC30)) power = 30;
-            if (m.has(ELEC60)) power = 60;
-            if (m.has(ELEC90)) power = 90;
-            if (m.has(ELEC120)) power = 120;
+            if (m.has(GT4RMaterialTags.ELEC30)) power = 30;
+            if (m.has(GT4RMaterialTags.ELEC60)) power = 60;
+            if (m.has(GT4RMaterialTags.ELEC90)) power = 90;
+            if (m.has(GT4RMaterialTags.ELEC120)) power = 120;
             if (power == 0) return;
             if (!m.has(DUST) && !m.has(LIQUID) && !m.has(GAS)) return;
             int count = m.getProcessInto().stream().mapToInt(t -> t.s).sum();

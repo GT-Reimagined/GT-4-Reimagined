@@ -11,8 +11,8 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.tags.Tag;
 import net.minecraft.resources.ResourceLocation;
+import trinsdar.gt4r.data.GT4RMaterialTags;
 
 import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.machine.Tier.LV;
@@ -38,8 +38,8 @@ public class AssemblyLoader {
                 ASSEMBLING.RB().ii(of(wireItem,1), PLATE.getMaterialIngredient(Rubber, getRubberAmount(size))).io(new ItemStack(cableItem,1)).add(size.getCableThickness()* 20L,8);
             });
         });
-        HULL.all().forEach(m -> {
-            ASSEMBLING.RB().ii(of(MachineParts, 1), of(PLATE.getMaterialTag(m), 6)).io(HULL.get(m, 1)).add(400, 8);
+        GT4RMaterialTags.HULL.all().forEach(m -> {
+            ASSEMBLING.RB().ii(of(MachineParts, 1), of(PLATE.getMaterialTag(m), 6)).io(GT4RMaterialTags.HULL.get(m, 1)).add(400, 8);
         });
         ASSEMBLING.RB().ii(of(getTag("forge", "rods/wooden"), 1), of(getTag("minecraft", "coals"), 1)).io(new ItemStack(Items.TORCH, 4)).add(400, 1);
         ASSEMBLING.RB().ii(of(getTag("forge", "string"), 1), of(getTag("forge", "slimeballs"), 1)).io(new ItemStack(Items.LEAD, 2)).add(200, 2);

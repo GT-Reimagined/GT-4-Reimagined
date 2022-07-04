@@ -2,6 +2,7 @@ package trinsdar.gt4r.loader.machines;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import muramasa.antimatter.material.Material;
+import muramasa.antimatter.material.MaterialTags;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
@@ -9,6 +10,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.fluids.FluidStack;
+import trinsdar.gt4r.data.GT4RMaterialTags;
 import trinsdar.gt4r.data.Machines;
 import trinsdar.gt4r.data.Materials;
 
@@ -45,7 +47,7 @@ public class OreByproducts {
                 List<FluidStack> fluids = new ObjectArrayList<>();
                 if (m.has(ORE)) ores.add(ore);
                 if (m.has(CRUSHED)) {
-                    ores.add(CRUSHED.getIngredient(m, 2 * m.getOreMulti()));
+                    ores.add(CRUSHED.getIngredient(m, 2 * MaterialTags.ORE_MULTI.getInt(m)));
                     ores.add(crushed);
                     ores.add(CRUSHED_PURIFIED.getIngredient(m, 1));
                     ores.add(DUST_PURE.getIngredient(m, 1));
@@ -59,8 +61,8 @@ public class OreByproducts {
                 Material oreByProduct3 = m.getByProducts().size() > 2 ? m.getByProducts().get(2) : oreByProduct2;
 
                 List<ItemStack> dusts = new ObjectArrayList<>();
-                if (m.getSmeltInto().has(INGOT) && !m.needsBlastFurnace()){
-                    dusts.add(INGOT.get(m.getSmeltInto(), m.getSmeltingMulti()));
+                if (MaterialTags.SMELT_INTO.getMapping(m).has(INGOT) && !m.has(MaterialTags.NEEDS_BLAST_FURNACE)){
+                    dusts.add(INGOT.get(MaterialTags.SMELT_INTO.getMapping(m), MaterialTags.SMELTING_MULTI.getInt(m)));
                 } else {
                     dusts.add(new ItemStack(Items.BARRIER));
                 }
@@ -77,19 +79,19 @@ public class OreByproducts {
                 dusts.add(DUST_TINY.get(oreByProduct2, 1));
                 dusts.add(CRUSHED_PURIFIED.get(m, 1));
                 dusts.add(DUST_TINY.get(oreByProduct1, 1));
-                if (m.has(Materials.BATHING_MERCURY) || m.has(Materials.BATHING_PERSULFATE)){
-                    if (m.has(Materials.BATHING_PERSULFATE)){
+                if (m.has(GT4RMaterialTags.BATHING_MERCURY) || m.has(GT4RMaterialTags.BATHING_PERSULFATE)){
+                    if (m.has(GT4RMaterialTags.BATHING_PERSULFATE)){
                         ores.add(CRUSHED_PURIFIED.getIngredient(m, 1));
-                        dusts.add(DUST.get(Materials.BATHING_MAP_PERSULFATE.get(m), 1));
+                        dusts.add(DUST.get(GT4RMaterialTags.BATHING_PERSULFATE.getMapping(m), 1));
                         fluids.add(Materials.SodiumPersulfate.getLiquid(100));
                         ORE_BYPRODUCTS.RB().ii(ores).fi(fluids).io(dusts.toArray(new ItemStack[0])).chances(100, 100, 10, 10, 10, 100, 100, 100, 10, 100, 100, 100, 100, 50, 70).add();
                         ores.remove(ores.size() - 1);
                         dusts.remove(dusts.size() - 1);
                         fluids.remove(1);
                     }
-                    if (m.has(Materials.BATHING_MERCURY)){
+                    if (m.has(GT4RMaterialTags.BATHING_MERCURY)){
                         ores.add(CRUSHED_PURIFIED.getIngredient(m, 1));
-                        dusts.add(DUST.get(Materials.BATHING_MAP_MERCURY.get(m), 1));
+                        dusts.add(DUST.get(GT4RMaterialTags.BATHING_MERCURY.getMapping(m), 1));
                         fluids.add(Materials.Mercury.getLiquid(100));
                         ORE_BYPRODUCTS.RB().ii(ores).fi(fluids).io(dusts.toArray(new ItemStack[0])).chances(100, 100, 10, 10, 10, 100, 100, 100, 10, 100, 100, 100, 100, 50, 70).add();
                     }

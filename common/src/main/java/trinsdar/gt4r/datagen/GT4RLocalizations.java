@@ -9,7 +9,6 @@ import muramasa.antimatter.machine.MachineFlag;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.material.Material;
-import muramasa.antimatter.material.MaterialTag;
 import muramasa.antimatter.material.MaterialTags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Item;
@@ -36,7 +35,7 @@ import static muramasa.antimatter.util.Utils.lowerUnderscoreToUpperSpacedRotated
 import static trinsdar.gt4r.data.Machines.ELECTROLYZER;
 import static trinsdar.gt4r.data.Machines.HATCH_DYNAMO;
 import static trinsdar.gt4r.data.Machines.MACERATOR;
-import static trinsdar.gt4r.data.Materials.BROKEN_TURBINE_ROTOR;
+import static trinsdar.gt4r.data.GT4RMaterialTags.BROKEN_TURBINE_ROTOR;
 import static trinsdar.gt4r.data.ToolTypes.ROCK_CUTTER;
 
 public class GT4RLocalizations {

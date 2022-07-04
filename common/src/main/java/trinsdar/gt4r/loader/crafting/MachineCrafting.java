@@ -9,6 +9,7 @@ import muramasa.antimatter.pipe.PipeSize;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.item.Items;
 import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.data.GT4RMaterialTags;
 
 import java.util.function.Consumer;
 
@@ -118,18 +119,18 @@ public class MachineCrafting {
                 GAS_TURBINE.getItem(LV), of('P', PLATES_INVAR_ALUMINIUM, 'W', WINDMILL.getItem(ULV), 'C', CIRCUITS_ADVANCED, 'G', REINFORCED_GLASS), "PCP", "WGW", "PCP");
         //TODO: replace turbine blade with turbine rotor
         provider.addItemRecipe(output, Ref.ID, "steam_turbine", "machines", "has_watermill", provider.hasSafeItem(WATERMILL.getItem(ULV)),
-                STEAM_TURBINE.getItem(LV), of('P', PLATES_STEELS, 'M', MACHINE_HULLS_BASIC, 'C', CIRCUITS_BASIC, 'B', TURBINE_BLADE.getMaterialTag(Bronze)), "PCP", "BMB", "PCP");
+                STEAM_TURBINE.getItem(LV), of('P', PLATES_STEELS, 'M', MACHINE_HULLS_BASIC, 'C', CIRCUITS_BASIC, 'B', GT4RMaterialTags.TURBINE_BLADE.getMaterialTag(Bronze)), "PCP", "BMB", "PCP");
         provider.addItemRecipe(output, Ref.ID, "primitive_blast_furnace", "machines", "has_fire_bricks", provider.hasSafeItem(FireBrick),
                 PRIMITIVE_BLAST_FURNACE.getItem(BRONZE), of('B', FireBrick, 'I', PLATE.getMaterialTag(Iron)), "BBB", "BIB", "BBB");
         provider.addItemRecipe(output, Ref.ID, "coke_oven", "machines", "has_fire_bricks", provider.hasSafeItem(FireBrick),
                 COKE_OVEN.getItem(LV), of('B', FireBrick), "BBB", "B B", "BBB");
         BATTERY_BUFFER_ONE.getTiers().forEach(t -> {
-            provider.addItemRecipe(output, Ref.ID, t.getId() + "_batter_buffer_one", "machines", "has_machine_hull", provider.hasSafeItem(HULL.getMaterialTag(TIER_MATERIALS.get(t))),
-                    BATTERY_BUFFER_ONE.getItem(t), of('H', HULL.get(TIER_MATERIALS.get(t)), 'C', Tags.Items.CHESTS, 'W', TIER_WIRES.get(t).getBlockItem(PipeSize.VTINY)), "WCW", "WHW");
-            provider.addItemRecipe(output, Ref.ID, t.getId() + "_batter_buffer_four", "machines", "has_machine_hull", provider.hasSafeItem(HULL.getMaterialTag(TIER_MATERIALS.get(t))),
-                    BATTERY_BUFFER_FOUR.getItem(t), of('H', HULL.get(TIER_MATERIALS.get(t)), 'C', Tags.Items.CHESTS, 'W', TIER_WIRES.get(t).getBlockItem(PipeSize.SMALL)), "WCW", "WHW");
-            provider.addItemRecipe(output, Ref.ID, t.getId() + "_batter_buffer_eight", "machines", "has_machine_hull", provider.hasSafeItem(HULL.getMaterialTag(TIER_MATERIALS.get(t))),
-                    BATTERY_BUFFER_EIGHT.getItem(t), of('H', HULL.get(TIER_MATERIALS.get(t)), 'C', Tags.Items.CHESTS, 'W', TIER_WIRES.get(t).getBlockItem(PipeSize.NORMAL)), "WCW", "WHW");
+            provider.addItemRecipe(output, Ref.ID, t.getId() + "_batter_buffer_one", "machines", "has_machine_hull", provider.hasSafeItem(GT4RMaterialTags.HULL.getMaterialTag(TIER_MATERIALS.get(t))),
+                    BATTERY_BUFFER_ONE.getItem(t), of('H', GT4RMaterialTags.HULL.get(TIER_MATERIALS.get(t)), 'C', Tags.Items.CHESTS, 'W', TIER_WIRES.get(t).getBlockItem(PipeSize.VTINY)), "WCW", "WHW");
+            provider.addItemRecipe(output, Ref.ID, t.getId() + "_batter_buffer_four", "machines", "has_machine_hull", provider.hasSafeItem(GT4RMaterialTags.HULL.getMaterialTag(TIER_MATERIALS.get(t))),
+                    BATTERY_BUFFER_FOUR.getItem(t), of('H', GT4RMaterialTags.HULL.get(TIER_MATERIALS.get(t)), 'C', Tags.Items.CHESTS, 'W', TIER_WIRES.get(t).getBlockItem(PipeSize.SMALL)), "WCW", "WHW");
+            provider.addItemRecipe(output, Ref.ID, t.getId() + "_batter_buffer_eight", "machines", "has_machine_hull", provider.hasSafeItem(GT4RMaterialTags.HULL.getMaterialTag(TIER_MATERIALS.get(t))),
+                    BATTERY_BUFFER_EIGHT.getItem(t), of('H', GT4RMaterialTags.HULL.get(TIER_MATERIALS.get(t)), 'C', Tags.Items.CHESTS, 'W', TIER_WIRES.get(t).getBlockItem(PipeSize.NORMAL)), "WCW", "WHW");
         });
         provider.addItemRecipe(output, Ref.ID, "drum_bronze", "drums", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),
                 BRONZE_DRUM.getItem(LV), of('H', HAMMER.getTag(), 'R', ROD.getMaterialTag(Bronze), 'P', PLATE.getMaterialTag(Bronze)), " H ", "PRP", "PRP");
@@ -146,8 +147,8 @@ public class MachineCrafting {
         provider.addItemRecipe(output, Ref.ID, "drum_tungstensteel", "drums", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),
                 TUNGSTENSTEEL_DRUM.getItem(LV), of('H', HAMMER.getTag(), 'R', ROD.getMaterialTag(TungstenSteel), 'P', PLATE.getMaterialTag(TungstenSteel)), " H ", "PRP", "PRP");
         TRANSFORMER.getTiers().forEach(t -> {
-            provider.addItemRecipe(output, Ref.ID, t.getId() + "_transformer", "machines", "has_machine_hull", provider.hasSafeItem(HULL.getMaterialTag(TIER_MATERIALS.get(t))),
-                    TRANSFORMER.getItem(t), of( 'C', TIER_CABLES.get(t).getBlockItem(PipeSize.VTINY), 'M', HULL.getMaterialTag(TIER_MATERIALS.get(t)), 'c', TIER_CABLES.get(Tier.getTier(t.getVoltage() * 4)).getBlockItem(PipeSize.VTINY))," CC", "cM ", " CC");
+            provider.addItemRecipe(output, Ref.ID, t.getId() + "_transformer", "machines", "has_machine_hull", provider.hasSafeItem(GT4RMaterialTags.HULL.getMaterialTag(TIER_MATERIALS.get(t))),
+                    TRANSFORMER.getItem(t), of( 'C', TIER_CABLES.get(t).getBlockItem(PipeSize.VTINY), 'M', GT4RMaterialTags.HULL.getMaterialTag(TIER_MATERIALS.get(t)), 'c', TIER_CABLES.get(Tier.getTier(t.getVoltage() * 4)).getBlockItem(PipeSize.VTINY))," CC", "cM ", " CC");
         });
         provider.addItemRecipe(output, Ref.ID, "disassembler", "machines", "has_assembler", provider.hasSafeItem(ASSEMBLER.getItem(LV)),
                 DISASSEMBLER.getItem(LV), of('R', PLATES_STEELS, 'A', EXTRACTOR.getItem(LV), 'W', ASSEMBLER.getItem(LV), 'E', CABLE_TIN.getBlockItem(PipeSize.VTINY), 'C', CIRCUITS_ADVANCED), "RAR", "ECE", "RWR");
@@ -158,7 +159,7 @@ public class MachineCrafting {
         provider.addItemRecipe(output, Ref.ID, "thermal_centrifuge", "machines", "has_hull", provider.hasSafeItem(MACHINE_HULLS_ADVANCED),
                 THERMAL_CENTRIFUGE.getItem(MV), of('m', MotorMV, 'C', CopperCoil, 'M', MACHINE_HULLS_ADVANCED, 'P', PLATE.getMaterialTag(WroughtIron)),"CmC", "PMP", "PmP");
         provider.addItemRecipe(output, Ref.ID, "watermill", "machines", "has_hull", provider.hasSafeItem(MACHINE_HULLS_BASIC),
-                WATERMILL.getItem(ULV), of('M', MACHINE_HULLS_BASIC, 'P', PLATE.getMaterialTag(Steel), 'T', TURBINE_BLADE.getMaterialTag(Bronze), 'C', CopperCoil),"PTP", "CMC", "PTP");
+                WATERMILL.getItem(ULV), of('M', MACHINE_HULLS_BASIC, 'P', PLATE.getMaterialTag(Steel), 'T', GT4RMaterialTags.TURBINE_BLADE.getMaterialTag(Bronze), 'C', CopperCoil),"PTP", "CMC", "PTP");
         provider.addItemRecipe(output, Ref.ID, "bath", "machines", "has_machine_hull_basic", provider.hasSafeItem(MACHINE_HULLS_BASIC),
                 BATH.getItem(LV), of('S', PLATE.getMaterialTag(StainlessSteel), 'M', MACHINE_HULLS_BASIC), "SSS", "S S", "SMS");
         provider.addItemRecipe(output, Ref.ID, "sifter", "machines", "has_machine_hull_basic", provider.hasSafeItem(MACHINE_HULLS_BASIC),
@@ -185,20 +186,20 @@ public class MachineCrafting {
                 QUANTUM_TANK.getItem(MAX), of('P', PLATE.getMaterialTag(Platinum), 'Q', QUANTUM_CHEST.getItem(MAX), 'C', CIRCUITS_MASTER), "CPC", "PQP", "CPC");
         provider.addItemRecipe(output, Ref.ID, "quantum_chest", "machines", "has_data_orb", provider.hasSafeItem(CircuitDataOrb),
                 QUANTUM_CHEST.getItem(MAX), ImmutableMap.<Character, Object>builder().put('D', CircuitDataOrb).put('C', ComputerMonitor).put('H', HIGHLY_ADVANCED_MACHINE_BLOCK).put('T', TELEPORTER.getItem(HV)).put('d', DIGITAL_CHEST.getItem(LV)).build(), "DCD", "HTH", "DdD");
-        CABINET.all().forEach(m -> {
+        GT4RMaterialTags.CABINET.all().forEach(m -> {
             provider.addItemRecipe(output, Ref.ID, "cabinet_" + m.getId(), "machines", "has_chest", provider.hasSafeItem(Tags.Items.CHESTS_WOODEN), Machine.get(m.getId() + "_cabinet", Ref.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR), of('P', PLATE.getMaterialTag(m), 'C', Tags.Items.CHESTS_WOODEN), "PPP", "CPC", "PPP");
             provider.addItemRecipe(output, Ref.ID, "chest_" + m.getId(), "machines", "has_chest", provider.hasSafeItem(Tags.Items.CHESTS_WOODEN), Machine.get(m.getId() + "_chest", Ref.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR), of('P', PLATE.getMaterialTag(m), 'C', Tags.Items.CHESTS_WOODEN, 'R', ROD.getMaterialTag(m), 'S', SAW.getTag(), 'W', WRENCH.getTag()), "SPW", "RCR", "PPP");
         });
-        WORKBENCH.all().forEach(m -> {
+        GT4RMaterialTags.WORKBENCH.all().forEach(m -> {
             provider.addItemRecipe(output, Ref.ID, "workbench_" + m.getId(), "machines", "has_chest", provider.hasSafeItem(Tags.Items.CHESTS_WOODEN), Machine.get(m.getId() + "_workbench", Ref.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR), of('P', PLATE.getMaterialTag(m), 'C', Tags.Items.CHESTS_WOODEN, 'c', Items.CRAFTING_TABLE, 'S', SCREWDRIVER.getTag()), "PSP", "PcP", "PCP");
         });
-        CHARGING_WORKBENCH.all().forEach(m -> {
+        GT4RMaterialTags.CHARGING_WORKBENCH.all().forEach(m -> {
             provider.addItemRecipe(output, Ref.ID, "charging_workbench_" + m.getId(), "machines", "has_chest", provider.hasSafeItem(Tags.Items.CHESTS_WOODEN), Machine.get(m.getId() + "_charging_workbench", Ref.ID).map(mch -> mch.getItem(HV)).orElse(Items.AIR), of2('S', SCREWDRIVER.getTag(), 'w', WIRE_CUTTER.getTag(), 'W', Machine.get(m.getId() + "_workbench", Ref.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR), 'c', CABLE_GOLD.getBlockItem(PipeSize.SMALL), 'C', CIRCUITS_ADVANCED, 'R', ROD.getMaterialTag(m)), "RCR", "SWw", "ccc");
         });
-        LOCKER.all().forEach(m -> {
-            provider.addItemRecipe(output, Ref.ID, "locker_" + m.getId(), "machines", "has_chest", provider.hasSafeItem(Machine.get(m.getId() + "_cabinet", Ref.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR)), Machine.get(m.getId() + "_locker", Ref.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR), of('P', PLATE.getMaterialTag(m), 'R', ROD.getMaterialTag(m), 'L', Items.LEATHER, 'C', Machine.get(m.getId() + "_cabinet", Ref.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR), 'M', HULL.getMaterialTag(m)), "RLR", "LCL", "PMP");
+        GT4RMaterialTags.LOCKER.all().forEach(m -> {
+            provider.addItemRecipe(output, Ref.ID, "locker_" + m.getId(), "machines", "has_chest", provider.hasSafeItem(Machine.get(m.getId() + "_cabinet", Ref.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR)), Machine.get(m.getId() + "_locker", Ref.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR), of('P', PLATE.getMaterialTag(m), 'R', ROD.getMaterialTag(m), 'L', Items.LEATHER, 'C', Machine.get(m.getId() + "_cabinet", Ref.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR), 'M', GT4RMaterialTags.HULL.getMaterialTag(m)), "RLR", "LCL", "PMP");
         });
-        CHARGING_LOCKER.all().forEach(m -> {
+        GT4RMaterialTags.CHARGING_LOCKER.all().forEach(m -> {
             provider.addItemRecipe(output, Ref.ID, "charging_locker_" + m.getId(), "machines", "has_chest", provider.hasSafeItem(Machine.get(m.getId() + "_locker", Ref.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR)), Machine.get(m.getId() + "_charging_locker", Ref.ID).map(mch -> mch.getItem(HV)).orElse(Items.AIR), of('L', Machine.get(m.getId() + "_locker", Ref.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR), 'c', CABLE_GOLD.getBlockItem(PipeSize.VTINY), 'C', CIRCUITS_ADVANCED), "cCc", "cLc", "cCc");
         });
         provider.addItemRecipe(output, Ref.ID, "fermenter", "machines", "has_machine_hull_basic", provider.hasSafeItem(MACHINE_HULLS_BASIC), FERMENTER.getItem(LV), of('C', CIRCUITS_BASIC, 'G', Tags.Items.GLASS, 'M', MACHINE_HULLS_BASIC, 'P', PumpModule), " P ", "GMG", " C ");

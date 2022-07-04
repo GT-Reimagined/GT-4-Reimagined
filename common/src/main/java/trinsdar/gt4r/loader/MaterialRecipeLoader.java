@@ -18,10 +18,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.tags.Tag;
 import net.minecraft.resources.ResourceLocation;
 import trinsdar.gt4r.GT4RConfig;
 import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.data.GT4RMaterialTags;
 
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -48,16 +48,16 @@ public class MaterialRecipeLoader {
         if (AntimatterAPI.isModLoaded(Ref.MOD_BLUEPOWER)){
             provider.shapeless(output, "amethyst_gem_convert", "gems", "has_gem", provider.hasSafeItem(GEM.getMaterialTag(Amethyst)), GEM.get(Amethyst, 1), AntimatterPlatformUtils.getItemFromID(new ResourceLocation(Ref.MOD_BLUEPOWER, "amethyst_gem")));
         }
-        HULL.all().forEach(m -> {
-            provider.addItemRecipe(output, Ref.ID, m.getId() + "_hull", "hulls", "has_wrench", provider.hasSafeItem(WRENCH.getTag()), HULL.get(m), ImmutableMap.of('P', PLATE.getMaterialTag(m), 'W', WRENCH.getTag()), "PPP", "PWP", "PPP");
+        GT4RMaterialTags.HULL.all().forEach(m -> {
+            provider.addItemRecipe(output, Ref.ID, m.getId() + "_hull", "hulls", "has_wrench", provider.hasSafeItem(WRENCH.getTag()), GT4RMaterialTags.HULL.get(m), ImmutableMap.of('P', PLATE.getMaterialTag(m), 'W', WRENCH.getTag()), "PPP", "PWP", "PPP");
         });
-        TURBINE_BLADE.all().forEach(m -> {
-            provider.addItemRecipe(output, Ref.ID, m.getId() + "_turbine_blade", "turbine_blades", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), TURBINE_BLADE.get(m), ImmutableMap.of('P', PLATE.getMaterialTag(m), 'H', HAMMER.getTag(), 'F', FILE.getTag()), " H ", "PPP", " F ");
+        GT4RMaterialTags.TURBINE_BLADE.all().forEach(m -> {
+            provider.addItemRecipe(output, Ref.ID, m.getId() + "_turbine_blade", "turbine_blades", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), GT4RMaterialTags.TURBINE_BLADE.get(m), ImmutableMap.of('P', PLATE.getMaterialTag(m), 'H', HAMMER.getTag(), 'F', FILE.getTag()), " H ", "PPP", " F ");
         });
-        TURBINE_ROTOR.all().forEach(m -> {
-            if (m.has(TURBINE_BLADE) && (m.has(BLOCK) || m == Carbon)){
+        GT4RMaterialTags.TURBINE_ROTOR.all().forEach(m -> {
+            if (m.has(GT4RMaterialTags.TURBINE_BLADE) && (m.has(BLOCK) || m == Carbon)){
                 TagKey<Item> center = m == Carbon ? PLATE.getMaterialTag(Carbon) : BLOCK.getMaterialTag(m);
-                provider.addItemRecipe(output, Ref.ID, m.getId() + "_turbine_rotor", "turbine_rotors", "has_turbine_blade", provider.hasSafeItem(TURBINE_BLADE.getMaterialTag(m)), TURBINE_ROTOR.get(m), ImmutableMap.of('T', TURBINE_BLADE.getMaterialTag(m), 'C', center), "TTT", "TCT", "TTT");
+                provider.addItemRecipe(output, Ref.ID, m.getId() + "_turbine_rotor", "turbine_rotors", "has_turbine_blade", provider.hasSafeItem(GT4RMaterialTags.TURBINE_BLADE.getMaterialTag(m)), GT4RMaterialTags.TURBINE_ROTOR.get(m), ImmutableMap.of('T', GT4RMaterialTags.TURBINE_BLADE.getMaterialTag(m), 'C', center), "TTT", "TCT", "TTT");
             }
 
         });
@@ -186,21 +186,21 @@ public class MaterialRecipeLoader {
                 SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("smooth")), c.getBlock("smooth_wall")).unlockedBy("has_smooth", provider.hasSafeItem(c.getBlock("smooth"))).save(output, m.getId() + "_smooth_wall");
             }
         });
-        provider.addToolRecipe(DUST_BUILDER.get(PICKAXE_HEAD.getId()), output, Ref.ANTIMATTER, "pickaxe_head", "antimatter_dusts",
-                "has_wrench", in, PICKAXE_HEAD.all().stream().filter(t -> MaterialTags.TOOLS.getToolData(t).toolTypes().contains(PICKAXE)).map(t -> PICKAXE_HEAD.get(t,1)).collect(Collectors.toList()), of('P', PropertyIngredient.builder("primary").types(PLATE, GEM).tags(PICKAXE_HEAD).tool(PICKAXE, true).build(), 'I', PropertyIngredient.builder("primary").types(INGOT, GEM).tags(PICKAXE_HEAD).tool(PICKAXE, true).build(), 'H', HAMMER.getTag(), 'F', FILE.getTag()), "PII", "F H");
-        provider.addToolRecipe(DUST_BUILDER.get(AXE_HEAD.getId()), output, Ref.ANTIMATTER, "axe_head", "antimatter_dusts",
-                "has_wrench", in, AXE_HEAD.all().stream().filter(t -> MaterialTags.TOOLS.getToolData(t).toolTypes().contains(AXE)).map(t -> AXE_HEAD.get(t,1)).collect(Collectors.toList()), of('P', PropertyIngredient.builder("primary").types(PLATE, GEM).tags(AXE_HEAD).tool(AXE, true).build(), 'I', PropertyIngredient.builder("primary").types(INGOT, GEM).tags(AXE_HEAD).tool(AXE, true).build(), 'H', HAMMER.getTag(), 'F', FILE.getTag()), "PIH", "P  ", "F  ");
-        provider.addToolRecipe(DUST_BUILDER.get(SHOVEL_HEAD.getId()), output, Ref.ANTIMATTER, "shovel_head", "antimatter_dusts",
-                "has_wrench", in, SHOVEL_HEAD.all().stream().filter(t -> MaterialTags.TOOLS.getToolData(t).toolTypes().contains(SHOVEL)).map(t -> SHOVEL_HEAD.get(t,1)).collect(Collectors.toList()), of('P', PropertyIngredient.builder("primary").types(PLATE, GEM).tags(SHOVEL_HEAD).tool(SHOVEL, true).build(), 'H', HAMMER.getTag(), 'F', FILE.getTag()), "FPH");
-        provider.addToolRecipe(DUST_BUILDER.get(SWORD_HEAD.getId()), output, Ref.ANTIMATTER, "sword_head", "antimatter_dusts",
-                "has_wrench", in, SWORD_HEAD.all().stream().filter(t -> MaterialTags.TOOLS.getToolData(t).toolTypes().contains(SWORD)).map(t -> SWORD_HEAD.get(t,1)).collect(Collectors.toList()), of('P', PropertyIngredient.builder("primary").types(PLATE, GEM).tags(SWORD_HEAD).tool(SWORD, true).build(), 'H', HAMMER.getTag(), 'F', FILE.getTag()), " P ", "FPH");
-        provider.addToolRecipe(DUST_BUILDER.get(HOE_HEAD.getId()), output, Ref.ANTIMATTER, "hoe_head", "antimatter_dusts",
-                "has_wrench", in, HOE_HEAD.all().stream().filter(t -> MaterialTags.TOOLS.getToolData(t).toolTypes().contains(HOE)).map(t -> HOE_HEAD.get(t,1)).collect(Collectors.toList()), of('P', PropertyIngredient.builder("primary").types(PLATE, GEM).tags(HOE_HEAD).tool(HOE, true).build(), 'I', PropertyIngredient.builder("primary").types(INGOT, GEM).tags(HOE_HEAD).tool(HOE, true).build(), 'H', HAMMER.getTag(), 'F', FILE.getTag()), "PIH", "F  ");
-        provider.addToolRecipe(DUST_BUILDER.get(HAMMER_HEAD.getId()), output, Ref.ANTIMATTER, "hammer_head", "antimatter_dusts",
-                "has_wrench", in, HAMMER_HEAD.all().stream().filter(t -> MaterialTags.TOOLS.getToolData(t).toolTypes().contains(HAMMER)).map(t -> HAMMER_HEAD.get(t,1)).collect(Collectors.toList()), of('I', PropertyIngredient.builder("primary").types(INGOT, GEM).tags(HAMMER_HEAD).tool(HAMMER, true).build(), 'H', HAMMER.getTag()), "II ", "IIH", "II ");
-        provider.addToolRecipe(DUST_BUILDER.get(SAW_HEAD.getId()), output, Ref.ANTIMATTER, "saw_head", "antimatter_dusts",
-                "has_wrench", in, SAW_HEAD.all().stream().filter(t -> MaterialTags.TOOLS.getToolData(t).toolTypes().contains(SAW)).map(t -> SAW_HEAD.get(t,1)).collect(Collectors.toList()), of('P', PropertyIngredient.builder("primary").types(PLATE, GEM).tags(SAW_HEAD).tool(SAW, true).build(), 'H', HAMMER.getTag(), 'F', FILE.getTag()), "PP", "FH");
-        provider.addToolRecipe(DUST_BUILDER.get(FILE_HEAD.getId()), output, Ref.ANTIMATTER, "file_head", "antimatter_dusts",
-                "has_wrench", in, FILE_HEAD.all().stream().filter(t -> MaterialTags.TOOLS.getToolData(t).toolTypes().contains(FILE)).map(t -> FILE_HEAD.get(t,1)).collect(Collectors.toList()), of('P', PropertyIngredient.builder("primary").types(PLATE, GEM).tags(FILE_HEAD).tool(FILE, true).build(), 'H', HAMMER.getTag(), 'F', FILE.getTag()), "FPH", " P ");
+        provider.addToolRecipe(DUST_BUILDER.get(GT4RMaterialTags.PICKAXE_HEAD.getId()), output, Ref.ANTIMATTER, "pickaxe_head", "antimatter_dusts",
+                "has_wrench", in, GT4RMaterialTags.PICKAXE_HEAD.all().stream().filter(t -> MaterialTags.TOOLS.getToolData(t).toolTypes().contains(PICKAXE)).map(t -> GT4RMaterialTags.PICKAXE_HEAD.get(t,1)).collect(Collectors.toList()), of('P', PropertyIngredient.builder("primary").types(PLATE, GEM).tags(GT4RMaterialTags.PICKAXE_HEAD).tool(PICKAXE, true).build(), 'I', PropertyIngredient.builder("primary").types(INGOT, GEM).tags(GT4RMaterialTags.PICKAXE_HEAD).tool(PICKAXE, true).build(), 'H', HAMMER.getTag(), 'F', FILE.getTag()), "PII", "F H");
+        provider.addToolRecipe(DUST_BUILDER.get(GT4RMaterialTags.AXE_HEAD.getId()), output, Ref.ANTIMATTER, "axe_head", "antimatter_dusts",
+                "has_wrench", in, GT4RMaterialTags.AXE_HEAD.all().stream().filter(t -> MaterialTags.TOOLS.getToolData(t).toolTypes().contains(AXE)).map(t -> GT4RMaterialTags.AXE_HEAD.get(t,1)).collect(Collectors.toList()), of('P', PropertyIngredient.builder("primary").types(PLATE, GEM).tags(GT4RMaterialTags.AXE_HEAD).tool(AXE, true).build(), 'I', PropertyIngredient.builder("primary").types(INGOT, GEM).tags(GT4RMaterialTags.AXE_HEAD).tool(AXE, true).build(), 'H', HAMMER.getTag(), 'F', FILE.getTag()), "PIH", "P  ", "F  ");
+        provider.addToolRecipe(DUST_BUILDER.get(GT4RMaterialTags.SHOVEL_HEAD.getId()), output, Ref.ANTIMATTER, "shovel_head", "antimatter_dusts",
+                "has_wrench", in, GT4RMaterialTags.SHOVEL_HEAD.all().stream().filter(t -> MaterialTags.TOOLS.getToolData(t).toolTypes().contains(SHOVEL)).map(t -> GT4RMaterialTags.SHOVEL_HEAD.get(t,1)).collect(Collectors.toList()), of('P', PropertyIngredient.builder("primary").types(PLATE, GEM).tags(GT4RMaterialTags.SHOVEL_HEAD).tool(SHOVEL, true).build(), 'H', HAMMER.getTag(), 'F', FILE.getTag()), "FPH");
+        provider.addToolRecipe(DUST_BUILDER.get(GT4RMaterialTags.SWORD_HEAD.getId()), output, Ref.ANTIMATTER, "sword_head", "antimatter_dusts",
+                "has_wrench", in, GT4RMaterialTags.SWORD_HEAD.all().stream().filter(t -> MaterialTags.TOOLS.getToolData(t).toolTypes().contains(SWORD)).map(t -> GT4RMaterialTags.SWORD_HEAD.get(t,1)).collect(Collectors.toList()), of('P', PropertyIngredient.builder("primary").types(PLATE, GEM).tags(GT4RMaterialTags.SWORD_HEAD).tool(SWORD, true).build(), 'H', HAMMER.getTag(), 'F', FILE.getTag()), " P ", "FPH");
+        provider.addToolRecipe(DUST_BUILDER.get(GT4RMaterialTags.HOE_HEAD.getId()), output, Ref.ANTIMATTER, "hoe_head", "antimatter_dusts",
+                "has_wrench", in, GT4RMaterialTags.HOE_HEAD.all().stream().filter(t -> MaterialTags.TOOLS.getToolData(t).toolTypes().contains(HOE)).map(t -> GT4RMaterialTags.HOE_HEAD.get(t,1)).collect(Collectors.toList()), of('P', PropertyIngredient.builder("primary").types(PLATE, GEM).tags(GT4RMaterialTags.HOE_HEAD).tool(HOE, true).build(), 'I', PropertyIngredient.builder("primary").types(INGOT, GEM).tags(GT4RMaterialTags.HOE_HEAD).tool(HOE, true).build(), 'H', HAMMER.getTag(), 'F', FILE.getTag()), "PIH", "F  ");
+        provider.addToolRecipe(DUST_BUILDER.get(GT4RMaterialTags.HAMMER_HEAD.getId()), output, Ref.ANTIMATTER, "hammer_head", "antimatter_dusts",
+                "has_wrench", in, GT4RMaterialTags.HAMMER_HEAD.all().stream().filter(t -> MaterialTags.TOOLS.getToolData(t).toolTypes().contains(HAMMER)).map(t -> GT4RMaterialTags.HAMMER_HEAD.get(t,1)).collect(Collectors.toList()), of('I', PropertyIngredient.builder("primary").types(INGOT, GEM).tags(GT4RMaterialTags.HAMMER_HEAD).tool(HAMMER, true).build(), 'H', HAMMER.getTag()), "II ", "IIH", "II ");
+        provider.addToolRecipe(DUST_BUILDER.get(GT4RMaterialTags.SAW_HEAD.getId()), output, Ref.ANTIMATTER, "saw_head", "antimatter_dusts",
+                "has_wrench", in, GT4RMaterialTags.SAW_HEAD.all().stream().filter(t -> MaterialTags.TOOLS.getToolData(t).toolTypes().contains(SAW)).map(t -> GT4RMaterialTags.SAW_HEAD.get(t,1)).collect(Collectors.toList()), of('P', PropertyIngredient.builder("primary").types(PLATE, GEM).tags(GT4RMaterialTags.SAW_HEAD).tool(SAW, true).build(), 'H', HAMMER.getTag(), 'F', FILE.getTag()), "PP", "FH");
+        provider.addToolRecipe(DUST_BUILDER.get(GT4RMaterialTags.FILE_HEAD.getId()), output, Ref.ANTIMATTER, "file_head", "antimatter_dusts",
+                "has_wrench", in, GT4RMaterialTags.FILE_HEAD.all().stream().filter(t -> MaterialTags.TOOLS.getToolData(t).toolTypes().contains(FILE)).map(t -> GT4RMaterialTags.FILE_HEAD.get(t,1)).collect(Collectors.toList()), of('P', PropertyIngredient.builder("primary").types(PLATE, GEM).tags(GT4RMaterialTags.FILE_HEAD).tool(FILE, true).build(), 'H', HAMMER.getTag(), 'F', FILE.getTag()), "FPH", " P ");
     }
 }

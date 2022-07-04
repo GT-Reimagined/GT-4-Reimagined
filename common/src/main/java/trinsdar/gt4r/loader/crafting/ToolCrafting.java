@@ -12,7 +12,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.ItemStack;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.CustomTags;
-import trinsdar.gt4r.data.Materials;
+import trinsdar.gt4r.data.GT4RMaterialTags;
 import trinsdar.gt4r.data.ToolTypes;
 
 import java.util.Collections;
@@ -38,9 +38,9 @@ public class ToolCrafting {
 
     private static void loadPoweredRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider){
         CriterionTriggerInstance in = provider.hasSafeItem(SCREWDRIVER.getTag());
-        provider.addToolRecipe(ToolTypes.POWERED_TOOL_BUILDER.get(ROCK_CUTTER.getId()), output, Ref.ID, "rock_cutter_1", "rock_cutters", "has_screwdriver", in, ROCK_CUTTER.getToolStack(NULL, NULL), of('D', PropertyIngredient.builder("primary").types(DUST).tags(Materials.ROCK_CUTTER).build(), 'P', PropertyIngredient.builder("secondary").mats(Titanium, TungstenSteel).types(PLATE).build(), 'R', PropertyIngredient.builder("secondary").mats(Titanium, TungstenSteel).types(ROD).build(), 'C', CustomTags.CIRCUITS_BASIC, 'B', PropertyIngredient.builder("battery").itemTags(CustomTags.BATTERIES_SMALL).build()), "DR ", "DP ", "DCB");
+        provider.addToolRecipe(ToolTypes.POWERED_TOOL_BUILDER.get(ROCK_CUTTER.getId()), output, Ref.ID, "rock_cutter_1", "rock_cutters", "has_screwdriver", in, ROCK_CUTTER.getToolStack(NULL, NULL), of('D', PropertyIngredient.builder("primary").types(DUST).tags(GT4RMaterialTags.ROCK_CUTTER).build(), 'P', PropertyIngredient.builder("secondary").mats(Titanium, TungstenSteel).types(PLATE).build(), 'R', PropertyIngredient.builder("secondary").mats(Titanium, TungstenSteel).types(ROD).build(), 'C', CustomTags.CIRCUITS_BASIC, 'B', PropertyIngredient.builder("battery").itemTags(CustomTags.BATTERIES_SMALL).build()), "DR ", "DP ", "DCB");
         provider.addToolRecipe(ToolTypes.UNIT_POWERED_TOOL_BUILDER.get(ROCK_CUTTER.getId()),output, Ref.ID, ROCK_CUTTER.getId() + "_power_unit_recipe", "rock_cutters",
-                "has_screwdriver", in, ROCK_CUTTER.getToolStack(NULL, NULL), of('D', PropertyIngredient.builder("primary").types(DUST).tags(Materials.ROCK_CUTTER).build(), 'S', FILE.getTag(), 'P', PropertyIngredient.builder("secondary").itemTags(POWER_UNIT_ROCK_CUTTER).build()), "DS", "DP", "D ");
+                "has_screwdriver", in, ROCK_CUTTER.getToolStack(NULL, NULL), of('D', PropertyIngredient.builder("primary").types(DUST).tags(GT4RMaterialTags.ROCK_CUTTER).build(), 'S', FILE.getTag(), 'P', PropertyIngredient.builder("secondary").itemTags(POWER_UNIT_ROCK_CUTTER).build()), "DS", "DP", "D ");
 
 
         IAntimatterTool drill_lv = AntimatterAPI.get(IAntimatterTool.class, "drill_lv", Ref.ANTIMATTER);
@@ -134,28 +134,28 @@ public class ToolCrafting {
                 "has_flint", provider.hasSafeItem(GEM.getMaterialTag(Flint)), ToolTypes.SPEAR.getToolStack(Flint, NULL), of('I', PropertyIngredient.builder("primary").types(GEM).tags(FLINT).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "  I", " R ", "R  ");
 
         provider.addToolRecipe(TOOL_BUILDER.get(PICKAXE.getId()), output, Ref.ANTIMATTER, PICKAXE.getId() + "__recipe_with_head", "antimatter_files",
-                "has_wrench", in, PICKAXE.getToolStack(NULL, NULL), of('P', PropertyIngredient.builder("primary").types(PICKAXE_HEAD).tool(PICKAXE, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
+                "has_wrench", in, PICKAXE.getToolStack(NULL, NULL), of('P', PropertyIngredient.builder("primary").types(GT4RMaterialTags.PICKAXE_HEAD).tool(PICKAXE, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
 
         provider.addToolRecipe(TOOL_BUILDER.get(AXE.getId()), output, Ref.ANTIMATTER, AXE.getId() + "__recipe_with_head", "antimatter_files",
-                "has_wrench", in, AXE.getToolStack(NULL, NULL), of('P', PropertyIngredient.builder("primary").types(AXE_HEAD).tool(AXE, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
+                "has_wrench", in, AXE.getToolStack(NULL, NULL), of('P', PropertyIngredient.builder("primary").types(GT4RMaterialTags.AXE_HEAD).tool(AXE, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
 
         provider.addToolRecipe(TOOL_BUILDER.get(SHOVEL.getId()), output, Ref.ANTIMATTER, SHOVEL.getId() + "__recipe_with_head", "antimatter_files",
-                "has_wrench", in, SHOVEL.getToolStack(NULL, NULL), of('P', PropertyIngredient.builder("primary").types(SHOVEL_HEAD).tool(SHOVEL, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
+                "has_wrench", in, SHOVEL.getToolStack(NULL, NULL), of('P', PropertyIngredient.builder("primary").types(GT4RMaterialTags.SHOVEL_HEAD).tool(SHOVEL, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
 
         provider.addToolRecipe(TOOL_BUILDER.get(SWORD.getId()), output, Ref.ANTIMATTER, SWORD.getId() + "__recipe_with_head", "antimatter_files",
-                "has_wrench", in, SWORD.getToolStack(NULL, NULL), of('P', PropertyIngredient.builder("primary").types(SWORD_HEAD).tool(SWORD, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
+                "has_wrench", in, SWORD.getToolStack(NULL, NULL), of('P', PropertyIngredient.builder("primary").types(GT4RMaterialTags.SWORD_HEAD).tool(SWORD, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
 
         provider.addToolRecipe(TOOL_BUILDER.get(HOE.getId()), output, Ref.ANTIMATTER, HOE.getId() + "__recipe_with_head", "antimatter_files",
-                "has_wrench", in, HOE.getToolStack(NULL, NULL), of('P', PropertyIngredient.builder("primary").types(HOE_HEAD).tool(HOE, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
+                "has_wrench", in, HOE.getToolStack(NULL, NULL), of('P', PropertyIngredient.builder("primary").types(GT4RMaterialTags.HOE_HEAD).tool(HOE, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
 
         provider.addToolRecipe(TOOL_BUILDER.get(HAMMER.getId()), output, Ref.ANTIMATTER, HAMMER.getId() + "__recipe_with_head", "antimatter_files",
-                "has_wrench", in, HAMMER.getToolStack(NULL, NULL), of('P', PropertyIngredient.builder("primary").types(HAMMER_HEAD).tool(HAMMER, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
+                "has_wrench", in, HAMMER.getToolStack(NULL, NULL), of('P', PropertyIngredient.builder("primary").types(GT4RMaterialTags.HAMMER_HEAD).tool(HAMMER, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
 
         provider.addToolRecipe(TOOL_BUILDER.get(FILE.getId()), output, Ref.ANTIMATTER, FILE.getId() + "__recipe_with_head", "antimatter_files",
-                "has_wrench", in, FILE.getToolStack(NULL, NULL), of('P', PropertyIngredient.builder("primary").types(FILE_HEAD).tool(FILE, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
+                "has_wrench", in, FILE.getToolStack(NULL, NULL), of('P', PropertyIngredient.builder("primary").types(GT4RMaterialTags.FILE_HEAD).tool(FILE, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
 
         provider.addToolRecipe(TOOL_BUILDER.get(SAW.getId()), output, Ref.ANTIMATTER, SAW.getId() + "__recipe_with_head", "antimatter_files",
-                "has_wrench", in, SAW.getToolStack(NULL, NULL), of('P', PropertyIngredient.builder("primary").types(SAW_HEAD).tool(SAW, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
+                "has_wrench", in, SAW.getToolStack(NULL, NULL), of('P', PropertyIngredient.builder("primary").types(GT4RMaterialTags.SAW_HEAD).tool(SAW, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
     }
 
 

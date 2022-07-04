@@ -2,26 +2,11 @@ package trinsdar.gt4r.worldgen;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import muramasa.antimatter.material.Material;
 import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import net.minecraftforge.common.BiomeDictionary;
-import org.lwjgl.system.macosx.LibSystem;
-import trinsdar.gt4r.config.OreConfigHandler;
-import trinsdar.gt4r.config.OreConfigNode;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import static muramasa.antimatter.Data.NULL;
 import static muramasa.antimatter.Data.ORE;
 import static trinsdar.gt4r.data.Materials.RockSalt;
 import static trinsdar.gt4r.data.Materials.Salt;
@@ -41,12 +26,6 @@ public class GT4ROreFeatureConfig implements FeatureConfiguration {
             return config.secondary;
         }), Codec.FLOAT.fieldOf("secondaryChance").forGetter(config -> {
             return config.secondaryChance;
-        }), Codec.list(Level.RESOURCE_KEY_CODEC).fieldOf("dimension").forGetter((config) ->{
-            return config.dimensions;
-        }), Codec.list(Codec.STRING).fieldOf("biomeTypesID").forGetter((config) ->{
-            return config.biomeTypesID;
-        }), Codec.list(Codec.STRING).fieldOf("invalidBiomeTypesID").forGetter((config) ->{
-            return config.invalidBiomeTypesID;
         })).apply(p_236568_0_, GT4ROreFeatureConfig::new);
     });
     private final String id;
@@ -54,14 +33,8 @@ public class GT4ROreFeatureConfig implements FeatureConfiguration {
     private String primary, secondary;
     final int size;
     final float secondaryChance, discardOnExposureChance;
-    private List<ResourceKey<Level>> dimensions;
-    private Set<ResourceLocation> dimensionLocations;
 
-   private FilterContext filter;
-    private List<String> biomeTypesID = new ArrayList<>();
-    private List<String> invalidBiomeTypesID = new ArrayList<>();
-
-    public GT4ROreFeatureConfig(String id, int size, float discardOnExposureChance, String primary, String secondary, float secondaryChance, List<ResourceKey<Level>> dimensions) {
+    public GT4ROreFeatureConfig(String id, int size, float discardOnExposureChance, String primary, String secondary, float secondaryChance) {
         this.id = id;
         this.size = size;
         this.secondaryChance = secondaryChance;
@@ -78,24 +51,10 @@ public class GT4ROreFeatureConfig implements FeatureConfiguration {
         /*if (secondary != null){
             this.secondary = secondary;
         }*/
-        this.dimensions = dimensions;
-        this.dimensionLocations = this.dimensions.stream().map(ResourceKey::location).collect(Collectors.toCollection(ObjectOpenHashSet::new));
-        this.filter = b -> true;
     }
 
-    public GT4ROreFeatureConfig(String id, int size, float discardOnExposureChance, String primary, String secondary, float secondaryChance, List<ResourceKey<Level>> dimensions, FilterContext filter) {
-        this(id, size, discardOnExposureChance, primary, secondary, secondaryChance, dimensions);
-        this.filter = filter;
-    }
-
-    public GT4ROreFeatureConfig(String id, int size, float discardOnExposureChance, Material primary, Material secondary, float secondaryChance, List<ResourceKey<Level>> dimensions) {
-        this(id, size, discardOnExposureChance, primary.getId(), secondary.getId(), secondaryChance, dimensions);
-    }
-
-    public GT4ROreFeatureConfig setValidBiomes(List<BiomeDictionary.Type> types){
-        biomeTypes = types;
-        biomeTypesID = types.stream().map(BiomeDictionary.Type::getName).collect(Collectors.toList());
-        return this;
+    public GT4ROreFeatureConfig(String id, int size, float discardOnExposureChance, Material primary, Material secondary, float secondaryChance) {
+        this(id, size, discardOnExposureChance, primary.getId(), secondary.getId(), secondaryChance);
     }
 
     public String getId() {
@@ -120,14 +79,6 @@ public class GT4ROreFeatureConfig implements FeatureConfiguration {
 
     public float getDiscardOnExposureChance() {
         return discardOnExposureChance;
-    }
-
-    public Set<ResourceLocation> getDimensionLocations() {
-        return dimensionLocations;
-    }
-
-    public FilterContext getFilter() {
-        return filter;
     }
 
     @FunctionalInterface

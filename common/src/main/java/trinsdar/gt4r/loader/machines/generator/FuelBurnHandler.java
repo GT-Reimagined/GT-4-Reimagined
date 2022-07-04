@@ -8,7 +8,7 @@ import static muramasa.antimatter.Data.GAS;
 import static muramasa.antimatter.Data.LIQUID;
 import static trinsdar.gt4r.data.Materials.DistilledWater;
 import static trinsdar.gt4r.data.Materials.NitroDiesel;
-import static trinsdar.gt4r.data.Materials.SEMIFLUID;
+import static trinsdar.gt4r.data.GT4RMaterialTags.SEMIFLUID;
 import static trinsdar.gt4r.data.Materials.Steam;
 import static trinsdar.gt4r.data.RecipeMaps.*;
 
