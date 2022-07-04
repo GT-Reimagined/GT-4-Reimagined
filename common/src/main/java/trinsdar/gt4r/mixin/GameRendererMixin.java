@@ -49,7 +49,7 @@ public abstract class GameRendererMixin {
 
     @Redirect(
             method = "pick",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/PlayerController;getPickRange()F")
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/MultiPlayerGameMode;getPickRange()F")
     )
     private float getRedirectedAttackReach(MultiPlayerGameMode controller){
         if (minecraft.player == null || minecraft.player.getMainHandItem().getItem() != ToolTypes.SPEAR.getToolStack(Data.NULL, Data.NULL).getItem()) return controller.getPickRange();
