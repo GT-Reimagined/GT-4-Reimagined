@@ -29,7 +29,7 @@ public class SlotTypes {
     public static SlotType<AbstractSlot<?>> TOOLS = new SlotType<>("tools", (type, gui, item, i, d) -> new AbstractSlot<>(type, gui, item.getOrDefault(type, new EmptyHandler()), i, d.getX(), d.getY()), (t, i) -> i.getItem() instanceof IAntimatterTool || i.getItem().canBeDepleted(), ContentEvent.ITEM_INPUT_CHANGED);
     public static SlotType<AbstractSlot<?>> TOOL_CHARGE = new SlotType<>("tool_charge", (type, gui, item, i, d) -> new AbstractSlot<>(type,gui, item.getOrDefault(type, new EmptyHandler()), i, d.getX(), d.getY()), (t, i) -> {
         if (t instanceof ICapabilityProvider) {
-            return ((ICapabilityProvider)t).getCapability(TesseractCaps.getENERGY_HANDLER_CAPABILITY()).map(eh -> i.getCapability(TesseractGTCapability.ENERGY_HANDLER_CAPABILITY).map(inner -> ((inner.getInputVoltage() | inner.getOutputVoltage()) <= (eh.getInputVoltage() | eh.getOutputVoltage()) )).orElse(false)).orElse(false) || i.getItem() instanceof IAntimatterTool || i.getItem().canBeDepleted();
+            return ((ICapabilityProvider)t).getCapability(TesseractCaps.getENERGY_HANDLER_CAPABILITY()).map(eh -> i.getCapability(TesseractCaps.getENERGY_HANDLER_CAPABILITY()).map(inner -> ((inner.getInputVoltage() | inner.getOutputVoltage()) <= (eh.getInputVoltage() | eh.getOutputVoltage()) )).orElse(false)).orElse(false) || i.getItem() instanceof IAntimatterTool || i.getItem().canBeDepleted();
         }
         return true;
     }, ContentEvent.ITEM_INPUT_CHANGED);

@@ -85,7 +85,7 @@ public class TileEntityDrum extends TileEntityMaterial<TileEntityDrum> {
         List<String> list = super.getInfo();
         fluidHandler.ifPresent(f -> {
             FluidStack stack = f.getInputTanks().getFluidInTank(0);
-            list.add("Fluid: " + (stack.isEmpty() ? "Empty" : stack.getAmount() + "mb of " + stack.getFluid().getAttributes().getDisplayName(stack)));
+            list.add("Fluid: " + (stack.isEmpty() ? "Empty" : stack.getAmount() + "mb of " + stack.getFluid().getAttributes().getDisplayName(stack.toPortingLibStack())));
         });
         return list;
     }

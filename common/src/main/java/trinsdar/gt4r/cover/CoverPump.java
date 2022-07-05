@@ -78,7 +78,7 @@ public class CoverPump extends CoverBasicTransport {
     protected boolean canMove(Direction side){
         String name = getCoverMode().getName();
         if (name.contains("Conditional")){
-            boolean powered = handler.getTile().getCapability(AntimatterCaps.COVERABLE_HANDLER_CAPABILITY, side).map(h -> {
+            boolean powered = handler.getTile().getCapability(AntimatterCaps.getCOVERABLE_HANDLER_CAPABILITY(), side).map(h -> {
                 List<CoverRedstoneMachineController> list = new ArrayList<>();
                 for (Direction dir : Direction.values()){
                     if (h.get(dir) instanceof CoverRedstoneMachineController){

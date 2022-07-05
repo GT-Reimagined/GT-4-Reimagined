@@ -83,27 +83,27 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
                     }
                     //boolean shouldRun = tile.energyHandler.map(h -> h.insert((long)(tile.getMachineType().getMachineEfficiency()*(double)tile.getMachineTier().getVoltage()),true) > 0).orElse(false);
                     ///if (!shouldRun) return false;
-                    int recipeAmount = activeRecipe.getInputFluids().get(0).getAmount();
-                    int toConsume = recipeAmount; // calculateGeneratorConsumption(tile.getMachineTier().getVoltage(), activeRecipe);// (long) ((double)tile.getMachineTier().getVoltage() / (activeRecipe.getPower() /(double) Objects.requireNonNull(activeRecipe.getInputFluids())[0].getAmount()));
-                    int consumed = tile.fluidHandler.map(h -> {
+                    long recipeAmount = activeRecipe.getInputFluids().get(0).getAmount();
+                    long toConsume = recipeAmount; // calculateGeneratorConsumption(tile.getMachineTier().getVoltage(), activeRecipe);// (long) ((double)tile.getMachineTier().getVoltage() / (activeRecipe.getPower() /(double) Objects.requireNonNull(activeRecipe.getInputFluids())[0].getAmount()));
+                    long consumed = tile.fluidHandler.map(h -> {
                         /*
                             How much wiggle room? So, at optimal flow : generate regular. Otherwise, dampen by a factor of 1/(optimal-current) or 1/(current-optimal). Allow
                             consuming up to 1.5x optimal
                          */
-                        int amount = activeRecipe.getInputFluids().get(0).drainedAmount(toConsume, h, true, true);
+                        long amount = activeRecipe.getInputFluids().get(0).drainedAmount(toConsume, h, true, true);
 
                         if (amount == toConsume) {
                             if (!simulate)
                                 activeRecipe.getInputFluids().get(0).drain(toConsume, h, true, false);
                             return amount;
                         }
-                        return 0;
-                    }).orElse(0);
+                        return 0L;
+                    }).orElse(0L);
                     if (consumed > 0 && efficiency > 0.0F){
                         if (consumed < recipeAmount) consumed *= Math.pow(1d/(recipeAmount-consumed),0.04);
                         if (consumed > recipeAmount) consumed *= Math.pow(1d/(consumed-recipeAmount),0.04);
                         //Input energy
-                        int finalConsumed = consumed;
+                        long finalConsumed = consumed;
 
                         if (!simulate) {
                             if (ticker < 80){

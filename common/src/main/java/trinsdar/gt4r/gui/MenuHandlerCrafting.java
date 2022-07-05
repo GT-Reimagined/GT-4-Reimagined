@@ -24,7 +24,7 @@ public class MenuHandlerCrafting extends MenuHandler<GTWorkbenchContainer> {
         BlockEntity tile = Utils.getTileFromBuf(data);
         if (tile != null) {
             Direction dir = Direction.from3DDataValue(data.readInt());
-            LazyOptional<ICoverHandler> coverHandler = tile.getCapability(AntimatterCaps.COVERABLE_HANDLER_CAPABILITY, dir);
+            LazyOptional<ICoverHandler<?>> coverHandler = tile.getCapability(AntimatterCaps.getCOVERABLE_HANDLER_CAPABILITY(), dir);
             return getMenu(coverHandler.map(ch -> ch.get(dir)).orElse(null), inv, windowId);
         }
         return null;

@@ -1,5 +1,6 @@
 package trinsdar.gt4r.client;
 
+import muramasa.antimatter.proxy.ClientHandler;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
@@ -22,6 +23,6 @@ public class ClientUtil {
     }
 
     public static void registerEntityRenders() {
-        EntityRenderers.register(GT4RData.SPEAR_ENTITY_TYPE, m -> new SpearRenderer(m, Minecraft.getInstance().getItemRenderer()));
+        ClientHandler.registerEntityRenderer(GT4RData.SPEAR_ENTITY_TYPE, m -> new SpearRenderer(m, Minecraft.getInstance().getItemRenderer()));
     }
 }

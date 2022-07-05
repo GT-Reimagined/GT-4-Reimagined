@@ -2,6 +2,7 @@ package trinsdar.gt4r.loader.machines.generator;
 
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.material.Material;
+import muramasa.antimatter.material.MaterialTags;
 import trinsdar.gt4r.data.Materials;
 
 import static muramasa.antimatter.Data.GAS;
@@ -15,15 +16,15 @@ import static trinsdar.gt4r.data.RecipeMaps.*;
 public class FuelBurnHandler {
     public static void init() {
         AntimatterAPI.all(Material.class, mat -> {
-            if (mat != Materials.Steam && mat.getFuelPower() > 0) {
+            if (mat != Materials.Steam && MaterialTags.FUEL_POWER.getInt(mat) > 0) {
                 if (mat.has(LIQUID)) {
-                    int power = 16, ticks = mat.getFuelPower() / 16;
-                    if (mat.getFuelPower() < 16) {
+                    int power = 16, ticks = MaterialTags.FUEL_POWER.getInt(mat) / 16;
+                    if (MaterialTags.FUEL_POWER.getInt(mat) < 16) {
                         ticks = 1;
-                        power = mat.getFuelPower();
+                        power = MaterialTags.FUEL_POWER.getInt(mat);
                     }
                     if (mat == NitroDiesel){
-                        ticks = mat.getFuelPower() / 32;
+                        ticks = MaterialTags.FUEL_POWER.getInt(mat) / 32;
                         power = 32;
                     }
                     if (mat.has(SEMIFLUID)){
@@ -34,13 +35,13 @@ public class FuelBurnHandler {
 
                 }
                 if (mat.has(GAS)) {
-                    int power = 16, ticks = mat.getFuelPower() / 16;
-                    if (mat.getFuelPower() < 16 || (mat.getFuelPower() < 32 && mat.getFuelPower() > 16)) {
+                    int power = 16, ticks = MaterialTags.FUEL_POWER.getInt(mat) / 16;
+                    if (MaterialTags.FUEL_POWER.getInt(mat) < 16 || (MaterialTags.FUEL_POWER.getInt(mat) < 32 && MaterialTags.FUEL_POWER.getInt(mat) > 16)) {
                         ticks = 1;
-                        power = mat.getFuelPower();
+                        power = MaterialTags.FUEL_POWER.getInt(mat);
                     }
                     GAS_FUELS.RB().fi(mat.getGas(1)).add(ticks, power);
-                    //LARGE_GAS_FUELS.RB().fi(mat.getGas(20)).add(1, mat.getFuelPower() * 20L);
+                    //LARGE_GAS_FUELS.RB().fi(mat.getGas(20)).add(1, MaterialTags.FUEL_POWER.getInt(mat) * 20L);
                 }
             }
         });
