@@ -13,7 +13,7 @@ import static muramasa.antimatter.material.MaterialTags.RUBBERTOOLS;
 import static net.minecraft.world.item.Tiers.IRON;
 import static trinsdar.gt4r.data.Materials.*;
 
-public class MaterialEvents {
+public class GT4RMaterialEvents {
     public static void onMaterialEvent(MaterialEvent event){
         flags(event);
         antimatterMaterials(event);

@@ -52,12 +52,10 @@ public class BlockRubberLog extends BlockBasic {
         return this.defaultBlockState().setValue(AXIS, context.getClickedFace().getAxis()).setValue(RESIN_FACING, context.getHorizontalDirection().getOpposite()).setValue(RESIN_STATE, ResinState.NONE);
     }
 
-    @Override
     public int getFlammability(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
         return state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED) ? 0 : 5;
     }
 
-    @Override
     public int getFireSpreadSpeed(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
         return state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED) ? 0 : 5;
     }
