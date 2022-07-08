@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "gt4r",
+  "version": "${version}",
+  "name": "GT 4 Reimagined",
+  "description": "Well-rounded API for Minecraft, primarily made for GregTech.",
+  "authors": [
+    "Trinsdar"
+  ],
+  "contact": {
+    "sources": "https://github.com/GregTech-Intergalactical/GT-4-Reimagined",
+    "issues": "https://github.com/GregTech-Intergalactical/GT-4-Reimagined/issues",
+    "discord": "https://discord.gg/9kM4bRj"
+  },
+  "license": "LGPL-3.0",
+  "mixins": [
+    "gt4r.mixins.json",
+    "gt4r-fabric.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.0",
+    "fabric": "*",
+    "tesseractapi": ">=0.1",
+    "antimatter": ">=0.1"
+  },
+  "entrypoints": {
+    "main": [
+      "trinsdar.gt4r.fabric.GT4ReimaginedImpl"
+    ],
+    "antimatter": [
+      "trinsdar.gt4r.GT4Reimagined"
+    ]
+  }
+}

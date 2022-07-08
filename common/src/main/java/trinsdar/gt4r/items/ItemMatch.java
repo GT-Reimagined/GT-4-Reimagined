@@ -84,9 +84,9 @@ public class ItemMatch extends ItemBasic<ItemMatch> {
         return InteractionResult.FAIL;
     }
 
-    @Override
+    //@Override
     public int getItemStackLimit(ItemStack stack) {
-        return this.getDamage(stack) == 0 ? 64 : 1;
+        return stack.getDamageValue() == 0 ? 64 : 1;
     }
 
     @Override

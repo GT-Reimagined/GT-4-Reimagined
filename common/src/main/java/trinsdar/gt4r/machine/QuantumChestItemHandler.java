@@ -1,6 +1,7 @@
 package trinsdar.gt4r.machine;
 
 
+import dev.architectury.injectables.annotations.ExpectPlatform;
 import muramasa.antimatter.Antimatter;
 import muramasa.antimatter.capability.IGuiHandler;
 import muramasa.antimatter.capability.item.TrackedItemHandler;
@@ -77,46 +78,16 @@ public class QuantumChestItemHandler extends MachineItemHandler<TileEntityQuantu
             onLoad();
         }
 
-        public static ItemStack of(CompoundTag pCompoundTag) {
-            try {
-                CompoundTag capNBT = pCompoundTag.contains("ForgeCaps") ? pCompoundTag.getCompound("ForgeCaps") : null;
-                Item rawItem = Registry.ITEM.get(new ResourceLocation(pCompoundTag.getString("id")));
-                int count = pCompoundTag.getInt("Count");
-                ItemStack stack = new ItemStack(rawItem, count, capNBT);
-                if (pCompoundTag.contains("tag", 10)) {
-                    CompoundTag tag = pCompoundTag.getCompound("tag");
-                    stack.setTag(tag);
-                    stack.getItem().verifyTagAfterLoad(pCompoundTag);
-                }
 
-                if (stack.getItem().isDamageable(stack)) {
-                    stack.setDamageValue(stack.getDamageValue());
-                }
-                return stack;
-            } catch (RuntimeException runtimeexception) {
-                Antimatter.LOGGER.debug("Tried to load invalid item: {}", pCompoundTag, runtimeexception);
-                return ItemStack.EMPTY;
-            }
-        }
+    }
+    @ExpectPlatform
+    public static CompoundTag save(CompoundTag pCompoundTag, ItemStack stack) {
+        return null;
+    }
 
-        public CompoundTag save(CompoundTag pCompoundTag, ItemStack stack) {
-            ResourceLocation resourcelocation = Registry.ITEM.getKey(stack.getItem());
-            pCompoundTag.putString("id", resourcelocation == null ? "minecraft:air" : resourcelocation.toString());
-            pCompoundTag.putInt("Count", stack.getCount());
-            if (stack.getTag() != null) {
-                pCompoundTag.put("tag", stack.getTag().copy());
-            }
-            final CapabilityDispatcher disp = ((GTCapabilityProviderAccessor)(Object)stack).getCapabilitiesGT();
-            if (disp != null)
-            {
-                CompoundTag cnbt = disp.serializeNBT();
-                if (!cnbt.isEmpty()) {
-                    pCompoundTag.put("ForgeCaps", cnbt);
-                }
-            }
-
-            return pCompoundTag;
-        }
+    @ExpectPlatform
+    public static ItemStack of(CompoundTag pCompoundTag) {
+        return ItemStack.EMPTY;
     }
 
     /*public void drawInfo(MatrixStack stack, FontRenderer renderer, int left, int top) {

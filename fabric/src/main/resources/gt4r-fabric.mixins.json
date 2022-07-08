@@ -1,0 +1,10 @@
+{
+  "required": true,
+  "package": "trinsdar.gt4r.mixin.fabric",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "gt4r-fabric.refmap.json",
+  "mixins": [
+    "ItemMatchMixin"
+  ],
+  "minVersion": "0.8"
+}

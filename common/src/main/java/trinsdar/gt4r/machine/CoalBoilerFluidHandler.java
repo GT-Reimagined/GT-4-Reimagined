@@ -28,7 +28,7 @@ public class CoalBoilerFluidHandler extends MachineFluidHandler<TileEntityCoalBo
     }
 
     @Override
-    public void fillCell(int cellSlot, int maxFill) {
+    public void fillCell(int cellSlot, long maxFill) {
         if (fillingCell) return;
         fillingCell = true;
         if (getInputTanks() != null) {

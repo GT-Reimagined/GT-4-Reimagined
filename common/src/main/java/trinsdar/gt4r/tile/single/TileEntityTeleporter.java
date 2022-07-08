@@ -4,6 +4,7 @@ import muramasa.antimatter.AntimatterConfig;
 import muramasa.antimatter.machine.MachineState;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.TileEntityMachine;
+import muramasa.antimatter.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -22,6 +23,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import tesseract.api.gt.GTTransaction;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -110,7 +112,7 @@ public class TileEntityTeleporter extends TileEntityMachine<TileEntityTeleporter
         double distance = Math.sqrt(this.getBlockPos().distSqr(destination));
         int energyCost = (int)(baseWeight * Math.pow(distance + 10.0, 0.7) * 5.0);
         if (energyHandler.map(e -> e.getEnergy() >= energyCost).orElse(false)){
-            energyHandler.ifPresent(e -> e.extractEnergy((int) (energyCost * AntimatterConfig.GAMEPLAY.EU_TO_FE_RATIO), false));
+            energyHandler.ifPresent(e -> Utils.extractEnergy(e, energyCost));
             entity.teleportTo(teleportTo.getX(), teleportTo.getY(), teleportTo.getZ());
         }
     }
