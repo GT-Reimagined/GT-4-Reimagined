@@ -1,10 +1,9 @@
 {
   "required": true,
-  "package": "trinsdar.gt4r.mixin.fabric",
+  "package": "trinsdar.gt4r.mixin.forge",
   "compatibilityLevel": "JAVA_8",
-  "refmap": "gt4r-fabric.refmap.json",
+  "refmap": "gt4r-forge.refmap.json",
   "mixins": [
-    "ItemMatchMixin",
     "PlayerEntityMixin"
   ],
   "minVersion": "0.8"

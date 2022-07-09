@@ -7,6 +7,8 @@ import muramasa.antimatter.event.fabric.ProviderEvents;
 import muramasa.antimatter.event.fabric.WorldGenEvents;
 import muramasa.antimatter.util.AntimatterPlatformUtils;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.player.UseBlockCallback;
+import net.minecraft.world.InteractionResult;
 import net.minecraftforge.api.fml.event.config.ModConfigEvent;
 import trinsdar.gt4r.GT4RConfig;
 import trinsdar.gt4r.events.AntimatterEvents;
@@ -24,7 +26,10 @@ public class GT4ReimaginedImpl implements ModInitializer {
         PlayerTickEvents.END.register(player -> CommonEvents.onPlayerTick(player, AntimatterPlatformUtils.isServer()));
         ModConfigEvent.LOADING.register(GT4RConfig::onModConfigEvent);
         ModConfigEvent.RELOADING.register(GT4RConfig::onModConfigEvent);
-        //TODO right click event
+        UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
+            CommonEvents.onRightlickBlock(player, hand, AntimatterPlatformUtils.isServer());
+            return InteractionResult.PASS;
+        });
         //TODO fabric version of this
         /*((AntimatterNetworkImpl) Antimatter.NETWORK).registerMessage(MessageCraftingSync.class, MessageCraftingSync::encode, MessageCraftingSync::decode, (msg, ctx) -> {
             NetworkEvent.Context context = ctx.get();

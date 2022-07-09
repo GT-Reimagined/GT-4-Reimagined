@@ -16,25 +16,10 @@ import trinsdar.gt4r.data.Attributes;
 import trinsdar.gt4r.data.ToolTypes;
 
 @Mixin(Player.class)
-public abstract class PlayerEntityMixin extends LivingEntity {
-    protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType_1, Level world_1) {
-        super(entityType_1, world_1);
-    }
-
-    @ModifyConstant(
-            method = "attackTargetEntityWithCurrentItem",
-            constant = @Constant(doubleValue = 9.0D)
-    )
-    private double getAttackReachSquared(double value) {
-        if (this.getMainHandItem().getItem() != ToolTypes.SPEAR.getToolStack(Data.NULL, Data.NULL).getItem()) return value;
-        double attackReachValue = this.getAttributeValue(Attributes.ATTACK_REACH);
-        return attackReachValue * attackReachValue;
-    }
-
+public class PlayerEntityMixin {
    @Inject(
             method = "createAttributes",
-            at = @At(value = "RETURN"),
-            cancellable = true
+            at = @At(value = "RETURN")
     )
     private static void initAttributes(CallbackInfoReturnable<AttributeSupplier.Builder> ci) {
        ci.getReturnValue().add(Attributes.ATTACK_REACH);

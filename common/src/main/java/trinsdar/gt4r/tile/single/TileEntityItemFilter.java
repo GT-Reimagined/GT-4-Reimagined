@@ -14,16 +14,20 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.server.level.ChunkHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import trinsdar.gt4r.data.SlotTypes;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
 
@@ -78,12 +82,12 @@ public class TileEntityItemFilter extends TileEntityMachine<TileEntityItemFilter
                 case 1:
                     outputRedstone = !outputRedstone;
                     playerEntity.sendMessage(new TextComponent( (outputRedstone ? "Emit redstone if slots contain something" : "Don't emit redstone")), playerEntity.getUUID());
-                    level.markAndNotifyBlock(this.getBlockPos(), this.level.getChunkAt(this.getBlockPos()), this.getBlockState(), this.getBlockState(), 1, 512);
+                    markAndNotifyBlock(this.getBlockPos(), this.level.getChunkAt(this.getBlockPos()), this.getBlockState(), this.getBlockState(), 1, 512);
                     break;
                 case 2:
                     invertRedstone = !invertRedstone;
                     playerEntity.sendMessage(new TextComponent( (invertRedstone ? "I" : "Don't i") + "nvert redstone"), playerEntity.getUUID());
-                    level.markAndNotifyBlock(this.getBlockPos(), this.level.getChunkAt(this.getBlockPos()), this.getBlockState(), this.getBlockState(), 1, 512);
+                    markAndNotifyBlock(this.getBlockPos(), this.level.getChunkAt(this.getBlockPos()), this.getBlockState(), this.getBlockState(), 1, 512);
                     break;
                 case 3:
                     blacklist = !blacklist;
@@ -114,7 +118,7 @@ public class TileEntityItemFilter extends TileEntityMachine<TileEntityItemFilter
     public void onMachineEvent(IMachineEvent event, Object... data) {
         super.onMachineEvent(event, data);
         if (event == ContentEvent.ITEM_OUTPUT_CHANGED && outputRedstone){
-            level.markAndNotifyBlock(this.getBlockPos(), this.level.getChunkAt(this.getBlockPos()), this.getBlockState(), this.getBlockState(), 1, 512);
+            markAndNotifyBlock(this.getBlockPos(), this.level.getChunkAt(this.getBlockPos()), this.getBlockState(), this.getBlockState(), 1, 512);
         }
     }
 
@@ -186,5 +190,36 @@ public class TileEntityItemFilter extends TileEntityMachine<TileEntityItemFilter
 
     public boolean isOutputRedstone() {
         return outputRedstone;
+    }
+
+    public void markAndNotifyBlock(BlockPos arg, @Nullable LevelChunk levelchunk, BlockState blockstate, BlockState arg2, int j, int k) {
+        Block block = arg2.getBlock();
+        BlockState blockstate1 = level.getBlockState(arg);
+        if (blockstate1 == arg2) {
+            if (blockstate != blockstate1) {
+                level.setBlocksDirty(arg, blockstate, blockstate1);
+            }
+
+            if ((j & 2) != 0 && (!level.isClientSide || (j & 4) == 0) && (level.isClientSide || levelchunk.getFullStatus() != null && levelchunk.getFullStatus().isOrAfter(ChunkHolder.FullChunkStatus.TICKING))) {
+                level.sendBlockUpdated(arg, blockstate, arg2, j);
+            }
+
+            if ((j & 1) != 0) {
+                level.blockUpdated(arg, blockstate.getBlock());
+                if (!level.isClientSide && arg2.hasAnalogOutputSignal()) {
+                    level.updateNeighbourForOutputSignal(arg, block);
+                }
+            }
+
+            if ((j & 16) == 0 && k > 0) {
+                int i = j & -34;
+                blockstate.updateIndirectNeighbourShapes(level, arg, i, k - 1);
+                arg2.updateNeighbourShapes(level, arg, i, k - 1);
+                arg2.updateIndirectNeighbourShapes(level, arg, i, k - 1);
+            }
+
+            level.onBlockStateChange(arg, blockstate, blockstate1);
+        }
+
     }
 }
