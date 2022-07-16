@@ -6,6 +6,7 @@ import muramasa.antimatter.util.AntimatterPlatformUtils;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
+import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.SlotTypes;
 import trinsdar.gt4r.network.MessageCraftingSync;
 
@@ -47,7 +48,7 @@ public class InventoryWorkbench extends CraftingContainer {
         this.projectTable.getTile().setChanged();
         this.eventHandler.slotsChanged(this);
         if(AntimatterPlatformUtils.isClient())
-            Antimatter.NETWORK.sendToServer(new MessageCraftingSync());
+            Antimatter.NETWORK.sendToServer(Ref.SYNC_ID, new MessageCraftingSync());
     }
 
     @Nonnull

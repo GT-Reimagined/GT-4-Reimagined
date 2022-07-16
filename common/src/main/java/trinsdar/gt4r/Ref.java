@@ -1,6 +1,7 @@
 package trinsdar.gt4r;
 
 
+import net.minecraft.resources.ResourceLocation;
 
 public class Ref {
 
@@ -10,6 +11,8 @@ public class Ref {
     public static final String VERSION = "0.0.1";
     public static final String ANTIMATTER = muramasa.antimatter.Ref.ID;
     public static final String ANTIMATTER_SHARED = muramasa.antimatter.Ref.SHARED_ID;
+
+    public static final ResourceLocation SYNC_ID = new ResourceLocation(Ref.ID, "crafting_sync");
 
     /** Mod ids **/
     public static final String MOD_IE = "immersiveengineering";

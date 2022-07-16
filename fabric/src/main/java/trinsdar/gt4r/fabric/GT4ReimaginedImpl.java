@@ -8,11 +8,14 @@ import muramasa.antimatter.event.fabric.WorldGenEvents;
 import muramasa.antimatter.util.AntimatterPlatformUtils;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.world.InteractionResult;
 import net.minecraftforge.api.fml.event.config.ModConfigEvent;
 import trinsdar.gt4r.GT4RConfig;
+import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.events.AntimatterEvents;
 import trinsdar.gt4r.events.CommonEvents;
+import trinsdar.gt4r.network.MessageCraftingSync;
 import trinsdar.gt4r.proxy.CommonHandler;
 
 public class GT4ReimaginedImpl implements ModInitializer {
@@ -30,11 +33,11 @@ public class GT4ReimaginedImpl implements ModInitializer {
             CommonEvents.onRightlickBlock(player, hand, AntimatterPlatformUtils.isServer());
             return InteractionResult.PASS;
         });
-        //TODO fabric version of this
-        /*((AntimatterNetworkImpl) Antimatter.NETWORK).registerMessage(MessageCraftingSync.class, MessageCraftingSync::encode, MessageCraftingSync::decode, (msg, ctx) -> {
-            NetworkEvent.Context context = ctx.get();
-            context.enqueueWork(() -> MessageCraftingSync.handle(msg, context.getSender()));
-            context.setPacketHandled(true);
-        });*/
+        ServerPlayNetworking.registerGlobalReceiver(Ref.SYNC_ID, ((server, player, handler, buf, responseSender) -> {
+            MessageCraftingSync sync = MessageCraftingSync.decodeStatic(buf);
+            server.execute(() -> {
+                sync.handleClient(player);
+            });
+        }));
     }
 }

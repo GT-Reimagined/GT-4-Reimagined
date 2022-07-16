@@ -36,9 +36,9 @@ public class GT4ReimaginedImpl {
 
     private void setup(final FMLCommonSetupEvent e) {
         CommonHandler.setup();
-        ((AntimatterNetworkImpl)Antimatter.NETWORK).registerMessage(MessageCraftingSync.class, MessageCraftingSync::encode, MessageCraftingSync::decode, (msg, ctx) -> {
+        ((AntimatterNetworkImpl)Antimatter.NETWORK).registerMessage(MessageCraftingSync.class, MessageCraftingSync::encodeStatic, MessageCraftingSync::decodeStatic, (msg, ctx) -> {
             NetworkEvent.Context context = ctx.get();
-            context.enqueueWork(() -> MessageCraftingSync.handle(msg, context.getSender()));
+            context.enqueueWork(() -> msg.handleClient(context.getSender()));
             context.setPacketHandled(true);
         });
     }
