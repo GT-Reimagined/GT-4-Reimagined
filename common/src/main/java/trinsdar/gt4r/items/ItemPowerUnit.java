@@ -15,6 +15,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import org.jetbrains.annotations.NotNull;
+import tesseract.api.TesseractCaps;
+import tesseract.api.gt.IEnergyHandler;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -79,31 +81,33 @@ public class ItemPowerUnit extends ItemBasic<ItemPowerUnit> implements IColorHan
     @Nullable
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
-        return new ItemEnergyHandler.Provider(() -> {
-            ItemEnergyHandler handler = new ItemEnergyHandler(getMaxEnergy(stack), 0, 32, 0, 1);
-            handler.setEnergy(getCurrentEnergy(stack));
-            return handler;
-        });
+        return new ItemEnergyHandler.Provider(() -> new ItemEnergyHandler(10000, 0, 32, 0, 1));
     }
 
     public long getCurrentEnergy(ItemStack stack) {
-        return getDataTag(stack).getLong(Ref.KEY_TOOL_DATA_ENERGY);
+        return getDataTag(stack).getLong(Ref.KEY_ITEM_ENERGY);
     }
 
     public CompoundTag getDataTag(ItemStack stack) {
-        CompoundTag dataTag = stack.getTagElement(Ref.TAG_TOOL_DATA);
+        CompoundTag dataTag = stack.getTagElement(Ref.TAG_ITEM_ENERGY_DATA);
         return dataTag != null ? dataTag : validateTag(stack, 0, 100000);
     }
 
     public CompoundTag validateTag(ItemStack stack, long startingEnergy, long maxEnergy) {
-        CompoundTag dataTag = stack.getOrCreateTagElement(Ref.TAG_TOOL_DATA);
-        dataTag.putLong(Ref.KEY_TOOL_DATA_ENERGY, startingEnergy);
-        dataTag.putLong(Ref.KEY_TOOL_DATA_MAX_ENERGY, maxEnergy);
+        CompoundTag dataTag = stack.getOrCreateTagElement(Ref.TAG_ITEM_ENERGY_DATA);
+        IEnergyHandler handler = stack.getCapability(TesseractCaps.getENERGY_HANDLER_CAPABILITY()).map(i -> i).orElse(null);
+        if (handler != null){
+            handler.setEnergy(startingEnergy);
+            handler.setCapacity(maxEnergy);
+        } else {
+            dataTag.putLong(Ref.KEY_ITEM_ENERGY, startingEnergy);
+            dataTag.putLong(Ref.KEY_ITEM_MAX_ENERGY, maxEnergy);
+        }
         return dataTag;
     }
 
     public long getMaxEnergy(ItemStack stack) {
-        return getDataTag(stack).getLong(Ref.KEY_TOOL_DATA_MAX_ENERGY);
+        return getDataTag(stack).getLong(Ref.KEY_ITEM_MAX_ENERGY);
     }
 
     @Override

@@ -5,20 +5,20 @@ architectury {
     forge()
 }
 
-sourceSets {
-    main {
-        java {
-            srcDir 'src/main/java'
-        }
-        resources {
-            include '**/**'
-            srcDirs += 'src/generated/resources'
-            exclude '.cache'
-            exclude 'Thumbs.db'
-        }
-    }
-
-}
+//sourceSets {
+//    main {
+//        java {
+//            srcDir 'src/main/java'
+//        }
+//        resources {
+//            include '**/**'
+//            srcDirs += 'src/generated/resources'
+//            exclude '.cache'
+//            exclude 'Thumbs.db'
+//        }
+//    }
+//
+//}
 
 loom{
     forge {

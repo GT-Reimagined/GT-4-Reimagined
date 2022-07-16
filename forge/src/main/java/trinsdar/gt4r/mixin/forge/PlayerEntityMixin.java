@@ -18,7 +18,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         super(arg, arg2);
     }
 
-    @ModifyConstant(
+    /*@ModifyConstant(
             method = "attackTargetEntityWithCurrentItem",
             constant = @Constant(doubleValue = 9.0D)
     )
@@ -26,5 +26,5 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         if (this.getMainHandItem().getItem() != ToolTypes.SPEAR.getToolStack(Data.NULL, Data.NULL).getItem()) return value;
         double attackReachValue = this.getAttributeValue(Attributes.ATTACK_REACH);
         return attackReachValue * attackReachValue;
-    }
+    }*/
 }
