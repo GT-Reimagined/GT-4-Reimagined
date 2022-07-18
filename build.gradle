@@ -61,6 +61,15 @@ allprojects {
             name = 'sponge'
             url = 'https://repo.spongepowered.org/repository/maven-public/'
         }
+        repositories {
+            maven { url "https://maven.shedaniel.me" }
+        }
+        maven {
+            url "https://maven.terraformersmc.com"
+            content {
+                includeGroup "com.terraformersmc"
+            }
+        }
         maven {
             // Shedaniel's maven (Architectury API)
             url = "https://maven.architectury.dev"
