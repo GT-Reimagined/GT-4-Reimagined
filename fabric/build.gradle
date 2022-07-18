@@ -27,8 +27,8 @@ dependencies{
     modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
     common(project(path: ":tesseract-common", configuration: "namedElements")) { transitive false }
     common(project(path: ":antimatter-common", configuration: "namedElements")) { transitive false }
-    common(project(path: ":tesseract-fabric", configuration: "namedElements")) { transitive false }
-    common(project(path: ":antimatter-fabric", configuration: "namedElements")) { transitive false }
+    implementation(project(path: ":tesseract-fabric", configuration: "namedElements")) { transitive false }
+    implementation(project(path: ":antimatter-fabric", configuration: "namedElements"))
     modImplementation("com.github.FeltMC.Fabricated-Forge-API:fabricated-forge-caps:${rootProject.fabricated_forge_hash}") { transitive false }
     modImplementation("com.github.FeltMC.Fabricated-Forge-API:fabricated-forge-recipe-api:${rootProject.fabricated_forge_hash}") { transitive false }
     modImplementation("com.github.FeltMC.Fabricated-Forge-API:fabricated-forge-modeldata:${rootProject.fabricated_forge_hash}") { transitive false }
@@ -46,11 +46,11 @@ dependencies{
     modCompileOnly("mezz.jei:jei-${rootProject.minecraft_version}-fabric-api:${rootProject.jei_version}")
     implementation("com.electronwill.night-config:toml:${rootProject.nightconfig_version}")
     implementation("com.electronwill.night-config:core:${rootProject.nightconfig_version}")
-    /*modApi("teamreborn:energy:${project.energy_version}") {
-        transitive = false
-    }*/
     modImplementation("teamreborn:energy:${rootProject.energy_version}") {
         transitive = false
+    }
+    modRuntimeOnly("com.terraformersmc:modmenu:${rootProject.mod_menu_version}") {
+        exclude(group: "net.fabricmc.fabric-api")
     }
     modImplementation("com.github.FeltMC:forgeconfigapiport-fabric:c1486f80f7"){
         transitive = false
