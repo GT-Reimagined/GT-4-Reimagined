@@ -59,8 +59,7 @@ dependencies {
         transitive = false;
     }
     //JEI
-    modCompileOnly("mezz.jei:jei-${jei_version}:api")
-    modRuntimeOnly("mezz.jei:jei-${jei_version}")
+    modRuntimeOnly("mezz.jei:jei-${rootProject.minecraft_version}-forge:${rootProject.jei_version}")
 
 
     //runtimeOnly fg.deobf("curse.maven:world_stripper-250603:3142092")
