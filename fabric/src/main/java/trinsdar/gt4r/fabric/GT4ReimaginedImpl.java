@@ -21,7 +21,6 @@ import trinsdar.gt4r.proxy.CommonHandler;
 public class GT4ReimaginedImpl implements ModInitializer {
     @Override
     public void onInitialize() {
-        CommonHandler.setup();
         WorldGenEvents.WORLD_GEN.register(AntimatterEvents::registerWorldgen);
         LoaderEvents.LOADER.register(AntimatterEvents::registerRecipeLoaders);
         CraftingEvents.CRAFTING.register(AntimatterEvents::registerCraftingLoaders);

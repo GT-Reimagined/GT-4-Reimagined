@@ -30,8 +30,8 @@ dependencies{
     common(project(path: ":tesseract-fabric", configuration: "namedElements")) { transitive false }
     common(project(path: ":antimatter-fabric", configuration: "namedElements")) { transitive false }
     modImplementation("com.github.FeltMC.Fabricated-Forge-API:fabricated-forge-caps:${rootProject.fabricated_forge_hash}") { transitive false }
-    //modImplementation(include("com.github.FeltMC.Fabricated-Forge-API:fabricated-forge-recipe-api:${rootProject.fabricated_forge_hash}")) { transitive false }
-    //modImplementation(include("com.github.FeltMC.Fabricated-Forge-API:fabricated-forge-modeldata:${rootProject.fabricated_forge_hash}")) { transitive false }
+    modImplementation("com.github.FeltMC.Fabricated-Forge-API:fabricated-forge-recipe-api:${rootProject.fabricated_forge_hash}") { transitive false }
+    modImplementation("com.github.FeltMC.Fabricated-Forge-API:fabricated-forge-modeldata:${rootProject.fabricated_forge_hash}") { transitive false }
     modImplementation("com.github.FeltMC.Fabricated-Forge-API:fabricated-forge-datagen:${rootProject.fabricated_forge_hash}") { transitive false }
     modImplementation("com.github.Trinsdar.Felt-API:felt-item-api:05a5fe1533") { transitive false }
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
@@ -44,9 +44,14 @@ dependencies{
     modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${rootProject.rei_version}"
     modCompileOnly("mezz.jei:jei-${rootProject.minecraft_version}-common-api:${rootProject.jei_version}")
     modCompileOnly("mezz.jei:jei-${rootProject.minecraft_version}-fabric-api:${rootProject.jei_version}")
+    implementation("com.electronwill.night-config:toml:${rootProject.nightconfig_version}")
+    implementation("com.electronwill.night-config:core:${rootProject.nightconfig_version}")
     /*modApi("teamreborn:energy:${project.energy_version}") {
         transitive = false
     }*/
+    modImplementation("teamreborn:energy:${rootProject.energy_version}") {
+        transitive = false
+    }
     modImplementation("com.github.FeltMC:forgeconfigapiport-fabric:c1486f80f7"){
         transitive = false
     }
