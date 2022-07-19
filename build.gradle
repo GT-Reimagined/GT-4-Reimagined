@@ -5,7 +5,6 @@ plugins {
     id "com.github.johnrengelman.shadow" version "7.0.0" apply(false)
 }
 
-
 architectury {
     minecraft = rootProject.minecraft_version
 }
@@ -61,9 +60,13 @@ allprojects {
             name = 'sponge'
             url = 'https://repo.spongepowered.org/repository/maven-public/'
         }
-        repositories {
-            maven { url "https://maven.shedaniel.me" }
+        maven {
+            url "https://www.cursemaven.com"
+            content {
+                includeGroup "curse.maven"
+            }
         }
+        maven { url "https://maven.shedaniel.me" }
         maven {
             url "https://maven.terraformersmc.com"
             content {

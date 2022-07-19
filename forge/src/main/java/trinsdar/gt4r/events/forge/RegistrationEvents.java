@@ -36,11 +36,6 @@ public class RegistrationEvents {
     }
 
     @SubscribeEvent
-    public static void onRegisterFeatures(final RegistryEvent.Register<Feature<?>> e){
-        e.getRegistry().register(RubberTree.TREE_FEATURE.setRegistryName(Ref.ID, "rubber_tree"));
-    }
-
-    @SubscribeEvent
     public static void onModConfigEvent(final ModConfigEvent e) {
         GT4RConfig.onModConfigEvent(e.getConfig());
     }

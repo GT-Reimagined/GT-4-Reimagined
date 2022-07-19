@@ -1,30 +1,47 @@
 package trinsdar.gt4r.tree;
 
+import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.worldgen.AntimatterWorldGenerator;
+import muramasa.antimatter.worldgen.feature.IAntimatterFeature;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeGenerationSettings;
+import net.minecraft.world.level.biome.BiomeSpecialEffects;
+import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import trinsdar.gt4r.Ref;
 
 import java.util.Random;
 
-public class RubberTreeFeature extends TreeFeature {
+public class RubberTreeFeature extends TreeFeature implements IAntimatterFeature {
     public RubberTreeFeature() {
         super(TreeConfiguration.CODEC);
-    }
-
-    public void init() {
-        AntimatterWorldGenerator.register(RubberTreeWorldGen::onEvent, "rubber_tree", Ref.ID, RubberTreeWorldGen.getValidBiomesStatic());
     }
 
     public boolean generateRubber(WorldGenLevel reader, ChunkGenerator generator, Random rand, BlockPos pos, TreeConfiguration config) {
         if (Biome.getBiomeCategory(reader.getBiome(pos)) != Biome.BiomeCategory.SWAMP && config == RubberTreeWorldGen.RUBBER_TREE_CONFIG_SWAMP) return false;
         if (Biome.getBiomeCategory(reader.getBiome(pos)) != Biome.BiomeCategory.JUNGLE && config == RubberTreeWorldGen.RUBBER_TREE_CONFIG_JUNGLE) return false;
         return super.place(config, reader, generator, rand, pos);
+    }
+
+    @Override
+    public String getId() {
+        return "rubber_tree";
+    }
+
+    @Override
+    public Feature<?> asFeature() {
+        return this;
+    }
+
+    @Override
+    public void build(ResourceLocation name, Biome.ClimateSettings climate, Biome.BiomeCategory category, BiomeSpecialEffects effects, BiomeGenerationSettings.Builder gen, MobSpawnSettings.Builder spawns) {
+        RubberTreeWorldGen.onEvent(name, climate, category, effects, gen, spawns);
     }
 
     /*public boolean doPlace(IWorldGenerationReader world, Random random, BlockPos pos, Set<BlockPos> set, Set<BlockPos> set1, MutableBoundingBox boundingBox, TreeFeatureConfig config) {

@@ -1,5 +1,7 @@
 package trinsdar.gt4r.tree;
 
+import muramasa.antimatter.AntimatterAPI;
+import muramasa.antimatter.worldgen.feature.IAntimatterFeature;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
@@ -11,6 +13,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import trinsdar.gt4r.data.GT4RData;
@@ -18,7 +21,7 @@ import trinsdar.gt4r.data.GT4RData;
 import java.util.Random;
 
 public class RubberTree extends AbstractTreeGrower {
-    public static final RubberTreeFeature TREE_FEATURE = new RubberTreeFeature();
+    public static final TreeFeature TREE_FEATURE = (TreeFeature) AntimatterAPI.register(IAntimatterFeature.class, new RubberTreeFeature()).asFeature();
     public static final WeightedStateProvider TRUNK_BLOCKS = new WeightedStateProvider(list());
 
     public RubberTree() {
