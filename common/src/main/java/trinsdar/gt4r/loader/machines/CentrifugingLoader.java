@@ -37,8 +37,8 @@ public class CentrifugingLoader {
         });
         ItemStack[] itemStacks = Lava.getProcessInto().stream().filter(t -> t.m.has(DUST_TINY)).map(t -> new ItemStack(DUST_TINY.get(t.m), t.s))
                 .toArray(ItemStack[]::new);
-        CENTRIFUGING.RB().fi(new FluidStack(Fluids.LAVA, 100)).io(itemStacks).chances(20, 10, 3, 3, 1).add(200, 16);
-        CENTRIFUGING.RB().fi(PahoehoeLava.getLiquid(100)).io(itemStacks).chances(20, 10, 3, 3, 1).add(200, 8);
+        CENTRIFUGING.RB().fi(new FluidStack(Fluids.LAVA, 100)).io(itemStacks).chances(0.2, 0.1, 0.025, 0.025, 0.01).add(200, 16);
+        CENTRIFUGING.RB().fi(PahoehoeLava.getLiquid(100)).io(itemStacks).chances(0.2, 0.1, 0.025, 0.025, 0.01).add(200, 8);
         add(EnderEye, 10, 792);
         CENTRIFUGING.RB().ii(of(MAGMA_CREAM, 1)).io(new ItemStack(SLIME_BALL), new ItemStack(BLAZE_POWDER)).add(156,16);
         CENTRIFUGING.RB().ii(of(DIRT, 64)).io(new ItemStack(Items.SAND, 32), new ItemStack(CLAY_BALL, 2), new ItemStack(Plantball, 4)).add(3125, 16);

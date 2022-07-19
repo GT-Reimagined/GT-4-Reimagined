@@ -83,7 +83,7 @@ public class MaceratorLoader {
             RecipeIngredient ore = RecipeIngredient.of(oreTag,1);
             ItemStack crushedStack = CRUSHED.get(m, ORE_MULTI.getInt(m));
             Material oreByProduct1 = m.getByProducts().size() > 0 ? m.getByProducts().get(0) : MACERATE_INTO.getMapping(m);
-            RecipeMap rm = MACERATING;
+            RecipeMap<?> rm = MACERATING;
             if (sm == Sand || sm == RedSand || sm == Gravel){
                 rm = SIFTING;
             }
@@ -93,12 +93,12 @@ public class MaceratorLoader {
             stacks.add(DUST.get(oreByProduct1, 1));
             if (!stoneDust.isEmpty()) stacks.add(stoneDust);
             ItemStack[] stackArray = stacks.toArray(new ItemStack[0]);
-            List<Integer> ints = new ArrayList<>();
-            ints.add(100);
-            if (rm == SIFTING) ints.add(50);
-            ints.add(10 * BY_PRODUCT_MULTI.getInt(m));
-            if (!stoneDust.isEmpty()) ints.add(50);
-            int[] chances = ints.stream().mapToInt(i -> i).toArray();
+            List<Double> ints = new ArrayList<>();
+            ints.add(1.0);
+            if (rm == SIFTING) ints.add(0.5);
+            ints.add(0.1 * BY_PRODUCT_MULTI.getInt(m));
+            if (!stoneDust.isEmpty()) ints.add(0.5);
+            double[] chances = ints.stream().mapToDouble(i -> i).toArray();
             rm.RB().ii(ore).io(stackArray).chances(chances).add(400, 2);
         });
         CRUSHED.all().forEach(m -> {
@@ -115,13 +115,13 @@ public class MaceratorLoader {
             Material oreByProduct3 = m.getByProducts().size() > 2 ? m.getByProducts().get(2) : oreByProduct2;
 
             if (m == NetheriteScrap){
-                MACERATING.RB().ii(ore).io(Utils.ca((ORE_MULTI.getInt(m) * multiplier) * 2, crushedStack), DUST.get(oreByProduct1, 1), DUST.get(Netherrack, 1)).chances(100, 10 * multiplier * BY_PRODUCT_MULTI.getInt(m), 50).add(400, 2);
+                MACERATING.RB().ii(ore).io(Utils.ca((ORE_MULTI.getInt(m) * multiplier) * 2, crushedStack), DUST.get(oreByProduct1, 1), DUST.get(Netherrack, 1)).chances(1.0, 0.1 * multiplier * BY_PRODUCT_MULTI.getInt(m), 0.5).add(400, 2);
             }
-            MACERATING.RB().ii(crushed).io(DUST_IMPURE.get(MACERATE_INTO.getMapping(m), 1), DUST.get(oreByProduct1, 1)).chances(100, 10).add(400, 2);
-            MACERATING.RB().ii(RecipeIngredient.of(CRUSHED_PURIFIED.getMaterialTag(m), 1)).io(DUST_PURE.get(MACERATE_INTO.getMapping(m), 1), DUST.get(oreByProduct2, 1)).chances(100, 10).add(400, 2);
-            MACERATING.RB().ii(RecipeIngredient.of(CRUSHED_CENTRIFUGED.getMaterialTag(m), 1)).io(DUST.get(MACERATE_INTO.getMapping(m), 1), DUST.get(oreByProduct3, 1)).chances(100, 10).add(400, 2);
+            MACERATING.RB().ii(crushed).io(DUST_IMPURE.get(MACERATE_INTO.getMapping(m), 1), DUST.get(oreByProduct1, 1)).chances(1.0, 0.1).add(400, 2);
+            MACERATING.RB().ii(RecipeIngredient.of(CRUSHED_PURIFIED.getMaterialTag(m), 1)).io(DUST_PURE.get(MACERATE_INTO.getMapping(m), 1), DUST.get(oreByProduct2, 1)).chances(1.0, 0.1).add(400, 2);
+            MACERATING.RB().ii(RecipeIngredient.of(CRUSHED_CENTRIFUGED.getMaterialTag(m), 1)).io(DUST.get(MACERATE_INTO.getMapping(m), 1), DUST.get(oreByProduct3, 1)).chances(1.0, 0.1).add(400, 2);
             if (m.has(RAW_ORE)){
-                MACERATING.RB().ii(RecipeIngredient.of(RAW_ORE.getMaterialTag(m), 1)).io(Utils.ca((ORE_MULTI.getInt(m) * multiplier) * 2, crushedStack), DUST.get(oreByProduct1, 1)).chances(100, 10 * multiplier * BY_PRODUCT_MULTI.getInt(m)).add(400, 2);
+                MACERATING.RB().ii(RecipeIngredient.of(RAW_ORE.getMaterialTag(m), 1)).io(Utils.ca((ORE_MULTI.getInt(m) * multiplier) * 2, crushedStack), DUST.get(oreByProduct1, 1)).chances(1.0, 0.1 * multiplier * BY_PRODUCT_MULTI.getInt(m)).add(400, 2);
             }
         });
         DUST.all().forEach(m -> {

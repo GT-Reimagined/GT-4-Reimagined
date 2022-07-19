@@ -72,16 +72,16 @@ public class TileEntityThermalBoiler extends TileEntityMultiMachine<TileEntityTh
                 if (r.hasOutputItems()) {
                     ItemStack[] outputs = r.getOutputItems(false).clone();
                     if (r.getChances() != null) {
-                        if (Arrays.stream(r.getChances()).sum() != 100 && chance){
+                        if (Arrays.stream(r.getChances()).sum() != 1.0 && chance){
                             return null;
                         }
-                        int rng = tile.level.random.nextInt(100);
+                        double rng = tile.level.random.nextDouble();
                         List<ItemStack> evaluated = new ObjectArrayList<>();
-                        List<Integer> chanceCompare = Arrays.stream(r.getChances()).boxed().collect(Collectors.toList());
+                        List<Double> chanceCompare = Arrays.stream(r.getChances()).boxed().collect(Collectors.toList());
                         for (int i = 0; i < outputs.length; i++) {
-                            Integer[] array = chanceCompare.subList(0, i + 1).toArray(new Integer[0]);
-                            int sum = Arrays.stream(array).reduce(0, Integer::sum);
-                            int compare = i == 0 ? r.getChances()[i] : sum;
+                            Double[] array = chanceCompare.subList(0, i + 1).toArray(new Double[0]);
+                            double sum = Arrays.stream(array).reduce(0.0, Double::sum);
+                            double compare = i == 0 ? r.getChances()[i] : sum;
                             if (!chance || rng < compare) {
                                 evaluated.add(outputs[i].copy());
                                 if (chance){
