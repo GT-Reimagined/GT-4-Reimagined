@@ -9,6 +9,7 @@ import muramasa.antimatter.machine.event.ContentEvent;
 import muramasa.antimatter.machine.event.IMachineEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.TileEntityMachine;
+import muramasa.antimatter.util.AntimatterPlatformUtils;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -78,16 +79,17 @@ public class TileEntityItemFilter extends TileEntityMachine<TileEntityItemFilter
                 case 0:
                     emitEnergy = !emitEnergy;
                     playerEntity.sendMessage(new TextComponent( (emitEnergy ? "Emit energy to output side" : "Don't emit energy")), playerEntity.getUUID());
+                    AntimatterPlatformUtils.markAndNotifyBlock(this.level, this.getBlockPos(), this.level.getChunkAt(this.getBlockPos()), this.getBlockState(), this.getBlockState(), 1, 512);
                     break;
                 case 1:
                     outputRedstone = !outputRedstone;
                     playerEntity.sendMessage(new TextComponent( (outputRedstone ? "Emit redstone if slots contain something" : "Don't emit redstone")), playerEntity.getUUID());
-                    markAndNotifyBlock(this.getBlockPos(), this.level.getChunkAt(this.getBlockPos()), this.getBlockState(), this.getBlockState(), 1, 512);
+                    AntimatterPlatformUtils.markAndNotifyBlock(this.level, this.getBlockPos(), this.level.getChunkAt(this.getBlockPos()), this.getBlockState(), this.getBlockState(), 1, 512);
                     break;
                 case 2:
                     invertRedstone = !invertRedstone;
                     playerEntity.sendMessage(new TextComponent( (invertRedstone ? "I" : "Don't i") + "nvert redstone"), playerEntity.getUUID());
-                    markAndNotifyBlock(this.getBlockPos(), this.level.getChunkAt(this.getBlockPos()), this.getBlockState(), this.getBlockState(), 1, 512);
+                    AntimatterPlatformUtils.markAndNotifyBlock(this.level, this.getBlockPos(), this.level.getChunkAt(this.getBlockPos()), this.getBlockState(), this.getBlockState(), 1, 512);
                     break;
                 case 3:
                     blacklist = !blacklist;
@@ -118,7 +120,7 @@ public class TileEntityItemFilter extends TileEntityMachine<TileEntityItemFilter
     public void onMachineEvent(IMachineEvent event, Object... data) {
         super.onMachineEvent(event, data);
         if (event == ContentEvent.ITEM_OUTPUT_CHANGED && outputRedstone){
-            markAndNotifyBlock(this.getBlockPos(), this.level.getChunkAt(this.getBlockPos()), this.getBlockState(), this.getBlockState(), 1, 512);
+            AntimatterPlatformUtils.markAndNotifyBlock(this.level, this.getBlockPos(), this.level.getChunkAt(this.getBlockPos()), this.getBlockState(), this.getBlockState(), 1, 512);
         }
     }
 
