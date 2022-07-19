@@ -82,12 +82,12 @@ public class QuantumChestItemHandler extends MachineItemHandler<TileEntityQuantu
     }
     @ExpectPlatform
     public static CompoundTag save(CompoundTag pCompoundTag, ItemStack stack) {
-        return null;
+        throw new AssertionError();
     }
 
     @ExpectPlatform
     public static ItemStack of(CompoundTag pCompoundTag) {
-        return ItemStack.EMPTY;
+        throw new AssertionError();
     }
 
     /*public void drawInfo(MatrixStack stack, FontRenderer renderer, int left, int top) {

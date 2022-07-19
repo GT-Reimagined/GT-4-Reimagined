@@ -6,11 +6,11 @@ import net.minecraft.world.entity.EntityType;
 public class EntityPlatformUtil {
     @ExpectPlatform
     public static EntityType.EntityFactory<SpearEntity> factory(){
-        return null;
+        throw new AssertionError();
     }
 
     @ExpectPlatform
     public static EntityType.Builder<SpearEntity> builder(EntityType.Builder<SpearEntity> builder){
-        return builder;
+        throw new AssertionError();
     }
 }
