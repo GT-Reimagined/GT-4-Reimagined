@@ -11,7 +11,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.resources.ResourceLocation;
-import trinsdar.gt4r.data.ForgeCTags;
+import muramasa.antimatter.data.ForgeCTags;
 import trinsdar.gt4r.data.GT4RMaterialTags;
 
 import static muramasa.antimatter.Data.*;

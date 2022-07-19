@@ -8,7 +8,7 @@ import muramasa.antimatter.pipe.PipeSize;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.item.Items;
 import trinsdar.gt4r.Ref;
-import trinsdar.gt4r.data.ForgeCTags;
+import muramasa.antimatter.data.ForgeCTags;
 import trinsdar.gt4r.data.GT4RMaterialTags;
 
 import java.util.function.Consumer;

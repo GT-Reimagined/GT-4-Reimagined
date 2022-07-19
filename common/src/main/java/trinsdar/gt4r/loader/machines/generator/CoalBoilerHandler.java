@@ -3,7 +3,7 @@ package trinsdar.gt4r.loader.machines.generator;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import net.minecraft.world.item.Items;
 import net.minecraft.tags.ItemTags;
-import trinsdar.gt4r.data.ForgeCTags;
+import muramasa.antimatter.data.ForgeCTags;
 
 import static muramasa.antimatter.Data.*;
 import static trinsdar.gt4r.data.Materials.*;

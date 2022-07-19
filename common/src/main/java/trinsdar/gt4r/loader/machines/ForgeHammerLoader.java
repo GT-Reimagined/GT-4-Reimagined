@@ -10,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import trinsdar.gt4r.GT4RConfig;
 import trinsdar.gt4r.Ref;
-import trinsdar.gt4r.data.ForgeCTags;
+import muramasa.antimatter.data.ForgeCTags;
 
 import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.material.MaterialTags.MACERATE_INTO;
