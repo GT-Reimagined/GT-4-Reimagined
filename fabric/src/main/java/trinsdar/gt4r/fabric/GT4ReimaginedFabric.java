@@ -16,9 +16,8 @@ import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.events.AntimatterEvents;
 import trinsdar.gt4r.events.CommonEvents;
 import trinsdar.gt4r.network.MessageCraftingSync;
-import trinsdar.gt4r.proxy.CommonHandler;
 
-public class GT4ReimaginedImpl implements ModInitializer {
+public class GT4ReimaginedFabric implements ModInitializer {
     @Override
     public void onInitialize() {
         WorldGenEvents.WORLD_GEN.register(AntimatterEvents::registerWorldgen);

@@ -4,6 +4,7 @@ import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.AntimatterDynamics;
 import muramasa.antimatter.AntimatterMod;
 import muramasa.antimatter.datagen.providers.AntimatterBlockStateProvider;
+import muramasa.antimatter.event.MaterialEvent;
 import muramasa.antimatter.proxy.IProxyHandler;
 import muramasa.antimatter.registration.RegistrationEvent;
 import muramasa.antimatter.registration.Side;
@@ -15,6 +16,7 @@ import trinsdar.gt4r.client.BakedModels;
 import trinsdar.gt4r.config.OreConfigHandler;
 import trinsdar.gt4r.data.Attributes;
 import trinsdar.gt4r.data.GT4RData;
+import trinsdar.gt4r.data.GT4RMaterialEvents;
 import trinsdar.gt4r.data.GT4RMaterialTags;
 import trinsdar.gt4r.data.Guis;
 import trinsdar.gt4r.data.Machines;
@@ -113,6 +115,11 @@ public class GT4Reimagined extends AntimatterMod {
     @Override
     public int getPriority() {
         return 800;
+    }
+
+    @Override
+    public void onMaterialEvent(MaterialEvent event) {
+        GT4RMaterialEvents.onMaterialEvent(event);
     }
 
     @Override

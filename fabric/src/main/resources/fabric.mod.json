@@ -28,7 +28,7 @@
       "trinsdar.gt4r.client.fabric.GT4RClientInitializer"
     ],
     "main": [
-      "trinsdar.gt4r.fabric.GT4ReimaginedImpl"
+      "trinsdar.gt4r.fabric.GT4ReimaginedFabric"
     ],
     "antimatter": [
       "trinsdar.gt4r.GT4Reimagined",

@@ -20,8 +20,8 @@ import trinsdar.gt4r.proxy.CommonHandler;
 import trinsdar.gt4r.proxy.ServerHandler;
 
 @Mod(Ref.ID)
-public class GT4ReimaginedImpl {
-    public GT4ReimaginedImpl(){
+public class GT4ReimaginedForge {
+    public GT4ReimaginedForge(){
         new GT4Reimagined();
         GT4Reimagined.PROXY = DistExecutor.runForDist(() -> ClientHandler::new, () -> ServerHandler::new); // todo: scheduled to change in new Forge
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);

@@ -1,20 +1,18 @@
 package trinsdar.gt4r.fabric;
 
+import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.AntimatterMod;
-import muramasa.antimatter.event.fabric.MaterialEvents;
 import muramasa.antimatter.registration.RegistrationEvent;
 import muramasa.antimatter.registration.Side;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.GT4RData;
-import trinsdar.gt4r.data.GT4RMaterialEvents;
 import trinsdar.gt4r.proxy.CommonHandler;
 
 public class GT4RFabricRegistrar extends AntimatterMod {
     @Override
     public void onRegistrarInit() {
-        super.onRegistrarInit();
-        MaterialEvents.MATERIAL.register(GT4RMaterialEvents::onMaterialEvent);
+        AntimatterAPI.addRegistrar(this);
     }
 
     @Override
