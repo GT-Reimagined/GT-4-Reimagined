@@ -28,7 +28,3 @@ dependencies{
 architectury {
     common("forge", "fabric")
 }
-
-processResources {
-    exclude('gtuassets1.14')
-}
