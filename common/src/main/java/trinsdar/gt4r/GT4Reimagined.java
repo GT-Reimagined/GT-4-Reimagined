@@ -8,6 +8,7 @@ import muramasa.antimatter.event.MaterialEvent;
 import muramasa.antimatter.proxy.IProxyHandler;
 import muramasa.antimatter.registration.RegistrationEvent;
 import muramasa.antimatter.registration.Side;
+import muramasa.antimatter.util.AntimatterPlatformUtils;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
@@ -65,6 +66,9 @@ public class GT4Reimagined extends AntimatterMod {
                 RecipeMaps.init();
                 MenuHandlers.init();
                 GT4RData.init(side);
+                if (AntimatterPlatformUtils.isFabric()){
+                    Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(Ref.ID, "spear"), GT4RData.SPEAR_ENTITY_TYPE);
+                }
                 Machines.init();
                 GT4RFeatures.init();
                 RecipeMaps.postInit();
