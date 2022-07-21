@@ -2,7 +2,7 @@ package trinsdar.gt4r.client;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
-import muramasa.antimatter.client.AntimatterModelLoader.DynamicModelLoader;
+import muramasa.antimatter.client.model.loader.AntimatterModelLoader.DynamicModelLoader;
 import muramasa.antimatter.client.AntimatterModelManager;
 import muramasa.antimatter.dynamic.DynamicModel;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
