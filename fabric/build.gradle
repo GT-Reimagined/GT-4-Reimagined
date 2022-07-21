@@ -1,4 +1,4 @@
-archivesBaseName = "${rootProject.antimatter_archive_base_name}-fabric"
+archivesBaseName = "${rootProject.archive_base_name}-fabric"
 version = "${rootProject.minecraft_version}-${project.mod_version}"
 
 def generatedResources = file("src/generated/resources")
@@ -40,7 +40,7 @@ dependencies{
         exclude(group: "net.fabricmc.fabric-api")
         exclude(group: "com.github.FeltMC.Fabricated-Forge-API")
     }
-    modImplementation(include("net.devtech:arrp:0.+"))
+    modImplementation("net.devtech:arrp:0.+")
     modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${rootProject.rei_version}"
     modCompileOnly("mezz.jei:jei-${rootProject.minecraft_version}-common-api:${rootProject.jei_version}")
     modCompileOnly("mezz.jei:jei-${rootProject.minecraft_version}-fabric-api:${rootProject.jei_version}")
@@ -61,13 +61,7 @@ architectury {
     fabric()
 }
 
-task copyAccessWidener(type: Copy) {
-    from accessWidenerFile
-    into generatedResources
-}
-
 processResources {
-    //dependsOn copyAccessWidener
 
     def toReplace = [
             "version"             : project.version
