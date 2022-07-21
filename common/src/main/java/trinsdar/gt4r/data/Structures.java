@@ -28,7 +28,8 @@ public class Structures {
     public static FakeTileElement CASING = new FakeTileElement(STANDARD_MACHINE_CASING);
 
     public static void initPatterns() {
-        COKE_OVEN.setStructurePattern(b -> b
+        //TODO after patterns are fixed
+        /*COKE_OVEN.setStructurePattern(b -> b
                 .of("CCC", "CCC", "CCC").of("CCC", "CAM", "CCC").of(0)
                 .at("C", FIRE_BRICKS.defaultBlockState()).at("M", COKE_OVEN, LV, Direction.SOUTH)
                 .description(COKE_OVEN.getDisplayName(COKE_OVEN.getFirstTier()))
@@ -139,7 +140,7 @@ public class Structures {
         FUSION_REACTOR.setStructurePattern(
                 builder.at("B", FUSION_ITEM_INJECTOR, FUSION_ITEM_INJECTOR.getFirstTier(), Direction.SOUTH).at("H", FUSION_ITEM_EXTRACTOR, FUSION_ITEM_EXTRACTOR.getFirstTier(), Direction.SOUTH).description(FUSION_REACTOR.getDisplayName(FUSION_REACTOR.getFirstTier()).getString() + " Item").build(),
                 builder.at("B", FUSION_FLUID_INJECTOR, FUSION_FLUID_INJECTOR.getFirstTier(), Direction.SOUTH).at("H", FUSION_FLUID_EXTRACTOR, FUSION_FLUID_EXTRACTOR.getFirstTier(), Direction.SOUTH).description(FUSION_REACTOR.getDisplayName(FUSION_REACTOR.getFirstTier()).getString() + " Fluid").build()
-        );
+        );*/
     }
 
     public static void init() {
