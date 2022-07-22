@@ -31,6 +31,7 @@ import trinsdar.gt4r.datagen.GT4RItemModelProvider;
 import trinsdar.gt4r.datagen.GT4RLocalizations;
 import trinsdar.gt4r.datagen.GT4RRandomDropBonus;
 import trinsdar.gt4r.tile.TileEntityTypes;
+import trinsdar.gt4r.tree.RubberFoliagePlacer;
 import trinsdar.gt4r.tree.RubberTreeWorldGen;
 import trinsdar.gt4r.worldgen.GT4RPlacedFeatures;
 import trinsdar.gt4r.worldgen.GT4RFeatures;
@@ -68,6 +69,7 @@ public class GT4Reimagined extends AntimatterMod {
                 GT4RData.init(side);
                 if (AntimatterPlatformUtils.isFabric()){
                     Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(Ref.ID, "spear"), GT4RData.SPEAR_ENTITY_TYPE);
+                    Registry.register(Registry.FOLIAGE_PLACER_TYPES, new ResourceLocation(Ref.ID, "rubber_foilage_placer"), RubberFoliagePlacer.RUBBER);
                 }
                 Machines.init();
                 GT4RFeatures.init();

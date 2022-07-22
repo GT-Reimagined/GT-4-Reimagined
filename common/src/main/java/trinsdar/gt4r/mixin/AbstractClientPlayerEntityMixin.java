@@ -15,6 +15,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import trinsdar.gt4r.data.GT4RData;
 
+import java.util.List;
+
 @Mixin(AbstractClientPlayer.class)
 public abstract class AbstractClientPlayerEntityMixin extends Player {
 
@@ -38,9 +40,7 @@ public abstract class AbstractClientPlayerEntityMixin extends Player {
     }
 
     private boolean orString(String compare, String... strings){
-        for (String string : strings){
-            if (compare.equals(string)) return true;
-        }
-        return false;
+        List<String> list = List.of(strings);
+        return list.contains(compare);
     }
 }
