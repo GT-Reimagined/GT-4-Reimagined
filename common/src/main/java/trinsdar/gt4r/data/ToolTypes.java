@@ -30,7 +30,6 @@ import tesseract.api.gt.IGTNode;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.items.ItemPowerUnit;
 import trinsdar.gt4r.items.MaterialRockCutter;
-import trinsdar.gt4r.items.MaterialSpear;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -78,8 +77,6 @@ public class ToolTypes {
             return ImmutableMap.of();
         }
     });
-
-    public static AntimatterToolType SPEAR = new SpearToolType(Ref.ID, "spear_gt", 2, 1, 10, 3.0F, -2.9F).setUseAction(UseAnim.SPEAR);
     public static AntimatterToolType ROCK_CUTTER = new RockCutterToolType(Ref.ID, "rock_cutter", 1, 1, 1, -1.0F, -3.0F).setPowered(100000L, 1).setRepairability(false).setOverlayLayers(2).addEffectiveMaterials(ICE_SOLID, METAL, STONE, HEAVY_METAL, PISTON).setBrokenItems(ImmutableMap.of("rock_cutter", i -> getBrokenItem(i, RockCutterPowerUnit)));
 
     static {
@@ -148,39 +145,6 @@ public class ToolTypes {
             return new Tuple<>(currentEnergy, new Tuple<>(maxEnergy, tool.getMaterial(stack)));
         }
         return null;
-    }
-
-    public static class SpearToolType extends AntimatterToolType{
-        public SpearToolType(String domain, String id, int useDurability, int attackDurability, int craftingDurability, float baseAttackDamage, float baseAttackSpeed) {
-            super(domain, id, useDurability, attackDurability, craftingDurability, baseAttackDamage, baseAttackSpeed, false);
-            this.tag = TagUtils.getItemTag(new ResourceLocation(Ref.ANTIMATTER, "spear"));
-            this.forgeTag = TagUtils.getForgelikeItemTag("tools/".concat("spear"));
-        }
-
-        @Override
-        public IAntimatterTool instantiateTools(String domain) {
-            return new MaterialSpear(domain, this, prepareInstantiation(domain));
-        }
-
-        @Override
-        public TagKey<Item> getTag() {
-            return tag;
-        }
-
-        @Override
-        public TagKey<Item> getForgeTag() {
-            return forgeTag;
-        }
-
-        @Override
-        public ItemStack getToolStack(Material primary, Material secondary) {
-            return Objects.requireNonNull(AntimatterAPI.get(IAntimatterTool.class, "spear", getDomain())).asItemStack(primary, secondary);
-        }
-
-        @Override
-        public IAntimatterTool instantiateTools(String domain, Supplier<Item.Properties> properties) {
-            return new MaterialSpear(domain, this, properties.get());
-        }
     }
 
     public static class RockCutterToolType extends AntimatterToolType{

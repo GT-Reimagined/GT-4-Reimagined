@@ -3,8 +3,7 @@
   "package": "trinsdar.gt4r.mixin.fabric",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "ItemMatchMixin",
-    "PlayerEntityMixin"
+    "ItemMatchMixin"
   ],
   "minVersion": "0.8"
 }

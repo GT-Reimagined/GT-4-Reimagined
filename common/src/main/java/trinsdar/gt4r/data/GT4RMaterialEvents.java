@@ -357,7 +357,7 @@ public class GT4RMaterialEvents {
         event.setMaterial(Gold).flags(GEAR).addByProduct(Copper, Nickel);
         event.setMaterial(Copper).flags(PLATE, ROD, GEAR).addByProduct(Gold, Nickel);
         event.setMaterial(Water).mats(of(Hydrogen, 2, Oxygen, 1));
-        event.setMaterial(Flint).setAllowedTypes(PICKAXE, AXE, SHOVEL, SWORD, HOE, MORTAR, KNIFE, ToolTypes.SPEAR).mats(of(SiliconDioxide, 1));
+        event.setMaterial(Flint).setAllowedTypes(PICKAXE, AXE, SHOVEL, SWORD, HOE, MORTAR, KNIFE).mats(of(SiliconDioxide, 1));
         event.setMaterial(Wood).mats(of(Carbon, 1, Oxygen, 1, Hydrogen, 1));
         event.setMaterial(Blaze).mats(of(Sulfur, 1, DarkAsh, 1/*, Magic, 1*/));
         event.setMaterial(Charcoal).mats(of(Carbon, 1));

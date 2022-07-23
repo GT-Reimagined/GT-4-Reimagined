@@ -103,11 +103,4 @@ public class CommonEvents {
             }
         }
     }
-
-    public static void playerJoin(Player player){
-        double base = player.getAttribute(Attributes.ATTACK_REACH).getBaseValue();
-        if (base == 4.5){
-            player.getAttribute(Attributes.ATTACK_REACH).setBaseValue(5.0);
-        }
-    }
 }

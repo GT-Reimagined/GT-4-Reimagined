@@ -24,7 +24,6 @@ import muramasa.antimatter.texture.Texture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
@@ -45,8 +44,6 @@ import trinsdar.gt4r.cover.CoverPump;
 import trinsdar.gt4r.cover.CoverSteamVent;
 import trinsdar.gt4r.cover.redstone.CoverRedstoneMachineController;
 import trinsdar.gt4r.data.client.RecipeRenderer;
-import trinsdar.gt4r.entity.EntityPlatformUtil;
-import trinsdar.gt4r.entity.SpearEntity;
 import trinsdar.gt4r.items.ItemCraftingModule;
 import trinsdar.gt4r.items.ItemIntCircuit;
 import trinsdar.gt4r.items.ItemMatch;
@@ -315,8 +312,6 @@ public class GT4RData {
     public static final BlockCasing FUSION_COIL = new BlockCasing(Ref.ID, "fusion_coil");
 
     public static final BlockSapBag SAP_BAG = new BlockSapBag();
-
-    public static final EntityType<SpearEntity> SPEAR_ENTITY_TYPE = EntityPlatformUtil.builder(EntityType.Builder.of(EntityPlatformUtil.factory(), MobCategory.MISC)).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("gt4r:spear");
 
     public static final Cable<?> CABLE_LEAD = AntimatterAPI.register(Cable.class, new Cable<>(Ref.ID, Lead, 2, Tier.LV).amps(2));
     public static final Cable<?> CABLE_TIN = AntimatterAPI.register(Cable.class, new Cable<>(Ref.ID, Tin, 1, Tier.LV).amps(1));

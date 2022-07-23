@@ -20,9 +20,6 @@ import java.util.List;
 @Mixin(AbstractClientPlayer.class)
 public abstract class AbstractClientPlayerEntityMixin extends Player {
 
-    @Shadow
-    protected abstract PlayerInfo getPlayerInfo();
-
     public AbstractClientPlayerEntityMixin(Level p_i241920_1_, BlockPos p_i241920_2_, float p_i241920_3_, GameProfile p_i241920_4_) {
         super(p_i241920_1_, p_i241920_2_, p_i241920_3_, p_i241920_4_);
     }

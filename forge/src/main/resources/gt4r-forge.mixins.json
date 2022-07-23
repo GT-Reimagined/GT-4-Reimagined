@@ -1,9 +1,0 @@
-{
-  "required": true,
-  "package": "trinsdar.gt4r.mixin.forge",
-  "compatibilityLevel": "JAVA_8",
-  "mixins": [
-    "PlayerEntityMixin"
-  ],
-  "minVersion": "0.8"
-}

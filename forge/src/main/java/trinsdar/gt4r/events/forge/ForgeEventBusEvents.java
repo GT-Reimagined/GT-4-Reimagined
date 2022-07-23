@@ -27,9 +27,4 @@ public class ForgeEventBusEvents {
             CommonEvents.onPlayerTick(event.player, event.side.isServer());
         }
     }
-
-    @SubscribeEvent
-    public static void playerJoin(PlayerEvent.PlayerLoggedInEvent e){
-        CommonEvents.playerJoin(e.getPlayer());
-    }
 }

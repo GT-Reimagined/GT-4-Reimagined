@@ -68,7 +68,6 @@ public class GT4Reimagined extends AntimatterMod {
                 MenuHandlers.init();
                 GT4RData.init(side);
                 if (AntimatterPlatformUtils.isFabric()){
-                    Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(Ref.ID, "spear"), GT4RData.SPEAR_ENTITY_TYPE);
                     Registry.register(Registry.FOLIAGE_PLACER_TYPES, new ResourceLocation(Ref.ID, "rubber_foilage_placer"), RubberFoliagePlacer.RUBBER);
                 }
                 Machines.init();

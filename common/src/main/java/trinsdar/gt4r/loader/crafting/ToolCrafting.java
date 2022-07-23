@@ -126,13 +126,6 @@ public class ToolCrafting {
     private static void loadOtherRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider){
         CriterionTriggerInstance in = provider.hasSafeItem(FILE.getTag());
 
-        provider.addToolRecipe(TOOL_BUILDER.get(ToolTypes.SPEAR.getId()), output, Ref.ID,  "spear_recipe", "antimatter_tools",
-                "has_file", in, ToolTypes.SPEAR.getToolStack(NULL, NULL), of('I', PropertyIngredient.builder("primary").inverse().tags(FLINT).types(PLATE, GEM).tool(ToolTypes.SPEAR, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build(), 'F', FILE.getTag(), 'H', HAMMER.getTag()), " FI", " RH", "R  ");
-
-
-        provider.addToolRecipe(TOOL_BUILDER.get(ToolTypes.SPEAR.getId()), output, Ref.ID, "flint_spear_recipe", "antimatter_tools",
-                "has_flint", provider.hasSafeItem(GEM.getMaterialTag(Flint)), ToolTypes.SPEAR.getToolStack(Flint, NULL), of('I', PropertyIngredient.builder("primary").types(GEM).tags(FLINT).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "  I", " R ", "R  ");
-
         provider.addToolRecipe(TOOL_BUILDER.get(PICKAXE.getId()), output, Ref.ANTIMATTER, PICKAXE.getId() + "__recipe_with_head", "antimatter_files",
                 "has_wrench", in, PICKAXE.getToolStack(NULL, NULL), of('P', PropertyIngredient.builder("primary").types(GT4RMaterialTags.PICKAXE_HEAD).tool(PICKAXE, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
 

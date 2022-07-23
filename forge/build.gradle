@@ -23,7 +23,7 @@ architectury {
 loom{
     forge {
         mixinConfigs = [
-                "gt4r.mixins.json", "gt4r-forge.mixins.json"
+                "gt4r.mixins.json"
         ]
         dataGen {
             mod project.modid

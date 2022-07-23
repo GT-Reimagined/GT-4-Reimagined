@@ -3,14 +3,9 @@
   "package": "trinsdar.gt4r.mixin",
   "compatibilityLevel": "JAVA_8",
   "client": [
-    "GameRendererMixin",
     "AbstractClientPlayerEntityMixin"
   ],
-  "server": [
-    "ServerPlayNetHandlerMixin"
-  ],
   "mixins": [
-    "PlayerEntityMixin",
     "GTCapabilityProviderAccessor"
   ],
   "minVersion": "0.8"
