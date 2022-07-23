@@ -11,6 +11,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
+import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
@@ -71,9 +72,9 @@ public class RubberTreeWorldGen  extends WorldGenBase<RubberTreeWorldGen> {
             (new TreeConfiguration.TreeConfigurationBuilder(RubberTree.TRUNK_BLOCKS, new StraightTrunkPlacer(4, 3, 0), SimpleStateProvider.simple(GT4RData.RUBBER_LEAVES.defaultBlockState()),
                     new RubberFoliagePlacer(), new TwoLayersFeatureSize(1, 0, 2))).ignoreVines().build();
 
-    static final Holder<ConfiguredFeature<TreeConfiguration, ?>> RUBBER_TREE_CONFIGURED_NORMAL = register("rubber_tree_normal", new ConfiguredFeature<>(RubberTree.TREE_FEATURE, RUBBER_TREE_CONFIG_NORMAL));
-    static final Holder<ConfiguredFeature<TreeConfiguration, ?>> RUBBER_TREE_CONFIGURED_JUNGLE = register("rubber_tree_jungle", new ConfiguredFeature<>(RubberTree.TREE_FEATURE, RUBBER_TREE_CONFIG_JUNGLE));
-    static final Holder<ConfiguredFeature<TreeConfiguration, ?>> RUBBER_TREE_CONFIGURED_SWAMP = register("rubber_tree_swamp", new ConfiguredFeature<>(RubberTree.TREE_FEATURE, RUBBER_TREE_CONFIG_SWAMP));
+    static final Holder<ConfiguredFeature<TreeConfiguration, ?>> RUBBER_TREE_CONFIGURED_NORMAL = register("rubber_tree_normal", RubberTree.TREE_FEATURE, RUBBER_TREE_CONFIG_NORMAL);
+    static final Holder<ConfiguredFeature<TreeConfiguration, ?>> RUBBER_TREE_CONFIGURED_JUNGLE = register("rubber_tree_jungle", RubberTree.TREE_FEATURE, RUBBER_TREE_CONFIG_JUNGLE);
+    static final Holder<ConfiguredFeature<TreeConfiguration, ?>> RUBBER_TREE_CONFIGURED_SWAMP = register("rubber_tree_swamp", RubberTree.TREE_FEATURE, RUBBER_TREE_CONFIG_SWAMP);
 
     static final Holder<PlacedFeature> RUBBER_TREE_NORMAL = createPlacedFeature("rubber_tree_normal", RUBBER_TREE_CONFIGURED_NORMAL, new RubberTreePlacementModifier(), BiomeFilter.biome());
     static final Holder<PlacedFeature> RUBBER_TREE_JUNGLE = createPlacedFeature("rubber_tree_jungle", RUBBER_TREE_CONFIGURED_JUNGLE, new RubberTreePlacementModifier(), BiomeFilter.biome());
@@ -85,10 +86,8 @@ public class RubberTreeWorldGen  extends WorldGenBase<RubberTreeWorldGen> {
         Registry.register(Registry.PLACEMENT_MODIFIERS, new ResourceLocation(Ref.ID, "rubber_tree_placement_modifier"), RUBBER_TREE_PLACEMENT_MODIFIER);
     }
 
-    public static <FC extends FeatureConfiguration, F extends Feature<FC>> Holder<ConfiguredFeature<FC, ?>> register(String id, ConfiguredFeature<FC, F> cf) {
-        ResourceLocation realId = new ResourceLocation(Ref.ID, id);
-        Preconditions.checkState(!BuiltinRegistries.CONFIGURED_FEATURE.keySet().contains(realId), "Duplicate ID: %s", id);
-        return BuiltinRegistries.registerExact(BuiltinRegistries.CONFIGURED_FEATURE, realId.toString(), cf);
+    public static <FC extends FeatureConfiguration, F extends Feature<FC>> Holder<ConfiguredFeature<FC, ?>> register(String id, F feature, FC config) {
+        return FeatureUtils.register(Ref.ID + ":" + id, feature, config);
     }
 
     public static <FC extends FeatureConfiguration> Holder<PlacedFeature> createPlacedFeature(String id, Holder<ConfiguredFeature<FC, ?>> feature, PlacementModifier... placementModifiers) {
