@@ -42,12 +42,12 @@ public class GT4RLocalizations {
 
     public static class en_US extends AntimatterLanguageProvider {
 
-        public en_US(DataGenerator gen) {
-            this("en_us", gen);
+        public en_US() {
+            this("en_us");
         }
 
-        public en_US(String locale, DataGenerator gen) {
-            super(Ref.ID, Ref.NAME + " " + locale + " Localization", locale, gen);
+        public en_US(String locale) {
+            super(Ref.ID, Ref.NAME + " " + locale + " Localization", locale);
         }
 
         @Override
@@ -138,8 +138,8 @@ public class GT4RLocalizations {
 
     public static class en_GB extends en_US{
         private final Map<String, String> usToGB = new HashMap<>();
-        public en_GB(DataGenerator gen) {
-            super("en_gb", gen);
+        public en_GB() {
+            super("en_gb");
             usToGB.put("Gasoline", "Petrol");
         }
 

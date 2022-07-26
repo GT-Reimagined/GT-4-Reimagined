@@ -1,5 +1,6 @@
 package trinsdar.gt4r.items;
 
+import muramasa.antimatter.datagen.builder.AntimatterItemModelBuilder;
 import muramasa.antimatter.datagen.providers.AntimatterItemModelProvider;
 import muramasa.antimatter.item.ItemBasic;
 import muramasa.antimatter.texture.Texture;
@@ -19,8 +20,6 @@ import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.client.model.generators.ItemModelBuilder;
-import net.minecraftforge.client.model.generators.ModelFile;
 import trinsdar.gt4r.Ref;
 
 import static trinsdar.gt4r.data.GT4RData.Lighter;
@@ -96,10 +95,10 @@ public class ItemMatch extends ItemBasic<ItemMatch> {
             return;
         }
         String id = this.getId();
-        ItemModelBuilder builder = prov.getBuilder(id +"_lit");
-        builder.parent(new ModelFile.UncheckedModelFile(new ResourceLocation("minecraft:item/generated")));
+        AntimatterItemModelBuilder builder = prov.getBuilder(id +"_lit");
+        builder.parent(new ResourceLocation("minecraft:item/generated"));
         builder.texture("layer0", new Texture(Ref.ID, "item/basic/" + id +"_lit"));
-        prov.tex(item, new ResourceLocation(Ref.ID, "item/basic/" + id)).override().predicate(new ResourceLocation("damaged"), 1).predicate(new ResourceLocation("damage"), 0).model(new ModelFile.UncheckedModelFile(new ResourceLocation(Ref.ID, "item/" + id +"_lit")));
+        prov.tex(item, new ResourceLocation(Ref.ID, "item/basic/" + id)).override().predicate(new ResourceLocation("damaged"), 1).predicate(new ResourceLocation("damage"), 0).model(new ResourceLocation(Ref.ID, "item/" + id +"_lit"));
     }
 
     @Override

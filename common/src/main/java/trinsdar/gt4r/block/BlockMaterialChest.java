@@ -30,7 +30,6 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.tile.single.TileEntityChest;
 
@@ -95,7 +94,7 @@ public class BlockMaterialChest extends BlockMachineMaterial implements SimpleWa
 
     @Override
     public void onItemModelBuild(ItemLike item, AntimatterItemModelProvider prov) {
-        ItemModelBuilder b = prov.getBuilder(item).parent(prov.existing(Ref.ID, "block/material_chest"));
+        prov.getBuilder(item).parent(prov.existing(Ref.ID, "block/material_chest"));
     }
 
     @Override

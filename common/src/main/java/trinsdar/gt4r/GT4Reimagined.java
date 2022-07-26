@@ -52,7 +52,7 @@ public class GT4Reimagined extends AntimatterMod {
     public void onRegistrarInit() {
         super.onRegistrarInit();
         AntimatterDynamics.clientProvider(Ref.ID, g -> new AntimatterBlockStateProvider(Ref.ID, Ref.NAME + " BlockStates", g));
-        AntimatterDynamics.clientProvider(Ref.ID, g -> new GT4RItemModelProvider(Ref.ID, Ref.NAME + " Item Models", g));
+        AntimatterDynamics.clientProvider(Ref.ID, g -> new GT4RItemModelProvider(Ref.ID, Ref.NAME + " Item Models"));
         AntimatterDynamics.clientProvider(Ref.ID, GT4RLocalizations.en_US::new);
     }
 
