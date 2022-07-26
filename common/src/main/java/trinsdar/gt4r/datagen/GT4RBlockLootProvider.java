@@ -41,8 +41,6 @@ public class GT4RBlockLootProvider extends AntimatterBlockLootProvider {
         this.add(GT4RData.RUBBER_LOG);
         this.add(GT4RData.RUBBER_SAPLING);
         this.add(GT4RData.SAP_BAG);
-        AntimatterAPI.all(BlockOre.class, this::addToFortune);
-        AntimatterAPI.all(BlockOreStone.class, this::addToStone);
     }
 
     @Override
@@ -50,35 +48,7 @@ public class GT4RBlockLootProvider extends AntimatterBlockLootProvider {
         if (block.getOreType() == ORE){
             if (block.getStoneType() == SAND || block.getStoneType() == SAND_RED || block.getStoneType() == GRAVEL){
                 tables.put(block, this::build);
-                return;
             }
-            Material mat = block.getMaterial();
-            if (mat == Lapis || mat == Redstone){
-                Item item = mat == Redstone ? Items.REDSTONE : GEM.get(mat);
-                if (mat == Lapis){
-                    tables.put(block, b -> createSilkTouchDispatchTable(b, applyExplosionDecay(b, LootItem.lootTableItem(item).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 9.0F))).apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE)))));
-                } else if (mat == Redstone){
-                    tables.put(block, b -> createSilkTouchDispatchTable(b, applyExplosionDecay(b, LootItem.lootTableItem(item).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 5.0F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE)))));
-                }
-            } else if (mat == Cinnabar || mat == Sphalerite || mat == Pyrite){
-                LootTable.Builder builder = createSilkTouchDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(DUST.get(mat)).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 2.0F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))));
-                if (mat == Cinnabar){
-                    builder = builder.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(BlockLootTablesAccessor.getNoSilkTouch()).add(LootItem.lootTableItem(DUST.get(Redstone)).apply(GT4RRandomDropBonus.randomDrops(Enchantments.BLOCK_FORTUNE, 4))));
-                } else if (mat == Sphalerite){
-                    builder = builder.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(BlockLootTablesAccessor.getNoSilkTouch()).add(LootItem.lootTableItem(DUST.get(Zinc)).apply(GT4RRandomDropBonus.randomDrops(Enchantments.BLOCK_FORTUNE, 4)))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(BlockLootTablesAccessor.getNoSilkTouch()).add(LootItem.lootTableItem(GEM.get(YellowGarnet)).apply(GT4RRandomDropBonus.randomDrops(Enchantments.BLOCK_FORTUNE, 32))));
-                }
-                LootTable.Builder finalBuilder = builder;
-                tables.put(block, b -> finalBuilder);
-            } else if (mat == Sodalite){
-                tables.put(block, b -> createSilkTouchDispatchTable(b, applyExplosionDecay(b, LootItem.lootTableItem(GEM.get(mat)).apply(SetItemCountFunction.setCount(UniformGenerator.between(6.0F, 6.0F))).apply(GT4RRandomDropBonus.uniformBonusCount(Enchantments.BLOCK_FORTUNE, 3)))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(BlockLootTablesAccessor.getNoSilkTouch()).add(LootItem.lootTableItem(DUST.get(Aluminium)).apply(GT4RRandomDropBonus.randomDrops(Enchantments.BLOCK_FORTUNE, 4)))));
-            }
-        }
-        //super.addToFortune(block);
-    }
-
-    protected void addToStone(BlockOreStone block) {
-        if (block.getMaterial() == Salt || block.getMaterial() == RockSalt) {
-            tables.put(block, b -> createOreDrop(b, DUST.get(block.getMaterial())));
         }
     }
 }
