@@ -61,6 +61,7 @@ dependencies {
     //JEI
     //modRuntimeOnly("mezz.jei:jei-${rootProject.minecraft_version}-forge:${rootProject.jei_version}")
     modRuntimeOnly("mezz.jei:jei-1.18.2:9.5.0.132")
+    modImplementation("com.github.Reforged-Mods:ARRP-forge:0.5.5")
 
 
     //runtimeOnly fg.deobf("curse.maven:world_stripper-250603:3142092")

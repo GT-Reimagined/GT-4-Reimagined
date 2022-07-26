@@ -26,8 +26,8 @@ import static muramasa.antimatter.Data.*;
 import static trinsdar.gt4r.data.Materials.*;
 
 public class GT4RBlockLootProvider extends AntimatterBlockLootProvider {
-    public GT4RBlockLootProvider(String providerDomain, String providerName, DataGenerator gen) {
-        super(providerDomain, providerName, gen);
+    public GT4RBlockLootProvider(String providerDomain, String providerName) {
+        super(providerDomain, providerName);
     }
 
     @Override
