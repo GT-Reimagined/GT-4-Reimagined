@@ -47,6 +47,9 @@ public class GT4ROreFeatureConfig implements FeatureConfiguration {
             materials = new Material[] {Material.get(primary)};
         }
         this.primary = primary;
+        if (secondary == null){
+            secondary = "";
+        }
         this.secondary = secondary;
         /*if (secondary != null){
             this.secondary = secondary;

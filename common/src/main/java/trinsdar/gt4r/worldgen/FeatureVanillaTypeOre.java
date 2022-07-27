@@ -210,7 +210,7 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
                                                                 continue;
                                                             }
                                                         }
-                                                        if (config.getSecondary() != null && !config.getSecondary().equals("null") && config.getSecondaryChance() > 0 && config.getSecondaryChance() < 1.0F){
+                                                        if (!config.getSecondary().isEmpty() && !config.getSecondary().equals("null") && config.getSecondaryChance() > 0 && config.getSecondaryChance() < 1.0F){
                                                             mat = pRandom.nextFloat() < config.getSecondaryChance() ? Material.get(config.getSecondary()) : Material.get(config.getPrimary());
                                                         }
                                                         if (canPlaceOre(blockstate, bulksectionaccess::getBlockState, pRandom, config, mat, Data.ORE, blockpos$mutableblockpos) && WorldGenHelper.setOre(pLevel, new BlockPos(i3, j3, k3), blockstate, mat, Data.ORE)) {
