@@ -1,7 +1,7 @@
 package trinsdar.gt4r;
 
 import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.AntimatterDynamics;
+import muramasa.antimatter.datagen.AntimatterDynamics;
 import muramasa.antimatter.AntimatterMod;
 import muramasa.antimatter.datagen.providers.AntimatterBlockStateProvider;
 import muramasa.antimatter.event.MaterialEvent;
@@ -51,8 +51,8 @@ public class GT4Reimagined extends AntimatterMod {
     @Override
     public void onRegistrarInit() {
         super.onRegistrarInit();
-        AntimatterDynamics.clientProvider(Ref.ID, g -> new AntimatterBlockStateProvider(Ref.ID, Ref.NAME + " BlockStates", g));
-        AntimatterDynamics.clientProvider(Ref.ID, g -> new GT4RItemModelProvider(Ref.ID, Ref.NAME + " Item Models", g));
+        AntimatterDynamics.clientProvider(Ref.ID, () -> new AntimatterBlockStateProvider(Ref.ID, Ref.NAME + " BlockStates"));
+        AntimatterDynamics.clientProvider(Ref.ID, () -> new GT4RItemModelProvider(Ref.ID, Ref.NAME + " Item Models"));
         AntimatterDynamics.clientProvider(Ref.ID, GT4RLocalizations.en_US::new);
     }
 

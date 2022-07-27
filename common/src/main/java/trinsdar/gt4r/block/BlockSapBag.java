@@ -2,6 +2,7 @@ package trinsdar.gt4r.block;
 
 import muramasa.antimatter.datagen.builder.AntimatterBlockModelBuilder;
 import muramasa.antimatter.datagen.builder.DynamicConfigBuilder;
+import muramasa.antimatter.datagen.builder.VariantBlockStateBuilder;
 import muramasa.antimatter.datagen.providers.AntimatterBlockStateProvider;
 import muramasa.antimatter.datagen.providers.AntimatterItemModelProvider;
 import muramasa.antimatter.dynamic.BlockDynamic;
@@ -37,8 +38,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.client.BakedModels;
 import trinsdar.gt4r.tile.TileEntityTypes;
@@ -153,15 +152,14 @@ public class BlockSapBag  extends BlockDynamic implements SimpleWaterloggedBlock
 
     @Override
     public void onItemModelBuild(ItemLike item, AntimatterItemModelProvider prov) {
-        ItemModelBuilder b = prov.getBuilder(item).parent(prov.existing(Ref.ID, "block/sapbag/north")).texture("side", TEXTURES[2]).texture("bottom", TEXTURES[0]).texture("top", TEXTURES[1]);
+        prov.getBuilder(item).parent(prov.existing(Ref.ID, "block/sapbag/north")).texture("side", TEXTURES[2]).texture("bottom", TEXTURES[0]).texture("top", TEXTURES[1]);
     }
 
     @Override
     public void onBlockModelBuild(Block block, AntimatterBlockStateProvider prov) {
-        prov.getVariantBuilder(block).forAllStates(s -> ConfiguredModel.builder()
+        prov.getVariantBuilder(block).forAllStates(s -> new VariantBlockStateBuilder.VariantBuilder()
                 .modelFile(buildModelsForState(prov.getBuilder(block), s))
-                .uvLock(true)
-                .build()
+                .uvLock()
         );
     }
 

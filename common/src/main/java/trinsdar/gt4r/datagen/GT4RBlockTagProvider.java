@@ -11,13 +11,13 @@ import static trinsdar.gt4r.data.GT4RData.*;
 
 public class GT4RBlockTagProvider extends AntimatterBlockTagProvider {
 
-    public GT4RBlockTagProvider(String providerDomain, String providerName, boolean replace, DataGenerator gen) {
-        super(providerDomain, providerName, replace, gen);
+    public GT4RBlockTagProvider(String providerDomain, String providerName, boolean replace) {
+        super(providerDomain, providerName, replace);
     }
 
     @Override
-    public void addTags() {
-        super.addTags();
+    public void processTags(String domain) {
+        super.processTags(domain);
         this.tag(BlockTags.LOGS).add(GT4RData.RUBBER_LOG);
         this.tag(BlockTags.LEAVES).add(GT4RData.RUBBER_LEAVES);
         this.tag(BlockTags.SAPLINGS).add(GT4RData.RUBBER_SAPLING);

@@ -1,10 +1,13 @@
 package trinsdar.gt4r.tree;
 
 import muramasa.antimatter.block.BlockBasic;
+import muramasa.antimatter.datagen.builder.AntimatterBlockModelBuilder;
+import muramasa.antimatter.datagen.builder.VariantBlockStateBuilder;
 import muramasa.antimatter.datagen.providers.AntimatterBlockStateProvider;
 import muramasa.antimatter.texture.Texture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -23,8 +26,6 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.client.model.generators.ModelFile;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.GT4RData;
 
@@ -67,13 +68,13 @@ public class BlockRubberLog extends BlockBasic {
 
     @Override
     public void onBlockModelBuild(Block block, AntimatterBlockStateProvider prov) {
-        ModelFile rubberLog = prov.existing(Ref.ID, "block/rubber_log");
-        ModelFile rubberLogEmpty = prov.existing(Ref.ID, "block/rubber_log_empty");
-        ModelFile rubberLogFilled = prov.existing(Ref.ID, "block/rubber_log_filled");
+        ResourceLocation rubberLog = prov.existing(Ref.ID, "block/rubber_log");
+        ResourceLocation rubberLogEmpty = prov.existing(Ref.ID, "block/rubber_log_empty");
+        ResourceLocation rubberLogFilled = prov.existing(Ref.ID, "block/rubber_log_filled");
         prov.getVariantBuilder(block).forAllStates(s ->
-            ConfiguredModel.builder().modelFile(s.getValue(RESIN_STATE) == ResinState.NONE ? rubberLog : s.getValue(RESIN_STATE) == ResinState.EMPTY ? rubberLogEmpty : rubberLogFilled)
+            new VariantBlockStateBuilder.VariantBuilder().modelFile(s.getValue(RESIN_STATE) == ResinState.NONE ? rubberLog : s.getValue(RESIN_STATE) == ResinState.EMPTY ? rubberLogEmpty : rubberLogFilled)
                 .rotationY((int) s.getValue(RESIN_FACING).getOpposite().toYRot())
-                .rotationX(s.getValue(AXIS) == Direction.Axis.Y ? 0 : 90).build()
+                .rotationX(s.getValue(AXIS) == Direction.Axis.Y ? 0 : 90)
         );
     }
 

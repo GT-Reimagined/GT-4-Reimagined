@@ -132,17 +132,17 @@ public class AntimatterEvents {
     }
 
     public static void onProviders(ProvidersEvent event){
-        if (event.getSide() == Side.CLIENT) return;
+        //if (event.getSide() == Side.CLIENT) return;
         final AntimatterBlockTagProvider[] p = new AntimatterBlockTagProvider[1];
-        event.addProvider(Ref.ID, g -> {
-            p[0] = new GT4RBlockTagProvider(Ref.ID, Ref.NAME.concat(" Block Tags"), false, g);
+        event.addProvider(Ref.ID, () -> {
+            p[0] = new GT4RBlockTagProvider(Ref.ID, Ref.NAME.concat(" Block Tags"), false);
             return p[0];
         });
-        event.addProvider(Ref.ID, g -> new GT4RItemTagProvider(Ref.ID, Ref.NAME.concat(" Item Tags"), false, g, p[0]));
-        event.addProvider(Ref.ID, g -> new AntimatterFluidTagProvider(Ref.ID, Ref.NAME.concat(" Fluid Tags"), false, g));
+        event.addProvider(Ref.ID, () -> new GT4RItemTagProvider(Ref.ID, Ref.NAME.concat(" Item Tags"), false, p[0]));
+        event.addProvider(Ref.ID, () -> new AntimatterFluidTagProvider(Ref.ID, Ref.NAME.concat(" Fluid Tags"), false));
 
-        event.addProvider(Ref.ID, g -> new AntimatterAdvancementProvider(Ref.ID, Ref.NAME.concat(" Advancements"), g, new ProgressionAdvancements()));
+        event.addProvider(Ref.ID, () -> new AntimatterAdvancementProvider(Ref.ID, Ref.NAME.concat(" Advancements"), new ProgressionAdvancements()));
 
-        event.addProvider(Ref.ID, g -> new GT4RBlockLootProvider(Ref.ID, Ref.NAME.concat( " Loot generator"),g));
+        event.addProvider(Ref.ID, () -> new GT4RBlockLootProvider(Ref.ID, Ref.NAME.concat( " Loot generator")));
     }
 }

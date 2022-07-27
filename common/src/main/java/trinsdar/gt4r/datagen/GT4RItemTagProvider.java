@@ -1,12 +1,14 @@
 package trinsdar.gt4r.datagen;
 
 import muramasa.antimatter.AntimatterAPI;
+import muramasa.antimatter.datagen.providers.AntimatterBlockTagProvider;
 import muramasa.antimatter.datagen.providers.AntimatterItemTagProvider;
 import muramasa.antimatter.ore.BlockOre;
 import muramasa.antimatter.util.AntimatterPlatformUtils;
 import muramasa.antimatter.util.TagUtils;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -21,13 +23,13 @@ import static trinsdar.gt4r.data.GT4RData.*;
 import static trinsdar.gt4r.data.Materials.*;
 
 public class GT4RItemTagProvider extends AntimatterItemTagProvider {
-    public GT4RItemTagProvider(String providerDomain, String providerName, boolean replace, DataGenerator gen, BlockTagsProvider p) {
-        super(providerDomain, providerName, replace, gen, p);
+    public GT4RItemTagProvider(String providerDomain, String providerName, boolean replace, AntimatterBlockTagProvider p) {
+        super(providerDomain, providerName, replace, p);
     }
 
     @Override
-    public void addTags() {
-        super.addTags();
+    public void processTags(String domain) {
+        super.processTags(domain);
         this.tag(PLATES_STEELS).addTag(getTag("plates/steel")).addTag(getTag("plates/stainless_steel"));
         this.tag(PLATES_INVAR_ALUMINIUM).addTag(getTag("plates/invar")).addTag(getTag("plates/aluminium"));
         this.tag(PLATES_IRON_ALUMINIUM).addTag(getTag("plates/iron")).addTag(getTag("plates/aluminium"));
@@ -78,7 +80,7 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
 
         this.tag(RODS_STEELS).addTag(getTag("rods/steel")).addTag(getTag("rods/stainless_steel"));
         this.tag(RODS_MAGNETIC).addTag(getTag("rods/magnetic_steel")).addTag(getTag("rods/magnetic_iron"));
-        TagAppender<Item> add = this.tag(CORALS);
+        TagsProvider.TagAppender<Item> add = this.tag(CORALS);
         String[] corals = {"tube", "brain", "bubble", "fire", "horn"};
         for (String coral : corals){
             add.add(AntimatterPlatformUtils.getItemFromID(new ResourceLocation(coral + "_coral")), AntimatterPlatformUtils.getItemFromID(new ResourceLocation("dead_" + coral + "_coral")), AntimatterPlatformUtils.getItemFromID(new ResourceLocation(coral + "_coral_fan")), AntimatterPlatformUtils.getItemFromID(new ResourceLocation("dead_" + coral + "_coral_fan"))).replace(false);
