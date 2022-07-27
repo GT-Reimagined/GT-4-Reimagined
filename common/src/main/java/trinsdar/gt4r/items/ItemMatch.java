@@ -98,7 +98,7 @@ public class ItemMatch extends ItemBasic<ItemMatch> {
         AntimatterItemModelBuilder builder = prov.getBuilder(id +"_lit");
         builder.parent(new ResourceLocation("minecraft:item/generated"));
         builder.texture("layer0", new Texture(Ref.ID, "item/basic/" + id +"_lit"));
-        prov.tex(item, new ResourceLocation(Ref.ID, "item/basic/" + id)).override().predicate(new ResourceLocation("damaged"), 1).predicate(new ResourceLocation("damage"), 0).model(new ResourceLocation(Ref.ID, "item/" + id +"_lit"));
+        prov.tex(item, new ResourceLocation(Ref.ID, "item/basic/" + id)).override().predicate(new ResourceLocation("damaged"), 1).predicate(new ResourceLocation("damage"), 0).model(new ResourceLocation(Ref.ID, "item/" + id +"_lit")).end();
     }
 
     @Override

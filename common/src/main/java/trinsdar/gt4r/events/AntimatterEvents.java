@@ -132,7 +132,7 @@ public class AntimatterEvents {
     }
 
     public static void onProviders(ProvidersEvent event){
-        if (event.getSide() == Side.CLIENT) return;
+        //if (event.getSide() == Side.CLIENT) return;
         final AntimatterBlockTagProvider[] p = new AntimatterBlockTagProvider[1];
         event.addProvider(Ref.ID, () -> {
             p[0] = new GT4RBlockTagProvider(Ref.ID, Ref.NAME.concat(" Block Tags"), false);

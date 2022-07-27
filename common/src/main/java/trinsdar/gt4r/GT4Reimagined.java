@@ -1,7 +1,7 @@
 package trinsdar.gt4r;
 
 import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.AntimatterDynamics;
+import muramasa.antimatter.datagen.AntimatterDynamics;
 import muramasa.antimatter.AntimatterMod;
 import muramasa.antimatter.datagen.providers.AntimatterBlockStateProvider;
 import muramasa.antimatter.event.MaterialEvent;
