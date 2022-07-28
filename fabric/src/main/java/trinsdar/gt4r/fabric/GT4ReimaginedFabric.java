@@ -1,11 +1,11 @@
 package trinsdar.gt4r.fabric;
 
 import io.github.fabricators_of_create.porting_lib.event.common.PlayerTickEvents;
+import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.event.fabric.CraftingEvents;
 import muramasa.antimatter.event.fabric.LoaderEvents;
 import muramasa.antimatter.event.fabric.ProviderEvents;
 import muramasa.antimatter.event.fabric.WorldGenEvents;
-import muramasa.antimatter.util.AntimatterPlatformUtils;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -24,11 +24,11 @@ public class GT4ReimaginedFabric implements ModInitializer {
         LoaderEvents.LOADER.register(AntimatterEvents::registerRecipeLoaders);
         CraftingEvents.CRAFTING.register(AntimatterEvents::registerCraftingLoaders);
         ProviderEvents.PROVIDERS.register(AntimatterEvents::onProviders);
-        PlayerTickEvents.END.register(player -> CommonEvents.onPlayerTick(player, AntimatterPlatformUtils.isServer()));
+        PlayerTickEvents.END.register(player -> CommonEvents.onPlayerTick(player, AntimatterAPI.getSIDE().isServer()));
         ModConfigEvent.LOADING.register(GT4RConfig::onModConfigEvent);
         ModConfigEvent.RELOADING.register(GT4RConfig::onModConfigEvent);
         UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
-            CommonEvents.onRightlickBlock(player, hand, AntimatterPlatformUtils.isServer());
+            CommonEvents.onRightlickBlock(player, hand, AntimatterAPI.getSIDE().isServer());
             return InteractionResult.PASS;
         });
         ServerPlayNetworking.registerGlobalReceiver(Ref.SYNC_ID, ((server, player, handler, buf, responseSender) -> {

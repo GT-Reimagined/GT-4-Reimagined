@@ -1,8 +1,8 @@
 package trinsdar.gt4r.gui;
 
 import muramasa.antimatter.Antimatter;
+import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.capability.machine.MachineItemHandler;
-import muramasa.antimatter.util.AntimatterPlatformUtils;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
@@ -47,7 +47,7 @@ public class InventoryWorkbench extends CraftingContainer {
     public void setChanged() {
         this.projectTable.getTile().setChanged();
         this.eventHandler.slotsChanged(this);
-        if(AntimatterPlatformUtils.isClient())
+        if(AntimatterAPI.getSIDE().isClient())
             Antimatter.NETWORK.sendToServer(Ref.SYNC_ID, new MessageCraftingSync());
     }
 

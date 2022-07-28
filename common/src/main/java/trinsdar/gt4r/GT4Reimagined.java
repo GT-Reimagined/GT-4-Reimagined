@@ -86,10 +86,10 @@ public class GT4Reimagined extends AntimatterMod {
                     //GEM.forceOverride(Amethyst, ForgeRegistries.ITEMS.getValue(new ResourceLocation("bluepower", "amethyst_gem")));
                 }
                 GT4RData.buildTierMaps();
-                Structures.init();
-                Structures.initPatterns();
                 RubberTreeWorldGen.init();
                 GT4RPlacedFeatures.init();
+                Structures.init();
+                Structures.initPatterns();
                 OreConfigHandler.ORE_CONFIG_HANDLER.save();
                 //GregTechAPI.registerFluidCell(Data.CellTin.get(1));
                 //GregTechAPI.registerFluidCell(Data.CellSteel.get(1));

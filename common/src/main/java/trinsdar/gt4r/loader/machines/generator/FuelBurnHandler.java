@@ -16,7 +16,7 @@ import static trinsdar.gt4r.data.RecipeMaps.*;
 public class FuelBurnHandler {
     public static void init() {
         AntimatterAPI.all(Material.class, mat -> {
-            if (mat != Materials.Steam && MaterialTags.FUEL_POWER.getInt(mat) > 0) {
+            if (mat != Materials.Steam && mat.has(MaterialTags.FUEL_POWER) && MaterialTags.FUEL_POWER.getInt(mat) > 0) {
                 if (mat.has(LIQUID)) {
                     int power = 16, ticks = MaterialTags.FUEL_POWER.getInt(mat) / 16;
                     if (MaterialTags.FUEL_POWER.getInt(mat) < 16) {

@@ -61,7 +61,7 @@ public class RecipeMaps {
     public static RecipeMap<?> BASIC_DISTILLING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(Ref.ID, "basic_distilling", new RecipeBuilder()));
     public static RecipeMap<?> DUSTBIN = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(Ref.ID, "dustbin", new RecipeBuilder()));
     public static RecipeMap<?> FERMENTING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(Ref.ID, "fermenting", new RecipeBuilder()));
-    public static RecipeMap<?> FLUID_EXTRACTOR_COILS = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(Ref.ID, "fluid_extractor_coils", new CoilBuilder()));
+    public static RecipeMap<?> FLUID_EXTRACTOR_COILS = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(Ref.ID, "fluid_extractor_coils", new RecipeBuilder()));
 
 
     public static RecipeMap<?> STEAM_SMELTING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(Ref.ID, "steam_smelting", new RecipeBuilder()).setProxy(RecipeProxies.FURNACE_PROXY.apply(8, 180)));

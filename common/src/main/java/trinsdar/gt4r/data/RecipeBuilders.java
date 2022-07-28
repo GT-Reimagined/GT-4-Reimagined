@@ -63,18 +63,6 @@ public class RecipeBuilders {
         }
     }
 
-    public static class CoilBuilder extends RecipeBuilder {
-        @Override
-        public Recipe build(int duration, long power, int special, int amps) {
-            if (ingredientInput == null) ingredientInput = Collections.emptyList();
-            if (ingredientInput.isEmpty()){
-                Utils.onInvalidData("RECIPE BUILDER ERROR - INPUT ITEMS OF COIL LIST INVALID!");
-                return Utils.getEmptyRecipe();
-            }
-            return new Recipe(ingredientInput, null, null, null, 0, 0, special, 1);
-        }
-    }
-
     public static class GasFuelBuilder extends RecipeBuilder {
         @Override
         public Recipe add() {
