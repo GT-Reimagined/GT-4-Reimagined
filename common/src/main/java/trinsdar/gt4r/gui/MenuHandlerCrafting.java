@@ -12,6 +12,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.util.LazyOptional;
+import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.client.ScreenFactories;
 
 public class MenuHandlerCrafting extends MenuHandler<GTWorkbenchContainer> {
@@ -36,7 +37,12 @@ public class MenuHandlerCrafting extends MenuHandler<GTWorkbenchContainer> {
     }
 
     @Override
-    public Object screen() {
-        return ScreenFactories.SCREEN_CRAFTING_TABLE;
+    public String screenID() {
+        return "crafting_table";
+    }
+
+    @Override
+    public String screenDomain() {
+        return Ref.ID;
     }
 }

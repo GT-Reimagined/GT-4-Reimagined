@@ -15,6 +15,7 @@ import trinsdar.gt4r.block.BlockMaterialChest;
 import trinsdar.gt4r.client.MaterialChestRenderer;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.data.Machines;
+import trinsdar.gt4r.data.client.ScreenFactories;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -30,6 +31,7 @@ public class ClientHandler implements IProxyHandler {
 
     @SuppressWarnings("RedundantTypeArguments")
     public static void setup() {
+        ScreenFactories.init();
         AntimatterAPI.runLaterClient(() -> {
             ModelUtils.setRenderLayer(GT4RData.RUBBER_SAPLING, RenderType.cutout());
             ModelUtils.setRenderLayer(GT4RData.RUBBER_LEAVES, RenderType.cutout());

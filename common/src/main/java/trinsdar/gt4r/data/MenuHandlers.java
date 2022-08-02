@@ -28,8 +28,13 @@ public class MenuHandlers {
             return tile instanceof TileEntityMachine ? new ContainerMultiMachine((TileEntityMultiMachine<?>) tile, playerInv, this, windowId) : null;
         }
         @Override
-        public Object screen() {
-            return ScreenFactories.SCREEN_FUSION_REACTOR;
+        public String screenDomain() {
+            return Ref.ID;
+        }
+
+        @Override
+        public String screenID() {
+            return "fusion_reactor";
         }
     };
     public static MenuHandlerMachine<? extends TileEntityMaterial, ? extends ContainerCabinet> CABINET_HANDLER_SIX = new MenuHandlerMachine(Ref.ID, "container_cabinet_six") {
@@ -39,8 +44,13 @@ public class MenuHandlers {
         }
 
         @Override
-        public Object screen() {
-            return ScreenFactories.SCREEN_CABINET_SIX;
+        public String screenDomain() {
+            return Ref.ID;
+        }
+
+        @Override
+        public String screenID() {
+            return "cabinet_six";
         }
     };
     public static MenuHandlerMachine<? extends TileEntityMaterial, ? extends ContainerCabinet> CABINET_HANDLER_SEVEN = new MenuHandlerMachine(Ref.ID, "container_cabinet_seven") {
@@ -50,8 +60,13 @@ public class MenuHandlers {
         }
 
         @Override
-        public Object screen() {
-            return ScreenFactories.SCREEN_CABINET_SEVEN;
+        public String screenDomain() {
+            return Ref.ID;
+        }
+
+        @Override
+        public String screenID() {
+            return "cabinet_seven";
         }
     };
     public static MenuHandlerMachine<? extends TileEntityMaterial, ? extends ContainerCabinet> CABINET_HANDLER_EIGHT = new MenuHandlerMachine(Ref.ID, "container_cabinet_eight") {
@@ -61,8 +76,13 @@ public class MenuHandlers {
         }
 
         @Override
-        public Object screen() {
-            return ScreenFactories.SCREEN_CABINET_EIGHT;
+        public String screenDomain() {
+            return Ref.ID;
+        }
+
+        @Override
+        public String screenID() {
+            return "cabinet_eight";
         }
     };
     public static MenuHandlerMachine<? extends TileEntityMaterial, ? extends ContainerCabinet> CABINET_HANDLER_NINE = new MenuHandlerMachine(Ref.ID, "container_cabinet_nine") {
@@ -72,8 +92,13 @@ public class MenuHandlers {
         }
 
         @Override
-        public Object screen() {
-            return ScreenFactories.SCREEN_CABINET_NINE;
+        public String screenDomain() {
+            return Ref.ID;
+        }
+
+        @Override
+        public String screenID() {
+            return "cabinet_nine";
         }
     };
     public static MenuHandlerMachine<? extends TileEntityMaterial, ? extends ContainerWorkbench> WORKBENCH_HANDLER = new MenuHandlerMachine(Ref.ID, "container_workbench") {
@@ -83,8 +108,13 @@ public class MenuHandlers {
         }
 
         @Override
-        public Object screen() {
-            return ScreenFactories.SCREEN_WORKBENCH;
+        public String screenDomain() {
+            return Ref.ID;
+        }
+
+        @Override
+        public String screenID() {
+            return "workbench";
         }
     };
     public static MenuHandlerMachine<? extends TileEntityMaterial, ? extends ContainerBasicMachine> LOCKER_HANDLER = new MenuHandlerMachine(Ref.ID, "container_locker") {
@@ -94,8 +124,13 @@ public class MenuHandlers {
         }
 
         @Override
-        public Object screen() {
-            return ScreenFactories.SCREEN_LOCKER;
+        public String screenID() {
+            return "locker";
+        }
+
+        @Override
+        public String screenDomain() {
+            return Ref.ID;
         }
     };
 
@@ -106,8 +141,8 @@ public class MenuHandlers {
         }
 
         @Override
-        public Object screen() {
-            return ClientData.SCREEN_BASIC;
+        public String screenID() {
+            return "basic";
         }
     };
 
@@ -118,8 +153,13 @@ public class MenuHandlers {
         }
 
         @Override
-        public Object screen() {
-            return ScreenFactories.SCREEN_DIGITAL_CHEST;
+        public String screenID() {
+            return "digital_chest";
+        }
+
+        @Override
+        public String screenDomain() {
+            return Ref.ID;
         }
     };
     public static MenuHandlerCrafting COVER_CRAFTING_HANDLER = new MenuHandlerCrafting(Ref.ID, "crafting_grid");

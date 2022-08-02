@@ -6,6 +6,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
+import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.client.ScreenFactories;
 
 public class MenuHandlerCraftingItem extends MenuHandler<GTWorkbenchContainer> {
@@ -25,7 +26,12 @@ public class MenuHandlerCraftingItem extends MenuHandler<GTWorkbenchContainer> {
     }
 
     @Override
-    public Object screen() {
-        return ScreenFactories.SCREEN_CRAFTING_TABLE;
+    public String screenID() {
+        return "crafting_table";
+    }
+
+    @Override
+    public String screenDomain() {
+        return Ref.ID;
     }
 }
