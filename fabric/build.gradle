@@ -36,9 +36,8 @@ dependencies{
     modImplementation("com.github.Trinsdar.Felt-API:felt-item-api:05a5fe1533") { transitive false }
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
-    modImplementation("com.github.FeltMC:Porting-Lib:${rootProject.port_lib_hash}"){
+    modImplementation("io.github.fabricators_of_create:Porting-Lib:1.1.310-beta+1.18.2-dev.${rootProject.port_lib_hash}"){
         exclude(group: "net.fabricmc.fabric-api")
-        exclude(group: "com.github.FeltMC.Fabricated-Forge-API")
     }
     modImplementation("net.devtech:arrp:0.5.5")
     modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${rootProject.rei_version}"
