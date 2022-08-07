@@ -31,7 +31,6 @@ public class ClientHandler implements IProxyHandler {
 
     @SuppressWarnings("RedundantTypeArguments")
     public static void setup() {
-        ScreenFactories.init();
         AntimatterAPI.runLaterClient(() -> {
             ModelUtils.setRenderLayer(GT4RData.RUBBER_SAPLING, RenderType.cutout());
             ModelUtils.setRenderLayer(GT4RData.RUBBER_LEAVES, RenderType.cutout());

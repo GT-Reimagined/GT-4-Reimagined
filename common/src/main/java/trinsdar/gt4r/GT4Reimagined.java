@@ -27,6 +27,7 @@ import trinsdar.gt4r.data.Models;
 import trinsdar.gt4r.data.RecipeMaps;
 import trinsdar.gt4r.data.Structures;
 import trinsdar.gt4r.data.ToolTypes;
+import trinsdar.gt4r.data.client.ScreenFactories;
 import trinsdar.gt4r.datagen.GT4RItemModelProvider;
 import trinsdar.gt4r.datagen.GT4RLocalizations;
 import trinsdar.gt4r.datagen.GT4RRandomDropBonus;
@@ -59,7 +60,7 @@ public class GT4Reimagined extends AntimatterMod {
     @Override
     public void onRegistrationEvent(RegistrationEvent event, Side side) {
         switch (event) {
-            case DATA_INIT:
+            case DATA_INIT -> {
                 ToolTypes.init();
                 GT4RMaterialTags.init();
                 Materials.init();
@@ -67,7 +68,7 @@ public class GT4Reimagined extends AntimatterMod {
                 RecipeMaps.init();
                 MenuHandlers.init();
                 GT4RData.init(side);
-                if (AntimatterPlatformUtils.isFabric()){
+                if (AntimatterPlatformUtils.isFabric()) {
                     Registry.register(Registry.FOLIAGE_PLACER_TYPES, new ResourceLocation(Ref.ID, "rubber_foilage_placer"), RubberFoliagePlacer.RUBBER);
                 }
                 Machines.init();
@@ -76,13 +77,13 @@ public class GT4Reimagined extends AntimatterMod {
                 TileEntityTypes.init();
                 Guis.init(side);
                 Models.init();
-                if (side == Side.CLIENT){
+                if (side == Side.CLIENT) {
                     BakedModels.init();
                 }
                 Registry.register(Registry.LOOT_FUNCTION_TYPE, new ResourceLocation(Ref.ID, "random_drop_bonus"), GT4RRandomDropBonus.RANDOM_DROP_BONUS);
-                break;
-            case DATA_READY:
-                if (AntimatterAPI.isModLoaded(Ref.MOD_BLUEPOWER)){
+            }
+            case DATA_READY -> {
+                if (AntimatterAPI.isModLoaded(Ref.MOD_BLUEPOWER)) {
                     //GEM.forceOverride(Amethyst, ForgeRegistries.ITEMS.getValue(new ResourceLocation("bluepower", "amethyst_gem")));
                 }
                 GT4RData.buildTierMaps();
@@ -110,10 +111,11 @@ public class GT4Reimagined extends AntimatterMod {
 //                AntimatterAPI.registerCoverStack(Data.PumpEV.get(1), new CoverPump(Tier.EV));
 //                AntimatterAPI.registerCoverStack(Data.PumpIV.get(1), new CoverPump(Tier.IV));
 //                MaterialType.PLATE.all().forEach(m -> AntimatterAPI.registerCoverStack(MaterialType.PLATE.get(m, 1), Data.COVER_PLATE));
-                break;
-            case WORLDGEN_INIT:
+            }
+            case WORLDGEN_INIT -> {
                 //WorldGenLoader.init();
-                break;
+            }
+            case CLIENT_DATA_INIT -> ScreenFactories.init();
         }
     }
 
