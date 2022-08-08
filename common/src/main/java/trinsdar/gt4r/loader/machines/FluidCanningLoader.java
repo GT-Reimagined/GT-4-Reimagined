@@ -1,5 +1,6 @@
 package trinsdar.gt4r.loader.machines;
 
+import muramasa.antimatter.fluid.AntimatterFluidUtils;
 import muramasa.antimatter.util.AntimatterPlatformUtils;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.world.level.material.FlowingFluid;
@@ -21,8 +22,8 @@ public class FluidCanningLoader {
     public static void init() {
         AntimatterPlatformUtils.getAllFluids().forEach(fluid -> {
             Item bucket = fluid.getBucket();
-            //Only the source.
-            if (fluid instanceof FlowingFluid) return;
+            //Only the source. might not work as well on fabric
+            if (!AntimatterFluidUtils.isSource(fluid)) return;
             if (bucket != Items.AIR){
                 FLUID_CANNING.RB().ii(of(bucket,1)).fo(new FluidStack(fluid,1000)).io(new ItemStack(Items.BUCKET)).add(20, 8);
                 FLUID_CANNING.RB().ii(of(Items.BUCKET,1)).fi(new FluidStack(fluid,1000)).io(new ItemStack(bucket)).add(20, 8);
