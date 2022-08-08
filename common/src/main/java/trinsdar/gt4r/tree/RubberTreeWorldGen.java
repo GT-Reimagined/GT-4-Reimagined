@@ -115,12 +115,12 @@ public class RubberTreeWorldGen  extends WorldGenBase<RubberTreeWorldGen> {
         float finalp = p;
 
         gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,  getTreeConfig(category));
-        if (RNG.nextInt(4) == 0){
+        /*if (RNG.nextInt(4) == 0){
             gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,  getTreeConfig(category));
             if (RNG.nextInt(6) == 0){
                 gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,  getTreeConfig(category));
             }
-        }
+        }*/
     }
 
     static Holder<PlacedFeature> getTreeConfig(Biome.BiomeCategory biome){
