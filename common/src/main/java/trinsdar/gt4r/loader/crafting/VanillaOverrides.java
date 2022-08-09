@@ -41,7 +41,7 @@ public class VanillaOverrides {
                 GT4RData.FLUID_PIPE_WOOD.getBlockItem(PipeSize.HUGE), of('S', SAW.getTag(), 's', ItemTags.LOGS, 'H', SOFT_HAMMER.getTag()), "  S", "s s", "H  ");
         provider.shapeless(consumer, "sodalite_to_blue_dye", "", "has_sodalite", provider.hasSafeItem(GEM.getMaterialTag(Sodalite)), new ItemStack(Items.BLUE_DYE), GEM.getMaterialTag(Sodalite));
         provider.addConditionalRecipe(consumer, provider.getStackRecipe("", "has_sulfur_dust", provider.hasSafeItem(getForgelikeItemTag("dusts/sulfur")),
-                new ItemStack(Blocks.TORCH, 6), of('D', getForgelikeItemTag("dusts/sulfur"), 'R', ForgeCTags.RODS_WOODEN), "D", "R"), Ref.class, "sulfurTorch", Ref.ID, "sulfur_torch");
+                new ItemStack(Items.TORCH, 6), of('D', getForgelikeItemTag("dusts/sulfur"), 'R', ForgeCTags.RODS_WOODEN), "D", "R"), "gt4r-common", "Gameplay.SULFUR_TORCH", Ref.ID, "sulfur_torch");
         provider.addItemRecipe(consumer, Ref.ID, "chainmail_helmet", "chainmail_armor", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),
                 Items.CHAINMAIL_HELMET, of('R', RING.getMaterialTag(Steel), 'H', HAMMER.getTag()), "RRR", "RHR");
         provider.addItemRecipe(consumer, Ref.ID, "chainmail_chestplate", "chainmail_armor", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),

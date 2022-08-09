@@ -4,6 +4,7 @@ import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.recipe.RecipeProxies;
 import muramasa.antimatter.recipe.map.RecipeBuilder;
 import muramasa.antimatter.recipe.map.RecipeMap;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import trinsdar.gt4r.Ref;
 
@@ -107,7 +108,7 @@ public class RecipeMaps {
         INDUSTRIAL_SAWMILLING.setGuiData(MULTI_DISPLAY, INDUSTRIAL_SAWMILL);
         VACUUM_FREEZING.setGuiData(MULTI_DISPLAY, VACUUM_FREEZER);
         FUSION.setGuiData(MULTI_DISPLAY, FUSION_REACTOR);
-        ORE_BYPRODUCTS.setIcon(Blocks.IRON_ORE);
+        ORE_BYPRODUCTS.setIcon(Items.IRON_ORE);
         INT_CIRCUITS.setIcon(GT4RData.INT_CIRCUITS_ITEMS.get(0));
     }
 }
