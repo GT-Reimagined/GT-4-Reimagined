@@ -1,4 +1,4 @@
-package trinsdar.machine.fabric;
+package trinsdar.gt4r.machine.fabric;
 
 import io.github.feltmc.feltapi.api.item.extensions.IsDamageableItem;
 import muramasa.antimatter.Antimatter;
