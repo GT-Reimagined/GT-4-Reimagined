@@ -2,6 +2,7 @@ package trinsdar.gt4r.fabric;
 
 import io.github.fabricators_of_create.porting_lib.event.common.PlayerTickEvents;
 import muramasa.antimatter.AntimatterAPI;
+import muramasa.antimatter.AntimatterConfig;
 import muramasa.antimatter.event.fabric.CraftingEvents;
 import muramasa.antimatter.event.fabric.LoaderEvents;
 import muramasa.antimatter.event.fabric.ProviderEvents;
@@ -10,16 +11,21 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.world.InteractionResult;
+import net.minecraftforge.api.ModLoadingContext;
 import net.minecraftforge.api.fml.event.config.ModConfigEvent;
+import net.minecraftforge.fml.config.ModConfig;
 import trinsdar.gt4r.GT4RConfig;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.events.AntimatterEvents;
 import trinsdar.gt4r.events.CommonEvents;
 import trinsdar.gt4r.network.MessageCraftingSync;
 
+import static muramasa.antimatter.Ref.ID;
+
 public class GT4ReimaginedFabric implements ModInitializer {
     @Override
     public void onInitialize() {
+        ModLoadingContext.registerConfig(ID, ModConfig.Type.COMMON, GT4RConfig.COMMON_SPEC);
         WorldGenEvents.WORLD_GEN.register(AntimatterEvents::registerWorldgen);
         LoaderEvents.LOADER.register(AntimatterEvents::registerRecipeLoaders);
         CraftingEvents.CRAFTING.register(AntimatterEvents::registerCraftingLoaders);
