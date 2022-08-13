@@ -94,19 +94,20 @@ public class GT4RLocalizations {
             override(GT4RData.StorageDataOrb.getDescriptionId(), "Data Orb");
             AntimatterAPI.all(Machine.class, domain).forEach(i -> {
                 Collection<Tier> tiers =  i.getTiers();
-                if (i.has(MachineFlag.BASIC)) {
-                    tiers.forEach(t -> {
-                        String value = lowerUnderscoreToUpperSpacedRotated(i.getId() + "_" + t.getId());
-                        String id = i == MACERATOR && t == MV ? "universal_macerator" : i == ELECTROLYZER ? t == LV ? "basic_electrolyzer" : "industrial_electrolyzer" : "";
-                        if (i.getId().contains("battery_buffer")){
-                            String tier = lowerUnderscoreToUpperSpaced(t.getId());
-                            String number = value.contains("One") ? " 1x " : value.contains("Four") ? " 4x " : " 8x ";
-                            String afterTier = lowerUnderscoreToUpperSpaced("battery_buffer");
-                            override("machine." + i.getId() + "." + t.getId(), tier + number + afterTier);
-                            return;
-                        }
-                        override("machine." + i.getId() + "." + t.getId(), value.contains("Infinite") || value.contains("Transformer") || value.contains("Battery") || t == BRONZE || t == STEEL || i == HATCH_DYNAMO ? value : lowerUnderscoreToUpperSpaced(id.isEmpty() ? i.getId() : id));
-                    });
+                String value = i.getLang(locale).concat(" (%s)");
+                if (i.getId().contains("battery_buffer")){
+                    override("machine." + i.getId(), value.replace(" x", "x"));
+                    return;
+                }
+                if (i == MACERATOR || i == ELECTROLYZER){
+                    if (i == MACERATOR){
+                        override("machine." + i.getId() + ".mv", lowerUnderscoreToUpperSpaced("universal_macerator").concat(" (%s)"));
+                    } else {
+                        tiers.forEach(t -> {
+                            String id = t == LV ? "basic_electrolyzer" : "industrial_electrolyzer";
+                            override("machine." + i.getId() + "." + t.getId(), lowerUnderscoreToUpperSpaced(id).concat(" (%s)"));
+                        });
+                    }
                 }
             });
             AntimatterAPI.all(AntimatterFluid.class).forEach(s -> {

@@ -74,12 +74,12 @@ public class Machines {
     public static BasicMachine EXTRACTOR = new BasicMachine(Ref.ID, "extractor").setMap(EXTRACTING).setTiers(LV).addFlags(GUI, ITEM);
     public static BasicMachine EXTRUDER = new BasicMachine(Ref.ID, "extruder").setTiers(MV).setMap(EXTRUDING).addFlags(GUI, ITEM).custom();
     public static BasicMachine LATHE = new BasicMachine(Ref.ID, "lathe").setMap(LATHING).setTiers(LV).addFlags(GUI, ITEM);
-    public static BasicMachine MACERATOR = new BasicMachine(Ref.ID, "macerator").setMap(MACERATING).addFlags(GUI, ITEM).setTiers(LV, MV).custom().overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER);
+    public static BasicMachine MACERATOR = new BasicMachine(Ref.ID, "macerator").setMap(MACERATING).addFlags(GUI, ITEM).setTiers(LV, MV).custom().overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).setTierSpecificLang();
     public static BasicMachine RECYCLER = new BasicMachine(Ref.ID, "recycler").setMap(RECYCLING).setTiers(LV).addFlags(GUI, ITEM);
     public static BasicMachine SCANNER = new BasicMachine(Ref.ID, "scanner").setTiers(HV).setMap(SCANNING).addFlags(GUI, ITEM, FLUID);
     public static BasicMachine WIRE_MILL = new BasicMachine(Ref.ID, "wire_mill").setMap(WIRE_MILLING).setTiers(LV).addFlags(GUI, ITEM).custom();
     public static BasicMachine CENTRIFUGE = new BasicMachine(Ref.ID, "centrifuge").setMap(CENTRIFUGING).setTiers(LV).addFlags(GUI, ITEM, FLUID);
-    public static BasicMachine ELECTROLYZER = new BasicMachine(Ref.ID, "electrolyzer").setMap(ELECTROLYZING).addFlags(GUI, ITEM, FLUID).setTiers(LV, MV);
+    public static BasicMachine ELECTROLYZER = new BasicMachine(Ref.ID, "electrolyzer").setMap(ELECTROLYZING).addFlags(GUI, ITEM, FLUID).setTiers(LV, MV).setTierSpecificLang();
     public static BasicMachine CHEMICAL_REACTOR = new BasicMachine(Ref.ID, "chemical_reactor").setTiers(MV).setMap(CHEMICAL_REACTING).addFlags(GUI, ITEM, FLUID);
     public static BasicMachine FLUID_CANNER = new BasicMachine(Ref.ID, "fluid_canner").setMap(FLUID_CANNING).setTiers(LV).addFlags(GUI, ITEM, FLUID);
     public static BasicMachine DISASSEMBLER = new BasicMachine(Ref.ID, "disassembler").setMap(DISASSEMBLING).setTiers(LV).addFlags(GUI, ITEM).custom();
@@ -198,9 +198,9 @@ public class Machines {
     public static BasicMachine INFINITE_STORAGE = new BasicMachine(Ref.ID, "infinite_storage").addFlags(ENERGY, GUI).setTiers(MAX).allowFrontIO().setTile(TileEntityInfiniteStorage::new)
             .noCovers();
     public static TankMachine INFINITE_STEAM = new TankMachine(Ref.ID, "infinite_steam").addFlags(FLUID, CELL, GUI).setTiers(LV).setTile(TileEntityInfiniteFluid::new);
-    public static BasicMachine BATTERY_BUFFER_ONE = new BasicMachine(Ref.ID, "battery_buffer_one").noCovers().addFlags(GUI, ENERGY, ITEM).setTile(TileEntityBatteryBuffer::new).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).allowFrontIO().setAllowVerticalFacing(true);
-    public static BasicMachine BATTERY_BUFFER_FOUR = new BasicMachine(Ref.ID, "battery_buffer_four").noCovers().addFlags(GUI, ENERGY, ITEM).setTile(TileEntityBatteryBuffer::new).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).allowFrontIO().setAllowVerticalFacing(true);
-    public static BasicMachine BATTERY_BUFFER_EIGHT = new BasicMachine(Ref.ID, "battery_buffer_eight").noCovers().addFlags(GUI, ENERGY, ITEM).setTile(TileEntityBatteryBuffer::new).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).allowFrontIO().setAllowVerticalFacing(true);
+    public static BasicMachine BATTERY_BUFFER_ONE = new BasicMachine(Ref.ID, "1x_battery_buffer").noCovers().addFlags(GUI, ENERGY, ITEM).setTile(TileEntityBatteryBuffer::new).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).allowFrontIO().setAllowVerticalFacing(true);
+    public static BasicMachine BATTERY_BUFFER_FOUR = new BasicMachine(Ref.ID, "4x_battery_buffer").noCovers().addFlags(GUI, ENERGY, ITEM).setTile(TileEntityBatteryBuffer::new).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).allowFrontIO().setAllowVerticalFacing(true);
+    public static BasicMachine BATTERY_BUFFER_EIGHT = new BasicMachine(Ref.ID, "8x_battery_buffer").noCovers().addFlags(GUI, ENERGY, ITEM).setTile(TileEntityBatteryBuffer::new).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).allowFrontIO().setAllowVerticalFacing(true);
     public static BasicMachine TRANSFORMER = new BasicMachine(Ref.ID, "transformer").addFlags(ENERGY).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).setTile((m, p, s) -> new TileEntityTransformer<>(m, p, s, 1)).noCovers().setAllowVerticalFacing(true).allowFrontIO();
     public static BasicMachine SUPERCONDENSATOR = new BasicMachine(Ref.ID, "supercondensator").addFlags(ENERGY).setTile((m, p, s) -> new TileEntitySupercondensator(m, p, s, 1)).setTiers(LUV).noCovers().setAllowVerticalFacing(true).allowFrontIO();
     public static BasicMachine TRANSFORMER_DIGITAL = new BasicMachine(Ref.ID, "transformer_digital").addFlags(GUI, ENERGY).setTiers(EV, IV).setTile(TileEntityDigitalTransformer::new).noCovers().allowFrontIO();
