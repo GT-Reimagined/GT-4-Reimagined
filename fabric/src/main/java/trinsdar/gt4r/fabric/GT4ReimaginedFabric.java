@@ -20,12 +20,10 @@ import trinsdar.gt4r.events.AntimatterEvents;
 import trinsdar.gt4r.events.CommonEvents;
 import trinsdar.gt4r.network.MessageCraftingSync;
 
-import static muramasa.antimatter.Ref.ID;
-
 public class GT4ReimaginedFabric implements ModInitializer {
     @Override
     public void onInitialize() {
-        ModLoadingContext.registerConfig(ID, ModConfig.Type.COMMON, GT4RConfig.COMMON_SPEC);
+        ModLoadingContext.registerConfig(Ref.ID, ModConfig.Type.COMMON, GT4RConfig.COMMON_SPEC);
         WorldGenEvents.WORLD_GEN.register(AntimatterEvents::registerWorldgen);
         LoaderEvents.LOADER.register(AntimatterEvents::registerRecipeLoaders);
         CraftingEvents.CRAFTING.register(AntimatterEvents::registerCraftingLoaders);
