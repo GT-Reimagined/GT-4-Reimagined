@@ -309,14 +309,14 @@ public class Guis {
             t.addWidget(TranslocatorButtonArrayWidget.build());
         });
         FORGE_HAMMER.getCallbacks().remove(1);
-        FORGE_HAMMER.addGuiCallback(t -> {
+        FORGE_HAMMER.setGuiProgressBarForJEI(BarDir.BOTTOM, false).addGuiCallback(t -> {
             t.addWidget(WidgetSupplier.build((a, b) -> TextWidget.build(((AntimatterContainerScreen<?>)b).getTitle().getString(), 4210752).build(a,b)).setPos(9, 5).clientSide())
                     .addWidget(ProgressWidget.build(BarDir.BOTTOM, false))
                     .addWidget(MachineStateWidget.build().setPos(84,46).setWH(8,8))
                     .addWidget(IOWidget.build(9,63,16,16));
         });
         STEAM_FORGE_HAMMER.getCallbacks().remove(1);
-        STEAM_FORGE_HAMMER.addGuiCallback(t -> {
+        STEAM_FORGE_HAMMER.setGuiProgressBarForJEI(BarDir.BOTTOM, false).addGuiCallback(t -> {
             t.addWidget(WidgetSupplier.build((a, b) -> TextWidget.build(((AntimatterContainerScreen<?>)b).getTitle().getString(), 4210752).build(a,b)).setPos(9, 5).clientSide())
                     .addWidget(ProgressWidget.build(BarDir.BOTTOM, false))
                     .addWidget(MachineStateWidget.build().setPos(84,46).setWH(8,8));
@@ -341,7 +341,7 @@ public class Guis {
                     .addWidget(IOWidget.build(9,45,16,16));
         });
         DISTILLATION_TOWER.getCallbacks().remove(1);
-        DISTILLATION_TOWER.addGuiCallback(t -> t.addWidget(ProgressWidget.build(BarDir.TOP, true).setSize(80, 4, 16, 72)).addWidget(MachineStateWidgetMoved.build(176, 108).setPos(66, 26).setWH(8, 8)));
+        DISTILLATION_TOWER.setGuiProgressBarForJEI(BarDir.TOP, true).addGuiCallback(t -> t.addWidget(ProgressWidget.build(BarDir.TOP, true).setSize(80, 4, 16, 72)).addWidget(MachineStateWidgetMoved.build(176, 108).setPos(66, 26).setWH(8, 8)));
         PLATINUM_CABINET.getCallbacks().remove(0);
         OSMIUM_CABINET.getCallbacks().remove(0);
         PLATINUM_CABINET.addGuiCallback(t -> t.addWidget(BackgroundWidget.build(t.handler.getGuiTexture(),t.handler.guiSize(), t.handler.guiHeight(), 256, 266)));

@@ -12,8 +12,8 @@ public class RecipeRenderer {
     static final IRecipeInfoRenderer FUEL_RENDERER = new IRecipeInfoRenderer() {
         @Override
         public void render(PoseStack stack, IRecipe recipe, Font fontRenderer, int guiOffsetX, int guiOffsetY) {
-            String fuelPerMb = "Fuel content(mb): " + ((double) (recipe.getPower() * recipe.getDuration()) / (double) recipe.getInputFluids().get(0).getAmount());
-            String fuelPerB = "Fuel content(bb): " + ((double) (recipe.getPower() * recipe.getDuration()) / (double) recipe.getInputFluids().get(0).getAmount()) * 1000;
+            String fuelPerMb = "Fuel content(mb): " + ((double) (recipe.getPower() * recipe.getDuration()) / (double) recipe.getInputFluids().get(0).getAmountInMB());
+            String fuelPerB = "Fuel content(bb): " + ((double) (recipe.getPower() * recipe.getDuration()) / (double) recipe.getInputFluids().get(0).getAmountInMB()) * 1000;
             renderString(stack, fuelPerMb, fontRenderer, 5, 0, guiOffsetX, guiOffsetY);
             renderString(stack, fuelPerB, fontRenderer, 5, 10, guiOffsetX, guiOffsetY);
             renderString(stack, "Ticks: " + recipe.getDuration(), fontRenderer, 5, 20, guiOffsetX, guiOffsetY);
