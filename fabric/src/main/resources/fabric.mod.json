@@ -24,7 +24,7 @@
     "antimatter": ">=0.1"
   },
   "entrypoints": {
-    "client": [
+    "antimatter_client": [
       "trinsdar.gt4r.client.fabric.GT4RClientInitializer"
     ],
     "main": [
