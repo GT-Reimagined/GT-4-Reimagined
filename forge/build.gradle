@@ -61,7 +61,7 @@ dependencies {
     //JEI
     //modRuntimeOnly("mezz.jei:jei-${rootProject.minecraft_version}-forge:${rootProject.jei_version}")
     modRuntimeOnly("mezz.jei:jei-1.18.2:9.5.0.132")
-    modImplementation("com.github.Reforged-Mods:ARRP-forge:362cae740e")
+    modImplementation("com.github.Reforged-Mods:ARRP-forge:0.5.7")
     modRuntimeOnly("com.github.FeltMC.Fabricated-Forge-API:fluidhandler-extras:${rootProject.fabricated_forge_hash}")
 
 
