@@ -30,7 +30,9 @@ dependencies{
     implementation(project(path: ":tesseract-fabric", configuration: "namedElements")) { transitive false }
     implementation(project(path: ":antimatter-fabric", configuration: "namedElements"))
     modImplementation("com.github.FeltMC.Fabricated-Forge-API:fabricated-forge-caps:${rootProject.fabricated_forge_hash}") { transitive false }
-    modImplementation("com.github.FeltMC.Fabricated-Forge-API:fabricated-forge-modeldata:${rootProject.fabricated_forge_hash}")
+    modImplementation("com.github.FeltMC.Fabricated-Forge-API:fabricated-forge-modeldata:${rootProject.fabricated_forge_hash}"){
+        exclude(group: "curse.maven")
+    }
     modImplementation("com.github.FeltMC.Fabricated-Forge-API:fabricated-forge-tag-extensions:${rootProject.fabricated_forge_hash}") { transitive false }
     modImplementation("com.github.FeltMC.Felt-API:felt-recipe-api:2a689af1cb")
     modImplementation("com.github.FeltMC.Felt-API:felt-item-api:05a5fe1533") { transitive false }
