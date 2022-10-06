@@ -2,17 +2,12 @@ package trinsdar.gt4r.worldgen;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import muramasa.antimatter.material.Material;
-import muramasa.antimatter.util.TagUtils;
 import net.minecraft.core.Holder;
-import net.minecraft.data.worldgen.features.OreFeatures;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
-import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.BiomeFilter;
@@ -88,7 +83,7 @@ public class GT4RPlacedFeatures {
     }
 
     public static void createOrePlacedFeature(String id, Material material, int minY, int maxY, int weight, int size, String secondary, float secondaryChance, float discardChance, List<ResourceKey<Level>> dimensions, GT4ROreFeatureConfig.FilterContext filter, boolean triangle, boolean rare){
-        OreConfigNode node = OreConfigHandler.ORE_CONFIG_HANDLER.getBiomeConfig().ore(id, new OreConfigNode(true, minY, maxY, weight, size, secondary, secondaryChance, triangle));
+        OreConfigNode node = OreConfigHandler.ORE_CONFIG_HANDLER.getOreConfig().ore(id, new OreConfigNode(true, minY, maxY, weight, size, secondary, secondaryChance, triangle));
         if (!node.isEnabled()) return;
         GT4ROreFeatureConfig config = new GT4ROreFeatureConfig(id, node.getSize(), discardChance, material.getId(), node.getSecondary(), node.getSecondaryChance());
         Holder<ConfiguredFeature<GT4ROreFeatureConfig, ?>> configuredFeature = RubberTreeWorldGen.register(id, GT4RFeatures.ORE, config);

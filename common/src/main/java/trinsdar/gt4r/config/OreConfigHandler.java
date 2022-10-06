@@ -2,6 +2,7 @@ package trinsdar.gt4r.config;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import muramasa.antimatter.util.AntimatterPlatformUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -17,11 +18,11 @@ public class OreConfigHandler {
     private OreConfigHandler() {
     }
 
-    private boolean prepareBiomeConfigFile() {
+    private boolean prepareOreConfigFile() {
         if (file != null) {
-            return false;
+            return !file.exists();
         }
-        File configDirectory = new File(".", "config/gt4r");
+        File configDirectory = new File(AntimatterPlatformUtils.getConfigDir().toFile(), "gt4r");
         file = new File(configDirectory, "ores.json");
         if (file.exists()){
             return false;
@@ -32,7 +33,7 @@ public class OreConfigHandler {
         return true;
     }
 
-    public OreConfig getBiomeConfig() {
+    public OreConfig getOreConfig() {
         if (config != null) {
             return config;
         }
@@ -44,7 +45,7 @@ public class OreConfigHandler {
     }
 
     private void load() {
-        prepareBiomeConfigFile();
+        prepareOreConfigFile();
 
         try {
             if (file.exists()) {
@@ -60,7 +61,7 @@ public class OreConfigHandler {
     }
 
     public void save() {
-        if (!prepareBiomeConfigFile()) return;
+        if (!prepareOreConfigFile()) return;
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String jsonString = gson.toJson(config);
