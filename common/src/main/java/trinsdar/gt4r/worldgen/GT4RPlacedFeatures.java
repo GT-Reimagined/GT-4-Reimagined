@@ -87,9 +87,11 @@ public class GT4RPlacedFeatures {
         if (!node.isEnabled()) return;
         GT4ROreFeatureConfig config = new GT4ROreFeatureConfig(id, node.getSize(), discardChance, material.getId(), node.getSecondary(), node.getSecondaryChance());
         Holder<ConfiguredFeature<GT4ROreFeatureConfig, ?>> configuredFeature = RubberTreeWorldGen.register(id, GT4RFeatures.ORE, config);
-        List<PlacementModifier> list = new ArrayList<>(List.of(BiomeFilter.biome(), InSquarePlacement.spread()));
-        list.add(node.isTriangle() ? HeightRangePlacement.triangle(VerticalAnchor.absolute(minY), VerticalAnchor.absolute(maxY)) : HeightRangePlacement.uniform(VerticalAnchor.absolute(minY), VerticalAnchor.absolute(maxY)));
+        List<PlacementModifier> list = new ArrayList<>();
         list.add(rare ? RarityFilter.onAverageOnceEvery(weight) : CountPlacement.of(weight));
+        list.add(InSquarePlacement.spread());
+        list.add(node.isTriangle() ? HeightRangePlacement.triangle(VerticalAnchor.absolute(minY), VerticalAnchor.absolute(maxY)) : HeightRangePlacement.uniform(VerticalAnchor.absolute(minY), VerticalAnchor.absolute(maxY)));
+        list.add(BiomeFilter.biome());
         Holder<PlacedFeature> placedFeature = RubberTreeWorldGen.createPlacedFeature(id, configuredFeature, list.toArray(new PlacementModifier[0]));
         FEATURE_MAP.put(id, new MapWrapper(placedFeature, dimensions, filter));
     }

@@ -204,7 +204,7 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
                                                         Material mat = Material.get(config.getPrimary());
                                                         if (mat.has(ORE_STONE) && mat != Coal){
                                                             StoneType stone = WorldGenHelper.STONE_MAP.get(blockstate);
-                                                            if (stone == null) continue;
+                                                            if (stone == null || stone == Data.DIRT) continue;
                                                             levelchunksection.setBlockState(lx, ly, lz, ORE_STONE.get().get(mat).asState(), false);
                                                             ++i;
                                                             continue;
@@ -244,7 +244,7 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
                                  MaterialType<?> type) {
 
         StoneType stone = WorldGenHelper.STONE_MAP.get(existing);
-        if (stone == null)
+        if (stone == null || stone == Data.DIRT)
             return null;
         BlockState oreState = type == Data.ORE ? Data.ORE.get().get(material, stone).asState()
                 : Data.ORE_SMALL.get().get(material, stone).asState();
