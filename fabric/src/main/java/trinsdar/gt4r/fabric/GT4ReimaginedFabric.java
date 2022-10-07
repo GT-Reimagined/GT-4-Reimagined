@@ -23,14 +23,14 @@ import trinsdar.gt4r.network.MessageCraftingSync;
 public class GT4ReimaginedFabric implements ModInitializer {
     @Override
     public void onInitialize() {
+        ModConfigEvent.LOADING.register(GT4RConfig::onModConfigEvent);
+        ModConfigEvent.RELOADING.register(GT4RConfig::onModConfigEvent);
         ModLoadingContext.registerConfig(Ref.ID, ModConfig.Type.COMMON, GT4RConfig.COMMON_SPEC);
         WorldGenEvents.WORLD_GEN.register(AntimatterEvents::registerWorldgen);
         LoaderEvents.LOADER.register(AntimatterEvents::registerRecipeLoaders);
         CraftingEvents.CRAFTING.register(AntimatterEvents::registerCraftingLoaders);
         ProviderEvents.PROVIDERS.register(AntimatterEvents::onProviders);
         PlayerTickEvents.END.register(player -> CommonEvents.onPlayerTick(player, AntimatterAPI.getSIDE().isServer()));
-        ModConfigEvent.LOADING.register(GT4RConfig::onModConfigEvent);
-        ModConfigEvent.RELOADING.register(GT4RConfig::onModConfigEvent);
         UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
             CommonEvents.onRightlickBlock(player, hand, AntimatterAPI.getSIDE().isServer());
             return InteractionResult.PASS;
