@@ -119,7 +119,7 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
         BlockPos blockpos = pContext.origin();
         WorldGenLevel worldgenlevel = pContext.level();
         GT4ROreFeatureConfig config = pContext.config();
-        if (!FEATURE_MAP.get(config.getId()).dimensions().contains(worldgenlevel.getLevel().dimension().location())) return false;
+        if (!FEATURE_MAP.get(config.getId()).dimensions().contains(worldgenlevel.getLevel().dimension())) return false;
         if (!FEATURE_MAP.get(config.getId()).filterContext().test(worldgenlevel.getBiome(blockpos))) return false;
         return place(worldgenlevel, random, blockpos, config);
     }
@@ -180,40 +180,39 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
                     int k1 = Math.max(Mth.floor(d13 + d9), l);
                     int l1 = Math.max(Mth.floor(d15 + d9), i1);
 
-                    for(int i2 = k4; i2 <= j1; ++i2) {
-                        double d5 = ((double)i2 + 0.5D - d11) / d9;
+                    for(int rx = k4; rx <= j1; ++rx) {
+                        double d5 = ((double)rx + 0.5D - d11) / d9;
                         if (d5 * d5 < 1.0D) {
-                            for(int j2 = l; j2 <= k1; ++j2) {
-                                double d6 = ((double)j2 + 0.5D - d13) / d9;
+                            for(int ry = l; ry <= k1; ++ry) {
+                                double d6 = ((double)ry + 0.5D - d13) / d9;
                                 if (d5 * d5 + d6 * d6 < 1.0D) {
-                                    for(int k2 = i1; k2 <= l1; ++k2) {
-                                        double d7 = ((double)k2 + 0.5D - d15) / d9;
-                                        if (d5 * d5 + d6 * d6 + d7 * d7 < 1.0D && !pLevel.isOutsideBuildHeight(j2)) {
-                                            int l2 = i2 - pX + (j2 - pY) * pWidth + (k2 - pZ) * pWidth * pHeight;
+                                    for(int rz = i1; rz <= l1; ++rz) {
+                                        double d7 = ((double)rz + 0.5D - d15) / d9;
+                                        if (d5 * d5 + d6 * d6 + d7 * d7 < 1.0D && !pLevel.isOutsideBuildHeight(ry)) {
+                                            int l2 = rx - pX + (ry - pY) * pWidth + (rz - pZ) * pWidth * pHeight;
                                             if (!bitset.get(l2)) {
                                                 bitset.set(l2);
-                                                blockpos$mutableblockpos.set(i2, j2, k2);
+                                                blockpos$mutableblockpos.set(rx, ry, rz);
                                                 if (pLevel.ensureCanWrite(blockpos$mutableblockpos)) {
                                                     LevelChunkSection levelchunksection = bulksectionaccess.getSection(blockpos$mutableblockpos);
                                                     if (levelchunksection != null) {
-                                                        int i3 = SectionPos.sectionRelative(i2);
-                                                        int j3 = SectionPos.sectionRelative(j2);
-                                                        int k3 = SectionPos.sectionRelative(k2);
-                                                        BlockState blockstate = levelchunksection.getBlockState(i3, j3, k3);
+                                                        int lx = SectionPos.sectionRelative(rx);
+                                                        int ly = SectionPos.sectionRelative(ry);
+                                                        int lz = SectionPos.sectionRelative(rz);
+                                                        BlockState blockstate = levelchunksection.getBlockState(lx, ly, lz);
 
                                                         Material mat = Material.get(config.getPrimary());
                                                         if (mat.has(ORE_STONE) && mat != Coal){
                                                             StoneType stone = WorldGenHelper.STONE_MAP.get(blockstate);
                                                             if (stone == null) continue;
-                                                            if (WorldGenHelper.setState(pLevel, new BlockPos(i3, j3, k3), ORE_STONE.get().get(mat).asState())) {
-                                                                ++i;
-                                                                continue;
-                                                            }
+                                                            levelchunksection.setBlockState(lx, ly, lz, ORE_STONE.get().get(mat).asState(), false);
+                                                            ++i;
+                                                            continue;
                                                         }
                                                         if (!config.getSecondary().isEmpty() && !config.getSecondary().equals("null") && config.getSecondaryChance() > 0 && config.getSecondaryChance() < 1.0F){
                                                             mat = pRandom.nextFloat() < config.getSecondaryChance() ? Material.get(config.getSecondary()) : Material.get(config.getPrimary());
                                                         }
-                                                        if (canPlaceOre(blockstate, bulksectionaccess::getBlockState, pRandom, config, mat, Data.ORE, blockpos$mutableblockpos) && WorldGenHelper.setOre(pLevel, new BlockPos(i3, j3, k3), blockstate, mat, Data.ORE)) {
+                                                        if (placeOre(lx, ly, lz, levelchunksection, bulksectionaccess::getBlockState, pRandom, config, mat, Data.ORE, blockpos$mutableblockpos)) {
                                                             ++i;
                                                         }
                                                     }
@@ -254,13 +253,23 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
         return oreState;
     }
 
-    public static boolean canPlaceOre(BlockState pState, Function<BlockPos, BlockState> pAdjacentStateAccessor, Random pRandom, GT4ROreFeatureConfig pConfig, Material material, MaterialType<?> type, BlockPos.MutableBlockPos pMatablePos) {
-        if (getOre(pState, material, type) == null) {
+    public boolean placeOre(int x, int y, int z, LevelChunkSection chunkSection, Function<BlockPos, BlockState> adjacentStateAccessor, Random random, GT4ROreFeatureConfig config, Material material, MaterialType<?> type, BlockPos.MutableBlockPos mutable){
+        BlockState blockState = chunkSection.getBlockState(x, y, z);
+        BlockState oreToPlace = getOre(blockState, material, type);
+        if (oreToPlace != null && canPlaceOre(blockState, adjacentStateAccessor, random, config, material, type, mutable)) {
+            chunkSection.setBlockState(x, y, z, oreToPlace, false);
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean canPlaceOre(BlockState state, Function<BlockPos, BlockState> adjacentStateAccessor, Random random, GT4ROreFeatureConfig config, Material material, MaterialType<?> type, BlockPos.MutableBlockPos mutable) {
+        if (getOre(state, material, type) == null) {
             return false;
-        } else if (shouldSkipAirCheck(pRandom, pConfig.getDiscardOnExposureChance())) {
+        } else if (shouldSkipAirCheck(random, config.getDiscardOnExposureChance())) {
             return true;
         } else {
-            return !isAdjacentToAir(pAdjacentStateAccessor, pMatablePos);
+            return !isAdjacentToAir(adjacentStateAccessor, mutable);
         }
     }
 
