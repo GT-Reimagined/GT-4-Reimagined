@@ -1,5 +1,6 @@
 package trinsdar.gt4r.loader.crafting;
 
+import com.github.gregtechintergalactical.gtrubber.GTRubberData;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.pipe.PipeSize;
