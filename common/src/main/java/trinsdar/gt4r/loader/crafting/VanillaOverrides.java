@@ -52,8 +52,8 @@ public class VanillaOverrides {
                 Items.CHAINMAIL_BOOTS, of('R', RING.getMaterialTag(Steel), 'H', HAMMER.getTag()), "R R", "RHR");
         provider.addItemRecipe(consumer, Ref.ID, "saddle", "", "has_leather", provider.hasSafeItem(Items.LEATHER), Items.SADDLE,
                 of('L', Items.LEATHER, 'R', RING.getMaterialTag(Steel), 'S', SCREW.getMaterialTag(Steel)), "LLL", "LSL", "R R");
-        provider.addItemRecipe(consumer,  Ref.ID,"sticky_piston_from_resin", "", "has_piston", provider.hasSafeItem(Blocks.PISTON), Blocks.STICKY_PISTON, of('S', GT4RData.StickyResin, 'P', Blocks.PISTON), "S", "P");
-        provider.addStackRecipe(consumer, Ref.ID, "lead_from_resin", "", "has_resin", provider.hasSafeItem(GT4RData.StickyResin), new ItemStack(Items.LEAD, 2), of('S', Items.STRING, 'R', GT4RData.StickyResin), "SS ", "SR ", "  S");
+        provider.addItemRecipe(consumer,  Ref.ID,"sticky_piston_from_resin", "", "has_piston", provider.hasSafeItem(Blocks.PISTON), Blocks.STICKY_PISTON, of('S', GTRubberData.StickyResin, 'P', Blocks.PISTON), "S", "P");
+        provider.addStackRecipe(consumer, Ref.ID, "lead_from_resin", "", "has_resin", provider.hasSafeItem(GTRubberData.StickyResin), new ItemStack(Items.LEAD, 2), of('S', Items.STRING, 'R', GTRubberData.StickyResin), "SS ", "SR ", "  S");
         provider.shapeless(consumer, "gravel_to_flint", "mortar_recipes", "has_mortar", provider.hasSafeItem(MORTAR.getTag()), new ItemStack(Items.FLINT), MORTAR.getTag(), Items.GRAVEL);
         provider.shapeless(consumer, "dust_brick", "mortar_recipes", "has_mortar", provider.hasSafeItem(MORTAR.getTag()), DUST_SMALL.get(Brick, 1), MORTAR.getTag(), Items.BRICK);
         provider.shapeless(consumer, "dust_clay", "mortar_recipes", "has_mortar", provider.hasSafeItem(MORTAR.getTag()), DUST_SMALL.get(Clay, 2), MORTAR.getTag(), Items.CLAY_BALL);

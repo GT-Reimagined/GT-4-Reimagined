@@ -1,5 +1,8 @@
 package trinsdar.gt4r.tile.single;
 
+import com.github.gregtechintergalactical.gtrubber.GTRubberData;
+import com.github.gregtechintergalactical.gtrubber.tree.BlockRubberLog;
+import com.github.gregtechintergalactical.gtrubber.tree.ResinState;
 import muramasa.antimatter.tile.TileEntityTickable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -8,8 +11,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.tile.TileEntityTypes;
-import trinsdar.gt4r.tree.BlockRubberLog;
-import trinsdar.gt4r.tree.ResinState;
 
 public class TileEntitySapBag extends TileEntityTickable<TileEntitySapBag> {
     ItemStack sap = ItemStack.EMPTY;
@@ -21,19 +22,19 @@ public class TileEntitySapBag extends TileEntityTickable<TileEntitySapBag> {
     @Override
     public void onFirstTick() {
         BlockState state = level.getBlockState(this.getBlockPos().relative(facing));
-        if (state.getBlock() == GT4RData.RUBBER_LOG){
-            if(state.getValue(BlockRubberLog.RESIN_STATE) ==  ResinState.FILLED && state.getValue(BlockRubberLog.RESIN_FACING) == facing.getOpposite()){
+        if (state.getBlock() == GTRubberData.RUBBER_LOG){
+            if(state.getValue(ResinState.INSTANCE) ==  ResinState.FILLED && state.getValue(BlockRubberLog.RESIN_FACING) == facing.getOpposite()){
                 boolean successful = false;
                 int amount = (1 + level.random.nextInt(3));
                 if (sap.isEmpty()){
-                    setSap(new ItemStack(GT4RData.StickyResin, amount));
+                    setSap(new ItemStack(GTRubberData.StickyResin, amount));
                     successful = true;
                 } else if (sap.getCount() < 64){
                     growSap(amount);
                     successful = true;
                 }
                 if (successful){
-                    level.setBlockAndUpdate(this.getBlockPos().relative(facing), state.setValue(BlockRubberLog.RESIN_STATE, ResinState.EMPTY));
+                    level.setBlockAndUpdate(this.getBlockPos().relative(facing), state.setValue(ResinState.INSTANCE, ResinState.EMPTY));
                 }
             }
         }

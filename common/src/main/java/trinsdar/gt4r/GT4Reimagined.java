@@ -8,7 +8,6 @@ import muramasa.antimatter.event.MaterialEvent;
 import muramasa.antimatter.proxy.IProxyHandler;
 import muramasa.antimatter.registration.RegistrationEvent;
 import muramasa.antimatter.registration.Side;
-import muramasa.antimatter.util.AntimatterPlatformUtils;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
@@ -32,7 +31,6 @@ import trinsdar.gt4r.datagen.GT4RItemModelProvider;
 import trinsdar.gt4r.datagen.GT4RLocalizations;
 import trinsdar.gt4r.datagen.GT4RRandomDropBonus;
 import trinsdar.gt4r.tile.TileEntityTypes;
-import trinsdar.gt4r.tree.RubberFoliagePlacer;
 import trinsdar.gt4r.worldgen.GT4RPlacedFeatures;
 import trinsdar.gt4r.worldgen.GT4RFeatures;
 
@@ -67,9 +65,6 @@ public class GT4Reimagined extends AntimatterMod {
                 RecipeMaps.init();
                 MenuHandlers.init();
                 GT4RData.init(side);
-                if (AntimatterPlatformUtils.isFabric()) {
-                    Registry.register(Registry.FOLIAGE_PLACER_TYPES, new ResourceLocation(Ref.ID, "rubber_foilage_placer"), RubberFoliagePlacer.RUBBER);
-                }
                 Machines.init();
                 GT4RFeatures.init();
                 RecipeMaps.postInit();

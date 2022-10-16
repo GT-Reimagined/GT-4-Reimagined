@@ -1,5 +1,6 @@
 package trinsdar.gt4r.loader.machines;
 
+import com.github.gregtechintergalactical.gtrubber.GTRubberData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import trinsdar.gt4r.data.GT4RData;
@@ -11,10 +12,10 @@ import static trinsdar.gt4r.data.RecipeMaps.EXTRACTING;
 
 public class ExtractorLoader {
     public static void init() {
-        EXTRACTING.RB().ii(of(GT4RData.RUBBER_LOG.asItem(),1)).io(DUST.get(Rubber, 2)).add(200,8);
-        EXTRACTING.RB().ii(of(GT4RData.RUBBER_LEAVES.asItem(),1)).io(DUST.get(Rubber, 1)).add(150,8);
-        EXTRACTING.RB().ii(of(GT4RData.RUBBER_SAPLING.asItem(),1)).io(DUST.get(Rubber, 1)).add(150,8);
-        EXTRACTING.RB().ii(of(GT4RData.StickyResin,1)).io(DUST.get(Rubber, 3)).add(150,8);
+        EXTRACTING.RB().ii(of(GTRubberData.RUBBER_LOG.asItem(),1)).io(DUST.get(Rubber, 2)).add(200,8);
+        EXTRACTING.RB().ii(of(GTRubberData.RUBBER_LEAVES.asItem(),1)).io(DUST.get(Rubber, 1)).add(150,8);
+        EXTRACTING.RB().ii(of(GTRubberData.RUBBER_SAPLING.asItem(),1)).io(DUST.get(Rubber, 1)).add(150,8);
+        EXTRACTING.RB().ii(of(GTRubberData.StickyResin,1)).io(DUST.get(Rubber, 3)).add(150,8);
         EXTRACTING.RB().ii(of(Items.LILY_OF_THE_VALLEY, 1)).io(new ItemStack(Items.WHITE_DYE, 3)).add(400, 2);
         EXTRACTING.RB().ii(of(Items.ORANGE_TULIP, 1)).io(new ItemStack(Items.ORANGE_DYE, 3)).add(400, 2);
         EXTRACTING.RB().ii(of(Items.ALLIUM, 1)).io(new ItemStack(Items.MAGENTA_DYE, 3)).add(400, 2);

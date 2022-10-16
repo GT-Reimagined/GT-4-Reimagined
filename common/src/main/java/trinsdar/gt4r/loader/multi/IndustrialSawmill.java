@@ -1,5 +1,6 @@
 package trinsdar.gt4r.loader.multi;
 
+import com.github.gregtechintergalactical.gtrubber.GTRubberData;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluids;
@@ -28,9 +29,9 @@ public class IndustrialSawmill {
         addWoodRecipe(ItemTags.ACACIA_LOGS, Items.ACACIA_PLANKS);
         addWoodRecipe(ItemTags.CRIMSON_STEMS, Items.CRIMSON_PLANKS);
         addWoodRecipe(ItemTags.WARPED_STEMS, Items.WARPED_PLANKS);
-        INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(GT4RData.RUBBER_LOG, 1)).fi(new FluidStack(Fluids.WATER, 40)).io(new ItemStack(GT4RData.StickyResin), DUST.get(Wood, 8), new ItemStack(Items.JUNGLE_PLANKS, 9)).add(200, 30);
-        INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(GT4RData.RUBBER_LOG, 1)).fi(Lubricant.getLiquid(10)).io(new ItemStack(GT4RData.StickyResin), DUST.get(Wood, 8), new ItemStack(Items.JUNGLE_PLANKS, 9)).add(100, 30);
-        INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(GT4RData.RUBBER_LOG, 1)).fi(DistilledWater.getLiquid(30)).io(new ItemStack(GT4RData.StickyResin), DUST.get(Wood, 8), new ItemStack(Items.JUNGLE_PLANKS, 9)).add(200, 30);
+        INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(GTRubberData.RUBBER_LOG, 1)).fi(new FluidStack(Fluids.WATER, 40)).io(new ItemStack(GTRubberData.StickyResin), DUST.get(Wood, 8), new ItemStack(Items.JUNGLE_PLANKS, 9)).add(200, 30);
+        INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(GTRubberData.RUBBER_LOG, 1)).fi(Lubricant.getLiquid(10)).io(new ItemStack(GTRubberData.StickyResin), DUST.get(Wood, 8), new ItemStack(Items.JUNGLE_PLANKS, 9)).add(100, 30);
+        INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(GTRubberData.RUBBER_LOG, 1)).fi(DistilledWater.getLiquid(30)).io(new ItemStack(GTRubberData.StickyResin), DUST.get(Wood, 8), new ItemStack(Items.JUNGLE_PLANKS, 9)).add(200, 30);
         INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(Items.MELON, 1)).fi(new FluidStack(Fluids.WATER, 40)).io(new ItemStack(Items.MELON_SLICE, 7)).add(200, 30);
         INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(Items.MELON, 1)).fi(DistilledWater.getLiquid(30)).io(new ItemStack(Items.MELON_SLICE, 7)).add(200, 30);
     }

@@ -1,5 +1,6 @@
 package trinsdar.gt4r.loader.machines;
 
+import com.github.gregtechintergalactical.gtrubber.GTRubberData;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialStack;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
@@ -13,14 +14,13 @@ import net.minecraftforge.fluids.FluidStack;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.github.gregtechintergalactical.gtrubber.GTRubberData.StickyResin;
 import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
 import static net.minecraft.world.item.Items.*;
 import static net.minecraft.world.item.Items.DIRT;
 import static net.minecraft.world.level.block.Blocks.GRASS_BLOCK;
 import static trinsdar.gt4r.data.GT4RData.Plantball;
-import static trinsdar.gt4r.data.GT4RData.RUBBER_LOG;
-import static trinsdar.gt4r.data.GT4RData.StickyResin;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.CENTRIFUGING;
 
@@ -61,7 +61,7 @@ public class CentrifugingLoader {
         add(Nichrome, 16, 2240);
         CENTRIFUGING.RB().ii(of(Items.SOUL_SAND, 16)).io(new ItemStack(Items.SAND, 1), DUST.get(Saltpeter,4), DUST.get(Coal, 1)).fo(Oil.getLiquid(1000)).add(750, 16);
         CENTRIFUGING.RB().ii(of(Items.SOUL_SOIL, 16)).io(new ItemStack(DIRT, 1), DUST.get(Saltpeter,4), DUST.get(Coal, 1)).fo(Oil.getLiquid(1000)).add(750, 16);
-        CENTRIFUGING.RB().ii(of(new ItemStack(RUBBER_LOG, 16))).io(DUST.get(Carbon, 8), new ItemStack(StickyResin, 8), new ItemStack(Plantball, 6)).fo(Methane.getGas(4000)).add(1562, 16);
+        CENTRIFUGING.RB().ii(of(new ItemStack(GTRubberData.RUBBER_LOG, 16))).io(DUST.get(Carbon, 8), new ItemStack(StickyResin, 8), new ItemStack(Plantball, 6)).fo(Methane.getGas(4000)).add(1562, 16);
         CENTRIFUGING.RB().fi(Hydrogen.getGas(4000)).fo(Deuterium.getGas(1000)).add(300, 20);
         CENTRIFUGING.RB().fi(Deuterium.getGas(4000)).fo(Tritium.getGas(1000)).add(300, 20);
         CENTRIFUGING.RB().fi(Helium.getGas(16000)).fo(Helium3.getGas(1000)).add(900, 20);

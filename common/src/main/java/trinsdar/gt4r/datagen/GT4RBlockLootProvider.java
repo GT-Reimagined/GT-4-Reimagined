@@ -37,9 +37,6 @@ public class GT4RBlockLootProvider extends AntimatterBlockLootProvider {
         AntimatterAPI.all(BlockNonSolidMachine.class, providerDomain, this::add);
 
         AntimatterAPI.all(BlockCasing.class, providerDomain, this::add);
-        tables.put(GT4RData.RUBBER_LEAVES, b -> createLeavesDrops(GT4RData.RUBBER_LEAVES, GT4RData.RUBBER_SAPLING, 0.025F, 0.027777778F, 0.03125F, 0.041666668F, 0.1F));
-        this.add(GT4RData.RUBBER_LOG);
-        this.add(GT4RData.RUBBER_SAPLING);
         this.add(GT4RData.SAP_BAG);
     }
 

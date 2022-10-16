@@ -1,5 +1,6 @@
 package trinsdar.gt4r.events.forge;
 
+import com.github.gregtechintergalactical.gtrubber.GTRubberData;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.Data;
 import muramasa.antimatter.material.Material;
@@ -40,16 +41,35 @@ public class ForgeEventBusEvents {
     @SubscribeEvent
     public static void remapMissingBlocks(final RegistryEvent.MissingMappings<Block> event) {
         for (RegistryEvent.MissingMappings.Mapping<Block> map : event.getMappings(Ref.ID)) {
-            String domain = map.key.getNamespace();
             String id = map.key.getPath();
-
+            if (id.equals("rubber_log")){
+                map.remap(GTRubberData.RUBBER_LOG);
+            }
+            if (id.equals("rubber_leaves")){
+                map.remap(GTRubberData.RUBBER_LEAVES);
+            }
+            if (id.equals("rubber_sapling")){
+                map.remap(GTRubberData.RUBBER_SAPLING);
+            }
         }
     }
 
     @SubscribeEvent
     public static void remapMissingItems(final RegistryEvent.MissingMappings<Item> event) {
         for (RegistryEvent.MissingMappings.Mapping<Item> map : event.getMappings(Ref.ID)) {
-            
+            String id = map.key.getPath();
+            if (id.equals("rubber_log")){
+                map.remap(GTRubberData.RUBBER_LOG.asItem());
+            }
+            if (id.equals("rubber_leaves")){
+                map.remap(GTRubberData.RUBBER_LEAVES.asItem());
+            }
+            if (id.equals("rubber_sapling")){
+                map.remap(GTRubberData.RUBBER_SAPLING.asItem());
+            }
+            if (id.equals("sticky_resin")){
+                map.remap(GTRubberData.StickyResin);
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 package trinsdar.gt4r.loader.crafting;
 
+import com.github.gregtechintergalactical.gtrubber.GTRubberData;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.pipe.PipeSize;
@@ -261,7 +262,7 @@ public class Parts {
         provider.shapeless(output, "match_r", "parts", "has_stick", provider.hasSafeItem(getForgelikeItemTag("rods/wooden")), new ItemStack(Match, 4), DUST.getMaterialTag(Phosphor), getForgelikeItemTag("rods/wooden"));
         provider.addStackRecipe(output, Ref.ID, "fluid_cell", "parts", "has_tin", provider.hasSafeItem(PLATE.getMaterialTag(Tin)),
                 new ItemStack(CellTin, 2), of('T', PLATE.getMaterialTag(Tin)), " T ", "T T", " T ");
-        provider.shapeless(output, "resin_torch", "parts", "has_sticky_resin", provider.hasSafeItem(StickyResin), new ItemStack(Items.TORCH, 4), StickyResin, getForgelikeItemTag("rods/wooden"));
+        provider.shapeless(output, "resin_torch", "parts", "has_sticky_resin", provider.hasSafeItem(GTRubberData.StickyResin), new ItemStack(Items.TORCH, 4), GTRubberData.StickyResin, getForgelikeItemTag("rods/wooden"));
         provider.addItemRecipe(output, Ref.ID, "neutron_reflector_iridium", "parts", "has_iridium_reinforced_plate", provider.hasSafeItem(IridiumReinforcedPlate),
                 IridiumNeutronReflector, of('N', ThickNeutronReflector, 'I', IridiumReinforcedPlate), "NNN", "NIN", "NNN");
         provider.addItemRecipe(output, Ref.ID, "neutron_reflector_thick", "parts", "has_beryllium_dust", provider.hasSafeItem(DUST.get(Beryllium)),

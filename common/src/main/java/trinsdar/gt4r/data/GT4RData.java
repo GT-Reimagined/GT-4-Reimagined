@@ -50,9 +50,6 @@ import trinsdar.gt4r.items.ItemMatch;
 import trinsdar.gt4r.items.ItemMixedMetal;
 import trinsdar.gt4r.items.ItemPowerUnit;
 import trinsdar.gt4r.items.ItemStorageOrb;
-import trinsdar.gt4r.tree.BlockRubberLeaves;
-import trinsdar.gt4r.tree.BlockRubberLog;
-import trinsdar.gt4r.tree.BlockRubberSapling;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -156,8 +153,6 @@ public class GT4RData {
             new ItemCraftingModule().tip("Can be placed on machines as a cover")).setMenuHandler(MenuHandlers.COVER_CRAFTING_HANDLER).addTextures(new Texture(Ref.ID, "block/cover/crafting_module")).build(Ref.ID, "crafting_module");
     public static final CoverFactory COVER_REDSTONE_MACHINE_CONTROLLER = CoverFactory.builder(CoverRedstoneMachineController::new).item((a, b) ->
             new ItemCover(Ref.ID, "redstone_machine_controller").tip("Can be placed on machines as a cover")).addTextures(new Texture(Ref.ID, "block/cover/redstone_machine_controller")).build(Ref.ID, "redstone_machine_controller");
-
-    public static ItemBasic<?> StickyResin = new ItemBasic<>(Ref.ID, "sticky_resin");
     public static ItemBasic<?> Plantball = new ItemBasic<>(Ref.ID, "plantball");
     public static ItemBasic<?> Biochaff = new ItemBasic<>(Ref.ID, "biochaff");
     public static ItemBasic<?> CarbonFibre = new ItemBasic<>(Ref.ID, "raw_carbon_fibre");
@@ -358,11 +353,6 @@ public class GT4RData {
     public static final ItemPipe<?> ITEM_PIPE_OSMIUM = AntimatterAPI.register(ItemPipe.class, new ItemPipe<>(Ref.ID, Osmium).caps(0, 0, 0, 8, 16, 32));
     public static final ItemPipe<?> ITEM_PIPE_HC = AntimatterAPI.register(ItemPipe.class, new ItemPipe<>(Ref.ID, HighCapacity).caps(64));
     public static final ItemPipe<?> ITEM_PIPE_OSMIRIDIUM = AntimatterAPI.register(ItemPipe.class, new ItemPipe<>(Ref.ID, Osmiridium).caps(0, 0, 0, 32, 64, 128));
-
-    // Rubber Tree
-    public static final BlockRubberLeaves RUBBER_LEAVES = new BlockRubberLeaves(Ref.ID, "rubber_leaves");
-    public static final BlockRubberLog RUBBER_LOG = new BlockRubberLog(Ref.ID, "rubber_log");
-    public static final BlockRubberSapling RUBBER_SAPLING = new BlockRubberSapling(Ref.ID, "rubber_sapling");
 
     public static final ImmutableMap<Integer, RecipeIngredient> INT_CIRCUITS;
     public static final ImmutableMap<Integer, Item> INT_CIRCUITS_ITEMS;

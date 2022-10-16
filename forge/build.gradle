@@ -63,7 +63,7 @@ dependencies {
     modRuntimeOnly("mezz.jei:jei-1.18.2:9.5.0.132")
     modImplementation("com.github.Reforged-Mods:ARRP-forge:0.5.7")
     modRuntimeOnly("io.github.feltmc:fluidhandler-extras:1.0.0")
-    modImplementation("com.github.gregtech-intergalactical:gtrubber-forge:1.18.2-0.1.1"){
+    implementation("com.github.gregtech-intergalactical:gtrubber-forge:1.18.2-0.1.1:dev-shadow"){
         transitive = false
     }
     include("com.github.gregtech-intergalactical:gtrubber-forge:1.18.2-0.1.1")
