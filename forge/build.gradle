@@ -62,7 +62,11 @@ dependencies {
     //modRuntimeOnly("mezz.jei:jei-${rootProject.minecraft_version}-forge:${rootProject.jei_version}")
     modRuntimeOnly("mezz.jei:jei-1.18.2:9.5.0.132")
     modImplementation("com.github.Reforged-Mods:ARRP-forge:0.5.7")
-    modRuntimeOnly("com.github.FeltMC.Fabricated-Forge-API:fluidhandler-extras:${rootProject.fabricated_forge_hash}")
+    modRuntimeOnly("io.github.feltmc:fluidhandler-extras:1.0.0")
+    modImplementation("com.github.gregtech-intergalactical:gtrubber-forge:1.18.2-0.1.1"){
+        transitive = false
+    }
+    include("com.github.gregtech-intergalactical:gtrubber-forge:1.18.2-0.1.1")
 
 
     //runtimeOnly fg.deobf("curse.maven:world_stripper-250603:3142092")

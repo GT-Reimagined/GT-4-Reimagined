@@ -33,7 +33,6 @@ import trinsdar.gt4r.datagen.GT4RLocalizations;
 import trinsdar.gt4r.datagen.GT4RRandomDropBonus;
 import trinsdar.gt4r.tile.TileEntityTypes;
 import trinsdar.gt4r.tree.RubberFoliagePlacer;
-import trinsdar.gt4r.tree.RubberTreeWorldGen;
 import trinsdar.gt4r.worldgen.GT4RPlacedFeatures;
 import trinsdar.gt4r.worldgen.GT4RFeatures;
 
@@ -87,7 +86,6 @@ public class GT4Reimagined extends AntimatterMod {
                     //GEM.forceOverride(Amethyst, ForgeRegistries.ITEMS.getValue(new ResourceLocation("bluepower", "amethyst_gem")));
                 }
                 GT4RData.buildTierMaps();
-                RubberTreeWorldGen.init();
                 GT4RPlacedFeatures.init();
                 Structures.init();
                 Structures.initPatterns();

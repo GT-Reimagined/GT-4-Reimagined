@@ -3,6 +3,7 @@ package trinsdar.gt4r.worldgen;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import muramasa.antimatter.material.Material;
 import net.minecraft.core.Holder;
+import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.Registry;
@@ -10,6 +11,7 @@ import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.placement.BiomeFilter;
 import net.minecraft.world.level.levelgen.placement.CountPlacement;
 import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
@@ -20,7 +22,6 @@ import net.minecraft.world.level.levelgen.placement.RarityFilter;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.config.OreConfigHandler;
 import trinsdar.gt4r.config.OreConfigNode;
-import trinsdar.gt4r.tree.RubberTreeWorldGen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,14 +87,22 @@ public class GT4RPlacedFeatures {
         OreConfigNode node = OreConfigHandler.ORE_CONFIG_HANDLER.getOreConfig().ore(id, new OreConfigNode(true, minY, maxY, weight, size, secondary, secondaryChance, triangle));
         if (!node.isEnabled()) return;
         GT4ROreFeatureConfig config = new GT4ROreFeatureConfig(id, node.getSize(), discardChance, material.getId(), node.getSecondary(), node.getSecondaryChance());
-        Holder<ConfiguredFeature<GT4ROreFeatureConfig, ?>> configuredFeature = RubberTreeWorldGen.register(id, GT4RFeatures.ORE, config);
+        Holder<ConfiguredFeature<GT4ROreFeatureConfig, ?>> configuredFeature = FeatureUtils.register(Ref.ID + ":" + id, GT4RFeatures.ORE, config);
         List<PlacementModifier> list = new ArrayList<>();
         list.add(rare ? RarityFilter.onAverageOnceEvery(weight) : CountPlacement.of(weight));
         list.add(InSquarePlacement.spread());
         list.add(node.isTriangle() ? HeightRangePlacement.triangle(VerticalAnchor.absolute(minY), VerticalAnchor.absolute(maxY)) : HeightRangePlacement.uniform(VerticalAnchor.absolute(minY), VerticalAnchor.absolute(maxY)));
         list.add(BiomeFilter.biome());
-        Holder<PlacedFeature> placedFeature = RubberTreeWorldGen.createPlacedFeature(id, configuredFeature, list.toArray(new PlacementModifier[0]));
+        Holder<PlacedFeature> placedFeature = createPlacedFeature(id, configuredFeature, list.toArray(new PlacementModifier[0]));
         FEATURE_MAP.put(id, new MapWrapper(placedFeature, dimensions, filter));
+    }
+
+    public static <FC extends FeatureConfiguration> Holder<PlacedFeature> createPlacedFeature(String id, Holder<ConfiguredFeature<FC, ?>> feature, PlacementModifier... placementModifiers) {
+        ResourceLocation realID = new ResourceLocation(Ref.ID, id);
+        if (BuiltinRegistries.PLACED_FEATURE.keySet().contains(realID))
+            throw new IllegalStateException("Placed Feature ID: \"" + realID.toString() + "\" already exists in the Placed Features registry!");
+
+        return BuiltinRegistries.register(BuiltinRegistries.PLACED_FEATURE, realID, new PlacedFeature(Holder.hackyErase(feature), List.of(placementModifiers)));
     }
 
     record MapWrapper(Holder<PlacedFeature> feature, List<ResourceKey<Level>> dimensions, GT4ROreFeatureConfig.FilterContext filterContext){}

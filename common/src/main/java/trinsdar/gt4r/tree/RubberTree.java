@@ -1,5 +1,6 @@
 package trinsdar.gt4r.tree;
 
+import com.github.gregtechintergalactical.gtrubber.tree.RubberTreeWorldGen;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.worldgen.feature.IAntimatterFeature;
 import net.minecraft.core.BlockPos;
@@ -21,7 +22,6 @@ import trinsdar.gt4r.data.GT4RData;
 import java.util.Random;
 
 public class RubberTree extends AbstractTreeGrower {
-    public static final TreeFeature TREE_FEATURE = (TreeFeature) AntimatterAPI.register(IAntimatterFeature.class, new RubberTreeFeature()).asFeature();
     public static final WeightedStateProvider TRUNK_BLOCKS = new WeightedStateProvider(list());
 
     public RubberTree() {
@@ -44,12 +44,12 @@ public class RubberTree extends AbstractTreeGrower {
 
     @Override
     protected Holder<ConfiguredFeature<TreeConfiguration, ?>> getConfiguredFeature(Random rand, boolean flowers) {
-        return RubberTreeWorldGen.RUBBER_TREE_CONFIGURED_NORMAL;
+        return RubberTreeWorldGen.TREE_FEATURE_CONFIG;
     }
 
     @Override
     public boolean growTree(ServerLevel world, ChunkGenerator chunkGenerator, BlockPos pos, BlockState state, Random random) {
-        ConfiguredFeature<TreeConfiguration, ?> configuredFeature = RubberTreeWorldGen.getTreeConfigured(Biome.getBiomeCategory(world.getBiome(pos))).value();
+        ConfiguredFeature<TreeConfiguration, ?> configuredFeature = RubberTreeWorldGen.TREE_FEATURE_CONFIG.value();
         world.setBlock(pos, Blocks.AIR.defaultBlockState(), 4);
         //configuredFeature.config();
         if (!configuredFeature.place(world, chunkGenerator, random, pos)) {
