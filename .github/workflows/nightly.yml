@@ -37,24 +37,28 @@ jobs:
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
     - name: Build with Gradle
-      uses: gradle/gradle-build-action@4137be6a8bf7d7133955359dbd952c0ca73b1021
-      with:
-        arguments: build
-
+      run: ./gradlew build --stacktrace
     - name: Set outputs
       id: vars
       run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
     # The USERNAME and TOKEN need to correspond to the credentials environment variables used in
     # the publishing section of your build.gradle
-    - name: Upload Artifact
+    - name: Upload Forge Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: GT4R-nightly-${{ steps.vars.outputs.sha_short }}
-        path: build/libs
+        name: GT4R-forge-nightly-${{ steps.vars.outputs.sha_short }}
+        path: forge/build/libs
       env:
         USERNAME: ${{ github.actor }}
         TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+    - name: Upload Fabric Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: GT4R-fabric-nightly-${{ steps.vars.outputs.sha_short }}
+        path: fabric/build/libs
+      env:
+        USERNAME: ${{ github.actor }}
+        TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Cleanup Gradle Cache
       # Remove some files from the Gradle cache, so they aren't cached by GitHub Actions.
       # Restoring these files from a GitHub Actions cache might cause problems for future builds.
