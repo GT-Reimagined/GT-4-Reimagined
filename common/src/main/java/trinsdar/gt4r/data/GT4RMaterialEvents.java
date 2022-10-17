@@ -185,7 +185,7 @@ public class GT4RMaterialEvents {
         event.setMaterial(Fireclay).asDust().mats(of(Brick, 1));
         event.setMaterial(Spessartine).asDust().mats(of(Aluminium, 2, Manganese, 3, Silicon, 3, Oxygen, 12));
         event.setMaterial(Sphalerite).asOre(1, 5,true).mats(of(Zinc, 1, Sulfur, 1));
-        event.setMaterial(Tetrahedrite).asOre(1, 5, true).mats(of(Copper, 3, Antimony, 1, Sulfur, 3, Iron, 1))
+        event.setMaterial(Tetrahedrite).asOre(1, 5, true, MaterialTags.HAS_CUSTOM_SMELTING).mats(of(Copper, 3, Antimony, 1, Sulfur, 3, Iron, 1))
                 .setDirectSmeltInto(Copper).setSmeltInto(Copper);
         event.setMaterial(Tungstate).asOre(1, 5, true).mats(of(Tungsten, 1, Lithium, 2, Oxygen, 4)).setOreMulti(2).harvestLevel(2);
         event.setMaterial(Uraninite).asOre(1, 5, true).mats(of(Uranium238, 1, Oxygen, 2)).harvestLevel(2);
