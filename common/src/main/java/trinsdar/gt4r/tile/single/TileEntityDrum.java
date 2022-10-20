@@ -6,6 +6,7 @@ import muramasa.antimatter.capability.machine.MachineFluidHandler;
 import muramasa.antimatter.machine.event.ContentEvent;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.tool.AntimatterToolType;
+import muramasa.antimatter.util.AntimatterPlatformUtils;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -86,7 +87,10 @@ public class TileEntityDrum extends TileEntityMaterial<TileEntityDrum> {
         List<String> list = super.getInfo();
         fluidHandler.ifPresent(f -> {
             FluidStack stack = f.getInputTanks().getFluidInTank(0);
-            list.add("Fluid: " + (stack.isEmpty() ? "Empty" : stack.getAmount() + "mb of " + FluidPlatformUtils.getFluidDisplayName(stack)));
+            if (AntimatterPlatformUtils.isFabric() && !stack.isEmpty()){
+                list.add("Fluid: " + stack.getRealAmount() + "droplets of " + FluidPlatformUtils.getFluidDisplayName(stack).getString());
+            }
+            list.add("Fluid: " + (stack.isEmpty() ? "Empty" : stack.getAmount() + "mb of " + FluidPlatformUtils.getFluidDisplayName(stack).getString()));
         });
         return list;
     }
