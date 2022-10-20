@@ -24,6 +24,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
+import tesseract.FluidPlatformUtils;
 import trinsdar.gt4r.machine.MaterialMachine;
 
 import javax.annotation.Nullable;
@@ -85,7 +86,7 @@ public class TileEntityDrum extends TileEntityMaterial<TileEntityDrum> {
         List<String> list = super.getInfo();
         fluidHandler.ifPresent(f -> {
             FluidStack stack = f.getInputTanks().getFluidInTank(0);
-            list.add("Fluid: " + (stack.isEmpty() ? "Empty" : stack.getAmount() + "mb of " + stack.getFluid().getAttributes().getDisplayName(stack.toPortingLibStack())));
+            list.add("Fluid: " + (stack.isEmpty() ? "Empty" : stack.getAmount() + "mb of " + FluidPlatformUtils.getFluidDisplayName(stack)));
         });
         return list;
     }
@@ -137,7 +138,7 @@ public class TileEntityDrum extends TileEntityMaterial<TileEntityDrum> {
         public void onUpdate() {
             super.onUpdate();
             if (tile.getLevel().getGameTime() % 20 == 0 && output){
-                Direction dir = getTank(0).getFluid().getFluid().getAttributes().isGaseous() ? UP : DOWN;
+                Direction dir = FluidPlatformUtils.isFluidGaseous(getTank(0).getFluid().getFluid()) ? UP : DOWN;
                 if (getTank(0).getFluidAmount() > 0){
                     BlockEntity adjacent = tile.getLevel().getBlockEntity(tile.getBlockPos().relative(dir));
                     if (adjacent != null){
@@ -163,7 +164,8 @@ public class TileEntityDrum extends TileEntityMaterial<TileEntityDrum> {
 
         @Override
         public boolean canInput(FluidStack fluid, Direction direction) {
-            if (output && ((direction == UP && fluid.getFluid().getAttributes().isGaseous()) || (direction == DOWN && !fluid.getFluid().getAttributes().isGaseous()))) return false;
+            boolean gaseous = FluidPlatformUtils.isFluidGaseous(fluid.getFluid());
+            if (output && ((direction == UP && gaseous) || (direction == DOWN && !gaseous))) return false;
             return super.canInput(fluid, direction);
         }
     }
