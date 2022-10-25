@@ -267,12 +267,6 @@ public class GT4RMaterialEvents {
 
         event.setMaterial(Coal).remove(CRUSHED, CRUSHED_PURIFIED, CRUSHED_CENTRIFUGED, DUST_IMPURE, DUST_PURE);
 
-        MaterialTags.TOOLS.all().forEach(m -> {
-            if (m != Flint && m != NULL && !m.has(RUBBERTOOLS) && m != Wood){
-                event.setMaterial(m).flags(GT4RMaterialTags.PICKAXE_HEAD, GT4RMaterialTags.AXE_HEAD, GT4RMaterialTags.SHOVEL_HEAD, GT4RMaterialTags.SWORD_HEAD, GT4RMaterialTags.HOE_HEAD, GT4RMaterialTags.HAMMER_HEAD, GT4RMaterialTags.FILE_HEAD, GT4RMaterialTags.SAW_HEAD);
-            }
-        });
-
         //WroughtIron.setSmeltInto(Iron).setMacerateInto(Iron);
 
         //Cinnabar.setDirectSmeltInto(Mercury);
