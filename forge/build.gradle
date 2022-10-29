@@ -68,6 +68,7 @@ dependencies {
         transitive = false
     }
     include("com.github.gregtech-intergalactical:gtrubber-forge:1.18.2-0.1.1")
+    modRuntimeOnly("dev.latvian.mods:kubejs-forge:${rootProject.kubejs_version}")
 
 
     //runtimeOnly fg.deobf("curse.maven:world_stripper-250603:3142092")
