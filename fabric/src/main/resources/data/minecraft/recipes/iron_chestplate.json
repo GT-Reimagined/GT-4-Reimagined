@@ -1,0 +1,19 @@
+{
+  "type": "antimatter:container_shaped",
+  "pattern": [
+    "XHX",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "tag": "c:plates/iron"
+    },
+    "H": {
+      "tag": "antimatter:hammer"
+    }
+  },
+  "result": {
+    "item": "minecraft:iron_chestplate"
+  }
+}

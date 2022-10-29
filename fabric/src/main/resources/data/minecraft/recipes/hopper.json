@@ -1,0 +1,22 @@
+{
+  "type": "antimatter:container_shaped",
+  "pattern": [
+    "IWI",
+    "ICI",
+    " I "
+  ],
+  "key": {
+    "C": {
+      "tag": "c:chests/wooden"
+    },
+    "I": {
+      "tag": "c:plates/iron"
+    },
+    "W": {
+      "tag": "antimatter:wrench"
+    }
+  },
+  "result": {
+    "item": "minecraft:hopper"
+  }
+}

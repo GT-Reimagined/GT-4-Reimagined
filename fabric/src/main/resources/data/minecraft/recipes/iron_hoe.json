@@ -1,0 +1,28 @@
+{
+  "type": "antimatter:container_shaped",
+  "pattern": [
+    "HIP",
+    " RF",
+    " R "
+  ],
+  "key": {
+    "P": {
+      "tag": "c:plates/iron"
+    },
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "H": {
+      "tag": "antimatter:hammer"
+    },
+    "F": {
+      "tag": "antimatter:file"
+    },
+    "R": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "result": {
+    "item": "minecraft:iron_hoe"
+  }
+}

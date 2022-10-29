@@ -1,0 +1,28 @@
+{
+  "type": "antimatter:container_shaped",
+  "pattern": [
+    "PII",
+    "FRH",
+    " R "
+  ],
+  "key": {
+    "P": {
+      "tag": "c:plates/gold"
+    },
+    "I": {
+      "tag": "c:ingots/gold"
+    },
+    "H": {
+      "tag": "antimatter:hammer"
+    },
+    "F": {
+      "tag": "antimatter:file"
+    },
+    "R": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "result": {
+    "item": "minecraft:golden_pickaxe"
+  }
+}

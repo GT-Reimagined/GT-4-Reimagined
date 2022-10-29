@@ -1,0 +1,19 @@
+{
+  "type": "antimatter:container_shaped",
+  "pattern": [
+    "XXX",
+    "XHX",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "tag": "c:plates/gold"
+    },
+    "H": {
+      "tag": "antimatter:hammer"
+    }
+  },
+  "result": {
+    "item": "minecraft:golden_leggings"
+  }
+}
