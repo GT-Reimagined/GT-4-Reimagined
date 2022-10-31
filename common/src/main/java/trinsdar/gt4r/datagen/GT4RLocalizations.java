@@ -32,6 +32,7 @@ import static muramasa.antimatter.machine.Tier.MV;
 import static muramasa.antimatter.machine.Tier.STEEL;
 import static muramasa.antimatter.util.Utils.lowerUnderscoreToUpperSpaced;
 import static muramasa.antimatter.util.Utils.lowerUnderscoreToUpperSpacedRotated;
+import static trinsdar.gt4r.data.GT4RMaterialTags.TURBINE_ROTOR;
 import static trinsdar.gt4r.data.Machines.ELECTROLYZER;
 import static trinsdar.gt4r.data.Machines.HATCH_DYNAMO;
 import static trinsdar.gt4r.data.Machines.MACERATOR;
@@ -133,7 +134,7 @@ public class GT4RLocalizations {
             });
             AntimatterAPI.all(ItemFluidCell.class, domain).forEach(i -> override(i.getDescriptionId(), lowerUnderscoreToUpperSpacedRotated(i.getId())));
             GEM.all().forEach(m -> override(GEM.get(m).getDescriptionId(), lowerUnderscoreToUpperSpaced(m.getId())));
-            BROKEN_TURBINE_ROTOR.all().forEach(m -> override(BROKEN_TURBINE_ROTOR.get(m).getDescriptionId(), lowerUnderscoreToUpperSpaced(m.getId() + "_" + BROKEN_TURBINE_ROTOR.getId())));
+            BROKEN_TURBINE_ROTOR.all().forEach(m -> override(BROKEN_TURBINE_ROTOR.get(m).getDescriptionId(), lowerUnderscoreToUpperSpaced("broken_" + m.getId() + "_" + TURBINE_ROTOR.getId())));
         }
     }
 

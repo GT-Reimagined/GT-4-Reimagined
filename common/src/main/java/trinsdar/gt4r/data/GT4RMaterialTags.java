@@ -60,5 +60,9 @@ public class GT4RMaterialTags {
     public static MaterialTag LOCKER = new MaterialTag("locker");
     public static MaterialTag CHARGING_LOCKER = new MaterialTag("charging_locker");
 
-    public static void init(){}
+    public static void init(){
+        TURBINE_BLADE.unSplitName();
+        TURBINE_ROTOR.unSplitName();
+        BROKEN_TURBINE_ROTOR.unSplitName();
+    }
 }
