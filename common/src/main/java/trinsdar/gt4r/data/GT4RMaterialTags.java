@@ -64,5 +64,13 @@ public class GT4RMaterialTags {
         TURBINE_BLADE.unSplitName();
         TURBINE_ROTOR.unSplitName();
         BROKEN_TURBINE_ROTOR.unSplitName();
+        PICKAXE_HEAD.unSplitName();
+        AXE_HEAD.unSplitName();
+        SWORD_HEAD.unSplitName();
+        SHOVEL_HEAD.unSplitName();
+        HOE_HEAD.unSplitName();
+        HAMMER_HEAD.unSplitName();
+        FILE_HEAD.unSplitName();
+        SAW_HEAD.unSplitName();
     }
 }
