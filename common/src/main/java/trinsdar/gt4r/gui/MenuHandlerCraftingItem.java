@@ -16,13 +16,12 @@ public class MenuHandlerCraftingItem extends MenuHandler<GTWorkbenchContainer> {
 
     @Override
     public GTWorkbenchContainer onContainerCreate(int windowId, Inventory inv, FriendlyByteBuf data) {
-        //TODO
-        return menu((IGuiHandler) inv.player, inv, windowId);
+        return menu(null, inv, windowId);
     }
 
     @Override
     public GTWorkbenchContainer getMenu(IGuiHandler tile, Inventory playerInv, int windowId) {
-        return tile instanceof Player ? new ContainerCraftingItem(windowId, playerInv, ContainerLevelAccess.create(playerInv.player.level, playerInv.player.blockPosition())) : null;
+        return new ContainerCraftingItem(windowId, playerInv, ContainerLevelAccess.create(playerInv.player.level, playerInv.player.blockPosition()));
     }
 
     @Override
