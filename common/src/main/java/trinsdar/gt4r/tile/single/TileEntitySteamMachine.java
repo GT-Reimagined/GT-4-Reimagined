@@ -5,6 +5,7 @@ import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.recipe.Recipe;
 import muramasa.antimatter.tile.TileEntityMachine;
+import muramasa.antimatter.util.TagUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -18,7 +19,7 @@ import static trinsdar.gt4r.data.Machines.STEAM_FORGE_HAMMER;
 
 public class TileEntitySteamMachine extends TileEntityMachine<TileEntitySteamMachine> {
 
-    public static final TagKey<Fluid> STEAM =  TagKey.create(Registry.FLUID_REGISTRY, new ResourceLocation("forge", "steam"));
+    public static final TagKey<Fluid> STEAM = TagUtils.getForgelikeFluidTag("steam");
 
     public TileEntitySteamMachine(Machine<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
