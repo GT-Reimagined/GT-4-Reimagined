@@ -47,7 +47,6 @@ public class ItemCraftingModule extends ItemCover implements MenuProvider {
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int windowId, Inventory playerInv, Player player) {
-        //TODO
-        return MenuHandlers.ITEM_CRAFTING_HANDLER.getMenu((IGuiHandler) player, playerInv, windowId);
+        return MenuHandlers.ITEM_CRAFTING_HANDLER.getMenu(null, playerInv, windowId);
     }
 }
