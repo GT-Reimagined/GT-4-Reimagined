@@ -42,19 +42,29 @@ public abstract class CoverBasicTransport extends BaseCover implements ICoverMod
     }
 
     public ImportExportMode getCoverMode(int buttonID){
-        switch (buttonID){
-            case 0: return ImportExportMode.IMPORT;
-            case 1: return ImportExportMode.IMPORT_EXPORT;
-            case 2: return ImportExportMode.IMPORT_CONDITIONAL;
-            case 3: return ImportExportMode.IMPORT_EXPORT_CONDITIONAL;
-            case 4: return ImportExportMode.IMPORT_INVERT_COND;
-            case 5: return ImportExportMode.IMPORT_EXPORT_INVERT_COND;
-            case 7: return ImportExportMode.EXPORT_IMPORT;
-            case 8: return ImportExportMode.EXPORT_CONDITIONAL;
-            case 9: return ImportExportMode.EXPORT_IMPORT_CONDITIONAL;
-            case 10: return ImportExportMode.EXPORT_INVERT_COND;
-            case 11: return ImportExportMode.EXPORT_IMPORT_INVERT_COND;
-            default: return ImportExportMode.EXPORT;
-        }
+        return switch (buttonID) {
+            case 0 -> ImportExportMode.IMPORT;
+            case 1 -> ImportExportMode.IMPORT_EXPORT;
+            case 2 -> ImportExportMode.IMPORT_CONDITIONAL;
+            case 3 -> ImportExportMode.IMPORT_EXPORT_CONDITIONAL;
+            case 4 -> ImportExportMode.IMPORT_INVERT_COND;
+            case 5 -> ImportExportMode.IMPORT_EXPORT_INVERT_COND;
+            case 7 -> ImportExportMode.EXPORT_IMPORT;
+            case 8 -> ImportExportMode.EXPORT_CONDITIONAL;
+            case 9 -> ImportExportMode.EXPORT_IMPORT_CONDITIONAL;
+            case 10 -> ImportExportMode.EXPORT_INVERT_COND;
+            case 11 -> ImportExportMode.EXPORT_IMPORT_INVERT_COND;
+            default -> ImportExportMode.EXPORT;
+        };
+    }
+
+    @Override
+    public int coverModeToInt() {
+        return coverMode.ordinal();
+    }
+
+    @Override
+    public void setCoverMode(int index) {
+        this.coverMode = ImportExportMode.values()[index];
     }
 }

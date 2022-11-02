@@ -115,6 +115,16 @@ public class CoverRedstoneMachineController extends BaseCover implements ICoverM
     }
 
     @Override
+    public int coverModeToInt() {
+        return coverMode.ordinal();
+    }
+
+    @Override
+    public void setCoverMode(int index) {
+        coverMode = RedstoneMode.values()[index];
+    }
+
+    @Override
     public ResourceLocation getModel(String type, Direction dir) {
         if (type.equals("pipe")) return PIPE_COVER_MODEL;
         return getBasicModel();
