@@ -37,7 +37,7 @@ public abstract class CoverBasicTransport extends BaseCover implements ICoverMod
     public void onGuiEvent(IGuiEvent event, Player playerEntity) {
         if (event.getFactory() == GuiEvents.EXTRA_BUTTON){
             GuiEvents.GuiEvent ev = (GuiEvents.GuiEvent) event;
-            coverMode = getCoverMode(ev.data[0]);
+            coverMode = getCoverMode(ev.data[1]);
         }
     }
 
