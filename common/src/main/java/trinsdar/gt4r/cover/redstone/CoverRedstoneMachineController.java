@@ -120,8 +120,8 @@ public class CoverRedstoneMachineController extends BaseCover implements ICoverM
     }
 
     @Override
-    public void setCoverMode(int index) {
-        coverMode = RedstoneMode.values()[index];
+    public ICoverMode getCoverMode(int index) {
+        return RedstoneMode.values()[index];
     }
 
     @Override

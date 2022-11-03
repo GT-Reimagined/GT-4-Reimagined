@@ -65,13 +65,16 @@ public class CoverPump extends CoverBasicTransport {
         if (adjTile == null) return;
         BlockEntity from = handler.getTile();
         BlockEntity to = adjTile;
-        if (getCoverMode().getName().startsWith("Input")){
+        Direction fromSide = side;
+        if (getCoverMode().getName().startsWith("Import")){
             from = adjTile;
             to = handler.getTile();
+            fromSide = side.getOpposite();
         }
         BlockEntity finalTo = to;
         if (canMove(side)) {
-            from.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side).ifPresent(ih -> finalTo.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side.getOpposite()).ifPresent(other -> Utils.transferFluids(ih, other, Integer.MAX_VALUE)));
+            Direction finalFromSide = fromSide;
+            from.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, fromSide).ifPresent(ih -> finalTo.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, finalFromSide.getOpposite()).ifPresent(other -> Utils.transferFluids(ih, other, Integer.MAX_VALUE)));
         }
     }
 
