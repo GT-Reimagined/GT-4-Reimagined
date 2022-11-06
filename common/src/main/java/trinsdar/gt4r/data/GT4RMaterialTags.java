@@ -59,6 +59,7 @@ public class GT4RMaterialTags {
     public static MaterialTag CHARGING_WORKBENCH = new MaterialTag("charging_workbench");
     public static MaterialTag LOCKER = new MaterialTag("locker");
     public static MaterialTag CHARGING_LOCKER = new MaterialTag("charging_locker");
+    public static MaterialTag DRUM = new MaterialTag("drum");
 
     public static void init(){
         TURBINE_BLADE.unSplitName();

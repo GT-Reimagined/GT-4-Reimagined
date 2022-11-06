@@ -358,6 +358,8 @@ public class GT4RMaterialEvents {
 
         GT4RMaterialTags.CABINET.add(Iron, Aluminium, WroughtIron, Brass, Cupronickel, Electrum, Gold, Silver, Magnalium, Platinum, Osmium);
         GT4RMaterialTags.CABINET.all().forEach(m -> event.setMaterial(m).flags(ROD));
+        GT4RMaterialTags.DRUM.add(Bronze, Steel, StainlessSteel, Invar, Tungsten, TungstenSteel, Netherite);
+        GT4RMaterialTags.DRUM.all().forEach(m -> event.setMaterial(m).flags(ROD, PLATE));
         GT4RMaterialTags.WORKBENCH.add(Bronze, Iron, Aluminium);
         GT4RMaterialTags.CHARGING_WORKBENCH.add(Iron, Aluminium);
         GT4RMaterialTags.LOCKER.add(Iron, Aluminium);
