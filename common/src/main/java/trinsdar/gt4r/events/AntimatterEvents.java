@@ -48,6 +48,7 @@ import trinsdar.gt4r.loader.machines.ForgeHammerLoader;
 import trinsdar.gt4r.loader.machines.FurnaceLoader;
 import trinsdar.gt4r.loader.machines.LatheLoader;
 import trinsdar.gt4r.loader.machines.MaceratorLoader;
+import trinsdar.gt4r.loader.machines.MassFabLoader;
 import trinsdar.gt4r.loader.machines.OreByproducts;
 import trinsdar.gt4r.loader.machines.SiftingLoader;
 import trinsdar.gt4r.loader.machines.ThermalCentrifuge;
@@ -59,6 +60,7 @@ import trinsdar.gt4r.loader.machines.generator.HeatExchangerLoader;
 import trinsdar.gt4r.loader.multi.Blasting;
 import trinsdar.gt4r.loader.multi.CokePyrolysisOven;
 import trinsdar.gt4r.loader.multi.DistillationTower;
+import trinsdar.gt4r.loader.multi.Fusion;
 import trinsdar.gt4r.loader.multi.ImplosionCompressor;
 import trinsdar.gt4r.loader.multi.IndustrialGrinder;
 import trinsdar.gt4r.loader.multi.IndustrialSawmill;
@@ -114,6 +116,8 @@ public class AntimatterEvents {
         loader.accept("furnace", FurnaceLoader::init);
         loader.accept("dustbin", DustbinLoader::init);
         loader.accept("int_circuit_jei", IntCircuitJeiLoader::init);
+        loader.accept("mass_fab", MassFabLoader::init);
+        loader.accept("fusion", Fusion::init);
     }
 
     public static void registerCraftingLoaders(CraftingEvent event){
