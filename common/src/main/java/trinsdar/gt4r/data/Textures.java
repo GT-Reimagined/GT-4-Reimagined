@@ -171,4 +171,13 @@ public class Textures {
                 new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + tier.getId() + "/" + stateDir + "side"),
         };
     };
+
+    public static IOverlayTexturer SIMPLE_SIDED = (type, state, tier) -> new Texture[]{
+            new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + "side"),
+            new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + "side"),
+            new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + "side"),
+            new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + "side"),
+            new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + "side"),
+            new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + "side")
+    };
 }

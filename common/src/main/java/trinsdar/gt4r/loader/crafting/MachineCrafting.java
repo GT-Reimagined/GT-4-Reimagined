@@ -60,6 +60,8 @@ public class MachineCrafting {
                 CHEMICAL_REACTOR.getItem(MV), of('C', CIRCUITS_ADVANCED, 'P', PLATES_INVAR_ALUMINIUM, 'E', EXTRACTOR.getItem(LV), 'L', CopperCoil, 'c', COMPRESSOR.getItem(LV)), "PLP", "CcC", "PEP");
         provider.addItemRecipe(output, Ref.ID, "distillation_tower", "machines", "has_centrifuge", provider.hasSafeItem(CENTRIFUGE.getItem(LV)),
                 DISTILLATION_TOWER.getItem(MV), of('C', CIRCUITS_MASTER, 'P', PUMP.getItem(LV), 'E', ELECTROLYZER.getItem(MV), 'c', CENTRIFUGE.getItem(LV), 'A', HIGHLY_ADVANCED_MACHINE_BLOCK), "cCc", "PAP", "ECE");
+        provider.addItemRecipe(output, Ref.ID, "fusion_control_computer", "machines", "has_computer_cube", provider.hasSafeItem(COMPUTER_CUBE.getItem(LV)),
+                FUSION_REACTOR.getItem(IV), of('C', CIRCUITS_MASTER, 'c', COMPUTER_CUBE.getItem(LV), 'F', FUSION_COIL), "CCC", "cFc", "CCC");
     }
 
     private static void loadGeneratorRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider){
@@ -193,6 +195,8 @@ public class MachineCrafting {
                 QUANTUM_TANK.getItem(MAX), of('P', PLATE.getMaterialTag(Platinum), 'Q', QUANTUM_CHEST.getItem(MAX), 'C', CIRCUITS_MASTER), "CPC", "PQP", "CPC");
         provider.addItemRecipe(output, Ref.ID, "quantum_chest", "machines", "has_data_orb", provider.hasSafeItem(CircuitDataOrb),
                 QUANTUM_CHEST.getItem(MAX), ImmutableMap.<Character, Object>builder().put('D', CircuitDataOrb).put('C', ComputerMonitor).put('H', HIGHLY_ADVANCED_MACHINE_BLOCK).put('T', TELEPORTER.getItem(HV)).put('d', DIGITAL_CHEST.getItem(LV)).build(), "DCD", "HTH", "DdD");
+        provider.addItemRecipe(output, Ref.ID, "computer_cube", "machines", "has_basic_machine", provider.hasSafeItem(MACHINE_HULLS_BASIC),
+                COMPUTER_CUBE.getItem(LV), of('C', CIRCUITS_MASTER, 'c', ComputerMonitor, 'B', MACHINE_HULLS_BASIC, 'D', CIRCUITS_ULTIMATE), "DcC", "cBc", "CcD");
         GT4RMaterialTags.DRUM.all().forEach(m -> {
             if (!m.has(PLATE) || !m.has(ROD)) return;
             provider.addItemRecipe(output, Ref.ID, "drum_" + m.getId(), "machines", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), Machine.get(m.getId() + "_drum", Ref.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR), of('H', HAMMER.getTag(), 'R', ROD.getMaterialTag(m), 'P', PLATE.getMaterialTag(m)), " H ", "PRP", "PRP");

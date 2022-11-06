@@ -6,6 +6,7 @@ import muramasa.antimatter.machine.types.GeneratorMachine;
 import muramasa.antimatter.machine.types.HatchMachine;
 import muramasa.antimatter.machine.types.MultiMachine;
 import muramasa.antimatter.machine.types.TankMachine;
+import muramasa.antimatter.texture.Texture;
 import muramasa.antimatter.tile.single.TileEntityBatteryBuffer;
 import muramasa.antimatter.tile.single.TileEntityDigitalTransformer;
 import muramasa.antimatter.tile.single.TileEntityTransformer;
@@ -106,6 +107,7 @@ public class Machines {
     public static BasicMachine STEAM_ALLOY_SMELTER = new BasicMachine(Ref.ID, "steam_alloy_smelter").setTiers(BRONZE).addFlags(GUI, STEAM, ITEM, FLUID).setMap(STEAM_ALLOY_SMELTING).baseTexture(Textures.BOILER_HANDLER).setTile(TileEntitySteamMachine::new).covers(COVER_STEAM_VENT);
 
     public static BasicMachine TELEPORTER = new BasicMachine(Ref.ID, "teleporter").setTiers(HV, LUV).setTile(TileEntityTeleporter::new).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER);
+    public static BasicMachine COMPUTER_CUBE = new BasicMachine(Ref.ID, "computer_cube").setTiers(LV).overlayTexture(Textures.SIMPLE_SIDED).noCovers();
     public static BasicMachine ELECTRIC_ITEM_FILTER = new BasicMachine(Ref.ID, "electric_item_filter").setTiers(LV).addFlags(GUI, ITEM).setTile(TileEntityItemFilter::new).noCovers().allowFrontIO().setAllowVerticalFacing(true).overlayTexture(Textures.LEFT_RIGHT_HANDLER);
     public static BasicMachine ELECTRIC_TYPE_FILTER = new BasicMachine(Ref.ID, "electric_type_filter").setTiers(LV).addFlags(GUI, ITEM).setTile(TileEntityTypeFilter::new).noCovers().allowFrontIO().setAllowVerticalFacing(true).overlayTexture(Textures.LEFT_RIGHT_HANDLER);
     public static BasicMachine ELECTRIC_ITEM_TRANSLOCATOR = new BasicMachine(Ref.ID, "electric_item_translocator").setTiers(LV).addFlags(GUI, ITEM).setTile(TileEntityTranslocator.TileEntityItemTranslocator::new).noCovers().allowFrontIO().setAllowVerticalFacing(true).overlayTexture(Textures.LEFT_RIGHT_HANDLER);
