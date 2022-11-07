@@ -14,16 +14,8 @@ import static muramasa.antimatter.machine.MachineFlag.COVERABLE;
 public class ChestMachine extends MaterialMachine{
     public ChestMachine(String domain, String id, Material material) {
         super(domain, id, material);
+        setBlock(BlockMaterialChest::new);
+        setItemBlock(tier -> BlockItem.BY_BLOCK.get(AntimatterAPI.get(BlockMaterialChest.class,this.getId() + "_" + tier.getId(), getDomain())));
         COVERABLE.remove(this);
-    }
-
-    @Override
-    protected Block getBlock(Machine<MaterialMachine> type, Tier tier) {
-        return new BlockMaterialChest(type, tier);
-    }
-
-    @Override
-    public Item getItem(Tier tier) {
-        return BlockItem.BY_BLOCK.get(AntimatterAPI.get(BlockMaterialChest.class,this.getId() + "_" + tier.getId(), getDomain()));
     }
 }

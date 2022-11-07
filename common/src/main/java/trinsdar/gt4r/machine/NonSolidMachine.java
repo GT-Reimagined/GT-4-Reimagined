@@ -17,16 +17,9 @@ public class NonSolidMachine extends Machine<NonSolidMachine> {
     public NonSolidMachine(String domain, String id) {
         super(domain, id);
         addFlags(BASIC, ENERGY);
+        setBlock(BlockNonSolidMachine::new);
+        setItemBlock(tier -> BlockItem.BY_BLOCK.get(AntimatterAPI.get(BlockNonSolidMachine.class,this.getId() + "_" + tier.getId(), getDomain())));
         setTile(TileEntityMachine::new);
         setGUI(Data.BASIC_MENU_HANDLER);
-    }
-
-    @Override
-    protected Block getBlock(Machine<NonSolidMachine> type, Tier tier) {
-        return new BlockNonSolidMachine(type, tier);
-    }
-
-    public Item getItem(Tier tier) {
-        return BlockItem.BY_BLOCK.get(AntimatterAPI.get(BlockNonSolidMachine.class,this.getId() + "_" + tier.getId(), getDomain()));
     }
 }
