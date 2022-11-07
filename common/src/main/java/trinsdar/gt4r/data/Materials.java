@@ -39,6 +39,7 @@ public class Materials {
     public static Material Osmium = AntimatterAPI.register(Material.class, new Material(Ref.ID, "osmium", 0x3232ff, METALLIC, Os));
     public static Material Platinum = AntimatterAPI.register(Material.class, new Material(Ref.ID, "platinum", 0xffffc8, SHINY, Pt));
     public static Material Plutonium = AntimatterAPI.register(Material.class, new Material(Ref.ID, "plutonium_244", 0xf03232, METALLIC, Pu));
+    public static Material Plutonium239 = AntimatterAPI.register(Material.class, new Material(Ref.ID, "plutonium_239", 0xf03232, METALLIC, Pu239));
     public static Material Silver = AntimatterAPI.register(Material.class, new Material(Ref.ID, "silver", 0xdcdcff, SHINY, Ag));
     public static Material Thorium = AntimatterAPI.register(Material.class, new Material(Ref.ID, "thorium", 0x001e00, SHINY, Th));
     public static Material Titanium = AntimatterAPI.register(Material.class, new Material(Ref.ID, "titanium", 0xdca0f0, METALLIC, Ti));

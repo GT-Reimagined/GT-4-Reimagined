@@ -71,6 +71,7 @@ public class GT4RMaterialEvents {
         event.setMaterial(Osmium).asMetal(3306, 3306, PLATE, ROD);
         event.setMaterial(Platinum).asMetal(2041, 0, PLATE, ROD).asOre(3, 7, true).harvestLevel(2);
         event.setMaterial(Plutonium).asMetal(912, 0);
+        event.setMaterial(Plutonium239).asMetal(912, 0);
         event.setMaterial(Silver).asMetal(1234, 0, PLATE).harvestLevel(2);
         event.setMaterial(Thorium).asMetal(2115, 0);
         event.setMaterial(Titanium).asMetal(1941, 1500,  PLATE, ROD, GEAR).addArmor(new int[]{3, 7, 7, 3}, 1.0F, 0.0F, 15).addTools(3.5F, 8.0F, 1600, 3);
@@ -334,6 +335,7 @@ public class GT4RMaterialEvents {
         event.setMaterial(Phosphor).addByProduct(Phosphate);
         event.setMaterial(Lithium).addByProduct(Lithium);
         event.setMaterial(Silicon).addByProduct(SiliconDioxide);
+        HotCoolant.remove(MaterialTags.MOLTEN);
     }
 
     private static void flags(MaterialEvent event){
