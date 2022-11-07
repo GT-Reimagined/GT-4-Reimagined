@@ -135,6 +135,8 @@ public class GT4RLocalizations {
             AntimatterAPI.all(ItemFluidCell.class, domain).forEach(i -> override(i.getDescriptionId(), lowerUnderscoreToUpperSpacedRotated(i.getId())));
             GEM.all().forEach(m -> override(GEM.get(m).getDescriptionId(), lowerUnderscoreToUpperSpaced(m.getId())));
             BROKEN_TURBINE_ROTOR.all().forEach(m -> override(BROKEN_TURBINE_ROTOR.get(m).getDescriptionId(), lowerUnderscoreToUpperSpaced("broken_" + m.getId() + "_" + TURBINE_ROTOR.getId())));
+            override("block.antimatter_shared.liquid.liquid_pahoehoe_lava", "Pahoehoe Lava");
+            override("item.antimatter_shared.liquid_pahoehoe_lava_bucket", "Pahoehoe Lava Bucket");
         }
     }
 
