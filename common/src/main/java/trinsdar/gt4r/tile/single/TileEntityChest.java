@@ -20,8 +20,12 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
+import net.minecraft.world.level.block.entity.ChestLidController;
+import net.minecraft.world.level.block.entity.ContainerOpenersCounter;
 import net.minecraft.world.level.block.entity.LidBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
@@ -39,46 +43,57 @@ public class TileEntityChest extends TileEntityCabinet implements LidBlockEntity
     protected int numPlayersUsing;
     private int ticksSinceSync;
 
+    private final ChestLidController lidController;
+    private final ContainerOpenersCounter manager = new ContainerOpenersCounter() {
+        @Override
+        protected void onOpen(Level world, BlockPos pos, BlockState state) {
+            TileEntityChest.playSound(world, pos, state, SoundEvents.CHEST_OPEN);
+        }
+
+        @Override
+        protected void onClose(Level world, BlockPos pos, BlockState state) {
+            TileEntityChest.playSound(world, pos, state, SoundEvents.CHEST_CLOSE);
+        }
+
+        @Override
+        protected void openerCountChanged(Level world, BlockPos pos, BlockState state, int oldCount, int newCount) {
+            world.blockEvent(pos, state.getBlock(), 1, newCount);
+        }
+
+        @Override
+        protected boolean isOwnContainer(Player player) {
+            return player.containerMenu instanceof ContainerCabinet<?> handler &&
+                    handler.handler.handler instanceof TileEntityChest chest && chest.getBlockPos().equals(TileEntityChest.this.getBlockPos());
+        }
+    };
+
+
     public TileEntityChest(MaterialMachine type, BlockPos pos, BlockState state, int ySize) {
         super(type, pos, state, ySize);
+        lidController = new ChestLidController();
+
+    }
+
+    @Override
+    public void clientTick(Level level, BlockPos pos, BlockState state) {
+        super.clientTick(level, pos, state);
     }
 
     @Override
     protected void tick(Level level, BlockPos pos, BlockState state) {
         super.tick(level, pos, state);
-        int i = this.getBlockPos().getX();
-        int j = this.getBlockPos().getY();
-        int k = this.getBlockPos().getZ();
-        ++this.ticksSinceSync;
-        this.numPlayersUsing = getNumberOfPlayersUsing(this.level, this, this.ticksSinceSync, i, j, k, this.numPlayersUsing);
-        this.prevLidAngle = this.lidAngle;
-        float f = 0.1F;
-        if (this.numPlayersUsing > 0 && this.lidAngle == 0.0F) {
-            this.playSound(SoundEvents.CHEST_OPEN);
-        }
-
-        if (this.numPlayersUsing == 0 && this.lidAngle > 0.0F || this.numPlayersUsing > 0 && this.lidAngle < 1.0F) {
-            float f1 = this.lidAngle;
-            if (this.numPlayersUsing > 0) {
-                this.lidAngle += 0.1F;
-            } else {
-                this.lidAngle -= 0.1F;
-            }
-
-            if (this.lidAngle > 1.0F) {
-                this.lidAngle = 1.0F;
-            }
-
-            float f2 = 0.5F;
-            if (this.lidAngle < 0.5F && f1 >= 0.5F) {
-                this.playSound(SoundEvents.CHEST_CLOSE);
-            }
-
-            if (this.lidAngle < 0.0F) {
-                this.lidAngle = 0.0F;
-            }
-        }
+        lidController.tickLid();
     }
+
+    @Override
+    public boolean triggerEvent(int event, int value) {
+        if (event == 1) {
+            lidController.shouldBeOpen(value > 0);
+            return true;
+        }
+        return super.triggerEvent(event, value);
+    }
+
 
     @Override
     public boolean canPlayerOpenGui(Player playerEntity) {
@@ -107,97 +122,33 @@ public class TileEntityChest extends TileEntityCabinet implements LidBlockEntity
         return false;
     }
 
-    public static int getNumberOfPlayersUsing(Level worldIn, TileEntityChest lockableTileEntity, int ticksSinceSync, int x, int y, int z, int numPlayersUsing) {
-        if (!worldIn.isClientSide && numPlayersUsing != 0 && (ticksSinceSync + x + y + z) % 200 == 0) {
-            numPlayersUsing = getNumberOfPlayersUsing(worldIn, lockableTileEntity, x, y, z);
-        }
+    private static void playSound(Level world, BlockPos pos, BlockState state, SoundEvent soundIn) {
+        double d0 = (double) pos.getX() + 0.5D;
+        double d1 = (double) pos.getY() + 0.5D;
+        double d2 = (double) pos.getZ() + 0.5D;
 
-        return numPlayersUsing;
-    }
-
-    public static int getNumberOfPlayersUsing(Level world, TileEntityChest lockableTileEntity, int x, int y, int z) {
-        int i = 0;
-
-        for (Player playerentity : world.getEntitiesOfClass(Player.class, new AABB((double) ((float) x - 5.0F), (double) ((float) y - 5.0F), (double) ((float) z - 5.0F), (double) ((float) (x + 1) + 5.0F), (double) ((float) (y + 1) + 5.0F), (double) ((float) (z + 1) + 5.0F)))) {
-            if (playerentity.containerMenu instanceof ContainerCabinet<?> chest) {
-                if (chest.handler.handler instanceof TileEntityChest chest1){
-                    if (chest1.getBlockPos().equals(lockableTileEntity.getBlockPos())){
-                        ++i;
-                    }
-                }
-            }
-        }
-
-        return i;
-    }
-
-    private void playSound(SoundEvent soundIn) {
-        double d0 = (double) this.getBlockPos().getX() + 0.5D;
-        double d1 = (double) this.getBlockPos().getY() + 0.5D;
-        double d2 = (double) this.getBlockPos().getZ() + 0.5D;
-
-        this.getLevel().playSound((Player) null, d0, d1, d2, soundIn, SoundSource.BLOCKS, 0.5F, this.getLevel().random.nextFloat() * 0.1F + 0.9F);
-    }
-
-
-    public boolean triggerEvent(int id, int type) {
-        if (id == 1) {
-            this.numPlayersUsing = type;
-            return true;
-        }
-        else return super.triggerEvent(id, type);
-    }
-
-    protected void onOpenOrClose() {
-        Block block = this.getBlockState().getBlock();
-
-        if (block instanceof BlockMaterialChest) {
-            this.getLevel().blockEvent(this.getBlockPos(), block, 1, this.numPlayersUsing);
-            this.getLevel().updateNeighborsAt(this.getBlockPos(), block);
-        }
+        world.playSound((Player) null, d0, d1, d2, soundIn, SoundSource.BLOCKS, 0.5F, world.random.nextFloat() * 0.1F + 0.9F);
     }
 
     @Override
     @Environment(EnvType.CLIENT)
     public float getOpenNess(float partialTicks) {
-        return Mth.lerp(partialTicks, this.prevLidAngle, this.lidAngle);
-    }
-
-    public static int getPlayersUsing(BlockGetter reader, BlockPos posIn) {
-        BlockState blockstate = reader.getBlockState(posIn);
-        if (blockstate.getBlock() instanceof EntityBlock) {
-            BlockEntity tileentity = reader.getBlockEntity(posIn);
-            if (tileentity instanceof TileEntityChest chest) {
-                return chest.numPlayersUsing;
-            }
-        }
-
-        return 0;
+        return lidController.getOpenness(partialTicks);
+        //return Mth.lerp(partialTicks, this.prevLidAngle, this.lidAngle);
     }
 
     @Override
     public void startOpen(Player player) {
-        if (!player.isSpectator()) {
-            if (this.numPlayersUsing < 0) {
-                this.numPlayersUsing = 0;
-            }
-
-            ++this.numPlayersUsing;
-            this.onOpenOrClose();
-            player.awardStat(this.getOpenChestStat());
+        if (!remove && !player.isSpectator()) {
+            this.manager.incrementOpeners(player, this.getLevel(), this.getBlockPos(), this.getBlockState());
         }
-    }
-
-    protected Stat<ResourceLocation> getOpenChestStat() {
-        return Stats.CUSTOM.get(Stats.OPEN_CHEST);
     }
 
 
     @Override
     public void stopOpen(Player player) {
-        if (!player.isSpectator()) {
-            --this.numPlayersUsing;
-            this.onOpenOrClose();
+        if (!remove && !player.isSpectator()) {
+            manager.decrementOpeners(player, this.getLevel(), this.getBlockPos(), this.getBlockState());
         }
     }
 

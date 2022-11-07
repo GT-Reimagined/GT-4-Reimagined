@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.blockentity.BrightnessCombiner;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoubleBlockCombiner;
@@ -42,6 +43,13 @@ public class MaterialChestRenderer <T extends BlockEntity> implements BlockEntit
         this.chestLock = modelpart.getChild("lock");
     }
 
+    private static float getLidOpenness(float delta) {
+        delta = 1 - delta;
+        delta = 1 - delta * delta * delta;
+        return -delta * Mth.HALF_PI;
+    }
+
+
     @Override
     public void render(T pBlockEntity, float pPartialTicks, PoseStack pMatrixStack, MultiBufferSource pBuffer, int pCombinedLight, int pCombinedOverlay) {
         TileEntityChest tileEntity = (TileEntityChest) pBlockEntity;
@@ -53,8 +61,7 @@ public class MaterialChestRenderer <T extends BlockEntity> implements BlockEntit
         Block block = blockstate.getBlock();
 
 
-        if (block instanceof BlockMaterialChest) {
-            BlockMaterialChest materialChest = (BlockMaterialChest) block;
+        if (block instanceof BlockMaterialChest materialChest) {
 
             pMatrixStack.pushPose();
             float f = blockstate.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot();
@@ -76,25 +83,24 @@ public class MaterialChestRenderer <T extends BlockEntity> implements BlockEntit
 
             Material material = new Material(Sheets.CHEST_SHEET, MATERIAL_CHEST_BASE);
             VertexConsumer ivertexbuilder = material.buffer(pBuffer, RenderType::entityCutout);
-
-            this.handleModelRender(pMatrixStack, ivertexbuilder, this.chestLid, this.chestLock, this.chestBottom, f1, i, pCombinedOverlay, materialChest.getBlockColor(blockstate, world, tileEntity.getBlockPos(), 0));
+            this.handleModelRender(pMatrixStack, ivertexbuilder, f1, i, pCombinedOverlay, materialChest.getBlockColor(blockstate, world, tileEntity.getBlockPos(), 0), getLidOpenness(((TileEntityChest) pBlockEntity).getOpenNess(pPartialTicks)));
 
             material = new Material(Sheets.CHEST_SHEET, MATERIAL_CHEST_OVERLAY);
             ivertexbuilder = material.buffer(pBuffer, RenderType::entityCutout);
 
-            this.handleModelRender(pMatrixStack, ivertexbuilder, this.chestLid, this.chestLock, this.chestBottom, f1, i, pCombinedOverlay, materialChest.getBlockColor(blockstate, world, tileEntity.getBlockPos(), 1));
+            this.handleModelRender(pMatrixStack, ivertexbuilder, f1, i, pCombinedOverlay, materialChest.getBlockColor(blockstate, world, tileEntity.getBlockPos(), 1), getLidOpenness(((TileEntityChest) pBlockEntity).getOpenNess(pPartialTicks)));
 
             pMatrixStack.popPose();
         }
     }
 
-    private void handleModelRender(PoseStack matrixStackIn, VertexConsumer iVertexBuilder, ModelPart firstModel, ModelPart secondModel, ModelPart thirdModel, float f1, int i, int pCombinedOverlay, int color) {
-        firstModel.xRot = -(f1 * ((float) Math.PI / 2F));
-        secondModel.xRot = firstModel.xRot;
+    private void handleModelRender(PoseStack matrixStackIn, VertexConsumer iVertexBuilder, float f1, int i, int pCombinedOverlay, int color, float openness) {
+        chestLid.xRot = openness;
+        chestLock.xRot = chestLid.xRot;
         Color colorValue = new Color(color);
         float[] colorArray = colorValue.getRGBColorComponents(null);
-        firstModel.render(matrixStackIn, iVertexBuilder, i, pCombinedOverlay, colorArray[0], colorArray[1], colorArray[2], 1.0F);
-        secondModel.render(matrixStackIn, iVertexBuilder, i, pCombinedOverlay);
-        thirdModel.render(matrixStackIn, iVertexBuilder, i, pCombinedOverlay, colorArray[0], colorArray[1], colorArray[2], 1.0F);
+        chestLid.render(matrixStackIn, iVertexBuilder, i, pCombinedOverlay, colorArray[0], colorArray[1], colorArray[2], 1.0F);
+        chestLock.render(matrixStackIn, iVertexBuilder, i, pCombinedOverlay);
+        chestBottom.render(matrixStackIn, iVertexBuilder, i, pCombinedOverlay, colorArray[0], colorArray[1], colorArray[2], 1.0F);
     }
 }
