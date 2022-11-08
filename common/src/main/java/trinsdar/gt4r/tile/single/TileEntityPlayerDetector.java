@@ -2,6 +2,7 @@ package trinsdar.gt4r.tile.single;
 
 import muramasa.antimatter.capability.machine.MachineEnergyHandler;
 import muramasa.antimatter.cover.IHaveCover;
+import muramasa.antimatter.machine.MachineState;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.tool.AntimatterToolType;
@@ -10,6 +11,8 @@ import muramasa.antimatter.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -21,6 +24,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 import tesseract.api.gt.GTTransaction;
+
+import java.util.UUID;
 
 public class TileEntityPlayerDetector extends TileEntityMachine<TileEntityPlayerDetector> {
     boolean redstone = false;
@@ -74,6 +79,7 @@ public class TileEntityPlayerDetector extends TileEntityMachine<TileEntityPlayer
             }
         }
         if (lastRedstone != redstone) {
+            this.setMachineState(redstone ? MachineState.ACTIVE : MachineState.IDLE);
             updateBlock(level, pos);
             level.updateNeighborsAt(pos, level.getBlockState(pos).getBlock());
         }
@@ -84,11 +90,23 @@ public class TileEntityPlayerDetector extends TileEntityMachine<TileEntityPlayer
         level.sendBlockUpdated(pos, state, state, 3);
     }
 
+    @SuppressWarnings("NoTranslation")
     @Override
     public InteractionResult onInteract(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit, @Nullable AntimatterToolType type) {
         ItemStack stack = player.getItemInHand(hand);
         if (stack.isEmpty() || !(stack.getItem() instanceof IAntimatterTool || stack.getItem() instanceof IHaveCover)){
             this.detectorType = detectorType.next();
+            if (!ownerUdid.isEmpty()) {
+                Player owner = world.getPlayerByUUID(UUID.fromString(ownerUdid));
+                if (owner != null){
+                    switch (detectorType){
+                        case YOU -> player.displayClientMessage(new TranslatableComponent("message.gt4r.player_detector.only", owner.getDisplayName()), false);
+                        case OTHERS -> player.displayClientMessage(new TranslatableComponent("message.gt4r.player_detector.other", owner.getDisplayName()), false);
+                        case ALL -> player.displayClientMessage(new TranslatableComponent("message.gt4r.player_detector.all"), false);
+                    }
+                }
+            }
+            return InteractionResult.SUCCESS;
         }
         return super.onInteract(state, world, pos, player, hand, hit, type);
     }

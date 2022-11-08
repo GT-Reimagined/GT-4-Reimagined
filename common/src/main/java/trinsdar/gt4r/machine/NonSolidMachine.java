@@ -18,7 +18,7 @@ public class NonSolidMachine extends Machine<NonSolidMachine> {
         super(domain, id);
         addFlags(BASIC, ENERGY);
         setBlock(BlockNonSolidMachine::new);
-        setItemBlock(tier -> BlockItem.BY_BLOCK.get(AntimatterAPI.get(BlockNonSolidMachine.class,this.getId() + "_" + tier.getId(), getDomain())));
+        setItemBlockClass(() -> BlockNonSolidMachine.class);
         setTile(TileEntityMachine::new);
         setGUI(Data.BASIC_MENU_HANDLER);
     }

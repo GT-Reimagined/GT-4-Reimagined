@@ -15,7 +15,7 @@ public class ChestMachine extends MaterialMachine{
     public ChestMachine(String domain, String id, Material material) {
         super(domain, id, material);
         setBlock(BlockMaterialChest::new);
-        setItemBlock(tier -> BlockItem.BY_BLOCK.get(AntimatterAPI.get(BlockMaterialChest.class,this.getId() + "_" + tier.getId(), getDomain())));
+        setItemBlockClass(() -> BlockMaterialChest.class);
         COVERABLE.remove(this);
     }
 }

@@ -70,6 +70,9 @@ public class GT4RLocalizations {
             add("tooltip.gt4r.sort_inventory", "Sort Inventory");
             add("machine.drum.fluid", "Contains %s mb of %s");
             add("machine.drum.output", "Currently set to auto output");
+            add("message.gt4r.player_detector.all", "Detects all Players");
+            add("message.gt4r.player_detector.other", "Detects all Players except %s");
+            add("message.gt4r.player_detector.only", "Detects only %s");
         }
 
         @Override

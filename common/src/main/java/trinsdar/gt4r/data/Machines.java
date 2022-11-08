@@ -11,6 +11,7 @@ import muramasa.antimatter.tile.single.TileEntityBatteryBuffer;
 import muramasa.antimatter.tile.single.TileEntityDigitalTransformer;
 import muramasa.antimatter.tile.single.TileEntityTransformer;
 import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.block.BlockRedstoneMachine;
 import trinsdar.gt4r.machine.ChestMachine;
 import trinsdar.gt4r.machine.MaterialMachine;
 import trinsdar.gt4r.machine.NonSolidMachine;
@@ -43,6 +44,7 @@ import trinsdar.gt4r.tile.single.TileEntityInfiniteFluid;
 import trinsdar.gt4r.tile.single.TileEntityInfiniteStorage;
 import trinsdar.gt4r.tile.single.TileEntityItemFilter;
 import trinsdar.gt4r.tile.single.TileEntityLocker;
+import trinsdar.gt4r.tile.single.TileEntityPlayerDetector;
 import trinsdar.gt4r.tile.single.TileEntityPump;
 import trinsdar.gt4r.tile.single.TileEntityQuantumChest;
 import trinsdar.gt4r.tile.single.TileEntityQuantumTank;
@@ -112,6 +114,8 @@ public class Machines {
     public static BasicMachine ELECTRIC_TYPE_FILTER = new BasicMachine(Ref.ID, "electric_type_filter").setTiers(LV).addFlags(GUI, ITEM).setTile(TileEntityTypeFilter::new).noCovers().allowFrontIO().setAllowVerticalFacing(true).overlayTexture(Textures.LEFT_RIGHT_HANDLER);
     public static BasicMachine ELECTRIC_ITEM_TRANSLOCATOR = new BasicMachine(Ref.ID, "electric_item_translocator").setTiers(LV).addFlags(GUI, ITEM).setTile(TileEntityTranslocator.TileEntityItemTranslocator::new).noCovers().allowFrontIO().setAllowVerticalFacing(true).overlayTexture(Textures.LEFT_RIGHT_HANDLER);
     public static BasicMachine ELECTRIC_FLUID_TRANSLOCATOR = new BasicMachine(Ref.ID, "electric_fluid_translocator").setTiers(LV).addFlags(GUI, ITEM, FLUID).setTile(TileEntityTranslocator.TileEntityFluidTranslocator::new).noCovers().allowFrontIO().setAllowVerticalFacing(true).overlayTexture(Textures.LEFT_RIGHT_HANDLER);
+
+    public static BasicMachine PLAYER_DETECTOR = new BasicMachine(Ref.ID, "player_detector").setTiers(LV).setTile(TileEntityPlayerDetector::new).setBlock(BlockRedstoneMachine::new).setItemBlockClass(() -> BlockRedstoneMachine.class).frontCovers().noCovers().allowFrontIO().overlayTexture(Textures.SIMPLE_ACTIVE_SIDED);
 
     public static BasicMultiMachine<?> COKE_OVEN = new BasicMultiMachine<>(Ref.ID, "coke_oven").setMap(COKING).setTiers(LV).addFlags(GUI, ITEM, FLUID).setTile(TileEntityCokeOven::new).custom(Textures.STANDARD_MACHINE_MODELS);
     public static BasicMultiMachine<?> PRIMITIVE_BLAST_FURNACE = new BasicMultiMachine<>(Ref.ID, "primitive_blast_furnace").setMap(BASIC_BLASTING).setTiers(BRONZE).addFlags(GUI, ITEM).setTile(TileEntityPrimitiveBlastFurnace::new).custom(Textures.STANDARD_MACHINE_MODELS);

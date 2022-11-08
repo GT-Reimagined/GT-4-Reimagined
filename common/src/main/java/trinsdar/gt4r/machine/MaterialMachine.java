@@ -19,7 +19,7 @@ public class MaterialMachine extends Machine<MaterialMachine> {
     public MaterialMachine(String domain, String id, Material material) {
         super(domain, id);
         this.material = material;
-        setItemBlock(tier -> BlockItem.BY_BLOCK.get(AntimatterAPI.get(BlockMachineMaterial.class,this.getId() + "_" + tier.getId(), getDomain())));
+        setItemBlockClass(() -> BlockMachineMaterial.class);
         setBlock((type, tier) -> {
             if (type.getId().contains("_drum")) return new BlockMachineMaterial(type, tier, BlockBehaviour.Properties.of(WRENCH_MATERIAL).strength(1.0f, 10.0f));
             return new BlockMachineMaterial(type, tier);
