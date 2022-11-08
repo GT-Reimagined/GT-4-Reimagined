@@ -12,6 +12,7 @@ import trinsdar.gt4r.GT4Reimagined;
 import trinsdar.gt4r.block.BlockCasing;
 import trinsdar.gt4r.block.BlockMachineMaterial;
 import trinsdar.gt4r.block.BlockMaterialChest;
+import trinsdar.gt4r.block.BlockRedstoneMachine;
 import trinsdar.gt4r.client.MaterialChestRenderer;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.data.Machines;
@@ -37,6 +38,7 @@ public class ClientHandler implements IProxyHandler {
             AntimatterAPI.all(BlockCasing.class, t -> ModelUtils.setRenderLayer(t, RenderType.cutout()));
             AntimatterAPI.all(BlockMachineMaterial.class, b -> ModelUtils.setRenderLayer(b, RenderType.cutout()));
             AntimatterAPI.all(BlockMaterialChest.class, b -> ModelUtils.setRenderLayer(b, RenderType.cutout()));
+            AntimatterAPI.all(BlockRedstoneMachine.class, b -> ModelUtils.setRenderLayer(b, RenderType.cutout()));
         });
         AntimatterAPI.all(BlockMaterialChest.class, b -> muramasa.antimatter.proxy.ClientHandler.registerBlockEntityRenderer(b.getType().getTileType(), MaterialChestRenderer::new));
         copyProgrammerArtIfMissing();
