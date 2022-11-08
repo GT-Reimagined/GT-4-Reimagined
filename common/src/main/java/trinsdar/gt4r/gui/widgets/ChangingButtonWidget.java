@@ -21,7 +21,7 @@ import java.util.function.Consumer;
 
 public class ChangingButtonWidget extends ButtonWidget {
     public ChangingButtonWidget(GuiInstance instance, IGuiElement parent, ResourceLocation res, @Nullable ButtonBody body, @Nullable ButtonOverlay overlay, @Nullable Consumer<ButtonWidget> onPress) {
-        super(instance, parent, res, body, overlay, onPress);
+        super(instance, parent, res, body, overlay, null, onPress);
     }
 
     public static WidgetSupplier build(ResourceLocation res, ButtonBody body, ButtonOverlay overlay, IGuiEvent.IGuiEventFactory ev, int id) {
