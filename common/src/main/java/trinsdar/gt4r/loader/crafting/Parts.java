@@ -33,7 +33,7 @@ public class Parts {
                 new ItemStack(ComputerMonitor, 1), of2('A', PLATE.getMaterialTag(Aluminium), 'G', ForgeCTags.GLASS_PANES, 'g', ForgeCTags.DYES_GREEN, 'R', ForgeCTags.DYES_RED, 'B', ForgeCTags.DYES_BLUE, 'D', DUST.getMaterialTag(Glowstone)), "AgA", "RGB", "ADA");
         provider.addStackRecipe(output, Ref.ID, "conv_module", "parts", "has_battery", provider.hasSafeItem(BatteryRE),
                 new ItemStack(ConveyorModule, 1), of('A', PLATES_IRON_ALUMINIUM, 'G', ForgeCTags.GLASS, 'B', BatteryRE, 'C', CIRCUITS_BASIC), "GGG", "AAA", "CBC");
-        provider.addStackRecipe(output, Ref.ID, "drain_expensive", "parts", "has_battery", provider.hasSafeItem(BatteryRE),
+        provider.addStackRecipe(output, Ref.ID, "drain_expensive", "parts", "has_battery", provider.hasSafeItem(Items.IRON_BARS),
                 new ItemStack(Drain, 1), of('A', PLATES_IRON_ALUMINIUM, 'B', Items.IRON_BARS), "ABA", "B B", "ABA");
         provider.addStackRecipe(output, Ref.ID, "sawblade", "parts", "has_stainless_steel_plate", provider.hasSafeItem(PLATE.getMaterialTag(StainlessSteel)),
                 new ItemStack(DiamondSawBlade, 4), of('A', PLATE.getMaterialTag(StainlessSteel), 'D', DUST.getMaterialTag(Diamond)), "DAD", "A A", "DAD");
