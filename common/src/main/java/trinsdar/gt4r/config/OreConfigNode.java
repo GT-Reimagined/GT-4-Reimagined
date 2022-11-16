@@ -3,6 +3,10 @@ package trinsdar.gt4r.config;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class OreConfigNode {
     public static final Codec<OreConfigNode> ORE_CONFIG_NODE_CODEC = RecordCodecBuilder.create((instance) -> {
         return instance.group(
@@ -22,6 +26,12 @@ public class OreConfigNode {
             return config.secondaryChance;
         }), Codec.BOOL.fieldOf("triangle").forGetter((config) -> {
             return config.triangle;
+        }), Codec.BOOL.fieldOf("biomeBlacklist").forGetter((config) -> {
+            return config.biomeBlacklist;
+        }), Codec.list(Codec.STRING).fieldOf("dimensions").forGetter((config) -> {
+            return config.dimensions;
+        }), Codec.list(Codec.STRING).fieldOf("biomeFilters").forGetter((config) -> {
+            return config.biomeFilters;
         })).apply(instance, OreConfigNode::new);
     });
     private boolean enable, triangle;
@@ -29,7 +39,11 @@ public class OreConfigNode {
     private String secondary;
     private float secondaryChance;
 
-    public OreConfigNode(boolean enable, int minY, int maxY, int weight, int size, String secondary, float secondaryChance, boolean triangle) {
+    private List<String> biomeFilters;
+    private List<String> dimensions;
+    private boolean biomeBlacklist = false;
+
+    public OreConfigNode(boolean enable, int minY, int maxY, int weight, int size, String secondary, float secondaryChance, boolean triangle, boolean biomeBlacklist, List<String> dimensions, String... biomeFilters) {
         this.enable = enable;
         this.minY = minY;
         this.maxY = maxY;
@@ -38,6 +52,23 @@ public class OreConfigNode {
         this.secondary = secondary;
         this.secondaryChance = secondaryChance;
         this.triangle = triangle;
+        this.biomeFilters = biomeFilters.length > 0 ? new ArrayList<>(Arrays.asList(biomeFilters)) : new ArrayList<>();
+        this.biomeBlacklist = biomeBlacklist;
+        this.dimensions = dimensions;
+    }
+
+    private OreConfigNode(boolean enable, int minY, int maxY, int weight, int size, String secondary, float secondaryChance, boolean triangle, boolean biomeBlacklist, List<String> dimensions, List<String> biomeFilters) {
+        this.enable = enable;
+        this.minY = minY;
+        this.maxY = maxY;
+        this.weight = weight;
+        this.size = size;
+        this.secondary = secondary;
+        this.secondaryChance = secondaryChance;
+        this.triangle = triangle;
+        this.biomeFilters = biomeFilters;
+        this.biomeBlacklist = biomeBlacklist;
+        this.dimensions = dimensions;
     }
 
     public boolean isEnabled() {
@@ -70,6 +101,18 @@ public class OreConfigNode {
 
     public boolean isTriangle() {
         return triangle;
+    }
+
+    public boolean isBiomeBlackListed() {
+        return biomeBlacklist;
+    }
+
+    public List<String> getDimensions() {
+        return dimensions;
+    }
+
+    public List<String> getBiomeFilters() {
+        return biomeFilters;
     }
 
     public void setEnabled(boolean enable) {
