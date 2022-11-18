@@ -29,6 +29,7 @@ import java.util.stream.Collectors;
 import static com.google.common.collect.ImmutableMap.of;
 import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.recipe.RecipeBuilders.DUST_BUILDER;
+import static trinsdar.gt4r.data.GT4RMaterialTags.*;
 import static trinsdar.gt4r.data.Materials.*;
 
 //TODO EXCLUDED FROM COMPILE
@@ -75,40 +76,6 @@ public class MaterialRecipeLoader {
                 provider.addItemRecipe(output, Ref.ID, m.getId() + "_ingot", "ingots", "has_nugget", provider.hasSafeItem(NUGGET.getMaterialTag(m)), INGOT.get(m), ImmutableMap.of('I', NUGGET.getMaterialTag(m)), "III", "III", "III");
                 provider.shapeless(output,"nugget_" + m.getId() + "_from_ingot", "ingots", "has_ingot", provider.hasSafeItem(INGOT.getMaterialTag(m)), NUGGET.get(m, 9), INGOT.getMaterialTag(m));
             }
-        });
-        /*DUST.all().forEach(m -> {
-            provider.addItemRecipe(output, Ref.ID, m.getId() + "_dust", "dusts", "has_tiny_dust", provider.hasSafeItem(DUST_TINY.getMaterialTag(m)), DUST.get(m), ImmutableMap.of('I', DUST_TINY.getMaterialTag(m)), "III", "III", "III");
-            provider.addItemRecipe(output, Ref.ID, m.getId() + "_dust2", "dusts", "has_small_dust", provider.hasSafeItem(DUST_SMALL.getMaterialTag(m)), DUST.get(m), ImmutableMap.of('I', DUST_SMALL.getMaterialTag(m)), "II", "II");
-            provider.addStackRecipe(output, Ref.ID,"tiny_dust_" + m.getId() + "_from_dust", "dusts", "has_dust", provider.hasSafeItem(DUST.getMaterialTag(m)), DUST_TINY.get(m, 9), ImmutableMap.of('I', DUST.getMaterialTag(m)), "I ");
-            provider.addStackRecipe(output, Ref.ID,"small_dust_" + m.getId() + "_from_dust", "dusts", "has_dust", provider.hasSafeItem(DUST.getMaterialTag(m)), DUST_SMALL.get(m, 4), ImmutableMap.of('I', DUST.getMaterialTag(m)), " I");
-        });*/
-        ROD.all().forEach(m -> {
-            if (m.has(INGOT) || m.has(GEM)){
-                TagKey<?> input = m.has(GEM) ? GEM.getMaterialTag(m) : INGOT.getMaterialTag(m);
-                provider.shapeless(output, m.getId() + "_rod", "rods", "has_file", provider.hasSafeItem(FILE.getTag()), ROD.get(m, craftingMultiplier), input, FILE.getTag());
-            }
-        });
-        RING.all().forEach(m -> {
-            if (m.has(ROD)){
-                provider.addStackRecipe(output, Ref.ID, m.getId() + "_ring", "rings", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), RING.get(m, craftingMultiplier),
-                        ImmutableMap.of('H', HAMMER.getTag(), 'R', ROD.getMaterialTag(m)), "H ", " R");
-            }
-        });
-        GEAR.all().forEach(m -> {
-            if ((m.has(PLATE) || m.has(GEM)) && m.has(ROD)){
-                TagKey<?> plate = m.has(PLATE) ? PLATE.getMaterialTag(m) : GEM.getMaterialTag(m);
-                provider.addItemRecipe(output, Ref.ID, m.getId() + "_gear", "gears", "has_wrench", provider.hasSafeItem(WRENCH.getTag()), GEAR.get(m), ImmutableMap.of('P', plate, 'R', ROD.getMaterialTag(m), 'W', WRENCH.getTag()), "RPR", "PWP", "RPR");
-            }
-        });
-        BOLT.all().forEach(m -> {
-            if (m.has(SCREW)){
-                if (GT4RConfig.GAMEPLAY.LOSSY_PART_CRAFTING){
-                    provider.addItemRecipe(output, Ref.ID, m.getId() + "_screw", "screws", "has_file", provider.hasSafeItem(FILE.getTag()), SCREW.get(m), ImmutableMap.of('F', FILE.getTag(), 'B', BOLT.getMaterialTag(m)), "FB", "B ");
-                } else {
-                    provider.shapeless(output, m.getId() + "_screw", "screws", "has_file", provider.hasSafeItem(FILE.getTag()), SCREW.get(m, 1), FILE.getTag(), BOLT.getMaterialTag(m));
-                }
-            }
-            provider.addStackRecipe(output, Ref.ID, m.getId() + "_bolt", "bolts", "has_saw", provider.hasSafeItem(SAW.getTag()), BOLT.get(m, craftingMultiplier * 2), ImmutableMap.of('S', SAW.getTag(), 'R', ROD.getMaterialTag(m)), "S ", " R");
         });
         DRILLBIT.all().forEach(m -> {
             if (m.has(PLATE) || m.has(GEM)){
@@ -186,21 +153,43 @@ public class MaterialRecipeLoader {
                 SingleItemRecipeBuilder.stonecutting(Ingredient.of(c.getBlock("smooth")), c.getBlock("smooth_wall")).unlockedBy("has_smooth", provider.hasSafeItem(c.getBlock("smooth"))).save(output, m.getId() + "_smooth_wall");
             }
         });
-        provider.addToolRecipe(DUST_BUILDER.get(GT4RMaterialTags.PICKAXE_HEAD.getId()), output, Ref.ANTIMATTER, "pickaxe_head", "antimatter_dusts",
-                "has_wrench", in, GT4RMaterialTags.PICKAXE_HEAD.all().stream().filter(t -> MaterialTags.TOOLS.getToolData(t).toolTypes().contains(PICKAXE)).map(t -> GT4RMaterialTags.PICKAXE_HEAD.get(t,1)).collect(Collectors.toList()), of('P', PropertyIngredient.builder("primary").types(PLATE, GEM).tags(GT4RMaterialTags.PICKAXE_HEAD).tool(PICKAXE, true).build(), 'I', PropertyIngredient.builder("primary").types(INGOT, GEM).tags(GT4RMaterialTags.PICKAXE_HEAD).tool(PICKAXE, true).build(), 'H', HAMMER.getTag(), 'F', FILE.getTag()), "PII", "F H");
-        provider.addToolRecipe(DUST_BUILDER.get(GT4RMaterialTags.AXE_HEAD.getId()), output, Ref.ANTIMATTER, "axe_head", "antimatter_dusts",
-                "has_wrench", in, GT4RMaterialTags.AXE_HEAD.all().stream().filter(t -> MaterialTags.TOOLS.getToolData(t).toolTypes().contains(AXE)).map(t -> GT4RMaterialTags.AXE_HEAD.get(t,1)).collect(Collectors.toList()), of('P', PropertyIngredient.builder("primary").types(PLATE, GEM).tags(GT4RMaterialTags.AXE_HEAD).tool(AXE, true).build(), 'I', PropertyIngredient.builder("primary").types(INGOT, GEM).tags(GT4RMaterialTags.AXE_HEAD).tool(AXE, true).build(), 'H', HAMMER.getTag(), 'F', FILE.getTag()), "PIH", "P  ", "F  ");
-        provider.addToolRecipe(DUST_BUILDER.get(GT4RMaterialTags.SHOVEL_HEAD.getId()), output, Ref.ANTIMATTER, "shovel_head", "antimatter_dusts",
-                "has_wrench", in, GT4RMaterialTags.SHOVEL_HEAD.all().stream().filter(t -> MaterialTags.TOOLS.getToolData(t).toolTypes().contains(SHOVEL)).map(t -> GT4RMaterialTags.SHOVEL_HEAD.get(t,1)).collect(Collectors.toList()), of('P', PropertyIngredient.builder("primary").types(PLATE, GEM).tags(GT4RMaterialTags.SHOVEL_HEAD).tool(SHOVEL, true).build(), 'H', HAMMER.getTag(), 'F', FILE.getTag()), "FPH");
-        provider.addToolRecipe(DUST_BUILDER.get(GT4RMaterialTags.SWORD_HEAD.getId()), output, Ref.ANTIMATTER, "sword_head", "antimatter_dusts",
-                "has_wrench", in, GT4RMaterialTags.SWORD_HEAD.all().stream().filter(t -> MaterialTags.TOOLS.getToolData(t).toolTypes().contains(SWORD)).map(t -> GT4RMaterialTags.SWORD_HEAD.get(t,1)).collect(Collectors.toList()), of('P', PropertyIngredient.builder("primary").types(PLATE, GEM).tags(GT4RMaterialTags.SWORD_HEAD).tool(SWORD, true).build(), 'H', HAMMER.getTag(), 'F', FILE.getTag()), " P ", "FPH");
-        provider.addToolRecipe(DUST_BUILDER.get(GT4RMaterialTags.HOE_HEAD.getId()), output, Ref.ANTIMATTER, "hoe_head", "antimatter_dusts",
-                "has_wrench", in, GT4RMaterialTags.HOE_HEAD.all().stream().filter(t -> MaterialTags.TOOLS.getToolData(t).toolTypes().contains(HOE)).map(t -> GT4RMaterialTags.HOE_HEAD.get(t,1)).collect(Collectors.toList()), of('P', PropertyIngredient.builder("primary").types(PLATE, GEM).tags(GT4RMaterialTags.HOE_HEAD).tool(HOE, true).build(), 'I', PropertyIngredient.builder("primary").types(INGOT, GEM).tags(GT4RMaterialTags.HOE_HEAD).tool(HOE, true).build(), 'H', HAMMER.getTag(), 'F', FILE.getTag()), "PIH", "F  ");
-        provider.addToolRecipe(DUST_BUILDER.get(GT4RMaterialTags.HAMMER_HEAD.getId()), output, Ref.ANTIMATTER, "hammer_head", "antimatter_dusts",
-                "has_wrench", in, GT4RMaterialTags.HAMMER_HEAD.all().stream().filter(t -> MaterialTags.TOOLS.getToolData(t).toolTypes().contains(HAMMER)).map(t -> GT4RMaterialTags.HAMMER_HEAD.get(t,1)).collect(Collectors.toList()), of('I', PropertyIngredient.builder("primary").types(INGOT, GEM).tags(GT4RMaterialTags.HAMMER_HEAD).tool(HAMMER, true).build(), 'H', HAMMER.getTag()), "II ", "IIH", "II ");
-        provider.addToolRecipe(DUST_BUILDER.get(GT4RMaterialTags.SAW_HEAD.getId()), output, Ref.ANTIMATTER, "saw_head", "antimatter_dusts",
-                "has_wrench", in, GT4RMaterialTags.SAW_HEAD.all().stream().filter(t -> MaterialTags.TOOLS.getToolData(t).toolTypes().contains(SAW)).map(t -> GT4RMaterialTags.SAW_HEAD.get(t,1)).collect(Collectors.toList()), of('P', PropertyIngredient.builder("primary").types(PLATE, GEM).tags(GT4RMaterialTags.SAW_HEAD).tool(SAW, true).build(), 'H', HAMMER.getTag(), 'F', FILE.getTag()), "PP", "FH");
-        provider.addToolRecipe(DUST_BUILDER.get(GT4RMaterialTags.FILE_HEAD.getId()), output, Ref.ANTIMATTER, "file_head", "antimatter_dusts",
-                "has_wrench", in, GT4RMaterialTags.FILE_HEAD.all().stream().filter(t -> MaterialTags.TOOLS.getToolData(t).toolTypes().contains(FILE)).map(t -> GT4RMaterialTags.FILE_HEAD.get(t,1)).collect(Collectors.toList()), of('P', PropertyIngredient.builder("primary").types(PLATE, GEM).tags(GT4RMaterialTags.FILE_HEAD).tool(FILE, true).build(), 'H', HAMMER.getTag(), 'F', FILE.getTag()), "FPH", " P ");
+        MaterialTags.TOOLS.all().forEach(m -> {
+            if (!m.has(INGOT) && !m.has(GEM)) return;
+            TagKey<Item> plate = m.has(PLATE) ? PLATE.getMaterialTag(m) : m.has(INGOT) ? INGOT.getMaterialTag(m) : GEM.getMaterialTag(m);
+            TagKey<Item> ingotGem = m.has(INGOT) ? INGOT.getMaterialTag(m) : GEM.getMaterialTag(m);
+            if (m.has(PICKAXE_HEAD)) {
+                provider.addStackRecipe(output, Ref.ANTIMATTER, m.getId() + "_pickaxe_head", "antimatter_dusts",
+                        "has_wrench", in, PICKAXE_HEAD.get(m,1), of('P', plate, 'I', ingotGem, 'H', HAMMER.getTag(), 'F', FILE.getTag()), "PII", "F H");
+            }
+            if (m.has(AXE_HEAD)){
+                provider.addStackRecipe(output, Ref.ANTIMATTER, m.getId() + "_axe_head", "antimatter_dusts",
+                        "has_wrench", in, AXE_HEAD.get(m,1), of('P', plate, 'I', ingotGem, 'H', HAMMER.getTag(), 'F', FILE.getTag()), "PIH", "P  ", "F  ");
+            }
+            if (m.has(SHOVEL_HEAD)){
+                provider.addStackRecipe(output, Ref.ANTIMATTER, m.getId() + "_shovel_head", "antimatter_dusts",
+                        "has_wrench", in, SHOVEL_HEAD.get(m,1), of('P', plate, 'H', HAMMER.getTag(), 'F', FILE.getTag()), "FPH");
+            }
+            if (m.has(SWORD_HEAD)){
+                provider.addStackRecipe(output, Ref.ANTIMATTER, m.getId() + "_sword_head", "antimatter_dusts",
+                        "has_wrench", in, SWORD_HEAD.get(m,1), of('P', plate, 'H', HAMMER.getTag(), 'F', FILE.getTag()), " P ", "FPH");
+            }
+            if (m.has(HOE_HEAD)){
+                provider.addStackRecipe(output, Ref.ANTIMATTER, m.getId() + "_hoe_head", "antimatter_dusts",
+                        "has_wrench", in, HOE_HEAD.get(m,1), of('P', plate, 'I', ingotGem, 'H', HAMMER.getTag(), 'F', FILE.getTag()), "PIH", "F  ");
+            }
+            if (m.has(HAMMER_HEAD)){
+                provider.addStackRecipe(output, Ref.ANTIMATTER, m.getId() + "_hammer_head", "antimatter_dusts",
+                        "has_wrench", in, HAMMER_HEAD.get(m,1), of('I', ingotGem, 'H', HAMMER.getTag()), "II ", "IIH", "II ");
+            }
+            if (m.has(SAW_HEAD)){
+                provider.addStackRecipe(output, Ref.ANTIMATTER, m.getId() + "_saw_head", "antimatter_dusts",
+                        "has_wrench", in, SAW_HEAD.get(m,1), of('P', plate, 'H', HAMMER.getTag(), 'F', FILE.getTag()), "PP", "FH");
+            }
+            if (m.has(FILE_HEAD)){
+                provider.addStackRecipe(output, Ref.ANTIMATTER, m.getId() + "_file_head", "antimatter_dusts",
+                        "has_wrench", in, FILE_HEAD.get(m,1), of('P', plate, 'H', HAMMER.getTag(), 'F', FILE.getTag()), "FPH", " P ");
+            }
+        });
+
     }
 }
