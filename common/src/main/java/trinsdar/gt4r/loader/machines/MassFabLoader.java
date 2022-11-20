@@ -6,7 +6,7 @@ import trinsdar.gt4r.data.RecipeMaps;
 
 public class MassFabLoader {
     public static void init(){
-        RecipeMaps.MASS_FABRICATING.RB().fi(Materials.UUAmplifier.getLiquid(1)).fo(Materials.UUMatter.getLiquid(1)).add(803, 256);
-        RecipeMaps.MASS_FABRICATING.RB().ii(GT4RData.INT_CIRCUITS.get(1)).fo(Materials.UUMatter.getLiquid(1)).add(3125, 256);
+        RecipeMaps.MASS_FABRICATING.RB().fi(Materials.UUAmplifier.getLiquid(1)).fo(Materials.UUMatter.getLiquid(1)).add("uumatter_1",803, 256);
+        RecipeMaps.MASS_FABRICATING.RB().ii(GT4RData.INT_CIRCUITS.get(1)).fo(Materials.UUMatter.getLiquid(1)).add("uumatter",3125, 256);
     }
 }

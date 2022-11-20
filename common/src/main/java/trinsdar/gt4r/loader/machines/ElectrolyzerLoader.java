@@ -34,11 +34,11 @@ public class ElectrolyzerLoader {
             add(m, power, (int) m.getMass() * count);
         });
 
-        ELECTROLYZING.RB().fi(Water.getLiquid(3000)).fo(Hydrogen.getGas(2000), Oxygen.getGas(1000)).add(2000, 30);
-        ELECTROLYZING.RB().ii(RecipeIngredient.of(new ItemStack(Items.BONE_MEAL, 3))).io(DUST.get(Calcium, 1)).add(24, 106);
-        ELECTROLYZING.RB().ii(RecipeIngredient.of(new ItemStack(Blocks.SAND, 8))).io(DUST.get(SiliconDioxide, 1)).add(500, 25);
-        ELECTROLYZING.RB().ii(RecipeIngredient.of(new ItemStack(Blocks.RED_SAND, 8))).io(DUST.get(SiliconDioxide, 1), DUST_TINY.get(Iron, 1)).add(500, 25);
-        ELECTROLYZING.RB().ii(RecipeIngredient.of(DUST.get(Diamond, 1))).io(DUST.get(Carbon, 64), DUST.get(Carbon, 64)).add(1536,60);
+        ELECTROLYZING.RB().fi(Water.getLiquid(3000)).fo(Hydrogen.getGas(2000), Oxygen.getGas(1000)).add("water",2000, 30);
+        ELECTROLYZING.RB().ii(RecipeIngredient.of(new ItemStack(Items.BONE_MEAL, 3))).io(DUST.get(Calcium, 1)).add("bone_meal",24, 106);
+        ELECTROLYZING.RB().ii(RecipeIngredient.of(new ItemStack(Blocks.SAND, 8))).io(DUST.get(SiliconDioxide, 1)).add("sand",500, 25);
+        ELECTROLYZING.RB().ii(RecipeIngredient.of(new ItemStack(Blocks.RED_SAND, 8))).io(DUST.get(SiliconDioxide, 1), DUST_TINY.get(Iron, 1)).add("red_sand",500, 25);
+        ELECTROLYZING.RB().ii(RecipeIngredient.of(DUST.get(Diamond, 1))).io(DUST.get(Carbon, 64), DUST.get(Carbon, 64)).add("diamond_dust",1536,60);
         add(Steel,50, 60, 2600);
         add(DarkAsh, 1, 30, 24);
         add(Coal, 1, 30, 24);
@@ -66,10 +66,10 @@ public class ElectrolyzerLoader {
         List<MaterialStack> stacks = dust.getProcessInto();
         List<FluidStack> fluidStacks = stacks.stream().filter(t -> (t.m.has(LIQUID) || t.m.has(GAS)) && !t.m.has(DUST)).map(t -> {
             return t.m.has(LIQUID) ? t.m.getLiquid(t.s * 1000) : t.m.getGas(t.s * 1000);
-        }).collect(Collectors.toList());
-        List<ItemStack> itemStacks = dust.getProcessInto().stream().filter(t -> t.m.has(DUST)).map(t -> new ItemStack(DUST.get(t.m), t.s))
-                .collect(Collectors.toList());
+        }).toList();
+        List<ItemStack> itemStacks = dust.getProcessInto().stream().filter(t -> t.m.has(DUST)).map(t -> new ItemStack(DUST.get(t.m), t.s)).toList();
         RecipeBuilder rb = ELECTROLYZING.RB();
+        String suffix = dust.has(LIQUID) ? "_liquid" : dust.has(GAS) ? "_gas" :"_dust";
         if ((dust.has(LIQUID) || dust.has(GAS)) && !dust.has(DUST)){
             rb.fi(getFluid(dust,count * 1000));
         } else {
@@ -77,7 +77,7 @@ public class ElectrolyzerLoader {
         }
         if (!itemStacks.isEmpty()) rb.io(itemStacks.toArray(new ItemStack[0]));
         if (!fluidStacks.isEmpty()) rb.fo(fluidStacks.toArray(new FluidStack[0]));
-        rb.add(duration, euT);
+        rb.add(dust.getId() + suffix, duration, euT);
     }
 
     private static FluidStack getFluid(Material mat, int amount){

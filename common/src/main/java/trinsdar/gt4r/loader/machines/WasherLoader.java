@@ -16,7 +16,7 @@ public class WasherLoader {
 
             Material aOreByProduct1 = m.getByProducts().size() >= 1 ? m.getByProducts().get(0) : MaterialTags.MACERATE_INTO.getMapping(m);
             //Material aOreByProduct2 = m.getByProducts().size() >= 2 ? m.getByProducts().get(1) : aOreByProduct1;
-            ORE_WASHING.RB().fi(Water.getLiquid(1000)).ii(of(CRUSHED.get(m,1))).io(CRUSHED_PURIFIED.get(m,1), DUST_TINY.get(aOreByProduct1,1), stoneDust).add(200, 24);
+            ORE_WASHING.RB().fi(Water.getLiquid(1000)).ii(of(CRUSHED.get(m,1))).io(CRUSHED_PURIFIED.get(m,1), DUST_TINY.get(aOreByProduct1,1), stoneDust).add(m.getId() + "_crushed_ore",200, 24);
         });
     }
 }

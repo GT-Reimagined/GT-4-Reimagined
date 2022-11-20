@@ -28,9 +28,9 @@ public class FuelBurnHandler {
                         power = 32;
                     }
                     if (mat.has(SEMIFLUID)){
-                        SEMIFLUID_FUELS.RB().fi(mat.getLiquid(1)).add(ticks, power);
+                        SEMIFLUID_FUELS.RB().fi(mat.getLiquid(1)).add(mat.getId(), ticks, power);
                     } else {
-                        DIESEL_FUELS.RB().fi(mat.getLiquid(1)).add(ticks, power);
+                        DIESEL_FUELS.RB().fi(mat.getLiquid(1)).add(mat.getId(), ticks, power);
                     }
 
                 }
@@ -40,13 +40,13 @@ public class FuelBurnHandler {
                         ticks = 1;
                         power = MaterialTags.FUEL_POWER.getInt(mat);
                     }
-                    GAS_FUELS.RB().fi(mat.getGas(1)).add(ticks, power);
+                    GAS_FUELS.RB().fi(mat.getGas(1)).add(mat.getId(), ticks, power);
                     //LARGE_GAS_FUELS.RB().fi(mat.getGas(20)).add(1, MaterialTags.FUEL_POWER.getInt(mat) * 20L);
                 }
             }
         });
-        STEAM_FUELS.RB().fi(Steam.getGas(32)).add(1,16);
-        LARGE_STEAM_FUELS.RB().fi(Steam.getGas(1600)).fo(DistilledWater.getLiquid(10)).add(1, 800);
+        STEAM_FUELS.RB().fi(Steam.getGas(32)).add("steam",1,16);
+        LARGE_STEAM_FUELS.RB().fi(Steam.getGas(1600)).fo(DistilledWater.getLiquid(10)).add("steam",1, 800);
 
     }
 }
