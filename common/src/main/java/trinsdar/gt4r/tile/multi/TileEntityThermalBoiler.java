@@ -4,7 +4,7 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import muramasa.antimatter.capability.machine.MachineRecipeHandler;
 import muramasa.antimatter.machine.event.MachineEvent;
 import muramasa.antimatter.machine.types.Machine;
-import muramasa.antimatter.recipe.Recipe;
+import muramasa.antimatter.recipe.IRecipe;
 import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -68,7 +68,7 @@ public class TileEntityThermalBoiler extends TileEntityMultiMachine<TileEntityTh
                 ticker = nbt.getInt("ticker");
             }
 
-            public ItemStack[] getOutputItems(Recipe r, boolean chance) {
+            public ItemStack[] getOutputItems(IRecipe r, boolean chance) {
                 if (r.hasOutputItems()) {
                     ItemStack[] outputs = r.getOutputItems(false).clone();
                     if (r.getChances() != null) {

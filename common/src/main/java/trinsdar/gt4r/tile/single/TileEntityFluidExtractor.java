@@ -3,7 +3,7 @@ package trinsdar.gt4r.tile.single;
 import muramasa.antimatter.capability.machine.MachineRecipeHandler;
 import muramasa.antimatter.machine.event.IMachineEvent;
 import muramasa.antimatter.machine.types.Machine;
-import muramasa.antimatter.recipe.Recipe;
+import muramasa.antimatter.recipe.IRecipe;
 import muramasa.antimatter.tile.TileEntityMachine;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
@@ -24,7 +24,7 @@ public class TileEntityFluidExtractor extends TileEntityMachine<TileEntityFluidE
                     maxHeat = 750;
                     ItemStack stack = (ItemStack) data[0];
                     if (!stack.isEmpty()){
-                        Recipe coilRecipe = RecipeMaps.FLUID_EXTRACTOR_COILS.find(new ItemStack[]{stack}, new FluidStack[]{}, tile.tier, r -> r.getSpecialValue() > 0);
+                        IRecipe coilRecipe = RecipeMaps.FLUID_EXTRACTOR_COILS.find(new ItemStack[]{stack}, new FluidStack[]{}, tile.tier, r -> r.getSpecialValue() > 0);
                         if (coilRecipe != null){
                             maxHeat += (coilRecipe.getSpecialValue() * stack.getCount());
                         }

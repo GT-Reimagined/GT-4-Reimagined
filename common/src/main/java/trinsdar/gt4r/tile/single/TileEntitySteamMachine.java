@@ -3,7 +3,7 @@ package trinsdar.gt4r.tile.single;
 import muramasa.antimatter.capability.machine.MachineRecipeHandler;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.Machine;
-import muramasa.antimatter.recipe.Recipe;
+import muramasa.antimatter.recipe.IRecipe;
 import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.util.TagUtils;
 import net.minecraft.core.BlockPos;
@@ -45,7 +45,7 @@ public class TileEntitySteamMachine extends TileEntityMachine<TileEntitySteamMac
         }
         //Allow up to 16 .
         @Override
-        protected boolean validateRecipe(Recipe r) {
+        protected boolean validateRecipe(IRecipe r) {
             return r.getPower() <= Tier.LV.getVoltage();
         }
 

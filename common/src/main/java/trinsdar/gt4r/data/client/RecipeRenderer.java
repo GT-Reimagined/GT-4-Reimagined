@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import muramasa.antimatter.integration.jeirei.renderer.IRecipeInfoRenderer;
 import muramasa.antimatter.integration.jeirei.renderer.InfoRenderers;
 import muramasa.antimatter.recipe.IRecipe;
-import muramasa.antimatter.recipe.Recipe;
 import net.minecraft.client.gui.Font;
 import trinsdar.gt4r.data.RecipeMaps;
 
