@@ -1,6 +1,7 @@
 package trinsdar.gt4r.loader.machines;
 
 import muramasa.antimatter.AntimatterAPI;
+import muramasa.antimatter.AntimatterConfig;
 import muramasa.antimatter.ore.CobbleStoneType;
 import muramasa.antimatter.ore.StoneType;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
@@ -38,8 +39,8 @@ public class ForgeHammerLoader {
             }
         });
         PLATE.all().stream().filter(m -> m.has(INGOT) && !m.has(RUBBERTOOLS)).forEach(m -> {
-            int in = GT4RConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 3 : 1;
-            int out = GT4RConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 2 : 1;
+            int in = AntimatterConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 3 : 1;
+            int out = AntimatterConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 2 : 1;
             HAMMERING.RB().ii(INGOT.getMaterialIngredient(m, in)).io(PLATE.get(m, out)).add(m.getMass(), 16);
         });
         AntimatterAPI.all(StoneType.class, Ref.ID, s -> {

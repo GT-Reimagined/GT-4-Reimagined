@@ -3,6 +3,7 @@ package trinsdar.gt4r.loader.crafting;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
 import muramasa.antimatter.AntimatterAPI;
+import muramasa.antimatter.AntimatterConfig;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.pipe.PipeSize;
 import muramasa.antimatter.pipe.types.Cable;
@@ -25,7 +26,7 @@ import static trinsdar.gt4r.data.Materials.Rubber;
 public class ToolCraftingTableRecipes {
     @SuppressWarnings("unchecked")
     public static void loadRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider) {
-        int wireAmount = GT4RConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 1 : 2;
+        int wireAmount = AntimatterConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 1 : 2;
         AntimatterAPI.all(Wire.class, wire -> {
             Cable<?> cable = AntimatterAPI.get(Cable.class, "cable" + "_" + wire.getMaterial().getId());
             ImmutableSet<PipeSize> sizes = wire.getSizes();
@@ -59,22 +60,6 @@ public class ToolCraftingTableRecipes {
                         new ItemStack(wires.get(VTINY), wireAmount),
                         WIRE_CUTTER.getTag(), PLATE.getMaterialTag(wire.getMaterial()));
             }
-        });
-
-        INGOT.all().stream().filter(p -> p.has(PLATE) && !p.has(RUBBERTOOLS)).forEach(p -> {
-            if (GT4RConfig.GAMEPLAY.LOSSY_PART_CRAFTING){
-                provider.shapeless(output, "ingothammer", "plate", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), new ItemStack(PLATE.get(p), 1),
-                        HAMMER.getTag(), INGOT.getMaterialTag(p), INGOT.getMaterialTag(p));
-            } else {
-                provider.shapeless(output, "ingothammer", "plate", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), new ItemStack(PLATE.get(p), 1),
-                        HAMMER.getTag(), INGOT.getMaterialTag(p));
-            }
-
-        });
-        DUST.all().stream().filter(p -> p.has(GEM) || p.has(INGOT)).forEach(p -> {
-            String gemIngot = p.has(GEM) ? "gems" : "ingots";
-            provider.shapeless(output, "dust_" + p.getId() + "_from_id", "mortar_uses", "has_mortar", provider.hasSafeItem(MORTAR.getTag()),
-                    DUST.get(p, 1), MORTAR.getTag(), TagUtils.getForgelikeItemTag(gemIngot+ "/" + p.getId()));
         });
     }
 

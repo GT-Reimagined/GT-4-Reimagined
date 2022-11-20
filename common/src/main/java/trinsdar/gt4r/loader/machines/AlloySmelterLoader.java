@@ -1,5 +1,6 @@
 package trinsdar.gt4r.loader.machines;
 
+import muramasa.antimatter.AntimatterConfig;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialTags;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
@@ -30,7 +31,7 @@ public class AlloySmelterLoader {
         //TODO compat for bluepower
         //ALLOY_SMELTING.RB().ii(DUST.getMaterialIngredient(Nikolite, 4), DUST.getMaterialIngredient(Copper)).io(INGOT.get(BlueAlloy, 1)).add(50, 16);
         //ALLOY_SMELTING.RB().ii(DUST.getMaterialIngredient(Nikolite, 4), INGOT.getMaterialIngredient(Copper)).io(INGOT.get(BlueAlloy, 1)).add(50, 16);
-        int ingotCount = GT4RConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 2 : 1;
+        int ingotCount = AntimatterConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 2 : 1;
         PLATE.all().forEach(m -> {
             if (!m.has(MaterialTags.NEEDS_BLAST_FURNACE) && m.has(INGOT)){
                 int euTick = m.has(RUBBERTOOLS) ? 16 : 32;

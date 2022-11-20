@@ -45,7 +45,6 @@ public class MaterialRecipeLoader {
 
     public static void loadRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider) {
         final CriterionTriggerInstance in = provider.hasSafeItem(WRENCH.getTag());
-        int craftingMultiplier = GT4RConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 1 : 2;
         if (AntimatterAPI.isModLoaded(Ref.MOD_BLUEPOWER)){
             provider.shapeless(output, "amethyst_gem_convert", "gems", "has_gem", provider.hasSafeItem(GEM.getMaterialTag(Amethyst)), GEM.get(Amethyst, 1), AntimatterPlatformUtils.getItemFromID(new ResourceLocation(Ref.MOD_BLUEPOWER, "amethyst_gem")));
         }

@@ -30,7 +30,7 @@ public class GT4RConfig {
 
         /** @see CommonConfig **/
 
-        public boolean LOSSY_PART_CRAFTING, REMOVE_VANILLA_CHARCOAL_RECIPE, HARDER_WOOD, HARDER_VANILLA_RECIPES, SULFUR_TORCH;
+        public boolean REMOVE_VANILLA_CHARCOAL_RECIPE, HARDER_WOOD, HARDER_VANILLA_RECIPES, SULFUR_TORCH;
 
     }
 
@@ -67,10 +67,6 @@ public class GT4RConfig {
 
             builder.push("Gameplay");
 
-            LOSSY_PART_CRAFTING = builder.comment("Whether or not plates cost more in the forge hammer and in the crafting table and other parts like rods give less in the crafting table - Default : false")
-                    .translation(Ref.ID + ".config.lossy_part_crafting")
-                    .define("LOSSY_PART_CRAFTING", false);
-
             HARDER_VANILLA_RECIPES = builder.comment("Enables Harder vanilla crafting recipes for things like hoppers and armor - Default: true")
                     .translation(Ref.ID + ".config.harder_vanilla_recipes")
                     .define("HARDER_VANILLA_RECIPES", true);
@@ -96,7 +92,6 @@ public class GT4RConfig {
         WORLD.REPLACEMENT_VANILLA_ORE_GEN = COMMON_CONFIG.REPLACEMENT_VANILLA_ORE_GEN.get();
         WORLD.GENERATE_STONE_LAYERS = COMMON_CONFIG.GENERATE_STONE_LAYERS.get();
 
-        GAMEPLAY.LOSSY_PART_CRAFTING = COMMON_CONFIG.LOSSY_PART_CRAFTING.get();
         GAMEPLAY.HARDER_VANILLA_RECIPES = COMMON_CONFIG.HARDER_VANILLA_RECIPES.get();
         GAMEPLAY.HARDER_WOOD = COMMON_CONFIG.HARDER_WOOD.get();
         GAMEPLAY.REMOVE_VANILLA_CHARCOAL_RECIPE = COMMON_CONFIG.REMOVE_VANILLA_CHARCOAL_RECIPE.get();
