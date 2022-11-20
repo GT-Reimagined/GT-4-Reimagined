@@ -9,7 +9,6 @@ import muramasa.antimatter.util.TagUtils;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import trinsdar.gt4r.GT4RConfig;
 import trinsdar.gt4r.Ref;
 import muramasa.antimatter.data.ForgeCTags;
 

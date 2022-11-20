@@ -3,7 +3,6 @@ package trinsdar.gt4r.loader.machines;
 import muramasa.antimatter.fluid.AntimatterFluidUtils;
 import muramasa.antimatter.util.AntimatterPlatformUtils;
 import muramasa.antimatter.util.Utils;
-import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;

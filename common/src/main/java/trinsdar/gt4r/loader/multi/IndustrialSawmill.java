@@ -7,11 +7,9 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.tags.Tag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.fluids.FluidStack;
-import trinsdar.gt4r.data.GT4RData;
 
 import static muramasa.antimatter.Data.DUST;
 import static muramasa.antimatter.Data.Wood;

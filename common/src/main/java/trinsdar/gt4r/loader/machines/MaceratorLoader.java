@@ -2,7 +2,6 @@ package trinsdar.gt4r.loader.machines;
 
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.material.Material;
-import muramasa.antimatter.material.MaterialTags;
 import muramasa.antimatter.ore.BlockOre;
 import muramasa.antimatter.ore.CobbleStoneType;
 import muramasa.antimatter.ore.StoneType;
@@ -18,11 +17,9 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.tags.Tag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.resources.ResourceLocation;
 import trinsdar.gt4r.Ref;
-import trinsdar.gt4r.data.GT4RData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +37,6 @@ import static trinsdar.gt4r.data.Materials.Brick;
 import static trinsdar.gt4r.data.Materials.Clay;
 import static trinsdar.gt4r.data.Materials.Limestone;
 import static trinsdar.gt4r.data.Materials.Scoria;
-import static trinsdar.gt4r.data.RecipeMaps.EXTRUDING;
-import static trinsdar.gt4r.data.RecipeMaps.INDUSTRIAL_GRINDING;
 import static trinsdar.gt4r.data.RecipeMaps.MACERATING;
 import static trinsdar.gt4r.data.RecipeMaps.SIFTING;
 
