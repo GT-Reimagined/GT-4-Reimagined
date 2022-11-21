@@ -79,7 +79,8 @@ public class Guis {
     public static void init(Side side) {
 
         AntimatterAPI.registerJEICategory(RecipeMaps.ORE_BYPRODUCTS, Guis.ORE_BYPRODUCTS);
-        AntimatterAPI.registerJEICategory(RecipeMaps.INT_CIRCUITS, Guis.ORE_BYPRODUCTS);
+        AntimatterAPI.registerJEICategory(RecipeMaps.INT_CIRCUITS, Guis.ORE_BYPRODUCTS_OLD);
+        AntimatterAPI.registerJEICategory(RecipeMaps.FLUID_EXTRACTOR_COILS, Guis.ORE_BYPRODUCTS_OLD);
 
         //TODO changing slots of a machine in world, will crash from GTItemHandler.validateSlot()
 
