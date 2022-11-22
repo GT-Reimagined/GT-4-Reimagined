@@ -77,30 +77,30 @@ public class VanillaOverrides {
 
 
         provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_diamond", provider.hasSafeItem(GEM.getMaterialTag(Diamond)),
-                Items.DIAMOND_BOOTS, of('D', GEM.getMaterialTag(Diamond), 'H', HAMMER.getTag()), "X X", "XHX");
+                Items.DIAMOND_BOOTS, of('X', GEM.getMaterialTag(Diamond), 'H', HAMMER.getTag()), "X X", "XHX");
         provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_diamond", provider.hasSafeItem(GEM.getMaterialTag(Diamond)),
-                Items.DIAMOND_LEGGINGS, of('D', GEM.getMaterialTag(Diamond), 'H', HAMMER.getTag()), "XXX", "XHX", "X X");
+                Items.DIAMOND_LEGGINGS, of('X', GEM.getMaterialTag(Diamond), 'H', HAMMER.getTag()), "XXX", "XHX", "X X");
         provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_diamond", provider.hasSafeItem(GEM.getMaterialTag(Diamond)),
-                Items.DIAMOND_CHESTPLATE, of('D', GEM.getMaterialTag(Diamond), 'H', HAMMER.getTag()), "XHX", "XXX", "XXX");
+                Items.DIAMOND_CHESTPLATE, of('X', GEM.getMaterialTag(Diamond), 'H', HAMMER.getTag()), "XHX", "XXX", "XXX");
         provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_diamond", provider.hasSafeItem(GEM.getMaterialTag(Diamond)),
-                Items.DIAMOND_HELMET, of('D', GEM.getMaterialTag(Diamond), 'H', HAMMER.getTag()), "XXX", "XHX");
+                Items.DIAMOND_HELMET, of('X', GEM.getMaterialTag(Diamond), 'H', HAMMER.getTag()), "XXX", "XHX");
 
         provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_gold", provider.hasSafeItem(PLATE.getMaterialTag(Gold)),
-                Items.GOLDEN_BOOTS, of('D', PLATE.getMaterialTag(Gold), 'H', HAMMER.getTag()), "X X", "XHX");
+                Items.GOLDEN_BOOTS, of('X', PLATE.getMaterialTag(Gold), 'H', HAMMER.getTag()), "X X", "XHX");
         provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_gold", provider.hasSafeItem(PLATE.getMaterialTag(Gold)),
-                Items.GOLDEN_LEGGINGS, of('D', PLATE.getMaterialTag(Gold), 'H', HAMMER.getTag()), "XXX", "XHX", "X X");
+                Items.GOLDEN_LEGGINGS, of('X', PLATE.getMaterialTag(Gold), 'H', HAMMER.getTag()), "XXX", "XHX", "X X");
         provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_gold", provider.hasSafeItem(PLATE.getMaterialTag(Gold)),
-                Items.GOLDEN_CHESTPLATE, of('D', PLATE.getMaterialTag(Gold), 'H', HAMMER.getTag()), "XHX", "XXX", "XXX");
+                Items.GOLDEN_CHESTPLATE, of('X', PLATE.getMaterialTag(Gold), 'H', HAMMER.getTag()), "XHX", "XXX", "XXX");
         provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_gold", provider.hasSafeItem(PLATE.getMaterialTag(Gold)),
-                Items.GOLDEN_HELMET, of('D', PLATE.getMaterialTag(Gold), 'H', HAMMER.getTag()), "XXX", "XHX");
+                Items.GOLDEN_HELMET, of('X', PLATE.getMaterialTag(Gold), 'H', HAMMER.getTag()), "XXX", "XHX");
 
         provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_iron", provider.hasSafeItem(PLATE.getMaterialTag(Iron)),
-                Items.IRON_BOOTS, of('D', PLATE.getMaterialTag(Iron), 'H', HAMMER.getTag()), "X X", "XHX");
+                Items.IRON_BOOTS, of('X', PLATE.getMaterialTag(Iron), 'H', HAMMER.getTag()), "X X", "XHX");
         provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_iron", provider.hasSafeItem(PLATE.getMaterialTag(Iron)),
-                Items.IRON_LEGGINGS, of('D', PLATE.getMaterialTag(Iron), 'H', HAMMER.getTag()), "XXX", "XHX", "X X");
+                Items.IRON_LEGGINGS, of('X', PLATE.getMaterialTag(Iron), 'H', HAMMER.getTag()), "XXX", "XHX", "X X");
         provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_iron", provider.hasSafeItem(PLATE.getMaterialTag(Iron)),
-                Items.IRON_CHESTPLATE, of('D', PLATE.getMaterialTag(Iron), 'H', HAMMER.getTag()), "XHX", "XXX", "XXX");
+                Items.IRON_CHESTPLATE, of('X', PLATE.getMaterialTag(Iron), 'H', HAMMER.getTag()), "XHX", "XXX", "XXX");
         provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_iron", provider.hasSafeItem(PLATE.getMaterialTag(Iron)),
-                Items.IRON_HELMET, of('D', PLATE.getMaterialTag(Iron), 'H', HAMMER.getTag()), "XXX", "XHX");
+                Items.IRON_HELMET, of('X', PLATE.getMaterialTag(Iron), 'H', HAMMER.getTag()), "XXX", "XHX");
     }
 }
