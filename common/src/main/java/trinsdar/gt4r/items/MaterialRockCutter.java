@@ -27,37 +27,24 @@ import static muramasa.antimatter.Data.Diamond;
 import static trinsdar.gt4r.data.Materials.Titanium;
 
 public class MaterialRockCutter extends MaterialTool {
-    public MaterialRockCutter(String domain, AntimatterToolType type, Properties properties, int energyTier) {
-        super(domain, type, properties, energyTier);
+
+    public MaterialRockCutter(String domain, AntimatterToolType type, Properties properties, Material primary, Material secondary, int energyTier) {
+        super(domain, type, properties, primary, secondary, energyTier);
     }
 
     @Override
-    public String getId() {
+    public String getToolID() {
         return type.getId();
     }
 
     @Override
-    public void onGenericFillItemGroup(CreativeModeTab group, NonNullList<ItemStack> list, long maxEnergy) {
-        if (this.allowdedIn(group)){
-            ItemStack stack = asItemStack(Diamond, Titanium);
-            IEnergyHandler h = TesseractPlatformUtils.getEnergyHandlerItem(stack).map(t -> t).orElse(null);
-            if (h != null){
-                list.add(stack.copy());
-                h.setCapacity(maxEnergy);
-                h.setEnergy(maxEnergy);
-                list.add(stack);
-            }
-        }
-    }
-
-    @Override
-    public ItemStack resolveStack(Material primary, Material secondary, long startingEnergy, long maxEnergy) {
-        ItemStack stack = super.resolveStack(primary, secondary, startingEnergy, maxEnergy);
-        if (!primary.has(MaterialTags.TOOLS) || !secondary.has(MaterialTags.HANDLE)){
+    public ItemStack resolveStack(long startingEnergy, long maxEnergy) {
+        ItemStack stack = super.resolveStack(startingEnergy, maxEnergy);
+        if (!primary.has(MaterialTags.TOOLS)){
             return stack;
         }
-        Map<Enchantment, Integer> mainEnchants = MaterialTags.TOOLS.getToolData(primary).toolEnchantment(), handleEnchants = MaterialTags.HANDLE.getHandleData(secondary).toolEnchantment();
-        if (!mainEnchants.containsKey(Enchantments.SILK_TOUCH) && !handleEnchants.containsKey(Enchantments.SILK_TOUCH)) {
+        Map<Enchantment, Integer> mainEnchants = MaterialTags.TOOLS.getToolData(primary).toolEnchantment();
+        if (!mainEnchants.containsKey(Enchantments.SILK_TOUCH)) {
             stack.enchant(Enchantments.SILK_TOUCH, 1);
         }
         return stack;

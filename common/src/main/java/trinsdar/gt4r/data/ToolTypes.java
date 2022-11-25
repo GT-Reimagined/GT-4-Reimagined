@@ -6,10 +6,13 @@ import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.Data;
 import muramasa.antimatter.item.ItemBattery;
 import muramasa.antimatter.material.Material;
+import muramasa.antimatter.material.MaterialTags;
 import muramasa.antimatter.recipe.ingredient.PropertyIngredient;
 import muramasa.antimatter.recipe.material.MaterialRecipe;
 import muramasa.antimatter.tool.AntimatterToolType;
 import muramasa.antimatter.tool.IAntimatterTool;
+import muramasa.antimatter.tool.MaterialSword;
+import muramasa.antimatter.tool.MaterialTool;
 import muramasa.antimatter.tool.ToolUtils;
 import muramasa.antimatter.util.TagUtils;
 import muramasa.antimatter.util.Utils;
@@ -42,7 +45,7 @@ import static net.minecraft.world.level.material.Material.*;
 import static trinsdar.gt4r.data.GT4RData.*;
 
 public class ToolTypes {
-    public static final MaterialRecipe.Provider POWERED_TOOL_BUILDER = MaterialRecipe.registerProvider("powered-tool", Ref.ID, id -> new MaterialRecipe.ItemBuilder() {
+    /*public static final MaterialRecipe.Provider POWERED_TOOL_BUILDER = MaterialRecipe.registerProvider("powered-tool", Ref.ID, id -> new MaterialRecipe.ItemBuilder() {
 
         @Override
         public ItemStack build(CraftingContainer inv, MaterialRecipe.Result mats) {
@@ -76,7 +79,7 @@ public class ToolTypes {
         public Map<String, Object> getFromResult(@Nonnull ItemStack stack) {
             return ImmutableMap.of();
         }
-    });
+    });*/
     public static AntimatterToolType ROCK_CUTTER = new RockCutterToolType(Ref.ID, "rock_cutter", 1, 1, 1, -1.0F, -3.0F).setPowered(100000L, 1).setRepairability(false).setOverlayLayers(2).addEffectiveMaterials(ICE_SOLID, METAL, STONE, HEAVY_METAL, PISTON).setBrokenItems(ImmutableMap.of("rock_cutter", i -> getBrokenItem(i, RockCutterPowerUnit)));
 
     static {
@@ -155,17 +158,12 @@ public class ToolTypes {
         }
 
         @Override
-        public List<IAntimatterTool> instantiatePoweredTools(String domain) {
-            List<IAntimatterTool> poweredTools = new ObjectArrayList<>();
-            Item.Properties properties = prepareInstantiation(domain);
-            poweredTools.add(new MaterialRockCutter(domain, this, properties, 1));
-            return poweredTools;
-        }
-
-        @Override
         public List<IAntimatterTool> instantiatePoweredTools(String domain, Supplier<Item.Properties> properties) {
             List<IAntimatterTool> poweredTools = new ObjectArrayList<>();
-            poweredTools.add(new MaterialRockCutter(domain, this, properties.get(), 1));
+            MaterialTags.TOOLS.all().forEach(t -> {
+                if (primaryMaterialRequirement != null && !t.has(primaryMaterialRequirement)) return;
+                poweredTools.add(new MaterialRockCutter(domain, this, properties.get(), t, Data.NULL, 1));
+            });
             return poweredTools;
         }
     }

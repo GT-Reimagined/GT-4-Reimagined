@@ -33,11 +33,11 @@ import static trinsdar.gt4r.loader.crafting.CraftingHelper.of2;
 public class ToolCrafting {
     public static void loadRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider){
         loadPoweredRecipes(output, provider);
-        loadOtherRecipes(output, provider);
+        //loadOtherRecipes(output, provider);
     }
 
     private static void loadPoweredRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider){
-        CriterionTriggerInstance in = provider.hasSafeItem(SCREWDRIVER.getTag());
+        /*CriterionTriggerInstance in = provider.hasSafeItem(SCREWDRIVER.getTag());
         provider.addToolRecipe(ToolTypes.POWERED_TOOL_BUILDER.get(ROCK_CUTTER.getId()), output, Ref.ID, "rock_cutter_1", "rock_cutters", "has_screwdriver", in, ROCK_CUTTER.getToolStack(NULL, NULL), of('D', PropertyIngredient.builder("primary").types(DUST).tags(GT4RMaterialTags.ROCK_CUTTER).build(), 'P', PropertyIngredient.builder("secondary").mats(Titanium, TungstenSteel).types(PLATE).build(), 'R', PropertyIngredient.builder("secondary").mats(Titanium, TungstenSteel).types(ROD).build(), 'C', CustomTags.CIRCUITS_BASIC, 'B', PropertyIngredient.builder("battery").itemTags(CustomTags.BATTERIES_SMALL).build()), "DR ", "DP ", "DCB");
         provider.addToolRecipe(ToolTypes.UNIT_POWERED_TOOL_BUILDER.get(ROCK_CUTTER.getId()),output, Ref.ID, ROCK_CUTTER.getId() + "_power_unit_recipe", "rock_cutters",
                 "has_screwdriver", in, ROCK_CUTTER.getToolStack(NULL, NULL), of('D', PropertyIngredient.builder("primary").types(DUST).tags(GT4RMaterialTags.ROCK_CUTTER).build(), 'S', FILE.getTag(), 'P', PropertyIngredient.builder("secondary").itemTags(POWER_UNIT_ROCK_CUTTER).build()), "DS", "DP", "D ");
@@ -120,7 +120,7 @@ public class ToolCrafting {
         provider.addToolRecipe(ToolTypes.POWERED_TOOL_BUILDER.get(JACKHAMMER.getId() + "-lv"), output, Ref.ID, JACKHAMMER.getId() + "_lv", "antimatter_jackhammers",
                 "has_battery_small", provider.hasSafeItem(BATTERIES_SMALL), jackhammer_lv.resolveStack(NULL, StainlessSteel, 0, 100000), of('R', PropertyIngredient.builder("primary").types(ROD).tool(JACKHAMMER, true).build(), 'P', PropertyIngredient.builder("primary").types(PLATE, GEM).tool(JACKHAMMER, true).build(), 'b', PropertyIngredient.builder("battery").itemTags(BATTERIES_SMALL).build(), 'M', MotorLV, 'r', PropertyIngredient.builder("secondary").mats(StainlessSteel).types(ROD).build()), "RbR", "rMr", " P ");
         provider.addToolRecipe(ToolTypes.UNIT_POWERED_TOOL_BUILDER.get(JACKHAMMER.getId() + "-lv"), output, Ref.ID, JACKHAMMER.getId() + "_lv", "antimatter_jackhammers",
-                "has_power_unit_small", provider.hasSafeItem(POWER_UNIT_SMALL), jackhammer_lv.resolveStack(NULL, StainlessSteel, 0, 100000), of('R', PropertyIngredient.builder("primary").types(ROD).tool(JACKHAMMER, true).build(), 'P', PropertyIngredient.builder("primary").types(PLATE, GEM).tool(JACKHAMMER, true).build(), 'b', PropertyIngredient.builder("secondary").itemTags(POWER_UNIT_SMALL).build()), "RbR", " P ");
+                "has_power_unit_small", provider.hasSafeItem(POWER_UNIT_SMALL), jackhammer_lv.resolveStack(NULL, StainlessSteel, 0, 100000), of('R', PropertyIngredient.builder("primary").types(ROD).tool(JACKHAMMER, true).build(), 'P', PropertyIngredient.builder("primary").types(PLATE, GEM).tool(JACKHAMMER, true).build(), 'b', PropertyIngredient.builder("secondary").itemTags(POWER_UNIT_SMALL).build()), "RbR", " P ");*/
     }
 
     private static void loadOtherRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider){
@@ -152,9 +152,10 @@ public class ToolCrafting {
     }
 
 
-    public static ItemStack resolveStack(IAntimatterTool tool, Material primary, Material secondary, long startingEnergy, long maxEnergy) {
-        ItemStack stack = new ItemStack(tool.getItem());
-        tool.validateTag(stack, primary, secondary, startingEnergy, maxEnergy);
+    public static ItemStack resolveStack(String tool, Material primary, int secondaryColot, long startingEnergy, long maxEnergy) {
+        IAntimatterTool antimatterTool = AntimatterAPI.get(IAntimatterTool.class, primary.getId() +"_" + tool);
+        ItemStack stack = new ItemStack(antimatterTool.getItem());
+        antimatterTool.validateTag(stack, startingEnergy, maxEnergy);
         if (!primary.has(MaterialTags.TOOLS)) return stack;
         Map<Enchantment, Integer> mainEnchants = MaterialTags.TOOLS.getToolData(primary).toolEnchantment();
         if (!mainEnchants.isEmpty()) {
