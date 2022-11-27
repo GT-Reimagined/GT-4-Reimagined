@@ -1,6 +1,7 @@
 package trinsdar.gt4r.data;
 
 import muramasa.antimatter.data.AntimatterDefaultTools;
+import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.event.MaterialEvent;
 import muramasa.antimatter.material.Material;
@@ -22,7 +23,6 @@ import trinsdar.gt4r.datagen.GT4RRandomDropBonus;
 import java.util.function.Function;
 
 import static com.google.common.collect.ImmutableMap.of;
-import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.material.MaterialTags.ELEC;
 import static muramasa.antimatter.material.MaterialTags.RUBBERTOOLS;
 import static net.minecraft.data.loot.BlockLoot.applyExplosionDecay;
@@ -44,13 +44,13 @@ public class GT4RMaterialEvents {
             return createSilkTouchDispatchTable(b, applyExplosionDecay(b, LootItem.lootTableItem(Items.LAPIS_LAZULI).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 9.0F))).apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))));
         });
         MaterialTags.CUSTOM_ORE_DROPS.add(Sodalite, b -> {
-            return createSilkTouchDispatchTable(b, applyExplosionDecay(b, LootItem.lootTableItem(GEM.get(Sodalite)).apply(SetItemCountFunction.setCount(UniformGenerator.between(6.0F, 6.0F))).apply(GT4RRandomDropBonus.uniformBonusCount(Enchantments.BLOCK_FORTUNE, 3)))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(BlockLootTablesAccessor.getNoSilkTouch()).add(LootItem.lootTableItem(DUST.get(Aluminium)).apply(GT4RRandomDropBonus.randomDrops(Enchantments.BLOCK_FORTUNE, 4))));
+            return createSilkTouchDispatchTable(b, applyExplosionDecay(b, LootItem.lootTableItem(AntimatterMaterialTypes.GEM.get(Sodalite)).apply(SetItemCountFunction.setCount(UniformGenerator.between(6.0F, 6.0F))).apply(GT4RRandomDropBonus.uniformBonusCount(Enchantments.BLOCK_FORTUNE, 3)))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(BlockLootTablesAccessor.getNoSilkTouch()).add(LootItem.lootTableItem(AntimatterMaterialTypes.DUST.get(Aluminium)).apply(GT4RRandomDropBonus.randomDrops(Enchantments.BLOCK_FORTUNE, 4))));
         });
-        Function<BlockOre, LootTable.Builder> function = (b) -> createSilkTouchDispatchTable(b, applyExplosionDecay(b, LootItem.lootTableItem(DUST.get(b.getMaterial())).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 2.0F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))));
+        Function<BlockOre, LootTable.Builder> function = (b) -> createSilkTouchDispatchTable(b, applyExplosionDecay(b, LootItem.lootTableItem(AntimatterMaterialTypes.DUST.get(b.getMaterial())).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 2.0F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))));
         MaterialTags.CUSTOM_ORE_DROPS.add(Pyrite, function);
-        MaterialTags.CUSTOM_ORE_DROPS.add(Cinnabar, b -> function.apply(b).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(BlockLootTablesAccessor.getNoSilkTouch()).add(LootItem.lootTableItem(DUST.get(AntimatterMaterials.Redstone)).apply(GT4RRandomDropBonus.randomDrops(Enchantments.BLOCK_FORTUNE, 4)))));
-        MaterialTags.CUSTOM_ORE_DROPS.add(Sphalerite, b -> function.apply(b).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(BlockLootTablesAccessor.getNoSilkTouch()).add(LootItem.lootTableItem(DUST.get(Zinc)).apply(GT4RRandomDropBonus.randomDrops(Enchantments.BLOCK_FORTUNE, 4)))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(BlockLootTablesAccessor.getNoSilkTouch()).add(LootItem.lootTableItem(GEM.get(YellowGarnet)).apply(GT4RRandomDropBonus.randomDrops(Enchantments.BLOCK_FORTUNE, 32)))));
-        Function<BlockOreStone, LootTable.Builder> function1 = (b) -> createOreDrop(b, DUST.get(b.getMaterial()));
+        MaterialTags.CUSTOM_ORE_DROPS.add(Cinnabar, b -> function.apply(b).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(BlockLootTablesAccessor.getNoSilkTouch()).add(LootItem.lootTableItem(AntimatterMaterialTypes.DUST.get(AntimatterMaterials.Redstone)).apply(GT4RRandomDropBonus.randomDrops(Enchantments.BLOCK_FORTUNE, 4)))));
+        MaterialTags.CUSTOM_ORE_DROPS.add(Sphalerite, b -> function.apply(b).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(BlockLootTablesAccessor.getNoSilkTouch()).add(LootItem.lootTableItem(AntimatterMaterialTypes.DUST.get(Zinc)).apply(GT4RRandomDropBonus.randomDrops(Enchantments.BLOCK_FORTUNE, 4)))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(BlockLootTablesAccessor.getNoSilkTouch()).add(LootItem.lootTableItem(AntimatterMaterialTypes.GEM.get(YellowGarnet)).apply(GT4RRandomDropBonus.randomDrops(Enchantments.BLOCK_FORTUNE, 32)))));
+        Function<BlockOreStone, LootTable.Builder> function1 = (b) -> createOreDrop(b, AntimatterMaterialTypes.DUST.get(b.getMaterial()));
         MaterialTags.CUSTOM_ORE_STONE_DROPS.add(Salt, function1);
         MaterialTags.CUSTOM_ORE_STONE_DROPS.add(RockSalt, function1);
         Material[] turbineStuff = new Material[]{Carbon, Osmium, Bronze, Magnalium, Steel, TungstenSteel, Osmiridium};
@@ -58,23 +58,23 @@ public class GT4RMaterialEvents {
             event.setMaterial(material).flags(GT4RMaterialTags.TURBINE_ROTOR, GT4RMaterialTags.TURBINE_BLADE, GT4RMaterialTags.BROKEN_TURBINE_ROTOR);
         }
         GT4RMaterialTags.HULL.add(Aluminium, AntimatterMaterials.Iron, Titanium, Brass, Bronze, Steel, StainlessSteel, WroughtIron, TungstenSteel);
-        event.setMaterial(Aluminium).asMetal(933, 1000, PLATE, ROD, GEAR, BOLT, SCREW);
-        event.setMaterial(Beryllium).asMetal(1560, 0, PLATE);
-        event.setMaterial(Bismuth).asMetal(544, 0, PLATE).asOre();
-        event.setMaterial(Carbon).asMetal(3800, 1000, PLATE);
-        event.setMaterial(Chrome).asMetal(2180, 1700, PLATE);
-        event.setMaterial(Iridium).asMetal(2719, 3000, PLATE).asOre(3, 7, true).harvestLevel(3);
-        event.setMaterial(Lead).asMetal(600, 0, PLATE, PLATE_DENSE, ROD).harvestLevel(2);
+        event.setMaterial(Aluminium).asMetal(933, 1000, AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.ROD, AntimatterMaterialTypes.GEAR, AntimatterMaterialTypes.BOLT, AntimatterMaterialTypes.SCREW);
+        event.setMaterial(Beryllium).asMetal(1560, 0, AntimatterMaterialTypes.PLATE);
+        event.setMaterial(Bismuth).asMetal(544, 0, AntimatterMaterialTypes.PLATE).asOre();
+        event.setMaterial(Carbon).asMetal(3800, 1000, AntimatterMaterialTypes.PLATE);
+        event.setMaterial(Chrome).asMetal(2180, 1700, AntimatterMaterialTypes.PLATE);
+        event.setMaterial(Iridium).asMetal(2719, 3000, AntimatterMaterialTypes.PLATE).asOre(3, 7, true).harvestLevel(3);
+        event.setMaterial(Lead).asMetal(600, 0, AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.PLATE_DENSE, AntimatterMaterialTypes.ROD).harvestLevel(2);
         event.setMaterial(Manganese).asMetal(1519, 0);
-        event.setMaterial(Nickel).asMetal(1728, 0, PLATE).asPlasma();
-        event.setMaterial(Osmium).asMetal(3306, 3306, PLATE, ROD);
-        event.setMaterial(Platinum).asMetal(2041, 0, PLATE, ROD).asOre(3, 7, true).harvestLevel(2);
+        event.setMaterial(Nickel).asMetal(1728, 0, AntimatterMaterialTypes.PLATE).asPlasma();
+        event.setMaterial(Osmium).asMetal(3306, 3306, AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.ROD);
+        event.setMaterial(Platinum).asMetal(2041, 0, AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.ROD).asOre(3, 7, true).harvestLevel(2);
         event.setMaterial(Plutonium).asMetal(912, 0);
         event.setMaterial(Plutonium239).asMetal(912, 0);
-        event.setMaterial(Silver).asMetal(1234, 0, PLATE).harvestLevel(2);
+        event.setMaterial(Silver).asMetal(1234, 0, AntimatterMaterialTypes.PLATE).harvestLevel(2);
         event.setMaterial(Thorium).asMetal(2115, 0);
-        event.setMaterial(Titanium).asMetal(1941, 1500,  PLATE, ROD, GEAR).addArmor(new int[]{3, 7, 7, 3}, 1.0F, 0.0F, 15).addTools(3.5F, 8.0F, 1600, 3);
-        event.setMaterial(Tungsten).asMetal(3695, 2500, PLATE, ROD).addTools(3.5F, 8.0F, 2560, 3);
+        event.setMaterial(Titanium).asMetal(1941, 1500,  AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.ROD, AntimatterMaterialTypes.GEAR).addArmor(new int[]{3, 7, 7, 3}, 1.0F, 0.0F, 15).addTools(3.5F, 8.0F, 1600, 3);
+        event.setMaterial(Tungsten).asMetal(3695, 2500, AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.ROD).addTools(3.5F, 8.0F, 2560, 3);
         event.setMaterial(Uranium238).asMetal(1405, 0);
         event.setMaterial(Uranium235).asMetal(1405, 0);
         event.setMaterial(Antimony).asMetal(1449, 0);
@@ -94,13 +94,13 @@ public class GT4RMaterialEvents {
         event.setMaterial(Oxygen).asPlasma();
         event.setMaterial(Phosphor).asDust(317);
         event.setMaterial(Potassium).asMetal(336, 0);
-        event.setMaterial(Silicon).asMetal(1687, 1000, PLATE);
+        event.setMaterial(Silicon).asMetal(1687, 1000, AntimatterMaterialTypes.PLATE);
         event.setMaterial(Sodium).asDust(370);
         event.setMaterial(Sulfur).asDust(388).asPlasma();
-        event.setMaterial(Tin).asMetal(505, 505, PLATE, ROD, GEAR).asOre(1, 5, true);
+        event.setMaterial(Tin).asMetal(505, 505, AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.ROD, AntimatterMaterialTypes.GEAR).asOre(1, 5, true);
         event.setMaterial(Tritium).asGas();
-        event.setMaterial(Zinc).asMetal(692, 0, PLATE);
-        event.setMaterial(Technetium).asMetal(PLATE);
+        event.setMaterial(Zinc).asMetal(692, 0, AntimatterMaterialTypes.PLATE);
+        event.setMaterial(Technetium).asMetal(AntimatterMaterialTypes.PLATE);
         event.setMaterial(Neon).asGas();
 
         //TODO: We can be more lenient about what fluids we have in, its not as bad as solids above, and we can stop them from showing in JEI (I think...)
@@ -214,58 +214,58 @@ public class GT4RMaterialEvents {
         event.setMaterial(Cinnabar).asDust().asOre(1, 5,true).mats(of(Mercury, 1, Sulfur, 1)).setOreMulti(2).harvestLevel(2);
 
         /** Metals **/
-        event.setMaterial(BatteryAlloy).asMetal(295, 0, PLATE).mats(of(Lead, 4, Antimony, 1));
-        event.setMaterial(Brass).asMetal(1170, 0,  PLATE, ROD).mats(of(Zinc, 1, AntimatterMaterials.Copper, 3));
-        event.setMaterial(Bronze).asMetal(1125, 0,  PLATE, ROD, GEAR).mats(of(Tin, 1, AntimatterMaterials.Copper, 3)).addTools(2.0F, 6.0F, 192, 2,  of(Enchantments.SHARPNESS, 1)).addArmor(new int[]{2, 6, 5, 2}, 0.0F, 0.0F, 12);
-        event.setMaterial(Cupronickel).asMetal(1728, 0, PLATE).mats(of(AntimatterMaterials.Copper, 1, Nickel, 1));
-        event.setMaterial(Electrum).asMetal(1330, 0, PLATE, ROD).mats(of(Silver, 1, AntimatterMaterials.Gold, 1));
-        event.setMaterial(Invar).asMetal(1700, 0,  PLATE, ROD).mats(of(AntimatterMaterials.Iron, 2, Nickel, 1)).addTools(AntimatterMaterials.Iron, of(Enchantments.BANE_OF_ARTHROPODS, 3)).addArmor(new int[]{2, 6, 5, 2}, 0.0F, 0.0F, 15, of(Enchantments.FIRE_PROTECTION, 1));
-        event.setMaterial(Kanthal).asMetal(1800, 2200,  PLATE, ROD).mats(of(AntimatterMaterials.Iron, 1, Aluminium, 1, Chrome, 1));
-        event.setMaterial(Magnalium).asMetal(870, 0,  PLATE, ROD).mats(of(Magnesium, 1, Aluminium, 2));
+        event.setMaterial(BatteryAlloy).asMetal(295, 0, AntimatterMaterialTypes.PLATE).mats(of(Lead, 4, Antimony, 1));
+        event.setMaterial(Brass).asMetal(1170, 0,  AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.ROD).mats(of(Zinc, 1, AntimatterMaterials.Copper, 3));
+        event.setMaterial(Bronze).asMetal(1125, 0,  AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.ROD, AntimatterMaterialTypes.GEAR).mats(of(Tin, 1, AntimatterMaterials.Copper, 3)).addTools(2.0F, 6.0F, 192, 2,  of(Enchantments.SHARPNESS, 1)).addArmor(new int[]{2, 6, 5, 2}, 0.0F, 0.0F, 12);
+        event.setMaterial(Cupronickel).asMetal(1728, 0, AntimatterMaterialTypes.PLATE).mats(of(AntimatterMaterials.Copper, 1, Nickel, 1));
+        event.setMaterial(Electrum).asMetal(1330, 0, AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.ROD).mats(of(Silver, 1, AntimatterMaterials.Gold, 1));
+        event.setMaterial(Invar).asMetal(1700, 0,  AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.ROD).mats(of(AntimatterMaterials.Iron, 2, Nickel, 1)).addTools(AntimatterMaterials.Iron, of(Enchantments.BANE_OF_ARTHROPODS, 3)).addArmor(new int[]{2, 6, 5, 2}, 0.0F, 0.0F, 15, of(Enchantments.FIRE_PROTECTION, 1));
+        event.setMaterial(Kanthal).asMetal(1800, 2200,  AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.ROD).mats(of(AntimatterMaterials.Iron, 1, Aluminium, 1, Chrome, 1));
+        event.setMaterial(Magnalium).asMetal(870, 0,  AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.ROD).mats(of(Magnesium, 1, Aluminium, 2));
         event.setMaterial(Nichrome).asMetal(2700, 2500).mats(of(Nickel, 4, Chrome, 1));
-        event.setMaterial(SolderingAlloy).asMetal(400, 400, PLATE, ROD).mats(of(Tin, 9, Antimony, 1));
-        event.setMaterial(Steel).asMetal(1811, 1500, PLATE, ROD, GEAR, RING).addTools(2.5F, 6.0F, 512, 2,  of(Enchantments.SHARPNESS, 2)).addArmor(new int[]{2, 7, 6, 2}, 1.0F, 0.0F, 21, of(Enchantments.ALL_DAMAGE_PROTECTION, 1)).mats(of(AntimatterMaterials.Iron, 50, Carbon, 1));
-        event.setMaterial(StainlessSteel).asMetal(1700, 1700, PLATE, ROD, GEAR).mats(of(AntimatterMaterials.Iron, 6, Chrome, 1, Manganese, 1, Nickel, 1)).addTools(2.5F, 7.0F, 480, 2, of(Enchantments.SHARPNESS, 3)).addArmor(new int[]{2, 7, 6, 2}, 2.0F, 0.0F, 20, of(Enchantments.ALL_DAMAGE_PROTECTION, 2));
-        event.setMaterial(WroughtIron).asMetal(1811, 0, PLATE, ROD, GEAR).mats(of(AntimatterMaterials.Iron, 1)).addTools(IRON.getAttackDamageBonus(), IRON.getSpeed(), (int)(256 * 1.5F), IRON.getLevel(),  of(Enchantments.SHARPNESS, 2)).addArmor(new int[]{2, 6, 5, 2}, 1.0F, 0.0F, 17, of(Enchantments.ALL_DAMAGE_PROTECTION, 1));
-        event.setMaterial(TungstenSteel).asMetal(3000, 3000, PLATE, ROD, GEAR).addTools(6.0F, 10.0F, 5120, 4).mats(of(Steel, 1, Tungsten, 1)).addArmor(new int[]{3, 8, 8, 3}, 3.0F, 0.0F, 18, of(Enchantments.ALL_DAMAGE_PROTECTION, 3));
+        event.setMaterial(SolderingAlloy).asMetal(400, 400, AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.ROD).mats(of(Tin, 9, Antimony, 1));
+        event.setMaterial(Steel).asMetal(1811, 1500, AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.ROD, AntimatterMaterialTypes.GEAR, AntimatterMaterialTypes.RING).addTools(2.5F, 6.0F, 512, 2,  of(Enchantments.SHARPNESS, 2)).addArmor(new int[]{2, 7, 6, 2}, 1.0F, 0.0F, 21, of(Enchantments.ALL_DAMAGE_PROTECTION, 1)).mats(of(AntimatterMaterials.Iron, 50, Carbon, 1));
+        event.setMaterial(StainlessSteel).asMetal(1700, 1700, AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.ROD, AntimatterMaterialTypes.GEAR).mats(of(AntimatterMaterials.Iron, 6, Chrome, 1, Manganese, 1, Nickel, 1)).addTools(2.5F, 7.0F, 480, 2, of(Enchantments.SHARPNESS, 3)).addArmor(new int[]{2, 7, 6, 2}, 2.0F, 0.0F, 20, of(Enchantments.ALL_DAMAGE_PROTECTION, 2));
+        event.setMaterial(WroughtIron).asMetal(1811, 0, AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.ROD, AntimatterMaterialTypes.GEAR).mats(of(AntimatterMaterials.Iron, 1)).addTools(IRON.getAttackDamageBonus(), IRON.getSpeed(), (int)(256 * 1.5F), IRON.getLevel(),  of(Enchantments.SHARPNESS, 2)).addArmor(new int[]{2, 6, 5, 2}, 1.0F, 0.0F, 17, of(Enchantments.ALL_DAMAGE_PROTECTION, 1));
+        event.setMaterial(TungstenSteel).asMetal(3000, 3000, AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.ROD, AntimatterMaterialTypes.GEAR).addTools(6.0F, 10.0F, 5120, 4).mats(of(Steel, 1, Tungsten, 1)).addArmor(new int[]{3, 8, 8, 3}, 3.0F, 0.0F, 18, of(Enchantments.ALL_DAMAGE_PROTECTION, 3));
         event.setMaterial(TungstenCarbide).asMetal(2460, 2460).addTools(5.0F, 14.0F, 2560, 4, of(Enchantments.SHARPNESS, 5)).mats(of(Tungsten, 1, Carbon, 1));
-        event.setMaterial(RedAlloy).asMetal(295, 0, PLATE, ROD).mats(of(AntimatterMaterials.Copper, 1, AntimatterMaterials.Redstone, 4));
-        event.setMaterial(Osmiridium).asMetal(3333, 3300,  PLATE, ROD).mats(of(Iridium, 1, Osmium, 1));
-        event.setMaterial(IronMagnetic).asMetal(1811, 0,ROD).addTools(AntimatterMaterials.Iron).mats(of(AntimatterMaterials.Iron, 1));
-        event.setMaterial(SteelMagnetic).asMetal(1000, 1000,ROD).addTools(Steel).mats(of(Steel, 1));
+        event.setMaterial(RedAlloy).asMetal(295, 0, AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.ROD).mats(of(AntimatterMaterials.Copper, 1, AntimatterMaterials.Redstone, 4));
+        event.setMaterial(Osmiridium).asMetal(3333, 3300,  AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.ROD).mats(of(Iridium, 1, Osmium, 1));
+        event.setMaterial(IronMagnetic).asMetal(1811, 0, AntimatterMaterialTypes.ROD).addTools(AntimatterMaterials.Iron).mats(of(AntimatterMaterials.Iron, 1));
+        event.setMaterial(SteelMagnetic).asMetal(1000, 1000, AntimatterMaterialTypes.ROD).addTools(Steel).mats(of(Steel, 1));
 
         /** TFC Materials **/
         event.setMaterial(SterlingSilver).asMetal(1700, 1700).mats(of(AntimatterMaterials.Copper, 1, Silver, 4));
         event.setMaterial(RoseGold).asMetal(1600, 1600).mats(of(AntimatterMaterials.Copper, 1, AntimatterMaterials.Gold, 4));
         event.setMaterial(BlackBronze).asMetal(2000, 2000).addTools(Bronze, of(Enchantments.SWEEPING_EDGE, 1)).mats(of(AntimatterMaterials.Gold, 1, Silver, 1, AntimatterMaterials.Copper, 3));
-        event.setMaterial(BismuthBronze).asMetal(1100, 900, PLATE).addTools(2.5F, MaterialTags.TOOLS.getToolData(Bronze).toolSpeed() + 2.0F, 350, 2, of(Enchantments.BANE_OF_ARTHROPODS, 4)).mats(of(Bismuth, 1, Zinc, 1, AntimatterMaterials.Copper, 3));
-        event.setMaterial(BlackSteel).asMetal(1200, 1200, FRAME, PLATE).addTools(3.5F, 6.5F, 768, 2).mats(of(Nickel, 1, BlackBronze, 1, Steel, 3));
+        event.setMaterial(BismuthBronze).asMetal(1100, 900, AntimatterMaterialTypes.PLATE).addTools(2.5F, MaterialTags.TOOLS.getToolData(Bronze).toolSpeed() + 2.0F, 350, 2, of(Enchantments.BANE_OF_ARTHROPODS, 4)).mats(of(Bismuth, 1, Zinc, 1, AntimatterMaterials.Copper, 3));
+        event.setMaterial(BlackSteel).asMetal(1200, 1200, AntimatterMaterialTypes.FRAME, AntimatterMaterialTypes.PLATE).addTools(3.5F, 6.5F, 768, 2).mats(of(Nickel, 1, BlackBronze, 1, Steel, 3));
         event.setMaterial(RedSteel).asMetal(1300, 1300).addTools(3.5F, 7.0F, 896, 2).mats(of(SterlingSilver, 1, BismuthBronze, 1, Steel, 2, BlackSteel, 4));
-        event.setMaterial(BlueSteel).asMetal(1400, 1400, FRAME).addTools(3.5F, 7.5F, 1024, 2).mats(of(RoseGold, 1, Brass, 1, Steel, 2, BlackSteel, 4));
+        event.setMaterial(BlueSteel).asMetal(1400, 1400, AntimatterMaterialTypes.FRAME).addTools(3.5F, 7.5F, 1024, 2).mats(of(RoseGold, 1, Brass, 1, Steel, 2, BlackSteel, 4));
 
         /** Solids (Plastic Related Stuff)**/
-        event.setMaterial(Plastic).asSolid(295, 0, PLATE, RUBBERTOOLS).addTools(0.0F, 0.0F, 64, 0, of(), AntimatterDefaultTools.SOFT_HAMMER).addHandleStat(66, 0.5F).mats(of(Carbon, 1, Hydrogen, 2));
-        event.setMaterial(Rubber).asSolid(295, 0, PLATE, RUBBERTOOLS).addTools(0.0F, 0.0F, 64, 0, of(), AntimatterDefaultTools.SOFT_HAMMER).addHandleStat(11, 0.4F).mats(of(Carbon, 5, Hydrogen, 8));
+        event.setMaterial(Plastic).asSolid(295, 0, AntimatterMaterialTypes.PLATE, RUBBERTOOLS).addTools(0.0F, 0.0F, 64, 0, of(), AntimatterDefaultTools.SOFT_HAMMER).addHandleStat(66, 0.5F).mats(of(Carbon, 1, Hydrogen, 2));
+        event.setMaterial(Rubber).asSolid(295, 0, AntimatterMaterialTypes.PLATE, RUBBERTOOLS).addTools(0.0F, 0.0F, 64, 0, of(), AntimatterDefaultTools.SOFT_HAMMER).addHandleStat(11, 0.4F).mats(of(Carbon, 5, Hydrogen, 8));
 
         /** Stones **/
-        event.setMaterial(RedGranite).asDust(ROCK).addHandleStat(74, 1.0F, of(Enchantments.UNBREAKING, 1)).mats(of(Aluminium, 2, PotassiumFeldspar, 1, Oxygen, 3));
-        event.setMaterial(BlackGranite).asDust(ROCK).addHandleStat(74, 1.0F, of(Enchantments.UNBREAKING, 1)).mats(of(SiliconDioxide, 4, Biotite, 1));
-        event.setMaterial(Marble).asDust(ROCK).mats(of(Magnesium, 1, Calcite, 7));
-        event.setMaterial(Komatiite).asDust(ROCK).mats(of(Olivine, 1, Magnesite, 2, AntimatterMaterials.Flint, 6, DarkAsh, 3));
-        event.setMaterial(Limestone).asDust(ROCK).mats(of(Calcite, 1));
-        event.setMaterial(GreenSchist).asDust(ROCK);
-        event.setMaterial(BlueSchist).asDust(ROCK);
-        event.setMaterial(Kimberlite).asDust(ROCK);
+        event.setMaterial(RedGranite).asDust(AntimatterMaterialTypes.ROCK).addHandleStat(74, 1.0F, of(Enchantments.UNBREAKING, 1)).mats(of(Aluminium, 2, PotassiumFeldspar, 1, Oxygen, 3));
+        event.setMaterial(BlackGranite).asDust(AntimatterMaterialTypes.ROCK).addHandleStat(74, 1.0F, of(Enchantments.UNBREAKING, 1)).mats(of(SiliconDioxide, 4, Biotite, 1));
+        event.setMaterial(Marble).asDust(AntimatterMaterialTypes.ROCK).mats(of(Magnesium, 1, Calcite, 7));
+        event.setMaterial(Komatiite).asDust(AntimatterMaterialTypes.ROCK).mats(of(Olivine, 1, Magnesite, 2, AntimatterMaterials.Flint, 6, DarkAsh, 3));
+        event.setMaterial(Limestone).asDust(AntimatterMaterialTypes.ROCK).mats(of(Calcite, 1));
+        event.setMaterial(GreenSchist).asDust(AntimatterMaterialTypes.ROCK);
+        event.setMaterial(BlueSchist).asDust(AntimatterMaterialTypes.ROCK);
+        event.setMaterial(Kimberlite).asDust(AntimatterMaterialTypes.ROCK);
         event.setMaterial(Quartzite).mats(of(Silicon, 1, Oxygen, 2));
 
         event.setMaterial(Scoria).asDust().mats(of(SiliconDioxide, 6, Calcium, 1, Carbon, 1, AntimatterMaterials.Iron, 1));
 
         /** Ore Stones **/
-        event.setMaterial(Salt).asDust(ORE_STONE).setExpRange(1, 5).mats(of(Sodium, 1, Chlorine, 1));
-        event.setMaterial(RockSalt).asDust(ORE_STONE).setExpRange(1, 5).mats(of(Potassium, 1, Chlorine, 1));
+        event.setMaterial(Salt).asDust(AntimatterMaterialTypes.ORE_STONE).setExpRange(1, 5).mats(of(Sodium, 1, Chlorine, 1));
+        event.setMaterial(RockSalt).asDust(AntimatterMaterialTypes.ORE_STONE).setExpRange(1, 5).mats(of(Potassium, 1, Chlorine, 1));
 
 
-        event.setMaterial(AntimatterMaterials.Coal).remove(CRUSHED, CRUSHED_PURIFIED, CRUSHED_CENTRIFUGED, DUST_IMPURE, DUST_PURE);
+        event.setMaterial(AntimatterMaterials.Coal).remove(AntimatterMaterialTypes.CRUSHED, AntimatterMaterialTypes.CRUSHED_PURIFIED, AntimatterMaterialTypes.CRUSHED_CENTRIFUGED, AntimatterMaterialTypes.DUST_IMPURE, AntimatterMaterialTypes.DUST_PURE);
 
         //WroughtIron.setSmeltInto(Iron).setMacerateInto(Iron);
 
@@ -358,9 +358,9 @@ public class GT4RMaterialEvents {
         GT4RMaterialTags.ROCK_CUTTER.add(AntimatterMaterials.Diamond, Ruby, Sapphire, AntimatterMaterials.NetherizedDiamond, Amethyst);
 
         GT4RMaterialTags.CABINET.add(AntimatterMaterials.Iron, Aluminium, WroughtIron, Brass, Cupronickel, Electrum, AntimatterMaterials.Gold, Silver, Magnalium, Platinum, Osmium);
-        GT4RMaterialTags.CABINET.all().forEach(m -> event.setMaterial(m).flags(ROD));
+        GT4RMaterialTags.CABINET.all().forEach(m -> event.setMaterial(m).flags(AntimatterMaterialTypes.ROD));
         GT4RMaterialTags.DRUM.add(Bronze, Steel, StainlessSteel, Invar, Tungsten, TungstenSteel, AntimatterMaterials.Netherite);
-        GT4RMaterialTags.DRUM.all().forEach(m -> event.setMaterial(m).flags(ROD, PLATE));
+        GT4RMaterialTags.DRUM.all().forEach(m -> event.setMaterial(m).flags(AntimatterMaterialTypes.ROD, AntimatterMaterialTypes.PLATE));
         GT4RMaterialTags.WORKBENCH.add(Bronze, AntimatterMaterials.Iron, Aluminium);
         GT4RMaterialTags.CHARGING_WORKBENCH.add(AntimatterMaterials.Iron, Aluminium);
         GT4RMaterialTags.LOCKER.add(AntimatterMaterials.Iron, Aluminium);
@@ -386,9 +386,9 @@ public class GT4RMaterialEvents {
         event.setMaterial(AntimatterMaterials.Diamond).mats(of(Carbon, 128)).addByProduct(Carbon/*Graphite*/);
         event.setMaterial(AntimatterMaterials.Emerald).mats(of(Beryllium, 3, Aluminium, 2, Silicon, 3, Oxygen, 18)).addByProduct(Beryllium, Aluminium);
         event.setMaterial(AntimatterMaterials.Coal).mats(of(Carbon, 2));
-        event.setMaterial(AntimatterMaterials.Iron).flags(PLATE, ROD).addByProduct(Nickel, Tin);
-        event.setMaterial(AntimatterMaterials.Gold).flags(GEAR).addByProduct(AntimatterMaterials.Copper, Nickel);
-        event.setMaterial(AntimatterMaterials.Copper).flags(PLATE, ROD, GEAR).addByProduct(AntimatterMaterials.Gold, Nickel);
+        event.setMaterial(AntimatterMaterials.Iron).flags(AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.ROD).addByProduct(Nickel, Tin);
+        event.setMaterial(AntimatterMaterials.Gold).flags(AntimatterMaterialTypes.GEAR).addByProduct(AntimatterMaterials.Copper, Nickel);
+        event.setMaterial(AntimatterMaterials.Copper).flags(AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.ROD, AntimatterMaterialTypes.GEAR).addByProduct(AntimatterMaterials.Gold, Nickel);
         event.setMaterial(AntimatterMaterials.Water).mats(of(Hydrogen, 2, Oxygen, 1));
         event.setMaterial(AntimatterMaterials.Flint).setAllowedTypes(AntimatterDefaultTools.PICKAXE, AntimatterDefaultTools.AXE, AntimatterDefaultTools.SHOVEL, AntimatterDefaultTools.SWORD, AntimatterDefaultTools.HOE, AntimatterDefaultTools.MORTAR, AntimatterDefaultTools.KNIFE).mats(of(SiliconDioxide, 1));
         event.setMaterial(AntimatterMaterials.Wood).mats(of(Carbon, 1, Oxygen, 1, Hydrogen, 1));

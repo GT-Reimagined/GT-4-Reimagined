@@ -1,6 +1,6 @@
 package trinsdar.gt4r.loader.multi;
 
-import static muramasa.antimatter.Data.DUST;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.DUST;
 import static muramasa.antimatter.data.AntimatterMaterials.Wood;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.DISTILLING;

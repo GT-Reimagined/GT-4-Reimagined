@@ -1,6 +1,7 @@
 package trinsdar.gt4r.loader.machines;
 
 import com.github.gregtechintergalactical.gtrubber.GTRubberData;
+import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialStack;
@@ -16,7 +17,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.github.gregtechintergalactical.gtrubber.GTRubberData.StickyResin;
-import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
 import static net.minecraft.world.item.Items.*;
 import static net.minecraft.world.item.Items.DIRT;
@@ -27,16 +27,16 @@ import static trinsdar.gt4r.data.RecipeMaps.CENTRIFUGING;
 
 public class CentrifugingLoader {
     public static void init() {
-        DUST_IMPURE.all().forEach(dust -> {
+        AntimatterMaterialTypes.DUST_IMPURE.all().forEach(dust -> {
             Material oreByProduct1 = dust.getByProducts().size() > 0 ? dust.getByProducts().get(0) : dust;
-            CENTRIFUGING.RB().ii(of(DUST_IMPURE.get(dust),1)).io(new ItemStack(DUST.get(dust), 1), DUST_TINY.get(oreByProduct1, 1)).add(400, 2);
+            CENTRIFUGING.RB().ii(of(AntimatterMaterialTypes.DUST_IMPURE.get(dust),1)).io(new ItemStack(AntimatterMaterialTypes.DUST.get(dust), 1), AntimatterMaterialTypes.DUST_TINY.get(oreByProduct1, 1)).add(400, 2);
         });
 
-        DUST_PURE.all().forEach(dust -> {
+        AntimatterMaterialTypes.DUST_PURE.all().forEach(dust -> {
             Material oreByProduct = dust.getByProducts().size() > 1 ? dust.getByProducts().get(1) : dust.getByProducts().size() > 0 ? dust.getByProducts().get(0) : dust;
-            CENTRIFUGING.RB().ii(of(DUST_PURE.get(dust),1)).io(new ItemStack(DUST.get(dust), 1), DUST_TINY.get(oreByProduct, 1)).add(400, 2);
+            CENTRIFUGING.RB().ii(of(AntimatterMaterialTypes.DUST_PURE.get(dust),1)).io(new ItemStack(AntimatterMaterialTypes.DUST.get(dust), 1), AntimatterMaterialTypes.DUST_TINY.get(oreByProduct, 1)).add(400, 2);
         });
-        ItemStack[] itemStacks = AntimatterMaterials.Lava.getProcessInto().stream().filter(t -> t.m.has(DUST_TINY)).map(t -> new ItemStack(DUST_TINY.get(t.m), t.s))
+        ItemStack[] itemStacks = AntimatterMaterials.Lava.getProcessInto().stream().filter(t -> t.m.has(AntimatterMaterialTypes.DUST_TINY)).map(t -> new ItemStack(AntimatterMaterialTypes.DUST_TINY.get(t.m), t.s))
                 .toArray(ItemStack[]::new);
         CENTRIFUGING.RB().fi(new FluidStack(Fluids.LAVA, 100)).io(itemStacks).chances(0.2, 0.1, 0.025, 0.025, 0.01).add(200, 16);
         CENTRIFUGING.RB().fi(PahoehoeLava.getLiquid(100)).io(itemStacks).chances(0.2, 0.1, 0.025, 0.025, 0.01).add(200, 8);
@@ -46,8 +46,8 @@ public class CentrifugingLoader {
         CENTRIFUGING.RB().ii(of(GRASS_BLOCK, 64)).io(new ItemStack(Items.SAND, 32), new ItemStack(CLAY_BALL, 2), new ItemStack(Plantball, 6)).add(3125, 16);
         CENTRIFUGING.RB().ii(of(MYCELIUM, 64)).io(new ItemStack(Items.SAND, 32), new ItemStack(CLAY_BALL, 8), new ItemStack(BROWN_MUSHROOM, 16), new ItemStack(RED_MUSHROOM, 16)).add(3906, 16);
         add(AntimatterMaterials.Lapis,20, 1792);
-        CENTRIFUGING.RB().ii(of(StickyResin, 8)).io(DUST.get(Rubber, 21), DUST.get(Plastic, 7), new ItemStack(Plantball, 4)).add(1250,10);
-        CENTRIFUGING.RB().ii(of(DUST.getMaterialTag(AntimatterMaterials.Netherrack), 64)).io(new ItemStack(GOLD_NUGGET, 4), new ItemStack(REDSTONE, 4), new ItemStack(GUNPOWDER, 8), DUST.get(AntimatterMaterials.Coal, 4), DUST.get(Sulfur, 4), DUST.get(Phosphor, 2)).add(3125,16);
+        CENTRIFUGING.RB().ii(of(StickyResin, 8)).io(AntimatterMaterialTypes.DUST.get(Rubber, 21), AntimatterMaterialTypes.DUST.get(Plastic, 7), new ItemStack(Plantball, 4)).add(1250,10);
+        CENTRIFUGING.RB().ii(of(AntimatterMaterialTypes.DUST.getMaterialTag(AntimatterMaterials.Netherrack), 64)).io(new ItemStack(GOLD_NUGGET, 4), new ItemStack(REDSTONE, 4), new ItemStack(GUNPOWDER, 8), AntimatterMaterialTypes.DUST.get(AntimatterMaterials.Coal, 4), AntimatterMaterialTypes.DUST.get(Sulfur, 4), AntimatterMaterialTypes.DUST.get(Phosphor, 2)).add(3125,16);
         add(AntimatterMaterials.Granite, 16, 1500);
         add(AntimatterMaterials.Diorite, 16,2250, 16);
         add(Electrum, 16, 312);
@@ -60,9 +60,9 @@ public class CentrifugingLoader {
         add(Kanthal, 16, 1040);
         add(TungstenSteel, 16, 1900);
         add(Nichrome, 16, 2240);
-        CENTRIFUGING.RB().ii(of(Items.SOUL_SAND, 16)).io(new ItemStack(Items.SAND, 1), DUST.get(Saltpeter,4), DUST.get(AntimatterMaterials.Coal, 1)).fo(Oil.getLiquid(1000)).add(750, 16);
-        CENTRIFUGING.RB().ii(of(Items.SOUL_SOIL, 16)).io(new ItemStack(DIRT, 1), DUST.get(Saltpeter,4), DUST.get(AntimatterMaterials.Coal, 1)).fo(Oil.getLiquid(1000)).add(750, 16);
-        CENTRIFUGING.RB().ii(of(new ItemStack(GTRubberData.RUBBER_LOG, 16))).io(DUST.get(Carbon, 8), new ItemStack(StickyResin, 8), new ItemStack(Plantball, 6)).fo(Methane.getGas(4000)).add(1562, 16);
+        CENTRIFUGING.RB().ii(of(Items.SOUL_SAND, 16)).io(new ItemStack(Items.SAND, 1), AntimatterMaterialTypes.DUST.get(Saltpeter,4), AntimatterMaterialTypes.DUST.get(AntimatterMaterials.Coal, 1)).fo(Oil.getLiquid(1000)).add(750, 16);
+        CENTRIFUGING.RB().ii(of(Items.SOUL_SOIL, 16)).io(new ItemStack(DIRT, 1), AntimatterMaterialTypes.DUST.get(Saltpeter,4), AntimatterMaterialTypes.DUST.get(AntimatterMaterials.Coal, 1)).fo(Oil.getLiquid(1000)).add(750, 16);
+        CENTRIFUGING.RB().ii(of(new ItemStack(GTRubberData.RUBBER_LOG, 16))).io(AntimatterMaterialTypes.DUST.get(Carbon, 8), new ItemStack(StickyResin, 8), new ItemStack(Plantball, 6)).fo(Methane.getGas(4000)).add(1562, 16);
         CENTRIFUGING.RB().fi(Hydrogen.getGas(4000)).fo(Deuterium.getGas(1000)).add(300, 20);
         CENTRIFUGING.RB().fi(Deuterium.getGas(4000)).fo(Tritium.getGas(1000)).add(300, 20);
         CENTRIFUGING.RB().fi(Helium.getGas(16000)).fo(Helium3.getGas(1000)).add(900, 20);
@@ -105,10 +105,10 @@ public class CentrifugingLoader {
         addMethaneRecipe(ENCHANTED_GOLDEN_APPLE, 1, new ItemStack(GOLD_INGOT, 64));
         addMethaneRecipe(GOLDEN_CARROT, 1, new ItemStack(GOLD_NUGGET, 6));
         addMethaneRecipe(GLISTERING_MELON_SLICE, 8, new ItemStack(GOLD_NUGGET, 6));
-        CENTRIFUGING.RB().ii(of(DUST.getMaterialTag(AntimatterMaterials.Endstone), 64)).io(new ItemStack(Items.SAND, 48), DUST.get(Tungsten, 1)).fo(Helium.getGas(4000), Helium3.getGas(4000)).add(19500,16);
+        CENTRIFUGING.RB().ii(of(AntimatterMaterialTypes.DUST.getMaterialTag(AntimatterMaterials.Endstone), 64)).io(new ItemStack(Items.SAND, 48), AntimatterMaterialTypes.DUST.get(Tungsten, 1)).fo(Helium.getGas(4000), Helium3.getGas(4000)).add(19500,16);
         add(RedGarnet, 16, 937);
         add(YellowGarnet, 16, 1093);
-        CENTRIFUGING.RB().ii(of(DUST.getMaterialTag(DarkAsh), 2)).io(DUST.get(Ash, 2)).add(78, 16);
+        CENTRIFUGING.RB().ii(of(AntimatterMaterialTypes.DUST.getMaterialTag(DarkAsh), 2)).io(AntimatterMaterialTypes.DUST.get(Ash, 2)).add(78, 16);
         //add(RedRock, 16, 2400); // 8 calcite, 4 flint, 4 clay
         add(Marble, 16, 329);
         add(AntimatterMaterials.Basalt, 16, 1500);
@@ -133,16 +133,16 @@ public class CentrifugingLoader {
 
     private static void add(Material dust, int count, long euT, int duration) {
         List<MaterialStack> stacks = dust.getProcessInto();
-        List<FluidStack> fluidStacks = stacks.stream().filter(t -> (t.m.has(LIQUID) || t.m.has(GAS)) && !t.m.has(DUST)).map(t -> {
-            return t.m.has(LIQUID) ? t.m.getLiquid(t.s * 1000) : t.m.getGas(t.s * 1000);
+        List<FluidStack> fluidStacks = stacks.stream().filter(t -> (t.m.has(AntimatterMaterialTypes.LIQUID) || t.m.has(AntimatterMaterialTypes.GAS)) && !t.m.has(AntimatterMaterialTypes.DUST)).map(t -> {
+            return t.m.has(AntimatterMaterialTypes.LIQUID) ? t.m.getLiquid(t.s * 1000) : t.m.getGas(t.s * 1000);
         }).collect(Collectors.toList());
-        List<ItemStack> itemStacks = dust.getProcessInto().stream().filter(t -> t.m.has(DUST)).map(t -> new ItemStack(DUST.get(t.m), t.s))
+        List<ItemStack> itemStacks = dust.getProcessInto().stream().filter(t -> t.m.has(AntimatterMaterialTypes.DUST)).map(t -> new ItemStack(AntimatterMaterialTypes.DUST.get(t.m), t.s))
                 .collect(Collectors.toList());
         RecipeBuilder rb = CENTRIFUGING.RB();
-        if ((dust.has(LIQUID) || dust.has(GAS)) && !dust.has(DUST)){
+        if ((dust.has(AntimatterMaterialTypes.LIQUID) || dust.has(AntimatterMaterialTypes.GAS)) && !dust.has(AntimatterMaterialTypes.DUST)){
             rb.fi(getFluid(dust,count * 1000));
         } else {
-            rb.ii(RecipeIngredient.of(DUST.get(dust), count));
+            rb.ii(RecipeIngredient.of(AntimatterMaterialTypes.DUST.get(dust), count));
         }
         if (!itemStacks.isEmpty()) rb.io(itemStacks.toArray(new ItemStack[0]));
         if (!fluidStacks.isEmpty()) rb.fo(fluidStacks.toArray(new FluidStack[0]));
@@ -150,11 +150,11 @@ public class CentrifugingLoader {
     }
 
     private static FluidStack getFluid(Material mat, int amount){
-        if (mat.has(LIQUID)){
+        if (mat.has(AntimatterMaterialTypes.LIQUID)){
             return mat.getLiquid(amount);
-        } else if (mat.has(GAS)){
+        } else if (mat.has(AntimatterMaterialTypes.GAS)){
             return mat.getGas(amount);
-        } else if (mat.has(PLASMA)){
+        } else if (mat.has(AntimatterMaterialTypes.PLASMA)){
             return mat.getPlasma(amount);
         } else {
             return mat.getLiquid(amount);

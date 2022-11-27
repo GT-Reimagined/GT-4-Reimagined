@@ -3,8 +3,8 @@ package trinsdar.gt4r.loader.multi;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
-import static muramasa.antimatter.Data.INGOT;
-import static muramasa.antimatter.Data.INGOT_HOT;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.INGOT;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.INGOT_HOT;
 import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
 import static trinsdar.gt4r.data.RecipeMaps.VACUUM_FREEZING;
 

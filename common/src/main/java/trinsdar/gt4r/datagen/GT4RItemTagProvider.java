@@ -1,6 +1,7 @@
 package trinsdar.gt4r.datagen;
 
 import muramasa.antimatter.AntimatterAPI;
+import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.data.AntimatterStoneTypes;
 import muramasa.antimatter.datagen.providers.AntimatterBlockTagProvider;
@@ -15,7 +16,6 @@ import net.minecraft.world.item.Items;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.GT4RMaterialTags;
 
-import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.util.Utils.getConventionalMaterialType;
 import static muramasa.antimatter.util.Utils.getConventionalStoneType;
 import static trinsdar.gt4r.data.CustomTags.*;
@@ -75,8 +75,8 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         }
 
         this.tag(INGOTS_MIXED_METAL).add(MixedMetal);
-        this.tag(TagUtils.getForgelikeItemTag("plates/constantan")).addTag(PLATE.getMaterialTag(Cupronickel));
-        this.tag(TagUtils.getForgelikeItemTag("ingots/constantan")).addTag(INGOT.getMaterialTag(Cupronickel));
+        this.tag(TagUtils.getForgelikeItemTag("plates/constantan")).addTag(AntimatterMaterialTypes.PLATE.getMaterialTag(Cupronickel));
+        this.tag(TagUtils.getForgelikeItemTag("ingots/constantan")).addTag(AntimatterMaterialTypes.INGOT.getMaterialTag(Cupronickel));
 
         this.tag(RODS_STEELS).addTag(getTag("rods/steel")).addTag(getTag("rods/stainless_steel"));
         this.tag(RODS_MAGNETIC).addTag(getTag("rods/magnetic_steel")).addTag(getTag("rods/magnetic_iron"));
@@ -91,13 +91,13 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
                 this.tag(TagUtils.getForgelikeItemTag("sandless_" + getConventionalMaterialType(o.getOreType()) + "/" +  o.getMaterial().getId())).addTag(TagUtils.getForgelikeItemTag(String.join("", getConventionalStoneType(o.getStoneType()), "_", getConventionalMaterialType(o.getOreType()), "/", o.getMaterial().getId()))).replace(false);
             }
         });
-        RAW_ORE.all().forEach(m -> {
-            this.tag(TagUtils.getForgelikeItemTag("sandless_ores/"+ m.getId())).add(RAW_ORE.get(m));
+        AntimatterMaterialTypes.RAW_ORE.all().forEach(m -> {
+            this.tag(TagUtils.getForgelikeItemTag("sandless_ores/"+ m.getId())).add(AntimatterMaterialTypes.RAW_ORE.get(m));
         });
         this.tag(TagUtils.getForgelikeItemTag("sandless_ores/"+ AntimatterMaterials.NetheriteScrap.getId())).add(Items.ANCIENT_DEBRIS);
-        this.tag(TagUtils.getForgelikeItemTag("sandless_ores/coal")).add(ORE_STONE.get().get(AntimatterMaterials.Coal).asItem());
-        this.tag(TagUtils.getForgelikeItemTag("dyes/black")).add(DUST.get(DarkAsh));
-        this.tag(TagUtils.getForgelikeItemTag("dyes/gray")).add(DUST.get(Ash));
+        this.tag(TagUtils.getForgelikeItemTag("sandless_ores/coal")).add(AntimatterMaterialTypes.ORE_STONE.get().get(AntimatterMaterials.Coal).asItem());
+        this.tag(TagUtils.getForgelikeItemTag("dyes/black")).add(AntimatterMaterialTypes.DUST.get(DarkAsh));
+        this.tag(TagUtils.getForgelikeItemTag("dyes/gray")).add(AntimatterMaterialTypes.DUST.get(Ash));
 
     }
 

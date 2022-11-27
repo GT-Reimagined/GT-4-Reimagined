@@ -1,23 +1,23 @@
 package trinsdar.gt4r.loader.machines;
 
 import muramasa.antimatter.AntimatterConfig;
+import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialTags;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import trinsdar.gt4r.data.GT4RData;
 
-import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.material.MaterialTags.RUBBERTOOLS;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.ALLOY_SMELTING;
 
 public class AlloySmelterLoader {
     public static void init(){
-        ALLOY_SMELTING.RB().ii(DUST.getMaterialIngredient(Tetrahedrite, 3), INGOT.getMaterialIngredient(Tin, 1)).io(INGOT.get(Bronze, 3)).add(150, 16);
-        ALLOY_SMELTING.RB().ii(DUST.getMaterialIngredient(Tetrahedrite, 3), INGOT.getMaterialIngredient(Zinc, 1)).io(INGOT.get(Brass, 3)).add(150, 16);
-        ALLOY_SMELTING.RB().ii(DUST.getMaterialIngredient(Tetrahedrite, 3), DUST.getMaterialIngredient(Tin, 1)).io(INGOT.get(Bronze, 3)).add(150, 16);
-        ALLOY_SMELTING.RB().ii(DUST.getMaterialIngredient(Tetrahedrite, 3), DUST.getMaterialIngredient(Zinc, 1)).io(INGOT.get(Brass, 3)).add(150, 16);
+        ALLOY_SMELTING.RB().ii(AntimatterMaterialTypes.DUST.getMaterialIngredient(Tetrahedrite, 3), AntimatterMaterialTypes.INGOT.getMaterialIngredient(Tin, 1)).io(AntimatterMaterialTypes.INGOT.get(Bronze, 3)).add(150, 16);
+        ALLOY_SMELTING.RB().ii(AntimatterMaterialTypes.DUST.getMaterialIngredient(Tetrahedrite, 3), AntimatterMaterialTypes.INGOT.getMaterialIngredient(Zinc, 1)).io(AntimatterMaterialTypes.INGOT.get(Brass, 3)).add(150, 16);
+        ALLOY_SMELTING.RB().ii(AntimatterMaterialTypes.DUST.getMaterialIngredient(Tetrahedrite, 3), AntimatterMaterialTypes.DUST.getMaterialIngredient(Tin, 1)).io(AntimatterMaterialTypes.INGOT.get(Bronze, 3)).add(150, 16);
+        ALLOY_SMELTING.RB().ii(AntimatterMaterialTypes.DUST.getMaterialIngredient(Tetrahedrite, 3), AntimatterMaterialTypes.DUST.getMaterialIngredient(Zinc, 1)).io(AntimatterMaterialTypes.INGOT.get(Brass, 3)).add(150, 16);
         addAlloyRecipes(AntimatterMaterials.Copper, 3, Tin, 1, Bronze, 4, 200);
         addAlloyRecipes(AntimatterMaterials.Copper, 3, Zinc, 1, Brass, 4, 200);
         addAlloyRecipes(AntimatterMaterials.Copper, 1, Nickel, 1, Cupronickel, 2, 100);
@@ -26,18 +26,18 @@ public class AlloySmelterLoader {
         addAlloyRecipes(Lead, 4, Antimony, 1, BatteryAlloy, 5, 250);
         addAlloyRecipes(AntimatterMaterials.Gold, 1, Silver, 1, Electrum, 2, 100);
         addAlloyRecipes(Magnesium, 1, Aluminium, 2, Magnalium, 3, 150);
-        ALLOY_SMELTING.RB().ii(DUST.getMaterialIngredient(AntimatterMaterials.Redstone, 4), DUST.getMaterialIngredient(AntimatterMaterials.Copper, 1)).io(INGOT.get(RedAlloy, 1)).add(50, 16);
-        ALLOY_SMELTING.RB().ii(DUST.getMaterialIngredient(AntimatterMaterials.Redstone, 4), INGOT.getMaterialIngredient(AntimatterMaterials.Copper, 1)).io(INGOT.get(RedAlloy, 1)).add(50, 16);
+        ALLOY_SMELTING.RB().ii(AntimatterMaterialTypes.DUST.getMaterialIngredient(AntimatterMaterials.Redstone, 4), AntimatterMaterialTypes.DUST.getMaterialIngredient(AntimatterMaterials.Copper, 1)).io(AntimatterMaterialTypes.INGOT.get(RedAlloy, 1)).add(50, 16);
+        ALLOY_SMELTING.RB().ii(AntimatterMaterialTypes.DUST.getMaterialIngredient(AntimatterMaterials.Redstone, 4), AntimatterMaterialTypes.INGOT.getMaterialIngredient(AntimatterMaterials.Copper, 1)).io(AntimatterMaterialTypes.INGOT.get(RedAlloy, 1)).add(50, 16);
         //TODO compat for bluepower
         //ALLOY_SMELTING.RB().ii(DUST.getMaterialIngredient(Nikolite, 4), DUST.getMaterialIngredient(Copper)).io(INGOT.get(BlueAlloy, 1)).add(50, 16);
         //ALLOY_SMELTING.RB().ii(DUST.getMaterialIngredient(Nikolite, 4), INGOT.getMaterialIngredient(Copper)).io(INGOT.get(BlueAlloy, 1)).add(50, 16);
         int ingotCount = AntimatterConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 2 : 1;
-        PLATE.all().forEach(m -> {
-            if (!m.has(MaterialTags.NEEDS_BLAST_FURNACE) && m.has(INGOT)){
+        AntimatterMaterialTypes.PLATE.all().forEach(m -> {
+            if (!m.has(MaterialTags.NEEDS_BLAST_FURNACE) && m.has(AntimatterMaterialTypes.INGOT)){
                 int euTick = m.has(RUBBERTOOLS) ? 16 : 32;
-                ALLOY_SMELTING.RB().ii(INGOT.getMaterialIngredient(m, ingotCount), RecipeIngredient.of(GT4RData.MoldPlate, 1).setNoConsume()).io(PLATE.get(m, 1)).add(m.getMass() * ingotCount, euTick);
-                if (m.has(RUBBERTOOLS) && m.has(DUST)){
-                    ALLOY_SMELTING.RB().ii(DUST.getMaterialIngredient(m, ingotCount), RecipeIngredient.of(GT4RData.MoldPlate, 1).setNoConsume()).io(PLATE.get(m, 1)).add(m.getMass() * ingotCount, euTick);
+                ALLOY_SMELTING.RB().ii(AntimatterMaterialTypes.INGOT.getMaterialIngredient(m, ingotCount), RecipeIngredient.of(GT4RData.MoldPlate, 1).setNoConsume()).io(AntimatterMaterialTypes.PLATE.get(m, 1)).add(m.getMass() * ingotCount, euTick);
+                if (m.has(RUBBERTOOLS) && m.has(AntimatterMaterialTypes.DUST)){
+                    ALLOY_SMELTING.RB().ii(AntimatterMaterialTypes.DUST.getMaterialIngredient(m, ingotCount), RecipeIngredient.of(GT4RData.MoldPlate, 1).setNoConsume()).io(AntimatterMaterialTypes.PLATE.get(m, 1)).add(m.getMass() * ingotCount, euTick);
                 }
             }
         });
@@ -45,9 +45,9 @@ public class AlloySmelterLoader {
     }
 
     private static void addAlloyRecipes(Material input1, int count1, Material input2, int count2, Material output, int countO, int duration){
-        ALLOY_SMELTING.RB().ii(INGOT.getMaterialIngredient(input1, count1), INGOT.getMaterialIngredient(input2, count2)).io(INGOT.get(output, countO)).add(duration, 16);
-        ALLOY_SMELTING.RB().ii(DUST.getMaterialIngredient(input1, count1), INGOT.getMaterialIngredient(input2, count2)).io(INGOT.get(output, countO)).add(duration, 16);
-        ALLOY_SMELTING.RB().ii(INGOT.getMaterialIngredient(input1, count1), DUST.getMaterialIngredient(input2, count2)).io(INGOT.get(output, countO)).add(duration, 16);
-        ALLOY_SMELTING.RB().ii(DUST.getMaterialIngredient(input1, count1), DUST.getMaterialIngredient(input2, count2)).io(INGOT.get(output, countO)).add(duration, 16);
+        ALLOY_SMELTING.RB().ii(AntimatterMaterialTypes.INGOT.getMaterialIngredient(input1, count1), AntimatterMaterialTypes.INGOT.getMaterialIngredient(input2, count2)).io(AntimatterMaterialTypes.INGOT.get(output, countO)).add(duration, 16);
+        ALLOY_SMELTING.RB().ii(AntimatterMaterialTypes.DUST.getMaterialIngredient(input1, count1), AntimatterMaterialTypes.INGOT.getMaterialIngredient(input2, count2)).io(AntimatterMaterialTypes.INGOT.get(output, countO)).add(duration, 16);
+        ALLOY_SMELTING.RB().ii(AntimatterMaterialTypes.INGOT.getMaterialIngredient(input1, count1), AntimatterMaterialTypes.DUST.getMaterialIngredient(input2, count2)).io(AntimatterMaterialTypes.INGOT.get(output, countO)).add(duration, 16);
+        ALLOY_SMELTING.RB().ii(AntimatterMaterialTypes.DUST.getMaterialIngredient(input1, count1), AntimatterMaterialTypes.DUST.getMaterialIngredient(input2, count2)).io(AntimatterMaterialTypes.INGOT.get(output, countO)).add(duration, 16);
     }
 }

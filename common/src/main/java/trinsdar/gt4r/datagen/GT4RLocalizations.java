@@ -21,8 +21,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import static muramasa.antimatter.Data.GEM;
-import static muramasa.antimatter.Data.LIQUID;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.GEM;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.LIQUID;
 import static muramasa.antimatter.material.Material.NULL;
 import static muramasa.antimatter.machine.Tier.LV;
 import static muramasa.antimatter.util.Utils.lowerUnderscoreToUpperSpaced;
