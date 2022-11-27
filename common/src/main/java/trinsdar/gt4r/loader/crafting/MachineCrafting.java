@@ -1,6 +1,7 @@
 package trinsdar.gt4r.loader.crafting;
 
 import com.google.common.collect.ImmutableMap;
+import muramasa.antimatter.data.AntimatterDefaultTools;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.Machine;
@@ -76,26 +77,26 @@ public class MachineCrafting {
     }
 
     private static void loadSteamMachineRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider){
-        provider.addItemRecipe(output, Ref.ID,"small_coil_boiler","machines", "has_wrench", provider.hasSafeItem(WRENCH.getTag()),
-                COAL_BOILER.getItem(BRONZE), of( 'P',  getForgelikeItemTag("plates/bronze"), 'W', WRENCH.getTag(), 'B', Items.BRICKS, 'F', Items.FURNACE), "PPP", "PWP", "BFB");
-        provider.addItemRecipe(output, Ref.ID,"steam_macerator","machines", "has_wrench", provider.hasSafeItem(WRENCH.getTag()),
-                STEAM_MACERATOR.getItem(BRONZE), of2( 'P',  getForgelikeItemTag("plates/bronze"), 'W', WRENCH.getTag(), 'H', HAMMER.getTag(), 'D', GEM.getMaterialTag(Diamond), 'M', MACHINE_HULLS_CHEAP, 'p', PISTONS, 'G', GEAR.getMaterialTag(Bronze)), "WDH", "GMG", "PpP");
-        provider.addItemRecipe(output, Ref.ID,"steam_furnace","machines", "has_wrench", provider.hasSafeItem(WRENCH.getTag()),
-                STEAM_FURNACE.getItem(BRONZE), of( 'P',  getForgelikeItemTag("plates/bronze"), 'W', WRENCH.getTag(), 'B', Items.BRICKS, 'F', Items.FURNACE, 'M', MACHINE_HULLS_CHEAP), "PWP", "PFP", "BMB");
-        provider.addItemRecipe(output, Ref.ID,"steam_alloy_smelter","machines", "has_wrench", provider.hasSafeItem(WRENCH.getTag()),
-                STEAM_ALLOY_SMELTER.getItem(BRONZE), of( 'P',  getForgelikeItemTag("plates/bronze"), 'W', WRENCH.getTag(), 'B', Items.BRICKS, 'F', STEAM_FURNACE.getItem(BRONZE)), "PPP", "FWF", "BBB");
-        provider.addItemRecipe(output, Ref.ID,"steam_forge_hammer","machines", "has_wrench", provider.hasSafeItem(WRENCH.getTag()),
-                STEAM_FORGE_HAMMER.getItem(BRONZE), of( 'B',  getForgelikeItemTag("plates/bronze"), 'W', WRENCH.getTag(), 'G', GEAR.getMaterialTag(Bronze), 'P', PISTONS, 'M', MACHINE_HULLS_CHEAP), "GPG", "BWB", "BMB");
-        provider.addItemRecipe(output, Ref.ID,"steam_compressor","machines", "has_wrench", provider.hasSafeItem(WRENCH.getTag()),
-                STEAM_COMPRESSOR.getItem(BRONZE), of( 'B',  getForgelikeItemTag("plates/bronze"), 'W', WRENCH.getTag(), 'G', GEAR.getMaterialTag(Bronze), 'P', PISTONS, 'M', MACHINE_HULLS_CHEAP), "BGB", "PWP", "BMB");
-        provider.addItemRecipe(output, Ref.ID,"steam_extractor","machines", "has_wrench", provider.hasSafeItem(WRENCH.getTag()),
-                STEAM_EXTRACTOR.getItem(BRONZE), of( 'B',  getForgelikeItemTag("plates/bronze"), 'W', WRENCH.getTag(),'P', PISTONS, 'M', MACHINE_HULLS_CHEAP), "BBB", "PWP", "BMB");
-        provider.addItemRecipe(output, Ref.ID,"high_pressure_coil_boiler","machines", "has_wrench", provider.hasSafeItem(WRENCH.getTag()),
-                COAL_BOILER.getItem(STEEL), of( 'P',  PLATES_STEELS, 'W', WRENCH.getTag(), 'B', Items.BRICKS, 'F', Items.FURNACE), "PPP", "PWP", "BFB");
+        provider.addItemRecipe(output, Ref.ID,"small_coil_boiler","machines", "has_wrench", provider.hasSafeItem(AntimatterDefaultTools.WRENCH.getTag()),
+                COAL_BOILER.getItem(BRONZE), of( 'P',  getForgelikeItemTag("plates/bronze"), 'W', AntimatterDefaultTools.WRENCH.getTag(), 'B', Items.BRICKS, 'F', Items.FURNACE), "PPP", "PWP", "BFB");
+        provider.addItemRecipe(output, Ref.ID,"steam_macerator","machines", "has_wrench", provider.hasSafeItem(AntimatterDefaultTools.WRENCH.getTag()),
+                STEAM_MACERATOR.getItem(BRONZE), of2( 'P',  getForgelikeItemTag("plates/bronze"), 'W', AntimatterDefaultTools.WRENCH.getTag(), 'H', AntimatterDefaultTools.HAMMER.getTag(), 'D', GEM.getMaterialTag(Diamond), 'M', MACHINE_HULLS_CHEAP, 'p', PISTONS, 'G', GEAR.getMaterialTag(Bronze)), "WDH", "GMG", "PpP");
+        provider.addItemRecipe(output, Ref.ID,"steam_furnace","machines", "has_wrench", provider.hasSafeItem(AntimatterDefaultTools.WRENCH.getTag()),
+                STEAM_FURNACE.getItem(BRONZE), of( 'P',  getForgelikeItemTag("plates/bronze"), 'W', AntimatterDefaultTools.WRENCH.getTag(), 'B', Items.BRICKS, 'F', Items.FURNACE, 'M', MACHINE_HULLS_CHEAP), "PWP", "PFP", "BMB");
+        provider.addItemRecipe(output, Ref.ID,"steam_alloy_smelter","machines", "has_wrench", provider.hasSafeItem(AntimatterDefaultTools.WRENCH.getTag()),
+                STEAM_ALLOY_SMELTER.getItem(BRONZE), of( 'P',  getForgelikeItemTag("plates/bronze"), 'W', AntimatterDefaultTools.WRENCH.getTag(), 'B', Items.BRICKS, 'F', STEAM_FURNACE.getItem(BRONZE)), "PPP", "FWF", "BBB");
+        provider.addItemRecipe(output, Ref.ID,"steam_forge_hammer","machines", "has_wrench", provider.hasSafeItem(AntimatterDefaultTools.WRENCH.getTag()),
+                STEAM_FORGE_HAMMER.getItem(BRONZE), of( 'B',  getForgelikeItemTag("plates/bronze"), 'W', AntimatterDefaultTools.WRENCH.getTag(), 'G', GEAR.getMaterialTag(Bronze), 'P', PISTONS, 'M', MACHINE_HULLS_CHEAP), "GPG", "BWB", "BMB");
+        provider.addItemRecipe(output, Ref.ID,"steam_compressor","machines", "has_wrench", provider.hasSafeItem(AntimatterDefaultTools.WRENCH.getTag()),
+                STEAM_COMPRESSOR.getItem(BRONZE), of( 'B',  getForgelikeItemTag("plates/bronze"), 'W', AntimatterDefaultTools.WRENCH.getTag(), 'G', GEAR.getMaterialTag(Bronze), 'P', PISTONS, 'M', MACHINE_HULLS_CHEAP), "BGB", "PWP", "BMB");
+        provider.addItemRecipe(output, Ref.ID,"steam_extractor","machines", "has_wrench", provider.hasSafeItem(AntimatterDefaultTools.WRENCH.getTag()),
+                STEAM_EXTRACTOR.getItem(BRONZE), of( 'B',  getForgelikeItemTag("plates/bronze"), 'W', AntimatterDefaultTools.WRENCH.getTag(),'P', PISTONS, 'M', MACHINE_HULLS_CHEAP), "BBB", "PWP", "BMB");
+        provider.addItemRecipe(output, Ref.ID,"high_pressure_coil_boiler","machines", "has_wrench", provider.hasSafeItem(AntimatterDefaultTools.WRENCH.getTag()),
+                COAL_BOILER.getItem(STEEL), of( 'P',  PLATES_STEELS, 'W', AntimatterDefaultTools.WRENCH.getTag(), 'B', Items.BRICKS, 'F', Items.FURNACE), "PPP", "PWP", "BFB");
         provider.addItemRecipe(output, Ref.ID,"high_pressure_coil_boiler_upgrade","machines", "has_bronze_coal_boiler", provider.hasSafeItem(COAL_BOILER.getItem(BRONZE)),
                 COAL_BOILER.getItem(STEEL), of( 'P',  PLATES_STEELS, 'C', COAL_BOILER.getItem(BRONZE)), "PPP", "PCP");
-        provider.addItemRecipe(output, Ref.ID,"high_pressure_steam_furnace","machines", "has_wrench", provider.hasSafeItem(WRENCH.getTag()),
-                STEAM_FURNACE.getItem(STEEL), of( 'P',  PLATES_STEELS, 'W', WRENCH.getTag(), 'B', Items.BRICKS, 'F', Items.FURNACE, 'M', MACHINE_HULLS_SEMI_CHEAP), "PWP", "PFP", "BMB");
+        provider.addItemRecipe(output, Ref.ID,"high_pressure_steam_furnace","machines", "has_wrench", provider.hasSafeItem(AntimatterDefaultTools.WRENCH.getTag()),
+                STEAM_FURNACE.getItem(STEEL), of( 'P',  PLATES_STEELS, 'W', AntimatterDefaultTools.WRENCH.getTag(), 'B', Items.BRICKS, 'F', Items.FURNACE, 'M', MACHINE_HULLS_SEMI_CHEAP), "PWP", "PFP", "BMB");
         provider.addItemRecipe(output, Ref.ID,"high_pressure_furnace_upgrade","machines", "has_bronze_furnace", provider.hasSafeItem(STEAM_FURNACE.getItem(BRONZE)),
                 STEAM_FURNACE.getItem(STEEL), of( 'P',  PLATES_STEELS, 'C', STEAM_FURNACE.getItem(BRONZE)), "PPP", "PCP");
     }
@@ -183,8 +184,8 @@ public class MachineCrafting {
                 SCANNER.getItem(HV), of('P', PLATES_STEELS, 'G', REINFORCED_GLASS, 'M', MotorHV, 'C', ComputerMonitor, 'c', CIRCUITS_ADVANCED, 'm', MACHINE_HULLS_ADVANCED), "PGP", "MCM", "cmc");
     }
     private static void loadUtilityBlockRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider){
-        provider.addItemRecipe(output, Ref.ID, "dustbin", "machines", "has_wrench", provider.hasSafeItem(WRENCH.getTag()),
-                DUSTBIN.getItem(LV), of2('H', HAMMER.getTag(), 'W', WRENCH.getTag(), 'S', SAW.getTag(), 'P', PLATES_STEELS, 'h', Items.HOPPER, 'R', RODS_STEELS), "HWS", "PhP", "RPR");
+        provider.addItemRecipe(output, Ref.ID, "dustbin", "machines", "has_wrench", provider.hasSafeItem(AntimatterDefaultTools.WRENCH.getTag()),
+                DUSTBIN.getItem(LV), of2('H', AntimatterDefaultTools.HAMMER.getTag(), 'W', AntimatterDefaultTools.WRENCH.getTag(), 'S', AntimatterDefaultTools.SAW.getTag(), 'P', PLATES_STEELS, 'h', Items.HOPPER, 'R', RODS_STEELS), "HWS", "PhP", "RPR");
         provider.addItemRecipe(output, Ref.ID, "electric_item_translocator", "machines", "has_machine_hull_basic", provider.hasSafeItem(MACHINE_HULLS_BASIC),
                 ELECTRIC_ITEM_TRANSLOCATOR.getItem(LV), of('B', BatteryRE, 'E', PLATE.getMaterialTag(Electrum), 'C', CIRCUITS_BASIC, 'c', ConveyorModule, 'M', MACHINE_HULLS_BASIC), "EBE", "CcC", "EME");
         provider.addItemRecipe(output, Ref.ID, "electric_fluid_translocator", "machines", "has_machine_hull_basic", provider.hasSafeItem(MACHINE_HULLS_BASIC),
@@ -205,17 +206,17 @@ public class MachineCrafting {
                 COMPUTER_CUBE.getItem(LV), of('C', CIRCUITS_MASTER, 'c', ComputerMonitor, 'B', MACHINE_HULLS_BASIC, 'D', CIRCUITS_ULTIMATE), "DcC", "cBc", "CcD");
         GT4RMaterialTags.DRUM.all().forEach(m -> {
             if (!m.has(PLATE) || !m.has(ROD)) return;
-            provider.addItemRecipe(output, Ref.ID, "drum_" + m.getId(), "machines", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), Machine.get(m.getId() + "_drum", Ref.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR), of('H', HAMMER.getTag(), 'R', ROD.getMaterialTag(m), 'P', PLATE.getMaterialTag(m)), " H ", "PRP", "PRP");
+            provider.addItemRecipe(output, Ref.ID, "drum_" + m.getId(), "machines", "has_hammer", provider.hasSafeItem(AntimatterDefaultTools.HAMMER.getTag()), Machine.get(m.getId() + "_drum", Ref.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR), of('H', AntimatterDefaultTools.HAMMER.getTag(), 'R', ROD.getMaterialTag(m), 'P', PLATE.getMaterialTag(m)), " H ", "PRP", "PRP");
         });
         GT4RMaterialTags.CABINET.all().forEach(m -> {
             provider.addItemRecipe(output, Ref.ID, "cabinet_" + m.getId(), "machines", "has_chest", provider.hasSafeItem(ForgeCTags.CHESTS_WOODEN), Machine.get(m.getId() + "_cabinet", Ref.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR), of('P', PLATE.getMaterialTag(m), 'C', ForgeCTags.CHESTS_WOODEN), "PPP", "CPC", "PPP");
-            provider.addItemRecipe(output, Ref.ID, "chest_" + m.getId(), "machines", "has_chest", provider.hasSafeItem(ForgeCTags.CHESTS_WOODEN), Machine.get(m.getId() + "_chest", Ref.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR), of('P', PLATE.getMaterialTag(m), 'C', ForgeCTags.CHESTS_WOODEN, 'R', ROD.getMaterialTag(m), 'S', SAW.getTag(), 'W', WRENCH.getTag()), "SPW", "RCR", "PPP");
+            provider.addItemRecipe(output, Ref.ID, "chest_" + m.getId(), "machines", "has_chest", provider.hasSafeItem(ForgeCTags.CHESTS_WOODEN), Machine.get(m.getId() + "_chest", Ref.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR), of('P', PLATE.getMaterialTag(m), 'C', ForgeCTags.CHESTS_WOODEN, 'R', ROD.getMaterialTag(m), 'S', AntimatterDefaultTools.SAW.getTag(), 'W', AntimatterDefaultTools.WRENCH.getTag()), "SPW", "RCR", "PPP");
         });
         GT4RMaterialTags.WORKBENCH.all().forEach(m -> {
-            provider.addItemRecipe(output, Ref.ID, "workbench_" + m.getId(), "machines", "has_chest", provider.hasSafeItem(ForgeCTags.CHESTS_WOODEN), Machine.get(m.getId() + "_workbench", Ref.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR), of('P', PLATE.getMaterialTag(m), 'C', ForgeCTags.CHESTS_WOODEN, 'c', Items.CRAFTING_TABLE, 'S', SCREWDRIVER.getTag()), "PSP", "PcP", "PCP");
+            provider.addItemRecipe(output, Ref.ID, "workbench_" + m.getId(), "machines", "has_chest", provider.hasSafeItem(ForgeCTags.CHESTS_WOODEN), Machine.get(m.getId() + "_workbench", Ref.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR), of('P', PLATE.getMaterialTag(m), 'C', ForgeCTags.CHESTS_WOODEN, 'c', Items.CRAFTING_TABLE, 'S', AntimatterDefaultTools.SCREWDRIVER.getTag()), "PSP", "PcP", "PCP");
         });
         GT4RMaterialTags.CHARGING_WORKBENCH.all().forEach(m -> {
-            provider.addItemRecipe(output, Ref.ID, "charging_workbench_" + m.getId(), "machines", "has_chest", provider.hasSafeItem(ForgeCTags.CHESTS_WOODEN), Machine.get(m.getId() + "_charging_workbench", Ref.ID).map(mch -> mch.getItem(HV)).orElse(Items.AIR), of2('S', SCREWDRIVER.getTag(), 'w', WIRE_CUTTER.getTag(), 'W', Machine.get(m.getId() + "_workbench", Ref.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR), 'c', CABLE_GOLD.getBlockItem(PipeSize.SMALL), 'C', CIRCUITS_ADVANCED, 'R', ROD.getMaterialTag(m)), "RCR", "SWw", "ccc");
+            provider.addItemRecipe(output, Ref.ID, "charging_workbench_" + m.getId(), "machines", "has_chest", provider.hasSafeItem(ForgeCTags.CHESTS_WOODEN), Machine.get(m.getId() + "_charging_workbench", Ref.ID).map(mch -> mch.getItem(HV)).orElse(Items.AIR), of2('S', AntimatterDefaultTools.SCREWDRIVER.getTag(), 'w', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'W', Machine.get(m.getId() + "_workbench", Ref.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR), 'c', CABLE_GOLD.getBlockItem(PipeSize.SMALL), 'C', CIRCUITS_ADVANCED, 'R', ROD.getMaterialTag(m)), "RCR", "SWw", "ccc");
         });
         GT4RMaterialTags.LOCKER.all().forEach(m -> {
             provider.addItemRecipe(output, Ref.ID, "locker_" + m.getId(), "machines", "has_chest", provider.hasSafeItem(Machine.get(m.getId() + "_cabinet", Ref.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR)), Machine.get(m.getId() + "_locker", Ref.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR), of('P', PLATE.getMaterialTag(m), 'R', ROD.getMaterialTag(m), 'L', Items.LEATHER, 'C', Machine.get(m.getId() + "_cabinet", Ref.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR), 'M', GT4RMaterialTags.HULL.getMaterialTag(m)), "RLR", "LCL", "PMP");

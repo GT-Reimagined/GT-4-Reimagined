@@ -1,6 +1,7 @@
 package trinsdar.gt4r.loader.crafting;
 
 import com.github.gregtechintergalactical.gtrubber.GTRubberData;
+import muramasa.antimatter.data.AntimatterDefaultTools;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.pipe.PipeSize;
@@ -56,72 +57,72 @@ public class Parts {
                 BatteryHullSmall, of('T', PLATE.getMaterialTag(BatteryAlloy), 'C', CABLE_TIN.getBlockItem(PipeSize.VTINY)), "C", "T", "T");
         provider.addItemRecipe(output, Ref.ID, "medium_battery_hull", "parts", "has_copper_cable", provider.hasSafeItem(CABLE_COPPER.getBlockItem(PipeSize.VTINY)),
                 BatteryHullMedium, of('T', PLATE.getMaterialTag(BatteryAlloy), 'C', CABLE_COPPER.getBlockItem(PipeSize.VTINY)), "C C", "TTT", "TTT");
-        provider.addItemRecipe(output, Ref.ID, "shape_empty", "parts", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),
-                EmptyShape, of('F', FILE.getTag(), 'H', HAMMER.getTag(), 'S', PLATE.getMaterialTag(Steel)), "HF", "SS", "SS");
-        provider.addItemRecipe(output, Ref.ID, "plate_mold", "parts", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),
-                MoldPlate, of('H', HAMMER.getTag(), 'P', EmptyShape), "H", "P");
-        provider.addItemRecipe(output, Ref.ID, "casing_mold", "parts", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),
-                MoldCasing, of('H', HAMMER.getTag(), 'P', EmptyShape), " H", "P ");
-        provider.addItemRecipe(output, Ref.ID, "gear_mold", "parts", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),
-                MoldGear, of('H', HAMMER.getTag(), 'P', EmptyShape), "PH");
-        provider.addItemRecipe(output, Ref.ID, "bottle_mold", "parts", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),
-                MoldBottle, of('H', HAMMER.getTag(), 'P', EmptyShape), "P ", " H");
-        provider.addItemRecipe(output, Ref.ID, "coinage_mold", "parts", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),
-                MoldCoinage, of('H', HAMMER.getTag(), 'P', EmptyShape), "H ", " P");
-        provider.addItemRecipe(output, Ref.ID, "ingot_mold", "parts", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),
-                MoldIngot, of('H', HAMMER.getTag(), 'P', EmptyShape), "P", "H");
-        provider.addItemRecipe(output, Ref.ID, "block_mold", "parts", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),
-                MoldBlock, of('H', HAMMER.getTag(), 'P', EmptyShape), "HP");
-        provider.addItemRecipe(output, Ref.ID, "nugget_mold", "parts", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),
-                MoldNugget, of('H', HAMMER.getTag(), 'P', EmptyShape), " P", "H ");
-        provider.addItemRecipe(output, Ref.ID, "plate_shape", "parts", "has_wire_cutter", provider.hasSafeItem(WIRE_CUTTER.getTag()),
-                ShapePlate, of('W', WIRE_CUTTER.getTag(), 'P', EmptyShape), "WP");
-        provider.addItemRecipe(output, Ref.ID, "rod_shape", "parts", "has_wire_cutter", provider.hasSafeItem(WIRE_CUTTER.getTag()),
-                ShapeRod, of('W', WIRE_CUTTER.getTag(), 'P', EmptyShape), "P ", " W");
-        provider.addItemRecipe(output, Ref.ID, "bolt_shape", "parts", "has_wire_cutter", provider.hasSafeItem(WIRE_CUTTER.getTag()),
-                ShapeBolt, of('W', WIRE_CUTTER.getTag(), 'P', EmptyShape), "W ", " P");
-        provider.addItemRecipe(output, Ref.ID, "ring_shape", "parts", "has_wire_cutter", provider.hasSafeItem(WIRE_CUTTER.getTag()),
-                ShapeRing, of('W', WIRE_CUTTER.getTag(), 'P', EmptyShape), "PW");
-        provider.addItemRecipe(output, Ref.ID, "cell_shape", "parts", "has_wire_cutter", provider.hasSafeItem(WIRE_CUTTER.getTag()),
-                ShapeCell, of('W', WIRE_CUTTER.getTag(), 'P', EmptyShape), "W", "P");
-        provider.addItemRecipe(output, Ref.ID, "ingot_shape", "parts", "has_wire_cutter", provider.hasSafeItem(WIRE_CUTTER.getTag()),
-                ShapeIngot, of('W', WIRE_CUTTER.getTag(), 'P', EmptyShape), " W", "P ");
-        provider.addItemRecipe(output, Ref.ID, "wire_shape", "parts", "has_wire_cutter", provider.hasSafeItem(WIRE_CUTTER.getTag()),
-                ShapeWire, of('W', WIRE_CUTTER.getTag(), 'P', EmptyShape), "P", "W");
-        provider.addItemRecipe(output, Ref.ID, "casing_shape", "parts", "has_wire_cutter", provider.hasSafeItem(WIRE_CUTTER.getTag()),
-                ShapeCasing, of('W', WIRE_CUTTER.getTag(), 'P', EmptyShape), " P", "W ");
-        provider.addItemRecipe(output, Ref.ID, "tiny_pipe_shape", "parts", "has_wire_cutter", provider.hasSafeItem(WIRE_CUTTER.getTag()),
-                ShapePipeTiny, of('W', WIRE_CUTTER.getTag(), 'P', EmptyShape), " W", "  ", "P ");
-        provider.addItemRecipe(output, Ref.ID, "small_pipe_shape", "parts", "has_wire_cutter", provider.hasSafeItem(WIRE_CUTTER.getTag()),
-                ShapePipeSmall, of('W', WIRE_CUTTER.getTag(), 'P', EmptyShape), "P  ", "  W");
-        provider.addItemRecipe(output, Ref.ID, "normal_pipe_shape", "parts", "has_wire_cutter", provider.hasSafeItem(WIRE_CUTTER.getTag()),
-                ShapePipeNormal, of('W', WIRE_CUTTER.getTag(), 'P', EmptyShape), "P ", "  ", " W");
-        provider.addItemRecipe(output, Ref.ID, "large_pipe_shape", "parts", "has_wire_cutter", provider.hasSafeItem(WIRE_CUTTER.getTag()),
-                ShapePipeLarge, of('W', WIRE_CUTTER.getTag(), 'P', EmptyShape), "P  ", "   ", "  W");
-        provider.addItemRecipe(output, Ref.ID, "huge_pipe_shape", "parts", "has_wire_cutter", provider.hasSafeItem(WIRE_CUTTER.getTag()),
-                ShapePipeHuge, of('W', WIRE_CUTTER.getTag(), 'P', EmptyShape), "  W", "   ", "P  ");
-        provider.addItemRecipe(output, Ref.ID, "block_shape", "parts", "has_wire_cutter", provider.hasSafeItem(WIRE_CUTTER.getTag()),
-                ShapeBlock, of('W', WIRE_CUTTER.getTag(), 'P', EmptyShape), "P W");
-        provider.addItemRecipe(output, Ref.ID, "sword_head_shape", "parts", "has_wire_cutter", provider.hasSafeItem(WIRE_CUTTER.getTag()),
-                ShapeHeadSword, of('W', WIRE_CUTTER.getTag(), 'P', EmptyShape), "P", " ", "W");
-        provider.addItemRecipe(output, Ref.ID, "pickaxe_head_shape", "parts", "has_wire_cutter", provider.hasSafeItem(WIRE_CUTTER.getTag()),
-                ShapeHeadPickaxe, of('W', WIRE_CUTTER.getTag(), 'P', EmptyShape), " P", "  ", "W ");
-        provider.addItemRecipe(output, Ref.ID, "shovel_head_shape", "parts", "has_wire_cutter", provider.hasSafeItem(WIRE_CUTTER.getTag()),
-                ShapeHeadShovel, of('W', WIRE_CUTTER.getTag(), 'P', EmptyShape), "  P", "   ", "W  ");
-        provider.addItemRecipe(output, Ref.ID, "axe_head_shape", "parts", "has_wire_cutter", provider.hasSafeItem(WIRE_CUTTER.getTag()),
-                ShapeHeadAxe, of('W', WIRE_CUTTER.getTag(), 'P', EmptyShape), "  P", "W  ");
-        provider.addItemRecipe(output, Ref.ID, "hoe_head_shape", "parts", "has_wire_cutter", provider.hasSafeItem(WIRE_CUTTER.getTag()),
-                ShapeHeadHoe, of('W', WIRE_CUTTER.getTag(), 'P', EmptyShape), "W P");
-        provider.addItemRecipe(output, Ref.ID, "hammer_head_shape", "parts", "has_wire_cutter", provider.hasSafeItem(WIRE_CUTTER.getTag()),
-                ShapeHeadHammer, of('W', WIRE_CUTTER.getTag(), 'P', EmptyShape), "W  ", "  P");
-        provider.addItemRecipe(output, Ref.ID, "file_head_shape", "parts", "has_wire_cutter", provider.hasSafeItem(WIRE_CUTTER.getTag()),
-                ShapeHeadFile, of('W', WIRE_CUTTER.getTag(), 'P', EmptyShape), "W  ", "   ", "  P");
-        provider.addItemRecipe(output, Ref.ID, "saw_head_shape", "parts", "has_wire_cutter", provider.hasSafeItem(WIRE_CUTTER.getTag()),
-                ShapeHeadSaw, of('W', WIRE_CUTTER.getTag(), 'P', EmptyShape), "W ", "  ", " P");
-        provider.addItemRecipe(output, Ref.ID, "gear_shape", "parts", "has_wire_cutter", provider.hasSafeItem(WIRE_CUTTER.getTag()),
-                ShapeGear, of('W', WIRE_CUTTER.getTag(), 'P', EmptyShape), "W", " ", "P");
-        provider.addItemRecipe(output, Ref.ID, "bottle_shape", "parts", "has_wire_cutter", provider.hasSafeItem(WIRE_CUTTER.getTag()),
-                ShapeBottle, of('W', WIRE_CUTTER.getTag(), 'P', EmptyShape), "  W", "P  ");
+        provider.addItemRecipe(output, Ref.ID, "shape_empty", "parts", "has_hammer", provider.hasSafeItem(AntimatterDefaultTools.HAMMER.getTag()),
+                EmptyShape, of('F', AntimatterDefaultTools.FILE.getTag(), 'H', AntimatterDefaultTools.HAMMER.getTag(), 'S', PLATE.getMaterialTag(Steel)), "HF", "SS", "SS");
+        provider.addItemRecipe(output, Ref.ID, "plate_mold", "parts", "has_hammer", provider.hasSafeItem(AntimatterDefaultTools.HAMMER.getTag()),
+                MoldPlate, of('H', AntimatterDefaultTools.HAMMER.getTag(), 'P', EmptyShape), "H", "P");
+        provider.addItemRecipe(output, Ref.ID, "casing_mold", "parts", "has_hammer", provider.hasSafeItem(AntimatterDefaultTools.HAMMER.getTag()),
+                MoldCasing, of('H', AntimatterDefaultTools.HAMMER.getTag(), 'P', EmptyShape), " H", "P ");
+        provider.addItemRecipe(output, Ref.ID, "gear_mold", "parts", "has_hammer", provider.hasSafeItem(AntimatterDefaultTools.HAMMER.getTag()),
+                MoldGear, of('H', AntimatterDefaultTools.HAMMER.getTag(), 'P', EmptyShape), "PH");
+        provider.addItemRecipe(output, Ref.ID, "bottle_mold", "parts", "has_hammer", provider.hasSafeItem(AntimatterDefaultTools.HAMMER.getTag()),
+                MoldBottle, of('H', AntimatterDefaultTools.HAMMER.getTag(), 'P', EmptyShape), "P ", " H");
+        provider.addItemRecipe(output, Ref.ID, "coinage_mold", "parts", "has_hammer", provider.hasSafeItem(AntimatterDefaultTools.HAMMER.getTag()),
+                MoldCoinage, of('H', AntimatterDefaultTools.HAMMER.getTag(), 'P', EmptyShape), "H ", " P");
+        provider.addItemRecipe(output, Ref.ID, "ingot_mold", "parts", "has_hammer", provider.hasSafeItem(AntimatterDefaultTools.HAMMER.getTag()),
+                MoldIngot, of('H', AntimatterDefaultTools.HAMMER.getTag(), 'P', EmptyShape), "P", "H");
+        provider.addItemRecipe(output, Ref.ID, "block_mold", "parts", "has_hammer", provider.hasSafeItem(AntimatterDefaultTools.HAMMER.getTag()),
+                MoldBlock, of('H', AntimatterDefaultTools.HAMMER.getTag(), 'P', EmptyShape), "HP");
+        provider.addItemRecipe(output, Ref.ID, "nugget_mold", "parts", "has_hammer", provider.hasSafeItem(AntimatterDefaultTools.HAMMER.getTag()),
+                MoldNugget, of('H', AntimatterDefaultTools.HAMMER.getTag(), 'P', EmptyShape), " P", "H ");
+        provider.addItemRecipe(output, Ref.ID, "plate_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
+                ShapePlate, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), "WP");
+        provider.addItemRecipe(output, Ref.ID, "rod_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
+                ShapeRod, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), "P ", " W");
+        provider.addItemRecipe(output, Ref.ID, "bolt_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
+                ShapeBolt, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), "W ", " P");
+        provider.addItemRecipe(output, Ref.ID, "ring_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
+                ShapeRing, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), "PW");
+        provider.addItemRecipe(output, Ref.ID, "cell_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
+                ShapeCell, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), "W", "P");
+        provider.addItemRecipe(output, Ref.ID, "ingot_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
+                ShapeIngot, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), " W", "P ");
+        provider.addItemRecipe(output, Ref.ID, "wire_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
+                ShapeWire, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), "P", "W");
+        provider.addItemRecipe(output, Ref.ID, "casing_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
+                ShapeCasing, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), " P", "W ");
+        provider.addItemRecipe(output, Ref.ID, "tiny_pipe_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
+                ShapePipeTiny, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), " W", "  ", "P ");
+        provider.addItemRecipe(output, Ref.ID, "small_pipe_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
+                ShapePipeSmall, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), "P  ", "  W");
+        provider.addItemRecipe(output, Ref.ID, "normal_pipe_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
+                ShapePipeNormal, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), "P ", "  ", " W");
+        provider.addItemRecipe(output, Ref.ID, "large_pipe_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
+                ShapePipeLarge, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), "P  ", "   ", "  W");
+        provider.addItemRecipe(output, Ref.ID, "huge_pipe_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
+                ShapePipeHuge, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), "  W", "   ", "P  ");
+        provider.addItemRecipe(output, Ref.ID, "block_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
+                ShapeBlock, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), "P W");
+        provider.addItemRecipe(output, Ref.ID, "sword_head_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
+                ShapeHeadSword, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), "P", " ", "W");
+        provider.addItemRecipe(output, Ref.ID, "pickaxe_head_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
+                ShapeHeadPickaxe, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), " P", "  ", "W ");
+        provider.addItemRecipe(output, Ref.ID, "shovel_head_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
+                ShapeHeadShovel, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), "  P", "   ", "W  ");
+        provider.addItemRecipe(output, Ref.ID, "axe_head_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
+                ShapeHeadAxe, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), "  P", "W  ");
+        provider.addItemRecipe(output, Ref.ID, "hoe_head_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
+                ShapeHeadHoe, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), "W P");
+        provider.addItemRecipe(output, Ref.ID, "hammer_head_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
+                ShapeHeadHammer, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), "W  ", "  P");
+        provider.addItemRecipe(output, Ref.ID, "file_head_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
+                ShapeHeadFile, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), "W  ", "   ", "  P");
+        provider.addItemRecipe(output, Ref.ID, "saw_head_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
+                ShapeHeadSaw, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), "W ", "  ", " P");
+        provider.addItemRecipe(output, Ref.ID, "gear_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
+                ShapeGear, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), "W", " ", "P");
+        provider.addItemRecipe(output, Ref.ID, "bottle_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
+                ShapeBottle, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), "  W", "P  ");
         provider.addStackRecipe(output, Ref.ID, "energium_dust", "parts", "has_diamond_dust", provider.hasSafeItem(DUST.getMaterialTag(Diamond)),
                 DUST.get(Energium, 9), of('R', DUST.getMaterialTag(Redstone), 'D', DUST.getMaterialTag(Diamond)), "RDR", "DRD", "RDR");
         provider.addStackRecipe(output, Ref.ID, "energium_dust2", "parts", "has_ruby_dust", provider.hasSafeItem(DUST.getMaterialTag(Ruby)),
@@ -249,10 +250,10 @@ public class Parts {
                 new ItemStack(ItemSuperconductor, 4), of('H', RecipeIngredient.of(Helium.getCellGas(1, CellTin)), 'T', PLATE.getMaterialTag(Tungsten), 'I', IridiumReinforcedPlate, 'C', CIRCUITS_MASTER), "HHH", "TIT", "CCC");
         provider.shapeless(output, Ref.ID, "bronze_dust", "had_copper", provider.hasSafeItem(DUST.getMaterialTag(Bronze)),
                 DUST.get(Bronze, 4), DUST.get(Copper), DUST.get(Copper), DUST.get(Copper), DUST.get(Tin));
-        provider.addItemRecipe(output, Ref.ID, "int_circuit", "parts", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),
-                INT_CIRCUITS_ITEMS.get(0), of('R', ROD.getMaterialTag(Iron), 'P', PLATE.getMaterialTag(Iron), 'H', HAMMER.getTag(), 'W', WRENCH.getTag()), "PHP", "RRR", "PWP");
-        provider.addItemRecipe(output, Ref.ID, "int_circuit1", "parts", "has_hammer", provider.hasSafeItem(HAMMER.getTag()),
-                INT_CIRCUITS_ITEMS.get(0), of('R', ROD.getMaterialTag(WroughtIron), 'P', PLATE.getMaterialTag(WroughtIron), 'H', HAMMER.getTag(), 'W', WRENCH.getTag()), "PHP", "RRR", "PWP");
+        provider.addItemRecipe(output, Ref.ID, "int_circuit", "parts", "has_hammer", provider.hasSafeItem(AntimatterDefaultTools.HAMMER.getTag()),
+                INT_CIRCUITS_ITEMS.get(0), of('R', ROD.getMaterialTag(Iron), 'P', PLATE.getMaterialTag(Iron), 'H', AntimatterDefaultTools.HAMMER.getTag(), 'W', AntimatterDefaultTools.WRENCH.getTag()), "PHP", "RRR", "PWP");
+        provider.addItemRecipe(output, Ref.ID, "int_circuit1", "parts", "has_hammer", provider.hasSafeItem(AntimatterDefaultTools.HAMMER.getTag()),
+                INT_CIRCUITS_ITEMS.get(0), of('R', ROD.getMaterialTag(WroughtIron), 'P', PLATE.getMaterialTag(WroughtIron), 'H', AntimatterDefaultTools.HAMMER.getTag(), 'W', AntimatterDefaultTools.WRENCH.getTag()), "PHP", "RRR", "PWP");
         provider.addItemRecipe(output, Ref.ID, "motor_lv", "parts", "has_tin_cable", provider.hasSafeItem(CABLE_TIN.getBlockItem(PipeSize.VTINY)),
                 MotorLV, of('T', CABLE_TIN.getBlockItem(PipeSize.VTINY), 'C', WIRE_COPPER.getBlockItem(PipeSize.VTINY), 'I', ROD.getMaterialTag(Steel), 'M', RODS_MAGNETIC), "TCI", "CMC", "ICT");
         provider.addItemRecipe(output, Ref.ID, "motor_mv", "parts", "has_copper_cable", provider.hasSafeItem(CABLE_COPPER.getBlockItem(PipeSize.VTINY)),

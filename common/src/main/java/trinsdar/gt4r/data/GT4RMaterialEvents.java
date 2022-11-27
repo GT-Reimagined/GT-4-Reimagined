@@ -1,13 +1,13 @@
 package trinsdar.gt4r.data;
 
 import muramasa.antimatter.Data;
+import muramasa.antimatter.data.AntimatterDefaultTools;
 import muramasa.antimatter.event.MaterialEvent;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialTags;
 import muramasa.antimatter.mixin.BlockLootTablesAccessor;
 import muramasa.antimatter.ore.BlockOre;
 import muramasa.antimatter.ore.BlockOreStone;
-import net.minecraft.data.loot.BlockLoot;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -19,7 +19,6 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import trinsdar.gt4r.datagen.GT4RRandomDropBonus;
 
-import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import static com.google.common.collect.ImmutableMap.of;
@@ -245,8 +244,8 @@ public class GT4RMaterialEvents {
         event.setMaterial(BlueSteel).asMetal(1400, 1400, FRAME).addTools(3.5F, 7.5F, 1024, 2).mats(of(RoseGold, 1, Brass, 1, Steel, 2, BlackSteel, 4));
 
         /** Solids (Plastic Related Stuff)**/
-        event.setMaterial(Plastic).asSolid(295, 0, PLATE, RUBBERTOOLS).addTools(0.0F, 0.0F, 64, 0, of(), SOFT_HAMMER).addHandleStat(66, 0.5F).mats(of(Carbon, 1, Hydrogen, 2));
-        event.setMaterial(Rubber).asSolid(295, 0, PLATE, RUBBERTOOLS).addTools(0.0F, 0.0F, 64, 0, of(), SOFT_HAMMER).addHandleStat(11, 0.4F).mats(of(Carbon, 5, Hydrogen, 8));
+        event.setMaterial(Plastic).asSolid(295, 0, PLATE, RUBBERTOOLS).addTools(0.0F, 0.0F, 64, 0, of(), AntimatterDefaultTools.SOFT_HAMMER).addHandleStat(66, 0.5F).mats(of(Carbon, 1, Hydrogen, 2));
+        event.setMaterial(Rubber).asSolid(295, 0, PLATE, RUBBERTOOLS).addTools(0.0F, 0.0F, 64, 0, of(), AntimatterDefaultTools.SOFT_HAMMER).addHandleStat(11, 0.4F).mats(of(Carbon, 5, Hydrogen, 8));
 
         /** Stones **/
         event.setMaterial(RedGranite).asDust(ROCK).addHandleStat(74, 1.0F, of(Enchantments.UNBREAKING, 1)).mats(of(Aluminium, 2, PotassiumFeldspar, 1, Oxygen, 3));
@@ -391,7 +390,7 @@ public class GT4RMaterialEvents {
         event.setMaterial(Gold).flags(GEAR).addByProduct(Copper, Nickel);
         event.setMaterial(Copper).flags(PLATE, ROD, GEAR).addByProduct(Gold, Nickel);
         event.setMaterial(Water).mats(of(Hydrogen, 2, Oxygen, 1));
-        event.setMaterial(Flint).setAllowedTypes(PICKAXE, AXE, SHOVEL, SWORD, HOE, MORTAR, KNIFE).mats(of(SiliconDioxide, 1));
+        event.setMaterial(Flint).setAllowedTypes(AntimatterDefaultTools.PICKAXE, AntimatterDefaultTools.AXE, AntimatterDefaultTools.SHOVEL, AntimatterDefaultTools.SWORD, AntimatterDefaultTools.HOE, AntimatterDefaultTools.MORTAR, AntimatterDefaultTools.KNIFE).mats(of(SiliconDioxide, 1));
         event.setMaterial(Wood).mats(of(Carbon, 1, Oxygen, 1, Hydrogen, 1));
         event.setMaterial(Blaze).mats(of(Sulfur, 1, DarkAsh, 1/*, Magic, 1*/));
         event.setMaterial(Charcoal).mats(of(Carbon, 1));

@@ -1,7 +1,5 @@
 package trinsdar.gt4r.events;
 
-import dev.architectury.event.events.common.PlayerEvent;
-import dev.architectury.event.events.common.TickEvent;
 import muramasa.antimatter.tool.IAntimatterTool;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -12,12 +10,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import trinsdar.gt4r.data.Attributes;
 
 import java.util.UUID;
 
-import static muramasa.antimatter.Data.DRILL;
-import static muramasa.antimatter.Data.PICKAXE;
+import static muramasa.antimatter.data.AntimatterDefaultTools.DRILL;
+import static muramasa.antimatter.data.AntimatterDefaultTools.PICKAXE;
 
 public class CommonEvents {
     @SuppressWarnings("NoTranslation")

@@ -2,12 +2,12 @@ package trinsdar.gt4r.loader;
 
 import com.google.common.collect.ImmutableMap;
 import muramasa.antimatter.AntimatterAPI;
+import muramasa.antimatter.data.AntimatterDefaultTools;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialTags;
 import muramasa.antimatter.ore.CobbleStoneType;
 import muramasa.antimatter.ore.StoneType;
-import muramasa.antimatter.recipe.ingredient.PropertyIngredient;
 import muramasa.antimatter.util.AntimatterPlatformUtils;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
@@ -19,16 +19,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.resources.ResourceLocation;
-import trinsdar.gt4r.GT4RConfig;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.GT4RMaterialTags;
 
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 import static com.google.common.collect.ImmutableMap.of;
 import static muramasa.antimatter.Data.*;
-import static muramasa.antimatter.recipe.RecipeBuilders.DUST_BUILDER;
 import static trinsdar.gt4r.data.GT4RMaterialTags.*;
 import static trinsdar.gt4r.data.Materials.*;
 
@@ -44,15 +41,15 @@ public class MaterialRecipeLoader {
     //TODO: Plasma Arc/Normal Arc smelting will be handled differently, when we have said amount system.
 
     public static void loadRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider) {
-        final CriterionTriggerInstance in = provider.hasSafeItem(WRENCH.getTag());
+        final CriterionTriggerInstance in = provider.hasSafeItem(AntimatterDefaultTools.WRENCH.getTag());
         if (AntimatterAPI.isModLoaded(Ref.MOD_BLUEPOWER)){
             provider.shapeless(output, "amethyst_gem_convert", "gems", "has_gem", provider.hasSafeItem(GEM.getMaterialTag(Amethyst)), GEM.get(Amethyst, 1), AntimatterPlatformUtils.getItemFromID(new ResourceLocation(Ref.MOD_BLUEPOWER, "amethyst_gem")));
         }
         GT4RMaterialTags.HULL.all().forEach(m -> {
-            provider.addItemRecipe(output, Ref.ID, m.getId() + "_hull", "hulls", "has_wrench", provider.hasSafeItem(WRENCH.getTag()), GT4RMaterialTags.HULL.get(m), ImmutableMap.of('P', PLATE.getMaterialTag(m), 'W', WRENCH.getTag()), "PPP", "PWP", "PPP");
+            provider.addItemRecipe(output, Ref.ID, m.getId() + "_hull", "hulls", "has_wrench", provider.hasSafeItem(AntimatterDefaultTools.WRENCH.getTag()), GT4RMaterialTags.HULL.get(m), ImmutableMap.of('P', PLATE.getMaterialTag(m), 'W', AntimatterDefaultTools.WRENCH.getTag()), "PPP", "PWP", "PPP");
         });
         GT4RMaterialTags.TURBINE_BLADE.all().forEach(m -> {
-            provider.addItemRecipe(output, Ref.ID, m.getId() + "_turbine_blade", "turbine_blades", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), GT4RMaterialTags.TURBINE_BLADE.get(m), ImmutableMap.of('P', PLATE.getMaterialTag(m), 'H', HAMMER.getTag(), 'F', FILE.getTag()), " H ", "PPP", " F ");
+            provider.addItemRecipe(output, Ref.ID, m.getId() + "_turbine_blade", "turbine_blades", "has_hammer", provider.hasSafeItem(AntimatterDefaultTools.HAMMER.getTag()), GT4RMaterialTags.TURBINE_BLADE.get(m), ImmutableMap.of('P', PLATE.getMaterialTag(m), 'H', AntimatterDefaultTools.HAMMER.getTag(), 'F', AntimatterDefaultTools.FILE.getTag()), " H ", "PPP", " F ");
         });
         GT4RMaterialTags.TURBINE_ROTOR.all().forEach(m -> {
             if (m.has(GT4RMaterialTags.TURBINE_BLADE) && (m.has(BLOCK) || m == Carbon)){
@@ -79,25 +76,25 @@ public class MaterialRecipeLoader {
         DRILLBIT.all().forEach(m -> {
             if (m.has(PLATE) || m.has(GEM)){
                 TagKey<?> plate = m.has(PLATE) ? PLATE.getMaterialTag(m) : GEM.getMaterialTag(m);
-                provider.addItemRecipe(output, Ref.ID, m.getId() + "_drillbit", "drillbits", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), DRILLBIT.get(m), ImmutableMap.of('H', HAMMER.getTag(), 'P', plate, 'S', PLATE.getMaterialTag(Steel)), "PSP", "PSP", "SHS");
+                provider.addItemRecipe(output, Ref.ID, m.getId() + "_drillbit", "drillbits", "has_hammer", provider.hasSafeItem(AntimatterDefaultTools.HAMMER.getTag()), DRILLBIT.get(m), ImmutableMap.of('H', AntimatterDefaultTools.HAMMER.getTag(), 'P', plate, 'S', PLATE.getMaterialTag(Steel)), "PSP", "PSP", "SHS");
             }
         });
         CHAINSAWBIT.all().forEach(m -> {
             if (m.has(PLATE) || m.has(GEM)){
                 TagKey<?> plate = m.has(PLATE) ? PLATE.getMaterialTag(m) : GEM.getMaterialTag(m);
-                provider.addItemRecipe(output, Ref.ID, m.getId() + "_chainsawbit", "chainsawbits", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), CHAINSAWBIT.get(m), ImmutableMap.of('H', HAMMER.getTag(), 'P', plate, 'S', PLATE.getMaterialTag(Steel), 'R', RING.getMaterialTag(Steel)), "SRS", "PHP", "SRS");
+                provider.addItemRecipe(output, Ref.ID, m.getId() + "_chainsawbit", "chainsawbits", "has_hammer", provider.hasSafeItem(AntimatterDefaultTools.HAMMER.getTag()), CHAINSAWBIT.get(m), ImmutableMap.of('H', AntimatterDefaultTools.HAMMER.getTag(), 'P', plate, 'S', PLATE.getMaterialTag(Steel), 'R', RING.getMaterialTag(Steel)), "SRS", "PHP", "SRS");
             }
         });
         WRENCHBIT.all().forEach(m -> {
             if (m.has(PLATE) || m.has(GEM)){
                 TagKey<?> plate = m.has(PLATE) ? PLATE.getMaterialTag(m) : GEM.getMaterialTag(m);
-                provider.addItemRecipe(output, Ref.ID, m.getId() + "_wrenchbit", "wrenchbits", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), WRENCHBIT.get(m), ImmutableMap.of('H', HAMMER.getTag(), 'P', plate, 'S', SCREW.getMaterialTag(Steel), 'R', RING.getMaterialTag(Steel), 's', SCREWDRIVER.getTag()), "HPS", "PRP", "SPs");
+                provider.addItemRecipe(output, Ref.ID, m.getId() + "_wrenchbit", "wrenchbits", "has_hammer", provider.hasSafeItem(AntimatterDefaultTools.HAMMER.getTag()), WRENCHBIT.get(m), ImmutableMap.of('H', AntimatterDefaultTools.HAMMER.getTag(), 'P', plate, 'S', SCREW.getMaterialTag(Steel), 'R', RING.getMaterialTag(Steel), 's', AntimatterDefaultTools.SCREWDRIVER.getTag()), "HPS", "PRP", "SPs");
             }
         });
         BUZZSAW_BLADE.all().forEach(m -> {
             if (m.has(PLATE) || m.has(GEM)){
                 TagKey<?> plate = m.has(PLATE) ? PLATE.getMaterialTag(m) : GEM.getMaterialTag(m);
-                provider.addItemRecipe(output, Ref.ID, m.getId() + "_buzzsaw_blade", "buzzsaw_blades", "has_hammer", provider.hasSafeItem(HAMMER.getTag()), BUZZSAW_BLADE.get(m), ImmutableMap.of('H', HAMMER.getTag(), 'P', plate, 'F', FILE.getTag(), 'W', WRENCH.getTag(), 'C', WIRE_CUTTER.getTag()), "WPH", "P P", "FPC");
+                provider.addItemRecipe(output, Ref.ID, m.getId() + "_buzzsaw_blade", "buzzsaw_blades", "has_hammer", provider.hasSafeItem(AntimatterDefaultTools.HAMMER.getTag()), BUZZSAW_BLADE.get(m), ImmutableMap.of('H', AntimatterDefaultTools.HAMMER.getTag(), 'P', plate, 'F', AntimatterDefaultTools.FILE.getTag(), 'W', AntimatterDefaultTools.WRENCH.getTag(), 'C', AntimatterDefaultTools.WIRE_CUTTER.getTag()), "WPH", "P P", "FPC");
             }
         });
         AntimatterAPI.all(StoneType.class).forEach(s -> {
@@ -158,35 +155,35 @@ public class MaterialRecipeLoader {
             TagKey<Item> ingotGem = m.has(INGOT) ? INGOT.getMaterialTag(m) : GEM.getMaterialTag(m);
             if (m.has(PICKAXE_HEAD)) {
                 provider.addStackRecipe(output, Ref.ANTIMATTER, m.getId() + "_pickaxe_head", "antimatter_dusts",
-                        "has_wrench", in, PICKAXE_HEAD.get(m,1), of('P', plate, 'I', ingotGem, 'H', HAMMER.getTag(), 'F', FILE.getTag()), "PII", "F H");
+                        "has_wrench", in, PICKAXE_HEAD.get(m,1), of('P', plate, 'I', ingotGem, 'H', AntimatterDefaultTools.HAMMER.getTag(), 'F', AntimatterDefaultTools.FILE.getTag()), "PII", "F H");
             }
             if (m.has(AXE_HEAD)){
                 provider.addStackRecipe(output, Ref.ANTIMATTER, m.getId() + "_axe_head", "antimatter_dusts",
-                        "has_wrench", in, AXE_HEAD.get(m,1), of('P', plate, 'I', ingotGem, 'H', HAMMER.getTag(), 'F', FILE.getTag()), "PIH", "P  ", "F  ");
+                        "has_wrench", in, AXE_HEAD.get(m,1), of('P', plate, 'I', ingotGem, 'H', AntimatterDefaultTools.HAMMER.getTag(), 'F', AntimatterDefaultTools.FILE.getTag()), "PIH", "P  ", "F  ");
             }
             if (m.has(SHOVEL_HEAD)){
                 provider.addStackRecipe(output, Ref.ANTIMATTER, m.getId() + "_shovel_head", "antimatter_dusts",
-                        "has_wrench", in, SHOVEL_HEAD.get(m,1), of('P', plate, 'H', HAMMER.getTag(), 'F', FILE.getTag()), "FPH");
+                        "has_wrench", in, SHOVEL_HEAD.get(m,1), of('P', plate, 'H', AntimatterDefaultTools.HAMMER.getTag(), 'F', AntimatterDefaultTools.FILE.getTag()), "FPH");
             }
             if (m.has(SWORD_HEAD)){
                 provider.addStackRecipe(output, Ref.ANTIMATTER, m.getId() + "_sword_head", "antimatter_dusts",
-                        "has_wrench", in, SWORD_HEAD.get(m,1), of('P', plate, 'H', HAMMER.getTag(), 'F', FILE.getTag()), " P ", "FPH");
+                        "has_wrench", in, SWORD_HEAD.get(m,1), of('P', plate, 'H', AntimatterDefaultTools.HAMMER.getTag(), 'F', AntimatterDefaultTools.FILE.getTag()), " P ", "FPH");
             }
             if (m.has(HOE_HEAD)){
                 provider.addStackRecipe(output, Ref.ANTIMATTER, m.getId() + "_hoe_head", "antimatter_dusts",
-                        "has_wrench", in, HOE_HEAD.get(m,1), of('P', plate, 'I', ingotGem, 'H', HAMMER.getTag(), 'F', FILE.getTag()), "PIH", "F  ");
+                        "has_wrench", in, HOE_HEAD.get(m,1), of('P', plate, 'I', ingotGem, 'H', AntimatterDefaultTools.HAMMER.getTag(), 'F', AntimatterDefaultTools.FILE.getTag()), "PIH", "F  ");
             }
             if (m.has(HAMMER_HEAD)){
                 provider.addStackRecipe(output, Ref.ANTIMATTER, m.getId() + "_hammer_head", "antimatter_dusts",
-                        "has_wrench", in, HAMMER_HEAD.get(m,1), of('I', ingotGem, 'H', HAMMER.getTag()), "II ", "IIH", "II ");
+                        "has_wrench", in, HAMMER_HEAD.get(m,1), of('I', ingotGem, 'H', AntimatterDefaultTools.HAMMER.getTag()), "II ", "IIH", "II ");
             }
             if (m.has(SAW_HEAD)){
                 provider.addStackRecipe(output, Ref.ANTIMATTER, m.getId() + "_saw_head", "antimatter_dusts",
-                        "has_wrench", in, SAW_HEAD.get(m,1), of('P', plate, 'H', HAMMER.getTag(), 'F', FILE.getTag()), "PP", "FH");
+                        "has_wrench", in, SAW_HEAD.get(m,1), of('P', plate, 'H', AntimatterDefaultTools.HAMMER.getTag(), 'F', AntimatterDefaultTools.FILE.getTag()), "PP", "FH");
             }
             if (m.has(FILE_HEAD)){
                 provider.addStackRecipe(output, Ref.ANTIMATTER, m.getId() + "_file_head", "antimatter_dusts",
-                        "has_wrench", in, FILE_HEAD.get(m,1), of('P', plate, 'H', HAMMER.getTag(), 'F', FILE.getTag()), "FPH", " P ");
+                        "has_wrench", in, FILE_HEAD.get(m,1), of('P', plate, 'H', AntimatterDefaultTools.HAMMER.getTag(), 'F', AntimatterDefaultTools.FILE.getTag()), "FPH", " P ");
             }
         });
 

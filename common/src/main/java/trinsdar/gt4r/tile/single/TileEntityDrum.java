@@ -31,9 +31,9 @@ import trinsdar.gt4r.machine.MaterialMachine;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static muramasa.antimatter.Data.ELECTRIC_WRENCH;
+import static muramasa.antimatter.data.AntimatterDefaultTools.ELECTRIC_WRENCH;
 import static muramasa.antimatter.Data.Netherite;
-import static muramasa.antimatter.Data.WRENCH;
+import static muramasa.antimatter.data.AntimatterDefaultTools.WRENCH;
 import static net.minecraft.core.Direction.DOWN;
 import static net.minecraft.core.Direction.UP;
 import static trinsdar.gt4r.data.Materials.*;
