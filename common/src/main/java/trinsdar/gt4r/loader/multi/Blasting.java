@@ -1,5 +1,6 @@
 package trinsdar.gt4r.loader.multi;
 
+import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialTags;
 import muramasa.antimatter.util.TagUtils;
@@ -20,20 +21,20 @@ public class Blasting {
     public static int mixedOreYield = Ref.mixedOreYieldsTwoThirdsPureOre ? 2 : 3;
 
     public static void init() {
-        BASIC_BLASTING.RB().ii(DUST.getMaterialIngredient(CoalCoke, 2), INGOT.getMaterialIngredient(Iron, 1)).io(INGOT.get(Steel,1), DUST_TINY.get(DarkAsh, 2)).add(7200);
-        BASIC_BLASTING.RB().ii(of(DUSTS_COALS, 4), INGOT.getMaterialIngredient(Iron, 1)).io(INGOT.get(Steel,1), DUST_TINY.get(DarkAsh, 4)).add(7200);
+        BASIC_BLASTING.RB().ii(DUST.getMaterialIngredient(CoalCoke, 2), INGOT.getMaterialIngredient(AntimatterMaterials.Iron, 1)).io(INGOT.get(Steel,1), DUST_TINY.get(DarkAsh, 2)).add(7200);
+        BASIC_BLASTING.RB().ii(of(DUSTS_COALS, 4), INGOT.getMaterialIngredient(AntimatterMaterials.Iron, 1)).io(INGOT.get(Steel,1), DUST_TINY.get(DarkAsh, 4)).add(7200);
         BASIC_BLASTING.RB().ii(of(DUSTS_COALS, 2), DUST.getMaterialIngredient(Steel, 1)).io(INGOT.get(Steel,1), DUST_TINY.get(DarkAsh, 2)).add(7200);
-        BASIC_BLASTING.RB().ii(GEM.getMaterialIngredient(CoalCoke, 2), INGOT.getMaterialIngredient(Iron, 1)).io(INGOT.get(Steel,1), DUST_TINY.get(DarkAsh, 2)).add(7200);
-        BASIC_BLASTING.RB().ii(of(TagUtils.getItemTag(new ResourceLocation("minecraft", "coals")), 4), INGOT.getMaterialIngredient(Iron, 1)).io(INGOT.get(Steel,1), DUST_TINY.get(DarkAsh, 4)).add(7200);
-        BASIC_BLASTING.RB().ii(DUST.getMaterialIngredient(Carbon, 2), INGOT.getMaterialIngredient(Iron, 1)).io(INGOT.get(Steel,1), DUST_TINY.get(DarkAsh, 2)).add(7200);
+        BASIC_BLASTING.RB().ii(GEM.getMaterialIngredient(CoalCoke, 2), INGOT.getMaterialIngredient(AntimatterMaterials.Iron, 1)).io(INGOT.get(Steel,1), DUST_TINY.get(DarkAsh, 2)).add(7200);
+        BASIC_BLASTING.RB().ii(of(TagUtils.getItemTag(new ResourceLocation("minecraft", "coals")), 4), INGOT.getMaterialIngredient(AntimatterMaterials.Iron, 1)).io(INGOT.get(Steel,1), DUST_TINY.get(DarkAsh, 4)).add(7200);
+        BASIC_BLASTING.RB().ii(DUST.getMaterialIngredient(Carbon, 2), INGOT.getMaterialIngredient(AntimatterMaterials.Iron, 1)).io(INGOT.get(Steel,1), DUST_TINY.get(DarkAsh, 2)).add(7200);
         BASIC_BLASTING.RB().ii(DUST.getMaterialIngredient(Galena, 2), of(DUSTS_COALS, 1)).io(INGOT.get(Lead, 1), INGOT.get(Silver, 1), DUST_TINY.get(DarkAsh, 1)).add(7200);
         BASIC_BLASTING.RB().ii(DUST.getMaterialIngredient(Galena, 4), DUST.getMaterialIngredient(CoalCoke, 1)).io(INGOT.get(Lead, 2), INGOT.get(Silver, 2), DUST_TINY.get(DarkAsh, 2)).add(14400);
         BASIC_BLASTING.RB().ii(DUST.getMaterialIngredient(Pyrite, 3), DUST.getMaterialIngredient(Calcite, 1), of(DUSTS_COALS, 1)).io(new ItemStack(Items.IRON_INGOT, 2), DUST_TINY.get(DarkAsh, 1)).add(1200);
-        BASIC_BLASTING.RB().ii(of(ORE.getMaterialTag(Iron), 1), DUST.getMaterialIngredient(Calcite, 1), of(DUSTS_COALS, 1)).io(new ItemStack(Items.IRON_INGOT, 3), DUST_TINY.get(DarkAsh, 1)).add(1200);
+        BASIC_BLASTING.RB().ii(of(ORE.getMaterialTag(AntimatterMaterials.Iron), 1), DUST.getMaterialIngredient(Calcite, 1), of(DUSTS_COALS, 1)).io(new ItemStack(Items.IRON_INGOT, 3), DUST_TINY.get(DarkAsh, 1)).add(1200);
         BASIC_BLASTING.RB().ii(DUST.getMaterialIngredient(Galena, 2), of(TagUtils.getItemTag(new ResourceLocation("minecraft", "coals")), 1)).io(INGOT.get(Lead, 1), INGOT.get(Silver, 1), DUST_TINY.get(DarkAsh, 1)).add(1200);
         BASIC_BLASTING.RB().ii(DUST.getMaterialIngredient(Galena, 4), GEM.getMaterialIngredient(CoalCoke, 1)).io(INGOT.get(Lead, 2), INGOT.get(Silver, 2), DUST_TINY.get(DarkAsh, 2)).add(2400);
         BASIC_BLASTING.RB().ii(DUST.getMaterialIngredient(Pyrite, 3), DUST.getMaterialIngredient(Calcite, 1), of(TagUtils.getItemTag(new ResourceLocation("minecraft", "coals")), 1)).io(new ItemStack(Items.IRON_INGOT, 2), DUST_TINY.get(DarkAsh, 1)).add(1200);
-        BASIC_BLASTING.RB().ii(of(ORE.getMaterialTag(Iron), 1), DUST.getMaterialIngredient(Calcite, 1), of(TagUtils.getItemTag(new ResourceLocation("minecraft", "coals")), 1)).io(new ItemStack(Items.IRON_INGOT, 3), DUST_TINY.get(DarkAsh, 1)).add(1200);
+        BASIC_BLASTING.RB().ii(of(ORE.getMaterialTag(AntimatterMaterials.Iron), 1), DUST.getMaterialIngredient(Calcite, 1), of(TagUtils.getItemTag(new ResourceLocation("minecraft", "coals")), 1)).io(new ItemStack(Items.IRON_INGOT, 3), DUST_TINY.get(DarkAsh, 1)).add(1200);
         final int multiplier = 1;
         //Tag<Item> rockTag = getForgelikeItemTag()
         BLASTING.RB().ii(of(TagUtils.getForgelikeItemTag("ores/iron"), 1), of(DUST.get(Calcite, 1))).io(new ItemStack(Items.IRON_INGOT, 3), DUST.get(DarkAsh, 1)).add(500, 120, 1500);
@@ -44,16 +45,16 @@ public class Blasting {
         BLASTING.RB().ii(of(DUST.get(m,1))).io(INGOT.get(m, 1)).add(600, 120, MaterialTags.BLAST_FURNACE_TEMP.getInt(m));
         m = Steel;
         BLASTING.RB().ii(of(DUST.get(m,1))).io(INGOT.get(m, 1)).add(600, 120, MaterialTags.BLAST_FURNACE_TEMP.getInt(m));
-        BLASTING.RB().ii(of(INGOT.get(Iron, 1)), of(DUST.get(Carbon, 1))).io(INGOT.get(m, 1)).add(600, 120, MaterialTags.BLAST_FURNACE_TEMP.getInt(m));
-        BLASTING.RB().ii(of(INGOT.get(Iron, 1)), of(DUST.get(CoalCoke, 1))).io(INGOT.get(m, 1)).add(600, 120, MaterialTags.BLAST_FURNACE_TEMP.getInt(m));
+        BLASTING.RB().ii(of(INGOT.get(AntimatterMaterials.Iron, 1)), of(DUST.get(Carbon, 1))).io(INGOT.get(m, 1)).add(600, 120, MaterialTags.BLAST_FURNACE_TEMP.getInt(m));
+        BLASTING.RB().ii(of(INGOT.get(AntimatterMaterials.Iron, 1)), of(DUST.get(CoalCoke, 1))).io(INGOT.get(m, 1)).add(600, 120, MaterialTags.BLAST_FURNACE_TEMP.getInt(m));
         m = Titanium;
         BLASTING.RB().ii(of(DUST.get(m,1))).io(INGOT.get(m, 1)).add(1700, 120, MaterialTags.BLAST_FURNACE_TEMP.getInt(m));
         m = TungstenSteel;
         BLASTING.RB().ii(of(DUST.get(m,1))).io(INGOT_HOT.get(m, 1)).add(1700, 120, MaterialTags.BLAST_FURNACE_TEMP.getInt(m));
         BLASTING.RB().ii(of(INGOT.get(Tungsten,1)), of(INGOT.get(Steel,1))).io(INGOT_HOT.get(m, 2), DUST.get(DarkAsh, 4)).add(1700, 120, MaterialTags.BLAST_FURNACE_TEMP.getInt(m));
-        m = Netherite;
+        m = AntimatterMaterials.Netherite;
         BLASTING.RB().ii(of(DUST.get(m,1))).io(INGOT.get(m, 1)).add(1700, 120, MaterialTags.BLAST_FURNACE_TEMP.getInt(m));
-        BLASTING.RB().ii(of(DUST.get(NetheriteScrap,4)), of(INGOT.get(Gold,4))).io(INGOT.get(m, 1), DUST.get(DarkAsh, 4)).add(1700, 120, MaterialTags.BLAST_FURNACE_TEMP.getInt(m));
+        BLASTING.RB().ii(of(DUST.get(AntimatterMaterials.NetheriteScrap,4)), of(INGOT.get(AntimatterMaterials.Gold,4))).io(INGOT.get(m, 1), DUST.get(DarkAsh, 4)).add(1700, 120, MaterialTags.BLAST_FURNACE_TEMP.getInt(m));
         m = TungstenCarbide;
         BLASTING.RB().ii(of(DUST.get(m,1))).io(INGOT_HOT.get(m, 1)).add(1700, 120, MaterialTags.BLAST_FURNACE_TEMP.getInt(m));
         BLASTING.RB().ii(of(INGOT.get(Tungsten,1)), of(DUST.get(Carbon,1))).io(INGOT_HOT.get(m, 2), DUST.get(DarkAsh, 4)).add(1700, 120, MaterialTags.BLAST_FURNACE_TEMP.getInt(m));
@@ -72,10 +73,10 @@ public class Blasting {
         BLASTING.RB().ii(of(INGOT.get(Osmium,1)), of(INGOT.get(Iridium, 1))).io(INGOT_HOT.get(m, 2)).add(10000, 120, MaterialTags.BLAST_FURNACE_TEMP.getInt(m));
         m = StainlessSteel;
         BLASTING.RB().ii(of(DUST.get(m,1))).io(INGOT.get(m, 1)).add(10200, 120, MaterialTags.BLAST_FURNACE_TEMP.getInt(m));
-        BLASTING.RB().ii(of(INGOT.get(Iron,6)), of(INGOT.get(Nickel, 1)), of(INGOT.get(Chrome, 1)), of(INGOT.get(Manganese, 1))).io(INGOT.get(m, 9)).add(10200, 120, MaterialTags.BLAST_FURNACE_TEMP.getInt(m));
+        BLASTING.RB().ii(of(INGOT.get(AntimatterMaterials.Iron,6)), of(INGOT.get(Nickel, 1)), of(INGOT.get(Chrome, 1)), of(INGOT.get(Manganese, 1))).io(INGOT.get(m, 9)).add(10200, 120, MaterialTags.BLAST_FURNACE_TEMP.getInt(m));
         m = Kanthal;
         BLASTING.RB().ii(of(DUST.get(m,1))).io(INGOT_HOT.get(m, 1)).add(5100, 120, MaterialTags.BLAST_FURNACE_TEMP.getInt(m));
-        BLASTING.RB().ii(of(INGOT.get(Iron,1)), of(INGOT.get(Aluminium, 1)), of(INGOT.get(Chrome, 1))).io(INGOT_HOT.get(m, 3)).add(5100, 120, MaterialTags.BLAST_FURNACE_TEMP.getInt(m));
+        BLASTING.RB().ii(of(INGOT.get(AntimatterMaterials.Iron,1)), of(INGOT.get(Aluminium, 1)), of(INGOT.get(Chrome, 1))).io(INGOT_HOT.get(m, 3)).add(5100, 120, MaterialTags.BLAST_FURNACE_TEMP.getInt(m));
         m = Nichrome;
         BLASTING.RB().ii(of(DUST.get(m,1))).io(INGOT_HOT.get(m, 1)).add(10200, 120, MaterialTags.BLAST_FURNACE_TEMP.getInt(m));
         BLASTING.RB().ii(of(INGOT.get(Nickel,4)), of(INGOT.get(Chrome, 1)), INT_CIRCUITS.get(2)).io(INGOT_HOT.get(m, 5)).add(10200, 120, MaterialTags.BLAST_FURNACE_TEMP.getInt(m));

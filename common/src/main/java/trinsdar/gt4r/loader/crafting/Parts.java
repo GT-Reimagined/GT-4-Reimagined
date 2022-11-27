@@ -2,6 +2,7 @@ package trinsdar.gt4r.loader.crafting;
 
 import com.github.gregtechintergalactical.gtrubber.GTRubberData;
 import muramasa.antimatter.data.AntimatterDefaultTools;
+import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.pipe.PipeSize;
@@ -31,15 +32,15 @@ public class Parts {
         provider.addStackRecipe(output, Ref.ID, "circuit_data_control", "parts", "has_iridium_plate", provider.hasSafeItem(IridiumReinforcedPlate),
                 new ItemStack(CircuitDataControl, 4), of('C', CIRCUITS_ADVANCED, 'c', CIRCUITS_DATA, 'P', IridiumReinforcedPlate), "CcC", "cPc", "CcC");
         provider.addStackRecipe(output, Ref.ID, "comp_monitor", "parts", "has_aluminium_plate", provider.hasSafeItem(PLATE.getMaterialTag(Aluminium)),
-                new ItemStack(ComputerMonitor, 1), of2('A', PLATE.getMaterialTag(Aluminium), 'G', ForgeCTags.GLASS_PANES, 'g', ForgeCTags.DYES_GREEN, 'R', ForgeCTags.DYES_RED, 'B', ForgeCTags.DYES_BLUE, 'D', DUST.getMaterialTag(Glowstone)), "AgA", "RGB", "ADA");
+                new ItemStack(ComputerMonitor, 1), of2('A', PLATE.getMaterialTag(Aluminium), 'G', ForgeCTags.GLASS_PANES, 'g', ForgeCTags.DYES_GREEN, 'R', ForgeCTags.DYES_RED, 'B', ForgeCTags.DYES_BLUE, 'D', DUST.getMaterialTag(AntimatterMaterials.Glowstone)), "AgA", "RGB", "ADA");
         provider.addStackRecipe(output, Ref.ID, "conv_module", "parts", "has_battery", provider.hasSafeItem(BatteryRE),
                 new ItemStack(ConveyorModule, 1), of('A', PLATES_IRON_ALUMINIUM, 'G', ForgeCTags.GLASS, 'B', BatteryRE, 'C', CIRCUITS_BASIC), "GGG", "AAA", "CBC");
         provider.addStackRecipe(output, Ref.ID, "drain_expensive", "parts", "has_battery", provider.hasSafeItem(Items.IRON_BARS),
                 new ItemStack(Drain, 1), of('A', PLATES_IRON_ALUMINIUM, 'B', Items.IRON_BARS), "ABA", "B B", "ABA");
         provider.addStackRecipe(output, Ref.ID, "sawblade", "parts", "has_stainless_steel_plate", provider.hasSafeItem(PLATE.getMaterialTag(StainlessSteel)),
-                new ItemStack(DiamondSawBlade, 4), of('A', PLATE.getMaterialTag(StainlessSteel), 'D', DUST.getMaterialTag(Diamond)), "DAD", "A A", "DAD");
-        provider.addStackRecipe(output, Ref.ID, "d_grindhead", "parts", "has_diamond", provider.hasSafeItem(GEM.getMaterialTag(Diamond)),
-                new ItemStack(DiamondGrindHead, 4), of('A', PLATES_STEELS, 'D', DUST.getMaterialTag(Diamond), 'G', GEM.getMaterialTag(Diamond)), "DAD", "AGA", "DAD");
+                new ItemStack(DiamondSawBlade, 4), of('A', PLATE.getMaterialTag(StainlessSteel), 'D', DUST.getMaterialTag(AntimatterMaterials.Diamond)), "DAD", "A A", "DAD");
+        provider.addStackRecipe(output, Ref.ID, "d_grindhead", "parts", "has_diamond", provider.hasSafeItem(GEM.getMaterialTag(AntimatterMaterials.Diamond)),
+                new ItemStack(DiamondGrindHead, 4), of('A', PLATES_STEELS, 'D', DUST.getMaterialTag(AntimatterMaterials.Diamond), 'G', GEM.getMaterialTag(AntimatterMaterials.Diamond)), "DAD", "AGA", "DAD");
         provider.addStackRecipe(output, Ref.ID, "w_grindhead", "parts", "has_steel_block", provider.hasSafeItem(BLOCK.getMaterialTag(Steel)),
                 new ItemStack(TungstenGrindHead, 4), of('S', PLATES_STEELS, 'T', PLATE.getMaterialTag(Tungsten), 'B', BLOCK.getMaterialTag(Steel)), "TST", "SBS", "TST");
         provider.addStackRecipe(output, Ref.ID, "circuit_basic_h", "parts", "has_copper_cable", provider.hasSafeItem(CABLE_COPPER.getBlockItem(PipeSize.VTINY)),
@@ -47,12 +48,12 @@ public class Parts {
         provider.addStackRecipe(output, Ref.ID, "circuit_basic_v", "parts", "has_copper_cable", provider.hasSafeItem(CABLE_COPPER.getBlockItem(PipeSize.VTINY)),
                 new ItemStack(CircuitBasic, 1), of('C', CABLE_COPPER.getBlockItem(PipeSize.VTINY), 'R', PLATE.getMaterialTag(RedAlloy), 'I', PLATE.getMaterialTag(WroughtIron)), "CRC", "CIC", "CRC");
         provider.addStackRecipe(output, Ref.ID, "circuit_advanced_h", "parts", "has_basic_circuit", provider.hasSafeItem(CIRCUITS_BASIC),
-                new ItemStack(CircuitAdv, 1), of('C', CIRCUITS_BASIC, 'R', PLATE.getMaterialTag(RedAlloy), 'L', getForgelikeItemTag("dusts/lapislaz"), 'G', DUST.getMaterialTag(Glowstone)), "RGR", "LCL", "RGR");
+                new ItemStack(CircuitAdv, 1), of('C', CIRCUITS_BASIC, 'R', PLATE.getMaterialTag(RedAlloy), 'L', getForgelikeItemTag("dusts/lapislaz"), 'G', DUST.getMaterialTag(AntimatterMaterials.Glowstone)), "RGR", "LCL", "RGR");
         provider.addStackRecipe(output, Ref.ID, "circuit_advanced_v", "parts", "has_basic_circuit", provider.hasSafeItem(CIRCUITS_BASIC),
-                new ItemStack(CircuitAdv, 1), of('C', CIRCUITS_BASIC, 'R', PLATE.getMaterialTag(RedAlloy), 'L', getForgelikeItemTag("dusts/lapislaz"), 'G', DUST.getMaterialTag(Glowstone)), "RLR", "GCG", "RLR");
+                new ItemStack(CircuitAdv, 1), of('C', CIRCUITS_BASIC, 'R', PLATE.getMaterialTag(RedAlloy), 'L', getForgelikeItemTag("dusts/lapislaz"), 'G', DUST.getMaterialTag(AntimatterMaterials.Glowstone)), "RLR", "GCG", "RLR");
         provider.shapeless(output, "mesh_carbon", "parts", "has_carbon_fibre", provider.hasSafeItem(CarbonFibre), new ItemStack(CarbonMesh), CarbonFibre, CarbonFibre);
         provider.addItemRecipe(output, Ref.ID, "re_battery", "parts", "has_tin_cable", provider.hasSafeItem(CABLE_TIN.getBlockItem(PipeSize.VTINY)),
-                BatteryRE, of('T', PLATE.getMaterialTag(Tin), 'C', CABLE_TIN.getBlockItem(PipeSize.VTINY), 'R', DUST.getMaterialTag(Redstone)), " C ", "TRT", "TRT");
+                BatteryRE, of('T', PLATE.getMaterialTag(Tin), 'C', CABLE_TIN.getBlockItem(PipeSize.VTINY), 'R', DUST.getMaterialTag(AntimatterMaterials.Redstone)), " C ", "TRT", "TRT");
         provider.addItemRecipe(output, Ref.ID, "small_battery_hull", "parts", "has_tin_cable", provider.hasSafeItem(CABLE_TIN.getBlockItem(PipeSize.VTINY)),
                 BatteryHullSmall, of('T', PLATE.getMaterialTag(BatteryAlloy), 'C', CABLE_TIN.getBlockItem(PipeSize.VTINY)), "C", "T", "T");
         provider.addItemRecipe(output, Ref.ID, "medium_battery_hull", "parts", "has_copper_cable", provider.hasSafeItem(CABLE_COPPER.getBlockItem(PipeSize.VTINY)),
@@ -123,26 +124,26 @@ public class Parts {
                 ShapeGear, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), "W", " ", "P");
         provider.addItemRecipe(output, Ref.ID, "bottle_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
                 ShapeBottle, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), "  W", "P  ");
-        provider.addStackRecipe(output, Ref.ID, "energium_dust", "parts", "has_diamond_dust", provider.hasSafeItem(DUST.getMaterialTag(Diamond)),
-                DUST.get(Energium, 9), of('R', DUST.getMaterialTag(Redstone), 'D', DUST.getMaterialTag(Diamond)), "RDR", "DRD", "RDR");
+        provider.addStackRecipe(output, Ref.ID, "energium_dust", "parts", "has_diamond_dust", provider.hasSafeItem(DUST.getMaterialTag(AntimatterMaterials.Diamond)),
+                DUST.get(Energium, 9), of('R', DUST.getMaterialTag(AntimatterMaterials.Redstone), 'D', DUST.getMaterialTag(AntimatterMaterials.Diamond)), "RDR", "DRD", "RDR");
         provider.addStackRecipe(output, Ref.ID, "energium_dust2", "parts", "has_ruby_dust", provider.hasSafeItem(DUST.getMaterialTag(Ruby)),
-                DUST.get(Energium, 9), of('R', DUST.getMaterialTag(Redstone), 'D', DUST.getMaterialTag(Ruby)), "RDR", "DRD", "RDR");
+                DUST.get(Energium, 9), of('R', DUST.getMaterialTag(AntimatterMaterials.Redstone), 'D', DUST.getMaterialTag(Ruby)), "RDR", "DRD", "RDR");
         provider.addItemRecipe(output, Ref.ID, "crystal_lapotron", "parts", "has_energy_crystal", provider.hasSafeItem(EnergyCrystal),
                 LapotronCrystal, of('L', DUSTS_LAPIS_LAZ, 'C', CIRCUITS_ADVANCED, 'E', EnergyCrystal), "LCL", "LEL", "LCL");
         provider.addItemRecipe(output, Ref.ID, "crystal_lapotron2", "parts", "has_sapphire", provider.hasSafeItem(GEM.getMaterialTag(Sapphire)),
                 LapotronCrystal, of('L', DUSTS_LAPIS_LAZ, 'C', CIRCUITS_ADVANCED, 'E', GEM.getMaterialTag(Sapphire)), "LCL", "LEL", "LCL");
         provider.addItemRecipe(output, Ref.ID, "orb_lapotron", "parts", "has_iridium_plate", provider.hasSafeItem(IridiumReinforcedPlate),
                 LapotronicEnergyOrb, of('L', LapotronCrystal, 'I', IridiumReinforcedPlate), "LLL", "LIL", "LLL");
-        provider.addItemRecipe(output, Ref.ID, "coil_copper", "parts", "has_iron_ingot", provider.hasSafeItem(INGOT.getMaterialTag(Iron)),
-                CopperCoil, of('L', WIRE_COPPER.getBlockItem(PipeSize.VTINY), 'I', INGOT.getMaterialTag(Iron)), "LLL", "LIL", "LLL");
-        provider.addItemRecipe(output, Ref.ID, "ingot_iridium_alloy", "parts", "has_diamond", provider.hasSafeItem(GEM.getMaterialTag(Diamond)),
-                IridiumAlloyIngot, of('I', PLATE.getMaterialTag(Iridium), 'D', GEM.getMaterialTag(Diamond), 'A', AdvancedAlloy), "IAI", "ADA", "IAI");
+        provider.addItemRecipe(output, Ref.ID, "coil_copper", "parts", "has_iron_ingot", provider.hasSafeItem(INGOT.getMaterialTag(AntimatterMaterials.Iron)),
+                CopperCoil, of('L', WIRE_COPPER.getBlockItem(PipeSize.VTINY), 'I', INGOT.getMaterialTag(AntimatterMaterials.Iron)), "LLL", "LIL", "LLL");
+        provider.addItemRecipe(output, Ref.ID, "ingot_iridium_alloy", "parts", "has_diamond", provider.hasSafeItem(GEM.getMaterialTag(AntimatterMaterials.Diamond)),
+                IridiumAlloyIngot, of('I', PLATE.getMaterialTag(Iridium), 'D', GEM.getMaterialTag(AntimatterMaterials.Diamond), 'A', AdvancedAlloy), "IAI", "ADA", "IAI");
         provider.addItemRecipe(output, Ref.ID, "freq_transmitter", "parts", "has_circuit", provider.hasSafeItem(CIRCUITS_BASIC), FrequencyTransmitter, of('C', CIRCUITS_BASIC, 'c', CABLE_COPPER.getBlockItem(PipeSize.VTINY)), "Cc");
-        provider.addItemRecipe(output, Ref.ID, "magnetic_steel_ingot", "parts", "has_redstone", provider.hasSafeItem(DUST.getMaterialTag(Redstone)), INGOT.get(SteelMagnetic), of('R', DUST.getMaterialTag(Redstone), 'I', INGOT.getMaterialTag(Steel)), "RRR", "RIR", "RRR");
-        provider.shapeless(output, "magnetic_steel_rod", "parts", "has_redstone", provider.hasSafeItem(DUST.getMaterialTag(Redstone)), ROD.get(SteelMagnetic, 1), ROD.getMaterialTag(Steel), DUST.getMaterialTag(Redstone), DUST.getMaterialTag(Redstone), DUST.getMaterialTag(Redstone), DUST.getMaterialTag(Redstone));
-        provider.addItemRecipe(output, Ref.ID, "magnetic_iron_ingot", "parts", "has_redstone", provider.hasSafeItem(DUST.getMaterialTag(Redstone)), INGOT.get(IronMagnetic), of('R', DUST.getMaterialTag(Redstone), 'I', INGOT.getMaterialTag(Iron)), "RRR", "RIR", "RRR");
-        provider.shapeless(output, "magnetic_iron_rod", "parts", "has_redstone", provider.hasSafeItem(DUST.getMaterialTag(Redstone)), ROD.get(IronMagnetic, 1), ROD.getMaterialTag(Iron), DUST.getMaterialTag(Redstone), DUST.getMaterialTag(Redstone), DUST.getMaterialTag(Redstone), DUST.getMaterialTag(Redstone));
-        Material[] in = new Material[]{Iron, WroughtIron, Nickel};
+        provider.addItemRecipe(output, Ref.ID, "magnetic_steel_ingot", "parts", "has_redstone", provider.hasSafeItem(DUST.getMaterialTag(AntimatterMaterials.Redstone)), INGOT.get(SteelMagnetic), of('R', DUST.getMaterialTag(AntimatterMaterials.Redstone), 'I', INGOT.getMaterialTag(Steel)), "RRR", "RIR", "RRR");
+        provider.shapeless(output, "magnetic_steel_rod", "parts", "has_redstone", provider.hasSafeItem(DUST.getMaterialTag(AntimatterMaterials.Redstone)), ROD.get(SteelMagnetic, 1), ROD.getMaterialTag(Steel), DUST.getMaterialTag(AntimatterMaterials.Redstone), DUST.getMaterialTag(AntimatterMaterials.Redstone), DUST.getMaterialTag(AntimatterMaterials.Redstone), DUST.getMaterialTag(AntimatterMaterials.Redstone));
+        provider.addItemRecipe(output, Ref.ID, "magnetic_iron_ingot", "parts", "has_redstone", provider.hasSafeItem(DUST.getMaterialTag(AntimatterMaterials.Redstone)), INGOT.get(IronMagnetic), of('R', DUST.getMaterialTag(AntimatterMaterials.Redstone), 'I', INGOT.getMaterialTag(AntimatterMaterials.Iron)), "RRR", "RIR", "RRR");
+        provider.shapeless(output, "magnetic_iron_rod", "parts", "has_redstone", provider.hasSafeItem(DUST.getMaterialTag(AntimatterMaterials.Redstone)), ROD.get(IronMagnetic, 1), ROD.getMaterialTag(AntimatterMaterials.Iron), DUST.getMaterialTag(AntimatterMaterials.Redstone), DUST.getMaterialTag(AntimatterMaterials.Redstone), DUST.getMaterialTag(AntimatterMaterials.Redstone), DUST.getMaterialTag(AntimatterMaterials.Redstone));
+        Material[] in = new Material[]{AntimatterMaterials.Iron, WroughtIron, Nickel};
         Material[] b = new Material[]{Bronze, Brass};
         Material[] tz = new Material[]{Tin, Zinc};
         for (Material it : in){
@@ -249,9 +250,9 @@ public class Parts {
         provider.addStackRecipe(output, Ref.ID, "super_conductor", "parts", "has_iridium_plate", provider.hasSafeItem(IridiumReinforcedPlate),
                 new ItemStack(ItemSuperconductor, 4), of('H', RecipeIngredient.of(Helium.getCellGas(1, CellTin)), 'T', PLATE.getMaterialTag(Tungsten), 'I', IridiumReinforcedPlate, 'C', CIRCUITS_MASTER), "HHH", "TIT", "CCC");
         provider.shapeless(output, Ref.ID, "bronze_dust", "had_copper", provider.hasSafeItem(DUST.getMaterialTag(Bronze)),
-                DUST.get(Bronze, 4), DUST.get(Copper), DUST.get(Copper), DUST.get(Copper), DUST.get(Tin));
+                DUST.get(Bronze, 4), DUST.get(AntimatterMaterials.Copper), DUST.get(AntimatterMaterials.Copper), DUST.get(AntimatterMaterials.Copper), DUST.get(Tin));
         provider.addItemRecipe(output, Ref.ID, "int_circuit", "parts", "has_hammer", provider.hasSafeItem(AntimatterDefaultTools.HAMMER.getTag()),
-                INT_CIRCUITS_ITEMS.get(0), of('R', ROD.getMaterialTag(Iron), 'P', PLATE.getMaterialTag(Iron), 'H', AntimatterDefaultTools.HAMMER.getTag(), 'W', AntimatterDefaultTools.WRENCH.getTag()), "PHP", "RRR", "PWP");
+                INT_CIRCUITS_ITEMS.get(0), of('R', ROD.getMaterialTag(AntimatterMaterials.Iron), 'P', PLATE.getMaterialTag(AntimatterMaterials.Iron), 'H', AntimatterDefaultTools.HAMMER.getTag(), 'W', AntimatterDefaultTools.WRENCH.getTag()), "PHP", "RRR", "PWP");
         provider.addItemRecipe(output, Ref.ID, "int_circuit1", "parts", "has_hammer", provider.hasSafeItem(AntimatterDefaultTools.HAMMER.getTag()),
                 INT_CIRCUITS_ITEMS.get(0), of('R', ROD.getMaterialTag(WroughtIron), 'P', PLATE.getMaterialTag(WroughtIron), 'H', AntimatterDefaultTools.HAMMER.getTag(), 'W', AntimatterDefaultTools.WRENCH.getTag()), "PHP", "RRR", "PWP");
         provider.addItemRecipe(output, Ref.ID, "motor_lv", "parts", "has_tin_cable", provider.hasSafeItem(CABLE_TIN.getBlockItem(PipeSize.VTINY)),
@@ -268,7 +269,7 @@ public class Parts {
                 IridiumNeutronReflector, of('N', ThickNeutronReflector, 'I', IridiumReinforcedPlate), "NNN", "NIN", "NNN");
         provider.addItemRecipe(output, Ref.ID, "neutron_reflector_thick", "parts", "has_beryllium_dust", provider.hasSafeItem(DUST.get(Beryllium)),
                 ThickNeutronReflector, of('N', NeutronReflector, 'I', DUST.get(Beryllium)), " N ", "NIN", " N ");
-        provider.addItemRecipe(output, Ref.ID, "neutron_reflector_normal", "parts", "has_copper_plate", provider.hasSafeItem(PLATE.get(Copper)),
-                NeutronReflector, of('C', DUST.get(Coal), 'T', DUST.get(Tin), 'I', PLATE.get(Copper)), "TCT", "CIC", "TCT");
+        provider.addItemRecipe(output, Ref.ID, "neutron_reflector_normal", "parts", "has_copper_plate", provider.hasSafeItem(PLATE.get(AntimatterMaterials.Copper)),
+                NeutronReflector, of('C', DUST.get(AntimatterMaterials.Coal), 'T', DUST.get(Tin), 'I', PLATE.get(AntimatterMaterials.Copper)), "TCT", "CIC", "TCT");
     }
 }

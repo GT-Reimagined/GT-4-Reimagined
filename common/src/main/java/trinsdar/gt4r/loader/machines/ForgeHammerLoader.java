@@ -2,6 +2,7 @@ package trinsdar.gt4r.loader.machines;
 
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.AntimatterConfig;
+import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.ore.CobbleStoneType;
 import muramasa.antimatter.ore.StoneType;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
@@ -9,7 +10,6 @@ import muramasa.antimatter.util.TagUtils;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import trinsdar.gt4r.GT4RConfig;
 import trinsdar.gt4r.Ref;
 import muramasa.antimatter.data.ForgeCTags;
 
@@ -23,7 +23,7 @@ import static trinsdar.gt4r.data.RecipeMaps.HAMMERING;
 public class ForgeHammerLoader {
     public static void init(){
         CRUSHED.all().forEach(m -> {
-            if (!m.has(ORE) && m != Gold && m != Iron && m != Diamond && m != Emerald && m != Lapis && m != Redstone) return;
+            if (!m.has(ORE) && m != AntimatterMaterials.Gold && m != AntimatterMaterials.Iron && m != AntimatterMaterials.Diamond && m != AntimatterMaterials.Emerald && m != AntimatterMaterials.Lapis && m != AntimatterMaterials.Redstone) return;
             int multiplier = 1;
             RecipeIngredient ore = RecipeIngredient.of(TagUtils.getForgelikeItemTag("sandless_ores/" + m.getId()),1), crushed = CRUSHED.getIngredient(m, 1);
             ItemStack crushedStack = CRUSHED.get(m,1);

@@ -2,6 +2,7 @@ package trinsdar.gt4r.loader.crafting;
 
 import com.github.gregtechintergalactical.gtrubber.GTRubberData;
 import muramasa.antimatter.data.AntimatterDefaultTools;
+import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.pipe.PipeSize;
@@ -24,7 +25,7 @@ import java.util.function.Consumer;
 import static com.google.common.collect.ImmutableMap.of;
 import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.Data.DUST;
-import static muramasa.antimatter.Data.Stone;
+import static muramasa.antimatter.data.AntimatterMaterials.Stone;
 import static muramasa.antimatter.util.TagUtils.getForgelikeItemTag;
 import static trinsdar.gt4r.data.Materials.*;
 
@@ -62,7 +63,7 @@ public class VanillaOverrides {
         Material[] mats = new Material[]{Bronze, WroughtIron, Aluminium, Steel, Titanium};
         for (Material m : mats){
             provider.addItemRecipe(consumer, Ref.ID, "piston_" + m.getId(), "pistons", "has_" + m.getId(), provider.hasSafeItem(INGOT.getMaterialTag(m)),
-                    Items.PISTON, of('W', ItemTags.PLANKS, 'C', ForgeCTags.COBBLESTONE, 'R', DUST.getMaterialTag(Redstone), 'I', INGOT.getMaterialTag(m)), "WWW", "CIC", "CRC");
+                    Items.PISTON, of('W', ItemTags.PLANKS, 'C', ForgeCTags.COBBLESTONE, 'R', DUST.getMaterialTag(AntimatterMaterials.Redstone), 'I', INGOT.getMaterialTag(m)), "WWW", "CIC", "CRC");
         }
         String[] colors = {"white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray", "light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black"};
         for (String color : colors){
@@ -71,37 +72,37 @@ public class VanillaOverrides {
         }
         // todo: bucket, minecart, iron door
 
-        provider.addItemRecipe(consumer, "minecraft", "", "misc", "has_iron", provider.hasSafeItem(PLATE.getMaterialTag(Iron)),
-                Items.BUCKET, of('I', PLATE.getMaterialTag(Iron), 'H', AntimatterDefaultTools.HAMMER.getTag()), "IHI", " I ");
-        provider.addItemRecipe(consumer, "minecraft", "", "misc", "has_iron", provider.hasSafeItem(PLATE.getMaterialTag(Iron)),
-                Items.HOPPER, of('I', PLATE.getMaterialTag(Iron), 'W', AntimatterDefaultTools.WRENCH.getTag(), 'C', ForgeCTags.CHESTS), "IWI", "ICI", " I ");
+        provider.addItemRecipe(consumer, "minecraft", "", "misc", "has_iron", provider.hasSafeItem(PLATE.getMaterialTag(AntimatterMaterials.Iron)),
+                Items.BUCKET, of('I', PLATE.getMaterialTag(AntimatterMaterials.Iron), 'H', AntimatterDefaultTools.HAMMER.getTag()), "IHI", " I ");
+        provider.addItemRecipe(consumer, "minecraft", "", "misc", "has_iron", provider.hasSafeItem(PLATE.getMaterialTag(AntimatterMaterials.Iron)),
+                Items.HOPPER, of('I', PLATE.getMaterialTag(AntimatterMaterials.Iron), 'W', AntimatterDefaultTools.WRENCH.getTag(), 'C', ForgeCTags.CHESTS), "IWI", "ICI", " I ");
 
 
-        provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_diamond", provider.hasSafeItem(GEM.getMaterialTag(Diamond)),
-                Items.DIAMOND_BOOTS, of('X', GEM.getMaterialTag(Diamond), 'H', AntimatterDefaultTools.HAMMER.getTag()), "X X", "XHX");
-        provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_diamond", provider.hasSafeItem(GEM.getMaterialTag(Diamond)),
-                Items.DIAMOND_LEGGINGS, of('X', GEM.getMaterialTag(Diamond), 'H', AntimatterDefaultTools.HAMMER.getTag()), "XXX", "XHX", "X X");
-        provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_diamond", provider.hasSafeItem(GEM.getMaterialTag(Diamond)),
-                Items.DIAMOND_CHESTPLATE, of('X', GEM.getMaterialTag(Diamond), 'H', AntimatterDefaultTools.HAMMER.getTag()), "XHX", "XXX", "XXX");
-        provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_diamond", provider.hasSafeItem(GEM.getMaterialTag(Diamond)),
-                Items.DIAMOND_HELMET, of('X', GEM.getMaterialTag(Diamond), 'H', AntimatterDefaultTools.HAMMER.getTag()), "XXX", "XHX");
+        provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_diamond", provider.hasSafeItem(GEM.getMaterialTag(AntimatterMaterials.Diamond)),
+                Items.DIAMOND_BOOTS, of('X', GEM.getMaterialTag(AntimatterMaterials.Diamond), 'H', AntimatterDefaultTools.HAMMER.getTag()), "X X", "XHX");
+        provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_diamond", provider.hasSafeItem(GEM.getMaterialTag(AntimatterMaterials.Diamond)),
+                Items.DIAMOND_LEGGINGS, of('X', GEM.getMaterialTag(AntimatterMaterials.Diamond), 'H', AntimatterDefaultTools.HAMMER.getTag()), "XXX", "XHX", "X X");
+        provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_diamond", provider.hasSafeItem(GEM.getMaterialTag(AntimatterMaterials.Diamond)),
+                Items.DIAMOND_CHESTPLATE, of('X', GEM.getMaterialTag(AntimatterMaterials.Diamond), 'H', AntimatterDefaultTools.HAMMER.getTag()), "XHX", "XXX", "XXX");
+        provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_diamond", provider.hasSafeItem(GEM.getMaterialTag(AntimatterMaterials.Diamond)),
+                Items.DIAMOND_HELMET, of('X', GEM.getMaterialTag(AntimatterMaterials.Diamond), 'H', AntimatterDefaultTools.HAMMER.getTag()), "XXX", "XHX");
 
-        provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_gold", provider.hasSafeItem(PLATE.getMaterialTag(Gold)),
-                Items.GOLDEN_BOOTS, of('X', PLATE.getMaterialTag(Gold), 'H', AntimatterDefaultTools.HAMMER.getTag()), "X X", "XHX");
-        provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_gold", provider.hasSafeItem(PLATE.getMaterialTag(Gold)),
-                Items.GOLDEN_LEGGINGS, of('X', PLATE.getMaterialTag(Gold), 'H', AntimatterDefaultTools.HAMMER.getTag()), "XXX", "XHX", "X X");
-        provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_gold", provider.hasSafeItem(PLATE.getMaterialTag(Gold)),
-                Items.GOLDEN_CHESTPLATE, of('X', PLATE.getMaterialTag(Gold), 'H', AntimatterDefaultTools.HAMMER.getTag()), "XHX", "XXX", "XXX");
-        provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_gold", provider.hasSafeItem(PLATE.getMaterialTag(Gold)),
-                Items.GOLDEN_HELMET, of('X', PLATE.getMaterialTag(Gold), 'H', AntimatterDefaultTools.HAMMER.getTag()), "XXX", "XHX");
+        provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_gold", provider.hasSafeItem(PLATE.getMaterialTag(AntimatterMaterials.Gold)),
+                Items.GOLDEN_BOOTS, of('X', PLATE.getMaterialTag(AntimatterMaterials.Gold), 'H', AntimatterDefaultTools.HAMMER.getTag()), "X X", "XHX");
+        provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_gold", provider.hasSafeItem(PLATE.getMaterialTag(AntimatterMaterials.Gold)),
+                Items.GOLDEN_LEGGINGS, of('X', PLATE.getMaterialTag(AntimatterMaterials.Gold), 'H', AntimatterDefaultTools.HAMMER.getTag()), "XXX", "XHX", "X X");
+        provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_gold", provider.hasSafeItem(PLATE.getMaterialTag(AntimatterMaterials.Gold)),
+                Items.GOLDEN_CHESTPLATE, of('X', PLATE.getMaterialTag(AntimatterMaterials.Gold), 'H', AntimatterDefaultTools.HAMMER.getTag()), "XHX", "XXX", "XXX");
+        provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_gold", provider.hasSafeItem(PLATE.getMaterialTag(AntimatterMaterials.Gold)),
+                Items.GOLDEN_HELMET, of('X', PLATE.getMaterialTag(AntimatterMaterials.Gold), 'H', AntimatterDefaultTools.HAMMER.getTag()), "XXX", "XHX");
 
-        provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_iron", provider.hasSafeItem(PLATE.getMaterialTag(Iron)),
-                Items.IRON_BOOTS, of('X', PLATE.getMaterialTag(Iron), 'H', AntimatterDefaultTools.HAMMER.getTag()), "X X", "XHX");
-        provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_iron", provider.hasSafeItem(PLATE.getMaterialTag(Iron)),
-                Items.IRON_LEGGINGS, of('X', PLATE.getMaterialTag(Iron), 'H', AntimatterDefaultTools.HAMMER.getTag()), "XXX", "XHX", "X X");
-        provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_iron", provider.hasSafeItem(PLATE.getMaterialTag(Iron)),
-                Items.IRON_CHESTPLATE, of('X', PLATE.getMaterialTag(Iron), 'H', AntimatterDefaultTools.HAMMER.getTag()), "XHX", "XXX", "XXX");
-        provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_iron", provider.hasSafeItem(PLATE.getMaterialTag(Iron)),
-                Items.IRON_HELMET, of('X', PLATE.getMaterialTag(Iron), 'H', AntimatterDefaultTools.HAMMER.getTag()), "XXX", "XHX");
+        provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_iron", provider.hasSafeItem(PLATE.getMaterialTag(AntimatterMaterials.Iron)),
+                Items.IRON_BOOTS, of('X', PLATE.getMaterialTag(AntimatterMaterials.Iron), 'H', AntimatterDefaultTools.HAMMER.getTag()), "X X", "XHX");
+        provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_iron", provider.hasSafeItem(PLATE.getMaterialTag(AntimatterMaterials.Iron)),
+                Items.IRON_LEGGINGS, of('X', PLATE.getMaterialTag(AntimatterMaterials.Iron), 'H', AntimatterDefaultTools.HAMMER.getTag()), "XXX", "XHX", "X X");
+        provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_iron", provider.hasSafeItem(PLATE.getMaterialTag(AntimatterMaterials.Iron)),
+                Items.IRON_CHESTPLATE, of('X', PLATE.getMaterialTag(AntimatterMaterials.Iron), 'H', AntimatterDefaultTools.HAMMER.getTag()), "XHX", "XXX", "XXX");
+        provider.addItemRecipe(consumer, "minecraft", "", "material_armor", "has_iron", provider.hasSafeItem(PLATE.getMaterialTag(AntimatterMaterials.Iron)),
+                Items.IRON_HELMET, of('X', PLATE.getMaterialTag(AntimatterMaterials.Iron), 'H', AntimatterDefaultTools.HAMMER.getTag()), "XXX", "XHX");
     }
 }

@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
-import static muramasa.antimatter.Data.NULL;
+import static muramasa.antimatter.material.Material.NULL;
 import static net.minecraft.world.level.material.Material.*;
 import static trinsdar.gt4r.data.GT4RData.*;
 

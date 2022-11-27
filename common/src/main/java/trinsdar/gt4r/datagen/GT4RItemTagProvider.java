@@ -1,13 +1,12 @@
 package trinsdar.gt4r.datagen;
 
 import muramasa.antimatter.AntimatterAPI;
+import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.datagen.providers.AntimatterBlockTagProvider;
 import muramasa.antimatter.datagen.providers.AntimatterItemTagProvider;
 import muramasa.antimatter.ore.BlockOre;
 import muramasa.antimatter.util.AntimatterPlatformUtils;
 import muramasa.antimatter.util.TagUtils;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -41,7 +40,7 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.tag(CIRCUITS_MASTER).add(CircuitEnergyFlow);
         this.tag(CIRCUITS_DATA).add(CircuitDataStorage);
         this.tag(CIRCUITS_ULTIMATE).add(CircuitDataOrb);
-        this.tag(MACHINE_HULLS_CHEAP).add(GT4RMaterialTags.HULL.get(Bronze), GT4RMaterialTags.HULL.get(Brass), GT4RMaterialTags.HULL.get(WroughtIron), GT4RMaterialTags.HULL.get(Iron), GT4RMaterialTags.HULL.get(Aluminium));
+        this.tag(MACHINE_HULLS_CHEAP).add(GT4RMaterialTags.HULL.get(Bronze), GT4RMaterialTags.HULL.get(Brass), GT4RMaterialTags.HULL.get(WroughtIron), GT4RMaterialTags.HULL.get(AntimatterMaterials.Iron), GT4RMaterialTags.HULL.get(Aluminium));
         this.tag(MACHINE_HULLS_SEMI_CHEAP).add(GT4RMaterialTags.HULL.get(WroughtIron), GT4RMaterialTags.HULL.get(Aluminium));
         this.tag(MACHINE_HULLS_BASIC).add(GT4RMaterialTags.HULL.get(Steel), GT4RMaterialTags.HULL.get(StainlessSteel), GT4RMaterialTags.HULL.get(Aluminium));
         this.tag(MACHINE_HULLS_ADVANCED).add(GT4RMaterialTags.HULL.get(Aluminium), GT4RMaterialTags.HULL.get(StainlessSteel));
@@ -94,8 +93,8 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         RAW_ORE.all().forEach(m -> {
             this.tag(TagUtils.getForgelikeItemTag("sandless_ores/"+ m.getId())).add(RAW_ORE.get(m));
         });
-        this.tag(TagUtils.getForgelikeItemTag("sandless_ores/"+ NetheriteScrap.getId())).add(Items.ANCIENT_DEBRIS);
-        this.tag(TagUtils.getForgelikeItemTag("sandless_ores/coal")).add(ORE_STONE.get().get(Coal).asItem());
+        this.tag(TagUtils.getForgelikeItemTag("sandless_ores/"+ AntimatterMaterials.NetheriteScrap.getId())).add(Items.ANCIENT_DEBRIS);
+        this.tag(TagUtils.getForgelikeItemTag("sandless_ores/coal")).add(ORE_STONE.get().get(AntimatterMaterials.Coal).asItem());
         this.tag(TagUtils.getForgelikeItemTag("dyes/black")).add(DUST.get(DarkAsh));
         this.tag(TagUtils.getForgelikeItemTag("dyes/gray")).add(DUST.get(Ash));
 

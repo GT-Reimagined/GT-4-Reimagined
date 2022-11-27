@@ -1,5 +1,6 @@
 package trinsdar.gt4r.loader.machines.generator;
 
+import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import net.minecraft.world.item.Items;
 import net.minecraft.tags.ItemTags;
@@ -11,10 +12,10 @@ import static trinsdar.gt4r.data.RecipeMaps.COAL_BOILERS;
 
 public class CoalBoilerHandler {
     public static void init(){
-        COAL_BOILERS.RB().ii(RecipeIngredient.of(GEM.getMaterialTag(Coal), 1)).io(DUST.get(DarkAsh, 1)).add(160);
-        COAL_BOILERS.RB().ii(RecipeIngredient.of(GEM.getMaterialTag(Charcoal), 1)).io(DUST.get(Ash, 1)).add(160);
+        COAL_BOILERS.RB().ii(RecipeIngredient.of(GEM.getMaterialTag(AntimatterMaterials.Coal), 1)).io(DUST.get(DarkAsh, 1)).add(160);
+        COAL_BOILERS.RB().ii(RecipeIngredient.of(GEM.getMaterialTag(AntimatterMaterials.Charcoal), 1)).io(DUST.get(Ash, 1)).add(160);
         COAL_BOILERS.RB().ii(RecipeIngredient.of(ForgeCTags.STORAGE_BLOCKS_COAL, 1)).io(DUST.get(DarkAsh, 9)).add(1600);
-        COAL_BOILERS.RB().ii(RecipeIngredient.of(BLOCK.getMaterialTag(Charcoal), 1)).io(DUST.get(Ash, 9)).add(1600);
+        COAL_BOILERS.RB().ii(RecipeIngredient.of(BLOCK.getMaterialTag(AntimatterMaterials.Charcoal), 1)).io(DUST.get(Ash, 9)).add(1600);
         COAL_BOILERS.RB().ii(RecipeIngredient.of(GEM.getMaterialTag(CoalCoke), 1)).io(DUST.get(DarkAsh, 1)).add(320);
         COAL_BOILERS.RB().ii(RecipeIngredient.of(BLOCK.getMaterialTag(CoalCoke), 1)).io(DUST.get(DarkAsh, 9)).add(3200);
         COAL_BOILERS.RB().ii(RecipeIngredient.of(ItemTags.PLANKS, 1)).io(DUST.get(Ash, 1)).add(30);

@@ -1,5 +1,6 @@
 package trinsdar.gt4r.loader.machines;
 
+import muramasa.antimatter.data.AntimatterMaterials;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -23,13 +24,13 @@ public class ChemicalReactorLoader {
         CHEMICAL_REACTING.RB().fi(Glyceryl.getLiquid(1000), Diesel.getLiquid(4000)).fo(NitroDiesel.getLiquid(5000)).add(1000,30);
         CHEMICAL_REACTING.RB().fi(Nitrogen.getGas(1000), Oxygen.getGas(2000)).fo(NitrogenDioxide.getGas(3000)).add(1250, 30);
         CHEMICAL_REACTING.RB().fi(Oxygen.getGas(2000)).ii(DUST.getMaterialIngredient(SodiumSulfide, 1)).fo(SodiumPersulfate.getLiquid(3000)).add(2000, 30);
-        CHEMICAL_REACTING.RB().fi(NitroCarbon.getLiquid(1000), Water.getLiquid(1000)).fo(Glyceryl.getLiquid(2000)).add(583, 30);
+        CHEMICAL_REACTING.RB().fi(NitroCarbon.getLiquid(1000), AntimatterMaterials.Water.getLiquid(1000)).fo(Glyceryl.getLiquid(2000)).add(583, 30);
         CHEMICAL_REACTING.RB().ii(DUST.getMaterialIngredient(Sodium, 1), DUST.getMaterialIngredient(Sulfur, 1)).io(DUST.get(SodiumSulfide, 2)).add(100, 30);
-        CHEMICAL_REACTING.RB().ii(DUST.getMaterialIngredient(Sulfur, 1)).fi(Water.getLiquid(2000)).fo(SulfuricAcid.getLiquid(3000)).add(1150, 30);
+        CHEMICAL_REACTING.RB().ii(DUST.getMaterialIngredient(Sulfur, 1)).fi(AntimatterMaterials.Water.getLiquid(2000)).fo(SulfuricAcid.getLiquid(3000)).add(1150, 30);
         CHEMICAL_REACTING.RB().fi(Hydrogen.getGas(2000), Oxygen.getGas(1000)).fo(new FluidStack(Fluids.WATER, 3000)).add(10, 30);
         CHEMICAL_REACTING.RB().ii(DUST.getMaterialIngredient(Sodium, 2)).fi(NitrogenDioxide.getGas(5000)).io(new ItemStack(Items.GUNPOWDER, 5)).add(34, 30);
         CHEMICAL_REACTING.RB().ii(DUST.getMaterialIngredient(Potassium, 1)).fi(NitricAcid.getLiquid(1000)).io(DUST.get(Saltpeter, 1)).add(20, 30);
-        CHEMICAL_REACTING.RB().fi(NitrogenDioxide.getGas(3000), Water.getLiquid(1000)).fo(NitricAcid.getLiquid(2000), NitricOxide.getGas(1000)).add(20, 30);
+        CHEMICAL_REACTING.RB().fi(NitrogenDioxide.getGas(3000), AntimatterMaterials.Water.getLiquid(1000)).fo(NitricAcid.getLiquid(2000), NitricOxide.getGas(1000)).add(20, 30);
         CHEMICAL_REACTING.RB().ii(DUST.getMaterialIngredient(Silicon, 1)).fi(Oxygen.getGas(2000)).io(DUST.get(SiliconDioxide, 3)).add(50,30);
         CHEMICAL_REACTING.RB().fi(NitricOxide.getGas(1000), Oxygen.getGas(1000)).fo(NitrogenDioxide.getGas(1000)).add(20, 30);
         CHEMICAL_REACTING.RB().fi(Oxygen.getGas(500), Hydrogen.getGas(1000)).fo(DistilledWater.getLiquid(1500)).add(5, 30);

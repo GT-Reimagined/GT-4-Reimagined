@@ -1,5 +1,6 @@
 package trinsdar.gt4r.loader.machines;
 
+import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import muramasa.antimatter.util.TagUtils;
@@ -14,7 +15,7 @@ import static trinsdar.gt4r.data.RecipeMaps.BATHING;
 
 public class BathingLoader {
     public static void init(){
-        ItemStack stoneDust = DUST.get(Stone, 1);
+        ItemStack stoneDust = DUST.get(AntimatterMaterials.Stone, 1);
         GT4RMaterialTags.BATHING_PERSULFATE.all().forEach(m -> {
             addBathRecipe(m, SodiumPersulfate, i(1.0, 0.7, 0.4), CRUSHED_PURIFIED.get(m, 1), DUST.get(GT4RMaterialTags.BATHING_PERSULFATE.getMapping(m), 1), stoneDust);
         });
@@ -22,10 +23,10 @@ public class BathingLoader {
             addBathRecipe(m, Mercury, i(1.0, 0.7, 0.4), CRUSHED_PURIFIED.get(m, 1), DUST.get(GT4RMaterialTags.BATHING_MERCURY.getMapping(m), 1), stoneDust);
         });
         //addBathRecipe(Zinc, SodiumPersulfate, i(100, 70, 40), CRUSHED_PURIFIED.get(Zinc, 1), DUST.get(Zinc, 1), stoneDust);
-        BATHING.RB().ii(RecipeIngredient.of(DUST.getMaterialTag(Wood), 1)).fi(Water.getLiquid(100)).io(new ItemStack(Items.PAPER)).chances(1.0).add(200);
-        BATHING.RB().ii(RecipeIngredient.of(Items.SUGAR_CANE, 1)).fi(Water.getLiquid(100)).io(new ItemStack(Items.PAPER)).chances(1.0).add(100);
+        BATHING.RB().ii(RecipeIngredient.of(DUST.getMaterialTag(AntimatterMaterials.Wood), 1)).fi(AntimatterMaterials.Water.getLiquid(100)).io(new ItemStack(Items.PAPER)).chances(1.0).add(200);
+        BATHING.RB().ii(RecipeIngredient.of(Items.SUGAR_CANE, 1)).fi(AntimatterMaterials.Water.getLiquid(100)).io(new ItemStack(Items.PAPER)).chances(1.0).add(100);
         BATHING.RB().ii(RecipeIngredient.of(TagUtils.getItemTag(new ResourceLocation("minecraft", "wool")), 1)).fi(Chlorine.getGas(125)).io(new ItemStack(Items.WHITE_WOOL)).chances(1.0).add(12);
-        BATHING.RB().ii(GEM.getMaterialIngredient(Diamond, 1)).fi(Netherite.getLiquid(36)).io(GEM.get(NetherizedDiamond, 1)).add(144);
+        BATHING.RB().ii(GEM.getMaterialIngredient(AntimatterMaterials.Diamond, 1)).fi(AntimatterMaterials.Netherite.getLiquid(36)).io(GEM.get(AntimatterMaterials.NetherizedDiamond, 1)).add(144);
     }
 
     private static double[] i(double... doubles){

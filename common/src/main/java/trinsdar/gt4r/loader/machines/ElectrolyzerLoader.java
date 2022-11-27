@@ -1,5 +1,6 @@
 package trinsdar.gt4r.loader.machines;
 
+import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialStack;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
@@ -34,14 +35,14 @@ public class ElectrolyzerLoader {
             add(m, power, (int) m.getMass() * count);
         });
 
-        ELECTROLYZING.RB().fi(Water.getLiquid(3000)).fo(Hydrogen.getGas(2000), Oxygen.getGas(1000)).add(2000, 30);
+        ELECTROLYZING.RB().fi(AntimatterMaterials.Water.getLiquid(3000)).fo(Hydrogen.getGas(2000), Oxygen.getGas(1000)).add(2000, 30);
         ELECTROLYZING.RB().ii(RecipeIngredient.of(new ItemStack(Items.BONE_MEAL, 3))).io(DUST.get(Calcium, 1)).add(24, 106);
         ELECTROLYZING.RB().ii(RecipeIngredient.of(new ItemStack(Blocks.SAND, 8))).io(DUST.get(SiliconDioxide, 1)).add(500, 25);
-        ELECTROLYZING.RB().ii(RecipeIngredient.of(new ItemStack(Blocks.RED_SAND, 8))).io(DUST.get(SiliconDioxide, 1), DUST_TINY.get(Iron, 1)).add(500, 25);
-        ELECTROLYZING.RB().ii(RecipeIngredient.of(DUST.get(Diamond, 1))).io(DUST.get(Carbon, 64), DUST.get(Carbon, 64)).add(1536,60);
+        ELECTROLYZING.RB().ii(RecipeIngredient.of(new ItemStack(Blocks.RED_SAND, 8))).io(DUST.get(SiliconDioxide, 1), DUST_TINY.get(AntimatterMaterials.Iron, 1)).add(500, 25);
+        ELECTROLYZING.RB().ii(RecipeIngredient.of(DUST.get(AntimatterMaterials.Diamond, 1))).io(DUST.get(Carbon, 64), DUST.get(Carbon, 64)).add(1536,60);
         add(Steel,50, 60, 2600);
         add(DarkAsh, 1, 30, 24);
-        add(Coal, 1, 30, 24);
+        add(AntimatterMaterials.Coal, 1, 30, 24);
         if (breakMethod) return;
 
         add(SodiumPersulfate, 90, 432); //close

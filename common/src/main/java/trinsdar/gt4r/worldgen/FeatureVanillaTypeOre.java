@@ -27,7 +27,7 @@ import java.util.BitSet;
 import java.util.Random;
 import java.util.function.Function;
 
-import static muramasa.antimatter.Data.Coal;
+import static muramasa.antimatter.data.AntimatterMaterials.Coal;
 import static muramasa.antimatter.Data.ORE_STONE;
 import static muramasa.antimatter.worldgen.WorldGenHelper.ORE_PREDICATE;
 import static trinsdar.gt4r.worldgen.GT4RPlacedFeatures.FEATURE_MAP;

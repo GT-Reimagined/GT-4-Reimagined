@@ -1,5 +1,6 @@
 package trinsdar.gt4r.loader.machines;
 
+import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -28,6 +29,6 @@ public class BendingLoader {
         });
         BENDING.RB().ii(RecipeIngredient.of(GT4RData.MixedMetal, 1)).io(new ItemStack(GT4RData.AdvancedAlloy)).add(100, 8);
         BENDING.RB().ii(PLATE.getMaterialIngredient(Tin, 2)).io(new ItemStack(GT4RData.CellTin)).add(200, 8);
-        BENDING.RB().ii(PLATE.getMaterialIngredient(Iron, 3)).io(new ItemStack(Items.BUCKET)).add(200, 4);
+        BENDING.RB().ii(PLATE.getMaterialIngredient(AntimatterMaterials.Iron, 3)).io(new ItemStack(Items.BUCKET)).add(200, 4);
     }
 }

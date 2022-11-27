@@ -32,7 +32,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 import static muramasa.antimatter.data.AntimatterDefaultTools.ELECTRIC_WRENCH;
-import static muramasa.antimatter.Data.Netherite;
+import static muramasa.antimatter.data.AntimatterMaterials.Netherite;
 import static muramasa.antimatter.data.AntimatterDefaultTools.WRENCH;
 import static net.minecraft.core.Direction.DOWN;
 import static net.minecraft.core.Direction.UP;
