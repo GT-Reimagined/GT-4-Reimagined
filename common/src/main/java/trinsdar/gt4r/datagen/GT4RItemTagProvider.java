@@ -2,6 +2,7 @@ package trinsdar.gt4r.datagen;
 
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.data.AntimatterMaterials;
+import muramasa.antimatter.data.AntimatterStoneTypes;
 import muramasa.antimatter.datagen.providers.AntimatterBlockTagProvider;
 import muramasa.antimatter.datagen.providers.AntimatterItemTagProvider;
 import muramasa.antimatter.ore.BlockOre;
@@ -86,7 +87,7 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         }
         this.tag(VINES).add(Items.VINE, Items.TWISTING_VINES, Items.WEEPING_VINES);
         AntimatterAPI.all(BlockOre.class, o -> {
-            if (o.getStoneType() != SAND && o.getStoneType() != SAND_RED && o.getStoneType() != GRAVEL){
+            if (o.getStoneType() != AntimatterStoneTypes.SAND && o.getStoneType() != AntimatterStoneTypes.SAND_RED && o.getStoneType() != AntimatterStoneTypes.GRAVEL){
                 this.tag(TagUtils.getForgelikeItemTag("sandless_" + getConventionalMaterialType(o.getOreType()) + "/" +  o.getMaterial().getId())).addTag(TagUtils.getForgelikeItemTag(String.join("", getConventionalStoneType(o.getStoneType()), "_", getConventionalMaterialType(o.getOreType()), "/", o.getMaterial().getId()))).replace(false);
             }
         });

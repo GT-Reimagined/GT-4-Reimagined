@@ -2,6 +2,7 @@ package trinsdar.gt4r.worldgen;
 
 import muramasa.antimatter.AntimatterConfig;
 import muramasa.antimatter.Data;
+import muramasa.antimatter.data.AntimatterStoneTypes;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialType;
 import muramasa.antimatter.ore.StoneType;
@@ -204,7 +205,7 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
                                                         Material mat = Material.get(config.getPrimary());
                                                         if (mat.has(ORE_STONE) && mat != Coal){
                                                             StoneType stone = WorldGenHelper.STONE_MAP.get(blockstate);
-                                                            if (stone == null || stone == Data.DIRT) continue;
+                                                            if (stone == null || stone == AntimatterStoneTypes.DIRT) continue;
                                                             levelchunksection.setBlockState(lx, ly, lz, ORE_STONE.get().get(mat).asState(), false);
                                                             ++i;
                                                             continue;
@@ -244,7 +245,7 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
                                  MaterialType<?> type) {
 
         StoneType stone = WorldGenHelper.STONE_MAP.get(existing);
-        if (stone == null || stone == Data.DIRT)
+        if (stone == null || stone == AntimatterStoneTypes.DIRT)
             return null;
         BlockState oreState = type == Data.ORE ? Data.ORE.get().get(material, stone).asState()
                 : Data.ORE_SMALL.get().get(material, stone).asState();

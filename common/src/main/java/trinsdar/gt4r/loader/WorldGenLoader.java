@@ -6,10 +6,10 @@ import muramasa.antimatter.worldgen.vein.WorldGenVein;
 import muramasa.antimatter.worldgen.vein.WorldGenVeinBuilder;
 import trinsdar.gt4r.GT4RConfig;
 
-import static muramasa.antimatter.Data.ANDESITE;
-import static muramasa.antimatter.Data.DIORITE;
-import static muramasa.antimatter.Data.GRANITE;
-import static muramasa.antimatter.Data.TUFF;
+import static muramasa.antimatter.data.AntimatterStoneTypes.ANDESITE;
+import static muramasa.antimatter.data.AntimatterStoneTypes.DIORITE;
+import static muramasa.antimatter.data.AntimatterStoneTypes.GRANITE;
+import static muramasa.antimatter.data.AntimatterStoneTypes.TUFF;
 import static net.minecraft.world.level.Level.OVERWORLD;
 import static trinsdar.gt4r.data.GT4RData.*;
 
