@@ -2,9 +2,9 @@ package trinsdar.gt4r.loader.machines;
 
 import muramasa.antimatter.material.Material;
 
-import static muramasa.antimatter.Data.CRUSHED_CENTRIFUGED;
-import static muramasa.antimatter.Data.CRUSHED_PURIFIED;
-import static muramasa.antimatter.Data.DUST_TINY;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.CRUSHED_CENTRIFUGED;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.CRUSHED_PURIFIED;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.DUST_TINY;
 import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
 import static trinsdar.gt4r.data.RecipeMaps.THERMAL_CENTRIFUGING;
 

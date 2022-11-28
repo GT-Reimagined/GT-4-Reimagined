@@ -1,24 +1,17 @@
 package trinsdar.gt4r.events.forge;
 
 import com.github.gregtechintergalactical.gtrubber.GTRubberData;
-import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.Data;
-import muramasa.antimatter.material.Material;
-import muramasa.antimatter.ore.BlockOre;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.events.CommonEvents;
-
-import static muramasa.antimatter.Data.NULL;
 
 @Mod.EventBusSubscriber(modid = Ref.ID)
 public class ForgeEventBusEvents {

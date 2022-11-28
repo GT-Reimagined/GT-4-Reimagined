@@ -1,5 +1,6 @@
 package trinsdar.gt4r.loader.machines;
 
+import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialTags;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
@@ -11,7 +12,6 @@ import net.minecraft.tags.ItemTags;
 import muramasa.antimatter.data.ForgeCTags;
 import trinsdar.gt4r.data.GT4RData;
 
-import static muramasa.antimatter.Data.*;
 import static trinsdar.gt4r.data.Materials.FishOil;
 import static trinsdar.gt4r.data.Materials.Honey;
 import static trinsdar.gt4r.data.Materials.SeedOil;
@@ -23,23 +23,23 @@ public class FluidExtractorLoader {
         FLUID_EXTRACTOR_COILS.RB().ii(RecipeIngredient.of(GT4RData.CupronickelHeatingCoil, 1)).add(0, 0, 250);
         FLUID_EXTRACTOR_COILS.RB().ii(RecipeIngredient.of(GT4RData.KanthalHeatingCoil, 1)).add(0, 0, 500);
         FLUID_EXTRACTOR_COILS.RB().ii(RecipeIngredient.of(GT4RData.NichromeHeatingCoil, 1)).add(0, 0, 750);
-        ROD.all().forEach(r -> {
-            add(r, ROD.get(r), 0.5f);
+        AntimatterMaterialTypes.ROD.all().forEach(r -> {
+            add(r, AntimatterMaterialTypes.ROD.get(r), 0.5f);
         });
-        PLATE.all().forEach(r -> {
-            add(r, PLATE.get(r), 1f);
+        AntimatterMaterialTypes.PLATE.all().forEach(r -> {
+            add(r, AntimatterMaterialTypes.PLATE.get(r), 1f);
         });
-        INGOT.all().forEach(r -> {
-            add(r, INGOT.get(r), 1f);
-            if (r.has(DUST)){
-                add(r, DUST.get(r), 1f);
+        AntimatterMaterialTypes.INGOT.all().forEach(r -> {
+            add(r, AntimatterMaterialTypes.INGOT.get(r), 1f);
+            if (r.has(AntimatterMaterialTypes.DUST)){
+                add(r, AntimatterMaterialTypes.DUST.get(r), 1f);
             }
         });
-        GEAR.all().forEach(r -> {
-            add(r, GEAR.get(r), 4f);
+        AntimatterMaterialTypes.GEAR.all().forEach(r -> {
+            add(r, AntimatterMaterialTypes.GEAR.get(r), 4f);
         });
-        PLATE_DENSE.all().forEach(r -> {
-            add(r, PLATE_DENSE.get(r), 9f);
+        AntimatterMaterialTypes.PLATE_DENSE.all().forEach(r -> {
+            add(r, AntimatterMaterialTypes.PLATE_DENSE.get(r), 9f);
         });
 
         FLUID_EXTRACTING.RB()
@@ -58,7 +58,7 @@ public class FluidExtractorLoader {
     }
 
     private static void add(Material m, Item i, float ratio) {
-        if (!m.has(LIQUID)) return;
+        if (!m.has(AntimatterMaterialTypes.LIQUID)) return;
         long amount = amount(ratio);
         FLUID_EXTRACTING.RB()
                 .ii(RecipeIngredient.of(i,1))

@@ -4,10 +4,10 @@ import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
-import static muramasa.antimatter.Data.BLOCK;
-import static muramasa.antimatter.Data.BOLT;
-import static muramasa.antimatter.Data.PLATE;
-import static muramasa.antimatter.Data.ROD;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.BLOCK;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.BOLT;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.PLATE;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.ROD;
 import static trinsdar.gt4r.data.RecipeMaps.CUTTING;
 
 public class CutterLoader {

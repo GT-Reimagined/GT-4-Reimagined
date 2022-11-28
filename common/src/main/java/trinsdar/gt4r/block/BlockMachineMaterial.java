@@ -28,7 +28,7 @@ import trinsdar.gt4r.tile.single.TileEntityDrum;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static muramasa.antimatter.Data.NULL;
+import static muramasa.antimatter.material.Material.NULL;
 import static muramasa.antimatter.Data.WRENCH_MATERIAL;
 
 public class BlockMachineMaterial extends BlockMachine implements IColorHandler {

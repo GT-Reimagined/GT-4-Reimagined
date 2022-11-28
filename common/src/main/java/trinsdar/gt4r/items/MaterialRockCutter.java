@@ -1,6 +1,5 @@
 package trinsdar.gt4r.items;
 
-import muramasa.antimatter.Ref;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialTags;
 import muramasa.antimatter.tool.AntimatterToolType;
@@ -19,11 +18,10 @@ import tesseract.TesseractPlatformUtils;
 import tesseract.api.gt.IEnergyHandler;
 
 import javax.annotation.Nullable;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import static muramasa.antimatter.Data.Diamond;
+import static muramasa.antimatter.data.AntimatterMaterials.Diamond;
 import static trinsdar.gt4r.data.Materials.Titanium;
 
 public class MaterialRockCutter extends MaterialTool {

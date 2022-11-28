@@ -9,7 +9,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
 import trinsdar.gt4r.tile.single.TileEntityMaterial;
 
-import static muramasa.antimatter.Data.Gold;
+import static muramasa.antimatter.data.AntimatterMaterials.Gold;
 import static trinsdar.gt4r.data.Materials.*;
 
 public class ContainerCabinet<T extends TileEntityMaterial<T>> extends ContainerBasicMachine<T> {

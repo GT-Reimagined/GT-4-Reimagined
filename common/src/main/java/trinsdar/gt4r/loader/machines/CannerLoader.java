@@ -2,8 +2,8 @@ package trinsdar.gt4r.loader.machines;
 
 import net.minecraft.world.item.ItemStack;
 
-import static muramasa.antimatter.Data.DUST;
-import static muramasa.antimatter.Data.Redstone;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.DUST;
+import static muramasa.antimatter.data.AntimatterMaterials.Redstone;
 import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
 import static trinsdar.gt4r.data.GT4RData.*;
 import static trinsdar.gt4r.data.Materials.Cadmium;

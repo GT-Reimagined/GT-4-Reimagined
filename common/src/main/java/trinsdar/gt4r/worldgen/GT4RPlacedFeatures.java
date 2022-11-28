@@ -1,6 +1,7 @@
 package trinsdar.gt4r.worldgen;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
+import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.util.TagUtils;
 import net.minecraft.core.Holder;
@@ -27,11 +28,9 @@ import trinsdar.gt4r.config.OreConfigHandler;
 import trinsdar.gt4r.config.OreConfigNode;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
-import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.util.TagUtils.getBiomeTag;
 import static trinsdar.gt4r.data.Materials.*;
 
@@ -69,23 +68,23 @@ public class GT4RPlacedFeatures {
         createOrePlacedFeature("sodalite", Sodalite, 0, 80, 6, 16, null, 0.0f, 0.0f, false, false, Level.END);
         createOrePlacedFeature("chromite", Chromite, 0, 80, 4, 5, null, 0.0f, 0.0f, false, false, Level.END);
 
-        createOrePlacedFeature("coal_upper", Coal, 136, 320, 30, 17, null, 0.0f, 0.0f, false, false, Level.OVERWORLD);
-        createOrePlacedFeature("coal_lower", Coal, 0, 192, 20, 17, null, 0.0f, 0.5f, false, false, Level.OVERWORLD);
-        createOrePlacedFeature("iron_upper", Iron, 80, 384, 90, 9, "tin", 0.02f, 0.0f, true, false, Level.OVERWORLD);
-        createOrePlacedFeature("iron_middle", Iron, -24, 56, 10, 9, "tin", 0.02f, 0.0f, true, false, Level.OVERWORLD);
-        createOrePlacedFeature("iron_small", Iron, -64, 72, 10, 4, "tin", 0.02f, 0.0f, false, false, Level.OVERWORLD);
-        createOrePlacedFeature("gold_extra", Gold, 32, 256, 50, 9, "copper", 0.02f, 0.0f, false, false, Level.OVERWORLD);
-        createOrePlacedFeature("gold", Gold, -64, 32, 4, 9, "copper", 0.02f, 0.5f, true, false, Level.OVERWORLD);
-        createOrePlacedFeature("redstone", Redstone, -64, 15, 4, 8, "cinnabar", 0.01f, 0, false, false, Level.OVERWORLD);
-        createOrePlacedFeature("redstone_lower", Redstone, -96, -32, 8, 8, "cinnabar", 0.01f, 0, true, false, Level.OVERWORLD);
-        createOrePlacedFeature("diamond", Diamond, -144, 16, 7, 4, null, 0.0f, 0.5f, true, false, Level.OVERWORLD);
-        createOrePlacedFeature("diamond_large", Diamond, -144, 16, 9, 12, null, 0.0f, 0.7f, true, true, Level.OVERWORLD);
-        createOrePlacedFeature("diamond_buried", Diamond, -144, 16, 4, 8, null, 0.0f, 1.0f, true, false, Level.OVERWORLD);
-        createOrePlacedFeature("lapis", Lapis, -32, 32, 2, 7, null, 0.0f, 0.0f, true, false, Level.OVERWORLD);
-        createOrePlacedFeature("lapis_buried", Lapis, -64, 64, 4, 7, null, 0.0f, 1.0f, false, false, Level.OVERWORLD);
-        createOrePlacedFeature("emerald", Emerald, -16, 480, 100, 3, null, 0.0f, 0.0f, true, false, Level.OVERWORLD);
-        createOrePlacedFeature("copper", Copper, -16, 112, 16, 10, "gold", 0.02f, 0.0f, true, false, Level.OVERWORLD);
-        createOrePlacedFeature("copper_buried", Copper, -16, 112, 16, 20, "gold", 0.02f, 0.0f, true, false, Level.OVERWORLD);
+        createOrePlacedFeature("coal_upper", AntimatterMaterials.Coal, 136, 320, 30, 17, null, 0.0f, 0.0f, false, false, Level.OVERWORLD);
+        createOrePlacedFeature("coal_lower", AntimatterMaterials.Coal, 0, 192, 20, 17, null, 0.0f, 0.5f, false, false, Level.OVERWORLD);
+        createOrePlacedFeature("iron_upper", AntimatterMaterials.Iron, 80, 384, 90, 9, "tin", 0.02f, 0.0f, true, false, Level.OVERWORLD);
+        createOrePlacedFeature("iron_middle", AntimatterMaterials.Iron, -24, 56, 10, 9, "tin", 0.02f, 0.0f, true, false, Level.OVERWORLD);
+        createOrePlacedFeature("iron_small", AntimatterMaterials.Iron, -64, 72, 10, 4, "tin", 0.02f, 0.0f, false, false, Level.OVERWORLD);
+        createOrePlacedFeature("gold_extra", AntimatterMaterials.Gold, 32, 256, 50, 9, "copper", 0.02f, 0.0f, false, false, Level.OVERWORLD);
+        createOrePlacedFeature("gold", AntimatterMaterials.Gold, -64, 32, 4, 9, "copper", 0.02f, 0.5f, true, false, Level.OVERWORLD);
+        createOrePlacedFeature("redstone", AntimatterMaterials.Redstone, -64, 15, 4, 8, "cinnabar", 0.01f, 0, false, false, Level.OVERWORLD);
+        createOrePlacedFeature("redstone_lower", AntimatterMaterials.Redstone, -96, -32, 8, 8, "cinnabar", 0.01f, 0, true, false, Level.OVERWORLD);
+        createOrePlacedFeature("diamond", AntimatterMaterials.Diamond, -144, 16, 7, 4, null, 0.0f, 0.5f, true, false, Level.OVERWORLD);
+        createOrePlacedFeature("diamond_large", AntimatterMaterials.Diamond, -144, 16, 9, 12, null, 0.0f, 0.7f, true, true, Level.OVERWORLD);
+        createOrePlacedFeature("diamond_buried", AntimatterMaterials.Diamond, -144, 16, 4, 8, null, 0.0f, 1.0f, true, false, Level.OVERWORLD);
+        createOrePlacedFeature("lapis", AntimatterMaterials.Lapis, -32, 32, 2, 7, null, 0.0f, 0.0f, true, false, Level.OVERWORLD);
+        createOrePlacedFeature("lapis_buried", AntimatterMaterials.Lapis, -64, 64, 4, 7, null, 0.0f, 1.0f, false, false, Level.OVERWORLD);
+        createOrePlacedFeature("emerald", AntimatterMaterials.Emerald, -16, 480, 100, 3, null, 0.0f, 0.0f, true, false, Level.OVERWORLD);
+        createOrePlacedFeature("copper", AntimatterMaterials.Copper, -16, 112, 16, 10, "gold", 0.02f, 0.0f, true, false, Level.OVERWORLD);
+        createOrePlacedFeature("copper_buried", AntimatterMaterials.Copper, -16, 112, 16, 20, "gold", 0.02f, 0.0f, true, false, Level.OVERWORLD);
     }
 
     public static void createOrePlacedFeature(String id, Material material, int minY, int maxY, int weight, int size, String secondary, float secondaryChance, float discardChance, List<ResourceKey<Level>> dimensions, List<String> biomeFilter, boolean biomeBlackList, boolean triangle, boolean rare){

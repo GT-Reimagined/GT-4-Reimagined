@@ -9,8 +9,8 @@ import muramasa.antimatter.data.ForgeCTags;
 import java.util.function.Consumer;
 
 import static com.google.common.collect.ImmutableMap.of;
-import static muramasa.antimatter.Data.PLATE;
-import static muramasa.antimatter.Data.SAW;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.PLATE;
+import static muramasa.antimatter.data.AntimatterDefaultTools.SAW;
 import static trinsdar.gt4r.data.CustomTags.*;
 import static trinsdar.gt4r.data.GT4RData.*;
 import static trinsdar.gt4r.data.Materials.Carbon;
