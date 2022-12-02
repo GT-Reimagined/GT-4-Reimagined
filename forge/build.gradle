@@ -69,6 +69,8 @@ dependencies {
     }
     include("com.github.gregtech-intergalactical:gtrubber-forge:1.18.2-0.1.2")
     modRuntimeOnly("dev.latvian.mods:kubejs-forge:${rootProject.kubejs_version}")
+    runtimeOnly("curse.maven:portality-291493:3840074")
+    runtimeOnly("curse.maven:titanium-287342:4117991")
 
 
     //runtimeOnly fg.deobf("curse.maven:world_stripper-250603:3142092")
