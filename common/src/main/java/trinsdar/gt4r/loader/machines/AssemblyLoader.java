@@ -9,6 +9,7 @@ import muramasa.antimatter.pipe.PipeSize;
 import muramasa.antimatter.pipe.types.Cable;
 import muramasa.antimatter.pipe.types.Wire;
 import muramasa.antimatter.util.TagUtils;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -43,8 +44,8 @@ public class AssemblyLoader {
         GT4RMaterialTags.HULL.all().forEach(m -> {
             ASSEMBLING.RB().ii(of(MachineParts, 1), of(AntimatterMaterialTypes.PLATE.getMaterialTag(m), 6)).io(GT4RMaterialTags.HULL.get(m, 1)).add(400, 8);
         });
-        ASSEMBLING.RB().ii(of(getTag("forge", "rods/wooden"), 1), of(getTag("minecraft", "coals"), 1)).io(new ItemStack(Items.TORCH, 4)).add(400, 1);
-        ASSEMBLING.RB().ii(of(getTag("forge", "string"), 1), of(getTag("forge", "slimeballs"), 1)).io(new ItemStack(Items.LEAD, 2)).add(200, 2);
+        ASSEMBLING.RB().ii(of(Items.STICK, 1), of(ItemTags.COALS, 1)).io(new ItemStack(Items.TORCH, 4)).add(400, 1);
+        ASSEMBLING.RB().ii(of(getForgelikeItemTag("string"), 1), of(getForgelikeItemTag( "slimeballs"), 1)).io(new ItemStack(Items.LEAD, 2)).add(200, 2);
         ASSEMBLING.RB().ii(of(new ItemStack(CompressedCoalBall, 8)), of(Items.BRICKS, 1)).io(new ItemStack(CoalChunk)).add(400, 4);
         ASSEMBLING.RB().ii(of(CircuitBoardAdv, 1), of(AdvCircuitParts, 2)).io(new ItemStack(CircuitAdv, 1)).add(1600, 2);
         ASSEMBLING.RB().ii(of(CircuitBoardProcessor, 1), of(CircuitDataStorage, 1)).io(new ItemStack(CircuitDataControl, 2)).add(3200, 4);
@@ -81,17 +82,17 @@ public class AssemblyLoader {
         //Todo when ic2 makes it to 1.16
         //ASSEMBLING.RB().ii(DUST.getMaterialIngredient(Flint, 5), of(Items.TNT, 1)).io(new ItemStack(ITNT, 5)).add(800, 2);
 
-        ASSEMBLING.RB().ii(AntimatterMaterialTypes.DUST.getMaterialIngredient(Phosphor, 1), of(getTag("forge", "rods/wooden"), 1)).io(new ItemStack(Match, 4)).add(400, 1);
+        ASSEMBLING.RB().ii(AntimatterMaterialTypes.DUST.getMaterialIngredient(Phosphor, 1), of(Items.STICK, 1)).io(new ItemStack(Match, 4)).add(400, 1);
         ASSEMBLING.RB().ii(of(Match, 64), of(Items.PAPER, 2)).io(new ItemStack(MatchBook)).add(400, 1);
         ASSEMBLING.RB().ii(of(Items.GUNPOWDER, 4), of(ForgeCTags.SAND, 1)).io(new ItemStack(Items.TNT, 1)).add(400, 1);
         ASSEMBLING.RB().ii(AntimatterMaterialTypes.DUST.getMaterialIngredient(AntimatterMaterials.Glowstone, 1), of(DUSTS_LAPIS_LAZ, 1)).io(new ItemStack(AdvCircuitParts, 2)).add(800,2);
         ASSEMBLING.RB().ii(AntimatterMaterialTypes.DUST.getMaterialIngredient(AntimatterMaterials.Redstone, 4), AntimatterMaterialTypes.DUST.getMaterialIngredient(AntimatterMaterials.Glowstone, 4)).io(new ItemStack(Items.REDSTONE_LAMP)).add(400, 1);
-        ASSEMBLING.RB().ii(of(getTag("forge", "rods/wooden"), 1), AntimatterMaterialTypes.DUST.getMaterialIngredient(AntimatterMaterials.Redstone, 1)).io(new ItemStack(Items.REDSTONE_TORCH)).add(400, 1);
+        ASSEMBLING.RB().ii(of(Items.STICK, 1), AntimatterMaterialTypes.DUST.getMaterialIngredient(AntimatterMaterials.Redstone, 1)).io(new ItemStack(Items.REDSTONE_TORCH)).add(400, 1);
         ASSEMBLING.RB().ii(AntimatterMaterialTypes.INGOT.getMaterialIngredient(AntimatterMaterials.Iron, 4), AntimatterMaterialTypes.DUST.getMaterialIngredient(AntimatterMaterials.Redstone, 1)).io(new ItemStack(Items.COMPASS)).add(400, 4);
         ASSEMBLING.RB().ii(AntimatterMaterialTypes.INGOT.getMaterialIngredient(AntimatterMaterials.Gold, 4), AntimatterMaterialTypes.DUST.getMaterialIngredient(AntimatterMaterials.Redstone, 1)).io(new ItemStack(Items.CLOCK)).add(400, 4);
-        ASSEMBLING.RB().ii(of(getTag("forge", "rods/wooden"), 1), of(GTRubberData.StickyResin, 1)).io(new ItemStack(Items.TORCH, 6)).add(400, 1);
+        ASSEMBLING.RB().ii(of(Items.STICK, 1), of(GTRubberData.StickyResin, 1)).io(new ItemStack(Items.TORCH, 6)).add(400, 1);
         ASSEMBLING.RB().ii(of(Items.COAL, 8), AntimatterMaterialTypes.GEM.getMaterialIngredient(AntimatterMaterials.Flint, 1)).io(new ItemStack(CompressedCoalBall)).add(400, 4);
-        ASSEMBLING.RB().ii(of(getTag("forge", "rods/wooden"), 1), of(ForgeCTags.COBBLESTONE, 1)).io(new ItemStack(Items.LEVER, 1)).add(400, 1);
+        ASSEMBLING.RB().ii(of(Items.STICK, 1), of(ForgeCTags.COBBLESTONE, 1)).io(new ItemStack(Items.LEVER, 1)).add(400, 1);
         ASSEMBLING.RB().ii(of(CircuitBoardBasic, 1), of(CABLE_COPPER.getBlockItem(PipeSize.VTINY), 3)).io(new ItemStack(CircuitBasic)).add(800, 1);
         ASSEMBLING.RB().ii(of(CompressedCoalBall, 8), of(AntimatterMaterialTypes.BLOCK.getMaterialTag(AntimatterMaterials.Iron), 1)).io(new ItemStack(CoalChunk)).add(400, 4);
         ASSEMBLING.RB().ii(AntimatterMaterialTypes.PLATE.getMaterialIngredient(Carbon, 4), of(MACHINE_HULLS_BASIC, 1), of(BatteryRE, 1).setIgnoreNbt()).io(new ItemStack(WINDMILL.getItem(ULV), 1)).add(6400, 8);
@@ -100,8 +101,8 @@ public class AssemblyLoader {
         ASSEMBLING.RB().ii(of(AntimatterMaterialTypes.PLATE.getMaterialTag(AntimatterMaterials.Wood), 8), AntimatterMaterialTypes.DUST.getMaterialIngredient(AntimatterMaterials.Redstone, 1)).io(new ItemStack(Items.NOTE_BLOCK)).add(800, 1);
         ASSEMBLING.RB().ii(of(AntimatterMaterialTypes.PLATE.getMaterialTag(AntimatterMaterials.Wood), 8), AntimatterMaterialTypes.GEM.getMaterialIngredient(AntimatterMaterials.Diamond, 1)).io(new ItemStack(Items.JUKEBOX)).add(1600, 1);
         ASSEMBLING.RB().ii(of(AdvancedAlloy, 2), of(ForgeCTags.GLASS, 7)).io(new ItemStack(REINFORCED_GLASS, 7)).add(400, 4);
-        ASSEMBLING.RB().ii(of(getTag("minecraft", "planks"), 8), AntimatterMaterialTypes.DUST.getMaterialIngredient(AntimatterMaterials.Redstone, 1)).io(new ItemStack(Items.NOTE_BLOCK)).add(800, 1);
-        ASSEMBLING.RB().ii(of(getTag("minecraft", "planks"), 8), AntimatterMaterialTypes.GEM.getMaterialIngredient(AntimatterMaterials.Diamond, 1)).io(new ItemStack(Items.JUKEBOX)).add(1600, 1);
+        ASSEMBLING.RB().ii(of(ItemTags.PLANKS, 8), AntimatterMaterialTypes.DUST.getMaterialIngredient(AntimatterMaterials.Redstone, 1)).io(new ItemStack(Items.NOTE_BLOCK)).add(800, 1);
+        ASSEMBLING.RB().ii(of(ItemTags.PLANKS, 8), AntimatterMaterialTypes.GEM.getMaterialIngredient(AntimatterMaterials.Diamond, 1)).io(new ItemStack(Items.JUKEBOX)).add(1600, 1);
         ASSEMBLING.RB().ii(of(CompressedCoalBall, 8), of(getForgelikeItemTag("obsidian"), 1)).io(new ItemStack(CoalChunk)).add(400, 4);
         ASSEMBLING.RB().ii(of(CABLE_TIN.getBlockItem(PipeSize.VTINY), 1), AntimatterMaterialTypes.PLATE.getMaterialIngredient(BatteryAlloy, 1)).io(new ItemStack(BatteryHullSmall)).add(800, 1);
         ASSEMBLING.RB().ii(of(CABLE_COPPER.getBlockItem(PipeSize.VTINY), 2), AntimatterMaterialTypes.PLATE.getMaterialIngredient(BatteryAlloy, 3)).io(new ItemStack(BatteryHullMedium)).add(1600, 2);

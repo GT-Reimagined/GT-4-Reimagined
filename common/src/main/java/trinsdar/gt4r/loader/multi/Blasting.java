@@ -5,6 +5,7 @@ import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialTags;
 import muramasa.antimatter.util.TagUtils;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.resources.ResourceLocation;
@@ -25,16 +26,16 @@ public class Blasting {
         BASIC_BLASTING.RB().ii(of(DUSTS_COALS, 4), AntimatterMaterialTypes.INGOT.getMaterialIngredient(AntimatterMaterials.Iron, 1)).io(AntimatterMaterialTypes.INGOT.get(Steel,1), AntimatterMaterialTypes.DUST_TINY.get(DarkAsh, 4)).add(7200);
         BASIC_BLASTING.RB().ii(of(DUSTS_COALS, 2), AntimatterMaterialTypes.DUST.getMaterialIngredient(Steel, 1)).io(AntimatterMaterialTypes.INGOT.get(Steel,1), AntimatterMaterialTypes.DUST_TINY.get(DarkAsh, 2)).add(7200);
         BASIC_BLASTING.RB().ii(AntimatterMaterialTypes.GEM.getMaterialIngredient(CoalCoke, 2), AntimatterMaterialTypes.INGOT.getMaterialIngredient(AntimatterMaterials.Iron, 1)).io(AntimatterMaterialTypes.INGOT.get(Steel,1), AntimatterMaterialTypes.DUST_TINY.get(DarkAsh, 2)).add(7200);
-        BASIC_BLASTING.RB().ii(of(TagUtils.getItemTag(new ResourceLocation("minecraft", "coals")), 4), AntimatterMaterialTypes.INGOT.getMaterialIngredient(AntimatterMaterials.Iron, 1)).io(AntimatterMaterialTypes.INGOT.get(Steel,1), AntimatterMaterialTypes.DUST_TINY.get(DarkAsh, 4)).add(7200);
+        BASIC_BLASTING.RB().ii(of(ItemTags.COALS, 4), AntimatterMaterialTypes.INGOT.getMaterialIngredient(AntimatterMaterials.Iron, 1)).io(AntimatterMaterialTypes.INGOT.get(Steel,1), AntimatterMaterialTypes.DUST_TINY.get(DarkAsh, 4)).add(7200);
         BASIC_BLASTING.RB().ii(AntimatterMaterialTypes.DUST.getMaterialIngredient(Carbon, 2), AntimatterMaterialTypes.INGOT.getMaterialIngredient(AntimatterMaterials.Iron, 1)).io(AntimatterMaterialTypes.INGOT.get(Steel,1), AntimatterMaterialTypes.DUST_TINY.get(DarkAsh, 2)).add(7200);
         BASIC_BLASTING.RB().ii(AntimatterMaterialTypes.DUST.getMaterialIngredient(Galena, 2), of(DUSTS_COALS, 1)).io(AntimatterMaterialTypes.INGOT.get(Lead, 1), AntimatterMaterialTypes.INGOT.get(Silver, 1), AntimatterMaterialTypes.DUST_TINY.get(DarkAsh, 1)).add(7200);
         BASIC_BLASTING.RB().ii(AntimatterMaterialTypes.DUST.getMaterialIngredient(Galena, 4), AntimatterMaterialTypes.DUST.getMaterialIngredient(CoalCoke, 1)).io(AntimatterMaterialTypes.INGOT.get(Lead, 2), AntimatterMaterialTypes.INGOT.get(Silver, 2), AntimatterMaterialTypes.DUST_TINY.get(DarkAsh, 2)).add(14400);
         BASIC_BLASTING.RB().ii(AntimatterMaterialTypes.DUST.getMaterialIngredient(Pyrite, 3), AntimatterMaterialTypes.DUST.getMaterialIngredient(Calcite, 1), of(DUSTS_COALS, 1)).io(new ItemStack(Items.IRON_INGOT, 2), AntimatterMaterialTypes.DUST_TINY.get(DarkAsh, 1)).add(1200);
         BASIC_BLASTING.RB().ii(of(AntimatterMaterialTypes.ORE.getMaterialTag(AntimatterMaterials.Iron), 1), AntimatterMaterialTypes.DUST.getMaterialIngredient(Calcite, 1), of(DUSTS_COALS, 1)).io(new ItemStack(Items.IRON_INGOT, 3), AntimatterMaterialTypes.DUST_TINY.get(DarkAsh, 1)).add(1200);
-        BASIC_BLASTING.RB().ii(AntimatterMaterialTypes.DUST.getMaterialIngredient(Galena, 2), of(TagUtils.getItemTag(new ResourceLocation("minecraft", "coals")), 1)).io(AntimatterMaterialTypes.INGOT.get(Lead, 1), AntimatterMaterialTypes.INGOT.get(Silver, 1), AntimatterMaterialTypes.DUST_TINY.get(DarkAsh, 1)).add(1200);
+        BASIC_BLASTING.RB().ii(AntimatterMaterialTypes.DUST.getMaterialIngredient(Galena, 2), of(ItemTags.COALS, 1)).io(AntimatterMaterialTypes.INGOT.get(Lead, 1), AntimatterMaterialTypes.INGOT.get(Silver, 1), AntimatterMaterialTypes.DUST_TINY.get(DarkAsh, 1)).add(1200);
         BASIC_BLASTING.RB().ii(AntimatterMaterialTypes.DUST.getMaterialIngredient(Galena, 4), AntimatterMaterialTypes.GEM.getMaterialIngredient(CoalCoke, 1)).io(AntimatterMaterialTypes.INGOT.get(Lead, 2), AntimatterMaterialTypes.INGOT.get(Silver, 2), AntimatterMaterialTypes.DUST_TINY.get(DarkAsh, 2)).add(2400);
-        BASIC_BLASTING.RB().ii(AntimatterMaterialTypes.DUST.getMaterialIngredient(Pyrite, 3), AntimatterMaterialTypes.DUST.getMaterialIngredient(Calcite, 1), of(TagUtils.getItemTag(new ResourceLocation("minecraft", "coals")), 1)).io(new ItemStack(Items.IRON_INGOT, 2), AntimatterMaterialTypes.DUST_TINY.get(DarkAsh, 1)).add(1200);
-        BASIC_BLASTING.RB().ii(of(AntimatterMaterialTypes.ORE.getMaterialTag(AntimatterMaterials.Iron), 1), AntimatterMaterialTypes.DUST.getMaterialIngredient(Calcite, 1), of(TagUtils.getItemTag(new ResourceLocation("minecraft", "coals")), 1)).io(new ItemStack(Items.IRON_INGOT, 3), AntimatterMaterialTypes.DUST_TINY.get(DarkAsh, 1)).add(1200);
+        BASIC_BLASTING.RB().ii(AntimatterMaterialTypes.DUST.getMaterialIngredient(Pyrite, 3), AntimatterMaterialTypes.DUST.getMaterialIngredient(Calcite, 1), of(ItemTags.COALS, 1)).io(new ItemStack(Items.IRON_INGOT, 2), AntimatterMaterialTypes.DUST_TINY.get(DarkAsh, 1)).add(1200);
+        BASIC_BLASTING.RB().ii(of(AntimatterMaterialTypes.ORE.getMaterialTag(AntimatterMaterials.Iron), 1), AntimatterMaterialTypes.DUST.getMaterialIngredient(Calcite, 1), of(ItemTags.COALS, 1)).io(new ItemStack(Items.IRON_INGOT, 3), AntimatterMaterialTypes.DUST_TINY.get(DarkAsh, 1)).add(1200);
         final int multiplier = 1;
         //Tag<Item> rockTag = getForgelikeItemTag()
         BLASTING.RB().ii(of(TagUtils.getForgelikeItemTag("ores/iron"), 1), of(AntimatterMaterialTypes.DUST.get(Calcite, 1))).io(new ItemStack(Items.IRON_INGOT, 3), AntimatterMaterialTypes.DUST.get(DarkAsh, 1)).add(500, 120, 1500);

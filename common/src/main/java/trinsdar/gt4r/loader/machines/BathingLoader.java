@@ -5,6 +5,7 @@ import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import muramasa.antimatter.util.TagUtils;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.resources.ResourceLocation;
@@ -25,7 +26,7 @@ public class BathingLoader {
         //addBathRecipe(Zinc, SodiumPersulfate, i(100, 70, 40), CRUSHED_PURIFIED.get(Zinc, 1), DUST.get(Zinc, 1), stoneDust);
         BATHING.RB().ii(RecipeIngredient.of(AntimatterMaterialTypes.DUST.getMaterialTag(AntimatterMaterials.Wood), 1)).fi(AntimatterMaterials.Water.getLiquid(100)).io(new ItemStack(Items.PAPER)).chances(1.0).add(200);
         BATHING.RB().ii(RecipeIngredient.of(Items.SUGAR_CANE, 1)).fi(AntimatterMaterials.Water.getLiquid(100)).io(new ItemStack(Items.PAPER)).chances(1.0).add(100);
-        BATHING.RB().ii(RecipeIngredient.of(TagUtils.getItemTag(new ResourceLocation("minecraft", "wool")), 1)).fi(Chlorine.getGas(125)).io(new ItemStack(Items.WHITE_WOOL)).chances(1.0).add(12);
+        BATHING.RB().ii(RecipeIngredient.of(ItemTags.WOOL, 1)).fi(Chlorine.getGas(125)).io(new ItemStack(Items.WHITE_WOOL)).chances(1.0).add(12);
         BATHING.RB().ii(AntimatterMaterialTypes.GEM.getMaterialIngredient(AntimatterMaterials.Diamond, 1)).fi(AntimatterMaterials.Netherite.getLiquid(36)).io(AntimatterMaterialTypes.GEM.get(AntimatterMaterials.NetherizedDiamond, 1)).add(144);
     }
 
