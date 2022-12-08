@@ -14,7 +14,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import tesseract.TesseractPlatformUtils;
+import tesseract.TesseractCapUtils;
 import tesseract.api.gt.IEnergyHandler;
 
 import javax.annotation.Nullable;
@@ -38,7 +38,7 @@ public class MaterialRockCutter extends MaterialTool {
     public void onGenericFillItemGroup(CreativeModeTab group, NonNullList<ItemStack> list, long maxEnergy) {
         if (this.allowdedIn(group)){
             ItemStack stack = asItemStack(Diamond, Titanium);
-            IEnergyHandler h = TesseractPlatformUtils.getEnergyHandlerItem(stack).map(t -> t).orElse(null);
+            IEnergyHandler h = TesseractCapUtils.getEnergyHandlerItem(stack).map(t -> t).orElse(null);
             if (h != null){
                 list.add(stack.copy());
                 h.setCapacity(maxEnergy);

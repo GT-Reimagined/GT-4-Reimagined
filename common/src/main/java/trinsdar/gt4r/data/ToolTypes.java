@@ -17,7 +17,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
-import tesseract.api.TesseractCaps;
+import tesseract.TesseractCapUtils;
 import tesseract.api.gt.IEnergyHandler;
 import tesseract.api.gt.IGTNode;
 import trinsdar.gt4r.Ref;
@@ -100,7 +100,7 @@ public class ToolTypes {
         ItemStack powerUnit = new ItemStack(broken);
         Tuple<Long, Long> tuple = getEnergy(tool);
         CompoundTag dataTag = powerUnit.getOrCreateTagElement(muramasa.antimatter.Ref.TAG_ITEM_ENERGY_DATA);
-        IEnergyHandler handler = powerUnit.getCapability(TesseractCaps.getENERGY_HANDLER_CAPABILITY()).map(i -> i).orElse(null);
+        IEnergyHandler handler = TesseractCapUtils.getEnergyHandlerItem(powerUnit).orElse(null);
         if (handler != null){
             handler.setEnergy(tuple.getA());
             handler.setCapacity(tuple.getB());
@@ -116,8 +116,8 @@ public class ToolTypes {
 
     public static Tuple<Long, Long> getEnergy(ItemStack stack){
         if (stack.getItem() instanceof ItemBattery battery){
-            long energy = stack.getCapability(TesseractCaps.getENERGY_HANDLER_CAPABILITY()).map(IGTNode::getEnergy).orElse((long)0);
-            long maxEnergy = stack.getCapability(TesseractCaps.getENERGY_HANDLER_CAPABILITY()).map(IGTNode::getCapacity).orElse(battery.getCapacity());
+            long energy = TesseractCapUtils.getEnergyHandlerItem(stack).map(IGTNode::getEnergy).orElse((long)0);
+            long maxEnergy = TesseractCapUtils.getEnergyHandlerItem(stack).map(IGTNode::getCapacity).orElse(battery.getCapacity());
             return new Tuple<>(energy, maxEnergy);
         }
         if (stack.getItem() instanceof IAntimatterTool tool){

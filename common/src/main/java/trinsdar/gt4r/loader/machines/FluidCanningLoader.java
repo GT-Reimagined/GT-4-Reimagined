@@ -3,13 +3,12 @@ package trinsdar.gt4r.loader.machines;
 import muramasa.antimatter.fluid.AntimatterFluidUtils;
 import muramasa.antimatter.util.AntimatterPlatformUtils;
 import muramasa.antimatter.util.Utils;
-import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.fluids.FluidStack;
-import tesseract.api.TesseractCaps;
+import tesseract.TesseractCapUtils;
 
 import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
 import static trinsdar.gt4r.data.GT4RData.*;
@@ -48,7 +47,7 @@ public class FluidCanningLoader {
 
     private static ItemStack getFullBattery(ItemLike battery){
         ItemStack stack = new ItemStack(battery);
-        stack.getCapability(TesseractCaps.getENERGY_HANDLER_CAPABILITY()).ifPresent(e -> {
+        TesseractCapUtils.getEnergyHandlerItem(stack).ifPresent(e -> {
             Utils.addEnergy(e, e.getCapacity());
         });
         return stack;
