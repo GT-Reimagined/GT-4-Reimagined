@@ -47,13 +47,13 @@ public class CoverConveyor extends CoverBasicTransport {
     }
 
     @Override
-    public <T> boolean blocksInput(Capability<T> cap, @Nullable Direction side) {
+    public <T> boolean blocksInput(Class<T> cap, @Nullable Direction side) {
         int mode = coverMode.ordinal();
         return mode == 0 || mode == 2 || mode == 4;
     }
 
     @Override
-    public <T> boolean blocksOutput(Capability<T> cap, @Nullable Direction side) {
+    public <T> boolean blocksOutput(Class<T> cap, @Nullable Direction side) {
         int mode = coverMode.ordinal();
         return mode == 1 || mode == 3 || mode == 5;
     }

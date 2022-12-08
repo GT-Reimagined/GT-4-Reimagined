@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import trinsdar.gt4r.gui.ContainerWorkbench;
 import trinsdar.gt4r.machine.MaterialMachine;
 
@@ -55,7 +56,7 @@ public class TileEntityWorkbench extends TileEntityMaterial<TileEntityWorkbench>
     }
 
     @Override
-    public <V> boolean blocksCapability(@Nonnull Capability<V> cap, Direction side) {
-        return super.blocksCapability(cap, side) || cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
+    public <V> boolean blocksCapability(@Nonnull Class<V> cap, Direction side) {
+        return super.blocksCapability(cap, side) || cap == IItemHandler.class;
     }
 }
