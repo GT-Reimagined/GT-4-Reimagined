@@ -1,10 +1,10 @@
 package trinsdar.gt4r.cover;
 
-import muramasa.antimatter.capability.AntimatterCaps;
 import muramasa.antimatter.capability.ICoverHandler;
 import muramasa.antimatter.cover.CoverFactory;
 import muramasa.antimatter.gui.ButtonBody;
 import muramasa.antimatter.machine.Tier;
+import muramasa.antimatter.util.AntimatterCapUtils;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -81,7 +81,7 @@ public class CoverPump extends CoverBasicTransport {
     protected boolean canMove(Direction side){
         String name = getCoverMode().getName();
         if (name.contains("Conditional")){
-            boolean powered = handler.getTile().getCapability(AntimatterCaps.getCOVERABLE_HANDLER_CAPABILITY(), side).map(h -> {
+            boolean powered = AntimatterCapUtils.getCoverHandler(handler.getTile(), side).map(h -> {
                 List<CoverRedstoneMachineController> list = new ArrayList<>();
                 for (Direction dir : Direction.values()){
                     if (h.get(dir) instanceof CoverRedstoneMachineController){
