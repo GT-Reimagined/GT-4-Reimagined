@@ -23,13 +23,12 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
+import tesseract.TesseractCapUtils;
 import trinsdar.gt4r.data.SlotTypes;
 
 import java.util.List;
@@ -112,8 +111,8 @@ public abstract class TileEntityTranslocator<T extends TileEntityTranslocator<T>
             if (inputTile == null) return false;
             boolean[] booleans = new boolean[1];
             booleans[0] = false;
-            outputTile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, outputDir.getOpposite()).ifPresent(out -> {
-                inputTile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, inputDir.getOpposite()).ifPresent(in -> {
+            TesseractCapUtils.getItemHandler(outputTile, outputDir.getOpposite()).ifPresent(out -> {
+                TesseractCapUtils.getItemHandler(inputTile, inputDir.getOpposite()).ifPresent(in -> {
                     booleans[0] = Utils.transferItems(in, out,true, this::accepts);
                 });
             });
@@ -155,7 +154,7 @@ public abstract class TileEntityTranslocator<T extends TileEntityTranslocator<T>
                 if (!state.isEmpty() && this.accepts(new FluidStack(state.getType(), 1)) && !((state.getType() == Fluids.WATER || state.getType() == Fluids.FLOWING_WATER) && level.getBlockState(this.getBlockPos().relative(inputDir)).getBlock() != Blocks.WATER)){
                     boolean[] booleans = new boolean[1];
                     booleans[0] = false;
-                    outputTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, outputDir.getOpposite()).ifPresent(out -> {
+                    TesseractCapUtils.getFluidHandler(outputTile, outputDir.getOpposite()).ifPresent(out -> {
                         int fill = out.fill(new FluidStack(state.getType(), 1000), IFluidHandler.FluidAction.SIMULATE);
                         if (fill == 1000){
                             out.fill(new FluidStack(state.getType(), 1000), IFluidHandler.FluidAction.EXECUTE);
@@ -169,8 +168,8 @@ public abstract class TileEntityTranslocator<T extends TileEntityTranslocator<T>
             }
             boolean[] booleans = new boolean[1];
             booleans[0] = false;
-            outputTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, outputDir.getOpposite()).ifPresent(out -> {
-                inputTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, inputDir.getOpposite()).ifPresent(in -> {
+            TesseractCapUtils.getFluidHandler(outputTile, outputDir.getOpposite()).ifPresent(out -> {
+                TesseractCapUtils.getFluidHandler(inputTile, inputDir.getOpposite()).ifPresent(in -> {
                     booleans[0] = Utils.transferFluids(in, out,1000, this::accepts);
                 });
             });

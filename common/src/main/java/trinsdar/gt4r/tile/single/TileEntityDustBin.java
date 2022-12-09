@@ -10,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.items.CapabilityItemHandler;
+import tesseract.TesseractCapUtils;
 
 import static net.minecraft.core.Direction.DOWN;
 
@@ -26,10 +26,10 @@ public class TileEntityDustBin extends TileEntityMachine<TileEntityDustBin> {
             BlockEntity up = level.getBlockEntity(this.getBlockPos().above(1));
             BlockEntity down = level.getBlockEntity(this.getBlockPos().below(1));
             if (up != null){
-                up.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, DOWN).ifPresent(f -> Utils.transferItems(f, i.getInputHandler(), true));
+                TesseractCapUtils.getItemHandler(up, DOWN).ifPresent(f -> Utils.transferItems(f, i.getInputHandler(), true));
             }
             if (down != null){
-                down.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.UP).ifPresent(t -> Utils.transferItems(i.getOutputHandler(), t, true));
+                TesseractCapUtils.getItemHandler(down, Direction.UP).ifPresent(t -> Utils.transferItems(i.getOutputHandler(), t, true));
             } else if (level.isEmptyBlock(this.getBlockPos().below(1))){
                 ItemStack stack = Utils.extractAny(i.getOutputHandler());
                 if (stack.isEmpty()) return;

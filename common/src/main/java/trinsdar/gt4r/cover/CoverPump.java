@@ -9,8 +9,7 @@ import muramasa.antimatter.util.Utils;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import tesseract.TesseractCapUtils;
 import trinsdar.gt4r.cover.redstone.CoverRedstoneMachineController;
 
 import javax.annotation.Nullable;
@@ -18,9 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static trinsdar.gt4r.gui.ButtonOverlays.*;
-import static trinsdar.gt4r.gui.ButtonOverlays.EXPORT_IMPORT;
-import static trinsdar.gt4r.gui.ButtonOverlays.EXPORT_IMPORT_CONDITIONAL;
-import static trinsdar.gt4r.gui.ButtonOverlays.EXPORT_IMPORT_INVERT_CONDITIONAL;
 
 public class CoverPump extends CoverBasicTransport {
 
@@ -74,7 +70,7 @@ public class CoverPump extends CoverBasicTransport {
         BlockEntity finalTo = to;
         if (canMove(side)) {
             Direction finalFromSide = fromSide;
-            from.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, fromSide).ifPresent(ih -> finalTo.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, finalFromSide.getOpposite()).ifPresent(other -> Utils.transferFluids(ih, other, Integer.MAX_VALUE)));
+            TesseractCapUtils.getFluidHandler(from, fromSide).ifPresent(ih -> TesseractCapUtils.getFluidHandler(finalTo, finalFromSide.getOpposite()).ifPresent(other -> Utils.transferFluids(ih, other, Integer.MAX_VALUE)));
         }
     }
 

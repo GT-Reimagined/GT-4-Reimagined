@@ -20,20 +20,20 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import tesseract.FluidPlatformUtils;
+import tesseract.TesseractCapUtils;
 import trinsdar.gt4r.machine.MaterialMachine;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Optional;
 
 import static muramasa.antimatter.data.AntimatterDefaultTools.ELECTRIC_WRENCH;
-import static muramasa.antimatter.data.AntimatterMaterials.Netherite;
 import static muramasa.antimatter.data.AntimatterDefaultTools.WRENCH;
+import static muramasa.antimatter.data.AntimatterMaterials.Netherite;
 import static net.minecraft.core.Direction.DOWN;
 import static net.minecraft.core.Direction.UP;
 import static trinsdar.gt4r.data.Materials.*;
@@ -144,7 +144,7 @@ public class TileEntityDrum extends TileEntityMaterial<TileEntityDrum> {
                 if (getTank(0).getFluidAmount() > 0){
                     BlockEntity adjacent = tile.getLevel().getBlockEntity(tile.getBlockPos().relative(dir));
                     if (adjacent != null){
-                        LazyOptional<IFluidHandler> cap = adjacent.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, dir.getOpposite());
+                        Optional<IFluidHandler> cap = TesseractCapUtils.getFluidHandler(adjacent, dir.getOpposite());
                         cap.ifPresent(other -> Utils.transferFluids(this, other, 1000));
                     }
                 }

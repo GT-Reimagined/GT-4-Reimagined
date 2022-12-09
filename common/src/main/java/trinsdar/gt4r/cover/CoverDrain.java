@@ -8,7 +8,6 @@ import muramasa.antimatter.tile.pipe.TileEntityPipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.Level;
@@ -22,8 +21,8 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import tesseract.TesseractCapUtils;
 import trinsdar.gt4r.Ref;
 
 import javax.annotation.Nullable;
@@ -51,7 +50,7 @@ public class CoverDrain extends BaseCover {
         }
         if (tile.getLevel().isClientSide) return;
         Level world = tile.getLevel();
-        LazyOptional<IFluidHandler> cap = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);
+        LazyOptional<IFluidHandler> cap = TesseractCapUtils.getLazyFluidHandler(tile, side);
         if (tile instanceof TileEntityPipe){
             cap = ((TileEntityPipe<?>)tile).getCoverCapability(IFluidHandler.class, side);
         }
