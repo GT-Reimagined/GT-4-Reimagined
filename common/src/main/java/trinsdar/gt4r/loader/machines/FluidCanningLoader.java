@@ -49,6 +49,7 @@ public class FluidCanningLoader {
         ItemStack stack = new ItemStack(battery);
         TesseractCapUtils.getEnergyHandlerItem(stack).ifPresent(e -> {
             Utils.addEnergy(e, e.getCapacity());
+            stack.setTag(e.getContainer().getTag());
         });
         return stack;
     }

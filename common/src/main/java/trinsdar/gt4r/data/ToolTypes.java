@@ -19,6 +19,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import tesseract.TesseractCapUtils;
 import tesseract.api.gt.IEnergyHandler;
+import tesseract.api.gt.IEnergyHandlerItem;
 import tesseract.api.gt.IGTNode;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.items.ItemPowerUnit;
@@ -100,10 +101,11 @@ public class ToolTypes {
         ItemStack powerUnit = new ItemStack(broken);
         Tuple<Long, Long> tuple = getEnergy(tool);
         CompoundTag dataTag = powerUnit.getOrCreateTagElement(muramasa.antimatter.Ref.TAG_ITEM_ENERGY_DATA);
-        IEnergyHandler handler = TesseractCapUtils.getEnergyHandlerItem(powerUnit).orElse(null);
+        IEnergyHandlerItem handler = TesseractCapUtils.getEnergyHandlerItem(powerUnit).orElse(null);
         if (handler != null){
             handler.setEnergy(tuple.getA());
             handler.setCapacity(tuple.getB());
+            powerUnit = handler.getContainer().getItemStack();
         } else {
             dataTag.putLong(muramasa.antimatter.Ref.KEY_ITEM_ENERGY, tuple.getA());
             dataTag.putLong(muramasa.antimatter.Ref.KEY_ITEM_MAX_ENERGY, tuple.getB());
