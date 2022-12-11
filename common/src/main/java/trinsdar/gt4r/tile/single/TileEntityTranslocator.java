@@ -24,7 +24,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
@@ -183,7 +182,7 @@ public abstract class TileEntityTranslocator<T extends TileEntityTranslocator<T>
                 for (int i = 0; i < outputs.getSlots(); i++) {
                     ItemStack slot = outputs.getStackInSlot(i);
                     if (!slot.isEmpty()) {
-                        if (slot.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).map(f -> f.getFluidInTank(0).getFluid() == stack.getFluid()).orElse(false)){
+                        if (TesseractCapUtils.getFluidHandlerItem(slot).map(f -> f.getFluidInTank(0).getFluid() == stack.getFluid()).orElse(false)){
                             list.add(slot.copy().getItem());
                         }
                     }
