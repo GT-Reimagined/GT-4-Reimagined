@@ -36,9 +36,11 @@ dependencies{
     modImplementation("io.github.feltmc:fabricated-forge-tag-extensions:${rootProject.fabricated_forge_hash}")
     modImplementation("io.github.feltmc:felt-recipe-api:1.0.0"){
         exclude(group: "net.fabricmc.fabric-api")
+        exclude(group: "com.terraformersmc")
     }
     modImplementation("io.github.feltmc:felt-player-item-api:1.0.0") {
         exclude(group: "net.fabricmc.fabric-api")
+        exclude(group: "com.terraformersmc")
     }
     modImplementation("com.github.Trinsdar.Felt-API:felt-enchanting-api:c372f99be1") { transitive false }
     modImplementation(include("com.github.Trinsdar.Felt-API:felt-durability-item-api:c4015755f9")){ transitive false }
