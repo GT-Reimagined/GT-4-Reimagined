@@ -8,6 +8,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import trinsdar.gt4r.data.GT4RData;
 
+import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
 import static trinsdar.gt4r.data.RecipeMaps.FLUID_SOLIDIFYING;
 
 public class FluidSolidifierLoader {

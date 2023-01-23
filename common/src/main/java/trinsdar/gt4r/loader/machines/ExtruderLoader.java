@@ -14,6 +14,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import trinsdar.gt4r.data.GT4RData;
 
+import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
+import static muramasa.antimatter.material.MaterialTags.RUBBERTOOLS;
 import static trinsdar.gt4r.data.Materials.Rubber;
 import static trinsdar.gt4r.data.Materials.SiliconDioxide;
 import static trinsdar.gt4r.data.Materials.Tin;

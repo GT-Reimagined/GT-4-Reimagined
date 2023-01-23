@@ -26,10 +26,12 @@ import trinsdar.gt4r.Ref;
 import java.util.ArrayList;
 import java.util.List;
 
+import static muramasa.antimatter.material.Material.NULL;
 import static muramasa.antimatter.material.MaterialTags.BY_PRODUCT_MULTI;
 import static muramasa.antimatter.material.MaterialTags.MACERATE_INTO;
 import static muramasa.antimatter.material.MaterialTags.ORE_MULTI;
-import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
+import static muramasa.antimatter.data.AntimatterMaterials.*;
 import static muramasa.antimatter.util.Utils.getConventionalMaterialType;
 import static muramasa.antimatter.util.Utils.getConventionalStoneType;
 import static trinsdar.gt4r.data.GT4RData.Biochaff;

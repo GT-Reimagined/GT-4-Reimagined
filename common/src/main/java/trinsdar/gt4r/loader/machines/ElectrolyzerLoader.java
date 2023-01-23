@@ -15,6 +15,8 @@ import trinsdar.gt4r.data.GT4RMaterialTags;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
+import static muramasa.antimatter.data.AntimatterMaterials.*;
 import static muramasa.antimatter.material.MaterialTags.ELEC;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.ELECTROLYZING;
@@ -29,9 +31,9 @@ public class ElectrolyzerLoader {
             if (m.has(GT4RMaterialTags.ELEC90)) power = 90;
             if (m.has(GT4RMaterialTags.ELEC120)) power = 120;
             if (power == 0) return;
-            if (!m.has(AntimatterMaterialTypes.DUST) && !m.has(AntimatterMaterialTypes.LIQUID) && !m.has(AntimatterMaterialTypes.GAS)) return;
+            if (!m.has(DUST) && !m.has(LIQUID) && !m.has(GAS)) return;
             int count = m.getProcessInto().stream().mapToInt(t -> t.s).sum();
-            if (m.has(AntimatterMaterialTypes.LIQUID) || m.has(AntimatterMaterialTypes.GAS)) count *= 4;
+            if (m.has(LIQUID) || m.has(GAS)) count *= 4;
             add(m, power, (int) m.getMass() * count);
         });
 
@@ -74,7 +76,7 @@ public class ElectrolyzerLoader {
         if ((dust.has(LIQUID) || dust.has(GAS)) && !dust.has(DUST)){
             rb.fi(getFluid(dust,count * 1000));
         } else {
-            rb.ii(RecipeIngredient.of(AntimatterMaterialTypes.DUST.get(dust), count));
+            rb.ii(RecipeIngredient.of(DUST.get(dust), count));
         }
         if (!itemStacks.isEmpty()) rb.io(itemStacks.toArray(new ItemStack[0]));
         if (!fluidStacks.isEmpty()) rb.fo(fluidStacks.toArray(new FluidStack[0]));
@@ -82,9 +84,9 @@ public class ElectrolyzerLoader {
     }
 
     private static FluidStack getFluid(Material mat, int amount){
-        if (mat.has(AntimatterMaterialTypes.LIQUID)){
+        if (mat.has(LIQUID)){
             return mat.getLiquid(amount);
-        } else if (mat.has(AntimatterMaterialTypes.GAS)){
+        } else if (mat.has(GAS)){
             return mat.getGas(amount);
         } else if (mat.has(AntimatterMaterialTypes.PLASMA)){
             return mat.getPlasma(amount);

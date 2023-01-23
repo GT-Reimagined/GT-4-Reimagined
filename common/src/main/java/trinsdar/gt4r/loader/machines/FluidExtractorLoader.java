@@ -13,6 +13,7 @@ import net.minecraft.tags.ItemTags;
 import muramasa.antimatter.data.ForgeCTags;
 import trinsdar.gt4r.data.GT4RData;
 
+import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
 import static trinsdar.gt4r.data.Materials.FishOil;
 import static trinsdar.gt4r.data.Materials.Honey;
 import static trinsdar.gt4r.data.Materials.SeedOil;

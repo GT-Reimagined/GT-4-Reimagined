@@ -10,6 +10,8 @@ import trinsdar.gt4r.data.CustomTags;
 import muramasa.antimatter.data.ForgeCTags;
 import trinsdar.gt4r.data.GT4RData;
 
+import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
+import static muramasa.antimatter.data.AntimatterMaterials.*;
 import static trinsdar.gt4r.data.CustomTags.CORALS;
 import static trinsdar.gt4r.data.CustomTags.VINES;
 import static trinsdar.gt4r.data.GT4RData.CompressedFireClay;

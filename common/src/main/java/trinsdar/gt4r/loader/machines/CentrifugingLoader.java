@@ -17,6 +17,8 @@ import net.minecraftforge.fluids.FluidStack;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
+import static muramasa.antimatter.data.AntimatterMaterials.*;
 import static com.github.gregtechintergalactical.gtrubber.GTRubberData.StickyResin;
 import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
 import static net.minecraft.world.item.Items.*;

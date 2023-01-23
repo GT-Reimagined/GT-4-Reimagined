@@ -14,6 +14,7 @@ import net.minecraft.world.item.Items;
 import trinsdar.gt4r.Ref;
 import muramasa.antimatter.data.ForgeCTags;
 
+import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
 import static muramasa.antimatter.material.MaterialTags.MACERATE_INTO;
 import static muramasa.antimatter.material.MaterialTags.ORE_MULTI;
 import static muramasa.antimatter.material.MaterialTags.RUBBERTOOLS;

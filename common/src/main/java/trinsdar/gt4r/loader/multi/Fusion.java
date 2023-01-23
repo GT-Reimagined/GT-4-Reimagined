@@ -1,9 +1,10 @@
 package trinsdar.gt4r.loader.multi;
 
+import muramasa.antimatter.data.AntimatterMaterials;
 import trinsdar.gt4r.data.RecipeMaps;
 
-import static muramasa.antimatter.Data.Gold;
-import static muramasa.antimatter.Data.Iron;
+import static muramasa.antimatter.data.AntimatterMaterials.Gold;
+import static muramasa.antimatter.data.AntimatterMaterials.Iron;
 import static trinsdar.gt4r.data.Materials.*;
 
 public class Fusion {

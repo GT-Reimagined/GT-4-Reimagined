@@ -9,7 +9,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.fluids.FluidStack;
 import tesseract.FluidPlatformUtils;
-import tesseract.api.TesseractCaps;
+import tesseract.TesseractCapUtils;
 
 import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
 import static trinsdar.gt4r.data.GT4RData.*;

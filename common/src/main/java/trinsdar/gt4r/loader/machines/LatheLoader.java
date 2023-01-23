@@ -2,7 +2,7 @@ package trinsdar.gt4r.loader.machines;
 
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 
-import static muramasa.antimatter.Data.*;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
 import static trinsdar.gt4r.data.RecipeMaps.LATHING;
 
 public class LatheLoader {
@@ -12,7 +12,7 @@ public class LatheLoader {
             RecipeIngredient input = m.has(INGOT) ? INGOT.getMaterialIngredient(m, 1) : GEM.getMaterialIngredient(m , 1);
             LATHING.RB().ii(input).io(ROD.get(m,2)).add(m.getId() + "_rod", duration, 16);
         });
-        AntimatterMaterialTypes.SCREW.all().forEach(m -> {
+        SCREW.all().forEach(m -> {
             long duration = Math.max(m.getMass(), 1);
             LATHING.RB().ii(BOLT.getMaterialIngredient(m, 1)).io(SCREW.get(m,1)).add(m.getId() + "_screw", duration, 16);
         });
