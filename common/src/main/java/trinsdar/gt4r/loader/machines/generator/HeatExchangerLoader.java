@@ -5,9 +5,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.fluids.FluidStack;
 
-import static muramasa.antimatter.Data.Copper;
-import static muramasa.antimatter.Data.Lava;
-import static muramasa.antimatter.Data.NUGGET;
+import static muramasa.antimatter.data.AntimatterMaterials.Copper;
+import static muramasa.antimatter.data.AntimatterMaterials.Lava;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.NUGGET;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.HOT_FUELS;
 import static trinsdar.gt4r.data.RecipeMaps.THERMAL_BOILER_FUELS;

@@ -1,5 +1,7 @@
 package trinsdar.gt4r.loader.machines;
 
+import muramasa.antimatter.data.AntimatterMaterialTypes;
+import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialStack;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
@@ -13,7 +15,6 @@ import trinsdar.gt4r.data.GT4RMaterialTags;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.material.MaterialTags.ELEC;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.ELECTROLYZING;
@@ -28,9 +29,9 @@ public class ElectrolyzerLoader {
             if (m.has(GT4RMaterialTags.ELEC90)) power = 90;
             if (m.has(GT4RMaterialTags.ELEC120)) power = 120;
             if (power == 0) return;
-            if (!m.has(DUST) && !m.has(LIQUID) && !m.has(GAS)) return;
+            if (!m.has(AntimatterMaterialTypes.DUST) && !m.has(AntimatterMaterialTypes.LIQUID) && !m.has(AntimatterMaterialTypes.GAS)) return;
             int count = m.getProcessInto().stream().mapToInt(t -> t.s).sum();
-            if (m.has(LIQUID) || m.has(GAS)) count *= 4;
+            if (m.has(AntimatterMaterialTypes.LIQUID) || m.has(AntimatterMaterialTypes.GAS)) count *= 4;
             add(m, power, (int) m.getMass() * count);
         });
 
@@ -41,7 +42,7 @@ public class ElectrolyzerLoader {
         ELECTROLYZING.RB().ii(RecipeIngredient.of(DUST.get(Diamond, 1))).io(DUST.get(Carbon, 64), DUST.get(Carbon, 64)).add("diamond_dust",1536,60);
         add(Steel,50, 60, 2600);
         add(DarkAsh, 1, 30, 24);
-        add(Coal, 1, 30, 24);
+        add(AntimatterMaterials.Coal, 1, 30, 24);
         if (breakMethod) return;
 
         add(SodiumPersulfate, 90, 432); //close
@@ -73,7 +74,7 @@ public class ElectrolyzerLoader {
         if ((dust.has(LIQUID) || dust.has(GAS)) && !dust.has(DUST)){
             rb.fi(getFluid(dust,count * 1000));
         } else {
-            rb.ii(RecipeIngredient.of(DUST.get(dust), count));
+            rb.ii(RecipeIngredient.of(AntimatterMaterialTypes.DUST.get(dust), count));
         }
         if (!itemStacks.isEmpty()) rb.io(itemStacks.toArray(new ItemStack[0]));
         if (!fluidStacks.isEmpty()) rb.fo(fluidStacks.toArray(new FluidStack[0]));
@@ -81,11 +82,11 @@ public class ElectrolyzerLoader {
     }
 
     private static FluidStack getFluid(Material mat, int amount){
-        if (mat.has(LIQUID)){
+        if (mat.has(AntimatterMaterialTypes.LIQUID)){
             return mat.getLiquid(amount);
-        } else if (mat.has(GAS)){
+        } else if (mat.has(AntimatterMaterialTypes.GAS)){
             return mat.getGas(amount);
-        } else if (mat.has(PLASMA)){
+        } else if (mat.has(AntimatterMaterialTypes.PLASMA)){
             return mat.getPlasma(amount);
         } else {
             return mat.getLiquid(amount);

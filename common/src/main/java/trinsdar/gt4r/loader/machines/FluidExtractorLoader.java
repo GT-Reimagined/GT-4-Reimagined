@@ -1,5 +1,6 @@
 package trinsdar.gt4r.loader.machines;
 
+import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialTags;
 import muramasa.antimatter.material.MaterialTypeItem;
@@ -12,7 +13,6 @@ import net.minecraft.tags.ItemTags;
 import muramasa.antimatter.data.ForgeCTags;
 import trinsdar.gt4r.data.GT4RData;
 
-import static muramasa.antimatter.Data.*;
 import static trinsdar.gt4r.data.Materials.FishOil;
 import static trinsdar.gt4r.data.Materials.Honey;
 import static trinsdar.gt4r.data.Materials.SeedOil;

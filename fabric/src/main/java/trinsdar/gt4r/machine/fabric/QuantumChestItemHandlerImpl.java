@@ -1,16 +1,12 @@
 package trinsdar.gt4r.machine.fabric;
 
-import io.github.feltmc.feltapi.api.item.extensions.IsDamageableItem;
+import io.github.feltmc.feltapi.api.durabilityitem.IsDamageableItem;
 import muramasa.antimatter.Antimatter;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.capabilities.CapabilityDispatcher;
-import trinsdar.gt4r.mixin.GTCapabilityProviderAccessor;
-
-import java.util.Optional;
 
 public class QuantumChestItemHandlerImpl {
     public static CompoundTag save(CompoundTag pCompoundTag, ItemStack stack) {
@@ -20,14 +16,14 @@ public class QuantumChestItemHandlerImpl {
         if (stack.getTag() != null) {
             pCompoundTag.put("tag", stack.getTag().copy());
         }
-        final CapabilityDispatcher disp = ((GTCapabilityProviderAccessor)stack.getCapabilityProvider()).getCapabilitiesGT();
+        /*final CapabilityDispatcher disp = ((GTCapabilityProviderAccessor)stack.getCapabilityProvider()).getCapabilitiesGT();
         if (disp != null)
         {
             CompoundTag cnbt = disp.serializeNBT();
             if (!cnbt.isEmpty()) {
                 pCompoundTag.put("ForgeCaps", cnbt);
             }
-        }
+        }*/
 
         return pCompoundTag;
     }

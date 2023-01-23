@@ -1,5 +1,6 @@
 package trinsdar.gt4r.loader.machines;
 
+import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import muramasa.antimatter.util.AntimatterPlatformUtils;
@@ -7,7 +8,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import trinsdar.gt4r.data.GT4RData;
 
-import static muramasa.antimatter.Data.*;
 import static trinsdar.gt4r.data.RecipeMaps.FLUID_SOLIDIFYING;
 
 public class FluidSolidifierLoader {

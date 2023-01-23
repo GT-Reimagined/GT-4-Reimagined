@@ -8,10 +8,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import trinsdar.gt4r.data.GT4RData;
 
-import static muramasa.antimatter.Data.Charcoal;
-import static muramasa.antimatter.Data.Coal;
-import static muramasa.antimatter.Data.DUST;
-import static muramasa.antimatter.Data.INGOT;
+import static muramasa.antimatter.data.AntimatterMaterials.Charcoal;
+import static muramasa.antimatter.data.AntimatterMaterials.Coal;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.DUST;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.INGOT;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.WIRE_MILLING;
 

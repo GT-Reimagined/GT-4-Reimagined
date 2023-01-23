@@ -7,7 +7,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 
-import static muramasa.antimatter.Data.ORE;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.ORE;
 import static trinsdar.gt4r.data.Materials.RockSalt;
 import static trinsdar.gt4r.data.Materials.Salt;
 

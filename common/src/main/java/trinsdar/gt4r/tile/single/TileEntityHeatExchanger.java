@@ -20,8 +20,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import tesseract.TesseractCapUtils;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -159,18 +159,18 @@ public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExc
             BlockEntity rightTile = tile.level.getBlockEntity(tile.getBlockPos().relative(right));
             BlockEntity downTile = tile.level.getBlockEntity(tile.getBlockPos().relative(DOWN));
             if (rightTile != null) {
-                tile.fluidHandler.side(right).ifPresent(f -> rightTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, right.getOpposite()).ifPresent(t -> Utils.transferFluids(f, t, 1000)));
+                tile.fluidHandler.side(right).ifPresent(f -> TesseractCapUtils.getFluidHandler(rightTile, right.getOpposite()).ifPresent(t -> Utils.transferFluids(f, t, 1000)));
             }
             if (downTile != null) {
-                tile.fluidHandler.side(DOWN).ifPresent(f -> downTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, UP).ifPresent(t -> Utils.transferFluids(f, t, 1000)));
+                tile.fluidHandler.side(DOWN).ifPresent(f -> TesseractCapUtils.getFluidHandler(downTile, UP).ifPresent(t -> Utils.transferFluids(f, t, 1000)));
             }
             BlockEntity leftTile = tile.level.getBlockEntity(tile.getBlockPos().relative(left));
             BlockEntity upTile = tile.level.getBlockEntity(tile.getBlockPos().relative(UP));
             if (leftTile != null) {
-                tile.fluidHandler.side(left).ifPresent(t -> leftTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, left.getOpposite()).ifPresent(f -> transferFluids(f, ((HeatExchangerFluidHandlerSidedWrapper)t), 1000)));
+                tile.fluidHandler.side(left).ifPresent(t -> TesseractCapUtils.getFluidHandler(leftTile, left.getOpposite()).ifPresent(f -> transferFluids(f, ((HeatExchangerFluidHandlerSidedWrapper)t), 1000)));
             }
             if (upTile != null) {
-                tile.fluidHandler.side(UP).ifPresent(t -> upTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, DOWN).ifPresent(f -> transferFluids(f, ((HeatExchangerFluidHandlerSidedWrapper)t), 1000)));
+                tile.fluidHandler.side(UP).ifPresent(t -> TesseractCapUtils.getFluidHandler(upTile, DOWN).ifPresent(f -> transferFluids(f, ((HeatExchangerFluidHandlerSidedWrapper)t), 1000)));
             }
         }
 

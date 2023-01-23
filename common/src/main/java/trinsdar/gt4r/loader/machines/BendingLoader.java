@@ -1,27 +1,28 @@
 package trinsdar.gt4r.loader.machines;
 
+import muramasa.antimatter.data.AntimatterMaterialTypes;
+import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import trinsdar.gt4r.data.GT4RData;
 
-import static muramasa.antimatter.Data.*;
 import static trinsdar.gt4r.data.Materials.Tin;
 import static trinsdar.gt4r.data.RecipeMaps.BENDING;
 
 public class BendingLoader {
     public static void init() {
-        PLATE.all().forEach(t -> {
+        AntimatterMaterialTypes.PLATE.all().forEach(t -> {
             long duration = Math.max(t.getMass(), 1);
             if (!t.has(INGOT)) return;
             BENDING.RB().ii(INGOT.getMaterialIngredient(t,1), GT4RData.INT_CIRCUITS.get(1)).io(PLATE.get(t,1)).add(t.getId() + "_plate", duration, 24);
         });
-        PLATE_DENSE.all().forEach(t -> {
+        AntimatterMaterialTypes.PLATE_DENSE.all().forEach(t -> {
             long duration = Math.max(t.getMass(), 1);
             if (!t.has(INGOT)) return;
             BENDING.RB().ii(INGOT.getMaterialIngredient(t,9), GT4RData.INT_CIRCUITS.get(9)).io(PLATE_DENSE.get(t,1)).add(t.getId() + "_dense_plate", duration, 24);
         });
-        RING.all().forEach(m -> {
+        AntimatterMaterialTypes.RING.all().forEach(m -> {
             long duration = Math.max(m.getMass(), 1);
             if (!m.has(ROD)) return;
             BENDING.RB().ii(ROD.getMaterialIngredient(m, 1), GT4RData.INT_CIRCUITS.get(1)).io(RING.get(m, 2)).add(m.getId() + "_ring", duration, 24);

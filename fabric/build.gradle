@@ -34,18 +34,26 @@ dependencies{
         exclude(group: "curse.maven")
     }
     modImplementation("io.github.feltmc:fabricated-forge-tag-extensions:${rootProject.fabricated_forge_hash}")
-    modImplementation("com.github.FeltMC.Felt-API:felt-recipe-api:2a689af1cb")
-    modImplementation("com.github.FeltMC.Felt-API:felt-item-api:05a5fe1533") { transitive false }
+    modImplementation("io.github.feltmc:felt-recipe-api:1.0.0"){
+        exclude(group: "net.fabricmc.fabric-api")
+        exclude(group: "com.terraformersmc")
+    }
+    modImplementation("io.github.feltmc:felt-player-item-api:1.0.0") {
+        exclude(group: "net.fabricmc.fabric-api")
+        exclude(group: "com.terraformersmc")
+    }
+    modImplementation("com.github.Trinsdar.Felt-API:felt-enchanting-api:c372f99be1") { transitive false }
+    modImplementation(include("com.github.Trinsdar.Felt-API:felt-durability-item-api:c4015755f9")){ transitive false }
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
     /*modImplementation("io.github.fabricators_of_create:Porting-Lib:1.1.310-beta+1.18.2-dev.${rootProject.port_lib_hash}"){
         exclude(group: "net.fabricmc.fabric-api")
     }*/
-    modImplementation("net.devtech:arrp:0.5.7")
-    modImplementation("com.github.gregtech-intergalactical:gtrubber-fabric:1.18.2-0.1.1:dev-shadow"){
+    modImplementation("com.github.Trinsdar:ARRP:0.6.7")
+    modImplementation("com.github.gregtech-intergalactical:gtrubber-fabric:1.18.2-0.1.2:dev-shadow"){
         transitive = false
     }
-    include("com.github.gregtech-intergalactical:gtrubber-fabric:1.18.2-0.1.1"){
+    include("com.github.gregtech-intergalactical:gtrubber-fabric:1.18.2-0.1.2"){
         transitive = false
     }
     modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${rootProject.rei_version}"
@@ -59,9 +67,7 @@ dependencies{
     modRuntimeOnly("com.terraformersmc:modmenu:${rootProject.mod_menu_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
-    modImplementation("com.github.FeltMC:forgeconfigapiport-fabric:c1486f80f7"){
-        transitive = false
-    }
+    modImplementation("net.minecraftforge:forgeconfigapiport-fabric:3.2.4")
     modRuntimeOnly("dev.latvian.mods:kubejs-fabric:${rootProject.kubejs_version}")
 }
 

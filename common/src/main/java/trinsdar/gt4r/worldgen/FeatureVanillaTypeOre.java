@@ -1,7 +1,8 @@
 package trinsdar.gt4r.worldgen;
 
 import muramasa.antimatter.AntimatterConfig;
-import muramasa.antimatter.Data;
+import muramasa.antimatter.data.AntimatterMaterialTypes;
+import muramasa.antimatter.data.AntimatterStoneTypes;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialType;
 import muramasa.antimatter.ore.StoneType;
@@ -27,8 +28,8 @@ import java.util.BitSet;
 import java.util.Random;
 import java.util.function.Function;
 
-import static muramasa.antimatter.Data.Coal;
-import static muramasa.antimatter.Data.ORE_STONE;
+import static muramasa.antimatter.data.AntimatterMaterials.Coal;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.ORE_STONE;
 import static muramasa.antimatter.worldgen.WorldGenHelper.ORE_PREDICATE;
 import static trinsdar.gt4r.worldgen.GT4RPlacedFeatures.FEATURE_MAP;
 
@@ -204,7 +205,7 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
                                                         Material mat = Material.get(config.getPrimary());
                                                         if (mat.has(ORE_STONE) && mat != Coal){
                                                             StoneType stone = WorldGenHelper.STONE_MAP.get(blockstate);
-                                                            if (stone == null || stone == Data.DIRT) continue;
+                                                            if (stone == null || stone == AntimatterStoneTypes.DIRT) continue;
                                                             levelchunksection.setBlockState(lx, ly, lz, ORE_STONE.get().get(mat).asState(), false);
                                                             ++i;
                                                             continue;
@@ -212,7 +213,7 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
                                                         if (!config.getSecondary().isEmpty() && !config.getSecondary().equals("null") && config.getSecondaryChance() > 0 && config.getSecondaryChance() < 1.0F){
                                                             mat = pRandom.nextFloat() < config.getSecondaryChance() ? Material.get(config.getSecondary()) : Material.get(config.getPrimary());
                                                         }
-                                                        if (placeOre(lx, ly, lz, levelchunksection, bulksectionaccess::getBlockState, pRandom, config, mat, Data.ORE, blockpos$mutableblockpos)) {
+                                                        if (placeOre(lx, ly, lz, levelchunksection, bulksectionaccess::getBlockState, pRandom, config, mat, AntimatterMaterialTypes.ORE, blockpos$mutableblockpos)) {
                                                             ++i;
                                                         }
                                                     }
@@ -244,10 +245,10 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
                                  MaterialType<?> type) {
 
         StoneType stone = WorldGenHelper.STONE_MAP.get(existing);
-        if (stone == null || stone == Data.DIRT)
+        if (stone == null || stone == AntimatterStoneTypes.DIRT)
             return null;
-        BlockState oreState = type == Data.ORE ? Data.ORE.get().get(material, stone).asState()
-                : Data.ORE_SMALL.get().get(material, stone).asState();
+        BlockState oreState = type == AntimatterMaterialTypes.ORE ? AntimatterMaterialTypes.ORE.get().get(material, stone).asState()
+                : AntimatterMaterialTypes.ORE_SMALL.get().get(material, stone).asState();
         if (!ORE_PREDICATE.test(existing))
             return null;
         return oreState;

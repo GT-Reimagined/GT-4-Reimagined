@@ -12,8 +12,8 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.fluids.FluidStack;
 
-import static muramasa.antimatter.Data.DUST;
-import static muramasa.antimatter.Data.Wood;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.DUST;
+import static muramasa.antimatter.data.AntimatterMaterials.Wood;
 import static trinsdar.gt4r.data.Materials.DistilledWater;
 import static trinsdar.gt4r.data.Materials.Lubricant;
 import static trinsdar.gt4r.data.RecipeMaps.INDUSTRIAL_SAWMILLING;

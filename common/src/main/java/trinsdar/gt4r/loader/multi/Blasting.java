@@ -1,14 +1,16 @@
 package trinsdar.gt4r.loader.multi;
 
+import muramasa.antimatter.data.AntimatterMaterialTypes;
+import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialTags;
 import muramasa.antimatter.util.TagUtils;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.resources.ResourceLocation;
 import trinsdar.gt4r.Ref;
 
-import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
 import static trinsdar.gt4r.data.CustomTags.DUSTS_COALS;
 import static trinsdar.gt4r.data.GT4RData.INT_CIRCUITS;

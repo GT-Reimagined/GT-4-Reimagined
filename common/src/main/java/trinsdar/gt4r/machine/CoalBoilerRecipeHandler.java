@@ -13,13 +13,13 @@ import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import tesseract.TesseractCapUtils;
 import trinsdar.gt4r.tile.single.TileEntityCoalBoiler;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static muramasa.antimatter.machine.MachineState.ACTIVE;
@@ -102,7 +102,7 @@ public class CoalBoilerRecipeHandler extends MachineRecipeHandler<TileEntityCoal
     public void exportFluidFromMachineToSide(Direction side){
         BlockEntity adjTile = tile.getLevel().getBlockEntity(tile.getBlockPos().relative(side));
         if (adjTile == null) return;
-        LazyOptional<IFluidHandler> cap = adjTile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side.getOpposite());
+        Optional<IFluidHandler> cap = TesseractCapUtils.getFluidHandler(adjTile, side.getOpposite());
         tile.fluidHandler.ifPresent(f -> cap.ifPresent(other -> Utils.transferFluids(f, other, 1000)));
     }
 

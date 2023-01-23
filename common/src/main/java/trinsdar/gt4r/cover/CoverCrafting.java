@@ -54,7 +54,7 @@ public class CoverCrafting extends BaseCover {
     }
 
     @Override
-    public <T> boolean blocksCapability(Capability<T> cap, @Nullable Direction side) {
+    public <T> boolean blocksCapability(Class<T> cap, @Nullable Direction side) {
         return true;
     }
 

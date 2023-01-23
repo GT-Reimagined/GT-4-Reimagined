@@ -7,8 +7,8 @@ import trinsdar.gt4r.Ref;
 
 import java.util.function.Consumer;
 
-import static muramasa.antimatter.Data.Flint;
-import static muramasa.antimatter.Data.GEM;
+import static muramasa.antimatter.data.AntimatterMaterials.Flint;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.GEM;
 import static muramasa.antimatter.datagen.providers.AntimatterAdvancementProvider.buildRootAdvancement;
 import static muramasa.antimatter.datagen.providers.AntimatterAdvancementProvider.getLoc;
 import static muramasa.antimatter.util.Utils.hasItem;

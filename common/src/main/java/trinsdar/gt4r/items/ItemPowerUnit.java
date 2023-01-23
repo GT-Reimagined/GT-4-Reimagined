@@ -13,10 +13,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import org.jetbrains.annotations.NotNull;
-import tesseract.api.TesseractCaps;
+import tesseract.TesseractCapUtils;
+import tesseract.api.context.TesseractItemContext;
 import tesseract.api.gt.IEnergyHandler;
+import tesseract.api.gt.IEnergyHandlerItem;
+import tesseract.api.gt.IEnergyItem;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -25,7 +27,7 @@ import java.util.List;
 import static trinsdar.gt4r.data.GT4RData.RockCutterPowerUnit;
 import static trinsdar.gt4r.data.GT4RData.SmallPowerUnit;
 
-public class ItemPowerUnit extends ItemBasic<ItemPowerUnit> implements IColorHandler {
+public class ItemPowerUnit extends ItemBasic<ItemPowerUnit> implements IColorHandler, IEnergyItem {
     Material material;
     public ItemPowerUnit(String domain, String id, Material material) {
         super(domain, id);
@@ -78,10 +80,9 @@ public class ItemPowerUnit extends ItemBasic<ItemPowerUnit> implements IColorHan
         return true;
     }
 
-    @Nullable
     @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
-        return new ItemEnergyHandler.Provider(() -> new ItemEnergyHandler(10000, 0, 32, 0, 1));
+    public IEnergyHandlerItem createEnergyHandler(TesseractItemContext context) {
+        return new ItemEnergyHandler(context, 10000, 0, 32, 0, 1);
     }
 
     public long getCurrentEnergy(ItemStack stack) {
@@ -95,10 +96,11 @@ public class ItemPowerUnit extends ItemBasic<ItemPowerUnit> implements IColorHan
 
     public CompoundTag validateTag(ItemStack stack, long startingEnergy, long maxEnergy) {
         CompoundTag dataTag = stack.getOrCreateTagElement(Ref.TAG_ITEM_ENERGY_DATA);
-        IEnergyHandler handler = stack.getCapability(TesseractCaps.getENERGY_HANDLER_CAPABILITY()).map(i -> i).orElse(null);
+        IEnergyHandlerItem handler = TesseractCapUtils.getEnergyHandlerItem(stack).orElse(null);
         if (handler != null){
             handler.setEnergy(startingEnergy);
             handler.setCapacity(maxEnergy);
+            stack.setTag(handler.getContainer().getTag());
         } else {
             dataTag.putLong(Ref.KEY_ITEM_ENERGY, startingEnergy);
             dataTag.putLong(Ref.KEY_ITEM_MAX_ENERGY, maxEnergy);

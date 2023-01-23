@@ -19,7 +19,7 @@ import trinsdar.gt4r.data.Materials;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static muramasa.antimatter.Data.NULL;
+import static muramasa.antimatter.material.Material.NULL;
 
 public class ItemMixedMetal extends ItemBasic<ItemMixedMetal> implements IColorHandler {
     public ItemMixedMetal() {

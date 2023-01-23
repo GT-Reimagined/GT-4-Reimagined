@@ -1,8 +1,8 @@
 package trinsdar.gt4r.loader.machines;
 
-import static muramasa.antimatter.Data.DUST;
-import static muramasa.antimatter.Data.DUST_SMALL;
-import static muramasa.antimatter.Data.DUST_TINY;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.DUST;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.DUST_SMALL;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.DUST_TINY;
 import static trinsdar.gt4r.data.RecipeMaps.DUSTBIN;
 
 public class DustbinLoader {

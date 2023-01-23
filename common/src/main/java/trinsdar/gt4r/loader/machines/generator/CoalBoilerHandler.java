@@ -1,11 +1,12 @@
 package trinsdar.gt4r.loader.machines.generator;
 
+import muramasa.antimatter.data.AntimatterMaterialTypes;
+import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import net.minecraft.world.item.Items;
 import net.minecraft.tags.ItemTags;
 import muramasa.antimatter.data.ForgeCTags;
 
-import static muramasa.antimatter.Data.*;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.COAL_BOILERS;
 

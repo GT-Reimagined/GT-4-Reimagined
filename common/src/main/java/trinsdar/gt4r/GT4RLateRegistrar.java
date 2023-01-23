@@ -8,9 +8,9 @@ import muramasa.antimatter.registration.Side;
 import muramasa.antimatter.util.AntimatterPlatformUtils;
 import trinsdar.gt4r.data.GT4RMaterialTags;
 
-import static muramasa.antimatter.Data.Flint;
-import static muramasa.antimatter.Data.NULL;
-import static muramasa.antimatter.Data.Wood;
+import static muramasa.antimatter.data.AntimatterMaterials.Flint;
+import static muramasa.antimatter.material.Material.NULL;
+import static muramasa.antimatter.data.AntimatterMaterials.Wood;
 import static muramasa.antimatter.material.MaterialTags.RUBBERTOOLS;
 
 public class GT4RLateRegistrar extends AntimatterMod {

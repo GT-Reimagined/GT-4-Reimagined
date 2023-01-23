@@ -1,26 +1,28 @@
 package trinsdar.gt4r.loader.machines;
 
+import muramasa.antimatter.data.AntimatterMaterialTypes;
+import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import muramasa.antimatter.util.AntimatterPlatformUtils;
 import muramasa.antimatter.util.TagUtils;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.resources.ResourceLocation;
 import trinsdar.gt4r.data.GT4RMaterialTags;
 
-import static muramasa.antimatter.Data.*;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.BATHING;
 
 public class BathingLoader {
     public static void init(){
-        ItemStack stoneDust = DUST.get(Stone, 1);
+        ItemStack stoneDust = AntimatterMaterialTypes.DUST.get(AntimatterMaterials.Stone, 1);
         GT4RMaterialTags.BATHING_PERSULFATE.all().forEach(m -> {
-            addBathRecipe(m, SodiumPersulfate, i(1.0, 0.7, 0.4), CRUSHED_PURIFIED.get(m, 1), DUST.get(GT4RMaterialTags.BATHING_PERSULFATE.getMapping(m), 1), stoneDust);
+            addBathRecipe(m, SodiumPersulfate, i(1.0, 0.7, 0.4), AntimatterMaterialTypes.CRUSHED_PURIFIED.get(m, 1), AntimatterMaterialTypes.DUST.get(GT4RMaterialTags.BATHING_PERSULFATE.getMapping(m), 1), stoneDust);
         });
         GT4RMaterialTags.BATHING_MERCURY.all().forEach(m -> {
-            addBathRecipe(m, Mercury, i(1.0, 0.7, 0.4), CRUSHED_PURIFIED.get(m, 1), DUST.get(GT4RMaterialTags.BATHING_MERCURY.getMapping(m), 1), stoneDust);
+            addBathRecipe(m, Mercury, i(1.0, 0.7, 0.4), AntimatterMaterialTypes.CRUSHED_PURIFIED.get(m, 1), AntimatterMaterialTypes.DUST.get(GT4RMaterialTags.BATHING_MERCURY.getMapping(m), 1), stoneDust);
         });
         //addBathRecipe(Zinc, SodiumPersulfate, i(100, 70, 40), CRUSHED_PURIFIED.get(Zinc, 1), DUST.get(Zinc, 1), stoneDust);
         BATHING.RB().ii(RecipeIngredient.of(DUST.getMaterialTag(Wood), 1)).fi(Water.getLiquid(100)).io(new ItemStack(Items.PAPER)).chances(1.0).add("paper",200);

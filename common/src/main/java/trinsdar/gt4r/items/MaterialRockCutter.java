@@ -1,6 +1,5 @@
 package trinsdar.gt4r.items;
 
-import muramasa.antimatter.Ref;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialTags;
 import muramasa.antimatter.tool.AntimatterToolType;
@@ -15,15 +14,15 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import tesseract.TesseractPlatformUtils;
+import tesseract.TesseractCapUtils;
 import tesseract.api.gt.IEnergyHandler;
+import tesseract.api.gt.IEnergyHandlerItem;
 
 import javax.annotation.Nullable;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import static muramasa.antimatter.Data.Diamond;
+import static muramasa.antimatter.data.AntimatterMaterials.Diamond;
 import static trinsdar.gt4r.data.Materials.Titanium;
 
 public class MaterialRockCutter extends MaterialTool {
@@ -40,11 +39,12 @@ public class MaterialRockCutter extends MaterialTool {
     public void onGenericFillItemGroup(CreativeModeTab group, NonNullList<ItemStack> list, long maxEnergy) {
         if (this.allowdedIn(group)){
             ItemStack stack = asItemStack(Diamond, Titanium);
-            IEnergyHandler h = TesseractPlatformUtils.getEnergyHandlerItem(stack).map(t -> t).orElse(null);
+            IEnergyHandlerItem h = TesseractCapUtils.getEnergyHandlerItem(stack).orElse(null);
             if (h != null){
                 list.add(stack.copy());
                 h.setCapacity(maxEnergy);
                 h.setEnergy(maxEnergy);
+                stack.setTag(h.getContainer().getTag());
                 list.add(stack);
             }
         }

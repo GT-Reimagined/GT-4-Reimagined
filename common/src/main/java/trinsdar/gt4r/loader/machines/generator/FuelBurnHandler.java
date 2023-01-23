@@ -5,8 +5,8 @@ import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialTags;
 import trinsdar.gt4r.data.Materials;
 
-import static muramasa.antimatter.Data.GAS;
-import static muramasa.antimatter.Data.LIQUID;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.GAS;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.LIQUID;
 import static trinsdar.gt4r.data.Materials.DistilledWater;
 import static trinsdar.gt4r.data.Materials.NitroDiesel;
 import static trinsdar.gt4r.data.GT4RMaterialTags.SEMIFLUID;

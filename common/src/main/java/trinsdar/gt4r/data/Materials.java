@@ -1,25 +1,21 @@
 package trinsdar.gt4r.data;
 
 import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.Data;
+import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialTags;
 import muramasa.antimatter.material.MaterialType;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.fluids.FluidAttributes;
 import trinsdar.gt4r.Ref;
 
 import static com.google.common.collect.ImmutableMap.of;
-import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.fluid.AntimatterFluid.LIQUID_FLOW_TEXTURE;
 import static muramasa.antimatter.fluid.AntimatterFluid.LIQUID_STILL_TEXTURE;
 import static muramasa.antimatter.fluid.AntimatterFluid.OVERLAY_TEXTURE;
 import static muramasa.antimatter.material.Element.*;
-import static muramasa.antimatter.material.MaterialTags.RUBBERTOOLS;
 import static muramasa.antimatter.material.TextureSet.*;
-import static net.minecraft.world.item.Tiers.IRON;
 
 public class Materials {
 
@@ -280,7 +276,7 @@ public class Materials {
     }
 
     private static Block.Properties prepareProperties(Material m, MaterialType<?> type) {
-        return Block.Properties.of(net.minecraft.world.level.material.Material.WATER).strength(100.0F).noDrops().lightLevel(s -> type == Data.PLASMA ? 15 : m == PahoehoeLava ? 9: 0);
+        return Block.Properties.of(net.minecraft.world.level.material.Material.WATER).strength(100.0F).noDrops().lightLevel(s -> type == AntimatterMaterialTypes.PLASMA ? 15 : m == PahoehoeLava ? 9: 0);
     }
 
 }

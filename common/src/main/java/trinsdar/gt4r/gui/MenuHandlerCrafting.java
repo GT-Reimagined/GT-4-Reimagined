@@ -1,19 +1,20 @@
 package trinsdar.gt4r.gui;
 
-import muramasa.antimatter.capability.AntimatterCaps;
 import muramasa.antimatter.capability.ICoverHandler;
 import muramasa.antimatter.capability.IGuiHandler;
 import muramasa.antimatter.cover.ICover;
 import muramasa.antimatter.gui.MenuHandler;
+import muramasa.antimatter.util.AntimatterCapUtils;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.util.LazyOptional;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.data.client.ScreenFactories;
+
+import java.util.Optional;
 
 public class MenuHandlerCrafting extends MenuHandler<GTWorkbenchContainer> {
     public MenuHandlerCrafting(String domain, String id) {
@@ -25,7 +26,7 @@ public class MenuHandlerCrafting extends MenuHandler<GTWorkbenchContainer> {
         BlockEntity tile = Utils.getTileFromBuf(data);
         if (tile != null) {
             Direction dir = Direction.from3DDataValue(data.readInt());
-            LazyOptional<ICoverHandler<?>> coverHandler = tile.getCapability(AntimatterCaps.getCOVERABLE_HANDLER_CAPABILITY(), dir);
+            Optional<ICoverHandler<?>> coverHandler = AntimatterCapUtils.getCoverHandler(tile, dir);
             return getMenu(coverHandler.map(ch -> ch.get(dir)).orElse(null), inv, windowId);
         }
         return null;

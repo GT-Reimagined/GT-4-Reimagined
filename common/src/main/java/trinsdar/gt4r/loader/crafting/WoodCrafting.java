@@ -17,37 +17,35 @@ import trinsdar.gt4r.Ref;
 import java.util.function.Consumer;
 
 import static com.google.common.collect.ImmutableMap.of;
-import static muramasa.antimatter.Data.SAW;
+import static muramasa.antimatter.data.AntimatterDefaultTools.SAW;
 
 public class WoodCrafting {
 
     public static void loadRecipes(Consumer<FinishedRecipe> consumer, AntimatterRecipeProvider provider) {
 
         if (GT4RConfig.GAMEPLAY.HARDER_WOOD){
-            provider.addStackRecipe(consumer, Ref.ID, "sticks_2", "wood_stuff", "has_planks", provider.hasSafeItem(ItemTags.PLANKS), new ItemStack(Items.STICK, 2), of('P', ItemTags.PLANKS), "P", "P");
+            provider.addStackRecipe(consumer, "minecraft", "", "wood_stuff", "has_planks", provider.hasSafeItem(ItemTags.PLANKS), new ItemStack(Items.STICK, 2), of('P', ItemTags.PLANKS), "P", "P");
             provider.addStackRecipe(consumer, Ref.ID, "sticks_4", "wood_stuff", "has_planks", provider.hasSafeItem(ItemTags.PLANKS), new ItemStack(Items.STICK, 4), of('P', ItemTags.PLANKS, 'S', SAW.getTag()), "S", "P", "P");
-        } else {
-            provider.addStackRecipe(consumer, Ref.ID, "sticks_4", "wood_stuff", "has_planks", provider.hasSafeItem(ItemTags.PLANKS), new ItemStack(Items.STICK, 4), of('P', ItemTags.PLANKS), "P", "P");
         }
-        addWoodRecipe(consumer, provider, ItemTags.OAK_LOGS, Items.OAK_PLANKS);
-        addWoodRecipe(consumer, provider, ItemTags.BIRCH_LOGS, Items.BIRCH_PLANKS);
-        addWoodRecipe(consumer, provider, ItemTags.SPRUCE_LOGS, Items.SPRUCE_PLANKS);
-        addWoodRecipe(consumer, provider, ItemTags.JUNGLE_LOGS, Items.JUNGLE_PLANKS);
-        addWoodRecipe(consumer, provider, ItemTags.ACACIA_LOGS, Items.ACACIA_PLANKS);
-        addWoodRecipe(consumer, provider, ItemTags.DARK_OAK_LOGS, Items.DARK_OAK_PLANKS);
-        addWoodRecipe(consumer, provider, ItemTags.CRIMSON_STEMS, Items.CRIMSON_PLANKS);
-        addWoodRecipe(consumer, provider, ItemTags.WARPED_STEMS, Items.WARPED_PLANKS);
+        addWoodRecipe(consumer, provider, "minecraft", ItemTags.OAK_LOGS, Items.OAK_PLANKS);
+        addWoodRecipe(consumer, provider, "minecraft", ItemTags.BIRCH_LOGS, Items.BIRCH_PLANKS);
+        addWoodRecipe(consumer, provider, "minecraft", ItemTags.SPRUCE_LOGS, Items.SPRUCE_PLANKS);
+        addWoodRecipe(consumer, provider, "minecraft", ItemTags.JUNGLE_LOGS, Items.JUNGLE_PLANKS);
+        addWoodRecipe(consumer, provider, "minecraft", ItemTags.ACACIA_LOGS, Items.ACACIA_PLANKS);
+        addWoodRecipe(consumer, provider, "minecraft", ItemTags.DARK_OAK_LOGS, Items.DARK_OAK_PLANKS);
+        addWoodRecipe(consumer, provider, "minecraft", ItemTags.CRIMSON_STEMS, Items.CRIMSON_PLANKS);
+        addWoodRecipe(consumer, provider, "minecraft", ItemTags.WARPED_STEMS, Items.WARPED_PLANKS);
         if (AntimatterAPI.isModLoaded(Ref.MOD_TERRESTRIA)){
             String[] woodTypes = {"cypress", "hemlock", "japanese_maple", "rainbow_eucalyptus", "redwood", "rubber", "sakura", "willow", "yucca_palm"};
             for (String woodType : woodTypes) {
-                addWoodRecipe(consumer, provider, TagUtils.getItemTag(new ResourceLocation(Ref.MOD_TERRESTRIA, woodType + "_logs")), AntimatterPlatformUtils.getItemFromID(new ResourceLocation(Ref.MOD_TERRESTRIA, woodType + "_planks")));
+                addWoodRecipe(consumer, provider, Ref.MOD_TERRESTRIA, TagUtils.getItemTag(new ResourceLocation(Ref.MOD_TERRESTRIA, woodType + "_logs")), AntimatterPlatformUtils.getItemFromID(new ResourceLocation(Ref.MOD_TERRESTRIA, woodType + "_planks")));
             }
 
         }
         if (AntimatterAPI.isModLoaded(Ref.MOD_CINDERSCAPES)){
             String[] woodTypes = {"scorched", "umbral"};
             for (String woodType : woodTypes) {
-                addWoodRecipe(consumer, provider, TagUtils.getItemTag(new ResourceLocation(Ref.MOD_CINDERSCAPES, woodType + "_stems")), AntimatterPlatformUtils.getItemFromID(new ResourceLocation(Ref.MOD_CINDERSCAPES, woodType + "_planks")));
+                addWoodRecipe(consumer, provider, Ref.MOD_CINDERSCAPES, TagUtils.getItemTag(new ResourceLocation(Ref.MOD_CINDERSCAPES, woodType + "_stems")), AntimatterPlatformUtils.getItemFromID(new ResourceLocation(Ref.MOD_CINDERSCAPES, woodType + "_planks")));
             }
 
         }
@@ -83,12 +81,10 @@ public class WoodCrafting {
         }
     }
 
-    public static void addWoodRecipe(Consumer<FinishedRecipe> consumer, AntimatterRecipeProvider provider, TagKey<Item> log, Item plank){
+    public static void addWoodRecipe(Consumer<FinishedRecipe> consumer, AntimatterRecipeProvider provider, String domain, TagKey<Item> log, Item plank){
         if (GT4RConfig.GAMEPLAY.HARDER_WOOD){
-            provider.shapeless(consumer, plank.getRegistryName().getPath() + "_2", "planks", "has_" + log.location().getPath(), provider.hasSafeItem(log), new ItemStack(plank, 2), log);
-            provider.addStackRecipe(consumer, Ref.ID, plank.getRegistryName().getPath() + "_4", "planks", "has_" + log.location().getPath(), provider.hasSafeItem(log), new ItemStack(plank, 4), of('S', SAW.getTag(), 'P', log), "S", "P");
-        } else {
-            provider.shapeless(consumer, plank.getRegistryName().getPath() + "_4", "planks", "has_" + log.location().getPath(), provider.hasSafeItem(log), new ItemStack(plank, 4), log);
+            provider.shapeless(consumer, domain, "", "planks", "has_" + log.location().getPath(), provider.hasSafeItem(log), new ItemStack(plank, 2), log);
+            provider.addStackRecipe(consumer, domain, plank.getRegistryName().getPath() + "_4", "planks", "has_" + log.location().getPath(), provider.hasSafeItem(log), new ItemStack(plank, 4), of('S', SAW.getTag(), 'P', log), "S", "P");
         }
     }
 }

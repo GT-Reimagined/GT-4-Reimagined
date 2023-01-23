@@ -1,7 +1,7 @@
 package trinsdar.gt4r.loader.machines;
 
 import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.material.MaterialTags;
+import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.pipe.PipeSize;
 import muramasa.antimatter.pipe.types.FluidPipe;
 import muramasa.antimatter.pipe.types.ItemPipe;
@@ -14,8 +14,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import trinsdar.gt4r.data.GT4RData;
 
-import static muramasa.antimatter.Data.*;
-import static muramasa.antimatter.material.MaterialTags.RUBBERTOOLS;
 import static trinsdar.gt4r.data.Materials.Rubber;
 import static trinsdar.gt4r.data.Materials.SiliconDioxide;
 import static trinsdar.gt4r.data.Materials.Tin;
@@ -24,16 +22,16 @@ import static trinsdar.gt4r.data.RecipeMaps.EXTRUDING;
 
 public class ExtruderLoader {
     public static void init(){
-        ROD.all().forEach(m -> {
-            if (!m.has(INGOT)) return;
+        AntimatterMaterialTypes.ROD.all().forEach(m -> {
+            if (!m.has(AntimatterMaterialTypes.INGOT)) return;
             int euPerTick = m == Rubber ? 32 : 128;
             EXTRUDING.RB().ii(INGOT.getMaterialIngredient(m, 1), getReusable(GT4RData.ShapeRod)).io(ROD.get(m, 2)).add(m.getId() + "_rod", (m.getMass() * 2), euPerTick);
             if (m.has(RUBBERTOOLS) && m.has(DUST)){
                 EXTRUDING.RB().ii(DUST.getMaterialIngredient(m, 1), getReusable(GT4RData.ShapeRod)).io(ROD.get(m, 2)).add(m.getId() + "_rod_1", m.getMass() * 2, euPerTick);
             }
         });
-        PLATE.all().forEach(m -> {
-            if (!m.has(INGOT)) return;
+        AntimatterMaterialTypes.PLATE.all().forEach(m -> {
+            if (!m.has(AntimatterMaterialTypes.INGOT)) return;
             int euPerTick = m == Rubber ? 32 : 128;
             EXTRUDING.RB().ii(INGOT.getMaterialIngredient(m, 1), getReusable(GT4RData.ShapePlate)).io(PLATE.get(m, 1)).add(m.getId() + "_plate", m.getMass(), euPerTick);
             if (m.has(RUBBERTOOLS) && m.has(DUST)){
@@ -41,14 +39,14 @@ public class ExtruderLoader {
             }
         });
         AntimatterAPI.all(Wire.class).forEach(t -> {
-            if (!t.getMaterial().has(INGOT)) return;
+            if (!t.getMaterial().has(AntimatterMaterialTypes.INGOT)) return;
             Item wireItem = t.getBlockItem(PipeSize.VTINY);
             ItemStack stack = new ItemStack(wireItem,2);
             EXTRUDING.RB().ii(INGOT.getMaterialIngredient(t.getMaterial(),1), getReusable(GT4RData.ShapeWire)).io(stack).add(t.getId() + "_wire", t.getMaterial().getMass()*2,96);
         });
 
         AntimatterAPI.all(FluidPipe.class).forEach(t -> {
-            if (!t.getMaterial().has(INGOT)) return;
+            if (!t.getMaterial().has(AntimatterMaterialTypes.INGOT)) return;
             Item pipeTiny = t.getBlockItem(PipeSize.TINY);
             Item pipeSmall = t.getBlockItem(PipeSize.SMALL);
             Item pipeNormal = t.getBlockItem(PipeSize.NORMAL);
@@ -103,16 +101,16 @@ public class ExtruderLoader {
             if (!m.has(INGOT)) return;
             EXTRUDING.RB().ii(INGOT.getMaterialIngredient(m, 4), getReusable(GT4RData.ShapeGear)).io(GEAR.get(m, 1)).add(m.getId() + "_gear", (m.getMass() * 5), 128);
         });
-        RING.all().forEach(m -> {
-            if (!m.has(INGOT)) return;
+        AntimatterMaterialTypes.RING.all().forEach(m -> {
+            if (!m.has(AntimatterMaterialTypes.INGOT)) return;
             int euPerTick = m == Rubber ? 32 : 128;
             EXTRUDING.RB().ii(INGOT.getMaterialIngredient(m, 1), getReusable(GT4RData.ShapeRing)).io(RING.get(m, 4)).add(m.getId() + "_ring", (m.getMass() * 4), euPerTick);
             if (m.has(RUBBERTOOLS) && m.has(DUST)){
                 EXTRUDING.RB().ii(DUST.getMaterialIngredient(m, 1), getReusable(GT4RData.ShapeRing)).io(RING.get(m, 4)).add(m.getId() + "_ring_1", m.getMass() * 4, euPerTick);
             }
         });
-        BOLT.all().forEach(m -> {
-            if (!m.has(INGOT)) return;
+        AntimatterMaterialTypes.BOLT.all().forEach(m -> {
+            if (!m.has(AntimatterMaterialTypes.INGOT)) return;
             int euPerTick = m == Rubber ? 32 : 128;
             EXTRUDING.RB().ii(INGOT.getMaterialIngredient(m, 1), getReusable(GT4RData.ShapeBolt)).io(BOLT.get(m, 8)).add(m.getId() + "_bolt", (m.getMass() * 8), euPerTick);
             if (m.has(RUBBERTOOLS) && m.has(DUST)){
