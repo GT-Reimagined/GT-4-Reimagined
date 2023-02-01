@@ -13,6 +13,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import trinsdar.gt4r.data.GT4RData;
 
+import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
+import static muramasa.antimatter.data.AntimatterMaterials.*;
 import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.INDUSTRIAL_GRINDING;
@@ -64,22 +66,22 @@ public class IndustrialGrinder {
         addGrinderRecipe(AntimatterMaterials.Emerald, SulfuricAcid, new ItemStack(Items.EMERALD, 2), AntimatterMaterialTypes.DUST_SMALL.get(Aluminium, 1));
         addGrinderRecipe(Olivine, SulfuricAcid, AntimatterMaterialTypes.GEM.get(Olivine, 2), AntimatterMaterialTypes.DUST_SMALL.get(Pyrope, 2));
 
-        INDUSTRIAL_GRINDING.RB().ii(of(new ItemStack(GT4RData.GRANITE_BLACK.getState().getBlock(), 16))).fi(AntimatterMaterials.Water.getLiquid(1000)).io(AntimatterMaterialTypes.DUST.get(BlackGranite, 16), AntimatterMaterialTypes.DUST_SMALL.get(Thorium, 1)).add(1600, 120);
-        INDUSTRIAL_GRINDING.RB().ii(of(new ItemStack(GT4RData.GRANITE_RED.getState().getBlock(), 16))).fi(AntimatterMaterials.Water.getLiquid(1000)).io(AntimatterMaterialTypes.DUST.get(RedGranite, 16), AntimatterMaterialTypes.DUST_SMALL.get(Uranium238, 1)).add(1600, 120);
-        INDUSTRIAL_GRINDING.RB().ii(of(new ItemStack(Items.END_STONE, 1))).fi(AntimatterMaterials.Water.getLiquid(1000)).io(AntimatterMaterialTypes.DUST.get(AntimatterMaterials.Endstone, 16), AntimatterMaterialTypes.DUST_TINY.get(Tungsten, 1)).add(1600, 120);
-        INDUSTRIAL_GRINDING.RB().ii(of(TagUtils.getForgelikeItemTag("sandless_ores/" + AntimatterMaterials.Coal.getId()), 1)).fi(AntimatterMaterials.Water.getLiquid(1000)).io(new ItemStack(Items.COAL), AntimatterMaterialTypes.DUST.get(AntimatterMaterials.Coal, 1), AntimatterMaterialTypes.DUST_SMALL.get(Thorium, 1)).add(100, 120);
-        INDUSTRIAL_GRINDING.RB().ii(of(Items.NETHER_QUARTZ_ORE, 1)).fi(AntimatterMaterials.Water.getLiquid(1000)).io(new ItemStack(Items.QUARTZ, 4), AntimatterMaterialTypes.DUST_SMALL.get(AntimatterMaterials.Netherrack, 2)).add(100, 120);
-        INDUSTRIAL_GRINDING.RB().ii(of(Items.TERRACOTTA, 2)).fi(AntimatterMaterials.Water.getLiquid(1000)).io(AntimatterMaterialTypes.DUST.get(Clay, 2)).add(100, 120);
-        INDUSTRIAL_GRINDING.RB().ii(of(Items.NETHERRACK, 16)).fi(AntimatterMaterials.Water.getLiquid(1000)).io(AntimatterMaterialTypes.DUST.get(AntimatterMaterials.Netherrack, 16), AntimatterMaterialTypes.DUST_TINY.get(AntimatterMaterials.Gold, 1)).add(1600, 120);
-        INDUSTRIAL_GRINDING.RB().ii(of(Items.NETHERRACK, 8)).fi(Mercury.getLiquid(1000)).io(AntimatterMaterialTypes.DUST.get(AntimatterMaterials.Netherrack, 8), AntimatterMaterialTypes.DUST_TINY.get(AntimatterMaterials.Gold, 5)).add(1600, 120);
+        INDUSTRIAL_GRINDING.RB().ii(of(new ItemStack(GT4RData.GRANITE_BLACK.getState().getBlock(), 16))).fi(Water.getLiquid(1000)).io(DUST.get(BlackGranite, 16), DUST_SMALL.get(Thorium, 1)).add("black_granite",1600, 120);
+        INDUSTRIAL_GRINDING.RB().ii(of(new ItemStack(GT4RData.GRANITE_RED.getState().getBlock(), 16))).fi(Water.getLiquid(1000)).io(DUST.get(RedGranite, 16), DUST_SMALL.get(Uranium238, 1)).add("red_granite",1600, 120);
+        INDUSTRIAL_GRINDING.RB().ii(of(new ItemStack(Items.END_STONE, 1))).fi(Water.getLiquid(1000)).io(DUST.get(Endstone, 16), DUST_TINY.get(Tungsten, 1)).add("end_stone",1600, 120);
+        INDUSTRIAL_GRINDING.RB().ii(of(TagUtils.getForgelikeItemTag("sandless_ores/" + Coal.getId()), 1)).fi(Water.getLiquid(1000)).io(new ItemStack(Items.COAL), DUST.get(Coal, 1), DUST_SMALL.get(Thorium, 1)).add("coal",100, 120);
+        INDUSTRIAL_GRINDING.RB().ii(of(Items.NETHER_QUARTZ_ORE, 1)).fi(Water.getLiquid(1000)).io(new ItemStack(Items.QUARTZ, 4), DUST_SMALL.get(Netherrack, 2)).add("nether_quartz",100, 120);
+        INDUSTRIAL_GRINDING.RB().ii(of(Items.TERRACOTTA, 2)).fi(Water.getLiquid(1000)).io(DUST.get(Clay, 2)).add("terracotta",100, 120);
+        INDUSTRIAL_GRINDING.RB().ii(of(Items.NETHERRACK, 16)).fi(Water.getLiquid(1000)).io(DUST.get(Netherrack, 16), DUST_TINY.get(Gold, 1)).add("netherrack",1600, 120);
+        INDUSTRIAL_GRINDING.RB().ii(of(Items.NETHERRACK, 8)).fi(Mercury.getLiquid(1000)).io(DUST.get(Netherrack, 8), DUST_TINY.get(Gold, 5)).add("netherrack_1",1600, 120);
         if (AntimatterAPI.isModLoaded("cinderscapes")){
-            INDUSTRIAL_GRINDING.RB().ii(of(AntimatterPlatformUtils.getItemFromID(new ResourceLocation("cinderscapes", "rose_quartz_ore")), 1)).fi(AntimatterMaterials.Water.getLiquid(1000)).io(new ItemStack(AntimatterPlatformUtils.getItemFromID(new ResourceLocation("cinderscapes", "rose_quartz")), 4), AntimatterMaterialTypes.DUST_SMALL.get(AntimatterMaterials.Netherrack, 2)).add(100, 120);
-            INDUSTRIAL_GRINDING.RB().ii(of(AntimatterPlatformUtils.getItemFromID(new ResourceLocation("cinderscapes", "smoky_quartz_ore")), 1)).fi(AntimatterMaterials.Water.getLiquid(1000)).io(new ItemStack(AntimatterPlatformUtils.getItemFromID(new ResourceLocation("cinderscapes", "smoky_quartz")), 4), AntimatterMaterialTypes.DUST_SMALL.get(AntimatterMaterials.Netherrack, 2)).add(100, 120);
-            INDUSTRIAL_GRINDING.RB().ii(of(AntimatterPlatformUtils.getItemFromID(new ResourceLocation("cinderscapes", "sulfur_quartz_ore")), 1)).fi(AntimatterMaterials.Water.getLiquid(1000)).io(new ItemStack(AntimatterPlatformUtils.getItemFromID(new ResourceLocation("cinderscapes", "sulfur_quartz")), 4), AntimatterMaterialTypes.DUST_SMALL.get(AntimatterMaterials.Netherrack, 2)).add(100, 120);
+            INDUSTRIAL_GRINDING.RB().ii(of(AntimatterPlatformUtils.getItemFromID(new ResourceLocation("cinderscapes", "rose_quartz_ore")), 1)).fi(Water.getLiquid(1000)).io(new ItemStack(AntimatterPlatformUtils.getItemFromID(new ResourceLocation("cinderscapes", "rose_quartz")), 4), DUST_SMALL.get(Netherrack, 2)).add("rose_quartz",100, 120);
+            INDUSTRIAL_GRINDING.RB().ii(of(AntimatterPlatformUtils.getItemFromID(new ResourceLocation("cinderscapes", "smoky_quartz_ore")), 1)).fi(Water.getLiquid(1000)).io(new ItemStack(AntimatterPlatformUtils.getItemFromID(new ResourceLocation("cinderscapes", "smoky_quartz")), 4), DUST_SMALL.get(Netherrack, 2)).add("smoky_quartz",100, 120);
+            INDUSTRIAL_GRINDING.RB().ii(of(AntimatterPlatformUtils.getItemFromID(new ResourceLocation("cinderscapes", "sulfur_quartz_ore")), 1)).fi(Water.getLiquid(1000)).io(new ItemStack(AntimatterPlatformUtils.getItemFromID(new ResourceLocation("cinderscapes", "sulfur_quartz")), 4), DUST_SMALL.get(Netherrack, 2)).add("sulfur_quartz",100, 120);
         }
     }
 
     private static void addGrinderRecipe(Material ore, Material fluid, ItemStack... outputs){
-        INDUSTRIAL_GRINDING.RB().ii(of(TagUtils.getForgelikeItemTag("sandless_ores/" + ore.getId()), 1)).fi(fluid.getLiquid(1000)).io(outputs).add(100, 120);
+        INDUSTRIAL_GRINDING.RB().ii(of(TagUtils.getForgelikeItemTag("sandless_ores/" + ore.getId()), 1)).fi(fluid.getLiquid(1000)).io(outputs).add(ore.getId() + "_in_" + fluid.getId(),100, 120);
     }
 }

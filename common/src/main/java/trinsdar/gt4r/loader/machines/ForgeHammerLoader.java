@@ -14,6 +14,7 @@ import net.minecraft.world.item.Items;
 import trinsdar.gt4r.Ref;
 import muramasa.antimatter.data.ForgeCTags;
 
+import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
 import static muramasa.antimatter.material.MaterialTags.MACERATE_INTO;
 import static muramasa.antimatter.material.MaterialTags.ORE_MULTI;
 import static muramasa.antimatter.material.MaterialTags.RUBBERTOOLS;
@@ -28,29 +29,29 @@ public class ForgeHammerLoader {
             RecipeIngredient ore = RecipeIngredient.of(TagUtils.getForgelikeItemTag("sandless_ores/" + m.getId()),1), crushed = AntimatterMaterialTypes.CRUSHED.getIngredient(m, 1);
             ItemStack crushedStack = AntimatterMaterialTypes.CRUSHED.get(m,1);
 
-            HAMMERING.RB().ii(ore).io(Utils.ca(ORE_MULTI.getInt(m) * multiplier, crushedStack)).add(16, 10);
-            HAMMERING.RB().ii(crushed).io(AntimatterMaterialTypes.DUST_IMPURE.get(MACERATE_INTO.getMapping(m), 1)).add(16, 10);
-            HAMMERING.RB().ii(RecipeIngredient.of(AntimatterMaterialTypes.CRUSHED_PURIFIED.get(m,1))).io(AntimatterMaterialTypes.DUST_PURE.get(MACERATE_INTO.getMapping(m), 1)).add(16, 10);
-            if (m.has(AntimatterMaterialTypes.CRUSHED_CENTRIFUGED)) {
-                HAMMERING.RB().ii(RecipeIngredient.of(AntimatterMaterialTypes.CRUSHED_CENTRIFUGED.get(m,1))).io(AntimatterMaterialTypes.DUST.get(MACERATE_INTO.getMapping(m), 1)).add(16, 10);
+            HAMMERING.RB().ii(ore).io(Utils.ca(ORE_MULTI.getInt(m) * multiplier, crushedStack)).add(m.getId() + "_ore",16, 10);
+            HAMMERING.RB().ii(crushed).io(DUST_IMPURE.get(MACERATE_INTO.getMapping(m), 1)).add(m.getId() + "_crushed_ore",16, 10);
+            HAMMERING.RB().ii(RecipeIngredient.of(CRUSHED_PURIFIED.get(m,1))).io(DUST_PURE.get(MACERATE_INTO.getMapping(m), 1)).add(m.getId() + "_purified_ore",16, 10);
+            if (m.has(CRUSHED_CENTRIFUGED)) {
+                HAMMERING.RB().ii(RecipeIngredient.of(CRUSHED_CENTRIFUGED.get(m,1))).io(DUST.get(MACERATE_INTO.getMapping(m), 1)).add(m.getId() + "_centrifuged_ore",16, 10);
             }
-            if (m.has(AntimatterMaterialTypes.RAW_ORE)){
-                HAMMERING.RB().ii(RecipeIngredient.of(AntimatterMaterialTypes.RAW_ORE.getMaterialTag(m), 1)).io(Utils.ca((ORE_MULTI.getInt(m) * multiplier), crushedStack)).add(16, 10);
+            if (m.has(RAW_ORE)){
+                HAMMERING.RB().ii(RecipeIngredient.of(RAW_ORE.getMaterialTag(m), 1)).io(Utils.ca((ORE_MULTI.getInt(m) * multiplier), crushedStack)).add(m.getId() + "_raw_ore",16, 10);
             }
         });
         AntimatterMaterialTypes.PLATE.all().stream().filter(m -> m.has(AntimatterMaterialTypes.INGOT) && !m.has(RUBBERTOOLS)).forEach(m -> {
             int in = AntimatterConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 3 : 1;
             int out = AntimatterConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 2 : 1;
-            HAMMERING.RB().ii(AntimatterMaterialTypes.INGOT.getMaterialIngredient(m, in)).io(AntimatterMaterialTypes.PLATE.get(m, out)).add(m.getMass(), 16);
+            HAMMERING.RB().ii(INGOT.getMaterialIngredient(m, in)).io(PLATE.get(m, out)).add(m.getId() + "_plate", m.getMass(), 16);
         });
         AntimatterAPI.all(StoneType.class, Ref.ID, s -> {
             if (!(s instanceof CobbleStoneType)) return;
-            HAMMERING.RB().ii(RecipeIngredient.of(((CobbleStoneType)s).getBlock(""), 1)).io(new ItemStack(((CobbleStoneType)s).getBlock("cobble"))).add(10, 16);
+            HAMMERING.RB().ii(RecipeIngredient.of(((CobbleStoneType)s).getBlock(""), 1)).io(new ItemStack(((CobbleStoneType)s).getBlock("cobble"))).add(s.getId() + "_to_cobble",10, 16);
         });
-        HAMMERING.RB().ii(RecipeIngredient.of(ForgeCTags.COBBLESTONE, 1)).io(new ItemStack(Items.GRAVEL)).add(10, 16);
-        HAMMERING.RB().ii(RecipeIngredient.of(Items.STONE, 1)).io(new ItemStack(Items.COBBLESTONE)).add(10, 16);
-        HAMMERING.RB().ii(RecipeIngredient.of(ForgeCTags.GRAVEL, 1)).io(new ItemStack(Items.SAND)).add(10, 16);
-        HAMMERING.RB().ii(RecipeIngredient.of(Items.BRICK, 1)).io(AntimatterMaterialTypes.DUST_SMALL.get(Brick, 1)).add(10, 16);
-        HAMMERING.RB().ii(RecipeIngredient.of(Items.BRICKS, 1)).io(AntimatterMaterialTypes.DUST.get(Brick, 1)).add(40, 16);
+        HAMMERING.RB().ii(RecipeIngredient.of(ForgeCTags.COBBLESTONE, 1)).io(new ItemStack(Items.GRAVEL)).add("gravel",10, 16);
+        HAMMERING.RB().ii(RecipeIngredient.of(Items.STONE, 1)).io(new ItemStack(Items.COBBLESTONE)).add("cobblestone",10, 16);
+        HAMMERING.RB().ii(RecipeIngredient.of(ForgeCTags.GRAVEL, 1)).io(new ItemStack(Items.SAND)).add("sand",10, 16);
+        HAMMERING.RB().ii(RecipeIngredient.of(Items.BRICK, 1)).io(DUST_SMALL.get(Brick, 1)).add("brick_dust_small",10, 16);
+        HAMMERING.RB().ii(RecipeIngredient.of(Items.BRICKS, 1)).io(DUST.get(Brick, 1)).add("brick_dust",40, 16);
     }
 }

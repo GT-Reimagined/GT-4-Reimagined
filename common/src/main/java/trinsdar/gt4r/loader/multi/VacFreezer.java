@@ -12,8 +12,8 @@ public class VacFreezer {
     public static void init() {
         INGOT_HOT.all().forEach(hi -> {
             Item ingot = INGOT.get(hi);
-            VACUUM_FREEZING.RB().ii(of(INGOT_HOT.get(hi),1))
-                    .io(new ItemStack(ingot,1)).add(hi.getMass(), 120);
+            VACUUM_FREEZING.RB().ii(INGOT_HOT.getMaterialIngredient(hi, 1))
+                    .io(new ItemStack(ingot,1)).add(hi.getId() + "_hot_ingot", hi.getMass(), 120);
         });
     }
 }

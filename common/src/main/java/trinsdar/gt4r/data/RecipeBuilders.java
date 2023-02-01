@@ -2,7 +2,7 @@ package trinsdar.gt4r.data;
 
 import muramasa.antimatter.Antimatter;
 import muramasa.antimatter.machine.Tier;
-import muramasa.antimatter.recipe.Recipe;
+import muramasa.antimatter.recipe.IRecipe;
 import muramasa.antimatter.recipe.map.RecipeBuilder;
 import muramasa.antimatter.recipe.map.RecipeMap;
 import muramasa.antimatter.util.Utils;
@@ -16,68 +16,68 @@ public class RecipeBuilders {
 
     public static class SmeltingBuilder extends RecipeBuilder {
         @Override
-        public Recipe add() {
-            return addRecipeToSteamMap(RecipeMaps.STEAM_SMELTING, super.add());
+        public IRecipe add(String domain, String id) {
+            return addRecipeToSteamMap(RecipeMaps.STEAM_SMELTING, super.add(domain, id), domain, id);
         }
     }
 
     public static class MaceratingBuilder extends RecipeBuilder {
         @Override
-        public Recipe add() {
-            return addRecipeToSteamMap(RecipeMaps.STEAM_MACERATING, super.add());
+        public IRecipe add(String domain, String id) {
+            return addRecipeToSteamMap(RecipeMaps.STEAM_MACERATING, super.add(domain, id), domain, id);
         }
     }
 
     public static class UniversalMaceratingBuilder extends RecipeBuilder {
         @Override
-        public Recipe add() {
-            return addRecipeToSingleOutputMap(RecipeMaps.MACERATING, super.add());
+        public IRecipe add(String domain, String id) {
+            return addRecipeToSingleOutputMap(RecipeMaps.MACERATING, super.add(domain, id), domain, id);
         }
     }
 
     public static class ExtractingBuilder extends RecipeBuilder {
         @Override
-        public Recipe add() {
-            return addRecipeToSteamMap(RecipeMaps.STEAM_EXTRACTING, super.add());
+        public IRecipe add(String domain, String id) {
+            return addRecipeToSteamMap(RecipeMaps.STEAM_EXTRACTING, super.add(domain, id), domain, id);
         }
     }
 
     public static class HammeringBuilder extends RecipeBuilder {
         @Override
-        public Recipe add() {
-            return addRecipeToSteamMap(RecipeMaps.STEAM_HAMMERING, super.add());
+        public IRecipe add(String domain, String id) {
+            return addRecipeToSteamMap(RecipeMaps.STEAM_HAMMERING, super.add(domain, id), domain, id);
         }
     }
 
     public static class CompressingBuilder extends RecipeBuilder {
         @Override
-        public Recipe add() {
-            return addRecipeToSteamMap(RecipeMaps.STEAM_COMPRESSING, super.add());
+        public IRecipe add(String domain, String id) {
+            return addRecipeToSteamMap(RecipeMaps.STEAM_COMPRESSING, super.add(domain, id), domain, id);
         }
     }
 
     public static class AlloySmeltingBuilder extends RecipeBuilder {
         @Override
-        public Recipe add() {
-            return addRecipeToSteamMap(RecipeMaps.STEAM_ALLOY_SMELTING, super.add());
+        public IRecipe add(String domain, String id) {
+            return addRecipeToSteamMap(RecipeMaps.STEAM_ALLOY_SMELTING, super.add(domain, id), domain, id);
         }
     }
 
     public static class GasFuelBuilder extends RecipeBuilder {
         @Override
-        public Recipe add() {
-            Recipe recipe = super.add();
+        public IRecipe add(String domain, String id) {
+            IRecipe recipe = super.add(domain, id);
             if (recipe.hasInputFluids()) {
-                RecipeMaps.LARGE_GAS_FUELS.RB().fi(recipe.getInputFluids().get(0).copyMB(50)).add(1, recipe.getDuration() * recipe.getPower() * 50L);
+                RecipeMaps.LARGE_GAS_FUELS.RB().fi(recipe.getInputFluids().get(0).copyMB(50)).add(domain, id,1, recipe.getDuration() * recipe.getPower() * 50L, recipe.getSpecialValue(), recipe.getAmps());
             }
             return recipe;
         }
     }
 
-    public static Recipe addRecipeToSteamMap(RecipeMap map, Recipe recipe) {
+    public static IRecipe addRecipeToSteamMap(RecipeMap map, IRecipe recipe, String domain, String id) {
         try {
             if (recipe.getPower() <= Tier.LV.getVoltage()) {
-                map.RB().ii(recipe.getInputItems()).io(recipe.getFlatOutputItems()).add(recipe.getDuration()* 3L, recipe.getPower() * 2);
+                map.RB().ii(recipe.getInputItems()).io(recipe.getFlatOutputItems()).add(domain, id,recipe.getDuration()* 3L, recipe.getPower() * 2, 0, 1);
             }
         } catch (Exception e) {
             System.out.println("bleh");
@@ -85,10 +85,10 @@ public class RecipeBuilders {
         return recipe;
     }
 
-    public static Recipe addRecipeToSingleOutputMap(RecipeMap map, Recipe recipe) {
+    public static IRecipe addRecipeToSingleOutputMap(RecipeMap map, IRecipe recipe, String domain, String id) {
         try {
             if (recipe.getPower() <= Tier.LV.getVoltage()) {
-                map.RB().ii(recipe.getInputItems()).io(Objects.requireNonNull(recipe.getOutputItems())[0]).add(recipe.getDuration(), recipe.getPower());
+                map.RB().ii(recipe.getInputItems()).io(Objects.requireNonNull(recipe.getOutputItems())[0]).add(domain, id, recipe.getDuration(), recipe.getPower(), recipe.getSpecialValue(), recipe.getAmps());
             }
         } catch (Exception e) {
             Antimatter.LOGGER.info("Recipe " + recipe.toString() + " Failed");

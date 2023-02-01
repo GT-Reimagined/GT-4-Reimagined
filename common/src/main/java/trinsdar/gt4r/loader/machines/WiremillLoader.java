@@ -22,7 +22,7 @@ public class WiremillLoader {
             ItemStack stack = new ItemStack(wireItem,2);
             if (t.getMaterial().has(INGOT)){
                 RecipeIngredient ing = INGOT.getMaterialIngredient(t.getMaterial(),1);
-                WIRE_MILLING.RB().ii(ing).io(stack).add(t.getMaterial().getMass()*2,24);
+                WIRE_MILLING.RB().ii(ing).io(stack).add(t.getId() + "_wire_vtiny",t.getMaterial().getMass()*2,24);
             }
 
             /*if (WIRE_FINE.allowItemGen(t.getMaterial())) {
@@ -30,12 +30,12 @@ public class WiremillLoader {
             }*/
         });
 
-        WIRE_MILLING.RB().ii(INGOT.getMaterialIngredient(Kanthal, 4)).io(new ItemStack(GT4RData.KanthalHeatingCoil)).add(450, 12);
-        WIRE_MILLING.RB().ii(INGOT.getMaterialIngredient(Nichrome, 5)).io(new ItemStack(GT4RData.NichromeHeatingCoil)).add(600, 16);
-        WIRE_MILLING.RB().ii(INGOT.getMaterialIngredient(Cupronickel, 3)).io(new ItemStack(GT4RData.CupronickelHeatingCoil)).add(300, 8);
-        WIRE_MILLING.RB().ii(DUST.getMaterialIngredient(Carbon, 8)).io(new ItemStack(GT4RData.CarbonFibre)).add(400, 2);
-        WIRE_MILLING.RB().ii(DUST.getMaterialIngredient(Charcoal, 8)).io(new ItemStack(GT4RData.CarbonFibre)).add(400, 2);
-        WIRE_MILLING.RB().ii(DUST.getMaterialIngredient(Coal, 4)).io(new ItemStack(GT4RData.CarbonFibre)).add(400, 2);
+        WIRE_MILLING.RB().ii(INGOT.getMaterialIngredient(Kanthal, 4)).io(new ItemStack(GT4RData.KanthalHeatingCoil)).add("kanthal_heating_coil",450, 12);
+        WIRE_MILLING.RB().ii(INGOT.getMaterialIngredient(Nichrome, 5)).io(new ItemStack(GT4RData.NichromeHeatingCoil)).add("nichroome_heating_coil",600, 16);
+        WIRE_MILLING.RB().ii(INGOT.getMaterialIngredient(Cupronickel, 3)).io(new ItemStack(GT4RData.CupronickelHeatingCoil)).add("cupronickel_heating_coil",300, 8);
+        WIRE_MILLING.RB().ii(DUST.getMaterialIngredient(Carbon, 8)).io(new ItemStack(GT4RData.CarbonFibre)).add("carbon_fibre",400, 2);
+        WIRE_MILLING.RB().ii(DUST.getMaterialIngredient(Charcoal, 8)).io(new ItemStack(GT4RData.CarbonFibre)).add("carbon_fibre_1",400, 2);
+        WIRE_MILLING.RB().ii(DUST.getMaterialIngredient(Coal, 4)).io(new ItemStack(GT4RData.CarbonFibre)).add("carbon_fibre_2",400, 2);
 
     }
 }

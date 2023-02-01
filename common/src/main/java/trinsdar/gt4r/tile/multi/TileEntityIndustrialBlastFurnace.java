@@ -11,7 +11,7 @@ import muramasa.antimatter.gui.widget.WidgetSupplier;
 import muramasa.antimatter.integration.jeirei.renderer.IInfoRenderer;
 import muramasa.antimatter.machine.event.IMachineEvent;
 import muramasa.antimatter.machine.types.Machine;
-import muramasa.antimatter.recipe.Recipe;
+import muramasa.antimatter.recipe.IRecipe;
 import muramasa.antimatter.tile.multi.TileEntityBasicMultiMachine;
 import net.minecraft.client.gui.Font;
 import net.minecraft.core.BlockPos;
@@ -177,7 +177,7 @@ public class TileEntityIndustrialBlastFurnace extends TileEntityBasicMultiMachin
         }
 
         @Override
-        protected boolean validateRecipe(Recipe r) {
+        protected boolean validateRecipe(IRecipe r) {
             return super.validateRecipe(r) && heatingCapacity >= r.getSpecialValue();
         }
 

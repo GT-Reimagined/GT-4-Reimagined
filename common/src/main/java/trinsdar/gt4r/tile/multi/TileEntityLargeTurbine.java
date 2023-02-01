@@ -4,7 +4,7 @@ import muramasa.antimatter.capability.machine.MachineRecipeHandler;
 import muramasa.antimatter.machine.event.ContentEvent;
 import muramasa.antimatter.machine.event.IMachineEvent;
 import muramasa.antimatter.machine.types.Machine;
-import muramasa.antimatter.recipe.Recipe;
+import muramasa.antimatter.recipe.IRecipe;
 import muramasa.antimatter.recipe.ingredient.FluidIngredient;
 import muramasa.antimatter.tile.multi.TileEntityMultiMachine;
 import muramasa.antimatter.util.Utils;
@@ -36,12 +36,12 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
         this.recipeHandler.set(() ->
             new MachineRecipeHandler<TileEntityLargeTurbine>(this) {
 
-                private Recipe sourceRecipe;
+                private IRecipe sourceRecipe;
                 private int ticker = 0;
                 private double efficiency;
 
                 @Override
-                protected boolean validateRecipe(Recipe r) {
+                protected boolean validateRecipe(IRecipe r) {
                     return true;
                 }
 
@@ -51,8 +51,8 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
                 }
 
                 @Override
-                public Recipe findRecipe() {
-                    Recipe r = super.findRecipe();
+                public IRecipe findRecipe() {
+                    IRecipe r = super.findRecipe();
                     if (r == null) return null;
                     sourceRecipe = r;
                     //Source recipe contains fluid amounts, map to turbine

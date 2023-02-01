@@ -15,14 +15,14 @@ public class CutterLoader {
         PLATE.all().forEach(t -> {
             if (!t.has(BLOCK)) return;
             long duration = Math.max(t.getMass(), 1) * 300;
-            CUTTING.RB().ii(RecipeIngredient.of(BLOCK.getMaterialTag(t), 1)).io(PLATE.get(t,9)).add(duration, 30);
+            CUTTING.RB().ii(RecipeIngredient.of(BLOCK.getMaterialTag(t), 1)).io(PLATE.get(t,9)).add(t.getId() + "_plate",duration, 30);
         });
         BOLT.all().forEach(t -> {
             if (!t.has(ROD)) return;
             long duration = Math.max(t.getMass(), 1) * 4;
-            CUTTING.RB().ii(RecipeIngredient.of(ROD.getMaterialTag(t), 1)).io(BOLT.get(t,4)).add(duration, 30);
+            CUTTING.RB().ii(RecipeIngredient.of(ROD.getMaterialTag(t), 1)).io(BOLT.get(t,4)).add(t.getId() + "_bolt",duration, 30);
         });
-        CUTTING.RB().ii(RecipeIngredient.of(Items.GLASS, 3)).io(new ItemStack(Items.GLASS_PANE)).add(50, 8);
+        CUTTING.RB().ii(RecipeIngredient.of(Items.GLASS, 3)).io(new ItemStack(Items.GLASS_PANE)).add("glass_pane",50, 8);
 
     }
 }

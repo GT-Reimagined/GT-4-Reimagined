@@ -4,13 +4,15 @@ import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
+import muramasa.antimatter.util.AntimatterPlatformUtils;
 import muramasa.antimatter.util.TagUtils;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.resources.ResourceLocation;
 import trinsdar.gt4r.data.GT4RMaterialTags;
 
+import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
+import static muramasa.antimatter.data.AntimatterMaterials.*;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.BATHING;
 
@@ -24,10 +26,14 @@ public class BathingLoader {
             addBathRecipe(m, Mercury, i(1.0, 0.7, 0.4), AntimatterMaterialTypes.CRUSHED_PURIFIED.get(m, 1), AntimatterMaterialTypes.DUST.get(GT4RMaterialTags.BATHING_MERCURY.getMapping(m), 1), stoneDust);
         });
         //addBathRecipe(Zinc, SodiumPersulfate, i(100, 70, 40), CRUSHED_PURIFIED.get(Zinc, 1), DUST.get(Zinc, 1), stoneDust);
-        BATHING.RB().ii(RecipeIngredient.of(AntimatterMaterialTypes.DUST.getMaterialTag(AntimatterMaterials.Wood), 1)).fi(AntimatterMaterials.Water.getLiquid(100)).io(new ItemStack(Items.PAPER)).chances(1.0).add(200);
-        BATHING.RB().ii(RecipeIngredient.of(Items.SUGAR_CANE, 1)).fi(AntimatterMaterials.Water.getLiquid(100)).io(new ItemStack(Items.PAPER)).chances(1.0).add(100);
-        BATHING.RB().ii(RecipeIngredient.of(ItemTags.WOOL, 1)).fi(Chlorine.getGas(125)).io(new ItemStack(Items.WHITE_WOOL)).chances(1.0).add(12);
-        BATHING.RB().ii(AntimatterMaterialTypes.GEM.getMaterialIngredient(AntimatterMaterials.Diamond, 1)).fi(AntimatterMaterials.Netherite.getLiquid(36)).io(AntimatterMaterialTypes.GEM.get(AntimatterMaterials.NetherizedDiamond, 1)).add(144);
+        BATHING.RB().ii(RecipeIngredient.of(DUST.getMaterialTag(Wood), 1)).fi(Water.getLiquid(100)).io(new ItemStack(Items.PAPER)).chances(1.0).add("paper",200);
+        BATHING.RB().ii(RecipeIngredient.of(Items.SUGAR_CANE, 1)).fi(Water.getLiquid(100)).io(new ItemStack(Items.PAPER)).chances(1.0).add("paper_1",100);
+        BATHING.RB().ii(RecipeIngredient.of(TagUtils.getItemTag(new ResourceLocation("minecraft", "wool")), 1)).fi(Chlorine.getGas(125)).io(new ItemStack(Items.WHITE_WOOL)).chances(1.0).add("white_wool",12);
+        BATHING.RB().ii(GEM.getMaterialIngredient(Diamond, 1)).fi(Netherite.getLiquid(switchValues(36, 2250))).io(GEM.get(NetherizedDiamond, 1)).add("netherized_diamond",144);
+    }
+
+    private static long switchValues(long forge, long fabric){
+        return AntimatterPlatformUtils.isForge() ? forge : fabric;
     }
 
     private static double[] i(double... doubles){
@@ -35,6 +41,6 @@ public class BathingLoader {
     }
 
     private static void addBathRecipe(Material input, Material liquid, double[] chances, ItemStack... outputs){
-        BATHING.RB().ii(RecipeIngredient.of(AntimatterMaterialTypes.CRUSHED.getMaterialTag(input), 1)).fi(liquid.getLiquid(1000)).io(outputs).chances(chances).add(800);
+        BATHING.RB().ii(RecipeIngredient.of(CRUSHED.getMaterialTag(input), 1)).fi(liquid.getLiquid(1000)).io(outputs).chances(chances).add(input.getId() + "_in_" + liquid.getId(),800);
     }
 }
