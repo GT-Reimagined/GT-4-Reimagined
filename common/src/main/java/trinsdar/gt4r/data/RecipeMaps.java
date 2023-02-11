@@ -43,7 +43,7 @@ public class RecipeMaps {
     public static RecipeMap<?> EXTRUDING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(Ref.ID, "extruding", new RecipeBuilder()));
     public static RecipeMap<?> LATHING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(Ref.ID, "lathing", new RecipeBuilder()));
     //public static RecipeMap UNIVERSAL_MACERATING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>("universal_macerating", new UniversalMaceratingBuilder(), Tier.MV));
-    public static RecipeMap<MaceratingBuilder> MACERATING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(Ref.ID, "macerating", new MaceratingBuilder()).setGuiTier(MV));
+    public static RecipeMap<?> MACERATING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(Ref.ID, "macerating", new MaceratingBuilder()).setGuiTier(MV));
     public static RecipeMap<?> RECYCLING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(Ref.ID, "recycling", new RecipeBuilder()));
     public static RecipeMap<?> SCANNING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(Ref.ID, "scanning", new RecipeBuilder()));
     public static RecipeMap<?> WIRE_MILLING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(Ref.ID, "wire_milling", new RecipeBuilder()));
