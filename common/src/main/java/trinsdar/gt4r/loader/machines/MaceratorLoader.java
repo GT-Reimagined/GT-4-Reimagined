@@ -117,7 +117,7 @@ public class MaceratorLoader {
             }
             MACERATING.RB().ii(crushed).io(DUST_IMPURE.get(MACERATE_INTO.getMapping(m), 1), DUST.get(oreByProduct1, 1)).chances(1.0, 0.1).add(m.getId() + "_crushed_ore",400, 2);
             MACERATING.RB().ii(RecipeIngredient.of(CRUSHED_PURIFIED.getMaterialTag(m), 1)).io(DUST_PURE.get(MACERATE_INTO.getMapping(m), 1), DUST.get(oreByProduct2, 1)).chances(1.0, 0.1).add(m.getId() + "_purified_ore",400, 2);
-            MACERATING.RB().ii(RecipeIngredient.of(CRUSHED_CENTRIFUGED.getMaterialTag(m), 1)).io(DUST.get(MACERATE_INTO.getMapping(m), 1), DUST.get(oreByProduct3, 1)).chances(1.0, 0.1).add(m.getId() + "_centrifuged_ore",400, 2);
+            MACERATING.RB().ii(RecipeIngredient.of(CRUSHED_REFINED.getMaterialTag(m), 1)).io(DUST.get(MACERATE_INTO.getMapping(m), 1), DUST.get(oreByProduct3, 1)).chances(1.0, 0.1).add(m.getId() + "_centrifuged_ore",400, 2);
             if (m.has(RAW_ORE)){
                 MACERATING.RB().ii(RecipeIngredient.of(RAW_ORE.getMaterialTag(m), 1)).io(Utils.ca((ORE_MULTI.getInt(m) * multiplier) * 2, crushedStack), DUST.get(oreByProduct1, 1)).chances(1.0, 0.1 * multiplier * BY_PRODUCT_MULTI.getInt(m)).add(m.getId() + "_raw_ore",400, 2);
             }

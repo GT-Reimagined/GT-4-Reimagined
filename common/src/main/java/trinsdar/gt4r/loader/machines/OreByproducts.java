@@ -52,7 +52,7 @@ public class OreByproducts {
                     ores.add(AntimatterMaterialTypes.CRUSHED_PURIFIED.getIngredient(m, 1));
                     ores.add(AntimatterMaterialTypes.DUST_PURE.getIngredient(m, 1));
                     ores.add(AntimatterMaterialTypes.DUST_IMPURE.getIngredient(m, 1));
-                    ores.add(AntimatterMaterialTypes.CRUSHED_CENTRIFUGED.getIngredient(m, 1));
+                    ores.add(AntimatterMaterialTypes.CRUSHED_REFINED.getIngredient(m, 1));
                     fluids.add(new FluidStack(Fluids.WATER, 1000));
                 }
 

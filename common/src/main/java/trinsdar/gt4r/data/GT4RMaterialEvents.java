@@ -265,7 +265,7 @@ public class GT4RMaterialEvents {
         event.setMaterial(RockSalt).asDust(AntimatterMaterialTypes.ORE_STONE).setExpRange(1, 5).mats(of(Potassium, 1, Chlorine, 1));
 
 
-        event.setMaterial(AntimatterMaterials.Coal).remove(AntimatterMaterialTypes.CRUSHED, AntimatterMaterialTypes.CRUSHED_PURIFIED, AntimatterMaterialTypes.CRUSHED_CENTRIFUGED, AntimatterMaterialTypes.DUST_IMPURE, AntimatterMaterialTypes.DUST_PURE);
+        event.setMaterial(AntimatterMaterials.Coal).remove(AntimatterMaterialTypes.CRUSHED, AntimatterMaterialTypes.CRUSHED_PURIFIED, AntimatterMaterialTypes.CRUSHED_REFINED, AntimatterMaterialTypes.DUST_IMPURE, AntimatterMaterialTypes.DUST_PURE);
 
         //WroughtIron.setSmeltInto(Iron).setMacerateInto(Iron);
 
