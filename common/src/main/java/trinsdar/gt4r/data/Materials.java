@@ -51,7 +51,7 @@ public class Materials {
     public static Material Fluorine = AntimatterAPI.register(Material.class, new Material(Ref.ID, "fluorine", 0xffffff, NONE, F));
     public static Material Hydrogen = AntimatterAPI.register(Material.class, new Material(Ref.ID, "hydrogen", 0x0000ff, NONE, H));
     public static Material Helium = AntimatterAPI.register(Material.class, new Material(Ref.ID, "helium", 0xffff00, NONE, He));
-    public static Material Helium3 = AntimatterAPI.register(Material.class, new Material(Ref.ID, "helium_3", 0xffffff, NONE, He_3));
+    public static Material Helium3 = AntimatterAPI.register(Material.class, new Material(Ref.ID, "helium_3", 0xffffff, NONE, He3));
     public static Material Lithium = AntimatterAPI.register(Material.class, new Material(Ref.ID, "lithium", 0xe1dcff, DULL, Li));
     public static Material Magnesium = AntimatterAPI.register(Material.class, new Material(Ref.ID, "magnesium", 0xffc8c8, METALLIC, Mg));
     public static Material Mercury = AntimatterAPI.register(Material.class, new Material(Ref.ID, "mercury", 0xffdcdc, SHINY, Hg));
