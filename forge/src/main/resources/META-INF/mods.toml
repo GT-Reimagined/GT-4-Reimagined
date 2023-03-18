@@ -1,6 +1,6 @@
 modLoader="javafml"
 license="LGPLv3"
-loaderVersion="[31,)"
+loaderVersion="[40,)"
 issueTrackerURL="https://github.com/Trinsdar/GT-4-Reimagined/issues"
 
 [[mods]]
@@ -14,19 +14,19 @@ description='''My remake of GregTech 4'''
 [[dependencies.gt4r]]
     modId="antimatter"
     mandatory=true
-    versionRange="[0.1,)"
+    versionRange="[0.2,)"
     ordering="AFTER"
     side="BOTH"
 [[dependencies.gt4r]]
     modId="forge"
     mandatory=true
-    versionRange="[36.2.26,)"
+    versionRange="[40.1.73,)"
     ordering="AFTER"
     side="BOTH"
 [[dependencies.gt4r]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.5,)"
+    versionRange="[1.18.2,)"
     ordering="AFTER"
     side="BOTH"
 [[dependencies.gt4r]]
