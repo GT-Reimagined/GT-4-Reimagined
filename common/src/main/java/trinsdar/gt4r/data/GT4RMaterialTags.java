@@ -1,10 +1,11 @@
 package trinsdar.gt4r.data;
 
-import muramasa.antimatter.material.DoubleMaterialTag;
+
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialTag;
 import muramasa.antimatter.material.MaterialType;
 import muramasa.antimatter.material.MaterialTypeItem;
+import muramasa.antimatter.material.tags.DoubleMaterialTag;
 import net.minecraft.world.item.Item;
 import trinsdar.gt4r.items.ItemTurbineRotor;
 

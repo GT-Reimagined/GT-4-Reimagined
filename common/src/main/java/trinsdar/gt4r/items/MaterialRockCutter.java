@@ -56,7 +56,7 @@ public class MaterialRockCutter extends MaterialTool {
         if (!primary.has(MaterialTags.TOOLS) || !secondary.has(MaterialTags.HANDLE)){
             return stack;
         }
-        Map<Enchantment, Integer> mainEnchants = MaterialTags.TOOLS.getToolData(primary).toolEnchantment(), handleEnchants = MaterialTags.HANDLE.getHandleData(secondary).toolEnchantment();
+        Map<Enchantment, Integer> mainEnchants = MaterialTags.TOOLS.get(primary).toolEnchantment(), handleEnchants = MaterialTags.HANDLE.get(secondary).toolEnchantment();
         if (!mainEnchants.containsKey(Enchantments.SILK_TOUCH) && !handleEnchants.containsKey(Enchantments.SILK_TOUCH)) {
             stack.enchant(Enchantments.SILK_TOUCH, 1);
         }
