@@ -41,7 +41,6 @@ import trinsdar.gt4r.tile.single.TileEntityDustBin;
 import trinsdar.gt4r.tile.single.TileEntityForgeHammer;
 import trinsdar.gt4r.tile.single.TileEntityHeatExchanger;
 import trinsdar.gt4r.tile.single.TileEntityInfiniteFluid;
-import trinsdar.gt4r.tile.single.TileEntityInfiniteStorage;
 import trinsdar.gt4r.tile.single.TileEntityItemFilter;
 import trinsdar.gt4r.tile.single.TileEntityLocker;
 import trinsdar.gt4r.tile.single.TileEntityPlayerDetector;
@@ -201,8 +200,6 @@ public class Machines {
     public static GeneratorMachine WINDMILL = new GeneratorMachine(Ref.ID, "windmill").setTiers(ULV).covers(emptyFactory,emptyFactory,emptyFactory,emptyFactory,emptyFactory, COVER_DYNAMO_OLD).allowFrontIO().setAllowVerticalFacing(false).setOutputCover(COVER_DYNAMO_OLD).setTile(TileEntityCoveredGenerator::new).custom(Textures.STANDARD_MACHINE_MODELS);
     public static GeneratorMachine WATERMILL = new GeneratorMachine(Ref.ID, "watermill").setTiers(ULV).covers(emptyFactory,emptyFactory,emptyFactory,emptyFactory,emptyFactory, COVER_DYNAMO_OLD).allowFrontIO().setAllowVerticalFacing(false).setOutputCover(COVER_DYNAMO_OLD).setTile(TileEntityCoveredGenerator::new);
 
-    public static BasicMachine INFINITE_STORAGE = new BasicMachine(Ref.ID, "infinite_storage").addFlags(ENERGY, GUI).setTiers(MAX).allowFrontIO().setTile(TileEntityInfiniteStorage::new)
-            .noCovers();
     public static TankMachine INFINITE_STEAM = new TankMachine(Ref.ID, "infinite_steam").addFlags(FLUID, CELL, GUI).setTiers(LV).setTile(TileEntityInfiniteFluid::new);
     public static BasicMachine BATTERY_BUFFER_ONE = new BasicMachine(Ref.ID, "1x_battery_buffer").noCovers().addFlags(GUI, ENERGY, ITEM).setTile(TileEntityBatteryBuffer::new).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).allowFrontIO().setAllowVerticalFacing(true);
     public static BasicMachine BATTERY_BUFFER_FOUR = new BasicMachine(Ref.ID, "4x_battery_buffer").noCovers().addFlags(GUI, ENERGY, ITEM).setTile(TileEntityBatteryBuffer::new).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).allowFrontIO().setAllowVerticalFacing(true);

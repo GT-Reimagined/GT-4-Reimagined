@@ -263,24 +263,6 @@ public class Guis {
                     .addButton(137, 63, 14, 14, PAD_RIGHT)
                     .addButton(152, 63, 14, 14, APAD_RIGHT);
         });
-        INFINITE_STORAGE.addGuiCallback(t -> {
-            t.addButton(10, 18, 14, 14, APAD_LEFT)
-                    .addButton(25, 18, 14, 14, PAD_LEFT)
-                    .addButton(10, 33, 14, 14, APAD_LEFT)
-                    .addButton(25, 33, 14, 14, PAD_LEFT)
-                    .addButton(10, 48, 14, 14, APAD_LEFT)
-                    .addButton(25, 48, 14, 14, PAD_LEFT)
-                    .addButton(10, 63, 14, 14, APAD_LEFT)
-                    .addButton(25, 63, 14, 14, PAD_LEFT)
-                    .addButton(137, 18, 14, 14, PAD_RIGHT)
-                    .addButton(152, 18, 14, 14, APAD_RIGHT)
-                    .addButton(137, 33, 14, 14, PAD_RIGHT)
-                    .addButton(152, 33, 14, 14, APAD_RIGHT)
-                    .addButton(137, 48, 14, 14, PAD_RIGHT)
-                    .addButton(152, 48, 14, 14, APAD_RIGHT)
-                    .addButton(137, 63, 14, 14, PAD_RIGHT)
-                    .addButton(152, 63, 14, 14, APAD_RIGHT);
-        });
         DIGITAL_CHEST.addGuiCallback(t -> {
            t.addButton(8, 119, 16, 16, NO_OVERLAY).addButton(26, 119, 16, 16, NO_OVERLAY).addButton(44, 119, 16, 16, NO_OVERLAY);
            t.addWidget(TooltipWidget.build("upload_chest").setSize(8, 119, 16, 16)).addWidget(TooltipWidget.build("download_orb").setSize(26, 119, 16, 16));
