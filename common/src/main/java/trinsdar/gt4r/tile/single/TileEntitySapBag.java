@@ -22,7 +22,7 @@ public class TileEntitySapBag extends TileEntityTickable<TileEntitySapBag> {
     @Override
     public void onFirstTick() {
         BlockState state = level.getBlockState(this.getBlockPos().relative(facing));
-        if (state.getBlock() == GTRubberData.RUBBER_LOG){
+        if (state.getBlock() == GTRubberData.RUBBER_LOG || state.getBlock() == GTRubberData.STRIPPED_RUBBER_LOG){
             if(state.getValue(ResinState.INSTANCE) ==  ResinState.FILLED && state.getValue(BlockRubberLog.RESIN_FACING) == facing.getOpposite()){
                 boolean successful = false;
                 int amount = (1 + level.random.nextInt(3));

@@ -28,9 +28,9 @@ public class IndustrialSawmill {
         addWoodRecipe(ItemTags.ACACIA_LOGS, Items.ACACIA_PLANKS);
         addWoodRecipe(ItemTags.CRIMSON_STEMS, Items.CRIMSON_PLANKS);
         addWoodRecipe(ItemTags.WARPED_STEMS, Items.WARPED_PLANKS);
-        INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(GTRubberData.RUBBER_LOG, 1)).fi(new FluidStack(Fluids.WATER, 40)).io(new ItemStack(GTRubberData.StickyResin), DUST.get(Wood, 8), new ItemStack(Items.JUNGLE_PLANKS, 9)).add("rubber_log",200, 30);
-        INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(GTRubberData.RUBBER_LOG, 1)).fi(Lubricant.getLiquid(10)).io(new ItemStack(GTRubberData.StickyResin), DUST.get(Wood, 8), new ItemStack(Items.JUNGLE_PLANKS, 9)).add("rubber_log_1",100, 30);
-        INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(GTRubberData.RUBBER_LOG, 1)).fi(DistilledWater.getLiquid(30)).io(new ItemStack(GTRubberData.StickyResin), DUST.get(Wood, 8), new ItemStack(Items.JUNGLE_PLANKS, 9)).add("rubber_log_2",200, 30);
+        INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(GTRubberData.RUBBER_LOGS, 1)).fi(new FluidStack(Fluids.WATER, 40)).io(new ItemStack(GTRubberData.StickyResin), DUST.get(Wood, 1), new ItemStack(GTRubberData.RUBBER_PLANKS, 6)).add("rubber_log",200, 30);
+        INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(GTRubberData.RUBBER_LOGS, 1)).fi(Lubricant.getLiquid(10)).io(new ItemStack(GTRubberData.StickyResin), DUST.get(Wood, 1), new ItemStack(GTRubberData.RUBBER_PLANKS, 6)).add("rubber_log_1",100, 30);
+        INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(GTRubberData.RUBBER_LOGS, 1)).fi(DistilledWater.getLiquid(30)).io(new ItemStack(GTRubberData.StickyResin), DUST.get(Wood, 1), new ItemStack(GTRubberData.RUBBER_PLANKS, 6)).add("rubber_log_2",200, 30);
         INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(Items.MELON, 1)).fi(new FluidStack(Fluids.WATER, 40)).io(new ItemStack(Items.MELON_SLICE, 7)).add("melon",200, 30);
         INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(Items.MELON, 1)).fi(DistilledWater.getLiquid(30)).io(new ItemStack(Items.MELON_SLICE, 7)).add("melon_1",200, 30);
     }

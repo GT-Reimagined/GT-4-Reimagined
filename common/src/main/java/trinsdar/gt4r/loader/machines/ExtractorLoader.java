@@ -11,7 +11,7 @@ import static trinsdar.gt4r.data.RecipeMaps.EXTRACTING;
 
 public class ExtractorLoader {
     public static void init() {
-        EXTRACTING.RB().ii(of(GTRubberData.RUBBER_LOG.asItem(),1)).io(DUST.get(Rubber, 2)).add("rubber_dust",200,8);
+        EXTRACTING.RB().ii(of(GTRubberData.RUBBER_LOGS,1)).io(DUST.get(Rubber, 2)).add("rubber_dust",200,8);
         EXTRACTING.RB().ii(of(GTRubberData.RUBBER_LEAVES.asItem(),1)).io(DUST.get(Rubber, 1)).add("rubber_dust_1", 150,8);
         EXTRACTING.RB().ii(of(GTRubberData.RUBBER_SAPLING.asItem(),1)).io(DUST.get(Rubber, 1)).add("rubber_dust_2", 150,8);
         EXTRACTING.RB().ii(of(GTRubberData.StickyResin,1)).io(DUST.get(Rubber, 3)).add("rubber_dust_3", 150,8);

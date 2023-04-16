@@ -65,7 +65,7 @@ public class CentrifugingLoader {
         add(Nichrome, 16, 2240);
         CENTRIFUGING.RB().ii(of(Items.SOUL_SAND, 16)).io(new ItemStack(Items.SAND, 1), DUST.get(Saltpeter,4), DUST.get(Coal, 1)).fo(Oil.getLiquid(1000)).add("soul_sand",750, 16);
         CENTRIFUGING.RB().ii(of(Items.SOUL_SOIL, 16)).io(new ItemStack(DIRT, 1), DUST.get(Saltpeter,4), DUST.get(Coal, 1)).fo(Oil.getLiquid(1000)).add("soul_soil",750, 16);
-        CENTRIFUGING.RB().ii(of(new ItemStack(GTRubberData.RUBBER_LOG, 16))).io(DUST.get(Carbon, 8), new ItemStack(StickyResin, 8), new ItemStack(Plantball, 6)).fo(Methane.getGas(4000)).add("rubber_log",1562, 16);
+        CENTRIFUGING.RB().ii(of(GTRubberData.RUBBER_LOGS, 16)).io(DUST.get(Carbon, 8), new ItemStack(StickyResin, 8), new ItemStack(Plantball, 6)).fo(Methane.getGas(4000)).add("rubber_log",1562, 16);
         CENTRIFUGING.RB().fi(Hydrogen.getGas(4000)).fo(Deuterium.getGas(1000)).add("hydrogen",300, 20);
         CENTRIFUGING.RB().fi(Deuterium.getGas(4000)).fo(Tritium.getGas(1000)).add("deuterium",300, 20);
         CENTRIFUGING.RB().fi(Helium.getGas(16000)).fo(Helium3.getGas(1000)).add("helium",900, 20);
