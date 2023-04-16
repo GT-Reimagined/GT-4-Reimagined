@@ -1,8 +1,8 @@
 package trinsdar.gt4r.tile.single;
 
 import com.github.gregtechintergalactical.gtrubber.GTRubberData;
-import com.github.gregtechintergalactical.gtrubber.tree.BlockRubberLog;
 import com.github.gregtechintergalactical.gtrubber.tree.ResinState;
+import com.github.gregtechintergalactical.gtrubber.tree.block.BlockRubberLog;
 import muramasa.antimatter.tile.TileEntityTickable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
