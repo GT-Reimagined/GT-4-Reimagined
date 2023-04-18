@@ -33,7 +33,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.block.BlockCasing;
 import trinsdar.gt4r.block.BlockConnectedCasing;
-import trinsdar.gt4r.block.BlockSapBag;
 import trinsdar.gt4r.block.BlockTurbineCasing;
 import trinsdar.gt4r.cover.CoverConveyor;
 import trinsdar.gt4r.cover.CoverCrafting;
@@ -305,8 +304,6 @@ public class GT4RData {
     public static final BlockCasing IRIDIUM_REINFORCED_STONE = new BlockCasing(Ref.ID, "iridium_reinforced_stone", Block.Properties.of(net.minecraft.world.level.material.Material.STONE).strength(80.0f, 150.0f).sound(SoundType.STONE).requiresCorrectToolForDrops());
 
     public static final BlockCasing FUSION_COIL = new BlockCasing(Ref.ID, "fusion_coil");
-
-    public static final BlockSapBag SAP_BAG = new BlockSapBag();
 
     public static final Cable<?> CABLE_LEAD = AntimatterAPI.register(Cable.class, new Cable<>(Ref.ID, Lead, 2, Tier.LV).amps(2));
     public static final Cable<?> CABLE_TIN = AntimatterAPI.register(Cable.class, new Cable<>(Ref.ID, Tin, 1, Tier.LV).amps(1));

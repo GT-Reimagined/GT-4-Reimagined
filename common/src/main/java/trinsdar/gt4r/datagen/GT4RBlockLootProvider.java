@@ -22,7 +22,6 @@ public class GT4RBlockLootProvider extends AntimatterBlockLootProvider {
         AntimatterAPI.all(BlockNonSolidMachine.class, providerDomain, this::add);
 
         AntimatterAPI.all(BlockCasing.class, providerDomain, this::add);
-        this.add(GT4RData.SAP_BAG);
     }
 
     @Override

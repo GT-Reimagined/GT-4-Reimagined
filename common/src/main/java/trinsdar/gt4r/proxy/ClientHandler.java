@@ -33,7 +33,6 @@ public class ClientHandler implements IProxyHandler {
     @SuppressWarnings("RedundantTypeArguments")
     public static void setup() {
         AntimatterAPI.runLaterClient(() -> {
-            ModelUtils.setRenderLayer(GT4RData.SAP_BAG, RenderType.cutout());
             ModelUtils.setRenderLayer(((BlockItem)Machines.DUSTBIN.getItem(LV)).getBlock(), RenderType.cutout());
             AntimatterAPI.all(BlockCasing.class, t -> ModelUtils.setRenderLayer(t, RenderType.cutout()));
             AntimatterAPI.all(BlockMachineMaterial.class, b -> ModelUtils.setRenderLayer(b, RenderType.cutout()));
