@@ -1,6 +1,7 @@
 package trinsdar.gt4r.loader;
 
 import muramasa.antimatter.AntimatterConfig;
+import muramasa.antimatter.data.AntimatterStoneTypes;
 import muramasa.antimatter.event.WorldGenEvent;
 import muramasa.antimatter.worldgen.vein.WorldGenVein;
 import muramasa.antimatter.worldgen.vein.WorldGenVeinBuilder;
@@ -28,7 +29,7 @@ public class WorldGenLoader {
                     .buildVein());
 
             event.vein(new WorldGenVeinBuilder("vein_basalt")
-                    .asMediumStoneVein(5, -64, 0, BASALT, OVERWORLD)
+                    .asMediumStoneVein(5, -64, 0, AntimatterStoneTypes.BASALT, OVERWORLD)
                     .buildVein());
 
             event.vein(new WorldGenVeinBuilder("vein_komatiite")
