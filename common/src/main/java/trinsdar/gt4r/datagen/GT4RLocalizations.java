@@ -107,32 +107,14 @@ public class GT4RLocalizations {
                     }
                 }
             });
-            AntimatterAPI.all(AntimatterFluid.class).forEach(s -> {
-                String mat;
-                if (s.getId().startsWith("liquid") || s.getId().startsWith("plasma")){
-                    mat = s.getId().substring(7);
-                } else {
-                    mat = s.getId().substring(4);
-                }
-                String id = mat;
-                if (s.getId().startsWith("plasma")){
-                    id = mat + "_plasma";
-                }
-                Material m = Material.get(mat);
-                if (m != NULL){
-                    if (m.has(LIQUID) && m.has(MaterialTags.METAL)){
-                        id = "molten_" + mat;
-                    }
-                    override(s.getAttributes().getTranslationKey(), lowerUnderscoreToUpperSpaced(id));
-                    Item bucket = AntimatterAPI.get(Item.class, s.getId()+ "_bucket", s.getDomain());
-                    if (bucket != null) override(bucket.getDescriptionId(), lowerUnderscoreToUpperSpaced(id) + " Bucket");
-                }
-            });
             AntimatterAPI.all(ItemFluidCell.class, domain).forEach(i -> override(i.getDescriptionId(), lowerUnderscoreToUpperSpacedRotated(i.getId())));
-            GEM.all().forEach(m -> override(GEM.get(m).getDescriptionId(), lowerUnderscoreToUpperSpaced(m.getId())));
-            BROKEN_TURBINE_ROTOR.all().forEach(m -> override(BROKEN_TURBINE_ROTOR.get(m).getDescriptionId(), lowerUnderscoreToUpperSpaced("broken_" + m.getId() + "_" + TURBINE_ROTOR.getId())));
-            override("block.antimatter_shared.liquid.liquid_pahoehoe_lava", "Pahoehoe Lava");
-            override("item.antimatter_shared.liquid_pahoehoe_lava_bucket", "Pahoehoe Lava Bucket");
+        }
+
+        @Override
+        protected void overrides() {
+            BROKEN_TURBINE_ROTOR.all().forEach(m -> override(Ref.ANTIMATTER, BROKEN_TURBINE_ROTOR.get(m).getDescriptionId(), lowerUnderscoreToUpperSpaced("broken_" + m.getId() + "_" + TURBINE_ROTOR.getId())));
+            override(Ref.ANTIMATTER, "block.antimatter_shared.liquid.liquid_pahoehoe_lava", "Pahoehoe Lava");
+            override(Ref.ANTIMATTER, "item.antimatter_shared.liquid_pahoehoe_lava_bucket", "Pahoehoe Lava Bucket");
         }
     }
 
