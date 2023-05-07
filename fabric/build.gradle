@@ -50,10 +50,10 @@ dependencies{
         exclude(group: "net.fabricmc.fabric-api")
     }*/
     modImplementation("com.github.Trinsdar:ARRP:0.6.7-hotfix")
-    implementation("com.github.gregtech-intergalactical:gtrubber-fabric:0.2.1-1.18.2:dev-shadow"){
+    implementation("com.github.gregtech-intergalactical:gtrubber-fabric:${rootProject.gt_rubber_version}-${rootProject.minecraft_version}:dev-shadow"){
         transitive = false
     }
-    include("com.github.gregtech-intergalactical:gtrubber-fabric:0.2.1-1.18.2"){
+    include("com.github.gregtech-intergalactical:gtrubber-fabric:${rootProject.gt_rubber_version}-${rootProject.minecraft_version}"){
         transitive = false
     }
     modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${rootProject.rei_version}"
