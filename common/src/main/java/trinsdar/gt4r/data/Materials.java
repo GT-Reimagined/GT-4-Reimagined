@@ -2,6 +2,8 @@ package trinsdar.gt4r.data;
 
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.data.AntimatterMaterialTypes;
+import muramasa.antimatter.fluid.AntimatterFluid;
+import muramasa.antimatter.fluid.AntimatterFluidAttributes;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialTags;
 import muramasa.antimatter.material.MaterialType;
@@ -236,47 +238,7 @@ public class Materials {
     public static Material HighCapacity = AntimatterAPI.register(Material.class, new Material(Ref.ID, "high_capacity", 0xb00b69, NONE));
     public static Material PlasmaContainment = AntimatterAPI.register(Material.class, new Material(Ref.ID, "plasma_containment", 0xffff00, NONE));
 
-    //TODO go through the GT_Loader_Item_Block_And_Fluid and make sure all explicitly added fluids have the LIQUID tag
     public static void init() {
-        //TODO assign correct handle materials
-//                for (Material material : generated) {
-//            if (material == Blaze) {
-//                material.handleMaterial = "blaze";
-//            } /*else if (aMaterial.contains(SubTag.MAGICAL) && aMaterial.contains(SubTag.CRYSTAL) && Utils.isModLoaded(MOD_ID_TC)) {
-//                    aMaterial.mHandleMaterial = Thaumium;
-//                }*/ else if (material.getMass() > Element.Tc.getMass() * 2) {
-//                material.handleMaterial = Tungstensteel.;
-//            } else if (material.getMass() > Element.Tc.getMass()) {
-//                material.handleMaterial = Steel;
-//            } else {
-//                material.handleMaterial = Wood;
-//            }
-//        }
-
-        //TODO move to antimatter
-        /*LIQUID.all().stream().filter(l -> !l.equals(Water) || !l.equals(Lava)).forEach(m -> {
-            if (m == HotCoolant || m == PahoehoeLava) {
-                new AntimatterMaterialFluid(Ref.ID, m, LIQUID, prepareAttributes(Ref.ID, m, LIQUID), prepareProperties(m, LIQUID));
-                return;
-            }
-            new AntimatterMaterialFluid(Ref.ID, m, LIQUID);
-        });
-        GAS.all().forEach(m -> new AntimatterMaterialFluid(Ref.ID, m, GAS));
-        PLASMA.all().forEach(m -> new AntimatterMaterialFluid(Ref.ID, m, PLASMA));
-
-        AntimatterAPI.all(Material.class, Material::setChemicalFormula);*/
-    }
-
-    private static FluidAttributes.Builder prepareAttributes(String domain, Material material, MaterialType<?> type) {
-        FluidAttributes.Builder builder = FluidAttributes.builder(LIQUID_STILL_TEXTURE, LIQUID_FLOW_TEXTURE);
-        if (material == PahoehoeLava) builder = FluidAttributes.builder(PAHOEHOE_STILL_TEXTURE, PAHOEHOE_STILL_TEXTURE);
-        return builder.overlay(OVERLAY_TEXTURE).color((155 << 24) | (material.getRGB() & 0x00ffffff))
-                .translationKey(String.join("", "block.", domain, type.getId(), ".", material.getId()))
-                .viscosity(1000).density(1000).temperature(MaterialTags.LIQUID_TEMPERATURE.getInt(material));
-    }
-
-    private static Block.Properties prepareProperties(Material m, MaterialType<?> type) {
-        return Block.Properties.of(net.minecraft.world.level.material.Material.WATER).strength(100.0F).noDrops().lightLevel(s -> type == AntimatterMaterialTypes.PLASMA ? 15 : m == PahoehoeLava ? 9: 0);
     }
 
 }

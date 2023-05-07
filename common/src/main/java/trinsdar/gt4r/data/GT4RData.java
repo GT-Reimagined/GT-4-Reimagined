@@ -5,6 +5,8 @@ import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.AntimatterConfig;
 import muramasa.antimatter.cover.CoverFactory;
 import muramasa.antimatter.data.AntimatterMaterials;
+import muramasa.antimatter.fluid.AntimatterFluid;
+import muramasa.antimatter.fluid.AntimatterFluidAttributes;
 import muramasa.antimatter.item.ItemBasic;
 import muramasa.antimatter.item.ItemBattery;
 import muramasa.antimatter.item.ItemCover;
@@ -12,6 +14,7 @@ import muramasa.antimatter.item.ItemFluidCell;
 import muramasa.antimatter.item.ItemMultiTextureBattery;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.material.Material;
+import muramasa.antimatter.material.MaterialTags;
 import muramasa.antimatter.ore.CobbleStoneType;
 import muramasa.antimatter.ore.StoneType;
 import muramasa.antimatter.pipe.PipeSize;
@@ -54,6 +57,7 @@ import trinsdar.gt4r.items.ItemStorageOrb;
 import java.util.HashSet;
 import java.util.Set;
 
+import static muramasa.antimatter.fluid.AntimatterFluid.OVERLAY_TEXTURE;
 import static trinsdar.gt4r.data.Materials.*;
 
 public class GT4RData {
@@ -152,6 +156,19 @@ public class GT4RData {
             new ItemCraftingModule().tip("Can be placed on machines as a cover")).setMenuHandler(MenuHandlers.COVER_CRAFTING_HANDLER).addTextures(new Texture(Ref.ID, "block/cover/crafting_module")).build(Ref.ID, "crafting_module");
     public static final CoverFactory COVER_REDSTONE_MACHINE_CONTROLLER = CoverFactory.builder(CoverRedstoneMachineController::new).item((a, b) ->
             new ItemCover(Ref.ID, "redstone_machine_controller").tip("Can be placed on machines as a cover")).addTextures(new Texture(Ref.ID, "block/cover/redstone_machine_controller")).build(Ref.ID, "redstone_machine_controller");
+
+    public static final AntimatterFluid PAHOEHOE_LAVA = AntimatterAPI.register(AntimatterFluid.class, new AntimatterFluid(Ref.ID,"pahoehoe_lava", prepareAttributes(), prepareProperties()));
+
+    private static AntimatterFluidAttributes.Builder prepareAttributes() {
+        AntimatterFluidAttributes.Builder builder = AntimatterFluidAttributes.builder(PAHOEHOE_STILL_TEXTURE, PAHOEHOE_STILL_TEXTURE);
+        return builder.overlay(OVERLAY_TEXTURE)
+                .translationKey(String.join("", "block.", Ref.ID, ".liquid.pahoehoe_lava"))
+                .viscosity(3000).density(6000).temperature(1200);
+    }
+
+    private static Block.Properties prepareProperties() {
+        return Block.Properties.of(net.minecraft.world.level.material.Material.WATER).strength(100.0F).noDrops().lightLevel(s -> 9);
+    }
     public static ItemBasic<?> Plantball = new ItemBasic<>(Ref.ID, "plantball");
     public static ItemBasic<?> Biochaff = new ItemBasic<>(Ref.ID, "biochaff");
     public static ItemBasic<?> CarbonFibre = new ItemBasic<>(Ref.ID, "raw_carbon_fibre");

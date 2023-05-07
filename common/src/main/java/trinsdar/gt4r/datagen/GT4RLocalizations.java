@@ -113,8 +113,6 @@ public class GT4RLocalizations {
         @Override
         protected void overrides() {
             BROKEN_TURBINE_ROTOR.all().forEach(m -> override(Ref.ANTIMATTER, BROKEN_TURBINE_ROTOR.get(m).getDescriptionId(), lowerUnderscoreToUpperSpaced("broken_" + m.getId() + "_" + TURBINE_ROTOR.getId())));
-            override(Ref.ANTIMATTER, "block.antimatter_shared.liquid.liquid_pahoehoe_lava", "Pahoehoe Lava");
-            override(Ref.ANTIMATTER, "item.antimatter_shared.liquid_pahoehoe_lava_bucket", "Pahoehoe Lava Bucket");
         }
     }
 

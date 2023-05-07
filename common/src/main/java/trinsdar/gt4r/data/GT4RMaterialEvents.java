@@ -120,7 +120,6 @@ public class GT4RMaterialEvents {
         event.setMaterial(NitricOxide).asGas().mats(of(Nitrogen, 1, Oxygen, 1));
 
         /** Fluids **/
-        event.setMaterial(PahoehoeLava).asFluid(0, 1200);
         event.setMaterial(Steam).asGas(0, 373);
         event.setMaterial(HotCoolant).asFluid(0, 1200);
         event.setMaterial(ColdCoolant).asFluid(0, 300);
