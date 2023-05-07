@@ -20,8 +20,8 @@
   "depends": {
     "fabricloader": ">=0.14.0",
     "fabric": "*",
-    "tesseractapi": ">=0.1",
-    "antimatter": ">=0.1"
+    "tesseractapi": ">=0.2",
+    "antimatter": ">=0.2-rc4"
   },
   "entrypoints": {
     "antimatter_client": [
