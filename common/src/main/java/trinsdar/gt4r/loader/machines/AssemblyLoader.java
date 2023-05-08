@@ -67,7 +67,7 @@ public class AssemblyLoader {
         ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Plastic, 1), PLATE.getMaterialIngredient(Electrum, 2)).io(new ItemStack(CircuitBoardBasic, 2)).add("circuit_board_basic_3",800, 1);
         ASSEMBLING.RB().ii(of(PLATES_IRON_ALUMINIUM, 1), of(Items.IRON_TRAPDOOR, 1)).io(new ItemStack(Shutter, 1)).add("shutter",400, 16);
         ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Iron, 5), of(ForgeCTags.CHESTS, 1)).io(new ItemStack(Items.HOPPER, 1)).add("hopper",800, 2);
-        ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(WroughtIron, 2), of(CIRCUITS_BASIC, 1)).io(new ItemStack(MachineParts, 4)).add("machine_parts",800, 16);
+        ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(WroughtIron, 2), of(CIRCUITS_BASIC, 1)).io(new ItemStack(MachineParts, 4)).add("machine_parts_2",800, 16);
         ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Plastic, 2), of(CIRCUITS_BASIC, 1)).io(new ItemStack(MachineParts, 2)).add("machine_parts_1",800, 16);
         ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Electrum, 2), of(CIRCUITS_BASIC, 1)).io(new ItemStack(CircuitBoardAdv)).add("circuit_board_advanced",1600,2);
         ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Electrum, 4), PLATE.getMaterialIngredient(Silicon, 1)).io(new ItemStack(CircuitBoardAdv, 2)).add("circuit_board_advanced_1",1600,2);
@@ -96,7 +96,7 @@ public class AssemblyLoader {
         ASSEMBLING.RB().ii(of(Items.COAL, 8), GEM.getMaterialIngredient(Flint, 1)).io(new ItemStack(CompressedCoalBall)).add("compressed_coal_ball",400, 4);
         ASSEMBLING.RB().ii(of(getTag("forge", "rods/wooden"), 1), of(ForgeCTags.COBBLESTONE, 1)).io(new ItemStack(Items.LEVER, 1)).add("lever",400, 1);
         ASSEMBLING.RB().ii(of(CircuitBoardBasic, 1), of(CABLE_COPPER.getBlockItem(PipeSize.VTINY), 3)).io(new ItemStack(CircuitBasic)).add("circuit_basic",800, 1);
-        ASSEMBLING.RB().ii(of(CompressedCoalBall, 8), of(BLOCK.getMaterialTag(Iron), 1)).io(new ItemStack(CoalChunk)).add("coal_chunk",400, 4);
+        ASSEMBLING.RB().ii(of(CompressedCoalBall, 8), of(BLOCK.getMaterialTag(Iron), 1)).io(new ItemStack(CoalChunk)).add("coal_chunk_2",400, 4);
         ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Carbon, 4), of(MACHINE_HULLS_BASIC, 1), of(BatteryRE, 1).setIgnoreNbt()).io(new ItemStack(WINDMILL.getItem(ULV), 1)).add("windmill_1",6400, 8);
         //missing
         ASSEMBLING.RB().ii(of(AdvancedAlloy, 1), of(getForgelikeItemTag("stone"), 8)).io(new ItemStack(REINFORCED_STONE, 8)).add("reinforced_stone",400, 4);
@@ -105,7 +105,7 @@ public class AssemblyLoader {
         ASSEMBLING.RB().ii(of(AdvancedAlloy, 2), of(ForgeCTags.GLASS, 7)).io(new ItemStack(REINFORCED_GLASS, 7)).add("reinforced_glass",400, 4);
         ASSEMBLING.RB().ii(of(getTag("minecraft", "planks"), 8), DUST.getMaterialIngredient(Redstone, 1)).io(new ItemStack(Items.NOTE_BLOCK)).add("note_block_1",800, 1);
         ASSEMBLING.RB().ii(of(getTag("minecraft", "planks"), 8), GEM.getMaterialIngredient(Diamond, 1)).io(new ItemStack(Items.JUKEBOX)).add("jukebox_1",1600, 1);
-        ASSEMBLING.RB().ii(of(CompressedCoalBall, 8), of(getForgelikeItemTag("obsidian"), 1)).io(new ItemStack(CoalChunk)).add("coal_chunk",400, 4);
+        ASSEMBLING.RB().ii(of(CompressedCoalBall, 8), of(getForgelikeItemTag("obsidian"), 1)).io(new ItemStack(CoalChunk)).add("coal_chunk_3",400, 4);
         ASSEMBLING.RB().ii(of(CABLE_TIN.getBlockItem(PipeSize.VTINY), 1), PLATE.getMaterialIngredient(BatteryAlloy, 1)).io(new ItemStack(BatteryHullSmall)).add("battery_hull_small",800, 1);
         ASSEMBLING.RB().ii(of(CABLE_COPPER.getBlockItem(PipeSize.VTINY), 2), PLATE.getMaterialIngredient(BatteryAlloy, 3)).io(new ItemStack(BatteryHullMedium)).add("battery_hull_medium",1600, 2);
         ASSEMBLING.RB().ii(of(CABLE_GOLD.getBlockItem(PipeSize.VTINY), 4), PLATE.getMaterialIngredient(BatteryAlloy, 9)).io(new ItemStack(BatteryHullLarge)).add("battery_hull_large",6400, 4);

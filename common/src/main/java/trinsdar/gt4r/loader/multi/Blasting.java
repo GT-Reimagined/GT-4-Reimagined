@@ -76,9 +76,9 @@ public class Blasting {
         BLASTING.RB().ii(of(INGOT.get(Iron,6)), of(INGOT.get(Nickel, 1)), of(INGOT.get(Chrome, 1)), of(INGOT.get(Manganese, 1))).io(INGOT.get(m, 9)).add("stainless_steel_1",10200, 120, MaterialTags.BLAST_FURNACE_TEMP.getInt(m));
         m = Kanthal;
         BLASTING.RB().ii(of(DUST.get(m,1))).io(INGOT_HOT.get(m, 1)).add("kanthal",5100, 120, MaterialTags.BLAST_FURNACE_TEMP.getInt(m));
-        BLASTING.RB().ii(of(INGOT.get(Iron,1)), of(INGOT.get(Aluminium, 1)), of(INGOT.get(Chrome, 1))).io(INGOT_HOT.get(m, 3)).add("kanthal",5100, 120, MaterialTags.BLAST_FURNACE_TEMP.getInt(m));
+        BLASTING.RB().ii(of(INGOT.get(Iron,1)), of(INGOT.get(Aluminium, 1)), of(INGOT.get(Chrome, 1))).io(INGOT_HOT.get(m, 3)).add("kanthal_2",5100, 120, MaterialTags.BLAST_FURNACE_TEMP.getInt(m));
         m = Nichrome;
         BLASTING.RB().ii(of(DUST.get(m,1))).io(INGOT_HOT.get(m, 1)).add("nichrome",10200, 120, MaterialTags.BLAST_FURNACE_TEMP.getInt(m));
-        BLASTING.RB().ii(of(INGOT.get(Nickel,4)), of(INGOT.get(Chrome, 1)), INT_CIRCUITS.get(2)).io(INGOT_HOT.get(m, 5)).add("nichrome",10200, 120, MaterialTags.BLAST_FURNACE_TEMP.getInt(m));
+        BLASTING.RB().ii(of(INGOT.get(Nickel,4)), of(INGOT.get(Chrome, 1)), INT_CIRCUITS.get(2)).io(INGOT_HOT.get(m, 5)).add("nichrome_2",10200, 120, MaterialTags.BLAST_FURNACE_TEMP.getInt(m));
     }
 }

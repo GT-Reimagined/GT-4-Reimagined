@@ -103,10 +103,10 @@ public class MaterialRecipeLoader {
             if (m.has(AntimatterMaterialTypes.ROD)){
                 provider.addStackRecipe(output, Ref.ID, m.getId() + "_rod", "rods", "has_stone", provider.hasSafeItem(s.getState().getBlock()), AntimatterMaterialTypes.ROD.get(m, 4), ImmutableMap.of('S', s.getState().getBlock()), "S", "S");
                 if (s == AntimatterStoneTypes.STONE){
-                    provider.addStackRecipe(output, Ref.ID, m.getId() + "_rod", "rods", "has_stone", provider.hasSafeItem(Items.COBBLESTONE), AntimatterMaterialTypes.ROD.get(m, 4), ImmutableMap.of('S', Items.COBBLESTONE), "S", "S");
+                    provider.addStackRecipe(output, Ref.ID, m.getId() + "_rod_2", "rods", "has_stone", provider.hasSafeItem(Items.COBBLESTONE), AntimatterMaterialTypes.ROD.get(m, 4), ImmutableMap.of('S', Items.COBBLESTONE), "S", "S");
                 }
                 if (s instanceof CobbleStoneType){
-                    provider.addStackRecipe(output, Ref.ID, m.getId() + "_rod", "rods", "has_stone", provider.hasSafeItem(((CobbleStoneType)s).getBlock("cobble")), AntimatterMaterialTypes.ROD.get(m, 4), ImmutableMap.of('S', ((CobbleStoneType)s).getBlock("cobble")), "S", "S");
+                    provider.addStackRecipe(output, Ref.ID, m.getId() + "_rod_2", "rods", "has_stone", provider.hasSafeItem(((CobbleStoneType)s).getBlock("cobble")), AntimatterMaterialTypes.ROD.get(m, 4), ImmutableMap.of('S', ((CobbleStoneType)s).getBlock("cobble")), "S", "S");
                 }
             }
             if (s instanceof CobbleStoneType){

@@ -33,7 +33,7 @@ public class ChemicalReactorLoader {
         CHEMICAL_REACTING.RB().ii(DUST.getMaterialIngredient(Potassium, 1)).fi(NitricAcid.getLiquid(1000)).io(DUST.get(Saltpeter, 1)).add("saltpeter",20, 30);
         CHEMICAL_REACTING.RB().fi(NitrogenDioxide.getGas(3000), Water.getLiquid(1000)).fo(NitricAcid.getLiquid(2000), NitricOxide.getGas(1000)).add("nitric_acid",20, 30);
         CHEMICAL_REACTING.RB().ii(DUST.getMaterialIngredient(Silicon, 1)).fi(Oxygen.getGas(2000)).io(DUST.get(SiliconDioxide, 3)).add("silicon_dioxide",50,30);
-        CHEMICAL_REACTING.RB().fi(NitricOxide.getGas(1000), Oxygen.getGas(1000)).fo(NitrogenDioxide.getGas(1000)).add("nitrogen_dioxide",20, 30);
+        CHEMICAL_REACTING.RB().fi(NitricOxide.getGas(1000), Oxygen.getGas(1000)).fo(NitrogenDioxide.getGas(1000)).add("nitrogen_dioxide_2",20, 30);
         CHEMICAL_REACTING.RB().fi(Oxygen.getGas(500), Hydrogen.getGas(1000)).fo(DistilledWater.getLiquid(1500)).add("distilled_water",5, 30);
         CHEMICAL_REACTING.RB().fi(FishOil.getLiquid(6000), Ethanol.getLiquid(1000)).ii(DUST_TINY.getMaterialIngredient(SodiumHydroxide, 1)).fo(BioDiesel.getLiquid(6000), Glycerol.getLiquid(1000)).add("biodiesel",600, 30);
         CHEMICAL_REACTING.RB().fi(SeedOil.getLiquid(6000), Ethanol.getLiquid(1000)).ii(DUST_TINY.getMaterialIngredient(SodiumHydroxide, 1)).fo(BioDiesel.getLiquid(6000), Glycerol.getLiquid(1000)).add("biodiesel_1",600, 30);
