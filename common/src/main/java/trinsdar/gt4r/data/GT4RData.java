@@ -306,8 +306,8 @@ public class GT4RData {
     public static StoneType QUARTZITE = AntimatterAPI.register(StoneType.class, new CobbleStoneType(Ref.ID, "quartzite", Quartzite, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F));
 
 
-    public static final BlockTurbineCasing STANDARD_MACHINE_CASING = new BlockTurbineCasing(Ref.ID, "standard_machine_casing");
-    public static final BlockTurbineCasing REINFORCED_MACHINE_CASING = new BlockTurbineCasing(Ref.ID, "reinforced_machine_casing");
+    public static final BlockConnectedCasing STANDARD_MACHINE_CASING = new BlockConnectedCasing(Ref.ID, "standard_machine_casing");
+    public static final BlockConnectedCasing REINFORCED_MACHINE_CASING = new BlockConnectedCasing(Ref.ID, "reinforced_machine_casing");
     public static final BlockConnectedCasing ADVANCED_MACHINE_CASING = new BlockConnectedCasing(Ref.ID, "advanced_machine_casing");
     public static final BlockConnectedCasing TUNGSTENSTEEL_REINFORCED_STONE = new BlockConnectedCasing(Ref.ID, "tungstensteel_reinforced_stone");
     public static final BlockConnectedCasing IRIDIUM_TUNGSTENSTEEL_REINFORCED_STONE = new BlockConnectedCasing(Ref.ID, "iridium_tungstensteel_reinforced_stone");

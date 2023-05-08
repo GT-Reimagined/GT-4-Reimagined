@@ -5,6 +5,7 @@ import muramasa.antimatter.texture.IOverlayModeler;
 import muramasa.antimatter.texture.IOverlayTexturer;
 import muramasa.antimatter.texture.ITextureHandler;
 import muramasa.antimatter.texture.Texture;
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import trinsdar.gt4r.Ref;
 
@@ -192,5 +193,13 @@ public class Textures {
                 new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + stateDir + "side"),
                 new Texture(Ref.ID, "block/machine/overlay/" + type.getId() + "/" + stateDir + "side")
         };
+    };
+
+    public static IOverlayModeler TURBINE = (type, state, side) -> {
+        String suffix = "";
+        if (side == Direction.SOUTH && state != MachineState.INVALID_STRUCTURE){
+            suffix = "_" + state.getId();
+        }
+        return new ResourceLocation(type.getDomain(), "block/machine/overlay/" + type.getId() + "/" + side.getSerializedName() + suffix);
     };
 }
