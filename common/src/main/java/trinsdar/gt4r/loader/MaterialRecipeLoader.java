@@ -68,12 +68,6 @@ public class MaterialRecipeLoader {
                 provider.shapeless(output,"gem_" + m.getId() + "_from_block", "blocks", "has_block", provider.hasSafeItem(AntimatterMaterialTypes.BLOCK.getMaterialTag(m)), AntimatterMaterialTypes.GEM.get(m, 9), AntimatterMaterialTypes.BLOCK.getMaterialTag(m));
             }
         });
-        AntimatterMaterialTypes.INGOT.all().forEach(m -> {
-            if (m.has(AntimatterMaterialTypes.NUGGET)){
-                provider.addItemRecipe(output, Ref.ID, m.getId() + "_ingot", "ingots", "has_nugget", provider.hasSafeItem(AntimatterMaterialTypes.NUGGET.getMaterialTag(m)), AntimatterMaterialTypes.INGOT.get(m), ImmutableMap.of('I', AntimatterMaterialTypes.NUGGET.getMaterialTag(m)), "III", "III", "III");
-                provider.shapeless(output,"nugget_" + m.getId() + "_from_ingot", "ingots", "has_ingot", provider.hasSafeItem(AntimatterMaterialTypes.INGOT.getMaterialTag(m)), AntimatterMaterialTypes.NUGGET.get(m, 9), AntimatterMaterialTypes.INGOT.getMaterialTag(m));
-            }
-        });
         AntimatterMaterialTypes.DRILLBIT.all().forEach(m -> {
             if (m.has(AntimatterMaterialTypes.PLATE) || m.has(AntimatterMaterialTypes.GEM)){
                 TagKey<?> plate = m.has(AntimatterMaterialTypes.PLATE) ? AntimatterMaterialTypes.PLATE.getMaterialTag(m) : AntimatterMaterialTypes.GEM.getMaterialTag(m);
