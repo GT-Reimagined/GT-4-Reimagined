@@ -107,6 +107,8 @@ public class GT4RLocalizations {
                     }
                 }
             });
+            override("machine.primitive_blast_furnace", "Primitive Blast Furnace");
+            override("machine.coke_oven", "Coke Oven");
             AntimatterAPI.all(ItemFluidCell.class, domain).forEach(i -> override(i.getDescriptionId(), lowerUnderscoreToUpperSpacedRotated(i.getId())));
         }
 
