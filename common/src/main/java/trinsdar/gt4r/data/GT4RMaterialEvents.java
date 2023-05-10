@@ -23,12 +23,12 @@ import trinsdar.gt4r.datagen.GT4RRandomDropBonus;
 import java.util.function.Function;
 
 import static com.google.common.collect.ImmutableMap.of;
-import static muramasa.antimatter.material.MaterialTags.ELEC;
 import static muramasa.antimatter.material.MaterialTags.RUBBERTOOLS;
 import static net.minecraft.data.loot.BlockLoot.applyExplosionDecay;
 import static net.minecraft.data.loot.BlockLoot.createOreDrop;
 import static net.minecraft.data.loot.BlockLoot.createSilkTouchDispatchTable;
 import static net.minecraft.world.item.Tiers.IRON;
+import static trinsdar.gt4r.data.GT4RMaterialTags.ELEC;
 import static trinsdar.gt4r.data.Materials.*;
 
 public class GT4RMaterialEvents {

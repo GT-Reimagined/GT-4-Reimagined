@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
 import static muramasa.antimatter.data.AntimatterMaterials.*;
-import static muramasa.antimatter.material.MaterialTags.ELEC;
+import static trinsdar.gt4r.data.GT4RMaterialTags.ELEC;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.ELECTROLYZING;
 
