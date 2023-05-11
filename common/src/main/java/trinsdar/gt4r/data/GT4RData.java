@@ -36,7 +36,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.block.BlockCasing;
 import trinsdar.gt4r.block.BlockConnectedCasing;
-import trinsdar.gt4r.block.BlockTurbineCasing;
 import trinsdar.gt4r.cover.CoverConveyor;
 import trinsdar.gt4r.cover.CoverCrafting;
 import trinsdar.gt4r.cover.CoverDrain;

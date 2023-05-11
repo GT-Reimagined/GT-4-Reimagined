@@ -1,14 +1,14 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"right": "gt4r:block/ct/turbine/large_steam_turbine_5",
-		"topright": "gt4r:block/ct/turbine/large_steam_turbine_2",
-		"top": "gt4r:block/ct/turbine/large_steam_turbine_1",
-		"topleft": "gt4r:block/ct/turbine/large_steam_turbine_0",
-		"left": "gt4r:block/ct/turbine/large_steam_turbine_3",
-		"bottomleft": "gt4r:block/ct/turbine/large_steam_turbine_6",
-		"bottom": "gt4r:block/ct/turbine/large_steam_turbine_7",
-		"bottomright": "gt4r:block/ct/turbine/large_steam_turbine_8"
+		"right": "gt4r:block/ct/turbine/large_gas_turbine_5",
+		"topright": "gt4r:block/ct/turbine/large_gas_turbine_2",
+		"top": "gt4r:block/ct/turbine/large_gas_turbine_1",
+		"topleft": "gt4r:block/ct/turbine/large_gas_turbine_0",
+		"left": "gt4r:block/ct/turbine/large_gas_turbine_3",
+		"bottomleft": "gt4r:block/ct/turbine/large_gas_turbine_6",
+		"bottom": "gt4r:block/ct/turbine/large_gas_turbine_7",
+		"bottomright": "gt4r:block/ct/turbine/large_gas_turbine_8"
 	},
 	"elements": [
 		{

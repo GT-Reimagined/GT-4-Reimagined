@@ -17,8 +17,6 @@ public class Textures {
     public static final Texture FUSION_IN = new Texture(Ref.ID, "block/machine/base/fusion_control_computer");
     public static final Texture FUSION_OUT = new Texture(Ref.ID, "block/machine/base/fusion_out");
 
-    public static final IOverlayModeler STANDARD_MACHINE_MODELS = (a,s,d) -> new ResourceLocation(Ref.ANTIMATTER, "block/machine/overlay/invalid/" + d.getName());
-
     public static final ITextureHandler BOILER_HANDLER = (m, t) -> new Texture[] {
         new Texture(Ref.ID, "block/machine/base/brick"),
         new Texture(Ref.ID, "block/machine/base/" + t.getId()),
