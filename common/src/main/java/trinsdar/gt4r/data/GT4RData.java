@@ -14,7 +14,6 @@ import muramasa.antimatter.item.ItemFluidCell;
 import muramasa.antimatter.item.ItemMultiTextureBattery;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.material.Material;
-import muramasa.antimatter.material.MaterialTags;
 import muramasa.antimatter.ore.CobbleStoneType;
 import muramasa.antimatter.ore.StoneType;
 import muramasa.antimatter.pipe.PipeSize;
@@ -35,7 +34,6 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.block.BlockCasing;
-import trinsdar.gt4r.block.BlockConnectedCasing;
 import trinsdar.gt4r.cover.CoverConveyor;
 import trinsdar.gt4r.cover.CoverCrafting;
 import trinsdar.gt4r.cover.CoverDrain;
@@ -305,11 +303,11 @@ public class GT4RData {
     public static StoneType QUARTZITE = AntimatterAPI.register(StoneType.class, new CobbleStoneType(Ref.ID, "quartzite", Quartzite, "block/stone/", SoundType.STONE, true).setHardnessAndResistance(0.75F,7.5F));
 
 
-    public static final BlockConnectedCasing STANDARD_MACHINE_CASING = new BlockConnectedCasing(Ref.ID, "standard_machine_casing");
-    public static final BlockConnectedCasing REINFORCED_MACHINE_CASING = new BlockConnectedCasing(Ref.ID, "reinforced_machine_casing");
-    public static final BlockConnectedCasing ADVANCED_MACHINE_CASING = new BlockConnectedCasing(Ref.ID, "advanced_machine_casing");
-    public static final BlockConnectedCasing TUNGSTENSTEEL_REINFORCED_STONE = new BlockConnectedCasing(Ref.ID, "tungstensteel_reinforced_stone");
-    public static final BlockConnectedCasing IRIDIUM_TUNGSTENSTEEL_REINFORCED_STONE = new BlockConnectedCasing(Ref.ID, "iridium_tungstensteel_reinforced_stone");
+    public static final BlockCasing STANDARD_MACHINE_CASING = new BlockCasing(Ref.ID, "standard_machine_casing");
+    public static final BlockCasing REINFORCED_MACHINE_CASING = new BlockCasing(Ref.ID, "reinforced_machine_casing");
+    public static final BlockCasing ADVANCED_MACHINE_CASING = new BlockCasing(Ref.ID, "advanced_machine_casing");
+    public static final BlockCasing TUNGSTENSTEEL_REINFORCED_STONE = new BlockCasing(Ref.ID, "tungstensteel_reinforced_stone");
+    public static final BlockCasing IRIDIUM_TUNGSTENSTEEL_REINFORCED_STONE = new BlockCasing(Ref.ID, "iridium_tungstensteel_reinforced_stone");
     public static final BlockCasing HIGHLY_ADVANCED_MACHINE_BLOCK = new BlockCasing(Ref.ID, "highly_advanced_machine_block");
     public static final BlockCasing ADVANCED_MACHINE_BLOCK = new BlockCasing(Ref.ID, "advanced_machine_block");
 

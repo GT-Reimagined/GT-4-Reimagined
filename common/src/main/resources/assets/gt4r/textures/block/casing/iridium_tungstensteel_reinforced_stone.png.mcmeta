@@ -1,0 +1,9 @@
+{
+	"ctm": {
+		"ctm_version": 1,
+		"type": "ctm",
+		"textures": [
+			"gt4r:block/ct/iridium_tungstensteel_reinforced_stone_ctm"
+		]
+	}
+}

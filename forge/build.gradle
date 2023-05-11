@@ -73,6 +73,7 @@ dependencies {
     runtimeOnly("curse.maven:portality-291493:3840074")
     runtimeOnly("curse.maven:titanium-287342:4117991")
     modImplementation("curse.maven:the-one-probe-245211:${rootProject.top_forge_file}")
+    modImplementation("curse.maven:ctm-267602:3933537")
 
 
     //runtimeOnly fg.deobf("curse.maven:world_stripper-250603:3142092")
