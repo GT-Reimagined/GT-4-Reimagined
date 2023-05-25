@@ -47,24 +47,15 @@ public class Blasting {
         });
         BLASTING.RB().ii(of(TagUtils.getForgelikeItemTag("ores/iron"), 1), of(DUST.get(Calcite, 1))).io(new ItemStack(Items.IRON_INGOT, 3), DUST.get(DarkAsh, 1)).add("iron",500, 120, 1500);
         BLASTING.RB().ii(of(DUST.get(Pyrite, 3)), of(DUST.get(Calcite, 1))).io(new ItemStack(Items.IRON_INGOT, 2)).add("iron_1",500, 120, 1500);
-        Material m = Steel;
-        BLASTING.RB().ii(of(INGOT.get(Iron, 1)), of(DUST.get(Carbon, 1))).io(INGOT.get(m, 1)).add("steel_1",600, 120, GT4RMaterialTags.BLAST_FURNACE_TEMP.getInt(m));
-        BLASTING.RB().ii(of(INGOT.get(Iron, 1)), of(DUST.get(CoalCoke, 1))).io(INGOT.get(m, 1)).add("steel_2",600, 120, GT4RMaterialTags.BLAST_FURNACE_TEMP.getInt(m));
-        m = TungstenSteel;
-        BLASTING.RB().ii(of(INGOT.get(Tungsten,1)), of(INGOT.get(Steel,1))).io(INGOT_HOT.get(m, 2), DUST.get(DarkAsh, 4)).add("tungsten_steel_1",1700, 120, GT4RMaterialTags.BLAST_FURNACE_TEMP.getInt(m));
-        m = Netherite;
-        BLASTING.RB().ii(of(DUST.get(NetheriteScrap,4)), of(INGOT.get(Gold,4))).io(INGOT.get(m, 1), DUST.get(DarkAsh, 4)).add("netherrite_1",1700, 120, GT4RMaterialTags.BLAST_FURNACE_TEMP.getInt(m));
-        m = TungstenCarbide;
-        BLASTING.RB().ii(of(INGOT.get(Tungsten,1)), of(DUST.get(Carbon,1))).io(INGOT_HOT.get(m, 2), DUST.get(DarkAsh, 4)).add("tungsten_carbide_1",1700, 120, GT4RMaterialTags.BLAST_FURNACE_TEMP.getInt(m));
-        m = Galena;
-        BLASTING.RB().ii(of(DUST.get(m,2))).io(INGOT.get(Lead, 1), INGOT.get(Silver, 1)).add("galena",600, 120, 1500);
-        m = Osmiridium;
-        BLASTING.RB().ii(of(INGOT.get(Osmium,1)), of(INGOT.get(Iridium, 1))).io(INGOT_HOT.get(m, 2)).add("osmiridium_1",10000, 120, GT4RMaterialTags.BLAST_FURNACE_TEMP.getInt(m));
-        m = StainlessSteel;
-        BLASTING.RB().ii(of(INGOT.get(Iron,6)), of(INGOT.get(Nickel, 1)), of(INGOT.get(Chrome, 1)), of(INGOT.get(Manganese, 1))).io(INGOT.get(m, 9)).add("stainless_steel_1",10200, 120, GT4RMaterialTags.BLAST_FURNACE_TEMP.getInt(m));
-        m = Kanthal;
-        BLASTING.RB().ii(of(INGOT.get(Iron,1)), of(INGOT.get(Aluminium, 1)), of(INGOT.get(Chrome, 1))).io(INGOT_HOT.get(m, 3)).add("kanthal_2",5100, 120, GT4RMaterialTags.BLAST_FURNACE_TEMP.getInt(m));
-        m = Nichrome;
-        BLASTING.RB().ii(of(INGOT.get(Nickel,4)), of(INGOT.get(Chrome, 1)), INT_CIRCUITS.get(2)).io(INGOT_HOT.get(m, 5)).add("nichrome_2",10200, 120, GT4RMaterialTags.BLAST_FURNACE_TEMP.getInt(m));
+        BLASTING.RB().ii(of(INGOT.get(Iron, 1)), of(DUST.get(Carbon, 1))).io(INGOT.get(Steel, 1)).add("steel_1",600, 120, GT4RMaterialTags.BLAST_FURNACE_TEMP.getInt(Steel));
+        BLASTING.RB().ii(of(INGOT.get(Iron, 1)), of(DUST.get(CoalCoke, 1))).io(INGOT.get(Steel, 1)).add("steel_2",600, 120, GT4RMaterialTags.BLAST_FURNACE_TEMP.getInt(Steel));
+        BLASTING.RB().ii(of(INGOT.get(Tungsten,1)), of(INGOT.get(Steel,1))).io(INGOT_HOT.get(TungstenSteel, 2), DUST.get(DarkAsh, 4)).add("tungsten_steel",1700, 120, GT4RMaterialTags.BLAST_FURNACE_TEMP.getInt(TungstenSteel));
+        BLASTING.RB().ii(of(DUST.get(NetheriteScrap,4)), of(INGOT.get(Gold,4))).io(INGOT.get(Netherite, 1), DUST.get(DarkAsh, 4)).add("netherrite",1700, 120, GT4RMaterialTags.BLAST_FURNACE_TEMP.getInt(Netherite));
+        BLASTING.RB().ii(of(INGOT.get(Tungsten,1)), of(DUST.get(Carbon,1))).io(INGOT_HOT.get(TungstenCarbide, 2), DUST.get(DarkAsh, 4)).add("tungsten_carbide",1700, 120, GT4RMaterialTags.BLAST_FURNACE_TEMP.getInt(TungstenCarbide));
+        BLASTING.RB().ii(of(DUST.get(Galena,2))).io(INGOT.get(Lead, 1), INGOT.get(Silver, 1)).add("galena",600, 120, 1500);
+        BLASTING.RB().ii(of(INGOT.get(Osmium,1)), of(INGOT.get(Iridium, 1))).io(INGOT_HOT.get(Osmiridium, 2)).add("osmiridium",10000, 120, GT4RMaterialTags.BLAST_FURNACE_TEMP.getInt(Osmiridium));
+        BLASTING.RB().ii(of(INGOT.get(Iron,6)), of(INGOT.get(Nickel, 1)), of(INGOT.get(Chrome, 1)), of(INGOT.get(Manganese, 1))).io(INGOT.get(StainlessSteel, 9)).add("stainless_steel",10200, 120, GT4RMaterialTags.BLAST_FURNACE_TEMP.getInt(StainlessSteel));
+        BLASTING.RB().ii(of(INGOT.get(Iron,1)), of(INGOT.get(Aluminium, 1)), of(INGOT.get(Chrome, 1))).io(INGOT_HOT.get(Kanthal, 3)).add("kanthal",5100, 120, GT4RMaterialTags.BLAST_FURNACE_TEMP.getInt(Kanthal));
+        BLASTING.RB().ii(of(INGOT.get(Nickel,4)), of(INGOT.get(Chrome, 1)), INT_CIRCUITS.get(2)).io(INGOT_HOT.get(Nichrome, 5)).add("nichrome",10200, 120, GT4RMaterialTags.BLAST_FURNACE_TEMP.getInt(Nichrome));
     }
 }
