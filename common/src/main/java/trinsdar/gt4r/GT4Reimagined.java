@@ -29,6 +29,7 @@ import trinsdar.gt4r.data.client.ScreenFactories;
 import trinsdar.gt4r.datagen.GT4RItemModelProvider;
 import trinsdar.gt4r.datagen.GT4RLocalizations;
 import trinsdar.gt4r.datagen.GT4RRandomDropBonus;
+import trinsdar.gt4r.material.GT4RMaterialEvent;
 import trinsdar.gt4r.worldgen.GT4RPlacedFeatures;
 import trinsdar.gt4r.worldgen.GT4RFeatures;
 
@@ -114,7 +115,8 @@ public class GT4Reimagined extends AntimatterMod {
 
     @Override
     public void onMaterialEvent(MaterialEvent event) {
-        GT4RMaterialEvents.onMaterialEvent(event);
+        event = new GT4RMaterialEvent();
+        GT4RMaterialEvents.onMaterialEvent((GT4RMaterialEvent) event);
     }
 
     @Override

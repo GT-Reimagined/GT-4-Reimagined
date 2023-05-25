@@ -19,6 +19,7 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import trinsdar.gt4r.datagen.GT4RRandomDropBonus;
+import trinsdar.gt4r.material.GT4RMaterialEvent;
 
 import java.util.function.Function;
 
@@ -32,7 +33,7 @@ import static trinsdar.gt4r.data.GT4RMaterialTags.ELEC;
 import static trinsdar.gt4r.data.Materials.*;
 
 public class GT4RMaterialEvents {
-    public static void onMaterialEvent(MaterialEvent event){
+    public static void onMaterialEvent(GT4RMaterialEvent event){
         flags(event);
         antimatterMaterials(event);
 
@@ -373,7 +374,7 @@ public class GT4RMaterialEvents {
         ELEC.add(GT4RMaterialTags.ELEC120.all().toArray(new Material[0]));
     }
 
-    private static void antimatterMaterials(MaterialEvent event){
+    private static void antimatterMaterials(GT4RMaterialEvent event){
         event.setMaterial(AntimatterMaterials.Redstone).mats(of(Silicon, 1, Pyrite, 5, Ruby, 1, Mercury, 3)).setOreMulti(5).setSmeltingMulti(5)
                 .addByProduct(Cinnabar, RareEarth, AntimatterMaterials.Glowstone);
         event.setMaterial(AntimatterMaterials.Prismarine).mats(of(Potassium, 2, Oxygen, 8, Manganese, 1, Silicon, 5));
@@ -397,6 +398,7 @@ public class GT4RMaterialEvents {
         event.setMaterial(AntimatterMaterials.Granite).mats(of(Aluminium, 2, AntimatterMaterials.Flint, 1, Clay, 1));
         event.setMaterial(AntimatterMaterials.Glowstone).mats(of(AntimatterMaterials.Redstone, 8, AntimatterMaterials.Gold, 8, Helium, 1));
         event.setMaterial(AntimatterMaterials.Diorite).mats(of(Nickel, 1));
+        event.setMaterial(AntimatterMaterials.Netherite).asMetal(2246, 1300);
         event.setMaterial(AntimatterMaterials.NetheriteScrap).addByProduct(AntimatterMaterials.Quartz);
         event.setMaterial(AntimatterMaterials.Basalt).addByProduct(Olivine, DarkAsh);
         event.setMaterial(AntimatterMaterials.Netherrack).addByProduct(Sulfur);

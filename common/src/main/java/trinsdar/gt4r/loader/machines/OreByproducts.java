@@ -61,7 +61,7 @@ public class OreByproducts {
                 Material oreByProduct3 = m.getByProducts().size() > 2 ? m.getByProducts().get(2) : oreByProduct2;
 
                 List<ItemStack> dusts = new ObjectArrayList<>();
-                if (MaterialTags.SMELT_INTO.getMapping(m).has(AntimatterMaterialTypes.INGOT) && !m.has(MaterialTags.NEEDS_BLAST_FURNACE)){
+                if (MaterialTags.SMELT_INTO.getMapping(m).has(AntimatterMaterialTypes.INGOT) && !m.has(GT4RMaterialTags.NEEDS_BLAST_FURNACE)){
                     dusts.add(AntimatterMaterialTypes.INGOT.get(MaterialTags.SMELT_INTO.getMapping(m), MaterialTags.SMELTING_MULTI.getInt(m)));
                 } else {
                     dusts.add(new ItemStack(Items.BARRIER));

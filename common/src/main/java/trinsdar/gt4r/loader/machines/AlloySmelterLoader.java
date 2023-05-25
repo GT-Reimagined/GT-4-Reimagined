@@ -7,6 +7,7 @@ import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialTags;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import trinsdar.gt4r.data.GT4RData;
+import trinsdar.gt4r.data.GT4RMaterialTags;
 
 import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
 import static muramasa.antimatter.data.AntimatterMaterials.*;
@@ -35,7 +36,7 @@ public class AlloySmelterLoader {
         //ALLOY_SMELTING.RB().ii(DUST.getMaterialIngredient(Nikolite, 4), INGOT.getMaterialIngredient(Copper)).io(INGOT.get(BlueAlloy, 1)).add(50, 16);
         int ingotCount = AntimatterConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 2 : 1;
         AntimatterMaterialTypes.PLATE.all().forEach(m -> {
-            if (!m.has(MaterialTags.NEEDS_BLAST_FURNACE) && m.has(AntimatterMaterialTypes.INGOT)){
+            if (!m.has(GT4RMaterialTags.NEEDS_BLAST_FURNACE) && m.has(AntimatterMaterialTypes.INGOT)){
                 int euTick = m.has(RUBBERTOOLS) ? 16 : 32;
                 ALLOY_SMELTING.RB().ii(INGOT.getMaterialIngredient(m, ingotCount), RecipeIngredient.of(GT4RData.MoldPlate, 1).setNoConsume()).io(PLATE.get(m, 1)).add(m.getId() + "_plate", m.getMass() * ingotCount, euTick);
                 if (m.has(RUBBERTOOLS) && m.has(DUST)){

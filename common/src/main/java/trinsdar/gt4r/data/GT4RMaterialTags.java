@@ -7,6 +7,7 @@ import muramasa.antimatter.material.MaterialTag;
 import muramasa.antimatter.material.MaterialType;
 import muramasa.antimatter.material.MaterialTypeItem;
 import muramasa.antimatter.material.tags.DoubleMaterialTag;
+import muramasa.antimatter.material.tags.NumberMaterialTag;
 import net.minecraft.world.item.Item;
 import trinsdar.gt4r.items.ItemTurbineRotor;
 
@@ -18,6 +19,9 @@ public class GT4RMaterialTags {
     public static final MaterialTag ELEC90 = new MaterialTag("elec90");
     public static final MaterialTag ELEC120 = new MaterialTag("elec120");
     public static final MaterialTag ELEC = AntimatterAPI.register(MaterialTag.class, new MaterialTag("elec", true));
+
+    public static final MaterialTag NEEDS_BLAST_FURNACE = AntimatterAPI.register(MaterialTag.class, new MaterialTag("needs_blast_furnace", true));
+    public static final NumberMaterialTag BLAST_FURNACE_TEMP = (NumberMaterialTag) AntimatterAPI.register(MaterialTag.class, new NumberMaterialTag("blast_furnace_temp", true));
     public static final MaterialTag ROCK_CUTTER = new MaterialTag("rock_cutter");
     public static final MaterialTypeItem<?> HULL = new MaterialTypeItem<>("hull", 2, true, muramasa.antimatter.Ref.U * 8);
     public static final MaterialTypeItem<?> TURBINE_BLADE = new MaterialTypeItem<>("turbine_blade", 1, true, muramasa.antimatter.Ref.U * 3);//.unSplitName();
