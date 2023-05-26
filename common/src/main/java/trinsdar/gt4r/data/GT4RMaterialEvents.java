@@ -40,8 +40,8 @@ public class GT4RMaterialEvents {
         if (!AntimatterAPI.isModLoaded("gti")) {
             oreDrops(event);
         }
-	byproducts(event);
-	Material[] turbineStuff = new Material[]{Carbon, Osmium, Bronze, Magnalium, Steel, TungstenSteel, Osmiridium};
+	    byProducts(event);
+	    Material[] turbineStuff = new Material[]{Carbon, Osmium, Bronze, Magnalium, Steel, TungstenSteel, Osmiridium};
         for (Material material : turbineStuff) {
             event.setMaterial(material).flags(GT4RMaterialTags.TURBINE_ROTOR, GT4RMaterialTags.TURBINE_BLADE, GT4RMaterialTags.BROKEN_TURBINE_ROTOR);
         }
