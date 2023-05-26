@@ -19,6 +19,7 @@ import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import trinsdar.gt4r.datagen.GT4RBlockLootProvider;
 import trinsdar.gt4r.datagen.GT4RRandomDropBonus;
 import trinsdar.gt4r.material.GT4RMaterialEvent;
 
@@ -38,7 +39,7 @@ public class GT4RMaterialEvents {
         flags(event);
         antimatterMaterials(event);
         if (!AntimatterAPI.isModLoaded("gti")) {
-            oreDrops(event);
+            GT4RBlockLootProvider.oreDrops(event);
         }
 	    byProducts(event);
 	    Material[] turbineStuff = new Material[]{Carbon, Osmium, Bronze, Magnalium, Steel, TungstenSteel, Osmiridium};
@@ -326,26 +327,6 @@ public class GT4RMaterialEvents {
         event.setMaterial(Phosphor).addByProduct(Phosphate);
         event.setMaterial(Lithium).addByProduct(Lithium);
         event.setMaterial(Silicon).addByProduct(SiliconDioxide);
-    }
-
-    private static void oreDrops(GT4RMaterialEvent event){
-        MaterialTags.CUSTOM_ORE_DROPS.add(AntimatterMaterials.Redstone, b -> {
-            return createSilkTouchDispatchTable(b, applyExplosionDecay(b, LootItem.lootTableItem(Items.REDSTONE).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 5.0F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))));
-        });
-
-        MaterialTags.CUSTOM_ORE_DROPS.add(AntimatterMaterials.Lapis, b -> {
-            return createSilkTouchDispatchTable(b, applyExplosionDecay(b, LootItem.lootTableItem(Items.LAPIS_LAZULI).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 9.0F))).apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))));
-        });
-        MaterialTags.CUSTOM_ORE_DROPS.add(Sodalite, b -> {
-            return createSilkTouchDispatchTable(b, applyExplosionDecay(b, LootItem.lootTableItem(AntimatterMaterialTypes.GEM.get(Sodalite)).apply(SetItemCountFunction.setCount(UniformGenerator.between(6.0F, 6.0F))).apply(GT4RRandomDropBonus.uniformBonusCount(Enchantments.BLOCK_FORTUNE, 3)))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(BlockLootTablesAccessor.getNoSilkTouch()).add(LootItem.lootTableItem(AntimatterMaterialTypes.DUST.get(Aluminium)).apply(GT4RRandomDropBonus.randomDrops(Enchantments.BLOCK_FORTUNE, 4))));
-        });
-        Function<BlockOre, LootTable.Builder> function = (b) -> createSilkTouchDispatchTable(b, applyExplosionDecay(b, LootItem.lootTableItem(AntimatterMaterialTypes.DUST.get(b.getMaterial())).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 2.0F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))));
-        MaterialTags.CUSTOM_ORE_DROPS.add(Pyrite, function);
-        MaterialTags.CUSTOM_ORE_DROPS.add(Cinnabar, b -> function.apply(b).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(BlockLootTablesAccessor.getNoSilkTouch()).add(LootItem.lootTableItem(AntimatterMaterialTypes.DUST.get(AntimatterMaterials.Redstone)).apply(GT4RRandomDropBonus.randomDrops(Enchantments.BLOCK_FORTUNE, 4)))));
-        MaterialTags.CUSTOM_ORE_DROPS.add(Sphalerite, b -> function.apply(b).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(BlockLootTablesAccessor.getNoSilkTouch()).add(LootItem.lootTableItem(AntimatterMaterialTypes.DUST.get(Zinc)).apply(GT4RRandomDropBonus.randomDrops(Enchantments.BLOCK_FORTUNE, 4)))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(BlockLootTablesAccessor.getNoSilkTouch()).add(LootItem.lootTableItem(AntimatterMaterialTypes.GEM.get(YellowGarnet)).apply(GT4RRandomDropBonus.randomDrops(Enchantments.BLOCK_FORTUNE, 32)))));
-        Function<BlockOreStone, LootTable.Builder> function1 = (b) -> createOreDrop(b, AntimatterMaterialTypes.DUST.get(b.getMaterial()));
-        MaterialTags.CUSTOM_ORE_STONE_DROPS.add(Salt, function1);
-        MaterialTags.CUSTOM_ORE_STONE_DROPS.add(RockSalt, function1);
     }
 
     private static void flags(MaterialEvent event){
