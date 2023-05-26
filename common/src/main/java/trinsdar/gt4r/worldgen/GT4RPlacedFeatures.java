@@ -42,6 +42,7 @@ public class GT4RPlacedFeatures {
     }
 
     public static void init(){
+
         // GT4R Overworld Ores
         createOrePlacedFeature("tin", Tin, -64, 0, 25, 8, "iron", 0.01f, 0.0f, false, false, Level.OVERWORLD);
         createOrePlacedFeature("uranite", Uraninite, -16, 100, 8, 4, null, 0.0f, 0.0f, false, false, true, getBiomeTag(new ResourceLocation(Ref.ID, "is_dead")), Level.OVERWORLD);

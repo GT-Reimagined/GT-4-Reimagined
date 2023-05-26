@@ -129,35 +129,35 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
         int i = 0;
         BitSet bitset = new BitSet(pWidth * pHeight * pWidth);
         BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-        int j = config.size;
-        double[] adouble = new double[j * 4];
+        int size = config.size;
+        double[] adouble = new double[size * 4];
 
-        for(int k = 0; k < j; ++k) {
-            float f = (float)k / (float)j;
-            double d0 = Mth.lerp(f, pMinX, pMaxX);
-            double d1 = Mth.lerp(f, pMinY, pMaxY);
-            double d2 = Mth.lerp(f, pMinZ, pMaxZ);
-            double d3 = pRandom.nextDouble() * (double)j / 16.0D;
+        for(int k = 0; k < size; ++k) {
+            float f = (float)k / (float)size;
+            double lerpX = Mth.lerp(f, pMinX, pMaxX);
+            double lerpY = Mth.lerp(f, pMinY, pMaxY);
+            double lerpZ = Mth.lerp(f, pMinZ, pMaxZ);
+            double d3 = pRandom.nextDouble() * (double)size / 16.0D;
             double d4 = ((double)(Mth.sin((float)Math.PI * f) + 1.0F) * d3 + 1.0D) / 2.0D;
-            adouble[k * 4 + 0] = d0;
-            adouble[k * 4 + 1] = d1;
-            adouble[k * 4 + 2] = d2;
+            adouble[k * 4 + 0] = lerpX;
+            adouble[k * 4 + 1] = lerpY;
+            adouble[k * 4 + 2] = lerpZ;
             adouble[k * 4 + 3] = d4;
         }
 
-        for(int l3 = 0; l3 < j - 1; ++l3) {
-            if (!(adouble[l3 * 4 + 3] <= 0.0D)) {
-                for(int i4 = l3 + 1; i4 < j; ++i4) {
-                    if (!(adouble[i4 * 4 + 3] <= 0.0D)) {
-                        double d8 = adouble[l3 * 4 + 0] - adouble[i4 * 4 + 0];
-                        double d10 = adouble[l3 * 4 + 1] - adouble[i4 * 4 + 1];
-                        double d12 = adouble[l3 * 4 + 2] - adouble[i4 * 4 + 2];
-                        double d14 = adouble[l3 * 4 + 3] - adouble[i4 * 4 + 3];
+        for(int currentIndex = 0; currentIndex < size - 1; ++currentIndex) {
+            if (!(adouble[currentIndex * 4 + 3] <= 0.0D)) {
+                for(int offset = currentIndex + 1; offset < size; ++offset) {
+                    if (!(adouble[offset * 4 + 3] <= 0.0D)) {
+                        double d8 = adouble[currentIndex * 4 + 0] - adouble[offset * 4 + 0];
+                        double d10 = adouble[currentIndex * 4 + 1] - adouble[offset * 4 + 1];
+                        double d12 = adouble[currentIndex * 4 + 2] - adouble[offset * 4 + 2];
+                        double d14 = adouble[currentIndex * 4 + 3] - adouble[offset * 4 + 3];
                         if (d14 * d14 > d8 * d8 + d10 * d10 + d12 * d12) {
                             if (d14 > 0.0D) {
-                                adouble[i4 * 4 + 3] = -1.0D;
+                                adouble[offset * 4 + 3] = -1.0D;
                             } else {
-                                adouble[l3 * 4 + 3] = -1.0D;
+                                adouble[currentIndex * 4 + 3] = -1.0D;
                             }
                         }
                     }
@@ -168,7 +168,7 @@ public class FeatureVanillaTypeOre extends AntimatterFeature<GT4ROreFeatureConfi
         BulkSectionAccess bulksectionaccess = new BulkSectionAccess(pLevel);
 
         try {
-            for(int j4 = 0; j4 < j; ++j4) {
+            for(int j4 = 0; j4 < size; ++j4) {
                 double d9 = adouble[j4 * 4 + 3];
                 if (!(d9 < 0.0D)) {
                     double d11 = adouble[j4 * 4 + 0];
