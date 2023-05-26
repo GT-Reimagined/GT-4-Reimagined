@@ -1,5 +1,6 @@
 package trinsdar.gt4r.data;
 
+import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.data.AntimatterDefaultTools;
 import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.data.AntimatterMaterials;
@@ -36,40 +37,26 @@ public class GT4RMaterialEvents {
     public static void onMaterialEvent(GT4RMaterialEvent event){
         flags(event);
         antimatterMaterials(event);
-
-        MaterialTags.CUSTOM_ORE_DROPS.add(AntimatterMaterials.Redstone, b -> {
-            return createSilkTouchDispatchTable(b, applyExplosionDecay(b, LootItem.lootTableItem(Items.REDSTONE).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 5.0F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))));
-        });
-
-        MaterialTags.CUSTOM_ORE_DROPS.add(AntimatterMaterials.Lapis, b -> {
-            return createSilkTouchDispatchTable(b, applyExplosionDecay(b, LootItem.lootTableItem(Items.LAPIS_LAZULI).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 9.0F))).apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))));
-        });
-        MaterialTags.CUSTOM_ORE_DROPS.add(Sodalite, b -> {
-            return createSilkTouchDispatchTable(b, applyExplosionDecay(b, LootItem.lootTableItem(AntimatterMaterialTypes.GEM.get(Sodalite)).apply(SetItemCountFunction.setCount(UniformGenerator.between(6.0F, 6.0F))).apply(GT4RRandomDropBonus.uniformBonusCount(Enchantments.BLOCK_FORTUNE, 3)))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(BlockLootTablesAccessor.getNoSilkTouch()).add(LootItem.lootTableItem(AntimatterMaterialTypes.DUST.get(Aluminium)).apply(GT4RRandomDropBonus.randomDrops(Enchantments.BLOCK_FORTUNE, 4))));
-        });
-        Function<BlockOre, LootTable.Builder> function = (b) -> createSilkTouchDispatchTable(b, applyExplosionDecay(b, LootItem.lootTableItem(AntimatterMaterialTypes.DUST.get(b.getMaterial())).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 2.0F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))));
-        MaterialTags.CUSTOM_ORE_DROPS.add(Pyrite, function);
-        MaterialTags.CUSTOM_ORE_DROPS.add(Cinnabar, b -> function.apply(b).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(BlockLootTablesAccessor.getNoSilkTouch()).add(LootItem.lootTableItem(AntimatterMaterialTypes.DUST.get(AntimatterMaterials.Redstone)).apply(GT4RRandomDropBonus.randomDrops(Enchantments.BLOCK_FORTUNE, 4)))));
-        MaterialTags.CUSTOM_ORE_DROPS.add(Sphalerite, b -> function.apply(b).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(BlockLootTablesAccessor.getNoSilkTouch()).add(LootItem.lootTableItem(AntimatterMaterialTypes.DUST.get(Zinc)).apply(GT4RRandomDropBonus.randomDrops(Enchantments.BLOCK_FORTUNE, 4)))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(BlockLootTablesAccessor.getNoSilkTouch()).add(LootItem.lootTableItem(AntimatterMaterialTypes.GEM.get(YellowGarnet)).apply(GT4RRandomDropBonus.randomDrops(Enchantments.BLOCK_FORTUNE, 32)))));
-        Function<BlockOreStone, LootTable.Builder> function1 = (b) -> createOreDrop(b, AntimatterMaterialTypes.DUST.get(b.getMaterial()));
-        MaterialTags.CUSTOM_ORE_STONE_DROPS.add(Salt, function1);
-        MaterialTags.CUSTOM_ORE_STONE_DROPS.add(RockSalt, function1);
-        Material[] turbineStuff = new Material[]{Carbon, Osmium, Bronze, Magnalium, Steel, TungstenSteel, Osmiridium};
+        if (!AntimatterAPI.isModLoaded("gti")) {
+            oreDrops(event);
+        }
+	byproducts(event);
+	Material[] turbineStuff = new Material[]{Carbon, Osmium, Bronze, Magnalium, Steel, TungstenSteel, Osmiridium};
         for (Material material : turbineStuff) {
             event.setMaterial(material).flags(GT4RMaterialTags.TURBINE_ROTOR, GT4RMaterialTags.TURBINE_BLADE, GT4RMaterialTags.BROKEN_TURBINE_ROTOR);
         }
         GT4RMaterialTags.HULL.add(Aluminium, AntimatterMaterials.Iron, Titanium, Brass, Bronze, Steel, StainlessSteel, WroughtIron, TungstenSteel);
         event.setMaterial(Aluminium).asMetal(933, 1000, AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.ROD, AntimatterMaterialTypes.GEAR, AntimatterMaterialTypes.BOLT, AntimatterMaterialTypes.SCREW);
         event.setMaterial(Beryllium).asMetal(1560, 0, AntimatterMaterialTypes.PLATE);
-        event.setMaterial(Bismuth).asMetal(544, 0, AntimatterMaterialTypes.PLATE).asOre();
+        event.setMaterial(Bismuth).asMetal(544, 0, AntimatterMaterialTypes.PLATE).asOre(false);
         event.setMaterial(Carbon).asMetal(3800, 1000, AntimatterMaterialTypes.PLATE);
         event.setMaterial(Chrome).asMetal(2180, 1700, AntimatterMaterialTypes.PLATE);
-        event.setMaterial(Iridium).asMetal(2719, 3000, AntimatterMaterialTypes.PLATE).asOre(3, 7, true).harvestLevel(3);
+        event.setMaterial(Iridium).asMetal(2719, 3000, AntimatterMaterialTypes.PLATE).asOre(3, 7, false).harvestLevel(3);
         event.setMaterial(Lead).asMetal(600, 0, AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.PLATE_DENSE, AntimatterMaterialTypes.ROD).harvestLevel(2);
         event.setMaterial(Manganese).asMetal(1519, 0);
-        event.setMaterial(Nickel).asMetal(1728, 0, AntimatterMaterialTypes.PLATE).asPlasma();
+        event.setMaterial(Nickel).asMetal(1728, 0, AntimatterMaterialTypes.PLATE).asOre(false).asPlasma();
         event.setMaterial(Osmium).asMetal(3306, 3306, AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.ROD);
-        event.setMaterial(Platinum).asMetal(2041, 0, AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.ROD).asOre(3, 7, true).harvestLevel(2);
+        event.setMaterial(Platinum).asMetal(2041, 0, AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.ROD).asOre(3, 7, false).harvestLevel(2);
         event.setMaterial(Plutonium).asMetal(912, 0);
         event.setMaterial(Plutonium239).asMetal(912, 0);
         event.setMaterial(Silver).asMetal(1234, 0, AntimatterMaterialTypes.PLATE).harvestLevel(2);
@@ -98,7 +85,7 @@ public class GT4RMaterialEvents {
         event.setMaterial(Silicon).asMetal(1687, 1000, AntimatterMaterialTypes.PLATE);
         event.setMaterial(Sodium).asDust(370);
         event.setMaterial(Sulfur).asDust(388).asPlasma();
-        event.setMaterial(Tin).asMetal(505, 505, AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.ROD, AntimatterMaterialTypes.GEAR).asOre(1, 5, true);
+        event.setMaterial(Tin).asMetal(505, 505, AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.ROD, AntimatterMaterialTypes.GEAR).asOre(1, 5, false);
         event.setMaterial(Tritium).asGas();
         event.setMaterial(Zinc).asMetal(692, 0, AntimatterMaterialTypes.PLATE);
         event.setMaterial(Technetium).asMetal(AntimatterMaterialTypes.PLATE);
@@ -165,18 +152,18 @@ public class GT4RMaterialEvents {
         event.setMaterial(Andradite).asDust().mats(of(Calcium, 3, AntimatterMaterials.Iron, 2, Silicon, 3, Oxygen, 12));
         event.setMaterial(Ash).asDust();
         event.setMaterial(Calcite).asDust().mats(of(Calcium, 1, Carbon, 1, Oxygen, 3));
-        event.setMaterial(Cassiterite).asOre(1, 5, true).mats(of(Tin, 1, Oxygen, 2))
+        event.setMaterial(Cassiterite).asOre(1, 5, false).mats(of(Tin, 1, Oxygen, 2))
                 .setDirectSmeltInto(Tin).setSmeltInto(Tin).setOreMulti(2).setSmeltingMulti(2);
-        event.setMaterial(Chromite).asOre(1, 5, true).mats(of(AntimatterMaterials.Iron, 1, Chrome, 2, Oxygen, 4)).harvestLevel(3);
+        event.setMaterial(Chromite).asOre(1, 5, false).mats(of(AntimatterMaterials.Iron, 1, Chrome, 2, Oxygen, 4)).harvestLevel(3);
         event.setMaterial(Clay).asDust().mats(of(Sodium, 2, Lithium, 1, Aluminium, 2, Silicon, 2));
         event.setMaterial(DarkAsh).asDust().mats(of(Carbon, 2));
         event.setMaterial(Energium).asDust();
-        event.setMaterial(Galena).asOre(1, 5, true).mats(of(Lead, 3, Silver, 3, Sulfur, 2)).harvestLevel(2);
+        event.setMaterial(Galena).asOre(1, 5, false).mats(of(Lead, 3, Silver, 3, Sulfur, 2)).harvestLevel(2);
         event.setMaterial(Grossular).asDust().mats(of(Calcium, 3, Aluminium, 2, Silicon, 3, Oxygen, 12));
         event.setMaterial(Magnesite).asDust().mats(of(Magnesium, 1, Carbon, 1, Oxygen, 3));
         event.setMaterial(Obsidian).asDust().mats(of(Magnesium, 1, AntimatterMaterials.Iron, 1, Silicon, 2, Oxygen, 8));
         event.setMaterial(Phosphate).asDust().mats(of(Phosphor, 1, Oxygen, 4));
-        event.setMaterial(Pyrite).asOre(1, 5,true).mats(of(AntimatterMaterials.Iron, 1, Sulfur, 2)).setOreMulti(2);
+        event.setMaterial(Pyrite).asOre(1, 5,false).mats(of(AntimatterMaterials.Iron, 1, Sulfur, 2)).setOreMulti(2);
         event.setMaterial(Pyrope).asDust().mats(of(Aluminium, 2, Magnesium, 3, Silicon, 3, Oxygen, 12));
         event.setMaterial(Saltpeter).asDust().mats(of(Potassium, 1, Nitrogen, 1, Oxygen, 3));
         event.setMaterial(SiliconDioxide).asDust().mats(of(Silicon, 1, Oxygen, 2));
@@ -184,12 +171,12 @@ public class GT4RMaterialEvents {
         event.setMaterial(Brick).asDust().mats(of(Aluminium, 4, Silicon, 3, Oxygen, 12));
         event.setMaterial(Fireclay).asDust().mats(of(Brick, 1));
         event.setMaterial(Spessartine).asDust().mats(of(Aluminium, 2, Manganese, 3, Silicon, 3, Oxygen, 12));
-        event.setMaterial(Sphalerite).asOre(1, 5,true).mats(of(Zinc, 1, Sulfur, 1));
-        event.setMaterial(Tetrahedrite).asOre(1, 5, true, MaterialTags.HAS_CUSTOM_SMELTING).mats(of(AntimatterMaterials.Copper, 3, Antimony, 1, Sulfur, 3, AntimatterMaterials.Iron, 1))
+        event.setMaterial(Sphalerite).asOre(1, 5,false).mats(of(Zinc, 1, Sulfur, 1));
+        event.setMaterial(Tetrahedrite).asOre(1, 5, false, MaterialTags.HAS_CUSTOM_SMELTING).mats(of(AntimatterMaterials.Copper, 3, Antimony, 1, Sulfur, 3, AntimatterMaterials.Iron, 1))
                 .setDirectSmeltInto(AntimatterMaterials.Copper).setSmeltInto(AntimatterMaterials.Copper);
-        event.setMaterial(Tungstate).asOre(1, 5, true).mats(of(Tungsten, 1, Lithium, 2, Oxygen, 4)).setOreMulti(2).harvestLevel(2);
-        event.setMaterial(Uraninite).asOre(1, 5, true).mats(of(Uranium238, 1, Oxygen, 2)).harvestLevel(2);
-        event.setMaterial(Bauxite).asOre(1, 5, true).mats(of(Aluminium, 16, Hydrogen, 10, Oxygen, 11, Titanium, 1)).setOreMulti(2);
+        event.setMaterial(Tungstate).asOre(1, 5, false).mats(of(Tungsten, 1, Lithium, 2, Oxygen, 4)).setOreMulti(2).harvestLevel(2);
+        event.setMaterial(Uraninite).asOre(1, 5, false).mats(of(Uranium238, 1, Oxygen, 2)).harvestLevel(2);
+        event.setMaterial(Bauxite).asOre(1, 5, false).mats(of(Aluminium, 16, Hydrogen, 10, Oxygen, 11, Titanium, 1)).setOreMulti(2);
         event.setMaterial(PotassiumFeldspar).asDust().mats(of(Potassium, 1, Aluminium, 1, Silicon, 3, Oxygen, 8));
         event.setMaterial(Biotite).asDust().mats(b -> b.put(Potassium, 1).put(Magnesium, 3).put(Aluminium, 3).put(Fluorine, 2).put(Silicon, 3).put(Oxygen, 10));
         event.setMaterial(Uvarovite).asDust().mats(of(Calcium, 3, Chrome, 2, Silicon, 3, Oxygen, 12));
@@ -201,7 +188,7 @@ public class GT4RMaterialEvents {
         event.setMaterial(Lazurite).asDust().mats(of(Aluminium, 3, Silicon, 3, Calcium, 4, Sodium, 4));
         event.setMaterial(Ruby).asGemBasic(false).asOre(3, 7,true).addTools(3.0F, 7.0F, 1024, 3).addArmor(new int[]{3, 7, 7, 3}, 1.0F, 0.0F, 30).mats(of(Chrome, 1, Aluminium, 2, Oxygen, 3));
         event.setMaterial(Sapphire).asGemBasic(false).asOre(3, 7,true).addTools(3.0F, 7.0F, 1024, 3).addArmor(new int[]{3, 7, 7, 3}, 1.0F, 0.0F, 30).mats(of(Aluminium, 2, Oxygen, 3));
-        event.setMaterial(Sodalite).asGemBasic(false).asOre(1, 5,true).mats(of(Aluminium, 3, Silicon, 3, Sodium, 4, Chlorine, 1)).setOreMulti(6).harvestLevel(2);
+        event.setMaterial(Sodalite).asGemBasic(false).asOre(1, 5,false).mats(of(Aluminium, 3, Silicon, 3, Sodium, 4, Chlorine, 1)).setOreMulti(6).harvestLevel(2);
         //Glass = AntimatterAPI.register(Material.class, new Material(Ref.ID, "glass", 0xfafafa, SHINY)).asDust(PLATE, LENS).mats(of(SiliconDioxide, 1));
         event.setMaterial(Olivine).asGemBasic(false).asOre(3, 7,true).mats(of(Magnesium, 2, AntimatterMaterials.Iron, 1, Silicon, 1, Oxygen, 4)).harvestLevel(3);
         //Phosphorus = AntimatterAPI.register(Material.class, new Material(Ref.ID, "phosphorus", 0xffff00, FLINT).asDust().mats(of(Calcium, 3, Phosphate, 2));
@@ -211,7 +198,7 @@ public class GT4RMaterialEvents {
         event.setMaterial(Amethyst).asGemBasic(false).asOre(3, 7,true).addTools(3.0F, 7.0F, 1024, 3).addArmor(new int[]{3, 7, 7, 3}, 1.0F, 0.0F, 30).mats(of(SiliconDioxide, 4, AntimatterMaterials.Iron, 1));
 
         /** **/
-        event.setMaterial(Cinnabar).asDust().asOre(1, 5,true).mats(of(Mercury, 1, Sulfur, 1)).setOreMulti(2).harvestLevel(2);
+        event.setMaterial(Cinnabar).asDust().asOre(1, 5,false).mats(of(Mercury, 1, Sulfur, 1)).setOreMulti(2).harvestLevel(2);
 
         /** Metals **/
         event.setMaterial(BatteryAlloy).asMetal(295, 0, AntimatterMaterialTypes.PLATE).mats(of(Lead, 4, Antimony, 1));
@@ -270,6 +257,11 @@ public class GT4RMaterialEvents {
         //WroughtIron.setSmeltInto(Iron).setMacerateInto(Iron);
 
         //Cinnabar.setDirectSmeltInto(Mercury);
+
+        HotCoolant.remove(MaterialTags.MOLTEN);
+    }
+
+    private static void byProducts(GT4RMaterialEvent event){
         // ore byproducts
         // eligible: cinnabar, uranium, copper, cassiterite, pyrite, sodalite-special:4x byproduct, sphalerite, tetra, bauxite 4x bypoduct, lead, tin, galena, iron, gold, platinum aka sheldonite, nickel, tungstate
         // gems & iridium will be separate redstone, lapis
@@ -334,7 +326,26 @@ public class GT4RMaterialEvents {
         event.setMaterial(Phosphor).addByProduct(Phosphate);
         event.setMaterial(Lithium).addByProduct(Lithium);
         event.setMaterial(Silicon).addByProduct(SiliconDioxide);
-        HotCoolant.remove(MaterialTags.MOLTEN);
+    }
+
+    private static void oreDrops(GT4RMaterialEvent event){
+        MaterialTags.CUSTOM_ORE_DROPS.add(AntimatterMaterials.Redstone, b -> {
+            return createSilkTouchDispatchTable(b, applyExplosionDecay(b, LootItem.lootTableItem(Items.REDSTONE).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 5.0F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))));
+        });
+
+        MaterialTags.CUSTOM_ORE_DROPS.add(AntimatterMaterials.Lapis, b -> {
+            return createSilkTouchDispatchTable(b, applyExplosionDecay(b, LootItem.lootTableItem(Items.LAPIS_LAZULI).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 9.0F))).apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))));
+        });
+        MaterialTags.CUSTOM_ORE_DROPS.add(Sodalite, b -> {
+            return createSilkTouchDispatchTable(b, applyExplosionDecay(b, LootItem.lootTableItem(AntimatterMaterialTypes.GEM.get(Sodalite)).apply(SetItemCountFunction.setCount(UniformGenerator.between(6.0F, 6.0F))).apply(GT4RRandomDropBonus.uniformBonusCount(Enchantments.BLOCK_FORTUNE, 3)))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(BlockLootTablesAccessor.getNoSilkTouch()).add(LootItem.lootTableItem(AntimatterMaterialTypes.DUST.get(Aluminium)).apply(GT4RRandomDropBonus.randomDrops(Enchantments.BLOCK_FORTUNE, 4))));
+        });
+        Function<BlockOre, LootTable.Builder> function = (b) -> createSilkTouchDispatchTable(b, applyExplosionDecay(b, LootItem.lootTableItem(AntimatterMaterialTypes.DUST.get(b.getMaterial())).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 2.0F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))));
+        MaterialTags.CUSTOM_ORE_DROPS.add(Pyrite, function);
+        MaterialTags.CUSTOM_ORE_DROPS.add(Cinnabar, b -> function.apply(b).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(BlockLootTablesAccessor.getNoSilkTouch()).add(LootItem.lootTableItem(AntimatterMaterialTypes.DUST.get(AntimatterMaterials.Redstone)).apply(GT4RRandomDropBonus.randomDrops(Enchantments.BLOCK_FORTUNE, 4)))));
+        MaterialTags.CUSTOM_ORE_DROPS.add(Sphalerite, b -> function.apply(b).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(BlockLootTablesAccessor.getNoSilkTouch()).add(LootItem.lootTableItem(AntimatterMaterialTypes.DUST.get(Zinc)).apply(GT4RRandomDropBonus.randomDrops(Enchantments.BLOCK_FORTUNE, 4)))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(BlockLootTablesAccessor.getNoSilkTouch()).add(LootItem.lootTableItem(AntimatterMaterialTypes.GEM.get(YellowGarnet)).apply(GT4RRandomDropBonus.randomDrops(Enchantments.BLOCK_FORTUNE, 32)))));
+        Function<BlockOreStone, LootTable.Builder> function1 = (b) -> createOreDrop(b, AntimatterMaterialTypes.DUST.get(b.getMaterial()));
+        MaterialTags.CUSTOM_ORE_STONE_DROPS.add(Salt, function1);
+        MaterialTags.CUSTOM_ORE_STONE_DROPS.add(RockSalt, function1);
     }
 
     private static void flags(MaterialEvent event){
