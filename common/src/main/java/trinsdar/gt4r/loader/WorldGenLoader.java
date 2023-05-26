@@ -103,7 +103,7 @@ public class WorldGenLoader {
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Bauxite).atHeight(50, 120).withWeight(6).withSize(16).withBiomes(tagged("has_bauxite")).buildMaterial());
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Ruby).atHeight(-16, 32).withWeight(3).withSize(6).withBiomes(tagged("has_ruby")).buildMaterial());
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Sapphire).atHeight(-16, 32).withWeight(3).withSize(6).withBiomes(tagged("has_sapphire")).buildMaterial());
-        event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Platinum).atHeight(-40, 20).withWeight(3).withSize(6).withSecondaryMaterial(Sphalerite, 0.05f).withBiomes(tagged("has_platinum")).buildMaterial());
+        event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Platinum).atHeight(-40, 20).withWeight(3).withSize(6).withSecondaryMaterial(Nickel, 0.05f).withBiomes(tagged("has_platinum")).buildMaterial());
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Iridium).atHeight(-64, 128).withWeight(1).withSize(4).setRare(true).buildMaterial());
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Salt).atHeight(0, 62).withWeight(6).withSize(64).setSpawnOnOceanFloor(true).withMaterialType(AntimatterMaterialTypes.ORE_STONE).withBiomes(tagged("has_salt")).buildMaterial());
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(RockSalt).atHeight(0, 80).withWeight(2).withSize(64).withMaterialType(AntimatterMaterialTypes.ORE_STONE).withBiomes(tagged("has_rock_salt")).buildMaterial());
