@@ -5,6 +5,8 @@ import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.data.AntimatterStoneTypes;
 import muramasa.antimatter.event.WorldGenEvent;
+import muramasa.antimatter.worldgen.smallore.WorldGenSmallOre;
+import muramasa.antimatter.worldgen.smallore.WorldGenSmallOreBuilder;
 import muramasa.antimatter.worldgen.vanillaore.WorldGenVanillaOre;
 import muramasa.antimatter.worldgen.vanillaore.WorldGenVanillaOreBuilder;
 import muramasa.antimatter.worldgen.vein.WorldGenVein;
@@ -94,6 +96,9 @@ public class WorldGenLoader {
     }
 
     private static void initVanillaOres(WorldGenEvent event){
+        event.smallOre(new WorldGenSmallOreBuilder().withMaterial(Ruby).withAmountPerChunk(2).withBiomes(tagged("has_ruby")).buildMaterial());
+        event.smallOre(new WorldGenSmallOreBuilder().withMaterial(Sapphire).withAmountPerChunk(2).withBiomes(tagged("has_sapphire")).buildMaterial());
+        event.smallOre(new WorldGenSmallOreBuilder().withMaterial(Coal).withAmountPerChunk(8).atHeight(16, 126).buildMaterial());
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Tin).atHeight(-64, 0).withWeight(25).withSize(8).withSecondaryMaterial(Iron, 0.01f).buildMaterial());
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Uraninite).atHeight(-16, 100).withWeight(8).withSize(4).withBiomes(tagged("is_dead")).setBiomeBlacklist(true).buildMaterial());
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Uraninite).withCustomId("uranite_dead").atHeight(-16, 100).withWeight(20).withSize(4).withBiomes(tagged("is_dead")).buildMaterial());
@@ -129,9 +134,9 @@ public class WorldGenLoader {
             event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Gold).withCustomId("gold_lower").atHeight(-64, -48).withWeight(2).withSize(9).withSecondaryMaterial(Copper, 0.02f).withDiscardOnExposureChance(0.5f).setRare(true).buildMaterial());
             event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Redstone).atHeight(-64, 15).withWeight(4).withSize(8).withSecondaryMaterial(Cinnabar, 0.01f).buildMaterial());
             event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Redstone).withCustomId("redstone_lower").atHeight(-96, -32).withWeight(8).withSize(8).withSecondaryMaterial(Cinnabar, 0.01f).setHasTriangleHeight(true).buildMaterial());
-            event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Diamond).atHeight(-144, 16).withWeight(7).withSize(4).withDiscardOnExposureChance(0.5f).setHasTriangleHeight(true).buildMaterial());
-            event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Diamond).withCustomId("diamond_large").atHeight(-144, 16).withWeight(9).withSize(12).withDiscardOnExposureChance(0.7f).setHasTriangleHeight(true).setRare(true).buildMaterial());
-            event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Diamond).withCustomId("diamond_buried").atHeight(-144, 16).withWeight(4).withSize(8).withDiscardOnExposureChance(1.0f).setHasTriangleHeight(true).buildMaterial());
+            event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Diamond).atHeight(-144, 16).withWeight(7).withSize(4).withSecondaryMaterial(Diamond, 0.03f).withSecondaryType(AntimatterMaterialTypes.ORE_SMALL).withDiscardOnExposureChance(0.5f).setHasTriangleHeight(true).buildMaterial());
+            event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Diamond).withCustomId("diamond_large").atHeight(-144, 16).withWeight(9).withSecondaryMaterial(Diamond, 0.03f).withSecondaryType(AntimatterMaterialTypes.ORE_SMALL).withSize(12).withDiscardOnExposureChance(0.7f).setHasTriangleHeight(true).setRare(true).buildMaterial());
+            event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Diamond).withCustomId("diamond_buried").atHeight(-144, 16).withWeight(4).withSecondaryMaterial(Diamond, 0.03f).withSecondaryType(AntimatterMaterialTypes.ORE_SMALL).withSize(8).withDiscardOnExposureChance(1.0f).setHasTriangleHeight(true).buildMaterial());
             event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(AntimatterMaterials.Lapis).atHeight(-32, 32).withWeight(2).withSize(7).setHasTriangleHeight(true).buildMaterial());
             event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(AntimatterMaterials.Lapis).withCustomId("lapis_buried").atHeight(-64, 64).withWeight(4).withSize(7).withDiscardOnExposureChance(1.0f).buildMaterial());
             event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Emerald).atHeight(-16, 480).withWeight(100).withSize(3).setHasTriangleHeight(true).withBiomes("#minecraft:is_mountain").buildMaterial());
