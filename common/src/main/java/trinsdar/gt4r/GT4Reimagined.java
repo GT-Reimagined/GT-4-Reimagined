@@ -30,8 +30,6 @@ import trinsdar.gt4r.datagen.GT4RItemModelProvider;
 import trinsdar.gt4r.datagen.GT4RLocalizations;
 import trinsdar.gt4r.datagen.GT4RRandomDropBonus;
 import trinsdar.gt4r.material.GT4RMaterialEvent;
-import trinsdar.gt4r.worldgen.GT4RPlacedFeatures;
-import trinsdar.gt4r.worldgen.GT4RFeatures;
 
 
 public class GT4Reimagined extends AntimatterMod {
@@ -66,7 +64,6 @@ public class GT4Reimagined extends AntimatterMod {
                 MenuHandlers.init();
                 GT4RData.init(side);
                 Machines.init();
-                GT4RFeatures.init();
                 RecipeMaps.postInit();
                 Guis.init(side);
                 Models.init();
@@ -77,7 +74,6 @@ public class GT4Reimagined extends AntimatterMod {
                     //GEM.forceOverride(Amethyst, ForgeRegistries.ITEMS.getValue(new ResourceLocation("bluepower", "amethyst_gem")));
                 }
                 GT4RData.buildTierMaps();
-                //GT4RPlacedFeatures.init();
                 Structures.init();
                 Structures.initPatterns();
                 OreConfigHandler.ORE_CONFIG_HANDLER.save();
@@ -100,9 +96,6 @@ public class GT4Reimagined extends AntimatterMod {
 //                AntimatterAPI.registerCoverStack(Data.PumpEV.get(1), new CoverPump(Tier.EV));
 //                AntimatterAPI.registerCoverStack(Data.PumpIV.get(1), new CoverPump(Tier.IV));
 //                MaterialType.PLATE.all().forEach(m -> AntimatterAPI.registerCoverStack(MaterialType.PLATE.get(m, 1), Data.COVER_PLATE));
-            }
-            case WORLDGEN_INIT -> {
-                //WorldGenLoader.init();
             }
             case CLIENT_DATA_INIT -> ScreenFactories.init();
         }
