@@ -77,25 +77,6 @@ public class GT4Reimagined extends AntimatterMod {
                 Structures.init();
                 Structures.initPatterns();
                 OreConfigHandler.ORE_CONFIG_HANDLER.save();
-                //GregTechAPI.registerFluidCell(Data.CellTin.get(1));
-                //GregTechAPI.registerFluidCell(Data.CellSteel.get(1));
-                //GregTechAPI.registerFluidCell(Data.CellTungstensteel.get(1));
-
-//                AntimatterAPI.registerCover(Data.COVER_PLATE);
-//                AntimatterAPI.registerCover(Data.COVER_CONVEYOR);
-//                AntimatterAPI.registerCover(Data.COVER_PUMP);
-
-//                AntimatterAPI.registerCoverStack(Data.ConveyorLV.get(1), new CoverConveyor(Tier.LV));
-//                AntimatterAPI.registerCoverStack(Data.ConveyorMV.get(1), new CoverConveyor(Tier.MV));
-//                AntimatterAPI.registerCoverStack(Data.ConveyorHV.get(1), new CoverConveyor(Tier.HV));
-//                AntimatterAPI.registerCoverStack(Data.ConveyorEV.get(1), new CoverConveyor(Tier.EV));
-//                AntimatterAPI.registerCoverStack(Data.ConveyorIV.get(1), new CoverConveyor(Tier.IV));
-//                AntimatterAPI.registerCoverStack(Data.PumpLV.get(1), new CoverPump(Tier.LV));
-//                AntimatterAPI.registerCoverStack(Data.PumpMV.get(1), new CoverPump(Tier.MV));
-//                AntimatterAPI.registerCoverStack(Data.PumpHV.get(1), new CoverPump(Tier.HV));
-//                AntimatterAPI.registerCoverStack(Data.PumpEV.get(1), new CoverPump(Tier.EV));
-//                AntimatterAPI.registerCoverStack(Data.PumpIV.get(1), new CoverPump(Tier.IV));
-//                MaterialType.PLATE.all().forEach(m -> AntimatterAPI.registerCoverStack(MaterialType.PLATE.get(m, 1), Data.COVER_PLATE));
             }
             case CLIENT_DATA_INIT -> ScreenFactories.init();
         }

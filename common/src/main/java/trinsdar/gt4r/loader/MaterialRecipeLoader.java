@@ -30,16 +30,7 @@ import static com.google.common.collect.ImmutableMap.of;
 import static trinsdar.gt4r.data.GT4RMaterialTags.*;
 import static trinsdar.gt4r.data.Materials.*;
 
-//TODO EXCLUDED FROM COMPILE
-
 public class MaterialRecipeLoader {
-
-    //TODO register purified dust processing to centrifuged processing to regain lost benefits
-
-    public static int mixedOreYield = Ref.mixedOreYieldsTwoThirdsPureOre ? 2 : 3;
-
-    //TODO: When we do have MaterialInfo or a MaterialType 'amount' system, some of this would need to adapt to it!
-    //TODO: Plasma Arc/Normal Arc smelting will be handled differently, when we have said amount system.
 
     public static void loadRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider) {
         final CriterionTriggerInstance in = provider.hasSafeItem(AntimatterDefaultTools.WRENCH.getTag());
