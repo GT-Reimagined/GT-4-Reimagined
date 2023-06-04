@@ -10,6 +10,7 @@ import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tile.multi.TileEntityBasicMultiMachine;
 import muramasa.antimatter.tool.AntimatterToolType;
 import muramasa.antimatter.util.TagUtils;
+import muramasa.antimatter.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -30,6 +31,7 @@ import trinsdar.gt4r.data.CustomTags;
 import trinsdar.gt4r.machine.IUpgradeProvider;
 import trinsdar.gt4r.machine.UpgradeableMachineRecipeHandler;
 
+import java.util.List;
 import java.util.Map;
 
 public class TileEntityUpgradeableBasicMultiblock<T extends TileEntityUpgradeableBasicMultiblock<T>> extends TileEntityBasicMultiMachine<T> implements IUpgradeProvider {
@@ -38,8 +40,8 @@ public class TileEntityUpgradeableBasicMultiblock<T extends TileEntityUpgradeabl
     public TileEntityUpgradeableBasicMultiblock(Machine<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
         this.recipeHandler.set(() -> new UpgradeableMachineRecipeHandler<>((T)this));
-        TagKey<Item> transformer = this.getMachineTier().getVoltage() >= Tier.HV.getVoltage() ? CustomTags.HV_TRANSFORMER_UPGRADES : CustomTags.TRANSFORMER_UPGRADES;
-        allowedUpgrades = ImmutableMap.of(CustomTags.OVERCLOCKER_UPGRADES, 4, transformer, 1, CustomTags.MUFFLER_UPGRADES, 1, CustomTags.STEAM_UPGRADES, 1);
+        int transformerAmount = this.getMachineTier().getVoltage() >= Tier.IV.getVoltage() ? 0 : 5 - Utils.getVoltageTier(this.getMachineTier().getVoltage());
+        allowedUpgrades = ImmutableMap.of(CustomTags.OVERCLOCKER_UPGRADES, 4, CustomTags.TRANSFORMER_UPGRADES, transformerAmount, CustomTags.MUFFLER_UPGRADES, 1, CustomTags.STEAM_UPGRADES, 1);
 
     }
 
@@ -59,6 +61,16 @@ public class TileEntityUpgradeableBasicMultiblock<T extends TileEntityUpgradeabl
         if (!stack.isEmpty()){
             TagKey<Item> foundUpgrade = null;
             for (TagKey<Item> allowedUpgrade : getAllowedUpgrades().keySet()) {
+                if (allowedUpgrade == CustomTags.TRANSFORMER_UPGRADES){
+                    long maxInput = energyHandler.map(e -> e.getInputVoltage()).orElse(0L);
+                    allowedUpgrade = maxInput >= 512 ? CustomTags.HV_TRANSFORMER_UPGRADES : CustomTags.TRANSFORMER_UPGRADES;
+                    if (stack.is(allowedUpgrade)){
+                        foundUpgrade = CustomTags.TRANSFORMER_UPGRADES;
+                        break;
+                    } else {
+                        continue;
+                    }
+                }
                 if (stack.is(allowedUpgrade)){
                     foundUpgrade = allowedUpgrade;
                     break;
@@ -70,23 +82,21 @@ public class TileEntityUpgradeableBasicMultiblock<T extends TileEntityUpgradeabl
                 if (upgrade >= maxCount) return InteractionResult.PASS;
                 upgrade++;
                 upgrades.put(foundUpgrade, upgrade);
-                if (!player.isCreative()) {
-                    stack.shrink(1);
-                }
                 if (isServerSide()){
-                    if (foundUpgrade == CustomTags.OVERCLOCKER_UPGRADES)
-                        recipeHandler.ifPresent(MachineRecipeHandler::resetProgress);
-                    if (foundUpgrade == CustomTags.TRANSFORMER_UPGRADES || foundUpgrade == CustomTags.HV_TRANSFORMER_UPGRADES) {
-                        int finalUpgrade = foundUpgrade == CustomTags.HV_TRANSFORMER_UPGRADES ? upgrade * 2 : upgrade;
-                        energyHandler.ifPresent(e -> {
-                            e.setInputVoltage(e.getInputVoltage() * (4 ^ finalUpgrade));
-                        });
+                    if (!player.isCreative()) {
+                        stack.shrink(1);
                     }
+                    if (foundUpgrade == CustomTags.OVERCLOCKER_UPGRADES) {
+                        recipeHandler.ifPresent(MachineRecipeHandler::resetProgress);
+                    }
+                    if (foundUpgrade == CustomTags.TRANSFORMER_UPGRADES || foundUpgrade == CustomTags.HV_TRANSFORMER_UPGRADES) {
+                        energyHandler.ifPresent(e -> e.setInputVoltage(e.getInputVoltage() * 4));
+                    }
+                    world.playSound(null, pos, SoundEvents.UI_BUTTON_CLICK, SoundSource.BLOCKS, 1.0f, 1.0f);
                 }
                 if (foundUpgrade == CustomTags.MUFFLER_UPGRADES) {
                     this.setMuffled(true);
                 }
-                world.playSound(null, pos, SoundEvents.UI_BUTTON_CLICK, SoundSource.BLOCKS, 1.0f, 1.0f);
                 return InteractionResult.sidedSuccess(isClientSide());
             }
 
