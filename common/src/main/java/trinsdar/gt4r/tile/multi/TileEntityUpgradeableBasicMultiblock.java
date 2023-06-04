@@ -20,11 +20,13 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 import trinsdar.gt4r.data.CustomTags;
@@ -134,6 +136,35 @@ public class TileEntityUpgradeableBasicMultiblock<T extends TileEntityUpgradeabl
         super.setMachineState(newState);
         if (level != null && level.isClientSide && upgrades.containsKey(CustomTags.MUFFLER_UPGRADES)){
             SoundHelper.clear(level, this.getBlockPos());
+        }
+    }
+
+    @Override
+    public void onDrop(BlockState state, LootContext.Builder builder, List<ItemStack> drops) {
+        ItemStack machine = drops.get(0);
+        if (!upgrades.isEmpty()){
+            CompoundTag nbt = machine.getOrCreateTag();
+            ListTag listTag = new ListTag();
+            upgrades.forEach((k, v) -> {
+                CompoundTag upgrade = new CompoundTag();
+                upgrade.putString("key", k.location().toString());
+                upgrade.putInt("value", v);
+                listTag.add(upgrade);
+            });
+            if (!listTag.isEmpty()) nbt.put("upgrades", listTag);
+        }
+    }
+
+    @Override
+    public void onPlacedBy(Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        super.onPlacedBy(world, pos, state, placer, stack);
+        CompoundTag tag = stack.getTag();
+        if (tag != null && tag.contains("upgrades")){
+            ListTag list = tag.getList("upgrades", 10);
+            for (int i = 0; i < list.size(); i++) {
+                CompoundTag upgrade = list.getCompound(i);
+                upgrades.put(TagUtils.getItemTag(new ResourceLocation(upgrade.getString("key"))), upgrade.getInt("value"));
+            }
         }
     }
 }

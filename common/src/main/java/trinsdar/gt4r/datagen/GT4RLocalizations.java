@@ -62,6 +62,11 @@ public class GT4RLocalizations {
             add("tooltip.gt4r.upload_tank", "Upload to Tank");
             add("tooltip.gt4r.download_orb", "Download to Data Orb");
             add("tooltip.gt4r.sort_inventory", "Sort Inventory");
+            add("tooltip.gt4r.possible_upgrades", "Possible Upgrades: %s");
+            add("tooltip.gt4r.overclocker_upgrades", "%s Overclocker Upgrades");
+            add("tooltip.gt4r.transformer_upgrades", "%s Transformer Upgrades");
+            add("tooltip.gt4r.muffler_upgrades", "Has Muffler Upgrades");
+            add("tooltip.gt4r.steam_upgrades", "Has Steam Upgrade");
             add("machine.drum.fluid", "Contains %s mb of %s");
             add("machine.drum.output", "Currently set to auto output");
             add("message.gt4r.player_detector.all", "Detects all Players");
