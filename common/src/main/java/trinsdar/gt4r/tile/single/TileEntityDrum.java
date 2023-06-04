@@ -15,10 +15,13 @@ import net.minecraft.network.chat.TextComponent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -47,7 +50,7 @@ public class TileEntityDrum extends TileEntityMaterial<TileEntityDrum> {
     }
 
     @Override
-    public InteractionResult onInteract(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit, @Nullable AntimatterToolType type) {
+    public InteractionResult onInteractServer(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit, @Nullable AntimatterToolType type) {
         boolean[] success = new boolean[1];
         this.fluidHandler.ifPresent(f -> {
             DrumFluidHandler dF = (DrumFluidHandler) f;
@@ -72,6 +75,37 @@ public class TileEntityDrum extends TileEntityMaterial<TileEntityDrum> {
             this.output = ((DrumFluidHandler)f).isOutput();
         });
        super.onRemove();
+    }
+
+    @Override
+    public void onDrop(BlockState state, LootContext.Builder builder, List<ItemStack> drops) {
+        if (!drops.isEmpty()){
+            ItemStack stack = drops.get(0);
+            if (!getDrop().isEmpty()){
+                CompoundTag nbt = stack.getOrCreateTag();
+                nbt.put("Fluid", getDrop().writeToNBT(new CompoundTag()));
+            }
+            if (isOutput()){
+                CompoundTag nbt = stack.getOrCreateTag();
+                nbt.putBoolean("Outputs", isOutput());
+            }
+        }
+    }
+
+    @Override
+    public void onPlacedBy(Level world, BlockPos pos, BlockState state, @org.jetbrains.annotations.Nullable LivingEntity placer, ItemStack stack) {
+        CompoundTag nbt = stack.getTag();
+        if (nbt != null && (nbt.contains("Fluid") || nbt.contains("Outputs"))){
+            this.fluidHandler.ifPresent(f -> {
+                FluidStack fluid = nbt.contains("Fluid") ? FluidStack.loadFluidStackFromNBT(nbt.getCompound("Fluid")) : FluidStack.EMPTY;
+                if (fluid != null && !fluid.isEmpty()){
+                    f.fill(fluid, IFluidHandler.FluidAction.EXECUTE);
+                }
+                if (nbt.contains("Outputs")){
+                    ((TileEntityDrum.DrumFluidHandler)f).setOutput(nbt.getBoolean("Outputs"));
+                }
+            });
+        }
     }
 
     public FluidStack getDrop() {

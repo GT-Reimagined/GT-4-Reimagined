@@ -188,6 +188,12 @@ public class GT4RData {
     public static ItemCover RedstoneMachineController = AntimatterAPI.get(ItemCover.class, COVER_REDSTONE_MACHINE_CONTROLLER.getId(), Ref.ID);
     public static ItemBasic<?> Shutter = new ItemBasic<>(Ref.ID, "shutter").tip("Can be placed on machines as a cover");
 
+    public static ItemBasic<?> OverclockerUpgrade = new ItemBasic<>(Ref.ID, "overclocker_upgrade");
+    public static ItemBasic<?> TransformerUpgrade = new ItemBasic<>(Ref.ID, "transformer_upgrade");
+    public static ItemBasic<?> SteamUpgrade = new ItemBasic<>(Ref.ID, "steam_upgrade");
+    public static ItemBasic<?> HVTransformerUpgrade = new ItemBasic<>(Ref.ID, "hv_transformer_upgrade");
+    public static ItemBasic<?> MufflerUpgrade = new ItemBasic<>(Ref.ID, "muffler_upgrade");
+
     public static ItemFluidCell CellTin = new ItemFluidCell(Ref.ID,Tin, 1000);
 
     public static ItemBasic<?> CopperCoil = new ItemBasic<>(Ref.ID, "copper_coil");

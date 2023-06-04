@@ -14,6 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.data.GT4RMaterialTags;
 
 import static muramasa.antimatter.util.Utils.getConventionalMaterialType;
@@ -35,6 +36,11 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.tag(PLATES_IRON_ALUMINIUM).addTag(getTag("plates/iron")).addTag(getTag("plates/aluminium"));
         this.tag(PLATES_WROUGHT_ALUMINIUM).addTag(getTag("plates/wrought_iron")).addTag(getTag("plates/aluminium"));
         this.tag(PLATES_TITAN_TUNGSTEEL).addTag(getTag("plates/titanium")).addTag(getTag("plates/tungstensteel"));
+        this.tag(OVERCLOCKER_UPGRADES).add(OverclockerUpgrade);
+        this.tag(TRANSFORMER_UPGRADES).add(TransformerUpgrade);
+        this.tag(HV_TRANSFORMER_UPGRADES).add(HVTransformerUpgrade);
+        this.tag(MUFFLER_UPGRADES).add(MufflerUpgrade);
+        this.tag(STEAM_UPGRADES).add(SteamUpgrade);
         this.tag(CIRCUITS_BASIC).add(CircuitBasic);
         this.tag(CIRCUITS_ADVANCED).add(CircuitAdv);
         this.tag(CIRCUITS_ELITE).add(CircuitDataControl);

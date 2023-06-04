@@ -11,7 +11,6 @@ import muramasa.antimatter.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -92,7 +91,7 @@ public class TileEntityPlayerDetector extends TileEntityMachine<TileEntityPlayer
 
     @SuppressWarnings("NoTranslation")
     @Override
-    public InteractionResult onInteract(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit, @Nullable AntimatterToolType type) {
+    public InteractionResult onInteractServer(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit, @Nullable AntimatterToolType type) {
         ItemStack stack = player.getItemInHand(hand);
         if (stack.isEmpty() || !(stack.getItem() instanceof IAntimatterTool || stack.getItem() instanceof IHaveCover)){
             this.detectorType = detectorType.next();
@@ -108,7 +107,7 @@ public class TileEntityPlayerDetector extends TileEntityMachine<TileEntityPlayer
             }
             return InteractionResult.SUCCESS;
         }
-        return super.onInteract(state, world, pos, player, hand, hit, type);
+        return super.onInteractServer(state, world, pos, player, hand, hit, type);
     }
 
     @Override

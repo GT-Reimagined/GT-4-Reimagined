@@ -10,6 +10,7 @@ import muramasa.antimatter.machine.types.TankMachine;
 import muramasa.antimatter.tile.single.TileEntityBatteryBuffer;
 import muramasa.antimatter.tile.single.TileEntityDigitalTransformer;
 import muramasa.antimatter.tile.single.TileEntityTransformer;
+import net.minecraft.sounds.SoundEvents;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.block.BlockRedstoneMachine;
 import trinsdar.gt4r.machine.ChestMachine;
@@ -119,7 +120,7 @@ public class Machines {
     public static BasicMultiMachine<?> COKE_OVEN = new BasicMultiMachine<>(Ref.ID, "coke_oven").setMap(COKING).setTiers(LV).addFlags(GUI, ITEM, FLUID).setTile(TileEntityCokeOven::new);
     public static BasicMultiMachine<?> PRIMITIVE_BLAST_FURNACE = new BasicMultiMachine<>(Ref.ID, "primitive_blast_furnace").setMap(BASIC_BLASTING).setTiers(BRONZE).addFlags(GUI, ITEM).setTile(TileEntityPrimitiveBlastFurnace::new);
     public static MultiMachine CHARCOAL_PIT = new MultiMachine(Ref.ID, "charcoal_pit").setTiers(LV).setTile(TileEntityCharcoalPit::new);
-    public static BasicMultiMachine<?> BLAST_FURNACE = new BasicMultiMachine<>(Ref.ID, "industrial_blast_furnace").setMap(BLASTING).setTiers(MV).addFlags(GUI, ITEM, ENERGY).setTile(TileEntityIndustrialBlastFurnace::new);
+    public static BasicMultiMachine<?> BLAST_FURNACE = new BasicMultiMachine<>(Ref.ID, "industrial_blast_furnace").setMap(BLASTING).setTiers(MV).addFlags(GUI, ITEM, ENERGY).setTile(TileEntityIndustrialBlastFurnace::new).setSound(SoundEvents.CAT_PURREOW, 1.0f);
     public static BasicMultiMachine<?> IMPLOSION_COMPRESSOR = new BasicMultiMachine<>(Ref.ID, "implosion_compressor").setMap(IMPLOSION_COMPRESSING).setTiers(LV).addFlags(GUI, ITEM, ENERGY).setTile(TileEntityImplosionCompressor::new);
     public static BasicMultiMachine<?> INDUSTRIAL_GRINDER = new BasicMultiMachine<>(Ref.ID, "industrial_grinder").setMap(INDUSTRIAL_GRINDING).setTiers(MV).addFlags(GUI, ITEM, ENERGY, FLUID).setTile(TileEntityIndustrialGrinder::new);
     public static BasicMultiMachine<?> INDUSTRIAL_SAWMILL = new BasicMultiMachine<>(Ref.ID, "industrial_sawmill").setMap(INDUSTRIAL_SAWMILLING).setTiers(MV).addFlags(GUI, ITEM, ENERGY, FLUID).setTile(TileEntityIndustrialSawmill::new);

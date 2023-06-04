@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.data.SlotTypes;
+import trinsdar.gt4r.machine.UpgradeableMachineRecipeHandler;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class TileEntityIndustrialBlastFurnace extends TileEntityBasicMultiMachine<TileEntityIndustrialBlastFurnace> implements IInfoRenderer<TileEntityIndustrialBlastFurnace.IBFWidget> {
+public class TileEntityIndustrialBlastFurnace extends TileEntityUpgradeableBasicMultiblock<TileEntityIndustrialBlastFurnace> implements IInfoRenderer<TileEntityIndustrialBlastFurnace.IBFWidget> {
 
     public TileEntityIndustrialBlastFurnace(Machine<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -136,7 +137,7 @@ public class TileEntityIndustrialBlastFurnace extends TileEntityBasicMultiMachin
         }
     }
 
-    public static class IBFRecipeHandler extends MachineRecipeHandler<TileEntityIndustrialBlastFurnace> {
+    public static class IBFRecipeHandler extends UpgradeableMachineRecipeHandler<TileEntityIndustrialBlastFurnace> {
         protected final ContainerData GUI_SYNC_DATA = new ContainerData() {
 
             @Override

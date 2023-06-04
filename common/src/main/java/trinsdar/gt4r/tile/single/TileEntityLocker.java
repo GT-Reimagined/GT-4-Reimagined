@@ -16,8 +16,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import trinsdar.gt4r.machine.MaterialMachine;
 
@@ -36,7 +34,7 @@ public class TileEntityLocker extends TileEntityMaterial<TileEntityLocker> {
     }
 
     @Override
-    public InteractionResult onInteract(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit, @Nullable AntimatterToolType type) {
+    public InteractionResult onInteractServer(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit, @Nullable AntimatterToolType type) {
         if (player.getItemInHand(hand).isEmpty() && hit.getDirection() == this.getFacing()){
             this.itemHandler.ifPresent(h -> {
                 for (int i = 0; i < 4; i++){
@@ -61,7 +59,7 @@ public class TileEntityLocker extends TileEntityMaterial<TileEntityLocker> {
             world.playSound(null, this.getBlockPos(), SoundEvents.UI_BUTTON_CLICK, SoundSource.PLAYERS, 1.0F, 1.0F);
             return InteractionResult.SUCCESS;
         }
-        return super.onInteract(state, world, pos, player, hand, hit, type);
+        return super.onInteractServer(state, world, pos, player, hand, hit, type);
     }
 
     @Override
