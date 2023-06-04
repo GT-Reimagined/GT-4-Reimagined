@@ -117,8 +117,8 @@ public class Machines {
 
     public static BasicMachine PLAYER_DETECTOR = new BasicMachine(Ref.ID, "player_detector").setTiers(LV).setTile(TileEntityPlayerDetector::new).setBlock(BlockRedstoneMachine::new).setItemBlockClass(() -> BlockRedstoneMachine.class).frontCovers().noCovers().allowFrontIO().overlayTexture(Textures.SIMPLE_ACTIVE_SIDED);
 
-    public static BasicMultiMachine<?> COKE_OVEN = new BasicMultiMachine<>(Ref.ID, "coke_oven").setMap(COKING).setTiers(LV).addFlags(GUI, ITEM, FLUID).setTile(TileEntityCokeOven::new);
-    public static BasicMultiMachine<?> PRIMITIVE_BLAST_FURNACE = new BasicMultiMachine<>(Ref.ID, "primitive_blast_furnace").setMap(BASIC_BLASTING).setTiers(BRONZE).addFlags(GUI, ITEM).setTile(TileEntityPrimitiveBlastFurnace::new);
+    public static BasicMultiMachine<?> COKE_OVEN = new BasicMultiMachine<>(Ref.ID, "coke_oven").setMap(COKING).setTiers(NONE).addFlags(GUI, ITEM, FLUID).setTile(TileEntityCokeOven::new);
+    public static BasicMultiMachine<?> PRIMITIVE_BLAST_FURNACE = new BasicMultiMachine<>(Ref.ID, "primitive_blast_furnace").setMap(BASIC_BLASTING).setTiers(NONE).addFlags(GUI, ITEM).setTile(TileEntityPrimitiveBlastFurnace::new);
     public static MultiMachine CHARCOAL_PIT = new MultiMachine(Ref.ID, "charcoal_pit").setTiers(LV).setTile(TileEntityCharcoalPit::new);
     public static BasicMultiMachine<?> BLAST_FURNACE = new BasicMultiMachine<>(Ref.ID, "industrial_blast_furnace").setMap(BLASTING).setTiers(MV).addFlags(GUI, ITEM, ENERGY).setTile(TileEntityIndustrialBlastFurnace::new).setSound(SoundEvents.CAT_PURREOW, 1.0f);
     public static BasicMultiMachine<?> IMPLOSION_COMPRESSOR = new BasicMultiMachine<>(Ref.ID, "implosion_compressor").setMap(IMPLOSION_COMPRESSING).setTiers(LV).addFlags(GUI, ITEM, ENERGY).setTile(TileEntityImplosionCompressor::new);

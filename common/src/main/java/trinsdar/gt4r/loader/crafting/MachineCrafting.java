@@ -36,10 +36,10 @@ public class MachineCrafting {
     }
 
     private static void loadMultiblockRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider){
-        provider.addItemRecipe(output, Ref.ID, "primitive_blast_furnace", "machines", "has_fire_bricks", provider.hasSafeItem(FireBrick),
-                PRIMITIVE_BLAST_FURNACE.getItem(BRONZE), of('B', FireBrick, 'I', AntimatterMaterialTypes.PLATE.getMaterialTag(AntimatterMaterials.Iron)), "BBB", "BIB", "BBB");
-        provider.addItemRecipe(output, Ref.ID, "coke_oven", "machines", "has_fire_bricks", provider.hasSafeItem(FireBrick),
-                COKE_OVEN.getItem(LV), of('B', FireBrick), "BBB", "B B", "BBB");
+        provider.addItemRecipe(output, Ref.ID, "", "machines", "has_fire_bricks", provider.hasSafeItem(FireBrick),
+                PRIMITIVE_BLAST_FURNACE.getItem(NONE), of('B', FireBrick, 'I', AntimatterMaterialTypes.PLATE.getMaterialTag(AntimatterMaterials.Iron)), "BBB", "BIB", "BBB");
+        provider.addItemRecipe(output, Ref.ID, "", "machines", "has_fire_bricks", provider.hasSafeItem(FireBrick),
+                COKE_OVEN.getItem(NONE), of('B', FireBrick), "BBB", "B B", "BBB");
         provider.addItemRecipe(output, Ref.ID,"large_gas_turbine","machines", "has_gas_turbine", provider.hasSafeItem(GAS_TURBINE.getItem(LV)),
                 LARGE_GAS_TURBINE.getItem(IV), of('G', GAS_TURBINE.getItem(LV), 'T', GEARS_TITAN_TUNGSTEEL, 'H', MACHINE_HULLS_VERY_ADVANCED, 'C', CIRCUITS_MASTER), "GGG", "THT", "GCG");
         provider.addItemRecipe(output, Ref.ID,"large_steam_turbine","machines", "has_steam_turbine", provider.hasSafeItem(STEAM_TURBINE.getItem(LV)),
