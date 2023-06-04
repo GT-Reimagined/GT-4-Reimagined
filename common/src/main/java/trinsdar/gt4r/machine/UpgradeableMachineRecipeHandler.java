@@ -31,6 +31,8 @@ public class UpgradeableMachineRecipeHandler<T extends TileEntityMachine<T> & IU
     @Override
     public void resetProgress() {
         super.resetProgress();
-        calculateDurations();
+        if (activeRecipe != null) {
+            calculateDurations();
+        }
     }
 }
