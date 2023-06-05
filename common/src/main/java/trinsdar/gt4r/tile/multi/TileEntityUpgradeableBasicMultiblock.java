@@ -31,6 +31,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 import trinsdar.gt4r.data.CustomTags;
 import trinsdar.gt4r.machine.IUpgradeProvider;
+import trinsdar.gt4r.machine.UpgradeableFluidHandler;
 import trinsdar.gt4r.machine.UpgradeableMachineRecipeHandler;
 
 import java.util.List;
@@ -42,6 +43,7 @@ public class TileEntityUpgradeableBasicMultiblock<T extends TileEntityUpgradeabl
     public TileEntityUpgradeableBasicMultiblock(Machine<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
         this.recipeHandler.set(() -> new UpgradeableMachineRecipeHandler<>((T)this));
+        this.fluidHandler.set(() -> new UpgradeableFluidHandler<>((T)this));
         int transformerAmount = this.getMachineTier().getVoltage() >= Tier.IV.getVoltage() ? 0 : 5 - Utils.getVoltageTier(this.getMachineTier().getVoltage());
         allowedUpgrades = ImmutableMap.of(CustomTags.OVERCLOCKER_UPGRADES, 4, CustomTags.TRANSFORMER_UPGRADES, transformerAmount, CustomTags.MUFFLER_UPGRADES, 1, CustomTags.STEAM_UPGRADES, 1);
 
@@ -141,6 +143,7 @@ public class TileEntityUpgradeableBasicMultiblock<T extends TileEntityUpgradeabl
 
     @Override
     public void onDrop(BlockState state, LootContext.Builder builder, List<ItemStack> drops) {
+        if (drops.isEmpty()) return;
         ItemStack machine = drops.get(0);
         if (!upgrades.isEmpty()){
             CompoundTag nbt = machine.getOrCreateTag();
