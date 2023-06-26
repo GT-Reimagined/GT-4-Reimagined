@@ -19,9 +19,7 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import trinsdar.gt4r.block.BlockCasing;
-import trinsdar.gt4r.block.BlockMachineMaterial;
 import trinsdar.gt4r.block.BlockNonSolidMachine;
-import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.material.GT4RMaterialEvent;
 
 import java.util.function.Function;
@@ -36,7 +34,6 @@ public class GT4RBlockLootProvider extends AntimatterBlockLootProvider {
     @Override
     protected void loot() {
         super.loot();
-        AntimatterAPI.all(BlockMachineMaterial.class, providerDomain, this::add);
         AntimatterAPI.all(BlockNonSolidMachine.class, providerDomain, this::add);
 
         AntimatterAPI.all(BlockCasing.class, providerDomain, this::add);

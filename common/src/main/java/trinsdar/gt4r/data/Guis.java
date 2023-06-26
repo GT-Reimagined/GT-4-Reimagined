@@ -68,9 +68,6 @@ public class Guis {
             .add(IT_OUT, 47, 4).add(IT_OUT, 83, 26).add(IT_OUT, 156, 48).add(IT_OUT, 4, 67).add(IT_OUT, 24, 110).add(IT_OUT, 51, 102).add(IT_OUT, 51, 120).add(IT_OUT, 71, 102).add(IT_OUT, 71, 120).add(IT_OUT, 98, 111).add(IT_OUT, 134, 93).add(IT_OUT, 134, 111).add(IT_OUT, 4, 146).add(IT_OUT, 24, 146)
             .add(IT_OUT, 83, 49)
     );
-
-    public static GuiData WORKBENCH = new GuiData("gt4r","workbench").setSlots(ISlotProvider.DEFAULT());
-    public static GuiData CHARGING_WORKBENCH = new GuiData("gt4r","charging_workbench").setSlots(ISlotProvider.DEFAULT());
     public static GuiData LOCKER = new GuiData("gt4r","locker").setSlots(ISlotProvider.DEFAULT().add(STORAGE, 80, 8).add(STORAGE, 80, 8 + (18)).add(STORAGE, 80, 8 + (2 * 18)).add(STORAGE, 80, 8 + (3 * 18)));
     public static GuiData CHARGING_LOCKER = new GuiData("gt4r","charging_locker").setSlots(ISlotProvider.DEFAULT().add(ENERGY, 80, 8).add(ENERGY, 80, 8 + (18)).add(ENERGY, 80, 8 + (2 * 18)).add(ENERGY, 80, 8 + (3 * 18)));
 
@@ -218,30 +215,6 @@ public class Guis {
         DIGITAL_TANK.add(BASIC_TANK.getSlots()).add(DATA, 107, 64);
 
         PUMP.addGuiCallback(g -> g.addWidget(IOWidget.build(9,63,16,16)));
-        BRONZE_WORKBENCH.addGuiCallback(t -> {
-            t.addButton(136, 28, 16, 16, NO_OVERLAY);
-            t.addButton(154, 28, 16, 16, NO_OVERLAY);
-        });
-
-        IRON_WORKBENCH.addGuiCallback(t -> {
-            t.addButton(136, 28, 16, 16, NO_OVERLAY);
-            t.addButton(154, 28, 16, 16, NO_OVERLAY);
-        });
-
-        ALUMINIUM_WORKBENCH.addGuiCallback(t -> {
-            t.addButton(136, 28, 16, 16, NO_OVERLAY);
-            t.addButton(154, 28, 16, 16, NO_OVERLAY);
-        });
-
-        ALUMINIUM_CHARGING_WORKBENCH.addGuiCallback(t -> {
-            t.addButton(136, 28, 16, 16, NO_OVERLAY);
-            t.addButton(154, 28, 16, 16, NO_OVERLAY);
-        });
-
-        IRON_CHARGING_WORKBENCH.addGuiCallback(t -> {
-            t.addButton(136, 28, 16, 16, NO_OVERLAY);
-            t.addButton(154, 28, 16, 16, NO_OVERLAY);
-        });
         FUSION_REACTOR.addGuiCallback(t -> {
             t.addButton(155, 23, 16, 16, NO_OVERLAY).addButton(155, 41, 16, 16, NO_OVERLAY).addButton(155, 59, 16, 16, NO_OVERLAY).addWidget(makeProgress(BarDir.LEFT, true, new int4(0, 235, 149, 16)).setSize(4,162, 149, 16)).addWidget(FusionButtonWidget.build());
         });
@@ -336,48 +309,7 @@ public class Guis {
     }
 
     private static void initMaterialMachine(Side side){
-        for (int y = 0; y < 4; y++){
-            for (int x = 0; x < 4; x++){
-                WORKBENCH.getSlots().add(STORAGE, 8 + (x * 18), 8 + (y * 18));
-                CHARGING_WORKBENCH.getSlots().add(STORAGE, 8 + (x * 18), 8 + (y * 18));
-            }
-        }
-        for (int y = 0; y < 3; y++){
-            for (int x = 0; x < 3; x++){
-                WORKBENCH.getSlots().add(CRAFTING, 82 + (x * 18), 28 + (y * 18));
-                CHARGING_WORKBENCH.getSlots().add(CRAFTING, 82 + (x * 18), 28 + (y * 18));
-            }
-        }
-        for (int x = 0; x < 5; x++){
-            WORKBENCH.getSlots().add(TOOLS, 82 + (x * 18), 8);
-            CHARGING_WORKBENCH.getSlots().add(TOOL_CHARGE, 82 + (x * 18), 8);
-        }
-        WORKBENCH.getSlots().add(PARK, 154, 46);
-        CHARGING_WORKBENCH.getSlots().add(PARK, 154, 46);
-       /* WORKBENCH.widget(addButton(136, 28, 16, 16, NO_OVERLAY, 0));
-        WORKBENCH.widget(addButton(154, 28, 16, 16, NO_OVERLAY, 1));
-        CHARGING_WORKBENCH.widget(addButton(136, 28, 16, 16, NO_OVERLAY, 0));
-        CHARGING_WORKBENCH.widget(addButton(154, 28, 16, 16, NO_OVERLAY, 1));*/
         BiFunction<Boolean, String, ResourceLocation> textures = (c, l) -> new ResourceLocation(Ref.ID, "textures/gui/machine/" + (c ? "charging_" : "") + l + ".png");
-
-        BRONZE_WORKBENCH.setGUI(MenuHandlers.WORKBENCH_HANDLER);
-        IRON_WORKBENCH.setGUI(MenuHandlers.WORKBENCH_HANDLER);
-        ALUMINIUM_WORKBENCH.setGUI(MenuHandlers.WORKBENCH_HANDLER);
-        IRON_CHARGING_WORKBENCH.setGUI(MenuHandlers.WORKBENCH_HANDLER);
-        ALUMINIUM_CHARGING_WORKBENCH.setGUI(MenuHandlers.WORKBENCH_HANDLER);
-        IRON_LOCKER.setGUI(MenuHandlers.LOCKER_HANDLER);
-        ALUMINIUM_LOCKER.setGUI(MenuHandlers.LOCKER_HANDLER);
-        IRON_CHARGING_LOCKER.setGUI(MenuHandlers.LOCKER_HANDLER);
-        ALUMINIUM_CHARGING_LOCKER.setGUI(MenuHandlers.LOCKER_HANDLER);
-        BRONZE_WORKBENCH.add(WORKBENCH.getSlots()).getGui().setOverrideLocation(textures.apply(false, "workbench"));
-        IRON_WORKBENCH.add(WORKBENCH.getSlots()).getGui().setOverrideLocation(textures.apply(false, "workbench"));
-        ALUMINIUM_WORKBENCH.add(WORKBENCH.getSlots()).getGui().setOverrideLocation(textures.apply(false, "workbench"));
-        IRON_CHARGING_WORKBENCH.add(CHARGING_WORKBENCH.getSlots()).getGui().setOverrideLocation(textures.apply(true, "workbench"));
-        ALUMINIUM_CHARGING_WORKBENCH.add(CHARGING_WORKBENCH.getSlots()).getGui().setOverrideLocation(textures.apply(true, "workbench"));
-        IRON_LOCKER.add(LOCKER.getSlots()).getGui().setOverrideLocation(textures.apply(false, "locker"));
-        ALUMINIUM_LOCKER.add(LOCKER.getSlots()).getGui().setOverrideLocation(textures.apply(false, "locker"));
-        IRON_CHARGING_LOCKER.add(CHARGING_LOCKER.getSlots()).getGui().setOverrideLocation(textures.apply(true, "locker"));
-        ALUMINIUM_CHARGING_LOCKER.add(CHARGING_LOCKER.getSlots()).getGui().setOverrideLocation(textures.apply(true, "locker"));
 
         FUSION_REACTOR.setGUI(MenuHandlers.FUSION_MENU_HANDLER);
         QUANTUM_CHEST.setGUI(MenuHandlers.QUANTUM_CHEST_HANDLER);

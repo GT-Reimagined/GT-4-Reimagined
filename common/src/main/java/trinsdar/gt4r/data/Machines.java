@@ -1,5 +1,10 @@
 package trinsdar.gt4r.data;
 
+import io.github.gregtechintergalactical.gtutility.GTUtilityData;
+import io.github.gregtechintergalactical.gtutility.machine.DrumMachine;
+import io.github.gregtechintergalactical.gtutility.machine.LockerMachine;
+import io.github.gregtechintergalactical.gtutility.machine.MaterialMachine;
+import io.github.gregtechintergalactical.gtutility.machine.WorkbenchMachine;
 import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.machine.types.BasicMachine;
 import muramasa.antimatter.machine.types.BasicMultiMachine;
@@ -34,13 +39,11 @@ import trinsdar.gt4r.tile.single.TileEntityCoalBoiler;
 import trinsdar.gt4r.tile.single.TileEntityCoveredGenerator;
 import trinsdar.gt4r.tile.single.TileEntityDigitalChest;
 import trinsdar.gt4r.tile.single.TileEntityDigitalTank;
-import trinsdar.gt4r.tile.single.TileEntityDrum;
 import trinsdar.gt4r.tile.single.TileEntityDustBin;
 import trinsdar.gt4r.tile.single.TileEntityForgeHammer;
 import trinsdar.gt4r.tile.single.TileEntityHeatExchanger;
 import trinsdar.gt4r.tile.single.TileEntityInfiniteFluid;
 import trinsdar.gt4r.tile.single.TileEntityItemFilter;
-import trinsdar.gt4r.tile.single.TileEntityLocker;
 import trinsdar.gt4r.tile.single.TileEntityPlayerDetector;
 import trinsdar.gt4r.tile.single.TileEntityPump;
 import trinsdar.gt4r.tile.single.TileEntityQuantumChest;
@@ -50,7 +53,6 @@ import trinsdar.gt4r.tile.single.TileEntitySupercondensator;
 import trinsdar.gt4r.tile.single.TileEntityTeleporter;
 import trinsdar.gt4r.tile.single.TileEntityTranslocator;
 import trinsdar.gt4r.tile.single.TileEntityTypeFilter;
-import trinsdar.gt4r.tile.single.TileEntityWorkbench;
 
 import static muramasa.antimatter.Data.*;
 import static muramasa.antimatter.cover.ICover.emptyFactory;
@@ -148,13 +150,13 @@ public class Machines {
     public static StorageMachine QUANTUM_CHEST = new StorageMachine(Ref.ID, "quantum_chest").addFlags(GUI, ITEM).setTiers(MAX).setTile(TileEntityQuantumChest::new);
     public static StorageMachine DIGITAL_CHEST = new StorageMachine(Ref.ID, "digital_chest").addFlags(GUI, ITEM).setTiers(LV).setTile(TileEntityDigitalChest::new);
 
-    public static MaterialMachine BRONZE_DRUM = new MaterialMachine(Ref.ID, "bronze_drum", Materials.Bronze).setTiers(LV).baseTexture(Textures.DRUM_HANDLER).overlayTexture(Textures.DRUM_OVERLAY_HANDLER).addFlags(COVERABLE, FLUID).setTile(TileEntityDrum::new).allowFrontIO();
-    public static MaterialMachine STEEL_DRUM = new MaterialMachine(Ref.ID, "steel_drum", Materials.Steel).setTiers(LV).baseTexture(Textures.DRUM_HANDLER).overlayTexture(Textures.DRUM_OVERLAY_HANDLER).addFlags(COVERABLE, FLUID).setTile(TileEntityDrum::new).allowFrontIO();
-    public static MaterialMachine STAINLESS_STEEL_DRUM = new MaterialMachine(Ref.ID, "stainless_steel_drum", Materials.StainlessSteel).setTiers(LV).baseTexture(Textures.DRUM_HANDLER).overlayTexture(Textures.DRUM_OVERLAY_HANDLER).addFlags(COVERABLE, FLUID).setTile(TileEntityDrum::new).allowFrontIO();
-    public static MaterialMachine INVAR_DRUM = new MaterialMachine(Ref.ID, "invar_drum", Materials.Invar).setTiers(LV).baseTexture(Textures.DRUM_HANDLER).overlayTexture(Textures.DRUM_OVERLAY_HANDLER).addFlags(COVERABLE, FLUID).setTile(TileEntityDrum::new).allowFrontIO();
-    public static MaterialMachine TUNGSTEN_DRUM = new MaterialMachine(Ref.ID, "tungsten_drum", Materials.Tungsten).setTiers(LV).baseTexture(Textures.DRUM_HANDLER).overlayTexture(Textures.DRUM_OVERLAY_HANDLER).addFlags(COVERABLE, FLUID).setTile(TileEntityDrum::new).allowFrontIO();
-    public static MaterialMachine TUNGSTENSTEEL_DRUM = new MaterialMachine(Ref.ID, "tungstensteel_drum", Materials.TungstenSteel).setTiers(LV).baseTexture(Textures.DRUM_HANDLER).overlayTexture(Textures.DRUM_OVERLAY_HANDLER).addFlags(COVERABLE, FLUID).setTile(TileEntityDrum::new).allowFrontIO();
-    public static MaterialMachine NETHERITE_DRUM = new MaterialMachine(Ref.ID, "netherite_drum", AntimatterMaterials.Netherite).setTiers(LV).baseTexture(Textures.DRUM_HANDLER).overlayTexture(Textures.DRUM_OVERLAY_HANDLER).addFlags(COVERABLE, FLUID).setTile(TileEntityDrum::new).allowFrontIO();
+    public static DrumMachine BRONZE_DRUM = GTUtilityData.createDrum(Materials.Bronze, 16000);
+    public static DrumMachine STEEL_DRUM = GTUtilityData.createDrum(Materials.Steel, 32000);
+    public static DrumMachine STAINLESS_STEEL_DRUM = GTUtilityData.createDrum(Materials.StainlessSteel, 64000);
+    public static DrumMachine INVAR_DRUM = GTUtilityData.createDrum(Materials.Invar, 48000);
+    public static DrumMachine TUNGSTEN_DRUM = GTUtilityData.createDrum(Materials.Tungsten, 256000);
+    public static DrumMachine TUNGSTENSTEEL_DRUM = GTUtilityData.createDrum(Materials.TungstenSteel, 256000);
+    public static DrumMachine NETHERITE_DRUM = GTUtilityData.createDrum(AntimatterMaterials.Netherite, 128000);
 
     public static MaterialMachine IRON_CABINET = new MaterialMachine(Ref.ID, "iron_cabinet", AntimatterMaterials.Iron).addFlags(ITEM, GUI, COVERABLE).overlayTexture(Textures.CABINET_OVERLAY_HANDLER).baseTexture(Textures.CABINET_HANDLER).setTiers(LV).setTile((m, p, s) -> new TileEntityCabinet(m, p, s, 222));
     public static MaterialMachine ALUMINIUM_CABINET = new MaterialMachine(Ref.ID, "aluminium_cabinet", Materials.Aluminium).addFlags(ITEM, GUI, COVERABLE).overlayTexture(Textures.CABINET_OVERLAY_HANDLER).baseTexture(Textures.CABINET_HANDLER).setTiers(LV).setTile((m, p, s) -> new TileEntityCabinet(m, p, s, 222));
@@ -180,15 +182,15 @@ public class Machines {
     public static MaterialMachine PLATINUM_CHEST = new ChestMachine(Ref.ID, "platinum_chest", Materials.Platinum).addFlags(ITEM, GUI).overlayTexture(Textures.CHEST_OVERLAY_HANDLER).baseTexture(Textures.CHEST_HANDLER).setTiers(LV).setTile((m, p, s) -> new TileEntityChest(m, p, s, 258)).tesr().noCovers();
     public static MaterialMachine OSMIUM_CHEST = new ChestMachine(Ref.ID, "osmium_chest", Materials.Osmium).addFlags(ITEM, GUI).overlayTexture(Textures.CHEST_OVERLAY_HANDLER).baseTexture(Textures.CHEST_HANDLER).setTiers(LV).setTile((m, p, s) -> new TileEntityChest(m, p, s, 276)).tesr().noCovers();
 
-    public static MaterialMachine BRONZE_WORKBENCH = new MaterialMachine(Ref.ID, "bronze_workbench", Materials.Bronze).setTiers(LV).baseTexture(Textures.WORKBENCH_HANDLER).overlayTexture(Textures.WORKBENCH_OVERLAY_HANDLER).addFlags(ITEM, GUI).setTile(TileEntityWorkbench::new);
-    public static MaterialMachine IRON_WORKBENCH = new MaterialMachine(Ref.ID, "iron_workbench", AntimatterMaterials.Iron).setTiers(LV).baseTexture(Textures.WORKBENCH_HANDLER).overlayTexture(Textures.WORKBENCH_OVERLAY_HANDLER).addFlags(ITEM, GUI).setTile(TileEntityWorkbench::new);
-    public static MaterialMachine ALUMINIUM_WORKBENCH = new MaterialMachine(Ref.ID, "aluminium_workbench", Materials.Aluminium).setTiers(LV).baseTexture(Textures.WORKBENCH_HANDLER).overlayTexture(Textures.WORKBENCH_OVERLAY_HANDLER).addFlags(ITEM, GUI).setTile(TileEntityWorkbench::new);
-    public static MaterialMachine IRON_CHARGING_WORKBENCH = new MaterialMachine(Ref.ID, "iron_charging_workbench", AntimatterMaterials.Iron).setTiers(HV).baseTexture(Textures.WORKBENCH_HANDLER).overlayTexture(Textures.CHARGING_WORKBENCH_OVERLAY_HANDLER).addFlags(ITEM, GUI, ENERGY).setTile(TileEntityWorkbench::new);
-    public static MaterialMachine ALUMINIUM_CHARGING_WORKBENCH = new MaterialMachine(Ref.ID, "aluminium_charging_workbench", Materials.Aluminium).setTiers(HV).baseTexture(Textures.WORKBENCH_HANDLER).overlayTexture(Textures.CHARGING_WORKBENCH_OVERLAY_HANDLER).addFlags(ITEM, GUI, ENERGY).setTile(TileEntityWorkbench::new);
-    public static MaterialMachine IRON_LOCKER = new MaterialMachine(Ref.ID, "iron_locker", AntimatterMaterials.Iron).setTiers(LV).baseTexture(Textures.LOCKER_HANDLER).overlayTexture(Textures.LOCKER_OVERLAY_HANDLER).addFlags(ITEM, GUI).setTile(TileEntityLocker::new);
-    public static MaterialMachine ALUMINIUM_LOCKER = new MaterialMachine(Ref.ID, "aluminium_locker", Materials.Aluminium).setTiers(LV).baseTexture(Textures.LOCKER_HANDLER).overlayTexture(Textures.LOCKER_OVERLAY_HANDLER).addFlags(ITEM, GUI).setTile(TileEntityLocker::new);
-    public static MaterialMachine IRON_CHARGING_LOCKER = new MaterialMachine(Ref.ID, "iron_charging_locker", AntimatterMaterials.Iron).setTiers(HV).baseTexture(Textures.LOCKER_HANDLER).overlayTexture(Textures.CHARGING_LOCKER_OVERLAY_HANDLER).addFlags(ITEM, GUI, ENERGY).setTile(TileEntityLocker::new);
-    public static MaterialMachine ALUMINIUM_CHARGING_LOCKER = new MaterialMachine(Ref.ID, "aluminium_charging_locker", Materials.Aluminium).setTiers(HV).baseTexture(Textures.LOCKER_HANDLER).overlayTexture(Textures.CHARGING_LOCKER_OVERLAY_HANDLER).addFlags(ITEM, GUI, ENERGY).setTile(TileEntityLocker::new);
+    public static WorkbenchMachine BRONZE_WORKBENCH = GTUtilityData.createWorkbench(Materials.Bronze, false);
+    public static WorkbenchMachine IRON_WORKBENCH = GTUtilityData.createWorkbench(AntimatterMaterials.Iron, false);
+    public static WorkbenchMachine ALUMINIUM_WORKBENCH = GTUtilityData.createWorkbench(Materials.Aluminium, false);
+    public static WorkbenchMachine IRON_CHARGING_WORKBENCH = GTUtilityData.createWorkbench(AntimatterMaterials.Iron, true);
+    public static WorkbenchMachine ALUMINIUM_CHARGING_WORKBENCH = GTUtilityData.createWorkbench(Materials.Aluminium, true);
+    public static LockerMachine IRON_LOCKER = GTUtilityData.createLocker(AntimatterMaterials.Iron, false);
+    public static LockerMachine ALUMINIUM_LOCKER = GTUtilityData.createLocker(Materials.Aluminium, false);
+    public static LockerMachine IRON_CHARGING_LOCKER = GTUtilityData.createLocker(AntimatterMaterials.Iron, true);
+    public static LockerMachine ALUMINIUM_CHARGING_LOCKER = GTUtilityData.createLocker(Materials.Aluminium, true);
 
     public static GeneratorMachine STEAM_TURBINE = new GeneratorMachine(Ref.ID, "steam_turbine").frontCovers().allowFrontIO().setMap(STEAM_FUELS).setTiers(LV).addFlags(GUI, ITEM, FLUID, GENERATOR, CELL).covers(emptyFactory,emptyFactory,emptyFactory,emptyFactory,emptyFactory, COVER_DYNAMO_OLD).setAllowVerticalFacing(false).setOutputCover(COVER_DYNAMO_OLD).setTile(TileEntityCoveredGenerator::new);
     public static GeneratorMachine GAS_TURBINE = new GeneratorMachine(Ref.ID, "gas_turbine").frontCovers().allowFrontIO().setMap(GAS_FUELS).setTiers(LV).addFlags(GUI, ITEM, FLUID, GENERATOR, CELL).covers(emptyFactory,emptyFactory,emptyFactory,emptyFactory,emptyFactory, COVER_DYNAMO_OLD).setAllowVerticalFacing(false).setOutputCover(COVER_DYNAMO_OLD).setTile(TileEntityCoveredGenerator::new);

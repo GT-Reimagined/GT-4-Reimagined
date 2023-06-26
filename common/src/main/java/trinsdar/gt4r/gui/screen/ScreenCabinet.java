@@ -1,12 +1,12 @@
 package trinsdar.gt4r.gui.screen;
 
+import io.github.gregtechintergalactical.gtutility.blockentity.BlockEntityMaterial;
 import muramasa.antimatter.gui.screen.ScreenMachine;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import trinsdar.gt4r.gui.ContainerCabinet;
-import trinsdar.gt4r.tile.single.TileEntityMaterial;
 
-public abstract class ScreenCabinet<T extends TileEntityMaterial<T>> extends ScreenMachine<T, ContainerCabinet<T>> {
+public abstract class ScreenCabinet<T extends BlockEntityMaterial<T>> extends ScreenMachine<T, ContainerCabinet<T>> {
     int guiY;
     public ScreenCabinet(ContainerCabinet<T> container, Inventory inv, Component name, String suffix, int maxY, int guiY) {
         super(container, inv, name);
@@ -24,25 +24,25 @@ public abstract class ScreenCabinet<T extends TileEntityMaterial<T>> extends Scr
         blit(stack, guiLeft, guiTop, 0, 0, xSize, ySize, 256, guiY);
     }*/
 
-    public static class ScreenCabinetSix<T extends TileEntityMaterial<T>> extends ScreenCabinet<T> {
+    public static class ScreenCabinetSix<T extends BlockEntityMaterial<T>> extends ScreenCabinet<T> {
         public ScreenCabinetSix(ContainerCabinet<T> container, Inventory inv, Component name) {
             super(container, inv, name, "six", 222, 256);
         }
     }
 
-    public static class ScreenCabinetSeven<T extends TileEntityMaterial<T>> extends ScreenCabinet<T> {
+    public static class ScreenCabinetSeven<T extends BlockEntityMaterial<T>> extends ScreenCabinet<T> {
         public ScreenCabinetSeven(ContainerCabinet<T> container, Inventory inv, Component name) {
             super(container, inv, name, "seven", 240, 256);
         }
     }
 
-    public static class ScreenCabinetEight<T extends TileEntityMaterial<T>> extends ScreenCabinet<T> {
+    public static class ScreenCabinetEight<T extends BlockEntityMaterial<T>> extends ScreenCabinet<T> {
         public ScreenCabinetEight(ContainerCabinet<T> container, Inventory inv, Component name) {
             super(container, inv, name, "eight", 258, 266);
         }
     }
 
-    public static class ScreenCabinetNine<T extends TileEntityMaterial<T>> extends ScreenCabinet<T> {
+    public static class ScreenCabinetNine<T extends BlockEntityMaterial<T>> extends ScreenCabinet<T> {
         public ScreenCabinetNine(ContainerCabinet<T> container, Inventory inv, Component name) {
             super(container, inv, name, "nine", 276, 276);
         }

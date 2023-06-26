@@ -1,5 +1,6 @@
 package trinsdar.gt4r.block;
 
+import io.github.gregtechintergalactical.gtutility.machine.BlockMachineMaterial;
 import it.unimi.dsi.fastutil.floats.Float2FloatFunction;
 import muramasa.antimatter.datagen.providers.AntimatterItemModelProvider;
 import muramasa.antimatter.machine.Tier;

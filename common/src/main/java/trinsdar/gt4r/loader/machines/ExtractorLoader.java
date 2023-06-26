@@ -1,6 +1,6 @@
 package trinsdar.gt4r.loader.machines;
 
-import com.github.gregtechintergalactical.gtrubber.GTRubberData;
+import io.github.gregtechintergalactical.gtrubber.GTRubberData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 

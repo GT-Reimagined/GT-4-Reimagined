@@ -1,5 +1,6 @@
 package trinsdar.gt4r.integration.jei;
 
+import io.github.gregtechintergalactical.gtutility.gui.ContainerWorkbench;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
@@ -16,7 +17,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import trinsdar.gt4r.Ref;
-import trinsdar.gt4r.gui.ContainerWorkbench;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,6 @@
 package trinsdar.gt4r.forge;
 
 import muramasa.antimatter.Antimatter;
-import muramasa.antimatter.network.forge.AntimatterNetworkImpl;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -14,7 +13,6 @@ import net.minecraftforge.network.NetworkEvent;
 import trinsdar.gt4r.GT4RConfig;
 import trinsdar.gt4r.GT4Reimagined;
 import trinsdar.gt4r.Ref;
-import trinsdar.gt4r.network.MessageCraftingSync;
 import trinsdar.gt4r.proxy.ClientHandler;
 import trinsdar.gt4r.proxy.CommonHandler;
 import trinsdar.gt4r.proxy.ServerHandler;
@@ -36,11 +34,6 @@ public class GT4ReimaginedForge {
 
     private void setup(final FMLCommonSetupEvent e) {
         CommonHandler.setup();
-        ((AntimatterNetworkImpl)Antimatter.NETWORK).registerMessage(MessageCraftingSync.class, MessageCraftingSync::encodeStatic, MessageCraftingSync::decodeStatic, (msg, ctx) -> {
-            NetworkEvent.Context context = ctx.get();
-            context.enqueueWork(() -> msg.handleClient(context.getSender()));
-            context.setPacketHandled(true);
-        });
     }
 
     private void serverSetup(final FMLDedicatedServerSetupEvent event){

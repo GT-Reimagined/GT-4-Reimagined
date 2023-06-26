@@ -1,6 +1,6 @@
 package trinsdar.gt4r.loader.machines;
 
-import com.github.gregtechintergalactical.gtrubber.GTRubberData;
+import io.github.gregtechintergalactical.gtrubber.GTRubberData;
 import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.material.Material;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
 import static muramasa.antimatter.data.AntimatterMaterials.*;
-import static com.github.gregtechintergalactical.gtrubber.GTRubberData.StickyResin;
+import static io.github.gregtechintergalactical.gtrubber.GTRubberData.StickyResin;
 import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
 import static net.minecraft.world.item.Items.*;
 import static net.minecraft.world.item.Items.DIRT;

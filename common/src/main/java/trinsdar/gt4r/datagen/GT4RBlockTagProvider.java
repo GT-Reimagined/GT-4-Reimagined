@@ -29,9 +29,6 @@ public class GT4RBlockTagProvider extends AntimatterBlockTagProvider {
         AntimatterAPI.all(BlockCasing.class, Ref.ID, cas -> {
             this.tag(AntimatterDefaultTools.PICKAXE.getToolType()).add(cas);
         });
-        AntimatterAPI.all(BlockMachineMaterial.class, Ref.ID, cas -> {
-            this.tag(AntimatterDefaultTools.WRENCH.getToolType()).add(cas);
-        });
         AntimatterAPI.all(BlockMaterialChest.class, Ref.ID, cas -> {
             this.tag(AntimatterDefaultTools.WRENCH.getToolType()).add(cas);
         });

@@ -1,5 +1,7 @@
 package trinsdar.gt4r.tile.single;
 
+import io.github.gregtechintergalactical.gtutility.blockentity.BlockEntityMaterial;
+import io.github.gregtechintergalactical.gtutility.machine.MaterialMachine;
 import muramasa.antimatter.capability.item.ITrackedHandler;
 import muramasa.antimatter.gui.SlotType;
 import net.minecraft.core.BlockPos;
@@ -7,9 +9,8 @@ import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import trinsdar.gt4r.machine.MaterialMachine;
 
-public class TileEntityCabinet extends TileEntityMaterial<TileEntityCabinet>{
+public class TileEntityCabinet extends BlockEntityMaterial<TileEntityCabinet> {
     final int ySize;
     public TileEntityCabinet(MaterialMachine type, BlockPos pos, BlockState state, int ySize) {
         super(type, pos, state);

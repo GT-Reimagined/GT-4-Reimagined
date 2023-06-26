@@ -1,6 +1,6 @@
 package trinsdar.gt4r.loader.machines;
 
-import com.github.gregtechintergalactical.gtrubber.GTRubberData;
+import io.github.gregtechintergalactical.gtrubber.GTRubberData;
 import com.google.common.collect.ImmutableSet;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.data.AntimatterMaterialTypes;

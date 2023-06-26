@@ -1,5 +1,6 @@
 package trinsdar.gt4r.machine;
 
+import io.github.gregtechintergalactical.gtutility.machine.MaterialMachine;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.Machine;
@@ -11,7 +12,7 @@ import trinsdar.gt4r.block.BlockMaterialChest;
 
 import static muramasa.antimatter.machine.MachineFlag.COVERABLE;
 
-public class ChestMachine extends MaterialMachine{
+public class ChestMachine extends MaterialMachine {
     public ChestMachine(String domain, String id, Material material) {
         super(domain, id, material);
         setBlock(BlockMaterialChest::new);
