@@ -1,27 +1,19 @@
 package trinsdar.gt4r.loader;
 
+import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.AntimatterConfig;
 import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.data.AntimatterMaterials;
-import muramasa.antimatter.data.AntimatterStoneTypes;
 import muramasa.antimatter.event.WorldGenEvent;
-import muramasa.antimatter.worldgen.smallore.WorldGenSmallOre;
+import muramasa.antimatter.worldgen.object.WorldGenStoneLayerBuilder;
 import muramasa.antimatter.worldgen.smallore.WorldGenSmallOreBuilder;
-import muramasa.antimatter.worldgen.vanillaore.WorldGenVanillaOre;
 import muramasa.antimatter.worldgen.vanillaore.WorldGenVanillaOreBuilder;
-import muramasa.antimatter.worldgen.vein.WorldGenVein;
-import muramasa.antimatter.worldgen.vein.WorldGenVeinBuilder;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.Level;
 import trinsdar.gt4r.GT4RConfig;
 import trinsdar.gt4r.Ref;
 
 import static muramasa.antimatter.data.AntimatterMaterials.*;
-import static muramasa.antimatter.data.AntimatterStoneTypes.ANDESITE;
-import static muramasa.antimatter.data.AntimatterStoneTypes.DIORITE;
-import static muramasa.antimatter.data.AntimatterStoneTypes.GRANITE;
-import static muramasa.antimatter.data.AntimatterStoneTypes.TUFF;
-import static net.minecraft.world.level.Level.OVERWORLD;
+import static muramasa.antimatter.data.AntimatterStoneTypes.*;
 import static trinsdar.gt4r.data.GT4RData.*;
 import static trinsdar.gt4r.data.Materials.*;
 
@@ -29,70 +21,42 @@ public class WorldGenLoader {
 
 
     public static void init(WorldGenEvent event) {
-        if (GT4RConfig.WORLD.GENERATE_STONE_LAYERS){
+        if (GT4RConfig.WORLD.GENERATE_STONE_LAYERS && !AntimatterAPI.isModLoaded("gti")){
             initStoneLayers(event);
         }
         initVanillaOres(event);
     }
 
-    private static void initStoneLayers(WorldGenEvent event){
-        WorldGenVein.setLayerChance(WorldGenVein.STONE_VEIN_LAYER, 0.25f);
-        event.vein(new WorldGenVeinBuilder("vein_granite_black")
-                .asMediumStoneVein(2, -64, 0, GRANITE_BLACK, OVERWORLD)
-                .buildVein());
+    private static void initStoneLayers(WorldGenEvent ev){
+        ev.stoneLayer(new WorldGenStoneLayerBuilder("stone").withStone(STONE).withWeight(6).buildVein());
 
-        event.vein(new WorldGenVeinBuilder("vein_granite_red")
-                .asMediumStoneVein(2, -32, 32, GRANITE_RED, OVERWORLD)
-                .buildVein());
+        ev.stoneLayer(new WorldGenStoneLayerBuilder("black_granite").withStone(GRANITE_BLACK).withWeight(2).buildVein());
 
-        event.vein(new WorldGenVeinBuilder("vein_basalt")
-                .asMediumStoneVein(5, -64, 0, AntimatterStoneTypes.BASALT, OVERWORLD)
-                .buildVein());
+        ev.stoneLayer(new WorldGenStoneLayerBuilder("red_granite").withStone(GRANITE_RED).withWeight(2).buildVein());
 
-        event.vein(new WorldGenVeinBuilder("vein_komatiite")
-                .asMediumStoneVein(4, 0, 64, KOMATIITE, OVERWORLD)
-                .buildVein());
+        ev.stoneLayer(new WorldGenStoneLayerBuilder("komatiite").withStone(KOMATIITE).withWeight(4).buildVein());
 
-        event.vein(new WorldGenVeinBuilder("vein_marble")
-                .asLargeStoneVein(4, 32, 160, MARBLE, OVERWORLD)
-                .buildVein());
+        ev.stoneLayer(new WorldGenStoneLayerBuilder("basalt").withStone(BASALT).withWeight(3).buildVein());
 
-        event.vein(new WorldGenVeinBuilder("vein_limestone")
-                .asLargeStoneVein(4, 32, 160, LIMESTONE, OVERWORLD)
-                .buildVein());
+        ev.stoneLayer(new WorldGenStoneLayerBuilder("marble").withStone(MARBLE).withWeight(4).buildVein());
 
-        event.vein(new WorldGenVeinBuilder("vein_green_schist")
-                .asMediumStoneVein(2, 64, 320, GREEN_SCHIST, OVERWORLD)
-                .buildVein());
+        ev.stoneLayer(new WorldGenStoneLayerBuilder("limestone").withStone(LIMESTONE).withWeight(3).buildVein());
 
-        event.vein(new WorldGenVeinBuilder("vein_blue_schist")
-                .asMediumStoneVein(2, 64, 320, BLUE_SCHIST, OVERWORLD)
-                .buildVein());
+        ev.stoneLayer(new WorldGenStoneLayerBuilder("green_schist").withStone(GREEN_SCHIST).withWeight(1).buildVein());
 
-        event.vein(new WorldGenVeinBuilder("vein_kimberlite")
-                .asMediumStoneVein(3, 64, 320, KIMBERLITE, OVERWORLD)
-                .buildVein());
+        ev.stoneLayer(new WorldGenStoneLayerBuilder("blue_schist").withStone(BLUE_SCHIST).withWeight(1).buildVein());
 
-        event.vein(new WorldGenVeinBuilder("vein_quartzite")
-                .asMediumStoneVein(3, 64, 320, QUARTZITE, OVERWORLD)
-                .buildVein());
-        if (AntimatterConfig.WORLD.VANILLA_STONE_GEN){
-            event.vein(new WorldGenVeinBuilder("vein_tuff")
-                    .asSmallStoneVein(5, -64, 16, TUFF, OVERWORLD)
-                    .buildVein());
+        ev.stoneLayer(new WorldGenStoneLayerBuilder("kimberlite").withStone(KIMBERLITE).withWeight(3).buildVein());
 
-            event.vein(new WorldGenVeinBuilder("vein_granite")
-                    .asMediumStoneVein(5, 32, 128, GRANITE, OVERWORLD)
-                    .buildVein());
+        ev.stoneLayer(new WorldGenStoneLayerBuilder("quartzite").withStone(QUARTZITE).withWeight(4).buildVein());
 
-            event.vein(new WorldGenVeinBuilder("vein_diorite")
-                    .asMediumStoneVein(5, 32, 128, DIORITE, OVERWORLD)
-                    .buildVein());
+        ev.stoneLayer(new WorldGenStoneLayerBuilder("granite").withStone(GRANITE).withWeight(3).buildVein());
 
-            event.vein(new WorldGenVeinBuilder("vein_andesite")
-                    .asMediumStoneVein(5, 32, 128, ANDESITE, OVERWORLD)
-                    .buildVein());
-        }
+        ev.stoneLayer(new WorldGenStoneLayerBuilder("diorite").withStone(DIORITE).withWeight(3).buildVein());
+
+        ev.stoneLayer(new WorldGenStoneLayerBuilder("andesite").withStone(ANDESITE).withWeight(4).buildVein());
+
+        ev.stoneLayer(new WorldGenStoneLayerBuilder("tuff").withStone(TUFF).withWeight(3).buildVein());
     }
 
     private static void initVanillaOres(WorldGenEvent event){
