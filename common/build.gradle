@@ -19,7 +19,6 @@ dependencies{
         transitive = false
     }
     modImplementation("io.github.feltmc:fabricated-forge-caps:${rootProject.fabricated_forge_hash}")
-    modImplementation("io.github.feltmc:fabricated-forge-modeldata:${rootProject.fabricated_forge_hash}")
     modImplementation("io.github.feltmc:fabricated-forge-tag-extensions:${rootProject.fabricated_forge_hash}") { transitive false }
     modImplementation("com.github.Trinsdar.Botarium:botarium-common-1.18.2:${project.botarium_version}")
     compileOnly("com.electronwill.night-config:toml:${rootProject.nightconfig_version}")
