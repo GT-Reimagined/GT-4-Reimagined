@@ -14,10 +14,10 @@ import trinsdar.gt4r.items.ItemTurbineRotor;
 public class GT4RMaterialTags {
     public static final DoubleMaterialTag BATHING_PERSULFATE = new DoubleMaterialTag("bathing_nas");
     public static final DoubleMaterialTag BATHING_MERCURY = new DoubleMaterialTag("bathing_mercury");
-    public static final MaterialTag ELEC30 = new MaterialTag("elec30");
-    public static final MaterialTag ELEC60 = new MaterialTag("elec60");
-    public static final MaterialTag ELEC90 = new MaterialTag("elec90");
-    public static final MaterialTag ELEC120 = new MaterialTag("elec120");
+    public static final MaterialTag ELEC30 = AntimatterAPI.register(MaterialTag.class, new MaterialTag("elec30", true));
+    public static final MaterialTag ELEC60 = AntimatterAPI.register(MaterialTag.class, new MaterialTag("elec60", true));
+    public static final MaterialTag ELEC90 = AntimatterAPI.register(MaterialTag.class, new MaterialTag("elec90", true));
+    public static final MaterialTag ELEC120 = AntimatterAPI.register(MaterialTag.class, new MaterialTag("elec120", true));
     public static final MaterialTag ELEC = AntimatterAPI.register(MaterialTag.class, new MaterialTag("elec", true));
 
     public static final MaterialTag NEEDS_BLAST_FURNACE = AntimatterAPI.register(MaterialTag.class, new MaterialTag("needs_blast_furnace", true));
