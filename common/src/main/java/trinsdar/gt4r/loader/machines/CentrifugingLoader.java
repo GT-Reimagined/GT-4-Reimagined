@@ -89,8 +89,8 @@ public class CentrifugingLoader {
         addMethaneRecipe(COOKED_COD, 12);
         addMethaneRecipe(COOKED_SALMON, 12);
         addMethaneRecipe(APPLE, 32);
-        //addMethaneRecipe(POTATO, 16);
-        //addMethaneRecipe(CARROT, 16);
+        addMethaneRecipe(POTATO, 16);
+        addMethaneRecipe(CARROT, 16);
         addMethaneRecipe(PUMPKIN, 16);
         addMethaneRecipe(COOKIE, 64);
         addMethaneRecipe(BREAD, 64);
@@ -100,9 +100,9 @@ public class CentrifugingLoader {
         addMethaneRecipe(BAKED_POTATO, 24);
         addMethaneRecipe(BROWN_MUSHROOM_BLOCK, 12);
         addMethaneRecipe(RED_MUSHROOM_BLOCK, 12);
-        //addMethaneRecipe(BROWN_MUSHROOM, 32);
-        //addMethaneRecipe(RED_MUSHROOM, 32);
-        //addMethaneRecipe(NETHER_WART, 32);
+        addMethaneRecipe(BROWN_MUSHROOM, 32);
+        addMethaneRecipe(RED_MUSHROOM, 32);
+        addMethaneRecipe(NETHER_WART, 32);
         // For when either I add my own terra wart or when ic2 comes out for 1,15, probably the latter
         //addMethaneRecipe(TerraWart, 16);
         addMethaneRecipe(GOLDEN_APPLE, 1, new ItemStack(GOLD_INGOT, 6));
