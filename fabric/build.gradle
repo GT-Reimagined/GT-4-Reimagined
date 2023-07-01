@@ -58,7 +58,7 @@ dependencies{
         transitive = false
     }
     include("io.github.gregtechintergalactical:gtutility-fabric:${rootProject.gt_utility_version}-${rootProject.minecraft_version}")
-    modRuntimeOnly("io.github.trinsdar:networkapi-fabric:0.1")
+    modRuntimeOnly "com.teamresourceful.resourcefullib:resourcefullib-fabric-1.18.2:${project.resourcefullib_version}"
     modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${rootProject.rei_version}"
     modCompileOnly("mezz.jei:jei-${rootProject.minecraft_version}-common-api:${rootProject.jei_version}")
     modCompileOnly("mezz.jei:jei-${rootProject.minecraft_version}-fabric-api:${rootProject.jei_version}")

@@ -59,7 +59,7 @@ dependencies {
         transitive = false
     }
     include("io.github.gregtechintergalactical:gtutility-forge:${rootProject.gt_utility_version}-${rootProject.minecraft_version}")
-    modRuntimeOnly("io.github.trinsdar:networkapi-forge:0.1")
+    modRuntimeOnly "com.teamresourceful.resourcefullib:resourcefullib-forge-1.18.2:${project.resourcefullib_version}"
     modRuntimeOnly("dev.latvian.mods:kubejs-forge:${rootProject.kubejs_version}")
     runtimeOnly("curse.maven:portality-291493:3840074")
     runtimeOnly("curse.maven:titanium-287342:4117991")
