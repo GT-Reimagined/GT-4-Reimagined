@@ -52,14 +52,6 @@ public class GT4RMaterialTags {
         }
     });
     public static final MaterialTypeItem<?> BROKEN_TURBINE_ROTOR = new MaterialTypeItem<>("broken_turbine_rotor", 1, true, muramasa.antimatter.Ref.U * 17);
-    public static final MaterialTypeItem<?> PICKAXE_HEAD = new MaterialTypeItem<>("pickaxe_head", 2, true, muramasa.antimatter.Ref.U * 3);
-    public static final MaterialTypeItem<?> AXE_HEAD = new MaterialTypeItem<>("axe_head", 2, true, muramasa.antimatter.Ref.U * 3);
-    public static final MaterialTypeItem<?> SWORD_HEAD = new MaterialTypeItem<>("sword_head", 2, true, muramasa.antimatter.Ref.U * 2);
-    public static final MaterialTypeItem<?> SHOVEL_HEAD = new MaterialTypeItem<>("shovel_head", 2, true, muramasa.antimatter.Ref.U);
-    public static final MaterialTypeItem<?> HOE_HEAD = new MaterialTypeItem<>("hoe_head", 2, true, muramasa.antimatter.Ref.U * 2);
-    public static final MaterialTypeItem<?> HAMMER_HEAD = new MaterialTypeItem<>("hammer_head", 2, true, muramasa.antimatter.Ref.U * 6);
-    public static final MaterialTypeItem<?> FILE_HEAD = new MaterialTypeItem<>("file_head", 2, true, muramasa.antimatter.Ref.U * 2);
-    public static final MaterialTypeItem<?> SAW_HEAD = new MaterialTypeItem<>("saw_head", 2, true, muramasa.antimatter.Ref.U * 2);
     public static final MaterialTag SEMIFLUID = new MaterialTag("semifluid");
     public static final MaterialTag CABINET = new MaterialTag("cabinet");
     public static final MaterialTag WORKBENCH = new MaterialTag("workbench");
@@ -72,13 +64,5 @@ public class GT4RMaterialTags {
         TURBINE_BLADE.unSplitName();
         TURBINE_ROTOR.unSplitName();
         BROKEN_TURBINE_ROTOR.unSplitName();
-        PICKAXE_HEAD.unSplitName();
-        AXE_HEAD.unSplitName();
-        SWORD_HEAD.unSplitName();
-        SHOVEL_HEAD.unSplitName();
-        HOE_HEAD.unSplitName();
-        HAMMER_HEAD.unSplitName();
-        FILE_HEAD.unSplitName();
-        SAW_HEAD.unSplitName();
     }
 }
