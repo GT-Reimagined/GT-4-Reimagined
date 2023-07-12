@@ -61,8 +61,9 @@ public class GT4RMaterialTags {
     public static final MaterialTag DRUM = new MaterialTag("drum");
 
     public static void init(){
-        TURBINE_BLADE.unSplitName();
-        TURBINE_ROTOR.unSplitName();
-        BROKEN_TURBINE_ROTOR.unSplitName();
+        TURBINE_BLADE.unSplitName().ignoreTextureSets();
+        TURBINE_ROTOR.unSplitName().ignoreTextureSets();
+        BROKEN_TURBINE_ROTOR.unSplitName().ignoreTextureSets();
+        HULL.ignoreTextureSets();
     }
 }

@@ -14,11 +14,6 @@ public class ItemTurbineRotor extends MaterialItem {
         super(domain, type, material, properties);
     }
 
-    @Override
-    public Texture[] getTextures() {
-        return new Texture[]{Textures.ROTOR};
-    }
-
     public float getRotorEfficiency(){
         if (this.material == Bronze){
             return 0.6F;
