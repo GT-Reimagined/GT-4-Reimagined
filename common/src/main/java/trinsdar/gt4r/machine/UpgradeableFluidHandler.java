@@ -1,10 +1,10 @@
 package trinsdar.gt4r.machine;
 
+import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import muramasa.antimatter.capability.machine.MachineFluidHandler;
 import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.core.Direction;
-import net.minecraftforge.fluids.FluidStack;
 import tesseract.TesseractGraphWrappers;
 import trinsdar.gt4r.data.CustomTags;
 import trinsdar.gt4r.tile.single.TileEntitySteamMachine;
@@ -15,7 +15,7 @@ public class UpgradeableFluidHandler<T extends TileEntityMachine<T> & IUpgradePr
         super(tile);
     }
 
-    @Override
+    /*@Override
     public long fillDroplets(FluidStack stack, FluidAction action) {
         if (stack.getFluid().is(TileEntitySteamMachine.STEAM)){
             if (tile.getUpgrades().containsKey(CustomTags.STEAM_UPGRADES)){
@@ -50,7 +50,7 @@ public class UpgradeableFluidHandler<T extends TileEntityMachine<T> & IUpgradePr
     }
 
     @Override
-    public boolean canInput(FluidStack fluid, Direction direction) {
+    public boolean canInput(FluidHolder fluid, Direction direction) {
         if (fluid.getFluid().is(TileEntitySteamMachine.STEAM) && tile.getUpgrades().containsKey(CustomTags.STEAM_UPGRADES)) {
             return true;
         }
@@ -58,9 +58,9 @@ public class UpgradeableFluidHandler<T extends TileEntityMachine<T> & IUpgradePr
     }
 
     @Override
-    public int getTanks() {
-        int tanks = super.getTanks();
+    public int getSize() {
+        int tanks = super.getSize();
         if (tile.getUpgrades().containsKey(CustomTags.STEAM_UPGRADES) && tanks == 0) tanks = 1;
         return tanks;
-    }
+    }*/
 }

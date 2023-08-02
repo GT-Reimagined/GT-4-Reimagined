@@ -79,7 +79,7 @@ public class TileEntityDigitalChest extends TileEntityMachine<TileEntityDigitalC
                     if (i.getHandler(SlotTypes.DATA).getStackInSlot(0).getItem() == GT4RData.CircuitDataOrb){
                         ITrackedHandler storage = i.getHandler(SlotTypes.FILTERABLE);
                         if (!isInventoryEmpty(storage)){
-                            CompoundTag nbt = ((TrackedItemHandler<?>)storage).serializeNBT();
+                            CompoundTag nbt = ((TrackedItemHandler<?>)storage).serialize(new CompoundTag());
                             ItemStack newStack = new ItemStack(GT4RData.StorageDataOrb);
                             newStack.getOrCreateTag().put("Data", nbt);
                             i.getHandler(SlotTypes.DATA).setStackInSlot(0, newStack);

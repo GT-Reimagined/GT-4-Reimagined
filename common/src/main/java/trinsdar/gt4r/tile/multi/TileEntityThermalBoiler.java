@@ -56,15 +56,15 @@ public class TileEntityThermalBoiler extends TileEntityMultiMachine<TileEntityTh
             }
 
             @Override
-            public CompoundTag serializeNBT() {
-                CompoundTag nbt = super.serializeNBT();
+            public CompoundTag serialize() {
+                CompoundTag nbt = super.serialize();
                 nbt.putInt("ticker", ticker);
                 return nbt;
             }
 
             @Override
-            public void deserializeNBT(CompoundTag nbt) {
-                super.deserializeNBT(nbt);
+            public void deserialize(CompoundTag nbt) {
+                super.deserialize(nbt);
                 ticker = nbt.getInt("ticker");
             }
 

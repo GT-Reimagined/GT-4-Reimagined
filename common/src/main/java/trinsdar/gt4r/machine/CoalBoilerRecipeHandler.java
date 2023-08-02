@@ -1,5 +1,7 @@
 package trinsdar.gt4r.machine;
 
+import earth.terrarium.botarium.common.fluid.base.FluidHolder;
+import earth.terrarium.botarium.common.fluid.base.PlatformFluidHandler;
 import muramasa.antimatter.capability.machine.MachineRecipeHandler;
 import muramasa.antimatter.machine.MachineState;
 import muramasa.antimatter.util.Utils;
@@ -13,9 +15,9 @@ import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.IFluidHandler;
+import tesseract.FluidPlatformUtils;
 import tesseract.TesseractCapUtils;
+import tesseract.TesseractGraphWrappers;
 import trinsdar.gt4r.tile.single.TileEntityCoalBoiler;
 
 import java.util.Arrays;
@@ -68,9 +70,9 @@ public class CoalBoilerRecipeHandler extends MachineRecipeHandler<TileEntityCoal
         delay = tile.getMachineTier() == BRONZE ? 25 : 10;
         if (tile.getLevel().getGameTime() % delay == 0){
             tile.fluidHandler.ifPresent(f -> {
-                FluidStack[] inputs = f.getInputs();
+                FluidHolder[] inputs = f.getInputs();
                 if (this.heat > 100){
-                    if (inputs[0].getAmount() == 0){
+                    if (inputs[0].getFluidAmount() == 0){
                         hadNoWater = true;
                     } else {
                         if (hadNoWater){
@@ -78,17 +80,17 @@ public class CoalBoilerRecipeHandler extends MachineRecipeHandler<TileEntityCoal
                             tile.getLevel().setBlockAndUpdate(tile.getBlockPos(), Blocks.AIR.defaultBlockState());
                             return;
                         }
-                        f.drainInput(new FluidStack(Fluids.WATER, 1), IFluidHandler.FluidAction.EXECUTE);
-                        int room = 16000 - f.getOutputs()[0].getAmount();
-                        int fill = Math.min(room, 150);
+                        f.drainInput(FluidPlatformUtils.createFluidStack(Fluids.WATER, TesseractGraphWrappers.dropletMultiplier), false);
+                        long room = (16000 * TesseractGraphWrappers.dropletMultiplier) - f.getOutputs()[0].getFluidAmount();
+                        long fill = Math.min(room, 150 * TesseractGraphWrappers.dropletMultiplier);
                         if (room > 0){
-                            f.fillOutput(Steam.getGas(fill), IFluidHandler.FluidAction.EXECUTE);
+                            f.fillOutput(Steam.getGas(fill), false);
                         }
                         if (fill < 150){
                             //TODO:steam sounds
                             tile.getLevel().playSound(null, tile.getBlockPos(), SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 1.0f, 1.0f);
                             if (tile.getLevel() instanceof ServerLevel) ((ServerLevel)tile.getLevel()).sendParticles(ParticleTypes.SMOKE, tile.getBlockPos().getX(), tile.getBlockPos().getY(), tile.getBlockPos().getZ(), tile.getLevel().getRandom().nextInt(8) + 1, 0.0D, 0.2D, 0.0D, 0.0D);
-                            f.drain(4000, IFluidHandler.FluidAction.EXECUTE);
+                            f.extractFluid(4000 * TesseractGraphWrappers.dropletMultiplier, false);
                         }
                     }
                 } else {
@@ -100,9 +102,7 @@ public class CoalBoilerRecipeHandler extends MachineRecipeHandler<TileEntityCoal
     }
 
     public void exportFluidFromMachineToSide(Direction side){
-        BlockEntity adjTile = tile.getLevel().getBlockEntity(tile.getBlockPos().relative(side));
-        if (adjTile == null) return;
-        Optional<IFluidHandler> cap = TesseractCapUtils.getFluidHandler(adjTile, side.getOpposite());
+        Optional<PlatformFluidHandler> cap = TesseractCapUtils.getFluidHandler(tile.getLevel(), tile.getBlockPos().relative(side), side.getOpposite());
         tile.fluidHandler.ifPresent(f -> cap.ifPresent(other -> Utils.transferFluids(f, other, 1000)));
     }
 
@@ -155,8 +155,8 @@ public class CoalBoilerRecipeHandler extends MachineRecipeHandler<TileEntityCoal
     }
 
     @Override
-    public boolean accepts(FluidStack fluid) {
-        return fluid.isFluidEqual(new FluidStack(Fluids.WATER, 1)) || fluid.isFluidEqual(DistilledWater.getLiquid(1));
+    public boolean accepts(FluidHolder fluid) {
+        return fluid.matches(FluidPlatformUtils.createFluidStack(Fluids.WATER, 1)) || fluid.matches(DistilledWater.getLiquid(1));
     }
 
     @Override
@@ -165,8 +165,8 @@ public class CoalBoilerRecipeHandler extends MachineRecipeHandler<TileEntityCoal
     }
 
     @Override
-    public CompoundTag serializeNBT() {
-        CompoundTag nbt = super.serializeNBT();
+    public CompoundTag serialize() {
+        CompoundTag nbt = super.serialize();
         nbt.putInt("heat", heat);
         nbt.putInt("maxHeat", maxHeat);
         nbt.putInt("fuel", fuel);
@@ -177,8 +177,8 @@ public class CoalBoilerRecipeHandler extends MachineRecipeHandler<TileEntityCoal
     }
 
     @Override
-    public void deserializeNBT(CompoundTag nbt) {
-        super.deserializeNBT(nbt);
+    public void deserialize(CompoundTag nbt) {
+        super.deserialize(nbt);
         this.heat = nbt.getInt("heat");
         this.maxHeat = nbt.getInt("maxHeat");
         this.fuel = nbt.getInt("fuel");

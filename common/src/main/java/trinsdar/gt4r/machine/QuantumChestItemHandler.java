@@ -2,21 +2,15 @@ package trinsdar.gt4r.machine;
 
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import muramasa.antimatter.Antimatter;
 import muramasa.antimatter.capability.IGuiHandler;
 import muramasa.antimatter.capability.item.TrackedItemHandler;
 import muramasa.antimatter.capability.machine.MachineItemHandler;
 import muramasa.antimatter.machine.event.ContentEvent;
-import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.capabilities.CapabilityDispatcher;
 import trinsdar.gt4r.data.SlotTypes;
-import trinsdar.gt4r.mixin.GTCapabilityProviderAccessor;
 import trinsdar.gt4r.tile.single.TileEntityQuantumChest;
 
 import javax.annotation.Nonnull;
@@ -43,7 +37,7 @@ public class QuantumChestItemHandler extends MachineItemHandler<TileEntityQuantu
         }
 
         @Override
-        public CompoundTag serializeNBT()
+        public CompoundTag serialize(CompoundTag nbt)
         {
             ListTag nbtTagList = new ListTag();
             for (int i = 0; i < stacks.size(); i++)
@@ -56,13 +50,12 @@ public class QuantumChestItemHandler extends MachineItemHandler<TileEntityQuantu
                     nbtTagList.add(itemTag);
                 }
             }
-            CompoundTag nbt = new CompoundTag();
             nbt.put("Items", nbtTagList);
             return nbt;
         }
 
         @Override
-        public void deserializeNBT(CompoundTag nbt)
+        public void deserialize(CompoundTag nbt)
         {
             ListTag tagList = nbt.getList("Items", Tag.TAG_COMPOUND);
             for (int i = 0; i < tagList.size(); i++)

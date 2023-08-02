@@ -6,9 +6,6 @@ import muramasa.antimatter.tile.multi.TileEntityBasicMultiMachine;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.items.IItemHandler;
 import tesseract.api.gt.IEnergyHandler;
 
 public class TileEntityCokeOven extends TileEntityBasicMultiMachine<TileEntityCokeOven> {
@@ -25,11 +22,4 @@ public class TileEntityCokeOven extends TileEntityBasicMultiMachine<TileEntityCo
         return 0;
     }
 
-    @Override
-    public <T> LazyOptional<T> getCapabilityFromFake(Class<T> cap, BlockPos pos, Direction side, ICover coverPresent) {
-        if (cap == IItemHandler.class && itemHandler.isPresent()) return itemHandler.side(side).cast();
-        else if (cap == IFluidHandler.class && fluidHandler.isPresent()) return fluidHandler.side(side).cast();
-        else if (cap == IEnergyHandler.class && energyHandler.isPresent()) return energyHandler.side(side).cast();
-        return LazyOptional.empty();
-    }
 }

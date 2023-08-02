@@ -30,11 +30,11 @@ public class QuantumChestItemHandlerImpl {
 
     public static ItemStack of(CompoundTag pCompoundTag) {
         try {
-            CompoundTag capNBT = pCompoundTag.contains("ForgeCaps") ? pCompoundTag.getCompound("ForgeCaps") : null;
+            //CompoundTag capNBT = pCompoundTag.contains("ForgeCaps") ? pCompoundTag.getCompound("ForgeCaps") : null;
             Item rawItem = Registry.ITEM.get(new ResourceLocation(pCompoundTag.getString("id")));
             int count = pCompoundTag.getInt("Count");
             ItemStack stack = new ItemStack(rawItem, count);
-            stack.setCapNbt(capNBT);
+            //stack.setCapNbt(capNBT);
             if (pCompoundTag.contains("tag", 10)) {
                 CompoundTag tag = pCompoundTag.getCompound("tag");
                 stack.setTag(tag);

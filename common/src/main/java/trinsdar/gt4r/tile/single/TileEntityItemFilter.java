@@ -24,8 +24,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
-import net.minecraftforge.items.IItemHandlerModifiable;
 import tesseract.TesseractCapUtils;
+import tesseract.api.item.ExtendedItemContainer;
 import trinsdar.gt4r.data.SlotTypes;
 
 import javax.annotation.Nullable;
@@ -55,7 +55,7 @@ public class TileEntityItemFilter extends TileEntityMachine<TileEntityItemFilter
     public boolean accepts(ItemStack stack){
         boolean hasItem = itemHandler.map(h -> {
             List<Item> list = new ObjectArrayList<>();
-            IItemHandlerModifiable outputs = h.getHandler(SlotType.DISPLAY_SETTABLE);
+            ExtendedItemContainer outputs = h.getHandler(SlotType.DISPLAY_SETTABLE);
             for (int i = 0; i < outputs.getSlots(); i++) {
                 ItemStack slot = outputs.getStackInSlot(i);
                 if (!slot.isEmpty()) {

@@ -183,15 +183,15 @@ public class TileEntityIndustrialBlastFurnace extends TileEntityUpgradeableBasic
         }
 
         @Override
-        public CompoundTag serializeNBT() {
-            CompoundTag nbt = super.serializeNBT();
+        public CompoundTag serialize() {
+            CompoundTag nbt = super.serialize();
             nbt.putInt("H", heatingCapacity);
             return nbt;
         }
 
         @Override
-        public void deserializeNBT(CompoundTag nbt) {
-            super.deserializeNBT(nbt);
+        public void deserialize(CompoundTag nbt) {
+            super.deserialize(nbt);
             this.heatingCapacity = nbt.getInt("H");
         }
 

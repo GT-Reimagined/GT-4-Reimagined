@@ -7,7 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.CapabilityDispatcher;
-import trinsdar.gt4r.mixin.GTCapabilityProviderAccessor;
+import trinsdar.gt4r.forge.mixin.GTCapabilityProviderAccessor;
 
 public class QuantumChestItemHandlerImpl {
     public static CompoundTag save(CompoundTag pCompoundTag, ItemStack stack) {

@@ -3,13 +3,11 @@ package trinsdar.gt4r.data;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.fluid.AntimatterFluid;
-import muramasa.antimatter.fluid.AntimatterFluidAttributes;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialTags;
 import muramasa.antimatter.material.MaterialType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.fluids.FluidAttributes;
 import trinsdar.gt4r.Ref;
 
 import static com.google.common.collect.ImmutableMap.of;

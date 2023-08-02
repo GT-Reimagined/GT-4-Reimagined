@@ -1,5 +1,9 @@
 package trinsdar.gt4r.tile.single;
 
+import earth.terrarium.botarium.common.fluid.base.FluidContainer;
+import earth.terrarium.botarium.common.fluid.base.FluidHolder;
+import earth.terrarium.botarium.common.fluid.base.PlatformFluidHandler;
+import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import muramasa.antimatter.capability.item.FakeTrackedItemHandler;
 import muramasa.antimatter.capability.machine.MachineEnergyHandler;
@@ -23,11 +27,10 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
+import tesseract.FluidPlatformUtils;
 import tesseract.TesseractCapUtils;
+import tesseract.TesseractGraphWrappers;
+import tesseract.api.item.ExtendedItemContainer;
 import trinsdar.gt4r.data.SlotTypes;
 
 import java.util.List;
@@ -98,7 +101,7 @@ public abstract class TileEntityTranslocator<T extends TileEntityTranslocator<T>
 
     public static class TileEntityItemTranslocator extends TileEntityTranslocator<TileEntityItemTranslocator>{
         public TileEntityItemTranslocator(Machine<?> type, BlockPos pos, BlockState state) {
-            super(type, pos, state, IItemHandler.class);
+            super(type, pos, state, ExtendedItemContainer.class);
         }
 
         protected boolean processOutput() {
@@ -121,7 +124,7 @@ public abstract class TileEntityTranslocator<T extends TileEntityTranslocator<T>
         public boolean accepts(ItemStack stack){
             boolean hasItem = itemHandler.map(h -> {
                 List<Item> list = new ObjectArrayList<>();
-                IItemHandlerModifiable outputs = h.getHandler(SlotType.DISPLAY_SETTABLE);
+                ExtendedItemContainer outputs = h.getHandler(SlotType.DISPLAY_SETTABLE);
                 for (int i = 0; i < outputs.getSlots(); i++) {
                     ItemStack slot = outputs.getStackInSlot(i);
                     if (!slot.isEmpty()) {
@@ -138,51 +141,41 @@ public abstract class TileEntityTranslocator<T extends TileEntityTranslocator<T>
 
     public static class TileEntityFluidTranslocator extends TileEntityTranslocator<TileEntityFluidTranslocator> {
         public TileEntityFluidTranslocator(Machine<?> type, BlockPos pos, BlockState state) {
-            super(type, pos, state, IFluidHandler.class);
+            super(type, pos, state, FluidContainer.class);
             this.itemHandler.set(() -> new FluidTranslocatorItemHandler(this));
         }
 
         protected boolean processOutput() {
             Direction outputDir = this.getFacing().getOpposite();
             Direction inputDir = this.getFacing();
-            BlockEntity outputTile = Utils.getTile(this.getLevel(), this.getBlockPos().relative(outputDir));
-            if (outputTile == null) return false;
+            PlatformFluidHandler outputHandler = TesseractCapUtils.getFluidHandler(this.level, this.getBlockPos().relative(outputDir), outputDir.getOpposite()).orElse(null);
+            if (outputHandler == null) return false;
+            PlatformFluidHandler inputHandler = TesseractCapUtils.getFluidHandler(this.level, this.getBlockPos().relative(inputDir), inputDir.getOpposite()).orElse(null);
+
             BlockEntity inputTile = Utils.getTile(this.getLevel(), this.getBlockPos().relative(inputDir));
-            if (inputTile == null) {
+            if (inputHandler == null) {
                 FluidState state = level.getFluidState(this.getBlockPos().relative(inputDir));
-                if (!state.isEmpty() && this.accepts(new FluidStack(state.getType(), 1)) && !((state.getType() == Fluids.WATER || state.getType() == Fluids.FLOWING_WATER) && level.getBlockState(this.getBlockPos().relative(inputDir)).getBlock() != Blocks.WATER)){
-                    boolean[] booleans = new boolean[1];
-                    booleans[0] = false;
-                    TesseractCapUtils.getFluidHandler(outputTile, outputDir.getOpposite()).ifPresent(out -> {
-                        int fill = out.fill(new FluidStack(state.getType(), 1000), IFluidHandler.FluidAction.SIMULATE);
-                        if (fill == 1000){
-                            out.fill(new FluidStack(state.getType(), 1000), IFluidHandler.FluidAction.EXECUTE);
-                            booleans[0] = true;
-                            level.setBlockAndUpdate(this.getBlockPos().relative(inputDir), Blocks.AIR.defaultBlockState());
-                        }
-                    });
-                    return booleans[0];
+                if (!state.isEmpty() && this.accepts(FluidPlatformUtils.createFluidStack(state.getType(), 1)) && !((state.getType() == Fluids.WATER || state.getType() == Fluids.FLOWING_WATER) && level.getBlockState(this.getBlockPos().relative(inputDir)).getBlock() != Blocks.WATER)){
+                    long fill = outputHandler.insertFluid(FluidPlatformUtils.createFluidStack(state.getType(), 1000 * TesseractGraphWrappers.dropletMultiplier), true);
+                    if (fill == 1000 * TesseractGraphWrappers.dropletMultiplier){
+                        outputHandler.insertFluid(FluidPlatformUtils.createFluidStack(state.getType(), 1000 * TesseractGraphWrappers.dropletMultiplier), false);
+                        level.setBlockAndUpdate(this.getBlockPos().relative(inputDir), Blocks.AIR.defaultBlockState());
+                        return true;
+                    }
                 }
                 return false;
             }
-            boolean[] booleans = new boolean[1];
-            booleans[0] = false;
-            TesseractCapUtils.getFluidHandler(outputTile, outputDir.getOpposite()).ifPresent(out -> {
-                TesseractCapUtils.getFluidHandler(inputTile, inputDir.getOpposite()).ifPresent(in -> {
-                    booleans[0] = Utils.transferFluids(in, out,1000, this::accepts);
-                });
-            });
-            return booleans[0];
+            return Utils.transferFluids(inputHandler, outputHandler, 1000, this::accepts);
         }
 
-        public boolean accepts(FluidStack stack){
+        public boolean accepts(FluidHolder stack){
             boolean hasItem = itemHandler.map(h -> {
                 List<Item> list = new ObjectArrayList<>();;
-                IItemHandlerModifiable outputs = h.getHandler(SlotTypes.FLUID_DISPLAY_SETTABLE);
+                ExtendedItemContainer outputs = h.getHandler(SlotTypes.FLUID_DISPLAY_SETTABLE);
                 for (int i = 0; i < outputs.getSlots(); i++) {
                     ItemStack slot = outputs.getStackInSlot(i);
                     if (!slot.isEmpty()) {
-                        if (TesseractCapUtils.getFluidHandlerItem(slot).map(f -> f.getFluidInTank(0).getFluid() == stack.getFluid()).orElse(false)){
+                        if (FluidHooks.safeGetItemFluidManager(slot).map(f -> f.getFluidInTank(0).getFluid() == stack.getFluid()).orElse(false)){
                             list.add(slot.copy().getItem());
                         }
                     }

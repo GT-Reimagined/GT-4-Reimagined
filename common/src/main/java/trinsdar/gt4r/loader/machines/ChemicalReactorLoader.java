@@ -3,7 +3,6 @@ package trinsdar.gt4r.loader.machines;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.fluids.FluidStack;
 import trinsdar.gt4r.data.GT4RData;
 
 import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
@@ -28,7 +27,7 @@ public class ChemicalReactorLoader {
         CHEMICAL_REACTING.RB().fi(NitroCarbon.getLiquid(1000), Water.getLiquid(1000)).fo(Glyceryl.getLiquid(2000)).add("glyceryl",583, 30);
         CHEMICAL_REACTING.RB().ii(DUST.getMaterialIngredient(Sodium, 1), DUST.getMaterialIngredient(Sulfur, 1)).io(DUST.get(SodiumSulfide, 2)).add("sodium_sulfide",100, 30);
         CHEMICAL_REACTING.RB().ii(DUST.getMaterialIngredient(Sulfur, 1)).fi(Water.getLiquid(2000)).fo(SulfuricAcid.getLiquid(3000)).add("sulfuric_acid",1150, 30);
-        CHEMICAL_REACTING.RB().fi(Hydrogen.getGas(2000), Oxygen.getGas(1000)).ii(GT4RData.INT_CIRCUITS.get(1)).fo(new FluidStack(Fluids.WATER, 3000)).add("water",10, 30);
+        CHEMICAL_REACTING.RB().fi(Hydrogen.getGas(2000), Oxygen.getGas(1000)).ii(GT4RData.INT_CIRCUITS.get(1)).fo(Water.getLiquid(3000)).add("water",10, 30);
         CHEMICAL_REACTING.RB().ii(DUST.getMaterialIngredient(Sodium, 2)).fi(NitrogenDioxide.getGas(5000)).io(new ItemStack(Items.GUNPOWDER, 5)).add("gunpowder",34, 30);
         CHEMICAL_REACTING.RB().ii(DUST.getMaterialIngredient(Potassium, 1)).fi(NitricAcid.getLiquid(1000)).io(DUST.get(Saltpeter, 1)).add("saltpeter",20, 30);
         CHEMICAL_REACTING.RB().fi(NitrogenDioxide.getGas(3000), Water.getLiquid(1000)).fo(NitricAcid.getLiquid(2000), NitricOxide.getGas(1000)).add("nitric_acid",20, 30);
@@ -37,6 +36,6 @@ public class ChemicalReactorLoader {
         CHEMICAL_REACTING.RB().fi(Oxygen.getGas(500), Hydrogen.getGas(1000)).fo(DistilledWater.getLiquid(1500)).add("distilled_water",5, 30);
         CHEMICAL_REACTING.RB().fi(FishOil.getLiquid(6000), Ethanol.getLiquid(1000)).ii(DUST_TINY.getMaterialIngredient(SodiumHydroxide, 1)).fo(BioDiesel.getLiquid(6000), Glycerol.getLiquid(1000)).add("biodiesel",600, 30);
         CHEMICAL_REACTING.RB().fi(SeedOil.getLiquid(6000), Ethanol.getLiquid(1000)).ii(DUST_TINY.getMaterialIngredient(SodiumHydroxide, 1)).fo(BioDiesel.getLiquid(6000), Glycerol.getLiquid(1000)).add("biodiesel_1",600, 30);
-        CHEMICAL_REACTING.RB().fi(new FluidStack(Fluids.WATER, 3000)).ii(DUST.getMaterialIngredient(Sodium, 1)).fo(Hydrogen.getGas(1000)).io(DUST.get(SodiumHydroxide, 3)).add("sodium_hydroxide",600, 30);
+        CHEMICAL_REACTING.RB().fi(Water.getLiquid(3000)).ii(DUST.getMaterialIngredient(Sodium, 1)).fo(Hydrogen.getGas(1000)).io(DUST.get(SodiumHydroxide, 3)).add("sodium_hydroxide",600, 30);
     }
 }

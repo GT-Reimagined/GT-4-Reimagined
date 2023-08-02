@@ -1,5 +1,7 @@
 package trinsdar.gt4r.tile.single;
 
+import earth.terrarium.botarium.common.fluid.base.FluidHolder;
+import muramasa.antimatter.capability.fluid.FluidTank;
 import muramasa.antimatter.capability.fluid.FluidTanks;
 import muramasa.antimatter.capability.machine.MachineFluidHandler;
 import muramasa.antimatter.cover.CoverOutput;
@@ -11,8 +13,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -66,11 +66,11 @@ public class TileEntityInfiniteFluid extends TileEntityMachine<TileEntityInfinit
                 return b;
             }));
             FluidTank tank = tanks.get(FluidDirection.OUTPUT).getTank(0);
-            tank.setFluid(Steam.getGas(Integer.MAX_VALUE-1));
+            tank.setFluid(0, Steam.getGas(Integer.MAX_VALUE-1));
         }
 
         @Override
-        public boolean canInput(FluidStack fluid, Direction direction) {
+        public boolean canInput(FluidHolder fluid, Direction direction) {
             return false;
         }
 
@@ -81,14 +81,8 @@ public class TileEntityInfiniteFluid extends TileEntityMachine<TileEntityInfinit
 
         @Nonnull
         @Override
-        public FluidStack drain(FluidStack stack, FluidAction action) {
-            return stack.copy();
-        }
-
-        @Nonnull
-        @Override
-        public FluidStack drain(int maxDrain, FluidAction action) {
-            return Steam.getGas(maxDrain);
+        public FluidHolder extractFluid(FluidHolder stack, boolean action) {
+            return stack.copyHolder();
         }
     }
 }

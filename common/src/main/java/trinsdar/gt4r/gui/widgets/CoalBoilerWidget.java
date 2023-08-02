@@ -17,7 +17,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class CoalBoilerWidget extends Widget {
-    private int heat = 0, maxHeat = 0, water = 0, steam = 0;
+    private int heat = 0, maxHeat = 0;
+    long water = 0, steam = 0;
 
     protected CoalBoilerWidget(@Nonnull GuiInstance gui, @Nullable IGuiElement parent) {
         super(gui, parent);
@@ -32,8 +33,8 @@ public class CoalBoilerWidget extends Widget {
         super.init();
         gui.syncInt(() -> ((TileEntityCoalBoiler)((ContainerMachine<?>)gui.container).getTile()).getHeat(), i -> heat = i, ICanSyncData.SyncDirection.SERVER_TO_CLIENT);
         gui.syncInt(() -> ((TileEntityCoalBoiler)((ContainerMachine<?>)gui.container).getTile()).getMaxHeat(), i -> maxHeat = i, ICanSyncData.SyncDirection.SERVER_TO_CLIENT);
-        gui.syncInt(() -> ((ContainerMachine<?>)gui.container).getTile().fluidHandler.map(t -> t.getInputs()[0].getAmount()).orElse(0), i -> water = i, ICanSyncData.SyncDirection.SERVER_TO_CLIENT);
-        gui.syncInt(() -> ((ContainerMachine<?>)gui.container).getTile().fluidHandler.map(t -> t.getOutputs()[0].getAmount()).orElse(0), i -> steam = i, ICanSyncData.SyncDirection.SERVER_TO_CLIENT);
+        gui.syncLong(() -> ((ContainerMachine<?>)gui.container).getTile().fluidHandler.map(t -> t.getInputs()[0].getFluidAmount()).orElse(0L), i -> water = i, ICanSyncData.SyncDirection.SERVER_TO_CLIENT);
+        gui.syncLong(() -> ((ContainerMachine<?>)gui.container).getTile().fluidHandler.map(t -> t.getOutputs()[0].getFluidAmount()).orElse(0L), i -> steam = i, ICanSyncData.SyncDirection.SERVER_TO_CLIENT);
     }
 
     @Override

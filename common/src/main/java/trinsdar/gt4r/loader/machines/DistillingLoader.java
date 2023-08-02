@@ -1,17 +1,15 @@
 package trinsdar.gt4r.loader.machines;
 
-import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.fluids.FluidStack;
-
 import static muramasa.antimatter.data.AntimatterMaterialTypes.DUST_SMALL;
 import static muramasa.antimatter.data.AntimatterMaterials.Sugar;
+import static muramasa.antimatter.data.AntimatterMaterials.Water;
 import static trinsdar.gt4r.data.GT4RData.INT_CIRCUITS;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.BASIC_DISTILLING;
 
 public class DistillingLoader {
     public static void init(){
-        BASIC_DISTILLING.RB().fi(new FluidStack(Fluids.WATER, 5)).ii(INT_CIRCUITS.get(5)).fo(DistilledWater.getLiquid(5)).add("water",16, 10);
+        BASIC_DISTILLING.RB().fi(Water.getLiquid(5)).ii(INT_CIRCUITS.get(5)).fo(DistilledWater.getLiquid(5)).add("water",16, 10);
         BASIC_DISTILLING.RB().fi(Biomass.getLiquid(40)).ii(INT_CIRCUITS.get(0)).fo(Ethanol.getLiquid(12), DistilledWater.getLiquid(20)).add("biomass",24, 16);
         BASIC_DISTILLING.RB().fi(Biomass.getLiquid(40)).ii(INT_CIRCUITS.get(1)).fo(Glycerol.getLiquid(20), DistilledWater.getLiquid(20)).add("biomass_1",24, 16);
         BASIC_DISTILLING.RB().fi(Oil.getLiquid(80)).ii(INT_CIRCUITS.get(0)).fo(Diesel.getLiquid(20), Lubricant.getLiquid(20)).add("oil",32, 16);

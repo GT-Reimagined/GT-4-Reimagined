@@ -1,5 +1,6 @@
 package trinsdar.gt4r.tile.single;
 
+import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import muramasa.antimatter.capability.machine.MachineRecipeHandler;
 import muramasa.antimatter.machine.event.IMachineEvent;
 import muramasa.antimatter.machine.types.Machine;
@@ -8,7 +9,6 @@ import muramasa.antimatter.tile.TileEntityMachine;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.fluids.FluidStack;
 import trinsdar.gt4r.data.RecipeMaps;
 import trinsdar.gt4r.tile.multi.TileEntityIndustrialBlastFurnace;
 
@@ -24,7 +24,7 @@ public class TileEntityFluidExtractor extends TileEntityMachine<TileEntityFluidE
                     maxHeat = 750;
                     ItemStack stack = (ItemStack) data[0];
                     if (!stack.isEmpty()){
-                        IRecipe coilRecipe = RecipeMaps.FLUID_EXTRACTOR_COILS.find(new ItemStack[]{stack}, new FluidStack[]{}, tile.tier, r -> r.getSpecialValue() > 0);
+                        IRecipe coilRecipe = RecipeMaps.FLUID_EXTRACTOR_COILS.find(new ItemStack[]{stack}, new FluidHolder[]{}, tile.tier, r -> r.getSpecialValue() > 0);
                         if (coilRecipe != null){
                             maxHeat += (coilRecipe.getSpecialValue() * stack.getCount());
                         }

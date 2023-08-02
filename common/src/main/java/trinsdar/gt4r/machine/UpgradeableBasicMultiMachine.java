@@ -11,7 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 public class UpgradeableBasicMultiMachine extends BasicMultiMachine<UpgradeableBasicMultiMachine> {
     public UpgradeableBasicMultiMachine(String domain, String name) {
         super(domain, name);
-        this.setTooltipInfo((s, w, t, f) -> {
+        this.setTooltipInfo((b, s, w, t, f) -> {
             String upgrades = "O T B M S";
             t.add(new TranslatableComponent("tooltip.gt4r.possible_upgrades", upgrades));
             CompoundTag nbt = s.getTag();

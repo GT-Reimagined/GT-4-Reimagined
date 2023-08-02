@@ -1,5 +1,6 @@
 package trinsdar.gt4r.loader.machines;
 
+import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.material.Material;
@@ -10,13 +11,13 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.fluids.FluidStack;
 import trinsdar.gt4r.data.GT4RMaterialTags;
 import trinsdar.gt4r.data.Machines;
 import trinsdar.gt4r.data.Materials;
 
 import java.util.List;
 
+import static muramasa.antimatter.data.AntimatterMaterials.Water;
 import static muramasa.antimatter.machine.Tier.LV;
 import static muramasa.antimatter.machine.Tier.MV;
 import static trinsdar.gt4r.data.RecipeMaps.ORE_BYPRODUCTS;
@@ -44,7 +45,7 @@ public class OreByproducts {
                 ores.add(RecipeIngredient.of(Machines.THERMAL_CENTRIFUGE.getItem(MV), 1));
                 ores.add(RecipeIngredient.of(Machines.CENTRIFUGE.getItem(LV), 1));
                 ores.add(RecipeIngredient.of(1, new ItemStack(Machines.ORE_WASHER.getItem(LV)), new ItemStack(Blocks.CAULDRON)));
-                List<FluidStack> fluids = new ObjectArrayList<>();
+                List<FluidHolder> fluids = new ObjectArrayList<>();
                 if (m.has(AntimatterMaterialTypes.ORE)) ores.add(ore);
                 if (m.has(AntimatterMaterialTypes.CRUSHED)) {
                     ores.add(AntimatterMaterialTypes.CRUSHED.getIngredient(m, 2 * MaterialTags.ORE_MULTI.getInt(m)));
@@ -53,7 +54,7 @@ public class OreByproducts {
                     ores.add(AntimatterMaterialTypes.DUST_PURE.getIngredient(m, 1));
                     ores.add(AntimatterMaterialTypes.DUST_IMPURE.getIngredient(m, 1));
                     ores.add(AntimatterMaterialTypes.CRUSHED_REFINED.getIngredient(m, 1));
-                    fluids.add(new FluidStack(Fluids.WATER, 1000));
+                    fluids.add(Water.getLiquid(1000));
                 }
 
                 Material oreByProduct1 = m.getByProducts().size() > 0 ? m.getByProducts().get(0) : m;

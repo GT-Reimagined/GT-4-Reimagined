@@ -1,12 +1,12 @@
 package trinsdar.gt4r.data;
 
 import com.google.common.collect.ImmutableMap;
+import earth.terrarium.botarium.common.registry.fluid.FluidProperties;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.AntimatterConfig;
 import muramasa.antimatter.cover.CoverFactory;
 import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.fluid.AntimatterFluid;
-import muramasa.antimatter.fluid.AntimatterFluidAttributes;
 import muramasa.antimatter.item.ItemBasic;
 import muramasa.antimatter.item.ItemBattery;
 import muramasa.antimatter.item.ItemCover;
@@ -156,10 +156,9 @@ public class GT4RData {
 
     public static final AntimatterFluid PAHOEHOE_LAVA = AntimatterAPI.register(AntimatterFluid.class, new AntimatterFluid(Ref.ID,"pahoehoe_lava", prepareAttributes(), prepareProperties()));
 
-    private static AntimatterFluidAttributes.Builder prepareAttributes() {
-        AntimatterFluidAttributes.Builder builder = AntimatterFluidAttributes.builder(PAHOEHOE_STILL_TEXTURE, PAHOEHOE_STILL_TEXTURE);
-        return builder.overlay(OVERLAY_TEXTURE)
-                .translationKey(String.join("", "block.", Ref.ID, ".liquid.pahoehoe_lava"))
+    private static FluidProperties.Builder prepareAttributes() {
+        FluidProperties.Builder builder = FluidProperties.create();
+        return builder.still(PAHOEHOE_STILL_TEXTURE).flowing(PAHOEHOE_STILL_TEXTURE).overlay(OVERLAY_TEXTURE)
                 .viscosity(3000).density(6000).temperature(1200);
     }
 

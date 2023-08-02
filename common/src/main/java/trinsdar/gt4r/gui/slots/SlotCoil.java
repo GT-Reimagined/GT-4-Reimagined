@@ -7,7 +7,7 @@ import muramasa.antimatter.gui.slot.AbstractSlot;
 import muramasa.antimatter.tile.TileEntityMachine;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.items.IItemHandler;
+import tesseract.api.item.ExtendedItemContainer;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.data.Machines;
 import trinsdar.gt4r.data.RecipeMaps;
@@ -17,7 +17,7 @@ import trinsdar.gt4r.tile.single.TileEntityFluidExtractor;
 import javax.annotation.Nonnull;
 
 public class SlotCoil extends AbstractSlot<SlotCoil> {
-    public SlotCoil(SlotType<SlotCoil> type, IGuiHandler tile, IItemHandler stackHandler, int index, int xPosition, int yPosition) {
+    public SlotCoil(SlotType<SlotCoil> type, IGuiHandler tile, ExtendedItemContainer stackHandler, int index, int xPosition, int yPosition) {
         super(type, tile, stackHandler, index, xPosition, yPosition);
     }
 

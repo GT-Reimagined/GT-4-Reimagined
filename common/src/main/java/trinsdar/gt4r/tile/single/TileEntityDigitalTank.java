@@ -1,5 +1,9 @@
 package trinsdar.gt4r.tile.single;
 
+import earth.terrarium.botarium.common.fluid.base.FluidHolder;
+import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
+import io.github.fabricators_of_create.porting_lib.util.FluidStack;
+import muramasa.antimatter.capability.fluid.FluidTank;
 import muramasa.antimatter.capability.fluid.FluidTanks;
 import muramasa.antimatter.capability.machine.MachineFluidHandler;
 import muramasa.antimatter.gui.event.GuiEvents;
@@ -12,9 +16,6 @@ import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.data.SlotTypes;
 
@@ -56,16 +57,16 @@ public class TileEntityDigitalTank extends TileEntityTank<TileEntityDigitalTank>
                             CompoundTag dataTag = tag.getCompound("Data");
                             if (dataTag.contains("Fluid")) {
                                 CompoundTag nbt = dataTag.getCompound("Fluid");
-                                FluidStack fluidStack = FluidStack.loadFluidStackFromNBT(nbt);
-                                int fill = f.fill(fluidStack, IFluidHandler.FluidAction.SIMULATE);
-                                if (fill != fluidStack.getAmount()) {
+                                FluidHolder fluidStack = FluidHooks.fluidFromCompound(nbt);
+                                long fill = f.insertFluid(fluidStack, true);
+                                if (fill != fluidStack.getFluidAmount()) {
                                     playerEntity.sendMessage(new TranslatableComponent("message.gt4r.digital_tank_inventory"), playerEntity.getUUID());
                                     return;
                                 }
                                 ItemStack newStack = new ItemStack(GT4RData.CircuitDataOrb);
 
 
-                                f.fill(fluidStack, IFluidHandler.FluidAction.EXECUTE);
+                                f.insertFluid(fluidStack, false);
                                 itemHandler.ifPresent(i -> i.getHandler(SlotTypes.DATA).setStackInSlot(0, newStack));
                             }
 
@@ -76,13 +77,13 @@ public class TileEntityDigitalTank extends TileEntityTank<TileEntityDigitalTank>
                 fluidHandler.ifPresent(f -> {
                     ItemStack orb = itemHandler.map(i -> i.getHandler(SlotTypes.DATA).getStackInSlot(0)).orElse(ItemStack.EMPTY);
                     if (orb.getItem() == GT4RData.CircuitDataOrb){
-                        if (f.getInputTanks().getTank(0).getFluidAmount() > 0){
+                        if (f.getInputTanks().getTank(0).getStoredFluid().getFluidAmount() > 0){
                             ItemStack newStack = new ItemStack(GT4RData.StorageDataOrb);
-                            CompoundTag nbt = f.getInputTanks().getTank(0).getFluid().writeToNBT(new CompoundTag());
+                            CompoundTag nbt = f.getInputTanks().getTank(0).getStoredFluid().serialize();
                             CompoundTag dataTag = new CompoundTag();
                             dataTag.put("Fluid", nbt);
                             newStack.getOrCreateTag().put("Data", dataTag);
-                            f.drainInput(f.getInputTanks().getTank(0).getFluidAmount(), IFluidHandler.FluidAction.EXECUTE);
+                            f.drainInput(f.getInputTanks().getTank(0).getStoredFluid().getFluidAmount(), false);
                             itemHandler.ifPresent(i -> i.getHandler(SlotTypes.DATA).setStackInSlot(0, newStack));
                         }
                     }

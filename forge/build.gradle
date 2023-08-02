@@ -9,7 +9,7 @@ loom{
     accessWidenerPath = project(":antimatter-common").file("src/main/resources/antimatter.accesswidener")
     forge {
         mixinConfigs = [
-                "gt4r.mixins.json"
+                "gt4r.mixins.json", "gt4r.mixins.forge.json"
         ]
         dataGen {
             mod project.modid
@@ -49,8 +49,7 @@ dependencies {
     modImplementation "me.shedaniel:RoughlyEnoughItems-forge:${rootProject.rei_version}"
     //modRuntimeOnly("mezz.jei:jei-1.18.2:9.5.0.132")
     modImplementation("com.github.Reforged-Mods:ARRP-forge:0.6.7-1.18.2")
-    modRuntimeOnly("io.github.feltmc:fluidhandler-extras:1.0.1")
-    modImplementation("com.github.Trinsdar.Botarium:botarium-forge-1.18.2:${project.botarium_version}")
+    modImplementation("earth.terrarium:botarium-forge-1.18.2:${project.botarium_version}")
     implementation("io.github.gregtechintergalactical:gtrubber-forge:${rootProject.gt_rubber_version}-${rootProject.minecraft_version}:dev-shadow"){
         transitive = false
     }

@@ -1,4 +1,4 @@
-package trinsdar.gt4r.mixin;
+package trinsdar.gt4r.forge.mixin;
 
 import net.minecraftforge.common.capabilities.CapabilityDispatcher;
 import net.minecraftforge.common.capabilities.CapabilityProvider;

@@ -4,12 +4,12 @@ import muramasa.antimatter.capability.item.TrackedItemHandler;
 import muramasa.antimatter.gui.MenuHandlerMachine;
 import muramasa.antimatter.gui.container.ContainerBasicMachine;
 import muramasa.antimatter.gui.container.ContainerMachine;
+import muramasa.antimatter.gui.slot.AbstractSlot;
 import muramasa.antimatter.gui.slot.SlotFake;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.SlotItemHandler;
+import tesseract.api.item.ExtendedItemContainer;
 import trinsdar.gt4r.tile.single.TileEntityQuantumChest;
 
 public class ContainerQuantumChest extends ContainerBasicMachine<TileEntityQuantumChest> {
@@ -48,9 +48,8 @@ public class ContainerQuantumChest extends ContainerBasicMachine<TileEntityQuant
                         stack.setCount(0);
                         itemstack.setCount(j);
                         slot.setChanged();
-                        if (slot instanceof SlotItemHandler) {
-                            SlotItemHandler handler = (SlotItemHandler) slot;
-                            IItemHandler handle = handler.getItemHandler();
+                        if (slot instanceof AbstractSlot<?> abstractSlot) {
+                            ExtendedItemContainer handle = abstractSlot.getContainer();
                             if (handle instanceof TrackedItemHandler<?>) {
                                 ((TrackedItemHandler<?>) handle).onContentsChanged(slot.index);
                             }
