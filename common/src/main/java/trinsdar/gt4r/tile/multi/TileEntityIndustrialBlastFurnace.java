@@ -33,33 +33,45 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class TileEntityIndustrialBlastFurnace extends TileEntityUpgradeableBasicMultiblock<TileEntityIndustrialBlastFurnace> implements IInfoRenderer<TileEntityIndustrialBlastFurnace.IBFWidget> {
 
+    private int heatingCapacity;
+    private int baseHeatingCapacity;
+
     public TileEntityIndustrialBlastFurnace(Machine<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-        this.recipeHandler.set(() -> new IBFRecipeHandler(this));
+        this.recipeHandler.set(() -> new MachineRecipeHandler<>(this){
+            @Override
+            protected boolean validateRecipe(IRecipe r) {
+                return super.validateRecipe(r) && heatingCapacity >= r.getSpecialValue();
+            }
+        });
     }
 
     @Override
     public boolean onStructureFormed() {
         super.onStructureFormed();
-        recipeHandler.ifPresent(r -> {
-            ((IBFRecipeHandler)r).heatingCapacity = getAllStates().stream().mapToInt(s -> (getHeatPerCasing(s.getBlock()))).sum();
-            this.itemHandler.ifPresent(i -> {
-                ItemStack stack = i.getHandler(SlotTypes.COIL).getStackInSlot(0);
-                if (!stack.isEmpty()){
-                    if (stack.getItem() == GT4RData.KanthalHeatingCoil){
-                        ((IBFRecipeHandler)r).heatingCapacity += (125 * stack.getCount());
-                    } else {
-                        ((IBFRecipeHandler)r).heatingCapacity += (250 * stack.getCount());
-                    }
+        this.itemHandler.ifPresent(i -> {
+            ItemStack stack = i.getHandler(SlotTypes.COIL).getStackInSlot(0);
+            heatingCapacity = baseHeatingCapacity;
+            if (!stack.isEmpty()){
+                if (stack.getItem() == GT4RData.KanthalHeatingCoil){
+                    heatingCapacity += (125 * stack.getCount());
+                } else {
+                    heatingCapacity += (250 * stack.getCount());
                 }
-            });
-
+            }
         });
 
         return true;
     }
 
-    public List<BlockState> getAllStates() {
+    @Override
+    public boolean checkStructure() {
+        baseHeatingCapacity = 0;
+        return super.checkStructure();
+    }
+
+
+    /*public List<BlockState> getAllStates() {
         if (result != null) {
             ObjectCollection<List<BlockState>> collection = result.states.values();
             if (collection.isEmpty()){
@@ -70,6 +82,10 @@ public class TileEntityIndustrialBlastFurnace extends TileEntityUpgradeableBasic
             return list;
         }
         return Collections.emptyList();
+    }*/
+
+    public void incrementBaseHeatingCapacity(int amount){
+        baseHeatingCapacity += amount;
     }
 
     public int getHeatPerCasing(Block block){
@@ -89,10 +105,15 @@ public class TileEntityIndustrialBlastFurnace extends TileEntityUpgradeableBasic
     @Override
     public void onMachineEvent(IMachineEvent event, Object... data) {
         if (event instanceof BFEvent){
-            recipeHandler.ifPresent(r -> {
-
-            });
-
+            heatingCapacity = baseHeatingCapacity;
+            ItemStack stack = (ItemStack) data[0];
+            if (!stack.isEmpty()){
+                if (stack.getItem() == GT4RData.KanthalHeatingCoil){
+                    heatingCapacity += (125 * stack.getCount());
+                } else {
+                    heatingCapacity += (250 * stack.getCount());
+                }
+            }
         }
         super.onMachineEvent(event, data);
     }
@@ -102,9 +123,7 @@ public class TileEntityIndustrialBlastFurnace extends TileEntityUpgradeableBasic
     }
 
     public int getHeatingCapacity() {
-        AtomicInteger integer = new AtomicInteger(0);
-        this.recipeHandler.ifPresent(r -> integer.set(((IBFRecipeHandler)r).heatingCapacity));
-        return integer.get();
+        return heatingCapacity;
     }
     @Override
     public int drawInfo(IBFWidget widget, PoseStack stack, Font renderer, int left, int top) {
@@ -134,81 +153,6 @@ public class TileEntityIndustrialBlastFurnace extends TileEntityUpgradeableBasic
 
         public static WidgetSupplier build() {
             return builder((a,b) -> new IBFWidget(a,b, (IInfoRenderer) a.handler));
-        }
-    }
-
-    public static class IBFRecipeHandler extends UpgradeableMachineRecipeHandler<TileEntityIndustrialBlastFurnace> {
-        protected final ContainerData GUI_SYNC_DATA = new ContainerData() {
-
-            @Override
-            public int get(int index) {
-                switch (index) {
-                    case 0:
-                        return IBFRecipeHandler.this.currentProgress;
-                    case 1:
-                        return IBFRecipeHandler.this.maxProgress;
-                    case 2:
-                        return IBFRecipeHandler.this.heatingCapacity;
-                }
-                return 0;
-            }
-
-            @Override
-            public void set(int index, int value) {
-                switch (index) {
-                    case 0:
-                        IBFRecipeHandler.this.currentProgress = value;
-                        break;
-                    case 1:
-                        IBFRecipeHandler.this.maxProgress = value;
-                        break;
-                    case 2:
-                        IBFRecipeHandler.this.heatingCapacity = value;
-                }
-            }
-
-            @Override
-            public int getCount() {
-                return 3;
-            }
-        };
-        private int heatingCapacity;
-        public IBFRecipeHandler(TileEntityIndustrialBlastFurnace tile) {
-            super(tile);
-        }
-
-        @Override
-        protected boolean validateRecipe(IRecipe r) {
-            return super.validateRecipe(r) && heatingCapacity >= r.getSpecialValue();
-        }
-
-        @Override
-        public CompoundTag serialize() {
-            CompoundTag nbt = super.serialize();
-            nbt.putInt("H", heatingCapacity);
-            return nbt;
-        }
-
-        @Override
-        public void deserialize(CompoundTag nbt) {
-            super.deserialize(nbt);
-            this.heatingCapacity = nbt.getInt("H");
-        }
-
-        @Override
-        public void onMachineEvent(IMachineEvent event, Object... data) {
-            super.onMachineEvent(event, data);
-            if (event instanceof BFEvent){
-                heatingCapacity = tile.getAllStates().stream().mapToInt(s -> (tile.getHeatPerCasing(s.getBlock()))).sum();
-                ItemStack stack = (ItemStack) data[0];
-                if (!stack.isEmpty()){
-                    if (stack.getItem() == GT4RData.KanthalHeatingCoil){
-                        heatingCapacity += (125 * stack.getCount());
-                    } else {
-                        heatingCapacity += (250 * stack.getCount());
-                    }
-                }
-            }
         }
     }
 }

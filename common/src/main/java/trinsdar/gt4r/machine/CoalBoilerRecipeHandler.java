@@ -103,7 +103,7 @@ public class CoalBoilerRecipeHandler extends MachineRecipeHandler<TileEntityCoal
 
     public void exportFluidFromMachineToSide(Direction side){
         Optional<PlatformFluidHandler> cap = TesseractCapUtils.getFluidHandler(tile.getLevel(), tile.getBlockPos().relative(side), side.getOpposite());
-        tile.fluidHandler.ifPresent(f -> cap.ifPresent(other -> Utils.transferFluids(f, other, 1000)));
+        tile.fluidHandler.ifPresent(f -> cap.ifPresent(other -> Utils.transferFluids(f.getOutputTanks(), other, 1000)));
     }
 
     @Override

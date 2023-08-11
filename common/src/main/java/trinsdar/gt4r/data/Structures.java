@@ -1,27 +1,34 @@
 package trinsdar.gt4r.data;
 
+import com.gtnewhorizon.structurelib.structure.IStructureElement;
+import com.gtnewhorizon.structurelib.structure.StructureUtility;
 import muramasa.antimatter.Data;
 import muramasa.antimatter.machine.types.Machine;
-import muramasa.antimatter.structure.BlockStateElement;
 import muramasa.antimatter.structure.FakeTileElement;
 import muramasa.antimatter.structure.PatternBuilder;
+import muramasa.antimatter.tile.TileEntityMachine;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
+import trinsdar.gt4r.tile.multi.*;
 
 import java.util.function.BiFunction;
 
+import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static muramasa.antimatter.machine.Tier.LV;
+import static muramasa.antimatter.structure.AntimatterStructureUtility.ofHatch;
 import static trinsdar.gt4r.data.GT4RData.*;
 import static trinsdar.gt4r.data.Machines.*;
 
 public class Structures {
 
     /** Special Case Elements **/
-    public static BlockStateElement AIR_OR_LAVA = new BlockStateElement("air_or_lava", (w, p, s) -> s.isAir() || s.getFluidState().getType() == Fluids.LAVA/* || s.getBlock() == Blocks.FLOWING_LAVA*/);
+    public static IStructureElement<?> AIR_OR_LAVA = ofChain(StructureUtility.isAir(), StructureUtility.ofBlockAdder((w, b) -> b == Blocks.LAVA/* || b == LAVA*/, Blocks.LAVA));
+    /*public static BlockStateElement AIR_OR_LAVA = new BlockStateElement("air_or_lava", (w, p, s) -> s.isAir() || s.getFluidState().getType() == Fluids.LAVA*//* || s.getBlock() == Blocks.FLOWING_LAVA*//*);
     public static BlockStateElement AIR = new BlockStateElement("air", (w, p, s) -> s.isAir());
-    public static BlockStateElement WATER = new BlockStateElement("water", (w, p, s) -> s.getFluidState().getType() == Fluids.WATER);
+    public static BlockStateElement WATER = new BlockStateElement("water", (w, p, s) -> s.getFluidState().getType() == Fluids.WATER);*/
 
 
     public static FakeTileElement BRICK = new FakeTileElement(FIRE_BRICKS);
@@ -144,100 +151,135 @@ public class Structures {
     }
 
     public static void init() {
-        COKE_OVEN.setStructure(b -> b
-            .of("ccc", "ccc", "ccc").of("CCC", "CAM", "CCC").of("CCC", "CCC", "CCC")
-            .at("C", BRICK).at("M", COKE_OVEN).at("c", BRICK.cover(Direction.DOWN, Data.COVEROUTPUT))
-            .build().offset(2, -1)
+        COKE_OVEN.setStructure(TileEntityCokeOven.class, b -> b.part("main")
+            .of("CCC", "CCC", "CCC").of("C~C", "CAC", "CCC").of("ccc", "ccc", "ccc").build()
+            .at('C', BRICK).at('c', BRICK.cover(Direction.DOWN, Data.COVEROUTPUT))
+                .offset(1, 1, 0).build()
         );
-        PYROLYSIS_OVEN.setStructure(b -> b
-                .of("CCC", "CCM", "CCC").of("CCC", "CLC", "CCC").of("CCC", "CCC", "CCC")
-                .at("M", PYROLYSIS_OVEN).at("C", CASING).at("L", AIR_OR_LAVA)
-                .build().offset(2, 0)
+        PYROLYSIS_OVEN.setStructure(TileEntityPyrolysisOven.class, b -> b.part("main")
+                .of("CCC", "CCC", "CCC").of("CCC", "CLC", "CCC").of("CCC", "C~C", "CCC").build()
+                .at('C', CASING).at('L', AIR_OR_LAVA)
+                .offset(1, 2, 0).build()
         );
-        PRIMITIVE_BLAST_FURNACE.setStructure(b -> b
-            .of("CCC", "CCC", "CCC").of("CCC", "CBM", "CCC").of("CCC", "CBC", "CCC").of(2)
-            .at("C", BRICK).at("B", AIR_OR_LAVA).at("M", PRIMITIVE_BLAST_FURNACE)
-            .build().offset(2, -1)
+        PRIMITIVE_BLAST_FURNACE.setStructure(TileEntityPrimitiveBlastFurnace.class, b -> b.part("main")
+                .of("CCC", "C-C", "CCC").of("CCC", "CBC", "CCC").of("C~C", "CBC", "CCC").of("CCC", "CCC", "CCC").build()
+                .at('C', FIRE_BRICKS).at('B', AIR_OR_LAVA)
+                .offset(1, 2, 0).build()
         );
-        BLAST_FURNACE.setStructure(b -> b
-            .of("CCC ", "CCCM", "CCC ").of("CCC ", "CLC ", "CCC ").of(1).of("CCC ", "CCC ", "CCC ")
-            .at("M", BLAST_FURNACE).at("C", STANDARD_MACHINE_CASING, REINFORCED_MACHINE_CASING, ADVANCED_MACHINE_CASING).at("L", AIR_OR_LAVA)
-            .build().offset(3, 0)
+        BLAST_FURNACE.setStructure(TileEntityIndustrialBlastFurnace.class, b -> b.part("main")
+            .of("   ","CCC", "CCC", "CCC").of("   ", "CCC", "CLC", "CCC").of(1).of(" ~ ","CCC", "CCC", "CCC").build()
+            .atElement('C', onElementPass((e, c, w, x, y, z) -> {
+                c.incrementBaseHeatingCapacity(c.getHeatPerCasing(w.getBlockState(new BlockPos(x,y,z)).getBlock()));
+            } , ofChain(
+                    ofBlock(STANDARD_MACHINE_CASING),
+                    ofBlock(REINFORCED_MACHINE_CASING),
+                    ofBlock(ADVANCED_MACHINE_CASING)))).atElement('L', onElementPass((e, c, w, x, y, z) -> {
+                    c.incrementBaseHeatingCapacity(c.getHeatPerCasing(w.getBlockState(new BlockPos(x,y,z)).getBlock()));
+                }, (IStructureElement<TileEntityIndustrialBlastFurnace>) AIR_OR_LAVA))
+                .offset(1,3,0).build()
         );
-        VACUUM_FREEZER.setStructure(b -> b
-            .of("CCC", "CcC", "CCC").of("CcC", "cAc", "CcC").of(0).of("   ", " M ", "   ")
-            .at("M", VACUUM_FREEZER).at("C", REINFORCED_MACHINE_CASING).at("c", ADVANCED_MACHINE_CASING)
-            .build().offset(1, -3).min(20, REINFORCED_MACHINE_CASING).min(6, ADVANCED_MACHINE_CASING)
+        VACUUM_FREEZER.setStructure(TileEntityVacuumFreezer.class, b -> b.part("main")
+                .of("   ", " ~ ", "   ").of("CCC", "CcC", "CCC").of("CcC", "c-c", "CcC").of(1).build()
+            .at('C', REINFORCED_MACHINE_CASING).at('c', ADVANCED_MACHINE_CASING)
+                .offset(1,0,-1).build()
         );
-        IMPLOSION_COMPRESSOR.setStructure(b -> b
-            .of("cCc", "CCC", "cCc").of("CCC", "CAC", "CCC").of(0).of("   ", " M ", "   ")
-            .at("M", IMPLOSION_COMPRESSOR).at("C", REINFORCED_MACHINE_CASING).at("c", STANDARD_MACHINE_CASING)
-            .build().offset(1, -3).min(18, REINFORCED_MACHINE_CASING).min(8, STANDARD_MACHINE_CASING)
+        IMPLOSION_COMPRESSOR.setStructure(TileEntityImplosionCompressor.class, b -> b.part("main")
+                .of("   ", " ~ ", "   ").of("cCc", "CCC", "cCc").of("CCC", "C-C", "CCC").of(1).build()
+                .at('C', REINFORCED_MACHINE_CASING).at('c', STANDARD_MACHINE_CASING)
+                .offset(1,0,-1).build()
         );
-        INDUSTRIAL_GRINDER.setStructure(b -> b
-                .of("ccc ", "ccc ", "ccc ").of("CCC ", "CWCM", "CCC ").of(0)
-                .at("M", INDUSTRIAL_GRINDER).at("C", REINFORCED_MACHINE_CASING).at("c", STANDARD_MACHINE_CASING).at("W", WATER)
-                .build().offset(3, -1)
+        INDUSTRIAL_GRINDER.setStructure(TileEntityIndustrialGrinder.class, b -> b.part("main")
+                .of("   ","ccc", "ccc", "ccc").of(" ~ ", "CCC", "CWC", "CCC").of(0).build()
+                .at('C', REINFORCED_MACHINE_CASING).at('c', STANDARD_MACHINE_CASING).at('W', StructureUtility.ofBlock(Blocks.WATER))
+                .offset(1,1, 0).build()
         );
-        INDUSTRIAL_SAWMILL.setStructure(b -> b
-                .of("ccc", "cCc", "ccc").of("   ", " M ", "   ")
-                .at("M", INDUSTRIAL_SAWMILL).at("C", REINFORCED_MACHINE_CASING).at("c", STANDARD_MACHINE_CASING)
-                .build().offset(1, -1)
+        INDUSTRIAL_SAWMILL.setStructure(TileEntityIndustrialSawmill.class, b -> b.part("main")
+                .of("   ", " ~ ", "   ").of("ccc", "cCc", "ccc").build()
+                .at('C', REINFORCED_MACHINE_CASING).at('c', STANDARD_MACHINE_CASING)
+                .offset(1, 0, -1).build()
         );
-        DISTILLATION_TOWER.setStructure(b -> b
-                .of("CCC ", "CCCM", "CCC ").of("ccc ", "c c ", "ccc ").of("CCC ", "C C ", "CCC ").of(1).of("CCC ", "CCC ", "CCC ")
-                .at("M", DISTILLATION_TOWER).at("C", STANDARD_MACHINE_CASING).at("c", ADVANCED_MACHINE_CASING)
-                .build().offset(3, 0)
+        DISTILLATION_TOWER.setStructure(TileEntityDistillationTower.class, b -> b.part("main")
+                .of("   ","ccc", "c c", "ccc").of("   ","CCC", "C-C", "CCC").of(1).of("   ","CCC", "CCC", "CCC").of(" ~ ","CCC", "CCC", "CCC").build()
+                .at('C', STANDARD_MACHINE_CASING).at('c', ADVANCED_MACHINE_CASING)
+                .offset(1, 4, 0).build()
         );
-        LARGE_STEAM_TURBINE.setStructure(b -> b
-            .of("CCCC", "CCCC", "CCCC").of("CHHC", "EAAM", "CHHC").of(0)
-            .at("M", LARGE_STEAM_TURBINE).at("C", STANDARD_MACHINE_CASING).at("H", STANDARD_MACHINE_CASING, HATCH_FLUID_I, HATCH_FLUID_O, HATCH_MUFFLER).at("E", HATCH_DYNAMO)
-            .build().offset(3, -1).min(28, STANDARD_MACHINE_CASING).min(1, HATCH_FLUID_I, HATCH_MUFFLER)
+        THERMAL_BOILER.setStructure(TileEntityThermalBoiler.class, b -> b.part("main")
+                .of("CCC", "CHC", "CCC").of("C~C", "H-H", "CHC").of(0).build()
+                .at('C', REINFORCED_MACHINE_CASING).at('H', REINFORCED_MACHINE_CASING, HATCH_FLUID_I, HATCH_FLUID_O, HATCH_ITEM_O)
+                .min(2, HATCH_FLUID_I).min(1, HATCH_FLUID_O).offset(1,1,0).build());
+        LARGE_GAS_TURBINE.setStructure(TileEntityLargeTurbine.class, b -> b.part("main")
+                .of("CCC", "CCC", "CCC", "CCC").of("C~C", "H-H", "H-H", "CEC").of(0).build()
+                .atElement('C', StructureUtility.lazy(t -> ofBlock(t.getCasing())))
+                .atElement('H', StructureUtility.<TileEntityLargeTurbine>ofChain(
+                        StructureUtility.lazy(t -> ofBlock(t.getCasing())),
+                        ofHatch(HATCH_FLUID_I),
+                        ofHatch(HATCH_FLUID_O)))
+                .atElement('E', ofHatch(HATCH_DYNAMO, (t, world, pos, machine, handler) -> {
+                    if (handler.getTile() instanceof TileEntityMachine<?> entityMachine){
+                        if (t.getMachineTier().getVoltage() <= entityMachine.getMachineTier().getVoltage()){
+                            t.addComponent(machine.getComponentId(), handler);
+                            return true;
+                        }
+                    }
+                    return false;
+                }))
+                .min(1, HATCH_FLUID_I, HATCH_FLUID_O).offset(1, 1, 0).build()
         );
-        THERMAL_BOILER.setStructure(b -> b
-                .of("CCC", "CHC", "CCC").of("CHC", "HAM", "CHC").of(0)
-                .at("M", THERMAL_BOILER).at("C", REINFORCED_MACHINE_CASING).at("H", REINFORCED_MACHINE_CASING, HATCH_FLUID_I, HATCH_FLUID_O, HATCH_ITEM_O)
-                .build().offset(2, -1).min(2, HATCH_FLUID_I).min(1, HATCH_FLUID_O).min(20, REINFORCED_MACHINE_CASING));
-        LARGE_GAS_TURBINE.setStructure(b -> b
-                .of("CCCC", "CCCC", "CCCC").of("CHHC", "EAAM", "CHHC").of(0)
-                .at("M", LARGE_GAS_TURBINE).at("C", REINFORCED_MACHINE_CASING).at("H", STANDARD_MACHINE_CASING, HATCH_FLUID_I, HATCH_FLUID_O, HATCH_MUFFLER).at("E", HATCH_DYNAMO)
-                .build().offset(3, -1).min(28, STANDARD_MACHINE_CASING).min(1, HATCH_FLUID_I, HATCH_MUFFLER)
+
+        LARGE_STEAM_TURBINE.setStructure(TileEntityLargeTurbine.class, b -> b.part("main")
+                .of("CCC", "CCC", "CCC", "CCC").of("C~C", "H-H", "H-H", "CEC").of(0).build()
+                .atElement('C', StructureUtility.lazy(t -> ofBlock(t.getCasing())))
+                .atElement('H', StructureUtility.<TileEntityLargeTurbine>ofChain(
+                        StructureUtility.lazy(t -> ofBlock(t.getCasing())),
+                        ofHatch(HATCH_FLUID_I),
+                        ofHatch(HATCH_FLUID_O)))
+                .atElement('E', ofHatch(HATCH_DYNAMO, (t, world, pos, machine, handler) -> {
+                    if (handler.getTile() instanceof TileEntityMachine<?> entityMachine){
+                        if (t.getMachineTier().getVoltage() <= entityMachine.getMachineTier().getVoltage()){
+                            t.addComponent(machine.getComponentId(), handler);
+                            return true;
+                        }
+                    }
+                    return false;
+                }))
+                .min(1, HATCH_FLUID_I, HATCH_FLUID_O).offset(1, 1, 0).build()
         );
-        FUSION_REACTOR.setStructure(b -> b
-            .of(
-                "               ",
-                "      BOB      ",
-                "    OO   OO    ",
-                "   O       O   ",
-                "  O         O  ",
-                "  O         O  ",
-                " B           B ",
-                " O           O ",
-                " B           B ",
-                "  O         O  ",
-                "  O         O  ",
-                "   O       O   ",
-                "    OO   OO    ",
-                "      BOB      ",
-                "               "
-            ).of(
-                "      HOH      ",
-                "    OOCCCOO    ",
-                "   ECCHOHCCE   ",
-                "  ECEO   OECE  ",
-                " OCE       ECO ",
-                " OCO       OCO ",
-                "HCH         HCH",
-                "OCM         OCO",
-                "HCH         HCH",
-                " OCO       OCO ",
-                " OCE       ECO ",
-                "  ECEO   OECE  ",
-                "   ECCHOHCCE   ",
-                "    OOCCCOO    ",
-                "      HOH      "
-            ).of(0)
-            .at("O", ADVANCED_MACHINE_CASING).at("C", FUSION_COIL).at("M", FUSION_REACTOR).at("B", ADVANCED_MACHINE_CASING, FUSION_ITEM_INJECTOR, FUSION_FLUID_INJECTOR).at("H", ADVANCED_MACHINE_CASING, FUSION_ITEM_EXTRACTOR, FUSION_FLUID_EXTRACTOR).at("E", ADVANCED_MACHINE_CASING, FUSION_ENERGY_INJECTOR)
-            .build().offset(2, -1).combined("fusion_injectors",2, FUSION_ITEM_INJECTOR, FUSION_FLUID_INJECTOR).combined("fusion_extractors",1, FUSION_ITEM_EXTRACTOR, FUSION_FLUID_EXTRACTOR).min(4, FUSION_ENERGY_INJECTOR));
+        FUSION_REACTOR.setStructure(TileEntityFusionReactor.class, b -> b.part("main")
+                .of(
+                        "               ",
+                        "      BOB      ",
+                        "    OO   OO    ",
+                        "   O       O   ",
+                        "  O         O  ",
+                        "  O         O  ",
+                        " B           B ",
+                        " O           O ",
+                        " B           B ",
+                        "  O         O  ",
+                        "  O         O  ",
+                        "   O       O   ",
+                        "    OO   OO    ",
+                        "      BOB      ",
+                        "               "
+                ).of("      XOX      ",
+                        "    OOCCCOO    ",
+                        "   ECCXOXCCE   ",
+                        "  ECEO   OECE  ",
+                        " OCE       ECO ",
+                        " OCO       OCO ",
+                        "XCX         XCX",
+                        "OCO         OCO",
+                        "XCX         XCX",
+                        " OCO       OCO ",
+                        " OCE       ECO ",
+                        "  ECEO   OECE  ",
+                        "   ECCX~XCCE   ",
+                        "    OOCCCOO    ",
+                        "      XOX      ").of(0).build()
+                .at('O', ADVANCED_MACHINE_CASING).at('C', FUSION_COIL)
+                .at('B', ADVANCED_MACHINE_CASING, FUSION_ITEM_INJECTOR, FUSION_FLUID_INJECTOR)
+                .at('X',ADVANCED_MACHINE_CASING, FUSION_ITEM_EXTRACTOR, FUSION_FLUID_EXTRACTOR)
+                .at('E', ADVANCED_MACHINE_CASING, FUSION_ENERGY_INJECTOR)
+                .offset(7, 1, 12).min(2, FUSION_FLUID_INJECTOR).min(1, FUSION_FLUID_EXTRACTOR).min(4, FUSION_ENERGY_INJECTOR).build());
     }
 }

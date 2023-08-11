@@ -158,8 +158,8 @@ public class TileEntityHeatExchanger extends TileEntityMachine<TileEntityHeatExc
             super.onUpdate();
             Direction right = tile.getFacing().getCounterClockWise();
             Direction left = tile.getFacing().getClockWise();
-            tile.fluidHandler.side(right).ifPresent(f -> TesseractCapUtils.getFluidHandler(tile.level, tile.getBlockPos().relative(right), right.getOpposite()).ifPresent(t -> Utils.transferFluids(f, t, 1000)));
-            tile.fluidHandler.side(DOWN).ifPresent(f -> TesseractCapUtils.getFluidHandler(tile.level, tile.getBlockPos().relative(DOWN), UP).ifPresent(t -> Utils.transferFluids(f, t, 1000)));
+            tile.fluidHandler.ifPresent(f -> TesseractCapUtils.getFluidHandler(tile.level, tile.getBlockPos().relative(right), right.getOpposite()).ifPresent(t -> Utils.transferFluids(f.getOutputTanks().getTank(0), t, 1000)));
+            tile.fluidHandler.ifPresent(f -> TesseractCapUtils.getFluidHandler(tile.level, tile.getBlockPos().relative(DOWN), UP).ifPresent(t -> Utils.transferFluids(f.getOutputTanks().getTank(1), t, 1000)));
             tile.fluidHandler.side(left).ifPresent(t -> TesseractCapUtils.getFluidHandler(tile.level, tile.getBlockPos().relative(left), left.getOpposite()).ifPresent(f -> transferFluids(f, ((HeatExchangerFluidHandlerSidedWrapper)t), 1000)));
             tile.fluidHandler.side(UP).ifPresent(t -> TesseractCapUtils.getFluidHandler(tile.level, tile.getBlockPos().relative(UP), DOWN).ifPresent(f -> transferFluids(f, ((HeatExchangerFluidHandlerSidedWrapper)t), 1000)));
         }

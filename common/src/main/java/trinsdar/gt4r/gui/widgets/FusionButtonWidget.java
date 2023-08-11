@@ -40,7 +40,7 @@ public class FusionButtonWidget extends Widget {
     @Override
     public void onClick(double mouseX, double mouseY, int button) {
         super.onClick(mouseX, mouseY, button);
-        AntimatterJEIREIPlugin.showCategory(getTile().getMachineType());
+        AntimatterJEIREIPlugin.showCategory(getTile().getMachineType(), getTile().getMachineTier());
     }
 
     public static WidgetSupplier build() {

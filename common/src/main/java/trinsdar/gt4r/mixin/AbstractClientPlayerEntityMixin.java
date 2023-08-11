@@ -1,6 +1,7 @@
 package trinsdar.gt4r.mixin;
 
 import com.mojang.authlib.GameProfile;
+import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.util.AntimatterPlatformUtils;
 import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.client.player.AbstractClientPlayer;
@@ -27,6 +28,7 @@ public abstract class AbstractClientPlayerEntityMixin extends Player {
     @Inject(method = "getCloakTextureLocation", at = @At(value = "HEAD"), cancellable = true)
     private void getLocationGTCape(CallbackInfoReturnable<ResourceLocation> info){
         String playerName = this.getDisplayName().getString();
+        if (AntimatterAPI.isModLoaded("gti")) return;
         if (!AntimatterPlatformUtils.isProduction()) info.setReturnValue(GT4RData.CAPE_LOCATIONS[3]);
         if (orString(playerName, "GregoriusT", "OvermindDL1", "jihuayu123", "Yuesha_Kev14", "Evanvenir", "Trinsdar")) info.setReturnValue(GT4RData.CAPE_LOCATIONS[3]);
         if (playerName.equals("CrazyJ1984")) info.setReturnValue(GT4RData.CAPE_LOCATIONS[5]);
