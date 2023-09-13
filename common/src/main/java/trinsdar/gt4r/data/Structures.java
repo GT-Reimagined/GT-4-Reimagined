@@ -217,7 +217,7 @@ public class Structures {
                 .atElement('E', ofHatch(HATCH_DYNAMO, (t, world, pos, machine, handler) -> {
                     if (handler.getTile() instanceof TileEntityMachine<?> entityMachine){
                         if (t.getMachineTier().getVoltage() <= entityMachine.getMachineTier().getVoltage()){
-                            t.addComponent(machine.getComponentId(), handler);
+                            t.addComponent(machine.getId(), handler);
                             return true;
                         }
                     }
@@ -236,7 +236,7 @@ public class Structures {
                 .atElement('E', ofHatch(HATCH_DYNAMO, (t, world, pos, machine, handler) -> {
                     if (handler.getTile() instanceof TileEntityMachine<?> entityMachine){
                         if (t.getMachineTier().getVoltage() <= entityMachine.getMachineTier().getVoltage()){
-                            t.addComponent(machine.getComponentId(), handler);
+                            t.addComponent(machine.getId(), handler);
                             return true;
                         }
                     }
