@@ -31,7 +31,7 @@ public class ToolCraftingTableRecipes {
             Cable<?> cable = AntimatterAPI.get(Cable.class, "cable" + "_" + wire.getMaterial().getId());
             ImmutableSet<PipeSize> sizes = wire.getSizes();
             Map<PipeSize, Item> wires = sizes.stream().map(s -> new Pair<>(s, wire.getBlockItem(s))).collect(Collectors.toMap(Pair::getFirst, Pair::getSecond));
-            PipeSize[] val = values();
+            PipeSize[] val = VALUES;
             for (int i = 1; i < val.length; i ++) {
                 int offset = val[i] == HUGE ? 1 : 0;
                 if (val[i] == LARGE){

@@ -51,6 +51,7 @@ dependencies {
     modImplementation("com.github.Reforged-Mods:ARRP-forge:0.6.7-1.18.2")
     modImplementation("earth.terrarium:botarium-forge-1.18.2:${project.botarium_version}")
     modImplementation("com.github.Reforged-Mods.Terraform-Reforged:terraform-utils-v1:${project.terraform_version}")
+    modImplementation("io.github.llamalad7:mixinextras-forge:0.2.0-beta.11")
     implementation("io.github.gregtechintergalactical:gtrubber-forge:${rootProject.gt_rubber_version}-${rootProject.minecraft_version}:dev-shadow"){
         transitive = false
     }

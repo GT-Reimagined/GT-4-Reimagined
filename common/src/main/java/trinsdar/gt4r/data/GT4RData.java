@@ -151,7 +151,7 @@ public class GT4RData {
             .addTextures(new Texture(Ref.ID, "block/cover/output")).build(Ref.ID, "steam_vent");;
     public static final CoverFactory COVER_CRAFTING = CoverFactory.builder(CoverCrafting::new).gui().item((a, b) ->
             new ItemCraftingModule().tip("Can be placed on machines as a cover")).setMenuHandler(MenuHandlers.COVER_CRAFTING_HANDLER).addTextures(new Texture(Ref.ID, "block/cover/crafting_module")).build(Ref.ID, "crafting_module");
-    public static final CoverFactory COVER_REDSTONE_MACHINE_CONTROLLER = CoverFactory.builder(CoverRedstoneMachineController::new).item((a, b) ->
+    public static final CoverFactory COVER_REDSTONE_MACHINE_CONTROLLER = CoverFactory.builder(CoverRedstoneMachineController::new).gui().item((a, b) ->
             new ItemCover(Ref.ID, "redstone_machine_controller").tip("Can be placed on machines as a cover")).addTextures(new Texture(Ref.ID, "block/cover/redstone_machine_controller")).build(Ref.ID, "redstone_machine_controller");
 
     public static final AntimatterFluid PAHOEHOE_LAVA = AntimatterAPI.register(AntimatterFluid.class, new AntimatterFluid(Ref.ID,"pahoehoe_lava", prepareAttributes(), prepareProperties()));

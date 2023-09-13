@@ -152,7 +152,7 @@ public class Structures {
 
     public static void init() {
         COKE_OVEN.setStructure(TileEntityCokeOven.class, b -> b.part("main")
-            .of("CCC", "CCC", "CCC").of("C~C", "CAC", "CCC").of("ccc", "ccc", "ccc").build()
+            .of("CCC", "CCC", "CCC").of("C~C", "C-C", "CCC").of("ccc", "ccc", "ccc").build()
             .at('C', BRICK).at('c', BRICK.cover(Direction.DOWN, Data.COVEROUTPUT))
                 .offset(1, 1, 0).build()
         );
