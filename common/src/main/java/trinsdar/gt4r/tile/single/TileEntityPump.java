@@ -169,12 +169,12 @@ public class TileEntityPump extends TileEntityMachine<TileEntityPump> {
                 FluidHolder stack = FluidPlatformUtils.createFluidStack(fluid, 1000 * TesseractGraphWrappers.dropletMultiplier);
                 if (fluidHandler.map(f -> f.canOutputsFit(new FluidHolder[]{stack})).orElse(false) && energyHandler.map(e -> e.getEnergy() >= 1000).orElse(false)){
                     fluidHandler.ifPresent(f -> f.fillOutput(stack, false));
-                    energyHandler.ifPresent(e -> Utils.extractEnergy(e, 1000));
+                    energyHandler.ifPresent(e -> e.extractEu(1000, false));
                 } else {
                     return false;
                 }
             } else {
-                energyHandler.ifPresent(e -> Utils.extractEnergy(e, 250));
+                energyHandler.ifPresent(e -> e.extractEu(250, false));
             }
             Block block = this.itemHandler.map(i -> {
                 ItemStack stack = i.getHandler(SlotType.STORAGE).getStackInSlot(0);

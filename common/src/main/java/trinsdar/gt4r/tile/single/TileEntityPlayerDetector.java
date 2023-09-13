@@ -69,13 +69,7 @@ public class TileEntityPlayerDetector extends TileEntityMachine<TileEntityPlayer
                     }
                 }
             }
-            GTTransaction transaction = energy.extract(GTTransaction.Mode.INTERNAL);
-            if (transaction != null && transaction.isValid()) {
-                if (transaction.eu >= 3) {
-                    transaction.addData(3, Utils.sink());
-                    transaction.commit();
-                }
-            }
+            energy.extractEu(3, false);
         }
         if (lastRedstone != redstone) {
             this.setMachineState(redstone ? MachineState.ACTIVE : MachineState.IDLE);

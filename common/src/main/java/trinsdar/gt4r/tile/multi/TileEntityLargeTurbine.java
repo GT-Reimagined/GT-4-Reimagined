@@ -33,6 +33,7 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
 
     public TileEntityLargeTurbine(Machine<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
+        //TODO fix
         this.recipeHandler.set(() ->
             new MachineRecipeHandler<TileEntityLargeTurbine>(this) {
 
@@ -50,7 +51,7 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
                     return true;
                 }
 
-                @Override
+                /*@Override
                 public IRecipe findRecipe() {
                     IRecipe r = super.findRecipe();
                     if (r == null) return null;
@@ -70,7 +71,7 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
                             r.getOutputFluids(),
                            // new FluidStack[]{new FluidStack(DistilledWater.getLiquid(), stacks[0].getAmount())},// Arrays.stream(sourceRecipe.getOutputFluids()).map(tt -> new FluidStack(tt.getFluid(), (int) (tt.getAmount()*toConsume))).toArray(FluidStack[]::new),
                             1, flow,1);
-                }
+                }*/
                 @Override
                 public boolean consumeInputs() {
                     return false;
@@ -137,13 +138,13 @@ public class TileEntityLargeTurbine extends TileEntityMultiMachine<TileEntityLar
                     return false;
                 }
 
-                public float getEfficiency(){
+                /*public float getEfficiency(){
                     ItemStack stack = tile.itemHandler.map(i -> i.getHandler(SlotTypes.ROTOR).getStackInSlot(0)).orElse(ItemStack.EMPTY);
                     if (!stack.isEmpty() && stack.getItem() instanceof ItemTurbineRotor){
                         return ((ItemTurbineRotor)stack.getItem()).getRotorEfficiency();
                     }
                     return 0.0F;
-                }
+                }*/
 
                 @Override
                 public void onMachineEvent(IMachineEvent event, Object... data) {

@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class TileEntitySupercondensator extends TileEntityTransformer<TileEntitySupercondensator> {
     public TileEntitySupercondensator(Machine<?> type, BlockPos pos, BlockState state, int amps) {
         super(type, pos, state, amps);
-        energyHandler.set(() -> new MachineEnergyHandler<TileEntitySupercondensator>(this, 0L, capFunc.applyAsLong(getMachineTier().getVoltage()), getMachineTier().getVoltage() * 64, getMachineTier().getVoltage(), amperage, amperage * 4) {
+        energyHandler.set(() -> new MachineEnergyHandler<TileEntitySupercondensator>(this, 0L, capFunc.apply(getMachineTier().getVoltage()), getMachineTier().getVoltage() * 64, getMachineTier().getVoltage(), amperage, amperage * 4) {
             @Override
             public boolean canOutput(Direction direction) {
                 return isDefaultMachineState() == (tile.getFacing().get3DDataValue() != direction.get3DDataValue());

@@ -112,7 +112,7 @@ public class TileEntityTeleporter extends TileEntityMachine<TileEntityTeleporter
         double distance = Math.sqrt(this.getBlockPos().distSqr(destination));
         int energyCost = (int)(baseWeight * Math.pow(distance + 10.0, 0.7) * 5.0);
         if (energyHandler.map(e -> e.getEnergy() >= energyCost).orElse(false)){
-            energyHandler.ifPresent(e -> Utils.extractEnergy(e, energyCost));
+            energyHandler.ifPresent(e -> e.extractEu(energyCost, false));
             entity.teleportTo(teleportTo.getX(), teleportTo.getY(), teleportTo.getZ());
         }
     }

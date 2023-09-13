@@ -2,6 +2,7 @@ package trinsdar.gt4r.items;
 
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialTags;
+import muramasa.antimatter.tool.AntimatterItemTier;
 import muramasa.antimatter.tool.AntimatterToolType;
 import muramasa.antimatter.tool.MaterialTool;
 import net.minecraft.core.NonNullList;
@@ -27,7 +28,7 @@ import static trinsdar.gt4r.data.Materials.Titanium;
 
 public class MaterialRockCutter extends MaterialTool {
     public MaterialRockCutter(String domain, AntimatterToolType type, Properties properties, int energyTier) {
-        super(domain, type, properties, energyTier);
+        super(domain, type, AntimatterItemTier.NULL, properties, energyTier);
     }
 
     @Override

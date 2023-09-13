@@ -24,7 +24,6 @@ import java.util.function.Consumer;
 import static com.google.common.collect.ImmutableMap.of;
 import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
 import static muramasa.antimatter.material.MaterialTags.HANDLE;
-import static muramasa.antimatter.recipe.RecipeBuilders.TOOL_BUILDER;
 import static trinsdar.gt4r.data.CustomTags.*;
 import static trinsdar.gt4r.data.GT4RData.MotorLV;
 import static trinsdar.gt4r.data.Materials.*;
@@ -125,31 +124,7 @@ public class ToolCrafting {
     }
 
     private static void loadOtherRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider){
-        CriterionTriggerInstance in = provider.hasSafeItem(AntimatterDefaultTools.FILE.getTag());
 
-        provider.addToolRecipe(TOOL_BUILDER.get(AntimatterDefaultTools.PICKAXE.getId()), output, Ref.ANTIMATTER, AntimatterDefaultTools.PICKAXE.getId() + "__recipe_with_head", "antimatter_files",
-                "has_wrench", in, AntimatterDefaultTools.PICKAXE.getToolStack(Material.NULL, Material.NULL), of('P', PropertyIngredient.builder("primary").types(PICKAXE_HEAD).tool(AntimatterDefaultTools.PICKAXE, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
-
-        provider.addToolRecipe(TOOL_BUILDER.get(AntimatterDefaultTools.AXE.getId()), output, Ref.ANTIMATTER, AntimatterDefaultTools.AXE.getId() + "__recipe_with_head", "antimatter_files",
-                "has_wrench", in, AntimatterDefaultTools.AXE.getToolStack(Material.NULL, Material.NULL), of('P', PropertyIngredient.builder("primary").types(AXE_HEAD).tool(AntimatterDefaultTools.AXE, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
-
-        provider.addToolRecipe(TOOL_BUILDER.get(AntimatterDefaultTools.SHOVEL.getId()), output, Ref.ANTIMATTER, AntimatterDefaultTools.SHOVEL.getId() + "__recipe_with_head", "antimatter_files",
-                "has_wrench", in, AntimatterDefaultTools.SHOVEL.getToolStack(Material.NULL, Material.NULL), of('P', PropertyIngredient.builder("primary").types(SHOVEL_HEAD).tool(AntimatterDefaultTools.SHOVEL, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
-
-        provider.addToolRecipe(TOOL_BUILDER.get(AntimatterDefaultTools.SWORD.getId()), output, Ref.ANTIMATTER, AntimatterDefaultTools.SWORD.getId() + "__recipe_with_head", "antimatter_files",
-                "has_wrench", in, AntimatterDefaultTools.SWORD.getToolStack(Material.NULL, Material.NULL), of('P', PropertyIngredient.builder("primary").types(SWORD_HEAD).tool(AntimatterDefaultTools.SWORD, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
-
-        provider.addToolRecipe(TOOL_BUILDER.get(AntimatterDefaultTools.HOE.getId()), output, Ref.ANTIMATTER, AntimatterDefaultTools.HOE.getId() + "__recipe_with_head", "antimatter_files",
-                "has_wrench", in, AntimatterDefaultTools.HOE.getToolStack(Material.NULL, Material.NULL), of('P', PropertyIngredient.builder("primary").types(HOE_HEAD).tool(AntimatterDefaultTools.HOE, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
-
-        provider.addToolRecipe(TOOL_BUILDER.get(AntimatterDefaultTools.HAMMER.getId()), output, Ref.ANTIMATTER, AntimatterDefaultTools.HAMMER.getId() + "__recipe_with_head", "antimatter_files",
-                "has_wrench", in, AntimatterDefaultTools.HAMMER.getToolStack(Material.NULL, Material.NULL), of('P', PropertyIngredient.builder("primary").types(HAMMER_HEAD).tool(AntimatterDefaultTools.HAMMER, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
-
-        provider.addToolRecipe(TOOL_BUILDER.get(AntimatterDefaultTools.FILE.getId()), output, Ref.ANTIMATTER, AntimatterDefaultTools.FILE.getId() + "__recipe_with_head", "antimatter_files",
-                "has_wrench", in, AntimatterDefaultTools.FILE.getToolStack(Material.NULL, Material.NULL), of('P', PropertyIngredient.builder("primary").types(FILE_HEAD).tool(AntimatterDefaultTools.FILE, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
-
-        provider.addToolRecipe(TOOL_BUILDER.get(AntimatterDefaultTools.SAW.getId()), output, Ref.ANTIMATTER, AntimatterDefaultTools.SAW.getId() + "__recipe_with_head", "antimatter_files",
-                "has_wrench", in, AntimatterDefaultTools.SAW.getToolStack(Material.NULL, Material.NULL), of('P', PropertyIngredient.builder("primary").types(SAW_HEAD).tool(AntimatterDefaultTools.SAW, true).build(), 'R', PropertyIngredient.builder("secondary").types(ROD).tags(HANDLE).build()), "P", "R");
     }
 
 

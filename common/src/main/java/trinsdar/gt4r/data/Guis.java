@@ -90,7 +90,8 @@ public class Guis {
         BENDER.add(ALLOY_SMELTER);
         CANNER.add(IT_IN, 35, 25).add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(ENERGY,80, 63)
                 .getGui().getMachineData().setProgressLocation("canner");
-        COMPRESSOR.add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(ENERGY,80, 63);
+        COMPRESSOR.add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(ENERGY,80, 63)
+                .getGui().getMachineData().setProgressLocation("compressor");
         CUTTER.add(IT_IN, 53, 25).add(FL_IN, 53, 63).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25).add(ENERGY,80, 63)
                 .getGui().getMachineData().setProgressLocation("cutter");
         FORGE_HAMMER.add(COMPRESSOR).getGui().setBackgroundTexture("machine_forge_hammer").getMachineData().setProgressLocation("forge_hammer");
@@ -102,25 +103,35 @@ public class Guis {
                 .getGui().setBackgroundTexture("machine_macerator").getMachineData().setProgressLocation("macerator");
         MACERATOR.add(LV, COMPRESSOR);
         RECYCLER.add(COMPRESSOR);
-        WIRE_MILL.add(COMPRESSOR);
-        CENTRIFUGE.add(IT_IN, 35, 25).add(IT_IN, 53, 25).add(FL_IN, 8, 63).add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 142, 16).add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(IT_OUT, 143, 34).add(ENERGY,26, 63).add(FL_OUT, 44, 63).add(FL_OUT, 62, 63).add(FL_OUT, 80, 63).add(FL_OUT, 98, 63).add(FL_OUT, 116, 63).add(FL_OUT, 134, 63)
-                .getGui().getMachineData().setProgressLocation("extractor");
+        WIRE_MILL.add(COMPRESSOR).getGui().getMachineData().setProgressLocation("wiremill");
+        CENTRIFUGE.add(IT_IN, 35, 25)
+                .add(FL_IN, 53, 25)
+                .add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 143, 16)
+                .add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(IT_OUT, 143, 34)
+                .add(FL_OUT, 44, 63).add(FL_OUT, 62, 63).add(FL_OUT, 80, 63)
+                .add(FL_OUT, 98, 63).add(FL_OUT, 116, 63).add(FL_OUT, 134, 63)
+                .add(ENERGY, 17, 25).getGui().getMachineData().setProgressLocation("extractor");
         ELECTROLYZER.add(CENTRIFUGE).getGui().getMachineData().setProgressLocation("extractor");
 
         THERMAL_CENTRIFUGE.add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25).add(IT_OUT, 143, 25).add(ENERGY,80, 63);
-        ORE_WASHER.add(THERMAL_CENTRIFUGE).add(FL_IN, 53, 63);
-        CHEMICAL_REACTOR.add(IT_IN, 17, 25).add(IT_IN, 35, 25).add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25).add(FL_IN, 53, 63).add(FL_IN, 35, 63).add(FL_OUT, 107, 63).add(FL_OUT, 125, 63).add(ENERGY, 80, 63);
-        FLUID_CANNER.add(COMPRESSOR).add(FL_IN, 53, 63).add(FL_OUT, 107, 63);
+        ORE_WASHER.add(THERMAL_CENTRIFUGE).add(FL_IN, 53, 63).getGui().getMachineData().setProgressLocation("ore_washer");
+        CHEMICAL_REACTOR.add(IT_IN, 26, 16).add(IT_IN, 44, 16)
+                .add(FL_IN, 17, 34).add(FL_IN, 35, 34).add(FL_IN, 53, 34)
+                .add(IT_OUT, 116, 16).add(IT_OUT, 134, 16)
+                .add(FL_OUT, 107, 34).add(FL_OUT, 125, 34).add(FL_OUT, 143, 34)
+                .add(ENERGY, 80, 63).getGui().getMachineData().setProgressLocation("chemical_reactor");
+        FLUID_CANNER.add(COMPRESSOR).add(FL_IN, 53, 63).add(FL_OUT, 107, 63)
+                .getGui().getMachineData().setProgressLocation("canner");
         FLUID_EXTRACTOR.add(COMPRESSOR).add(FL_OUT, 107, 63).getGui().getMachineData().setProgressLocation("extractor");
         FLUID_SOLIDIFIER.add(COMPRESSOR).add(FL_IN, 53, 63);
-        FERMENTER.add(FLUID_CANNER);
-        DISTILLERY.add(FLUID_CANNER).add(FL_OUT, 125, 63);
+        FERMENTER.add(FLUID_CANNER).getGui().getMachineData().setProgressLocation("chemical_reactor");
+        DISTILLERY.add(FLUID_CANNER).add(FL_OUT, 125, 63).getGui().getMachineData().setProgressLocation("chemical_reactor");
         DISASSEMBLER.add(IT_IN, 53, 25)
                 .add(IT_OUT, 107, 7).add(IT_OUT, 107+18, 7).add(IT_OUT, 107+18*2, 7)
                 .add(IT_OUT, 107, 25).add(IT_OUT, 107+18, 25).add(IT_OUT, 107+18*2, 25)
                 .add(IT_OUT, 107, 43).add(IT_OUT, 107+18, 43).add(IT_OUT, 107+18*2, 43)
                 .add(ENERGY,80, 63);
-        SIFTER.add(DISASSEMBLER).getGui().getMachineData().setProgressLocation("chemical_reactor");
+        SIFTER.add(DISASSEMBLER).getGui().getMachineData().setProgressLocation("sifter");
         BATH.add(IT_IN, 53, 25).add(FL_IN, 53, 63).add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 142, 16).add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(IT_OUT, 143, 34).add(ENERGY, 80, 63)
                 .getGui().getMachineData().setProgressLocation("ore_washer");
         DUSTBIN
@@ -220,8 +231,10 @@ public class Guis {
         FUSION_ITEM_INJECTOR.add(IT_IN, 79, 34);
         DIGITAL_TANK.add(BASIC_TANK.getSlots()).add(DATA, 107, 64);
 
+        FUSION_REACTOR.getGui().setBackgroundTexture("fusion_control_computer").setEnablePlayerSlots(false)
+                .getMachineData().setProgressLocation("fusion_reactor").setProgressPos(163, 4).setProgressSize(149, 16);
         FUSION_REACTOR.addGuiCallback(t -> {
-            t.addButton(155, 23, 16, 16, NO_OVERLAY).addButton(155, 41, 16, 16, NO_OVERLAY).addButton(155, 59, 16, 16, NO_OVERLAY).addWidget(makeProgress(BarDir.LEFT, true, new int4(0, 235, 149, 16)).setSize(4,162, 149, 16)).addWidget(FusionButtonWidget.build());
+            t.addButton(155, 23, 16, 16, NO_OVERLAY).addButton(155, 41, 16, 16, NO_OVERLAY).addButton(155, 59, 16, 16, NO_OVERLAY).addWidget(makeProgress()).addWidget(FusionButtonWidget.build());
         });
         TRANSFORMER_DIGITAL.addGuiCallback(t -> {
             t.addButton(10, 18, 14, 14, APAD_LEFT)
@@ -249,6 +262,11 @@ public class Guis {
             t.addButton(54, 64, 16, 16, NO_OVERLAY).addButton(72, 64, 16, 16, NO_OVERLAY);
             t.addWidget(TooltipWidget.build("upload_chest").setSize(54, 64, 16, 16)).addWidget(TooltipWidget.build("download_orb").setSize(72, 64, 16, 16));
         });
+        DISTILLATION_TOWER.setGuiProgressBarForJEI(BarDir.TOP, true);
+        DISTILLATION_TOWER.getGui().getMachineData().setProgressLocation("distillation_tower")
+                .setProgressSize(16, 72).setProgressPos(80, 4).setMachineStatePos(65, 25);
+        FORGE_HAMMER.setGuiProgressBarForJEI(BarDir.BOTTOM, false);
+        STEAM_FORGE_HAMMER.setGuiProgressBarForJEI(BarDir.BOTTOM, false);
         initWidgets();
     }
 
@@ -269,40 +287,9 @@ public class Guis {
         ELECTRIC_FLUID_TRANSLOCATOR.addGuiCallback(t -> {
             t.addWidget(TranslocatorButtonArrayWidget.build());
         });
-        FORGE_HAMMER.getCallbacks().remove(1);
-        FORGE_HAMMER.setGuiProgressBarForJEI(BarDir.BOTTOM, false).addGuiCallback(t -> {
-            t.addWidget(WidgetSupplier.build((a, b) -> TextWidget.build(((AntimatterContainerScreen<?>)b).getTitle().getString(), 4210752).build(a,b)).setPos(9, 5).clientSide())
-                    .addWidget(ProgressWidget.build(BarDir.BOTTOM, false))
-                    .addWidget(MachineStateWidget.build().setPos(84,46).setWH(8,8))
-                    .addWidget(IOWidget.build(9,63,16,16));
-        });
-        STEAM_FORGE_HAMMER.getCallbacks().remove(1);
-        STEAM_FORGE_HAMMER.setGuiProgressBarForJEI(BarDir.BOTTOM, false).addGuiCallback(t -> {
-            t.addWidget(WidgetSupplier.build((a, b) -> TextWidget.build(((AntimatterContainerScreen<?>)b).getTitle().getString(), 4210752).build(a,b)).setPos(9, 5).clientSide())
-                    .addWidget(ProgressWidget.build(BarDir.BOTTOM, false))
-                    .addWidget(MachineStateWidget.build().setPos(84,46).setWH(8,8));
-        });
-        COAL_BOILER.getCallbacks().remove(1);
         COAL_BOILER.addGuiCallback(t -> {
-            t.addWidget(WidgetSupplier.build((a, b) -> TextWidget.build(((AntimatterContainerScreen<?>)b).getTitle().getString(), 4210752).build(a,b)).setPos(9, 5).clientSide());
             t.addWidget(CoalBoilerWidget.build().setSize(70, 25, 36, 54)).addWidget(CoalBoilerFuelWidget.build().setSize(115, 43, 18, 18));
         });
-        CENTRIFUGE.getCallbacks().remove(1);
-        ELECTROLYZER.getCallbacks().remove(1);
-        CENTRIFUGE.addGuiCallback(t -> {
-            t.addWidget(WidgetSupplier.build((a, b) -> TextWidget.build(((AntimatterContainerScreen<?>)b).getTitle().getString(), 4210752).build(a,b)).setPos(9, 5).clientSide())
-                    .addWidget(ProgressWidget.build(BarDir.LEFT, true))
-                    .addWidget(MachineStateWidget.build().setPos(84,46).setWH(8,8))
-                    .addWidget(IOWidget.build(9,45,16,16));
-        });
-        ELECTROLYZER.addGuiCallback(t -> {
-            t.addWidget(WidgetSupplier.build((a, b) -> TextWidget.build(((AntimatterContainerScreen<?>)b).getTitle().getString(), 4210752).build(a,b)).setPos(9, 5).clientSide())
-                    .addWidget(ProgressWidget.build(BarDir.LEFT, true))
-                    .addWidget(MachineStateWidget.build().setPos(84,46).setWH(8,8))
-                    .addWidget(IOWidget.build(9,45,16,16));
-        });
-        DISTILLATION_TOWER.getCallbacks().remove(1);
-        DISTILLATION_TOWER.setGuiProgressBarForJEI(BarDir.TOP, true).addGuiCallback(t -> t.addWidget(ProgressWidget.build(BarDir.TOP, true).setSize(80, 4, 16, 72)).addWidget(MachineStateWidgetMoved.build(176, 108).setPos(66, 26).setWH(8, 8)));
         PLATINUM_CABINET.getCallbacks().remove(0);
         OSMIUM_CABINET.getCallbacks().remove(0);
         PLATINUM_CABINET.addGuiCallback(t -> t.addWidget(BackgroundWidget.build(t.handler.getGuiTexture(),t.handler.guiSize(), t.handler.guiHeight(), 256, 266)));
@@ -314,6 +301,7 @@ public class Guis {
     }
 
     private static void initMaterialMachine(Side side){
+        //TODO move these textures to background folder
         BiFunction<Boolean, String, ResourceLocation> textures = (c, l) -> new ResourceLocation(Ref.ID, "textures/gui/machine/" + (c ? "charging_" : "") + l + ".png");
 
         FUSION_REACTOR.setGUI(MenuHandlers.FUSION_MENU_HANDLER);
@@ -400,7 +388,7 @@ public class Guis {
         DIGITAL_CHEST.add(DATA, 80, 119);
     }
 
-    public static WidgetSupplier makeProgress(BarDir dir, boolean barFill, int4 loc){
-        return builder((screen, handler) -> new ProgressWidget(screen, handler, loc, dir, dir.getPos().x + 6, dir.getPos().y + 6, dir.getUV().z, dir.getUV().w, barFill));
+    public static WidgetSupplier makeProgress(){
+        return builder(ProgressWidget::new);
     }
 }

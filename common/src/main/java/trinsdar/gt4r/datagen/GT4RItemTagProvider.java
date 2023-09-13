@@ -4,6 +4,7 @@ import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.data.AntimatterStoneTypes;
+import muramasa.antimatter.datagen.builder.AntimatterTagBuilder;
 import muramasa.antimatter.datagen.providers.AntimatterBlockTagProvider;
 import muramasa.antimatter.datagen.providers.AntimatterItemTagProvider;
 import muramasa.antimatter.ore.BlockOre;
@@ -86,7 +87,7 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
 
         this.tag(RODS_STEELS).addTag(getTag("rods/steel")).addTag(getTag("rods/stainless_steel"));
         this.tag(RODS_MAGNETIC).addTag(getTag("rods/magnetic_steel")).addTag(getTag("rods/magnetic_iron"));
-        TagsProvider.TagAppender<Item> add = this.tag(CORALS);
+        AntimatterTagBuilder<Item> add = this.tag(CORALS);
         String[] corals = {"tube", "brain", "bubble", "fire", "horn"};
         for (String coral : corals){
             add.add(AntimatterPlatformUtils.getItemFromID(new ResourceLocation(coral + "_coral")), AntimatterPlatformUtils.getItemFromID(new ResourceLocation("dead_" + coral + "_coral")), AntimatterPlatformUtils.getItemFromID(new ResourceLocation(coral + "_coral_fan")), AntimatterPlatformUtils.getItemFromID(new ResourceLocation("dead_" + coral + "_coral_fan"))).replace(false);

@@ -1,6 +1,7 @@
 package trinsdar.gt4r.gui;
 
 import muramasa.antimatter.capability.IGuiHandler;
+import muramasa.antimatter.gui.GuiData;
 import muramasa.antimatter.gui.event.IGuiEvent;
 import muramasa.antimatter.network.packets.AbstractGuiEventPacket;
 import net.minecraft.resources.ResourceLocation;
@@ -26,5 +27,10 @@ public record PlayerGuiHandler(Player player) implements IGuiHandler {
     @Override
     public String handlerDomain() {
         return Ref.ID;
+    }
+
+    @Override
+    public GuiData getGui() {
+        return null;
     }
 }
