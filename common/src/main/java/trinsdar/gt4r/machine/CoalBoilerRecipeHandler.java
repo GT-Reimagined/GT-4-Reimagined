@@ -13,12 +13,11 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.material.Fluids;
 import tesseract.FluidPlatformUtils;
 import tesseract.TesseractCapUtils;
 import tesseract.TesseractGraphWrappers;
-import trinsdar.gt4r.tile.single.TileEntityCoalBoiler;
+import trinsdar.gt4r.blockentity.single.BlockEntityCoalBoiler;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -30,11 +29,11 @@ import static muramasa.antimatter.machine.Tier.BRONZE;
 import static trinsdar.gt4r.data.Materials.DistilledWater;
 import static trinsdar.gt4r.data.Materials.Steam;
 
-public class CoalBoilerRecipeHandler extends MachineRecipeHandler<TileEntityCoalBoiler> {
+public class CoalBoilerRecipeHandler extends MachineRecipeHandler<BlockEntityCoalBoiler> {
     int maxHeat = 500, heat, fuel = 0, maxFuel, lossTimer = 0;
     boolean hadNoWater;
 
-    public CoalBoilerRecipeHandler(TileEntityCoalBoiler tile) {
+    public CoalBoilerRecipeHandler(BlockEntityCoalBoiler tile) {
         super(tile);
         maxHeat = tile.getMachineTier() == BRONZE ? 500 : 1000;
     }

@@ -5,10 +5,10 @@ import muramasa.antimatter.gui.container.ContainerBasicMachine;
 import muramasa.antimatter.gui.container.ContainerMachine;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
-import trinsdar.gt4r.tile.single.TileEntityDigitalChest;
+import trinsdar.gt4r.blockentity.single.BlockEntityDigitalChest;
 
-public class ContainerDigitalChest extends ContainerBasicMachine<TileEntityDigitalChest> {
-    public ContainerDigitalChest(TileEntityDigitalChest tile, Inventory playerInv, MenuHandlerMachine<TileEntityDigitalChest, ContainerMachine<TileEntityDigitalChest>> handler, int windowId) {
+public class ContainerDigitalChest extends ContainerBasicMachine<BlockEntityDigitalChest> {
+    public ContainerDigitalChest(BlockEntityDigitalChest tile, Inventory playerInv, MenuHandlerMachine<BlockEntityDigitalChest, ContainerMachine<BlockEntityDigitalChest>> handler, int windowId) {
         super(tile, playerInv, handler, windowId);
     }
 

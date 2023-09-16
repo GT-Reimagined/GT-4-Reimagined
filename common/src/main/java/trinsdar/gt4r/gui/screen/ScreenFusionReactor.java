@@ -5,9 +5,9 @@ import muramasa.antimatter.gui.container.ContainerMultiMachine;
 import muramasa.antimatter.gui.screen.ScreenMultiMachine;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
-import trinsdar.gt4r.tile.multi.TileEntityFusionReactor;
+import trinsdar.gt4r.blockentity.multi.BlockEntityFusionReactor;
 
-public class ScreenFusionReactor<T extends ContainerMultiMachine<TileEntityFusionReactor>> extends ScreenMultiMachine<TileEntityFusionReactor, T> {
+public class ScreenFusionReactor<T extends ContainerMultiMachine<BlockEntityFusionReactor>> extends ScreenMultiMachine<BlockEntityFusionReactor, T> {
     public ScreenFusionReactor(T container, Inventory inv, Component name) {
         super(container, inv, name);
         this.imageHeight = 182;

@@ -4,7 +4,7 @@ import muramasa.antimatter.capability.ICoverHandler;
 import muramasa.antimatter.cover.CoverFactory;
 import muramasa.antimatter.gui.ButtonBody;
 import muramasa.antimatter.machine.Tier;
-import muramasa.antimatter.tile.TileEntityMachine;
+import muramasa.antimatter.blockentity.BlockEntityMachine;
 import muramasa.antimatter.util.AntimatterCapUtils;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.core.BlockPos;
@@ -70,7 +70,7 @@ public class CoverConveyor extends CoverBasicTransport {
         if (handler.getTile().getLevel().isClientSide) return;
         if (handler.getTile() == null)
             return;
-        boolean isMachine = handler.getTile() instanceof TileEntityMachine;
+        boolean isMachine = handler.getTile() instanceof BlockEntityMachine;
         BlockState state = handler.getTile().getLevel().getBlockState(handler.getTile().getBlockPos().relative(side));
         //Drop into world.
         if (state == Blocks.AIR.defaultBlockState() && isMachine && coverMode.getName().startsWith("Export")) {

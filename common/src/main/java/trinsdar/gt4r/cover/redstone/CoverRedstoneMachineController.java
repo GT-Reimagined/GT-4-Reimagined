@@ -9,7 +9,7 @@ import muramasa.antimatter.gui.event.GuiEvents;
 import muramasa.antimatter.gui.event.IGuiEvent;
 import muramasa.antimatter.machine.MachineState;
 import muramasa.antimatter.machine.Tier;
-import muramasa.antimatter.tile.TileEntityMachine;
+import muramasa.antimatter.blockentity.BlockEntityMachine;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
@@ -47,8 +47,8 @@ public class CoverRedstoneMachineController extends BaseCover implements ICoverM
 
     @Override
     public void onRemove() {
-        if (handler.getTile() instanceof TileEntityMachine){
-            TileEntityMachine<?> machine = (TileEntityMachine<?>) handler.getTile();
+        if (handler.getTile() instanceof BlockEntityMachine){
+            BlockEntityMachine<?> machine = (BlockEntityMachine<?>) handler.getTile();
             if (machine.getMachineState() == MachineState.DISABLED){
                 machine.toggleMachine();
             }
@@ -67,8 +67,8 @@ public class CoverRedstoneMachineController extends BaseCover implements ICoverM
 
     @Override
     public void onUpdate() {
-        if (handler.getTile() instanceof TileEntityMachine){
-            TileEntityMachine<?> machine = (TileEntityMachine<?>) handler.getTile();
+        if (handler.getTile() instanceof BlockEntityMachine){
+            BlockEntityMachine<?> machine = (BlockEntityMachine<?>) handler.getTile();
             if (machine.getMachineState() != MachineState.DISABLED){
                 if (coverMode == RedstoneMode.NO_WORK){
                     machine.toggleMachine();

@@ -1,12 +1,12 @@
 package trinsdar.gt4r.gui.widgets;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import muramasa.antimatter.blockentity.BlockEntityMachine;
 import muramasa.antimatter.gui.GuiInstance;
 import muramasa.antimatter.gui.IGuiElement;
 import muramasa.antimatter.gui.widget.MachineStateWidget;
 import muramasa.antimatter.gui.widget.WidgetSupplier;
 import muramasa.antimatter.machine.MachineState;
-import muramasa.antimatter.tile.TileEntityMachine;
 import muramasa.antimatter.util.int2;
 
 public class MachineStateWidgetMoved extends MachineStateWidget {
@@ -19,7 +19,7 @@ public class MachineStateWidgetMoved extends MachineStateWidget {
 
     @Override
     public void render(PoseStack stack, double mouseX, double mouseY, float partialTicks) {
-        TileEntityMachine<?> m = ((TileEntityMachine<?>) gui.handler);
+        BlockEntityMachine<?> m = ((BlockEntityMachine<?>) gui.handler);
         MachineState state = m.getMachineState();
         //Draw error.
         if (isRecipe) {

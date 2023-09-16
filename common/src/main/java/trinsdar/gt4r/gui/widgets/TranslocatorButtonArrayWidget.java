@@ -9,7 +9,7 @@ import muramasa.antimatter.gui.Widget;
 import muramasa.antimatter.gui.container.ContainerMachine;
 import muramasa.antimatter.gui.event.GuiEvents;
 import muramasa.antimatter.gui.widget.WidgetSupplier;
-import trinsdar.gt4r.tile.single.TileEntityTranslocator;
+import trinsdar.gt4r.blockentity.single.BlockEntityTranslocator;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -53,7 +53,7 @@ public class TranslocatorButtonArrayWidget extends Widget {
     public void init() {
         super.init();
         ContainerMachine<?> m = (ContainerMachine<?>) gui.container;
-        TileEntityTranslocator filter = (TileEntityTranslocator) m.getTile();
+        BlockEntityTranslocator filter = (BlockEntityTranslocator) m.getTile();
         gui.syncBoolean(filter::isBlacklist, b -> blacklist = b, ICanSyncData.SyncDirection.SERVER_TO_CLIENT);
         gui.syncBoolean(filter::isEmitEnergy, b -> emitEnergy = b, ICanSyncData.SyncDirection.SERVER_TO_CLIENT);
     }

@@ -9,11 +9,11 @@ import muramasa.antimatter.gui.container.ContainerMachine;
 import muramasa.antimatter.gui.widget.WidgetSupplier;
 import muramasa.antimatter.integration.jeirei.AntimatterJEIREIPlugin;
 import muramasa.antimatter.mixin.client.AbstractContainerScreenAccessor;
-import muramasa.antimatter.tile.TileEntityMachine;
+import muramasa.antimatter.blockentity.BlockEntityMachine;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.network.chat.TextComponent;
-import trinsdar.gt4r.tile.single.TileEntityCoalBoiler;
+import trinsdar.gt4r.blockentity.single.BlockEntityCoalBoiler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -31,8 +31,8 @@ public class CoalBoilerFuelWidget extends Widget {
     @Override
     public void init() {
         super.init();
-        gui.syncInt(() -> ((TileEntityCoalBoiler)((ContainerMachine<?>)gui.container).getTile()).getFuel(), i -> fuel = i, ICanSyncData.SyncDirection.SERVER_TO_CLIENT);
-        gui.syncInt(() -> ((TileEntityCoalBoiler)((ContainerMachine<?>)gui.container).getTile()).getMaxFuel(), i -> maxFuel = i, ICanSyncData.SyncDirection.SERVER_TO_CLIENT);
+        gui.syncInt(() -> ((BlockEntityCoalBoiler)((ContainerMachine<?>)gui.container).getTile()).getFuel(), i -> fuel = i, ICanSyncData.SyncDirection.SERVER_TO_CLIENT);
+        gui.syncInt(() -> ((BlockEntityCoalBoiler)((ContainerMachine<?>)gui.container).getTile()).getMaxFuel(), i -> maxFuel = i, ICanSyncData.SyncDirection.SERVER_TO_CLIENT);
     }
 
     @Override
@@ -75,7 +75,7 @@ public class CoalBoilerFuelWidget extends Widget {
     @Override
     public void onClick(double mouseX, double mouseY, int button) {
         super.onClick(mouseX, mouseY, button);
-        if (this.gui.handler instanceof TileEntityMachine<?> machine) {
+        if (this.gui.handler instanceof BlockEntityMachine<?> machine) {
             AntimatterJEIREIPlugin.showCategory(machine.getMachineType(), machine.getMachineTier());
         }
     }

@@ -10,7 +10,7 @@ import muramasa.antimatter.machine.MachineFlag;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import trinsdar.gt4r.Ref;
-import trinsdar.gt4r.tile.multi.TileEntityFusionReactor;
+import trinsdar.gt4r.blockentity.multi.BlockEntityFusionReactor;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -33,8 +33,8 @@ public class FusionButtonWidget extends Widget {
         }
     }
 
-    private TileEntityFusionReactor getTile() {
-        return (TileEntityFusionReactor) gui.handler;
+    private BlockEntityFusionReactor getTile() {
+        return (BlockEntityFusionReactor) gui.handler;
     }
 
     @Override
@@ -49,10 +49,10 @@ public class FusionButtonWidget extends Widget {
 
     @Override
     public void render(PoseStack matrixStack, double mouseX, double mouseY, float partialTicks) {
-        TileEntityFusionReactor tile = getTile();
-        if (tile.getDisplay() == TileEntityFusionReactor.Display.REGULAR){
+        BlockEntityFusionReactor tile = getTile();
+        if (tile.getDisplay() == BlockEntityFusionReactor.Display.REGULAR){
             drawTexture(matrixStack, gui.handler.getGuiTexture(), realX() + 154, realY() + 22, 176, 0, 18, 18);
-        } else if (tile.getDisplay() == TileEntityFusionReactor.Display.MIDDLE){
+        } else if (tile.getDisplay() == BlockEntityFusionReactor.Display.MIDDLE){
             drawTexture(matrixStack, gui.handler.getGuiTexture(), realX() + 6, realY()+ 22 + getH(), 176, 18, 18, 18);
             drawTexture(matrixStack, middle, realX() + 6, realY() + 6, 0, 0, 145, 145);
         } else {

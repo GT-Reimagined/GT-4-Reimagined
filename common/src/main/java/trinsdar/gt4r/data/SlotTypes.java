@@ -10,7 +10,7 @@ import trinsdar.gt4r.gui.slots.SlotData;
 import trinsdar.gt4r.gui.slots.SlotFluidDisplaySettable;
 import trinsdar.gt4r.gui.slots.SlotQuantum;
 import trinsdar.gt4r.items.ItemTurbineRotor;
-import trinsdar.gt4r.tile.single.IFilterable;
+import trinsdar.gt4r.blockentity.single.IFilterable;
 
 public class SlotTypes {
     public static SlotType<SlotCoil> COIL = new SlotType<>("coil_bf", (type, gui, item, i, d) -> new SlotCoil(type,  gui,item.getOrDefault(type, new EmptyContainer()), i, d.getX(), d.getY()), (t, i) -> true, ContentEvent.ITEM_INPUT_CHANGED);

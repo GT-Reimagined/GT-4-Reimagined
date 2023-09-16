@@ -32,7 +32,7 @@ import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import trinsdar.gt4r.Ref;
-import trinsdar.gt4r.tile.single.TileEntityChest;
+import trinsdar.gt4r.blockentity.single.BlockEntityChest;
 
 import java.util.function.BiPredicate;
 
@@ -83,8 +83,8 @@ public class BlockMaterialChest extends BlockMachineMaterial implements SimpleWa
     @Override
     public int getAnalogOutputSignal(BlockState pBlockState, Level pLevel, BlockPos pPos) {
         BlockEntity tile = pLevel.getBlockEntity(pPos);
-        if (tile instanceof TileEntityChest){
-            return AbstractContainerMenu.getRedstoneSignalFromContainer((TileEntityChest) tile);
+        if (tile instanceof BlockEntityChest){
+            return AbstractContainerMenu.getRedstoneSignalFromContainer((BlockEntityChest) tile);
         }
         return 0;
     }
@@ -113,17 +113,17 @@ public class BlockMaterialChest extends BlockMachineMaterial implements SimpleWa
     }
 
     @Environment(EnvType.CLIENT)
-    public static DoubleBlockCombiner.Combiner<TileEntityChest, Float2FloatFunction> getLid(final LidBlockEntity p_226917_0_) {
-        return new DoubleBlockCombiner.Combiner<TileEntityChest, Float2FloatFunction>() {
+    public static DoubleBlockCombiner.Combiner<BlockEntityChest, Float2FloatFunction> getLid(final LidBlockEntity p_226917_0_) {
+        return new DoubleBlockCombiner.Combiner<BlockEntityChest, Float2FloatFunction>() {
             @Override
-            public Float2FloatFunction acceptDouble(TileEntityChest p_225539_1_, TileEntityChest p_225539_2_) {
+            public Float2FloatFunction acceptDouble(BlockEntityChest p_225539_1_, BlockEntityChest p_225539_2_) {
                 return (p_226921_2_) -> {
                     return Math.max(p_225539_1_.getOpenNess(p_226921_2_), p_225539_2_.getOpenNess(p_226921_2_));
                 };
             }
 
             @Override
-            public Float2FloatFunction acceptSingle(TileEntityChest p_225538_1_) {
+            public Float2FloatFunction acceptSingle(BlockEntityChest p_225538_1_) {
                 return p_225538_1_::getOpenNess;
             }
 
@@ -134,16 +134,16 @@ public class BlockMaterialChest extends BlockMachineMaterial implements SimpleWa
         };
     }
 
-    public DoubleBlockCombiner.NeighborCombineResult<? extends TileEntityChest> getWrapper(BlockState blockState, Level world, BlockPos blockPos, boolean p_225536_4_) {
+    public DoubleBlockCombiner.NeighborCombineResult<? extends BlockEntityChest> getWrapper(BlockState blockState, Level world, BlockPos blockPos, boolean p_225536_4_) {
         BiPredicate<LevelAccessor, BlockPos> biPredicate;
         if (p_225536_4_) {
             biPredicate = (p_226918_0_, p_226918_1_) -> false;
         }
         else {
-            biPredicate = TileEntityChest::isChestBlockedAt;
+            biPredicate = BlockEntityChest::isChestBlockedAt;
         }
 
-        return DoubleBlockCombiner.combineWithNeigbour(((BlockEntityType<TileEntityChest>)this.getType().getTileType()), BlockMaterialChest::getMergerType, BlockMaterialChest::getDirectionToAttached, BlockStateProperties.HORIZONTAL_FACING, blockState, world, blockPos, biPredicate);
+        return DoubleBlockCombiner.combineWithNeigbour(((BlockEntityType<BlockEntityChest>)this.getType().getTileType()), BlockMaterialChest::getMergerType, BlockMaterialChest::getDirectionToAttached, BlockStateProperties.HORIZONTAL_FACING, blockState, world, blockPos, biPredicate);
     }
 
     public static DoubleBlockCombiner.BlockType getMergerType(BlockState blockState) {

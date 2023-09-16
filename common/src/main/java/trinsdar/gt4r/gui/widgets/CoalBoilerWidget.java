@@ -11,7 +11,7 @@ import muramasa.antimatter.mixin.client.AbstractContainerScreenAccessor;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.network.chat.TextComponent;
-import trinsdar.gt4r.tile.single.TileEntityCoalBoiler;
+import trinsdar.gt4r.blockentity.single.BlockEntityCoalBoiler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -31,8 +31,8 @@ public class CoalBoilerWidget extends Widget {
     @Override
     public void init() {
         super.init();
-        gui.syncInt(() -> ((TileEntityCoalBoiler)((ContainerMachine<?>)gui.container).getTile()).getHeat(), i -> heat = i, ICanSyncData.SyncDirection.SERVER_TO_CLIENT);
-        gui.syncInt(() -> ((TileEntityCoalBoiler)((ContainerMachine<?>)gui.container).getTile()).getMaxHeat(), i -> maxHeat = i, ICanSyncData.SyncDirection.SERVER_TO_CLIENT);
+        gui.syncInt(() -> ((BlockEntityCoalBoiler)((ContainerMachine<?>)gui.container).getTile()).getHeat(), i -> heat = i, ICanSyncData.SyncDirection.SERVER_TO_CLIENT);
+        gui.syncInt(() -> ((BlockEntityCoalBoiler)((ContainerMachine<?>)gui.container).getTile()).getMaxHeat(), i -> maxHeat = i, ICanSyncData.SyncDirection.SERVER_TO_CLIENT);
         gui.syncLong(() -> ((ContainerMachine<?>)gui.container).getTile().fluidHandler.map(t -> t.getInputs()[0].getFluidAmount()).orElse(0L), i -> water = i, ICanSyncData.SyncDirection.SERVER_TO_CLIENT);
         gui.syncLong(() -> ((ContainerMachine<?>)gui.container).getTile().fluidHandler.map(t -> t.getOutputs()[0].getFluidAmount()).orElse(0L), i -> steam = i, ICanSyncData.SyncDirection.SERVER_TO_CLIENT);
     }

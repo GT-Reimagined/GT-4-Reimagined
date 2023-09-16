@@ -24,7 +24,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import trinsdar.gt4r.Ref;
 import trinsdar.gt4r.block.BlockMaterialChest;
-import trinsdar.gt4r.tile.single.TileEntityChest;
+import trinsdar.gt4r.blockentity.single.BlockEntityChest;
 
 import java.awt.Color;
 
@@ -52,7 +52,7 @@ public class MaterialChestRenderer <T extends BlockEntity> implements BlockEntit
 
     @Override
     public void render(T pBlockEntity, float pPartialTicks, PoseStack pMatrixStack, MultiBufferSource pBuffer, int pCombinedLight, int pCombinedOverlay) {
-        TileEntityChest tileEntity = (TileEntityChest) pBlockEntity;
+        BlockEntityChest tileEntity = (BlockEntityChest) pBlockEntity;
 
         Level world = tileEntity.getLevel();
         boolean flag = world != null;
@@ -69,7 +69,7 @@ public class MaterialChestRenderer <T extends BlockEntity> implements BlockEntit
             pMatrixStack.mulPose(Vector3f.YP.rotationDegrees(-f));
             pMatrixStack.translate(-0.5D, -0.5D, -0.5D);
 
-            DoubleBlockCombiner.NeighborCombineResult<? extends TileEntityChest> iCallbackWrapper;
+            DoubleBlockCombiner.NeighborCombineResult<? extends BlockEntityChest> iCallbackWrapper;
             if (flag) {
                 iCallbackWrapper = materialChest.getWrapper(blockstate, world, tileEntity.getBlockPos(), true);
             } else {
@@ -83,12 +83,12 @@ public class MaterialChestRenderer <T extends BlockEntity> implements BlockEntit
 
             Material material = new Material(Sheets.CHEST_SHEET, MATERIAL_CHEST_BASE);
             VertexConsumer ivertexbuilder = material.buffer(pBuffer, RenderType::entityCutout);
-            this.handleModelRender(pMatrixStack, ivertexbuilder, f1, i, pCombinedOverlay, materialChest.getBlockColor(blockstate, world, tileEntity.getBlockPos(), 0), getLidOpenness(((TileEntityChest) pBlockEntity).getOpenNess(pPartialTicks)));
+            this.handleModelRender(pMatrixStack, ivertexbuilder, f1, i, pCombinedOverlay, materialChest.getBlockColor(blockstate, world, tileEntity.getBlockPos(), 0), getLidOpenness(((BlockEntityChest) pBlockEntity).getOpenNess(pPartialTicks)));
 
             material = new Material(Sheets.CHEST_SHEET, MATERIAL_CHEST_OVERLAY);
             ivertexbuilder = material.buffer(pBuffer, RenderType::entityCutout);
 
-            this.handleModelRender(pMatrixStack, ivertexbuilder, f1, i, pCombinedOverlay, materialChest.getBlockColor(blockstate, world, tileEntity.getBlockPos(), 1), getLidOpenness(((TileEntityChest) pBlockEntity).getOpenNess(pPartialTicks)));
+            this.handleModelRender(pMatrixStack, ivertexbuilder, f1, i, pCombinedOverlay, materialChest.getBlockColor(blockstate, world, tileEntity.getBlockPos(), 1), getLidOpenness(((BlockEntityChest) pBlockEntity).getOpenNess(pPartialTicks)));
 
             pMatrixStack.popPose();
         }

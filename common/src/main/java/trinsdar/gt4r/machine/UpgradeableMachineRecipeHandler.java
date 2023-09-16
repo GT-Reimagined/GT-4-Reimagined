@@ -1,14 +1,10 @@
 package trinsdar.gt4r.machine;
 
-import muramasa.antimatter.Ref;
 import muramasa.antimatter.capability.machine.MachineRecipeHandler;
-import muramasa.antimatter.tile.TileEntityMachine;
-import muramasa.antimatter.util.Utils;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.item.ItemStack;
+import muramasa.antimatter.blockentity.BlockEntityMachine;
 import trinsdar.gt4r.data.CustomTags;
 
-public class UpgradeableMachineRecipeHandler<T extends TileEntityMachine<T> & IUpgradeProvider> extends MachineRecipeHandler<T> {
+public class UpgradeableMachineRecipeHandler<T extends BlockEntityMachine<T> & IUpgradeProvider> extends MachineRecipeHandler<T> {
     public UpgradeableMachineRecipeHandler(T tile) {
         super(tile);
     }

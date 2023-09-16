@@ -9,7 +9,7 @@ import muramasa.antimatter.gui.Widget;
 import muramasa.antimatter.gui.container.ContainerMachine;
 import muramasa.antimatter.gui.event.GuiEvents;
 import muramasa.antimatter.gui.widget.WidgetSupplier;
-import trinsdar.gt4r.tile.single.TileEntityItemFilter;
+import trinsdar.gt4r.blockentity.single.BlockEntityItemFilter;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -68,7 +68,7 @@ public class FilterButtonArrayWidget extends Widget {
     public void init() {
         super.init();
         ContainerMachine<?> m = (ContainerMachine<?>) gui.container;
-        TileEntityItemFilter filter = (TileEntityItemFilter) m.getTile();
+        BlockEntityItemFilter filter = (BlockEntityItemFilter) m.getTile();
         gui.syncBoolean(filter::isBlacklist, b -> blacklist = b, ICanSyncData.SyncDirection.SERVER_TO_CLIENT);
         gui.syncBoolean(filter::isNbt, b -> nbt = b, ICanSyncData.SyncDirection.SERVER_TO_CLIENT);
         gui.syncBoolean(filter::isOutputRedstone, b -> outputRedstone = b, ICanSyncData.SyncDirection.SERVER_TO_CLIENT);

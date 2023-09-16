@@ -11,23 +11,23 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.ItemStack;
 import trinsdar.gt4r.data.SlotTypes;
-import trinsdar.gt4r.tile.single.TileEntityQuantumChest;
+import trinsdar.gt4r.blockentity.single.BlockEntityQuantumChest;
 
 import javax.annotation.Nonnull;
 import java.util.function.BiPredicate;
 
-public class QuantumChestItemHandler extends MachineItemHandler<TileEntityQuantumChest> {
+public class QuantumChestItemHandler extends MachineItemHandler<BlockEntityQuantumChest> {
     int maxSize = Integer.MAX_VALUE;
     int digitalCount;
-    public QuantumChestItemHandler(TileEntityQuantumChest tile) {
+    public QuantumChestItemHandler(BlockEntityQuantumChest tile) {
         super(tile);
         int count = tile.getMachineType().getCount(tile.getMachineTier(), SlotTypes.QUANTUM);
         inventories.put(SlotTypes.QUANTUM, new QuantumSlotTrackedHandler(tile, count, SlotTypes.QUANTUM.output, SlotTypes.QUANTUM.input, SlotTypes.QUANTUM.tester, SlotTypes.QUANTUM.ev, Integer.MAX_VALUE));
     }
 
-    public static class QuantumSlotTrackedHandler extends TrackedItemHandler<TileEntityQuantumChest> {
+    public static class QuantumSlotTrackedHandler extends TrackedItemHandler<BlockEntityQuantumChest> {
 
-        public QuantumSlotTrackedHandler(TileEntityQuantumChest tile, int size, boolean output, boolean input, BiPredicate<IGuiHandler, ItemStack> validator, ContentEvent contentEvent, int limit) {
+        public QuantumSlotTrackedHandler(BlockEntityQuantumChest tile, int size, boolean output, boolean input, BiPredicate<IGuiHandler, ItemStack> validator, ContentEvent contentEvent, int limit) {
             super(tile, size, output, input, validator, contentEvent, limit);
         }
 

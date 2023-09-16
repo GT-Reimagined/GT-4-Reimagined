@@ -3,11 +3,11 @@ package trinsdar.gt4r.machine;
 import muramasa.antimatter.capability.fluid.FluidTanks;
 import muramasa.antimatter.capability.machine.MachineFluidHandler;
 import muramasa.antimatter.machine.event.ContentEvent;
-import trinsdar.gt4r.tile.single.TileEntityCoalBoiler;
+import trinsdar.gt4r.blockentity.single.BlockEntityCoalBoiler;
 
-public class CoalBoilerFluidHandler extends MachineFluidHandler<TileEntityCoalBoiler> {
+public class CoalBoilerFluidHandler extends MachineFluidHandler<BlockEntityCoalBoiler> {
 
-    public CoalBoilerFluidHandler(TileEntityCoalBoiler tile) {
+    public CoalBoilerFluidHandler(BlockEntityCoalBoiler tile) {
         super(tile, 16000, 1000 * (250 + tile.getMachineTier().getIntegerId()));
         tanks.put(FluidDirection.INPUT, FluidTanks.create(tile, ContentEvent.FLUID_INPUT_CHANGED, b -> {
             b.tank(16000);

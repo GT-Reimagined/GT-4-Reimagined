@@ -1,15 +1,9 @@
 package trinsdar.gt4r.machine;
 
-import earth.terrarium.botarium.common.fluid.base.FluidHolder;
+import muramasa.antimatter.blockentity.BlockEntityMachine;
 import muramasa.antimatter.capability.machine.MachineFluidHandler;
-import muramasa.antimatter.tile.TileEntityMachine;
-import muramasa.antimatter.util.Utils;
-import net.minecraft.core.Direction;
-import tesseract.TesseractGraphWrappers;
-import trinsdar.gt4r.data.CustomTags;
-import trinsdar.gt4r.tile.single.TileEntitySteamMachine;
 
-public class UpgradeableFluidHandler<T extends TileEntityMachine<T> & IUpgradeProvider> extends MachineFluidHandler<T> {
+public class UpgradeableFluidHandler<T extends BlockEntityMachine<T> & IUpgradeProvider> extends MachineFluidHandler<T> {
 
     public UpgradeableFluidHandler(T tile) {
         super(tile);
@@ -17,7 +11,7 @@ public class UpgradeableFluidHandler<T extends TileEntityMachine<T> & IUpgradePr
 
     /*@Override
     public long fillDroplets(FluidStack stack, FluidAction action) {
-        if (stack.getFluid().is(TileEntitySteamMachine.STEAM)){
+        if (stack.getFluid().is(BlockEntitySteamMachine.STEAM)){
             if (tile.getUpgrades().containsKey(CustomTags.STEAM_UPGRADES)){
                 if (stack.getRealAmount() % TesseractGraphWrappers.dropletMultiplier == 0 && stack.getAmount() % 2 == 0){
                     long[] toDrain = new long[1];
@@ -51,7 +45,7 @@ public class UpgradeableFluidHandler<T extends TileEntityMachine<T> & IUpgradePr
 
     @Override
     public boolean canInput(FluidHolder fluid, Direction direction) {
-        if (fluid.getFluid().is(TileEntitySteamMachine.STEAM) && tile.getUpgrades().containsKey(CustomTags.STEAM_UPGRADES)) {
+        if (fluid.getFluid().is(BlockEntitySteamMachine.STEAM) && tile.getUpgrades().containsKey(CustomTags.STEAM_UPGRADES)) {
             return true;
         }
         return super.canInput(direction);

@@ -10,10 +10,10 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import tesseract.api.item.ExtendedItemContainer;
-import trinsdar.gt4r.tile.single.TileEntityQuantumChest;
+import trinsdar.gt4r.blockentity.single.BlockEntityQuantumChest;
 
-public class ContainerQuantumChest extends ContainerBasicMachine<TileEntityQuantumChest> {
-    public ContainerQuantumChest(TileEntityQuantumChest tile, Inventory playerInv, MenuHandlerMachine<TileEntityQuantumChest, ContainerMachine<TileEntityQuantumChest>> handler, int windowId) {
+public class ContainerQuantumChest extends ContainerBasicMachine<BlockEntityQuantumChest> {
+    public ContainerQuantumChest(BlockEntityQuantumChest tile, Inventory playerInv, MenuHandlerMachine<BlockEntityQuantumChest, ContainerMachine<BlockEntityQuantumChest>> handler, int windowId) {
         super(tile, playerInv, handler, windowId);
     }
 

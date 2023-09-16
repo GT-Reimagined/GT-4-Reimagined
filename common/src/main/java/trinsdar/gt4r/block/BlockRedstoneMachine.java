@@ -10,7 +10,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
-import trinsdar.gt4r.tile.single.TileEntityPlayerDetector;
+import trinsdar.gt4r.blockentity.single.BlockEntityPlayerDetector;
 
 public class BlockRedstoneMachine extends BlockMachine {
     public BlockRedstoneMachine(Machine<?> type, Tier tier) {
@@ -21,7 +21,7 @@ public class BlockRedstoneMachine extends BlockMachine {
     public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         super.setPlacedBy(level, pos, state, placer, stack);
         BlockEntity blockEntity = level.getBlockEntity(pos);
-        if (blockEntity instanceof TileEntityPlayerDetector detector) {
+        if (blockEntity instanceof BlockEntityPlayerDetector detector) {
             detector.setOwner(placer);
         }
     }

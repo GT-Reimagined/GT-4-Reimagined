@@ -4,10 +4,10 @@ import muramasa.antimatter.capability.ICoverHandler;
 import muramasa.antimatter.cover.BaseCover;
 import muramasa.antimatter.cover.CoverFactory;
 import muramasa.antimatter.machine.Tier;
-import muramasa.antimatter.tile.TileEntityMachine;
+import muramasa.antimatter.blockentity.BlockEntityMachine;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
-import trinsdar.gt4r.tile.single.TileEntitySteamMachine;
+import trinsdar.gt4r.blockentity.single.BlockEntitySteamMachine;
 
 import javax.annotation.Nullable;
 
@@ -36,10 +36,10 @@ public class CoverSteamVent extends BaseCover {
 
     @Override
     public void onBlockUpdate() {
-        if (handler.getTile() instanceof TileEntityMachine){
-            ((TileEntityMachine<?>)handler.getTile()).recipeHandler.ifPresent(h -> {
-                if (h instanceof TileEntitySteamMachine.SteamMachineRecipeHandler){
-                    ((TileEntitySteamMachine.SteamMachineRecipeHandler) h).setSteamClear(handler.getTile().getLevel().isEmptyBlock(handler.getTile().getBlockPos().relative(side)));
+        if (handler.getTile() instanceof BlockEntityMachine){
+            ((BlockEntityMachine<?>)handler.getTile()).recipeHandler.ifPresent(h -> {
+                if (h instanceof BlockEntitySteamMachine.SteamMachineRecipeHandler){
+                    ((BlockEntitySteamMachine.SteamMachineRecipeHandler) h).setSteamClear(handler.getTile().getLevel().isEmptyBlock(handler.getTile().getBlockPos().relative(side)));
                 }
             });
         }
