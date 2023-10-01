@@ -3,14 +3,10 @@ package trinsdar.gt4r.datagen;
 
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.datagen.providers.AntimatterLanguageProvider;
-import muramasa.antimatter.fluid.AntimatterFluid;
 import muramasa.antimatter.item.ItemFluidCell;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.Machine;
-import muramasa.antimatter.material.Material;
-import muramasa.antimatter.material.MaterialTags;
-import net.minecraft.world.item.Item;
-import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.GT4RRef;
 import trinsdar.gt4r.block.BlockCasing;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.items.ItemIntCircuit;
@@ -21,8 +17,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import static muramasa.antimatter.data.AntimatterMaterialTypes.GEM;
-import static muramasa.antimatter.data.AntimatterMaterialTypes.LIQUID;
 import static muramasa.antimatter.material.Material.NULL;
 import static muramasa.antimatter.machine.Tier.LV;
 import static muramasa.antimatter.util.Utils.lowerUnderscoreToUpperSpaced;
@@ -42,15 +36,15 @@ public class GT4RLocalizations {
         }
 
         public en_US(String locale) {
-            super(Ref.ID, Ref.NAME + " " + locale + " Localization", locale);
+            super(GT4RRef.ID, GT4RRef.NAME + " " + locale + " Localization", locale);
         }
 
         @Override
         protected void addTranslations() {
             super.addTranslations();
-            add(Ref.ID + ".advancements.gt4r", "GT4 Reimagined");
-            add(Ref.ID + ".advancements.gt4r.desc", "Getting familiar with your surroundings");
-            add(Ref.ID + ".tooltip.occurrence", "Indicates occurrence of ");
+            add(GT4RRef.ID + ".advancements.gt4r", "GT4 Reimagined");
+            add(GT4RRef.ID + ".advancements.gt4r.desc", "Getting familiar with your surroundings");
+            add(GT4RRef.ID + ".tooltip.occurrence", "Indicates occurrence of ");
             add("block.gt4r.rubber_leaves", "Rubber Leaves");
             add("block.gt4r.rubber_log", "Rubber Log");
             add("block.gt4r.rubber_sapling", "Rubber Sapling");
@@ -117,7 +111,7 @@ public class GT4RLocalizations {
 
         @Override
         protected void overrides() {
-            BROKEN_TURBINE_ROTOR.all().forEach(m -> override(Ref.ANTIMATTER, BROKEN_TURBINE_ROTOR.get(m).getDescriptionId(), lowerUnderscoreToUpperSpaced("broken_" + m.getId() + "_" + TURBINE_ROTOR.getId())));
+            BROKEN_TURBINE_ROTOR.all().forEach(m -> override(GT4RRef.ANTIMATTER, BROKEN_TURBINE_ROTOR.get(m).getDescriptionId(), lowerUnderscoreToUpperSpaced("broken_" + m.getId() + "_" + TURBINE_ROTOR.getId())));
         }
     }
 

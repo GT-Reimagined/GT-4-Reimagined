@@ -11,7 +11,7 @@ import muramasa.antimatter.gui.widget.TextWidget;
 import muramasa.antimatter.gui.widget.WidgetSupplier;
 import muramasa.antimatter.machine.types.Machine;
 import net.minecraft.resources.ResourceLocation;
-import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.GT4RRef;
 import trinsdar.gt4r.blockentity.single.BlockEntitySteamMachine;
 
 import java.util.List;
@@ -55,8 +55,8 @@ public class SteamMachine extends Machine<SteamMachine> {
         List<SlotData<?>> list = provider.getAnySlots();
         for (SlotData<?> slot : list) {
             String suffix = slot.getType() == SlotType.FL_IN ? "fluid" : "item";
-            add(BRONZE, slot.getType(), slot.getX(), slot.getY(), new ResourceLocation(Ref.ID, "bronze_"+suffix));
-            add(STEEL, slot.getType(), slot.getX(), slot.getY(), new ResourceLocation(Ref.ID, "steel_"+suffix));
+            add(BRONZE, slot.getType(), slot.getX(), slot.getY(), new ResourceLocation(GT4RRef.ID, "bronze_"+suffix));
+            add(STEEL, slot.getType(), slot.getX(), slot.getY(), new ResourceLocation(GT4RRef.ID, "steel_"+suffix));
         }
         return this;
     }
@@ -64,8 +64,8 @@ public class SteamMachine extends Machine<SteamMachine> {
     @Override
     public Machine<SteamMachine> add(SlotType<?> type, int x, int y) {
         String suffix = type == SlotType.FL_IN ? "fluid" : "item";
-        add(BRONZE, type, x, y, new ResourceLocation(Ref.ID, "bronze_"+suffix));
-        add(STEEL, type, x, y, new ResourceLocation(Ref.ID, "steel_"+suffix));
+        add(BRONZE, type, x, y, new ResourceLocation(GT4RRef.ID, "bronze_"+suffix));
+        add(STEEL, type, x, y, new ResourceLocation(GT4RRef.ID, "steel_"+suffix));
         return this;
     }
 }

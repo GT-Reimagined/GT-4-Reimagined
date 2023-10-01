@@ -4,33 +4,21 @@ import com.google.common.collect.ImmutableMap;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.gui.BarDir;
 import muramasa.antimatter.gui.GuiData;
-import muramasa.antimatter.gui.screen.AntimatterContainerScreen;
 import muramasa.antimatter.gui.slot.ISlotProvider;
 import muramasa.antimatter.gui.widget.BackgroundWidget;
-import muramasa.antimatter.gui.widget.IOWidget;
-import muramasa.antimatter.gui.widget.MachineStateWidget;
 import muramasa.antimatter.gui.widget.ProgressWidget;
-import muramasa.antimatter.gui.widget.TextWidget;
 import muramasa.antimatter.gui.widget.WidgetSupplier;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.registration.Side;
-import muramasa.antimatter.util.int4;
 import net.minecraft.resources.ResourceLocation;
-import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.GT4RRef;
 import trinsdar.gt4r.gui.widgets.CoalBoilerFuelWidget;
 import trinsdar.gt4r.gui.widgets.CoalBoilerWidget;
-import trinsdar.gt4r.gui.widgets.FilterButtonArrayWidget;
 import trinsdar.gt4r.gui.widgets.FusionButtonWidget;
-import trinsdar.gt4r.gui.widgets.MachineStateWidgetMoved;
-import trinsdar.gt4r.gui.widgets.TooltipWidget;
-import trinsdar.gt4r.gui.widgets.TranslocatorButtonArrayWidget;
 
 import java.util.function.BiFunction;
 
-import static muramasa.antimatter.gui.ButtonBody.APAD_LEFT;
-import static muramasa.antimatter.gui.ButtonBody.APAD_RIGHT;
-import static muramasa.antimatter.gui.ButtonBody.PAD_LEFT;
-import static muramasa.antimatter.gui.ButtonBody.PAD_RIGHT;
+import static muramasa.antimatter.gui.ButtonOverlay.*;
 import static muramasa.antimatter.gui.SlotType.*;
 import static muramasa.antimatter.gui.Widget.builder;
 import static muramasa.antimatter.machine.Tier.BRONZE;
@@ -72,7 +60,7 @@ public class Guis {
     public static GuiData LOCKER = new GuiData("gt4r","locker").setSlots(ISlotProvider.DEFAULT().add(STORAGE, 80, 8).add(STORAGE, 80, 8 + (18)).add(STORAGE, 80, 8 + (2 * 18)).add(STORAGE, 80, 8 + (3 * 18)));
     public static GuiData CHARGING_LOCKER = new GuiData("gt4r","charging_locker").setSlots(ISlotProvider.DEFAULT().add(ENERGY, 80, 8).add(ENERGY, 80, 8 + (18)).add(ENERGY, 80, 8 + (2 * 18)).add(ENERGY, 80, 8 + (3 * 18)));
 
-    static ResourceLocation buttonLocation = new ResourceLocation(Ref.ID, "textures/gui/button/gui_buttons.png");
+    static ResourceLocation buttonLocation = new ResourceLocation(GT4RRef.ID, "textures/gui/button/gui_buttons.png");
 
     public static void init(Side side) {
 
@@ -234,33 +222,31 @@ public class Guis {
         FUSION_REACTOR.getGui().setBackgroundTexture("fusion_control_computer").setEnablePlayerSlots(false)
                 .getMachineData().setProgressLocation("fusion_reactor").setProgressPos(163, 4).setProgressSize(149, 16);
         FUSION_REACTOR.addGuiCallback(t -> {
-            t.addButton(155, 23, 16, 16, NO_OVERLAY).addButton(155, 41, 16, 16, NO_OVERLAY).addButton(155, 59, 16, 16, NO_OVERLAY).addWidget(makeProgress()).addWidget(FusionButtonWidget.build());
+            t.addButton(155, 23, NO_OVERLAY, false).addButton(155, 41, NO_OVERLAY, false).addButton(155, 59, NO_OVERLAY, false).addWidget(makeProgress()).addWidget(FusionButtonWidget.build());
         });
         TRANSFORMER_DIGITAL.addGuiCallback(t -> {
-            t.addButton(10, 18, 14, 14, APAD_LEFT)
-                    .addButton(25, 18, 14, 14, PAD_LEFT)
-                    .addButton(10, 33, 14, 14, APAD_LEFT)
-                    .addButton(25, 33, 14, 14, PAD_LEFT)
-                    .addButton(10, 48, 14, 14, APAD_LEFT)
-                    .addButton(25, 48, 14, 14, PAD_LEFT)
-                    .addButton(10, 63, 14, 14, APAD_LEFT)
-                    .addButton(25, 63, 14, 14, PAD_LEFT)
-                    .addButton(137, 18, 14, 14, PAD_RIGHT)
-                    .addButton(152, 18, 14, 14, APAD_RIGHT)
-                    .addButton(137, 33, 14, 14, PAD_RIGHT)
-                    .addButton(152, 33, 14, 14, APAD_RIGHT)
-                    .addButton(137, 48, 14, 14, PAD_RIGHT)
-                    .addButton(152, 48, 14, 14, APAD_RIGHT)
-                    .addButton(137, 63, 14, 14, PAD_RIGHT)
-                    .addButton(152, 63, 14, 14, APAD_RIGHT);
+            t.addButton(10, 18, APAD_LEFT, false)
+                    .addButton(25, 18, PAD_LEFT, false)
+                    .addButton(10, 33, APAD_LEFT, false)
+                    .addButton(25, 33, PAD_LEFT, false)
+                    .addButton(10, 48, APAD_LEFT, false)
+                    .addButton(25, 48, PAD_LEFT, false)
+                    .addButton(10, 63, APAD_LEFT, false)
+                    .addButton(25, 63, PAD_LEFT, false)
+                    .addButton(137, 18, PAD_RIGHT, false)
+                    .addButton(152, 18, APAD_RIGHT, false)
+                    .addButton(137, 33, PAD_RIGHT, false)
+                    .addButton(152, 33, APAD_RIGHT, false)
+                    .addButton(137, 48, PAD_RIGHT, false)
+                    .addButton(152, 48, APAD_RIGHT, false)
+                    .addButton(137, 63, PAD_RIGHT, false)
+                    .addButton(152, 63, APAD_RIGHT, false);
         });
         DIGITAL_CHEST.addGuiCallback(t -> {
-           t.addButton(8, 119, 16, 16, NO_OVERLAY).addButton(26, 119, 16, 16, NO_OVERLAY).addButton(44, 119, 16, 16, NO_OVERLAY);
-           t.addWidget(TooltipWidget.build("upload_chest").setSize(8, 119, 16, 16)).addWidget(TooltipWidget.build("download_orb").setSize(26, 119, 16, 16));
+           t.addButton(8, 119, DATA_IN, true, "tooltip.gt4r.upload_chest").addButton(26, 119, DATA_OUT, true, "tooltip.gt4r.download_orb").addButton(44, 119, CHEST, true);
         });
         DIGITAL_TANK.addGuiCallback(t -> {
-            t.addButton(54, 64, 16, 16, NO_OVERLAY).addButton(72, 64, 16, 16, NO_OVERLAY);
-            t.addWidget(TooltipWidget.build("upload_chest").setSize(54, 64, 16, 16)).addWidget(TooltipWidget.build("download_orb").setSize(72, 64, 16, 16));
+            t.addButton(54, 64, DATA_IN, true, "tooltip.gt4r.upload_chest").addButton(72, 64, DATA_OUT, true, "tooltip.gt4r.download_orb");
         });
         DISTILLATION_TOWER.setGuiProgressBarForJEI(BarDir.TOP, true);
         DISTILLATION_TOWER.getGui().getMachineData().setProgressLocation("distillation_tower")
@@ -272,21 +258,9 @@ public class Guis {
 
     public static void initWidgets(){
         ELECTRIC_ITEM_FILTER.getCallbacks().remove(1);
-        ELECTRIC_ITEM_FILTER.addGuiCallback(t -> {
-            t.addWidget(FilterButtonArrayWidget.build());
-        });
         ELECTRIC_TYPE_FILTER.getCallbacks().remove(1);
-        ELECTRIC_TYPE_FILTER.addGuiCallback(t -> {
-            t.addWidget(FilterButtonArrayWidget.build());
-        });
         ELECTRIC_ITEM_TRANSLOCATOR.getCallbacks().remove(1);
-        ELECTRIC_ITEM_TRANSLOCATOR.addGuiCallback(t -> {
-            t.addWidget(TranslocatorButtonArrayWidget.build());
-        });
         ELECTRIC_FLUID_TRANSLOCATOR.getCallbacks().remove(1);
-        ELECTRIC_FLUID_TRANSLOCATOR.addGuiCallback(t -> {
-            t.addWidget(TranslocatorButtonArrayWidget.build());
-        });
         COAL_BOILER.addGuiCallback(t -> {
             t.addWidget(CoalBoilerWidget.build().setSize(70, 25, 36, 54)).addWidget(CoalBoilerFuelWidget.build().setSize(115, 43, 18, 18));
         });
@@ -302,7 +276,7 @@ public class Guis {
 
     private static void initMaterialMachine(Side side){
         //TODO move these textures to background folder
-        BiFunction<Boolean, String, ResourceLocation> textures = (c, l) -> new ResourceLocation(Ref.ID, "textures/gui/machine/" + (c ? "charging_" : "") + l + ".png");
+        BiFunction<Boolean, String, ResourceLocation> textures = (c, l) -> new ResourceLocation(GT4RRef.ID, "textures/gui/machine/" + (c ? "charging_" : "") + l + ".png");
 
         FUSION_REACTOR.setGUI(MenuHandlers.FUSION_MENU_HANDLER);
         QUANTUM_CHEST.setGUI(MenuHandlers.QUANTUM_CHEST_HANDLER);

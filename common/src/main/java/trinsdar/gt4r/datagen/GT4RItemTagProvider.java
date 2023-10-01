@@ -10,12 +10,10 @@ import muramasa.antimatter.datagen.providers.AntimatterItemTagProvider;
 import muramasa.antimatter.ore.BlockOre;
 import muramasa.antimatter.util.AntimatterPlatformUtils;
 import muramasa.antimatter.util.TagUtils;
-import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import trinsdar.gt4r.Ref;
-import trinsdar.gt4r.data.GT4RData;
+import trinsdar.gt4r.GT4RRef;
 import trinsdar.gt4r.data.GT4RMaterialTags;
 
 import static muramasa.antimatter.util.Utils.getConventionalMaterialType;
@@ -77,8 +75,8 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.tag(TagUtils.getForgelikeItemTag("stone_ores/diamond")).add(Items.DIAMOND_ORE);
         this.tag(TagUtils.getForgelikeItemTag("stone_ores/redstone")).add(Items.REDSTONE_ORE);
         this.tag(TagUtils.getForgelikeItemTag("stone_ores/emerald")).add(Items.EMERALD_ORE);
-        if (AntimatterAPI.isModLoaded(Ref.MOD_BLUEPOWER)){
-            this.tag(TagUtils.getForgelikeItemTag("stone_ores/amethyst")).add(AntimatterPlatformUtils.getItemFromID(new ResourceLocation(Ref.MOD_BLUEPOWER, "amethyst_ore")));
+        if (AntimatterAPI.isModLoaded(GT4RRef.MOD_BLUEPOWER)){
+            this.tag(TagUtils.getForgelikeItemTag("stone_ores/amethyst")).add(AntimatterPlatformUtils.getItemFromID(new ResourceLocation(GT4RRef.MOD_BLUEPOWER, "amethyst_ore")));
         }
 
         this.tag(INGOTS_MIXED_METAL).add(MixedMetal);

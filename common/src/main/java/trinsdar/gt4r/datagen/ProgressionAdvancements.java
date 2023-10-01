@@ -3,7 +3,7 @@ package trinsdar.gt4r.datagen;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.FrameType;
 import net.minecraft.resources.ResourceLocation;
-import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.GT4RRef;
 
 import java.util.function.Consumer;
 
@@ -20,8 +20,8 @@ public class ProgressionAdvancements implements Consumer<Consumer<Advancement>> 
     @Override
     public void accept(Consumer<Advancement> consumer) {
         progressionRoot = buildRootAdvancement(GEM.get(Flint), new ResourceLocation("textures/gui/advancements/backgrounds/stone.png"),
-                        Ref.ID + ".advancements.gt4r", Ref.ID + ".advancements.gt4r.desc", FrameType.TASK, true, true, false)
-                        .addCriterion("has_rocks", hasItem(GEM.get(Flint))).save(consumer, getLoc(Ref.ID, "progression/root"));
+                        GT4RRef.ID + ".advancements.gt4r", GT4RRef.ID + ".advancements.gt4r.desc", FrameType.TASK, true, true, false)
+                        .addCriterion("has_rocks", hasItem(GEM.get(Flint))).save(consumer, getLoc(GT4RRef.ID, "progression/root"));
     }
 
 }

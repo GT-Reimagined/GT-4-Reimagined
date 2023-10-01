@@ -1,6 +1,5 @@
 package trinsdar.gt4r.forge;
 
-import muramasa.antimatter.Antimatter;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -9,15 +8,14 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.network.NetworkEvent;
 import trinsdar.gt4r.GT4RConfig;
 import trinsdar.gt4r.GT4Reimagined;
-import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.GT4RRef;
 import trinsdar.gt4r.proxy.ClientHandler;
 import trinsdar.gt4r.proxy.CommonHandler;
 import trinsdar.gt4r.proxy.ServerHandler;
 
-@Mod(Ref.ID)
+@Mod(GT4RRef.ID)
 public class GT4ReimaginedForge {
     public GT4ReimaginedForge(){
         new GT4Reimagined();

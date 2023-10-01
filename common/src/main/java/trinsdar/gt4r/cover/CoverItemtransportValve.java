@@ -28,14 +28,12 @@ public class CoverItemtransportValve extends CoverBasicTransport{
 
     @Override
     public <T> boolean blocksInput(Class<T> cap, @Nullable Direction side) {
-        int mode = coverMode.ordinal();
-        return mode == 0 || mode == 2 || mode == 4;
+        return exportMode == ImportExportMode.EXPORT;
     }
 
     @Override
     public <T> boolean blocksOutput(Class<T> cap, @Nullable Direction side) {
-        int mode = coverMode.ordinal();
-        return mode == 1 || mode == 3 || mode == 5;
+        return exportMode == ImportExportMode.IMPORT;
     }
 
 

@@ -14,7 +14,7 @@ import muramasa.antimatter.util.AntimatterPlatformUtils;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.GT4RRef;
 
 import java.util.Map;
 import java.util.function.Consumer;
@@ -56,7 +56,7 @@ public class ToolCraftingTableRecipes {
                 provider.shapeless(output, wire.getId() + "_cable_16x", "cables", "has_wire16x", provider.hasSafeItem(wire.getBlockItem(HUGE)), new ItemStack(cable.getBlockItem(HUGE)), wire.getBlockItem(HUGE), AntimatterMaterialTypes.PLATE.getMaterialTag(Rubber), AntimatterMaterialTypes.PLATE.getMaterialTag(Rubber), AntimatterMaterialTypes.PLATE.getMaterialTag(Rubber), AntimatterMaterialTypes.PLATE.getMaterialTag(Rubber), AntimatterMaterialTypes.PLATE.getMaterialTag(Rubber));
             }
             if (wire.getMaterial().has(AntimatterMaterialTypes.PLATE)) {
-                provider.shapeless(output, Ref.ID, wire.getMaterial().getId() + "_plate_to_wire","wire","has_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
+                provider.shapeless(output, GT4RRef.ID, wire.getMaterial().getId() + "_plate_to_wire","wire","has_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
                         new ItemStack(wires.get(VTINY), wireAmount),
                         AntimatterDefaultTools.WIRE_CUTTER.getTag(), AntimatterMaterialTypes.PLATE.getMaterialTag(wire.getMaterial()));
             }

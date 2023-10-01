@@ -21,7 +21,7 @@ public class GT4RConfig {
     }
 
     public static void onModConfigEvent(final ModConfig config) {
-        if (config.getModId().equals(Ref.ID)){
+        if (config.getModId().equals(GT4RRef.ID)){
             if (config.getSpec() == COMMON_SPEC) bakeCommonConfig();
         }
     }
@@ -54,12 +54,12 @@ public class GT4RConfig {
             builder.push("World");
 
             REPLACEMENT_VANILLA_ORE_GEN = builder.comment("Enables my own version of vanilla ore gen (Iron, Coal, Diamond, ect.) if Antimatter.World.DISABLE_ORE_GEN is true - Default: true")
-                    .translation(Ref.ID + ".config.replacement_vanilla_ore_gen")
+                    .translation(GT4RRef.ID + ".config.replacement_vanilla_ore_gen")
                     .worldRestart()
                     .define("ENABLE_REPLACEMENT_VANILLA_ORE_GEN", true);
 
             GENERATE_STONE_LAYERS = builder.comment("Enables Generations of my stnes as stone layers in the world - Default: false")
-                    .translation(Ref.ID + ".config.generate_stone_layers")
+                    .translation(GT4RRef.ID + ".config.generate_stone_layers")
                     .worldRestart()
                     .define("GENERATE_STONE_LAYERS", false);
 
@@ -68,19 +68,19 @@ public class GT4RConfig {
             builder.push("Gameplay");
 
             HARDER_VANILLA_RECIPES = builder.comment("Enables Harder vanilla crafting recipes for things like hoppers and armor - Default: true")
-                    .translation(Ref.ID + ".config.harder_vanilla_recipes")
+                    .translation(GT4RRef.ID + ".config.harder_vanilla_recipes")
                     .define("HARDER_VANILLA_RECIPES", true);
 
             HARDER_WOOD = builder.comment("If true logs to planks and planks to sticks give half of vannila amounts - Default: false")
-                    .translation(Ref.ID + ".config.harder_wood")
+                    .translation(GT4RRef.ID + ".config.harder_wood")
                     .define("HARDER_WOOD", false);
 
             REMOVE_VANILLA_CHARCOAL_RECIPE = builder.comment("Disables vanilla charcoal recipe if true. - Default: false")
-                    .translation(Ref.ID + ".config.remove_vanilla_charcoal_recipe")
+                    .translation(GT4RRef.ID + ".config.remove_vanilla_charcoal_recipe")
                     .define("REMOVE_VANILLA_CHARCOAL_RECIPE", false);
 
             SULFUR_TORCH = builder.comment("Enables sulfur torch recipe. - Default: true")
-                    .translation(Ref.ID + ".config.sulfur_torch")
+                    .translation(GT4RRef.ID + ".config.sulfur_torch")
                     .define("SULFUR_TORCH", true);
             builder.pop();
 

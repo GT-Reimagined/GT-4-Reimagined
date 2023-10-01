@@ -9,15 +9,15 @@ import muramasa.antimatter.integration.jeirei.AntimatterJEIREIPlugin;
 import muramasa.antimatter.machine.MachineFlag;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
-import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.GT4RRef;
 import trinsdar.gt4r.blockentity.multi.BlockEntityFusionReactor;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class FusionButtonWidget extends Widget {
-    ResourceLocation middle = new ResourceLocation(Ref.ID, "textures/gui/machine/fusion_computer_middle_overlay.png");
-    ResourceLocation top_bottom = new ResourceLocation(Ref.ID, "textures/gui/machine/fusion_computer_top_bottom_overlay.png");
+    ResourceLocation middle = new ResourceLocation(GT4RRef.ID, "textures/gui/machine/fusion_computer_middle_overlay.png");
+    ResourceLocation top_bottom = new ResourceLocation(GT4RRef.ID, "textures/gui/machine/fusion_computer_top_bottom_overlay.png");
 
     protected FusionButtonWidget(@Nonnull GuiInstance gui, @Nullable IGuiElement parent) {
         super(gui, parent);

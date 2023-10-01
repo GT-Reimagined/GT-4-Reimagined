@@ -1,42 +1,35 @@
 package trinsdar.gt4r.cover;
 
-import muramasa.antimatter.cover.ICoverMode;
+public enum ImportExportMode {
+    EXPORT(true),
+    IMPORT(false),
+    EXPORT_IMPORT(true),
+    IMPORT_EXPORT(false);
 
-public enum ImportExportMode implements ICoverMode {
-    EXPORT("Export",88, 24),
-    IMPORT("Import",34, 24),
-    EXPORT_CONDITIONAL("Export Conditional",106, 24),
-    IMPORT_CONDITIONAL("Import Conditional",52, 24),
-    EXPORT_INVERT_COND("Export Invert Conditional",124, 24),
-    IMPORT_INVERT_COND("Import Invert Conditional",70, 24),
-    EXPORT_IMPORT("Export Import",88, 42),
-    IMPORT_EXPORT("Import Export",34, 42),
-    EXPORT_IMPORT_CONDITIONAL("Export Import Conditional",106, 42),
-    IMPORT_EXPORT_CONDITIONAL("Import Export Conditional",52, 42),
-    EXPORT_IMPORT_INVERT_COND("Export Import Invert Conditional",124, 42),
-    IMPORT_EXPORT_INVERT_COND("Import Export Invert Conditional",70, 42);
+    boolean export;
 
-    int x, y;
-    String name;
-
-    ImportExportMode(String name, int x, int y){
-        this.name = name;
-        this.x = x;
-        this.y = y;
+    ImportExportMode(boolean export){
+        this.export = export;
     }
 
-    @Override
-    public int getX() {
-        return x;
+    public boolean isExport() {
+        return export;
     }
 
-    @Override
-    public int getY() {
-        return y;
+    public ImportExportMode next(){
+        return switch (this){
+            case EXPORT -> IMPORT;
+            case IMPORT -> EXPORT_IMPORT;
+            case EXPORT_IMPORT -> IMPORT_EXPORT;
+            case IMPORT_EXPORT -> EXPORT;
+        };
     }
-
-    @Override
-    public String getName() {
-        return name;
+    public ImportExportMode previous(){
+        return switch (this){
+            case IMPORT_EXPORT -> EXPORT_IMPORT;
+            case EXPORT_IMPORT -> IMPORT;
+            case IMPORT -> EXPORT;
+            case EXPORT -> IMPORT_EXPORT;
+        };
     }
 }

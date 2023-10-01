@@ -6,7 +6,7 @@ import muramasa.antimatter.gui.event.IGuiEvent;
 import muramasa.antimatter.network.packets.AbstractGuiEventPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
-import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.GT4RRef;
 
 public record PlayerGuiHandler(Player player) implements IGuiHandler {
     @Override
@@ -26,7 +26,7 @@ public record PlayerGuiHandler(Player player) implements IGuiHandler {
 
     @Override
     public String handlerDomain() {
-        return Ref.ID;
+        return GT4RRef.ID;
     }
 
     @Override

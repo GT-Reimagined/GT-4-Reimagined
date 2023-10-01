@@ -2,6 +2,8 @@ package trinsdar.gt4r.blockentity.single;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import muramasa.antimatter.capability.machine.MachineEnergyHandler;
+import muramasa.antimatter.gui.GuiInstance;
+import muramasa.antimatter.gui.IGuiElement;
 import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.gui.event.GuiEvents;
 import muramasa.antimatter.gui.event.IGuiEvent;
@@ -27,6 +29,7 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import tesseract.TesseractCapUtils;
 import tesseract.api.item.ExtendedItemContainer;
 import trinsdar.gt4r.data.SlotTypes;
+import trinsdar.gt4r.gui.ButtonOverlays;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -101,6 +104,16 @@ public class BlockEntityItemFilter extends BlockEntityMachine<BlockEntityItemFil
                     break;
             }
         }
+    }
+
+    @Override
+    public void addWidgets(GuiInstance instance, IGuiElement parent) {
+        super.addWidgets(instance, parent);
+        instance.addSwitchButton(8, 63, 16, 16, ButtonOverlays.ENERGY_OFF, ButtonOverlays.ENERGY_ON, h -> ((BlockEntityItemFilter)h).emitEnergy, true);
+        instance.addSwitchButton(26, 63, 16, 16, ButtonOverlays.REDSTONE_CONTROL_OFF, ButtonOverlays.REDSTONE_CONTROL_ON, h -> ((BlockEntityItemFilter)h).outputRedstone, true);
+        instance.addSwitchButton(44, 63, 16, 16, ButtonOverlays.INVERT_REDSTONE_OFF, ButtonOverlays.INVERT_REDSTONE_ON, h -> ((BlockEntityItemFilter)h).invertRedstone, true);
+        instance.addSwitchButton(62, 63, 16, 16, ButtonOverlays.BLACKLIST_OFF, ButtonOverlays.BLACKLIST_ON, h -> ((BlockEntityItemFilter)h).blacklist, true);
+        instance.addSwitchButton(80, 63, 16, 16, ButtonOverlays.NBT_OFF, ButtonOverlays.NBT_ON, h -> ((BlockEntityItemFilter)h).nbt, true);
     }
 
     @Override

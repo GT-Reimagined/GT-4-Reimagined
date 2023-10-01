@@ -22,15 +22,15 @@ import net.minecraft.world.level.block.DoubleBlockCombiner;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.GT4RRef;
 import trinsdar.gt4r.block.BlockMaterialChest;
 import trinsdar.gt4r.blockentity.single.BlockEntityChest;
 
 import java.awt.Color;
 
 public class MaterialChestRenderer <T extends BlockEntity> implements BlockEntityRenderer<T> {
-    public static final ResourceLocation MATERIAL_CHEST_BASE = new ResourceLocation(Ref.ID, "model/material_chest_base");
-    public static final ResourceLocation MATERIAL_CHEST_OVERLAY = new ResourceLocation(Ref.ID, "model/material_chest_overlay");
+    public static final ResourceLocation MATERIAL_CHEST_BASE = new ResourceLocation(GT4RRef.ID, "model/material_chest_base");
+    public static final ResourceLocation MATERIAL_CHEST_OVERLAY = new ResourceLocation(GT4RRef.ID, "model/material_chest_overlay");
     private final ModelPart chestLid;
     private final ModelPart chestBottom;
     private final ModelPart chestLock;

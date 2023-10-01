@@ -10,7 +10,7 @@ import muramasa.antimatter.worldgen.smallore.WorldGenSmallOreBuilder;
 import muramasa.antimatter.worldgen.vanillaore.WorldGenVanillaOreBuilder;
 import net.minecraft.resources.ResourceLocation;
 import trinsdar.gt4r.GT4RConfig;
-import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.GT4RRef;
 
 import static muramasa.antimatter.data.AntimatterMaterials.*;
 import static muramasa.antimatter.data.AntimatterStoneTypes.*;
@@ -110,6 +110,6 @@ public class WorldGenLoader {
     }
 
     private static String tagged(String id){
-        return "#" + Ref.ID + ":" + id;
+        return "#" + GT4RRef.ID + ":" + id;
     }
 }

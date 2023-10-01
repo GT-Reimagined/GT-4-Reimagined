@@ -13,7 +13,7 @@ import net.minecraftforge.api.ModLoadingContext;
 import net.minecraftforge.api.fml.event.config.ModConfigEvent;
 import net.minecraftforge.fml.config.ModConfig;
 import trinsdar.gt4r.GT4RConfig;
-import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.GT4RRef;
 import trinsdar.gt4r.events.AntimatterEvents;
 import trinsdar.gt4r.events.CommonEvents;
 
@@ -22,7 +22,7 @@ public class GT4ReimaginedFabric implements ModInitializer {
     public void onInitialize() {
         ModConfigEvent.LOADING.register(GT4RConfig::onModConfigEvent);
         ModConfigEvent.RELOADING.register(GT4RConfig::onModConfigEvent);
-        ModLoadingContext.registerConfig(Ref.ID, ModConfig.Type.COMMON, GT4RConfig.COMMON_SPEC);
+        ModLoadingContext.registerConfig(GT4RRef.ID, ModConfig.Type.COMMON, GT4RConfig.COMMON_SPEC);
         WorldGenEvents.WORLD_GEN.register(AntimatterEvents::registerWorldgen);
         LoaderEvents.LOADER.register(AntimatterEvents::registerRecipeLoaders);
         CraftingEvents.CRAFTING.register(AntimatterEvents::registerCraftingLoaders);

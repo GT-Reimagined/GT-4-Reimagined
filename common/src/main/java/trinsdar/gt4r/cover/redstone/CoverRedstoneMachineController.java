@@ -1,10 +1,12 @@
 package trinsdar.gt4r.cover.redstone;
 
+import muramasa.antimatter.blockentity.pipe.BlockEntityPipe;
 import muramasa.antimatter.capability.ICoverHandler;
 import muramasa.antimatter.cover.BaseCover;
 import muramasa.antimatter.cover.CoverFactory;
 import muramasa.antimatter.cover.ICoverMode;
 import muramasa.antimatter.cover.ICoverModeHandler;
+import muramasa.antimatter.gui.ButtonOverlay;
 import muramasa.antimatter.gui.event.GuiEvents;
 import muramasa.antimatter.gui.event.IGuiEvent;
 import muramasa.antimatter.machine.MachineState;
@@ -13,31 +15,26 @@ import muramasa.antimatter.blockentity.BlockEntityMachine;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
-import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.GT4RRef;
 import trinsdar.gt4r.cover.RedstoneMode;
 
 import javax.annotation.Nullable;
 
-import static trinsdar.gt4r.gui.ButtonOverlays.REDSTONE;
-import static trinsdar.gt4r.gui.ButtonOverlays.TORCH_OFF;
-import static trinsdar.gt4r.gui.ButtonOverlays.TORCH_ON;
+public class CoverRedstoneMachineController extends BaseCover {
 
-public class CoverRedstoneMachineController extends BaseCover implements ICoverModeHandler {
-
-    protected RedstoneMode coverMode;
+    protected boolean inverted;
     protected int redstonePower;
     
     public CoverRedstoneMachineController(ICoverHandler<?> source, @Nullable Tier tier, Direction side, CoverFactory factory) {
         super(source, tier, side, factory);
-        this.coverMode = RedstoneMode.NORMAL;
         addGuiCallback(t -> {
-            t.addButton(61, 34, 16, 16, TORCH_ON).addButton(79, 34, 16, 16, TORCH_OFF).addButton(97, 34, 16, 16, REDSTONE);
+            t.addSwitchButton(79, 34, 16, 16, ButtonOverlay.TORCH_OFF, ButtonOverlay.TORCH_ON, h -> inverted, true, b -> "tooltip.gti.redstone_mode." + (b ? "inverted" : "normal"));
         });
     }
 
     @Override
     public String getDomain() {
-        return Ref.ID;
+        return GT4RRef.ID;
     }
 
     @Override
@@ -56,40 +53,19 @@ public class CoverRedstoneMachineController extends BaseCover implements ICoverM
     }
 
     public boolean isPowered(){
-        if (coverMode == RedstoneMode.NORMAL){
-            return redstonePower > 0;
-        }
-        if (coverMode == RedstoneMode.INVERTED){
-            return redstonePower == 0;
-        }
-        return false;
+        return inverted ? redstonePower == 0 : redstonePower > 0;
     }
 
     @Override
     public void onUpdate() {
-        if (handler.getTile() instanceof BlockEntityMachine){
-            BlockEntityMachine<?> machine = (BlockEntityMachine<?>) handler.getTile();
+        if (handler.getTile() instanceof BlockEntityMachine<?> machine && machine.isServerSide()){
             if (machine.getMachineState() != MachineState.DISABLED){
-                if (coverMode == RedstoneMode.NO_WORK){
+                if (!isPowered()){
                     machine.toggleMachine();
-                } else if (coverMode == RedstoneMode.NORMAL){
-                    if (redstonePower == 0){
-                        machine.toggleMachine();
-                    }
-                } else {
-                    if (redstonePower > 0){
-                        machine.toggleMachine();
-                    }
                 }
             } else {
-                if (coverMode == RedstoneMode.NORMAL){
-                    if (redstonePower > 0){
-                        machine.toggleMachine();
-                    }
-                } else if (coverMode == RedstoneMode.INVERTED){
-                    if (redstonePower == 0){
-                        machine.toggleMachine();
-                    }
+                if (isPowered()){
+                    machine.toggleMachine();
                 }
             }
 
@@ -105,23 +81,12 @@ public class CoverRedstoneMachineController extends BaseCover implements ICoverM
     public void onGuiEvent(IGuiEvent event, Player playerEntity) {
         if (event.getFactory() == GuiEvents.EXTRA_BUTTON){
             GuiEvents.GuiEvent ev = (GuiEvents.GuiEvent) event;
-            coverMode = RedstoneMode.values()[Math.min(ev.data[0], 2)];
+            if (ev.data[1] == 0){
+                inverted = !inverted;
+                if (handler.getTile() instanceof BlockEntityPipe<?> pipe) pipe.onBlockUpdate(pipe.getBlockPos());
+                if (handler.getTile() instanceof BlockEntityMachine<?> machine) machine.onBlockUpdate(machine.getBlockPos());
+            }
         }
-    }
-
-    @Override
-    public ICoverMode getCoverMode() {
-        return coverMode;
-    }
-
-    @Override
-    public int coverModeToInt() {
-        return coverMode.ordinal();
-    }
-
-    @Override
-    public ICoverMode getCoverMode(int index) {
-        return RedstoneMode.values()[index];
     }
 
     @Override

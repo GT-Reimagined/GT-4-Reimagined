@@ -36,7 +36,7 @@ public class GT4Reimagined extends AntimatterMod {
 
     public static GT4Reimagined INSTANCE;
     public static IProxyHandler PROXY;
-    public static Logger LOGGER = LogManager.getLogger(Ref.ID);
+    public static Logger LOGGER = LogManager.getLogger(GT4RRef.ID);
 
     public GT4Reimagined() {
         super();
@@ -46,9 +46,9 @@ public class GT4Reimagined extends AntimatterMod {
     @Override
     public void onRegistrarInit() {
         super.onRegistrarInit();
-        AntimatterDynamics.clientProvider(Ref.ID, () -> new AntimatterBlockStateProvider(Ref.ID, Ref.NAME + " BlockStates"));
-        AntimatterDynamics.clientProvider(Ref.ID, () -> new GT4RItemModelProvider(Ref.ID, Ref.NAME + " Item Models"));
-        AntimatterDynamics.clientProvider(Ref.ID, GT4RLocalizations.en_US::new);
+        AntimatterDynamics.clientProvider(GT4RRef.ID, () -> new AntimatterBlockStateProvider(GT4RRef.ID, GT4RRef.NAME + " BlockStates"));
+        AntimatterDynamics.clientProvider(GT4RRef.ID, () -> new GT4RItemModelProvider(GT4RRef.ID, GT4RRef.NAME + " Item Models"));
+        AntimatterDynamics.clientProvider(GT4RRef.ID, GT4RLocalizations.en_US::new);
         new GT4RLateRegistrar();
     }
 
@@ -67,10 +67,10 @@ public class GT4Reimagined extends AntimatterMod {
                 RecipeMaps.postInit();
                 Guis.init(side);
                 Models.init();
-                Registry.register(Registry.LOOT_FUNCTION_TYPE, new ResourceLocation(Ref.ID, "random_drop_bonus"), GT4RRandomDropBonus.RANDOM_DROP_BONUS);
+                Registry.register(Registry.LOOT_FUNCTION_TYPE, new ResourceLocation(GT4RRef.ID, "random_drop_bonus"), GT4RRandomDropBonus.RANDOM_DROP_BONUS);
             }
             case DATA_READY -> {
-                if (AntimatterAPI.isModLoaded(Ref.MOD_BLUEPOWER)) {
+                if (AntimatterAPI.isModLoaded(GT4RRef.MOD_BLUEPOWER)) {
                     //GEM.forceOverride(Amethyst, ForgeRegistries.ITEMS.getValue(new ResourceLocation("bluepower", "amethyst_gem")));
                 }
                 GT4RData.buildTierMaps();
@@ -95,6 +95,6 @@ public class GT4Reimagined extends AntimatterMod {
 
     @Override
     public String getId() {
-        return Ref.ID;
+        return GT4RRef.ID;
     }
 }

@@ -11,8 +11,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import trinsdar.gt4r.Ref;
-import trinsdar.gt4r.data.client.ScreenFactories;
+import trinsdar.gt4r.GT4RRef;
 
 import java.util.Optional;
 
@@ -44,6 +43,6 @@ public class MenuHandlerCrafting extends MenuHandler<GTWorkbenchContainer> {
 
     @Override
     public String screenDomain() {
-        return Ref.ID;
+        return GT4RRef.ID;
     }
 }

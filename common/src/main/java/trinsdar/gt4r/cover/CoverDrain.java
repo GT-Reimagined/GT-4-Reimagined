@@ -24,7 +24,7 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import tesseract.FluidPlatformUtils;
 import tesseract.TesseractGraphWrappers;
-import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.GT4RRef;
 
 import javax.annotation.Nullable;
 
@@ -39,7 +39,7 @@ public class CoverDrain extends BaseCover {
 
     @Override
     public String getDomain() {
-        return Ref.ID;
+        return GT4RRef.ID;
     }
 
     @Override

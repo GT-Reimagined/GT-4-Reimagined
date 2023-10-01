@@ -16,7 +16,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CraftingRecipe;
-import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.GT4RRef;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +34,7 @@ public class GT4RJeiPlugin implements IModPlugin {
 
     @Override
     public ResourceLocation getPluginUid() {
-        return new ResourceLocation(Ref.ID, "jei_plugin");
+        return new ResourceLocation(GT4RRef.ID, "jei_plugin");
     }
 
     @Override
@@ -45,9 +45,9 @@ public class GT4RJeiPlugin implements IModPlugin {
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         WORKBENCH.all().forEach(m -> {
-            registration.addRecipeCatalyst(new ItemStack(Machine.get(m.getId() + "_workbench", Ref.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR)), RecipeTypes.CRAFTING);
+            registration.addRecipeCatalyst(new ItemStack(Machine.get(m.getId() + "_workbench", GT4RRef.ID).map(mch -> mch.getItem(LV)).orElse(Items.AIR)), RecipeTypes.CRAFTING);
             if (m.has(CHARGING_WORKBENCH)){
-                registration.addRecipeCatalyst(new ItemStack(Machine.get(m.getId() + "_charging_workbench", Ref.ID).map(mch -> mch.getItem(HV)).orElse(Items.AIR)), RecipeTypes.CRAFTING);
+                registration.addRecipeCatalyst(new ItemStack(Machine.get(m.getId() + "_charging_workbench", GT4RRef.ID).map(mch -> mch.getItem(HV)).orElse(Items.AIR)), RecipeTypes.CRAFTING);
             }
         });
     }

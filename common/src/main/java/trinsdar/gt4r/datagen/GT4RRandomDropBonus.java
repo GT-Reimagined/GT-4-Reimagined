@@ -18,7 +18,7 @@ import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParam;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.GT4RRef;
 
 import java.util.Map;
 import java.util.Random;
@@ -87,7 +87,7 @@ public class GT4RRandomDropBonus extends LootItemConditionalFunction {
     }
 
     static final class RandomDropsFormula implements IFormula {
-        public static final ResourceLocation ID = new ResourceLocation(Ref.ID,"random_drops");
+        public static final ResourceLocation ID = new ResourceLocation(GT4RRef.ID,"random_drops");
 
         private final int dividend;
 
@@ -117,7 +117,7 @@ public class GT4RRandomDropBonus extends LootItemConditionalFunction {
     }
 
     static final class UniformMultipliedFormula implements IFormula {
-        public static final ResourceLocation ID = new ResourceLocation(Ref.ID,"uniform_multiplied_drops");
+        public static final ResourceLocation ID = new ResourceLocation(GT4RRef.ID,"uniform_multiplied_drops");
 
         private final int multiplier;
 

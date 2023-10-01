@@ -1,81 +1,72 @@
 package trinsdar.gt4r.cover;
 
-import muramasa.antimatter.Antimatter;
+import muramasa.antimatter.blockentity.BlockEntityMachine;
+import muramasa.antimatter.blockentity.pipe.BlockEntityPipe;
 import muramasa.antimatter.capability.ICoverHandler;
-import muramasa.antimatter.cover.BaseCover;
 import muramasa.antimatter.cover.CoverFactory;
-import muramasa.antimatter.cover.ICoverMode;
-import muramasa.antimatter.cover.ICoverModeHandler;
+import muramasa.antimatter.gui.ButtonOverlay;
 import muramasa.antimatter.gui.event.GuiEvents;
 import muramasa.antimatter.gui.event.IGuiEvent;
 import muramasa.antimatter.machine.Tier;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
-import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.GT4RRef;
 
 import javax.annotation.Nullable;
 
-public abstract class CoverBasicTransport extends BaseCover implements ICoverModeHandler {
+import static trinsdar.gt4r.cover.ImportExportMode.EXPORT;
+import static trinsdar.gt4r.cover.ImportExportMode.IMPORT;
 
-    protected ImportExportMode coverMode;
+
+public abstract class CoverBasicTransport extends CoverBasicRedstone implements ICoverRedstoneSensitive {
+
+    protected ImportExportMode exportMode;
     int coverModeInt;
 
     public CoverBasicTransport(ICoverHandler<?> source, @Nullable Tier tier, Direction side, CoverFactory factory) {
         super(source, tier, side, factory);
-        this.coverMode = ImportExportMode.EXPORT;
+        this.exportMode = source.getTile() instanceof BlockEntityPipe<?> ? IMPORT : EXPORT;
+        redstoneMode = RedstoneMode.NO_WORK;
+        coverModeInt = exportMode.ordinal();
+        addGuiCallback(t -> {
+            t.addCycleButton(70, 34, 16, 16, h -> ((CoverBasicRedstone)h).redstoneMode.ordinal(), true, i -> "tooltip.gt4r.redstone_mode." + i, ButtonOverlay.TORCH_OFF, ButtonOverlay.TORCH_ON, ButtonOverlay.REDSTONE);
+            t.addCycleButton(88, 34, 16, 16, h -> ((CoverBasicTransport)h).exportMode.ordinal(), true, i -> "tooltip.gt4r.export_mode." + i, ButtonOverlay.EXPORT, ButtonOverlay.IMPORT, ButtonOverlay.EXPORT_IMPORT, ButtonOverlay.IMPORT_EXPORT);
+        });
     }
 
     @Override
     public String getDomain() {
-        return Ref.ID;
+        return GT4RRef.ID;
     }
 
     @Override
-    public ICoverMode getCoverMode() {
-        return coverMode;
+    public void onPlace() {
+        super.onPlace();
+        if (handler.getTile().getLevel() == null) return;
+        if (handler.getTile() instanceof BlockEntityPipe<?> pipe){
+            pipe.setConnection(this.side);
+        }
     }
 
     @Override
     public void onGuiEvent(IGuiEvent event, Player playerEntity) {
+        super.onGuiEvent(event, playerEntity);
         if (event.getFactory() == GuiEvents.EXTRA_BUTTON){
+
             GuiEvents.GuiEvent ev = (GuiEvents.GuiEvent) event;
-            Antimatter.LOGGER.info(handler.getTile().getLevel().isClientSide);
-            coverMode = getCoverModeFromButton(ev.data[1]);
-            coverModeInt = coverMode.ordinal();
+            if (ev.data[1] == 1){
+                exportMode = ev.data[0] == 0 ? exportMode.next() : exportMode.previous();
+                if (handler.getTile() instanceof BlockEntityPipe<?> pipe) pipe.onBlockUpdate(pipe.getBlockPos());
+                if (handler.getTile() instanceof BlockEntityMachine<?> machine) machine.onBlockUpdate(machine.getBlockPos());
+            }
         }
-    }
-
-    public ImportExportMode getCoverModeFromButton(int buttonID){
-        return switch (buttonID) {
-            case 0 -> ImportExportMode.IMPORT;
-            case 1 -> ImportExportMode.IMPORT_EXPORT;
-            case 2 -> ImportExportMode.IMPORT_CONDITIONAL;
-            case 3 -> ImportExportMode.IMPORT_EXPORT_CONDITIONAL;
-            case 4 -> ImportExportMode.IMPORT_INVERT_COND;
-            case 5 -> ImportExportMode.IMPORT_EXPORT_INVERT_COND;
-            case 7 -> ImportExportMode.EXPORT_IMPORT;
-            case 8 -> ImportExportMode.EXPORT_CONDITIONAL;
-            case 9 -> ImportExportMode.EXPORT_IMPORT_CONDITIONAL;
-            case 10 -> ImportExportMode.EXPORT_INVERT_COND;
-            case 11 -> ImportExportMode.EXPORT_IMPORT_INVERT_COND;
-            default -> ImportExportMode.EXPORT;
-        };
-    }
-
-    @Override
-    public int coverModeToInt() {
-        return coverMode.ordinal();
-    }
-
-    public ICoverMode getCoverMode(int index) {
-        return ImportExportMode.values()[index];
     }
 
     @Override
     public CompoundTag serialize() {
         CompoundTag nbt =  super.serialize();
-        nbt.putInt("coverMode", coverModeInt);
+        nbt.putInt("coverMode", exportMode.ordinal());
         return nbt;
     }
 
@@ -84,7 +75,8 @@ public abstract class CoverBasicTransport extends BaseCover implements ICoverMod
         super.deserialize(nbt);
         if (nbt.contains("coverMode")) {
             coverModeInt = nbt.getInt("coverMode");
-            coverMode = (ImportExportMode) getCoverMode(coverModeInt);
+            if (coverModeInt > 3) coverModeInt = 2;
+            exportMode = ImportExportMode.values()[coverModeInt];
         }
     }
 }

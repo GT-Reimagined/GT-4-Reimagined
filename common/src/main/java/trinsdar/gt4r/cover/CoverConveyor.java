@@ -2,7 +2,6 @@ package trinsdar.gt4r.cover;
 
 import muramasa.antimatter.capability.ICoverHandler;
 import muramasa.antimatter.cover.CoverFactory;
-import muramasa.antimatter.gui.ButtonBody;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.blockentity.BlockEntityMachine;
 import muramasa.antimatter.util.AntimatterCapUtils;
@@ -18,6 +17,7 @@ import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import tesseract.TesseractCapUtils;
+import tesseract.api.item.ExtendedItemContainer;
 import trinsdar.gt4r.cover.redstone.CoverRedstoneMachineController;
 
 import javax.annotation.Nullable;
@@ -32,26 +32,21 @@ public class CoverConveyor extends CoverBasicTransport {
 
     public CoverConveyor(ICoverHandler<?> source, @Nullable Tier tier, Direction side, CoverFactory factory) {
         super(source, tier, side, factory);
-        ButtonBody[][] overlays = new ButtonBody[][]{{IMPORT, IMPORT_CONDITIONAL, IMPORT_INVERT_CONDITIONAL, EXPORT, EXPORT_CONDITIONAL, EXPORT_INVERT_CONDITIONAL}, {IMPORT_EXPORT, IMPORT_EXPORT_CONDITIONAL, IMPORT_EXPORT_INVERT_CONDITIONAL, EXPORT_IMPORT, EXPORT_IMPORT_CONDITIONAL, EXPORT_IMPORT_INVERT_CONDITIONAL}};
-        addGuiCallback(t -> {
-            for (int x = 0; x < 6; x++){
-                for (int y = 0; y < 2; y++){
-                    t.addButton(35 + (x * 18), 25 + (y * 18), 16, 16, overlays[y][x]);
-                }
-            }
-        });
+    }
+
+    @Override
+    public <T> boolean blocksCapability(Class<T> cap, Direction side) {
+        return cap != ExtendedItemContainer.class;
     }
 
     @Override
     public <T> boolean blocksInput(Class<T> cap, @Nullable Direction side) {
-        int mode = coverMode.ordinal();
-        return mode == 0 || mode == 2 || mode == 4;
+        return exportMode == ImportExportMode.EXPORT;
     }
 
     @Override
     public <T> boolean blocksOutput(Class<T> cap, @Nullable Direction side) {
-        int mode = coverMode.ordinal();
-        return mode == 1 || mode == 3 || mode == 5;
+        return exportMode == ImportExportMode.IMPORT;
     }
 
     //Useful for using the same model for multiple tiers where id is dependent on tier.
@@ -73,7 +68,7 @@ public class CoverConveyor extends CoverBasicTransport {
         boolean isMachine = handler.getTile() instanceof BlockEntityMachine;
         BlockState state = handler.getTile().getLevel().getBlockState(handler.getTile().getBlockPos().relative(side));
         //Drop into world.
-        if (state == Blocks.AIR.defaultBlockState() && isMachine && coverMode.getName().startsWith("Export")) {
+        if (state == Blocks.AIR.defaultBlockState() && isMachine && exportMode.isExport()) {
             Level world = handler.getTile().getLevel();
             BlockPos pos = handler.getTile().getBlockPos();
             ItemStack stack = TesseractCapUtils.getItemHandler(handler.getTile(), side).map(Utils::extractAny).orElse(ItemStack.EMPTY);
@@ -86,7 +81,7 @@ public class CoverConveyor extends CoverBasicTransport {
             return;
         }
         if (canMove(side)) {
-            if (coverMode.getName().startsWith("Export")) {
+            if (exportMode.isExport()) {
                 if (isMachine) TesseractCapUtils.getItemHandler(handler.getTile(), side).ifPresent(ih -> TesseractCapUtils.getItemHandler(adjTile, side.getOpposite()).ifPresent(other -> Utils.transferItems(ih, other,true)));
             } else {
                 TesseractCapUtils.getItemHandler(handler.getTile(), side).ifPresent(ih -> TesseractCapUtils.getItemHandler(adjTile, side.getOpposite()).ifPresent(other -> Utils.transferItems(other, ih,true)));
@@ -95,26 +90,9 @@ public class CoverConveyor extends CoverBasicTransport {
     }
 
     protected boolean canMove(Direction side){
-        String name = getCoverMode().getName();
-        if (name.contains("Conditional")){
-            boolean powered = AntimatterCapUtils.getCoverHandler(handler.getTile(), side).map(h -> {
-                List<CoverRedstoneMachineController> list = new ArrayList<>();
-                for (Direction dir : Direction.values()){
-                    if (h.get(dir) instanceof CoverRedstoneMachineController){
-                        list.add((CoverRedstoneMachineController) h.get(dir));
-                    }
-                }
-                int i = 0;
-                int j = 0;
-                for (CoverRedstoneMachineController coverStack : list){
-                    j++;
-                    if (coverStack.isPowered()){
-                        i++;
-                    }
-                }
-                return i > 0 && i == j;
-            }).orElse(false);
-            return name.contains("Invert") != powered;
+        if (redstoneMode != RedstoneMode.NO_WORK){
+            boolean powered = isPowered(side);
+            return (redstoneMode == RedstoneMode.INVERTED) != powered;
         }
         return true;
     }

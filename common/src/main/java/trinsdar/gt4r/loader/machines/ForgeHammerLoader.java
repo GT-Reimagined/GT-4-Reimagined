@@ -11,7 +11,7 @@ import muramasa.antimatter.util.TagUtils;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.GT4RRef;
 import muramasa.antimatter.data.ForgeCTags;
 
 import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
@@ -44,7 +44,7 @@ public class ForgeHammerLoader {
             int out = AntimatterConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 2 : 1;
             HAMMERING.RB().ii(INGOT.getMaterialIngredient(m, in)).io(PLATE.get(m, out)).add(m.getId() + "_plate", m.getMass(), 16);
         });
-        AntimatterAPI.all(StoneType.class, Ref.ID, s -> {
+        AntimatterAPI.all(StoneType.class, GT4RRef.ID, s -> {
             if (!(s instanceof CobbleStoneType)) return;
             HAMMERING.RB().ii(RecipeIngredient.of(((CobbleStoneType)s).getBlock(""), 1)).io(new ItemStack(((CobbleStoneType)s).getBlock("cobble"))).add(s.getId() + "_to_cobble",10, 16);
         });

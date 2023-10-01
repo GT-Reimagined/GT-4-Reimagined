@@ -1,6 +1,5 @@
 package trinsdar.gt4r.items;
 
-import muramasa.antimatter.capability.IGuiHandler;
 import muramasa.antimatter.item.ItemCover;
 import muramasa.antimatter.util.AntimatterPlatformUtils;
 import net.minecraft.network.chat.Component;
@@ -15,14 +14,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.GT4RRef;
 import trinsdar.gt4r.data.MenuHandlers;
 
 import javax.annotation.Nullable;
 
 public class ItemCraftingModule extends ItemCover implements MenuProvider {
     public ItemCraftingModule() {
-        super(Ref.ID, "crafting_module");
+        super(GT4RRef.ID, "crafting_module");
     }
 
     @Override

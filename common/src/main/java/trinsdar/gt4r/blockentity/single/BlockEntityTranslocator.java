@@ -9,6 +9,8 @@ import muramasa.antimatter.blockentity.BlockEntityMachine;
 import muramasa.antimatter.capability.item.FakeTrackedItemHandler;
 import muramasa.antimatter.capability.machine.MachineEnergyHandler;
 import muramasa.antimatter.capability.machine.MachineItemHandler;
+import muramasa.antimatter.gui.GuiInstance;
+import muramasa.antimatter.gui.IGuiElement;
 import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.gui.event.GuiEvents;
 import muramasa.antimatter.gui.event.IGuiEvent;
@@ -32,6 +34,7 @@ import tesseract.TesseractCapUtils;
 import tesseract.TesseractGraphWrappers;
 import tesseract.api.item.ExtendedItemContainer;
 import trinsdar.gt4r.data.SlotTypes;
+import trinsdar.gt4r.gui.ButtonOverlays;
 
 import java.util.List;
 
@@ -48,6 +51,13 @@ public abstract class BlockEntityTranslocator<T extends BlockEntityTranslocator<
                 return super.canOutput(direction) && direction == tile.getFacing().getOpposite() && tile.emitEnergy;
             }
         });
+    }
+
+    @Override
+    public void addWidgets(GuiInstance instance, IGuiElement parent) {
+        super.addWidgets(instance, parent);
+        instance.addSwitchButton(8, 63, 16, 16, ButtonOverlays.ENERGY_OFF, ButtonOverlays.ENERGY_ON, h -> ((BlockEntityTranslocator)h).emitEnergy, true);
+        instance.addSwitchButton(26, 63, 16, 16, ButtonOverlays.BLACKLIST_OFF, ButtonOverlays.BLACKLIST_ON, h -> ((BlockEntityTranslocator)h).blacklist, true);
     }
 
     @Override
@@ -188,7 +198,7 @@ public abstract class BlockEntityTranslocator<T extends BlockEntityTranslocator<
             public FluidTranslocatorItemHandler(BlockEntityFluidTranslocator tile) {
                 super(tile);
                 int count = tile.getMachineType().getCount(tile.getMachineTier(), SlotTypes.FLUID_DISPLAY_SETTABLE);
-                inventories.put(SlotTypes.FLUID_DISPLAY_SETTABLE, new FakeTrackedItemHandler<>(tile, count, SlotTypes.FLUID_DISPLAY_SETTABLE.output, SlotTypes.FLUID_DISPLAY_SETTABLE.input, SlotTypes.FLUID_DISPLAY_SETTABLE.tester, SlotTypes.FLUID_DISPLAY_SETTABLE.ev));
+                inventories.put(SlotTypes.FLUID_DISPLAY_SETTABLE, new FakeTrackedItemHandler<>(tile, SlotTypes.FLUID_DISPLAY_SETTABLE, count, SlotTypes.FLUID_DISPLAY_SETTABLE.output, SlotTypes.FLUID_DISPLAY_SETTABLE.input, SlotTypes.FLUID_DISPLAY_SETTABLE.tester, SlotTypes.FLUID_DISPLAY_SETTABLE.ev));
             }
         }
     }

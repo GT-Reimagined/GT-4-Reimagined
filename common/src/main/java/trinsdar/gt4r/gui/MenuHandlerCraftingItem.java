@@ -4,10 +4,8 @@ import muramasa.antimatter.capability.IGuiHandler;
 import muramasa.antimatter.gui.MenuHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
-import trinsdar.gt4r.Ref;
-import trinsdar.gt4r.data.client.ScreenFactories;
+import trinsdar.gt4r.GT4RRef;
 
 public class MenuHandlerCraftingItem extends MenuHandler<GTWorkbenchContainer> {
     public MenuHandlerCraftingItem(String domain, String id) {
@@ -31,6 +29,6 @@ public class MenuHandlerCraftingItem extends MenuHandler<GTWorkbenchContainer> {
 
     @Override
     public String screenDomain() {
-        return Ref.ID;
+        return GT4RRef.ID;
     }
 }

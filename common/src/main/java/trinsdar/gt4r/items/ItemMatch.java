@@ -20,7 +20,7 @@ import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.GT4RRef;
 
 import static trinsdar.gt4r.data.GT4RData.Lighter;
 import static trinsdar.gt4r.data.GT4RData.LighterEmpty;
@@ -97,8 +97,8 @@ public class ItemMatch extends ItemBasic<ItemMatch> {
         String id = this.getId();
         AntimatterItemModelBuilder builder = prov.getBuilder(id +"_lit");
         builder.parent(new ResourceLocation("minecraft:item/generated"));
-        builder.texture("layer0", new Texture(Ref.ID, "item/basic/" + id +"_lit"));
-        prov.tex(item, new ResourceLocation(Ref.ID, "item/basic/" + id)).override().predicate(new ResourceLocation("damaged"), 1).predicate(new ResourceLocation("damage"), 0).model(new ResourceLocation(Ref.ID, "item/" + id +"_lit")).end();
+        builder.texture("layer0", new Texture(GT4RRef.ID, "item/basic/" + id +"_lit"));
+        prov.tex(item, new ResourceLocation(GT4RRef.ID, "item/basic/" + id)).override().predicate(new ResourceLocation("damaged"), 1).predicate(new ResourceLocation("damage"), 0).model(new ResourceLocation(GT4RRef.ID, "item/" + id +"_lit")).end();
     }
 
     @Override

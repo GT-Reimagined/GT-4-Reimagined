@@ -11,7 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
-import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.GT4RRef;
 
 import javax.annotation.Nullable;
 
@@ -24,7 +24,7 @@ public class CoverCrafting extends BaseCover {
 
     @Override
     public String getDomain() {
-        return Ref.ID;
+        return GT4RRef.ID;
     }
 
     @Override

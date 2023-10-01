@@ -1,18 +1,19 @@
 package trinsdar.gt4r;
 
 
+import muramasa.antimatter.Ref;
 import net.minecraft.resources.ResourceLocation;
 
-public class Ref {
+public class GT4RRef {
 
     /** Mod Data **/
     public static final String ID = "gt4r";
     public static final String NAME = "GT 4 Reimagined";
     public static final String VERSION = "0.0.1";
-    public static final String ANTIMATTER = muramasa.antimatter.Ref.ID;
-    public static final String ANTIMATTER_SHARED = muramasa.antimatter.Ref.SHARED_ID;
+    public static final String ANTIMATTER = Ref.ID;
+    public static final String ANTIMATTER_SHARED = Ref.SHARED_ID;
 
-    public static final ResourceLocation SYNC_ID = new ResourceLocation(Ref.ID, "crafting_sync");
+    public static final ResourceLocation SYNC_ID = new ResourceLocation(GT4RRef.ID, "crafting_sync");
 
     /** Mod ids **/
     public static final String MOD_IE = "immersiveengineering";

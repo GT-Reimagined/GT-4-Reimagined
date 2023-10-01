@@ -4,7 +4,7 @@ import muramasa.antimatter.util.TagUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.GT4RRef;
 
 
 public class CustomTags {
@@ -13,11 +13,11 @@ public class CustomTags {
     public static TagKey<Item> PLATES_IRON_ALUMINIUM = getTag("plates/ironaluminium");
     public static TagKey<Item> PLATES_WROUGHT_ALUMINIUM = getTag("plates/wroughtaluminium");
     public static TagKey<Item> PLATES_TITAN_TUNGSTEEL = getTag("plates/titantungsteel");
-    public static TagKey<Item> OVERCLOCKER_UPGRADES = TagUtils.getItemTag(new ResourceLocation(Ref.ID, "overclocker_upgrades"));
-    public static TagKey<Item> TRANSFORMER_UPGRADES = TagUtils.getItemTag(new ResourceLocation(Ref.ID, "transformer_upgrades"));
-    public static TagKey<Item> HV_TRANSFORMER_UPGRADES = TagUtils.getItemTag(new ResourceLocation(Ref.ID, "hv_transformer_upgrades"));
-    public static TagKey<Item> MUFFLER_UPGRADES = TagUtils.getItemTag(new ResourceLocation(Ref.ID, "muffler_upgrades"));
-    public static TagKey<Item> STEAM_UPGRADES = TagUtils.getItemTag(new ResourceLocation(Ref.ID, "steam_upgrades"));
+    public static TagKey<Item> OVERCLOCKER_UPGRADES = TagUtils.getItemTag(new ResourceLocation(GT4RRef.ID, "overclocker_upgrades"));
+    public static TagKey<Item> TRANSFORMER_UPGRADES = TagUtils.getItemTag(new ResourceLocation(GT4RRef.ID, "transformer_upgrades"));
+    public static TagKey<Item> HV_TRANSFORMER_UPGRADES = TagUtils.getItemTag(new ResourceLocation(GT4RRef.ID, "hv_transformer_upgrades"));
+    public static TagKey<Item> MUFFLER_UPGRADES = TagUtils.getItemTag(new ResourceLocation(GT4RRef.ID, "muffler_upgrades"));
+    public static TagKey<Item> STEAM_UPGRADES = TagUtils.getItemTag(new ResourceLocation(GT4RRef.ID, "steam_upgrades"));
     public static TagKey<Item> CIRCUITS_BASIC = getTag("circuits/basic");
     public static TagKey<Item> CIRCUITS_ADVANCED = getTag("circuits/advanced");
     public static TagKey<Item> CIRCUITS_ELITE = getTag("circuits/elite");

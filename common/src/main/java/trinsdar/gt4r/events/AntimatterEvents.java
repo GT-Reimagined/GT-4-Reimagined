@@ -9,8 +9,7 @@ import muramasa.antimatter.event.ProvidersEvent;
 import muramasa.antimatter.event.WorldGenEvent;
 import muramasa.antimatter.recipe.loader.IRecipeRegistrate;
 import muramasa.antimatter.registration.IAntimatterRegistrar;
-import muramasa.antimatter.registration.Side;
-import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.GT4RRef;
 import trinsdar.gt4r.datagen.GT4RBlockLootProvider;
 import trinsdar.gt4r.datagen.GT4RBlockTagProvider;
 import trinsdar.gt4r.datagen.GT4RItemTagProvider;
@@ -75,7 +74,7 @@ public class AntimatterEvents {
     }
 
     public static void registerRecipeLoaders(IAntimatterRegistrar registrar, IRecipeRegistrate reg) {
-        BiConsumer<String, IRecipeRegistrate.IRecipeLoader> loader = (a, b) -> reg.add(Ref.ID, a, b);
+        BiConsumer<String, IRecipeRegistrate.IRecipeLoader> loader = (a, b) -> reg.add(GT4RRef.ID, a, b);
         loader.accept("wiremill", WiremillLoader::init);
         loader.accept("washer", WasherLoader::init);
         loader.accept("blasting", Blasting::init);
@@ -130,7 +129,7 @@ public class AntimatterEvents {
         event.addLoader(ToolCrafting::loadRecipes);
         event.addLoader(VanillaOverrides::loadRecipes);
         event.addLoader(WoodCrafting::loadRecipes);
-        if (AntimatterAPI.isModLoaded(Ref.MOD_IE)){
+        if (AntimatterAPI.isModLoaded(GT4RRef.MOD_IE)){
             event.addLoader(ModCompatRecipes::loadIE);
         }
     }
@@ -138,15 +137,15 @@ public class AntimatterEvents {
     public static void onProviders(ProvidersEvent event){
         //if (event.getSide() == Side.CLIENT) return;
         final AntimatterBlockTagProvider[] p = new AntimatterBlockTagProvider[1];
-        event.addProvider(Ref.ID, () -> {
-            p[0] = new GT4RBlockTagProvider(Ref.ID, Ref.NAME.concat(" Block Tags"), false);
+        event.addProvider(GT4RRef.ID, () -> {
+            p[0] = new GT4RBlockTagProvider(GT4RRef.ID, GT4RRef.NAME.concat(" Block Tags"), false);
             return p[0];
         });
-        event.addProvider(Ref.ID, () -> new GT4RItemTagProvider(Ref.ID, Ref.NAME.concat(" Item Tags"), false, p[0]));
-        event.addProvider(Ref.ID, () -> new AntimatterFluidTagProvider(Ref.ID, Ref.NAME.concat(" Fluid Tags"), false));
+        event.addProvider(GT4RRef.ID, () -> new GT4RItemTagProvider(GT4RRef.ID, GT4RRef.NAME.concat(" Item Tags"), false, p[0]));
+        event.addProvider(GT4RRef.ID, () -> new AntimatterFluidTagProvider(GT4RRef.ID, GT4RRef.NAME.concat(" Fluid Tags"), false));
 
-        event.addProvider(Ref.ID, () -> new AntimatterAdvancementProvider(Ref.ID, Ref.NAME.concat(" Advancements"), new ProgressionAdvancements()));
+        event.addProvider(GT4RRef.ID, () -> new AntimatterAdvancementProvider(GT4RRef.ID, GT4RRef.NAME.concat(" Advancements"), new ProgressionAdvancements()));
 
-        event.addProvider(Ref.ID, () -> new GT4RBlockLootProvider(Ref.ID, Ref.NAME.concat( " Loot generator")));
+        event.addProvider(GT4RRef.ID, () -> new GT4RBlockLootProvider(GT4RRef.ID, GT4RRef.NAME.concat( " Loot generator")));
     }
 }

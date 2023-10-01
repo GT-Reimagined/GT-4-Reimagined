@@ -21,7 +21,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.resources.ResourceLocation;
-import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.GT4RRef;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,11 +56,11 @@ public class MaceratorLoader {
         MACERATING.RB().ii(RecipeIngredient.of(ItemTags.LOGS, 1)).io(DUST.get(Wood, 6)).add("wood_dust",400, 2);
         MACERATING.RB().ii(RecipeIngredient.of(Items.PRISMARINE, 1)).io(DUST.get(Prismarine, 1)).add("prismarine_dust",400, 2);
         MACERATING.RB().ii(RecipeIngredient.of(Items.DARK_PRISMARINE, 1)).io(DUST.get(DarkPrismarine, 1)).add("dark_prismarine_dust",400, 2);
-        if (AntimatterAPI.isModLoaded(Ref.MOD_CREATE)){
-            MACERATING.RB().ii(RecipeIngredient.of(AntimatterPlatformUtils.getBlockFromId(new ResourceLocation(Ref.MOD_CREATE, "limestone")), 1)).io(DUST.get(Limestone, 1)).add("limestone_dust",400, 2);
-            MACERATING.RB().ii(RecipeIngredient.of(AntimatterPlatformUtils.getBlockFromId(new ResourceLocation(Ref.MOD_CREATE, "weathered_limestone")), 1)).io(DUST.get(Limestone, 1)).add("limestone_dust_1",400, 2);
-            MACERATING.RB().ii(RecipeIngredient.of(AntimatterPlatformUtils.getBlockFromId(new ResourceLocation(Ref.MOD_CREATE, "scoria")), 1)).io(DUST.get(Scoria, 1)).add("scoria_dust",400, 2);
-            MACERATING.RB().ii(RecipeIngredient.of(AntimatterPlatformUtils.getBlockFromId(new ResourceLocation(Ref.MOD_CREATE, "dark_scoria")), 1)).io(DUST.get(Scoria, 1)).add("scoria_dust_1",400, 2);
+        if (AntimatterAPI.isModLoaded(GT4RRef.MOD_CREATE)){
+            MACERATING.RB().ii(RecipeIngredient.of(AntimatterPlatformUtils.getBlockFromId(new ResourceLocation(GT4RRef.MOD_CREATE, "limestone")), 1)).io(DUST.get(Limestone, 1)).add("limestone_dust",400, 2);
+            MACERATING.RB().ii(RecipeIngredient.of(AntimatterPlatformUtils.getBlockFromId(new ResourceLocation(GT4RRef.MOD_CREATE, "weathered_limestone")), 1)).io(DUST.get(Limestone, 1)).add("limestone_dust_1",400, 2);
+            MACERATING.RB().ii(RecipeIngredient.of(AntimatterPlatformUtils.getBlockFromId(new ResourceLocation(GT4RRef.MOD_CREATE, "scoria")), 1)).io(DUST.get(Scoria, 1)).add("scoria_dust",400, 2);
+            MACERATING.RB().ii(RecipeIngredient.of(AntimatterPlatformUtils.getBlockFromId(new ResourceLocation(GT4RRef.MOD_CREATE, "dark_scoria")), 1)).io(DUST.get(Scoria, 1)).add("scoria_dust_1",400, 2);
         }
         MACERATING.RB().ii(RecipeIngredient.of(Items.NETHER_QUARTZ_ORE, 1)).io(new ItemStack(Items.QUARTZ, 2)).add("nether_quartz_ore",200, 2);
         if (AntimatterAPI.isModLoaded("cinderscapes")){

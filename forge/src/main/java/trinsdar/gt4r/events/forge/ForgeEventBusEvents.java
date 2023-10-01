@@ -10,10 +10,10 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import trinsdar.gt4r.Ref;
+import trinsdar.gt4r.GT4RRef;
 import trinsdar.gt4r.events.CommonEvents;
 
-@Mod.EventBusSubscriber(modid = Ref.ID)
+@Mod.EventBusSubscriber(modid = GT4RRef.ID)
 public class ForgeEventBusEvents {
 
     @SubscribeEvent
@@ -33,7 +33,7 @@ public class ForgeEventBusEvents {
 
     @SubscribeEvent
     public static void remapMissingBlocks(final RegistryEvent.MissingMappings<Block> event) {
-        for (RegistryEvent.MissingMappings.Mapping<Block> map : event.getMappings(Ref.ID)) {
+        for (RegistryEvent.MissingMappings.Mapping<Block> map : event.getMappings(GT4RRef.ID)) {
             String id = map.key.getPath();
             if (id.equals("rubber_log")){
                 map.remap(GTRubberData.RUBBER_LOG);
@@ -49,7 +49,7 @@ public class ForgeEventBusEvents {
 
     @SubscribeEvent
     public static void remapMissingItems(final RegistryEvent.MissingMappings<Item> event) {
-        for (RegistryEvent.MissingMappings.Mapping<Item> map : event.getMappings(Ref.ID)) {
+        for (RegistryEvent.MissingMappings.Mapping<Item> map : event.getMappings(GT4RRef.ID)) {
             String id = map.key.getPath();
             if (id.equals("rubber_log")){
                 map.remap(GTRubberData.RUBBER_LOG.asItem());
