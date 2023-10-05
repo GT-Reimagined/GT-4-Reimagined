@@ -40,6 +40,14 @@ public abstract class CoverBasicTransport extends CoverBasicRedstone implements 
         return GT4RRef.ID;
     }
 
+
+    protected boolean canMove(Direction side){
+        if (redstoneMode != RedstoneMode.NO_WORK){
+            boolean powered = isPowered(side);
+            return (redstoneMode == RedstoneMode.INVERTED) != powered;
+        }
+        return true;
+    }
     @Override
     public void onPlace() {
         super.onPlace();

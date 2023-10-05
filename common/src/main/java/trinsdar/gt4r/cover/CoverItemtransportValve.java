@@ -37,11 +37,11 @@ public class CoverItemtransportValve extends CoverBasicTransport{
     }
 
 
-    /*@Override
-    public void onUpdate(CoverStack<?> instance, Direction side) {
-        GT4RData.COVER_PUMP.onUpdate(instance, side);
-        GT4RData.COVER_CONVEYOR.onUpdate(instance, side);
-    }*/
+    @Override
+    public void onUpdate() {
+        CoverConveyor.onConveyorUpdate(this, side);
+        CoverPump.onPumpUpdate(this, side);
+    }
 
     @Override
     public boolean hasGui() {

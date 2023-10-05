@@ -50,33 +50,31 @@ public class CoverPump extends CoverBasicTransport {
 
     @Override
     public void onUpdate() {
+        onPumpUpdate(this, side);
+    }
+
+    static void onPumpUpdate(CoverBasicTransport cover, Direction side){
         //Pump acts on each tick.
-        if (handler.getTile().getLevel().isClientSide) return;
-        if (handler.getTile() == null) return;
-        BlockEntity adjTile = handler.getTile().getLevel().getBlockEntity(handler.getTile().getBlockPos().relative(side));
+        if (cover.source().getTile().getLevel().isClientSide) return;
+        if (cover.source().getTile() == null) return;
+        BlockEntity adjTile = cover.source().getTile().getLevel().getBlockEntity(cover.source().getTile().getBlockPos().relative(side));
         if (adjTile == null) return;
-        BlockPos from = handler.getTile().getBlockPos();
-        BlockPos to = handler.getTile().getBlockPos().relative(side);
+        BlockPos from = cover.source().getTile().getBlockPos();
+        BlockPos to = cover.source().getTile().getBlockPos().relative(side);
         Direction fromSide = side;
-        if (!exportMode.isExport()){
-            from = handler.getTile().getBlockPos().relative(side);
-            to = handler.getTile().getBlockPos();
+        if (!cover.exportMode.isExport()){
+            from = cover.source().getTile().getBlockPos().relative(side);
+            to = cover.source().getTile().getBlockPos();
             fromSide = side.getOpposite();
         }
         BlockPos finalTo = to;
-        if (canMove(side)) {
+        if (cover.canMove(side)) {
             Direction finalFromSide = fromSide;
-            TesseractCapUtils.getFluidHandler(handler.getTile().getLevel(), from, fromSide).ifPresent(ih -> TesseractCapUtils.getFluidHandler(handler.getTile().getLevel(), finalTo, finalFromSide.getOpposite()).ifPresent(other -> Utils.transferFluids(ih, other, Integer.MAX_VALUE)));
+            TesseractCapUtils.getFluidHandler(cover.source().getTile().getLevel(), from, fromSide).ifPresent(ih -> TesseractCapUtils.getFluidHandler(cover.source().getTile().getLevel(), finalTo, finalFromSide.getOpposite()).ifPresent(other -> Utils.transferFluids(ih, other, Integer.MAX_VALUE)));
         }
     }
 
-    protected boolean canMove(Direction side){
-        if (redstoneMode != RedstoneMode.NO_WORK){
-            boolean powered = isPowered(side);
-            return (redstoneMode == RedstoneMode.INVERTED) != powered;
-        }
-        return true;
-    }
+
 
     @Override
     protected String getRenderId() {

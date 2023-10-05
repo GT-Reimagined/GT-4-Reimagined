@@ -61,39 +61,35 @@ public class CoverConveyor extends CoverBasicTransport {
 
     @Override
     public void onUpdate() {
-        if (handler.getTile().getLevel().isClientSide) return;
-        if (handler.getTile() == null)
+        onConveyorUpdate(this, side);
+    }
+
+    static void onConveyorUpdate(CoverBasicTransport cover, Direction side){
+        if (cover.source().getTile().getLevel().isClientSide) return;
+        if (cover.source().getTile() == null)
             return;
-        boolean isMachine = handler.getTile() instanceof BlockEntityMachine;
-        BlockState state = handler.getTile().getLevel().getBlockState(handler.getTile().getBlockPos().relative(side));
+        boolean isMachine = cover.source().getTile() instanceof BlockEntityMachine;
+        BlockState state = cover.source().getTile().getLevel().getBlockState(cover.source().getTile().getBlockPos().relative(side));
         //Drop into world.
-        if (state == Blocks.AIR.defaultBlockState() && isMachine && exportMode.isExport()) {
-            Level world = handler.getTile().getLevel();
-            BlockPos pos = handler.getTile().getBlockPos();
-            ItemStack stack = TesseractCapUtils.getItemHandler(handler.getTile(), side).map(Utils::extractAny).orElse(ItemStack.EMPTY);
+        if (state == Blocks.AIR.defaultBlockState() && isMachine && cover.exportMode.isExport()) {
+            Level world = cover.source().getTile().getLevel();
+            BlockPos pos = cover.source().getTile().getBlockPos();
+            ItemStack stack = TesseractCapUtils.getItemHandler(cover.source().getTile(), side).map(Utils::extractAny).orElse(ItemStack.EMPTY);
             if (stack.isEmpty()) return;
             world.addFreshEntity(new ItemEntity(world,pos.getX()+side.getStepX(), pos.getY()+side.getStepY(), pos.getZ()+side.getStepZ(),stack));
         }
         if (!(state.getBlock() instanceof EntityBlock)) return;
-        BlockEntity adjTile = handler.getTile().getLevel().getBlockEntity(handler.getTile().getBlockPos().relative(side));
+        BlockEntity adjTile = cover.source().getTile().getLevel().getBlockEntity(cover.source().getTile().getBlockPos().relative(side));
         if (adjTile == null) {
             return;
         }
-        if (canMove(side)) {
-            if (exportMode.isExport()) {
-                if (isMachine) TesseractCapUtils.getItemHandler(handler.getTile(), side).ifPresent(ih -> TesseractCapUtils.getItemHandler(adjTile, side.getOpposite()).ifPresent(other -> Utils.transferItems(ih, other,true)));
+        if (cover.canMove(side)) {
+            if (cover.exportMode.isExport()) {
+                if (isMachine) TesseractCapUtils.getItemHandler(cover.source().getTile(), side).ifPresent(ih -> TesseractCapUtils.getItemHandler(adjTile, side.getOpposite()).ifPresent(other -> Utils.transferItems(ih, other,true)));
             } else {
-                TesseractCapUtils.getItemHandler(handler.getTile(), side).ifPresent(ih -> TesseractCapUtils.getItemHandler(adjTile, side.getOpposite()).ifPresent(other -> Utils.transferItems(other, ih,true)));
+                TesseractCapUtils.getItemHandler(cover.source().getTile(), side).ifPresent(ih -> TesseractCapUtils.getItemHandler(adjTile, side.getOpposite()).ifPresent(other -> Utils.transferItems(other, ih,true)));
             }
         }
-    }
-
-    protected boolean canMove(Direction side){
-        if (redstoneMode != RedstoneMode.NO_WORK){
-            boolean powered = isPowered(side);
-            return (redstoneMode == RedstoneMode.INVERTED) != powered;
-        }
-        return true;
     }
 
     @Override
