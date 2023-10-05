@@ -10,6 +10,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import trinsdar.gt4r.GT4RRef;
 
@@ -48,8 +49,8 @@ public class CoverCrafting extends BaseCover {
     }
 
     @Override
-    public boolean onInteract(Player player, InteractionHand hand, Direction side, @Nullable AntimatterToolType type) {
-        return openGui(player, side);
+    public InteractionResult onInteract(Player player, InteractionHand hand, Direction side, @Nullable AntimatterToolType type) {
+        return openGui(player, side) ? InteractionResult.SUCCESS : InteractionResult.PASS;
     }
 
     @Override

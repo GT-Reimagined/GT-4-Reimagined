@@ -1,10 +1,10 @@
 package trinsdar.gt4r.gui;
 
 import muramasa.antimatter.capability.ICoverHandler;
+import muramasa.antimatter.capability.ICoverHandlerProvider;
 import muramasa.antimatter.capability.IGuiHandler;
 import muramasa.antimatter.cover.ICover;
 import muramasa.antimatter.gui.MenuHandler;
-import muramasa.antimatter.util.AntimatterCapUtils;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
@@ -23,9 +23,9 @@ public class MenuHandlerCrafting extends MenuHandler<GTWorkbenchContainer> {
     @Override
     public GTWorkbenchContainer onContainerCreate(int windowId, Inventory inv, FriendlyByteBuf data) {
         BlockEntity tile = Utils.getTileFromBuf(data);
-        if (tile != null) {
+        if (tile instanceof ICoverHandlerProvider<?> provider) {
             Direction dir = Direction.from3DDataValue(data.readInt());
-            Optional<ICoverHandler<?>> coverHandler = AntimatterCapUtils.getCoverHandler(tile, dir);
+            var coverHandler = provider.getCoverHandler();
             return getMenu(coverHandler.map(ch -> ch.get(dir)).orElse(null), inv, windowId);
         }
         return null;
