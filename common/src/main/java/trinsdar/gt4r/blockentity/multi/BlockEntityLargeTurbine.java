@@ -1,7 +1,7 @@
 package trinsdar.gt4r.blockentity.multi;
 
 import muramasa.antimatter.capability.machine.MachineRecipeHandler;
-import muramasa.antimatter.machine.event.ContentEvent;
+import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.machine.event.IMachineEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.recipe.IRecipe;
@@ -145,7 +145,7 @@ public class BlockEntityLargeTurbine extends BlockEntityMultiMachine<BlockEntity
                 @Override
                 public void onMachineEvent(IMachineEvent event, Object... data) {
                     super.onMachineEvent(event, data);
-                    if (event == ContentEvent.ITEM_INPUT_CHANGED) efficiency = getEfficiency();
+                    if (event == SlotType.IT_IN) efficiency = getEfficiency();
                 }
 
                 @Override

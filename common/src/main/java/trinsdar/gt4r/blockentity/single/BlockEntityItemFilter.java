@@ -7,7 +7,6 @@ import muramasa.antimatter.gui.IGuiElement;
 import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.gui.event.GuiEvents;
 import muramasa.antimatter.gui.event.IGuiEvent;
-import muramasa.antimatter.machine.event.ContentEvent;
 import muramasa.antimatter.machine.event.IMachineEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.blockentity.BlockEntityMachine;
@@ -127,7 +126,7 @@ public class BlockEntityItemFilter extends BlockEntityMachine<BlockEntityItemFil
     @Override
     public void onMachineEvent(IMachineEvent event, Object... data) {
         super.onMachineEvent(event, data);
-        if (event == ContentEvent.ITEM_OUTPUT_CHANGED && outputRedstone){
+        if (event == SlotType.IT_OUT && outputRedstone){
             AntimatterPlatformUtils.markAndNotifyBlock(this.level, this.getBlockPos(), this.level.getChunkAt(this.getBlockPos()), this.getBlockState(), this.getBlockState(), 1, 512);
         }
     }

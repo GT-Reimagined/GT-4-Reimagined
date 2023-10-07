@@ -198,7 +198,7 @@ public abstract class BlockEntityTranslocator<T extends BlockEntityTranslocator<
             public FluidTranslocatorItemHandler(BlockEntityFluidTranslocator tile) {
                 super(tile);
                 int count = tile.getMachineType().getCount(tile.getMachineTier(), SlotTypes.FLUID_DISPLAY_SETTABLE);
-                inventories.put(SlotTypes.FLUID_DISPLAY_SETTABLE, new FakeTrackedItemHandler<>(tile, SlotTypes.FLUID_DISPLAY_SETTABLE, count, SlotTypes.FLUID_DISPLAY_SETTABLE.output, SlotTypes.FLUID_DISPLAY_SETTABLE.input, SlotTypes.FLUID_DISPLAY_SETTABLE.tester, SlotTypes.FLUID_DISPLAY_SETTABLE.ev));
+                inventories.put(SlotTypes.FLUID_DISPLAY_SETTABLE, new FakeTrackedItemHandler<>(tile, SlotTypes.FLUID_DISPLAY_SETTABLE, count, SlotTypes.FLUID_DISPLAY_SETTABLE.output, SlotTypes.FLUID_DISPLAY_SETTABLE.input, SlotTypes.FLUID_DISPLAY_SETTABLE.tester));
             }
         }
     }

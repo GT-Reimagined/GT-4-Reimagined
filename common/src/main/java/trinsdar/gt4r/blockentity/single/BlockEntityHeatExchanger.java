@@ -9,7 +9,7 @@ import muramasa.antimatter.capability.fluid.FluidHandlerSidedWrapper;
 import muramasa.antimatter.capability.fluid.FluidTanks;
 import muramasa.antimatter.capability.machine.MachineFluidHandler;
 import muramasa.antimatter.capability.machine.MachineRecipeHandler;
-import muramasa.antimatter.machine.event.ContentEvent;
+import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.machine.event.MachineEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.blockentity.BlockEntityMachine;
@@ -127,7 +127,7 @@ public class BlockEntityHeatExchanger extends BlockEntityMachine<BlockEntityHeat
 
         public HeatExchangerFluidHandler(BlockEntityHeatExchanger tile, int capacity, int pressure) {
             super(tile, capacity, pressure);
-            tanks.put(FluidDirection.INPUT, FluidTanks.create(tile, ContentEvent.FLUID_INPUT_CHANGED, b -> {
+            tanks.put(FluidDirection.INPUT, FluidTanks.create(tile, SlotType.FL_IN, b -> {
                 for (int i = 0; i < 2; i++) {
                     Predicate<FluidHolder> validator = f -> {
                         boolean check = f.getFluid() != Fluids.WATER && f.getFluid() != DistilledWater.getLiquid();
@@ -144,7 +144,7 @@ public class BlockEntityHeatExchanger extends BlockEntityMachine<BlockEntityHeat
                 }
                 return b;
             }));
-            tanks.put(FluidDirection.OUTPUT, FluidTanks.create(tile, ContentEvent.FLUID_OUTPUT_CHANGED, b -> {
+            tanks.put(FluidDirection.OUTPUT, FluidTanks.create(tile, SlotType.FL_OUT, b -> {
                 for (int i = 0; i < 2; i++) {
                     b.tank(capacity);
                 }

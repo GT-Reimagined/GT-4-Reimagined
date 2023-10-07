@@ -6,7 +6,6 @@ import muramasa.antimatter.capability.IGuiHandler;
 import muramasa.antimatter.capability.item.TrackedItemHandler;
 import muramasa.antimatter.capability.machine.MachineItemHandler;
 import muramasa.antimatter.gui.SlotType;
-import muramasa.antimatter.machine.event.ContentEvent;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -23,13 +22,13 @@ public class QuantumChestItemHandler extends MachineItemHandler<BlockEntityQuant
     public QuantumChestItemHandler(BlockEntityQuantumChest tile) {
         super(tile);
         int count = tile.getMachineType().getCount(tile.getMachineTier(), SlotTypes.QUANTUM);
-        inventories.put(SlotTypes.QUANTUM, new QuantumSlotTrackedHandler(tile, SlotTypes.QUANTUM, count, SlotTypes.QUANTUM.output, SlotTypes.QUANTUM.input, SlotTypes.QUANTUM.tester, SlotTypes.QUANTUM.ev, Integer.MAX_VALUE));
+        inventories.put(SlotTypes.QUANTUM, new QuantumSlotTrackedHandler(tile, SlotTypes.QUANTUM, count, SlotTypes.QUANTUM.output, SlotTypes.QUANTUM.input, SlotTypes.QUANTUM.tester, Integer.MAX_VALUE));
     }
 
     public static class QuantumSlotTrackedHandler extends TrackedItemHandler<BlockEntityQuantumChest> {
 
-        public QuantumSlotTrackedHandler(BlockEntityQuantumChest tile, SlotType<?> type, int size, boolean output, boolean input, BiPredicate<IGuiHandler, ItemStack> validator, ContentEvent contentEvent, int limit) {
-            super(tile, type, size, output, input, validator, contentEvent, limit);
+        public QuantumSlotTrackedHandler(BlockEntityQuantumChest tile, SlotType<?> type, int size, boolean output, boolean input, BiPredicate<IGuiHandler, ItemStack> validator, int limit) {
+            super(tile, type, size, output, input, validator, limit);
         }
 
         @Override
