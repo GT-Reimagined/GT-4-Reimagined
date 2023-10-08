@@ -19,7 +19,6 @@ public class SlotTypes {
         }
         return true;
     }, true, true);
-    public static SlotType<SlotFake> FLUID_DISPLAY_SETTABLE = new SlotType<>("fluid_display_settable", (type, gui, item, i, d) -> new SlotFluidDisplaySettable(type, gui, item.getOrDefault(type, new EmptyContainer()), i, d.getX(), d.getY()), (t, i) -> false, true, false);
     public static SlotType<AbstractSlot<?>> ROTOR = new SlotType<>("rotor", ((type, gui, item, i, d) -> new AbstractSlot<>(type, gui, item.getOrDefault(type, new EmptyContainer()), i, d.getX(), d.getY())), (t, i) -> i.getItem() instanceof ItemTurbineRotor);
     public static SlotType<AbstractSlot<?>> FILTER = new SlotType<>("filter", (type, gui, item, i, d) -> new AbstractSlot<>(type, gui, item.getOrDefault(type, new EmptyContainer()), i, d.getX(), d.getY()), (t, i) -> i.getItem() == GT4RData.LavaFilter);
     public static SlotType<SlotData> DATA = new SlotType<>("data", (type, gui, item, i, d) -> new SlotData(type, gui, item.getOrDefault(type, new EmptyContainer()), i, d.getX(), d.getY()), (t, i) -> i.getItem() == GT4RData.CircuitDataOrb || i.getItem() == GT4RData.StorageDataOrb);

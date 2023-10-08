@@ -152,7 +152,6 @@ public abstract class BlockEntityTranslocator<T extends BlockEntityTranslocator<
     public static class BlockEntityFluidTranslocator extends BlockEntityTranslocator<BlockEntityFluidTranslocator> {
         public BlockEntityFluidTranslocator(Machine<?> type, BlockPos pos, BlockState state) {
             super(type, pos, state, FluidContainer.class);
-            this.itemHandler.set(() -> new FluidTranslocatorItemHandler(this));
         }
 
         protected boolean processOutput() {
@@ -181,7 +180,7 @@ public abstract class BlockEntityTranslocator<T extends BlockEntityTranslocator<
         public boolean accepts(FluidHolder stack){
             boolean hasItem = itemHandler.map(h -> {
                 List<Item> list = new ObjectArrayList<>();;
-                ExtendedItemContainer outputs = h.getHandler(SlotTypes.FLUID_DISPLAY_SETTABLE);
+                ExtendedItemContainer outputs = h.getHandler(SlotType.FLUID_DISPLAY_SETTABLE);
                 for (int i = 0; i < outputs.getSlots(); i++) {
                     ItemStack slot = outputs.getStackInSlot(i);
                     if (!slot.isEmpty()) {
@@ -193,13 +192,6 @@ public abstract class BlockEntityTranslocator<T extends BlockEntityTranslocator<
                 return list.isEmpty() == blacklist;
             }).orElse(false);
             return hasItem;
-        }
-        public static class FluidTranslocatorItemHandler extends MachineItemHandler<BlockEntityFluidTranslocator> {
-            public FluidTranslocatorItemHandler(BlockEntityFluidTranslocator tile) {
-                super(tile);
-                int count = tile.getMachineType().getCount(tile.getMachineTier(), SlotTypes.FLUID_DISPLAY_SETTABLE);
-                inventories.put(SlotTypes.FLUID_DISPLAY_SETTABLE, new FakeTrackedItemHandler<>(tile, SlotTypes.FLUID_DISPLAY_SETTABLE, count, SlotTypes.FLUID_DISPLAY_SETTABLE.output, SlotTypes.FLUID_DISPLAY_SETTABLE.input, SlotTypes.FLUID_DISPLAY_SETTABLE.tester));
-            }
         }
     }
 }
