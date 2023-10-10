@@ -1,5 +1,6 @@
 package trinsdar.gt4r.blockentity.multi;
 
+import muramasa.antimatter.capability.IFilterableHandler;
 import muramasa.antimatter.capability.machine.MachineRecipeHandler;
 import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.machine.event.IMachineEvent;
@@ -25,7 +26,7 @@ import trinsdar.gt4r.data.SlotTypes;
 import trinsdar.gt4r.items.ItemTurbineRotor;
 
 
-public class BlockEntityLargeTurbine extends BlockEntityMultiMachine<BlockEntityLargeTurbine> {
+public class BlockEntityLargeTurbine extends BlockEntityMultiMachine<BlockEntityLargeTurbine> implements IFilterableHandler {
 
     public BlockEntityLargeTurbine(Machine<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -46,28 +47,6 @@ public class BlockEntityLargeTurbine extends BlockEntityMultiMachine<BlockEntity
                 public boolean canOutput() {
                     return true;
                 }
-
-                /*@Override
-                public IRecipe findRecipe() {
-                    IRecipe r = super.findRecipe();
-                    if (r == null) return null;
-                    sourceRecipe = r;
-                    //Source recipe contains fluid amounts, map to turbine
-                    List<FluidIngredient> stacks = r.getInputFluids();
-                    if (stacks.size() == 0) return null;
-                    //ItemStack t = tile.itemHandler.map(tt -> tt.getSpecial()).orElse(ItemStack.EMPTY);
-                    //if (!(t.getItem() instanceof ItemTurbine)) return null;
-                   // ItemTurbine turbine = (ItemTurbine) t.getItem();
-                    long flow = sourceRecipe.getPower();//turbine.optimalEUT;
-                    efficiency = getEfficiency();//turbine.efficency;
-                    if (efficiency <= 0.0F) return null;
-                    long toConsume = calculateGeneratorConsumption((int) flow, sourceRecipe);
-
-                    return Utils.getFluidPoweredRecipe(Collections.singletonList(stacks.get(0).copy((int)toConsume)),
-                            r.getOutputFluids(),
-                           // new FluidStack[]{new FluidStack(DistilledWater.getLiquid(), stacks[0].getAmount())},// Arrays.stream(sourceRecipe.getOutputFluids()).map(tt -> new FluidStack(tt.getFluid(), (int) (tt.getAmount()*toConsume))).toArray(FluidStack[]::new),
-                            1, flow,1);
-                }*/
                 @Override
                 public boolean consumeInputs() {
                     return false;
@@ -108,10 +87,10 @@ public class BlockEntityLargeTurbine extends BlockEntityMultiMachine<BlockEntity
                             } else {
                                 ticker = 0;
                                 tile.itemHandler.ifPresent(h -> {
-                                    ItemStack copy = h.getHandler(SlotTypes.ROTOR).getStackInSlot(0).copy();
-                                    if (h.getHandler(SlotTypes.ROTOR).getStackInSlot(0).hurt(1, tile.level.random, null)){
+                                    ItemStack copy = h.getHandler(SlotType.STORAGE).getStackInSlot(0).copy();
+                                    if (h.getHandler(SlotType.STORAGE).getStackInSlot(0).hurt(1, tile.level.random, null)){
                                         if (copy.getItem() instanceof ItemTurbineRotor){
-                                            h.getHandler(SlotTypes.ROTOR).setStackInSlot(0, GT4RMaterialTags.BROKEN_TURBINE_ROTOR.get(((ItemTurbineRotor)copy.getItem()).getMaterial(), 1));
+                                            h.getHandler(SlotType.STORAGE).setStackInSlot(0, GT4RMaterialTags.BROKEN_TURBINE_ROTOR.get(((ItemTurbineRotor)copy.getItem()).getMaterial(), 1));
                                         }
                                         for (Player player : level.getNearbyPlayers(TargetingConditions.DEFAULT.range(5.0D), null, new AABB(new int3(tile.getBlockPos(), tile.getFacing()).left(2).back(5), new int3(tile.getBlockPos(), tile.getFacing()).right(2)))){
                                             if (EntitySelector.NO_SPECTATORS.test(player) && !player.isCreative()) {
@@ -134,18 +113,18 @@ public class BlockEntityLargeTurbine extends BlockEntityMultiMachine<BlockEntity
                     return false;
                 }
 
-                /*public float getEfficiency(){
-                    ItemStack stack = tile.itemHandler.map(i -> i.getHandler(SlotTypes.ROTOR).getStackInSlot(0)).orElse(ItemStack.EMPTY);
+                public float getRotorEfficiency(){
+                    ItemStack stack = tile.itemHandler.map(i -> i.getHandler(SlotType.STORAGE).getStackInSlot(0)).orElse(ItemStack.EMPTY);
                     if (!stack.isEmpty() && stack.getItem() instanceof ItemTurbineRotor){
                         return ((ItemTurbineRotor)stack.getItem()).getRotorEfficiency();
                     }
                     return 0.0F;
-                }*/
+                }
 
                 @Override
                 public void onMachineEvent(IMachineEvent event, Object... data) {
                     super.onMachineEvent(event, data);
-                    if (event == SlotType.IT_IN) efficiency = getEfficiency();
+                    if (event == SlotType.STORAGE) efficiency = getRotorEfficiency();
                 }
 
                 @Override
@@ -171,5 +150,13 @@ public class BlockEntityLargeTurbine extends BlockEntityMultiMachine<BlockEntity
             return GT4RData.REINFORCED_MACHINE_CASING;
         }
         return GT4RData.STANDARD_MACHINE_CASING;
+    }
+
+    @Override
+    public boolean test(SlotType<?> slotType, int slot, ItemStack stack) {
+        if (slotType == SlotType.STORAGE){
+            return stack.getItem() instanceof ItemTurbineRotor;
+        }
+        return true;
     }
 }

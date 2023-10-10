@@ -268,7 +268,7 @@ public class Guis {
         INDUSTRIAL_GRINDER.add(BATH);
         LARGE_GAS_TURBINE.add(STORAGE, 152, 5);
         LARGE_STEAM_TURBINE.add(LARGE_GAS_TURBINE);
-        THERMAL_BOILER.add(FILTER, 152, 5);
+        THERMAL_BOILER.add(STORAGE, 152, 5);
 
         QUANTUM_CHEST.add(QUANTUM, 80, 35);
 

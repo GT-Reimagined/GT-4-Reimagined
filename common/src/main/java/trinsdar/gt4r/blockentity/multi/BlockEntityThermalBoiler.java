@@ -1,7 +1,9 @@
 package trinsdar.gt4r.blockentity.multi;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import muramasa.antimatter.capability.IFilterableHandler;
 import muramasa.antimatter.capability.machine.MachineRecipeHandler;
+import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.machine.event.MachineEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.recipe.IRecipe;
@@ -10,12 +12,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
+import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.data.SlotTypes;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class BlockEntityThermalBoiler extends BlockEntityMultiMachine<BlockEntityThermalBoiler> {
+public class BlockEntityThermalBoiler extends BlockEntityMultiMachine<BlockEntityThermalBoiler> implements IFilterableHandler {
     public BlockEntityThermalBoiler(Machine<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
         this.recipeHandler.set(() -> new MachineRecipeHandler<BlockEntityThermalBoiler>(this){
@@ -24,7 +27,7 @@ public class BlockEntityThermalBoiler extends BlockEntityMultiMachine<BlockEntit
 
             @Override
             protected void addOutputs() {
-                if (itemHandler.map(h -> !h.getHandler(SlotTypes.FILTER).getStackInSlot(0).isEmpty()).orElse(false)){
+                if (itemHandler.map(h -> !h.getHandler(SlotType.STORAGE).getStackInSlot(0).isEmpty()).orElse(false)){
                     if (activeRecipe.hasOutputItems()) {
                         tile.itemHandler.ifPresent(h -> {
                             //Roll the chances here. If they don't fit add flat (no chances).
@@ -35,8 +38,8 @@ public class BlockEntityThermalBoiler extends BlockEntityMultiMachine<BlockEntit
                                 if (ticker < 80){
                                     ticker++;
                                 } else {
-                                    if (!h.getHandler(SlotTypes.FILTER).getStackInSlot(0).hurt(1, tile.getLevel().random, null)){
-                                        h.getHandler(SlotTypes.FILTER).getStackInSlot(0).shrink(1);
+                                    if (!h.getHandler(SlotType.STORAGE).getStackInSlot(0).hurt(1, tile.getLevel().random, null)){
+                                        h.getHandler(SlotType.STORAGE).getStackInSlot(0).shrink(1);
                                     }
                                     ticker = 0;
                                 }
@@ -100,5 +103,10 @@ public class BlockEntityThermalBoiler extends BlockEntityMultiMachine<BlockEntit
                 return !tile.fluidHandler.isPresent() || !activeRecipe.hasOutputFluids() || tile.fluidHandler.map(t -> t.canOutputsFit(activeRecipe.getOutputFluids())).orElse(false);
             }
         });
+    }
+
+    @Override
+    public boolean test(SlotType<?> slotType, int slot, ItemStack stack) {
+        return slotType != SlotType.STORAGE || stack.getItem() == GT4RData.LavaFilter;
     }
 }
