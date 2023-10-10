@@ -26,6 +26,7 @@ import muramasa.antimatter.registration.Side;
 import muramasa.antimatter.texture.Texture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
@@ -159,7 +160,7 @@ public class GT4RData {
     private static FluidProperties.Builder prepareAttributes() {
         FluidProperties.Builder builder = FluidProperties.create();
         return builder.still(PAHOEHOE_STILL_TEXTURE).flowing(PAHOEHOE_STILL_TEXTURE).overlay(OVERLAY_TEXTURE)
-                .viscosity(3000).density(6000).temperature(1200);
+                .viscosity(3000).density(6000).temperature(1200).sounds("bucket_fill", SoundEvents.BUCKET_FILL).sounds("bucket_empty", SoundEvents.BUCKET_EMPTY);
     }
 
     private static Block.Properties prepareProperties() {
