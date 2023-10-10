@@ -5,6 +5,7 @@ import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.gui.BarDir;
 import muramasa.antimatter.gui.ButtonOverlay;
 import muramasa.antimatter.gui.GuiData;
+import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.gui.slot.ISlotProvider;
 import muramasa.antimatter.gui.widget.BackgroundWidget;
 import muramasa.antimatter.gui.widget.ProgressWidget;
@@ -140,7 +141,7 @@ public class Guis {
                     WROUGHT_IRON_CHEST.add(STORAGE, 12 + j * 18, 18 + (i * 18));
                     BRASS_CHEST.add(STORAGE, 12 + j * 18, 18 + (i * 18));
                     CUPRONICKEL_CHEST.add(STORAGE, 12 + j * 18, 18 + (i * 18));
-                    DIGITAL_CHEST.add(FILTERABLE, 8 + j * 18, 8 + (i * 18));
+                    DIGITAL_CHEST.add(STORAGE, 8 + j * 18, 8 + (i * 18));
                 }
                 if (i < 7){
                     ELECTRUM_CABINET.add(STORAGE, 12 + j * 18, 18 + (i * 18));
@@ -265,7 +266,7 @@ public class Guis {
         IMPLOSION_COMPRESSOR.add(ALLOY_SMELTER).add(IT_OUT, 125, 25);
         INDUSTRIAL_SAWMILL.add(ORE_WASHER);
         INDUSTRIAL_GRINDER.add(BATH);
-        LARGE_GAS_TURBINE.add(ROTOR, 152, 5);
+        LARGE_GAS_TURBINE.add(STORAGE, 152, 5);
         LARGE_STEAM_TURBINE.add(LARGE_GAS_TURBINE);
         THERMAL_BOILER.add(FILTER, 152, 5);
 
@@ -289,21 +290,21 @@ public class Guis {
                 .add(DISPLAY_SETTABLE, 18, 6, new ResourceLocation(GT4RRef.ID, "blank")).add(DISPLAY_SETTABLE, 35, 6, new ResourceLocation(GT4RRef.ID, "blank")).add(DISPLAY_SETTABLE, 52, 6, new ResourceLocation(GT4RRef.ID, "blank"))
                 .add(DISPLAY_SETTABLE, 18, 23, new ResourceLocation(GT4RRef.ID, "blank")).add(DISPLAY_SETTABLE, 35, 23, new ResourceLocation(GT4RRef.ID, "blank")).add(DISPLAY_SETTABLE, 52, 23, new ResourceLocation(GT4RRef.ID, "blank"))
                 .add(DISPLAY_SETTABLE, 18, 40, new ResourceLocation(GT4RRef.ID, "blank")).add(DISPLAY_SETTABLE, 35, 40, new ResourceLocation(GT4RRef.ID, "blank")).add(DISPLAY_SETTABLE, 52, 40, new ResourceLocation(GT4RRef.ID, "blank"))
-                .add(SlotTypes.FILTERABLE, 98, 5).add(SlotTypes.FILTERABLE, 98 + 18, 5)
-                .add(SlotTypes.FILTERABLE, 98 + 18 * 2, 5)
-                .add(SlotTypes.FILTERABLE, 98, 23).add(SlotTypes.FILTERABLE, 98 + 18, 23)
-                .add(SlotTypes.FILTERABLE, 98 + 18 * 2, 23)
-                .add(SlotTypes.FILTERABLE, 98, 41).add(SlotTypes.FILTERABLE, 98 + 18, 41)
-                .add(SlotTypes.FILTERABLE, 98 + 18 * 2, 41);
+                .add(STORAGE, 98, 5).add(STORAGE, 98 + 18, 5)
+                .add(STORAGE, 98 + 18 * 2, 5)
+                .add(STORAGE, 98, 23).add(STORAGE, 98 + 18, 23)
+                .add(STORAGE, 98 + 18 * 2, 23)
+                .add(STORAGE, 98, 41).add(STORAGE, 98 + 18, 41)
+                .add(STORAGE, 98 + 18 * 2, 41);
 
         ELECTRIC_TYPE_FILTER
                 .add(DISPLAY_SETTABLE, 35, 23, new ResourceLocation(GT4RRef.ID, "blank"))
-                .add(SlotTypes.FILTERABLE, 98, 5).add(SlotTypes.FILTERABLE, 98 + 18, 5)
-                .add(SlotTypes.FILTERABLE, 98 + 18 * 2, 5)
-                .add(SlotTypes.FILTERABLE, 98, 23).add(SlotTypes.FILTERABLE, 98 + 18, 23)
-                .add(SlotTypes.FILTERABLE, 98 + 18 * 2, 23)
-                .add(SlotTypes.FILTERABLE, 98, 41).add(SlotTypes.FILTERABLE, 98 + 18, 41)
-                .add(SlotTypes.FILTERABLE, 98 + 18 * 2, 41);
+                .add(STORAGE, 98, 5).add(STORAGE, 98 + 18, 5)
+                .add(STORAGE, 98 + 18 * 2, 5)
+                .add(STORAGE, 98, 23).add(STORAGE, 98 + 18, 23)
+                .add(STORAGE, 98 + 18 * 2, 23)
+                .add(STORAGE, 98, 41).add(STORAGE, 98 + 18, 41)
+                .add(STORAGE, 98 + 18 * 2, 41);
         ELECTRIC_ITEM_TRANSLOCATOR
                 .add(DISPLAY_SETTABLE, 63, 6, new ResourceLocation(GT4RRef.ID,"blank")).add(DISPLAY_SETTABLE, 80, 6, new ResourceLocation(GT4RRef.ID,"blank")).add(DISPLAY_SETTABLE, 97, 6, new ResourceLocation(GT4RRef.ID,"blank"))
                 .add(DISPLAY_SETTABLE, 63, 23, new ResourceLocation(GT4RRef.ID,"blank")).add(DISPLAY_SETTABLE, 80, 23, new ResourceLocation(GT4RRef.ID,"blank")).add(DISPLAY_SETTABLE, 97, 23, new ResourceLocation(GT4RRef.ID,"blank"))

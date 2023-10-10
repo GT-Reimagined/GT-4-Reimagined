@@ -13,12 +13,6 @@ import trinsdar.gt4r.blockentity.single.IFilterable;
 
 public class SlotTypes {
     public static SlotType<SlotCoil> COIL = new SlotType<>("coil_bf", (type, gui, item, i, d) -> new SlotCoil(type,  gui,item.getOrDefault(type, new EmptyContainer()), i, d.getX(), d.getY()), (t, i) -> true);
-    public static SlotType<AbstractSlot<?>> FILTERABLE = new SlotType<>("filterable", (type, gui, inv, i, d) -> new AbstractSlot<>(type, gui, inv.getOrDefault(type, new EmptyContainer()), i, d.getX(), d.getY()), (t, i) -> {
-        if (t instanceof IFilterable) {
-            return ((IFilterable)t).accepts(i);
-        }
-        return true;
-    }, true, true);
     public static SlotType<AbstractSlot<?>> ROTOR = new SlotType<>("rotor", ((type, gui, item, i, d) -> new AbstractSlot<>(type, gui, item.getOrDefault(type, new EmptyContainer()), i, d.getX(), d.getY())), (t, i) -> i.getItem() instanceof ItemTurbineRotor);
     public static SlotType<AbstractSlot<?>> FILTER = new SlotType<>("filter", (type, gui, item, i, d) -> new AbstractSlot<>(type, gui, item.getOrDefault(type, new EmptyContainer()), i, d.getX(), d.getY()), (t, i) -> i.getItem() == GT4RData.LavaFilter);
     public static SlotType<SlotData> DATA = new SlotType<>("data", (type, gui, item, i, d) -> new SlotData(type, gui, item.getOrDefault(type, new EmptyContainer()), i, d.getX(), d.getY()), (t, i) -> i.getItem() == GT4RData.CircuitDataOrb || i.getItem() == GT4RData.StorageDataOrb);

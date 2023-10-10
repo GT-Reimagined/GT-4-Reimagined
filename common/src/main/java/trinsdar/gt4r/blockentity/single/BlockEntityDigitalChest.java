@@ -1,8 +1,10 @@
 package trinsdar.gt4r.blockentity.single;
 
 import muramasa.antimatter.blockentity.BlockEntityMachine;
+import muramasa.antimatter.capability.IFilterableHandler;
 import muramasa.antimatter.capability.item.ITrackedHandler;
 import muramasa.antimatter.capability.item.TrackedItemHandler;
+import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.gui.event.GuiEvents;
 import muramasa.antimatter.gui.event.IGuiEvent;
 import muramasa.antimatter.machine.types.Machine;
@@ -17,14 +19,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.data.SlotTypes;
 
-public class BlockEntityDigitalChest extends BlockEntityMachine<BlockEntityDigitalChest> implements IFilterable{
+public class BlockEntityDigitalChest extends BlockEntityMachine<BlockEntityDigitalChest> implements IFilterableHandler {
     public BlockEntityDigitalChest(Machine<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-    }
-
-    @Override
-    public boolean accepts(ItemStack stack) {
-        return stack.getItem() != GT4RData.StorageDataOrb;
     }
 
     @Override
@@ -46,7 +43,7 @@ public class BlockEntityDigitalChest extends BlockEntityMachine<BlockEntityDigit
                             if (tag.contains("Data")){
                                 CompoundTag nbt = tag.getCompound("Data");
                                 if (nbt.contains("Items")){
-                                    ITrackedHandler storage = i.getHandler(SlotTypes.FILTERABLE);
+                                    ITrackedHandler storage = i.getHandler(SlotType.STORAGE);
                                     ListTag tagList = nbt.getList("Items", Tag.TAG_COMPOUND);
                                     if (!tagList.isEmpty()){
                                         if (!isInventoryEmpty(storage)){
@@ -77,7 +74,7 @@ public class BlockEntityDigitalChest extends BlockEntityMachine<BlockEntityDigit
             } else if (data[1] == 1){
                 itemHandler.ifPresent(i -> {
                     if (i.getHandler(SlotTypes.DATA).getStackInSlot(0).getItem() == GT4RData.CircuitDataOrb){
-                        ITrackedHandler storage = i.getHandler(SlotTypes.FILTERABLE);
+                        ITrackedHandler storage = i.getHandler(SlotType.STORAGE);
                         if (!isInventoryEmpty(storage)){
                             CompoundTag nbt = ((TrackedItemHandler<?>)storage).serialize(new CompoundTag());
                             ItemStack newStack = new ItemStack(GT4RData.StorageDataOrb);
@@ -102,5 +99,13 @@ public class BlockEntityDigitalChest extends BlockEntityMachine<BlockEntityDigit
             }
         }
         return empty;
+    }
+
+    @Override
+    public boolean test(SlotType<?> slotType, int slot, ItemStack stack) {
+        if (slotType == SlotType.STORAGE){
+            return stack.getItem() != GT4RData.StorageDataOrb;
+        }
+        return true;
     }
 }
