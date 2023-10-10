@@ -57,6 +57,9 @@ public class BlockEntityLargeTurbine extends BlockEntityMultiMachine<BlockEntity
                     if (!activeRecipe.hasInputFluids()) {
                         throw new RuntimeException("Missing fuel in active generator recipe!");
                     }
+                    if (efficiency == 0.0f){
+                        return false;
+                    }
                     //boolean shouldRun = tile.energyHandler.map(h -> h.insert((long)(tile.getMachineType().getMachineEfficiency()*(double)tile.getMachineTier().getVoltage()),true) > 0).orElse(false);
                     ///if (!shouldRun) return false;
                     long recipeAmount = activeRecipe.getInputFluids().get(0).getAmount();
