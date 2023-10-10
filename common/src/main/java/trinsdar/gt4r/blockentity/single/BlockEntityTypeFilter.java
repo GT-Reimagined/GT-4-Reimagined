@@ -18,19 +18,23 @@ public class BlockEntityTypeFilter extends BlockEntityItemFilter {
         super(type, pos, state);
     }
 
-    @Override
-    public boolean accepts(ItemStack stack) {
-        return itemHandler.map(i -> {
-            ItemStack tagStack = i.getHandler(SlotType.DISPLAY_SETTABLE).getStackInSlot(0);
-            if (tagStack.isEmpty()) return false;
-            List<TagKey<Item>> tags = tagStack.getItem().builtInRegistryHolder().tags().toList();
-            String forge = AntimatterPlatformUtils.isForge() ? "forge" : "c";
-            String compare = tags.stream().filter(t -> t.location().toString().contains("/") && t.location().getNamespace().equals(forge)).findFirst().map(t -> t.location().toString()).orElse("");
-            if (compare.isEmpty()) return false;
-            compare = compare.substring(0, compare.lastIndexOf("/"));
 
-            boolean hasTag = tags.contains(TagUtils.getItemTag(new ResourceLocation(compare)));
-            return blacklist != hasTag;
-        }).orElse(false);
+    @Override
+    public boolean test(SlotType<?> slotType, int slotId, ItemStack stack) {
+        if (slotType == SlotType.STORAGE){
+            return itemHandler.map(i -> {
+                ItemStack tagStack = i.getHandler(SlotType.DISPLAY_SETTABLE).getStackInSlot(0);
+                if (tagStack.isEmpty()) return false;
+                List<TagKey<Item>> tags = tagStack.getItem().builtInRegistryHolder().tags().toList();
+                String forge = AntimatterPlatformUtils.isForge() ? "forge" : "c";
+                String compare = tags.stream().filter(t -> t.location().toString().contains("/") && t.location().getNamespace().equals(forge)).findFirst().map(t -> t.location().toString()).orElse("");
+                if (compare.isEmpty()) return false;
+                compare = compare.substring(0, compare.lastIndexOf("/"));
+
+                boolean hasTag = stack.is(TagUtils.getItemTag(new ResourceLocation(compare)));
+                return blacklist != hasTag;
+            }).orElse(false);
+        }
+        return super.test(slotType, slotId, stack);
     }
 }
