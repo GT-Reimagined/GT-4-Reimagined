@@ -360,14 +360,14 @@ public class GT4RData {
     public static final FluidPipe<?> FLUID_PIPE_TUNGSTEN_CARBIDE = AntimatterAPI.register(FluidPipe.class,new FluidPipe<>(GT4RRef.ID, TungstenCarbide, 3837, true).caps(1).pressures(getPressures(1350)));
     public static final FluidPipe<?> FLUID_PIPE_HP = AntimatterAPI.register(FluidPipe.class,new FluidPipe<>(GT4RRef.ID, HighPressure, 3422, true).sizes(PipeSize.SMALL, PipeSize.NORMAL, PipeSize.LARGE).caps(1).pressures(10000));
 
-    public static final ItemPipe<?> ITEM_PIPE_BRASS = AntimatterAPI.register(ItemPipe.class, new ItemPipe<>(GT4RRef.ID, Brass).caps(0, 0, 0, 1, 2, 4));
-    public static final ItemPipe<?> ITEM_PIPE_CUPRONICKEL = AntimatterAPI.register(ItemPipe.class, new ItemPipe<>(GT4RRef.ID, Cupronickel).caps(0, 0, 0, 1, 2, 4));
-    public static final ItemPipe<?> ITEM_PIPE_ELECTRUM = AntimatterAPI.register(ItemPipe.class, new ItemPipe<>(GT4RRef.ID, Electrum).caps(0, 0, 0, 2, 4, 8));
-    public static final ItemPipe<?> ITEM_PIPE_MAGNALIUM = AntimatterAPI.register(ItemPipe.class, new ItemPipe<>(GT4RRef.ID, Magnalium).caps(0, 0, 0, 2, 4, 8));
-    public static final ItemPipe<?> ITEM_PIPE_PLATINUM = AntimatterAPI.register(ItemPipe.class, new ItemPipe<>(GT4RRef.ID, Platinum).caps(0, 0, 0, 4, 8, 16));
-    public static final ItemPipe<?> ITEM_PIPE_OSMIUM = AntimatterAPI.register(ItemPipe.class, new ItemPipe<>(GT4RRef.ID, Osmium).caps(0, 0, 0, 8, 16, 32));
-    public static final ItemPipe<?> ITEM_PIPE_HC = AntimatterAPI.register(ItemPipe.class, new ItemPipe<>(GT4RRef.ID, HighCapacity).caps(64));
-    public static final ItemPipe<?> ITEM_PIPE_OSMIRIDIUM = AntimatterAPI.register(ItemPipe.class, new ItemPipe<>(GT4RRef.ID, Osmiridium).caps(0, 0, 0, 32, 64, 128));
+    public static final ItemPipe<?> ITEM_PIPE_BRASS = AntimatterAPI.register(ItemPipe.class, new ItemPipe<>(GT4RRef.ID, Brass).stepsize(32768).caps(0, 0, 0, 1, 2, 4));
+    public static final ItemPipe<?> ITEM_PIPE_CUPRONICKEL = AntimatterAPI.register(ItemPipe.class, new ItemPipe<>(GT4RRef.ID, Cupronickel).stepsize(32768).caps(0, 0, 0, 1, 2, 4));
+    public static final ItemPipe<?> ITEM_PIPE_ELECTRUM = AntimatterAPI.register(ItemPipe.class, new ItemPipe<>(GT4RRef.ID, Electrum).stepsize(16384).caps(0, 0, 0, 2, 4, 8));
+    public static final ItemPipe<?> ITEM_PIPE_MAGNALIUM = AntimatterAPI.register(ItemPipe.class, new ItemPipe<>(GT4RRef.ID, Magnalium).stepsize(16384).caps(0, 0, 0, 2, 4, 8));
+    public static final ItemPipe<?> ITEM_PIPE_PLATINUM = AntimatterAPI.register(ItemPipe.class, new ItemPipe<>(GT4RRef.ID, Platinum).stepsize(8192).caps(0, 0, 0, 4, 8, 16));
+    public static final ItemPipe<?> ITEM_PIPE_OSMIUM = AntimatterAPI.register(ItemPipe.class, new ItemPipe<>(GT4RRef.ID, Osmium).stepsize(4096).caps(0, 0, 0, 8, 16, 32));
+    public static final ItemPipe<?> ITEM_PIPE_HC = AntimatterAPI.register(ItemPipe.class, new ItemPipe<>(GT4RRef.ID, HighCapacity).stepsize(4096).caps(64));
+    public static final ItemPipe<?> ITEM_PIPE_OSMIRIDIUM = AntimatterAPI.register(ItemPipe.class, new ItemPipe<>(GT4RRef.ID, Osmiridium).stepsize(1024).caps(0, 0, 0, 32, 64, 128));
 
     public static final ImmutableMap<Integer, RecipeIngredient> INT_CIRCUITS;
     public static final ImmutableMap<Integer, Item> INT_CIRCUITS_ITEMS;
