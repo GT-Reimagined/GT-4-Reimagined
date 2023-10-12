@@ -2,6 +2,7 @@ package trinsdar.gt4r.data;
 
 
 import muramasa.antimatter.AntimatterAPI;
+import muramasa.antimatter.Ref;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialTag;
 import muramasa.antimatter.material.MaterialType;
@@ -23,9 +24,9 @@ public class GT4RMaterialTags {
     public static final MaterialTag NEEDS_BLAST_FURNACE = AntimatterAPI.register(MaterialTag.class, new MaterialTag("needs_blast_furnace", true));
     public static final NumberMaterialTag BLAST_FURNACE_TEMP = (NumberMaterialTag) AntimatterAPI.register(MaterialTag.class, new NumberMaterialTag("blast_furnace_temp", true));
     public static final MaterialTag ROCK_CUTTER = new MaterialTag("rock_cutter");
-    public static final MaterialTypeItem<?> HULL = new MaterialTypeItem<>("hull", 2, true, muramasa.antimatter.Ref.U * 8);
-    public static final MaterialTypeItem<?> TURBINE_BLADE = new MaterialTypeItem<>("turbine_blade", 1, true, muramasa.antimatter.Ref.U * 3);//.unSplitName();
-    public static final MaterialTypeItem<?> TURBINE_ROTOR = new MaterialTypeItem<>("turbine_rotor", 1, true, muramasa.antimatter.Ref.U * 17, new MaterialTypeItem.ItemSupplier() {
+    public static final MaterialTypeItem<?> HULL = AntimatterAPI.register(MaterialTypeItem.class, new MaterialTypeItem<>("hull", 2, true, muramasa.antimatter.Ref.U * 8));
+    public static final MaterialTypeItem<?> TURBINE_BLADE = AntimatterAPI.register(MaterialTypeItem.class, new MaterialTypeItem<>("turbine_blade", 1, true, (Ref.U * 3) + (Ref.U8 * 2)));//.unSplitName();
+    public static final MaterialTypeItem<?> TURBINE_ROTOR = AntimatterAPI.register(MaterialTypeItem.class, new MaterialTypeItem<>("turbine_rotor", 1, true, muramasa.antimatter.Ref.U * 17, new MaterialTypeItem.ItemSupplier() {
         @Override
         public void createItems(String domain, MaterialType<?> type, Material material) {
             new ItemTurbineRotor(domain, type, material, new Item.Properties().defaultDurability(getMaxDamage(material)).tab(muramasa.antimatter.Ref.TAB_MATERIALS));
@@ -50,7 +51,7 @@ public class GT4RMaterialTags {
             }
             return d;
         }
-    });
+    }));
     public static final MaterialTypeItem<?> BROKEN_TURBINE_ROTOR = new MaterialTypeItem<>("broken_turbine_rotor", 1, true, muramasa.antimatter.Ref.U * 17);
     public static final MaterialTag SEMIFLUID = new MaterialTag("semifluid");
     public static final MaterialTag CABINET = new MaterialTag("cabinet");
