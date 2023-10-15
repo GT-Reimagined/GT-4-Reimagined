@@ -38,9 +38,6 @@ public class GT4RMaterialEvents {
     public static void onMaterialEvent(GT4RMaterialEvent event){
         flags(event);
         antimatterMaterials(event);
-        if (!AntimatterAPI.isModLoaded("gti")) {
-            GT4RBlockLootProvider.oreDrops(event);
-        }
 	    byProducts(event);
 	    Material[] turbineStuff = new Material[]{Carbon, Osmium, Bronze, Magnalium, Steel, TungstenSteel, Osmiridium};
         for (Material material : turbineStuff) {

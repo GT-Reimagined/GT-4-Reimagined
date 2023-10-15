@@ -24,6 +24,7 @@ import trinsdar.gt4r.material.GT4RMaterialEvent;
 
 import java.util.function.Function;
 
+import static muramasa.antimatter.data.AntimatterMaterialTypes.ORE_STONE;
 import static trinsdar.gt4r.data.Materials.*;
 
 public class GT4RBlockLootProvider extends AntimatterBlockLootProvider {
@@ -37,34 +38,25 @@ public class GT4RBlockLootProvider extends AntimatterBlockLootProvider {
         AntimatterAPI.all(BlockNonSolidMachine.class, providerDomain, this::add);
 
         AntimatterAPI.all(BlockCasing.class, providerDomain, this::add);
-    }
-
-    @Override
-    protected void addToFortune(BlockOre block) {
-        if (block.getOreType() == AntimatterMaterialTypes.ORE){
-            if (block.getStoneType() == AntimatterStoneTypes.SAND || block.getStoneType() == AntimatterStoneTypes.SAND_RED || block.getStoneType() == AntimatterStoneTypes.GRAVEL){
-                tables.put(block, this::build);
-            }
+        if (!AntimatterAPI.isModLoaded("gti")){
+            oreDrops();
         }
     }
 
-    public static void oreDrops(GT4RMaterialEvent event){
-        MaterialTags.CUSTOM_ORE_DROPS.add(AntimatterMaterials.Redstone, b -> {
-            return createSilkTouchDispatchTable(b, applyExplosionDecay(b, LootItem.lootTableItem(Items.REDSTONE).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 5.0F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))));
-        });
-
-        MaterialTags.CUSTOM_ORE_DROPS.add(AntimatterMaterials.Lapis, b -> {
+    public void oreDrops(){
+        overrideOre(AntimatterMaterials.Redstone, b -> createSilkTouchDispatchTable(b, applyExplosionDecay(b, LootItem.lootTableItem(Items.REDSTONE).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 5.0F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE)))));
+        overrideOre(AntimatterMaterials.Lapis, b -> {
             return createSilkTouchDispatchTable(b, applyExplosionDecay(b, LootItem.lootTableItem(Items.LAPIS_LAZULI).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 9.0F))).apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))));
         });
-        MaterialTags.CUSTOM_ORE_DROPS.add(Sodalite, b -> {
+        overrideOre(Sodalite, b -> {
             return createSilkTouchDispatchTable(b, applyExplosionDecay(b, LootItem.lootTableItem(AntimatterMaterialTypes.GEM.get(Sodalite)).apply(SetItemCountFunction.setCount(UniformGenerator.between(6.0F, 6.0F))).apply(GT4RRandomDropBonus.uniformBonusCount(Enchantments.BLOCK_FORTUNE, 3)))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(BlockLootTablesAccessor.getNoSilkTouch()).add(LootItem.lootTableItem(AntimatterMaterialTypes.DUST.get(Aluminium)).apply(GT4RRandomDropBonus.randomDrops(Enchantments.BLOCK_FORTUNE, 4))));
         });
         Function<BlockOre, LootTable.Builder> function = (b) -> createSilkTouchDispatchTable(b, applyExplosionDecay(b, LootItem.lootTableItem(AntimatterMaterialTypes.DUST.get(b.getMaterial())).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 2.0F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))));
-        MaterialTags.CUSTOM_ORE_DROPS.add(Pyrite, function);
-        MaterialTags.CUSTOM_ORE_DROPS.add(Cinnabar, b -> function.apply(b).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(BlockLootTablesAccessor.getNoSilkTouch()).add(LootItem.lootTableItem(AntimatterMaterialTypes.DUST.get(AntimatterMaterials.Redstone)).apply(GT4RRandomDropBonus.randomDrops(Enchantments.BLOCK_FORTUNE, 4)))));
-        MaterialTags.CUSTOM_ORE_DROPS.add(Sphalerite, b -> function.apply(b).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(BlockLootTablesAccessor.getNoSilkTouch()).add(LootItem.lootTableItem(AntimatterMaterialTypes.DUST.get(Zinc)).apply(GT4RRandomDropBonus.randomDrops(Enchantments.BLOCK_FORTUNE, 4)))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(BlockLootTablesAccessor.getNoSilkTouch()).add(LootItem.lootTableItem(AntimatterMaterialTypes.GEM.get(YellowGarnet)).apply(GT4RRandomDropBonus.randomDrops(Enchantments.BLOCK_FORTUNE, 32)))));
+        overrideOre(Pyrite, function);
+        overrideOre(Cinnabar, b -> function.apply(b).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(BlockLootTablesAccessor.getNoSilkTouch()).add(LootItem.lootTableItem(AntimatterMaterialTypes.DUST.get(AntimatterMaterials.Redstone)).apply(GT4RRandomDropBonus.randomDrops(Enchantments.BLOCK_FORTUNE, 4)))));
+        overrideOre(Sphalerite, b -> function.apply(b).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(BlockLootTablesAccessor.getNoSilkTouch()).add(LootItem.lootTableItem(AntimatterMaterialTypes.DUST.get(Zinc)).apply(GT4RRandomDropBonus.randomDrops(Enchantments.BLOCK_FORTUNE, 4)))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(BlockLootTablesAccessor.getNoSilkTouch()).add(LootItem.lootTableItem(AntimatterMaterialTypes.GEM.get(YellowGarnet)).apply(GT4RRandomDropBonus.randomDrops(Enchantments.BLOCK_FORTUNE, 32)))));
         Function<BlockOreStone, LootTable.Builder> function1 = (b) -> createOreDrop(b, AntimatterMaterialTypes.DUST.get(b.getMaterial()));
-        MaterialTags.CUSTOM_ORE_STONE_DROPS.add(Salt, function1);
-        MaterialTags.CUSTOM_ORE_STONE_DROPS.add(RockSalt, function1);
+        overrideBlock(ORE_STONE.get().get(Salt).asBlock(), b -> function1.apply((BlockOreStone) b));
+        overrideBlock(ORE_STONE.get().get(RockSalt).asBlock(), b -> function1.apply((BlockOreStone) b));
     }
 }
