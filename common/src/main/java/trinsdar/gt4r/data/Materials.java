@@ -15,52 +15,86 @@ public class Materials {
 
 
     /** Elements **/
-    public static Material Aluminium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "aluminium", 0x80c8f0, DULL, Al));
-    public static Material Beryllium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "beryllium", 0x64b464, METALLIC, Be));
-    public static Material Bismuth = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "bismuth", 0x64a0a0, METALLIC, Bi, GT4RRef.MOD_TFC));
-    public static Material Carbon = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "carbon", 0x141414, DULL, C));
-    public static Material Chrome = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "chrome", 0xffe6e6, SHINY, Cr));
-    public static Material Iridium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "iridium", 0xf0f0f5, DULL, Ir));
-    public static Material Lead = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "lead", 0x8c648c, DULL, Pb));
-    public static Material Manganese = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "manganese", 0xfafafa, DULL, Mn));
-    public static Material Nickel = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "nickel", 0xc8c8fa, METALLIC, Ni));
-    public static Material Osmium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "osmium", 0x3232ff, METALLIC, Os));
-    public static Material Platinum = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "platinum", 0xffffc8, SHINY, Pt));
-    public static Material Plutonium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "plutonium_244", 0xf03232, METALLIC, Pu));
-    public static Material Plutonium239 = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "plutonium_239", 0xf03232, METALLIC, Pu239));
-    public static Material Silver = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "silver", 0xdcdcff, SHINY, Ag));
-    public static Material Thorium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "thorium", 0x001e00, SHINY, Th));
-    public static Material Titanium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "titanium", 0xdca0f0, METALLIC, Ti));
-    public static Material Tungsten = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "tungsten", 0x323232, METALLIC, W));
-    public static Material Uranium238 = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "uranium_238", 0x32f032, METALLIC, U));
-    public static Material Uranium235 = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "uranium_235", 0x46fa46, METALLIC, U235));
-    public static Material Antimony = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "antimony", 0xdcdcf0, SHINY, Sb));
-    public static Material Argon = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "argon", 0xff00f0, NONE, Ar));
-    public static Material Calcium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "calcium", 0xfff5f5, METALLIC, Ca));
-    public static Material Cadmium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "cadmium", 0x32323c, SHINY, Cd));
-    public static Material Chlorine = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "chlorine", 0xffffff, NONE, Cr));
-    public static Material Deuterium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "deuterium", 0xffff00, NONE, D));
-    public static Material Fluorine = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "fluorine", 0xffffff, NONE, F));
     public static Material Hydrogen = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "hydrogen", 0x0000ff, NONE, H));
     public static Material Helium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "helium", 0xffff00, NONE, He));
-    public static Material Helium3 = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "helium_3", 0xffffff, NONE, He3));
     public static Material Lithium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "lithium", 0xe1dcff, DULL, Li));
-    public static Material Magnesium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "magnesium", 0xffc8c8, METALLIC, Mg));
-    public static Material Mercury = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "mercury", 0xffdcdc, SHINY, Hg));
+    public static Material Beryllium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "beryllium", 0x64b464, METALLIC, Be));
+    public static Material Carbon = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "carbon", 0x141414, DULL, C));
     public static Material Nitrogen = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "nitrogen", 0x0096c8, NONE, N));
     public static Material Oxygen = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "oxygen", 0x0064c8, NONE, O));
-    public static Material Phosphor = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "phosphor", 0xffff00, DULL, P));
-    public static Material Potassium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "potassium", 0xfafafa, METALLIC, K));
-    public static Material Silicon = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "silicon", 0x3c3c50, METALLIC, Si));
+    public static Material Fluorine = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "fluorine", 0xffffff, NONE, F));
+    public static Material Neon = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "neon", 0xFF6464, NONE, Ne));
     public static Material Sodium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "sodium", 0x000096, METALLIC, Na));
+    public static Material Magnesium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "magnesium", 0xffc8c8, METALLIC, Mg));
+    public static Material Aluminium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "aluminium", 0x80c8f0, DULL, Al));
+    public static Material Silicon = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "silicon", 0x3c3c50, METALLIC, Si));
+    public static Material Phosphor = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "phosphor", 0xffff00, DULL, P));
     public static Material Sulfur = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "sulfur", 0xc8c800, DULL, S));
-    public static Material Tin = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "tin", 0xdcdcdc, DULL, Sn));
-    public static Material Tritium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "tritium", 0xff0000, METALLIC, T));
+    public static Material Chlorine = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "chlorine", 0xffffff, NONE, Cr));
+    public static Material Argon = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "argon", 0xff00f0, NONE, Ar));
+    public static Material Potassium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "potassium", 0xfafafa, METALLIC, K));
+    public static Material Calcium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "calcium", 0xfff5f5, METALLIC, Ca));
+    public static Material Titanium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "titanium", 0xdca0f0, METALLIC, Ti));
+    public static Material Chromium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "chromium", 0xffe6e6, SHINY, Cr));
+    public static Material Manganese = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "manganese", 0xfafafa, DULL, Mn));
+    public static Material Nickel = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "nickel", 0xc8c8fa, METALLIC, Ni));
     public static Material Zinc = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "zinc", 0xfaf0f0, METALLIC, Zn));
     public static Material Technetium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "technetium", 0xC8C8C8, METALLIC, Tc));
-    public static Material Neon = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "neon", 0xFF6464, NONE, Ne));
+    public static Material Silver = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "silver", 0xdcdcff, SHINY, Ag));
+    public static Material Cadmium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "cadmium", 0x32323c, SHINY, Cd));
+    public static Material Tin = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "tin", 0xdcdcdc, DULL, Sn));
+    public static Material Antimony = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "antimony", 0xdcdcf0, SHINY, Sb));
+    public static Material Tungsten = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "tungsten", 0x323232, METALLIC, W));
+    public static Material Osmium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "osmium", 0x3232ff, METALLIC, Os));
+    public static Material Iridium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "iridium", 0xf0f0f5, DULL, Ir));
+    public static Material Platinum = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "platinum", 0xffffc8, SHINY, Pt));
+    public static Material Mercury = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "mercury", 0xffdcdc, SHINY, Hg));
+    public static Material Lead = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "lead", 0x8c648c, DULL, Pb));
+    public static Material Bismuth = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "bismuth", 0x64a0a0, METALLIC, Bi));
+    public static Material Thorium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "thorium", 0x001e00, SHINY, Th)).setDisplayNameString("Thorium 232");
+    public static Material Plutonium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "plutonium", 0xf03232, METALLIC, Pu));
+    public static Material Uranium238 = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "uranium", 0x32f032, METALLIC, U)).setDisplayNameString("Uranium 238");
+
+
+    public static Material Deuterium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "deuterium", 0xffff00, NONE, D));
+    public static Material Tritium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "tritium", 0xff0000, METALLIC, T));
+    public static Material Helium3 = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "helium_3", 0xffffff, NONE, He3));
+    public static Material Uranium235 = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "uranium_235", 0x46fa46, METALLIC, U235));
+    public static Material Plutonium239 = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "plutonium_239", 0xf03232, METALLIC, Pu239));
 
     //TODO: We can be more lenient about what fluids we have in, its not as bad as solids above, and we can stop them from showing in JEI (I think...)
+
+    /** Metals **/
+    public static Material BatteryAlloy = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "battery_alloy", 0x9c7ca0, DULL));
+    public static Material Brass = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "brass", 0xffb400, METALLIC));
+    public static Material Bronze = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "bronze", 0xff8000, METALLIC));
+    public static Material Cupronickel = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "cupronickel", 0xe39680, METALLIC));
+    public static Material Electrum = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "electrum", 0xffff64, SHINY));
+    public static Material Invar = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "invar", 0xb4b478, METALLIC));
+    public static Material IronMagnetic = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "magnetic_iron", 0xc8c8c8, MAGNETIC));
+    public static Material Kanthal = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "kanthal", 0xc2d2df, METALLIC));
+    public static Material Magnalium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "magnalium", 0xc8beff, DULL));
+    public static Material Nichrome = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "nichrome", 0xcdcef6, METALLIC));
+    public static Material Osmiridium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "osmiridium", 0x6464ff, METALLIC));
+    public static Material RedAlloy = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "red_alloy", 0xc80000, DULL));
+    public static Material SolderingAlloy = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "soldering_alloy", 0xdcdce6, DULL));
+    public static Material Steel = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "steel", 0x808080, METALLIC));
+    public static Material SteelMagnetic = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "magnetic_steel", 0x808080, MAGNETIC));
+    public static Material StainlessSteel = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "stainless_steel", 0xc8c8dc, SHINY));
+    public static Material TungstenSteel = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "tungstensteel", 0x6464a0, METALLIC));
+    public static Material TungstenCarbide = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "tungsten_carbide", 0x330066, METALLIC));
+    public static Material WroughtIron = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "wrought_iron", 0xc8b4b4, METALLIC));
+
+    /** TFC Materials **/
+    public static Material BismuthBronze = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "bismuth_bronze", 0x647d7d, DULL, GT4RRef.MOD_TFC));
+    public static Material BlackBronze = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "black_bronze", 0x64327d, DULL, GT4RRef.MOD_TFC));
+    public static Material BlackSteel = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "black_steel", 0x646464, METALLIC, GT4RRef.MOD_TFC));
+    public static Material BlueSteel = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "blue_steel", 0x64648c, METALLIC, GT4RRef.MOD_TFC));
+    public static Material RedSteel = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "red_steel", 0x8c6464, METALLIC, GT4RRef.MOD_TFC));
+    public static Material RoseGold = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "rose_gold", 0xffe61e, SHINY, GT4RRef.MOD_TFC));
+    public static Material SterlingSilver = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "sterling_silver", 0xfadce1, SHINY, GT4RRef.MOD_TFC));
+
+
 
     /** Gases **/
     public static Material WoodGas = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "wood_gas", 0xdecd87, NONE));
@@ -167,36 +201,6 @@ public class Materials {
 
     /** **/
     public static Material Cinnabar = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "cinnabar", 0x960000, REDSTONE));
-
-    /** Metals **/
-    public static Material BatteryAlloy = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "battery_alloy", 0x9c7ca0, DULL));
-    public static Material Brass = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "brass", 0xffb400, METALLIC));
-    public static Material Bronze = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "bronze", 0xff8000, METALLIC));
-    public static Material Cupronickel = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "cupronickel", 0xe39680, METALLIC));
-    public static Material Electrum = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "electrum", 0xffff64, SHINY));
-    public static Material Invar = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "invar", 0xb4b478, METALLIC));
-    public static Material Kanthal = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "kanthal", 0xc2d2df, METALLIC));
-    public static Material Magnalium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "magnalium", 0xc8beff, DULL));
-    public static Material Nichrome = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "nichrome", 0xcdcef6, METALLIC));
-    public static Material SolderingAlloy = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "soldering_alloy", 0xdcdce6, DULL));
-    public static Material Steel = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "steel", 0x808080, METALLIC));
-    public static Material StainlessSteel = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "stainless_steel", 0xc8c8dc, SHINY));
-    public static Material WroughtIron = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "wrought_iron", 0xc8b4b4, METALLIC));
-    public static Material TungstenSteel = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "tungstensteel", 0x6464a0, METALLIC));
-    public static Material TungstenCarbide = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "tungsten_carbide", 0x330066, METALLIC));
-    public static Material RedAlloy = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "red_alloy", 0xc80000, DULL));
-    public static Material Osmiridium = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "osmiridium", 0x6464ff, METALLIC));
-    public static Material IronMagnetic = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "magnetic_iron", 0xc8c8c8, MAGNETIC));
-    public static Material SteelMagnetic = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "magnetic_steel", 0x808080, MAGNETIC));
-
-    /** TFC Materials **/
-    public static Material SterlingSilver = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "sterling_silver", 0xfadce1, SHINY, GT4RRef.MOD_TFC));
-    public static Material RoseGold = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "rose_gold", 0xffe61e, SHINY, GT4RRef.MOD_TFC));
-    public static Material BlackBronze = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "black_bronze", 0x64327d, DULL, GT4RRef.MOD_TFC));
-    public static Material BismuthBronze = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "bismuth_bronze", 0x647d7d, DULL, GT4RRef.MOD_TFC));
-    public static Material BlackSteel = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "black_steel", 0x646464, METALLIC, GT4RRef.MOD_TFC));
-    public static Material RedSteel = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "red_steel", 0x8c6464, METALLIC, GT4RRef.MOD_TFC));
-    public static Material BlueSteel = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "blue_steel", 0x64648c, METALLIC, GT4RRef.MOD_TFC));
 
     /** Solids (Plastic Related Stuff)**/
     public static Material Plastic = AntimatterAPI.register(Material.class, new Material(GT4RRef.ID, "plastic", 0xc8c8c8, DULL));
