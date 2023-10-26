@@ -1,23 +1,22 @@
 package trinsdar.gt4r.loader.machines;
 
-import io.github.gregtechintergalactical.gtrubber.GTRubberData;
 import com.google.common.collect.ImmutableSet;
 import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.data.AntimatterMaterialTypes;
-import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.pipe.PipeSize;
 import muramasa.antimatter.pipe.types.Cable;
 import muramasa.antimatter.pipe.types.Wire;
 import muramasa.antimatter.util.TagUtils;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.resources.ResourceLocation;
 import muramasa.antimatter.data.ForgeCTags;
+import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.data.GT4RMaterialTags;
+import trinsdar.gt4r.data.TierMaps;
 
+import static io.github.gregtechintergalactical.gtcore.data.GTCoreItems.*;
 import static muramasa.antimatter.machine.Tier.LV;
 import static muramasa.antimatter.machine.Tier.ULV;
 import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
@@ -49,12 +48,12 @@ public class AssemblyLoader {
         ASSEMBLING.RB().ii(of(getTag("forge", "rods/wooden"), 1), of(getTag("minecraft", "coals"), 1)).io(new ItemStack(Items.TORCH, 4)).add("torch",400, 1);
         ASSEMBLING.RB().ii(of(getTag("forge", "string"), 1), of(getTag("forge", "slimeballs"), 1)).io(new ItemStack(Items.LEAD, 2)).add("lead", 200, 2);
         ASSEMBLING.RB().ii(of(new ItemStack(CompressedCoalBall, 8)), of(Items.BRICKS, 1)).io(new ItemStack(CoalChunk)).add("coal_chunk", 400, 4);
-        ASSEMBLING.RB().ii(of(CircuitBoardAdv, 1), of(AdvCircuitParts, 2)).io(new ItemStack(CircuitAdv, 1)).add("circuit_advanced", 1600, 2);
+        ASSEMBLING.RB().ii(of(CircuitBoardAdvanced, 1), of(AdvCircuitParts, 2)).io(new ItemStack(CircuitAdv, 1)).add("circuit_advanced", 1600, 2);
         ASSEMBLING.RB().ii(of(CircuitBoardProcessor, 1), of(CircuitDataStorage, 1)).io(new ItemStack(CircuitDataControl, 2)).add("circuit_data_control", 3200, 4);
         ASSEMBLING.RB().ii(of(CircuitBoardProcessor, 1), of(LapotronCrystal, 1)).io(new ItemStack(CircuitEnergyFlow, 1)).add("circuit_energy_flow", 3200, 4);
-        ASSEMBLING.RB().ii(of(CircuitDataControl, 1), of(CircuitDataStorage, 8)).io(new ItemStack(CircuitDataOrb, 1)).add("data_orb",12800, 16);
-        ASSEMBLING.RB().ii(of(CarbonFibre, 2), INT_CIRCUITS.get(2)).io(new ItemStack(CarbonMesh)).add("carbon_mesh",800, 2);
-        ASSEMBLING.RB().ii(of(CarbonMesh, 16), INT_CIRCUITS.get(16)).io(new ItemStack(LavaFilter)).add("lava_filter",1600, 8);
+        ASSEMBLING.RB().ii(of(CircuitDataControl, 1), of(CircuitDataStorage, 8)).io(new ItemStack(DataOrb, 1)).add("data_orb",12800, 16);
+        ASSEMBLING.RB().ii(of(CarbonFibre, 2), TierMaps.INT_CIRCUITS.get(2)).io(new ItemStack(CarbonMesh)).add("carbon_mesh",800, 2);
+        ASSEMBLING.RB().ii(of(CarbonMesh, 16), TierMaps.INT_CIRCUITS.get(16)).io(new ItemStack(LavaFilter)).add("lava_filter",1600, 8);
         ASSEMBLING.RB().ii(of(PLATES_IRON_ALUMINIUM, 1), of(PUMP.getItem(LV), 1)).io(new ItemStack(PumpModule)).add("pump_module",800, 16);
         ASSEMBLING.RB().ii(of(PLATES_IRON_ALUMINIUM, 2), of(Items.IRON_BARS, 2)).io(new ItemStack(Drain)).add("drain",800, 16);
         ASSEMBLING.RB().ii(of(PLATES_IRON_ALUMINIUM, 1), of(Items.LEVER, 1)).io(new ItemStack(RedstoneMachineController)).add("redstone_machine_controller",800, 16);
@@ -69,8 +68,8 @@ public class AssemblyLoader {
         ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Iron, 5), of(ForgeCTags.CHESTS, 1)).io(new ItemStack(Items.HOPPER, 1)).add("hopper",800, 2);
         ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(WroughtIron, 2), of(CIRCUITS_BASIC, 1)).io(new ItemStack(MachineParts, 4)).add("machine_parts_2",800, 16);
         ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Plastic, 2), of(CIRCUITS_BASIC, 1)).io(new ItemStack(MachineParts, 2)).add("machine_parts_1",800, 16);
-        ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Electrum, 2), of(CIRCUITS_BASIC, 1)).io(new ItemStack(CircuitBoardAdv)).add("circuit_board_advanced",1600,2);
-        ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Electrum, 4), PLATE.getMaterialIngredient(Silicon, 1)).io(new ItemStack(CircuitBoardAdv, 2)).add("circuit_board_advanced_1",1600,2);
+        ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Electrum, 2), of(CIRCUITS_BASIC, 1)).io(new ItemStack(CircuitBoardAdvanced)).add("circuit_board_advanced",1600,2);
+        ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Electrum, 4), PLATE.getMaterialIngredient(Silicon, 1)).io(new ItemStack(CircuitBoardAdvanced, 2)).add("circuit_board_advanced_1",1600,2);
         ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Platinum, 1), of(CIRCUITS_ADVANCED, 1)).io(new ItemStack(CircuitBoardProcessor)).add("circuit_board_processor",1600,2);
         ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Magnalium, 2), of(MACHINE_HULLS_BASIC, 1), of(BatteryRE, 1).setIgnoreNbt()).io(new ItemStack(WINDMILL.getItem(ULV), 1)).add("windmill",6400, 8);
         ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(TungstenSteel, 1), of(REINFORCED_STONE, 1)).io(new ItemStack(TUNGSTENSTEEL_REINFORCED_STONE)).add("tungstensteel_reinforced_stone",400, 4);
@@ -92,7 +91,7 @@ public class AssemblyLoader {
         ASSEMBLING.RB().ii(of(getTag("forge", "rods/wooden"), 1), DUST.getMaterialIngredient(Redstone, 1)).io(new ItemStack(Items.REDSTONE_TORCH)).add("redstone_torch",400, 1);
         ASSEMBLING.RB().ii(INGOT.getMaterialIngredient(Iron, 4), DUST.getMaterialIngredient(Redstone, 1)).io(new ItemStack(Items.COMPASS)).add("compass",400, 4);
         ASSEMBLING.RB().ii(INGOT.getMaterialIngredient(Gold, 4), DUST.getMaterialIngredient(Redstone, 1)).io(new ItemStack(Items.CLOCK)).add("clock",400, 4);
-        ASSEMBLING.RB().ii(of(getTag("forge", "rods/wooden"), 1), of(GTRubberData.StickyResin, 1)).io(new ItemStack(Items.TORCH, 6)).add("torch_1",400, 1);
+        ASSEMBLING.RB().ii(of(getTag("forge", "rods/wooden"), 1), of(StickyResin, 1)).io(new ItemStack(Items.TORCH, 6)).add("torch_1",400, 1);
         ASSEMBLING.RB().ii(of(Items.COAL, 8), GEM.getMaterialIngredient(Flint, 1)).io(new ItemStack(CompressedCoalBall)).add("compressed_coal_ball",400, 4);
         ASSEMBLING.RB().ii(of(getTag("forge", "rods/wooden"), 1), of(ForgeCTags.COBBLESTONE, 1)).io(new ItemStack(Items.LEVER, 1)).add("lever",400, 1);
         ASSEMBLING.RB().ii(of(CircuitBoardBasic, 1), of(CABLE_COPPER.getBlockItem(PipeSize.VTINY), 3)).io(new ItemStack(CircuitBasic)).add("circuit_basic",800, 1);

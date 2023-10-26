@@ -3,7 +3,7 @@ package trinsdar.gt4r.loader.machines;
 import static muramasa.antimatter.data.AntimatterMaterialTypes.DUST_SMALL;
 import static muramasa.antimatter.data.AntimatterMaterials.Sugar;
 import static muramasa.antimatter.data.AntimatterMaterials.Water;
-import static trinsdar.gt4r.data.GT4RData.INT_CIRCUITS;
+import static trinsdar.gt4r.data.TierMaps.INT_CIRCUITS;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.BASIC_DISTILLING;
 

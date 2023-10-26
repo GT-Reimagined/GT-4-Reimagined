@@ -12,7 +12,7 @@ import static muramasa.antimatter.data.AntimatterMaterials.*;
 import static muramasa.antimatter.material.MaterialTags.DIRECT_SMELT_INTO;
 import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
 import static trinsdar.gt4r.data.CustomTags.DUSTS_COALS;
-import static trinsdar.gt4r.data.GT4RData.INT_CIRCUITS;
+import static trinsdar.gt4r.data.TierMaps.INT_CIRCUITS;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.BASIC_BLASTING;
 import static trinsdar.gt4r.data.RecipeMaps.BLASTING;

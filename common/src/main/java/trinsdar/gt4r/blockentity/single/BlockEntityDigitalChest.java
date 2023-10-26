@@ -1,5 +1,6 @@
 package trinsdar.gt4r.blockentity.single;
 
+import io.github.gregtechintergalactical.gtcore.data.GTCoreItems;
 import muramasa.antimatter.blockentity.BlockEntityMachine;
 import muramasa.antimatter.capability.IFilterableHandler;
 import muramasa.antimatter.capability.item.ITrackedHandler;
@@ -50,7 +51,7 @@ public class BlockEntityDigitalChest extends BlockEntityMachine<BlockEntityDigit
                                             playerEntity.sendMessage(new TranslatableComponent("message.gt4r.digital_chest_inventory"), playerEntity.getUUID());
                                             return;
                                         }
-                                        ItemStack newStack = new ItemStack(GT4RData.CircuitDataOrb);
+                                        ItemStack newStack = new ItemStack(GTCoreItems.DataOrb);
                                         for (int j = 0; j < tagList.size(); j++)
                                         {
                                             CompoundTag itemTags = tagList.getCompound(j);
@@ -73,7 +74,7 @@ public class BlockEntityDigitalChest extends BlockEntityMachine<BlockEntityDigit
                 });
             } else if (data[1] == 1){
                 itemHandler.ifPresent(i -> {
-                    if (i.getHandler(SlotTypes.DATA).getStackInSlot(0).getItem() == GT4RData.CircuitDataOrb){
+                    if (i.getHandler(SlotTypes.DATA).getStackInSlot(0).getItem() == GTCoreItems.DataOrb){
                         ITrackedHandler storage = i.getHandler(SlotType.STORAGE);
                         if (!isInventoryEmpty(storage)){
                             CompoundTag nbt = ((TrackedItemHandler<?>)storage).serialize(new CompoundTag());

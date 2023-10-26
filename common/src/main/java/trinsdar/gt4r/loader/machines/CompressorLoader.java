@@ -1,5 +1,6 @@
 package trinsdar.gt4r.loader.machines;
 
+import io.github.gregtechintergalactical.gtcore.data.GTCoreItems;
 import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
@@ -34,15 +35,15 @@ public class CompressorLoader {
                 COMPRESSING.RB().ii(RecipeIngredient.of(DUST.getMaterialTag(gem), 9)).io(PLATE.get(gem, 1)).add(gem.getId() + "_plate", Math.max(40, gem.getMass() * 2), 16);
             }
         });
-        COMPRESSING.RB().ii(RecipeIngredient.of(GT4RData.CarbonMesh, 1)).io(PLATE.get(Carbon, 1)).add("carbon_plate",400, 2);
+        COMPRESSING.RB().ii(RecipeIngredient.of(GTCoreItems.CarbonMesh, 1)).io(PLATE.get(Carbon, 1)).add("carbon_plate",400, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(CustomTags.INGOTS_MIXED_METAL, 1).setIgnoreNbt()).io(new ItemStack(GT4RData.AdvancedAlloy)).add("advanced_alloy",400, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(Items.SNOWBALL, 1)).io(new ItemStack(Items.SNOW_BLOCK)).add("snow_block",400, 2);
         COMPRESSING.RB().ii(DUST.getMaterialIngredient(Glowstone, 4)).io(new ItemStack(Items.GLOWSTONE)).add("glowstone",400, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(Items.SNOW_BLOCK, 1)).io(new ItemStack(Items.ICE)).add("ice",400, 2);
-        COMPRESSING.RB().ii(RecipeIngredient.of(GT4RData.CoalBall, 1)).io(new ItemStack(GT4RData.CompressedCoalBall)).add("compressed_coal_ball",400, 2);
+        COMPRESSING.RB().ii(RecipeIngredient.of(GTCoreItems.CoalBall, 1)).io(new ItemStack(GTCoreItems.CompressedCoalBall)).add("compressed_coal_ball",400, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(Items.SAND, 4)).io(new ItemStack(Items.SANDSTONE)).add("sandstone",400, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(Items.RED_SAND, 4)).io(new ItemStack(Items.RED_SANDSTONE)).add("red_sandstone",400, 2);
-        COMPRESSING.RB().ii(DUST.getMaterialIngredient(Energium, 9)).io(new ItemStack(GT4RData.EnergyCrystal)).add("energy_crystal",400, 2);
+        COMPRESSING.RB().ii(DUST.getMaterialIngredient(Energium, 9)).io(new ItemStack(GTCoreItems.EnergyCrystal)).add("energy_crystal",400, 2);
         COMPRESSING.RB().ii(DUST.getMaterialIngredient(Wood, 1)).io(PLATE.get(Wood, 1)).add("wood_plate",400, 2);
         COMPRESSING.RB().ii(DUST.getMaterialIngredient(Fireclay, 1)).io(new ItemStack(CompressedFireClay)).add("compressed_fireclay",200, 2);
         COMPRESSING.RB().ii(RecipeIngredient.of(ItemTags.SAPLINGS, 4)).io(new ItemStack(Plantball)).add("plantball",300, 2);

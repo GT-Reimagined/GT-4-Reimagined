@@ -1,6 +1,6 @@
 package trinsdar.gt4r.data;
 
-import io.github.gregtechintergalactical.gtutility.blockentity.BlockEntityMaterial;
+import io.github.gregtechintergalactical.gtcore.blockentity.BlockEntityMaterial;
 import muramasa.antimatter.blockentity.BlockEntityMachine;
 import muramasa.antimatter.capability.IGuiHandler;
 import muramasa.antimatter.gui.MenuHandlerMachine;

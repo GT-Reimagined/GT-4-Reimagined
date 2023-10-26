@@ -1,6 +1,7 @@
 package trinsdar.gt4r.machine;
 
-import io.github.gregtechintergalactical.gtutility.machine.MaterialMachine;
+
+import io.github.gregtechintergalactical.gtcore.machine.MaterialMachine;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.Machine;

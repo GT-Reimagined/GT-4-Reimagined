@@ -1,7 +1,8 @@
 package trinsdar.gt4r.blockentity.single;
 
-import io.github.gregtechintergalactical.gtutility.blockentity.BlockEntityMaterial;
-import io.github.gregtechintergalactical.gtutility.machine.MaterialMachine;
+
+import io.github.gregtechintergalactical.gtcore.blockentity.BlockEntityMaterial;
+import io.github.gregtechintergalactical.gtcore.machine.MaterialMachine;
 import muramasa.antimatter.capability.item.ITrackedHandler;
 import muramasa.antimatter.gui.SlotType;
 import net.minecraft.core.BlockPos;

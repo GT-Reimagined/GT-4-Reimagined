@@ -6,7 +6,7 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import trinsdar.gt4r.data.GT4RData;
+import trinsdar.gt4r.data.TierMaps;
 
 public class ItemIntCircuit extends ItemBasic<ItemIntCircuit> {
 
@@ -31,7 +31,7 @@ public class ItemIntCircuit extends ItemBasic<ItemIntCircuit> {
     public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
         int newId = playerIn.isCrouching() ? this.getNewCircuitIdBackward() : this.getNewCircuitIdForward();
         ItemStack stack = playerIn.getItemInHand(handIn);
-        ItemStack newStack = new ItemStack(GT4RData.INT_CIRCUITS_ITEMS.get(newId), stack.getCount());
+        ItemStack newStack = new ItemStack(TierMaps.INT_CIRCUITS_ITEMS.get(newId), stack.getCount());
         playerIn.setItemInHand(handIn, newStack);
         return InteractionResultHolder.consume(stack);
     }

@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static trinsdar.gt4r.data.GT4RData.RockCutterPowerUnit;
-import static trinsdar.gt4r.data.GT4RData.SmallPowerUnit;
 
 public class ItemPowerUnit extends ItemBasic<ItemPowerUnit> implements IColorHandler, IEnergyItem {
     Material material;
@@ -117,7 +116,7 @@ public class ItemPowerUnit extends ItemBasic<ItemPowerUnit> implements IColorHan
         String id = getId().startsWith("power_unit") ? "power_unit" : getId();
         List<Texture> list = new ArrayList<>();
         list.add(new Texture(getDomain(), "item/basic/" + id));
-        if (this == SmallPowerUnit || this == RockCutterPowerUnit){
+        if (this == RockCutterPowerUnit){
             list.add(new Texture(getDomain(), "item/basic/" + id + "_overlay"));
         }
         return list.toArray(new Texture[0]);

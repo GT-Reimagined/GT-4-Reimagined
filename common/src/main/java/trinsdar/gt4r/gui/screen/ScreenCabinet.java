@@ -1,6 +1,6 @@
 package trinsdar.gt4r.gui.screen;
 
-import io.github.gregtechintergalactical.gtutility.blockentity.BlockEntityMaterial;
+import io.github.gregtechintergalactical.gtcore.blockentity.BlockEntityMaterial;
 import muramasa.antimatter.gui.screen.ScreenMachine;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;

@@ -1,5 +1,6 @@
 package trinsdar.gt4r.loader.machines;
 
+import io.github.gregtechintergalactical.gtcore.data.GTCoreItems;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.pipe.PipeSize;
 import muramasa.antimatter.pipe.types.Wire;
@@ -33,9 +34,9 @@ public class WiremillLoader {
         WIRE_MILLING.RB().ii(INGOT.getMaterialIngredient(Kanthal, 4)).io(new ItemStack(GT4RData.KanthalHeatingCoil)).add("kanthal_heating_coil",450, 12);
         WIRE_MILLING.RB().ii(INGOT.getMaterialIngredient(Nichrome, 5)).io(new ItemStack(GT4RData.NichromeHeatingCoil)).add("nichroome_heating_coil",600, 16);
         WIRE_MILLING.RB().ii(INGOT.getMaterialIngredient(Cupronickel, 3)).io(new ItemStack(GT4RData.CupronickelHeatingCoil)).add("cupronickel_heating_coil",300, 8);
-        WIRE_MILLING.RB().ii(DUST.getMaterialIngredient(Carbon, 8)).io(new ItemStack(GT4RData.CarbonFibre)).add("carbon_fibre",400, 2);
-        WIRE_MILLING.RB().ii(DUST.getMaterialIngredient(Charcoal, 8)).io(new ItemStack(GT4RData.CarbonFibre)).add("carbon_fibre_1",400, 2);
-        WIRE_MILLING.RB().ii(DUST.getMaterialIngredient(Coal, 4)).io(new ItemStack(GT4RData.CarbonFibre)).add("carbon_fibre_2",400, 2);
+        WIRE_MILLING.RB().ii(DUST.getMaterialIngredient(Carbon, 8)).io(new ItemStack(GTCoreItems.CarbonFibre)).add("carbon_fibre",400, 2);
+        WIRE_MILLING.RB().ii(DUST.getMaterialIngredient(Charcoal, 8)).io(new ItemStack(GTCoreItems.CarbonFibre)).add("carbon_fibre_1",400, 2);
+        WIRE_MILLING.RB().ii(DUST.getMaterialIngredient(Coal, 4)).io(new ItemStack(GTCoreItems.CarbonFibre)).add("carbon_fibre_2",400, 2);
 
     }
 }

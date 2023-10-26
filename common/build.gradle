@@ -12,10 +12,7 @@ dependencies{
     modCompileOnly("dev.latvian.mods:kubejs-fabric:${rootProject.kubejs_version}")
     implementation(project(path: ":tesseract-common", configuration: "namedElements"))
     implementation(project(path: ":antimatter-common", configuration: "namedElements"))
-    modCompileOnly("io.github.gregtechintergalactical:gtrubber-common:${rootProject.gt_rubber_version}-${rootProject.minecraft_version}"){
-        transitive = false
-    }
-    modCompileOnly("io.github.gregtechintergalactical:gtutility-common:${rootProject.gt_utility_version}-${rootProject.minecraft_version}"){
+    modCompileOnly("io.github.gregtechintergalactical:gtcore-common:${rootProject.gt_core_version}-${rootProject.minecraft_version}"){
         transitive = false
     }
     modImplementation("com.gtnewhorizon.structurelib:structurelib-common:${project.structurelib_version}-${project.minecraft_version}")

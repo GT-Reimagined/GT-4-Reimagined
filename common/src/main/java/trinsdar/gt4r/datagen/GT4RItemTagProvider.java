@@ -1,5 +1,6 @@
 package trinsdar.gt4r.datagen;
 
+import io.github.gregtechintergalactical.gtcore.data.GTCoreItems;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.data.AntimatterMaterials;
@@ -39,34 +40,20 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.tag(TRANSFORMER_UPGRADES).add(TransformerUpgrade);
         this.tag(HV_TRANSFORMER_UPGRADES).add(HVTransformerUpgrade);
         this.tag(MUFFLER_UPGRADES).add(MufflerUpgrade);
-        this.tag(STEAM_UPGRADES).add(SteamUpgrade);
-        this.tag(CIRCUITS_BASIC).add(CircuitBasic);
-        this.tag(CIRCUITS_ADVANCED).add(CircuitAdv);
-        this.tag(CIRCUITS_ELITE).add(CircuitDataControl);
-        this.tag(CIRCUITS_MASTER).add(CircuitEnergyFlow);
-        this.tag(CIRCUITS_DATA).add(CircuitDataStorage);
-        this.tag(CIRCUITS_ULTIMATE).add(CircuitDataOrb);
+        this.tag(STEAM_UPGRADES).add(SteamUpgrade);;
         this.tag(MACHINE_HULLS_CHEAP).add(GT4RMaterialTags.HULL.get(Bronze), GT4RMaterialTags.HULL.get(Brass), GT4RMaterialTags.HULL.get(WroughtIron), GT4RMaterialTags.HULL.get(AntimatterMaterials.Iron), GT4RMaterialTags.HULL.get(Aluminium));
         this.tag(MACHINE_HULLS_SEMI_CHEAP).add(GT4RMaterialTags.HULL.get(WroughtIron), GT4RMaterialTags.HULL.get(Aluminium));
         this.tag(MACHINE_HULLS_BASIC).add(GT4RMaterialTags.HULL.get(Steel), GT4RMaterialTags.HULL.get(StainlessSteel), GT4RMaterialTags.HULL.get(Aluminium));
         this.tag(MACHINE_HULLS_ADVANCED).add(GT4RMaterialTags.HULL.get(Aluminium), GT4RMaterialTags.HULL.get(StainlessSteel));
         this.tag(MACHINE_HULLS_STABILIZED).add(GT4RMaterialTags.HULL.get(StainlessSteel), GT4RMaterialTags.HULL.get(TungstenSteel), GT4RMaterialTags.HULL.get(Titanium));
         this.tag(MACHINE_HULLS_VERY_ADVANCED).add(GT4RMaterialTags.HULL.get(TungstenSteel), GT4RMaterialTags.HULL.get(Titanium));
-        this.tag(GRINDING_HEAD).add(DiamondGrindHead, TungstenGrindHead);
+        this.tag(GRINDING_HEAD).add(GTCoreItems.DiamondGrindHead, GTCoreItems.TungstenGrindHead);
         this.tag(PISTONS).add(Items.PISTON, Items.STICKY_PISTON);
         this.tag(GEARS_TITAN_TUNGSTEEL).addTag(getTag("gears/titanium")).addTag(getTag("gears/tungstensteel"));
         this.tag(GEARS_STEELS).addTag(getTag("gears/steel")).addTag(getTag("gears/stainless_steel"));
         this.tag(DUSTS_LAPIS_LAZ).addTag(getTag("dusts/lapis")).addTag(getTag("dusts/lazurite"));
         this.tag(DUSTS_COALS).addTag(getTag("dusts/coal")).addTag(getTag("dusts/charcoal"));
 
-        this.tag(BATTERIES_RE).add(BatteryRE);
-        this.tag(BATTERIES_SMALL).add(BatterySmallSodium, BatterySmallCadmium, BatterySmallLithium);
-        this.tag(BATTERIES_MEDIUM).add(BatteryMediumSodium, BatteryMediumCadmium, BatteryMediumLithium);
-        this.tag(BATTERIES_LARGE).add(BatteryLargeSodium, BatteryLargeCadmium, BatteryLargeLithium, EnergyCrystal);
-        this.tag(POWER_UNIT_LV).add(PowerUnitLV);
-        this.tag(POWER_UNIT_MV).add(PowerUnitMV);
-        this.tag(POWER_UNIT_HV).add(PowerUnitHV);
-        this.tag(POWER_UNIT_SMALL).add(SmallPowerUnit);
         this.tag(POWER_UNIT_ROCK_CUTTER).add(RockCutterPowerUnit);
         this.tag(TagUtils.getForgelikeItemTag("stone_ores/iron")).add(Items.IRON_ORE);
         this.tag(TagUtils.getForgelikeItemTag("stone_ores/gold")).add(Items.GOLD_ORE);

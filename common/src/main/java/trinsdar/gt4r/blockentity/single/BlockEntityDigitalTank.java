@@ -2,6 +2,7 @@ package trinsdar.gt4r.blockentity.single;
 
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
+import io.github.gregtechintergalactical.gtcore.data.GTCoreItems;
 import muramasa.antimatter.blockentity.BlockEntityTank;
 import muramasa.antimatter.capability.fluid.FluidTank;
 import muramasa.antimatter.capability.fluid.FluidTanks;
@@ -62,7 +63,7 @@ public class BlockEntityDigitalTank extends BlockEntityTank<BlockEntityDigitalTa
                                     playerEntity.sendMessage(new TranslatableComponent("message.gt4r.digital_tank_inventory"), playerEntity.getUUID());
                                     return;
                                 }
-                                ItemStack newStack = new ItemStack(GT4RData.CircuitDataOrb);
+                                ItemStack newStack = new ItemStack(GTCoreItems.DataOrb);
 
 
                                 f.insertFluid(fluidStack, false);
@@ -75,7 +76,7 @@ public class BlockEntityDigitalTank extends BlockEntityTank<BlockEntityDigitalTa
             } else if (data[1] == 1){
                 fluidHandler.ifPresent(f -> {
                     ItemStack orb = itemHandler.map(i -> i.getHandler(SlotTypes.DATA).getStackInSlot(0)).orElse(ItemStack.EMPTY);
-                    if (orb.getItem() == GT4RData.CircuitDataOrb){
+                    if (orb.getItem() == GTCoreItems.DataOrb){
                         if (f.getInputTanks().getTank(0).getStoredFluid().getFluidAmount() > 0){
                             ItemStack newStack = new ItemStack(GT4RData.StorageDataOrb);
                             CompoundTag nbt = f.getInputTanks().getTank(0).getStoredFluid().serialize();

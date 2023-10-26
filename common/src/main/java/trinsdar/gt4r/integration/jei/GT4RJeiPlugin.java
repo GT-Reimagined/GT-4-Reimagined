@@ -1,6 +1,6 @@
 package trinsdar.gt4r.integration.jei;
 
-import io.github.gregtechintergalactical.gtutility.gui.ContainerWorkbench;
+import io.github.gregtechintergalactical.gtcore.gui.ContainerWorkbench;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;

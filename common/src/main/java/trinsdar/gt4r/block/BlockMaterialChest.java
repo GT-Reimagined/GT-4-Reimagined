@@ -1,6 +1,6 @@
 package trinsdar.gt4r.block;
 
-import io.github.gregtechintergalactical.gtutility.machine.BlockMachineMaterial;
+import io.github.gregtechintergalactical.gtcore.machine.BlockMachineMaterial;
 import it.unimi.dsi.fastutil.floats.Float2FloatFunction;
 import muramasa.antimatter.datagen.providers.AntimatterItemModelProvider;
 import muramasa.antimatter.machine.Tier;
@@ -43,7 +43,7 @@ public class BlockMaterialChest extends BlockMachineMaterial implements SimpleWa
     protected static final VoxelShape AABB = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 14.0D, 15.0D);
     public BlockMaterialChest(Machine<?> type, Tier tier) {
         super(type, tier);
-        type.setClientTick();
+        type.setClientTicking();
     }
 
 

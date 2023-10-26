@@ -1,6 +1,8 @@
 package trinsdar.gt4r.loader.machines;
 
-import io.github.gregtechintergalactical.gtrubber.GTRubberData;
+import io.github.gregtechintergalactical.gtcore.data.GTCoreBlocks;
+import io.github.gregtechintergalactical.gtcore.data.GTCoreItems;
+import io.github.gregtechintergalactical.gtcore.data.GTCoreTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
@@ -11,10 +13,10 @@ import static trinsdar.gt4r.data.RecipeMaps.EXTRACTING;
 
 public class ExtractorLoader {
     public static void init() {
-        EXTRACTING.RB().ii(of(GTRubberData.RUBBER_LOGS,1)).io(DUST.get(Rubber, 2)).add("rubber_dust",200,8);
-        EXTRACTING.RB().ii(of(GTRubberData.RUBBER_LEAVES.asItem(),1)).io(DUST.get(Rubber, 1)).add("rubber_dust_1", 150,8);
-        EXTRACTING.RB().ii(of(GTRubberData.RUBBER_SAPLING.asItem(),1)).io(DUST.get(Rubber, 1)).add("rubber_dust_2", 150,8);
-        EXTRACTING.RB().ii(of(GTRubberData.StickyResin,1)).io(DUST.get(Rubber, 3)).add("rubber_dust_3", 150,8);
+        EXTRACTING.RB().ii(of(GTCoreTags.RUBBER_LOGS,1)).io(DUST.get(Rubber, 2)).add("rubber_dust",200,8);
+        EXTRACTING.RB().ii(of(GTCoreBlocks.RUBBER_LEAVES.asItem(),1)).io(DUST.get(Rubber, 1)).add("rubber_dust_1", 150,8);
+        EXTRACTING.RB().ii(of(GTCoreBlocks.RUBBER_SAPLING.asItem(),1)).io(DUST.get(Rubber, 1)).add("rubber_dust_2", 150,8);
+        EXTRACTING.RB().ii(of(GTCoreItems.StickyResin,1)).io(DUST.get(Rubber, 3)).add("rubber_dust_3", 150,8);
         EXTRACTING.RB().ii(of(Items.LILY_OF_THE_VALLEY, 1)).io(new ItemStack(Items.WHITE_DYE, 3)).add("white_dye", 400, 2);
         EXTRACTING.RB().ii(of(Items.ORANGE_TULIP, 1)).io(new ItemStack(Items.ORANGE_DYE, 3)).add("orange_dye", 400, 2);
         EXTRACTING.RB().ii(of(Items.ALLIUM, 1)).io(new ItemStack(Items.MAGENTA_DYE, 3)).add("magenta_dye",400, 2);

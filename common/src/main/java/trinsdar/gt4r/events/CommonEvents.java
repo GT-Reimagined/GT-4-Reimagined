@@ -13,7 +13,7 @@ import net.minecraft.world.item.Items;
 
 import java.util.UUID;
 
-import static muramasa.antimatter.data.AntimatterDefaultTools.DRILL;
+import static io.github.gregtechintergalactical.gtcore.data.GTCoreTools.DRILL;
 import static muramasa.antimatter.data.AntimatterDefaultTools.PICKAXE;
 
 public class CommonEvents {

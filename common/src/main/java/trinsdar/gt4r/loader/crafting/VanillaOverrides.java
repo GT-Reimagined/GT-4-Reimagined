@@ -1,6 +1,5 @@
 package trinsdar.gt4r.loader.crafting;
 
-import io.github.gregtechintergalactical.gtrubber.GTRubberData;
 import muramasa.antimatter.data.AntimatterDefaultTools;
 import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.data.AntimatterMaterials;
@@ -24,6 +23,7 @@ import trinsdar.gt4r.data.GT4RData;
 import java.util.function.Consumer;
 
 import static com.google.common.collect.ImmutableMap.of;
+import static io.github.gregtechintergalactical.gtcore.data.GTCoreItems.StickyResin;
 import static muramasa.antimatter.data.AntimatterMaterialTypes.DUST;
 import static muramasa.antimatter.data.AntimatterMaterials.Stone;
 import static muramasa.antimatter.util.TagUtils.getForgelikeItemTag;
@@ -43,7 +43,7 @@ public class VanillaOverrides {
         provider.addItemRecipe(consumer, GT4RRef.ID, "huge_wooden_fluid_pipe", "pipes", "has_saw", provider.hasSafeItem(AntimatterDefaultTools.SAW.getTag()),
                 GT4RData.FLUID_PIPE_WOOD.getBlockItem(PipeSize.HUGE), of('S', AntimatterDefaultTools.SAW.getTag(), 's', ItemTags.LOGS, 'H', AntimatterDefaultTools.SOFT_HAMMER.getTag()), "  S", "s s", "H  ");
         provider.shapeless(consumer, "sodalite_to_blue_dye", "", "has_sodalite", provider.hasSafeItem(AntimatterMaterialTypes.GEM.getMaterialTag(Sodalite)), new ItemStack(Items.BLUE_DYE), AntimatterMaterialTypes.GEM.getMaterialTag(Sodalite));
-        provider.addConditionalRecipe(consumer, provider.getStackRecipe("", "has_sulfur_dust", provider.hasSafeItem(getForgelikeItemTag("dusts/sulfur")),
+        provider.addConditionalRecipe(consumer, provider.getStackRecipe("", false,
                 new ItemStack(Items.TORCH, 6), of('D', getForgelikeItemTag("dusts/sulfur"), 'R', ForgeCTags.RODS_WOODEN), "D", "R"), "gt4r-common", "Gameplay.SULFUR_TORCH", GT4RRef.ID, "sulfur_torch");
         provider.addItemRecipe(consumer, GT4RRef.ID, "chainmail_helmet", "chainmail_armor", "has_hammer", provider.hasSafeItem(AntimatterDefaultTools.HAMMER.getTag()),
                 Items.CHAINMAIL_HELMET, of('R', AntimatterMaterialTypes.RING.getMaterialTag(Steel), 'H', AntimatterDefaultTools.HAMMER.getTag()), "RRR", "RHR");
@@ -55,8 +55,8 @@ public class VanillaOverrides {
                 Items.CHAINMAIL_BOOTS, of('R', AntimatterMaterialTypes.RING.getMaterialTag(Steel), 'H', AntimatterDefaultTools.HAMMER.getTag()), "R R", "RHR");
         provider.addItemRecipe(consumer, GT4RRef.ID, "saddle", "", "has_leather", provider.hasSafeItem(Items.LEATHER), Items.SADDLE,
                 of('L', Items.LEATHER, 'R', AntimatterMaterialTypes.RING.getMaterialTag(Steel), 'S', AntimatterMaterialTypes.SCREW.getMaterialTag(Steel)), "LLL", "LSL", "R R");
-        provider.addItemRecipe(consumer,  GT4RRef.ID,"sticky_piston_from_resin", "", "has_piston", provider.hasSafeItem(Blocks.PISTON), Blocks.STICKY_PISTON, of('S', GTRubberData.StickyResin, 'P', Blocks.PISTON), "S", "P");
-        provider.addStackRecipe(consumer, GT4RRef.ID, "lead_from_resin", "", "has_resin", provider.hasSafeItem(GTRubberData.StickyResin), new ItemStack(Items.LEAD, 2), of('S', Items.STRING, 'R', GTRubberData.StickyResin), "SS ", "SR ", "  S");
+        provider.addItemRecipe(consumer,  GT4RRef.ID,"sticky_piston_from_resin", "", "has_piston", provider.hasSafeItem(Blocks.PISTON), Blocks.STICKY_PISTON, of('S', StickyResin, 'P', Blocks.PISTON), "S", "P");
+        provider.addStackRecipe(consumer, GT4RRef.ID, "lead_from_resin", "", "has_resin", provider.hasSafeItem(StickyResin), new ItemStack(Items.LEAD, 2), of('S', Items.STRING, 'R', StickyResin), "SS ", "SR ", "  S");
         provider.shapeless(consumer, "gravel_to_flint", "mortar_recipes", "has_mortar", provider.hasSafeItem(AntimatterDefaultTools.MORTAR.getTag()), new ItemStack(Items.FLINT), AntimatterDefaultTools.MORTAR.getTag(), Items.GRAVEL);
         provider.shapeless(consumer, "dust_brick", "mortar_recipes", "has_mortar", provider.hasSafeItem(AntimatterDefaultTools.MORTAR.getTag()), AntimatterMaterialTypes.DUST_SMALL.get(Brick, 1), AntimatterDefaultTools.MORTAR.getTag(), Items.BRICK);
         provider.shapeless(consumer, "dust_clay", "mortar_recipes", "has_mortar", provider.hasSafeItem(AntimatterDefaultTools.MORTAR.getTag()), AntimatterMaterialTypes.DUST_SMALL.get(Clay, 2), AntimatterDefaultTools.MORTAR.getTag(), Items.CLAY_BALL);

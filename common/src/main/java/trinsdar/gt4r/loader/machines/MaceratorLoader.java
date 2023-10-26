@@ -26,6 +26,7 @@ import trinsdar.gt4r.GT4RRef;
 import java.util.ArrayList;
 import java.util.List;
 
+import static io.github.gregtechintergalactical.gtcore.data.GTCoreItems.Biochaff;
 import static muramasa.antimatter.material.Material.NULL;
 import static muramasa.antimatter.material.MaterialTags.BY_PRODUCT_MULTI;
 import static muramasa.antimatter.material.MaterialTags.MACERATE_INTO;
@@ -34,7 +35,6 @@ import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
 import static muramasa.antimatter.data.AntimatterMaterials.*;
 import static muramasa.antimatter.util.Utils.getConventionalMaterialType;
 import static muramasa.antimatter.util.Utils.getConventionalStoneType;
-import static trinsdar.gt4r.data.GT4RData.Biochaff;
 import static trinsdar.gt4r.data.GT4RData.Plantball;
 import static trinsdar.gt4r.data.Materials.Brick;
 import static trinsdar.gt4r.data.Materials.Clay;

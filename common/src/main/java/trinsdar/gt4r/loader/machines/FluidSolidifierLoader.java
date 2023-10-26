@@ -1,5 +1,6 @@
 package trinsdar.gt4r.loader.machines;
 
+import io.github.gregtechintergalactical.gtcore.data.GTCoreItems;
 import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
@@ -15,19 +16,19 @@ public class FluidSolidifierLoader {
 
     public static void init() {
         NUGGET.all().forEach(r -> {
-            add(r, NUGGET.get(r, 1), "nugget", GT4RData.MoldNugget, ratio() / 9, 4);
+            add(r, NUGGET.get(r, 1), "nugget", GTCoreItems.MoldNugget, ratio() / 9, 4);
         });
         PLATE.all().forEach(r -> {
-            add(r, PLATE.get(r, 1), "plate", GT4RData.MoldPlate, 1.0f, 4);
+            add(r, PLATE.get(r, 1), "plate", GTCoreItems.MoldPlate, 1.0f, 4);
         });
         INGOT.all().forEach(r -> {
-            add(r, INGOT.get(r, 1), "ingot", GT4RData.MoldIngot, 1.0f, 4);
+            add(r, INGOT.get(r, 1), "ingot", GTCoreItems.MoldIngot, 1.0f, 4);
         });
         GEAR.all().forEach(r -> {
-            add(r, GEAR.get(r, 1), "gear", GT4RData.MoldGear, 4.0f, 8);
+            add(r, GEAR.get(r, 1), "gear", GTCoreItems.MoldGear, 4.0f, 8);
         });
         BLOCK.all().forEach(r -> {
-            add(r, BLOCK.get().get(r).asStack(), "block", GT4RData.MoldBlock, 9.0f, 16);
+            add(r, BLOCK.get().get(r).asStack(), "block", GTCoreItems.MoldBlock, 9.0f, 16);
         });
     }
 
