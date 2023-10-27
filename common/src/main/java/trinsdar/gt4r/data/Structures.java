@@ -3,14 +3,21 @@ package trinsdar.gt4r.data;
 import com.gtnewhorizon.structurelib.structure.IStructureElement;
 import com.gtnewhorizon.structurelib.structure.StructureUtility;
 import muramasa.antimatter.Data;
+import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.structure.FakeTileElement;
 import muramasa.antimatter.blockentity.BlockEntityMachine;
+import muramasa.antimatter.structure.PatternBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import trinsdar.gt4r.blockentity.multi.*;
 
+import java.util.function.BiFunction;
+
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static muramasa.antimatter.machine.Tier.LV;
+import static muramasa.antimatter.machine.Tier.NONE;
 import static muramasa.antimatter.structure.AntimatterStructureUtility.ofHatch;
 import static trinsdar.gt4r.data.GT4RData.*;
 import static trinsdar.gt4r.data.Machines.*;
@@ -29,9 +36,9 @@ public class Structures {
 
     public static void initPatterns() {
         //TODO after patterns are fixed
-        /*COKE_OVEN.setStructurePattern(b -> b
+        COKE_OVEN.setStructurePattern(b -> b
                 .of("CCC", "CCC", "CCC").of("CCC", "CAM", "CCC").of(0)
-                .at("C", FIRE_BRICKS.defaultBlockState()).at("M", COKE_OVEN, LV, Direction.SOUTH)
+                .at("C", FIRE_BRICKS.defaultBlockState()).at("M", COKE_OVEN, NONE, Direction.SOUTH)
                 .description(COKE_OVEN.getDisplayName(COKE_OVEN.getFirstTier()))
                 .build()
         );
@@ -140,7 +147,7 @@ public class Structures {
         FUSION_REACTOR.setStructurePattern(
                 builder.at("B", FUSION_ITEM_INJECTOR, FUSION_ITEM_INJECTOR.getFirstTier(), Direction.SOUTH).at("H", FUSION_ITEM_EXTRACTOR, FUSION_ITEM_EXTRACTOR.getFirstTier(), Direction.SOUTH).description(FUSION_REACTOR.getDisplayName(FUSION_REACTOR.getFirstTier()).getString() + " Item").build(),
                 builder.at("B", FUSION_FLUID_INJECTOR, FUSION_FLUID_INJECTOR.getFirstTier(), Direction.SOUTH).at("H", FUSION_FLUID_EXTRACTOR, FUSION_FLUID_EXTRACTOR.getFirstTier(), Direction.SOUTH).description(FUSION_REACTOR.getDisplayName(FUSION_REACTOR.getFirstTier()).getString() + " Fluid").build()
-        );*/
+        );
     }
 
     public static void init() {
