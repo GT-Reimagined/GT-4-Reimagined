@@ -53,7 +53,7 @@ public class Structures {
                 builder.at("B", Blocks.AIR.defaultBlockState()).description(Blocks.AIR.getDescriptionId()).build()
         );
         builder = new PatternBuilder().of("CCC ", "CCCM", "CCC ").of("CCC ", "CLC ", "CCC ").of(1).of("CCC ", "CCC ", "CCC ")
-                .at("M", BLAST_FURNACE, BLAST_FURNACE.getFirstTier(), Direction.SOUTH);
+                .at("M", BLAST_FURNACE, BLAST_FURNACE.getFirstTier(), Direction.SOUTH).scale(0.9f);
         BLAST_FURNACE.setStructurePattern(
                 builder.at("C", STANDARD_MACHINE_CASING.defaultBlockState()).at("L", Blocks.LAVA.defaultBlockState()).description(STANDARD_MACHINE_CASING.getDescriptionId() + " With " + Blocks.LAVA.getDescriptionId()).build(),
                 builder.at("C", REINFORCED_MACHINE_CASING.defaultBlockState()).at("L", Blocks.LAVA.defaultBlockState()).description(REINFORCED_MACHINE_CASING.getDescriptionId() + " With " + Blocks.LAVA.getDescriptionId()).build(),
@@ -143,7 +143,7 @@ public class Structures {
                 "   ECCHOHCCE   ",
                 "    OOCCCOO    ",
                 "      HOH      "
-        ).of(0).at("O", ADVANCED_MACHINE_CASING.defaultBlockState()).at("C", FUSION_COIL.defaultBlockState()).at("M", FUSION_REACTOR, FUSION_REACTOR.getFirstTier(), Direction.SOUTH).at("E", FUSION_ENERGY_INJECTOR, FUSION_ENERGY_INJECTOR.getFirstTier(), Direction.SOUTH);
+        ).of(0).at("O", ADVANCED_MACHINE_CASING.defaultBlockState()).at("C", FUSION_COIL.defaultBlockState()).at("M", FUSION_REACTOR, FUSION_REACTOR.getFirstTier(), Direction.SOUTH).at("E", FUSION_ENERGY_INJECTOR, FUSION_ENERGY_INJECTOR.getFirstTier(), Direction.SOUTH).scale(0.5f);
         FUSION_REACTOR.setStructurePattern(
                 builder.at("B", FUSION_ITEM_INJECTOR, FUSION_ITEM_INJECTOR.getFirstTier(), Direction.SOUTH).at("H", FUSION_ITEM_EXTRACTOR, FUSION_ITEM_EXTRACTOR.getFirstTier(), Direction.SOUTH).description(FUSION_REACTOR.getDisplayName(FUSION_REACTOR.getFirstTier()).getString() + " Item").build(),
                 builder.at("B", FUSION_FLUID_INJECTOR, FUSION_FLUID_INJECTOR.getFirstTier(), Direction.SOUTH).at("H", FUSION_FLUID_EXTRACTOR, FUSION_FLUID_EXTRACTOR.getFirstTier(), Direction.SOUTH).description(FUSION_REACTOR.getDisplayName(FUSION_REACTOR.getFirstTier()).getString() + " Fluid").build()
