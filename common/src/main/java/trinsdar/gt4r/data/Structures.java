@@ -53,7 +53,7 @@ public class Structures {
                 builder.at("B", Blocks.AIR.defaultBlockState()).description(Blocks.AIR.getDescriptionId()).build()
         );
         builder = new PatternBuilder().of("CCC ", "CCCM", "CCC ").of("CCC ", "CLC ", "CCC ").of(1).of("CCC ", "CCC ", "CCC ")
-                .at("M", BLAST_FURNACE, BLAST_FURNACE.getFirstTier(), Direction.SOUTH).scale(0.9f);
+                .at("M", BLAST_FURNACE, BLAST_FURNACE.getFirstTier(), Direction.SOUTH).scale(0.9f).tip(1, 0, 1, "You can mix and match any of the 3 casings");
         BLAST_FURNACE.setStructurePattern(
                 builder.at("C", STANDARD_MACHINE_CASING.defaultBlockState()).at("L", Blocks.LAVA.defaultBlockState()).description(STANDARD_MACHINE_CASING.getDescriptionId() + " With " + Blocks.LAVA.getDescriptionId()).build(),
                 builder.at("C", REINFORCED_MACHINE_CASING.defaultBlockState()).at("L", Blocks.LAVA.defaultBlockState()).description(REINFORCED_MACHINE_CASING.getDescriptionId() + " With " + Blocks.LAVA.getDescriptionId()).build(),
