@@ -3,6 +3,7 @@ package trinsdar.gt4r.data;
 import earth.terrarium.botarium.common.registry.fluid.FluidProperties;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.AntimatterConfig;
+import muramasa.antimatter.Ref;
 import muramasa.antimatter.cover.CoverFactory;
 import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.fluid.AntimatterFluid;
@@ -130,13 +131,13 @@ public class GT4RData {
     public static ItemBasic<?> CompressedFireClay = new ItemBasic<>(GT4RRef.ID, "compressed_fire_clay").tip("Brick Shaped");
     public static ItemBasic<?> FireBrick = new ItemBasic<>(GT4RRef.ID, "fire_brick").tip("Heat Resistant");
     public static ItemBasic<?> ItemSuperconductor = new ItemBasic<>(GT4RRef.ID, "superconductor").tip("Conducts Energy Losslessly");
-    public static ItemBasic<?> FrequencyTransmitter = new ItemBasic<>(GT4RRef.ID, "frequency_transmitter", new Item.Properties().tab(muramasa.antimatter.Ref.TAB_ITEMS).stacksTo(1));
+    public static ItemBasic<?> FrequencyTransmitter = new ItemBasic<>(GT4RRef.ID, "frequency_transmitter", new Item.Properties().tab(Ref.TAB_ITEMS).stacksTo(1));
 
-    public static ItemBasic<?> LavaFilter = new ItemBasic<>(GT4RRef.ID, "lava_filter", new Item.Properties().tab(muramasa.antimatter.Ref.TAB_ITEMS).defaultDurability(100));
+    public static ItemBasic<?> LavaFilter = new ItemBasic<>(GT4RRef.ID, "lava_filter", new Item.Properties().tab(Ref.TAB_ITEMS).defaultDurability(100));
     public static ItemBasic<?> LighterEmpty = new ItemBasic<>(GT4RRef.ID, "lighter_empty");
-    public static ItemBasic<ItemMatch> Match = new ItemMatch(GT4RRef.ID, "match", new Item.Properties().tab(muramasa.antimatter.Ref.TAB_ITEMS));
-    public static ItemBasic<ItemMatch> MatchBook = new ItemMatch(GT4RRef.ID, "match_book", new Item.Properties().tab(muramasa.antimatter.Ref.TAB_ITEMS).defaultDurability(64));
-    public static ItemBasic<ItemMatch> Lighter = new ItemMatch(GT4RRef.ID, "lighter", new Item.Properties().tab(muramasa.antimatter.Ref.TAB_ITEMS).defaultDurability(100));
+    public static ItemBasic<ItemMatch> Match = new ItemMatch(GT4RRef.ID, "match", new Item.Properties().tab(Ref.TAB_ITEMS));
+    public static ItemBasic<ItemMatch> MatchBook = new ItemMatch(GT4RRef.ID, "match_book", new Item.Properties().tab(Ref.TAB_ITEMS).defaultDurability(64));
+    public static ItemBasic<ItemMatch> Lighter = new ItemMatch(GT4RRef.ID, "lighter", new Item.Properties().tab(Ref.TAB_ITEMS).defaultDurability(100));
 
     public static ItemBasic<?> MixedMetal = new ItemMixedMetal();
     public static ItemBasic<?> AdvancedAlloy = new ItemBasic<>(GT4RRef.ID,"advanced_alloy");

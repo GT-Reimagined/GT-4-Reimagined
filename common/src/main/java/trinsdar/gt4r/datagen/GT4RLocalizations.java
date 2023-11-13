@@ -75,16 +75,14 @@ public class GT4RLocalizations {
             AntimatterAPI.all(ItemMatch.class, domain).forEach(i -> {
                 String value = lowerUnderscoreToUpperSpaced(i.getId());
                 if (i == GT4RData.Lighter) value = value.concat(" (Full)");
-                add(i, value);
+                override(i.getDescriptionId(), value);
             });
             AntimatterAPI.all(ItemPowerUnit.class, domain).forEach(i -> {
                 String value = lowerUnderscoreToUpperSpaced(i.getId());
                 if (i.getId().startsWith("power_unit")) value = lowerUnderscoreToUpperSpacedRotated(i.getId());
-                add(i, value);
+                override(i.getDescriptionId(), value);
             });
-            AntimatterAPI.all(ItemIntCircuit.class, domain).forEach(i -> add(i, "Integrated Circuit (" + i.circuitId + ")"));
-            add(GT4RData.MixedMetal, lowerUnderscoreToUpperSpaced(GT4RData.MixedMetal.getId()));
-            add(GT4RData.CraftingModule, lowerUnderscoreToUpperSpaced(GT4RData.CraftingModule.getId()));
+            AntimatterAPI.all(ItemIntCircuit.class, domain).forEach(i -> override(i.getDescriptionId(), "Integrated Circuit (" + i.circuitId + ")"));
             override(ROCK_CUTTER.getToolStack(NULL, NULL).getItem().getDescriptionId(), "Rock Cutter");
             override(GT4RData.LighterEmpty.getDescriptionId(), "Lighter (Empty)");
             override(GT4RData.StorageDataOrb.getDescriptionId(), "Data Orb");

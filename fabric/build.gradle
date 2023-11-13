@@ -50,6 +50,7 @@ dependencies{
         exclude(group: "net.fabricmc.fabric-api")
     }*/
     modImplementation("com.github.Trinsdar:ARRP:0.6.7-hotfix")
+    modImplementation "maven.modrinth:carbon-config:2ngFmmhP"
     implementation("io.github.gregtechintergalactical:gtcore-fabric:${rootProject.gt_core_version}-${rootProject.minecraft_version}:dev-shadow"){
         transitive = false
     }
