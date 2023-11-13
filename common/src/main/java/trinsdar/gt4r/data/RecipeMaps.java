@@ -61,7 +61,7 @@ public class RecipeMaps {
     public static RecipeMap<?> BASIC_DISTILLING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "basic_distilling", new RecipeBuilder()));
     public static RecipeMap<?> DUSTBIN = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "dustbin", new RecipeBuilder()));
     public static RecipeMap<?> FERMENTING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "fermenting", new RecipeBuilder()));
-    public static RecipeMap<?> FLUID_EXTRACTOR_COILS = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "fluid_extractor_coils", new RecipeBuilder())).setIcon(GT4RData.CupronickelHeatingCoil);
+    public static RecipeMap<?> FLUID_EXTRACTOR_COILS = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "fluid_extractor_coils", new RecipeBuilder())).setIcon(() -> GT4RData.CupronickelHeatingCoil);
 
 
     public static RecipeMap<?> STEAM_SMELTING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "steam_smelting", new RecipeBuilder()).setProxy(RecipeProxies.FURNACE_PROXY.apply(8, 180)));
@@ -107,7 +107,7 @@ public class RecipeMaps {
         INDUSTRIAL_SAWMILLING.setGuiData(MULTI_DISPLAY, INDUSTRIAL_SAWMILL);
         VACUUM_FREEZING.setGuiData(MULTI_DISPLAY, VACUUM_FREEZER);
         FUSION.setGuiData(MULTI_DISPLAY, FUSION_REACTOR);
-        ORE_BYPRODUCTS.setIcon(Items.IRON_ORE);
-        INT_CIRCUITS.setIcon(TierMaps.INT_CIRCUITS_ITEMS.get(0));
+        ORE_BYPRODUCTS.setIcon(() -> Items.IRON_ORE);
+        INT_CIRCUITS.setIcon(() -> TierMaps.INT_CIRCUITS_ITEMS.get(0));
     }
 }

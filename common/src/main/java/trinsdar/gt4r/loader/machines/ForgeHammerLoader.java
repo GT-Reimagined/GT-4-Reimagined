@@ -40,8 +40,8 @@ public class ForgeHammerLoader {
             }
         });
         AntimatterMaterialTypes.PLATE.all().stream().filter(m -> m.has(AntimatterMaterialTypes.INGOT) && !m.has(RUBBERTOOLS)).forEach(m -> {
-            int in = AntimatterConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 3 : 1;
-            int out = AntimatterConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 2 : 1;
+            int in = 1;//AntimatterConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 3 : 1;
+            int out = 1;//AntimatterConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 2 : 1;
             HAMMERING.RB().ii(INGOT.getMaterialIngredient(m, in)).io(PLATE.get(m, out)).add(m.getId() + "_plate", m.getMass(), 16);
         });
         AntimatterAPI.all(StoneType.class, GT4RRef.ID, s -> {

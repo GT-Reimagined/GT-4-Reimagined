@@ -61,8 +61,6 @@ public class GT4RData {
 
     public static final Set<String> SupporterListSilver = new HashSet<>(), SupporterListGold = new HashSet<>();
 
-    private static final boolean HC = AntimatterConfig.GAMEPLAY.HARDCORE_CABLES;
-
     public static void init(Side side) {
         if (side == Side.CLIENT){
             RecipeRenderer.clientMaps();

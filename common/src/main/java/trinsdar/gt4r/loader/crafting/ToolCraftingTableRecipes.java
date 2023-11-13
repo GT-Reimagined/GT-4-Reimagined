@@ -26,7 +26,7 @@ import static trinsdar.gt4r.data.Materials.Rubber;
 public class ToolCraftingTableRecipes {
     @SuppressWarnings("unchecked")
     public static void loadRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider) {
-        int wireAmount = AntimatterConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 1 : 2;
+        int wireAmount = 2;//AntimatterConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 1 : 2;
         AntimatterAPI.all(Wire.class, wire -> {
             Cable<?> cable = AntimatterAPI.get(Cable.class, "cable" + "_" + wire.getMaterial().getId());
             ImmutableSet<PipeSize> sizes = wire.getSizes();

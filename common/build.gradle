@@ -10,6 +10,7 @@ dependencies{
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
     compileOnly("com.blamejared.crafttweaker:CraftTweaker-common-1.18.2:${rootProject.crafttweaker_version}")
     modCompileOnly("dev.latvian.mods:kubejs-fabric:${rootProject.kubejs_version}")
+    implementation(annotationProcessor("io.github.llamalad7:mixinextras-common:0.2.0-beta.11"))
     implementation(project(path: ":tesseract-common", configuration: "namedElements"))
     implementation(project(path: ":antimatter-common", configuration: "namedElements"))
     modCompileOnly("io.github.gregtechintergalactical:gtcore-common:${rootProject.gt_core_version}-${rootProject.minecraft_version}"){
@@ -23,6 +24,8 @@ dependencies{
     modImplementation("earth.terrarium:botarium-common-1.18.2:${project.botarium_version}")
     compileOnly("com.electronwill.night-config:toml:${rootProject.nightconfig_version}")
     compileOnly("com.electronwill.night-config:core:${rootProject.nightconfig_version}")
+    modImplementation "maven.modrinth:carbon-config:2ngFmmhP"
+    modCompileOnly("com.github.Trinsdar:ARRP:0.6.7-hotfix")
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-api:${rootProject.rei_version}"
     modCompileOnly("mezz.jei:jei-${rootProject.minecraft_version}-common-api:${rootProject.jei_version}")
     modImplementation("net.minecraftforge:forgeconfigapiport-fabric:3.2.4")

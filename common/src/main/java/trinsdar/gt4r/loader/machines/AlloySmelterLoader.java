@@ -35,7 +35,7 @@ public class AlloySmelterLoader {
         //TODO compat for bluepower
         //ALLOY_SMELTING.RB().ii(DUST.getMaterialIngredient(Nikolite, 4), DUST.getMaterialIngredient(Copper)).io(INGOT.get(BlueAlloy, 1)).add(50, 16);
         //ALLOY_SMELTING.RB().ii(DUST.getMaterialIngredient(Nikolite, 4), INGOT.getMaterialIngredient(Copper)).io(INGOT.get(BlueAlloy, 1)).add(50, 16);
-        int ingotCount = AntimatterConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 2 : 1;
+        int ingotCount = 1;//AntimatterConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 2 : 1;
         AntimatterMaterialTypes.PLATE.all().forEach(m -> {
             if (!m.has(GT4RMaterialTags.NEEDS_BLAST_FURNACE) && m.has(AntimatterMaterialTypes.INGOT)){
                 int euTick = m.has(RUBBERTOOLS) ? 16 : 32;

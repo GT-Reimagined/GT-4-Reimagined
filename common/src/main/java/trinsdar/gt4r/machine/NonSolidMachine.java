@@ -6,12 +6,12 @@ import muramasa.antimatter.blockentity.BlockEntityMachine;
 import trinsdar.gt4r.block.BlockNonSolidMachine;
 
 import static muramasa.antimatter.machine.MachineFlag.BASIC;
-import static muramasa.antimatter.machine.MachineFlag.ENERGY;
+import static muramasa.antimatter.machine.MachineFlag.EU;
 
 public class NonSolidMachine extends Machine<NonSolidMachine> {
     public NonSolidMachine(String domain, String id) {
         super(domain, id);
-        addFlags(BASIC, ENERGY);
+        addFlags(BASIC, EU);
         setBlock(BlockNonSolidMachine::new);
         setItemBlockClass(() -> BlockNonSolidMachine.class);
         setTile(BlockEntityMachine::new);

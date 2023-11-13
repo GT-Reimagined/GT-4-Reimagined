@@ -28,15 +28,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
 import tesseract.TesseractCapUtils;
 import tesseract.api.item.ExtendedItemContainer;
-import trinsdar.gt4r.data.GT4RData;
-import trinsdar.gt4r.data.SlotTypes;
 import trinsdar.gt4r.gui.ButtonOverlays;
 
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
 
-import static muramasa.antimatter.machine.MachineFlag.ENERGY;
+import static muramasa.antimatter.machine.MachineFlag.EU;
 
 public class BlockEntityItemFilter extends BlockEntityMachine<BlockEntityItemFilter> implements IFilterableHandler {
     boolean blacklist = false;
@@ -46,7 +44,7 @@ public class BlockEntityItemFilter extends BlockEntityMachine<BlockEntityItemFil
     boolean emitEnergy = false;
     public BlockEntityItemFilter(Machine<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-        if (type.has(ENERGY)) {
+        if (type.has(EU)) {
             energyHandler.set(() -> new MachineEnergyHandler<BlockEntityItemFilter>(this, 0L, this.getMachineTier().getVoltage() * 66L, this.getMachineTier().getVoltage(), this.getMachineTier().getVoltage(), 1, 1){
                 @Override
                 public boolean canOutput(Direction direction) {

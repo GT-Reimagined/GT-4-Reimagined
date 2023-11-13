@@ -87,7 +87,7 @@ public class WorldGenLoader {
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Sodalite).atHeight(0, 80).withWeight(6).withSize(16).withDimensions(new ResourceLocation("the_end")).buildMaterial());
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Chromite).atHeight(0, 80).withWeight(4).withSize(5).withDimensions(new ResourceLocation("the_end")).buildMaterial());
 
-        if (AntimatterConfig.WORLD.VANILLA_ORE_GEN){
+        if (AntimatterConfig.VANILLA_ORE_GEN.get()){
             event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Coal).withCustomId("coal_upper").atHeight(136, 320).withWeight(30).withSize(17).buildMaterial());
             event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Coal).withCustomId("coal_lower").atHeight(0, 192).withWeight(20).withSize(17).buildMaterial());
             event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Iron).withCustomId("iron_upper").atHeight(80, 384).withWeight(90).withSize(9).withSecondaryMaterial(Tin, 0.02f).withDiscardOnExposureChance(0.5f).buildMaterial());
