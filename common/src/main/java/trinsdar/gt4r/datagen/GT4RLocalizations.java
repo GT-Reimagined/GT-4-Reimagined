@@ -10,8 +10,6 @@ import trinsdar.gt4r.GT4RRef;
 import trinsdar.gt4r.block.BlockCasing;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.items.ItemIntCircuit;
-import trinsdar.gt4r.items.ItemMatch;
-import trinsdar.gt4r.items.ItemPowerUnit;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -72,19 +70,8 @@ public class GT4RLocalizations {
         protected void english(String domain, String locale) {
             super.english(domain, locale);
             AntimatterAPI.all(BlockCasing.class, domain).forEach(i -> add(i, lowerUnderscoreToUpperSpaced(i.getId())));
-            AntimatterAPI.all(ItemMatch.class, domain).forEach(i -> {
-                String value = lowerUnderscoreToUpperSpaced(i.getId());
-                if (i == GT4RData.Lighter) value = value.concat(" (Full)");
-                override(i.getDescriptionId(), value);
-            });
-            AntimatterAPI.all(ItemPowerUnit.class, domain).forEach(i -> {
-                String value = lowerUnderscoreToUpperSpaced(i.getId());
-                if (i.getId().startsWith("power_unit")) value = lowerUnderscoreToUpperSpacedRotated(i.getId());
-                override(i.getDescriptionId(), value);
-            });
             AntimatterAPI.all(ItemIntCircuit.class, domain).forEach(i -> override(i.getDescriptionId(), "Integrated Circuit (" + i.circuitId + ")"));
             override(ROCK_CUTTER.getToolStack(NULL, NULL).getItem().getDescriptionId(), "Rock Cutter");
-            override(GT4RData.LighterEmpty.getDescriptionId(), "Lighter (Empty)");
             override(GT4RData.StorageDataOrb.getDescriptionId(), "Data Orb");
             AntimatterAPI.all(Machine.class, domain).forEach(i -> {
                 Collection<Tier> tiers =  i.getTiers();

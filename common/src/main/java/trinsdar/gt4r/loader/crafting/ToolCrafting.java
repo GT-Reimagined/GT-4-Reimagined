@@ -23,9 +23,9 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 import static com.google.common.collect.ImmutableMap.of;
+import static io.github.gregtechintergalactical.gtcore.data.GTCoreItems.MotorLV;
 import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
 import static trinsdar.gt4r.data.CustomTags.*;
-import static trinsdar.gt4r.data.GT4RData.MotorLV;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.ToolTypes.ROCK_CUTTER;
 import static trinsdar.gt4r.loader.crafting.CraftingHelper.of2;

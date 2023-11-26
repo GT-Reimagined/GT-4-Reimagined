@@ -17,8 +17,6 @@ import trinsdar.gt4r.data.RecipeMaps;
 
 import static io.github.gregtechintergalactical.gtcore.data.GTCoreItems.*;
 import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
-import static trinsdar.gt4r.data.GT4RData.Lighter;
-import static trinsdar.gt4r.data.GT4RData.LighterEmpty;
 import static trinsdar.gt4r.data.Materials.Mercury;
 import static trinsdar.gt4r.data.Materials.Propane;
 import static trinsdar.gt4r.data.Materials.SulfuricAcid;

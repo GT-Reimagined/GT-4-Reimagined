@@ -2,7 +2,6 @@ package trinsdar.gt4r.data;
 
 import earth.terrarium.botarium.common.registry.fluid.FluidProperties;
 import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.AntimatterConfig;
 import muramasa.antimatter.Ref;
 import muramasa.antimatter.cover.CoverFactory;
 import muramasa.antimatter.data.AntimatterMaterials;
@@ -43,7 +42,6 @@ import trinsdar.gt4r.cover.CoverSteamVent;
 import trinsdar.gt4r.cover.redstone.CoverRedstoneMachineController;
 import trinsdar.gt4r.data.client.RecipeRenderer;
 import trinsdar.gt4r.items.ItemCraftingModule;
-import trinsdar.gt4r.items.ItemMatch;
 import trinsdar.gt4r.items.ItemMixedMetal;
 import trinsdar.gt4r.items.ItemPowerUnit;
 import trinsdar.gt4r.items.ItemStorageOrb;
@@ -100,7 +98,6 @@ public class GT4RData {
     private static Block.Properties prepareProperties() {
         return Block.Properties.of(net.minecraft.world.level.material.Material.WATER).strength(100.0F).noDrops().lightLevel(s -> 9);
     }
-    public static ItemBasic<?> Plantball = new ItemBasic<>(GT4RRef.ID, "plantball");
     public static ItemPowerUnit RockCutterPowerUnit = new ItemPowerUnit(GT4RRef.ID, "rock_cutter_power_unit", Aluminium);
 
     public static ItemBasic<?> ComputerMonitor = new ItemBasic<>(GT4RRef.ID, "computer_monitor").tip("Can be placed on machines as a cover");
@@ -126,25 +123,15 @@ public class GT4RData {
     public static ItemBasic<?> ItemFilter = new ItemBasic<>(GT4RRef.ID, "item_filter");
     public static ItemBasic<?> ThickNeutronReflector = new ItemBasic<>(GT4RRef.ID, "thick_neutron_reflector");
     public static ItemBasic<?> NeutronReflector = new ItemBasic<>(GT4RRef.ID, "neutron_reflector");
-    public static ItemBasic<?> CompressedFireClay = new ItemBasic<>(GT4RRef.ID, "compressed_fire_clay").tip("Brick Shaped");
-    public static ItemBasic<?> FireBrick = new ItemBasic<>(GT4RRef.ID, "fire_brick").tip("Heat Resistant");
     public static ItemBasic<?> ItemSuperconductor = new ItemBasic<>(GT4RRef.ID, "superconductor").tip("Conducts Energy Losslessly");
     public static ItemBasic<?> FrequencyTransmitter = new ItemBasic<>(GT4RRef.ID, "frequency_transmitter", new Item.Properties().tab(Ref.TAB_ITEMS).stacksTo(1));
 
     public static ItemBasic<?> LavaFilter = new ItemBasic<>(GT4RRef.ID, "lava_filter", new Item.Properties().tab(Ref.TAB_ITEMS).defaultDurability(100));
-    public static ItemBasic<?> LighterEmpty = new ItemBasic<>(GT4RRef.ID, "lighter_empty");
-    public static ItemBasic<ItemMatch> Match = new ItemMatch(GT4RRef.ID, "match", new Item.Properties().tab(Ref.TAB_ITEMS));
-    public static ItemBasic<ItemMatch> MatchBook = new ItemMatch(GT4RRef.ID, "match_book", new Item.Properties().tab(Ref.TAB_ITEMS).defaultDurability(64));
-    public static ItemBasic<ItemMatch> Lighter = new ItemMatch(GT4RRef.ID, "lighter", new Item.Properties().tab(Ref.TAB_ITEMS).defaultDurability(100));
 
     public static ItemBasic<?> MixedMetal = new ItemMixedMetal();
     public static ItemBasic<?> AdvancedAlloy = new ItemBasic<>(GT4RRef.ID,"advanced_alloy");
     public static ItemBasic<?> MachineParts = new ItemBasic<>(GT4RRef.ID, "machine_parts");
-    public static ItemBasic<?> AdvCircuitParts = new ItemBasic<>(GT4RRef.ID, "advanced_circuit_parts").tip("Used for making Advanced Circuits");
     public static ItemBasic<?> StorageDataOrb = new ItemStorageOrb(GT4RRef.ID, "storage_data_orb").tip("A High Capacity Data Storage");
-    public static ItemBasic<?> MotorLV = new ItemBasic<>(GT4RRef.ID, "lv_motor");
-    public static ItemBasic<?> MotorMV = new ItemBasic<>(GT4RRef.ID, "mv_motor");
-    public static ItemBasic<?> MotorHV = new ItemBasic<>(GT4RRef.ID, "hv_motor");
 
     public static ItemBasic<?> ZPM = new ItemBattery(GT4RRef.ID, "zpm", Tier.ZPM, 100000000000L, false);
     //public static ItemBasic<?> BatteryEnergyOrbCluster = new ItemBasic<>(Ref.ID, "battery_energy_orb_cluster");

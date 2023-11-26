@@ -19,14 +19,14 @@ public class GT4RItemModelProvider extends AntimatterItemModelProvider {
     @Override
     public void processItemModels(String domain) {
         AntimatterModelManager.put(DUSTBIN.getItem(LV), (item, prov) -> {
-            AntimatterItemModelBuilder b = prov.getBuilder(item).parent(prov.existing(GT4RRef.ID, "block/layered_dustbin")).texture("base", DUSTBIN.getBaseTexture(LV)[0]);
-            Texture[] base = DUSTBIN.getBaseTexture(LV);
+            AntimatterItemModelBuilder b = prov.getBuilder(item).parent(prov.existing(GT4RRef.ID, "block/layered_dustbin")).texture("base", DUSTBIN.getBaseTexture(LV, MachineState.ACTIVE)[0]);
+            Texture[] base = DUSTBIN.getBaseTexture(LV, MachineState.ACTIVE);
             if (base.length >= 6){
                 for (int s = 0; s < 6; s++){
                     b.texture("base" +  muramasa.antimatter.Ref.DIRS[s].getSerializedName(), base[s]);
                 }
             }
-            Texture[] overlays = DUSTBIN.getOverlayTextures(MachineState.ACTIVE, LV);
+            Texture[] overlays = DUSTBIN.getOverlayTextures(MachineState.ACTIVE, LV, 0);
             for (int s = 0; s < 6; s++) {
                 b.texture("overlay" + muramasa.antimatter.Ref.DIRS[s].getSerializedName(), overlays[s]);
             }

@@ -11,12 +11,12 @@ import trinsdar.gt4r.data.CustomTags;
 import muramasa.antimatter.data.ForgeCTags;
 import trinsdar.gt4r.data.GT4RData;
 
+import static io.github.gregtechintergalactical.gtcore.data.GTCoreItems.CompressedFireClay;
+import static io.github.gregtechintergalactical.gtcore.data.GTCoreItems.Plantball;
 import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
 import static muramasa.antimatter.data.AntimatterMaterials.*;
 import static trinsdar.gt4r.data.CustomTags.CORALS;
 import static trinsdar.gt4r.data.CustomTags.VINES;
-import static trinsdar.gt4r.data.GT4RData.CompressedFireClay;
-import static trinsdar.gt4r.data.GT4RData.Plantball;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.COMPRESSING;
 

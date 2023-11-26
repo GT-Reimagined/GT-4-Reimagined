@@ -20,6 +20,7 @@ import trinsdar.gt4r.data.GT4RData;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static io.github.gregtechintergalactical.gtcore.data.GTCoreItems.Plantball;
 import static io.github.gregtechintergalactical.gtcore.data.GTCoreItems.StickyResin;
 import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
 import static muramasa.antimatter.data.AntimatterMaterials.*;
@@ -27,7 +28,6 @@ import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
 import static net.minecraft.world.item.Items.*;
 import static net.minecraft.world.item.Items.DIRT;
 import static net.minecraft.world.level.block.Blocks.GRASS_BLOCK;
-import static trinsdar.gt4r.data.GT4RData.Plantball;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.CENTRIFUGING;
 
