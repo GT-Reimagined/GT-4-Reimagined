@@ -8,7 +8,6 @@ import muramasa.antimatter.gui.container.ContainerMultiMachine;
 import muramasa.antimatter.blockentity.multi.BlockEntityMultiMachine;
 import net.minecraft.world.entity.player.Inventory;
 import trinsdar.gt4r.GT4RRef;
-import trinsdar.gt4r.gui.ContainerDigitalChest;
 import trinsdar.gt4r.gui.ContainerQuantumChest;
 import trinsdar.gt4r.gui.MenuHandlerCrafting;
 import trinsdar.gt4r.gui.MenuHandlerCraftingItem;
@@ -45,22 +44,6 @@ public class MenuHandlers {
         }
     };
 
-    public static MenuHandlerMachine<BlockEntityDigitalChest, ContainerDigitalChest> DIGITAL_CHEST_HANDLER = new MenuHandlerMachine(GT4RRef.ID, "container_digital_chest") {
-        @Override
-        public ContainerBasicMachine getMenu(IGuiHandler tile, Inventory playerInv, int windowId) {
-            return tile instanceof BlockEntityDigitalChest ? new ContainerDigitalChest((BlockEntityDigitalChest) tile, playerInv, this, windowId) : null;
-        }
-
-        @Override
-        public String screenID() {
-            return "digital_chest";
-        }
-
-        @Override
-        public String screenDomain() {
-            return GT4RRef.ID;
-        }
-    };
     public static MenuHandlerCrafting COVER_CRAFTING_HANDLER = new MenuHandlerCrafting(GT4RRef.ID, "crafting_grid");
     public static MenuHandlerCraftingItem ITEM_CRAFTING_HANDLER = new MenuHandlerCraftingItem(GT4RRef.ID, "crafting_item");
 

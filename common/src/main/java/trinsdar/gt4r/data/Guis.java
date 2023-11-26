@@ -82,7 +82,6 @@ public class Guis {
         //TODO move these textures to background folder
         BiFunction<Boolean, String, ResourceLocation> textures = (c, l) -> new ResourceLocation(GT4RRef.ID, "textures/gui/machine/" + (c ? "charging_" : "") + l + ".png");
         QUANTUM_CHEST.setGUI(MenuHandlers.QUANTUM_CHEST_HANDLER);
-        DIGITAL_CHEST.setGUI(MenuHandlers.DIGITAL_CHEST_HANDLER);
 
 
 
@@ -269,7 +268,7 @@ public class Guis {
         LARGE_STEAM_TURBINE.getGui().setBackgroundTexture("multiblock");
         THERMAL_BOILER.getGui().setBackgroundTexture("multiblock");
         HEAT_EXCHANGER.getGui().setBackgroundTexture("multiblock");
-        FUSION_REACTOR.setGUI(MenuHandlers.FUSION_MENU_HANDLER);
+        DIGITAL_CHEST.getGui().setBackgroundTexture("digital_chest");
         FUSION_REACTOR.getGui().setBackgroundTexture("fusion_control_computer");
     }
 
@@ -300,7 +299,8 @@ public class Guis {
         DISTILLATION_TOWER.setGuiProgressBarForJEI(BarDir.TOP, true);
         DISTILLATION_TOWER.getGui().getMachineData().setProgressLocation("distillation_tower")
                 .setProgressSize(16, 72).setProgressPos(80, 4).setMachineStatePos(65, 25);
-        FUSION_REACTOR.getGui().setEnablePlayerSlots(false)
+        DIGITAL_CHEST.getGui().setYSize(221).setPlayerYOffset(56);
+        FUSION_REACTOR.getGui().setYSize(182).setTitleDrawingAllowed(false).setEnablePlayerSlots(false)
                 .getMachineData().setProgressLocation("fusion_reactor").setProgressPos(163, 4).setProgressSize(149, 16);
     }
 

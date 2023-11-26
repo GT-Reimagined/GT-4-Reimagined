@@ -20,6 +20,7 @@ import java.util.function.Consumer;
 
 import static com.google.common.collect.ImmutableMap.of;
 import static io.github.gregtechintergalactical.gtcore.data.GTCoreItems.*;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.ROD;
 import static muramasa.antimatter.machine.Tier.*;
 import static muramasa.antimatter.util.TagUtils.getForgelikeItemTag;
 import static trinsdar.gt4r.data.CustomTags.*;
@@ -179,7 +180,7 @@ public class MachineCrafting {
         provider.addItemRecipe(output, GT4RRef.ID, "heat_exchanger", "machines", "has_machine_hull_basic", provider.hasSafeItem(MACHINE_HULLS_BASIC),
                 HEAT_EXCHANGER.getItem(LV), of('I', AntimatterMaterialTypes.PLATE.getMaterialTag(Invar), 'C', CopperCoil, 'P', FLUID_PIPE_INVAR.getBlock(PipeSize.SMALL), 'M', MACHINE_HULLS_BASIC), "ICI", "PMP", "ICI");
         provider.addItemRecipe(output, GT4RRef.ID, "fermenter", "machines", "has_machine_hull_basic", provider.hasSafeItem(MACHINE_HULLS_BASIC), FERMENTER.getItem(LV), of('C', CIRCUITS_BASIC, 'G', ForgeCTags.GLASS, 'M', MACHINE_HULLS_BASIC, 'P', PumpModule), " P ", "GMG", " C ");
-        provider.addItemRecipe(output, GT4RRef.ID, "distillery", "machines", "has_machine_hull_basic", provider.hasSafeItem(MACHINE_HULLS_BASIC), DISTILLERY.getItem(LV), of('C', CIRCUITS_BASIC, 'G', ForgeCTags.GLASS, 'M', MACHINE_HULLS_BASIC, 'P', PumpModule, 'B', AntimatterMaterialTypes.ROD.getMaterialTag(AntimatterMaterials.Blaze)), " B ", "CMC", "GPG");
+        provider.addItemRecipe(output, GT4RRef.ID, "distillery", "machines", "has_machine_hull_basic", provider.hasSafeItem(MACHINE_HULLS_BASIC), DISTILLERY.getItem(LV), of('C', CIRCUITS_BASIC, 'G', ForgeCTags.GLASS, 'M', MACHINE_HULLS_BASIC, 'P', PumpModule, 'B', ROD.getMaterialTag(AntimatterMaterials.Blaze)), " B ", "CMC", "GPG");
         provider.addItemRecipe(output, GT4RRef.ID, "mass_fabricator", "machines", "has_teleporter", provider.hasSafeItem(TELEPORTER.getItem(HV)),
                 MASS_FABRICATOR.getItem(EV), of('C', CIRCUITS_MASTER, 'F', FUSION_COIL, 'L', BatteryEnergyOrb, 'T', TELEPORTER.getItem(HV)), "CTC", "FLF", "CTC");
         provider.addItemRecipe(output, GT4RRef.ID, "replicator", "machines", "has_teleporter", provider.hasSafeItem(TELEPORTER.getItem(HV)),
@@ -209,8 +210,8 @@ public class MachineCrafting {
         provider.addItemRecipe(output, GT4RRef.ID, "computer_cube", "machines", "has_basic_machine", provider.hasSafeItem(MACHINE_HULLS_BASIC),
                 COMPUTER_CUBE.getItem(LV), of('C', CIRCUITS_MASTER, 'c', ComputerMonitor, 'B', MACHINE_HULLS_BASIC, 'D', CIRCUITS_ULTIMATE), "DcC", "cBc", "CcD");
         GT4RMaterialTags.CABINET.all().forEach(m -> {
-            provider.addItemRecipe(output, GT4RRef.ID, "barrel_" + m.getId(), "machines", "has_chest", provider.hasSafeItem(ForgeCTags.CHESTS_WOODEN), Machine.get(m.getId() + "_barrel", GTCore.ID).map(mch -> mch.getItem(NONE)).orElse(Items.AIR), of('P', AntimatterMaterialTypes.PLATE.getMaterialTag(m), 'C', ForgeCTags.CHESTS_WOODEN), "PPP", "CPC", "PPP");
-            provider.addItemRecipe(output, GT4RRef.ID, "chest_" + m.getId(), "machines", "has_chest", provider.hasSafeItem(ForgeCTags.CHESTS_WOODEN), Machine.get(m.getId() + "_chest", GTCore.ID).map(mch -> mch.getItem(NONE)).orElse(Items.AIR), of('P', AntimatterMaterialTypes.PLATE.getMaterialTag(m), 'C', ForgeCTags.CHESTS_WOODEN, 'R', AntimatterMaterialTypes.ROD.getMaterialTag(m), 'S', AntimatterDefaultTools.SAW.getTag(), 'W', AntimatterDefaultTools.WRENCH.getTag()), "SPW", "RCR", "PPP");
+            provider.addItemRecipe(output, GT4RRef.ID, "barrel_" + m.getId(), "machines", Machine.get(m.getId() + "_barrel", GTCore.ID).map(mch -> mch.getItem(NONE)).orElse(Items.AIR), of('P', AntimatterMaterialTypes.PLATE.getMaterialTag(m), 'C', Items.BARREL, 'R', ROD.getMaterialTag(m), 'S', AntimatterDefaultTools.SAW.getTag(), 'W', AntimatterDefaultTools.WRENCH.getTag()), "PRP", "SCW", "PRP");
+            provider.addItemRecipe(output, GT4RRef.ID, "chest_" + m.getId(), "machines", Machine.get(m.getId() + "_chest", GTCore.ID).map(mch -> mch.getItem(NONE)).orElse(Items.AIR), of('P', AntimatterMaterialTypes.PLATE.getMaterialTag(m), 'C', ForgeCTags.CHESTS_WOODEN, 'R', ROD.getMaterialTag(m), 'S', AntimatterDefaultTools.SAW.getTag(), 'W', AntimatterDefaultTools.WRENCH.getTag()), "SPW", "RCR", "PPP");
         });
 
         /*GT4RMaterialTags.LOCKER.all().forEach(m -> {

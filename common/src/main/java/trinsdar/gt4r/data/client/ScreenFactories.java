@@ -6,13 +6,10 @@ import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.inventory.CraftingScreen;
 import net.minecraft.world.inventory.CraftingMenu;
 import trinsdar.gt4r.GT4RRef;
-import trinsdar.gt4r.gui.ContainerDigitalChest;
-import trinsdar.gt4r.gui.screen.ScreenDigitalChest;
 import trinsdar.gt4r.gui.screen.ScreenFusionReactor;
 
 public class ScreenFactories {
     public final static MenuScreens.ScreenConstructor SCREEN_FUSION_REACTOR = AntimatterAPI.register(MenuScreens.ScreenConstructor.class, "fusion_reactor", GT4RRef.ID,(MenuScreens.ScreenConstructor)(a, b, c) -> new ScreenFusionReactor<>((ContainerMultiMachine) a,b,c));
-    public final static MenuScreens.ScreenConstructor SCREEN_DIGITAL_CHEST = AntimatterAPI.register(MenuScreens.ScreenConstructor.class, "digital_chest", GT4RRef.ID,(MenuScreens.ScreenConstructor)(a, b, c) -> new ScreenDigitalChest((ContainerDigitalChest) a,b,c));
     public final static MenuScreens.ScreenConstructor SCREEN_CRAFTING_TABLE = AntimatterAPI.register(MenuScreens.ScreenConstructor.class, "crafting_table", GT4RRef.ID,(MenuScreens.ScreenConstructor)(a, b, c) -> new CraftingScreen((CraftingMenu) a, b, c));
 
     public static void init(){

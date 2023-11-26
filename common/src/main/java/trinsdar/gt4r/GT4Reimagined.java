@@ -57,12 +57,12 @@ public class GT4Reimagined extends AntimatterMod {
                 Guis.init(side);
                 Models.init();
                 Registry.register(Registry.LOOT_FUNCTION_TYPE, new ResourceLocation(GT4RRef.ID, "random_drop_bonus"), GT4RRandomDropBonus.RANDOM_DROP_BONUS);
+                TierMaps.buildTierMaps();
             }
             case DATA_READY -> {
                 if (AntimatterAPI.isModLoaded(GT4RRef.MOD_BLUEPOWER)) {
                     //GEM.forceOverride(Amethyst, ForgeRegistries.ITEMS.getValue(new ResourceLocation("bluepower", "amethyst_gem")));
                 }
-                TierMaps.buildTierMaps();
                 Structures.init();
                 Structures.initPatterns();
                 OreConfigHandler.ORE_CONFIG_HANDLER.save();
