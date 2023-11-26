@@ -83,82 +83,12 @@ public class Guis {
         BiFunction<Boolean, String, ResourceLocation> textures = (c, l) -> new ResourceLocation(GT4RRef.ID, "textures/gui/machine/" + (c ? "charging_" : "") + l + ".png");
         QUANTUM_CHEST.setGUI(MenuHandlers.QUANTUM_CHEST_HANDLER);
         DIGITAL_CHEST.setGUI(MenuHandlers.DIGITAL_CHEST_HANDLER);
-        IRON_CABINET.setGUI(MenuHandlers.CABINET_HANDLER_SIX);
-        ALUMINIUM_CABINET.setGUI(MenuHandlers.CABINET_HANDLER_SIX);
-        WROUGHT_IRON_CABINET.setGUI(MenuHandlers.CABINET_HANDLER_SIX);
-        BRASS_CABINET.setGUI(MenuHandlers.CABINET_HANDLER_SIX);
-        CUPRONICKEL_CABINET.setGUI(MenuHandlers.CABINET_HANDLER_SIX);
-        ELECTRUM_CABINET.setGUI(MenuHandlers.CABINET_HANDLER_SEVEN);
-        GOLD_CABINET.setGUI(MenuHandlers.CABINET_HANDLER_SEVEN);
-        SILVER_CABINET.setGUI(MenuHandlers.CABINET_HANDLER_SEVEN);
-        MAGNALIUM_CABINET.setGUI(MenuHandlers.CABINET_HANDLER_SEVEN);
-        PLATINUM_CABINET.setGUI(MenuHandlers.CABINET_HANDLER_EIGHT);
-        OSMIUM_CABINET.setGUI(MenuHandlers.CABINET_HANDLER_NINE);
-        IRON_CABINET.getGui().setOverrideLocation(textures.apply(false, "cabinet_six"));
-        ALUMINIUM_CABINET.getGui().setOverrideLocation(textures.apply(false, "cabinet_six"));
-        WROUGHT_IRON_CABINET.getGui().setOverrideLocation(textures.apply(false, "cabinet_six"));
-        BRASS_CABINET.getGui().setOverrideLocation(textures.apply(false, "cabinet_six"));
-        CUPRONICKEL_CABINET.getGui().setOverrideLocation(textures.apply(false, "cabinet_six"));
-        ELECTRUM_CABINET.getGui().setOverrideLocation(textures.apply(false, "cabinet_seven"));
-        GOLD_CABINET.getGui().setOverrideLocation(textures.apply(false, "cabinet_seven"));
-        SILVER_CABINET.getGui().setOverrideLocation(textures.apply(false, "cabinet_seven"));
-        MAGNALIUM_CABINET.getGui().setOverrideLocation(textures.apply(false, "cabinet_seven"));
-        PLATINUM_CABINET.getGui().setOverrideLocation(textures.apply(false, "cabinet_eight"));
-        OSMIUM_CABINET.getGui().setOverrideLocation(textures.apply(false, "cabinet_nine"));
 
-        IRON_CHEST.setGUI(MenuHandlers.CABINET_HANDLER_SIX);
-        ALUMINIUM_CHEST.setGUI(MenuHandlers.CABINET_HANDLER_SIX);
-        WROUGHT_IRON_CHEST.setGUI(MenuHandlers.CABINET_HANDLER_SIX);
-        BRASS_CHEST.setGUI(MenuHandlers.CABINET_HANDLER_SIX);
-        CUPRONICKEL_CHEST.setGUI(MenuHandlers.CABINET_HANDLER_SIX);
-        ELECTRUM_CHEST.setGUI(MenuHandlers.CABINET_HANDLER_SEVEN);
-        GOLD_CHEST.setGUI(MenuHandlers.CABINET_HANDLER_SEVEN);
-        SILVER_CHEST.setGUI(MenuHandlers.CABINET_HANDLER_SEVEN);
-        MAGNALIUM_CHEST.setGUI(MenuHandlers.CABINET_HANDLER_SEVEN);
-        PLATINUM_CHEST.setGUI(MenuHandlers.CABINET_HANDLER_EIGHT);
-        OSMIUM_CHEST.setGUI(MenuHandlers.CABINET_HANDLER_NINE);
-        IRON_CHEST.getGui().setOverrideLocation(textures.apply(false, "cabinet_six"));
-        ALUMINIUM_CHEST.getGui().setOverrideLocation(textures.apply(false, "cabinet_six"));
-        WROUGHT_IRON_CHEST.getGui().setOverrideLocation(textures.apply(false, "cabinet_six"));
-        BRASS_CHEST.getGui().setOverrideLocation(textures.apply(false, "cabinet_six"));
-        CUPRONICKEL_CHEST.getGui().setOverrideLocation(textures.apply(false, "cabinet_six"));
-        ELECTRUM_CHEST.getGui().setOverrideLocation(textures.apply(false, "cabinet_seven"));
-        GOLD_CHEST.getGui().setOverrideLocation(textures.apply(false, "cabinet_seven"));
-        SILVER_CHEST.getGui().setOverrideLocation(textures.apply(false, "cabinet_seven"));
-        MAGNALIUM_CHEST.getGui().setOverrideLocation(textures.apply(false, "cabinet_seven"));
-        PLATINUM_CHEST.getGui().setOverrideLocation(textures.apply(false, "cabinet_eight"));
-        OSMIUM_CHEST.getGui().setOverrideLocation(textures.apply(false, "cabinet_nine"));
-        for (int i = 0; i < 9; i++){
+
+
+        for (int i = 0; i < 6; i++){
             for (int j = 0; j < 9; ++j) {
-                if (i < 6){
-                    IRON_CABINET.add(STORAGE, 12 + j * 18, 18 + (i * 18));
-                    ALUMINIUM_CABINET.add(STORAGE, 12 + j * 18, 18 + (i * 18));
-                    WROUGHT_IRON_CABINET.add(STORAGE, 12 + j * 18, 18 + (i * 18));
-                    BRASS_CABINET.add(STORAGE, 12 + j * 18, 18 + (i * 18));
-                    CUPRONICKEL_CABINET.add(STORAGE, 12 + j * 18, 18 + (i * 18));
-                    IRON_CHEST.add(STORAGE, 12 + j * 18, 18 + (i * 18));
-                    ALUMINIUM_CHEST.add(STORAGE, 12 + j * 18, 18 + (i * 18));
-                    WROUGHT_IRON_CHEST.add(STORAGE, 12 + j * 18, 18 + (i * 18));
-                    BRASS_CHEST.add(STORAGE, 12 + j * 18, 18 + (i * 18));
-                    CUPRONICKEL_CHEST.add(STORAGE, 12 + j * 18, 18 + (i * 18));
-                    DIGITAL_CHEST.add(STORAGE, 8 + j * 18, 8 + (i * 18));
-                }
-                if (i < 7){
-                    ELECTRUM_CABINET.add(STORAGE, 12 + j * 18, 18 + (i * 18));
-                    GOLD_CABINET.add(STORAGE, 12 + j * 18, 18 + (i * 18));
-                    SILVER_CABINET.add(STORAGE, 12 + j * 18, 18 + (i * 18));
-                    MAGNALIUM_CABINET.add(STORAGE, 12 + j * 18, 18 + (i * 18));
-                    ELECTRUM_CHEST.add(STORAGE, 12 + j * 18, 18 + (i * 18));
-                    GOLD_CHEST.add(STORAGE, 12 + j * 18, 18 + (i * 18));
-                    SILVER_CHEST.add(STORAGE, 12 + j * 18, 18 + (i * 18));
-                    MAGNALIUM_CHEST.add(STORAGE, 12 + j * 18, 18 + (i * 18));
-                }
-                if (i < 8){
-                    PLATINUM_CABINET.add(STORAGE, 12 + j * 18, 18 + (i * 18));
-                    PLATINUM_CHEST.add(STORAGE, 12 + j * 18, 18 + (i * 18));
-                }
-                OSMIUM_CABINET.add(STORAGE, 12 + j * 18, 18 + (i * 18));
-                OSMIUM_CHEST.add(STORAGE, 12 + j * 18, 18 + (i * 18));
+                DIGITAL_CHEST.add(STORAGE, 8 + j * 18, 8 + (i * 18));
             }
         }
         DIGITAL_CHEST.add(DATA, 80, 119);
@@ -384,14 +314,6 @@ public class Guis {
             t.addWidget(CoalBoilerWidget.build().setSize(70, 25, 36, 54))
                     .addWidget(CoalBoilerFuelWidget.build().setSize(115, 43, 18, 18));
         });
-        PLATINUM_CABINET.getCallbacks().remove(0);
-        OSMIUM_CABINET.getCallbacks().remove(0);
-        PLATINUM_CABINET.addGuiCallback(t -> t.addWidget(BackgroundWidget.build(t.handler.getGuiTexture(),t.handler.guiSize(), t.handler.guiHeight(), 256, 266)));
-        OSMIUM_CABINET.addGuiCallback(t -> t.addWidget(BackgroundWidget.build(t.handler.getGuiTexture(),t.handler.guiSize(), t.handler.guiHeight(), 256, 276)));
-        PLATINUM_CHEST.getCallbacks().remove(0);
-        OSMIUM_CHEST.getCallbacks().remove(0);
-        PLATINUM_CHEST.addGuiCallback(t -> t.addWidget(BackgroundWidget.build(t.handler.getGuiTexture(),t.handler.guiSize(), t.handler.guiHeight(), 256, 266)));
-        OSMIUM_CHEST.addGuiCallback(t -> t.addWidget(BackgroundWidget.build(t.handler.getGuiTexture(),t.handler.guiSize(), t.handler.guiHeight(), 256, 276)));
         FUSION_REACTOR.addGuiCallback(t -> {
             t.addButton(155, 23, ButtonOverlay.NO_OVERLAY, false).addButton(155, 41, ButtonOverlay.NO_OVERLAY, false).addButton(155, 59, ButtonOverlay.NO_OVERLAY, false).addWidget(makeProgress()).addWidget(FusionButtonWidget.build());
         });

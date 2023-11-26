@@ -10,6 +10,5 @@ public class GT4RClientInitializer implements IAntimatterClientInitializer {
     @Override
     public void onInitializeClient() {
         ClientHandler.setup();
-        TextureStitchCallback.PRE.register((ClientEvents::onStitch));
     }
 }

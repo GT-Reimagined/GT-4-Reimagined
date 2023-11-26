@@ -10,9 +10,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.Level;
 import trinsdar.gt4r.GT4Reimagined;
 import trinsdar.gt4r.block.BlockCasing;
-import trinsdar.gt4r.block.BlockMaterialChest;
 import trinsdar.gt4r.block.BlockRedstoneMachine;
-import trinsdar.gt4r.client.MaterialChestRenderer;
 import trinsdar.gt4r.data.Machines;
 
 import java.io.File;
@@ -32,10 +30,8 @@ public class ClientHandler implements IProxyHandler {
         AntimatterAPI.runLaterClient(() -> {
             ModelUtils.setRenderLayer(((BlockItem)Machines.DUSTBIN.getItem(LV)).getBlock(), RenderType.cutout());
             AntimatterAPI.all(BlockCasing.class, t -> ModelUtils.setRenderLayer(t, RenderType.cutout()));
-            AntimatterAPI.all(BlockMaterialChest.class, b -> ModelUtils.setRenderLayer(b, RenderType.cutout()));
             AntimatterAPI.all(BlockRedstoneMachine.class, b -> ModelUtils.setRenderLayer(b, RenderType.cutout()));
         });
-        AntimatterAPI.all(BlockMaterialChest.class, b -> muramasa.antimatter.proxy.ClientHandler.registerBlockEntityRenderer(b.getType().getTileType(), MaterialChestRenderer::new));
         copyProgrammerArtIfMissing();
     }
 

@@ -327,7 +327,7 @@ public class GT4RMaterialEvents {
         GT4RMaterialTags.ELEC120.add(AntimatterMaterials.Emerald, Grossular, Clay, StainlessSteel, Sodalite, Bauxite, Obsidian, Pyrope, Uvarovite, Almandine, Andradite, Lazurite, Spessartine, PotassiumFeldspar, Biotite);
         GT4RMaterialTags.ROCK_CUTTER.add(AntimatterMaterials.Diamond, Ruby, Sapphire, AntimatterMaterials.NetherizedDiamond, Amethyst);
 
-        GT4RMaterialTags.CABINET.add(AntimatterMaterials.Iron, Aluminium, WroughtIron, Brass, Cupronickel, Electrum, AntimatterMaterials.Gold, Silver, Magnalium, Platinum, Osmium);
+        GT4RMaterialTags.CABINET.add(AntimatterMaterials.Iron, Aluminium, WroughtIron, Brass);
         GT4RMaterialTags.CABINET.all().forEach(m -> event.setMaterial(m).flags(AntimatterMaterialTypes.ROD));
         GT4RMaterialTags.DRUM.add(Bronze, Steel, StainlessSteel, Invar, Tungsten, TungstenSteel, AntimatterMaterials.Netherite);
         GT4RMaterialTags.DRUM.all().forEach(m -> event.setMaterial(m).flags(AntimatterMaterialTypes.ROD, AntimatterMaterialTypes.PLATE));

@@ -2,6 +2,7 @@ package trinsdar.gt4r.data;
 
 
 import io.github.gregtechintergalactical.gtcore.data.GTCoreBlocks;
+import io.github.gregtechintergalactical.gtcore.data.GTCoreMaterials;
 import io.github.gregtechintergalactical.gtcore.machine.DrumMachine;
 import io.github.gregtechintergalactical.gtcore.machine.LockerMachine;
 import io.github.gregtechintergalactical.gtcore.machine.MaterialMachine;
@@ -129,29 +130,15 @@ public class Machines {
     public static DrumMachine TUNGSTENSTEEL_DRUM = GTCoreBlocks.createDrum(Materials.TungstenSteel, 256000);
     public static DrumMachine NETHERITE_DRUM = GTCoreBlocks.createDrum(AntimatterMaterials.Netherite, 128000);
 
-    public static MaterialMachine IRON_CABINET = new MaterialMachine(GT4RRef.ID, "iron_cabinet", AntimatterMaterials.Iron).addFlags(ITEM, GUI, COVERABLE).overlayTexture(Textures.CABINET_OVERLAY_HANDLER).baseTexture(Textures.CABINET_HANDLER).setTiers(LV).setTile((m, p, s) -> new BlockEntityCabinet(m, p, s, 222));
-    public static MaterialMachine ALUMINIUM_CABINET = new MaterialMachine(GT4RRef.ID, "aluminium_cabinet", Materials.Aluminium).addFlags(ITEM, GUI, COVERABLE).overlayTexture(Textures.CABINET_OVERLAY_HANDLER).baseTexture(Textures.CABINET_HANDLER).setTiers(LV).setTile((m, p, s) -> new BlockEntityCabinet(m, p, s, 222));
-    public static MaterialMachine WROUGHT_IRON_CABINET = new MaterialMachine(GT4RRef.ID, "wrought_iron_cabinet", Materials.WroughtIron).addFlags(ITEM, GUI, COVERABLE).overlayTexture(Textures.CABINET_OVERLAY_HANDLER).baseTexture(Textures.CABINET_HANDLER).setTiers(LV).setTile((m, p, s) -> new BlockEntityCabinet(m, p, s, 222));
-    public static MaterialMachine BRASS_CABINET = new MaterialMachine(GT4RRef.ID, "brass_cabinet", Materials.Brass).addFlags(ITEM, GUI, COVERABLE).overlayTexture(Textures.CABINET_OVERLAY_HANDLER).baseTexture(Textures.CABINET_HANDLER).setTiers(LV).setTile((m, p, s) -> new BlockEntityCabinet(m, p, s, 222));
-    public static MaterialMachine CUPRONICKEL_CABINET = new MaterialMachine(GT4RRef.ID, "cupronickel_cabinet", Materials.Cupronickel).addFlags(ITEM, GUI, COVERABLE).overlayTexture(Textures.CABINET_OVERLAY_HANDLER).baseTexture(Textures.CABINET_HANDLER).setTiers(LV).setTile((m, p, s) -> new BlockEntityCabinet(m, p, s, 222));
-    public static MaterialMachine ELECTRUM_CABINET = new MaterialMachine(GT4RRef.ID, "electrum_cabinet", Materials.Electrum).addFlags(ITEM, GUI, COVERABLE).overlayTexture(Textures.CABINET_OVERLAY_HANDLER).baseTexture(Textures.CABINET_HANDLER).setTiers(LV).setTile((m, p, s) -> new BlockEntityCabinet(m, p, s, 240));
-    public static MaterialMachine GOLD_CABINET = new MaterialMachine(GT4RRef.ID, "gold_cabinet", AntimatterMaterials.Gold).addFlags(ITEM, GUI, COVERABLE).overlayTexture(Textures.CABINET_OVERLAY_HANDLER).baseTexture(Textures.CABINET_HANDLER).setTiers(LV).setTile((m, p, s) -> new BlockEntityCabinet(m, p, s, 240));
-    public static MaterialMachine SILVER_CABINET = new MaterialMachine(GT4RRef.ID, "silver_cabinet", Materials.Silver).addFlags(ITEM, GUI, COVERABLE).overlayTexture(Textures.CABINET_OVERLAY_HANDLER).baseTexture(Textures.CABINET_HANDLER).setTiers(LV).setTile((m, p, s) -> new BlockEntityCabinet(m, p, s, 240));
-    public static MaterialMachine MAGNALIUM_CABINET = new MaterialMachine(GT4RRef.ID, "magnalium_cabinet", Materials.Magnalium).addFlags(ITEM, GUI, COVERABLE).overlayTexture(Textures.CABINET_OVERLAY_HANDLER).baseTexture(Textures.CABINET_HANDLER).setTiers(LV).setTile((m, p, s) -> new BlockEntityCabinet(m, p, s, 240));
-    public static MaterialMachine PLATINUM_CABINET = new MaterialMachine(GT4RRef.ID, "platinum_cabinet", Materials.Platinum).addFlags(ITEM, GUI, COVERABLE).overlayTexture(Textures.CABINET_OVERLAY_HANDLER).baseTexture(Textures.CABINET_HANDLER).setTiers(LV).setTile((m, p, s) -> new BlockEntityCabinet(m, p, s, 258));
-    public static MaterialMachine OSMIUM_CABINET = new MaterialMachine(GT4RRef.ID, "osmium_cabinet", Materials.Osmium).addFlags(ITEM, GUI, COVERABLE).overlayTexture(Textures.CABINET_OVERLAY_HANDLER).baseTexture(Textures.CABINET_HANDLER).setTiers(LV).setTile((m, p, s) -> new BlockEntityCabinet(m, p, s, 276));
+    public static MaterialMachine IRON_CABINET = GTCoreBlocks.createBarrel(AntimatterMaterials.Iron);
+    public static MaterialMachine ALUMINIUM_CABINET = GTCoreBlocks.createBarrel(GTCoreMaterials.Aluminium);
+    public static MaterialMachine WROUGHT_IRON_CABINET = GTCoreBlocks.createBarrel(GTCoreMaterials.WroughtIron);
+    public static MaterialMachine BRASS_CABINET = GTCoreBlocks.createBarrel(GTCoreMaterials.Brass);
 
-    public static MaterialMachine IRON_CHEST = new ChestMachine(GT4RRef.ID, "iron_chest", AntimatterMaterials.Iron).addFlags(ITEM, GUI).overlayTexture(Textures.CHEST_OVERLAY_HANDLER).baseTexture(Textures.CHEST_HANDLER).setTiers(LV).setTile((m, p, s) -> new BlockEntityChest(m, p, s, 222)).tesr().noCovers();
-    public static MaterialMachine ALUMINIUM_CHEST = new ChestMachine(GT4RRef.ID, "aluminium_chest", Materials.Aluminium).addFlags(ITEM, GUI).overlayTexture(Textures.CHEST_OVERLAY_HANDLER).baseTexture(Textures.CHEST_HANDLER).setTiers(LV).setTile((m, p, s) -> new BlockEntityChest(m, p, s, 222)).tesr().noCovers();
-    public static MaterialMachine WROUGHT_IRON_CHEST = new ChestMachine(GT4RRef.ID, "wrought_iron_chest", Materials.WroughtIron).addFlags(ITEM, GUI).overlayTexture(Textures.CHEST_OVERLAY_HANDLER).baseTexture(Textures.CHEST_HANDLER).setTiers(LV).setTile((m, p, s) -> new BlockEntityChest(m, p, s, 222)).tesr().noCovers();
-    public static MaterialMachine BRASS_CHEST = new ChestMachine(GT4RRef.ID, "brass_chest", Materials.Brass).addFlags(ITEM, GUI).overlayTexture(Textures.CHEST_OVERLAY_HANDLER).baseTexture(Textures.CHEST_HANDLER).setTiers(LV).setTile((m, p, s) -> new BlockEntityChest(m, p, s, 222)).tesr().noCovers();
-    public static MaterialMachine CUPRONICKEL_CHEST = new ChestMachine(GT4RRef.ID, "cupronickel_chest", Materials.Cupronickel).addFlags(ITEM, GUI).overlayTexture(Textures.CHEST_OVERLAY_HANDLER).baseTexture(Textures.CHEST_HANDLER).setTiers(LV).setTile((m, p, s) -> new BlockEntityChest(m, p, s, 222)).tesr().noCovers();
-    public static MaterialMachine ELECTRUM_CHEST = new ChestMachine(GT4RRef.ID, "electrum_chest", Materials.Electrum).addFlags(ITEM, GUI).overlayTexture(Textures.CHEST_OVERLAY_HANDLER).baseTexture(Textures.CHEST_HANDLER).setTiers(LV).setTile((m, p, s) -> new BlockEntityChest(m, p, s, 240)).tesr().noCovers();
-    public static MaterialMachine GOLD_CHEST = new ChestMachine(GT4RRef.ID, "gold_chest", AntimatterMaterials.Gold).addFlags(ITEM, GUI).overlayTexture(Textures.CHEST_OVERLAY_HANDLER).baseTexture(Textures.CHEST_HANDLER).setTiers(LV).setTile((m, p, s) -> new BlockEntityChest(m, p, s, 240)).tesr().noCovers();
-    public static MaterialMachine SILVER_CHEST = new ChestMachine(GT4RRef.ID, "silver_chest", Materials.Silver).addFlags(ITEM, GUI).overlayTexture(Textures.CHEST_OVERLAY_HANDLER).baseTexture(Textures.CHEST_HANDLER).setTiers(LV).setTile((m, p, s) -> new BlockEntityChest(m, p, s, 240)).tesr().noCovers();
-    public static MaterialMachine MAGNALIUM_CHEST = new ChestMachine(GT4RRef.ID, "magnalium_chest", Materials.Magnalium).addFlags(ITEM, GUI).overlayTexture(Textures.CHEST_OVERLAY_HANDLER).baseTexture(Textures.CHEST_HANDLER).setTiers(LV).setTile((m, p, s) -> new BlockEntityChest(m, p, s, 240)).tesr().noCovers();
-    public static MaterialMachine PLATINUM_CHEST = new ChestMachine(GT4RRef.ID, "platinum_chest", Materials.Platinum).addFlags(ITEM, GUI).overlayTexture(Textures.CHEST_OVERLAY_HANDLER).baseTexture(Textures.CHEST_HANDLER).setTiers(LV).setTile((m, p, s) -> new BlockEntityChest(m, p, s, 258)).tesr().noCovers();
-    public static MaterialMachine OSMIUM_CHEST = new ChestMachine(GT4RRef.ID, "osmium_chest", Materials.Osmium).addFlags(ITEM, GUI).overlayTexture(Textures.CHEST_OVERLAY_HANDLER).baseTexture(Textures.CHEST_HANDLER).setTiers(LV).setTile((m, p, s) -> new BlockEntityChest(m, p, s, 276)).tesr().noCovers();
+    public static MaterialMachine IRON_CHEST = GTCoreBlocks.createChest(AntimatterMaterials.Iron);
+    public static MaterialMachine ALUMINIUM_CHEST = GTCoreBlocks.createChest(GTCoreMaterials.Aluminium);
+    public static MaterialMachine WROUGHT_IRON_CHEST = GTCoreBlocks.createChest(GTCoreMaterials.WroughtIron);
+    public static MaterialMachine BRASS_CHEST = GTCoreBlocks.createChest(GTCoreMaterials.Brass);
 
     public static WorkbenchMachine BRONZE_WORKBENCH = GTCoreBlocks.createWorkbench(Materials.Bronze, false);
     public static WorkbenchMachine IRON_WORKBENCH = GTCoreBlocks.createWorkbench(AntimatterMaterials.Iron, false);

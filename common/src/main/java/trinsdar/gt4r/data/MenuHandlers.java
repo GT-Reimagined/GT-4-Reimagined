@@ -1,6 +1,5 @@
 package trinsdar.gt4r.data;
 
-import io.github.gregtechintergalactical.gtcore.blockentity.BlockEntityMaterial;
 import muramasa.antimatter.blockentity.BlockEntityMachine;
 import muramasa.antimatter.capability.IGuiHandler;
 import muramasa.antimatter.gui.MenuHandlerMachine;
@@ -9,7 +8,6 @@ import muramasa.antimatter.gui.container.ContainerMultiMachine;
 import muramasa.antimatter.blockentity.multi.BlockEntityMultiMachine;
 import net.minecraft.world.entity.player.Inventory;
 import trinsdar.gt4r.GT4RRef;
-import trinsdar.gt4r.gui.ContainerCabinet;
 import trinsdar.gt4r.gui.ContainerDigitalChest;
 import trinsdar.gt4r.gui.ContainerQuantumChest;
 import trinsdar.gt4r.gui.MenuHandlerCrafting;
@@ -32,70 +30,6 @@ public class MenuHandlers {
         @Override
         public String screenID() {
             return "fusion_reactor";
-        }
-    };
-    public static MenuHandlerMachine<? extends BlockEntityMaterial, ? extends ContainerCabinet> CABINET_HANDLER_SIX = new MenuHandlerMachine(GT4RRef.ID, "container_cabinet_six") {
-        @Override
-        public ContainerCabinet getMenu(IGuiHandler tile, Inventory playerInv, int windowId) {
-            return tile instanceof BlockEntityMaterial ? new ContainerCabinet((BlockEntityMaterial) tile, playerInv, this, windowId) : null;
-        }
-
-        @Override
-        public String screenDomain() {
-            return GT4RRef.ID;
-        }
-
-        @Override
-        public String screenID() {
-            return "cabinet_six";
-        }
-    };
-    public static MenuHandlerMachine<? extends BlockEntityMaterial, ? extends ContainerCabinet> CABINET_HANDLER_SEVEN = new MenuHandlerMachine(GT4RRef.ID, "container_cabinet_seven") {
-        @Override
-        public ContainerCabinet getMenu(IGuiHandler tile, Inventory playerInv, int windowId) {
-            return tile instanceof BlockEntityMaterial ? new ContainerCabinet((BlockEntityMaterial) tile, playerInv, this, windowId) : null;
-        }
-
-        @Override
-        public String screenDomain() {
-            return GT4RRef.ID;
-        }
-
-        @Override
-        public String screenID() {
-            return "cabinet_seven";
-        }
-    };
-    public static MenuHandlerMachine<? extends BlockEntityMaterial, ? extends ContainerCabinet> CABINET_HANDLER_EIGHT = new MenuHandlerMachine(GT4RRef.ID, "container_cabinet_eight") {
-        @Override
-        public ContainerCabinet getMenu(IGuiHandler tile, Inventory playerInv, int windowId) {
-            return tile instanceof BlockEntityMaterial ? new ContainerCabinet((BlockEntityMaterial) tile, playerInv, this, windowId) : null;
-        }
-
-        @Override
-        public String screenDomain() {
-            return GT4RRef.ID;
-        }
-
-        @Override
-        public String screenID() {
-            return "cabinet_eight";
-        }
-    };
-    public static MenuHandlerMachine<? extends BlockEntityMaterial, ? extends ContainerCabinet> CABINET_HANDLER_NINE = new MenuHandlerMachine(GT4RRef.ID, "container_cabinet_nine") {
-        @Override
-        public ContainerCabinet getMenu(IGuiHandler tile, Inventory playerInv, int windowId) {
-            return tile instanceof BlockEntityMaterial ? new ContainerCabinet((BlockEntityMaterial) tile, playerInv, this, windowId) : null;
-        }
-
-        @Override
-        public String screenDomain() {
-            return GT4RRef.ID;
-        }
-
-        @Override
-        public String screenID() {
-            return "cabinet_nine";
         }
     };
 
