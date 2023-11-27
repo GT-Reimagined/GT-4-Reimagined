@@ -1,5 +1,5 @@
 archivesBaseName = "${rootProject.archive_base_name}-forge"
-version = "${rootProject.minecraft_version}-${rootProject.mod_version}"
+version = "${rootProject.mod_version}-${rootProject.minecraft_version}"
 
 architectury {
     forge()
@@ -89,9 +89,9 @@ jar {
 
 processResources {
 
-    inputs.property "version", project.version
+    inputs.property "version", project.mod_version
 
     filesMatching("META-INF/mods.toml") {
-        expand "version": project.version
+        expand "version": project.mod_version
     }
 }

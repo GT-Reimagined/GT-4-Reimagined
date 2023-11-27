@@ -1,5 +1,5 @@
 archivesBaseName = "${rootProject.archive_base_name}-fabric"
-version = "${rootProject.minecraft_version}-${project.mod_version}"
+version = "${rootProject.mod_version}-${rootProject.minecraft_version}"
 
 def generatedResources = file("src/generated/resources")
 def accessWidenerFile = project(":antimatter-common").file("src/main/resources/antimatter.accesswidener")
@@ -81,7 +81,7 @@ architectury {
 processResources {
 
     def toReplace = [
-            "version"             : project.version
+            "version"             : project.mod_version
     ]
 
     inputs.properties toReplace
