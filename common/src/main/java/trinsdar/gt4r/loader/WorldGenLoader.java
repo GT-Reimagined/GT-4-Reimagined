@@ -12,6 +12,8 @@ import net.minecraft.resources.ResourceLocation;
 import trinsdar.gt4r.GT4RConfig;
 import trinsdar.gt4r.GT4RRef;
 
+import static io.github.gregtechintergalactical.gtcore.data.GTCoreBlocks.SHALE;
+import static io.github.gregtechintergalactical.gtcore.data.GTCoreBlocks.SLATE;
 import static muramasa.antimatter.data.AntimatterMaterials.*;
 import static muramasa.antimatter.data.AntimatterStoneTypes.*;
 import static trinsdar.gt4r.data.GT4RData.*;
@@ -29,33 +31,21 @@ public class WorldGenLoader {
 
     private static void initStoneLayers(WorldGenEvent ev){
         ev.stoneLayer(new WorldGenStoneLayerBuilder("stone").withStone(STONE).withWeight(6).buildVein());
-
         ev.stoneLayer(new WorldGenStoneLayerBuilder("black_granite").withStone(GRANITE_BLACK).withWeight(2).buildVein());
-
         ev.stoneLayer(new WorldGenStoneLayerBuilder("red_granite").withStone(GRANITE_RED).withWeight(2).buildVein());
-
         ev.stoneLayer(new WorldGenStoneLayerBuilder("komatiite").withStone(KOMATIITE).withWeight(4).buildVein());
-
         ev.stoneLayer(new WorldGenStoneLayerBuilder("basalt").withStone(BASALT).withWeight(3).buildVein());
-
         ev.stoneLayer(new WorldGenStoneLayerBuilder("marble").withStone(MARBLE).withWeight(4).buildVein());
-
         ev.stoneLayer(new WorldGenStoneLayerBuilder("limestone").withStone(LIMESTONE).withWeight(3).buildVein());
-
         ev.stoneLayer(new WorldGenStoneLayerBuilder("green_schist").withStone(GREEN_SCHIST).withWeight(1).buildVein());
-
         ev.stoneLayer(new WorldGenStoneLayerBuilder("blue_schist").withStone(BLUE_SCHIST).withWeight(1).buildVein());
-
         ev.stoneLayer(new WorldGenStoneLayerBuilder("kimberlite").withStone(KIMBERLITE).withWeight(3).buildVein());
-
         ev.stoneLayer(new WorldGenStoneLayerBuilder("quartzite").withStone(QUARTZITE).withWeight(4).buildVein());
-
+        ev.stoneLayer(new WorldGenStoneLayerBuilder("shale").withStone(SHALE).withWeight(3).buildVein());
+        ev.stoneLayer(new WorldGenStoneLayerBuilder("slate").withStone(SLATE).withWeight(3).buildVein());
         ev.stoneLayer(new WorldGenStoneLayerBuilder("granite").withStone(GRANITE).withWeight(3).buildVein());
-
         ev.stoneLayer(new WorldGenStoneLayerBuilder("diorite").withStone(DIORITE).withWeight(3).buildVein());
-
         ev.stoneLayer(new WorldGenStoneLayerBuilder("andesite").withStone(ANDESITE).withWeight(4).buildVein());
-
         ev.stoneLayer(new WorldGenStoneLayerBuilder("tuff").withStone(TUFF).withWeight(3).buildVein());
     }
 
@@ -63,7 +53,7 @@ public class WorldGenLoader {
         event.smallOre(new WorldGenSmallOreBuilder().withMaterial(Ruby).withAmountPerChunk(2).withBiomes(tagged("has_ruby")).buildMaterial());
         event.smallOre(new WorldGenSmallOreBuilder().withMaterial(Sapphire).withAmountPerChunk(2).withBiomes(tagged("has_sapphire")).buildMaterial());
         event.smallOre(new WorldGenSmallOreBuilder().withMaterial(Coal).withAmountPerChunk(8).atHeight(16, 126).buildMaterial());
-        event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Tin).atHeight(-64, 0).withWeight(25).withSize(8).withSecondaryMaterial(Iron, 0.01f).buildMaterial());
+        event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Tin).atHeight(-16, 48).withWeight(25).withSize(8).withSecondaryMaterial(Iron, 0.01f).setHasTriangleHeight(true).buildMaterial());
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Uraninite).atHeight(-16, 100).withWeight(8).withSize(4).withBiomes(tagged("is_dead")).setBiomeBlacklist(true).buildMaterial());
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Uraninite).withCustomId("uranite_dead").atHeight(-16, 100).withWeight(20).withSize(4).withBiomes(tagged("is_dead")).buildMaterial());
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Cassiterite).atHeight(-30, 30).withWeight(2).withSize(32).withSecondaryMaterial(Tin, 0.05f).withBiomes(tagged("has_cassiterite")).buildMaterial());
