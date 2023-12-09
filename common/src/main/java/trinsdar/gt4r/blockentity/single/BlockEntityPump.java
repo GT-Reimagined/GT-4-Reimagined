@@ -223,8 +223,8 @@ public class BlockEntityPump extends BlockEntityMachine<BlockEntityPump> {
     }
 
     @Override
-    public List<String> getInfo() {
-        List<String> list = super.getInfo();
+    public List<String> getInfo(boolean simple) {
+        List<String> list = super.getInfo(simple);
         list.add(mPumpList.toString());
         return list;
     }
