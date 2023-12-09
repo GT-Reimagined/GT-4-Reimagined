@@ -10,6 +10,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import trinsdar.gt4r.material.GT4RMaterialEvent;
 
 import static com.google.common.collect.ImmutableMap.of;
+import static muramasa.antimatter.material.MaterialTags.NOSMASH;
 import static muramasa.antimatter.material.MaterialTags.RUBBERTOOLS;
 import static net.minecraft.world.item.Tiers.IRON;
 import static trinsdar.gt4r.data.GT4RMaterialTags.ELEC;
@@ -210,8 +211,8 @@ public class GT4RMaterialEvents {
         event.setMaterial(BlueSteel).asMetal(1400, 1400, AntimatterMaterialTypes.FRAME).addTools(3.5F, 7.5F, 1024, 2).mats(of(RoseGold, 1, Brass, 1, Steel, 2, BlackSteel, 4));
 
         /** Solids (Plastic Related Stuff)**/
-        event.setMaterial(Plastic).asSolid(295, 0, AntimatterMaterialTypes.PLATE, RUBBERTOOLS).addTools(0.0F, 0.0F, 64, 0, of(), AntimatterDefaultTools.SOFT_HAMMER).addHandleStat(66, 0.5F).mats(of(Carbon, 1, Hydrogen, 2));
-        event.setMaterial(Rubber).asSolid(295, 0, AntimatterMaterialTypes.PLATE, RUBBERTOOLS).addTools(0.0F, 0.0F, 64, 0, of(), AntimatterDefaultTools.SOFT_HAMMER).addHandleStat(11, 0.4F).mats(of(Carbon, 5, Hydrogen, 8));
+        event.setMaterial(Plastic).asSolid(295, 0, AntimatterMaterialTypes.PLATE, RUBBERTOOLS, NOSMASH).addTools(0.0F, 0.0F, 64, 0, of(), AntimatterDefaultTools.SOFT_HAMMER).addHandleStat(66, 0.5F).mats(of(Carbon, 1, Hydrogen, 2));
+        event.setMaterial(Rubber).asSolid(295, 0, AntimatterMaterialTypes.PLATE, RUBBERTOOLS, NOSMASH).addTools(0.0F, 0.0F, 64, 0, of(), AntimatterDefaultTools.SOFT_HAMMER).addHandleStat(11, 0.4F).mats(of(Carbon, 5, Hydrogen, 8));
 
         /** Stones **/
         event.setMaterial(RedGranite).asDust(AntimatterMaterialTypes.ROCK).addHandleStat(74, 1.0F, of(Enchantments.UNBREAKING, 1)).mats(of(Aluminium, 2, PotassiumFeldspar, 1, Oxygen, 3));
