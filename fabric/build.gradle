@@ -62,15 +62,12 @@ dependencies{
     modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${rootProject.rei_version}"
     modCompileOnly("mezz.jei:jei-${rootProject.minecraft_version}-common-api:${rootProject.jei_version}")
     modCompileOnly("mezz.jei:jei-${rootProject.minecraft_version}-fabric-api:${rootProject.jei_version}")
-    implementation("com.electronwill.night-config:toml:${rootProject.nightconfig_version}")
-    implementation("com.electronwill.night-config:core:${rootProject.nightconfig_version}")
     modImplementation("teamreborn:energy:${rootProject.energy_version}") {
         transitive = false
     }
     modRuntimeOnly("com.terraformersmc:modmenu:${rootProject.mod_menu_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
-    modImplementation("net.minecraftforge:forgeconfigapiport-fabric:3.2.4")
     modRuntimeOnly("dev.latvian.mods:kubejs-fabric:${rootProject.kubejs_version}")
 }
 

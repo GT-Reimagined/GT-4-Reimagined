@@ -13,11 +13,6 @@ import trinsdar.gt4r.events.AntimatterEvents;
 public class RegistrationEvents {
 
     @SubscribeEvent
-    public static void onModConfigEvent(final ModConfigEvent e) {
-        GT4RConfig.onModConfigEvent(e.getConfig());
-    }
-
-    @SubscribeEvent
     public static void onProviders(AntimatterProvidersEvent event){
         AntimatterEvents.onProviders(event.getEvent());
     }

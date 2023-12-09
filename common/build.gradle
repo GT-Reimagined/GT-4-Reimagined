@@ -22,13 +22,10 @@ dependencies{
         exclude(group: "com.github.LlamaLad7")
     }
     modImplementation("earth.terrarium:botarium-common-1.18.2:${project.botarium_version}")
-    compileOnly("com.electronwill.night-config:toml:${rootProject.nightconfig_version}")
-    compileOnly("com.electronwill.night-config:core:${rootProject.nightconfig_version}")
     modImplementation "maven.modrinth:carbon-config:2ngFmmhP"
     modCompileOnly("com.github.Trinsdar:ARRP:0.6.7-hotfix")
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-api:${rootProject.rei_version}"
     modCompileOnly("mezz.jei:jei-${rootProject.minecraft_version}-common-api:${rootProject.jei_version}")
-    modImplementation("net.minecraftforge:forgeconfigapiport-fabric:3.2.4")
 }
 
 architectury {
