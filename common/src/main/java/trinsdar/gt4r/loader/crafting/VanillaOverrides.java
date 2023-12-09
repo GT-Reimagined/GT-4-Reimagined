@@ -9,6 +9,7 @@ import muramasa.antimatter.pipe.PipeSize;
 import muramasa.antimatter.util.AntimatterPlatformUtils;
 import muramasa.antimatter.util.TagUtils;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.item.Item;
@@ -24,7 +25,8 @@ import java.util.function.Consumer;
 
 import static com.google.common.collect.ImmutableMap.of;
 import static io.github.gregtechintergalactical.gtcore.data.GTCoreItems.StickyResin;
-import static muramasa.antimatter.data.AntimatterMaterialTypes.DUST;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
+import static muramasa.antimatter.data.AntimatterMaterials.Coal;
 import static muramasa.antimatter.data.AntimatterMaterials.Stone;
 import static muramasa.antimatter.util.TagUtils.getForgelikeItemTag;
 import static trinsdar.gt4r.data.Materials.*;
@@ -44,7 +46,7 @@ public class VanillaOverrides {
                 GT4RData.FLUID_PIPE_WOOD.getBlockItem(PipeSize.HUGE), of('S', AntimatterDefaultTools.SAW.getTag(), 's', ItemTags.LOGS, 'H', AntimatterDefaultTools.SOFT_HAMMER.getTag()), "  S", "s s", "H  ");
         provider.shapeless(consumer, "sodalite_to_blue_dye", "", new ItemStack(Items.BLUE_DYE), AntimatterMaterialTypes.GEM.getMaterialTag(Sodalite));
 
-        provider.addStackRecipe(consumer, GT4RRef.ID, "sulfur_torch", "torches", new ItemStack(Items.TORCH, 6), of('D', getForgelikeItemTag("dusts/sulfur"), 'R', ForgeCTags.RODS_WOODEN), "D", "R");
+        provider.addStackRecipe(consumer, GT4RRef.ID, "sulfur_torch", "torches", new ItemStack(Items.TORCH, 2), of('D', getForgelikeItemTag("dusts/sulfur"), 'R', ForgeCTags.RODS_WOODEN), "D", "R");
         provider.addItemRecipe(consumer, GT4RRef.ID, "chainmail_helmet", "chainmail_armor",
                 Items.CHAINMAIL_HELMET, of('R', AntimatterMaterialTypes.RING.getMaterialTag(Steel), 'H', AntimatterDefaultTools.HAMMER.getTag()), "RRR", "RHR");
         provider.addItemRecipe(consumer, GT4RRef.ID, "chainmail_chestplate", "chainmail_armor",
@@ -57,6 +59,10 @@ public class VanillaOverrides {
                 of('L', Items.LEATHER, 'R', AntimatterMaterialTypes.RING.getMaterialTag(Steel), 'S', AntimatterMaterialTypes.SCREW.getMaterialTag(Steel)), "LLL", "LSL", "R R");
         /*provider.shapeless(consumer, "dust_brick", "mortar_recipes", AntimatterMaterialTypes.DUST_SMALL.get(Brick, 1), AntimatterDefaultTools.MORTAR.getTag(), Items.BRICK);
         provider.shapeless(consumer, "dust_clay", "mortar_recipes", AntimatterMaterialTypes.DUST_SMALL.get(Clay, 2), AntimatterDefaultTools.MORTAR.getTag(), Items.CLAY_BALL);*/
+        provider.addStackRecipe(consumer, GT4RRef.ID, "torch_from_coal", "torches", new ItemStack(Items.TORCH, 4),
+                of('C', Ingredient.of(RAW_ORE.get(Coal), DUST.get(Coal), DUST_IMPURE.get(Coal), DUST_PURE.get(Coal), CRUSHED.get(Coal),CRUSHED_PURIFIED.get(Coal), CRUSHED_REFINED.get(Coal)), 'S', Items.STICK), "C", "S");
+        provider.addStackRecipe(consumer, GT4RRef.ID, "torch_from_creosote", "torches", new ItemStack(Items.TORCH, 6),
+                of('W', ItemTags.WOOL, 'C', Creosote.getLiquid().getBucket(), 'S', Items.STICK), "C", "W", "S");
         Material[] mats = new Material[]{Bronze, WroughtIron, Aluminium, Steel, Titanium};
         for (Material m : mats){
             provider.addItemRecipe(consumer, GT4RRef.ID, "piston_" + m.getId(), "pistons",
