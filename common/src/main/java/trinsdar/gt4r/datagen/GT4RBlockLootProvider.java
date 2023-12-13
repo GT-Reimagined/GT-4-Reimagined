@@ -27,8 +27,7 @@ import trinsdar.gt4r.material.GT4RMaterialEvent;
 
 import java.util.function.Function;
 
-import static muramasa.antimatter.data.AntimatterMaterialTypes.ORE_STONE;
-import static muramasa.antimatter.data.AntimatterMaterialTypes.RAW_ORE;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
 import static muramasa.antimatter.data.AntimatterMaterials.*;
 import static muramasa.antimatter.data.AntimatterMaterials.Diamond;
 import static trinsdar.gt4r.data.Materials.*;
@@ -64,19 +63,17 @@ public class GT4RBlockLootProvider extends AntimatterBlockLootProvider {
         Function<BlockOreStone, LootTable.Builder> function1 = (b) -> createOreDrop(b, AntimatterMaterialTypes.DUST.get(b.getMaterial()));
         overrideBlock(ORE_STONE.get().get(Salt).asBlock(), b -> function1.apply((BlockOreStone) b));
         overrideBlock(ORE_STONE.get().get(RockSalt).asBlock(), b -> function1.apply((BlockOreStone) b));
-
+        overrideOre(Coal, b -> createOreDrop(b, GEM.get(Coal)));
+        overrideOre(Diamond, b -> createOreDrop(b, GEM.get(Diamond)));
+        overrideOre(Emerald, b -> createOreDrop(b, GEM.get(Emerald)));
+        overrideOre(Ruby, b -> createOreDrop(b, GEM.get(Ruby)));
+        overrideOre(Sapphire, b -> createOreDrop(b, GEM.get(Sapphire)));
         /*tables.put(Blocks.LAPIS_ORE, b -> createOreDrop(b, RAW_ORE.get(Lapis)));
         tables.put(Blocks.DEEPSLATE_LAPIS_ORE, b -> createOreDrop(b, RAW_ORE.get(Lapis)));
         tables.put(Blocks.REDSTONE_ORE, b -> createOreDrop(b, RAW_ORE.get(Redstone)));
         tables.put(Blocks.DEEPSLATE_REDSTONE_ORE, b -> createOreDrop(b, RAW_ORE.get(Redstone)));*/
-        tables.put(Blocks.DIAMOND_ORE, b -> createOreDrop(b, RAW_ORE.get(Diamond)));
-        tables.put(Blocks.DEEPSLATE_DIAMOND_ORE, b -> createOreDrop(b, RAW_ORE.get(Diamond)));
-        tables.put(Blocks.EMERALD_ORE, b -> createOreDrop(b, RAW_ORE.get(Emerald)));
-        tables.put(Blocks.DEEPSLATE_EMERALD_ORE, b -> createOreDrop(b, RAW_ORE.get(Emerald)));
         tables.put(Blocks.COPPER_ORE, b -> createOreDrop(b, RAW_ORE.get(Copper)));
         tables.put(Blocks.DEEPSLATE_COPPER_ORE, b -> createOreDrop(b, RAW_ORE.get(Copper)));
-        tables.put(Blocks.COAL_ORE, b -> createOreDrop(b, RAW_ORE.get(Coal)));
-        tables.put(Blocks.DEEPSLATE_COAL_ORE, b -> createOreDrop(b, RAW_ORE.get(Coal)));
         tables.put(Blocks.ANCIENT_DEBRIS, b -> createOreDrop(b, RAW_ORE.get(NetheriteScrap)));
         tables.put(Blocks.ANDESITE, b -> createSingleItemTableWithSilkTouch(Blocks.ANDESITE, ((CobbleStoneType)AntimatterStoneTypes.ANDESITE).getBlock("cobble")));
         tables.put(Blocks.DIORITE, b -> createSingleItemTableWithSilkTouch(Blocks.DIORITE, ((CobbleStoneType)AntimatterStoneTypes.DIORITE).getBlock("cobble")));
