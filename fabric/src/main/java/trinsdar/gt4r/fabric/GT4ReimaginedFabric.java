@@ -19,7 +19,6 @@ public class GT4ReimaginedFabric implements ModInitializer {
         LoaderEvents.LOADER.register(AntimatterEvents::registerRecipeLoaders);
         CraftingEvents.CRAFTING.register(AntimatterEvents::registerCraftingLoaders);
         ProviderEvents.PROVIDERS.register(AntimatterEvents::onProviders);
-        PlayerTickEvents.END.register(player -> CommonEvents.onPlayerTick(player, AntimatterAPI.getSIDE().isServer()));
         UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
             CommonEvents.onRightlickBlock(player, hand, AntimatterAPI.getSIDE().isServer());
             return InteractionResult.PASS;

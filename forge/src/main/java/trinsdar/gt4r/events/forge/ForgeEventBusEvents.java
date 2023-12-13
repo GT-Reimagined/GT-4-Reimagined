@@ -26,13 +26,6 @@ public class ForgeEventBusEvents {
     }
 
     @SubscribeEvent
-    public static void onPlayerTick(TickEvent.PlayerTickEvent event){
-        if (event.phase == TickEvent.Phase.END){
-            CommonEvents.onPlayerTick(event.player, event.side.isServer());
-        }
-    }
-
-    @SubscribeEvent
     public static void remapMissingBlocks(final RegistryEvent.MissingMappings<Block> event) {
         for (RegistryEvent.MissingMappings.Mapping<Block> map : event.getMappings(GT4RRef.ID)) {
             String id = map.key.getPath();
