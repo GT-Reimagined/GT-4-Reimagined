@@ -39,8 +39,7 @@ public class ToolTypes {
         public ItemStack build(CraftingContainer inv, MaterialRecipe.Result mats) {
             Material m = (Material) mats.mats.get("secondary");
             Tuple<Long, Long> battery = (Tuple<Long, Long>) mats.mats.get("battery");
-            String domain = id.equals(ROCK_CUTTER.getId()) ? GT4RRef.ID : GT4RRef.ANTIMATTER;
-            IAntimatterTool type = AntimatterAPI.get(IAntimatterTool.class, id.replace('-', '_'), domain);
+            IAntimatterTool type = AntimatterAPI.get(IAntimatterTool.class, id.replace('-', '_'));
             return type.resolveStack((Material) mats.mats.get("primary"), m == null ? NULL : m, battery.getA(), battery.getB());
         }
 
