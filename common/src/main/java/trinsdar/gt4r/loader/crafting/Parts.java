@@ -106,7 +106,7 @@ public class Parts {
         provider.addItemRecipe(output, GT4RRef.ID, "block_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
                 ShapeBlock, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), "P W");
         provider.addItemRecipe(output, GT4RRef.ID, "sword_head_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
-                ShapeHeadSword, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), "P", " ", "W");
+                ShapeBladeSword, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), "P", " ", "W");
         provider.addItemRecipe(output, GT4RRef.ID, "pickaxe_head_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
                 ShapeHeadPickaxe, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), " P", "  ", "W ");
         provider.addItemRecipe(output, GT4RRef.ID, "shovel_head_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
@@ -120,7 +120,7 @@ public class Parts {
         provider.addItemRecipe(output, GT4RRef.ID, "file_head_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
                 ShapeHeadFile, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), "W  ", "   ", "  P");
         provider.addItemRecipe(output, GT4RRef.ID, "saw_head_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
-                ShapeHeadSaw, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), "W ", "  ", " P");
+                ShapeBladeSaw, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), "W ", "  ", " P");
         provider.addItemRecipe(output, GT4RRef.ID, "gear_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
                 ShapeGear, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), "W", " ", "P");
         /*provider.addItemRecipe(output, GT4RRef.ID, "bottle_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
