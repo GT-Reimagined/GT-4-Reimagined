@@ -160,8 +160,6 @@ public class CentrifugingLoader {
             return mat.getLiquid(amount);
         } else if (mat.has(AntimatterMaterialTypes.GAS)){
             return mat.getGas(amount);
-        } else if (mat.has(AntimatterMaterialTypes.PLASMA)){
-            return mat.getPlasma(amount);
         } else {
             return mat.getLiquid(amount);
         }
