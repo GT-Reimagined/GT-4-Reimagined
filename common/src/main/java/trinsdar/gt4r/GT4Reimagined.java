@@ -1,10 +1,12 @@
 package trinsdar.gt4r;
 
+import io.github.gregtechintergalactical.gtcore.data.GTCoreItems;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.datagen.AntimatterDynamics;
 import muramasa.antimatter.AntimatterMod;
 import muramasa.antimatter.datagen.providers.AntimatterBlockStateProvider;
 import muramasa.antimatter.event.MaterialEvent;
+import muramasa.antimatter.integration.jeirei.AntimatterJEIREIPlugin;
 import muramasa.antimatter.proxy.IProxyHandler;
 import muramasa.antimatter.registration.RegistrationEvent;
 import muramasa.antimatter.registration.Side;
@@ -19,6 +21,8 @@ import trinsdar.gt4r.datagen.GT4RItemModelProvider;
 import trinsdar.gt4r.datagen.GT4RLocalizations;
 import trinsdar.gt4r.datagen.GT4RRandomDropBonus;
 import trinsdar.gt4r.material.GT4RMaterialEvent;
+
+import java.util.Arrays;
 
 
 public class GT4Reimagined extends AntimatterMod {
@@ -59,6 +63,15 @@ public class GT4Reimagined extends AntimatterMod {
                 Models.init();
                 Registry.register(Registry.LOOT_FUNCTION_TYPE, new ResourceLocation(GT4RRef.ID, "random_drop_bonus"), GT4RRandomDropBonus.RANDOM_DROP_BONUS);
                 TierMaps.buildTierMaps();
+                AntimatterJEIREIPlugin.addItemsToHide(l -> {
+                    l.addAll(Arrays.asList(GTCoreItems.GlassTube, GTCoreItems.VacuumTube, GTCoreItems.NandChip, GTCoreItems.EtchedWiringMV, GTCoreItems.EtchedWiringHV,
+                            GTCoreItems.EtchedWiringEV, GTCoreItems.EngravedCrystalChip, GTCoreItems.EngravedLapotronChip, GTCoreItems.Transistor, GTCoreItems.SMDTransistor,
+                            GTCoreItems.Resistor, GTCoreItems.SMDResistor, GTCoreItems.Diode, GTCoreItems.SMDDiode, GTCoreItems.Capacitor, GTCoreItems.SMDCapacitor,
+                            GTCoreItems.CircuitBoardEmpty, GTCoreItems.CircuitBoardProcessorEmpty, GTCoreItems.CircuitBoardCoated, GTCoreItems.CircuitBoardPhenolic,
+                            GTCoreItems.CircuitBoardPlastic, GTCoreItems.CircuitBoardEpoxy, GTCoreItems.CircuitBoardFiber, GTCoreItems.CircuitBoardMultiFiber,
+                            GTCoreItems.CircuitBoardWetware, GTCoreItems.CircuitGood, GTCoreItems.CircuitComplex, GTCoreItems.CircuitFuturistic,
+                            GTCoreItems.Circuit3D, GTCoreItems.CircuitInfinite));
+                });
             }
             case DATA_READY -> {
                 if (AntimatterAPI.isModLoaded(GT4RRef.MOD_BLUEPOWER)) {
