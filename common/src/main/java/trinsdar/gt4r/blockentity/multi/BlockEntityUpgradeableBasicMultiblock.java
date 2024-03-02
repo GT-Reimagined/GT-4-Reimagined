@@ -96,10 +96,16 @@ public class BlockEntityUpgradeableBasicMultiblock<T extends BlockEntityUpgradea
                     if (foundUpgrade == CustomTags.TRANSFORMER_UPGRADES || foundUpgrade == CustomTags.HV_TRANSFORMER_UPGRADES) {
                         energyHandler.ifPresent(e -> e.setInputVoltage(e.getInputVoltage() * 4));
                     }
+                    if (foundUpgrade == CustomTags.STEAM_UPGRADES){
+                        energyHandler.ifPresent(e -> {
+                            e.setInputVoltage(0);
+                            //e.extractEu(e.getEnergy(), false); //TODO way to drain only the internal buffer of the machine, not batteries in it
+                        });
+                    }
+                    if (foundUpgrade == CustomTags.MUFFLER_UPGRADES) {
+                        this.setMuffled(true);
+                    }
                     world.playSound(null, pos, SoundEvents.UI_BUTTON_CLICK, SoundSource.BLOCKS, 1.0f, 1.0f);
-                }
-                if (foundUpgrade == CustomTags.MUFFLER_UPGRADES) {
-                    this.setMuffled(true);
                 }
                 return InteractionResult.sidedSuccess(isClientSide());
             }

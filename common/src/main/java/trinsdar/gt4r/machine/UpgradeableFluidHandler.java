@@ -1,60 +1,35 @@
 package trinsdar.gt4r.machine;
 
 import muramasa.antimatter.blockentity.BlockEntityMachine;
+import muramasa.antimatter.capability.fluid.FluidTanks;
 import muramasa.antimatter.capability.machine.MachineFluidHandler;
+import muramasa.antimatter.gui.SlotType;
+import muramasa.antimatter.util.TagUtils;
+import trinsdar.gt4r.data.CustomTags;
+
+import static muramasa.antimatter.machine.MachineFlag.GUI;
 
 public class UpgradeableFluidHandler<T extends BlockEntityMachine<T> & IUpgradeProvider> extends MachineFluidHandler<T> {
-
-    public UpgradeableFluidHandler(T tile) {
-        super(tile);
+    public UpgradeableFluidHandler(T tile, int capacity, int pressure) {
+        this(tile, capacity, pressure, tile.has(GUI) ? tile.getMachineType().getSlots(SlotType.FL_IN, tile.getMachineTier()).size() : 0,
+                tile.has(GUI) ? tile.getMachineType().getSlots(SlotType.FL_OUT, tile.getMachineTier()).size() : 0);
     }
 
-    /*@Override
-    public long fillDroplets(FluidStack stack, FluidAction action) {
-        if (stack.getFluid().is(BlockEntitySteamMachine.STEAM)){
-            if (tile.getUpgrades().containsKey(CustomTags.STEAM_UPGRADES)){
-                if (stack.getRealAmount() % TesseractGraphWrappers.dropletMultiplier == 0 && stack.getAmount() % 2 == 0){
-                    long[] toDrain = new long[1];
-                    toDrain[0] = 0;
-                    tile.energyHandler.ifPresent(e -> {
-                        long euToInject = Math.min(stack.getAmount() / 2, e.getCapacity() - e.getEnergy());
-                        if (euToInject > 0){
-                            if (action.execute()){
-                                Utils.addEnergy(e, euToInject);
-                            }
-                            toDrain[0] = euToInject * 2;
-                        }
-                    });
-                    if (toDrain[0] > 0){
-                        return toDrain[0];
-                    }
-
+    public UpgradeableFluidHandler(T tile, int capacity, int pressure, int inputCount, int outputCount) {
+        super(tile, capacity, pressure, inputCount + 1, outputCount);
+        tanks.put(FluidDirection.INPUT, FluidTanks.create(tile, SlotType.FL_IN, b -> {
+            for (int i = 0; i < inputCount + 1; i++) {
+                if (i == inputCount){
+                    b.tank(f -> f.getFluid().is(TagUtils.getForgelikeFluidTag("steam")) && tile.getUpgrades().containsKey(CustomTags.STEAM_UPGRADES), capacity);
+                } else {
+                    b.tank(f -> !f.getFluid().is(TagUtils.getForgelikeFluidTag("steam")) || !tile.getUpgrades().containsKey(CustomTags.STEAM_UPGRADES), capacity);
                 }
             }
-        }
-        return super.fillDroplets(stack, action);
+            return b;
+        }));
     }
 
-    @Override
-    public boolean canInput(Direction facing) {
-        if (tile.getUpgrades().containsKey(CustomTags.STEAM_UPGRADES)) {
-            return tile.getFacing().get3DDataValue() != facing.get3DDataValue() || tile.getMachineType().allowsFrontCovers();
-        }
-        return super.canInput(facing);
+    public UpgradeableFluidHandler(T tile) {
+        this(tile, 32000, 1000 * (250 + tile.getMachineTier().getIntegerId()));
     }
-
-    @Override
-    public boolean canInput(FluidHolder fluid, Direction direction) {
-        if (fluid.getFluid().is(BlockEntitySteamMachine.STEAM) && tile.getUpgrades().containsKey(CustomTags.STEAM_UPGRADES)) {
-            return true;
-        }
-        return super.canInput(direction);
-    }
-
-    @Override
-    public int getSize() {
-        int tanks = super.getSize();
-        if (tile.getUpgrades().containsKey(CustomTags.STEAM_UPGRADES) && tanks == 0) tanks = 1;
-        return tanks;
-    }*/
 }
