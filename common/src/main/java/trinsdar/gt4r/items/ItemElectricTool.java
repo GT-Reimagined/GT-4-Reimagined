@@ -2,12 +2,14 @@ package trinsdar.gt4r.items;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.mojang.blaze3d.vertex.PoseStack;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import muramasa.antimatter.Ref;
 import muramasa.antimatter.behaviour.IBehaviour;
 import muramasa.antimatter.behaviour.IDestroySpeed;
 import muramasa.antimatter.capability.energy.ItemEnergyHandler;
+import muramasa.antimatter.data.AntimatterDefaultTools;
 import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.item.ItemBasic;
 import muramasa.antimatter.material.Material;
@@ -20,29 +22,46 @@ import muramasa.antimatter.tool.AntimatterToolType;
 import muramasa.antimatter.tool.IAbstractToolMethods;
 import muramasa.antimatter.tool.IAntimatterTool;
 import muramasa.antimatter.util.TagUtils;
+import muramasa.antimatter.util.Utils;
+import net.minecraft.client.Camera;
+import net.minecraft.client.renderer.LevelRenderer;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.NonNullList;
+import net.minecraft.network.chat.Component;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tesseract.api.context.TesseractItemContext;
 import tesseract.api.gt.IEnergyHandlerItem;
 import tesseract.api.gt.IEnergyItem;
 import trinsdar.gt4r.GT4RRef;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -57,6 +76,66 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
         type = base;
         this.energyTier = energyTier;
         this.itemTier = new ElectricItemTier(miningSpeed, base.getBaseQuality(), base.getBaseAttackDamage());
+    }
+
+    @Override
+    public AntimatterToolType getAntimatterToolType() {
+        return type;
+    }
+
+    @Override
+    public Tier getItemTier() {
+        return itemTier;
+    }
+
+    @Override
+    public int getEnergyTier() {
+        return energyTier;
+    }
+
+    @Override
+    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> list) {
+        onGenericFillItemGroup(group, list, 100000);
+    }
+
+    public boolean doesSneakBypassUse(ItemStack stack, LevelReader world, BlockPos pos, Player player) {
+        return Utils.doesStackHaveToolTypes(stack, AntimatterDefaultTools.WRENCH, AntimatterDefaultTools.SCREWDRIVER, AntimatterDefaultTools.CROWBAR, AntimatterDefaultTools.WIRE_CUTTER); // ???
+    }
+
+    //fabric method
+    public boolean isSuitableFor(ItemStack stack, BlockState state) {
+        return this.genericIsCorrectToolForDrops(stack, state);
+    }
+
+    public boolean isCorrectToolForDrops(ItemStack stack, BlockState state){
+        return genericIsCorrectToolForDrops(stack, state);
+    }
+
+    @Override
+    public void onUseTick(Level p_41428_, LivingEntity p_41429_, ItemStack p_41430_, int p_41431_) {
+        super.onUseTick(p_41428_, p_41429_, p_41430_, p_41431_);
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag flag) {
+        onGenericAddInformation(stack, tooltip, flag);
+        super.appendHoverText(stack, world, tooltip, flag);
+    }
+
+    //TODO figure this out
+    //@Override
+    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+        return false;
+    }
+
+    @Override
+    public UseAnim getUseAnimation(ItemStack stack) {
+        return type.getUseAction();
+    }
+
+    @Override
+    public int getUseDuration(ItemStack stack) {
+        return type.getUseAction() == UseAnim.NONE ? super.getUseDuration(stack) : 72000;
     }
 
     public float getDestroySpeed(ItemStack stack, BlockState state) {
@@ -95,6 +174,39 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
     }
 
     @Override
+    public InteractionResult useOn(UseOnContext ctx) {
+        return onGenericItemUse(ctx);
+    }
+
+    @Override
+    public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity interactionTarget, InteractionHand usedHand) {
+        return genericInteractLivingEntity(stack, player, interactionTarget, usedHand);
+    }
+
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
+        InteractionResultHolder<ItemStack> result = onGenericRightclick(level, player, usedHand);
+        if (result.getResult().shouldAwardStats()){
+            return result;
+        }
+        return super.use(level, player, usedHand);
+    }
+
+    public void handleRenderHighlight(Player entity, LevelRenderer levelRenderer, Camera camera, HitResult target, float partialTicks, PoseStack poseStack, MultiBufferSource multiBufferSource) {
+        onGenericHighlight(entity, levelRenderer, camera, target, partialTicks, poseStack, multiBufferSource);
+    }
+
+    @Override
+    public boolean canAttackBlock(BlockState state, Level world, BlockPos pos, Player player) {
+        return type.getBlockBreakability();
+    }
+
+    @Override
+    public boolean canDisableShield(ItemStack stack, ItemStack shield, LivingEntity entity, LivingEntity attacker) {
+        return type.getToolTypes().contains(BlockTags.MINEABLE_WITH_AXE);
+    }
+
+    @Override
     public IEnergyHandlerItem createEnergyHandler(TesseractItemContext context) {
         return new ItemEnergyHandler(context, 100000, 8 * (int) Math.pow(4, this.energyTier), 8 * (int) Math.pow(4, this.energyTier), 1, 1);
     }
@@ -112,6 +224,21 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
         return 0;
     }
 
+    //@Override
+    public int getEnchantability(ItemStack stack) {
+        return getItemTier().getEnchantmentValue();
+    }
+
+    @Override
+    public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
+        return false;
+    }
+
+    @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return true;
+    }
+
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
         if (type.getBlacklistedEnchantments().contains(enchantment)) return false;
@@ -121,24 +248,12 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
         return (!type.isPowered() || (enchantment != Enchantments.UNBREAKING && enchantment != Enchantments.MENDING)) && enchantment.category.canEnchant(stack.getItem());
     }
 
-    @Override
-    public AntimatterToolType getAntimatterToolType() {
-        return type;
+    public boolean hasContainerItem(ItemStack stack) {
+        return type.hasContainer();
     }
 
-    @Override
-    public Tier getItemTier() {
-        return itemTier;
-    }
-
-    @Override
-    public int getEnergyTier() {
-        return energyTier;
-    }
-
-    @Override
-    public boolean canDisableShield(ItemStack stack, ItemStack shield, LivingEntity entity, LivingEntity attacker) {
-        return false;
+    public ItemStack getContainerItem(ItemStack oldStack) {
+        return getGenericContainerItem(oldStack);
     }
 
     public static class ElectricItemTier implements Tier {
