@@ -21,6 +21,8 @@ import muramasa.antimatter.texture.Texture;
 import muramasa.antimatter.tool.AntimatterToolType;
 import muramasa.antimatter.tool.IAbstractToolMethods;
 import muramasa.antimatter.tool.IAntimatterTool;
+import muramasa.antimatter.tool.IBasicAntimatterTool;
+import muramasa.antimatter.tool.ToolUtils;
 import muramasa.antimatter.util.TagUtils;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.client.Camera;
@@ -71,11 +73,11 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
     final AntimatterToolType type;
     int energyTier;
     final Tier itemTier;
-    public ItemElectricTool(String id, AntimatterToolType base, float miningSpeed, Properties properties, int energyTier) {
-        super(GT4RRef.ID, id, properties.stacksTo(1).tab(Ref.TAB_ITEMS));
+    public ItemElectricTool(String id, AntimatterToolType base, float miningSpeed, int quality, int energyTier) {
+        super(GT4RRef.ID, id, ToolUtils.getToolProperties(Ref.TAB_ITEMS, false).stacksTo(1));
         type = base;
         this.energyTier = energyTier;
-        this.itemTier = new ElectricItemTier(miningSpeed, base.getBaseQuality(), base.getBaseAttackDamage());
+        this.itemTier = new ElectricItemTier(miningSpeed, quality, base.getBaseAttackDamage());
     }
 
     @Override
@@ -122,6 +124,7 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
         super.appendHoverText(stack, world, tooltip, flag);
     }
 
+    //TODO figure out why I wrote the below todo
     //TODO figure this out
     //@Override
     public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
@@ -140,10 +143,10 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
 
     public float getDestroySpeed(ItemStack stack, BlockState state) {
         float destroySpeed = genericIsCorrectToolForDrops(stack, state) ? getDefaultMiningSpeed(stack) : 1.0F;
-        if (type.isPowered() && getCurrentEnergy(stack)  == 0){
+        if (type.isPowered() && !hasEnoughDurability(stack, 1, true)){
             destroySpeed = 0.0f;
         }
-        for (Map.Entry<String, IBehaviour<IAntimatterTool>> e : getAntimatterToolType().getBehaviours().entrySet()) {
+        for (Map.Entry<String, IBehaviour<IBasicAntimatterTool>> e : getAntimatterToolType().getBehaviours().entrySet()) {
             IBehaviour<?> b = e.getValue();
             if (!(b instanceof IDestroySpeed destroySpeed1)) continue;
             float i = destroySpeed1.getDestroySpeed(this, destroySpeed, stack, state);
@@ -239,7 +242,7 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
         return true;
     }
 
-    @Override
+    //@Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
         if (type.getBlacklistedEnchantments().contains(enchantment)) return false;
         if (type.getToolTypes().contains(BlockTags.MINEABLE_WITH_AXE) && enchantment.category == EnchantmentCategory.WEAPON) {

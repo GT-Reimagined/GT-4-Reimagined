@@ -1,6 +1,7 @@
 package trinsdar.gt4r.data;
 
 import earth.terrarium.botarium.common.registry.fluid.FluidProperties;
+import io.github.gregtechintergalactical.gtcore.data.GTCoreTools;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.Ref;
 import muramasa.antimatter.cover.CoverFactory;
@@ -11,6 +12,7 @@ import muramasa.antimatter.item.ItemBattery;
 import muramasa.antimatter.item.ItemCover;
 import muramasa.antimatter.item.ItemFluidCell;
 import muramasa.antimatter.machine.Tier;
+import muramasa.antimatter.material.MaterialTags;
 import muramasa.antimatter.ore.CobbleStoneType;
 import muramasa.antimatter.ore.StoneType;
 import muramasa.antimatter.pipe.PipeSize;
@@ -42,6 +44,7 @@ import trinsdar.gt4r.cover.CoverSteamVent;
 import trinsdar.gt4r.cover.redstone.CoverRedstoneMachineController;
 import trinsdar.gt4r.data.client.RecipeRenderer;
 import trinsdar.gt4r.items.ItemCraftingModule;
+import trinsdar.gt4r.items.ItemElectricTool;
 import trinsdar.gt4r.items.ItemMixedMetal;
 import trinsdar.gt4r.items.ItemPowerUnit;
 import trinsdar.gt4r.items.ItemStorageOrb;
@@ -132,6 +135,8 @@ public class GT4RData {
     public static ItemBasic<?> AdvancedAlloy = new ItemBasic<>(GT4RRef.ID,"advanced_alloy");
     public static ItemBasic<?> MachineParts = new ItemBasic<>(GT4RRef.ID, "machine_parts");
     public static ItemBasic<?> StorageDataOrb = new ItemStorageOrb(GT4RRef.ID, "storage_data_orb").tip("A High Capacity Data Storage");
+
+    public static ItemElectricTool DRILL = new ItemElectricTool("drill", GTCoreTools.DRILL, 6.0f, 2, 1);
 
     public static ItemBasic<?> ZPM = new ItemBattery(GT4RRef.ID, "zpm", Tier.ZPM, 100000000000L, false);
     //public static ItemBasic<?> BatteryEnergyOrbCluster = new ItemBasic<>(Ref.ID, "battery_energy_orb_cluster");
