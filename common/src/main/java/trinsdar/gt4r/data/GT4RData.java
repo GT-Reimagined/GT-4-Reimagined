@@ -12,7 +12,6 @@ import muramasa.antimatter.item.ItemBattery;
 import muramasa.antimatter.item.ItemCover;
 import muramasa.antimatter.item.ItemFluidCell;
 import muramasa.antimatter.machine.Tier;
-import muramasa.antimatter.material.MaterialTags;
 import muramasa.antimatter.ore.CobbleStoneType;
 import muramasa.antimatter.ore.StoneType;
 import muramasa.antimatter.pipe.PipeSize;
@@ -22,6 +21,7 @@ import muramasa.antimatter.pipe.types.ItemPipe;
 import muramasa.antimatter.pipe.types.Wire;
 import muramasa.antimatter.registration.Side;
 import muramasa.antimatter.texture.Texture;
+import muramasa.antimatter.tool.behaviour.BehaviourAOEBreak;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -136,8 +136,8 @@ public class GT4RData {
     public static ItemBasic<?> MachineParts = new ItemBasic<>(GT4RRef.ID, "machine_parts");
     public static ItemBasic<?> StorageDataOrb = new ItemStorageOrb(GT4RRef.ID, "storage_data_orb").tip("A High Capacity Data Storage");
 
-    public static ItemElectricTool DRILL = new ItemElectricTool("drill", GTCoreTools.DRILL, 6.0f, 5.5f, 2, 1);
-    public static ItemElectricTool DIAMOND_DRILL = new ItemElectricTool("diamond_drill", GTCoreTools.DRILL, 8.0f, 6.0f, 3, 1);
+    public static ItemElectricTool Drill = new ItemElectricTool("drill", GTCoreTools.DRILL, 6.0f, 5.5f, 2, 1, b -> !(b instanceof BehaviourAOEBreak));
+    public static ItemElectricTool DiamondDrill = new ItemElectricTool("diamond_drill", GTCoreTools.DRILL, 8.0f, 6.0f, 3, 1, b -> !(b instanceof BehaviourAOEBreak));
 
     public static ItemBasic<?> ZPM = new ItemBattery(GT4RRef.ID, "zpm", Tier.ZPM, 100000000000L, false);
     //public static ItemBasic<?> BatteryEnergyOrbCluster = new ItemBasic<>(Ref.ID, "battery_energy_orb_cluster");

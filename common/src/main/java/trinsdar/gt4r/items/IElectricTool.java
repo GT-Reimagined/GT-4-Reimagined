@@ -70,7 +70,8 @@ public interface IElectricTool extends IBasicAntimatterTool, IEnergyItem {
     }
 
     default boolean isPoweredBarVisible(ItemStack stack) {
-        return getCurrentEnergy(stack) > 0;
+        return true;
+        //return getCurrentEnergy(stack) > 0;
     }
 
 

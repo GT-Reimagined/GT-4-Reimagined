@@ -6,6 +6,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import muramasa.antimatter.Ref;
 import muramasa.antimatter.behaviour.IBehaviour;
@@ -71,6 +72,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 import static trinsdar.gt4r.data.Materials.Steel;
 
@@ -78,11 +80,18 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
     final AntimatterToolType type;
     int energyTier;
     final Tier itemTier;
-    public ItemElectricTool(String id, AntimatterToolType base, float miningSpeed, float attackDamage, int quality, int energyTier) {
+    final Object2ObjectMap<String, IBehaviour<IBasicAntimatterTool>> behaviours;
+    public ItemElectricTool(String id, AntimatterToolType base, float miningSpeed, float attackDamage, int quality, int energyTier, Predicate<IBehaviour<?>> behaviourFilter) {
         super(GT4RRef.ID, id, ToolUtils.getToolProperties(Ref.TAB_ITEMS, false).durability(1));
         type = base;
         this.energyTier = energyTier;
         this.itemTier = new ElectricItemTier(miningSpeed, quality, attackDamage);
+        behaviours = new Object2ObjectOpenHashMap<>();
+        base.getBehaviours().forEach((s, b) -> {
+            if (behaviourFilter.test(b)){
+                behaviours.put(s, b);
+            }
+        });
     }
 
     @Override
@@ -102,7 +111,7 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
 
     @Override
     public Object2ObjectMap<String, IBehaviour<IBasicAntimatterTool>> getBehaviours(){
-        return getAntimatterToolType().getBehaviours();
+        return behaviours;
     }
 
     public float getDefaultMiningSpeed(ItemStack stack) {
