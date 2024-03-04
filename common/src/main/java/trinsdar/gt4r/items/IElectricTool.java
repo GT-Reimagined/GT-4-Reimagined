@@ -105,13 +105,13 @@ public interface IElectricTool extends IBasicAntimatterTool, IEnergyItem {
     }
 
     default void onGenericFillItemGroup(CreativeModeTab group, NonNullList<ItemStack> list, long maxEnergy) {
-        if (group != Ref.TAB_TOOLS) return;
+        if (group != Ref.TAB_ITEMS) return;
         if (getAntimatterToolType().isPowered()) {
             ItemStack stack = new ItemStack(this.getItem());
             IEnergyHandlerItem h = TesseractCapUtils.getEnergyHandlerItem(stack).orElse(null);
             if (h != null){
-                list.add(stack.copy());
                 h.setCapacity(maxEnergy);
+                list.add(stack.copy());
                 h.setEnergy(maxEnergy);
                 stack.setTag(h.getContainer().getTag());
                 list.add(stack);
@@ -174,10 +174,8 @@ public interface IElectricTool extends IBasicAntimatterTool, IEnergyItem {
             h.extractEu(multipliedDamage, false);
             stack.setTag(h.getContainer().getTag());
             //tag.putLong(Ref.KEY_TOOL_DATA_ENERGY, currentEnergy - multipliedDamage); // Otherwise take energy off of tool if energy is larger than multiplied damage
-            return 0; // Nothing is taken away from main durability
-        } else { // Lastly, set energy to 0 and take leftovers off of tool durability itself
-            return 0;
         }
+        return 0;
     }
 
     default boolean hasEnoughDurability(ItemStack stack, int damage, boolean energy) {

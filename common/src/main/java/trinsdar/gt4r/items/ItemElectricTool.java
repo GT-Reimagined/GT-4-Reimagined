@@ -5,6 +5,8 @@ import com.google.common.collect.Multimap;
 import com.mojang.blaze3d.vertex.PoseStack;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import muramasa.antimatter.Ref;
 import muramasa.antimatter.behaviour.IBehaviour;
 import muramasa.antimatter.behaviour.IDestroySpeed;
@@ -54,6 +56,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
@@ -69,15 +72,17 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Consumer;
 
+import static trinsdar.gt4r.data.Materials.Steel;
+
 public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IElectricTool {
     final AntimatterToolType type;
     int energyTier;
     final Tier itemTier;
-    public ItemElectricTool(String id, AntimatterToolType base, float miningSpeed, int quality, int energyTier) {
-        super(GT4RRef.ID, id, ToolUtils.getToolProperties(Ref.TAB_ITEMS, false).stacksTo(1));
+    public ItemElectricTool(String id, AntimatterToolType base, float miningSpeed, float attackDamage, int quality, int energyTier) {
+        super(GT4RRef.ID, id, ToolUtils.getToolProperties(Ref.TAB_ITEMS, false).durability(1));
         type = base;
         this.energyTier = energyTier;
-        this.itemTier = new ElectricItemTier(miningSpeed, quality, base.getBaseAttackDamage());
+        this.itemTier = new ElectricItemTier(miningSpeed, quality, attackDamage);
     }
 
     @Override
@@ -96,8 +101,17 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
     }
 
     @Override
+    public Object2ObjectMap<String, IBehaviour<IBasicAntimatterTool>> getBehaviours(){
+        return getAntimatterToolType().getBehaviours();
+    }
+
+    public float getDefaultMiningSpeed(ItemStack stack) {
+        return IElectricTool.super.getDefaultMiningSpeed(stack) * (float)(3 * this.energyTier);
+    }
+
+    @Override
     public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> list) {
-        onGenericFillItemGroup(group, list, 100000);
+        onGenericFillItemGroup(group, list, 100000L * this.energyTier);
     }
 
     public boolean doesSneakBypassUse(ItemStack stack, LevelReader world, BlockPos pos, Player player) {
@@ -146,7 +160,7 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
         if (type.isPowered() && !hasEnoughDurability(stack, 1, true)){
             destroySpeed = 0.0f;
         }
-        for (Map.Entry<String, IBehaviour<IBasicAntimatterTool>> e : getAntimatterToolType().getBehaviours().entrySet()) {
+        for (Map.Entry<String, IBehaviour<IBasicAntimatterTool>> e : getBehaviours().entrySet()) {
             IBehaviour<?> b = e.getValue();
             if (!(b instanceof IDestroySpeed destroySpeed1)) continue;
             float i = destroySpeed1.getDestroySpeed(this, destroySpeed, stack, state);
@@ -170,7 +184,7 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
     public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot slot) {
         Multimap<Attribute, AttributeModifier> modifiers = HashMultimap.create();
         if (slot == EquipmentSlot.MAINHAND) {
-            modifiers.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Tool modifier", type.getBaseAttackDamage(), AttributeModifier.Operation.ADDITION));
+            modifiers.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Tool modifier", itemTier.getAttackDamageBonus(), AttributeModifier.Operation.ADDITION));
             modifiers.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Tool modifier", type.getBaseAttackSpeed(), AttributeModifier.Operation.ADDITION));
         }
         return modifiers;
@@ -200,6 +214,21 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
     }
 
     @Override
+    public int getBarColor(ItemStack stack) {
+        return getPoweredBarColor(stack);
+    }
+
+    @Override
+    public int getBarWidth(ItemStack stack) {
+        return getPoweredBarWidth(stack);
+    }
+
+    @Override
+    public boolean isBarVisible(ItemStack stack) {
+        return isPoweredBarVisible(stack);
+    }
+
+    @Override
     public boolean canAttackBlock(BlockState state, Level world, BlockPos pos, Player player) {
         return type.getBlockBreakability();
     }
@@ -224,7 +253,7 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
 
     @Override
     public int getMaxDamage(ItemStack stack) {
-        return 0;
+        return getMaxDamage();
     }
 
     //@Override
@@ -257,6 +286,32 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
 
     public ItemStack getContainerItem(ItemStack oldStack) {
         return getGenericContainerItem(oldStack);
+    }
+
+    @Override
+    public int getItemColor(ItemStack stack, @Nullable Block block, int i) {
+        if (i == 1){
+            return 0xff6400;
+        }
+        if (i == 0) {
+            return Steel.getRGB();
+        }
+        return -1;
+    }
+
+    @Override
+    public Texture[] getTextures() {
+        List<Texture> textures = new ObjectArrayList<>();
+        int layers = getAntimatterToolType().getOverlayLayers();
+        textures.add(new Texture(getTextureDomain(), "item/tool/".concat(getAntimatterToolType().getId())));
+        if (layers == 1)
+            textures.add(new Texture(getTextureDomain(), "item/tool/overlay/".concat(getAntimatterToolType().getId())));
+        if (layers > 1) {
+            for (int i = 1; i <= layers; i++) {
+                textures.add(new Texture(getTextureDomain(), String.join("", "item/tool/overlay/", getAntimatterToolType().getId(), "_", Integer.toString(i))));
+            }
+        }
+        return textures.toArray(new Texture[textures.size()]);
     }
 
     public static class ElectricItemTier implements Tier {
