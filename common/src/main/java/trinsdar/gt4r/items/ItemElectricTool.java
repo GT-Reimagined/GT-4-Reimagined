@@ -302,7 +302,7 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
     @Override
     public Texture[] getTextures() {
         List<Texture> textures = new ObjectArrayList<>();
-        int layers = getAntimatterToolType().getOverlayLayers();
+        int layers = getId().contains("diamond") ? 2 : getAntimatterToolType().getOverlayLayers();
         textures.add(new Texture(getTextureDomain(), "item/tool/".concat(getAntimatterToolType().getId())));
         if (layers == 1)
             textures.add(new Texture(getTextureDomain(), "item/tool/overlay/".concat(getAntimatterToolType().getId())));

@@ -136,7 +136,8 @@ public class GT4RData {
     public static ItemBasic<?> MachineParts = new ItemBasic<>(GT4RRef.ID, "machine_parts");
     public static ItemBasic<?> StorageDataOrb = new ItemStorageOrb(GT4RRef.ID, "storage_data_orb").tip("A High Capacity Data Storage");
 
-    public static ItemElectricTool DRILL = new ItemElectricTool("drill", GTCoreTools.DRILL, 6.0f, 6.5f, 2, 1);
+    public static ItemElectricTool DRILL = new ItemElectricTool("drill", GTCoreTools.DRILL, 6.0f, 5.5f, 2, 1);
+    public static ItemElectricTool DIAMOND_DRILL = new ItemElectricTool("diamond_drill", GTCoreTools.DRILL, 8.0f, 6.0f, 3, 1);
 
     public static ItemBasic<?> ZPM = new ItemBattery(GT4RRef.ID, "zpm", Tier.ZPM, 100000000000L, false);
     //public static ItemBasic<?> BatteryEnergyOrbCluster = new ItemBasic<>(Ref.ID, "battery_energy_orb_cluster");
