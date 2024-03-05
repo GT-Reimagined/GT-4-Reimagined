@@ -138,7 +138,14 @@ public class GT4RData {
 
     public static ItemElectricTool Drill = new ItemElectricTool("drill", GTCoreTools.DRILL, 6.0f, 5.5f, 2, 1, b -> !(b instanceof BehaviourAOEBreak));
     public static ItemElectricTool DiamondDrill = new ItemElectricTool("diamond_drill", GTCoreTools.DRILL, 8.0f, 6.0f, 3, 1, b -> !(b instanceof BehaviourAOEBreak));
+    public static ItemElectricTool AdvancedDrill = new ItemElectricTool("advanced_drill", GTCoreTools.DRILL, 10.0f, 9.0f, 4, 2, b -> true);
     public static ItemElectricTool Chainsaw = new ItemElectricTool("chainsaw", GTCoreTools.CHAINSAW, 6.0f, 8.5f, 2, 1, b -> true);
+    public static ItemElectricTool AdvancedChainsaw = new ItemElectricTool("advanced_chainsaw", GTCoreTools.CHAINSAW, 10.0f, 12f, 4, 2, b -> true);
+    public static ItemElectricTool ElectricWrench = new ItemElectricTool("electric_wrench", GTCoreTools.ELECTRIC_WRENCH, 6.0f, 4f, 2, 1, b -> true);
+    public static ItemElectricTool AdvancedWrench = new ItemElectricTool("advanced_wrench", GTCoreTools.ELECTRIC_WRENCH, 10.0f, 7.5f, 4, 2, b -> true);
+    public static ItemElectricTool ElectricWrenchAlt = new ItemElectricTool("electric_wrench_alt", GTCoreTools.ELECTRIC_WRENCH_ALT, 6.0f, 4f, 2, 1, b -> true);
+    public static ItemElectricTool AdvancedWrenchAlt = new ItemElectricTool("advanced_wrench_alt", GTCoreTools.ELECTRIC_WRENCH_ALT, 10.0f, 7.5f, 4, 2, b -> true);
+    public static ItemElectricTool ElectricScrewdriver = new ItemElectricTool("electric_screwdriver", GTCoreTools.ELECTRIC_SCREWDRIVER, 6.0f, 2.5f, 2, 1, b -> true);
     public static ItemElectricTool RockCutter = new ItemElectricTool("rock_cutter", ToolTypes.ROCK_CUTTER, 8.0f, 1.0f, 3, 1, b -> true);
 
     public static ItemBasic<?> ZPM = new ItemBattery(GT4RRef.ID, "zpm", Tier.ZPM, 100000000000L, false);

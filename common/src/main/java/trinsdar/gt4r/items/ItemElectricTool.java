@@ -77,8 +77,7 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 import static muramasa.antimatter.data.AntimatterMaterials.Diamond;
-import static trinsdar.gt4r.data.Materials.Steel;
-import static trinsdar.gt4r.data.Materials.Titanium;
+import static trinsdar.gt4r.data.Materials.*;
 
 public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IElectricTool {
     final AntimatterToolType type;
@@ -268,7 +267,7 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
 
     @Override
     public IEnergyHandlerItem createEnergyHandler(TesseractItemContext context) {
-        return new ItemEnergyHandler(context, 100000, 8 * (int) Math.pow(4, this.energyTier), 8 * (int) Math.pow(4, this.energyTier), 1, 1);
+        return new ItemEnergyHandler(context, 100000L * energyTier, 8 * (int) Math.pow(4, this.energyTier), 8 * (int) Math.pow(4, this.energyTier), 1, 1);
     }
 
     @Override
@@ -305,7 +304,7 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
         if (type.getToolTypes().contains(BlockTags.MINEABLE_WITH_AXE) && enchantment.category == EnchantmentCategory.WEAPON) {
             return true;
         }
-        return (!type.isPowered() || (enchantment != Enchantments.UNBREAKING && enchantment != Enchantments.MENDING)) && enchantment.category.canEnchant(stack.getItem());
+        return enchantment != Enchantments.UNBREAKING && enchantment != Enchantments.MENDING && enchantment.category.canEnchant(stack.getItem());
     }
 
     public boolean hasContainerItem(ItemStack stack) {
@@ -319,10 +318,10 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
     @Override
     public int getItemColor(ItemStack stack, @Nullable Block block, int i) {
         if (i == 1){
-            return 0xff6400;
+            return getId().contains("advanced") ? 0x0000ff : 0xff6400;
         }
         if (i == 0) {
-            return this == GT4RData.RockCutter ? Diamond.getRGB() : Steel.getRGB();
+            return this == GT4RData.RockCutter ? Diamond.getRGB() : this.getId().contains("advanced") ? TungstenSteel.getRGB() : Steel.getRGB();
         }
         return -1;
     }
@@ -330,7 +329,7 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
     @Override
     public Texture[] getTextures() {
         List<Texture> textures = new ObjectArrayList<>();
-        int layers = getId().contains("diamond") ? 2 : getAntimatterToolType().getOverlayLayers();
+        int layers = this == GT4RData.AdvancedDrill || this == GT4RData.DiamondDrill ? 2 : getAntimatterToolType().getOverlayLayers();
         textures.add(new Texture(getTextureDomain(), "item/tool/".concat(getAntimatterToolType().getId())));
         if (layers == 1)
             textures.add(new Texture(getTextureDomain(), "item/tool/overlay/".concat(getAntimatterToolType().getId())));
