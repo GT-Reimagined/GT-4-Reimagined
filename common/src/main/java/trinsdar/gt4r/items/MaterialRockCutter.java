@@ -77,9 +77,4 @@ public class MaterialRockCutter extends GTCoreTools.PoweredTool {
         if (flagIn.isAdvanced()) tooltip.add(new TextComponent("Energy: " + getCurrentEnergy(stack) + " / " + getMaxEnergy(stack)));
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
     }
-
-    @Override
-    public float getDestroySpeed(ItemStack stack, BlockState state) {
-        return super.getDestroySpeed(stack, state) / 4;
-    }
 }

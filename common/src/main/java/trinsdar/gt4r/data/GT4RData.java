@@ -138,6 +138,8 @@ public class GT4RData {
 
     public static ItemElectricTool Drill = new ItemElectricTool("drill", GTCoreTools.DRILL, 6.0f, 5.5f, 2, 1, b -> !(b instanceof BehaviourAOEBreak));
     public static ItemElectricTool DiamondDrill = new ItemElectricTool("diamond_drill", GTCoreTools.DRILL, 8.0f, 6.0f, 3, 1, b -> !(b instanceof BehaviourAOEBreak));
+    public static ItemElectricTool Chainsaw = new ItemElectricTool("chainsaw", GTCoreTools.CHAINSAW, 6.0f, 8.5f, 2, 1, b -> true);
+    public static ItemElectricTool RockCutter = new ItemElectricTool("rock_cutter", ToolTypes.ROCK_CUTTER, 8.0f, 1.0f, 3, 1, b -> true);
 
     public static ItemBasic<?> ZPM = new ItemBattery(GT4RRef.ID, "zpm", Tier.ZPM, 100000000000L, false);
     //public static ItemBasic<?> BatteryEnergyOrbCluster = new ItemBasic<>(Ref.ID, "battery_energy_orb_cluster");

@@ -46,6 +46,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.DiggerItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
@@ -66,6 +67,7 @@ import tesseract.api.context.TesseractItemContext;
 import tesseract.api.gt.IEnergyHandlerItem;
 import tesseract.api.gt.IEnergyItem;
 import trinsdar.gt4r.GT4RRef;
+import trinsdar.gt4r.data.GT4RData;
 
 import java.util.List;
 import java.util.Map;
@@ -74,7 +76,9 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
+import static muramasa.antimatter.data.AntimatterMaterials.Diamond;
 import static trinsdar.gt4r.data.Materials.Steel;
+import static trinsdar.gt4r.data.Materials.Titanium;
 
 public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IElectricTool {
     final AntimatterToolType type;
@@ -121,6 +125,21 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
     @Override
     public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> list) {
         onGenericFillItemGroup(group, list, 100000L * this.energyTier);
+    }
+
+    @Override
+    public ItemStack getDefaultInstance() {
+        ItemStack stack = super.getDefaultInstance();
+        if (this == GT4RData.RockCutter){
+            stack.enchant(Enchantments.SILK_TOUCH, 1);
+        }
+        return stack;
+    }
+
+    public ItemStack resolveStack(long startingEnergy, long maxEnergy) {
+        ItemStack stack = this.getDefaultInstance();
+        validateEnergyTag(stack, startingEnergy, maxEnergy);
+        return stack;
     }
 
     public boolean doesSneakBypassUse(ItemStack stack, LevelReader world, BlockPos pos, Player player) {
@@ -303,7 +322,7 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
             return 0xff6400;
         }
         if (i == 0) {
-            return Steel.getRGB();
+            return this == GT4RData.RockCutter ? Diamond.getRGB() : Steel.getRGB();
         }
         return -1;
     }

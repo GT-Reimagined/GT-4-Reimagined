@@ -67,7 +67,7 @@ public class ToolTypes {
             return ImmutableMap.of();
         }
     });
-    public static AntimatterToolType ROCK_CUTTER = AntimatterAPI.register(AntimatterToolType.class, new AntimatterToolType(GT4RRef.ID, "rock_cutter", 1, 1, 1, -1.0F, -3.0F, false)).setPowered(100000L, 1).setRepairable(false).setOverlayLayers(2).addEffectiveMaterials(ICE_SOLID, METAL, STONE, HEAVY_METAL, PISTON).setBrokenItems(ImmutableMap.of("rock_cutter", i -> getBrokenItem(i, RockCutterPowerUnit))).setType(AntimatterDefaultTools.PICKAXE).setToolSupplier((domain, toolType, tier, properties) -> new MaterialRockCutter(domain, toolType, properties, 1));
+    public static AntimatterToolType ROCK_CUTTER = AntimatterAPI.register(AntimatterToolType.class, new AntimatterToolType(GT4RRef.ID, "rock_cutter", 1, 1, 1, -1.0F, -3.0F, false)).setPowered(100000L, 1).setRepairable(false).setOverlayLayers(2).addEffectiveMaterials(ICE_SOLID, METAL, STONE, HEAVY_METAL, PISTON).setBrokenItems(ImmutableMap.of("rock_cutter", i -> getBrokenItem(i, RockCutterPowerUnit))).setType(AntimatterDefaultTools.PICKAXE).setToolSpeedMultiplier(0.25f).setToolSupplier((domain, toolType, tier, properties) -> new MaterialRockCutter(domain, toolType, properties, 1));
 
     static {
         PropertyIngredient.addGetter(CustomTags.BATTERIES_RE.location(), ToolTypes::getEnergy);

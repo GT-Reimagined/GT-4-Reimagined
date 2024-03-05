@@ -108,7 +108,7 @@ public interface IElectricTool extends IBasicAntimatterTool, IEnergyItem {
     default void onGenericFillItemGroup(CreativeModeTab group, NonNullList<ItemStack> list, long maxEnergy) {
         if (group != Ref.TAB_ITEMS) return;
         if (getAntimatterToolType().isPowered()) {
-            ItemStack stack = new ItemStack(this.getItem());
+            ItemStack stack = this.getItem().getDefaultInstance();
             IEnergyHandlerItem h = TesseractCapUtils.getEnergyHandlerItem(stack).orElse(null);
             if (h != null){
                 h.setCapacity(maxEnergy);
