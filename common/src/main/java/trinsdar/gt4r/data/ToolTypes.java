@@ -81,7 +81,10 @@ public class ToolTypes {
 
         @Override
         public Map<String, Object> getFromResult(@Nonnull ItemStack stack) {
-            return ImmutableMap.of();
+            CompoundTag nbt = stack.getTag().getCompound(muramasa.antimatter.Ref.TAG_TOOL_DATA);
+            Material primary = AntimatterAPI.get(Material.class, nbt.getString(muramasa.antimatter.Ref.KEY_TOOL_DATA_PRIMARY_MATERIAL));
+            Material secondary = AntimatterAPI.get(Material.class, nbt.getString(muramasa.antimatter.Ref.KEY_TOOL_DATA_SECONDARY_MATERIAL));
+            return ImmutableMap.of("primary", primary, "secondary", secondary, "energy", getEnergy(stack).getA(), "maxEnergy", getEnergy(stack).getB());
         }
     });
     public static AntimatterToolType ROCK_CUTTER = AntimatterAPI.register(AntimatterToolType.class, new AntimatterToolType(GT4RRef.ID, "rock_cutter", 1, 1, 1, -1.0F, -3.0F, false)).setPowered(100000L, 1).setRepairable(false).setOverlayLayers(2).addEffectiveMaterials(ICE_SOLID, METAL, STONE, HEAVY_METAL, PISTON).setBrokenItems(ImmutableMap.of("rock_cutter", i -> getBrokenItem(i, RockCutterPowerUnit))).setType(AntimatterDefaultTools.PICKAXE).setToolSpeedMultiplier(0.25f).setToolSupplier((domain, toolType, tier, properties) -> new MaterialRockCutter(domain, toolType, properties, 1));
