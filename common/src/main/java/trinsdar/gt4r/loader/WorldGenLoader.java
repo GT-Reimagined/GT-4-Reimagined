@@ -94,8 +94,9 @@ public class WorldGenLoader {
             event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(AntimatterMaterials.Lapis).atHeight(-32, 32).withWeight(2).withSize(7).setHasTriangleHeight(true).buildMaterial());
             event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(AntimatterMaterials.Lapis).withCustomId("lapis_buried").atHeight(-64, 64).withWeight(4).withSize(7).withDiscardOnExposureChance(1.0f).buildMaterial());
             event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Emerald).atHeight(-16, 480).withWeight(100).withSize(3).setHasTriangleHeight(true).withBiomes("#minecraft:is_mountain").buildMaterial());
-            event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Copper).atHeight(-16, 112).withWeight(16).withSize(10).withSecondaryMaterial(Gold, 0.02f).setHasTriangleHeight(true).buildMaterial());
-            event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Copper).withCustomId("copper_large").atHeight(-16, 112).withWeight(16).withSize(20).withSecondaryMaterial(Gold, 0.02f).setHasTriangleHeight(true).buildMaterial());
+            int copperWeight = GT4RConfig.NERF_VANILLA_COPPER_GEN.get() ? 8 : 16;
+            event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Copper).atHeight(-16, 112).withWeight(copperWeight).withSize(10).withSecondaryMaterial(Gold, 0.02f).setHasTriangleHeight(true).buildMaterial());
+            event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Copper).withCustomId("copper_large").atHeight(-16, 112).withWeight(copperWeight).withSize(20).withSecondaryMaterial(Gold, 0.02f).setHasTriangleHeight(true).buildMaterial());
         }
     }
 
