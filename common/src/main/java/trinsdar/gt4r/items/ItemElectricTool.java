@@ -81,12 +81,14 @@ import static trinsdar.gt4r.data.Materials.*;
 
 public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IElectricTool {
     final AntimatterToolType type;
+    private final Material baseMaterial;
     int energyTier;
     final Tier itemTier;
     final Object2ObjectMap<String, IBehaviour<IBasicAntimatterTool>> behaviours;
-    public ItemElectricTool(String id, AntimatterToolType base, float miningSpeed, float attackDamage, int quality, int energyTier, Predicate<IBehaviour<?>> behaviourFilter) {
+    public ItemElectricTool(String id, AntimatterToolType base, Material baseMaterial, float miningSpeed, float attackDamage, int quality, int energyTier, Predicate<IBehaviour<?>> behaviourFilter) {
         super(GT4RRef.ID, id, ToolUtils.getToolProperties(Ref.TAB_ITEMS, false).durability(1));
         type = base;
+        this.baseMaterial = baseMaterial;
         this.energyTier = energyTier;
         this.itemTier = new ElectricItemTier(miningSpeed, quality, attackDamage);
         behaviours = new Object2ObjectOpenHashMap<>();
@@ -319,10 +321,10 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
     @Override
     public int getItemColor(ItemStack stack, @Nullable Block block, int i) {
         if (i == 1){
-            return getId().contains("advanced") ? 0x0000ff : 0xff6400;
+            return getId().contains("jackhammer") ? -1 : getId().contains("advanced") ? 0x0000ff : 0xff6400;
         }
         if (i == 0) {
-            return this == GT4RData.RockCutter ? Diamond.getRGB() : this.getId().contains("advanced") ? TungstenSteel.getRGB() : Steel.getRGB();
+            return this.baseMaterial.getRGB();
         }
         return -1;
     }

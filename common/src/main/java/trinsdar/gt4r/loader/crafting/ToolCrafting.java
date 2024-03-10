@@ -63,6 +63,12 @@ public class ToolCrafting {
                 GT4RData.RockCutter.getDefaultInstance(), of('R', ROD.getMaterialTag(Titanium), 'P', PLATE.getMaterialTag(Titanium), 'C', CIRCUITS_BASIC, 'D', DUST.getMaterialTag(Diamond), 'B', PropertyIngredient.builder("battery").itemTags(BATTERIES_SMALL).build()), "DR ", "DP ", "DCB");
         provider.addToolRecipe(ToolTypes.POWERED_TOOL_BUILDER_BASIC.get(ROCK_CUTTER.getId()),output, GT4RRef.ID,  "rock_cutter_tungstensteel", "antimatter_drills",
                 GT4RData.RockCutter.getDefaultInstance(), of('R', ROD.getMaterialTag(TungstenSteel), 'P', PLATE.getMaterialTag(TungstenSteel), 'C', CIRCUITS_BASIC, 'D', DUST.getMaterialTag(Diamond), 'B', PropertyIngredient.builder("battery").itemTags(BATTERIES_SMALL).build()), "DR ", "DP ", "DCB");
+        provider.addToolRecipe(ToolTypes.POWERED_TOOL_BUILDER_BASIC.get("bronze_jackhammer"), output, GT4RRef.ID, "jackhammer_bronze", "drills",
+                GT4RData.BronzeJackHammer.getDefaultInstance(), of('R', ROD.getMaterialTag(Bronze), 'I', INGOT.getMaterialTag(Bronze), 'C', CIRCUITS_BASIC, 'B', PropertyIngredient.builder("battery").itemTags(BATTERIES_SMALL).build()), "RBR", " C ", " I ");
+        provider.addToolRecipe(ToolTypes.POWERED_TOOL_BUILDER_BASIC.get("steel_jackhammer"), output, GT4RRef.ID, "jackhammer_steel", "drills",
+                GT4RData.SteelJackHammer.getDefaultInstance(), of('R', RODS_STEELS, 'I', INGOT.getMaterialTag(Steel), 'C', CIRCUITS_BASIC, 'B', PropertyIngredient.builder("battery").itemTags(BATTERIES_SMALL).build()), "RBR", " C ", " I ");
+        provider.addToolRecipe(ToolTypes.POWERED_TOOL_BUILDER_BASIC.get("diamond_jackhammer"), output, GT4RRef.ID, "jackhammer_diamond", "drills",
+                GT4RData.DiamondJackHammer.getDefaultInstance(), of('R', ROD.getMaterialTag(TungstenSteel), 'I', GEM.getMaterialTag(Diamond), 'C', CIRCUITS_ADVANCED, 'B', PropertyIngredient.builder("battery").itemTags(BATTERIES_MEDIUM).build()), "RBR", " C ", " I ");
     }
 
     private static void loadBreakablePoweredRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider){
