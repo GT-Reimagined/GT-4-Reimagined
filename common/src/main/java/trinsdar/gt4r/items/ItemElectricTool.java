@@ -135,6 +135,7 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
         return stack;
     }
 
+    @Override
     public ItemStack resolveStack(long startingEnergy, long maxEnergy) {
         ItemStack stack = this.getDefaultInstance();
         validateEnergyTag(stack, startingEnergy, maxEnergy);

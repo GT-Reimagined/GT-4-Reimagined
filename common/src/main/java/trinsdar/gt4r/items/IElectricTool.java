@@ -90,9 +90,11 @@ public interface IElectricTool extends IBasicAntimatterTool, IEnergyItem {
 
     int getEnergyTier();
 
+    ItemStack resolveStack(long startingEnergy, long maxEnergy);
+
     default CompoundTag getEnergyTag(ItemStack stack){
         CompoundTag dataTag = stack.getTagElement(Ref.TAG_ITEM_ENERGY_DATA);
-        return dataTag != null ? dataTag : validateEnergyTag(stack, 0, 10000);
+        return dataTag != null ? dataTag : validateEnergyTag(stack, 0, 100000);
     }
 
     default CompoundTag validateEnergyTag(ItemStack stack, long startingEnergy, long maxEnergy){

@@ -10,7 +10,6 @@ import trinsdar.gt4r.GT4RRef;
 public class CustomTags {
     public static TagKey<Item> PLATES_STEELS = getTag("plates/steels");
     public static TagKey<Item> PLATES_INVAR_ALUMINIUM = getTag("plates/invaraluminium");
-    public static TagKey<Item> PLATES_IRON_ALUMINIUM = getTag("plates/ironaluminium");
     public static TagKey<Item> PLATES_WROUGHT_ALUMINIUM = getTag("plates/wroughtaluminium");
     public static TagKey<Item> PLATES_TITAN_TUNGSTEEL = getTag("plates/titantungsteel");
     public static TagKey<Item> OVERCLOCKER_UPGRADES = TagUtils.getItemTag(new ResourceLocation(GT4RRef.ID, "overclocker_upgrades"));
@@ -18,11 +17,6 @@ public class CustomTags {
     public static TagKey<Item> HV_TRANSFORMER_UPGRADES = TagUtils.getItemTag(new ResourceLocation(GT4RRef.ID, "hv_transformer_upgrades"));
     public static TagKey<Item> MUFFLER_UPGRADES = TagUtils.getItemTag(new ResourceLocation(GT4RRef.ID, "muffler_upgrades"));
     public static TagKey<Item> STEAM_UPGRADES = TagUtils.getItemTag(new ResourceLocation(GT4RRef.ID, "steam_upgrades"));
-    public static TagKey<Item> CIRCUITS_BASIC = getTag("circuits/basic");
-    public static TagKey<Item> CIRCUITS_ADVANCED = getTag("circuits/advanced");
-    public static TagKey<Item> CIRCUITS_ELITE = getTag("circuits/elite");
-    public static TagKey<Item> CIRCUITS_MASTER = getTag("circuits/master");
-    public static TagKey<Item> CIRCUITS_DATA = getTag("circuits/data");
     public static TagKey<Item> CIRCUITS_ULTIMATE = getTag("circuits/ultimate");
     public static TagKey<Item> MACHINE_HULLS_CHEAP = getTag("machine_hulls/cheap");
     public static TagKey<Item> MACHINE_HULLS_SEMI_CHEAP = getTag("machine_hulls/semi_cheap");
@@ -36,15 +30,8 @@ public class CustomTags {
     public static TagKey<Item> GEARS_TITAN_TUNGSTEEL = getTag("gears/titantungsteel");
     public static TagKey<Item> DUSTS_LAPIS_LAZ = getTag("dusts/lapislaz");
     public static TagKey<Item> DUSTS_COALS = getTag("dusts/coals");
-    public static TagKey<Item> BATTERIES_RE = getTag("batteries/re");
-    public static TagKey<Item> BATTERIES_SMALL = getTag("batteries/small");
-    public static TagKey<Item> BATTERIES_MEDIUM = getTag("batteries/medium");
-    public static TagKey<Item> BATTERIES_LARGE = getTag("batteries/large");
-    public static TagKey<Item> POWER_UNIT_LV = getTag("power_units/lv");
-    public static TagKey<Item> POWER_UNIT_MV = getTag("power_units/mv");
-    public static TagKey<Item> POWER_UNIT_HV = getTag("power_units/hv");
-    public static TagKey<Item> POWER_UNIT_SMALL = getTag("power_units/small");
     public static TagKey<Item> POWER_UNIT_ROCK_CUTTER = getTag("power_units/rock_cutter");
+    public static TagKey<Item> DRILL = TagUtils.getItemTag(new ResourceLocation(GT4RRef.ID, "drill"));
 
     public static TagKey<Item> INGOTS_MIXED_METAL = getTag("ingots/mixed_metal");
     public static TagKey<Item> RODS_STEELS = getTag("rods/steels");

@@ -17,6 +17,7 @@ import trinsdar.gt4r.data.GT4RMaterialTags;
 import trinsdar.gt4r.data.TierMaps;
 
 import static io.github.gregtechintergalactical.gtcore.data.GTCoreItems.*;
+import static io.github.gregtechintergalactical.gtcore.data.GTCoreTags.*;
 import static muramasa.antimatter.machine.Tier.LV;
 import static muramasa.antimatter.machine.Tier.ULV;
 import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
