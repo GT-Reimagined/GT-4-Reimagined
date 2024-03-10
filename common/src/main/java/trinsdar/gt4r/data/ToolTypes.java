@@ -21,6 +21,7 @@ import tesseract.TesseractCapUtils;
 import tesseract.api.gt.IEnergyHandlerItem;
 import tesseract.api.gt.IGTNode;
 import trinsdar.gt4r.GT4RRef;
+import trinsdar.gt4r.items.IElectricTool;
 import trinsdar.gt4r.items.MaterialRockCutter;
 
 import javax.annotation.Nonnull;
@@ -88,7 +89,7 @@ public class ToolTypes {
         ItemStack powerUnit = new ItemStack(broken);
         Tuple<Long, Long> tuple = getEnergy(tool);
         CompoundTag dataTag = powerUnit.getOrCreateTagElement(muramasa.antimatter.Ref.TAG_ITEM_ENERGY_DATA);
-        IEnergyHandlerItem handler = TesseractCapUtils.getEnergyHandlerItem(powerUnit).orElse(null);
+        IEnergyHandlerItem handler = TesseractCapUtils.INSTANCE.getEnergyHandlerItem(powerUnit).orElse(null);
         if (handler != null){
             handler.setEnergy(tuple.getA());
             handler.setCapacity(tuple.getB());
@@ -102,11 +103,18 @@ public class ToolTypes {
 
     public static Tuple<Long, Long> getEnergy(ItemStack stack){
         if (stack.getItem() instanceof ItemBattery battery){
-            long energy = TesseractCapUtils.getEnergyHandlerItem(stack).map(IGTNode::getEnergy).orElse((long)0);
-            long maxEnergy = TesseractCapUtils.getEnergyHandlerItem(stack).map(IGTNode::getCapacity).orElse(battery.getCapacity());
+            long energy = TesseractCapUtils.INSTANCE.getEnergyHandlerItem(stack).map(IGTNode::getEnergy).orElse((long)0);
+            long maxEnergy = TesseractCapUtils.INSTANCE.getEnergyHandlerItem(stack).map(IGTNode::getCapacity).orElse(battery.getCapacity());
             return new Tuple<>(energy, maxEnergy);
         }
         if (stack.getItem() instanceof IAntimatterTool tool){
+            if (tool.getAntimatterToolType().isPowered()){
+                long currentEnergy = tool.getCurrentEnergy(stack);
+                long maxEnergy = tool.getMaxEnergy(stack);
+                return new Tuple<>(currentEnergy, maxEnergy);
+            }
+        }
+        if (stack.getItem() instanceof IElectricTool tool){
             if (tool.getAntimatterToolType().isPowered()){
                 long currentEnergy = tool.getCurrentEnergy(stack);
                 long maxEnergy = tool.getMaxEnergy(stack);

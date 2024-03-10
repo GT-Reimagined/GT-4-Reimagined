@@ -123,8 +123,8 @@ public abstract class BlockEntityTranslocator<T extends BlockEntityTranslocator<
             if (inputTile == null) return false;
             boolean[] booleans = new boolean[1];
             booleans[0] = false;
-            TesseractCapUtils.getItemHandler(outputTile, outputDir.getOpposite()).ifPresent(out -> {
-                TesseractCapUtils.getItemHandler(inputTile, inputDir.getOpposite()).ifPresent(in -> {
+            TesseractCapUtils.INSTANCE.getItemHandler(outputTile, outputDir.getOpposite()).ifPresent(out -> {
+                TesseractCapUtils.INSTANCE.getItemHandler(inputTile, inputDir.getOpposite()).ifPresent(in -> {
                     booleans[0] = Utils.transferItems(in, out,true, this::accepts);
                 });
             });
@@ -157,9 +157,9 @@ public abstract class BlockEntityTranslocator<T extends BlockEntityTranslocator<
         protected boolean processOutput() {
             Direction outputDir = this.getFacing().getOpposite();
             Direction inputDir = this.getFacing();
-            PlatformFluidHandler outputHandler = TesseractCapUtils.getFluidHandler(this.level, this.getBlockPos().relative(outputDir), outputDir.getOpposite()).orElse(null);
+            PlatformFluidHandler outputHandler = TesseractCapUtils.INSTANCE.getFluidHandler(this.level, this.getBlockPos().relative(outputDir), outputDir.getOpposite()).orElse(null);
             if (outputHandler == null) return false;
-            PlatformFluidHandler inputHandler = TesseractCapUtils.getFluidHandler(this.level, this.getBlockPos().relative(inputDir), inputDir.getOpposite()).orElse(null);
+            PlatformFluidHandler inputHandler = TesseractCapUtils.INSTANCE.getFluidHandler(this.level, this.getBlockPos().relative(inputDir), inputDir.getOpposite()).orElse(null);
 
             BlockEntity inputTile = Utils.getTile(this.getLevel(), this.getBlockPos().relative(inputDir));
             if (inputHandler == null) {

@@ -48,7 +48,7 @@ public class MaterialRockCutter extends GTCoreTools.PoweredTool {
     public void onGenericFillItemGroup(CreativeModeTab group, NonNullList<ItemStack> list, long maxEnergy) {
         if (this.allowdedIn(group)){
             ItemStack stack = asItemStack(Diamond, Titanium);
-            IEnergyHandlerItem h = TesseractCapUtils.getEnergyHandlerItem(stack).orElse(null);
+            IEnergyHandlerItem h = TesseractCapUtils.INSTANCE.getEnergyHandlerItem(stack).orElse(null);
             if (h != null){
                 list.add(stack.copy());
                 h.setCapacity(maxEnergy);

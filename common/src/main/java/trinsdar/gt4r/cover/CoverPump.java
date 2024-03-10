@@ -70,7 +70,7 @@ public class CoverPump extends CoverBasicTransport {
         BlockPos finalTo = to;
         if (cover.canMove(side)) {
             Direction finalFromSide = fromSide;
-            TesseractCapUtils.getFluidHandler(cover.source().getTile().getLevel(), from, fromSide).ifPresent(ih -> TesseractCapUtils.getFluidHandler(cover.source().getTile().getLevel(), finalTo, finalFromSide.getOpposite()).ifPresent(other -> Utils.transferFluids(ih, other, Integer.MAX_VALUE)));
+            TesseractCapUtils.INSTANCE.getFluidHandler(cover.source().getTile().getLevel(), from, fromSide).ifPresent(ih -> TesseractCapUtils.INSTANCE.getFluidHandler(cover.source().getTile().getLevel(), finalTo, finalFromSide.getOpposite()).ifPresent(other -> Utils.transferFluids(ih, other, Integer.MAX_VALUE)));
         }
     }
 

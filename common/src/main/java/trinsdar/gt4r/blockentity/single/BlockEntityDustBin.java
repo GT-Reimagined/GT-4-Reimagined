@@ -26,10 +26,10 @@ public class BlockEntityDustBin extends BlockEntityMachine<BlockEntityDustBin> {
             BlockEntity up = level.getBlockEntity(this.getBlockPos().above(1));
             BlockEntity down = level.getBlockEntity(this.getBlockPos().below(1));
             if (up != null){
-                TesseractCapUtils.getItemHandler(up, DOWN).ifPresent(f -> Utils.transferItems(f, i.getInputHandler(), true));
+                TesseractCapUtils.INSTANCE.getItemHandler(up, DOWN).ifPresent(f -> Utils.transferItems(f, i.getInputHandler(), true));
             }
             if (down != null){
-                TesseractCapUtils.getItemHandler(down, Direction.UP).ifPresent(t -> Utils.transferItems(i.getOutputHandler(), t, true));
+                TesseractCapUtils.INSTANCE.getItemHandler(down, Direction.UP).ifPresent(t -> Utils.transferItems(i.getOutputHandler(), t, true));
             } else if (level.isEmptyBlock(this.getBlockPos().below(1))){
                 ItemStack stack = Utils.extractAny(i.getOutputHandler());
                 if (stack.isEmpty()) return;
