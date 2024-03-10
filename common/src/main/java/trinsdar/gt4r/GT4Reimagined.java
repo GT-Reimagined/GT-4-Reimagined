@@ -75,8 +75,7 @@ public class GT4Reimagined extends AntimatterMod {
                             GTCoreItems.CircuitBoardPlastic, GTCoreItems.CircuitBoardEpoxy, GTCoreItems.CircuitBoardFiber, GTCoreItems.CircuitBoardMultiFiber,
                             GTCoreItems.CircuitBoardWetware, GTCoreItems.CircuitGood, GTCoreItems.CircuitComplex, GTCoreItems.CircuitFuturistic,
                             GTCoreItems.Circuit3D, GTCoreItems.CircuitInfinite));
-                    l.add(GT4RData.AdvancedWrenchAlt);
-                    l.add(GT4RData.ElectricWrenchAlt);
+                    l.addAll(Arrays.asList(GT4RData.AdvancedWrenchAlt, GT4RData.ElectricWrenchAlt, GTCoreItems.Fertilizer));
                     if (GT4RConfig.GT5_ELECTRIC_TOOLS.get()){
                         l.addAll(Arrays.asList(GT4RData.Drill, GT4RData.DiamondDrill, GT4RData.AdvancedDrill, GT4RData.Chainsaw, GT4RData.AdvancedChainsaw,
                                 GT4RData.ElectricWrench, GT4RData.AdvancedWrench,GT4RData.ElectricScrewdriver, GT4RData.RockCutter));
