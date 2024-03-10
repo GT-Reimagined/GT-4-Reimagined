@@ -2,6 +2,7 @@ package trinsdar.gt4r.data;
 
 import earth.terrarium.botarium.common.registry.fluid.FluidProperties;
 import io.github.gregtechintergalactical.gtcore.data.GTCoreTools;
+import io.github.gregtechintergalactical.gtcore.item.ItemPowerUnit;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.Ref;
 import muramasa.antimatter.cover.CoverFactory;
@@ -46,7 +47,7 @@ import trinsdar.gt4r.data.client.RecipeRenderer;
 import trinsdar.gt4r.items.ItemCraftingModule;
 import trinsdar.gt4r.items.ItemElectricTool;
 import trinsdar.gt4r.items.ItemMixedMetal;
-import trinsdar.gt4r.items.ItemPowerUnit;
+import trinsdar.gt4r.items.ItemRockCutterUnit;
 import trinsdar.gt4r.items.ItemStorageOrb;
 
 import java.util.HashSet;
@@ -101,7 +102,7 @@ public class GT4RData {
     private static Block.Properties prepareProperties() {
         return Block.Properties.of(net.minecraft.world.level.material.Material.WATER).strength(100.0F).noDrops().lightLevel(s -> 9);
     }
-    public static ItemPowerUnit RockCutterPowerUnit = new ItemPowerUnit(GT4RRef.ID, "rock_cutter_power_unit", Aluminium);
+    public static ItemPowerUnit RockCutterPowerUnit = new ItemRockCutterUnit(GT4RRef.ID, "rock_cutter_power_unit", Aluminium);
 
     public static ItemBasic<?> ComputerMonitor = new ItemBasic<>(GT4RRef.ID, "computer_monitor").tip("Can be placed on machines as a cover");
     public static ItemCover ConveyorModule = AntimatterAPI.get(ItemCover.class, COVER_CONVEYOR.getId(), GT4RRef.ID);

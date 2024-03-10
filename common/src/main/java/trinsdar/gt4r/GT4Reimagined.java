@@ -1,6 +1,7 @@
 package trinsdar.gt4r;
 
 import io.github.gregtechintergalactical.gtcore.data.GTCoreItems;
+import io.github.gregtechintergalactical.gtcore.item.ItemPowerUnit;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.datagen.AntimatterDynamics;
 import muramasa.antimatter.AntimatterMod;
@@ -10,6 +11,8 @@ import muramasa.antimatter.integration.jeirei.AntimatterJEIREIPlugin;
 import muramasa.antimatter.proxy.IProxyHandler;
 import muramasa.antimatter.registration.RegistrationEvent;
 import muramasa.antimatter.registration.Side;
+import muramasa.antimatter.tool.IAntimatterTool;
+import muramasa.antimatter.tool.IBasicAntimatterTool;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
@@ -23,6 +26,7 @@ import trinsdar.gt4r.datagen.GT4RRandomDropBonus;
 import trinsdar.gt4r.material.GT4RMaterialEvent;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 
 public class GT4Reimagined extends AntimatterMod {
@@ -71,6 +75,20 @@ public class GT4Reimagined extends AntimatterMod {
                             GTCoreItems.CircuitBoardPlastic, GTCoreItems.CircuitBoardEpoxy, GTCoreItems.CircuitBoardFiber, GTCoreItems.CircuitBoardMultiFiber,
                             GTCoreItems.CircuitBoardWetware, GTCoreItems.CircuitGood, GTCoreItems.CircuitComplex, GTCoreItems.CircuitFuturistic,
                             GTCoreItems.Circuit3D, GTCoreItems.CircuitInfinite));
+                    l.add(GT4RData.AdvancedWrenchAlt);
+                    l.add(GT4RData.ElectricWrenchAlt);
+                    if (GT4RConfig.GT5_ELECTRIC_TOOLS.get()){
+                        l.addAll(Arrays.asList(GT4RData.Drill, GT4RData.DiamondDrill, GT4RData.AdvancedDrill, GT4RData.Chainsaw, GT4RData.AdvancedChainsaw,
+                                GT4RData.ElectricWrench, GT4RData.AdvancedWrench,GT4RData.ElectricScrewdriver, GT4RData.RockCutter));
+                    } else {
+                        if (!AntimatterAPI.isModLoaded("gti")){
+                            l.addAll(AntimatterAPI.all(IAntimatterTool.class).stream().filter(i -> i.getAntimatterToolType().isPowered()).map(IBasicAntimatterTool::getItem).toList());
+                            l.addAll(AntimatterAPI.all(ItemPowerUnit.class));
+                        } else {
+                            l.add(GT4RData.RockCutterPowerUnit);
+                            l.add(AntimatterAPI.get(IAntimatterTool.class, "rock_cutter").getItem());
+                        }
+                    }
                 });
             }
             case DATA_READY -> {
