@@ -56,7 +56,7 @@ public class WorldGenLoader {
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Tin).atHeight(-16, 48).withWeight(25).withSize(8).withSecondaryMaterial(Iron, 0.01f).setHasTriangleHeight(true).buildMaterial());
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Uraninite).atHeight(-16, 100).withWeight(8).withSize(4).withBiomes(tagged("is_dead")).setBiomeBlacklist(true).buildMaterial());
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Uraninite).withCustomId("uranite_dead").atHeight(-16, 100).withWeight(20).withSize(4).withBiomes(tagged("is_dead")).buildMaterial());
-        event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Cassiterite).atHeight(-30, 30).withWeight(2).withSize(32).withSecondaryMaterial(Tin, 0.05f).withBiomes(tagged("has_cassiterite")).buildMaterial());
+        event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Cassiterite).atHeight(60, 120).withWeight(2).withSize(32).withSecondaryMaterial(Tin, 0.05f).withBiomes(tagged("has_cassiterite")).buildMaterial());
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Tetrahedrite).atHeight(-20, 40).withWeight(10).withSize(12).withSecondaryMaterial(Copper, 0.225f).withBiomes(tagged("has_tetra")).buildMaterial());
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Galena).atHeight(-32, 32).withWeight(12).withSize(10).withDiscardOnExposureChance(0.2f).setHasTriangleHeight(true).buildMaterial());
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Bauxite).atHeight(50, 120).withWeight(6).withSize(16).withBiomes(tagged("has_bauxite")).buildMaterial());
