@@ -182,6 +182,7 @@ public class GT4RData {
 
     public static final BlockCasing FUSION_COIL = new BlockCasing(GT4RRef.ID, "fusion_coil");
 
+    public static final Cable<?> CABLE_SOLDERING_ALLOY = AntimatterAPI.register(Cable.class, new Cable<>(GT4RRef.ID, SolderingAlloy, 0.02, Tier.ULV).amps(1));
     public static final Cable<?> CABLE_LEAD = AntimatterAPI.register(Cable.class, new Cable<>(GT4RRef.ID, Lead, 2, Tier.LV).amps(2));
     public static final Cable<?> CABLE_TIN = AntimatterAPI.register(Cable.class, new Cable<>(GT4RRef.ID, Tin, 1, Tier.LV).amps(1));
     public static final Cable<?> CABLE_COPPER = AntimatterAPI.register(Cable.class, new Cable<>(GT4RRef.ID, AntimatterMaterials.Copper, 2, Tier.MV).amps(1));
@@ -193,6 +194,7 @@ public class GT4RData {
     public static final Cable<?> CABLE_OSMIUM = AntimatterAPI.register(Cable.class, new Cable<>(GT4RRef.ID, Osmium, 2, Tier.IV).amps(4));
     public static final Cable<?> CABLE_TUNGSTEN = AntimatterAPI.register(Cable.class, new Cable<>(GT4RRef.ID, Tungsten, 2, Tier.IV).amps(2));
 
+    public static final Wire<?> WIRE_SOLDERING_ALLOY = AntimatterAPI.register(Wire.class, new Wire<>(GT4RRef.ID, SolderingAlloy, 0.04, Tier.ULV).amps(1));
     public static final Wire<?> WIRE_LEAD = AntimatterAPI.register(Wire.class, new Wire<>(GT4RRef.ID, Lead, 4, Tier.LV).amps(2));
     public static final Wire<?> WIRE_TIN = AntimatterAPI.register(Wire.class, new Wire<>(GT4RRef.ID, Tin, 2, Tier.LV).amps(1));
     public static final Wire<?> WIRE_COPPER = AntimatterAPI.register(Wire.class, new Wire<>(GT4RRef.ID, AntimatterMaterials.Copper, 4, Tier.MV).amps(1));
