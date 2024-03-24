@@ -32,7 +32,7 @@ public class RecipeMaps {
     public static RecipeMap<?> STEAM_COMPRESSING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "steam_compressor", new RecipeBuilder()));
     public static RecipeMap<?> STEAM_ALLOY_SMELTING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "steam_alloy_smelter", new RecipeBuilder()));
 
-    public static RecipeMap<?> COAL_BOILERS = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "coal_boilers", new RecipeBuilder()));
+    public static RecipeMap<?> SOLID_FUEL_BOILERS = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "solid_fuel_boilers", new RecipeBuilder()));
 
     public static RecipeMap<?> ALLOY_SMELTING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "alloy_smelter", new io.github.gregtechintergalactical.gtcore.data.RecipeBuilders.SteamBuilder(STEAM_ALLOY_SMELTING)));
     public static RecipeMap<?> ASSEMBLING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "assembler", new RecipeBuilder()));
@@ -94,7 +94,7 @@ public class RecipeMaps {
         HOT_FUELS.setGuiData(MULTI_DISPLAY, HEAT_EXCHANGER);
         SEMIFLUID_FUELS.setGuiData(MULTI_DISPLAY, SEMIFLUID_GENERATOR);
         THERMAL_BOILER_FUELS.setGuiData(MULTI_DISPLAY, THERMAL_BOILER);
-        COAL_BOILERS.setGuiData(MULTI_DISPLAY, COAL_BOILER);
+        SOLID_FUEL_BOILERS.setGuiData(MULTI_DISPLAY, SOLID_FUEL_BOILER);
         COKING.setGuiData(MULTI_DISPLAY, COKE_OVEN);
         PYROLYSING.setGuiData(MULTI_DISPLAY, PYROLYSIS_OVEN);
         DISTILLING.setGuiData(MULTI_DISPLAY_MORE_FLUID, DISTILLATION_TOWER);

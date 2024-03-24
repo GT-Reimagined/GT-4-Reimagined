@@ -94,6 +94,7 @@ public class GT4Reimagined extends AntimatterMod {
                 if (AntimatterAPI.isModLoaded(GT4RRef.MOD_BLUEPOWER)) {
                     //GEM.forceOverride(Amethyst, ForgeRegistries.ITEMS.getValue(new ResourceLocation("bluepower", "amethyst_gem")));
                 }
+                GT4RRemapping.init();
                 Structures.init();
                 Structures.initPatterns();
                 OreConfigHandler.ORE_CONFIG_HANDLER.save();

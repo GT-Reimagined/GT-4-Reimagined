@@ -1,13 +1,10 @@
 package trinsdar.gt4r.data;
 
-import com.google.common.collect.ImmutableMap;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.gui.BarDir;
 import muramasa.antimatter.gui.ButtonOverlay;
 import muramasa.antimatter.gui.GuiData;
-import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.gui.slot.ISlotProvider;
-import muramasa.antimatter.gui.widget.BackgroundWidget;
 import muramasa.antimatter.gui.widget.ProgressWidget;
 import muramasa.antimatter.gui.widget.WidgetSupplier;
 import muramasa.antimatter.machine.Tier;
@@ -24,7 +21,6 @@ import static muramasa.antimatter.gui.ButtonOverlay.*;
 import static muramasa.antimatter.gui.SlotType.*;
 import static muramasa.antimatter.gui.Widget.builder;
 import static muramasa.antimatter.machine.Tier.*;
-import static muramasa.antimatter.machine.Tier.ULV;
 import static trinsdar.gt4r.data.Machines.*;
 import static trinsdar.gt4r.data.SlotTypes.*;
 import static trinsdar.gt4r.gui.ButtonOverlays.*;
@@ -163,8 +159,8 @@ public class Guis {
                 .add(ENERGY,53,27, bat).add(ENERGY,71,27, bat).add(ENERGY,89,27, bat).add(ENERGY,107,27, bat)
                 .add(ENERGY,53,45, bat).add(ENERGY,71,45, bat).add(ENERGY,89,45, bat).add(ENERGY,107,45, bat);
 
-        COAL_BOILER.add(CELL_IN, 44, 26).add(CELL_OUT, 44, 62).add(IT_OUT, 116, 26).add(IT_IN, 116, 62);
-        COAL_BOILER.add(CELL_IN, 44, 26).add(CELL_OUT, 44, 62).add(IT_OUT, 116, 26).add(STEEL,
+        SOLID_FUEL_BOILER.add(CELL_IN, 44, 26).add(CELL_OUT, 44, 62).add(IT_OUT, 116, 26).add(IT_IN, 116, 62);
+        SOLID_FUEL_BOILER.add(CELL_IN, 44, 26).add(CELL_OUT, 44, 62).add(IT_OUT, 116, 26).add(STEEL,
                 IT_IN, 116, 62);
 
         STEAM_ALLOY_SMELTER.add(ALLOY_SMELTER).add(FL_IN, 53, 63);
@@ -310,7 +306,7 @@ public class Guis {
         ELECTRIC_TYPE_FILTER.getCallbacks().remove(1);
         ELECTRIC_ITEM_TRANSLOCATOR.getCallbacks().remove(1);
         ELECTRIC_FLUID_TRANSLOCATOR.getCallbacks().remove(1);
-        COAL_BOILER.addGuiCallback(t -> {
+        SOLID_FUEL_BOILER.addGuiCallback(t -> {
             t.addWidget(CoalBoilerWidget.build().setSize(70, 25, 36, 54))
                     .addWidget(CoalBoilerFuelWidget.build().setSize(115, 43, 18, 18));
         });

@@ -53,7 +53,7 @@ import trinsdar.gt4r.loader.machines.SiftingLoader;
 import trinsdar.gt4r.loader.machines.ThermalCentrifuge;
 import trinsdar.gt4r.loader.machines.WasherLoader;
 import trinsdar.gt4r.loader.machines.WiremillLoader;
-import trinsdar.gt4r.loader.machines.generator.CoalBoilerHandler;
+import trinsdar.gt4r.loader.machines.generator.SolidFuelBoilerHandler;
 import trinsdar.gt4r.loader.machines.generator.FuelBurnHandler;
 import trinsdar.gt4r.loader.machines.generator.HeatExchangerLoader;
 import trinsdar.gt4r.loader.multi.Blasting;
@@ -88,7 +88,7 @@ public class AntimatterEvents {
         loader.accept("fluid_extractor", FluidExtractorLoader::init);
         loader.accept("fluid_solidifier", FluidSolidifierLoader::init);
         loader.accept("bathing", BathingLoader::init);
-        loader.accept("coal_boiler", CoalBoilerHandler::init);
+        loader.accept("solid_fuel_boiler", SolidFuelBoilerHandler::init);
         loader.accept("distilling", DistillingLoader::init);
         loader.accept("fermenting", FermentingLoader::init);
         loader.accept("industrial_sawmilling", IndustrialSawmill::init);
