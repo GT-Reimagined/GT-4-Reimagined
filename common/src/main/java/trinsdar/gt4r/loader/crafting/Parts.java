@@ -22,6 +22,7 @@ import static com.google.common.collect.ImmutableMap.of;
 import static io.github.gregtechintergalactical.gtcore.data.GTCoreItems.*;
 import static io.github.gregtechintergalactical.gtcore.data.GTCoreTags.*;
 import static muramasa.antimatter.data.AntimatterMaterialTypes.FOIL;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.PLATE;
 import static muramasa.antimatter.util.TagUtils.getForgelikeItemTag;
 import static trinsdar.gt4r.data.CustomTags.*;
 import static trinsdar.gt4r.data.GT4RData.*;
@@ -281,5 +282,9 @@ public class Parts {
         provider.addItemRecipe(output, GT4RRef.ID, "", "tapes", Tape, of('P', Items.PAPER, 'G', StickyResin), "PPP", " G ");
         provider.addItemRecipe(output, GT4RRef.ID, "", "tapes", DuctTape, of('P', FOIL.getMaterialTag(Plastic), 'G', StickyResin), "PPP", " G ");
         provider.addItemRecipe(output, GT4RRef.ID, "", "tapes", FALDuctTape, of('P', FOIL.getMaterialTag(Tungsten), 'G', StickyResin), "PPP", " G ");
+        provider.addItemRecipe(output, "hazmat", UniversalHazardSuitMask, of('L', PLATE.getMaterialTag(Lead), 'A', PLATE.getMaterialTag(Aluminium), 'C', Items.CHAINMAIL_HELMET, 'G', Items.GLASS_PANE), "ALA", "LCL", "AGA");
+        provider.addItemRecipe(output, "hazmat", UniversalHazardSuitShirt, of('L', PLATE.getMaterialTag(Lead), 'A', PLATE.getMaterialTag(Aluminium), 'C', Items.CHAINMAIL_CHESTPLATE), "ALA", "LCL", "ALA");
+        provider.addItemRecipe(output, "hazmat", UniversalHazardSuitPants, of('L', PLATE.getMaterialTag(Lead), 'A', PLATE.getMaterialTag(Aluminium), 'C', Items.CHAINMAIL_LEGGINGS), "ALA", "LCL", "ALA");
+        provider.addItemRecipe(output, "hazmat", UniversalHazardSuitBoots, of('L', PLATE.getMaterialTag(Lead), 'A', PLATE.getMaterialTag(Aluminium), 'C', Items.CHAINMAIL_BOOTS), "ALA", "LCL", "ALA");
     }
 }
