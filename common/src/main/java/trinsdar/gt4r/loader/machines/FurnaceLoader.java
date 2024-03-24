@@ -24,18 +24,6 @@ public class FurnaceLoader {
         SimpleCookingRecipeBuilder.smelting(RecipeIngredient.of(GTCoreItems.CompressedFireClay, 1), GTCoreItems.FireBrick, 0.5F, 200).unlockedBy("has_compressed_fire_clay", provider.hasSafeItem(GTCoreItems.CompressedFireClay)).save(output, GT4RRef.ID + ":firebrick");
         AntimatterCookingRecipeBuilder.blastingRecipe(AntimatterMaterialTypes.DUST.getMaterialIngredient(Tetrahedrite, 1), AntimatterMaterialTypes.NUGGET.get(AntimatterMaterials.Copper, 6), 0.5F, 100).addCriterion("has_" + Tetrahedrite.getId() + "_dust", provider.hasSafeItem(AntimatterMaterialTypes.DUST.getMaterialTag(Tetrahedrite))).build(output, GT4RRef.ID + ":" + Tetrahedrite.getId() + "_dust_to_nuggets_bl");
         AntimatterCookingRecipeBuilder.smeltingRecipe(AntimatterMaterialTypes.DUST.getMaterialIngredient(Tetrahedrite, 1), AntimatterMaterialTypes.NUGGET.get(AntimatterMaterials.Copper, 6), 0.5F, 200).addCriterion("has_" + Tetrahedrite.getId() + "_dust", provider.hasSafeItem(AntimatterMaterialTypes.DUST.getMaterialTag(Tetrahedrite))).build(output, GT4RRef.ID + ":" + Tetrahedrite.getId() + "_dust_to_nuggets");
-        AntimatterMaterialTypes.CRUSHED.all().forEach(m -> {
-            if (m.has(GT4RMaterialTags.NEEDS_BLAST_FURNACE)) return;
-            if (!MaterialTags.DIRECT_SMELT_INTO.getMapping(m).has(AntimatterMaterialTypes.NUGGET)) return;
-            AntimatterCookingRecipeBuilder.blastingRecipe(AntimatterMaterialTypes.CRUSHED.getMaterialIngredient(m, 1), AntimatterMaterialTypes.NUGGET.get(MaterialTags.DIRECT_SMELT_INTO.getMapping(m), 10), 0.5F, 100).addCriterion("has_" + m.getId() + "_crushed", provider.hasSafeItem(AntimatterMaterialTypes.CRUSHED.getMaterialTag(m))).build(output, GT4RRef.ID + ":" + m.getId() + "_crushed_to_nuggets_bl");
-            AntimatterCookingRecipeBuilder.smeltingRecipe(AntimatterMaterialTypes.CRUSHED.getMaterialIngredient(m, 1), AntimatterMaterialTypes.NUGGET.get(MaterialTags.DIRECT_SMELT_INTO.getMapping(m), 10), 0.5F, 200).addCriterion("has_" + m.getId() + "_crushed", provider.hasSafeItem(AntimatterMaterialTypes.CRUSHED.getMaterialTag(m))).build(output, GT4RRef.ID + ":" + m.getId() + "_crushed_to_nuggets");
-        });
-        AntimatterMaterialTypes.CRUSHED_PURIFIED.all().forEach(m -> {
-            if (m.has(GT4RMaterialTags.NEEDS_BLAST_FURNACE)) return;
-            if (!MaterialTags.DIRECT_SMELT_INTO.getMapping(m).has(AntimatterMaterialTypes.NUGGET)) return;
-            AntimatterCookingRecipeBuilder.blastingRecipe(AntimatterMaterialTypes.CRUSHED_PURIFIED.getMaterialIngredient(m, 1), AntimatterMaterialTypes.NUGGET.get(MaterialTags.DIRECT_SMELT_INTO.getMapping(m), 10), 0.5F, 100).addCriterion("has_" + m.getId() + "_crushed_purified", provider.hasSafeItem(AntimatterMaterialTypes.CRUSHED.getMaterialTag(m))).build(output, GT4RRef.ID + ":" + m.getId() + "_crushed_purified_to_nuggets_bl");
-            AntimatterCookingRecipeBuilder.smeltingRecipe(AntimatterMaterialTypes.CRUSHED_PURIFIED.getMaterialIngredient(m, 1), AntimatterMaterialTypes.NUGGET.get(MaterialTags.DIRECT_SMELT_INTO.getMapping(m), 10), 0.5F, 200).addCriterion("has_" + m.getId() + "_crushed_purified", provider.hasSafeItem(AntimatterMaterialTypes.CRUSHED.getMaterialTag(m))).build(output, GT4RRef.ID + ":" + m.getId() + "_crushed_purified_to_nuggets");
-        });
     }
 
     public static void init(){
