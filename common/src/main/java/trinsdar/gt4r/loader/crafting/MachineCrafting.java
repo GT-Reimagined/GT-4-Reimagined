@@ -243,6 +243,8 @@ public class MachineCrafting {
         });*/
         provider.addItemRecipe(output, GT4RRef.ID, "hv_teleporter", "machines", TELEPORTER.getItem(HV), of('C', CIRCUITS_ADVANCED, 'S', MACHINE_HULLS_STABILIZED, 'D', AntimatterMaterialTypes.GEM.getMaterialTag(AntimatterMaterials.Diamond), 'c', CABLE_ELECTRUM.getBlock(PipeSize.TINY), 'f', FrequencyTransmitter), "CfC", "cSc", "CDC");
         provider.addItemRecipe(output, GT4RRef.ID, "luv_teleporter", "machines", TELEPORTER.getItem(LUV), of('T', TELEPORTER.getItem(HV), 'M', HIGHLY_ADVANCED_MACHINE_BLOCK, 'L', BatteryEnergyOrb, 'C', CIRCUITS_MASTER), "CTC", "TMT", "CLC");
+        provider.addItemRecipe(output, "trash_bin", GTCoreBlocks.ENDER_GARBAGE_BIN.getItem(NONE),
+                of('O', PLATE.getMaterialTag(Obsidian), 'I', PLATE.getMaterialTag(Iron), 'E', Items.ENDER_EYE), "OOO", "OEO", "III");
     }
 
     private static void loadHatchRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider){

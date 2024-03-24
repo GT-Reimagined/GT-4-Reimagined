@@ -11,6 +11,7 @@ import trinsdar.gt4r.material.GT4RMaterialEvent;
 
 import static com.google.common.collect.ImmutableMap.of;
 import static muramasa.antimatter.data.AntimatterMaterialTypes.FOIL;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.PLATE;
 import static muramasa.antimatter.material.MaterialTags.NOSMASH;
 import static muramasa.antimatter.material.MaterialTags.RUBBERTOOLS;
 import static net.minecraft.world.item.Tiers.IRON;
@@ -142,7 +143,7 @@ public class GT4RMaterialEvents {
         event.setMaterial(Galena).asOre(1, 5, false).mats(of(Lead, 3, Silver, 3, Sulfur, 2)).harvestLevel(2);
         event.setMaterial(Grossular).asDust().mats(of(Calcium, 3, Aluminium, 2, Silicon, 3, Oxygen, 12));
         event.setMaterial(Magnesite).asDust().mats(of(Magnesium, 1, Carbon, 1, Oxygen, 3));
-        event.setMaterial(Obsidian).asDust().mats(of(Magnesium, 1, AntimatterMaterials.Iron, 1, Silicon, 2, Oxygen, 8));
+        event.setMaterial(Obsidian).asDust(PLATE).mats(of(Magnesium, 1, AntimatterMaterials.Iron, 1, Silicon, 2, Oxygen, 8));
         event.setMaterial(Phosphate).asDust().mats(of(Phosphor, 1, Oxygen, 4));
         event.setMaterial(Pyrite).asOre(1, 5,false).mats(of(AntimatterMaterials.Iron, 1, Sulfur, 2)).setOreMulti(2);
         event.setMaterial(Pyrope).asDust().mats(of(Aluminium, 2, Magnesium, 3, Silicon, 3, Oxygen, 12));

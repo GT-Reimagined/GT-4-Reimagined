@@ -9,7 +9,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import trinsdar.gt4r.data.GT4RData;
 
+import static muramasa.antimatter.Ref.L;
 import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
+import static muramasa.antimatter.data.AntimatterMaterials.Lava;
+import static trinsdar.gt4r.data.Materials.Obsidian;
 import static trinsdar.gt4r.data.RecipeMaps.FLUID_SOLIDIFYING;
 
 public class FluidSolidifierLoader {
@@ -30,6 +33,7 @@ public class FluidSolidifierLoader {
         BLOCK.all().forEach(r -> {
             add(r, BLOCK.get().get(r).asStack(), "block", GTCoreItems.MoldBlock, 9.0f, 16);
         });
+        FLUID_SOLIDIFYING.RB().ii(RecipeIngredient.of(GTCoreItems.MoldPlate, 1).setNoConsume()).fi(Lava.getLiquid(AntimatterPlatformUtils.isFabric() ? L : 111)).io(PLATE.get(Obsidian)).add("obsidian_plate", 16, 8);
     }
 
     private static void add(Material m, ItemStack output, String suffix, Item mold, float ratio, int power) {
