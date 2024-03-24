@@ -1,5 +1,6 @@
 package trinsdar.gt4r.loader.crafting;
 
+import io.github.gregtechintergalactical.gtcore.data.GTCoreItems;
 import muramasa.antimatter.data.AntimatterDefaultTools;
 import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.data.AntimatterMaterials;
@@ -20,6 +21,7 @@ import java.util.function.Consumer;
 import static com.google.common.collect.ImmutableMap.of;
 import static io.github.gregtechintergalactical.gtcore.data.GTCoreItems.*;
 import static io.github.gregtechintergalactical.gtcore.data.GTCoreTags.*;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.FOIL;
 import static muramasa.antimatter.util.TagUtils.getForgelikeItemTag;
 import static trinsdar.gt4r.data.CustomTags.*;
 import static trinsdar.gt4r.data.GT4RData.*;
@@ -273,5 +275,11 @@ public class Parts {
                 ThickNeutronReflector, of('N', NeutronReflector, 'I', AntimatterMaterialTypes.DUST.get(Beryllium)), " N ", "NIN", " N ");
         provider.addItemRecipe(output, GT4RRef.ID, "neutron_reflector_normal", "parts",
                 NeutronReflector, of('C', AntimatterMaterialTypes.DUST.get(AntimatterMaterials.Coal), 'T', AntimatterMaterialTypes.DUST.get(Tin), 'I', AntimatterMaterialTypes.PLATE.get(AntimatterMaterials.Copper)), "TCT", "CIC", "TCT");
+        provider.shapeless(output, GT4RRef.ID, "tape_from_empty", "tapes", new ItemStack(Tape), TapeEmpty, TapeEmpty, TapeEmpty, TapeEmpty);
+        provider.shapeless(output, GT4RRef.ID, "duct_tape_from_empty", "tapes", new ItemStack(DuctTape), DuctTapeEmpty, DuctTapeEmpty, DuctTapeEmpty, DuctTapeEmpty);
+        provider.shapeless(output, GT4RRef.ID, "fal_duct_tape_from_empty", "tapes", new ItemStack(FALDuctTape), FALDuctTapeEmpty, FALDuctTapeEmpty, FALDuctTapeEmpty, FALDuctTapeEmpty);
+        provider.addItemRecipe(output, GT4RRef.ID, "", "tapes", Tape, of('P', Items.PAPER, 'G', StickyResin), "PPP", " G ");
+        provider.addItemRecipe(output, GT4RRef.ID, "", "tapes", DuctTape, of('P', FOIL.getMaterialTag(Plastic), 'G', StickyResin), "PPP", " G ");
+        provider.addItemRecipe(output, GT4RRef.ID, "", "tapes", FALDuctTape, of('P', FOIL.getMaterialTag(Tungsten), 'G', StickyResin), "PPP", " G ");
     }
 }

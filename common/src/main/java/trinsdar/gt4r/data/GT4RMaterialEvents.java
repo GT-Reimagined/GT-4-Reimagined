@@ -10,6 +10,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import trinsdar.gt4r.material.GT4RMaterialEvent;
 
 import static com.google.common.collect.ImmutableMap.of;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.FOIL;
 import static muramasa.antimatter.material.MaterialTags.NOSMASH;
 import static muramasa.antimatter.material.MaterialTags.RUBBERTOOLS;
 import static net.minecraft.world.item.Tiers.IRON;
@@ -42,7 +43,7 @@ public class GT4RMaterialEvents {
         event.setMaterial(Silver).asMetal(1234, 0, AntimatterMaterialTypes.PLATE).harvestLevel(2);
         event.setMaterial(Thorium).asMetal(2115, 0);
         event.setMaterial(Titanium).asMetal(1941, 1500,  AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.ROD, AntimatterMaterialTypes.GEAR).addArmor(new int[]{3, 7, 7, 3}, 1.0F, 0.0F, 15).addTools(3.5F, 8.0F, 1600, 3);
-        event.setMaterial(Tungsten).asMetal(3695, 2500, AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.ROD).addTools(3.5F, 8.0F, 2560, 3);
+        event.setMaterial(Tungsten).asMetal(3695, 2500, AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.ROD, FOIL).addTools(3.5F, 8.0F, 2560, 3);
         event.setMaterial(Uranium238).asMetal(1405, 0);
         event.setMaterial(Uranium235).asMetal(1405, 0);
         event.setMaterial(Antimony).asMetal(1449, 0);
@@ -211,7 +212,7 @@ public class GT4RMaterialEvents {
         event.setMaterial(BlueSteel).asMetal(1400, 1400, AntimatterMaterialTypes.FRAME).addTools(3.5F, 7.5F, 1024, 2).mats(of(RoseGold, 1, Brass, 1, Steel, 2, BlackSteel, 4));
 
         /** Solids (Plastic Related Stuff)**/
-        event.setMaterial(Plastic).asSolid(295, 0, AntimatterMaterialTypes.PLATE, RUBBERTOOLS, NOSMASH).addTools(0.0F, 0.0F, 64, 0, of(), AntimatterDefaultTools.SOFT_HAMMER).addHandleStat(66, 0.5F).mats(of(Carbon, 1, Hydrogen, 2));
+        event.setMaterial(Plastic).asSolid(295, 0, AntimatterMaterialTypes.PLATE, RUBBERTOOLS, NOSMASH, FOIL).addTools(0.0F, 0.0F, 64, 0, of(), AntimatterDefaultTools.SOFT_HAMMER).addHandleStat(66, 0.5F).mats(of(Carbon, 1, Hydrogen, 2));
         event.setMaterial(Rubber).asSolid(295, 0, AntimatterMaterialTypes.PLATE, RUBBERTOOLS, NOSMASH).addTools(0.0F, 0.0F, 64, 0, of(), AntimatterDefaultTools.SOFT_HAMMER).addHandleStat(11, 0.4F).mats(of(Carbon, 5, Hydrogen, 8));
 
         /** Stones **/
