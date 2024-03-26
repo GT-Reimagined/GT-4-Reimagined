@@ -3,6 +3,7 @@ package trinsdar.gt4r.blockentity.single;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import muramasa.antimatter.blockentity.BlockEntityMachine;
 import muramasa.antimatter.capability.machine.MachineRecipeHandler;
+import muramasa.antimatter.machine.MachineFlag;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.recipe.IRecipe;
@@ -56,6 +57,13 @@ public class BlockEntitySteamMachine extends BlockEntityMachine<BlockEntitySteam
         protected boolean canRecipeContinue() {
             isSteamClear = tile.level.isEmptyBlock(tile.worldPosition.relative(tile.getOutputFacing()));
             return super.canRecipeContinue() && isSteamClear;
+        }
+
+        @Override
+        public long getPower() {
+            if (activeRecipe == null) return 0;
+            if (overclock == 0 || tile.has(MachineFlag.RF)) return activeRecipe.getPower();
+            return (activeRecipe.getPower() * (1L << overclock));
         }
 
         @Override
