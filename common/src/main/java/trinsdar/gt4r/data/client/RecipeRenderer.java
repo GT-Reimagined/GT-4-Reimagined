@@ -70,11 +70,11 @@ public class RecipeRenderer {
         RecipeMaps.SEMIFLUID_FUELS.setInfoRenderer(FUEL_RENDERER);
 
         RecipeMaps.BLASTING.setInfoRenderer(InfoRenderers.BLASTING_RENDERER);
-        RecipeMaps.STEAM_SMELTING.setInfoRenderer(InfoRenderers.STEAM_RENDERER);
-        RecipeMaps.STEAM_COMPRESSING.setInfoRenderer(InfoRenderers.STEAM_RENDERER);
-        RecipeMaps.STEAM_ALLOY_SMELTING.setInfoRenderer(InfoRenderers.STEAM_RENDERER);
-        RecipeMaps.STEAM_EXTRACTING.setInfoRenderer(InfoRenderers.STEAM_RENDERER);
-        RecipeMaps.STEAM_MACERATING.setInfoRenderer(InfoRenderers.STEAM_RENDERER);
-        RecipeMaps.STEAM_HAMMERING.setInfoRenderer(InfoRenderers.STEAM_RENDERER);
+        RecipeMaps.STEAM_FURNACE.setInfoRenderer(InfoRenderers.STEAM_RENDERER);
+        RecipeMaps.STEAM_COMPRESSOR.setInfoRenderer(InfoRenderers.STEAM_RENDERER);
+        RecipeMaps.STEAM_ALLOY_SMELTER.setInfoRenderer(InfoRenderers.STEAM_RENDERER);
+        RecipeMaps.STEAM_EXTRACTOR.setInfoRenderer(InfoRenderers.STEAM_RENDERER);
+        RecipeMaps.STEAM_MACERATOR.setInfoRenderer(InfoRenderers.STEAM_RENDERER);
+        RecipeMaps.STEAM_FORGE_HAMMER.setInfoRenderer(InfoRenderers.STEAM_RENDERER);
     }
 }

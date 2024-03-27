@@ -164,6 +164,7 @@ public class Guis {
                 IT_IN, 116, 62);
 
         STEAM_ALLOY_SMELTER.add(ALLOY_SMELTER).add(FL_IN, 53, 63);
+        STEAM_CUTTER.add(CUTTER).add(FL_IN, 35, 63);
         STEAM_COMPRESSOR.add(COMPRESSOR).add(FL_IN, 53, 63);
         STEAM_FURNACE.add(FURNACE).add(FL_IN, 53, 63);
         STEAM_EXTRACTOR.add(EXTRACTOR).add(FL_IN, 53, 63);
