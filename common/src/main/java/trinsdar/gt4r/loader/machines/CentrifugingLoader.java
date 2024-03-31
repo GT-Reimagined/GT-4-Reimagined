@@ -44,8 +44,8 @@ public class CentrifugingLoader {
         });
         ItemStack[] itemStacks = AntimatterMaterials.Lava.getProcessInto().stream().filter(t -> t.m.has(AntimatterMaterialTypes.DUST_TINY)).map(t -> new ItemStack(AntimatterMaterialTypes.DUST_TINY.get(t.m), t.s))
                 .toArray(ItemStack[]::new);
-        CENTRIFUGING.RB().fi(Lava.getLiquid(100)).io(itemStacks).chances(0.2, 0.1, 0.025, 0.025, 0.01).add("lava",200, 16);
-        CENTRIFUGING.RB().fi(FluidPlatformUtils.createFluidStack(GT4RData.PAHOEHOE_LAVA.getFluid(), 100 * TesseractGraphWrappers.dropletMultiplier)).io(itemStacks).chances(0.2, 0.1, 0.025, 0.025, 0.01).add("pahoehoe_lava", 200, 8);
+        CENTRIFUGING.RB().fi(Lava.getLiquid(100)).io(itemStacks).outputChances(0.2, 0.1, 0.025, 0.025, 0.01).add("lava",200, 16);
+        CENTRIFUGING.RB().fi(FluidPlatformUtils.createFluidStack(GT4RData.PAHOEHOE_LAVA.getFluid(), 100 * TesseractGraphWrappers.dropletMultiplier)).io(itemStacks).outputChances(0.2, 0.1, 0.025, 0.025, 0.01).add("pahoehoe_lava", 200, 8);
         add(EnderEye, 10, 792);
         CENTRIFUGING.RB().ii(of(MAGMA_CREAM, 1)).io(new ItemStack(SLIME_BALL), new ItemStack(BLAZE_POWDER)).add("magma_cream",156,16);
         CENTRIFUGING.RB().ii(of(DIRT, 64)).io(new ItemStack(Items.SAND, 32), new ItemStack(CLAY_BALL, 2), new ItemStack(Plantball, 4)).add("dirt",3125, 16);

@@ -85,7 +85,7 @@ public class OreByproducts {
                         ores.add(AntimatterMaterialTypes.CRUSHED_PURIFIED.getIngredient(m, 1));
                         dusts.add(AntimatterMaterialTypes.DUST.get(GT4RMaterialTags.BATHING_PERSULFATE.getMapping(m), 1));
                         fluids.add(Materials.SodiumPersulfate.getLiquid(100));
-                        ORE_BYPRODUCTS.RB().ii(ores).fi(fluids).io(dusts.toArray(new ItemStack[0])).chances(1.0, 1.0, 0.1, 0.1, 0.1, 1.0, 1.0, 1.0, 0.1, 1.0, 1.0, 1.0, 1.0, 0.5, 0.7).add(m.getId() + "_byproducts");
+                        ORE_BYPRODUCTS.RB().ii(ores).fi(fluids).io(dusts.toArray(new ItemStack[0])).outputChances(1.0, 1.0, 0.1, 0.1, 0.1, 1.0, 1.0, 1.0, 0.1, 1.0, 1.0, 1.0, 1.0, 0.5, 0.7).add(m.getId() + "_byproducts");
                         ores.remove(ores.size() - 1);
                         dusts.remove(dusts.size() - 1);
                         fluids.remove(1);
@@ -94,10 +94,10 @@ public class OreByproducts {
                         ores.add(AntimatterMaterialTypes.CRUSHED_PURIFIED.getIngredient(m, 1));
                         dusts.add(AntimatterMaterialTypes.DUST.get(GT4RMaterialTags.BATHING_MERCURY.getMapping(m), 1));
                         fluids.add(Materials.Mercury.getLiquid(100));
-                        ORE_BYPRODUCTS.RB().ii(ores).fi(fluids).io(dusts.toArray(new ItemStack[0])).chances(1.0, 1.0, 0.1, 0.1, 0.1, 1.0, 1.0, 1.0, 0.1, 1.0, 1.0, 1.0, 1.0, 0.5, 0.7).add(m.getId() + "_byproducts_1");
+                        ORE_BYPRODUCTS.RB().ii(ores).fi(fluids).io(dusts.toArray(new ItemStack[0])).outputChances(1.0, 1.0, 0.1, 0.1, 0.1, 1.0, 1.0, 1.0, 0.1, 1.0, 1.0, 1.0, 1.0, 0.5, 0.7).add(m.getId() + "_byproducts_1");
                     }
                 } else {
-                    ORE_BYPRODUCTS.RB().ii(ores).fi(fluids).io(dusts.toArray(new ItemStack[0])).chances(1.0, 1.0, 0.1, 0.1, 0.1, 1.0, 1.0, 1.0, 0.1, 1.0, 1.0, 1.0, 1.0, 0.5).add(m.getId() + "_byproducts_2");
+                    ORE_BYPRODUCTS.RB().ii(ores).fi(fluids).io(dusts.toArray(new ItemStack[0])).outputChances(1.0, 1.0, 0.1, 0.1, 0.1, 1.0, 1.0, 1.0, 0.1, 1.0, 1.0, 1.0, 1.0, 0.5).add(m.getId() + "_byproducts_2");
                 }
             }
         });

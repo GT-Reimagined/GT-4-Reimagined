@@ -95,7 +95,7 @@ public class MaceratorLoader {
             ints.add(0.1 * BY_PRODUCT_MULTI.getInt(m));
             if (!stoneDust.isEmpty()) ints.add(0.5);
             double[] chances = ints.stream().mapToDouble(i -> i).toArray();
-            rm.RB().ii(ore).io(stackArray).chances(chances).add(sm.getId() + "_" + m.getId() + "_ore",400, 2);
+            rm.RB().ii(ore).io(stackArray).outputChances(chances).add(sm.getId() + "_" + m.getId() + "_ore",400, 2);
         });
         AntimatterMaterialTypes.CRUSHED.all().forEach(m -> {
             if (!m.has(AntimatterMaterialTypes.ORE) && m != AntimatterMaterials.NetheriteScrap) return;
@@ -111,13 +111,13 @@ public class MaceratorLoader {
             Material oreByProduct3 = m.getByProducts().size() > 2 ? m.getByProducts().get(2) : oreByProduct2;
 
             if (m == NetheriteScrap){
-                MACERATING.RB().ii(ore).io(Utils.ca((ORE_MULTI.getInt(m) * multiplier) * 2, crushedStack), DUST.get(oreByProduct1, 1), DUST.get(Netherrack, 1)).chances(1.0, 0.1 * multiplier * BY_PRODUCT_MULTI.getInt(m), 0.5).add("ancient_debris",400, 2);
+                MACERATING.RB().ii(ore).io(Utils.ca((ORE_MULTI.getInt(m) * multiplier) * 2, crushedStack), DUST.get(oreByProduct1, 1), DUST.get(Netherrack, 1)).outputChances(1.0, 0.1 * multiplier * BY_PRODUCT_MULTI.getInt(m), 0.5).add("ancient_debris",400, 2);
             }
-            MACERATING.RB().ii(crushed).io(DUST_IMPURE.get(MACERATE_INTO.getMapping(m), 1), DUST.get(oreByProduct1, 1)).chances(1.0, 0.1).add(m.getId() + "_crushed_ore",400, 2);
-            MACERATING.RB().ii(RecipeIngredient.of(CRUSHED_PURIFIED.getMaterialTag(m), 1)).io(DUST_PURE.get(MACERATE_INTO.getMapping(m), 1), DUST.get(oreByProduct2, 1)).chances(1.0, 0.1).add(m.getId() + "_purified_ore",400, 2);
-            MACERATING.RB().ii(RecipeIngredient.of(CRUSHED_REFINED.getMaterialTag(m), 1)).io(DUST.get(MACERATE_INTO.getMapping(m), 1), DUST.get(oreByProduct3, 1)).chances(1.0, 0.1).add(m.getId() + "_centrifuged_ore",400, 2);
+            MACERATING.RB().ii(crushed).io(DUST_IMPURE.get(MACERATE_INTO.getMapping(m), 1), DUST.get(oreByProduct1, 1)).outputChances(1.0, 0.1).add(m.getId() + "_crushed_ore",400, 2);
+            MACERATING.RB().ii(RecipeIngredient.of(CRUSHED_PURIFIED.getMaterialTag(m), 1)).io(DUST_PURE.get(MACERATE_INTO.getMapping(m), 1), DUST.get(oreByProduct2, 1)).outputChances(1.0, 0.1).add(m.getId() + "_purified_ore",400, 2);
+            MACERATING.RB().ii(RecipeIngredient.of(CRUSHED_REFINED.getMaterialTag(m), 1)).io(DUST.get(MACERATE_INTO.getMapping(m), 1), DUST.get(oreByProduct3, 1)).outputChances(1.0, 0.1).add(m.getId() + "_centrifuged_ore",400, 2);
             if (m.has(RAW_ORE)){
-                MACERATING.RB().ii(RecipeIngredient.of(RAW_ORE.getMaterialTag(m), 1)).io(Utils.ca((ORE_MULTI.getInt(m) * multiplier) * 2, crushedStack), DUST.get(oreByProduct1, 1)).chances(1.0, 0.1 * multiplier * BY_PRODUCT_MULTI.getInt(m)).add(m.getId() + "_raw_ore",400, 2);
+                MACERATING.RB().ii(RecipeIngredient.of(RAW_ORE.getMaterialTag(m), 1)).io(Utils.ca((ORE_MULTI.getInt(m) * multiplier) * 2, crushedStack), DUST.get(oreByProduct1, 1)).outputChances(1.0, 0.1 * multiplier * BY_PRODUCT_MULTI.getInt(m)).add(m.getId() + "_raw_ore",400, 2);
             }
         });
         AntimatterMaterialTypes.DUST.all().forEach(m -> {

@@ -17,6 +17,6 @@ public class HeatExchangerLoader {
     public static void init(){
         HOT_FUELS.RB().fi(Lava.getLiquid(1)).fo(FluidPlatformUtils.createFluidStack(GT4RData.PAHOEHOE_LAVA.getFluid(), TesseractGraphWrappers.dropletMultiplier)).add("lava",5, 0, 80);
         HOT_FUELS.RB().fi(HotCoolant.getLiquid(1)).fo(ColdCoolant.getLiquid(1)).add("coolant",5, 0, 20);
-        THERMAL_BOILER_FUELS.RB().fi(Water.getLiquid(5), Lava.getLiquid(83)).fo(Steam.getGas(800)).io(new ItemStack(Items.OBSIDIAN), NUGGET.get(Tin, 1), NUGGET.get(Copper, 1), NUGGET.get(Electrum, 1)).chances(0.9, 0.05, 0.04, 0.01).add("lava",1);
+        THERMAL_BOILER_FUELS.RB().fi(Water.getLiquid(5), Lava.getLiquid(83)).fo(Steam.getGas(800)).io(new ItemStack(Items.OBSIDIAN), NUGGET.get(Tin, 1), NUGGET.get(Copper, 1), NUGGET.get(Electrum, 1)).outputChances(0.9, 0.05, 0.04, 0.01).add("lava",1);
     }
 }

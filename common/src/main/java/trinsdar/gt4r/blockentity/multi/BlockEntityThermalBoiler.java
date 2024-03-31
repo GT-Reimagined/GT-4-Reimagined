@@ -73,17 +73,17 @@ public class BlockEntityThermalBoiler extends BlockEntityMultiMachine<BlockEntit
             public ItemStack[] getOutputItems(IRecipe r, boolean chance) {
                 if (r.hasOutputItems()) {
                     ItemStack[] outputs = r.getOutputItems(false).clone();
-                    if (r.getChances() != null) {
-                        if (Arrays.stream(r.getChances()).sum() != 1.0 && chance){
+                    if (r.getOutputChances() != null) {
+                        if (Arrays.stream(r.getOutputChances()).sum() != 1.0 && chance){
                             return null;
                         }
                         int rng = tile.level.random.nextInt(10000);
                         List<ItemStack> evaluated = new ObjectArrayList<>();
-                        List<Integer> chanceCompare = Arrays.stream(r.getChances()).boxed().toList();
+                        List<Integer> chanceCompare = Arrays.stream(r.getOutputChances()).boxed().toList();
                         for (int i = 0; i < outputs.length; i++) {
                             Integer[] array = chanceCompare.subList(0, i + 1).toArray(new Integer[0]);
                             int sum = Arrays.stream(array).reduce(0, Integer::sum);
-                            int compare = i == 0 ? r.getChances()[i] : sum;
+                            int compare = i == 0 ? r.getOutputChances()[i] : sum;
                             if (!chance || rng < compare) {
                                 evaluated.add(outputs[i].copy());
                                 if (chance){
