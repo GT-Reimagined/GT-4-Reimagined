@@ -2,6 +2,7 @@ package trinsdar.gt4r.loader.crafting;
 
 import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
+import io.github.gregtechintergalactical.gtcore.block.RedstoneWire;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.AntimatterConfig;
 import muramasa.antimatter.data.AntimatterDefaultTools;
@@ -20,6 +21,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+import static muramasa.antimatter.data.AntimatterMaterialTypes.PLATE;
 import static muramasa.antimatter.pipe.PipeSize.*;
 import static trinsdar.gt4r.data.Materials.Rubber;
 
@@ -59,6 +61,13 @@ public class ToolCraftingTableRecipes {
                 provider.shapeless(output, GT4RRef.ID, wire.getMaterial().getId() + "_plate_to_wire","wire",
                         new ItemStack(wires.get(VTINY), wireAmount),
                         AntimatterDefaultTools.WIRE_CUTTER.getTag(), AntimatterMaterialTypes.PLATE.getMaterialTag(wire.getMaterial()));
+            }
+        });
+        AntimatterAPI.all(RedstoneWire.class, wire -> {
+            if (wire.getMaterial().has(PLATE)) {
+                provider.shapeless(output,  wire.getMaterial().getId() + "_plate_to_wire","wire",
+                        new ItemStack(wire.getBlockItem(VTINY), wireAmount),
+                        AntimatterDefaultTools.WIRE_CUTTER.getTag(), PLATE.get(wire.getMaterial()));
             }
         });
     }
