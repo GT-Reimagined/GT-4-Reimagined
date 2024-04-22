@@ -45,7 +45,7 @@ public class RecipeMaps {
     public static RecipeMap<?> CANNING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "canner", new RecipeBuilder()));
     public static RecipeMap<?> CENTRIFUGING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "centrifuge", new RecipeBuilder()));
     public static RecipeMap<?> COMPRESSING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "compressor", new SteamBuilder(STEAM_COMPRESSOR)));
-    public static RecipeMap<?> CUTTING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "plate_cutter", new SteamBuilder(STEAM_CUTTER)));
+    public static RecipeMap<?> CUTTING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "plate_cutter", new RecipeBuilder()));
     public static RecipeMap<?> SMELTING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "furnace", new RecipeBuilder()).setProxy(RecipeProxies.FURNACE_PROXY.apply(4, 60)));
     public static RecipeMap<?> EXTRACTING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "extractor", new SteamBuilder(STEAM_EXTRACTOR)));
     public static RecipeMap<?> EXTRUDING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "extruder", new RecipeBuilder()));
