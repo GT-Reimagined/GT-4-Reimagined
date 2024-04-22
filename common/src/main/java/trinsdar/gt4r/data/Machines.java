@@ -79,6 +79,7 @@ public class Machines {
     public static SteamMachine STEAM_COMPRESSOR = new SteamMachine(GT4RRef.ID, "steam_compressor").setTiers(BRONZE, STEEL).addFlags(GUI, STEAM, ITEM, FLUID).setMap(RecipeMaps.STEAM_COMPRESSOR).covers(COVER_STEAM_VENT);
     public static SteamMachine STEAM_ALLOY_SMELTER = new SteamMachine(GT4RRef.ID, "steam_alloy_smelter").setTiers(BRONZE, STEEL).addFlags(GUI, STEAM, ITEM, FLUID).setMap(RecipeMaps.STEAM_ALLOY_SMELTER).baseTexture(Textures.BOILER_HANDLER).covers(COVER_STEAM_VENT);
     public static SteamMachine STEAM_CUTTER = new SteamMachine(GT4RRef.ID, "steam_cutter").setTiers(BRONZE, STEEL).addFlags(GUI, STEAM, ITEM, FLUID).setMap(RecipeMaps.STEAM_CUTTER).covers(COVER_STEAM_VENT);
+    public static SteamMachine STEAM_SIFTER = new SteamMachine(GT4RRef.ID, "steam_sifter").setTiers(BRONZE, STEEL).addFlags(GUI, STEAM, ITEM, FLUID).setMap(RecipeMaps.STEAM_SIFTER).covers(COVER_STEAM_VENT);
 
     public static BasicMachine TELEPORTER = new BasicMachine(GT4RRef.ID, "teleporter").setTiers(HV, LUV).setTile(BlockEntityTeleporter::new).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER);
     public static BasicMachine COMPUTER_CUBE = new BasicMachine(GT4RRef.ID, "computer_cube").setTiers(LV).overlayTexture(Textures.SIMPLE_SIDED).noCovers();
