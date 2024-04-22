@@ -23,8 +23,8 @@ public class CutterLoader {
             if (t == AntimatterMaterials.Diamond || t == AntimatterMaterials.NetherizedDiamond)
                 multiplier = 5;
             int count = t.has(MaterialTags.QUARTZ_LIKE_BLOCKS) ? 4 : 9;
-            CUTTING.RB().ii(RecipeIngredient.of(BLOCK.getMaterialTag(t), 1)).fi(AntimatterMaterials.Water.getLiquid(3)).io(PLATE.get(t,count)).add(t.getId() + "_plate",duration * multiplier, 30);
-            STEAM_CUTTER.RB().ii(BLOCK.getMaterialIngredient(t, 1)).fi(AntimatterMaterials.Water.getLiquid(3)).io(PLATE.get(t, count)).add(t.getId() + "_plate", duration * multiplier * 4, 30);
+            CUTTING.RB().ii(RecipeIngredient.of(BLOCK.getMaterialTag(t), 1)).fi(AntimatterMaterials.Water.getLiquid(3)).io(PLATE.get(t,count)).add(t.getId() + "_plate",duration * 8 * multiplier, 30);
+            STEAM_CUTTER.RB().ii(BLOCK.getMaterialIngredient(t, 1)).fi(AntimatterMaterials.Water.getLiquid(3)).io(PLATE.get(t, count)).add(t.getId() + "_plate", duration * 8 * multiplier * 4, 30);
         });
         BOLT.all().forEach(t -> {
             if (!t.has(ROD)) return;
