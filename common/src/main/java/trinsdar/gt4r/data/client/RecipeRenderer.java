@@ -75,6 +75,8 @@ public class RecipeRenderer {
         RecipeMaps.STEAM_ALLOY_SMELTER.setInfoRenderer(InfoRenderers.STEAM_RENDERER);
         RecipeMaps.STEAM_EXTRACTOR.setInfoRenderer(InfoRenderers.STEAM_RENDERER);
         RecipeMaps.STEAM_MACERATOR.setInfoRenderer(InfoRenderers.STEAM_RENDERER);
+        RecipeMaps.STEAM_CUTTER.setInfoRenderer(InfoRenderers.STEAM_RENDERER);
+        RecipeMaps.STEAM_SIFTER.setInfoRenderer(InfoRenderers.STEAM_RENDERER);
         RecipeMaps.STEAM_FORGE_HAMMER.setInfoRenderer(InfoRenderers.STEAM_RENDERER);
     }
 }
