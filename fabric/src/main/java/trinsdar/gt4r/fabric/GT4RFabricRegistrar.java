@@ -15,9 +15,6 @@ public class GT4RFabricRegistrar extends AntimatterMod {
 
     @Override
     public void onRegistrationEvent(RegistrationEvent event, Side side) {
-        if (event == RegistrationEvent.DATA_READY){
-            CommonHandler.setup();
-        }
     }
 
     @Override

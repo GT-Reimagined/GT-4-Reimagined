@@ -58,11 +58,6 @@ import static trinsdar.gt4r.data.Materials.*;
 
 public class GT4RData {
 
-    private static final String CAPE_PATH = "textures/capes/";
-    public static final ResourceLocation[] CAPE_LOCATIONS = new ResourceLocation[] {new ResourceLocation(GT4RRef.ID,  CAPE_PATH + "braintech.png"), new ResourceLocation(GT4RRef.ID, CAPE_PATH + "silver.png"), new ResourceLocation(GT4RRef.ID, CAPE_PATH + "mrbrain.png"), new ResourceLocation(GT4RRef.ID, CAPE_PATH + "dev.png"), new ResourceLocation(GT4RRef.ID, CAPE_PATH + "gold.png"), new ResourceLocation(GT4RRef.ID, CAPE_PATH + "crazy.png"), new ResourceLocation(GT4RRef.ID, CAPE_PATH + "fake.png")};
-
-    public static final Set<String> SupporterListSilver = new HashSet<>(), SupporterListGold = new HashSet<>();
-
     public static void init(Side side) {
         if (side == Side.CLIENT){
             RecipeRenderer.clientMaps();

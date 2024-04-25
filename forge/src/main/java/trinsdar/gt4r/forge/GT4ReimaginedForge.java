@@ -30,7 +30,6 @@ public class GT4ReimaginedForge {
     }
 
     private void setup(final FMLCommonSetupEvent e) {
-        CommonHandler.setup();
     }
 
     private void serverSetup(final FMLDedicatedServerSetupEvent event){
