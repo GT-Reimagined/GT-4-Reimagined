@@ -86,7 +86,7 @@ public class AntimatterEvents {
         loader.accept("chemical_reactor", ChemicalReactorLoader::init);
         loader.accept("fuels", FuelBurnHandler::init);
         loader.accept("heat_exchanger", HeatExchangerLoader::init);
-        loader.accept("fluid_extractor", FluidPressLoader::init);
+        loader.accept("fluid_press", FluidPressLoader::init);
         loader.accept("fluid_solidifier", FluidSolidifierLoader::init);
         loader.accept("bathing", BathingLoader::init);
         loader.accept("solid_fuel_boiler", SolidFuelBoilerHandler::init);

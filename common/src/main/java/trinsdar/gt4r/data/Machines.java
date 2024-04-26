@@ -66,7 +66,7 @@ public class Machines {
     public static BasicMachine FLUID_SOLIDIFIER = new UpgradeableMachine(GT4RRef.ID, "fluid_solidifier").setMap(FLUID_SOLIDIFYING).setTiers(LV).addFlags(GUI, ITEM, FLUID);
     public static BasicMachine PUMP = new BasicMachine(GT4RRef.ID, "pump").addFlags(GUI, ITEM, FLUID).setTiers(LV).setTile(BlockEntityPump::new);
     public static BasicMachine SIFTER = new UpgradeableMachine(GT4RRef.ID, "sifter").setMap(SIFTING).setTiers(LV).addFlags(GUI, ITEM);
-    public static BasicMachine SMELTER = new UpgradeableMachine(GT4RRef.ID, "smelter").setMap(RecipeMaps.SMELTER).addFlags(GUI, ITEM, FLUID);
+    public static BasicMachine SMELTER = new UpgradeableMachine(GT4RRef.ID, "smelter").setTiers(LV).setMap(RecipeMaps.SMELTER).addFlags(GUI, ITEM, FLUID);
     public static BasicMachine BATH = new UpgradeableMachine(GT4RRef.ID, "bath").setMap(BATHING).setTiers(LV).addFlags(GUI, ITEM);
     public static BasicMachine DISTILLERY = new UpgradeableMachine(GT4RRef.ID, "distillery").setMap(BASIC_DISTILLING).setTiers(LV).addFlags(GUI, ITEM, FLUID);
     public static BasicMachine FERMENTER = new UpgradeableMachine(GT4RRef.ID, "fermenter").setMap(FERMENTING).setTiers(LV).addFlags(GUI, ITEM, FLUID);
