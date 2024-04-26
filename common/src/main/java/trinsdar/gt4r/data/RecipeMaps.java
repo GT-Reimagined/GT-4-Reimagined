@@ -63,14 +63,15 @@ public class RecipeMaps {
     public static RecipeMap<?> DISASSEMBLING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "disassembler", new RecipeBuilder()));
     public static RecipeMap<?> MASS_FABRICATING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "mass_fabricator", new RecipeBuilder()));
     public static RecipeMap<?> REPLICATING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "replicator", new RecipeBuilder()));
-    public static RecipeMap<?> FLUID_EXTRACTING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "fluid_extractor", new RecipeBuilder()));
+    public static RecipeMap<?> FLUID_PRESS = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "fluid_press", new RecipeBuilder()));
     public static RecipeMap<?> FLUID_SOLIDIFYING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "fluid_solidifier", new RecipeBuilder()));
     public static RecipeMap<?> HAMMERING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "forge_hammer", new SteamBuilder(STEAM_FORGE_HAMMER)));
     public static RecipeMap<?> SIFTING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "sifter", new SteamBuilder(STEAM_SIFTER)));
+    public static RecipeMap<?> SMELTER = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "smelter", new RecipeBuilder()));
     public static RecipeMap<?> BASIC_DISTILLING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "distillery", new RecipeBuilder()));
     public static RecipeMap<?> DUSTBIN = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "dustbin", new RecipeBuilder()));
     public static RecipeMap<?> FERMENTING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "fermenter", new RecipeBuilder()));
-    public static RecipeMap<?> FLUID_EXTRACTOR_COILS = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "fluid_extractor_coils", new RecipeBuilder())).setIcon(() -> GT4RData.CupronickelHeatingCoil);
+    public static RecipeMap<?> SMELTER_COILS = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "smelter_coils", new RecipeBuilder())).setIcon(() -> GT4RData.CupronickelHeatingCoil);
 
     public static RecipeMap<?> COKING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "coke_oven", new RecipeBuilder()));
     public static RecipeMap<?> PYROLYSING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "pyrolysis_oven", new RecipeBuilder()));

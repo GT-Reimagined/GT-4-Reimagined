@@ -12,7 +12,7 @@ import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.data.Machines;
 import trinsdar.gt4r.data.RecipeMaps;
 import trinsdar.gt4r.blockentity.multi.BlockEntityIndustrialBlastFurnace;
-import trinsdar.gt4r.blockentity.single.BlockEntityFluidExtractor;
+import trinsdar.gt4r.blockentity.single.BlockEntitySmelter;
 
 import javax.annotation.Nonnull;
 
@@ -23,8 +23,8 @@ public class SlotCoil extends AbstractSlot<SlotCoil> {
 
     @Override
     public boolean mayPlace(@Nonnull ItemStack stack) {
-        if (holder instanceof BlockEntityFluidExtractor){
-            return RecipeMaps.FLUID_EXTRACTOR_COILS.acceptsItem(stack);
+        if (holder instanceof BlockEntitySmelter){
+            return RecipeMaps.SMELTER_COILS.acceptsItem(stack);
         }
         BlockEntityMachine<?> m = (BlockEntityMachine<?>) holder;
         return stack.getItem() == GT4RData.KanthalHeatingCoil || stack.getItem() == GT4RData.NichromeHeatingCoil || (m.getMachineType() == Machines.PYROLYSIS_OVEN && stack.getItem() == GT4RData.CupronickelHeatingCoil);
@@ -37,7 +37,7 @@ public class SlotCoil extends AbstractSlot<SlotCoil> {
 
     @Override
     public int getMaxStackSize() {
-        if (holder instanceof BlockEntityFluidExtractor){
+        if (holder instanceof BlockEntitySmelter){
             return 6;
         }
         return 4;
@@ -45,7 +45,7 @@ public class SlotCoil extends AbstractSlot<SlotCoil> {
 
     @Override
     public int getMaxStackSize(@Nonnull ItemStack stack) {
-        if (holder instanceof BlockEntityFluidExtractor){
+        if (holder instanceof BlockEntitySmelter){
             return 6;
         }
         return 4;

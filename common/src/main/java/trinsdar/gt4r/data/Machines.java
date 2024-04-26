@@ -62,10 +62,11 @@ public class Machines {
     public static BasicMachine FORGE_HAMMER = new UpgradeableMachine(GT4RRef.ID, "forge_hammer").setMap(HAMMERING).setTiers(LV).addFlags(GUI, ITEM).setTile(BlockEntityForgeHammer::new);
     public static BasicMachine ORE_WASHER = new UpgradeableMachine(GT4RRef.ID, "ore_washer").setMap(ORE_WASHING).setTiers(LV).addFlags(GUI, ITEM, FLUID);
     public static BasicMachine THERMAL_CENTRIFUGE = new UpgradeableMachine(GT4RRef.ID, "thermal_centrifuge").setTiers(MV).setMap(THERMAL_CENTRIFUGING).addFlags(GUI, ITEM, FLUID);
-    public static BasicMachine FLUID_EXTRACTOR = new UpgradeableMachine(GT4RRef.ID, "fluid_extractor").setMap(FLUID_EXTRACTING).setTiers(LV).addFlags(GUI, ITEM, FLUID);
+    public static BasicMachine FLUID_PRESS = new UpgradeableMachine(GT4RRef.ID, "fluid_press").setMap(RecipeMaps.FLUID_PRESS).setTiers(LV).addFlags(GUI, ITEM, FLUID);
     public static BasicMachine FLUID_SOLIDIFIER = new UpgradeableMachine(GT4RRef.ID, "fluid_solidifier").setMap(FLUID_SOLIDIFYING).setTiers(LV).addFlags(GUI, ITEM, FLUID);
     public static BasicMachine PUMP = new BasicMachine(GT4RRef.ID, "pump").addFlags(GUI, ITEM, FLUID).setTiers(LV).setTile(BlockEntityPump::new);
     public static BasicMachine SIFTER = new UpgradeableMachine(GT4RRef.ID, "sifter").setMap(SIFTING).setTiers(LV).addFlags(GUI, ITEM);
+    public static BasicMachine SMELTER = new UpgradeableMachine(GT4RRef.ID, "smelter").setMap(RecipeMaps.SMELTER).addFlags(GUI, ITEM, FLUID);
     public static BasicMachine BATH = new UpgradeableMachine(GT4RRef.ID, "bath").setMap(BATHING).setTiers(LV).addFlags(GUI, ITEM);
     public static BasicMachine DISTILLERY = new UpgradeableMachine(GT4RRef.ID, "distillery").setMap(BASIC_DISTILLING).setTiers(LV).addFlags(GUI, ITEM, FLUID);
     public static BasicMachine FERMENTER = new UpgradeableMachine(GT4RRef.ID, "fermenter").setMap(FERMENTING).setTiers(LV).addFlags(GUI, ITEM, FLUID);

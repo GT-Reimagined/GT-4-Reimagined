@@ -62,7 +62,7 @@ public class Guis {
 
         AntimatterAPI.registerJEICategory(RecipeMaps.ORE_BYPRODUCTS, Guis.ORE_BYPRODUCTS);
         AntimatterAPI.registerJEICategory(RecipeMaps.INT_CIRCUITS, Guis.ORE_BYPRODUCTS_OLD);
-        AntimatterAPI.registerJEICategory(RecipeMaps.FLUID_EXTRACTOR_COILS, Guis.ORE_BYPRODUCTS_OLD);
+        AntimatterAPI.registerJEICategory(RecipeMaps.SMELTER_COILS, Guis.ORE_BYPRODUCTS_OLD);
 
         //TODO changing slots of a machine in world, will crash from GTItemHandler.validateSlot()
 
@@ -133,7 +133,8 @@ public class Guis {
         MASS_FABRICATOR.add(COMPRESSOR).add(FL_IN, 53, 63).add(FL_OUT, 107, 63);
         REPLICATOR.add(FLUID_CANNER);
         FERMENTER.add(FLUID_CANNER);
-        FLUID_EXTRACTOR.add(COMPRESSOR).add(FL_OUT, 107, 63);
+        FLUID_PRESS.add(COMPRESSOR).add(FL_OUT, 107, 63);
+        SMELTER.add(FLUID_PRESS);
         FLUID_SOLIDIFIER.add(COMPRESSOR).add(FL_IN, 53, 63);
         DISTILLERY.add(FLUID_CANNER);
         BATH.add(THERMAL_CENTRIFUGE).add(FL_IN, 53, 63);
@@ -288,7 +289,7 @@ public class Guis {
         CHEMICAL_REACTOR.getGui().getMachineData().setProgressLocation("chemical_reactor");
         FLUID_CANNER.getGui().getMachineData().setProgressLocation("canner");
         FERMENTER.getGui().getMachineData().setProgressLocation("chemical_reactor");
-        FLUID_EXTRACTOR.getGui().getMachineData().setProgressLocation("extractor");
+        FLUID_PRESS.getGui().getMachineData().setProgressLocation("extractor");
         DISTILLERY.getGui().getMachineData().setProgressLocation("chemical_reactor");
         BATH.getGui().getMachineData().setProgressLocation("ore_washer");
         SIFTER.getGui().getMachineData().setProgressLocation("sifter");

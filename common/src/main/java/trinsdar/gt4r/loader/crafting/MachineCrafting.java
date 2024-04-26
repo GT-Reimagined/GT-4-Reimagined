@@ -20,7 +20,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import trinsdar.gt4r.GT4RRef;
 import muramasa.antimatter.data.ForgeCTags;
-import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.data.GT4RMaterialTags;
 import trinsdar.gt4r.data.TierMaps;
 
@@ -252,7 +251,7 @@ public class MachineCrafting {
     }
 
     private static void loadHatchRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider){
-        provider.addItemRecipe(output, GT4RRef.ID, "fluid_extractor", "machines", FLUID_EXTRACTOR.getItem(LV), of('C', CIRCUITS_BASIC, 'G', ForgeCTags.GLASS, 'M', MACHINE_HULLS_BASIC, 'P', PISTONS, 'p', PumpModule), " C ", "pMP", "GCG");
+        provider.addItemRecipe(output, GT4RRef.ID, "fluid_press", "machines", FLUID_PRESS.getItem(LV), of('C', CIRCUITS_BASIC, 'G', ForgeCTags.GLASS, 'M', MACHINE_HULLS_BASIC, 'P', PISTONS, 'p', PumpModule), " C ", "pMP", "GCG");
         provider.addItemRecipe(output, GT4RRef.ID, "fluid_solidifier", "machines", FLUID_SOLIDIFIER.getItem(LV), of('C', CIRCUITS_BASIC, 'G', ForgeCTags.GLASS, 'M', MACHINE_HULLS_BASIC, 'P', PumpModule, 'c', ForgeCTags.CHESTS_WOODEN), " G ", "PMP", "CcC");
         provider.addItemRecipe(output, GT4RRef.ID, "item_input_hatch", "hatches", HATCH_ITEM_I.getItem(LV), of('P', AntimatterMaterialTypes.PLATE.getMaterialTag(StainlessSteel), 'G', GEARS_STEELS, 'M', MACHINE_HULLS_BASIC, 'C', ForgeCTags.CHESTS_WOODEN), "PCP", "GMG", "PPP");
         provider.addItemRecipe(output, GT4RRef.ID, "item_output_hatch", "hatches", HATCH_ITEM_O.getItem(LV), of('P', AntimatterMaterialTypes.PLATE.getMaterialTag(StainlessSteel), 'G', GEARS_STEELS, 'M', MACHINE_HULLS_BASIC, 'C', ForgeCTags.CHESTS_WOODEN), "PPP", "GMG", "PCP");
