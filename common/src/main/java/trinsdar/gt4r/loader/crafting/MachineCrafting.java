@@ -200,6 +200,12 @@ public class MachineCrafting {
                 SCANNER.getItem(HV), of('P', PLATES_STEELS, 'G', REINFORCED_GLASS, 'M', MotorHV, 'C', ComputerMonitor, 'c', CIRCUITS_ADVANCED, 'm', MACHINE_HULLS_ADVANCED), "PGP", "MCM", "cmc");
         provider.addItemRecipe(output, GT4RRef.ID, "fluid_press", "machines", FLUID_PRESS.getItem(LV), of('C', CIRCUITS_BASIC, 'G', ForgeCTags.GLASS, 'M', MACHINE_HULLS_BASIC, 'P', PISTONS, 'p', PumpModule), " C ", "pMP", "GCG");
         provider.addItemRecipe(output, GT4RRef.ID, "fluid_solidifier", "machines", FLUID_SOLIDIFIER.getItem(LV), of('C', CIRCUITS_BASIC, 'G', ForgeCTags.GLASS, 'M', MACHINE_HULLS_BASIC, 'P', PumpModule, 'c', ForgeCTags.CHESTS_WOODEN), " G ", "PMP", "CcC");
+        provider.addItemRecipe(output, GT4RRef.ID, "smelter", "machines", SMELTER.getItem(MV), of(
+                'P', PLATE.getMaterialTag(Titanium),
+                'S', FLUID_PIPE_STAINLESS_STEEL.getBlock(PipeSize.NORMAL),
+                'H', MACHINE_HULLS_VERY_ADVANCED,
+                'B', Items.BRICKS,
+                'C', CIRCUITS_ELITE), "P P", "SHS", "BCB");
     }
     private static void loadUtilityBlockRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider){
         AntimatterAPI.all(WorkbenchMachine.class).forEach(m -> {
