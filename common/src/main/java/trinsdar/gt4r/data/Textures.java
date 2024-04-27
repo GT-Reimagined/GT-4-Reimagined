@@ -27,6 +27,15 @@ public class Textures {
     };
 
     public static final ITextureHandler BOILER_HANDLER = (m, t, s) -> new Texture[] {
+            new Texture(GT4RRef.ID, "block/machine/base/brick"),
+            new Texture(GT4RRef.ID, "block/machine/base/" + t.getId()),
+            new Texture(GT4RRef.ID, "block/machine/base/boiler_side_" + t.getId()),
+            new Texture(GT4RRef.ID, "block/machine/base/boiler_side_" + t.getId()),
+            new Texture(GT4RRef.ID, "block/machine/base/boiler_side_" + t.getId()),
+            new Texture(GT4RRef.ID, "block/machine/base/boiler_side_" + t.getId()),
+    };
+
+    public static final ITextureHandler BRICKED_HANDLER = (m, t, s) -> new Texture[] {
         new Texture(GT4RRef.ID, "block/machine/base/brick"),
         new Texture(GT4RRef.ID, "block/machine/base/" + t.getId()),
         new Texture(GT4RRef.ID, "block/machine/base/bricked_" + t.getId()),
