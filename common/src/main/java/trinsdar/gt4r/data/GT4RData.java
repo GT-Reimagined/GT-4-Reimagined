@@ -12,6 +12,7 @@ import muramasa.antimatter.item.ItemBasic;
 import muramasa.antimatter.item.ItemBattery;
 import muramasa.antimatter.item.ItemCover;
 import muramasa.antimatter.item.ItemFluidCell;
+import muramasa.antimatter.item.ItemMultiTextureBattery;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.ore.CobbleStoneType;
 import muramasa.antimatter.ore.StoneType;
@@ -147,7 +148,7 @@ public class GT4RData {
     public static ItemElectricTool SteelJackHammer = new ItemElectricTool("steel_jackhammer", GTCoreTools.JACKHAMMER, Steel, 8.0f, 5.5f, 2, 1, b -> !(b instanceof BehaviourAOEBreak));
     public static ItemElectricTool DiamondJackHammer = new ItemElectricTool("diamond_jackhammer", GTCoreTools.JACKHAMMER, AntimatterMaterials.Diamond, 10.0f, 6.0f, 3, 2, b -> true);
 
-    public static ItemBasic<?> ZPM = new ItemBattery(GT4RRef.ID, "zpm", Tier.ZPM, 100000000000L, false);
+    public static ItemBasic<?> ZPM = new ItemMultiTextureBattery(GT4RRef.ID, "zpm", Tier.ZPM, 100000000000L, false);
     //public static ItemBasic<?> BatteryEnergyOrbCluster = new ItemBasic<>(Ref.ID, "battery_energy_orb_cluster");
 
     public static StoneType GRANITE_RED = AntimatterAPI.register(StoneType.class, new CobbleStoneType(GT4RRef.ID, "red_granite", Materials.RedGranite, "block/stone/", SoundType.STONE, true)).setHardnessAndResistance(4.5F, 60.0F).setHarvestLevel(3);
