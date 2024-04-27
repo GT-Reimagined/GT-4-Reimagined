@@ -3,6 +3,7 @@ package trinsdar.gt4r;
 import io.github.gregtechintergalactical.gtcore.data.GTCoreItems;
 import io.github.gregtechintergalactical.gtcore.item.ItemPowerUnit;
 import muramasa.antimatter.AntimatterAPI;
+import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.datagen.AntimatterDynamics;
 import muramasa.antimatter.AntimatterMod;
 import muramasa.antimatter.datagen.providers.AntimatterBlockStateProvider;
@@ -27,6 +28,10 @@ import trinsdar.gt4r.material.GT4RMaterialEvent;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
+
+import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.DRILLBIT;
+import static trinsdar.gt4r.data.Materials.Steel;
 
 
 public class GT4Reimagined extends AntimatterMod {
@@ -83,6 +88,10 @@ public class GT4Reimagined extends AntimatterMod {
                         if (!AntimatterAPI.isModLoaded("gti")){
                             l.addAll(AntimatterAPI.all(IAntimatterTool.class).stream().filter(i -> i.getAntimatterToolType().isPowered()).map(IBasicAntimatterTool::getItem).toList());
                             l.addAll(AntimatterAPI.all(ItemPowerUnit.class));
+                            l.addAll(WRENCHBIT.all().stream().map(m -> WRENCHBIT.get(m)).toList());
+                            l.addAll(CHAINSAWBIT.all().stream().map(m -> CHAINSAWBIT.get(m)).toList());
+                            l.addAll(DRILLBIT.all().stream().map(m -> DRILLBIT.get(m)).toList());
+                            l.addAll(BUZZSAW_BLADE.all().stream().filter(m -> m != Steel).map(m -> BUZZSAW_BLADE.get(m)).toList());
                         } else {
                             l.add(GT4RData.RockCutterPowerUnit);
                             l.add(AntimatterAPI.get(IAntimatterTool.class, "rock_cutter").getItem());

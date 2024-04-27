@@ -12,6 +12,7 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.resources.ResourceLocation;
+import trinsdar.gt4r.GT4RConfig;
 import trinsdar.gt4r.GT4RRef;
 import trinsdar.gt4r.data.GT4RMaterialTags;
 
@@ -50,25 +51,28 @@ public class MaterialRecipeLoader {
                 provider.shapeless(output,"gem_" + m.getId() + "_from_block", "blocks", GEM.get(m, 9), BLOCK.getMaterialTag(m));
             }
         });
-        AntimatterMaterialTypes.DRILLBIT.all().forEach(m -> {
-            if (m.has(PLATE) || m.has(GEM)){
-                TagKey<?> plate = m.has(PLATE) ? PLATE.getMaterialTag(m) : GEM.getMaterialTag(m);
-                provider.addItemRecipe(output, GT4RRef.ID, m.getId() + "_drillbit", "drillbits", AntimatterMaterialTypes.DRILLBIT.get(m), ImmutableMap.of('H', AntimatterDefaultTools.HAMMER.getTag(), 'P', plate, 'S', PLATE.getMaterialTag(Steel)), "PSP", "PSP", "SHS");
-            }
-        });
-        AntimatterMaterialTypes.CHAINSAWBIT.all().forEach(m -> {
-            if (m.has(PLATE) || m.has(GEM)){
-                TagKey<?> plate = m.has(PLATE) ? PLATE.getMaterialTag(m) : GEM.getMaterialTag(m);
-                provider.addItemRecipe(output, GT4RRef.ID, m.getId() + "_chainsawbit", "chainsawbits", AntimatterMaterialTypes.CHAINSAWBIT.get(m), ImmutableMap.of('H', AntimatterDefaultTools.HAMMER.getTag(), 'P', plate, 'S', PLATE.getMaterialTag(Steel), 'R', AntimatterMaterialTypes.RING.getMaterialTag(Steel)), "SRS", "PHP", "SRS");
-            }
-        });
-        AntimatterMaterialTypes.WRENCHBIT.all().forEach(m -> {
-            if (m.has(PLATE) || m.has(GEM)){
-                TagKey<?> plate = m.has(PLATE) ? PLATE.getMaterialTag(m) : GEM.getMaterialTag(m);
-                provider.addItemRecipe(output, GT4RRef.ID, m.getId() + "_wrenchbit", "wrenchbits", AntimatterMaterialTypes.WRENCHBIT.get(m), ImmutableMap.of('H', AntimatterDefaultTools.HAMMER.getTag(), 'P', plate, 'S', AntimatterMaterialTypes.SCREW.getMaterialTag(Steel), 'R', AntimatterMaterialTypes.RING.getMaterialTag(Steel), 's', AntimatterDefaultTools.SCREWDRIVER.getTag()), "HPS", "PRP", "SPs");
-            }
-        });
+        if (GT4RConfig.GT5_ELECTRIC_TOOLS.get()) {
+            AntimatterMaterialTypes.DRILLBIT.all().forEach(m -> {
+                if (m.has(PLATE) || m.has(GEM)){
+                    TagKey<?> plate = m.has(PLATE) ? PLATE.getMaterialTag(m) : GEM.getMaterialTag(m);
+                    provider.addItemRecipe(output, GT4RRef.ID, m.getId() + "_drillbit", "drillbits", AntimatterMaterialTypes.DRILLBIT.get(m), ImmutableMap.of('H', AntimatterDefaultTools.HAMMER.getTag(), 'P', plate, 'S', PLATE.getMaterialTag(Steel)), "PSP", "PSP", "SHS");
+                }
+            });
+            AntimatterMaterialTypes.CHAINSAWBIT.all().forEach(m -> {
+                if (m.has(PLATE) || m.has(GEM)){
+                    TagKey<?> plate = m.has(PLATE) ? PLATE.getMaterialTag(m) : GEM.getMaterialTag(m);
+                    provider.addItemRecipe(output, GT4RRef.ID, m.getId() + "_chainsawbit", "chainsawbits", AntimatterMaterialTypes.CHAINSAWBIT.get(m), ImmutableMap.of('H', AntimatterDefaultTools.HAMMER.getTag(), 'P', plate, 'S', PLATE.getMaterialTag(Steel), 'R', AntimatterMaterialTypes.RING.getMaterialTag(Steel)), "SRS", "PHP", "SRS");
+                }
+            });
+            AntimatterMaterialTypes.WRENCHBIT.all().forEach(m -> {
+                if (m.has(PLATE) || m.has(GEM)){
+                    TagKey<?> plate = m.has(PLATE) ? PLATE.getMaterialTag(m) : GEM.getMaterialTag(m);
+                    provider.addItemRecipe(output, GT4RRef.ID, m.getId() + "_wrenchbit", "wrenchbits", AntimatterMaterialTypes.WRENCHBIT.get(m), ImmutableMap.of('H', AntimatterDefaultTools.HAMMER.getTag(), 'P', plate, 'S', AntimatterMaterialTypes.SCREW.getMaterialTag(Steel), 'R', AntimatterMaterialTypes.RING.getMaterialTag(Steel), 's', AntimatterDefaultTools.SCREWDRIVER.getTag()), "HPS", "PRP", "SPs");
+                }
+            });
+        }
         AntimatterMaterialTypes.BUZZSAW_BLADE.all().forEach(m -> {
+            if (m != Steel && !GT4RConfig.GT5_ELECTRIC_TOOLS.get()) return;
             if (m.has(PLATE) || m.has(GEM)){
                 TagKey<?> plate = m.has(PLATE) ? PLATE.getMaterialTag(m) : GEM.getMaterialTag(m);
                 provider.addItemRecipe(output, GT4RRef.ID, m.getId() + "_buzzsaw_blade", "buzzsaw_blades", AntimatterMaterialTypes.BUZZSAW_BLADE.get(m), ImmutableMap.of('H', AntimatterDefaultTools.HAMMER.getTag(), 'P', plate, 'F', AntimatterDefaultTools.FILE.getTag(), 'W', AntimatterDefaultTools.WRENCH.getTag(), 'C', AntimatterDefaultTools.WIRE_CUTTER.getTag()), "WPH", "P P", "FPC");
