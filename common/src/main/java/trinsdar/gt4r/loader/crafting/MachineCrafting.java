@@ -110,6 +110,11 @@ public class MachineCrafting {
                     STEAM_COMPRESSOR.getItem(tier), of( 'B',  plate, 'W', AntimatterDefaultTools.WRENCH.getTag(), 'G', tier == BRONZE ? GEAR.getMaterialTag(Bronze) : GEARS_STEELS, 'P', PISTONS, 'M', hull), "BGB", "PWP", "BMB");
             provider.addItemRecipe(output, GT4RRef.ID,prefix + "steam_extractor","machines",
                     STEAM_EXTRACTOR.getItem(tier), of( 'B',  plate, 'W', AntimatterDefaultTools.WRENCH.getTag(),'P', PISTONS, 'M', hull), "BBB", "PWP", "BMB");
+            provider.addItemRecipe(output, GT4RRef.ID,prefix + "steam_cutter","machines",
+                    STEAM_CUTTER.getItem(tier), of( 'B',  plate, 'W', AntimatterDefaultTools.WRENCH.getTag(),'P', PISTONS, 'M', hull, 'C', BUZZSAW_BLADE.getMaterialTag(Steel)), "BCB", "PWP", "BMB");
+            provider.addItemRecipe(output, GT4RRef.ID,prefix + "steam_sifter","machines",
+                    STEAM_SIFTER.getItem(tier), of( 'B',  plate, 'C', WIRE_STEEL.getBlock(PipeSize.VTINY), 'W', AntimatterDefaultTools.WRENCH.getTag(),'P', PISTONS, 'M', hull), "CCC", "PWP", "BMB");
+
         }
         provider.addItemRecipe(output, GT4RRef.ID,"high_pressure_solid_fuel_boiler_upgrade","machines",
                 SOLID_FUEL_BOILER.getItem(STEEL), of( 'P',  PLATES_STEELS, 'C', SOLID_FUEL_BOILER.getItem(BRONZE)), "PPP", "PCP");
