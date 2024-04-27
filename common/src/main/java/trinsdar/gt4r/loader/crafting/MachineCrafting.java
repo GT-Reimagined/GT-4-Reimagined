@@ -94,7 +94,7 @@ public class MachineCrafting {
     private static void loadSteamMachineRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider){
         for (Tier tier : getSteam()) {
             TagKey<Item> plate = tier == BRONZE ? PLATE.getMaterialTag(Bronze) : PLATES_STEELS;
-            TagKey<Item> hull = tier == BRONZE ? MACHINE_HULLS_SEMI_CHEAP : MACHINE_HULLS_CHEAP;
+            TagKey<Item> hull = tier == BRONZE ? MACHINE_HULLS_CHEAP : MACHINE_HULLS_SEMI_CHEAP;
             String prefix = tier == BRONZE ? "high_pressure_" : "";
             provider.addItemRecipe(output, GT4RRef.ID,prefix + "solid_fuel_boiler","machines",
                     SOLID_FUEL_BOILER.getItem(tier), of( 'P',  plate, 'W', AntimatterDefaultTools.WRENCH.getTag(), 'B', Items.BRICKS, 'F', Items.FURNACE), "PPP", "PWP", "BFB");
