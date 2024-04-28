@@ -64,7 +64,7 @@ public class Machines {
     public static BasicMachine THERMAL_CENTRIFUGE = new UpgradeableMachine(GT4RRef.ID, "thermal_centrifuge").setTiers(MV).setMap(THERMAL_CENTRIFUGING).addFlags(GUI, ITEM, FLUID);
     public static BasicMachine FLUID_PRESS = new UpgradeableMachine(GT4RRef.ID, "fluid_press").setMap(RecipeMaps.FLUID_PRESS).setTiers(LV).addFlags(GUI, ITEM, FLUID);
     public static BasicMachine FLUID_SOLIDIFIER = new UpgradeableMachine(GT4RRef.ID, "fluid_solidifier").setMap(FLUID_SOLIDIFYING).setTiers(LV).addFlags(GUI, ITEM, FLUID);
-    public static BasicMachine PUMP = new BasicMachine(GT4RRef.ID, "pump").addFlags(GUI, ITEM, FLUID).setTiers(LV).setTile(BlockEntityPump::new);
+    public static BasicMachine PUMP = new BasicMachine(GT4RRef.ID, "pump").addFlags(GUI, ITEM, FLUID).setTiers(LV).setTile(BlockEntityPump::new).baseTexture(Textures.BASE_HANDLER);
     public static BasicMachine SIFTER = new UpgradeableMachine(GT4RRef.ID, "sifter").setMap(SIFTING).setTiers(LV).addFlags(GUI, ITEM);
     public static BasicMachine SMELTER = new UpgradeableMachine(GT4RRef.ID, "smelter").setTiers(MV).setMap(RecipeMaps.SMELTER).addFlags(GUI, ITEM, FLUID);
     public static BasicMachine BATH = new UpgradeableMachine(GT4RRef.ID, "bath").setMap(BATHING).setTiers(LV).addFlags(GUI, ITEM);
@@ -176,7 +176,7 @@ public class Machines {
         SEMIFLUID_GENERATOR.setOutputCover(COVER_DYNAMO_OLD);
         WINDMILL.setOutputCover(COVER_DYNAMO_OLD);
         WATERMILL.setOutputCover(COVER_DYNAMO_OLD);
-        EU.remove(HEAT_EXCHANGER);
-        EU.remove(DUSTBIN);
+        HEAT_EXCHANGER.removeFlags(EU);
+        DUSTBIN.removeFlags(EU);
     }
 }
