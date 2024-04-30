@@ -31,8 +31,8 @@ public class Structures {
     public static BlockStateElement WATER = new BlockStateElement("water", (w, p, s) -> s.getFluidState().getType() == Fluids.WATER);*/
 
 
-    public static FakeTileElement BRICK = new FakeTileElement(FIRE_BRICKS);
-    public static FakeTileElement CASING = new FakeTileElement(STANDARD_MACHINE_CASING);
+    public static FakeTileElement<BlockEntityCokeOven> BRICK = new FakeTileElement<>(FIRE_BRICKS);
+    public static FakeTileElement<BlockEntityPyrolysisOven> CASING = new FakeTileElement<>(STANDARD_MACHINE_CASING);
 
     public static void initPatterns() {
         //TODO after patterns are fixed
