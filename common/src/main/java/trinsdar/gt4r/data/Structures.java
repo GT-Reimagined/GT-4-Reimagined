@@ -152,8 +152,8 @@ public class Structures {
 
     public static void init() {
         COKE_OVEN.setStructure(BlockEntityCokeOven.class, b -> b.part("main")
-            .of("CCC", "CCC", "CCC").of("C~C", "C-C", "CCC").of("ccc", "ccc", "ccc").build()
-            .at('C', BRICK).at('c', BRICK.cover(Direction.DOWN, Data.COVEROUTPUT))
+            .of("CCC", "CCC", "CCC").of("C~C", "C-C", "CCC").of(0).build()
+            .at('C', BRICK)
                 .offset(1, 1, 0).build()
         );
         PYROLYSIS_OVEN.setStructure(BlockEntityPyrolysisOven.class, b -> b.part("main")
