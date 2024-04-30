@@ -22,6 +22,7 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import trinsdar.gt4r.block.BlockCasing;
+import trinsdar.gt4r.block.BlockFakeCasing;
 import trinsdar.gt4r.block.BlockNonSolidMachine;
 import trinsdar.gt4r.material.GT4RMaterialEvent;
 
@@ -43,6 +44,7 @@ public class GT4RBlockLootProvider extends AntimatterBlockLootProvider {
         AntimatterAPI.all(BlockNonSolidMachine.class, providerDomain, this::add);
 
         AntimatterAPI.all(BlockCasing.class, providerDomain, this::add);
+        AntimatterAPI.all(BlockFakeCasing.class, providerDomain, this::add);
         if (!AntimatterAPI.isModLoaded("gti")){
             oreDrops();
         }
