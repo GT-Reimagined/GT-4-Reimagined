@@ -155,7 +155,6 @@ public class Guis {
                 .add(FL_OUT, 125, 25, new ResourceLocation(GT4RRef.ID, "primitive_cell"));
         ResourceLocation bat = new ResourceLocation(GT4RRef.ID, "battery");
         BATTERY_BUFFER_FOUR.add(ENERGY, 71, 27, bat).add(ENERGY, 89, 27, bat).add(ENERGY, 71, 45, bat).add(ENERGY, 89, 45, bat);
-        BATTERY_BUFFER_ONE.add(ENERGY, 80, 40, bat);
         BATTERY_BUFFER_EIGHT
                 .add(ENERGY,53,27, bat).add(ENERGY,71,27, bat).add(ENERGY,89,27, bat).add(ENERGY,107,27, bat)
                 .add(ENERGY,53,45, bat).add(ENERGY,71,45, bat).add(ENERGY,89,45, bat).add(ENERGY,107,45, bat);

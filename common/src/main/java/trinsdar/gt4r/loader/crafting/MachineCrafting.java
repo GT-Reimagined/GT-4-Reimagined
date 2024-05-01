@@ -123,9 +123,7 @@ public class MachineCrafting {
     }
 
     private static void loadSimpleMachineRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider){
-        BATTERY_BUFFER_ONE.getTiers().forEach(t -> {
-            provider.addItemRecipe(output, GT4RRef.ID, t.getId() + "_batter_buffer_one", "machines",
-                    BATTERY_BUFFER_ONE.getItem(t), of('H', GT4RMaterialTags.HULL.get(TierMaps.TIER_MATERIALS.get(t)), 'C', ForgeCTags.CHESTS, 'W', TierMaps.TIER_WIRES.get(t).getBlockItem(PipeSize.VTINY)), "WCW", "WHW");
+        BATTERY_BUFFER_FOUR.getTiers().forEach(t -> {
             provider.addItemRecipe(output, GT4RRef.ID, t.getId() + "_batter_buffer_four", "machines",
                     BATTERY_BUFFER_FOUR.getItem(t), of('H', GT4RMaterialTags.HULL.get(TierMaps.TIER_MATERIALS.get(t)), 'C', ForgeCTags.CHESTS, 'W', TierMaps.TIER_WIRES.get(t).getBlockItem(PipeSize.SMALL)), "WCW", "WHW");
             provider.addItemRecipe(output, GT4RRef.ID, t.getId() + "_batter_buffer_eight", "machines",
