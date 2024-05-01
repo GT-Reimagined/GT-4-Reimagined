@@ -5,11 +5,12 @@ import muramasa.antimatter.capability.machine.MachineRecipeHandler;
 import muramasa.antimatter.machine.types.Machine;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
+import trinsdar.gt4r.machine.UpgradeableMachineRecipeHandler;
 
-public class BlockEntityForgeHammer extends BlockEntityMachine<BlockEntityForgeHammer> {
+public class BlockEntityForgeHammer extends BlockEntityUpgradeableMachine<BlockEntityForgeHammer> {
     public BlockEntityForgeHammer(Machine<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-        this.recipeHandler.set(() -> new MachineRecipeHandler<BlockEntityForgeHammer>(this){
+        this.recipeHandler.set(() -> new UpgradeableMachineRecipeHandler<BlockEntityForgeHammer>(this){
             @Override
             public float getClientProgress() {
                 float percent = (float) currentProgress / ((float) maxProgress / 3);

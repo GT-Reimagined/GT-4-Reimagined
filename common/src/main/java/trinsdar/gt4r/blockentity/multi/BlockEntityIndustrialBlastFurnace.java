@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.data.SlotTypes;
+import trinsdar.gt4r.machine.UpgradeableMachineRecipeHandler;
 
 import java.awt.Color;
 
@@ -29,7 +30,7 @@ public class BlockEntityIndustrialBlastFurnace extends BlockEntityUpgradeableBas
 
     public BlockEntityIndustrialBlastFurnace(Machine<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-        this.recipeHandler.set(() -> new MachineRecipeHandler<>(this){
+        this.recipeHandler.set(() -> new UpgradeableMachineRecipeHandler<>(this){
             @Override
             protected boolean validateRecipe(IRecipe r) {
                 return super.validateRecipe(r) && heatingCapacity >= r.getSpecialValue();
@@ -60,20 +61,6 @@ public class BlockEntityIndustrialBlastFurnace extends BlockEntityUpgradeableBas
         baseHeatingCapacity = 0;
         return super.checkStructure();
     }
-
-
-    /*public List<BlockState> getAllStates() {
-        if (result != null) {
-            ObjectCollection<List<BlockState>> collection = result.states.values();
-            if (collection.isEmpty()){
-                return Collections.emptyList();
-            }
-            List<BlockState> list = new ArrayList<>();
-            collection.forEach(list::addAll);
-            return list;
-        }
-        return Collections.emptyList();
-    }*/
 
     public void incrementBaseHeatingCapacity(int amount){
         baseHeatingCapacity += amount;
