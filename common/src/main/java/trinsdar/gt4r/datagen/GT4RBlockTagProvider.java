@@ -33,6 +33,9 @@ public class GT4RBlockTagProvider extends AntimatterBlockTagProvider {
         AntimatterAPI.all(BlockNonSolidMachine.class, GT4RRef.ID, cas -> {
             this.tag(AntimatterDefaultTools.WRENCH.getToolType()).add(cas);
         });
+        AntimatterAPI.all(BlockBatBox.class, GT4RRef.ID, cas -> {
+            this.tag(AntimatterDefaultTools.WRENCH.getToolType()).add(cas);
+        });
         AntimatterAPI.all(BlockRedstoneMachine.class, GT4RRef.ID, cas -> {
             this.tag(AntimatterDefaultTools.WRENCH.getToolType()).add(cas);
         });
