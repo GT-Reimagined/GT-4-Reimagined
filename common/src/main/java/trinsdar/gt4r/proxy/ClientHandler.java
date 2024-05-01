@@ -14,6 +14,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.Level;
 import org.apache.commons.io.FileUtils;
 import trinsdar.gt4r.GT4Reimagined;
+import trinsdar.gt4r.block.BlockBatBox;
 import trinsdar.gt4r.block.BlockCasing;
 import trinsdar.gt4r.block.BlockRedstoneMachine;
 import trinsdar.gt4r.data.Machines;
@@ -36,6 +37,7 @@ public class ClientHandler implements IProxyHandler {
             ModelUtils.setRenderLayer(((BlockItem)Machines.DUSTBIN.getItem(LV)).getBlock(), RenderType.cutout());
             AntimatterAPI.all(BlockCasing.class, t -> ModelUtils.setRenderLayer(t, RenderType.cutout()));
             AntimatterAPI.all(BlockRedstoneMachine.class, b -> ModelUtils.setRenderLayer(b, RenderType.cutout()));
+            AntimatterAPI.all(BlockBatBox.class, b -> ModelUtils.setRenderLayer(b, RenderType.cutout()));
         });
         copyProgrammerArtIfMissing();
     }

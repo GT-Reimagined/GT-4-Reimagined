@@ -38,16 +38,15 @@ public class BlockBatBox extends BlockMachine {
         Tier original = this.tier;
         for (BatBoxTiers tier : BatBoxTiers.values()) {
             this.tier = fromBatBoxTier(tier);
-            AntimatterBlockModelBuilder builder = prov.models().getBuilder(getId() + "_" + tier.getSerializedName());
+            AntimatterBlockModelBuilder builder = prov.models().getBuilder(getId().replace("_lv", "") + "_" + tier.getSerializedName());
             buildModelsForState(builder, MachineState.IDLE);
             buildModelsForState(builder, MachineState.ACTIVE);
             builder.loader(AntimatterModelManager.LOADER_MACHINE);
             builder.property("particle", getType().getBaseTexture(this.tier, MachineState.IDLE)[0].toString());
         }
         this.tier = original;
-        prov.getVariantBuilder(block).forAllStatesExcept(b ->
-                new VariantBlockStateBuilder.VariantBuilder().modelFile(prov.models().getBuilder(getId() + "_" + b.getValue(TIER).getSerializedName())),
-                BlockStateProperties.HORIZONTAL_FACING);
+        prov.getVariantBuilder(block).forAllStates(b ->
+                new VariantBlockStateBuilder.VariantBuilder().modelFile(prov.models().getBuilder(getId().replace("_lv", "") + "_" + b.getValue(TIER).getSerializedName())));
     }
 
     @Override

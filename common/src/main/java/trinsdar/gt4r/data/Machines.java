@@ -19,6 +19,7 @@ import muramasa.antimatter.machine.types.TankMachine;
 import muramasa.antimatter.blockentity.single.BlockEntityDigitalTransformer;
 import net.minecraft.sounds.SoundEvents;
 import trinsdar.gt4r.GT4RRef;
+import trinsdar.gt4r.block.BlockBatBox;
 import trinsdar.gt4r.block.BlockRedstoneMachine;
 import trinsdar.gt4r.machine.*;
 import trinsdar.gt4r.blockentity.multi.*;
@@ -162,9 +163,9 @@ public class Machines {
     public static GeneratorMachine WATERMILL = new GeneratorMachine(GT4RRef.ID, "watermill").baseTexture(Textures.BASE_HANDLER).setTiers(ULV).covers(emptyFactory,emptyFactory,emptyFactory,emptyFactory,emptyFactory, COVER_DYNAMO_OLD).allowFrontIO().setVerticalFacingAllowed(false).setOutputCover(COVER_DYNAMO_OLD).setTile(BlockEntityCoveredGenerator::new).custom();
 
     public static TankMachine INFINITE_STEAM = new TankMachine(GT4RRef.ID, "infinite_steam").addFlags(FLUID, CELL, GUI).setTiers(LV).setTile(BlockEntityInfiniteFluid::new);
-    public static BasicMachine BATTERY_BUFFER_ONE = new BasicMachine(GT4RRef.ID, "1x_battery_buffer").noCovers().addFlags(GUI, EU, ITEM).setTile(BlockEntityBatteryBuffer::new).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).allowFrontIO().setVerticalFacingAllowed(true);
-    public static BasicMachine BATTERY_BUFFER_FOUR = new BasicMachine(GT4RRef.ID, "4x_battery_buffer").noCovers().addFlags(GUI, EU, ITEM).setTile(BlockEntityBatteryBuffer::new).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).allowFrontIO().setVerticalFacingAllowed(true);
-    public static BasicMachine BATTERY_BUFFER_EIGHT = new BasicMachine(GT4RRef.ID, "8x_battery_buffer").noCovers().addFlags(GUI, EU, ITEM).setTile(BlockEntityBatteryBuffer::new).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).allowFrontIO().setVerticalFacingAllowed(true);
+    public static BasicMachine BATTERY_BUFFER_ONE = new UpgradeableMachine(GT4RRef.ID, "1x_battery_buffer").setTiers(LV).noCovers().addFlags(GUI, EU, ITEM).setTile(BlockEntityBatteryBuffer::new).setBlock(BlockBatBox::new).setItemBlockClass(() -> BlockBatBox.class).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).allowFrontIO().setVerticalFacingAllowed(true);
+    public static BasicMachine BATTERY_BUFFER_FOUR = new UpgradeableMachine(GT4RRef.ID, "4x_battery_buffer").setTiers(LV).noCovers().addFlags(GUI, EU, ITEM).setTile(BlockEntityBatteryBuffer::new).setBlock(BlockBatBox::new).setItemBlockClass(() -> BlockBatBox.class).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).allowFrontIO().setVerticalFacingAllowed(true);
+    public static BasicMachine BATTERY_BUFFER_EIGHT = new UpgradeableMachine(GT4RRef.ID, "8x_battery_buffer").setTiers(LV).noCovers().addFlags(GUI, EU, ITEM).setTile(BlockEntityBatteryBuffer::new).setBlock(BlockBatBox::new).setItemBlockClass(() -> BlockBatBox.class).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).allowFrontIO().setVerticalFacingAllowed(true);
     public static BasicMachine TRANSFORMER = new BasicMachine(GT4RRef.ID, "transformer").addFlags(EU).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).setTile((m, p, s) -> new BlockEntityTransformer<>(m, p, s, 1)).noCovers().setVerticalFacingAllowed(true).allowFrontIO();
     public static BasicMachine SUPERCONDENSATOR = new BasicMachine(GT4RRef.ID, "supercondensator").addFlags(EU).setTile((m, p, s) -> new BlockEntitySupercondensator(m, p, s, 1)).setTiers(LUV).noCovers().setVerticalFacingAllowed(true).allowFrontIO();
     public static BasicMachine TRANSFORMER_DIGITAL = new BasicMachine(GT4RRef.ID, "transformer_digital").addFlags(GUI, EU).setTiers(EV, IV).setTile(BlockEntityDigitalTransformer::new).noCovers().allowFrontIO();
