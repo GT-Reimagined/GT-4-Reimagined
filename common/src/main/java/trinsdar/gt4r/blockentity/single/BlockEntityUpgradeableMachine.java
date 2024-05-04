@@ -106,21 +106,7 @@ public class BlockEntityUpgradeableMachine<T extends BlockEntityUpgradeableMachi
                     if (!player.isCreative()) {
                         stack.shrink(1);
                     }
-                    if (foundUpgrade == CustomTags.OVERCLOCKER_UPGRADES) {
-                        recipeHandler.ifPresent(MachineRecipeHandler::resetProgress);
-                    }
-                    if (foundUpgrade == CustomTags.TRANSFORMER_UPGRADES || foundUpgrade == CustomTags.HV_TRANSFORMER_UPGRADES) {
-                        energyHandler.ifPresent(e -> e.setInputVoltage(e.getInputVoltage() * 4));
-                    }
-                    if (foundUpgrade == CustomTags.STEAM_UPGRADES){
-                        energyHandler.ifPresent(e -> {
-                            e.setInputVoltage(0);
-                            //e.extractEu(e.getEnergy(), false); //TODO way to drain only the internal buffer of the machine, not batteries in it
-                        });
-                    }
-                    if (foundUpgrade == CustomTags.MUFFLER_UPGRADES) {
-                        this.setMuffled(true);
-                    }
+                    doUpgradeFunction(foundUpgrade);
                     world.playSound(null, pos, SoundEvents.UI_BUTTON_CLICK, SoundSource.BLOCKS, 1.0f, 1.0f);
                 }
                 return InteractionResult.sidedSuccess(isClientSide());
@@ -128,6 +114,31 @@ public class BlockEntityUpgradeableMachine<T extends BlockEntityUpgradeableMachi
 
         }
         return super.onInteractBoth(state, world, pos, player, hand, hit, type);
+    }
+
+    protected void doUpgradeFunction(TagKey<Item> upgrade){
+        if (upgrade == CustomTags.OVERCLOCKER_UPGRADES) {
+            recipeHandler.ifPresent(MachineRecipeHandler::resetProgress);
+        }
+        if (upgrade == CustomTags.TRANSFORMER_UPGRADES || upgrade == CustomTags.HV_TRANSFORMER_UPGRADES) {
+            energyHandler.ifPresent(e -> {
+                if (e.getInputVoltage() > 0){
+                    e.setInputVoltage(e.getInputVoltage() * 4);
+                }
+                if (e.getOutputVoltage() > 0){
+                    e.setOutputVoltage(e.getOutputVoltage() * 4);
+                }
+            });
+        }
+        if (upgrade == CustomTags.STEAM_UPGRADES){
+            energyHandler.ifPresent(e -> {
+                e.setInputVoltage(0);
+                //e.extractEu(e.getEnergy(), false); //TODO way to drain only the internal buffer of the machine, not batteries in it
+            });
+        }
+        if (upgrade == CustomTags.MUFFLER_UPGRADES) {
+            this.setMuffled(true);
+        }
     }
 
     @Override
@@ -188,7 +199,15 @@ public class BlockEntityUpgradeableMachine<T extends BlockEntityUpgradeableMachi
             ListTag list = tag.getList("upgrades", 10);
             for (int i = 0; i < list.size(); i++) {
                 CompoundTag upgrade = list.getCompound(i);
-                upgrades.put(TagUtils.getItemTag(new ResourceLocation(upgrade.getString("key"))), upgrade.getInt("value"));
+                TagKey<Item> upgradeTag = TagUtils.getItemTag(new ResourceLocation(upgrade.getString("key")));
+                if (upgradeTag == CustomTags.TRANSFORMER_UPGRADES){
+                    for (int j = 0; j < upgrade.getInt("value"); j++) {
+                        doUpgradeFunction(upgradeTag);
+                    }
+                } else {
+                    doUpgradeFunction(upgradeTag);
+                }
+                upgrades.put(upgradeTag, upgrade.getInt("value"));
             }
         }
     }
