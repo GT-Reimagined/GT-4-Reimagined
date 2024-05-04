@@ -9,8 +9,9 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import trinsdar.gt4r.data.GT4RData;
+import trinsdar.gt4r.machine.UpgradeableMachineRecipeHandler;
 
-public class BlockEntityPyrolysisOven extends BlockEntityBasicMultiMachine<BlockEntityPyrolysisOven> {
+public class BlockEntityPyrolysisOven extends BlockEntityUpgradeableBasicMultiblock<BlockEntityPyrolysisOven> {
 
     public BlockEntityPyrolysisOven(Machine<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -48,7 +49,7 @@ public class BlockEntityPyrolysisOven extends BlockEntityBasicMultiMachine<Block
         });
     }
 */
-    public static class PyrolysisRecipeHandler extends MachineRecipeHandler<BlockEntityPyrolysisOven> {
+    public static class PyrolysisRecipeHandler extends UpgradeableMachineRecipeHandler<BlockEntityPyrolysisOven> {
         private int heatingCapacity;
         public PyrolysisRecipeHandler(BlockEntityPyrolysisOven tile) {
             super(tile);

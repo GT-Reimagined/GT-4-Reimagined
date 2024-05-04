@@ -15,6 +15,7 @@ public class CustomTags {
     public static TagKey<Item> OVERCLOCKER_UPGRADES = TagUtils.getItemTag(new ResourceLocation(GT4RRef.ID, "overclocker_upgrades"));
     public static TagKey<Item> TRANSFORMER_UPGRADES = TagUtils.getItemTag(new ResourceLocation(GT4RRef.ID, "transformer_upgrades"));
     public static TagKey<Item> HV_TRANSFORMER_UPGRADES = TagUtils.getItemTag(new ResourceLocation(GT4RRef.ID, "hv_transformer_upgrades"));
+    public static TagKey<Item> BATTERY_UPGRADES = TagUtils.getItemTag(new ResourceLocation(GT4RRef.ID, "battery_upgrades"));
     public static TagKey<Item> MUFFLER_UPGRADES = TagUtils.getItemTag(new ResourceLocation(GT4RRef.ID, "muffler_upgrades"));
     public static TagKey<Item> STEAM_UPGRADES = TagUtils.getItemTag(new ResourceLocation(GT4RRef.ID, "steam_upgrades"));
     public static TagKey<Item> CIRCUITS_ULTIMATE = getTag("circuits/ultimate");

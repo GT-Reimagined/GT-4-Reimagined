@@ -32,6 +32,7 @@ import org.jetbrains.annotations.Nullable;
 import trinsdar.gt4r.data.CustomTags;
 import trinsdar.gt4r.machine.IUpgradeProvider;
 import trinsdar.gt4r.machine.UpgradeableFluidHandler;
+import trinsdar.gt4r.machine.UpgradeableMachine;
 import trinsdar.gt4r.machine.UpgradeableMachineRecipeHandler;
 
 import java.util.List;
@@ -40,12 +41,28 @@ import java.util.Map;
 public class BlockEntityUpgradeableMachine<T extends BlockEntityUpgradeableMachine<T>> extends BlockEntityMachine<T> implements IUpgradeProvider {
     Map<TagKey<Item>, Integer> upgrades = new Object2ObjectArrayMap<>();
     Map<TagKey<Item>, Integer> allowedUpgrades;
-    public BlockEntityUpgradeableMachine(Machine<?> type, BlockPos pos, BlockState state) {
+    public BlockEntityUpgradeableMachine(UpgradeableMachine type, BlockPos pos, BlockState state) {
         super(type, pos, state);
         this.recipeHandler.set(() -> new UpgradeableMachineRecipeHandler<>((T)this));
         this.fluidHandler.set(() -> new UpgradeableFluidHandler<>((T)this));
+        ImmutableMap.Builder<TagKey<Item>, Integer> builder = ImmutableMap.builder();
         int transformerAmount = this.getMachineTier().getVoltage() >= Tier.IV.getVoltage() ? 0 : 5 - Utils.getVoltageTier(this.getMachineTier().getVoltage());
-        allowedUpgrades = ImmutableMap.of(CustomTags.OVERCLOCKER_UPGRADES, 4, CustomTags.TRANSFORMER_UPGRADES, transformerAmount, CustomTags.MUFFLER_UPGRADES, 1, CustomTags.STEAM_UPGRADES, 1);
+        if (type.getAllowedUpgrades().contains(CustomTags.OVERCLOCKER_UPGRADES)){
+            builder.put(CustomTags.OVERCLOCKER_UPGRADES, 4);
+        }
+        if (type.getAllowedUpgrades().contains(CustomTags.TRANSFORMER_UPGRADES)){
+            builder.put(CustomTags.TRANSFORMER_UPGRADES, transformerAmount);
+        }
+        if (type.getAllowedUpgrades().contains(CustomTags.BATTERY_UPGRADES)){
+            builder.put(CustomTags.BATTERY_UPGRADES, 1);
+        }
+        if (type.getAllowedUpgrades().contains(CustomTags.MUFFLER_UPGRADES)){
+            builder.put(CustomTags.MUFFLER_UPGRADES, 1);
+        }
+        if (type.getAllowedUpgrades().contains(CustomTags.STEAM_UPGRADES)){
+            builder.put(CustomTags.TRANSFORMER_UPGRADES, 1);
+        }
+        allowedUpgrades = builder.build();
     }
 
     @Override
