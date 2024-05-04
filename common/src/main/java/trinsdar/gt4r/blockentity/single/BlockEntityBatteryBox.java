@@ -2,6 +2,7 @@ package trinsdar.gt4r.blockentity.single;
 
 import it.unimi.dsi.fastutil.Pair;
 import muramasa.antimatter.capability.machine.MachineEnergyHandler;
+import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.event.IMachineEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.util.Utils;
@@ -9,6 +10,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
 import tesseract.api.gt.IGTNode;
+import trinsdar.gt4r.block.BlockBatBox;
 import trinsdar.gt4r.machine.UpgradeableMachine;
 
 import java.util.List;
@@ -58,6 +60,13 @@ public class BlockEntityBatteryBox extends BlockEntityUpgradeableMachine<BlockEn
                     return cachedItems.stream().map(Pair::right).mapToLong(IGTNode::getOutputAmperage).sum();
                 }
                 return super.getOutputAmperage();
+            }
+
+            @Override
+            public void setInputVoltage(long voltageIn) {
+                super.setInputVoltage(voltageIn);
+                Tier tier1 = Tier.getTier(voltageIn);
+                this.tile.getLevel().setBlock(this.tile.getBlockPos(), this.tile.getBlockState().setValue(BlockBatBox.TIER, voltageIn > 8192 ? BlockBatBox.BatBoxTiers.IV : BlockBatBox.BatBoxTiers.valueOf(tier1.getId().toUpperCase())), 3);
             }
         });
     }

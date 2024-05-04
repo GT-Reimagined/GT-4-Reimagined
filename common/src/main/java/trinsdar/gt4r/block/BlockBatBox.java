@@ -8,9 +8,11 @@ import muramasa.antimatter.machine.BlockMachine;
 import muramasa.antimatter.machine.MachineState;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.Machine;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -50,6 +52,14 @@ public class BlockBatBox extends BlockMachine {
     }
 
     @Override
+    public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
+        ItemStack stack = new ItemStack(this);
+        BatBoxTiers tiers = state.getValue(TIER);
+        stack.getOrCreateTag().putByte("tier", (byte) tiers.ordinal());
+        return stack;
+    }
+
+    @Override
     public Component getDisplayName(ItemStack stack) {
         Tier tier1 = getTier();
         if (stack.getTag() != null && stack.getTag().contains("tier")){
@@ -64,8 +74,8 @@ public class BlockBatBox extends BlockMachine {
             case LV -> LV;
             case MV -> MV;
             case HV -> HV;
-            case EV -> IV;
-            case IV -> EV;
+            case EV -> EV;
+            case IV -> IV;
         };
     }
 

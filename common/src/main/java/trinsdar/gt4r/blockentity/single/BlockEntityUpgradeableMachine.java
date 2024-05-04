@@ -14,6 +14,7 @@ import muramasa.antimatter.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -28,6 +29,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import trinsdar.gt4r.data.CustomTags;
 import trinsdar.gt4r.machine.IUpgradeProvider;
@@ -73,6 +75,21 @@ public class BlockEntityUpgradeableMachine<T extends BlockEntityUpgradeableMachi
     @Override
     public Map<TagKey<Item>, Integer> getAllowedUpgrades() {
         return allowedUpgrades;
+    }
+
+    @NotNull
+    @Override
+    public Component getDisplayName() {
+        return getMachineType().getDisplayName(getPowerLevel());
+    }
+
+    @Override
+    public Tier getPowerLevel() {
+        if (upgrades.containsKey(CustomTags.TRANSFORMER_UPGRADES)){
+            long voltage = getMachineTier().getVoltage() * ((int)Math.pow(4,  upgrades.get(CustomTags.TRANSFORMER_UPGRADES)));
+            return Tier.getTier(voltage);
+        }
+        return super.getPowerLevel();
     }
 
     @Override
