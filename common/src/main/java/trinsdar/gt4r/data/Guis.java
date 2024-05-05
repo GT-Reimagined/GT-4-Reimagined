@@ -172,7 +172,7 @@ public class Guis {
         STEAM_FORGE_HAMMER.add(FORGE_HAMMER).add(FL_IN, 53, 63);
         STEAM_SIFTER.add(IT_IN, 53, 25)
                 .add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 143, 16)
-                .add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(IT_OUT, 143, 34);
+                .add(IT_OUT, 107, 34).add(IT_OUT, 125, 34).add(IT_OUT, 143, 34).add(FL_IN, 53, 63);
         STEAM_TURBINE.add(BASIC_TANK.getSlots());
         GAS_TURBINE.add(BASIC_TANK.getSlots());
         DIESEL_GENERATOR.add(BASIC_TANK.getSlots());
