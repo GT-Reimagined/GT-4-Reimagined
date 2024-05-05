@@ -9,6 +9,9 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import trinsdar.gt4r.GT4RRef;
 
+import static muramasa.antimatter.machine.Tier.LV;
+import static muramasa.antimatter.machine.Tier.MV;
+
 public class Textures {
 
     public static final Texture ROTOR = new Texture(GT4RRef.ID, "material/rotor");
@@ -24,6 +27,18 @@ public class Textures {
             new Texture(GT4RRef.ID, "block/machine/base/side_" + t.getId()),
             new Texture(GT4RRef.ID, "block/machine/base/side_" + t.getId()),
             new Texture(GT4RRef.ID, "block/machine/base/side_" + t.getId()),
+    };
+
+    public static final ITextureHandler BATBOX_HANDLER = (m, t, s) -> {
+        String side = t == LV || t == MV ? "side" : "energy";
+        return new Texture[]{
+                new Texture(GT4RRef.ID, "block/machine/base/" + side + "_" + t.getId()),
+                new Texture(GT4RRef.ID, "block/machine/base/" + side + "_" + t.getId()),
+                new Texture(GT4RRef.ID, "block/machine/base/" + side + "_" + t.getId()),
+                new Texture(GT4RRef.ID, "block/machine/base/" + side + "_" + t.getId()),
+                new Texture(GT4RRef.ID, "block/machine/base/" + side + "_" + t.getId()),
+                new Texture(GT4RRef.ID, "block/machine/base/" + side + "_" + t.getId()),
+        };
     };
 
     public static final ITextureHandler BOILER_HANDLER = (m, t, s) -> new Texture[] {

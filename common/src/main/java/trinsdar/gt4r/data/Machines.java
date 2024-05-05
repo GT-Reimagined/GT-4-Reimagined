@@ -10,6 +10,7 @@ import io.github.gregtechintergalactical.gtcore.machine.WorkbenchMachine;
 import muramasa.antimatter.blockentity.single.BlockEntityBatteryBuffer;
 import muramasa.antimatter.blockentity.single.BlockEntityTransformer;
 import muramasa.antimatter.data.AntimatterMaterials;
+import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.BasicMachine;
 import muramasa.antimatter.machine.types.BasicMultiMachine;
 import muramasa.antimatter.machine.types.GeneratorMachine;
@@ -17,6 +18,8 @@ import muramasa.antimatter.machine.types.HatchMachine;
 import muramasa.antimatter.machine.types.MultiMachine;
 import muramasa.antimatter.machine.types.TankMachine;
 import muramasa.antimatter.blockentity.single.BlockEntityDigitalTransformer;
+import muramasa.antimatter.util.Utils;
+import net.minecraft.ChatFormatting;
 import net.minecraft.sounds.SoundEvents;
 import trinsdar.gt4r.GT4RRef;
 import trinsdar.gt4r.block.BlockBatBox;
@@ -163,9 +166,18 @@ public class Machines {
     public static GeneratorMachine WATERMILL = new GeneratorMachine(GT4RRef.ID, "watermill").baseTexture(Textures.BASE_HANDLER).setTiers(ULV).covers(emptyFactory,emptyFactory,emptyFactory,emptyFactory,emptyFactory, COVER_DYNAMO_OLD).allowFrontIO().setVerticalFacingAllowed(false).setOutputCover(COVER_DYNAMO_OLD).setTile(BlockEntityCoveredGenerator::new).custom();
 
     public static TankMachine INFINITE_STEAM = new TankMachine(GT4RRef.ID, "infinite_steam").addFlags(FLUID, CELL, GUI).setTiers(LV).setTile(BlockEntityInfiniteFluid::new);
-    public static UpgradeableMachine BATTERY_BUFFER_FOUR = new UpgradeableMachine(GT4RRef.ID, "4x_battery_buffer").setTiers(LV).noCovers().addFlags(GUI, EU, ITEM).setUpgrades(CustomTags.TRANSFORMER_UPGRADES).setTile(BlockEntityBatteryBox::new).setBlock(BlockBatBox::new).setItemBlockClass(() -> BlockBatBox.class).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).allowFrontIO().setVerticalFacingAllowed(true);
-    public static UpgradeableMachine BATTERY_BUFFER_EIGHT = new UpgradeableMachine(GT4RRef.ID, "8x_battery_buffer").setTiers(LV).noCovers().addFlags(GUI, EU, ITEM).setUpgrades(CustomTags.TRANSFORMER_UPGRADES).setTile(BlockEntityBatteryBox::new).setBlock(BlockBatBox::new).setItemBlockClass(() -> BlockBatBox.class).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).allowFrontIO().setVerticalFacingAllowed(true);
-    public static BasicMachine TRANSFORMER = new BasicMachine(GT4RRef.ID, "transformer").addFlags(EU).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).setTile((m, p, s) -> new BlockEntityTransformer<>(m, p, s, 1)).noCovers().setVerticalFacingAllowed(true).allowFrontIO();
+    public static UpgradeableMachine BATTERY_BUFFER_FOUR = new UpgradeableMachine(GT4RRef.ID, "4x_battery_buffer").setTiers(LV).noCovers().addFlags(GUI, EU, ITEM).setUpgrades(CustomTags.TRANSFORMER_UPGRADES).setTile(BlockEntityBatteryBox::new).setBlock(BlockBatBox::new).setItemBlockClass(() -> BlockBatBox.class).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).baseTexture(Textures.BATBOX_HANDLER).allowFrontIO().setVerticalFacingAllowed(true);
+    public static UpgradeableMachine BATTERY_BUFFER_EIGHT = new UpgradeableMachine(GT4RRef.ID, "8x_battery_buffer").setTiers(LV).noCovers().addFlags(GUI, EU, ITEM).setUpgrades(CustomTags.TRANSFORMER_UPGRADES).setTile(BlockEntityBatteryBox::new).setBlock(BlockBatBox::new).setItemBlockClass(() -> BlockBatBox.class).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).baseTexture(Textures.BATBOX_HANDLER).allowFrontIO().setVerticalFacingAllowed(true);
+    public static BasicMachine TRANSFORMER = new BasicMachine(GT4RRef.ID, "transformer").addFlags(EU).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).setTile((m, p, s) -> new BlockEntityTransformer<>(m, p, s, 1)).noCovers().setVerticalFacingAllowed(true).allowFrontIO().addTooltipInfo((machine, stack, world, tooltip, flag) -> {
+        tooltip.remove(tooltip.size() - 1);
+        tooltip.remove(tooltip.size() - 1);
+        Tier upper = Tier.getTier(machine.getTier().getVoltage() * 4);
+        tooltip.add(Utils.translatable("machine.transformer.voltage_info", Utils.literal(upper.getId().toUpperCase()), Utils.literal(machine.getTier().getId().toUpperCase())));
+        tooltip.add(Utils.translatable("machine.voltage.in").append(": ").append(Utils.literal(upper.getVoltage() + " (" + upper.getId().toUpperCase() + ")")).withStyle(ChatFormatting.GREEN));
+        tooltip.add(Utils.translatable("machine.voltage.out").append(": ").append(Utils.literal(machine.getTier().getVoltage() + " (" + machine.getTier().getId().toUpperCase() + ")")).withStyle(ChatFormatting.GREEN));
+        tooltip.add(Utils.translatable("generic.amp").append(": ").append(Utils.literal(String.valueOf(4)).withStyle(ChatFormatting.YELLOW)));
+        tooltip.add(Utils.translatable("machine.power.capacity").append(": ").append(Utils.literal(String.valueOf(512L + machine.getTier().getVoltage() * 8L))).withStyle(ChatFormatting.BLUE));
+    });
     public static BasicMachine SUPERCONDENSATOR = new BasicMachine(GT4RRef.ID, "supercondensator").addFlags(EU).setTile((m, p, s) -> new BlockEntitySupercondensator(m, p, s, 1)).setTiers(LUV).noCovers().setVerticalFacingAllowed(true).allowFrontIO();
     public static BasicMachine TRANSFORMER_DIGITAL = new BasicMachine(GT4RRef.ID, "transformer_digital").addFlags(GUI, EU).setTiers(EV, IV).setTile(BlockEntityDigitalTransformer::new).noCovers().allowFrontIO();
 
