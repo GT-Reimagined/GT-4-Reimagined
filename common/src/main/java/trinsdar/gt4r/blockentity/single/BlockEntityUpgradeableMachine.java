@@ -62,7 +62,7 @@ public class BlockEntityUpgradeableMachine<T extends BlockEntityUpgradeableMachi
             builder.put(CustomTags.MUFFLER_UPGRADES, 1);
         }
         if (type.getAllowedUpgrades().contains(CustomTags.STEAM_UPGRADES)){
-            builder.put(CustomTags.TRANSFORMER_UPGRADES, 1);
+            builder.put(CustomTags.STEAM_UPGRADES, 1);
         }
         allowedUpgrades = builder.build();
     }
