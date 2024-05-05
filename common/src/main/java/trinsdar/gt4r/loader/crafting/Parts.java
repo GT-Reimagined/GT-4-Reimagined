@@ -1,6 +1,7 @@
 package trinsdar.gt4r.loader.crafting;
 
 import io.github.gregtechintergalactical.gtcore.data.GTCoreItems;
+import io.github.gregtechintergalactical.gtcore.data.GTCoreTags;
 import muramasa.antimatter.data.AntimatterDefaultTools;
 import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.data.AntimatterMaterials;
@@ -9,11 +10,14 @@ import muramasa.antimatter.material.Material;
 import muramasa.antimatter.pipe.PipeSize;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.nbt.CompoundTag;
 import trinsdar.gt4r.GT4RRef;
 import muramasa.antimatter.data.ForgeCTags;
+import trinsdar.gt4r.data.GT4RData;
+import trinsdar.gt4r.data.Machines;
 import trinsdar.gt4r.data.TierMaps;
 
 import java.util.function.Consumer;
@@ -23,6 +27,7 @@ import static io.github.gregtechintergalactical.gtcore.data.GTCoreItems.*;
 import static io.github.gregtechintergalactical.gtcore.data.GTCoreTags.*;
 import static muramasa.antimatter.data.AntimatterMaterialTypes.FOIL;
 import static muramasa.antimatter.data.AntimatterMaterialTypes.PLATE;
+import static muramasa.antimatter.machine.Tier.MV;
 import static muramasa.antimatter.util.TagUtils.getForgelikeItemTag;
 import static trinsdar.gt4r.data.CustomTags.*;
 import static trinsdar.gt4r.data.GT4RData.*;
@@ -276,6 +281,8 @@ public class Parts {
                 ThickNeutronReflector, of('N', NeutronReflector, 'I', AntimatterMaterialTypes.DUST.get(Beryllium)), " N ", "NIN", " N ");
         provider.addItemRecipe(output, GT4RRef.ID, "neutron_reflector_normal", "parts",
                 NeutronReflector, of('C', AntimatterMaterialTypes.DUST.get(AntimatterMaterials.Coal), 'T', AntimatterMaterialTypes.DUST.get(Tin), 'I', AntimatterMaterialTypes.PLATE.get(AntimatterMaterials.Copper)), "TCT", "CIC", "TCT");
+        provider.addItemRecipe(output, "upgrades", TransformerUpgrade,
+                of('G', ForgeCTags.GLASS, 'C', CABLE_GOLD.getBlockItem(PipeSize.VTINY), 'T', Machines.TRANSFORMER.getItem(MV), 'c', CIRCUITS_BASIC), "GGG", "CTC", "GcG");
         provider.shapeless(output, GT4RRef.ID, "tape_from_empty", "tapes", new ItemStack(Tape), TapeEmpty, TapeEmpty, TapeEmpty, TapeEmpty);
         provider.shapeless(output, GT4RRef.ID, "duct_tape_from_empty", "tapes", new ItemStack(DuctTape), DuctTapeEmpty, DuctTapeEmpty, DuctTapeEmpty, DuctTapeEmpty);
         provider.shapeless(output, GT4RRef.ID, "fal_duct_tape_from_empty", "tapes", new ItemStack(FALDuctTape), FALDuctTapeEmpty, FALDuctTapeEmpty, FALDuctTapeEmpty, FALDuctTapeEmpty);

@@ -18,16 +18,14 @@ import trinsdar.gt4r.data.TierMaps;
 
 import static io.github.gregtechintergalactical.gtcore.data.GTCoreItems.*;
 import static io.github.gregtechintergalactical.gtcore.data.GTCoreTags.*;
-import static muramasa.antimatter.machine.Tier.LV;
-import static muramasa.antimatter.machine.Tier.ULV;
+import static muramasa.antimatter.machine.Tier.*;
 import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
 import static muramasa.antimatter.util.TagUtils.getForgelikeItemTag;
 import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
 import static muramasa.antimatter.data.AntimatterMaterials.*;
 import static trinsdar.gt4r.data.CustomTags.*;
 import static trinsdar.gt4r.data.GT4RData.*;
-import static trinsdar.gt4r.data.Machines.PUMP;
-import static trinsdar.gt4r.data.Machines.WINDMILL;
+import static trinsdar.gt4r.data.Machines.*;
 import static trinsdar.gt4r.data.Materials.*;
 import static trinsdar.gt4r.data.RecipeMaps.ASSEMBLING;
 
@@ -111,6 +109,9 @@ public class AssemblyLoader {
         ASSEMBLING.RB().ii(of(CABLE_GOLD.getBlockItem(PipeSize.VTINY), 4), PLATE.getMaterialIngredient(BatteryAlloy, 9)).io(new ItemStack(BatteryHullLarge)).add("battery_hull_large",6400, 4);
         ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Invar, 2), GEM.getMaterialIngredient(Flint, 1)).io(new ItemStack(LighterEmpty)).add("lighter_empty",256, 16);
         ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Zinc, 4), of(CarbonMesh, 4)).io(new ItemStack(ItemFilter)).add("item_filter",1600, 32);
+        ASSEMBLING.RB().ii(TRANSFORMER.getItem(HV), TransformerUpgrade).io(HVTransformerUpgrade).add("hv_transformer_upgrade", 3200, 4);
+        ASSEMBLING.RB().ii(of(PLATES_STEELS, 2), of(STEAM_TURBINE.getItem(LV))).io(SteamUpgrade).add("steam_upgrade",1600, 32);
+        ASSEMBLING.RB().ii(of(PLATES_IRON_ALUMINIUM, 1), DUST.getMaterialIngredient(Wood, 2)).io(MufflerUpgrade).add("muffler_upgrade",1600, 2);
     }
 
     public static int getRubberAmount(PipeSize size){
