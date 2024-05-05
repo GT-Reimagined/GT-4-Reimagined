@@ -94,12 +94,13 @@ public class MachineCrafting {
     private static void loadSteamMachineRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider){
         for (Tier tier : getSteam()) {
             TagKey<Item> plate = tier == BRONZE ? PLATE.getMaterialTag(Bronze) : PLATES_STEELS;
+            TagKey<Item> gear = tier == BRONZE ? GEAR.getMaterialTag(Bronze) : GEARS_STEELS;
             TagKey<Item> hull = tier == BRONZE ? MACHINE_HULLS_CHEAP : MACHINE_HULLS_SEMI_CHEAP;
             String prefix = tier == BRONZE ? "high_pressure_" : "";
             provider.addItemRecipe(output, GT4RRef.ID,prefix + "solid_fuel_boiler","machines",
                     SOLID_FUEL_BOILER.getItem(tier), of( 'P',  plate, 'W', AntimatterDefaultTools.WRENCH.getTag(), 'B', Items.BRICKS, 'F', Items.FURNACE), "PPP", "PWP", "BFB");
             provider.addItemRecipe(output, GT4RRef.ID,prefix + "steam_macerator","machines",
-                    STEAM_MACERATOR.getItem(tier), of2( 'P',  plate, 'W', AntimatterDefaultTools.WRENCH.getTag(), 'H', AntimatterDefaultTools.HAMMER.getTag(), 'D', AntimatterMaterialTypes.GEM.getMaterialTag(AntimatterMaterials.Diamond), 'M', hull, 'p', PISTONS, 'G', GEAR.getMaterialTag(Bronze)), "WDH", "GMG", "PpP");
+                    STEAM_MACERATOR.getItem(tier), of2( 'P',  plate, 'W', AntimatterDefaultTools.WRENCH.getTag(), 'H', AntimatterDefaultTools.HAMMER.getTag(), 'D', AntimatterMaterialTypes.GEM.getMaterialTag(AntimatterMaterials.Diamond), 'M', hull, 'p', PISTONS, 'G', gear), "WDH", "GMG", "PpP");
             provider.addItemRecipe(output, GT4RRef.ID,prefix + "steam_furnace","machines",
                     STEAM_FURNACE.getItem(tier), of( 'P',  plate, 'W', AntimatterDefaultTools.WRENCH.getTag(), 'B', Items.BRICKS, 'F', Items.FURNACE, 'M', hull), "PWP", "PFP", "BMB");
             provider.addItemRecipe(output, GT4RRef.ID,prefix + "steam_alloy_smelter","machines",
@@ -107,7 +108,7 @@ public class MachineCrafting {
             provider.addItemRecipe(output, GT4RRef.ID,prefix + "steam_forge_hammer","machines",
                     STEAM_FORGE_HAMMER.getItem(tier), of( 'B', plate, 'P', PISTONS, 'M', hull, 'A', Items.ANVIL), "BPB", "BMB", "BAB");
             provider.addItemRecipe(output, GT4RRef.ID,prefix + "steam_compressor","machines",
-                    STEAM_COMPRESSOR.getItem(tier), of( 'B',  plate, 'W', AntimatterDefaultTools.WRENCH.getTag(), 'G', tier == BRONZE ? GEAR.getMaterialTag(Bronze) : GEARS_STEELS, 'P', PISTONS, 'M', hull), "BGB", "PWP", "BMB");
+                    STEAM_COMPRESSOR.getItem(tier), of( 'B',  plate, 'W', AntimatterDefaultTools.WRENCH.getTag(), 'G', gear, 'P', PISTONS, 'M', hull), "BGB", "PWP", "BMB");
             provider.addItemRecipe(output, GT4RRef.ID,prefix + "steam_extractor","machines",
                     STEAM_EXTRACTOR.getItem(tier), of( 'B',  plate, 'W', AntimatterDefaultTools.WRENCH.getTag(),'P', PISTONS, 'M', hull), "BBB", "PWP", "BMB");
             provider.addItemRecipe(output, GT4RRef.ID,prefix + "steam_cutter","machines",
