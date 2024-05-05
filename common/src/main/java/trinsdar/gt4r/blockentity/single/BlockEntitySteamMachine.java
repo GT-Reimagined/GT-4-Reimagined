@@ -87,7 +87,7 @@ public class BlockEntitySteamMachine extends BlockEntityMachine<BlockEntitySteam
 
         @Override
         public boolean accepts(FluidHolder stack) {
-            return stack.getFluid().builtInRegistryHolder().is(STEAM);
+            return super.accepts(stack) || stack.getFluid().builtInRegistryHolder().is(STEAM);
         }
 
         @Override
