@@ -3,6 +3,7 @@ package trinsdar.gt4r.loader.crafting;
 import com.google.common.collect.ImmutableMap;
 import io.github.gregtechintergalactical.gtcore.GTCore;
 import io.github.gregtechintergalactical.gtcore.data.GTCoreBlocks;
+import io.github.gregtechintergalactical.gtcore.data.GTCoreItems;
 import io.github.gregtechintergalactical.gtcore.data.GTCoreMaterials;
 import io.github.gregtechintergalactical.gtcore.machine.WorkbenchMachine;
 import muramasa.antimatter.AntimatterAPI;
@@ -20,6 +21,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import trinsdar.gt4r.GT4RRef;
 import muramasa.antimatter.data.ForgeCTags;
+import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.data.GT4RMaterialTags;
 import trinsdar.gt4r.data.TierMaps;
 
@@ -130,10 +132,20 @@ public class MachineCrafting {
             provider.addItemRecipe(output, GT4RRef.ID, t.getId() + "_batter_buffer_eight", "machines",
                     BATTERY_BUFFER_EIGHT.getItem(t), of('H', GT4RMaterialTags.HULL.get(TierMaps.TIER_MATERIALS.get(t)), 'C', ForgeCTags.CHESTS, 'W', TierMaps.TIER_WIRES.get(t).getBlockItem(PipeSize.NORMAL)), "WCW", "WHW");
         });
-        TRANSFORMER.getTiers().forEach(t -> {
+        provider.addItemRecipe(output, "machines", TRANSFORMER.getItem(LV),
+                of('H', MACHINE_HULLS_BASIC, 'C', CABLE_TIN.getBlockItem(PipeSize.VTINY), 'c', CopperCoil), " C ", "cHc", " C ");
+        provider.addItemRecipe(output, "machines", TRANSFORMER.getItem(MV),
+                of('C', CABLE_COPPER.getBlockItem(PipeSize.VTINY), 'H', MACHINE_HULLS_ADVANCED), "C", "H", "C");
+        provider.addItemRecipe(output, "machines", TRANSFORMER.getItem(HV),
+                of('C', CIRCUITS_BASIC, 'c', CABLE_GOLD.getBlockItem(PipeSize.VTINY), 'T', TRANSFORMER.getItem(MV), 'B', BatteryMediumLithium), " c ", "CTB", " c ");
+        provider.addItemRecipe(output, "machines", TRANSFORMER.getItem(EV),
+                of('C', CIRCUITS_ADVANCED, 'T', TRANSFORMER.getItem(HV), 'c', CABLE_STEEL.getBlockItem(PipeSize.VTINY), 'B', LapotronCrystal), " c ", "CTB", " c ");
+        provider.addItemRecipe(output, "machines", TRANSFORMER.getItem(IV),
+                of('I', IRIDIUM_REINFORCED_STONE, 'C', CIRCUITS_ADVANCED, 'T', TRANSFORMER.getItem(EV), 'c', CABLE_TUNGSTEN.getBlockItem(PipeSize.VTINY), 'B', BatteryEnergyOrb), "IcI", "CTB", "IcI");
+        /*TRANSFORMER.getTiers().forEach(t -> {
             provider.addItemRecipe(output, GT4RRef.ID, t.getId() + "_transformer", "machines",
                     TRANSFORMER.getItem(t), of( 'C', TierMaps.TIER_CABLES.get(t).getBlockItem(PipeSize.VTINY), 'M', GT4RMaterialTags.HULL.getMaterialTag(TierMaps.TIER_MATERIALS.get(t)), 'c', TierMaps.TIER_CABLES.get(Tier.getTier(t.getVoltage() * 4)).getBlockItem(PipeSize.VTINY))," CC", "cM ", " CC");
-        });
+        });*/
         provider.addItemRecipe(output, GT4RRef.ID, "mv_electrolyzer", "machines",
                 ELECTROLYZER.getItem(MV), of('C', CIRCUITS_ADVANCED, 'P', PLATES_STEELS, 'E', EXTRACTOR.getItem(LV), 'L', CopperCoil), "PEP", "CLC", "PEP");
         provider.addItemRecipe(output, GT4RRef.ID, "mv_electrolyzer_upgrade", "machines",
