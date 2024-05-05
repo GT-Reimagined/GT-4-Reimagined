@@ -45,6 +45,7 @@ public class GT4RLocalizations {
             add(GT4RRef.ID + ".advancements.gt4r", "GT4 Reimagined");
             add(GT4RRef.ID + ".advancements.gt4r.desc", "Getting familiar with your surroundings");
             add(GT4RRef.ID + ".tooltip.occurrence", "Indicates occurrence of ");
+            add("machine.transformer.voltage_info", "%s -> %s (Use Soft Hammer to invert)");
             add("block.gt4r.rubber_leaves", "Rubber Leaves");
             add("block.gt4r.rubber_log", "Rubber Log");
             add("block.gt4r.rubber_sapling", "Rubber Sapling");
