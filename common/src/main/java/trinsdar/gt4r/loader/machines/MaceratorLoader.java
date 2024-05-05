@@ -3,6 +3,7 @@ package trinsdar.gt4r.loader.machines;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.data.AntimatterMaterials;
+import muramasa.antimatter.data.AntimatterStoneTypes;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.ore.BlockOre;
 import muramasa.antimatter.ore.CobbleStoneType;
@@ -69,33 +70,40 @@ public class MaceratorLoader {
     }
 
     public static void initAuto() {
-        AntimatterAPI.all(BlockOre.class, o -> {
-            if (o.getOreType() != AntimatterMaterialTypes.ORE) return;
-            Material m = o.getMaterial();
-            Material sm = o.getStoneType().getMaterial();
-            if (!m.has(AntimatterMaterialTypes.DUST) || !m.has(AntimatterMaterialTypes.CRUSHED)) return;
-            ItemStack stoneDust = sm.has(AntimatterMaterialTypes.DUST) ? AntimatterMaterialTypes.DUST.get(sm, 1) : ItemStack.EMPTY;
-            TagKey<Item> oreTag = TagUtils.getForgelikeItemTag(String.join("", getConventionalStoneType(o.getStoneType()), "_", getConventionalMaterialType(o.getOreType()), "/", o.getMaterial().getId()));
-            RecipeIngredient ore = RecipeIngredient.of(oreTag,1);
-            ItemStack crushedStack = AntimatterMaterialTypes.CRUSHED.get(m, ORE_MULTI.getInt(m));
-            Material oreByProduct1 = m.getByProducts().size() > 0 ? m.getByProducts().get(0) : MACERATE_INTO.getMapping(m);
-            RecipeMap<?> rm = MACERATING;
-            if (o.getStoneType().isSandLike()){
-                rm = SIFTING;
-            }
-            List<ItemStack> stacks = new ArrayList<>();
-            stacks.add(Utils.ca((ORE_MULTI.getInt(m)) * (rm == SIFTING ? 1 : 2), crushedStack));
-            if (rm == SIFTING) stacks.add(crushedStack);
-            stacks.add(AntimatterMaterialTypes.DUST.get(oreByProduct1, 1));
-            if (!stoneDust.isEmpty()) stacks.add(stoneDust);
-            ItemStack[] stackArray = stacks.toArray(new ItemStack[0]);
-            List<Double> ints = new ArrayList<>();
-            ints.add(1.0);
-            if (rm == SIFTING) ints.add(0.5);
-            ints.add(0.1 * BY_PRODUCT_MULTI.getInt(m));
-            if (!stoneDust.isEmpty()) ints.add(0.5);
-            double[] chances = ints.stream().mapToDouble(i -> i).toArray();
-            rm.RB().ii(ore).io(stackArray).outputChances(chances).add(sm.getId() + "_" + m.getId() + "_ore",400, 2);
+        ORE.all().forEach(m -> {
+            AntimatterAPI.all(StoneType.class).stream().filter(StoneType::doesGenerateOre).filter(s -> s != AntimatterStoneTypes.BEDROCK).forEach(s -> {
+                Material sm = s.getMaterial();
+                if (!m.has(AntimatterMaterialTypes.DUST) && !m.has(AntimatterMaterialTypes.CRUSHED)) return;
+                ItemStack stoneDust = sm.has(AntimatterMaterialTypes.DUST) ? AntimatterMaterialTypes.DUST.get(sm, 1) : ItemStack.EMPTY;
+                TagKey<Item> oreTag = ORE.getMaterialTag(m, s);
+                RecipeIngredient ore = RecipeIngredient.of(oreTag,1);
+                ItemStack crushedStack = (m.has(CRUSHED) ? AntimatterMaterialTypes.CRUSHED : DUST).get(m, ORE_MULTI.getInt(m));
+                Material oreByProduct1 = m.getByProducts().size() > 0 ? m.getByProducts().get(0) : MACERATE_INTO.getMapping(m);
+                RecipeMap<?> rm = s.isSandLike() ? SIFTING : MACERATING;
+                List<ItemStack> stacks = new ArrayList<>();
+                stacks.add(Utils.ca((ORE_MULTI.getInt(m)) * (rm == SIFTING ? 1 : 2), crushedStack));
+                if (rm == SIFTING){
+                    stacks.add(crushedStack);
+                    stacks.add(crushedStack);
+                    stacks.add(crushedStack);
+                }
+                stacks.add(AntimatterMaterialTypes.DUST.get(oreByProduct1, 1));
+                if (!stoneDust.isEmpty()) stacks.add(stoneDust);
+                ItemStack[] stackArray = stacks.toArray(new ItemStack[0]);
+                List<Double> ints = new ArrayList<>();
+                if (rm == SIFTING){
+                    ints.add(0.7);
+                    ints.add(0.5);
+                    ints.add(0.3);
+                    ints.add(0.1);
+                } else {
+                    ints.add(1.0);
+                }
+                ints.add(0.1 * BY_PRODUCT_MULTI.getInt(m));
+                if (!stoneDust.isEmpty()) ints.add(0.5);
+                double[] chances = ints.stream().mapToDouble(i -> i).toArray();
+                rm.RB().ii(ore).io(stackArray).outputChances(chances).add("ore_" + m.getId() + "_" + s.getId(),400, 2);
+            });
         });
         AntimatterMaterialTypes.CRUSHED.all().forEach(m -> {
             if (!m.has(AntimatterMaterialTypes.ORE) && m != AntimatterMaterials.NetheriteScrap) return;
