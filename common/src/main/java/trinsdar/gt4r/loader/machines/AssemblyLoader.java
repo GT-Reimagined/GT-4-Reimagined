@@ -111,7 +111,7 @@ public class AssemblyLoader {
         ASSEMBLING.RB().ii(PLATE.getMaterialIngredient(Zinc, 4), of(CarbonMesh, 4)).io(new ItemStack(ItemFilter)).add("item_filter",1600, 32);
         ASSEMBLING.RB().ii(TRANSFORMER.getItem(HV), TransformerUpgrade).io(HVTransformerUpgrade).add("hv_transformer_upgrade", 3200, 4);
         ASSEMBLING.RB().ii(of(PLATES_STEELS, 2), of(STEAM_TURBINE.getItem(LV))).io(SteamUpgrade).add("steam_upgrade",1600, 32);
-        ASSEMBLING.RB().ii(of(PLATES_IRON_ALUMINIUM, 1), DUST.getMaterialIngredient(Wood, 2)).io(MufflerUpgrade).add("muffler_upgrade",1600, 2);
+        ASSEMBLING.RB().ii(of(PLATES_IRON_ALUMINIUM, 1), of(2, DUST.getMaterialTag(Plastic), DUST.getMaterialTag(Wood))).io(MufflerUpgrade).add("muffler_upgrade",1600, 2);
     }
 
     public static int getRubberAmount(PipeSize size){
