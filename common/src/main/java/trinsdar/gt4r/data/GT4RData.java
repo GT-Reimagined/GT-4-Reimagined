@@ -149,7 +149,7 @@ public class GT4RData {
     public static ItemElectricTool ElectricScrewdriver = new ItemElectricTool("electric_screwdriver", GTCoreTools.ELECTRIC_SCREWDRIVER, Steel, 6.0f, 2.5f, 2, 1, b -> true);
     public static ItemElectricTool RockCutter = new ItemElectricTool("rock_cutter", ToolTypes.ROCK_CUTTER, AntimatterMaterials.Diamond, 8.0f, 1.0f, 3, 1, b -> true);
     public static ItemElectricTool BronzeJackHammer = new ItemElectricTool("bronze_jackhammer", GTCoreTools.JACKHAMMER, Bronze, 6.0f, 5f, 2, 1, b -> !(b instanceof BehaviourAOEBreak));
-    public static ItemElectricTool SteelJackHammer = new ItemElectricTool("steel_jackhammer", GTCoreTools.JACKHAMMER, Steel, 8.0f, 5.5f, 2, 1, b -> !(b instanceof BehaviourAOEBreak));
+    public static ItemElectricTool SteelJackHammer = new ItemElectricTool("steel_jackhammer", GTCoreTools.JACKHAMMER, StainlessSteel, 8.0f, 5.5f, 2, 1, b -> !(b instanceof BehaviourAOEBreak));
     public static ItemElectricTool DiamondJackHammer = new ItemElectricTool("diamond_jackhammer", GTCoreTools.JACKHAMMER, AntimatterMaterials.Diamond, 10.0f, 6.0f, 3, 2, b -> true);
 
     public static ItemBasic<?> ZPM = new ItemMultiTextureBattery(GT4RRef.ID, "zpm", Tier.ZPM, 100000000000L, false);
