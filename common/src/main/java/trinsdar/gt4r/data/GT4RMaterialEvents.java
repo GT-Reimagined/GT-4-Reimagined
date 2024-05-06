@@ -27,7 +27,7 @@ public class GT4RMaterialEvents {
         for (Material material : turbineStuff) {
             event.setMaterial(material).flags(GT4RMaterialTags.TURBINE_ROTOR, GT4RMaterialTags.TURBINE_BLADE, GT4RMaterialTags.BROKEN_TURBINE_ROTOR);
         }
-        GT4RMaterialTags.HULL.add(Aluminium, AntimatterMaterials.Iron, Titanium, Brass, Bronze, Steel, StainlessSteel, WroughtIron, TungstenSteel);
+        GT4RMaterialTags.HULL.add(Aluminium, Titanium, Brass, Bronze, Steel, StainlessSteel, WroughtIron, TungstenSteel);
         event.setMaterial(Aluminium).asMetal(933, 1000, AntimatterMaterialTypes.PLATE, AntimatterMaterialTypes.ROD, AntimatterMaterialTypes.GEAR, AntimatterMaterialTypes.BOLT, AntimatterMaterialTypes.SCREW);
         event.setMaterial(Beryllium).asMetal(1560, 0, AntimatterMaterialTypes.PLATE);
         event.setMaterial(Bismuth).asMetal(544, 0, AntimatterMaterialTypes.PLATE).asOre(false);

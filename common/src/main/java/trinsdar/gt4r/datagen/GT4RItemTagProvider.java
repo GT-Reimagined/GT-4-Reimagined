@@ -43,7 +43,7 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.tag(HV_TRANSFORMER_UPGRADES).add(HVTransformerUpgrade);
         this.tag(MUFFLER_UPGRADES).add(MufflerUpgrade);
         this.tag(STEAM_UPGRADES).add(SteamUpgrade);;
-        this.tag(MACHINE_HULLS_CHEAP).add(GT4RMaterialTags.HULL.get(Bronze), GT4RMaterialTags.HULL.get(Brass), GT4RMaterialTags.HULL.get(AntimatterMaterials.Iron), GT4RMaterialTags.HULL.get(WroughtIron), GT4RMaterialTags.HULL.get(Aluminium));
+        this.tag(MACHINE_HULLS_CHEAP).add(GT4RMaterialTags.HULL.get(Bronze), GT4RMaterialTags.HULL.get(Brass), GT4RMaterialTags.HULL.get(WroughtIron), GT4RMaterialTags.HULL.get(Aluminium));
         this.tag(MACHINE_HULLS_BASIC).add(GT4RMaterialTags.HULL.get(WroughtIron), GT4RMaterialTags.HULL.get(Aluminium));
         this.tag(MACHINE_HULLS_ADVANCED).add(GT4RMaterialTags.HULL.get(Steel), GT4RMaterialTags.HULL.get(StainlessSteel));
         this.tag(MACHINE_HULLS_STABILIZED).add(GT4RMaterialTags.HULL.get(StainlessSteel), GT4RMaterialTags.HULL.get(TungstenSteel), GT4RMaterialTags.HULL.get(Titanium));
