@@ -35,10 +35,6 @@ public class BlockCrafting {
                 new ItemStack(ADVANCED_MACHINE_CASING, 4), of('I', PLATE.getMaterialTag(Chromium), 'C', CIRCUITS_ELITE, 'M', HIGHLY_ADVANCED_MACHINE_BLOCK), "III", "CMC", "III");
         provider.addStackRecipe(output, GT4RRef.ID, "highly_advanced_machine", "blocks",
                 new ItemStack(HIGHLY_ADVANCED_MACHINE_BLOCK, 1), of('T', PLATE.getMaterialTag(Titanium), 'C', PLATE.getMaterialTag(Chromium), 'M', MACHINE_HULLS_ADVANCED), "CTC", "TMT", "CTC");
-        provider.addStackRecipe(output, GT4RRef.ID, "machine_block_advanced_1", "blocks",
-                new ItemStack(ADVANCED_MACHINE_BLOCK, 1), of('A', AdvancedAlloy, 'C', PLATE.getMaterialTag(Carbon), 'M', CustomTags.MACHINE_HULLS_BASIC), " C ", "AMA", " C ");
-        provider.addStackRecipe(output, GT4RRef.ID, "machine_block_advanced_2", "blocks",
-                new ItemStack(ADVANCED_MACHINE_BLOCK, 1), of('A', AdvancedAlloy, 'C', PLATE.getMaterialTag(Carbon), 'M', CustomTags.MACHINE_HULLS_BASIC), " A ", "CMC", " A ");
         provider.addItemRecipe(output, GT4RRef.ID, "coil_fusion", "blocks", FUSION_COIL, of('C', CIRCUITS_MASTER, 'S', ItemSuperconductor, 'N', NichromeHeatingCoil, 'H', HIGHLY_ADVANCED_MACHINE_BLOCK, 'I', GTCoreItems.IridiumNeutronReflector), "CSC", "NHN", "CIC");
     }
 }

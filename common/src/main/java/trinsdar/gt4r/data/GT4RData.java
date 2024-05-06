@@ -173,7 +173,6 @@ public class GT4RData {
     public static final BlockCasing TUNGSTENSTEEL_REINFORCED_STONE = new BlockCasing(GT4RRef.ID, "tungstensteel_reinforced_stone");
     public static final BlockCasing IRIDIUM_TUNGSTENSTEEL_REINFORCED_STONE = new BlockCasing(GT4RRef.ID, "iridium_tungstensteel_reinforced_stone");
     public static final BlockCasing HIGHLY_ADVANCED_MACHINE_BLOCK = new BlockCasing(GT4RRef.ID, "highly_advanced_machine_block");
-    public static final BlockCasing ADVANCED_MACHINE_BLOCK = new BlockCasing(GT4RRef.ID, "advanced_machine_block");
 
     public static final BlockFakeCasing FIRE_BRICKS = new BlockFakeCasing(GT4RRef.ID, "fire_bricks", BlockBehaviour.Properties.of(Material.STONE, MaterialColor.DIRT).strength(1.0f, 10.0f).sound(SoundType.STONE));
     public static final BlockCasing REINFORCED_GLASS = new BlockCasing(GT4RRef.ID, "reinforced_glass", Block.Properties.of(net.minecraft.world.level.material.Material.GLASS).strength(15.0f, 150.0f).sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion().isValidSpawn(GT4RData::neverAllowSpawn).isRedstoneConductor(GT4RData::isntSolid).isSuffocating(GT4RData::isntSolid).isViewBlocking(GT4RData::isntSolid));
