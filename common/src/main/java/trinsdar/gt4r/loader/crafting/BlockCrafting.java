@@ -6,6 +6,7 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.item.ItemStack;
 import trinsdar.gt4r.GT4RRef;
 import muramasa.antimatter.data.ForgeCTags;
+import trinsdar.gt4r.data.CustomTags;
 
 import java.util.function.Consumer;
 
@@ -27,17 +28,17 @@ public class BlockCrafting {
         provider.addStackRecipe(output, GT4RRef.ID, "reinforce_glass_h", "blocks",
                 new ItemStack(REINFORCED_GLASS, 7), of('G', ForgeCTags.GLASS, 'A', AdvancedAlloy), "GGG", "AGA", "GGG");
         provider.addStackRecipe(output, GT4RRef.ID, "standard_machine", "blocks",
-                new ItemStack(STANDARD_MACHINE_CASING, 4), of('I', PLATES_WROUGHT_ALUMINIUM, 'C', CIRCUITS_BASIC, 'M', MACHINE_HULLS_SEMI_CHEAP), "III", "CMC", "III");
+                new ItemStack(STANDARD_MACHINE_CASING, 4), of('I', PLATES_WROUGHT_ALUMINIUM, 'C', CIRCUITS_BASIC, 'M', CustomTags.MACHINE_HULLS_BASIC), "III", "CMC", "III");
         provider.addStackRecipe(output, GT4RRef.ID, "reinforced_machine", "blocks",
-                new ItemStack(REINFORCED_MACHINE_CASING, 4), of('I', PLATES_STEELS, 'C', CIRCUITS_ADVANCED, 'M', MACHINE_HULLS_BASIC), "III", "CMC", "III");
+                new ItemStack(REINFORCED_MACHINE_CASING, 4), of('I', PLATES_STEELS, 'C', CIRCUITS_ADVANCED, 'M', MACHINE_HULLS_ADVANCED), "III", "CMC", "III");
         provider.addStackRecipe(output, GT4RRef.ID, "advanced_machine", "blocks",
                 new ItemStack(ADVANCED_MACHINE_CASING, 4), of('I', PLATE.getMaterialTag(Chromium), 'C', CIRCUITS_ELITE, 'M', HIGHLY_ADVANCED_MACHINE_BLOCK), "III", "CMC", "III");
         provider.addStackRecipe(output, GT4RRef.ID, "highly_advanced_machine", "blocks",
                 new ItemStack(HIGHLY_ADVANCED_MACHINE_BLOCK, 1), of('T', PLATE.getMaterialTag(Titanium), 'C', PLATE.getMaterialTag(Chromium), 'M', MACHINE_HULLS_ADVANCED), "CTC", "TMT", "CTC");
         provider.addStackRecipe(output, GT4RRef.ID, "machine_block_advanced_1", "blocks",
-                new ItemStack(ADVANCED_MACHINE_BLOCK, 1), of('A', AdvancedAlloy, 'C', PLATE.getMaterialTag(Carbon), 'M', MACHINE_HULLS_BASIC), " C ", "AMA", " C ");
+                new ItemStack(ADVANCED_MACHINE_BLOCK, 1), of('A', AdvancedAlloy, 'C', PLATE.getMaterialTag(Carbon), 'M', CustomTags.MACHINE_HULLS_BASIC), " C ", "AMA", " C ");
         provider.addStackRecipe(output, GT4RRef.ID, "machine_block_advanced_2", "blocks",
-                new ItemStack(ADVANCED_MACHINE_BLOCK, 1), of('A', AdvancedAlloy, 'C', PLATE.getMaterialTag(Carbon), 'M', MACHINE_HULLS_BASIC), " A ", "CMC", " A ");
+                new ItemStack(ADVANCED_MACHINE_BLOCK, 1), of('A', AdvancedAlloy, 'C', PLATE.getMaterialTag(Carbon), 'M', CustomTags.MACHINE_HULLS_BASIC), " A ", "CMC", " A ");
         provider.addItemRecipe(output, GT4RRef.ID, "coil_fusion", "blocks", FUSION_COIL, of('C', CIRCUITS_MASTER, 'S', ItemSuperconductor, 'N', NichromeHeatingCoil, 'H', HIGHLY_ADVANCED_MACHINE_BLOCK, 'I', GTCoreItems.IridiumNeutronReflector), "CSC", "NHN", "CIC");
     }
 }

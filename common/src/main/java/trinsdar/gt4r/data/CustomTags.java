@@ -20,7 +20,6 @@ public class CustomTags {
     public static TagKey<Item> STEAM_UPGRADES = TagUtils.getItemTag(new ResourceLocation(GT4RRef.ID, "steam_upgrades"));
     public static TagKey<Item> CIRCUITS_ULTIMATE = getTag("circuits/ultimate");
     public static TagKey<Item> MACHINE_HULLS_CHEAP = getTag("machine_hulls/cheap");
-    public static TagKey<Item> MACHINE_HULLS_SEMI_CHEAP = getTag("machine_hulls/semi_cheap");
     public static TagKey<Item> MACHINE_HULLS_BASIC = getTag("machine_hulls/basic");
     public static TagKey<Item> MACHINE_HULLS_ADVANCED = getTag("machine_hulls/advanced");
     public static TagKey<Item> MACHINE_HULLS_STABILIZED = getTag("machine_hulls/stabilized");

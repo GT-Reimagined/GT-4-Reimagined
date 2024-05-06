@@ -15,7 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import trinsdar.gt4r.GT4RRef;
-import trinsdar.gt4r.data.GT4RData;
+import trinsdar.gt4r.data.CustomTags;
 import trinsdar.gt4r.data.GT4RMaterialTags;
 
 import static io.github.gregtechintergalactical.gtcore.data.GTCoreTags.PLATES_IRON_ALUMINIUM;
@@ -43,10 +43,9 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.tag(HV_TRANSFORMER_UPGRADES).add(HVTransformerUpgrade);
         this.tag(MUFFLER_UPGRADES).add(MufflerUpgrade);
         this.tag(STEAM_UPGRADES).add(SteamUpgrade);;
-        this.tag(MACHINE_HULLS_CHEAP).add(GT4RMaterialTags.HULL.get(Bronze), GT4RMaterialTags.HULL.get(Brass), GT4RMaterialTags.HULL.get(WroughtIron), GT4RMaterialTags.HULL.get(AntimatterMaterials.Iron), GT4RMaterialTags.HULL.get(Aluminium));
-        this.tag(MACHINE_HULLS_SEMI_CHEAP).add(GT4RMaterialTags.HULL.get(WroughtIron), GT4RMaterialTags.HULL.get(Aluminium));
-        this.tag(MACHINE_HULLS_BASIC).add(GT4RMaterialTags.HULL.get(Steel), GT4RMaterialTags.HULL.get(StainlessSteel), GT4RMaterialTags.HULL.get(Aluminium));
-        this.tag(MACHINE_HULLS_ADVANCED).add(GT4RMaterialTags.HULL.get(Aluminium), GT4RMaterialTags.HULL.get(StainlessSteel));
+        this.tag(MACHINE_HULLS_CHEAP).add(GT4RMaterialTags.HULL.get(Bronze), GT4RMaterialTags.HULL.get(Brass), GT4RMaterialTags.HULL.get(AntimatterMaterials.Iron), GT4RMaterialTags.HULL.get(WroughtIron), GT4RMaterialTags.HULL.get(Aluminium));
+        this.tag(MACHINE_HULLS_BASIC).add(GT4RMaterialTags.HULL.get(WroughtIron), GT4RMaterialTags.HULL.get(Aluminium));
+        this.tag(MACHINE_HULLS_ADVANCED).add(GT4RMaterialTags.HULL.get(Steel), GT4RMaterialTags.HULL.get(StainlessSteel));
         this.tag(MACHINE_HULLS_STABILIZED).add(GT4RMaterialTags.HULL.get(StainlessSteel), GT4RMaterialTags.HULL.get(TungstenSteel), GT4RMaterialTags.HULL.get(Titanium));
         this.tag(MACHINE_HULLS_VERY_ADVANCED).add(GT4RMaterialTags.HULL.get(TungstenSteel), GT4RMaterialTags.HULL.get(Titanium));
         this.tag(GRINDING_HEAD).add(GTCoreItems.DiamondGrindHead, GTCoreItems.TungstenGrindHead);

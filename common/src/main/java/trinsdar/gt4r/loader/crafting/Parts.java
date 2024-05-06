@@ -256,7 +256,7 @@ public class Parts {
         provider.shapeless(output, "fire_clay_dust", "parts", AntimatterMaterialTypes.DUST.get(Fireclay, 2), AntimatterMaterialTypes.DUST.getMaterialTag(Brick), AntimatterMaterialTypes.DUST.getMaterialTag(Clay));
         provider.shapeless(output, "iron_ingot_from_wrought", "parts", new ItemStack(Items.IRON_INGOT), AntimatterMaterialTypes.DUST.getMaterialTag(Ash), AntimatterMaterialTypes.INGOT.getMaterialTag(WroughtIron));
         provider.addStackRecipe(output, GT4RRef.ID, "super_conductor_wire", "parts",
-                new ItemStack(WIRE_SUPERCONDUCTOR.getBlockItem(PipeSize.NORMAL), 4), of('M', MACHINE_HULLS_BASIC, 'S', ItemSuperconductor, 'C', CIRCUITS_MASTER), "MCM", "SSS", "MCM");
+                new ItemStack(WIRE_SUPERCONDUCTOR.getBlockItem(PipeSize.NORMAL), 4), of('M', MACHINE_HULLS_ADVANCED, 'S', ItemSuperconductor, 'C', CIRCUITS_MASTER), "MCM", "SSS", "MCM");
         provider.addStackRecipe(output, GT4RRef.ID, "super_conductor", "parts",
                 new ItemStack(ItemSuperconductor, 4), of('H', RecipeIngredient.of(Helium.getCellGas(1, CellTin)), 'T', AntimatterMaterialTypes.PLATE.getMaterialTag(Tungsten), 'I', IridiumReinforcedPlate, 'C', CIRCUITS_MASTER), "HHH", "TIT", "CCC");
         provider.shapeless(output, GT4RRef.ID, "bronze_dust",
