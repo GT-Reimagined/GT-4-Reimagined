@@ -130,12 +130,12 @@ public class Machines {
     public static StorageMachine DIGITAL_CHEST = new StorageMachine(GT4RRef.ID, "digital_chest").addFlags(GUI, ITEM).setTiers(LV).setTile(BlockEntityDigitalChest::new);
 
     public static DrumMachine BRONZE_DRUM = GTCoreBlocks.createDrum(Materials.Bronze, 16000);
-    public static DrumMachine STEEL_DRUM = GTCoreBlocks.createDrum(Materials.Steel, 32000);
-    public static DrumMachine STAINLESS_STEEL_DRUM = GTCoreBlocks.createDrum(Materials.StainlessSteel, 64000);
-    public static DrumMachine INVAR_DRUM = GTCoreBlocks.createDrum(Materials.Invar, 48000);
+    public static DrumMachine INVAR_DRUM = GTCoreBlocks.createDrum(Materials.Invar, 32000);
+    public static DrumMachine STEEL_DRUM = GTCoreBlocks.createDrum(Materials.Steel, 48000);
+    public static DrumMachine STAINLESS_STEEL_DRUM = GTCoreBlocks.createDrum(Materials.StainlessSteel, 64000).acidProof();
     public static DrumMachine TUNGSTEN_DRUM = GTCoreBlocks.createDrum(Materials.Tungsten, 256000);
     public static DrumMachine TUNGSTENSTEEL_DRUM = GTCoreBlocks.createDrum(Materials.TungstenSteel, 256000);
-    public static DrumMachine NETHERITE_DRUM = GTCoreBlocks.createDrum(AntimatterMaterials.Netherite, 128000);
+    public static DrumMachine NETHERITE_DRUM = GTCoreBlocks.createDrum(AntimatterMaterials.Netherite, 128000).acidProof();
 
     public static MaterialMachine IRON_CABINET = GTCoreBlocks.createBarrel(AntimatterMaterials.Iron);
     public static MaterialMachine ALUMINIUM_CABINET = GTCoreBlocks.createBarrel(GTCoreMaterials.Aluminium);
