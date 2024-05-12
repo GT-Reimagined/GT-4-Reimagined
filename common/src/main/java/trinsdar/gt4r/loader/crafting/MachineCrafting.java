@@ -125,12 +125,10 @@ public class MachineCrafting {
     }
 
     private static void loadSimpleMachineRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider){
-        BATTERY_BUFFER_FOUR.getTiers().forEach(t -> {
-            provider.addItemRecipe(output, GT4RRef.ID, t.getId() + "_batter_buffer_four", "machines",
-                    BATTERY_BUFFER_FOUR.getItem(t), of('H', GT4RMaterialTags.HULL.get(TierMaps.TIER_MATERIALS.get(t)), 'C', ForgeCTags.CHESTS, 'W', TierMaps.TIER_WIRES.get(t).getBlockItem(PipeSize.SMALL)), "WCW", "WHW");
-            provider.addItemRecipe(output, GT4RRef.ID, t.getId() + "_batter_buffer_eight", "machines",
-                    BATTERY_BUFFER_EIGHT.getItem(t), of('H', GT4RMaterialTags.HULL.get(TierMaps.TIER_MATERIALS.get(t)), 'C', ForgeCTags.CHESTS, 'W', TierMaps.TIER_WIRES.get(t).getBlockItem(PipeSize.NORMAL)), "WCW", "WHW");
-        });
+        provider.addItemRecipe(output, "machines", BATTERY_BUFFER_FOUR.getItem(LV),
+                of('T', CABLE_TIN.getBlockItem(PipeSize.VTINY), 'H', MACHINE_HULLS_BASIC, 'P', PLATES_WROUGHT_ALUMINIUM, 'C', CIRCUITS_BASIC, 'c', ForgeCTags.CHESTS), "CcC", "THT", "PTP");
+        provider.addItemRecipe(output, "machines", BATTERY_BUFFER_EIGHT.getItem(LV),
+                of('C', CIRCUITS_BASIC, 'c', ForgeCTags.CHESTS, 'B', BATTERY_BUFFER_FOUR.getItem(LV)), "ccc", "cBc", "CCC");
         provider.addItemRecipe(output, "machines", TRANSFORMER.getItem(LV),
                 of('H', MACHINE_HULLS_ADVANCED, 'C', CABLE_TIN.getBlockItem(PipeSize.VTINY), 'c', CopperCoil), " C ", "cHc", " C ");
         provider.addItemRecipe(output, "machines", TRANSFORMER.getItem(MV),
