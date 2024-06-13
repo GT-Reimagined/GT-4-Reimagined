@@ -52,7 +52,7 @@ dependencies {
     modImplementation("earth.terrarium:botarium-forge-1.18.2:${project.botarium_version}")
     modImplementation("com.github.Reforged-Mods.Terraform-Reforged:terraform-utils-v1:${project.terraform_version}")
     modImplementation("io.github.llamalad7:mixinextras-forge:0.2.0-beta.11")
-    implementation("io.github.gregtechintergalactical:gtcore-forge:${rootProject.gt_core_version}-${rootProject.minecraft_version}:dev-shadow"){
+    implementation("io.github.gregtechintergalactical:gtcore-forge:${rootProject.gt_core_version}-${rootProject.minecraft_version}:dev"){
         transitive = false
     }
     include("io.github.gregtechintergalactical:gtcore-forge:${rootProject.gt_core_version}-${rootProject.minecraft_version}")

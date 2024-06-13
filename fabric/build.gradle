@@ -51,7 +51,7 @@ dependencies{
     }*/
     modImplementation("com.github.Trinsdar:ARRP:0.6.7-hotfix")
     modImplementation "maven.modrinth:carbon-config:2ngFmmhP"
-    implementation("io.github.gregtechintergalactical:gtcore-fabric:${rootProject.gt_core_version}-${rootProject.minecraft_version}:dev-shadow"){
+    implementation("io.github.gregtechintergalactical:gtcore-fabric:${rootProject.gt_core_version}-${rootProject.minecraft_version}:dev"){
         transitive = false
     }
     include("io.github.gregtechintergalactical:gtcore-fabric:${rootProject.gt_core_version}-${rootProject.minecraft_version}"){

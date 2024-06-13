@@ -13,7 +13,7 @@ dependencies{
     implementation(annotationProcessor("io.github.llamalad7:mixinextras-common:0.2.0-beta.11"))
     implementation(project(path: ":tesseract-common", configuration: "namedElements"))
     implementation(project(path: ":antimatter-common", configuration: "namedElements"))
-    modCompileOnly("io.github.gregtechintergalactical:gtcore-common:${rootProject.gt_core_version}-${rootProject.minecraft_version}"){
+    implementation("io.github.gregtechintergalactical:gtcore-common:${rootProject.gt_core_version}-${rootProject.minecraft_version}:dev"){
         transitive = false
     }
     modImplementation("com.gtnewhorizon.structurelib:structurelib-common:${project.structurelib_version}-${project.minecraft_version}")
