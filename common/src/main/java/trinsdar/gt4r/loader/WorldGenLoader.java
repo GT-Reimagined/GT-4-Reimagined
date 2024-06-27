@@ -7,8 +7,10 @@ import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.event.WorldGenEvent;
 import muramasa.antimatter.worldgen.object.WorldGenStoneLayerBuilder;
 import muramasa.antimatter.worldgen.smallore.WorldGenSmallOreBuilder;
+import muramasa.antimatter.worldgen.vanillaore.WorldGenVanillaOre;
 import muramasa.antimatter.worldgen.vanillaore.WorldGenVanillaOreBuilder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BiomeTags;
 import trinsdar.gt4r.GT4RConfig;
 import trinsdar.gt4r.GT4RRef;
 
@@ -54,6 +56,7 @@ public class WorldGenLoader {
         event.smallOre(new WorldGenSmallOreBuilder().withMaterial(Sapphire).withAmountPerChunk(2).withBiomes(tagged("has_sapphire")).buildMaterial());
         event.smallOre(new WorldGenSmallOreBuilder().withMaterial(Coal).withAmountPerChunk(8).atHeight(16, 126).buildMaterial());
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Tin).atHeight(-16, 48).withWeight(25).withSize(8).withSecondaryMaterial(Iron, 0.01f).setHasTriangleHeight(true).buildMaterial());
+        event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Nickel).atHeight(-54, -32).withProbability(10).withSize(32).withBiomes(tagged("has_nickel")).buildMaterial());
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Uraninite).atHeight(-16, 100).withWeight(8).withSize(4).withBiomes(tagged("is_dead")).setBiomeBlacklist(true).buildMaterial());
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Uraninite).withCustomId("uranite_dead").atHeight(-16, 100).withWeight(20).withSize(4).withBiomes(tagged("is_dead")).buildMaterial());
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Cassiterite).atHeight(60, 120).withWeight(2).withSize(32).withSecondaryMaterial(Tin, 0.05f).withBiomes(tagged("has_cassiterite")).buildMaterial());
@@ -69,7 +72,7 @@ public class WorldGenLoader {
         // GT4R Nether Ores
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Pyrite).atHeight(0, 64).withWeight(8).withSize(16).withDimensions(new ResourceLocation("the_nether")).buildMaterial());
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Sphalerite).atHeight(32, 96).withWeight(8).withSize(16).withDimensions(new ResourceLocation("the_nether")).buildMaterial());
-        event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Pyrite).atHeight(64, 128).withWeight(7).withSize(16).withDimensions(new ResourceLocation("the_nether")).buildMaterial());
+        event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Cinnabar).atHeight(64, 128).withWeight(7).withSize(16).withDimensions(new ResourceLocation("the_nether")).buildMaterial());
         // GT4R End Ores
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Tungstate).atHeight(0, 80).withWeight(2).withSize(16).withDimensions(new ResourceLocation("the_end")).buildMaterial());
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Platinum).withCustomId("platinum_end").atHeight(0, 80).withWeight(2).withSize(6).withDimensions(new ResourceLocation("the_end")).buildMaterial());
