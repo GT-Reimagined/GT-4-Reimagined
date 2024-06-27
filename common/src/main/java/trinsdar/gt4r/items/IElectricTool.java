@@ -17,7 +17,6 @@ import muramasa.antimatter.tool.AntimatterToolType;
 import muramasa.antimatter.tool.IAbstractToolMethods;
 import muramasa.antimatter.tool.IAntimatterTool;
 import muramasa.antimatter.tool.IBasicAntimatterTool;
-import muramasa.antimatter.tool.ToolUtils;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Camera;
