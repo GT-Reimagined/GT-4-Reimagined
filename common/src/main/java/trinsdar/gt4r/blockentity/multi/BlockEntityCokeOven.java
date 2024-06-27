@@ -57,4 +57,9 @@ public class BlockEntityCokeOven extends BlockEntityBasicMultiMachine<BlockEntit
             }
         }
     }
+
+    @Override
+    public boolean allowsFakeTiles() {
+        return true;
+    }
 }
