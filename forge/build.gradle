@@ -8,18 +8,7 @@ architectury {
 loom{
     accessWidenerPath = project(":antimatter-common").file("src/main/resources/antimatter.accesswidener")
     forge {
-        mixinConfigs = [
-                "gt4r.mixins.json", "gt4r.mixins.forge.json"
-        ]
-        dataGen {
-            mod project.modid
-        }
-
-        launches {
-            data {
-                arg "--existing", file("src/main/resources").absolutePath
-            }
-        }
+        mixinConfigs("gt4r.mixins.json")
     }
 }
 

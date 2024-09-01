@@ -1,9 +1,0 @@
-{
-  "required": true,
-  "package": "trinsdar.gt4r.forge.mixin",
-  "compatibilityLevel": "JAVA_8",
-  "mixins": [
-    "GTCapabilityProviderAccessor"
-  ],
-  "minVersion": "0.8"
-}
