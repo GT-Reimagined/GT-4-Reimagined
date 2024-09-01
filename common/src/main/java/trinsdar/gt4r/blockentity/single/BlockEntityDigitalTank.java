@@ -16,10 +16,9 @@ import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.data.SlotTypes;
-
-import javax.annotation.Nullable;
 
 public class BlockEntityDigitalTank extends BlockEntityTank<BlockEntityDigitalTank> {
     public BlockEntityDigitalTank(Machine<?> type, BlockPos pos, BlockState state) {

@@ -14,10 +14,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 import trinsdar.gt4r.GT4RRef;
 import trinsdar.gt4r.data.MenuHandlers;
-
-import javax.annotation.Nullable;
 
 public class ItemCraftingModule extends ItemCover implements MenuProvider {
     public ItemCraftingModule() {

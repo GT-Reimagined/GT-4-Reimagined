@@ -11,16 +11,15 @@ import muramasa.antimatter.mixin.client.AbstractContainerScreenAccessor;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.network.chat.TextComponent;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import trinsdar.gt4r.blockentity.single.BlockEntityCoalBoiler;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 public class CoalBoilerWidget extends Widget {
     private int heat = 0, maxHeat = 0;
     long water = 0, steam = 0;
 
-    protected CoalBoilerWidget(@Nonnull GuiInstance gui, @Nullable IGuiElement parent) {
+    protected CoalBoilerWidget(@NotNull GuiInstance gui, @Nullable IGuiElement parent) {
         super(gui, parent);
     }
 

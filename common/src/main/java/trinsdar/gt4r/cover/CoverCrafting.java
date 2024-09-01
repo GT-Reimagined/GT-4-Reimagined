@@ -12,9 +12,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import org.jetbrains.annotations.Nullable;
 import trinsdar.gt4r.GT4RRef;
-
-import javax.annotation.Nullable;
 
 public class CoverCrafting extends BaseCover {
 

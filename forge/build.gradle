@@ -33,19 +33,21 @@ dependencies {
     common(project(path: ":antimatter-common", configuration: "namedElements")){
         transitive = false;
     }
+    modImplementation("earth.terrarium:botarium-forge-1.18.2:${project.botarium_version}")
+    modImplementation("io.github.reforgedmods.terraform-api:terraform-utils-v1:3.1.5")
+    modImplementation("com.teamresourceful.resourcefullib:resourcefullib-forge-1.18.2:${project.resourcefullib_version}")
     //JEI
     //modRuntimeOnly("mezz.jei:jei-${rootProject.minecraft_version}-forge:${rootProject.jei_version}")
     //modImplementation "me.shedaniel:RoughlyEnoughItems-forge:${rootProject.rei_version}"
     modRuntimeOnly("mezz.jei:jei-1.18.2:9.7.2.1001")
-    modImplementation("com.github.Reforged-Mods:ARRP-forge:0.6.7-1.18.2")
-    modImplementation("earth.terrarium:botarium-forge-1.18.2:${project.botarium_version}")
-    modImplementation("com.github.Reforged-Mods.Terraform-Reforged:terraform-utils-v1:${project.terraform_version}")
-    modImplementation("io.github.llamalad7:mixinextras-forge:0.2.0-beta.11")
+    modImplementation("io.github.trinsdar:arrp-forge:0.6.7")
+    modImplementation("io.github.llamalad7:mixinextras-forge:0.3.5")
+    minecraftRuntimeLibraries(group: 'com.github.Speiger', name: 'Primitive-Collections', version: '[0.8,0.9)')
     implementation("io.github.gregtechintergalactical:gtcore-forge:${rootProject.gt_core_version}-${rootProject.minecraft_version}:dev"){
         transitive = false
     }
     include("io.github.gregtechintergalactical:gtcore-forge:${rootProject.gt_core_version}-${rootProject.minecraft_version}")
-    modRuntimeOnly(include("com.github.Reforged-Mods.Terraform-Reforged:terraform-wood-api-v1:3.1.5"))
+    modRuntimeOnly(include("io.github.reforgedmods.terraform-api:terraform-wood-api-v1:3.1.5"))
     modRuntimeOnly("com.gtnewhorizon.structurelib:structurelib-forge:${project.structurelib_version}-${project.minecraft_version}")
     modRuntimeOnly "com.teamresourceful.resourcefullib:resourcefullib-forge-1.18.2:${project.resourcefullib_version}"
     modRuntimeOnly("dev.latvian.mods:kubejs-forge:${rootProject.kubejs_version}")

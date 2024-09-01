@@ -7,8 +7,7 @@ import muramasa.antimatter.capability.machine.MachineFluidHandler;
 import muramasa.antimatter.machine.types.Machine;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class BlockEntityQuantumTank extends BlockEntityTank<BlockEntityQuantumTank> {
 

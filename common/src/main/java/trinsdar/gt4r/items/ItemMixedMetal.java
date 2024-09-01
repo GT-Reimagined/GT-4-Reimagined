@@ -13,10 +13,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import org.jetbrains.annotations.Nullable;
 import trinsdar.gt4r.GT4RRef;
 import trinsdar.gt4r.data.Materials;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 import static muramasa.antimatter.material.Material.NULL;

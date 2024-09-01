@@ -26,11 +26,10 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import org.jetbrains.annotations.Nullable;
 import tesseract.FluidPlatformUtils;
 import tesseract.TesseractGraphWrappers;
 import trinsdar.gt4r.GT4RRef;
-
-import javax.annotation.Nullable;
 
 import java.util.Optional;
 

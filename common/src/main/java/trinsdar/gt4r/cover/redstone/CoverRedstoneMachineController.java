@@ -15,10 +15,9 @@ import muramasa.antimatter.blockentity.BlockEntityMachine;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
+import org.jetbrains.annotations.Nullable;
 import trinsdar.gt4r.GT4RRef;
 import trinsdar.gt4r.cover.RedstoneMode;
-
-import javax.annotation.Nullable;
 
 public class CoverRedstoneMachineController extends BaseCover {
 

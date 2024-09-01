@@ -21,11 +21,11 @@ import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
+import org.jetbrains.annotations.NotNull;
 import tesseract.FluidPlatformUtils;
 import tesseract.TesseractCapUtils;
 import tesseract.TesseractGraphWrappers;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -245,7 +245,7 @@ public class BlockEntityHeatExchanger extends BlockEntityMachine<BlockEntityHeat
                 return fluidHandler.insertFluid(resource, simulate);
             }
 
-            @Nonnull
+            @NotNull
             @Override
             public FluidHolder extractFluid(FluidHolder resource, boolean simulate) {
                 if (side == DOWN) return ((HeatExchangerFluidHandler)fluidHandler).tanks.get(FluidDirection.OUTPUT).getTank(1).extractFluid(resource, simulate);

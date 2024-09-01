@@ -7,6 +7,7 @@ import muramasa.antimatter.gui.slot.AbstractSlot;
 import muramasa.antimatter.blockentity.BlockEntityMachine;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import tesseract.api.item.ExtendedItemContainer;
 import trinsdar.gt4r.data.GT4RData;
 import trinsdar.gt4r.data.Machines;
@@ -14,15 +15,13 @@ import trinsdar.gt4r.data.RecipeMaps;
 import trinsdar.gt4r.blockentity.multi.BlockEntityIndustrialBlastFurnace;
 import trinsdar.gt4r.blockentity.single.BlockEntitySmelter;
 
-import javax.annotation.Nonnull;
-
 public class SlotCoil extends AbstractSlot<SlotCoil> {
     public SlotCoil(SlotType<SlotCoil> type, IGuiHandler tile, ExtendedItemContainer stackHandler, int index, int xPosition, int yPosition) {
         super(type, tile, stackHandler, index, xPosition, yPosition);
     }
 
     @Override
-    public boolean mayPlace(@Nonnull ItemStack stack) {
+    public boolean mayPlace(@NotNull ItemStack stack) {
         if (holder instanceof BlockEntitySmelter){
             return RecipeMaps.SMELTER_COILS.acceptsItem(stack);
         }
@@ -44,7 +43,7 @@ public class SlotCoil extends AbstractSlot<SlotCoil> {
     }
 
     @Override
-    public int getMaxStackSize(@Nonnull ItemStack stack) {
+    public int getMaxStackSize(@NotNull ItemStack stack) {
         if (holder instanceof BlockEntitySmelter){
             return 6;
         }

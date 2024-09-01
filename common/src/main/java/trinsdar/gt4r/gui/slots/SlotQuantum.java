@@ -10,9 +10,8 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import tesseract.api.item.ExtendedItemContainer;
-
-import javax.annotation.Nonnull;
 
 public class SlotQuantum extends AbstractSlot<SlotQuantum> implements IClickableSlot {
     public SlotQuantum(SlotType<SlotQuantum> type, IGuiHandler tile, ExtendedItemContainer stackHandler, int index, int x, int y) {
@@ -229,7 +228,7 @@ public class SlotQuantum extends AbstractSlot<SlotQuantum> implements IClickable
     }
 
     @Override
-    public int getMaxStackSize(@Nonnull ItemStack stack) {
+    public int getMaxStackSize(@NotNull ItemStack stack) {
         if (stack.getMaxStackSize() == 1) return 1;
         return Integer.MAX_VALUE;
     }

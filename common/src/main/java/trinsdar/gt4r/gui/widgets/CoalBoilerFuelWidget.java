@@ -13,14 +13,13 @@ import muramasa.antimatter.blockentity.BlockEntityMachine;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.network.chat.TextComponent;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import trinsdar.gt4r.blockentity.single.BlockEntityCoalBoiler;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 public class CoalBoilerFuelWidget extends Widget {
     private int fuel = 0, maxFuel = 0;
-    protected CoalBoilerFuelWidget(@Nonnull GuiInstance gui, @Nullable IGuiElement parent) {
+    protected CoalBoilerFuelWidget(@NotNull GuiInstance gui, @Nullable IGuiElement parent) {
         super(gui, parent);
     }
 

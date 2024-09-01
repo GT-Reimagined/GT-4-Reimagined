@@ -13,8 +13,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 
 import static trinsdar.gt4r.data.Materials.Steam;
@@ -79,7 +79,7 @@ public class BlockEntityInfiniteFluid extends BlockEntityMachine<BlockEntityInfi
             return false;
         }
 
-        @Nonnull
+        @NotNull
         @Override
         public FluidHolder extractFluid(FluidHolder stack, boolean action) {
             return stack.copyHolder();

@@ -17,11 +17,11 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 import tesseract.TesseractCapUtils;
 import tesseract.api.gt.IEnergyHandler;
 import tesseract.api.gt.IEnergyHandlerItem;
 
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Map;
 

@@ -6,9 +6,8 @@ import muramasa.antimatter.cover.CoverInput;
 import muramasa.antimatter.machine.Tier;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.Nullable;
 import trinsdar.gt4r.GT4RRef;
-
-import javax.annotation.Nullable;
 
 public class CoverFusionInput extends CoverInput {
     public CoverFusionInput(ICoverHandler<?> source, @Nullable Tier tier, Direction side, CoverFactory factory) {

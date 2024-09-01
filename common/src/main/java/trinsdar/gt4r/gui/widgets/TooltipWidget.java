@@ -6,13 +6,12 @@ import muramasa.antimatter.gui.IGuiElement;
 import muramasa.antimatter.gui.Widget;
 import muramasa.antimatter.gui.widget.WidgetSupplier;
 import net.minecraft.network.chat.TranslatableComponent;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class TooltipWidget extends Widget {
     final String tooltipKey;
-    protected TooltipWidget(@Nonnull GuiInstance gui, @Nullable IGuiElement parent, String tooltipKey) {
+    protected TooltipWidget(@NotNull GuiInstance gui, @Nullable IGuiElement parent, String tooltipKey) {
         super(gui, parent);
         this.tooltipKey = tooltipKey;
     }

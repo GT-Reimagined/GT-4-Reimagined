@@ -5,8 +5,7 @@ import muramasa.antimatter.cover.CoverFactory;
 import muramasa.antimatter.machine.Tier;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class CoverItemtransportValve extends CoverBasicTransport{
     public static String ID = "item_transport_valve";

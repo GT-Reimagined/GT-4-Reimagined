@@ -6,9 +6,8 @@ import muramasa.antimatter.cover.CoverFactory;
 import muramasa.antimatter.machine.Tier;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.Nullable;
 import trinsdar.gt4r.GT4RRef;
-
-import javax.annotation.Nullable;
 
 public class CoverDynamoOld extends CoverDynamo {
 

@@ -7,9 +7,8 @@ import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.blockentity.BlockEntityMachine;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.Nullable;
 import trinsdar.gt4r.blockentity.single.BlockEntitySteamMachine;
-
-import javax.annotation.Nullable;
 
 public class CoverSteamVent extends BaseCover {
 

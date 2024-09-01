@@ -18,6 +18,7 @@ import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
+import org.jetbrains.annotations.NotNull;
 import tesseract.TesseractCapUtils;
 import tesseract.api.gt.IEnergyHandlerItem;
 import tesseract.api.gt.IGTNode;
@@ -25,10 +26,7 @@ import trinsdar.gt4r.GT4RRef;
 import trinsdar.gt4r.items.IElectricTool;
 import trinsdar.gt4r.items.MaterialRockCutter;
 
-import javax.annotation.Nonnull;
-import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
 
 import static muramasa.antimatter.material.Material.NULL;
 import static net.minecraft.world.level.material.Material.*;
@@ -46,7 +44,7 @@ public class ToolTypes {
         }
 
         @Override
-        public Map<String, Object> getFromResult(@Nonnull ItemStack stack) {
+        public Map<String, Object> getFromResult(@NotNull ItemStack stack) {
             CompoundTag nbt = stack.getTag().getCompound(muramasa.antimatter.Ref.TAG_TOOL_DATA);
             Material primary = AntimatterAPI.get(Material.class, nbt.getString(muramasa.antimatter.Ref.KEY_TOOL_DATA_PRIMARY_MATERIAL));
             Material secondary = AntimatterAPI.get(Material.class, nbt.getString(muramasa.antimatter.Ref.KEY_TOOL_DATA_SECONDARY_MATERIAL));
@@ -64,7 +62,7 @@ public class ToolTypes {
         }
 
         @Override
-        public Map<String, Object> getFromResult(@Nonnull ItemStack stack) {
+        public Map<String, Object> getFromResult(@NotNull ItemStack stack) {
             return ImmutableMap.of("energy", getEnergy(stack).getA(), "maxEnergy", getEnergy(stack).getB());
         }
     });
@@ -80,7 +78,7 @@ public class ToolTypes {
         }
 
         @Override
-        public Map<String, Object> getFromResult(@Nonnull ItemStack stack) {
+        public Map<String, Object> getFromResult(@NotNull ItemStack stack) {
             CompoundTag nbt = stack.getTag().getCompound(muramasa.antimatter.Ref.TAG_TOOL_DATA);
             Material primary = AntimatterAPI.get(Material.class, nbt.getString(muramasa.antimatter.Ref.KEY_TOOL_DATA_PRIMARY_MATERIAL));
             Material secondary = AntimatterAPI.get(Material.class, nbt.getString(muramasa.antimatter.Ref.KEY_TOOL_DATA_SECONDARY_MATERIAL));

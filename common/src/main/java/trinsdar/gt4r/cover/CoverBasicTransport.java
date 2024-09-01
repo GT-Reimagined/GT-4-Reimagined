@@ -11,9 +11,8 @@ import muramasa.antimatter.machine.Tier;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
+import org.jetbrains.annotations.Nullable;
 import trinsdar.gt4r.GT4RRef;
-
-import javax.annotation.Nullable;
 
 import static trinsdar.gt4r.cover.ImportExportMode.EXPORT;
 import static trinsdar.gt4r.cover.ImportExportMode.IMPORT;
