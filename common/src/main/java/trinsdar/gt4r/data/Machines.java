@@ -52,7 +52,7 @@ public class Machines {
     public static UpgradeableMachine EXTRACTOR = new UpgradeableMachine(GT4RRef.ID, "extractor").setMap(EXTRACTING).setTiers(LV).addFlags(GUI, ITEM);
     public static UpgradeableMachine EXTRUDER = new UpgradeableMachine(GT4RRef.ID, "extruder").setTiers(MV).setMap(EXTRUDING).addFlags(GUI, ITEM).custom();
     public static UpgradeableMachine LATHE = new UpgradeableMachine(GT4RRef.ID, "lathe").setMap(LATHING).setTiers(LV).addFlags(GUI, ITEM);
-    public static UpgradeableMachine MACERATOR = new UpgradeableMachine(GT4RRef.ID, "macerator").setMap(MACERATING).addFlags(GUI, ITEM).setTiers(LV, MV).custom().overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).setTierSpecificLang();
+    public static UpgradeableMachine MACERATOR = new UpgradeableMachine(GT4RRef.ID, "macerator").setTiers(LV, MV).setMap(UNIVERSAL_MACERATING).addFlags(GUI, ITEM).setTile(BlockEntityMacerator::new).custom().overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER).setTierSpecificLang();
     public static UpgradeableMachine RECYCLER = new UpgradeableMachine(GT4RRef.ID, "recycler").setMap(RECYCLING).setTiers(LV).addFlags(GUI, ITEM);
     public static UpgradeableMachine SCANNER = new UpgradeableMachine(GT4RRef.ID, "scanner").setTiers(HV).setMap(SCANNING).addFlags(GUI, ITEM, FLUID);
     public static UpgradeableMachine WIRE_MILL = new UpgradeableMachine(GT4RRef.ID, "wire_mill").setMap(WIRE_MILLING).setTiers(LV).addFlags(GUI, ITEM).custom();

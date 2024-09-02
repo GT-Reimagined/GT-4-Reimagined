@@ -2,6 +2,7 @@ package trinsdar.gt4r.data;
 
 import io.github.gregtechintergalactical.gtcore.data.RecipeBuilders.SteamBuilder;
 import muramasa.antimatter.AntimatterAPI;
+import muramasa.antimatter.recipe.IRecipe;
 import muramasa.antimatter.recipe.RecipeProxies;
 import muramasa.antimatter.recipe.map.RecipeBuilder;
 import muramasa.antimatter.recipe.map.RecipeMap;
@@ -50,8 +51,8 @@ public class RecipeMaps {
     public static RecipeMap<?> EXTRACTING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "extractor", new SteamBuilder(STEAM_EXTRACTOR)));
     public static RecipeMap<?> EXTRUDING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "extruder", new RecipeBuilder()));
     public static RecipeMap<?> LATHING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "lathe", new RecipeBuilder()));
-    //public static RecipeMap UNIVERSAL_MACERATING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>("universal_macerating", new UniversalMaceratingBuilder(), Tier.MV));
-    public static RecipeMap<?> MACERATING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "macerator", new SteamBuilder(STEAM_MACERATOR)).setGuiTier(MV));
+    public static RecipeMap<?> UNIVERSAL_MACERATING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "universal_macerator", new UniversalMaceratorBuilder()).setGuiTier(MV));
+    public static RecipeMap<?> MACERATING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "macerator", new SteamBuilder(STEAM_MACERATOR)));
     public static RecipeMap<?> RECYCLING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "recycler", new RecipeBuilder()));
     public static RecipeMap<?> SCANNING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "scanner", new RecipeBuilder()));
     public static RecipeMap<?> WIRE_MILLING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "wire_mill", new RecipeBuilder()));
@@ -111,5 +112,21 @@ public class RecipeMaps {
         FUSION.setGuiData(MULTI_DISPLAY, FUSION_REACTOR);
         ORE_BYPRODUCTS.setIcon(() -> Items.IRON_ORE);
         INT_CIRCUITS.setIcon(() -> TierMaps.INT_CIRCUITS_ITEMS.get(0));
+    }
+
+    public static class UniversalMaceratorBuilder extends RecipeBuilder{
+        @Override
+        public IRecipe add(String domain, String id) {
+            IRecipe recipe = super.add(domain, id);
+            var  recipeBuilder = MACERATING.RB().hide().ii(recipe.getInputItems());
+            if (recipe.hasOutputItems() && recipe.getOutputItems().length > 0) {
+                recipeBuilder.io(recipe.getOutputItems(false)[0]);
+            }
+            if (recipe.hasOutputChances() && recipe.getOutputChances().length > 0) {
+                recipeBuilder.outputChances(recipe.getOutputChances()[0]);
+            }
+            recipeBuilder.inputChances(recipe.getInputChances()).add(domain, id, recipe.getDuration(), recipe.getPower(), recipe.getSpecialValue(), recipe.getAmps());
+            return recipe;
+        }
     }
 }
