@@ -1,7 +1,6 @@
 package trinsdar.gt4r.loader.machines;
 
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
-import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialStack;
@@ -13,13 +12,12 @@ import net.minecraft.world.item.Items;
 import trinsdar.gt4r.data.GT4RMaterialTags;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
 import static muramasa.antimatter.data.AntimatterMaterials.*;
 import static trinsdar.gt4r.data.GT4RMaterialTags.ELEC;
 import static trinsdar.gt4r.data.Materials.*;
-import static trinsdar.gt4r.data.RecipeMaps.ELECTROLYZING;
+import static trinsdar.gt4r.data.RecipeMaps.ELECTROLYZER;
 
 public class ElectrolyzerLoader {
     static boolean breakMethod = true;
@@ -37,11 +35,11 @@ public class ElectrolyzerLoader {
             add(m, power, (int) m.getMass() * count);
         });
 
-        ELECTROLYZING.RB().fi(Water.getLiquid(3000)).fo(Hydrogen.getGas(2000), Oxygen.getGas(1000)).add("water",2000, 30);
-        ELECTROLYZING.RB().ii(RecipeIngredient.of(new ItemStack(Items.BONE_MEAL, 3))).io(DUST.get(Calcium, 1)).add("bone_meal",24, 106);
-        ELECTROLYZING.RB().ii(RecipeIngredient.of(new ItemStack(Blocks.SAND, 8))).io(DUST.get(SiliconDioxide, 1)).add("sand",500, 25);
-        ELECTROLYZING.RB().ii(RecipeIngredient.of(new ItemStack(Blocks.RED_SAND, 8))).io(DUST.get(SiliconDioxide, 1), DUST_TINY.get(Iron, 1)).add("red_sand",500, 25);
-        ELECTROLYZING.RB().ii(RecipeIngredient.of(DUST.get(Diamond, 1))).io(DUST.get(Carbon, 64), DUST.get(Carbon, 64)).add("diamond_dust",1536,60);
+        ELECTROLYZER.RB().fi(Water.getLiquid(3000)).fo(Hydrogen.getGas(2000), Oxygen.getGas(1000)).add("water",2000, 30);
+        ELECTROLYZER.RB().ii(RecipeIngredient.of(new ItemStack(Items.BONE_MEAL, 3))).io(DUST.get(Calcium, 1)).add("bone_meal",24, 106);
+        ELECTROLYZER.RB().ii(RecipeIngredient.of(new ItemStack(Blocks.SAND, 8))).io(DUST.get(SiliconDioxide, 1)).add("sand",500, 25);
+        ELECTROLYZER.RB().ii(RecipeIngredient.of(new ItemStack(Blocks.RED_SAND, 8))).io(DUST.get(SiliconDioxide, 1), DUST_TINY.get(Iron, 1)).add("red_sand",500, 25);
+        ELECTROLYZER.RB().ii(RecipeIngredient.of(DUST.get(Diamond, 1))).io(DUST.get(Carbon, 64), DUST.get(Carbon, 64)).add("diamond_dust",1536,60);
         add(Steel,50, 60, 2600);
         add(DarkAsh, 1, 30, 24);
         add(AntimatterMaterials.Coal, 1, 30, 24);
@@ -71,7 +69,7 @@ public class ElectrolyzerLoader {
             return t.m.has(LIQUID) ? t.m.getLiquid(t.s * 1000) : t.m.getGas(t.s * 1000);
         }).toList();
         List<ItemStack> itemStacks = dust.getProcessInto().stream().filter(t -> t.m.has(DUST)).map(t -> new ItemStack(DUST.get(t.m), t.s)).toList();
-        RecipeBuilder rb = ELECTROLYZING.RB();
+        RecipeBuilder rb = ELECTROLYZER.RB();
         String suffix = dust.has(LIQUID) ? "_liquid" : dust.has(GAS) ? "_gas" :"_dust";
         if ((dust.has(LIQUID) || dust.has(GAS)) && !dust.has(DUST)){
             rb.fi(getFluid(dust,count * 1000));

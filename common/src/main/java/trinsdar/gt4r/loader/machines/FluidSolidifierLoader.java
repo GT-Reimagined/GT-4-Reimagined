@@ -1,19 +1,17 @@
 package trinsdar.gt4r.loader.machines;
 
 import io.github.gregtechintergalactical.gtcore.data.GTCoreItems;
-import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import muramasa.antimatter.util.AntimatterPlatformUtils;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import trinsdar.gt4r.data.GT4RData;
 
 import static muramasa.antimatter.Ref.L;
 import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
 import static muramasa.antimatter.data.AntimatterMaterials.Lava;
 import static trinsdar.gt4r.data.Materials.Obsidian;
-import static trinsdar.gt4r.data.RecipeMaps.FLUID_SOLIDIFYING;
+import static trinsdar.gt4r.data.RecipeMaps.FLUID_SOLIDIFIER;
 
 public class FluidSolidifierLoader {
 
@@ -33,7 +31,7 @@ public class FluidSolidifierLoader {
         BLOCK.all().forEach(r -> {
             add(r, BLOCK.get().get(r).asStack(), "block", GTCoreItems.MoldBlock, 9.0f, 16);
         });
-        FLUID_SOLIDIFYING.RB().ii(RecipeIngredient.of(GTCoreItems.MoldPlate, 1).setNoConsume()).fi(Lava.getLiquid(AntimatterPlatformUtils.isFabric() ? L : 111)).io(PLATE.get(Obsidian)).add("obsidian_plate", 16, 8);
+        FLUID_SOLIDIFIER.RB().ii(RecipeIngredient.of(GTCoreItems.MoldPlate, 1).setNoConsume()).fi(Lava.getLiquid(AntimatterPlatformUtils.isFabric() ? L : 111)).io(PLATE.get(Obsidian)).add("obsidian_plate", 16, 8);
     }
 
     private static void add(Material m, ItemStack output, String suffix, Item mold, float ratio, int power) {
@@ -43,7 +41,7 @@ public class FluidSolidifierLoader {
 
     private static void add(Material m, ItemStack output, String suffix, Item mold, long amount, int power) {
         if (!m.has(LIQUID)) return;
-        FLUID_SOLIDIFYING.RB()
+        FLUID_SOLIDIFIER.RB()
                 .ii(RecipeIngredient.of(mold,1))
                 .fi(m.getLiquid(amount))
                 .io(output)

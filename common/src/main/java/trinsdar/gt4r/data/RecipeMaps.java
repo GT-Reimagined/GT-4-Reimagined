@@ -38,41 +38,41 @@ public class RecipeMaps {
 
     public static RecipeMap<?> SOLID_FUEL_BOILERS = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "solid_fuel_boilers", new RecipeBuilder()));
 
-    public static RecipeMap<?> ALLOY_SMELTING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "alloy_smelter", new SteamBuilder(STEAM_ALLOY_SMELTER)));
-    public static RecipeMap<?> ASSEMBLING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "assembler", new RecipeBuilder()));
-    public static RecipeMap<?> AUTOCLAVING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "autoclave", new RecipeBuilder()));
-    public static RecipeMap<?> BATHING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "bath", new RecipeBuilder()));
-    public static RecipeMap<?> BENDING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "plate_bender", new RecipeBuilder()));
-    public static RecipeMap<?> CANNING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "canner", new RecipeBuilder()));
-    public static RecipeMap<?> CENTRIFUGING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "centrifuge", new RecipeBuilder()));
-    public static RecipeMap<?> COMPRESSING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "compressor", new SteamBuilder(STEAM_COMPRESSOR)));
-    public static RecipeMap<?> CUTTING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "plate_cutter", new RecipeBuilder()));
-    public static RecipeMap<?> SMELTING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "furnace", new RecipeBuilder()).setProxy(RecipeProxies.FURNACE_PROXY.apply(4, 60)));
-    public static RecipeMap<?> EXTRACTING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "extractor", new SteamBuilder(STEAM_EXTRACTOR)));
-    public static RecipeMap<?> EXTRUDING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "extruder", new RecipeBuilder()));
-    public static RecipeMap<?> LATHING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "lathe", new RecipeBuilder()));
-    public static RecipeMap<?> UNIVERSAL_MACERATING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "universal_macerator", new UniversalMaceratorBuilder()).setGuiTier(MV));
-    public static RecipeMap<?> MACERATING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "macerator", new SteamBuilder(STEAM_MACERATOR)));
-    public static RecipeMap<?> RECYCLING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "recycler", new RecipeBuilder()));
-    public static RecipeMap<?> SCANNING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "scanner", new RecipeBuilder()));
-    public static RecipeMap<?> WIRE_MILLING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "wire_mill", new RecipeBuilder()));
-    public static RecipeMap<?> ELECTROLYZING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "electrolyzer", new RecipeBuilder()));
-    public static RecipeMap<?> THERMAL_CENTRIFUGING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "thermal_centrifuge", new RecipeBuilder()));
-    public static RecipeMap<?> ORE_WASHING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "ore_washer", new RecipeBuilder()));
-    public static RecipeMap<?> CHEMICAL_REACTING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "chemical_reactor", new RecipeBuilder()));
-    public static RecipeMap<?> FLUID_CANNING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "fluid_canner", new RecipeBuilder()));
-    public static RecipeMap<?> DISASSEMBLING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "disassembler", new RecipeBuilder()));
-    public static RecipeMap<?> MASS_FABRICATING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "mass_fabricator", new RecipeBuilder()));
-    public static RecipeMap<?> REPLICATING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "replicator", new RecipeBuilder()));
-    public static RecipeMap<?> FLUID_PRESS = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "fluid_press", new RecipeBuilder()));
-    public static RecipeMap<?> FLUID_SOLIDIFYING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "fluid_solidifier", new RecipeBuilder()));
-    public static RecipeMap<?> HAMMERING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "forge_hammer", new SteamBuilder(STEAM_FORGE_HAMMER)));
-    public static RecipeMap<?> SIFTING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "sifter", new SteamBuilder(STEAM_SIFTER)));
-    public static RecipeMap<?> SMELTER = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "smelter", new RecipeBuilder()));
-    public static RecipeMap<?> BASIC_DISTILLING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "distillery", new RecipeBuilder()));
+    public static RecipeMap<?> ALLOY_SMELTER = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "alloy_smelter", new SteamBuilder(STEAM_ALLOY_SMELTER)));
+    public static RecipeMap<?> ASSEMBLER = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "assembler", new RecipeBuilder()));
+    public static RecipeMap<?> AUTOCLAVE = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "autoclave", new RecipeBuilder()));
+    public static RecipeMap<?> BATH = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "bath", new RecipeBuilder()));
+    public static RecipeMap<?> CANNER = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "canner", new RecipeBuilder()));
+    public static RecipeMap<?> CENTRIFUGE = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "centrifuge", new RecipeBuilder()));
+    public static RecipeMap<?> CHEMICAL_REACTOR = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "chemical_reactor", new RecipeBuilder()));
+    public static RecipeMap<?> COMPRESSOR = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "compressor", new SteamBuilder(STEAM_COMPRESSOR)));
+    public static RecipeMap<?> DISASSEMBLER = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "disassembler", new RecipeBuilder()));
+    public static RecipeMap<?> DISTILLERY = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "distillery", new RecipeBuilder()));
     public static RecipeMap<?> DUSTBIN = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "dustbin", new RecipeBuilder()));
-    public static RecipeMap<?> FERMENTING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "fermenter", new RecipeBuilder()));
+    public static RecipeMap<?> ELECTROLYZER = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "electrolyzer", new RecipeBuilder()));
+    public static RecipeMap<?> EXTRACTOR = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "extractor", new SteamBuilder(STEAM_EXTRACTOR)));
+    public static RecipeMap<?> EXTRUDER = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "extruder", new RecipeBuilder()));
+    public static RecipeMap<?> FERMENTER = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "fermenter", new RecipeBuilder()));
+    public static RecipeMap<?> FLUID_CANNER = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "fluid_canner", new RecipeBuilder()));
+    public static RecipeMap<?> FLUID_PRESS = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "fluid_press", new RecipeBuilder()));
+    public static RecipeMap<?> FLUID_SOLIDIFIER = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "fluid_solidifier", new RecipeBuilder()));
+    public static RecipeMap<?> FORGE_HAMMER = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "forge_hammer", new SteamBuilder(STEAM_FORGE_HAMMER)));
+    public static RecipeMap<?> FURNACE = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "furnace", new RecipeBuilder()).setProxy(RecipeProxies.FURNACE_PROXY.apply(4, 60)));
+    public static RecipeMap<?> LATHE = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "lathe", new RecipeBuilder()));
+    public static RecipeMap<?> MACERATOR = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "macerator", new SteamBuilder(STEAM_MACERATOR)));
+    public static RecipeMap<?> MASS_FABRICATOR = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "mass_fabricator", new RecipeBuilder()));
+    public static RecipeMap<?> ORE_WASHER = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "ore_washer", new RecipeBuilder()));
+    public static RecipeMap<?> PLATE_BENDER = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "plate_bender", new RecipeBuilder()));
+    public static RecipeMap<?> PLATE_CUTTER = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "plate_cutter", new RecipeBuilder()));
+    public static RecipeMap<?> RECYCLER = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "recycler", new RecipeBuilder()));
+    public static RecipeMap<?> REPLICATOR = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "replicator", new RecipeBuilder()));
+    public static RecipeMap<?> SCANNER = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "scanner", new RecipeBuilder()));
+    public static RecipeMap<?> SIFTER = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "sifter", new SteamBuilder(STEAM_SIFTER)));
+    public static RecipeMap<?> SMELTER = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "smelter", new RecipeBuilder()));
     public static RecipeMap<?> SMELTER_COILS = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "smelter_coils", new RecipeBuilder())).setIcon(() -> GT4RData.CupronickelHeatingCoil);
+    public static RecipeMap<?> THERMAL_CENTRIFUGE = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "thermal_centrifuge", new RecipeBuilder()));
+    public static RecipeMap<?> UNIVERSAL_MACERATOR = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "universal_macerator", new UniversalMaceratorBuilder()).setGuiTier(MV));
+    public static RecipeMap<?> WIRE_MILL = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "wire_mill", new RecipeBuilder()));
 
     public static RecipeMap<?> COKING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "coke_oven", new RecipeBuilder()));
     public static RecipeMap<?> PYROLYSING = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "pyrolysis_oven", new RecipeBuilder()));
@@ -118,7 +118,7 @@ public class RecipeMaps {
         @Override
         public IRecipe add(String domain, String id) {
             IRecipe recipe = super.add(domain, id);
-            var  recipeBuilder = MACERATING.RB().hide().ii(recipe.getInputItems());
+            var  recipeBuilder = MACERATOR.RB().hide().ii(recipe.getInputItems());
             if (recipe.hasOutputItems() && recipe.getOutputItems().length > 0) {
                 recipeBuilder.io(recipe.getOutputItems(false)[0]);
             }

@@ -3,11 +3,9 @@ package trinsdar.gt4r.loader.multi;
 import io.github.gregtechintergalactical.gtcore.data.GTCoreBlocks;
 import io.github.gregtechintergalactical.gtcore.data.GTCoreItems;
 import io.github.gregtechintergalactical.gtcore.data.GTCoreTags;
-import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import muramasa.antimatter.util.AntimatterPlatformUtils;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -42,7 +40,7 @@ public class IndustrialSawmill {
         INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(log, 1)).fi(Water.getLiquid(40)).io(new ItemStack(wood, 6), DUST.get(Wood, 1)).add(woodID + "_log",200, 30);
         INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(log, 1)).fi(Lubricant.getLiquid(10)).io(new ItemStack(wood, 6), DUST.get(Wood, 1)).add(woodID + "_log_1",100, 30);
         INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(log, 1)).fi(DistilledWater.getLiquid(30)).io(new ItemStack(wood, 6), DUST.get(Wood, 1)).add(woodID + "_log_2",200, 30);
-        CUTTING.RB().ii(RecipeIngredient.of(log, 1)).fi(Water.getLiquid(3)).io(new ItemStack(wood, 4), DUST.get(Wood, 1)).add(woodID + "_log",200, 30);
+        PLATE_CUTTER.RB().ii(RecipeIngredient.of(log, 1)).fi(Water.getLiquid(3)).io(new ItemStack(wood, 4), DUST.get(Wood, 1)).add(woodID + "_log",200, 30);
         STEAM_CUTTER.RB().ii(RecipeIngredient.of(log, 1)).fi(Water.getLiquid(3)).io(new ItemStack(wood, 4), DUST.get(Wood, 1)).add(woodID + "_log", 800, 30);
     }
 
@@ -51,7 +49,7 @@ public class IndustrialSawmill {
         INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(log, 1)).fi(Water.getLiquid(40)).io(new ItemStack(wood, 6), DUST.get(Wood, 1), output).add(woodID + "_log",200, 30);
         INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(log, 1)).fi(Lubricant.getLiquid(10)).io(new ItemStack(wood, 6), DUST.get(Wood, 1), output).add(woodID + "_log_1",100, 30);
         INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(log, 1)).fi(DistilledWater.getLiquid(30)).io(new ItemStack(wood, 6), DUST.get(Wood, 1), output).add(woodID + "_log_2",200, 30);
-        CUTTING.RB().ii(RecipeIngredient.of(log, 1)).fi(Water.getLiquid(3)).io(new ItemStack(wood, 4), DUST.get(Wood, 1)).add(woodID + "_log",200, 30);
+        PLATE_CUTTER.RB().ii(RecipeIngredient.of(log, 1)).fi(Water.getLiquid(3)).io(new ItemStack(wood, 4), DUST.get(Wood, 1)).add(woodID + "_log",200, 30);
         STEAM_CUTTER.RB().ii(RecipeIngredient.of(log, 1)).fi(Water.getLiquid(3)).io(new ItemStack(wood, 4), DUST.get(Wood, 1)).add(woodID + "_log", 800, 30);
     }
 }
