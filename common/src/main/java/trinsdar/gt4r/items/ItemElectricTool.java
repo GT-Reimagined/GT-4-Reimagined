@@ -85,7 +85,7 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
     final Tier itemTier;
     final Object2ObjectMap<String, IBehaviour<IBasicAntimatterTool>> behaviours;
     public ItemElectricTool(String id, AntimatterToolType base, Material baseMaterial, float miningSpeed, float attackDamage, int quality, int energyTier, Predicate<IBehaviour<?>> behaviourFilter) {
-        super(GT4RRef.ID, id, AntimatterPlatformUtils.getToolProperties(Ref.TAB_ITEMS, false).durability(1));
+        super(GT4RRef.ID, id, AntimatterPlatformUtils.INSTANCE.getToolProperties(Ref.TAB_ITEMS, false).durability(1));
         type = base;
         this.baseMaterial = baseMaterial;
         this.energyTier = energyTier;

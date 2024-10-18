@@ -16,7 +16,7 @@ import static muramasa.antimatter.material.MaterialTags.RUBBERTOOLS;
 public class GT4RLateRegistrar extends AntimatterMod {
     public GT4RLateRegistrar(){
         super();
-        if (AntimatterPlatformUtils.isFabric()){
+        if (AntimatterPlatformUtils.INSTANCE.isFabric()){
             this.onRegistrarInit();
         }
     }

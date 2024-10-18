@@ -65,7 +65,7 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.tag(TagUtils.getForgelikeItemTag("stone_ores/redstone")).add(Items.REDSTONE_ORE);
         this.tag(TagUtils.getForgelikeItemTag("stone_ores/emerald")).add(Items.EMERALD_ORE);
         if (AntimatterAPI.isModLoaded(GT4RRef.MOD_BLUEPOWER)){
-            this.tag(TagUtils.getForgelikeItemTag("stone_ores/amethyst")).add(AntimatterPlatformUtils.getItemFromID(new ResourceLocation(GT4RRef.MOD_BLUEPOWER, "amethyst_ore")));
+            this.tag(TagUtils.getForgelikeItemTag("stone_ores/amethyst")).add(AntimatterPlatformUtils.INSTANCE.getItemFromID(new ResourceLocation(GT4RRef.MOD_BLUEPOWER, "amethyst_ore")));
         }
 
         this.tag(INGOTS_MIXED_METAL).add(MixedMetal);
@@ -77,7 +77,7 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         AntimatterTagBuilder<Item> add = this.tag(CORALS);
         String[] corals = {"tube", "brain", "bubble", "fire", "horn"};
         for (String coral : corals){
-            add.add(AntimatterPlatformUtils.getItemFromID(new ResourceLocation(coral + "_coral")), AntimatterPlatformUtils.getItemFromID(new ResourceLocation("dead_" + coral + "_coral")), AntimatterPlatformUtils.getItemFromID(new ResourceLocation(coral + "_coral_fan")), AntimatterPlatformUtils.getItemFromID(new ResourceLocation("dead_" + coral + "_coral_fan"))).replace(false);
+            add.add(AntimatterPlatformUtils.INSTANCE.getItemFromID(new ResourceLocation(coral + "_coral")), AntimatterPlatformUtils.INSTANCE.getItemFromID(new ResourceLocation("dead_" + coral + "_coral")), AntimatterPlatformUtils.INSTANCE.getItemFromID(new ResourceLocation(coral + "_coral_fan")), AntimatterPlatformUtils.INSTANCE.getItemFromID(new ResourceLocation("dead_" + coral + "_coral_fan"))).replace(false);
         }
         this.tag(VINES).add(Items.VINE, Items.TWISTING_VINES, Items.WEEPING_VINES);
         AntimatterAPI.all(BlockOre.class, o -> {

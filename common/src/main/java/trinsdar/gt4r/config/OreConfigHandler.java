@@ -22,7 +22,7 @@ public class OreConfigHandler {
         if (file != null) {
             return !file.exists();
         }
-        File configDirectory = new File(AntimatterPlatformUtils.getConfigDir().toFile(), "gt4r");
+        File configDirectory = new File(AntimatterPlatformUtils.INSTANCE.getConfigDir().toFile(), "gt4r");
         file = new File(configDirectory, "ores.json");
         if (file.exists()){
             return false;

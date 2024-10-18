@@ -37,9 +37,9 @@ public class ToolCraftingTableRecipes {
             for (int i = 1; i < val.length; i ++) {
                 int offset = val[i] == HUGE ? 1 : 0;
                 if (val[i] == LARGE){
-                    provider.shapeless(output,"three_to_one_" + AntimatterPlatformUtils.getIdFromItem(wires.get(LARGE)).getPath(),"wire",
+                    provider.shapeless(output,"three_to_one_" + AntimatterPlatformUtils.INSTANCE.getIdFromItem(wires.get(LARGE)).getPath(),"wire",
                             new ItemStack(wires.get(val[i]),1),wires.get(SMALL),wires.get(SMALL),wires.get(SMALL));
-                    provider.shapeless(output,"one_to_three_" + AntimatterPlatformUtils.getIdFromItem(wires.get(NORMAL)).getPath(),"wire",
+                    provider.shapeless(output,"one_to_three_" + AntimatterPlatformUtils.INSTANCE.getIdFromItem(wires.get(NORMAL)).getPath(),"wire",
                             new ItemStack(wires.get(SMALL),3),wires.get(val[i]));
                     continue;
                 }
@@ -73,17 +73,17 @@ public class ToolCraftingTableRecipes {
     }
 
     private static void twoToOne(Map<PipeSize, Item> wires, PipeSize from, PipeSize to, Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider) {
-        provider.shapeless(output,"two_to_one_" + AntimatterPlatformUtils.getIdFromItem(wires.get(to)).getPath(),"wire",
+        provider.shapeless(output,"two_to_one_" + AntimatterPlatformUtils.INSTANCE.getIdFromItem(wires.get(to)).getPath(),"wire",
                 new ItemStack(wires.get(to),1),wires.get(from),wires.get(from));
     }
 
     private static void oneToTwo(Map<PipeSize, Item> wires, PipeSize from, PipeSize to, Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider) {
-        provider.shapeless(output,"one_to_two_" + AntimatterPlatformUtils.getIdFromItem(wires.get(to)).getPath(),"wire",
+        provider.shapeless(output,"one_to_two_" + AntimatterPlatformUtils.INSTANCE.getIdFromItem(wires.get(to)).getPath(),"wire",
                 new ItemStack(wires.get(to),2),wires.get(from));
     }
 
     private static void fourToOne(Map<PipeSize, Item> wires, PipeSize from, PipeSize to, Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider) {
-        provider.shapeless(output,"four_to_one_" + AntimatterPlatformUtils.getIdFromItem(wires.get(to)).getPath(),"wire",
+        provider.shapeless(output,"four_to_one_" + AntimatterPlatformUtils.INSTANCE.getIdFromItem(wires.get(to)).getPath(),"wire",
                 new ItemStack(wires.get(to),1),wires.get(from),wires.get(from),wires.get(from),wires.get(from));
     }
 }

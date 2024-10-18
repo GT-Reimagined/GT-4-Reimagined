@@ -43,7 +43,7 @@ public class ClientHandler implements IProxyHandler {
     }
 
     private static void copyProgrammerArtIfMissing() {
-        File dir = new File(AntimatterPlatformUtils.getConfigDir().getParent().toFile(), "resourcepacks");
+        File dir = new File(AntimatterPlatformUtils.INSTANCE.getConfigDir().getParent().toFile(), "resourcepacks");
         File target = new File(dir, "GT4R-Programmer-Art.zip");
         File target2 = new File(dir, "GT4R-Classic-Tools.zip");
         File target3 = new File(dir, "GT4R-Machine-Alt.zip");

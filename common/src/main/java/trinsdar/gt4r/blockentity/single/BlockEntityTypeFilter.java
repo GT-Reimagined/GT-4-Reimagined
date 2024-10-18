@@ -26,7 +26,7 @@ public class BlockEntityTypeFilter extends BlockEntityItemFilter {
                 ItemStack tagStack = i.getHandler(SlotType.DISPLAY_SETTABLE).getStackInSlot(0);
                 if (tagStack.isEmpty()) return false;
                 List<TagKey<Item>> tags = tagStack.getItem().builtInRegistryHolder().tags().toList();
-                String forge = AntimatterPlatformUtils.isForge() ? "forge" : "c";
+                String forge = AntimatterPlatformUtils.INSTANCE.isForge() ? "forge" : "c";
                 String compare = tags.stream().filter(t -> t.location().toString().contains("/") && t.location().getNamespace().equals(forge)).findFirst().map(t -> t.location().toString()).orElse("");
                 if (compare.isEmpty()) return false;
                 compare = compare.substring(0, compare.lastIndexOf("/"));

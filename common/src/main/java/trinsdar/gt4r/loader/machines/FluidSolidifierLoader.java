@@ -31,7 +31,7 @@ public class FluidSolidifierLoader {
         BLOCK.all().forEach(r -> {
             add(r, BLOCK.get().get(r).asStack(), "block", GTCoreItems.MoldBlock, 9.0f, 16);
         });
-        FLUID_SOLIDIFIER.RB().ii(RecipeIngredient.of(GTCoreItems.MoldPlate, 1).setNoConsume()).fi(Lava.getLiquid(AntimatterPlatformUtils.isFabric() ? L : 111)).io(PLATE.get(Obsidian)).add("obsidian_plate", 16, 8);
+        FLUID_SOLIDIFIER.RB().ii(RecipeIngredient.of(GTCoreItems.MoldPlate, 1).setNoConsume()).fi(Lava.getLiquid(AntimatterPlatformUtils.INSTANCE.isFabric() ? L : 111)).io(PLATE.get(Obsidian)).add("obsidian_plate", 16, 8);
     }
 
     private static void add(Material m, ItemStack output, String suffix, Item mold, float ratio, int power) {
@@ -49,7 +49,7 @@ public class FluidSolidifierLoader {
     }
 
     private static long ratio(){
-        return AntimatterPlatformUtils.isForge() ? 144L : 9000L;
+        return AntimatterPlatformUtils.INSTANCE.isForge() ? 144L : 9000L;
     }
 
     private static long amount(float ingots){

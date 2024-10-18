@@ -33,7 +33,7 @@ public class BathingLoader {
     }
 
     private static long switchValues(long forge, long fabric){
-        return AntimatterPlatformUtils.isForge() ? forge : fabric;
+        return AntimatterPlatformUtils.INSTANCE.isForge() ? forge : fabric;
     }
 
     private static double[] i(double... doubles){

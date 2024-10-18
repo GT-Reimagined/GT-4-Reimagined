@@ -51,7 +51,7 @@ public class SmelterLoader {
     }
 
     private static void addLava(Material m, MaterialTypeItem<?> i, long materialAmount) {
-        long flUnit = AntimatterPlatformUtils.isFabric() ? L : 111;
+        long flUnit = AntimatterPlatformUtils.INSTANCE.isFabric() ? L : 111;
         long amount = //(long) (L * ratio);
                 (flUnit * materialAmount) / U;
         long duration = Math.max(1, (24 * materialAmount) / U);

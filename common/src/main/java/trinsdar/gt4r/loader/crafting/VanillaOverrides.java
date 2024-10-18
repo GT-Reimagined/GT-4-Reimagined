@@ -71,7 +71,7 @@ public class VanillaOverrides {
         String[] colors = {"white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray", "light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black"};
         for (String color : colors){
             TagKey<Item> tag = TagUtils.getForgelikeItemTag("dyes/" + color);
-            provider.shapeless(consumer, "concrete_" + color, "concretes", new ItemStack(AntimatterPlatformUtils.getItemFromID(new ResourceLocation(color + "_concrete_powder")), 8), tag, Items.SAND, Items.SAND, Items.SAND, Items.SAND, DUST.get(Stone), DUST.get(Stone), DUST.get(Stone), DUST.get(Stone));
+            provider.shapeless(consumer, "concrete_" + color, "concretes", new ItemStack(AntimatterPlatformUtils.INSTANCE.getItemFromID(new ResourceLocation(color + "_concrete_powder")), 8), tag, Items.SAND, Items.SAND, Items.SAND, Items.SAND, DUST.get(Stone), DUST.get(Stone), DUST.get(Stone), DUST.get(Stone));
         }
     }
 }

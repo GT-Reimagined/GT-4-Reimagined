@@ -218,7 +218,7 @@ public class BlockEntityPump extends BlockEntityMachine<BlockEntityPump> {
             BlockPos pos = new BlockPos(itemTags.getInt("X"), itemTags.getInt("Y"), itemTags.getInt("Z"));
             mPumpList.add(pos);
         }
-        this.fluid = AntimatterPlatformUtils.fromTag(tag.getCompound("Fluid")).getFluid();
+        this.fluid = AntimatterPlatformUtils.INSTANCE.fromTag(tag.getCompound("Fluid")).getFluid();
         this.pumpHeadY = tag.getInt("pumpHeadY");
     }
 

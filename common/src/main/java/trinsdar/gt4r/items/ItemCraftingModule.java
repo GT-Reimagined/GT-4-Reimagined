@@ -31,7 +31,7 @@ public class ItemCraftingModule extends ItemCover implements MenuProvider {
 
     public boolean openGui(Player player) {
         if (player.level.isClientSide) return false;
-        AntimatterPlatformUtils.openGui((ServerPlayer) player, this, packetBuffer -> {
+        AntimatterPlatformUtils.INSTANCE.openGui((ServerPlayer) player, this, packetBuffer -> {
             packetBuffer.writeBlockPos(player.blockPosition());
         });
         return true;

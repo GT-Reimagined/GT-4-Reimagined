@@ -142,7 +142,7 @@ public class CoverDrain extends BaseCover {
     public void addInfoFromStack(ItemStack stack) {
         super.addInfoFromStack(stack);
         if (stack.getTag() != null && stack.getTag().contains("containedFluid")){
-            contained = AntimatterPlatformUtils.fromTag(stack.getTag().getCompound("containedFluid"));
+            contained = AntimatterPlatformUtils.INSTANCE.fromTag(stack.getTag().getCompound("containedFluid"));
         }
     }
 
@@ -159,7 +159,7 @@ public class CoverDrain extends BaseCover {
     public void deserialize(CompoundTag nbt) {
         super.deserialize(nbt);
         if (nbt.contains("contained")){
-            contained = AntimatterPlatformUtils.fromTag(nbt.getCompound("contained"));
+            contained = AntimatterPlatformUtils.INSTANCE.fromTag(nbt.getCompound("contained"));
         }
     }
 }

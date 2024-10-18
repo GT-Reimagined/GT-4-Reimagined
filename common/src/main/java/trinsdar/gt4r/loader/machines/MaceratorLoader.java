@@ -54,14 +54,14 @@ public class MaceratorLoader {
         UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(Items.PRISMARINE, 1)).io(DUST.get(Prismarine, 1)).add("prismarine_dust",400, 2);
         UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(Items.DARK_PRISMARINE, 1)).io(DUST.get(DarkPrismarine, 1)).add("dark_prismarine_dust",400, 2);
         if (AntimatterAPI.isModLoaded(GT4RRef.MOD_CREATE)){
-            UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(AntimatterPlatformUtils.getBlockFromId(new ResourceLocation(GT4RRef.MOD_CREATE, "limestone")), 1)).io(DUST.get(Limestone, 1)).add("limestone_dust",400, 2);
-            UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(AntimatterPlatformUtils.getBlockFromId(new ResourceLocation(GT4RRef.MOD_CREATE, "scoria")), 1)).io(DUST.get(Scoria, 1)).add("scoria_dust",400, 2);
+            UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(AntimatterPlatformUtils.INSTANCE.getBlockFromId(new ResourceLocation(GT4RRef.MOD_CREATE, "limestone")), 1)).io(DUST.get(Limestone, 1)).add("limestone_dust",400, 2);
+            UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(AntimatterPlatformUtils.INSTANCE.getBlockFromId(new ResourceLocation(GT4RRef.MOD_CREATE, "scoria")), 1)).io(DUST.get(Scoria, 1)).add("scoria_dust",400, 2);
         }
         UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(Items.NETHER_QUARTZ_ORE, 1)).io(new ItemStack(Items.QUARTZ, 2)).add("nether_quartz_ore",200, 2);
         if (AntimatterAPI.isModLoaded("cinderscapes")){
-            UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(AntimatterPlatformUtils.getItemFromID(new ResourceLocation("cinderscapes", "rose_quartz_ore")), 1)).io(new ItemStack(AntimatterPlatformUtils.getItemFromID(new ResourceLocation("cinderscapes", "rose_quartz")), 2)).add("rose_quartz",200, 2);
-            UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(AntimatterPlatformUtils.getItemFromID(new ResourceLocation("cinderscapes", "smoky_quartz_ore")), 1)).io(new ItemStack(AntimatterPlatformUtils.getItemFromID(new ResourceLocation("cinderscapes", "smoky_quartz")), 2)).add("smoky_quartz",200, 2);
-            UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(AntimatterPlatformUtils.getItemFromID(new ResourceLocation("cinderscapes", "sulfur_quartz_ore")), 1)).io(new ItemStack(AntimatterPlatformUtils.getItemFromID(new ResourceLocation("cinderscapes", "sulfur_quartz")), 2)).add("sulfur_quartz",200, 2);
+            UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(AntimatterPlatformUtils.INSTANCE.getItemFromID(new ResourceLocation("cinderscapes", "rose_quartz_ore")), 1)).io(new ItemStack(AntimatterPlatformUtils.INSTANCE.getItemFromID(new ResourceLocation("cinderscapes", "rose_quartz")), 2)).add("rose_quartz",200, 2);
+            UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(AntimatterPlatformUtils.INSTANCE.getItemFromID(new ResourceLocation("cinderscapes", "smoky_quartz_ore")), 1)).io(new ItemStack(AntimatterPlatformUtils.INSTANCE.getItemFromID(new ResourceLocation("cinderscapes", "smoky_quartz")), 2)).add("smoky_quartz",200, 2);
+            UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(AntimatterPlatformUtils.INSTANCE.getItemFromID(new ResourceLocation("cinderscapes", "sulfur_quartz_ore")), 1)).io(new ItemStack(AntimatterPlatformUtils.INSTANCE.getItemFromID(new ResourceLocation("cinderscapes", "sulfur_quartz")), 2)).add("sulfur_quartz",200, 2);
         }
     }
 
