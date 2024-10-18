@@ -44,7 +44,7 @@ jobs:
     # The USERNAME and TOKEN need to correspond to the credentials environment variables used in
     # the publishing section of your build.gradle
     - name: Upload Forge Artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: GT4R-forge-nightly-${{ steps.vars.outputs.sha_short }}
         path: forge/build/libs
@@ -52,7 +52,7 @@ jobs:
         USERNAME: ${{ github.actor }}
         TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Upload Fabric Artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: GT4R-fabric-nightly-${{ steps.vars.outputs.sha_short }}
         path: fabric/build/libs
