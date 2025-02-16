@@ -12,6 +12,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import org.gtreimagined.gt4r.GT4RRef;
 
@@ -40,7 +41,7 @@ public class CoverCrafting extends BaseCover {
     @Override
     public boolean openGui(Player player, Direction side) {
         if (!hasGui()) return false;
-        AntimatterPlatformUtils.INSTANCE.openGui((ServerPlayer) player, this, packetBuffer -> {
+        NetworkHooks.openGui((ServerPlayer) player, this, packetBuffer -> {
             packetBuffer.writeBlockPos(handler.getTile().getBlockPos());
             packetBuffer.writeInt(side.get3DDataValue());
         });

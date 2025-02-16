@@ -1,5 +1,6 @@
 package org.gtreimagined.gt4r.gui;
 
+import muramasa.antimatter.capability.item.ExtendedItemContainer;
 import muramasa.antimatter.capability.item.TrackedItemHandler;
 import muramasa.antimatter.gui.MenuHandlerMachine;
 import muramasa.antimatter.gui.container.ContainerBasicMachine;
@@ -9,7 +10,6 @@ import muramasa.antimatter.gui.slot.SlotFake;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import tesseract.api.item.ExtendedItemContainer;
 import org.gtreimagined.gt4r.blockentity.single.BlockEntityQuantumChest;
 
 public class ContainerQuantumChest extends ContainerBasicMachine<BlockEntityQuantumChest> {

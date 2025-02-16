@@ -2,8 +2,10 @@ package org.gtreimagined.gt4r.cover;
 
 import muramasa.antimatter.blockentity.BlockEntityMachine;
 import muramasa.antimatter.capability.ICoverHandler;
+import muramasa.antimatter.capability.item.ExtendedItemContainer;
 import muramasa.antimatter.cover.CoverFactory;
 import muramasa.antimatter.machine.Tier;
+import muramasa.antimatter.util.AntimatterCapUtils;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -17,7 +19,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import tesseract.TesseractCapUtils;
-import tesseract.api.item.ExtendedItemContainer;
 
 public class CoverConveyor extends CoverBasicTransport {
 
@@ -68,7 +69,7 @@ public class CoverConveyor extends CoverBasicTransport {
         if (state == Blocks.AIR.defaultBlockState() && isMachine && cover.exportMode.isExport()) {
             Level world = cover.source().getTile().getLevel();
             BlockPos pos = cover.source().getTile().getBlockPos();
-            ItemStack stack = TesseractCapUtils.INSTANCE.getItemHandler(cover.source().getTile(), side).map(Utils::extractAny).orElse(ItemStack.EMPTY);
+            ItemStack stack = AntimatterCapUtils.INSTANCE.getItemHandler(cover.source().getTile(), side).map(Utils::extractAny).orElse(ItemStack.EMPTY);
             if (stack.isEmpty()) return;
             world.addFreshEntity(new ItemEntity(world,pos.getX()+side.getStepX(), pos.getY()+side.getStepY(), pos.getZ()+side.getStepZ(),stack));
         }
@@ -79,9 +80,9 @@ public class CoverConveyor extends CoverBasicTransport {
         }
         if (cover.canMove(side)) {
             if (cover.exportMode.isExport()) {
-                if (isMachine) TesseractCapUtils.INSTANCE.getItemHandler(cover.source().getTile(), side).ifPresent(ih -> TesseractCapUtils.INSTANCE.getItemHandler(adjTile, side.getOpposite()).ifPresent(other -> Utils.transferItems(ih, other,true)));
+                if (isMachine) AntimatterCapUtils.INSTANCE.getItemHandler(cover.source().getTile(), side).ifPresent(ih -> AntimatterCapUtils.INSTANCE.getItemHandler(adjTile, side.getOpposite()).ifPresent(other -> Utils.transferItems(ih, other,true)));
             } else {
-                TesseractCapUtils.INSTANCE.getItemHandler(cover.source().getTile(), side).ifPresent(ih -> TesseractCapUtils.INSTANCE.getItemHandler(adjTile, side.getOpposite()).ifPresent(other -> Utils.transferItems(other, ih,true)));
+                AntimatterCapUtils.INSTANCE.getItemHandler(cover.source().getTile(), side).ifPresent(ih -> AntimatterCapUtils.INSTANCE.getItemHandler(adjTile, side.getOpposite()).ifPresent(other -> Utils.transferItems(other, ih,true)));
             }
         }
     }

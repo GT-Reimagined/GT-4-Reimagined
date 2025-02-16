@@ -17,7 +17,7 @@ public class FluidSolidifierLoader {
 
     public static void init() {
         NUGGET.all().forEach(r -> {
-            add(r, NUGGET.get(r, 1), "nugget", GTCoreItems.MoldNugget, ratio() / 9, 4);
+            add(r, NUGGET.get(r, 1), "nugget", GTCoreItems.MoldNugget, L / 9, 4);
         });
         PLATE.all().forEach(r -> {
             add(r, PLATE.get(r, 1), "plate", GTCoreItems.MoldPlate, 1.0f, 4);
@@ -31,7 +31,7 @@ public class FluidSolidifierLoader {
         BLOCK.all().forEach(r -> {
             add(r, BLOCK.get().get(r).asStack(), "block", GTCoreItems.MoldBlock, 9.0f, 16);
         });
-        FLUID_SOLIDIFIER.RB().ii(RecipeIngredient.of(GTCoreItems.MoldPlate, 1).setNoConsume()).fi(Lava.getLiquid(AntimatterPlatformUtils.INSTANCE.isFabric() ? L : 111)).io(PLATE.get(Obsidian)).add("obsidian_plate", 16, 8);
+        FLUID_SOLIDIFIER.RB().ii(RecipeIngredient.of(GTCoreItems.MoldPlate, 1).setNoConsume()).fi(Lava.getLiquid(111)).io(PLATE.get(Obsidian)).add("obsidian_plate", 16, 8);
     }
 
     private static void add(Material m, ItemStack output, String suffix, Item mold, float ratio, int power) {
@@ -45,15 +45,11 @@ public class FluidSolidifierLoader {
                 .ii(RecipeIngredient.of(mold,1))
                 .fi(m.getLiquid(amount))
                 .io(output)
-                .add(m.getId() + "_" + suffix, (long)(16 * ((float)amount / ratio())), power);
-    }
-
-    private static long ratio(){
-        return AntimatterPlatformUtils.INSTANCE.isForge() ? 144L : 9000L;
+                .add(m.getId() + "_" + suffix, (long)(16 * ((float)amount / L)), power);
     }
 
     private static long amount(float ingots){
-        return (long) (ratio() * ingots);
+        return (long) (L * ingots);
     }
 
 }

@@ -8,11 +8,12 @@ import muramasa.antimatter.material.MaterialStack;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import muramasa.antimatter.recipe.map.RecipeBuilder;
 import muramasa.antimatter.util.AntimatterPlatformUtils;
+import muramasa.antimatter.util.FluidPlatformUtils;
+import muramasa.antimatter.util.RegistryUtils;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import org.gtreimagined.gtcore.data.GTCoreTags;
-import tesseract.FluidPlatformUtils;
 import tesseract.TesseractGraphWrappers;
 import org.gtreimagined.gt4r.data.GT4RBlocks;
 
@@ -123,11 +124,11 @@ public class CentrifugingLoader {
     }
 
     private static void addMethaneRecipe(Item input, int inputAmount){
-        CENTRIFUGE.RB().ii(of(input, inputAmount)).fo(Methane.getGas(1000)).add(AntimatterPlatformUtils.INSTANCE.getIdFromItem(input).getPath() + "_into_methane",2250, 16);
+        CENTRIFUGE.RB().ii(of(input, inputAmount)).fo(Methane.getGas(1000)).add(RegistryUtils.getIdFromItem(input).getPath() + "_into_methane",2250, 16);
     }
 
     private static void addMethaneRecipe(Item input, int inputAmount, ItemStack extra){
-        CENTRIFUGE.RB().ii(of(input, inputAmount)).io(extra).fo(Methane.getGas(1000)).add(AntimatterPlatformUtils.INSTANCE.getIdFromItem(input).getPath() + "_into_methane",2250, 16);
+        CENTRIFUGE.RB().ii(of(input, inputAmount)).io(extra).fo(Methane.getGas(1000)).add(RegistryUtils.getIdFromItem(input).getPath() + "_into_methane",2250, 16);
     }
 
     private static void add(Material mat, long euT, int duration) {

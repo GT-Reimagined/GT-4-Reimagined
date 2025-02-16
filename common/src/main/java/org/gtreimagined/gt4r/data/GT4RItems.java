@@ -11,6 +11,7 @@ import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.registration.Side;
 import muramasa.antimatter.tool.behaviour.BehaviourAOEBreak;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.api.distmarker.Dist;
 import org.gtreimagined.gtcore.data.GTCoreTools;
 import org.gtreimagined.gtcore.item.ItemPowerUnit;
 import org.gtreimagined.gt4r.GT4RRef;
@@ -24,8 +25,8 @@ import static org.gtreimagined.gt4r.data.Materials.*;
 
 public class GT4RItems {
 
-    public static void init(Side side) {
-        if (side == Side.CLIENT){
+    public static void init(Dist side) {
+        if (side.isClient()){
             RecipeRenderer.clientMaps();
         }
     }

@@ -10,6 +10,7 @@ import muramasa.antimatter.gui.widget.WidgetSupplier;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.registration.Side;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
 import org.gtreimagined.gt4r.GT4RRef;
 import org.gtreimagined.gt4r.gui.widgets.CoalBoilerFuelWidget;
 import org.gtreimagined.gt4r.gui.widgets.CoalBoilerWidget;
@@ -60,7 +61,7 @@ public class Guis {
 
     static ResourceLocation buttonLocation = new ResourceLocation(GT4RRef.ID, "textures/gui/button/gui_buttons.png");
 
-    public static void init(Side side) {
+    public static void init(Dist side) {
 
         AntimatterAPI.registerJEICategory(RecipeMaps.ORE_BYPRODUCTS, Guis.ORE_BYPRODUCTS);
         AntimatterAPI.registerJEICategory(RecipeMaps.INT_CIRCUITS, Guis.ORE_BYPRODUCTS_OLD);
@@ -76,7 +77,7 @@ public class Guis {
         widgets();
     }
 
-    private static void initMaterialMachine(Side side){
+    private static void initMaterialMachine(Dist side){
         //TODO move these textures to background folder
         BiFunction<Boolean, String, ResourceLocation> textures = (c, l) -> new ResourceLocation(GT4RRef.ID, "textures/gui/machine/" + (c ? "charging_" : "") + l + ".png");
         QUANTUM_CHEST.setGUI(MenuHandlers.QUANTUM_CHEST_HANDLER);

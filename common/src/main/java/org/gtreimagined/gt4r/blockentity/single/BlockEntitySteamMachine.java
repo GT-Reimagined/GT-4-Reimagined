@@ -101,7 +101,7 @@ public class BlockEntitySteamMachine extends BlockEntityMachine<BlockEntitySteam
         @Override
         public long getPower() {
             if (activeRecipe == null) return 0;
-            if (overclock == 0 || tile.has(MachineFlag.RF)) return activeRecipe.getPower();
+            if (overclock == 0 || tile.has(MachineFlag.FE)) return activeRecipe.getPower();
             return (activeRecipe.getPower() * (1L << overclock));
         }
 

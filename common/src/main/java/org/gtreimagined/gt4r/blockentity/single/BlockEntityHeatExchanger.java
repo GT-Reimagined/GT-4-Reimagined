@@ -13,6 +13,8 @@ import muramasa.antimatter.capability.machine.MachineRecipeHandler;
 import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.machine.event.MachineEvent;
 import muramasa.antimatter.machine.types.Machine;
+import muramasa.antimatter.util.AntimatterCapUtils;
+import muramasa.antimatter.util.FluidPlatformUtils;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -22,7 +24,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.NotNull;
-import tesseract.FluidPlatformUtils;
 import tesseract.TesseractCapUtils;
 import tesseract.TesseractGraphWrappers;
 
@@ -157,10 +158,10 @@ public class BlockEntityHeatExchanger extends BlockEntityMachine<BlockEntityHeat
             super.onUpdate();
             Direction right = tile.getFacing().getCounterClockWise();
             Direction left = tile.getFacing().getClockWise();
-            tile.fluidHandler.ifPresent(f -> TesseractCapUtils.INSTANCE.getFluidHandler(tile.level, tile.getBlockPos().relative(right), right.getOpposite()).ifPresent(t -> Utils.transferFluids(f.getOutputTanks().getTank(0), t, 1000)));
-            tile.fluidHandler.ifPresent(f -> TesseractCapUtils.INSTANCE.getFluidHandler(tile.level, tile.getBlockPos().relative(DOWN), UP).ifPresent(t -> Utils.transferFluids(f.getOutputTanks().getTank(1), t, 1000)));
-            tile.fluidHandler.side(left).ifPresent(t -> TesseractCapUtils.INSTANCE.getFluidHandler(tile.level, tile.getBlockPos().relative(left), left.getOpposite()).ifPresent(f -> transferFluids(f, ((HeatExchangerFluidHandlerSidedWrapper)t), 1000)));
-            tile.fluidHandler.side(UP).ifPresent(t -> TesseractCapUtils.INSTANCE.getFluidHandler(tile.level, tile.getBlockPos().relative(UP), DOWN).ifPresent(f -> transferFluids(f, ((HeatExchangerFluidHandlerSidedWrapper)t), 1000)));
+            tile.fluidHandler.ifPresent(f -> AntimatterCapUtils.INSTANCE.getFluidHandler(tile.level, tile.getBlockPos().relative(right), right.getOpposite()).ifPresent(t -> Utils.transferFluids(f.getOutputTanks().getTank(0), t, 1000)));
+            tile.fluidHandler.ifPresent(f -> AntimatterCapUtils.INSTANCE.getFluidHandler(tile.level, tile.getBlockPos().relative(DOWN), UP).ifPresent(t -> Utils.transferFluids(f.getOutputTanks().getTank(1), t, 1000)));
+            tile.fluidHandler.side(left).ifPresent(t -> AntimatterCapUtils.INSTANCE.getFluidHandler(tile.level, tile.getBlockPos().relative(left), left.getOpposite()).ifPresent(f -> transferFluids(f, ((HeatExchangerFluidHandlerSidedWrapper)t), 1000)));
+            tile.fluidHandler.side(UP).ifPresent(t -> AntimatterCapUtils.INSTANCE.getFluidHandler(tile.level, tile.getBlockPos().relative(UP), DOWN).ifPresent(f -> transferFluids(f, ((HeatExchangerFluidHandlerSidedWrapper)t), 1000)));
         }
 
         public static void transferFluids(PlatformFluidHandler from, HeatExchangerFluidHandlerSidedWrapper to, int cap) {

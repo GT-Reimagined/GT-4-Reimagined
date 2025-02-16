@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.fml.loading.FMLPaths;
 import org.gtreimagined.gt4r.GT4Reimagined;
 import org.gtreimagined.gt4r.block.BlockCasing;
 import org.gtreimagined.gt4r.block.BlockRedstoneMachine;
@@ -37,7 +38,7 @@ public class ClientHandler implements IProxyHandler {
     }
 
     private static void copyProgrammerArtIfMissing() {
-        File dir = new File(AntimatterPlatformUtils.INSTANCE.getConfigDir().getParent().toFile(), "resourcepacks");
+        File dir = new File(FMLPaths.CONFIGDIR.get().getParent().toFile(), "resourcepacks");
         File target = new File(dir, "GT4R-Programmer-Art.zip");
         File target2 = new File(dir, "GT4R-Classic-Tools.zip");
         File target3 = new File(dir, "GT4R-Machine-Alt.zip");

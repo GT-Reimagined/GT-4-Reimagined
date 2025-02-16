@@ -6,6 +6,7 @@ import muramasa.antimatter.data.AntimatterDefaultTools;
 import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.util.AntimatterPlatformUtils;
+import muramasa.antimatter.util.RegistryUtils;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
@@ -25,7 +26,7 @@ public class MaterialRecipeLoader {
     public static void loadRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider) {
         final CriterionTriggerInstance in = provider.hasSafeItem(AntimatterDefaultTools.WRENCH.getTag());
         if (AntimatterAPI.isModLoaded(GT4RRef.MOD_BLUEPOWER)){
-            provider.shapeless(output, "amethyst_gem_convert", "gems", GEM.get(Amethyst, 1), AntimatterPlatformUtils.INSTANCE.getItemFromID(new ResourceLocation(GT4RRef.MOD_BLUEPOWER, "amethyst_gem")));
+            provider.shapeless(output, "amethyst_gem_convert", "gems", GEM.get(Amethyst, 1), RegistryUtils.getItemFromID(new ResourceLocation(GT4RRef.MOD_BLUEPOWER, "amethyst_gem")));
         }
         GT4RMaterialTags.HULL.all().forEach(m -> {
             provider.addItemRecipe(output, GT4RRef.ID, m.getId() + "_hull", "hulls", GT4RMaterialTags.HULL.get(m), ImmutableMap.of('P', PLATE.getMaterialTag(m), 'W', AntimatterDefaultTools.WRENCH.getTag()), "PPP", "PWP", "PPP");

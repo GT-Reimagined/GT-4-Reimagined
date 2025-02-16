@@ -6,6 +6,7 @@ import earth.terrarium.botarium.common.fluid.base.PlatformFluidHandler;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import muramasa.antimatter.blockentity.BlockEntityMachine;
+import muramasa.antimatter.capability.item.ExtendedItemContainer;
 import muramasa.antimatter.capability.machine.MachineEnergyHandler;
 import muramasa.antimatter.gui.GuiInstance;
 import muramasa.antimatter.gui.IGuiElement;
@@ -13,6 +14,8 @@ import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.gui.event.GuiEvents;
 import muramasa.antimatter.gui.event.IGuiEvent;
 import muramasa.antimatter.machine.types.Machine;
+import muramasa.antimatter.util.AntimatterCapUtils;
+import muramasa.antimatter.util.FluidPlatformUtils;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -27,10 +30,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import tesseract.FluidPlatformUtils;
 import tesseract.TesseractCapUtils;
 import tesseract.TesseractGraphWrappers;
-import tesseract.api.item.ExtendedItemContainer;
 import org.gtreimagined.gt4r.gui.ButtonOverlays;
 
 import java.util.List;
@@ -120,8 +121,8 @@ public abstract class BlockEntityTranslocator<T extends BlockEntityTranslocator<
             if (inputTile == null) return false;
             boolean[] booleans = new boolean[1];
             booleans[0] = false;
-            TesseractCapUtils.INSTANCE.getItemHandler(outputTile, outputDir.getOpposite()).ifPresent(out -> {
-                TesseractCapUtils.INSTANCE.getItemHandler(inputTile, inputDir.getOpposite()).ifPresent(in -> {
+            AntimatterCapUtils.INSTANCE.getItemHandler(outputTile, outputDir.getOpposite()).ifPresent(out -> {
+                AntimatterCapUtils.INSTANCE.getItemHandler(inputTile, inputDir.getOpposite()).ifPresent(in -> {
                     booleans[0] = Utils.transferItems(in, out,true, this::accepts);
                 });
             });
@@ -154,9 +155,9 @@ public abstract class BlockEntityTranslocator<T extends BlockEntityTranslocator<
         protected boolean processOutput() {
             Direction outputDir = this.getFacing().getOpposite();
             Direction inputDir = this.getFacing();
-            PlatformFluidHandler outputHandler = TesseractCapUtils.INSTANCE.getFluidHandler(this.level, this.getBlockPos().relative(outputDir), outputDir.getOpposite()).orElse(null);
+            PlatformFluidHandler outputHandler = AntimatterCapUtils.INSTANCE.getFluidHandler(this.level, this.getBlockPos().relative(outputDir), outputDir.getOpposite()).orElse(null);
             if (outputHandler == null) return false;
-            PlatformFluidHandler inputHandler = TesseractCapUtils.INSTANCE.getFluidHandler(this.level, this.getBlockPos().relative(inputDir), inputDir.getOpposite()).orElse(null);
+            PlatformFluidHandler inputHandler = AntimatterCapUtils.INSTANCE.getFluidHandler(this.level, this.getBlockPos().relative(inputDir), inputDir.getOpposite()).orElse(null);
 
             BlockEntity inputTile = Utils.getTile(this.getLevel(), this.getBlockPos().relative(inputDir));
             if (inputHandler == null) {

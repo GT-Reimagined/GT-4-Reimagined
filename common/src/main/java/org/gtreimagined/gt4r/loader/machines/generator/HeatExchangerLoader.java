@@ -1,8 +1,8 @@
 package org.gtreimagined.gt4r.loader.machines.generator;
 
+import muramasa.antimatter.util.FluidPlatformUtils;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import tesseract.FluidPlatformUtils;
 import tesseract.TesseractGraphWrappers;
 import org.gtreimagined.gt4r.data.GT4RBlocks;
 

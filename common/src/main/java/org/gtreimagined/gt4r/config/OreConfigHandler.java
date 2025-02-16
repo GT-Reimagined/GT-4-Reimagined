@@ -3,6 +3,7 @@ package org.gtreimagined.gt4r.config;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import muramasa.antimatter.util.AntimatterPlatformUtils;
+import net.minecraftforge.fml.loading.FMLPaths;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -22,7 +23,7 @@ public class OreConfigHandler {
         if (file != null) {
             return !file.exists();
         }
-        File configDirectory = new File(AntimatterPlatformUtils.INSTANCE.getConfigDir().toFile(), "gt4r");
+        File configDirectory = new File(FMLPaths.CONFIGDIR.get().toFile(), "gt4r");
         file = new File(configDirectory, "ores.json");
         if (file.exists()){
             return false;
