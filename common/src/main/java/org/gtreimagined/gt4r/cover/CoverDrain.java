@@ -1,5 +1,6 @@
 package org.gtreimagined.gt4r.cover;
 
+import com.gtnewhorizon.structurelib.util.PlatformUtils;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.base.PlatformFluidHandler;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
@@ -8,7 +9,6 @@ import muramasa.antimatter.capability.ICoverHandler;
 import muramasa.antimatter.cover.BaseCover;
 import muramasa.antimatter.cover.CoverFactory;
 import muramasa.antimatter.machine.Tier;
-import muramasa.antimatter.util.AntimatterPlatformUtils;
 import muramasa.antimatter.util.FluidPlatformUtils;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.core.BlockPos;
@@ -142,7 +142,7 @@ public class CoverDrain extends BaseCover {
     public void addInfoFromStack(ItemStack stack) {
         super.addInfoFromStack(stack);
         if (stack.getTag() != null && stack.getTag().contains("containedFluid")){
-            contained = AntimatterPlatformUtils.INSTANCE.fromTag(stack.getTag().getCompound("containedFluid"));
+            contained = FluidPlatformUtils.INSTANCE.fromTag(stack.getTag().getCompound("containedFluid"));
         }
     }
 
@@ -159,7 +159,7 @@ public class CoverDrain extends BaseCover {
     public void deserialize(CompoundTag nbt) {
         super.deserialize(nbt);
         if (nbt.contains("contained")){
-            contained = AntimatterPlatformUtils.INSTANCE.fromTag(nbt.getCompound("contained"));
+            contained = FluidPlatformUtils.INSTANCE.fromTag(nbt.getCompound("contained"));
         }
     }
 }

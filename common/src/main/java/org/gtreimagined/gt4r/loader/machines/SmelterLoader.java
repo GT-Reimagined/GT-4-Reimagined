@@ -5,7 +5,6 @@ import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialTags;
 import muramasa.antimatter.material.MaterialTypeItem;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
-import muramasa.antimatter.util.AntimatterPlatformUtils;
 import org.gtreimagined.gt4r.data.GT4RItems;
 import org.gtreimagined.gt4r.data.GT4RMaterialTags;
 

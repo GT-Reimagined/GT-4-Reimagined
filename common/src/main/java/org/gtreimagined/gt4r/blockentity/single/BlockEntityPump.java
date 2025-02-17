@@ -1,11 +1,11 @@
 package org.gtreimagined.gt4r.blockentity.single;
 
+import com.gtnewhorizon.structurelib.util.PlatformUtils;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import muramasa.antimatter.blockentity.BlockEntityMachine;
 import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.machine.MachineState;
 import muramasa.antimatter.machine.types.Machine;
-import muramasa.antimatter.util.AntimatterPlatformUtils;
 import muramasa.antimatter.util.FluidPlatformUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -218,7 +218,7 @@ public class BlockEntityPump extends BlockEntityMachine<BlockEntityPump> {
             BlockPos pos = new BlockPos(itemTags.getInt("X"), itemTags.getInt("Y"), itemTags.getInt("Z"));
             mPumpList.add(pos);
         }
-        this.fluid = AntimatterPlatformUtils.INSTANCE.fromTag(tag.getCompound("Fluid")).getFluid();
+        this.fluid = FluidPlatformUtils.INSTANCE.fromTag(tag.getCompound("Fluid")).getFluid();
         this.pumpHeadY = tag.getInt("pumpHeadY");
     }
 

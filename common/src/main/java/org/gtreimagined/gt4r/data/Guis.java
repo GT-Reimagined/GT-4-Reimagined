@@ -8,7 +8,6 @@ import muramasa.antimatter.gui.slot.ISlotProvider;
 import muramasa.antimatter.gui.widget.ProgressWidget;
 import muramasa.antimatter.gui.widget.WidgetSupplier;
 import muramasa.antimatter.machine.Tier;
-import muramasa.antimatter.registration.Side;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import org.gtreimagined.gt4r.GT4RRef;

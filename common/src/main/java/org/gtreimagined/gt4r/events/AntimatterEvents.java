@@ -4,9 +4,10 @@ import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.datagen.providers.AntimatterAdvancementProvider;
 import muramasa.antimatter.datagen.providers.AntimatterBlockTagProvider;
 import muramasa.antimatter.datagen.providers.AntimatterFluidTagProvider;
-import muramasa.antimatter.event.CraftingEvent;
-import muramasa.antimatter.event.ProvidersEvent;
-import muramasa.antimatter.event.WorldGenEvent;
+import muramasa.antimatter.event.forge.AntimatterCraftingEvent;
+import muramasa.antimatter.event.forge.AntimatterLoaderEvent;
+import muramasa.antimatter.event.forge.AntimatterProvidersEvent;
+import muramasa.antimatter.event.forge.AntimatterWorldGenEvent;
 import muramasa.antimatter.recipe.loader.IRecipeRegistrate;
 import muramasa.antimatter.registration.IAntimatterRegistrar;
 import org.gtreimagined.gt4r.GT4RRef;
@@ -70,12 +71,12 @@ import java.util.function.BiConsumer;
 
 public class AntimatterEvents {
 
-    public static void registerWorldgen(WorldGenEvent event){
+    public static void registerWorldgen(AntimatterWorldGenEvent event){
         WorldGenLoader.init(event);
     }
 
-    public static void registerRecipeLoaders(IAntimatterRegistrar registrar, IRecipeRegistrate reg) {
-        BiConsumer<String, IRecipeRegistrate.IRecipeLoader> loader = (a, b) -> reg.add(GT4RRef.ID, a, b);
+    public static void registerRecipeLoaders(AntimatterLoaderEvent event) {
+        BiConsumer<String, IRecipeRegistrate.IRecipeLoader> loader = (a, b) -> event.registrat.add(GT4RRef.ID, a, b);
         loader.accept("wiremill", WiremillLoader::init);
         loader.accept("washer", WasherLoader::init);
         loader.accept("blasting", Blasting::init);
@@ -121,7 +122,7 @@ public class AntimatterEvents {
         loader.accept("fusion", Fusion::init);
     }
 
-    public static void registerCraftingLoaders(CraftingEvent event){
+    public static void registerCraftingLoaders(AntimatterCraftingEvent event){
         event.addLoader(Parts::loadRecipes);
         event.addLoader(ToolCraftingTableRecipes::loadRecipes);
         event.addLoader(MachineCrafting::loadRecipes);
@@ -136,18 +137,17 @@ public class AntimatterEvents {
         }
     }
 
-    public static void onProviders(ProvidersEvent event){
-        //if (event.getSide() == Side.CLIENT) return;
+    public static void onProviders(AntimatterProvidersEvent event){
         final AntimatterBlockTagProvider[] p = new AntimatterBlockTagProvider[1];
-        event.addProvider(GT4RRef.ID, () -> {
+        event.addProvider(() -> {
             p[0] = new GT4RBlockTagProvider(GT4RRef.ID, GT4RRef.NAME.concat(" Block Tags"), false);
             return p[0];
         });
-        event.addProvider(GT4RRef.ID, () -> new GT4RItemTagProvider(GT4RRef.ID, GT4RRef.NAME.concat(" Item Tags"), false, p[0]));
-        event.addProvider(GT4RRef.ID, () -> new AntimatterFluidTagProvider(GT4RRef.ID, GT4RRef.NAME.concat(" Fluid Tags"), false));
+        event.addProvider(() -> new GT4RItemTagProvider(GT4RRef.ID, GT4RRef.NAME.concat(" Item Tags"), false, p[0]));
+        event.addProvider(() -> new AntimatterFluidTagProvider(GT4RRef.ID, GT4RRef.NAME.concat(" Fluid Tags"), false));
 
-        event.addProvider(GT4RRef.ID, () -> new AntimatterAdvancementProvider(GT4RRef.ID, GT4RRef.NAME.concat(" Advancements"), new ProgressionAdvancements()));
+        event.addProvider(() -> new AntimatterAdvancementProvider(GT4RRef.ID, GT4RRef.NAME.concat(" Advancements"), new ProgressionAdvancements()));
 
-        event.addProvider(GT4RRef.ID, () -> new GT4RBlockLootProvider(GT4RRef.ID, GT4RRef.NAME.concat( " Loot generator")));
+        event.addProvider(() -> new GT4RBlockLootProvider(GT4RRef.ID, GT4RRef.NAME.concat( " Loot generator")));
     }
 }

@@ -2,7 +2,6 @@ package org.gtreimagined.gt4r.config;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import muramasa.antimatter.util.AntimatterPlatformUtils;
 import net.minecraftforge.fml.loading.FMLPaths;
 
 import java.io.BufferedReader;

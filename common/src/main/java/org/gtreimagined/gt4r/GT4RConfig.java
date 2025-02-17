@@ -5,7 +5,6 @@ import carbonconfiglib.config.Config;
 import carbonconfiglib.config.ConfigEntry;
 import carbonconfiglib.config.ConfigHandler;
 import carbonconfiglib.config.ConfigSection;
-import muramasa.antimatter.util.AntimatterPlatformUtils;
 
 public class GT4RConfig {
     static ConfigHandler CONFIG;

@@ -9,7 +9,6 @@ import muramasa.antimatter.integration.jeirei.AntimatterJEIREIPlugin;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.proxy.IProxyHandler;
 import muramasa.antimatter.registration.RegistrationEvent;
-import muramasa.antimatter.registration.Side;
 import muramasa.antimatter.tool.IAntimatterTool;
 import muramasa.antimatter.tool.IBasicAntimatterTool;
 import net.minecraft.core.Registry;
@@ -56,11 +55,6 @@ public class GT4Reimagined extends AntimatterMod {
     public GT4Reimagined() {
         super();
         INSTANCE = this;
-    }
-
-    @Override
-    public void onRegistrarInit() {
-        super.onRegistrarInit();
         AntimatterDynamics.clientProvider(GT4RRef.ID, () -> new AntimatterBlockStateProvider(GT4RRef.ID, GT4RRef.NAME + " BlockStates"));
         AntimatterDynamics.clientProvider(GT4RRef.ID, () -> new GT4RItemModelProvider(GT4RRef.ID, GT4RRef.NAME + " Item Models"));
         AntimatterDynamics.clientProvider(GT4RRef.ID, GT4RLocalizations.en_US::new);

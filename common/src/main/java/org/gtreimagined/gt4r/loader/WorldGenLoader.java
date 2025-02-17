@@ -4,7 +4,7 @@ import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.AntimatterConfig;
 import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.data.AntimatterMaterials;
-import muramasa.antimatter.event.WorldGenEvent;
+import muramasa.antimatter.event.forge.AntimatterWorldGenEvent;
 import muramasa.antimatter.worldgen.object.WorldGenStoneLayerBuilder;
 import muramasa.antimatter.worldgen.smallore.WorldGenSmallOreBuilder;
 import muramasa.antimatter.worldgen.vanillaore.WorldGenVanillaOreBuilder;
@@ -21,14 +21,14 @@ import static org.gtreimagined.gtcore.data.GTCoreBlocks.*;
 public class WorldGenLoader {
 
 
-    public static void init(WorldGenEvent event) {
+    public static void init(AntimatterWorldGenEvent event) {
         if (AntimatterConfig.STONE_LAYERS.get() && !AntimatterAPI.isModLoaded("gt5r")){
             initStoneLayers(event);
         }
         initVanillaOres(event);
     }
 
-    private static void initStoneLayers(WorldGenEvent ev){
+    private static void initStoneLayers(AntimatterWorldGenEvent ev){
         ev.stoneLayer(new WorldGenStoneLayerBuilder("stone").withStone(STONE).withWeight(6).buildVein());
         ev.stoneLayer(new WorldGenStoneLayerBuilder("black_granite").withStone(GTCoreBlocks.BLACK_GRANITE).withWeight(2).buildVein());
         ev.stoneLayer(new WorldGenStoneLayerBuilder("red_granite").withStone(GTCoreBlocks.RED_GRANITE).withWeight(2).buildVein());
@@ -48,7 +48,7 @@ public class WorldGenLoader {
         ev.stoneLayer(new WorldGenStoneLayerBuilder("tuff").withStone(TUFF).withWeight(3).buildVein());
     }
 
-    private static void initVanillaOres(WorldGenEvent event){
+    private static void initVanillaOres(AntimatterWorldGenEvent event){
         event.smallOre(new WorldGenSmallOreBuilder().withMaterial(Ruby).withAmountPerChunk(2).withBiomes(tagged("has_ruby")).buildMaterial());
         event.smallOre(new WorldGenSmallOreBuilder().withMaterial(Sapphire).withAmountPerChunk(2).withBiomes(tagged("has_sapphire")).buildMaterial());
         event.smallOre(new WorldGenSmallOreBuilder().withMaterial(Coal).withAmountPerChunk(8).atHeight(16, 126).buildMaterial());

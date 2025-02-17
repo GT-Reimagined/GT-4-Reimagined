@@ -3,15 +3,9 @@ package org.gtreimagined.gt4r;
 import muramasa.antimatter.AntimatterMod;
 import muramasa.antimatter.event.MaterialEvent;
 import muramasa.antimatter.registration.RegistrationEvent;
-import muramasa.antimatter.registration.Side;
-import muramasa.antimatter.util.AntimatterPlatformUtils;
 import net.minecraftforge.api.distmarker.Dist;
 
 public class GT4RLateRegistrar extends AntimatterMod {
-    public GT4RLateRegistrar(){
-        super();
-        this.onRegistrarInit();
-    }
     @Override
     public String getId() {
         return "gt4r-late";

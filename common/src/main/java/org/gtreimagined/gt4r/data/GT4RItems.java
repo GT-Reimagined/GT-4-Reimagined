@@ -8,7 +8,6 @@ import muramasa.antimatter.item.ItemCover;
 import muramasa.antimatter.item.ItemFluidCell;
 import muramasa.antimatter.item.ItemMultiTextureBattery;
 import muramasa.antimatter.machine.Tier;
-import muramasa.antimatter.registration.Side;
 import muramasa.antimatter.tool.behaviour.BehaviourAOEBreak;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;

@@ -1,7 +1,6 @@
 package org.gtreimagined.gt4r.loader.multi;
 
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
-import muramasa.antimatter.util.AntimatterPlatformUtils;
 import muramasa.antimatter.util.RegistryUtils;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
