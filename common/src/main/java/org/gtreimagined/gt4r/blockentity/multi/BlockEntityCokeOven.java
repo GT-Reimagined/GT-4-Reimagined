@@ -2,7 +2,6 @@ package org.gtreimagined.gt4r.blockentity.multi;
 
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import muramasa.antimatter.blockentity.multi.BlockEntityBasicMultiMachine;
-import muramasa.antimatter.capability.item.PlatformItemHandler;
 import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.util.AntimatterCapUtils;
@@ -13,6 +12,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import tesseract.TesseractCapUtils;
 
 public class BlockEntityCokeOven extends BlockEntityBasicMultiMachine<BlockEntityCokeOven> {
@@ -46,7 +47,7 @@ public class BlockEntityCokeOven extends BlockEntityBasicMultiMachine<BlockEntit
             for (BlockPos pos1 : positions) {
                 BlockEntity blockEntity = level.getBlockEntity(pos1);
                 if (blockEntity != null){
-                    PlatformItemHandler itemHandler1 = AntimatterCapUtils.INSTANCE.getItemHandler(blockEntity, Direction.UP).orElse(null);
+                    IItemHandler itemHandler1 = blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.UP).orElse(null);
                     if (itemHandler1 != null){
                         itemHandler.ifPresent(i -> Utils.transferItems(i.getHandler(SlotType.IT_OUT), itemHandler1, false));
                     }

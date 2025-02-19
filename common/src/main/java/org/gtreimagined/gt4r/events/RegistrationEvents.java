@@ -1,7 +1,7 @@
 package org.gtreimagined.gt4r.events;
 
-import muramasa.antimatter.event.forge.AntimatterCraftingEvent;
-import muramasa.antimatter.event.forge.AntimatterProvidersEvent;
+import muramasa.antimatter.event.AntimatterCraftingEvent;
+import muramasa.antimatter.event.AntimatterProvidersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.gtreimagined.gt4r.GT4RRef;

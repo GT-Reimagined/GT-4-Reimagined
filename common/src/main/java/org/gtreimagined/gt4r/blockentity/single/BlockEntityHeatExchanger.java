@@ -23,6 +23,7 @@ import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 import tesseract.TesseractCapUtils;
 import tesseract.TesseractGraphWrappers;
@@ -191,8 +192,8 @@ public class BlockEntityHeatExchanger extends BlockEntityMachine<BlockEntityHeat
         }
 
         @Override
-        public Optional<FluidContainer> forSide(Direction side) {
-            return Optional.of(new HeatExchangerFluidHandlerSidedWrapper(this, tile.coverHandler.map(c -> c).orElse(null), side));
+        public LazyOptional<FluidContainer> forSide(Direction side) {
+            return LazyOptional.of(() -> new HeatExchangerFluidHandlerSidedWrapper(this, tile.coverHandler.map(c -> c).orElse(null), side));
         }
 
         @Override

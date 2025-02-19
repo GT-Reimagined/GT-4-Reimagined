@@ -4,7 +4,7 @@ import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.AntimatterConfig;
 import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.data.AntimatterMaterials;
-import muramasa.antimatter.event.forge.AntimatterWorldGenEvent;
+import muramasa.antimatter.event.AntimatterWorldGenEvent;
 import muramasa.antimatter.worldgen.object.WorldGenStoneLayerBuilder;
 import muramasa.antimatter.worldgen.smallore.WorldGenSmallOreBuilder;
 import muramasa.antimatter.worldgen.vanillaore.WorldGenVanillaOreBuilder;

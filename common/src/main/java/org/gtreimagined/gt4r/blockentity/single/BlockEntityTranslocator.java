@@ -30,6 +30,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.items.CapabilityItemHandler;
 import tesseract.TesseractCapUtils;
 import tesseract.TesseractGraphWrappers;
 import org.gtreimagined.gt4r.gui.ButtonOverlays;
@@ -121,8 +122,8 @@ public abstract class BlockEntityTranslocator<T extends BlockEntityTranslocator<
             if (inputTile == null) return false;
             boolean[] booleans = new boolean[1];
             booleans[0] = false;
-            AntimatterCapUtils.INSTANCE.getItemHandler(outputTile, outputDir.getOpposite()).ifPresent(out -> {
-                AntimatterCapUtils.INSTANCE.getItemHandler(inputTile, inputDir.getOpposite()).ifPresent(in -> {
+            outputTile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, outputDir.getOpposite()).ifPresent(out -> {
+                inputTile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, inputDir.getOpposite()).ifPresent(in -> {
                     booleans[0] = Utils.transferItems(in, out,true, this::accepts);
                 });
             });

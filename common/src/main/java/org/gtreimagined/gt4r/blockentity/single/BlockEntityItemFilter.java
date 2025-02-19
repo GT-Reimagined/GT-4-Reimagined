@@ -27,6 +27,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraftforge.items.CapabilityItemHandler;
 import org.jetbrains.annotations.Nullable;
 import tesseract.TesseractCapUtils;
 import org.gtreimagined.gt4r.gui.ButtonOverlays;
@@ -141,7 +142,7 @@ public class BlockEntityItemFilter extends BlockEntityMachine<BlockEntityItemFil
         if (adjTile == null) return false;
         boolean[] booleans = new boolean[1];
         booleans[0] = false;
-        AntimatterCapUtils.INSTANCE.getItemHandler(adjTile, outputDir.getOpposite()).ifPresent(adjHandler -> {
+        adjTile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, outputDir.getOpposite()).ifPresent(adjHandler -> {
             booleans[0] = this.itemHandler.map(h -> Utils.transferItems(h.getHandler(SlotType.STORAGE), adjHandler,true)).orElse(false);
         });
         return booleans[0];

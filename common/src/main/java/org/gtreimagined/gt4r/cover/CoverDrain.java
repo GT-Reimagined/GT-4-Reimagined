@@ -58,7 +58,7 @@ public class CoverDrain extends BaseCover {
         Level world = tile.getLevel();
         Optional<PlatformFluidHandler> cap = FluidHooks.safeGetBlockFluidManager(tile, side);
         if (tile instanceof BlockEntityFluidPipe pipe){
-            cap = pipe.getPipeCapHolder().side(side);
+            cap = pipe.getPipeCapHolder().side(side).resolve();
         }
         BlockPos offset = tile.getBlockPos().relative(side);
         if (side == Direction.UP && world.isRainingAt(offset) && world.getGameTime() % 60 == 0){

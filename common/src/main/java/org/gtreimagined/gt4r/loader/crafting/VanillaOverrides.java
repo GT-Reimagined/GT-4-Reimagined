@@ -3,7 +3,6 @@ package org.gtreimagined.gt4r.loader.crafting;
 import muramasa.antimatter.data.AntimatterDefaultTools;
 import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.data.AntimatterMaterials;
-import muramasa.antimatter.data.ForgeCTags;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.pipe.PipeSize;
@@ -17,6 +16,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraftforge.common.Tags;
 import org.gtreimagined.gt4r.GT4RRef;
 import org.gtreimagined.gt4r.data.GT4RBlocks;
 
@@ -43,7 +43,7 @@ public class VanillaOverrides {
                 GT4RBlocks.FLUID_PIPE_WOOD.getBlockItem(PipeSize.HUGE), of('S', AntimatterDefaultTools.SAW.getTag(), 's', ItemTags.LOGS, 'H', AntimatterDefaultTools.SOFT_HAMMER.getTag()), "  S", "s s", "H  ");
         provider.shapeless(consumer, "sodalite_to_blue_dye", "", new ItemStack(Items.BLUE_DYE), AntimatterMaterialTypes.GEM.getMaterialTag(Sodalite));
 
-        provider.addStackRecipe(consumer, GT4RRef.ID, "sulfur_torch", "torches", new ItemStack(Items.TORCH, 2), of('D', getForgelikeItemTag("dusts/sulfur"), 'R', ForgeCTags.RODS_WOODEN), "D", "R");
+        provider.addStackRecipe(consumer, GT4RRef.ID, "sulfur_torch", "torches", new ItemStack(Items.TORCH, 2), of('D', getForgelikeItemTag("dusts/sulfur"), 'R', Tags.Items.RODS_WOODEN), "D", "R");
         provider.addItemRecipe(consumer, GT4RRef.ID, "chainmail_helmet", "chainmail_armor",
                 Items.CHAINMAIL_HELMET, of('R', AntimatterMaterialTypes.RING.getMaterialTag(Steel), 'H', AntimatterDefaultTools.HAMMER.getTag()), "RRR", "RHR");
         provider.addItemRecipe(consumer, GT4RRef.ID, "chainmail_chestplate", "chainmail_armor",
@@ -65,7 +65,7 @@ public class VanillaOverrides {
         Material[] mats = new Material[]{Bronze, WroughtIron, Aluminium, Steel, Titanium};
         for (Material m : mats){
             provider.addItemRecipe(consumer, GT4RRef.ID, "piston_" + m.getId(), "pistons",
-                    Items.PISTON, of('W', ItemTags.PLANKS, 'C', ForgeCTags.COBBLESTONE, 'R', DUST.getMaterialTag(AntimatterMaterials.Redstone), 'I', AntimatterMaterialTypes.INGOT.getMaterialTag(m)), "WWW", "CIC", "CRC");
+                    Items.PISTON, of('W', ItemTags.PLANKS, 'C', Tags.Items.COBBLESTONE, 'R', DUST.getMaterialTag(AntimatterMaterials.Redstone), 'I', AntimatterMaterialTypes.INGOT.getMaterialTag(m)), "WWW", "CIC", "CRC");
         }
         String[] colors = {"white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray", "light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black"};
         for (String color : colors){
