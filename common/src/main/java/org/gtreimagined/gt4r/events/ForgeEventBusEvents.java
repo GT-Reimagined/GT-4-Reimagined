@@ -1,8 +1,11 @@
-package org.gtreimagined.gt4r.events.forge;
+package org.gtreimagined.gt4r.events;
 
+import muramasa.antimatter.tool.IAntimatterTool;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -11,7 +14,9 @@ import net.minecraftforge.fml.common.Mod;
 import org.gtreimagined.gtcore.data.GTCoreBlocks;
 import org.gtreimagined.gtcore.data.GTCoreItems;
 import org.gtreimagined.gt4r.GT4RRef;
-import org.gtreimagined.gt4r.events.CommonEvents;
+
+import static muramasa.antimatter.data.AntimatterDefaultTools.PICKAXE;
+import static org.gtreimagined.gtcore.data.GTCoreTools.DRILL;
 
 @Mod.EventBusSubscriber(modid = GT4RRef.ID)
 public class ForgeEventBusEvents {
@@ -21,7 +26,11 @@ public class ForgeEventBusEvents {
         Player player = event.getPlayer();
         InteractionHand hand = event.getHand();
         boolean server = !event.getWorld().isClientSide;
-        CommonEvents.onRightlickBlock(player, hand, server);
+        if (hand == InteractionHand.OFF_HAND && server){
+            if (player.getMainHandItem().getItem() instanceof IAntimatterTool && (((IAntimatterTool)player.getMainHandItem().getItem()).getAntimatterToolType() == PICKAXE || ((IAntimatterTool)player.getMainHandItem().getItem()).getAntimatterToolType() == DRILL) && (player.getOffhandItem().getItem() == Items.TORCH || player.getOffhandItem().getItem() == Items.SOUL_TORCH)){
+                player.sendMessage(new TranslatableComponent("message.gt4r.pickaxe_torch_right_click"), player.getUUID());
+            }
+        }
     }
 
     @SubscribeEvent

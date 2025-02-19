@@ -10,6 +10,8 @@ import muramasa.antimatter.event.forge.AntimatterProvidersEvent;
 import muramasa.antimatter.event.forge.AntimatterWorldGenEvent;
 import muramasa.antimatter.recipe.loader.IRecipeRegistrate;
 import muramasa.antimatter.registration.IAntimatterRegistrar;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import org.gtreimagined.gt4r.GT4RRef;
 import org.gtreimagined.gt4r.datagen.GT4RBlockLootProvider;
 import org.gtreimagined.gt4r.datagen.GT4RBlockTagProvider;
@@ -69,12 +71,15 @@ import org.gtreimagined.gt4r.loader.multi.VacFreezer;
 
 import java.util.function.BiConsumer;
 
+@Mod.EventBusSubscriber(modid = GT4RRef.ID)
 public class AntimatterEvents {
 
+    @SubscribeEvent
     public static void registerWorldgen(AntimatterWorldGenEvent event){
         WorldGenLoader.init(event);
     }
 
+    @SubscribeEvent
     public static void registerRecipeLoaders(AntimatterLoaderEvent event) {
         BiConsumer<String, IRecipeRegistrate.IRecipeLoader> loader = (a, b) -> event.registrat.add(GT4RRef.ID, a, b);
         loader.accept("wiremill", WiremillLoader::init);

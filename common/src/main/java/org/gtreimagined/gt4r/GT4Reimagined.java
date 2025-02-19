@@ -14,8 +14,16 @@ import muramasa.antimatter.tool.IBasicAntimatterTool;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.gtreimagined.gt4r.proxy.ClientHandler;
+import org.gtreimagined.gt4r.proxy.ServerHandler;
 import org.gtreimagined.gtcore.data.GTCoreItems;
 import org.gtreimagined.gtcore.item.ItemPowerUnit;
 import org.gtreimagined.gt4r.config.OreConfigHandler;
@@ -45,7 +53,7 @@ import java.util.Arrays;
 import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
 import static org.gtreimagined.gt4r.data.Materials.Steel;
 
-
+@Mod(GT4RRef.ID)
 public class GT4Reimagined extends AntimatterMod {
 
     public static GT4Reimagined INSTANCE;
@@ -55,6 +63,10 @@ public class GT4Reimagined extends AntimatterMod {
     public GT4Reimagined() {
         super();
         INSTANCE = this;
+        GT4Reimagined.PROXY = DistExecutor.runForDist(() -> ClientHandler::new, () -> ServerHandler::new); // todo: scheduled to change in new Forge
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::serverSetup);
         AntimatterDynamics.clientProvider(GT4RRef.ID, () -> new AntimatterBlockStateProvider(GT4RRef.ID, GT4RRef.NAME + " BlockStates"));
         AntimatterDynamics.clientProvider(GT4RRef.ID, () -> new GT4RItemModelProvider(GT4RRef.ID, GT4RRef.NAME + " Item Models"));
         AntimatterDynamics.clientProvider(GT4RRef.ID, GT4RLocalizations.en_US::new);
@@ -135,5 +147,15 @@ public class GT4Reimagined extends AntimatterMod {
     @Override
     public String getId() {
         return GT4RRef.ID;
+    }
+
+    private void clientSetup(final FMLClientSetupEvent e) {
+        ClientHandler.setup();
+    }
+
+    private void setup(final FMLCommonSetupEvent e) {
+    }
+
+    private void serverSetup(final FMLDedicatedServerSetupEvent event){
     }
 }
