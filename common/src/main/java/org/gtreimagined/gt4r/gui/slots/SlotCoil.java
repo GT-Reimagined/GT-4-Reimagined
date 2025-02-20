@@ -3,11 +3,11 @@ package org.gtreimagined.gt4r.gui.slots;
 import muramasa.antimatter.blockentity.BlockEntityMachine;
 import muramasa.antimatter.capability.IGuiHandler;
 import muramasa.antimatter.capability.IMachineHandler;
-import muramasa.antimatter.capability.item.ExtendedItemContainer;
 import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.gui.slot.AbstractSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.gtreimagined.gt4r.blockentity.multi.BlockEntityIndustrialBlastFurnace;
 import org.gtreimagined.gt4r.blockentity.single.BlockEntitySmelter;
@@ -16,7 +16,7 @@ import org.gtreimagined.gt4r.data.Machines;
 import org.gtreimagined.gt4r.data.RecipeMaps;
 
 public class SlotCoil extends AbstractSlot<SlotCoil> {
-    public SlotCoil(SlotType<SlotCoil> type, IGuiHandler tile, ExtendedItemContainer stackHandler, int index, int xPosition, int yPosition) {
+    public SlotCoil(SlotType<SlotCoil> type, IGuiHandler tile, IItemHandler stackHandler, int index, int xPosition, int yPosition) {
         super(type, tile, stackHandler, index, xPosition, yPosition);
     }
 

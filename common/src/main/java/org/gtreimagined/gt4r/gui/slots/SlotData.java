@@ -1,14 +1,14 @@
 package org.gtreimagined.gt4r.gui.slots;
 
 import muramasa.antimatter.capability.IGuiHandler;
-import muramasa.antimatter.capability.item.ExtendedItemContainer;
 import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.gui.slot.AbstractSlot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 
 public class SlotData extends AbstractSlot<SlotData> {
-    public SlotData(SlotType<SlotData> type, IGuiHandler tile, ExtendedItemContainer stackHandler, int index, int x, int y) {
+    public SlotData(SlotType<SlotData> type, IGuiHandler tile, IItemHandler stackHandler, int index, int x, int y) {
         super(type, tile, stackHandler, index, x, y);
     }
 

@@ -1,7 +1,6 @@
 package org.gtreimagined.gt4r.gui.slots;
 
 import muramasa.antimatter.capability.IGuiHandler;
-import muramasa.antimatter.capability.item.ExtendedItemContainer;
 import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.gui.slot.AbstractSlot;
 import muramasa.antimatter.gui.slot.IClickableSlot;
@@ -11,10 +10,11 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 
 public class SlotQuantum extends AbstractSlot<SlotQuantum> implements IClickableSlot {
-    public SlotQuantum(SlotType<SlotQuantum> type, IGuiHandler tile, ExtendedItemContainer stackHandler, int index, int x, int y) {
+    public SlotQuantum(SlotType<SlotQuantum> type, IGuiHandler tile, IItemHandler stackHandler, int index, int x, int y) {
         super(type, tile, stackHandler, index, x, y);
     }
 

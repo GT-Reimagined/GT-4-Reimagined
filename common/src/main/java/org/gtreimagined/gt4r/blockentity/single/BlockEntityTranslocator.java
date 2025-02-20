@@ -6,7 +6,6 @@ import earth.terrarium.botarium.common.fluid.base.PlatformFluidHandler;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import muramasa.antimatter.blockentity.BlockEntityMachine;
-import muramasa.antimatter.capability.item.ExtendedItemContainer;
 import muramasa.antimatter.capability.machine.MachineEnergyHandler;
 import muramasa.antimatter.gui.GuiInstance;
 import muramasa.antimatter.gui.IGuiElement;
@@ -31,6 +30,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import tesseract.TesseractCapUtils;
 import tesseract.TesseractGraphWrappers;
 import org.gtreimagined.gt4r.gui.ButtonOverlays;
@@ -110,7 +110,7 @@ public abstract class BlockEntityTranslocator<T extends BlockEntityTranslocator<
 
     public static class BlockEntityItemTranslocator extends BlockEntityTranslocator<BlockEntityItemTranslocator> {
         public BlockEntityItemTranslocator(Machine<?> type, BlockPos pos, BlockState state) {
-            super(type, pos, state, ExtendedItemContainer.class);
+            super(type, pos, state, IItemHandler.class);
         }
 
         protected boolean processOutput() {
@@ -133,7 +133,7 @@ public abstract class BlockEntityTranslocator<T extends BlockEntityTranslocator<
         public boolean accepts(ItemStack stack){
             boolean hasItem = itemHandler.map(h -> {
                 List<Item> list = new ObjectArrayList<>();
-                ExtendedItemContainer outputs = h.getHandler(SlotType.DISPLAY_SETTABLE);
+                IItemHandler outputs = h.getHandler(SlotType.DISPLAY_SETTABLE);
                 for (int i = 0; i < outputs.getSlots(); i++) {
                     ItemStack slot = outputs.getStackInSlot(i);
                     if (!slot.isEmpty()) {
@@ -179,7 +179,7 @@ public abstract class BlockEntityTranslocator<T extends BlockEntityTranslocator<
         public boolean accepts(FluidHolder stack){
             boolean hasItem = itemHandler.map(h -> {
                 List<Item> list = new ObjectArrayList<>();;
-                ExtendedItemContainer outputs = h.getHandler(SlotType.FLUID_DISPLAY_SETTABLE);
+                IItemHandler outputs = h.getHandler(SlotType.FLUID_DISPLAY_SETTABLE);
                 for (int i = 0; i < outputs.getSlots(); i++) {
                     ItemStack slot = outputs.getStackInSlot(i);
                     if (!slot.isEmpty()) {

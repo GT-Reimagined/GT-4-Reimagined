@@ -2,7 +2,6 @@ package org.gtreimagined.gt4r.cover;
 
 import muramasa.antimatter.blockentity.BlockEntityMachine;
 import muramasa.antimatter.capability.ICoverHandler;
-import muramasa.antimatter.capability.item.ExtendedItemContainer;
 import muramasa.antimatter.cover.CoverFactory;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.util.AntimatterCapUtils;
@@ -18,6 +17,7 @@ import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 import tesseract.TesseractCapUtils;
 
@@ -31,7 +31,7 @@ public class CoverConveyor extends CoverBasicTransport {
 
     @Override
     public <T> boolean blocksCapability(Class<T> cap, Direction side) {
-        return cap != ExtendedItemContainer.class;
+        return cap != IItemHandler.class;
     }
 
     @Override

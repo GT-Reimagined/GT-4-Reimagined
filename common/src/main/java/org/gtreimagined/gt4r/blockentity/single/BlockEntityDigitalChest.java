@@ -77,7 +77,7 @@ public class BlockEntityDigitalChest extends BlockEntityMachine<BlockEntityDigit
                     if (i.getHandler(SlotTypes.DATA).getStackInSlot(0).getItem() == GTCoreItems.DataOrb){
                         ITrackedHandler storage = i.getHandler(SlotType.STORAGE);
                         if (!isInventoryEmpty(storage)){
-                            CompoundTag nbt = ((TrackedItemHandler<?>)storage).serialize(new CompoundTag());
+                            CompoundTag nbt = storage.serializeNBT();
                             ItemStack newStack = new ItemStack(GT4RItems.StorageDataOrb);
                             newStack.getOrCreateTag().put("Data", nbt);
                             i.getHandler(SlotTypes.DATA).setStackInSlot(0, newStack);

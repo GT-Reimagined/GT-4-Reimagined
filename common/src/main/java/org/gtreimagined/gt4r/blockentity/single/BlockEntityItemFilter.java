@@ -3,7 +3,6 @@ package org.gtreimagined.gt4r.blockentity.single;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import muramasa.antimatter.blockentity.BlockEntityMachine;
 import muramasa.antimatter.capability.IFilterableHandler;
-import muramasa.antimatter.capability.item.ExtendedItemContainer;
 import muramasa.antimatter.capability.machine.MachineEnergyHandler;
 import muramasa.antimatter.gui.GuiInstance;
 import muramasa.antimatter.gui.IGuiElement;
@@ -28,6 +27,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 import tesseract.TesseractCapUtils;
 import org.gtreimagined.gt4r.gui.ButtonOverlays;
@@ -61,7 +61,7 @@ public class BlockEntityItemFilter extends BlockEntityMachine<BlockEntityItemFil
         if (slotType == SlotType.STORAGE){
             boolean hasItem = itemHandler.map(h -> {
                 List<Item> list = new ObjectArrayList<>();
-                ExtendedItemContainer outputs = h.getHandler(SlotType.DISPLAY_SETTABLE);
+                IItemHandler outputs = h.getHandler(SlotType.DISPLAY_SETTABLE);
                 for (int i = 0; i < outputs.getSlots(); i++) {
                     ItemStack slotStack = outputs.getStackInSlot(i);
                     if (!slotStack.isEmpty()) {
