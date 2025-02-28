@@ -1,10 +1,8 @@
 package org.gtreimagined.gt4r.blockentity.multi;
 
-import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import muramasa.antimatter.blockentity.multi.BlockEntityBasicMultiMachine;
 import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.machine.types.Machine;
-import muramasa.antimatter.util.AntimatterCapUtils;
 import muramasa.antimatter.util.Utils;
 import muramasa.antimatter.util.int3;
 import net.minecraft.core.BlockPos;
@@ -12,6 +10,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import tesseract.TesseractCapUtils;
@@ -51,7 +50,7 @@ public class BlockEntityCokeOven extends BlockEntityBasicMultiMachine<BlockEntit
                     if (itemHandler1 != null){
                         itemHandler.ifPresent(i -> Utils.transferItems(i.getHandler(SlotType.IT_OUT), itemHandler1, false));
                     }
-                    var fluidHandler1 = FluidHooks.safeGetBlockFluidManager(blockEntity, Direction.UP).orElse(null);
+                    var fluidHandler1 = blockEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, Direction.UP).resolve().orElse(null);
                     if (fluidHandler1 != null){
                         fluidHandler.ifPresent(f -> Utils.transferFluids(f.getOutputTanks(), fluidHandler1));
                     }

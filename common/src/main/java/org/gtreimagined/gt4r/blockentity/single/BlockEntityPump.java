@@ -1,12 +1,11 @@
 package org.gtreimagined.gt4r.blockentity.single;
 
 import com.gtnewhorizon.structurelib.util.PlatformUtils;
-import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import muramasa.antimatter.blockentity.BlockEntityMachine;
 import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.machine.MachineState;
 import muramasa.antimatter.machine.types.Machine;
-import muramasa.antimatter.util.FluidPlatformUtils;
+import muramasa.antimatter.util.FluidUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -21,6 +20,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import tesseract.TesseractGraphWrappers;
 
 import java.util.ArrayList;
@@ -49,7 +50,7 @@ public class BlockEntityPump extends BlockEntityMachine<BlockEntityPump> {
             ItemStack stack = i.getHandler(SlotType.STORAGE).getStackInSlot(0);
             return stack.isEmpty() || stack.getItem() instanceof BlockItem;
         }).orElse(false)) {
-            if (fluidHandler.map(f -> f.getOutputTanks().getTank(0).getStoredFluid().getFluidAmount() + 1000 <= f.getOutputTanks().getTank(0).getCapacity()).orElse(false) && energyHandler.map(e -> e.getEnergy() >= 2000).orElse(false)) {
+            if (fluidHandler.map(f -> f.getOutputTanks().getTank(0).getFluid().getAmount() + 1000 <= f.getOutputTanks().getTank(0).getCapacity()).orElse(false) && energyHandler.map(e -> e.getEnergy() >= 2000).orElse(false)) {
                 boolean tMovedOneDown = false;
 
                 if (level.getGameTime()%100==0) {
@@ -165,9 +166,9 @@ public class BlockEntityPump extends BlockEntityMachine<BlockEntityPump> {
                 return false;
             }
             if (fluid.isSource(fluidState)) {
-                FluidHolder stack = FluidPlatformUtils.createFluidStack(fluid, 1000 * TesseractGraphWrappers.dropletMultiplier);
-                if (fluidHandler.map(f -> f.canOutputsFit(new FluidHolder[]{stack})).orElse(false) && energyHandler.map(e -> e.getEnergy() >= 1000).orElse(false)){
-                    fluidHandler.ifPresent(f -> f.fillOutput(stack, false));
+                FluidStack stack = new FluidStack(fluid, 1000);
+                if (fluidHandler.map(f -> f.canOutputsFit(new FluidStack[]{stack})).orElse(false) && energyHandler.map(e -> e.getEnergy() >= 1000).orElse(false)){
+                    fluidHandler.ifPresent(f -> f.fillOutput(stack, FluidAction.EXECUTE));
                     energyHandler.ifPresent(e -> e.extractEu(1000, false));
                 } else {
                     return false;
@@ -192,7 +193,7 @@ public class BlockEntityPump extends BlockEntityMachine<BlockEntityPump> {
     @Override
     public void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
-        tag.put("Fluid", FluidPlatformUtils.createFluidStack(fluid, 1).serialize());
+        tag.put("Fluid", new FluidStack(fluid, 1).writeToNBT(new CompoundTag()));
         tag.putInt("pumpHeadY", pumpHeadY);
         ListTag nbtTagList = new ListTag();
         for (int i = 0; i < mPumpList.size(); i++) {
@@ -218,7 +219,7 @@ public class BlockEntityPump extends BlockEntityMachine<BlockEntityPump> {
             BlockPos pos = new BlockPos(itemTags.getInt("X"), itemTags.getInt("Y"), itemTags.getInt("Z"));
             mPumpList.add(pos);
         }
-        this.fluid = FluidPlatformUtils.INSTANCE.fromTag(tag.getCompound("Fluid")).getFluid();
+        this.fluid = FluidUtils.fromTag(tag.getCompound("Fluid")).getFluid();
         this.pumpHeadY = tag.getInt("pumpHeadY");
     }
 

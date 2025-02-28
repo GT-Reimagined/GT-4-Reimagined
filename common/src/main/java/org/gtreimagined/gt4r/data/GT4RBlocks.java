@@ -1,6 +1,5 @@
 package org.gtreimagined.gt4r.data;
 
-import earth.terrarium.botarium.common.registry.fluid.FluidProperties;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.fluid.AntimatterFluid;

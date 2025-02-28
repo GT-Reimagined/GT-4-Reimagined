@@ -58,7 +58,6 @@ dependencies {
     modImplementation("com.blamejared.crafttweaker:CraftTweaker-forge-1.18.2:${project.crafttweaker_version}")
     modImplementation("dev.trinsdar:arrp-forge:0.6.7.1")
     modImplementation("dev.trinsdar:terraform-utils-v1:3.1.5")
-    modImplementation("earth.terrarium:botarium-forge-1.18.2:${project.botarium_version}")
     modImplementation("org.gt-reimagined:structurelib-forge:${project.structurelib_version}-${project.minecraft_version}")
     modImplementation("com.teamresourceful.resourcefullib:resourcefullib-forge-1.18.2:${project.resourcefullib_version}")
     modImplementation("maven.modrinth:carbon-config:${project.carbon_config_forge_version}")

@@ -2,7 +2,6 @@ package org.gtreimagined.gt4r.blockentity.single;
 
 import muramasa.antimatter.blockentity.BlockEntityMachine;
 import muramasa.antimatter.machine.types.Machine;
-import muramasa.antimatter.util.AntimatterCapUtils;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

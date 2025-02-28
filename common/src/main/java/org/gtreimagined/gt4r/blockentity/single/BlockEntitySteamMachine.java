@@ -1,6 +1,5 @@
 package org.gtreimagined.gt4r.blockentity.single;
 
-import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import muramasa.antimatter.blockentity.BlockEntityMachine;
 import muramasa.antimatter.capability.machine.MachineFluidHandler;
 import muramasa.antimatter.capability.machine.MachineRecipeHandler;
@@ -22,6 +21,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.Nullable;
 import tesseract.TesseractGraphWrappers;
 import org.gtreimagined.gt4r.data.GT4RItems;
@@ -69,7 +69,7 @@ public class BlockEntitySteamMachine extends BlockEntityMachine<BlockEntitySteam
 
         @Override
         public boolean consumeResourceForRecipe(boolean simulate) {
-            return tile.fluidHandler.map(t -> t.consumeTaggedInput(STEAM, getPower() * TesseractGraphWrappers.dropletMultiplier, simulate).getFluidAmount() > 0)
+            return tile.fluidHandler.map(t -> t.consumeTaggedInput(STEAM, (int) getPower(), simulate).getAmount() > 0)
                     .orElse(false);
         }
         //Allow up to 16 .
@@ -125,7 +125,7 @@ public class BlockEntitySteamMachine extends BlockEntityMachine<BlockEntitySteam
         }
 
         @Override
-        public boolean accepts(FluidHolder stack) {
+        public boolean accepts(FluidStack stack) {
             return super.accepts(stack) || stack.getFluid().builtInRegistryHolder().is(STEAM);
         }
 

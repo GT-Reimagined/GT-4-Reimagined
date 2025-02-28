@@ -1,15 +1,15 @@
 package org.gtreimagined.gt4r.cover;
 
-import earth.terrarium.botarium.common.fluid.base.FluidContainer;
 import muramasa.antimatter.capability.ICoverHandler;
 import muramasa.antimatter.cover.CoverFactory;
 import muramasa.antimatter.machine.Tier;
-import muramasa.antimatter.util.AntimatterCapUtils;
+import muramasa.antimatter.util.FluidUtils;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.Nullable;
 import tesseract.TesseractCapUtils;
 
@@ -29,7 +29,7 @@ public class CoverPump extends CoverBasicTransport {
 
     @Override
     public <T> boolean blocksCapability(Class<T> cap, Direction side) {
-        return cap != FluidContainer.class;
+        return cap != IFluidHandler.class;
     }
 
     @Override
@@ -65,7 +65,7 @@ public class CoverPump extends CoverBasicTransport {
         BlockPos finalTo = to;
         if (cover.canMove(side)) {
             Direction finalFromSide = fromSide;
-            AntimatterCapUtils.INSTANCE.getFluidHandler(cover.source().getTile().getLevel(), from, fromSide).ifPresent(ih -> AntimatterCapUtils.INSTANCE.getFluidHandler(cover.source().getTile().getLevel(), finalTo, finalFromSide.getOpposite()).ifPresent(other -> Utils.transferFluids(ih, other, Integer.MAX_VALUE)));
+            FluidUtils.getFluidHandler(cover.source().getTile().getLevel(), from, fromSide).ifPresent(ih -> FluidUtils.getFluidHandler(cover.source().getTile().getLevel(), finalTo, finalFromSide.getOpposite()).ifPresent(other -> Utils.transferFluids(ih, other, Integer.MAX_VALUE)));
         }
     }
 

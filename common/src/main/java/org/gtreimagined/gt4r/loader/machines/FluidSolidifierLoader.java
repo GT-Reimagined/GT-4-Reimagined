@@ -34,11 +34,11 @@ public class FluidSolidifierLoader {
     }
 
     private static void add(Material m, ItemStack output, String suffix, Item mold, float ratio, int power) {
-        long amount = amount(ratio);
+        int amount = amount(ratio);
         add(m, output, suffix, mold, amount, power);
     }
 
-    private static void add(Material m, ItemStack output, String suffix, Item mold, long amount, int power) {
+    private static void add(Material m, ItemStack output, String suffix, Item mold, int amount, int power) {
         if (!m.has(LIQUID)) return;
         FLUID_SOLIDIFIER.RB()
                 .ii(RecipeIngredient.of(mold,1))
@@ -47,8 +47,8 @@ public class FluidSolidifierLoader {
                 .add(m.getId() + "_" + suffix, (long)(16 * ((float)amount / L)), power);
     }
 
-    private static long amount(float ingots){
-        return (long) (L * ingots);
+    private static int amount(float ingots){
+        return (int) (L * ingots);
     }
 
 }

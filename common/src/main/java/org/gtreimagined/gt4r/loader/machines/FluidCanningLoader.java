@@ -1,7 +1,6 @@
 package org.gtreimagined.gt4r.loader.machines;
 
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
-import muramasa.antimatter.util.FluidPlatformUtils;
 import muramasa.antimatter.util.RegistryUtils;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.resources.ResourceLocation;
@@ -9,6 +8,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import tesseract.TesseractCapUtils;
 import tesseract.TesseractGraphWrappers;
@@ -27,8 +27,8 @@ public class FluidCanningLoader {
             //Only the source, so we don't get duplicates.
             if (!fluid.isSource(fluid.defaultFluidState())) return;
             ResourceLocation fluidId = RegistryUtils.getIdFromFluid(fluid);
-            RecipeMaps.FLUID_CANNER.RB().ii(RecipeIngredient.of(bucket, 1)).fo(FluidPlatformUtils.createFluidStack(fluid, 1000 * TesseractGraphWrappers.dropletMultiplier)).io(Items.BUCKET.getDefaultInstance()).add(fluidId.getNamespace() + "_" + fluidId.getPath() + "_bucket",20, 8);
-            RecipeMaps.FLUID_CANNER.RB().ii(RecipeIngredient.of(Items.BUCKET, 1)).fi(FluidPlatformUtils.createFluidStack(fluid, 1000 * TesseractGraphWrappers.dropletMultiplier)).io(new ItemStack(bucket, 1)).add("bucket_from_" + fluidId.getNamespace() + "_" + fluidId.getPath(),20, 8);
+            RecipeMaps.FLUID_CANNER.RB().ii(RecipeIngredient.of(bucket, 1)).fo(new FluidStack(fluid, 1000)).io(Items.BUCKET.getDefaultInstance()).add(fluidId.getNamespace() + "_" + fluidId.getPath() + "_bucket",20, 8);
+            RecipeMaps.FLUID_CANNER.RB().ii(RecipeIngredient.of(Items.BUCKET, 1)).fi(new FluidStack(fluid, 1000)).io(new ItemStack(bucket, 1)).add("bucket_from_" + fluidId.getNamespace() + "_" + fluidId.getPath(),20, 8);
 
             /*AntimatterAPI.all(ItemFluidCell.class, emptyCell -> {
                 int size = emptyCell.getCapacity();

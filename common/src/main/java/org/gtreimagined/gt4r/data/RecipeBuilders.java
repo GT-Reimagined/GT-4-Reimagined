@@ -10,7 +10,7 @@ public class RecipeBuilders {
         public IRecipe add(String domain, String id) {
             IRecipe recipe = super.add(domain, id);
             if (recipe.hasInputFluids()) {
-                RecipeMaps.LARGE_GAS_FUELS.RB().fi(recipe.getInputFluids().get(0).copyMB(50)).add(domain, id,1, recipe.getDuration() * recipe.getPower() * 50L, recipe.getSpecialValue(), recipe.getAmps());
+                RecipeMaps.LARGE_GAS_FUELS.RB().fi(recipe.getInputFluids().get(0).copy(50)).add(domain, id,1, recipe.getDuration() * recipe.getPower() * 50L, recipe.getSpecialValue(), recipe.getAmps());
             }
             return recipe;
         }

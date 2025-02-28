@@ -1,17 +1,16 @@
 package org.gtreimagined.gt4r.loader.machines;
 
-import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialStack;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import muramasa.antimatter.recipe.map.RecipeBuilder;
-import muramasa.antimatter.util.FluidPlatformUtils;
 import muramasa.antimatter.util.RegistryUtils;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraftforge.fluids.FluidStack;
 import org.gtreimagined.gtcore.data.GTCoreTags;
 import tesseract.TesseractGraphWrappers;
 import org.gtreimagined.gt4r.data.GT4RBlocks;
@@ -42,7 +41,7 @@ public class CentrifugingLoader {
         ItemStack[] itemStacks = AntimatterMaterials.Lava.getProcessInto().stream().filter(t -> t.m.has(AntimatterMaterialTypes.DUST_TINY)).map(t -> new ItemStack(AntimatterMaterialTypes.DUST_TINY.get(t.m), t.s))
                 .toArray(ItemStack[]::new);
         CENTRIFUGE.RB().fi(Lava.getLiquid(100)).io(itemStacks).outputChances(0.2, 0.1, 0.025, 0.025, 0.01).add("lava",200, 16);
-        CENTRIFUGE.RB().fi(FluidPlatformUtils.createFluidStack(GT4RBlocks.PAHOEHOE_LAVA.getFluid(), 100 * TesseractGraphWrappers.dropletMultiplier)).io(itemStacks).outputChances(0.2, 0.1, 0.025, 0.025, 0.01).add("pahoehoe_lava", 200, 8);
+        CENTRIFUGE.RB().fi(new FluidStack(GT4RBlocks.PAHOEHOE_LAVA.getFluid(), 100)).io(itemStacks).outputChances(0.2, 0.1, 0.025, 0.025, 0.01).add("pahoehoe_lava", 200, 8);
         add(EnderEye, 10, 792);
         CENTRIFUGE.RB().ii(of(MAGMA_CREAM, 1)).io(new ItemStack(SLIME_BALL), new ItemStack(BLAZE_POWDER)).add("magma_cream",156,16);
         CENTRIFUGE.RB().ii(of(DIRT, 64)).io(new ItemStack(Items.SAND, 32), new ItemStack(CLAY_BALL, 2), new ItemStack(Plantball, 4)).add("dirt",3125, 16);
@@ -136,7 +135,7 @@ public class CentrifugingLoader {
 
     private static void add(Material dust, int count, long euT, int duration) {
         List<MaterialStack> stacks = dust.getProcessInto();
-        List<FluidHolder> fluidStacks = stacks.stream().filter(t -> (t.m.has(AntimatterMaterialTypes.LIQUID) || t.m.has(AntimatterMaterialTypes.GAS)) && !t.m.has(AntimatterMaterialTypes.DUST)).map(t -> {
+        List<FluidStack> fluidStacks = stacks.stream().filter(t -> (t.m.has(AntimatterMaterialTypes.LIQUID) || t.m.has(AntimatterMaterialTypes.GAS)) && !t.m.has(AntimatterMaterialTypes.DUST)).map(t -> {
             return t.m.has(AntimatterMaterialTypes.LIQUID) ? t.m.getLiquid(t.s * 1000) : t.m.getGas(t.s * 1000);
         }).toList();
         List<ItemStack> itemStacks = dust.getProcessInto().stream().filter(t -> t.m.has(AntimatterMaterialTypes.DUST)).map(t -> new ItemStack(AntimatterMaterialTypes.DUST.get(t.m), t.s))
@@ -148,14 +147,12 @@ public class CentrifugingLoader {
             rb.ii(RecipeIngredient.of(AntimatterMaterialTypes.DUST.get(dust), count));
         }
         if (!itemStacks.isEmpty()) rb.io(itemStacks.toArray(new ItemStack[0]));
-        if (!fluidStacks.isEmpty()) rb.fo(fluidStacks.toArray(new FluidHolder[0]));
+        if (!fluidStacks.isEmpty()) rb.fo(fluidStacks.toArray(new FluidStack[0]));
         rb.add(dust.getId() + "_dust", duration, euT);
     }
 
-    private static FluidHolder getFluid(Material mat, int amount){
-        if (mat.has(AntimatterMaterialTypes.LIQUID)){
-            return mat.getLiquid(amount);
-        } else if (mat.has(AntimatterMaterialTypes.GAS)){
+    private static FluidStack getFluid(Material mat, int amount){
+        if (mat.has(AntimatterMaterialTypes.GAS)){
             return mat.getGas(amount);
         } else {
             return mat.getLiquid(amount);
