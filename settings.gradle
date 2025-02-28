@@ -22,17 +22,17 @@ pluginManagement {
     }
 }
 include 'tesseract-forge'
-project(':tesseract-forge').setProjectDir(new File("GT-Reimagined-Lib/TesseractAPI/forge"))
+project(':tesseract-forge').setProjectDir(new File("GT-Lib/TesseractAPI/forge"))
 include 'tesseract-common'
-project(':tesseract-common').setProjectDir(new File("GT-Reimagined-Lib/TesseractAPI/common"))
+project(':tesseract-common').setProjectDir(new File("GT-Lib/TesseractAPI/common"))
 include 'tesseract-fabric'
-project(':tesseract-fabric').setProjectDir(new File("GT-Reimagined-Lib/TesseractAPI/fabric"))
+project(':tesseract-fabric').setProjectDir(new File("GT-Lib/TesseractAPI/fabric"))
 
 
 include("antimatter-common")
 //include("antimatter-fabric")
 //include("antimatter-forge")
-project(':antimatter-common').setProjectDir(new File("GT-Reimagined-Lib/common"))
+project(':antimatter-common').setProjectDir(new File("GT-Lib/common"))
 //project(':antimatter-forge').setProjectDir(new File("GT-Reimagined-Lib/forge"))
 //project(':antimatter-fabric').setProjectDir(new File("GT-Reimagined-Lib/fabric"))
 include("common")
