@@ -9,7 +9,7 @@ import muramasa.antimatter.gui.slot.SlotFake;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import tesseract.api.item.ExtendedItemContainer;
+import net.minecraftforge.items.IItemHandler;
 import org.gtreimagined.gt4r.blockentity.single.BlockEntityQuantumChest;
 
 public class ContainerQuantumChest extends ContainerBasicMachine<BlockEntityQuantumChest> {
@@ -49,7 +49,7 @@ public class ContainerQuantumChest extends ContainerBasicMachine<BlockEntityQuan
                         itemstack.setCount(j);
                         slot.setChanged();
                         if (slot instanceof AbstractSlot<?> abstractSlot) {
-                            ExtendedItemContainer handle = abstractSlot.getContainer();
+                            IItemHandler handle = abstractSlot.getContainer();
                             if (handle instanceof TrackedItemHandler<?>) {
                                 ((TrackedItemHandler<?>) handle).onContentsChanged(slot.index);
                             }

@@ -1,6 +1,5 @@
 package org.gtreimagined.gt4r.data;
 
-import earth.terrarium.botarium.common.registry.fluid.FluidProperties;
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.fluid.AntimatterFluid;
@@ -16,6 +15,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
+import net.minecraftforge.fluids.FluidAttributes;
 import org.gtreimagined.gt4r.GT4RRef;
 import org.gtreimagined.gt4r.block.BlockCasing;
 import org.gtreimagined.gt4r.block.BlockColoredWall;
@@ -99,10 +99,9 @@ public class GT4RBlocks {
         return new int[]{basePressure / 6, basePressure / 6, basePressure / 3, basePressure, basePressure * 2, basePressure * 4};
     }
 
-    private static FluidProperties.Builder prepareAttributes() {
-        FluidProperties.Builder builder = FluidProperties.create();
-        return builder.still(PAHOEHOE_STILL_TEXTURE).flowing(PAHOEHOE_STILL_TEXTURE).overlay(OVERLAY_TEXTURE)
-                .viscosity(3000).density(6000).temperature(1200).sounds("bucket_fill", SoundEvents.BUCKET_FILL).sounds("bucket_empty", SoundEvents.BUCKET_EMPTY);
+    private static FluidAttributes.Builder prepareAttributes() {
+        return FluidAttributes.builder(PAHOEHOE_STILL_TEXTURE, PAHOEHOE_STILL_TEXTURE).overlay(OVERLAY_TEXTURE)
+                .viscosity(3000).density(6000).temperature(1200).sound(SoundEvents.BUCKET_FILL, SoundEvents.BUCKET_EMPTY);
     }
 
     private static Block.Properties prepareProperties() {

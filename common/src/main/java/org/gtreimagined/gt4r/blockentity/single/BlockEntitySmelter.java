@@ -1,6 +1,5 @@
 package org.gtreimagined.gt4r.blockentity.single;
 
-import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import muramasa.antimatter.blockentity.BlockEntityMachine;
 import muramasa.antimatter.capability.machine.MachineRecipeHandler;
 import muramasa.antimatter.machine.event.IMachineEvent;
@@ -9,6 +8,7 @@ import muramasa.antimatter.recipe.IRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.fluids.FluidStack;
 import org.gtreimagined.gt4r.blockentity.multi.BlockEntityIndustrialBlastFurnace;
 import org.gtreimagined.gt4r.data.RecipeMaps;
 
@@ -25,7 +25,7 @@ public class BlockEntitySmelter extends BlockEntityMachine<BlockEntitySmelter> {
                     maxHeat = 750;
                     ItemStack stack = (ItemStack) data[0];
                     if (!stack.isEmpty()) {
-                        IRecipe coilRecipe = RecipeMaps.SMELTER_COILS.find(new ItemStack[]{stack}, new FluidHolder[]{}, tile.tier, r -> r.getSpecialValue() > 0);
+                        IRecipe coilRecipe = RecipeMaps.SMELTER_COILS.find(new ItemStack[]{stack}, new FluidStack[]{}, tile.tier, r -> r.getSpecialValue() > 0);
                         if (coilRecipe != null) {
                             maxHeat += (coilRecipe.getSpecialValue() * stack.getCount());
                         }

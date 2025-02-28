@@ -2,7 +2,7 @@ package org.gtreimagined.gt4r.loader.crafting;
 
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
-import muramasa.antimatter.util.AntimatterPlatformUtils;
+import muramasa.antimatter.util.RegistryUtils;
 import muramasa.antimatter.util.TagUtils;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
@@ -23,14 +23,14 @@ public class WoodCrafting {
         if (AntimatterAPI.isModLoaded(GT4RRef.MOD_TERRESTRIA)){
             String[] woodTypes = {"cypress", "hemlock", "japanese_maple", "rainbow_eucalyptus", "redwood", "rubber", "sakura", "willow", "yucca_palm"};
             for (String woodType : woodTypes) {
-                addWoodRecipe(consumer, provider, GT4RRef.MOD_TERRESTRIA, TagUtils.getItemTag(new ResourceLocation(GT4RRef.MOD_TERRESTRIA, woodType + "_logs")), AntimatterPlatformUtils.INSTANCE.getItemFromID(new ResourceLocation(GT4RRef.MOD_TERRESTRIA, woodType + "_planks")));
+                addWoodRecipe(consumer, provider, GT4RRef.MOD_TERRESTRIA, TagUtils.getItemTag(new ResourceLocation(GT4RRef.MOD_TERRESTRIA, woodType + "_logs")), RegistryUtils.getItemFromID(new ResourceLocation(GT4RRef.MOD_TERRESTRIA, woodType + "_planks")));
             }
 
         }
         if (AntimatterAPI.isModLoaded(GT4RRef.MOD_CINDERSCAPES)){
             String[] woodTypes = {"scorched", "umbral"};
             for (String woodType : woodTypes) {
-                addWoodRecipe(consumer, provider, GT4RRef.MOD_CINDERSCAPES, TagUtils.getItemTag(new ResourceLocation(GT4RRef.MOD_CINDERSCAPES, woodType + "_stems")), AntimatterPlatformUtils.INSTANCE.getItemFromID(new ResourceLocation(GT4RRef.MOD_CINDERSCAPES, woodType + "_planks")));
+                addWoodRecipe(consumer, provider, GT4RRef.MOD_CINDERSCAPES, TagUtils.getItemTag(new ResourceLocation(GT4RRef.MOD_CINDERSCAPES, woodType + "_stems")), RegistryUtils.getItemFromID(new ResourceLocation(GT4RRef.MOD_CINDERSCAPES, woodType + "_planks")));
             }
 
         }
@@ -39,7 +39,7 @@ public class WoodCrafting {
             for (String woodType : woodTypes) {
                 ResourceLocation name = new ResourceLocation(GT4RRef.MOD_TERRESTRIA,woodType + "_planks");
                 ResourceLocation slab = new ResourceLocation(GT4RRef.MOD_TERRESTRIA,woodType + "_slab");
-                provider.addItemRecipe(consumer, GT4RRef.ID, slab.getPath() + "_to_" + name.getPath(), "slabs", AntimatterPlatformUtils.INSTANCE.getItemFromID(name), of('S', AntimatterPlatformUtils.INSTANCE.getItemFromID(slab)), "S", "S");
+                provider.addItemRecipe(consumer, GT4RRef.ID, slab.getPath() + "_to_" + name.getPath(), "slabs", RegistryUtils.getItemFromID(name), of('S', RegistryUtils.getItemFromID(slab)), "S", "S");
             }
 
         }
@@ -48,7 +48,7 @@ public class WoodCrafting {
             for (String woodType : woodTypes) {
                 ResourceLocation name = new ResourceLocation(GT4RRef.MOD_CINDERSCAPES,woodType + "_planks");
                 ResourceLocation slab = new ResourceLocation(GT4RRef.MOD_CINDERSCAPES,woodType + "_slab");
-                provider.addItemRecipe(consumer, GT4RRef.ID, slab.getPath() + "_to_" + name.getPath(), "slabs", AntimatterPlatformUtils.INSTANCE.getItemFromID(name), of('S', AntimatterPlatformUtils.INSTANCE.getItemFromID(slab)), "S", "S");
+                provider.addItemRecipe(consumer, GT4RRef.ID, slab.getPath() + "_to_" + name.getPath(), "slabs", RegistryUtils.getItemFromID(name), of('S', RegistryUtils.getItemFromID(slab)), "S", "S");
             }
         }
     }

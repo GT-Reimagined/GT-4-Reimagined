@@ -3,7 +3,6 @@ package org.gtreimagined.gt4r.loader.crafting;
 import muramasa.antimatter.data.AntimatterDefaultTools;
 import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.data.AntimatterMaterials;
-import muramasa.antimatter.data.ForgeCTags;
 import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.pipe.PipeSize;
@@ -12,6 +11,7 @@ import muramasa.antimatter.util.Utils;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraftforge.common.Tags;
 import org.gtreimagined.gtcore.data.GTCoreItems;
 import org.gtreimagined.gt4r.GT4RRef;
 import org.gtreimagined.gt4r.data.GT4RBlocks;
@@ -40,9 +40,9 @@ public class Parts {
         provider.addStackRecipe(output, GT4RRef.ID, "circuit_data_control", "parts",
                 new ItemStack(CircuitDataControl, 4), of('C', CIRCUITS_ADVANCED, 'c', CIRCUITS_DATA, 'P', IridiumReinforcedPlate), "CcC", "cPc", "CcC");
         provider.addStackRecipe(output, GT4RRef.ID, "comp_monitor", "parts",
-                new ItemStack(ComputerMonitor, 1), of2('A', AntimatterMaterialTypes.PLATE.getMaterialTag(Aluminium), 'G', ForgeCTags.GLASS_PANES, 'g', ForgeCTags.DYES_GREEN, 'R', ForgeCTags.DYES_RED, 'B', ForgeCTags.DYES_BLUE, 'D', AntimatterMaterialTypes.DUST.getMaterialTag(AntimatterMaterials.Glowstone)), "AgA", "RGB", "ADA");
+                new ItemStack(ComputerMonitor, 1), of2('A', AntimatterMaterialTypes.PLATE.getMaterialTag(Aluminium), 'G', Tags.Items.GLASS_PANES, 'g', Tags.Items.DYES_GREEN, 'R', Tags.Items.DYES_RED, 'B', Tags.Items.DYES_BLUE, 'D', AntimatterMaterialTypes.DUST.getMaterialTag(AntimatterMaterials.Glowstone)), "AgA", "RGB", "ADA");
         provider.addStackRecipe(output, GT4RRef.ID, "conv_module", "parts",
-                new ItemStack(ConveyorModule, 1), of('A', PLATES_IRON_ALUMINIUM, 'G', ForgeCTags.GLASS, 'B', BatteryRE, 'C', CIRCUITS_BASIC), "GGG", "AAA", "CBC");
+                new ItemStack(ConveyorModule, 1), of('A', PLATES_IRON_ALUMINIUM, 'G', Tags.Items.GLASS, 'B', BatteryRE, 'C', CIRCUITS_BASIC), "GGG", "AAA", "CBC");
         provider.addStackRecipe(output, GT4RRef.ID, "drain_expensive", "parts",
                 new ItemStack(Drain, 1), of('A', PLATES_IRON_ALUMINIUM, 'B', Items.IRON_BARS), "ABA", "B B", "ABA");
         provider.addStackRecipe(output, GT4RRef.ID, "sawblade", "parts",
@@ -180,7 +180,7 @@ public class Parts {
         provider.addItemRecipe(output, GT4RRef.ID, "neutron_reflector_normal", "parts",
                 NeutronReflector, of('C', AntimatterMaterialTypes.DUST.get(AntimatterMaterials.Coal), 'T', AntimatterMaterialTypes.DUST.get(Tin), 'I', AntimatterMaterialTypes.PLATE.get(AntimatterMaterials.Copper)), "TCT", "CIC", "TCT");
         provider.addItemRecipe(output, "upgrades", TransformerUpgrade,
-                of('G', ForgeCTags.GLASS, 'C', GT4RBlocks.CABLE_GOLD.getBlockItem(PipeSize.VTINY), 'T', Machines.TRANSFORMER.getItem(MV), 'c', CIRCUITS_BASIC), "GGG", "CTC", "GcG");
+                of('G', Tags.Items.GLASS, 'C', GT4RBlocks.CABLE_GOLD.getBlockItem(PipeSize.VTINY), 'T', Machines.TRANSFORMER.getItem(MV), 'c', CIRCUITS_BASIC), "GGG", "CTC", "GcG");
         provider.addItemRecipe(output, "upgrades", SteelUpgrade, of('S', PLATE.getMaterialTag(Steel), 'B', PLATE.getMaterialTag(Bronze)), "SSS", "SBS");
         provider.shapeless(output, GT4RRef.ID, "tape_from_empty", "tapes", new ItemStack(Tape), TapeEmpty, TapeEmpty, TapeEmpty, TapeEmpty);
         provider.shapeless(output, GT4RRef.ID, "duct_tape_from_empty", "tapes", new ItemStack(DuctTape), DuctTapeEmpty, DuctTapeEmpty, DuctTapeEmpty, DuctTapeEmpty);

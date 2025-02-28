@@ -1,7 +1,7 @@
 package org.gtreimagined.gt4r.loader.multi;
 
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
-import muramasa.antimatter.util.AntimatterPlatformUtils;
+import muramasa.antimatter.util.RegistryUtils;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -36,7 +36,7 @@ public class IndustrialSawmill {
 
 
     private static void addWoodRecipe(TagKey<Item> log, ItemLike wood){
-        String woodID = AntimatterPlatformUtils.INSTANCE.getIdFromItem(wood.asItem()).getPath().replace("_planks", "");
+        String woodID = RegistryUtils.getIdFromItem(wood.asItem()).getPath().replace("_planks", "");
         INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(log, 1)).fi(Water.getLiquid(40)).io(new ItemStack(wood, 6), DUST.get(Wood, 1)).add(woodID + "_log",200, 30);
         INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(log, 1)).fi(Lubricant.getLiquid(10)).io(new ItemStack(wood, 6), DUST.get(Wood, 1)).add(woodID + "_log_1",100, 30);
         INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(log, 1)).fi(DistilledWater.getLiquid(30)).io(new ItemStack(wood, 6), DUST.get(Wood, 1)).add(woodID + "_log_2",200, 30);
@@ -45,7 +45,7 @@ public class IndustrialSawmill {
     }
 
     private static void addWoodRecipe(TagKey<Item> log, ItemLike wood, ItemStack output){
-        String woodID = AntimatterPlatformUtils.INSTANCE.getIdFromItem(wood.asItem()).getPath().replace("_planks", "");
+        String woodID = RegistryUtils.getIdFromItem(wood.asItem()).getPath().replace("_planks", "");
         INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(log, 1)).fi(Water.getLiquid(40)).io(new ItemStack(wood, 6), DUST.get(Wood, 1), output).add(woodID + "_log",200, 30);
         INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(log, 1)).fi(Lubricant.getLiquid(10)).io(new ItemStack(wood, 6), DUST.get(Wood, 1), output).add(woodID + "_log_1",100, 30);
         INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(log, 1)).fi(DistilledWater.getLiquid(30)).io(new ItemStack(wood, 6), DUST.get(Wood, 1), output).add(woodID + "_log_2",200, 30);

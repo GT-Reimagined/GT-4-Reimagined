@@ -1,11 +1,8 @@
 package org.gtreimagined.gt4r.blockentity.single;
 
-import earth.terrarium.botarium.common.fluid.base.FluidContainer;
-import earth.terrarium.botarium.common.fluid.base.FluidHolder;
-import earth.terrarium.botarium.common.fluid.base.PlatformFluidHandler;
-import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import muramasa.antimatter.blockentity.BlockEntityMachine;
 import muramasa.antimatter.capability.CoverHandler;
+import muramasa.antimatter.capability.FluidHandler;
 import muramasa.antimatter.capability.fluid.FluidHandlerSidedWrapper;
 import muramasa.antimatter.capability.fluid.FluidTanks;
 import muramasa.antimatter.capability.machine.MachineFluidHandler;
@@ -13,6 +10,7 @@ import muramasa.antimatter.capability.machine.MachineRecipeHandler;
 import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.machine.event.MachineEvent;
 import muramasa.antimatter.machine.types.Machine;
+import muramasa.antimatter.util.FluidUtils;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -21,8 +19,11 @@ import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import org.jetbrains.annotations.NotNull;
-import tesseract.FluidPlatformUtils;
 import tesseract.TesseractCapUtils;
 import tesseract.TesseractGraphWrappers;
 
@@ -48,12 +49,12 @@ public class BlockEntityHeatExchanger extends BlockEntityMachine<BlockEntityHeat
             @Override
             public boolean canOutput() {
                 if (heat > maxHeat) return false;
-                List<FluidHolder> output = new ArrayList<>();
+                List<FluidStack> output = new ArrayList<>();
                 output.add(Steam.getGas(160));
                 if (activeRecipe != null && activeRecipe.hasOutputFluids()){
                     output.addAll(Arrays.asList(activeRecipe.getOutputFluids()));
                 }
-                return super.canOutput() && tile.fluidHandler.map(t -> t.canOutputsFit(output.toArray(new FluidHolder[0]))).orElse(false);
+                return super.canOutput() && tile.fluidHandler.map(t -> t.canOutputsFit(output.toArray(new FluidStack[0]))).orElse(false);
             }
 
             @Override
@@ -80,7 +81,7 @@ public class BlockEntityHeatExchanger extends BlockEntityMachine<BlockEntityHeat
                 consumedWater = false;
                 if (flag && this.heat + activeRecipe.getSpecialValue() >= 80){
                     tile.fluidHandler.ifPresent(h -> {
-                        FluidHolder stack = h.drainInput(FluidPlatformUtils.createFluidStack(h.getInputTanks().getFluidInTank(0).getFluid(), TesseractGraphWrappers.dropletMultiplier), false);
+                        FluidStack stack = h.drainInput(new FluidStack(h.getInputTanks().getFluidInTank(0).getFluid(), 1), FluidAction.EXECUTE);
                         if (!stack.isEmpty()){
                             consumedWater = true;
                         }
@@ -103,7 +104,7 @@ public class BlockEntityHeatExchanger extends BlockEntityMachine<BlockEntityHeat
             }
 
             @Override
-            public boolean accepts(FluidHolder stack) {
+            public boolean accepts(FluidStack stack) {
                 return super.accepts(stack) || stack.getFluid() == Fluids.WATER || stack.getFluid() == DistilledWater.getLiquid();
             }
 
@@ -129,7 +130,7 @@ public class BlockEntityHeatExchanger extends BlockEntityMachine<BlockEntityHeat
             super(tile, capacity);
             tanks.put(FluidDirection.INPUT, FluidTanks.create(tile, SlotType.FL_IN, b -> {
                 for (int i = 0; i < 2; i++) {
-                    Predicate<FluidHolder> validator = f -> {
+                    Predicate<FluidStack> validator = f -> {
                         boolean check = f.getFluid() != Fluids.WATER && f.getFluid() != DistilledWater.getLiquid();
                         return check;
                     };
@@ -157,52 +158,52 @@ public class BlockEntityHeatExchanger extends BlockEntityMachine<BlockEntityHeat
             super.onUpdate();
             Direction right = tile.getFacing().getCounterClockWise();
             Direction left = tile.getFacing().getClockWise();
-            tile.fluidHandler.ifPresent(f -> TesseractCapUtils.INSTANCE.getFluidHandler(tile.level, tile.getBlockPos().relative(right), right.getOpposite()).ifPresent(t -> Utils.transferFluids(f.getOutputTanks().getTank(0), t, 1000)));
-            tile.fluidHandler.ifPresent(f -> TesseractCapUtils.INSTANCE.getFluidHandler(tile.level, tile.getBlockPos().relative(DOWN), UP).ifPresent(t -> Utils.transferFluids(f.getOutputTanks().getTank(1), t, 1000)));
-            tile.fluidHandler.side(left).ifPresent(t -> TesseractCapUtils.INSTANCE.getFluidHandler(tile.level, tile.getBlockPos().relative(left), left.getOpposite()).ifPresent(f -> transferFluids(f, ((HeatExchangerFluidHandlerSidedWrapper)t), 1000)));
-            tile.fluidHandler.side(UP).ifPresent(t -> TesseractCapUtils.INSTANCE.getFluidHandler(tile.level, tile.getBlockPos().relative(UP), DOWN).ifPresent(f -> transferFluids(f, ((HeatExchangerFluidHandlerSidedWrapper)t), 1000)));
+            tile.fluidHandler.ifPresent(f -> FluidUtils.getFluidHandler(tile.level, tile.getBlockPos().relative(right), right.getOpposite()).ifPresent(t -> Utils.transferFluids(f.getOutputTanks().getTank(0), t, 1000)));
+            tile.fluidHandler.ifPresent(f -> FluidUtils.getFluidHandler(tile.level, tile.getBlockPos().relative(DOWN), UP).ifPresent(t -> Utils.transferFluids(f.getOutputTanks().getTank(1), t, 1000)));
+            tile.fluidHandler.side(left).ifPresent(t -> FluidUtils.getFluidHandler(tile.level, tile.getBlockPos().relative(left), left.getOpposite()).ifPresent(f -> transferFluids(f, ((HeatExchangerFluidHandlerSidedWrapper)t), 1000)));
+            tile.fluidHandler.side(UP).ifPresent(t -> FluidUtils.getFluidHandler(tile.level, tile.getBlockPos().relative(UP), DOWN).ifPresent(f -> transferFluids(f, ((HeatExchangerFluidHandlerSidedWrapper)t), 1000)));
         }
 
-        public static void transferFluids(PlatformFluidHandler from, HeatExchangerFluidHandlerSidedWrapper to, int cap) {
-            for (int i = 0; i < to.getSize(); i++) {
+        public static void transferFluids(IFluidHandler from, HeatExchangerFluidHandlerSidedWrapper to, int cap) {
+            for (int i = 0; i < to.getTanks(); i++) {
                 //if (i >= from.getTanks()) break;
-                FluidHolder toInsert = FluidHooks.emptyFluid();
-                for (int j = 0; j < from.getTankAmount(); j++) {
+                FluidStack toInsert = FluidStack.EMPTY;
+                for (int j = 0; j < from.getTanks(); j++) {
                     if (cap > 0) {
-                        FluidHolder fluid = from.getFluidInTank(j);
+                        FluidStack fluid = from.getFluidInTank(j);
                         if (fluid.isEmpty()) {
                             continue;
                         }
-                        fluid = fluid.copyHolder();
-                        long toDrain = Math.min(cap, fluid.getFluidAmount());
+                        fluid = fluid.copy();
+                        int toDrain = Math.min(cap, fluid.getAmount());
                         fluid.setAmount(toDrain);
-                        toInsert = from.extractFluid(fluid, true);
+                        toInsert = from.drain(fluid, FluidAction.SIMULATE);
                     } else {
-                        toInsert = from.extractFluid(from.getFluidInTank(j), true);
+                        toInsert = from.drain(from.getFluidInTank(j), FluidAction.SIMULATE);
                     }
-                    long filled = to.fillInternal(toInsert, true);
+                    int filled = to.fillInternal(toInsert, FluidAction.SIMULATE);
                     if (filled > 0) {
                         toInsert.setAmount(filled);
-                        to.fillInternal(from.extractFluid(toInsert, false), false);
+                        to.fillInternal(from.drain(toInsert, FluidAction.EXECUTE), FluidAction.EXECUTE);
                     }
                 }
             }
         }
 
         @Override
-        public Optional<FluidContainer> forSide(Direction side) {
-            return Optional.of(new HeatExchangerFluidHandlerSidedWrapper(this, tile.coverHandler.map(c -> c).orElse(null), side));
+        public LazyOptional<IFluidHandler> forSide(Direction side) {
+            return LazyOptional.of(() -> new HeatExchangerFluidHandlerSidedWrapper(this, tile.coverHandler.map(c -> c).orElse(null), side));
         }
 
         @Override
         public boolean canInput(Direction direction) {
-            return super.allowsInsertion();
+            return super.canInput();
         }
 
         @Override
-        public long insertFluid(FluidHolder stack, boolean simulate) {
+        public int fill(FluidStack stack, FluidAction action) {
             if (stack.getFluid() == Fluids.WATER || stack.getFluid() == DistilledWater.getLiquid()){
-                long fillSim = super.insertFluid(stack, true);
+                int fillSim = super.fill(stack, FluidAction.SIMULATE);
                 boolean hasWater = this.getInputTanks().getFluidInTank(0).getFluid() == Fluids.WATER || this.getInputTanks().getFluidInTank(1).getFluid() == Fluids.WATER || this.getInputTanks().getFluidInTank(0).getFluid() == DistilledWater.getLiquid() || this.getInputTanks().getFluidInTank(1).getFluid() == DistilledWater.getLiquid();
                 if (fillSim > 0 && !hasWater && tile.recipeHandler.map(h -> h.serialize().getInt("heat") >= 80).orElse(false)){
                     tile.getLevel().explode(null, tile.getBlockPos().getX(), tile.getBlockPos().getY(), tile.getBlockPos().getZ(), 4.0F, Explosion.BlockInteraction.DESTROY);
@@ -210,7 +211,7 @@ public class BlockEntityHeatExchanger extends BlockEntityMachine<BlockEntityHeat
                     return 0;
                 }
             }
-            return super.insertFluid(stack, simulate);
+            return super.fill(stack, action);
         }
 
         public static class HeatExchangerFluidHandlerSidedWrapper extends FluidHandlerSidedWrapper {
@@ -219,7 +220,7 @@ public class BlockEntityHeatExchanger extends BlockEntityMachine<BlockEntityHeat
             }
 
             @Override
-            public long insertFluid(FluidHolder resource, boolean simulate) {
+            public int fill(FluidStack resource, FluidAction action) {
                 if (side == DOWN || side == ((HeatExchangerFluidHandler)fluidHandler).tile.getFacing().getCounterClockWise()) return 0;
                 /*if (side == UP) {
                     int fill = fluidHandler.tanks.get(FluidDirection.INPUT).getTank(0).fill(resource, action);
@@ -229,28 +230,26 @@ public class BlockEntityHeatExchanger extends BlockEntityMachine<BlockEntityHeat
                     int fill = fluidHandler.tanks.get(FluidDirection.INPUT).getTank(1).fill(resource, action);
                     return fill;
                 }*/
-                return fluidHandler.insertFluid(resource, simulate);
+                return fluidHandler.fill(resource, action);
             }
 
-            public long fillInternal(FluidHolder resource, boolean simulate) {
+            public int fillInternal(FluidStack resource, FluidAction action) {
                 if (side == DOWN || side == ((HeatExchangerFluidHandler)fluidHandler).tile.getFacing().getCounterClockWise()) return 0;
                 if (side == UP) {
-                    long fill = ((HeatExchangerFluidHandler)fluidHandler).tanks.get(FluidDirection.INPUT).getTank(0).insertFluid(resource, simulate);
-                    return fill;
+                    return ((HeatExchangerFluidHandler)fluidHandler).tanks.get(FluidDirection.INPUT).getTank(0).fill(resource, action);
                 }
                 if (side == ((HeatExchangerFluidHandler)fluidHandler).tile.getFacing().getClockWise()) {
-                    long fill = ((HeatExchangerFluidHandler)fluidHandler).tanks.get(FluidDirection.INPUT).getTank(1).insertFluid(resource, simulate);
-                    return fill;
+                    return ((HeatExchangerFluidHandler)fluidHandler).tanks.get(FluidDirection.INPUT).getTank(1).fill(resource, action);
                 }
-                return fluidHandler.insertFluid(resource, simulate);
+                return fluidHandler.fill(resource, action);
             }
 
             @NotNull
             @Override
-            public FluidHolder extractFluid(FluidHolder resource, boolean simulate) {
-                if (side == DOWN) return ((HeatExchangerFluidHandler)fluidHandler).tanks.get(FluidDirection.OUTPUT).getTank(1).extractFluid(resource, simulate);
-                if (side == ((HeatExchangerFluidHandler)fluidHandler).tile.getFacing().getCounterClockWise()) return ((HeatExchangerFluidHandler)fluidHandler).tanks.get(FluidDirection.OUTPUT).getTank(0).extractFluid(resource, simulate);
-                return FluidHooks.emptyFluid();
+            public FluidStack drain(FluidStack resource, FluidAction action) {
+                if (side == DOWN) return ((HeatExchangerFluidHandler)fluidHandler).tanks.get(FluidDirection.OUTPUT).getTank(1).drain(resource, action);
+                if (side == ((HeatExchangerFluidHandler)fluidHandler).tile.getFacing().getCounterClockWise()) return ((HeatExchangerFluidHandler)fluidHandler).tanks.get(FluidDirection.OUTPUT).getTank(0).drain(resource, action);
+                return FluidStack.EMPTY;
             }
         }
     }

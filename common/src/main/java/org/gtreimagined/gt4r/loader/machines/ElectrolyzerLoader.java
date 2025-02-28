@@ -1,6 +1,5 @@
 package org.gtreimagined.gt4r.loader.machines;
 
-import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialStack;
@@ -9,6 +8,7 @@ import muramasa.antimatter.recipe.map.RecipeBuilder;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.fluids.FluidStack;
 import org.gtreimagined.gt4r.data.GT4RMaterialTags;
 
 import java.util.List;
@@ -65,7 +65,7 @@ public class ElectrolyzerLoader {
 
     private static void add(Material dust, int count, long euT, int duration) {
         List<MaterialStack> stacks = dust.getProcessInto();
-        List<FluidHolder> fluidStacks = stacks.stream().filter(t -> (t.m.has(LIQUID) || t.m.has(GAS)) && !t.m.has(DUST)).map(t -> {
+        List<FluidStack> fluidStacks = stacks.stream().filter(t -> (t.m.has(LIQUID) || t.m.has(GAS)) && !t.m.has(DUST)).map(t -> {
             return t.m.has(LIQUID) ? t.m.getLiquid(t.s * 1000) : t.m.getGas(t.s * 1000);
         }).toList();
         List<ItemStack> itemStacks = dust.getProcessInto().stream().filter(t -> t.m.has(DUST)).map(t -> new ItemStack(DUST.get(t.m), t.s)).toList();
@@ -77,14 +77,12 @@ public class ElectrolyzerLoader {
             rb.ii(RecipeIngredient.of(DUST.get(dust), count));
         }
         if (!itemStacks.isEmpty()) rb.io(itemStacks.toArray(new ItemStack[0]));
-        if (!fluidStacks.isEmpty()) rb.fo(fluidStacks.toArray(new FluidHolder[0]));
+        if (!fluidStacks.isEmpty()) rb.fo(fluidStacks.toArray(new FluidStack[0]));
         rb.add(dust.getId() + suffix, duration, euT);
     }
 
-    private static FluidHolder getFluid(Material mat, int amount){
-        if (mat.has(LIQUID)){
-            return mat.getLiquid(amount);
-        } else if (mat.has(GAS)){
+    private static FluidStack getFluid(Material mat, int amount){
+        if (mat.has(GAS)){
             return mat.getGas(amount);
         } else {
             return mat.getLiquid(amount);

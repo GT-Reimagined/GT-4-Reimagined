@@ -2,6 +2,7 @@ package org.gtreimagined.gt4r.machine;
 
 import muramasa.antimatter.blockentity.BlockEntityMachine;
 import muramasa.antimatter.capability.machine.MachineRecipeHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import tesseract.TesseractGraphWrappers;
 import org.gtreimagined.gt4r.data.CustomTags;
 
@@ -17,7 +18,7 @@ public class UpgradeableMachineRecipeHandler<T extends BlockEntityMachine<T> & I
         if (tile.getUpgrades().containsKey(CustomTags.STEAM_UPGRADES) && !generator){
             if (activeRecipe.getPower() > 0) {
                 if (tile.fluidHandler.isPresent()) {
-                    return tile.fluidHandler.map(f -> f.drainInput(Steam.getLiquid(getPower() * 2 * TesseractGraphWrappers.dropletMultiplier), simulate).getFluidAmount() == getPower() * 2 * TesseractGraphWrappers.dropletMultiplier).orElse(false);
+                    return tile.fluidHandler.map(f -> f.drainInput(Steam.getLiquid((int) (getPower() * 2)), simulate ? FluidAction.SIMULATE : FluidAction.EXECUTE).getAmount() == getPower() * 2).orElse(false);
                 } else {
                     return false;
                 }

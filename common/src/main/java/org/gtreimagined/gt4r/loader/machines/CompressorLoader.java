@@ -1,10 +1,10 @@
 package org.gtreimagined.gt4r.loader.machines;
 
-import muramasa.antimatter.data.ForgeCTags;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraftforge.common.Tags;
 import org.gtreimagined.gtcore.data.GTCoreItems;
 import org.gtreimagined.gtcore.data.GTCoreTags;
 
@@ -45,13 +45,13 @@ public class CompressorLoader {
         COMPRESSOR.RB().ii(DUST.getMaterialIngredient(Fireclay, 1)).io(new ItemStack(CompressedFireClay)).add("compressed_fireclay",200, 2);
         COMPRESSOR.RB().ii(RecipeIngredient.of(ItemTags.SAPLINGS, 4)).io(new ItemStack(Plantball)).add("plantball",300, 2);
         COMPRESSOR.RB().ii(RecipeIngredient.of(ItemTags.SMALL_FLOWERS, 8)).io(new ItemStack(Plantball)).add("plantball_1",300, 2);
-        COMPRESSOR.RB().ii(RecipeIngredient.of(ForgeCTags.CROPS, 8)).io(new ItemStack(Plantball)).add("plantball_2",300, 2);
-        COMPRESSOR.RB().ii(RecipeIngredient.of(ForgeCTags.SEEDS, 16)).io(new ItemStack(Plantball)).add("plantball_3",300, 2);
+        COMPRESSOR.RB().ii(RecipeIngredient.of(Tags.Items.CROPS, 8)).io(new ItemStack(Plantball)).add("plantball_2",300, 2);
+        COMPRESSOR.RB().ii(RecipeIngredient.of(Tags.Items.SEEDS, 16)).io(new ItemStack(Plantball)).add("plantball_3",300, 2);
         COMPRESSOR.RB().ii(RecipeIngredient.of(ItemTags.LEAVES, 8)).io(new ItemStack(Plantball)).add("plantball_4",300, 2);
         COMPRESSOR.RB().ii(RecipeIngredient.of(Items.CACTUS, 8)).io(new ItemStack(Plantball)).add("plantball_5",300, 2);
         COMPRESSOR.RB().ii(RecipeIngredient.of(Items.DEAD_BUSH, 8)).io(new ItemStack(Plantball)).add("plantball_6",300, 2);
         COMPRESSOR.RB().ii(RecipeIngredient.of(CORALS, 8)).io(new ItemStack(Plantball)).add("plantball_7",300, 2);
-        COMPRESSOR.RB().ii(RecipeIngredient.of(ForgeCTags.MUSHROOMS, 8)).io(new ItemStack(Plantball)).add("plantball_8",300, 2);
+        COMPRESSOR.RB().ii(RecipeIngredient.of(Tags.Items.MUSHROOMS, 8)).io(new ItemStack(Plantball)).add("plantball_8",300, 2);
         COMPRESSOR.RB().ii(RecipeIngredient.of(Items.NETHER_WART_BLOCK, 8)).io(new ItemStack(Plantball)).add("plantball_9",300, 2);
         COMPRESSOR.RB().ii(RecipeIngredient.of(Items.WARPED_FUNGUS, 4)).io(new ItemStack(Plantball)).add("plantball_10",300, 2);
         COMPRESSOR.RB().ii(RecipeIngredient.of(Items.WARPED_ROOTS, 8)).io(new ItemStack(Plantball)).add("plantball_11",300, 2);

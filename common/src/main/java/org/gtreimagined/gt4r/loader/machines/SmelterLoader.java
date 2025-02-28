@@ -5,7 +5,6 @@ import muramasa.antimatter.material.Material;
 import muramasa.antimatter.material.MaterialTags;
 import muramasa.antimatter.material.MaterialTypeItem;
 import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
-import muramasa.antimatter.util.AntimatterPlatformUtils;
 import org.gtreimagined.gt4r.data.GT4RItems;
 import org.gtreimagined.gt4r.data.GT4RMaterialTags;
 
@@ -41,8 +40,7 @@ public class SmelterLoader {
 
     private static void add(Material m, MaterialTypeItem<?> i, long materialAmount) {
         if (!m.has(AntimatterMaterialTypes.LIQUID)) return;
-        long amount = //(long) (L * ratio);
-                (L * materialAmount) / U;
+        int amount = (int) ((L * materialAmount) / U);
         long duration = Math.max(1, (24 * materialAmount) / U);
         SMELTER.RB()
                 .ii(RecipeIngredient.of(i.getMaterialTag(m),1))
@@ -51,9 +49,8 @@ public class SmelterLoader {
     }
 
     private static void addLava(Material m, MaterialTypeItem<?> i, long materialAmount) {
-        long flUnit = AntimatterPlatformUtils.INSTANCE.isFabric() ? L : 111;
-        long amount = //(long) (L * ratio);
-                (flUnit * materialAmount) / U;
+        long flUnit = 111;
+        int amount = (int) ((flUnit * materialAmount) / U);
         long duration = Math.max(1, (24 * materialAmount) / U);
         SMELTER.RB()
                 .ii(RecipeIngredient.of(i.getMaterialTag(m),1))

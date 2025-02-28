@@ -16,7 +16,6 @@ import muramasa.antimatter.material.Material;
 import muramasa.antimatter.texture.Texture;
 import muramasa.antimatter.tool.AntimatterToolType;
 import muramasa.antimatter.tool.IBasicAntimatterTool;
-import muramasa.antimatter.util.AntimatterPlatformUtils;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.client.Camera;
 import net.minecraft.client.renderer.LevelRenderer;
@@ -35,6 +34,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
@@ -67,7 +67,7 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
     final Tier itemTier;
     final Object2ObjectMap<String, IBehaviour<IBasicAntimatterTool>> behaviours;
     public ItemElectricTool(String id, AntimatterToolType base, Material baseMaterial, float miningSpeed, float attackDamage, int quality, int energyTier, Predicate<IBehaviour<?>> behaviourFilter) {
-        super(GT4RRef.ID, id, AntimatterPlatformUtils.INSTANCE.getToolProperties(Ref.TAB_ITEMS, false).durability(1));
+        super(GT4RRef.ID, id, new Item.Properties().tab(Ref.TAB_ITEMS).setNoRepair().durability(1));
         type = base;
         this.baseMaterial = baseMaterial;
         this.energyTier = energyTier;

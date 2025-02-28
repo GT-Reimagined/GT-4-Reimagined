@@ -1,6 +1,5 @@
 package org.gtreimagined.gt4r.loader.machines;
 
-import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.material.Material;
@@ -10,6 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.fluids.FluidStack;
 import org.gtreimagined.gt4r.data.GT4RMaterialTags;
 import org.gtreimagined.gt4r.data.Machines;
 import org.gtreimagined.gt4r.data.Materials;
@@ -44,7 +44,7 @@ public class OreByproducts {
                 ores.add(RecipeIngredient.of(Machines.THERMAL_CENTRIFUGE.getItem(MV), 1));
                 ores.add(RecipeIngredient.of(Machines.CENTRIFUGE.getItem(LV), 1));
                 ores.add(RecipeIngredient.of(1, new ItemStack(Machines.ORE_WASHER.getItem(LV)), new ItemStack(Blocks.CAULDRON)));
-                List<FluidHolder> fluids = new ObjectArrayList<>();
+                List<FluidStack> fluids = new ObjectArrayList<>();
                 if (m.has(AntimatterMaterialTypes.ORE)) ores.add(ore);
                 if (m.has(AntimatterMaterialTypes.CRUSHED)) {
                     ores.add(AntimatterMaterialTypes.CRUSHED.getIngredient(m, 2 * MaterialTags.ORE_MULTI.getInt(m)));

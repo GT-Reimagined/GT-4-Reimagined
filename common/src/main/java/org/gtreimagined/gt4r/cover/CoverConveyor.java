@@ -15,9 +15,10 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 import tesseract.TesseractCapUtils;
-import tesseract.api.item.ExtendedItemContainer;
 
 public class CoverConveyor extends CoverBasicTransport {
 
@@ -29,7 +30,7 @@ public class CoverConveyor extends CoverBasicTransport {
 
     @Override
     public <T> boolean blocksCapability(Class<T> cap, Direction side) {
-        return cap != ExtendedItemContainer.class;
+        return cap != IItemHandler.class;
     }
 
     @Override
@@ -68,7 +69,7 @@ public class CoverConveyor extends CoverBasicTransport {
         if (state == Blocks.AIR.defaultBlockState() && isMachine && cover.exportMode.isExport()) {
             Level world = cover.source().getTile().getLevel();
             BlockPos pos = cover.source().getTile().getBlockPos();
-            ItemStack stack = TesseractCapUtils.INSTANCE.getItemHandler(cover.source().getTile(), side).map(Utils::extractAny).orElse(ItemStack.EMPTY);
+            ItemStack stack = cover.source().getTile().getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side).map(Utils::extractAny).orElse(ItemStack.EMPTY);
             if (stack.isEmpty()) return;
             world.addFreshEntity(new ItemEntity(world,pos.getX()+side.getStepX(), pos.getY()+side.getStepY(), pos.getZ()+side.getStepZ(),stack));
         }
@@ -79,9 +80,9 @@ public class CoverConveyor extends CoverBasicTransport {
         }
         if (cover.canMove(side)) {
             if (cover.exportMode.isExport()) {
-                if (isMachine) TesseractCapUtils.INSTANCE.getItemHandler(cover.source().getTile(), side).ifPresent(ih -> TesseractCapUtils.INSTANCE.getItemHandler(adjTile, side.getOpposite()).ifPresent(other -> Utils.transferItems(ih, other,true)));
+                if (isMachine) cover.source().getTile().getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side).ifPresent(ih -> adjTile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side.getOpposite()).ifPresent(other -> Utils.transferItems(ih, other,true)));
             } else {
-                TesseractCapUtils.INSTANCE.getItemHandler(cover.source().getTile(), side).ifPresent(ih -> TesseractCapUtils.INSTANCE.getItemHandler(adjTile, side.getOpposite()).ifPresent(other -> Utils.transferItems(other, ih,true)));
+                cover.source().getTile().getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side).ifPresent(ih -> adjTile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side.getOpposite()).ifPresent(other -> Utils.transferItems(other, ih,true)));
             }
         }
     }

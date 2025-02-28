@@ -30,12 +30,12 @@ project(':tesseract-fabric').setProjectDir(new File("GT-Reimagined-Lib/Tesseract
 
 
 include("antimatter-common")
-include("antimatter-fabric")
-include("antimatter-forge")
+//include("antimatter-fabric")
+//include("antimatter-forge")
 project(':antimatter-common').setProjectDir(new File("GT-Reimagined-Lib/common"))
-project(':antimatter-forge').setProjectDir(new File("GT-Reimagined-Lib/forge"))
-project(':antimatter-fabric').setProjectDir(new File("GT-Reimagined-Lib/fabric"))
+//project(':antimatter-forge').setProjectDir(new File("GT-Reimagined-Lib/forge"))
+//project(':antimatter-fabric').setProjectDir(new File("GT-Reimagined-Lib/fabric"))
 include("common")
-include("fabric")
-include("forge")
+//include("fabric")
+//include("forge")
 

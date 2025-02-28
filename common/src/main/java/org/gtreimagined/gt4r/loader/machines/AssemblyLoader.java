@@ -2,7 +2,6 @@ package org.gtreimagined.gt4r.loader.machines;
 
 import com.google.common.collect.ImmutableSet;
 import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.data.ForgeCTags;
 import muramasa.antimatter.pipe.PipeSize;
 import muramasa.antimatter.pipe.types.Cable;
 import muramasa.antimatter.pipe.types.Wire;
@@ -12,6 +11,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraftforge.common.Tags;
 import org.gtreimagined.gtcore.data.GTCoreBlocks;
 import org.gtreimagined.gt4r.data.GT4RBlocks;
 import org.gtreimagined.gt4r.data.GT4RMaterialTags;
@@ -64,7 +64,7 @@ public class AssemblyLoader {
         RecipeMaps.ASSEMBLER.RB().ii(PLATE.getMaterialIngredient(Plastic, 1), PLATE.getMaterialIngredient(RedAlloy, 2)).io(new ItemStack(CircuitBoardBasic)).add("circuit_board_basic_2",800, 1);
         RecipeMaps.ASSEMBLER.RB().ii(PLATE.getMaterialIngredient(Plastic, 1), PLATE.getMaterialIngredient(Electrum, 2)).io(new ItemStack(CircuitBoardBasic, 2)).add("circuit_board_basic_3",800, 1);
         RecipeMaps.ASSEMBLER.RB().ii(of(PLATES_IRON_ALUMINIUM, 1), of(Items.IRON_TRAPDOOR, 1)).io(new ItemStack(Shutter, 1)).add("shutter",400, 16);
-        RecipeMaps.ASSEMBLER.RB().ii(PLATE.getMaterialIngredient(Iron, 5), of(ForgeCTags.CHESTS, 1)).io(new ItemStack(Items.HOPPER, 1)).add("hopper",800, 2);
+        RecipeMaps.ASSEMBLER.RB().ii(PLATE.getMaterialIngredient(Iron, 5), of(Tags.Items.CHESTS, 1)).io(new ItemStack(Items.HOPPER, 1)).add("hopper",800, 2);
         RecipeMaps.ASSEMBLER.RB().ii(PLATE.getMaterialIngredient(WroughtIron, 2), of(CIRCUITS_BASIC, 1)).io(new ItemStack(MachineParts, 4)).add("machine_parts_2",800, 16);
         RecipeMaps.ASSEMBLER.RB().ii(PLATE.getMaterialIngredient(Plastic, 2), of(CIRCUITS_BASIC, 1)).io(new ItemStack(MachineParts, 2)).add("machine_parts_1",800, 16);
         RecipeMaps.ASSEMBLER.RB().ii(PLATE.getMaterialIngredient(Electrum, 2), of(CIRCUITS_BASIC, 1)).io(new ItemStack(CircuitBoardAdvanced)).add("circuit_board_advanced",1600,2);
@@ -84,7 +84,7 @@ public class AssemblyLoader {
 
         RecipeMaps.ASSEMBLER.RB().ii(DUST.getMaterialIngredient(Phosphor, 1), of(getTag("forge", "rods/wooden"), 1)).io(new ItemStack(Match, 4)).add("match",400, 1);
         RecipeMaps.ASSEMBLER.RB().ii(of(Match, 64), of(Items.PAPER, 2)).io(new ItemStack(MatchBook)).add("match_book",400, 1);
-        RecipeMaps.ASSEMBLER.RB().ii(of(Items.GUNPOWDER, 4), of(ForgeCTags.SAND, 1)).io(new ItemStack(Items.TNT, 1)).add("tnt",400, 1);
+        RecipeMaps.ASSEMBLER.RB().ii(of(Items.GUNPOWDER, 4), of(Tags.Items.SAND, 1)).io(new ItemStack(Items.TNT, 1)).add("tnt",400, 1);
         RecipeMaps.ASSEMBLER.RB().ii(DUST.getMaterialIngredient(Glowstone, 1), of(DUSTS_LAPIS_LAZ, 1)).io(new ItemStack(AdvCircuitParts, 2)).add("adv_circuit_parts",800,2);
         RecipeMaps.ASSEMBLER.RB().ii(DUST.getMaterialIngredient(Redstone, 4), DUST.getMaterialIngredient(Glowstone, 4)).io(new ItemStack(Items.REDSTONE_LAMP)).add("redstone_lamp",400, 1);
         RecipeMaps.ASSEMBLER.RB().ii(of(getTag("forge", "rods/wooden"), 1), DUST.getMaterialIngredient(Redstone, 1)).io(new ItemStack(Items.REDSTONE_TORCH)).add("redstone_torch",400, 1);
@@ -92,7 +92,7 @@ public class AssemblyLoader {
         RecipeMaps.ASSEMBLER.RB().ii(INGOT.getMaterialIngredient(Gold, 4), DUST.getMaterialIngredient(Redstone, 1)).io(new ItemStack(Items.CLOCK)).add("clock",400, 4);
         RecipeMaps.ASSEMBLER.RB().ii(of(getTag("forge", "rods/wooden"), 1), of(StickyResin, 1)).io(new ItemStack(Items.TORCH, 6)).add("torch_1",400, 1);
         RecipeMaps.ASSEMBLER.RB().ii(of(Items.COAL, 8), GEM.getMaterialIngredient(Flint, 1)).io(new ItemStack(CompressedCoalBall)).add("compressed_coal_ball",400, 4);
-        RecipeMaps.ASSEMBLER.RB().ii(of(getTag("forge", "rods/wooden"), 1), of(ForgeCTags.COBBLESTONE, 1)).io(new ItemStack(Items.LEVER, 1)).add("lever",400, 1);
+        RecipeMaps.ASSEMBLER.RB().ii(of(getTag("forge", "rods/wooden"), 1), of(Tags.Items.COBBLESTONE, 1)).io(new ItemStack(Items.LEVER, 1)).add("lever",400, 1);
         RecipeMaps.ASSEMBLER.RB().ii(of(CircuitBoardBasic, 1), of(GT4RBlocks.CABLE_COPPER.getBlockItem(PipeSize.VTINY), 3)).io(new ItemStack(CircuitBasic)).add("circuit_basic",800, 1);
         RecipeMaps.ASSEMBLER.RB().ii(of(CompressedCoalBall, 8), of(BLOCK.getMaterialTag(Iron), 1)).io(new ItemStack(CoalChunk)).add("coal_chunk_2",400, 4);
         RecipeMaps.ASSEMBLER.RB().ii(PLATE.getMaterialIngredient(Carbon, 4), of(MACHINE_HULLS_BASIC, 1), of(BatteryRE, 1).setIgnoreNbt()).io(new ItemStack(WINDMILL.getItem(ULV), 1)).add("windmill_1",6400, 8);
@@ -100,7 +100,7 @@ public class AssemblyLoader {
         RecipeMaps.ASSEMBLER.RB().ii(of(AdvancedAlloy, 1), of(getForgelikeItemTag("stone"), 8)).io(new ItemStack(GTCoreBlocks.REINFORCED_STONE, 8)).add("reinforced_stone",400, 4);
         RecipeMaps.ASSEMBLER.RB().ii(of(PLATE.getMaterialTag(Wood), 8), DUST.getMaterialIngredient(Redstone, 1)).io(new ItemStack(Items.NOTE_BLOCK)).add("note_block",800, 1);
         RecipeMaps.ASSEMBLER.RB().ii(of(PLATE.getMaterialTag(Wood), 8), GEM.getMaterialIngredient(Diamond, 1)).io(new ItemStack(Items.JUKEBOX)).add("jukebox",1600, 1);
-        RecipeMaps.ASSEMBLER.RB().ii(of(AdvancedAlloy, 2), of(ForgeCTags.GLASS, 7)).io(new ItemStack(GTCoreBlocks.REINFORCED_GLASS, 7)).add("reinforced_glass",400, 4);
+        RecipeMaps.ASSEMBLER.RB().ii(of(AdvancedAlloy, 2), of(Tags.Items.GLASS, 7)).io(new ItemStack(GTCoreBlocks.REINFORCED_GLASS, 7)).add("reinforced_glass",400, 4);
         RecipeMaps.ASSEMBLER.RB().ii(of(getTag("minecraft", "planks"), 8), DUST.getMaterialIngredient(Redstone, 1)).io(new ItemStack(Items.NOTE_BLOCK)).add("note_block_1",800, 1);
         RecipeMaps.ASSEMBLER.RB().ii(of(getTag("minecraft", "planks"), 8), GEM.getMaterialIngredient(Diamond, 1)).io(new ItemStack(Items.JUKEBOX)).add("jukebox_1",1600, 1);
         RecipeMaps.ASSEMBLER.RB().ii(of(CompressedCoalBall, 8), of(getForgelikeItemTag("obsidian"), 1)).io(new ItemStack(CoalChunk)).add("coal_chunk_3",400, 4);

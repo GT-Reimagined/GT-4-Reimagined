@@ -11,7 +11,6 @@ import muramasa.antimatter.gui.event.GuiEvents;
 import muramasa.antimatter.gui.event.IGuiEvent;
 import muramasa.antimatter.machine.event.IMachineEvent;
 import muramasa.antimatter.machine.types.Machine;
-import muramasa.antimatter.util.AntimatterPlatformUtils;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -26,9 +25,10 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 import tesseract.TesseractCapUtils;
-import tesseract.api.item.ExtendedItemContainer;
 import org.gtreimagined.gt4r.gui.ButtonOverlays;
 
 import java.util.List;
@@ -60,7 +60,7 @@ public class BlockEntityItemFilter extends BlockEntityMachine<BlockEntityItemFil
         if (slotType == SlotType.STORAGE){
             boolean hasItem = itemHandler.map(h -> {
                 List<Item> list = new ObjectArrayList<>();
-                ExtendedItemContainer outputs = h.getHandler(SlotType.DISPLAY_SETTABLE);
+                IItemHandler outputs = h.getHandler(SlotType.DISPLAY_SETTABLE);
                 for (int i = 0; i < outputs.getSlots(); i++) {
                     ItemStack slotStack = outputs.getStackInSlot(i);
                     if (!slotStack.isEmpty()) {
@@ -85,17 +85,17 @@ public class BlockEntityItemFilter extends BlockEntityMachine<BlockEntityItemFil
                 case 0:
                     emitEnergy = !emitEnergy;
                     playerEntity.sendMessage(new TextComponent( (emitEnergy ? "Emit energy to output side" : "Don't emit energy")), playerEntity.getUUID());
-                    AntimatterPlatformUtils.INSTANCE.markAndNotifyBlock(this.level, this.getBlockPos(), this.level.getChunkAt(this.getBlockPos()), this.getBlockState(), this.getBlockState(), 1, 512);
+                    this.level.markAndNotifyBlock(this.getBlockPos(), this.level.getChunkAt(this.getBlockPos()), this.getBlockState(), this.getBlockState(), 1, 512);
                     break;
                 case 1:
                     outputRedstone = !outputRedstone;
                     playerEntity.sendMessage(new TextComponent( (outputRedstone ? "Emit redstone if slots contain something" : "Don't emit redstone")), playerEntity.getUUID());
-                    AntimatterPlatformUtils.INSTANCE.markAndNotifyBlock(this.level, this.getBlockPos(), this.level.getChunkAt(this.getBlockPos()), this.getBlockState(), this.getBlockState(), 1, 512);
+                    this.level.markAndNotifyBlock(this.getBlockPos(), this.level.getChunkAt(this.getBlockPos()), this.getBlockState(), this.getBlockState(), 1, 512);
                     break;
                 case 2:
                     invertRedstone = !invertRedstone;
                     playerEntity.sendMessage(new TextComponent( (invertRedstone ? "I" : "Don't i") + "nvert redstone"), playerEntity.getUUID());
-                    AntimatterPlatformUtils.INSTANCE.markAndNotifyBlock(this.level, this.getBlockPos(), this.level.getChunkAt(this.getBlockPos()), this.getBlockState(), this.getBlockState(), 1, 512);
+                    this.level.markAndNotifyBlock(this.getBlockPos(), this.level.getChunkAt(this.getBlockPos()), this.getBlockState(), this.getBlockState(), 1, 512);
                     break;
                 case 3:
                     blacklist = !blacklist;
@@ -131,7 +131,7 @@ public class BlockEntityItemFilter extends BlockEntityMachine<BlockEntityItemFil
     public void onMachineEvent(IMachineEvent event, Object... data) {
         super.onMachineEvent(event, data);
         if (event == SlotType.IT_OUT && outputRedstone){
-            AntimatterPlatformUtils.INSTANCE.markAndNotifyBlock(this.level, this.getBlockPos(), this.level.getChunkAt(this.getBlockPos()), this.getBlockState(), this.getBlockState(), 1, 512);
+            this.level.markAndNotifyBlock(this.getBlockPos(), this.level.getChunkAt(this.getBlockPos()), this.getBlockState(), this.getBlockState(), 1, 512);
         }
     }
 
@@ -141,7 +141,7 @@ public class BlockEntityItemFilter extends BlockEntityMachine<BlockEntityItemFil
         if (adjTile == null) return false;
         boolean[] booleans = new boolean[1];
         booleans[0] = false;
-        TesseractCapUtils.INSTANCE.getItemHandler(adjTile, outputDir.getOpposite()).ifPresent(adjHandler -> {
+        adjTile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, outputDir.getOpposite()).ifPresent(adjHandler -> {
             booleans[0] = this.itemHandler.map(h -> Utils.transferItems(h.getHandler(SlotType.STORAGE), adjHandler,true)).orElse(false);
         });
         return booleans[0];
