@@ -30,10 +30,10 @@ public class ClientHandler implements IProxyHandler {
     @SuppressWarnings("RedundantTypeArguments")
     public static void setup() {
         AntimatterAPI.runLaterClient(() -> {
-            ModelUtils.INSTANCE.setRenderLayer(((BlockItem)Machines.DUSTBIN.getItem(LV)).getBlock(), RenderType.cutout());
-            AntimatterAPI.all(BlockCasing.class, t -> ModelUtils.INSTANCE.setRenderLayer(t, RenderType.cutout()));
-            AntimatterAPI.all(BlockRedstoneMachine.class, b -> ModelUtils.INSTANCE.setRenderLayer(b, RenderType.cutout()));
-            AntimatterAPI.all(BlockColoredWall.class, b -> ModelUtils.INSTANCE.setRenderLayer(b, RenderType.cutout()));
+            ModelUtils.setRenderLayer(((BlockItem)Machines.DUSTBIN.getItem(LV)).getBlock(), RenderType.cutout());
+            AntimatterAPI.all(BlockCasing.class, t -> ModelUtils.setRenderLayer(t, RenderType.cutout()));
+            AntimatterAPI.all(BlockRedstoneMachine.class, b -> ModelUtils.setRenderLayer(b, RenderType.cutout()));
+            AntimatterAPI.all(BlockColoredWall.class, b -> ModelUtils.setRenderLayer(b, RenderType.cutout()));
         });
         copyProgrammerArtIfMissing();
     }
