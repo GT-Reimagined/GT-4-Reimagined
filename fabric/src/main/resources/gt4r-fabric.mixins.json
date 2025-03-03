@@ -1,8 +1,0 @@
-{
-  "required": true,
-  "package": "org.gtreimagined.gt4r.mixin.fabric",
-  "compatibilityLevel": "JAVA_8",
-  "mixins": [
-  ],
-  "minVersion": "0.8"
-}

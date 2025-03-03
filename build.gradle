@@ -128,6 +128,18 @@ dependencies {
 
 jar {
     zip64 true
+    manifest {
+        attributes([
+                'Specification-Title'     : mod_id,
+                'Specification-Vendor'    : "GT-Reimagined",
+                'Specification-Version'   : '1', // We are version 1 of ourselves
+                'Implementation-Title'    : "GT4 Reimagined",
+                'Implementation-Version'  : project.version,
+                'Implementation-Vendor'   : "GT-Reimagined",
+                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                "MixinConfigs" : "gt4r.mixins.json"
+        ])
+    }
 }
 
 processResources {
