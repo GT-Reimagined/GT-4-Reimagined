@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.Block;
 import org.gtreimagined.gtcore.data.GTCoreTools;
 import org.jetbrains.annotations.Nullable;
 import tesseract.TesseractCapUtils;
+import tesseract.api.forge.TesseractCaps;
 import tesseract.api.gt.IEnergyHandlerItem;
 
 import java.util.List;
@@ -40,7 +41,7 @@ public class MaterialRockCutter extends GTCoreTools.PoweredTool {
     public void onGenericFillItemGroup(CreativeModeTab group, NonNullList<ItemStack> list, long maxEnergy) {
         if (this.allowdedIn(group)){
             ItemStack stack = asItemStack(Diamond, Titanium);
-            IEnergyHandlerItem h = TesseractCapUtils.INSTANCE.getEnergyHandlerItem(stack).orElse(null);
+            IEnergyHandlerItem h = stack.getCapability(TesseractCaps.ENERGY_HANDLER_CAPABILITY_ITEM).resolve().orElse(null);
             if (h != null){
                 list.add(stack.copy());
                 h.setCapacity(maxEnergy);

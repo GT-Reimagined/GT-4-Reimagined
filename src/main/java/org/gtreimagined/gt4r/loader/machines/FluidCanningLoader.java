@@ -13,6 +13,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import tesseract.TesseractCapUtils;
 import tesseract.TesseractGraphWrappers;
 import org.gtreimagined.gt4r.data.RecipeMaps;
+import tesseract.api.forge.TesseractCaps;
 
 import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
 import static org.gtreimagined.gt4r.data.Materials.*;
@@ -49,7 +50,7 @@ public class FluidCanningLoader {
 
     private static ItemStack getFullBattery(ItemLike battery){
         ItemStack stack = new ItemStack(battery);
-        TesseractCapUtils.INSTANCE.getEnergyHandlerItem(stack).ifPresent(e -> {
+        stack.getCapability(TesseractCaps.ENERGY_HANDLER_CAPABILITY_ITEM).ifPresent(e -> {
             Utils.addEnergy(e, e.getCapacity());
             stack.setTag(e.getContainer().getTag());
         });
