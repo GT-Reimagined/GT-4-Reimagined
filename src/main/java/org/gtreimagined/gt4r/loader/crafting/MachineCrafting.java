@@ -28,7 +28,6 @@ import org.gtreimagined.gtcore.machine.MassStorageMachine;
 import org.gtreimagined.gtcore.machine.MultiblockTankMachine;
 import org.gtreimagined.gtcore.machine.WorkbenchMachine;
 import org.gtreimagined.gt4r.GT4RRef;
-import org.gtreimagined.gt4r.data.CustomTags;
 import org.gtreimagined.gt4r.data.GT4RBlocks;
 import org.gtreimagined.gt4r.data.GT4RMaterialTags;
 import org.gtreimagined.gt4r.data.TierMaps;
@@ -94,15 +93,15 @@ public class MachineCrafting {
 
     private static void loadGeneratorRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider){
         provider.addItemRecipe(output, GT4RRef.ID, "diesel_generator", "machines",
-                DIESEL_GENERATOR.getItem(LV), of('P', PLATES_WROUGHT_ALUMINIUM, 'B', BatteryRE, 'C', CIRCUITS_BASIC, 'M', MACHINE_HULLS_ADVANCED), "PBP", "P P", "CMC");
+                DIESEL_GENERATOR.getItem(LV), of('P', PLATES_WROUGHT_ALUMINIUM, 'B', REBattery, 'C', CIRCUITS_BASIC, 'M', MACHINE_HULLS_ADVANCED), "PBP", "P P", "CMC");
         provider.addItemRecipe(output, GT4RRef.ID, "semifluid_generator", "machines",
-                SEMIFLUID_GENERATOR.getItem(LV), of('P', PLATES_WROUGHT_ALUMINIUM, 'B', BatteryRE, 'C', CIRCUITS_BASIC, 'M', MACHINE_HULLS_ADVANCED, 'R', GTCoreBlocks.REINFORCED_GLASS), "PBP", "PRP", "CMC");
+                SEMIFLUID_GENERATOR.getItem(LV), of('P', PLATES_WROUGHT_ALUMINIUM, 'B', REBattery, 'C', CIRCUITS_BASIC, 'M', MACHINE_HULLS_ADVANCED, 'R', GTCoreBlocks.REINFORCED_GLASS), "PBP", "PRP", "CMC");
         provider.addItemRecipe(output, GT4RRef.ID, "gas_turbine", "machines",
                 GAS_TURBINE.getItem(LV), of('P', PLATES_INVAR_ALUMINIUM, 'W', WINDMILL.getItem(ULV), 'C', CIRCUITS_ADVANCED, 'G', GTCoreBlocks.REINFORCED_GLASS), "PCP", "WGW", "PCP");
         provider.addItemRecipe(output, GT4RRef.ID, "steam_turbine", "machines",
                 STEAM_TURBINE.getItem(LV), of('P', PLATES_STEELS, 'M', MACHINE_HULLS_ADVANCED, 'C', CIRCUITS_BASIC, 'B', GT4RMaterialTags.TURBINE_ROTOR.getMaterialTag(Bronze)), "PCP", "BMB", "PCP");
         provider.addItemRecipe(output, "machines", THERMAL_GENERATOR.getItem(LV),
-                of('I', PLATE.getMaterialTag(Invar), 'C', CIRCUITS_BASIC, 'G', GTCoreBlocks.REINFORCED_GLASS, 'M', MACHINE_HULLS_ADVANCED, 'B', BatteryRE), "IBI", "IGI", "CMC");
+                of('I', PLATE.getMaterialTag(Invar), 'C', CIRCUITS_BASIC, 'G', GTCoreBlocks.REINFORCED_GLASS, 'M', MACHINE_HULLS_ADVANCED, 'B', REBattery), "IBI", "IGI", "CMC");
     }
 
     private static void loadSteamMachineRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider){
@@ -151,7 +150,7 @@ public class MachineCrafting {
         provider.addItemRecipe(output, "machines", TRANSFORMER.getItem(EV),
                 of('C', CIRCUITS_ADVANCED, 'T', TRANSFORMER.getItem(HV), 'c', GT4RBlocks.CABLE_STEEL.getBlockItem(PipeSize.VTINY), 'B', LapotronCrystal), " c ", "CTB", " c ");
         provider.addItemRecipe(output, "machines", TRANSFORMER.getItem(IV),
-                of('I', GT4RBlocks.IRIDIUM_REINFORCED_STONE, 'C', CIRCUITS_ADVANCED, 'T', TRANSFORMER.getItem(EV), 'c', GT4RBlocks.CABLE_TUNGSTEN.getBlockItem(PipeSize.VTINY), 'B', BatteryEnergyOrb), "IcI", "CTB", "IcI");
+                of('I', GT4RBlocks.IRIDIUM_REINFORCED_STONE, 'C', CIRCUITS_ADVANCED, 'T', TRANSFORMER.getItem(EV), 'c', GT4RBlocks.CABLE_TUNGSTEN.getBlockItem(PipeSize.VTINY), 'B', LapotronicEnergyOrb), "IcI", "CTB", "IcI");
         /*TRANSFORMER.getTiers().forEach(t -> {
             provider.addItemRecipe(output, GT4RRef.ID, t.getId() + "_transformer", "machines",
                     TRANSFORMER.getItem(t), of( 'C', TierMaps.TIER_CABLES.get(t).getBlockItem(PipeSize.VTINY), 'M', GT4RMaterialTags.HULL.getMaterialTag(TierMaps.TIER_MATERIALS.get(t)), 'c', TierMaps.TIER_CABLES.get(Tier.getTier(t.getVoltage() * 4)).getBlockItem(PipeSize.VTINY))," CC", "cM ", " CC");
@@ -219,7 +218,7 @@ public class MachineCrafting {
         provider.addItemRecipe(output, GT4RRef.ID, "fermenter", "machines", FERMENTER.getItem(LV), of('C', CIRCUITS_BASIC, 'G', Tags.Items.GLASS, 'M', MACHINE_HULLS_ADVANCED, 'P', PumpModule), " P ", "GMG", " C ");
         provider.addItemRecipe(output, GT4RRef.ID, "distillery", "machines", DISTILLERY.getItem(LV), of('C', CIRCUITS_BASIC, 'G', Tags.Items.GLASS, 'M', MACHINE_HULLS_ADVANCED, 'P', PumpModule, 'B', ROD.getMaterialTag(AntimatterMaterials.Blaze)), " B ", "CMC", "GPG");
         provider.addItemRecipe(output, GT4RRef.ID, "mass_fabricator", "machines",
-                MASS_FABRICATOR.getItem(EV), of('C', CIRCUITS_MASTER, 'F', GT4RBlocks.FUSION_COIL, 'L', BatteryEnergyOrb, 'T', TELEPORTER.getItem(HV)), "CTC", "FLF", "CTC");
+                MASS_FABRICATOR.getItem(EV), of('C', CIRCUITS_MASTER, 'F', GT4RBlocks.FUSION_COIL, 'L', LapotronicEnergyOrb, 'T', TELEPORTER.getItem(HV)), "CTC", "FLF", "CTC");
         provider.addItemRecipe(output, GT4RRef.ID, "replicator", "machines",
                 REPLICATOR.getItem(EV), of('R', GTCoreBlocks.REINFORCED_STONE, 'G', GTCoreBlocks.REINFORCED_GLASS, 'T',TELEPORTER.getItem(HV), 't', TRANSFORMER.getItem(HV), 'M', GT4RBlocks.CABLE_ALUMINIUM.getBlock(PipeSize.SMALL)), "RGR", "TTT", "tMt");
         provider.addItemRecipe(output, GT4RRef.ID, "scanner", "machines",
@@ -252,9 +251,9 @@ public class MachineCrafting {
         provider.addItemRecipe(output, GT4RRef.ID, "dustbin", "machines",
                 DUSTBIN.getItem(LV), of2('H', AntimatterDefaultTools.HAMMER.getTag(), 'W', AntimatterDefaultTools.WRENCH.getTag(), 'S', AntimatterDefaultTools.SAW.getTag(), 'P', PLATES_STEELS, 'h', Items.HOPPER, 'R', RODS_STEELS), "HWS", "PhP", "RPR");
         provider.addItemRecipe(output, GT4RRef.ID, "electric_item_translocator", "machines",
-                ELECTRIC_ITEM_TRANSLOCATOR.getItem(LV), of('B', BatteryRE, 'E', AntimatterMaterialTypes.PLATE.getMaterialTag(Electrum), 'C', CIRCUITS_BASIC, 'c', ConveyorModule, 'M', MACHINE_HULLS_BASIC), "EBE", "CcC", "EME");
+                ELECTRIC_ITEM_TRANSLOCATOR.getItem(LV), of('B', REBattery, 'E', AntimatterMaterialTypes.PLATE.getMaterialTag(Electrum), 'C', CIRCUITS_BASIC, 'c', ConveyorModule, 'M', MACHINE_HULLS_BASIC), "EBE", "CcC", "EME");
         provider.addItemRecipe(output, GT4RRef.ID, "electric_fluid_translocator", "machines",
-                ELECTRIC_FLUID_TRANSLOCATOR.getItem(LV), of('B', BatteryRE, 'E', AntimatterMaterialTypes.PLATE.getMaterialTag(Electrum), 'C', CIRCUITS_BASIC, 'c', Drain, 'M', MACHINE_HULLS_BASIC), "EBE", "CcC", "EME");
+                ELECTRIC_FLUID_TRANSLOCATOR.getItem(LV), of('B', REBattery, 'E', AntimatterMaterialTypes.PLATE.getMaterialTag(Electrum), 'C', CIRCUITS_BASIC, 'c', Drain, 'M', MACHINE_HULLS_BASIC), "EBE", "CcC", "EME");
         provider.addItemRecipe(output, GT4RRef.ID, "electric_item_filter", "machines",
                 ELECTRIC_ITEM_FILTER.getItem(LV), of2('B', ItemFilter, 'E', PLATES_IRON_ALUMINIUM, 'C', CIRCUITS_BASIC, 'c', ConveyorModule, 'M', MACHINE_HULLS_BASIC, 'h', Tags.Items.CHESTS_WOODEN), "EBE", "hMc", "ECE");
         provider.addItemRecipe(output, GT4RRef.ID, "electric_type_filter", "machines",
@@ -321,7 +320,7 @@ public class MachineCrafting {
         });
 
         provider.addItemRecipe(output, GT4RRef.ID, "hv_teleporter", "machines", TELEPORTER.getItem(HV), of('C', CIRCUITS_ADVANCED, 'S', MACHINE_HULLS_STABILIZED, 'D', AntimatterMaterialTypes.GEM.getMaterialTag(AntimatterMaterials.Diamond), 'c', GT4RBlocks.CABLE_ELECTRUM.getBlock(PipeSize.TINY), 'f', FrequencyTransmitter), "CfC", "cSc", "CDC");
-        provider.addItemRecipe(output, GT4RRef.ID, "luv_teleporter", "machines", TELEPORTER.getItem(LUV), of('T', TELEPORTER.getItem(HV), 'M', GT4RBlocks.HIGHLY_ADVANCED_MACHINE_BLOCK, 'L', BatteryEnergyOrb, 'C', CIRCUITS_MASTER), "CTC", "TMT", "CLC");
+        provider.addItemRecipe(output, GT4RRef.ID, "luv_teleporter", "machines", TELEPORTER.getItem(LUV), of('T', TELEPORTER.getItem(HV), 'M', GT4RBlocks.HIGHLY_ADVANCED_MACHINE_BLOCK, 'L', LapotronicEnergyOrb, 'C', CIRCUITS_MASTER), "CTC", "TMT", "CLC");
         provider.addItemRecipe(output, "trash_bin", GTCoreBlocks.ENDER_GARBAGE_BIN.getItem(NONE),
                 of('O', PLATE.getMaterialTag(Obsidian), 'I', PLATE.getMaterialTag(Iron), 'E', Items.ENDER_EYE), "OOO", "OEO", "III");
     }
@@ -338,7 +337,7 @@ public class MachineCrafting {
         provider.addItemRecipe(output, GT4RRef.ID, "fusion_fluid_injector", "hatches", FUSION_FLUID_INJECTOR.getItem(LV), of('P', PumpModule, 'c', CIRCUITS_MASTER, 'M', GT4RBlocks.HIGHLY_ADVANCED_MACHINE_BLOCK, 'C', Tags.Items.GLASS), "PCP", "cMc", "PcP");
         provider.addItemRecipe(output, GT4RRef.ID, "fusion_fluid_extractor", "hatches", FUSION_FLUID_EXTRACTOR.getItem(LV), of('P', PumpModule, 'c', CIRCUITS_MASTER, 'M', GT4RBlocks.HIGHLY_ADVANCED_MACHINE_BLOCK, 'C', Tags.Items.GLASS), "PcP", "cMc", "PCP");
         provider.addItemRecipe(output, GT4RRef.ID, "fusion_energy_injector", "hatches", FUSION_ENERGY_INJECTOR.getItem(IV), of('S', ItemSuperconductor, 'C', CIRCUITS_MASTER, 'T', SUPERCONDENSATOR.getItem(LUV)), "SCS", "CTC", "SCS");
-        provider.addItemRecipe(output, GT4RRef.ID, "supercondensator", "machines", SUPERCONDENSATOR.getItem(LUV), of('C', CIRCUITS_MASTER, 'L', BatteryEnergyOrb, 'S', ItemSuperconductor, 'M', GT4RBlocks.HIGHLY_ADVANCED_MACHINE_BLOCK), "CLC", "SMS", "CLC");
+        provider.addItemRecipe(output, GT4RRef.ID, "supercondensator", "machines", SUPERCONDENSATOR.getItem(LUV), of('C', CIRCUITS_MASTER, 'L', LapotronicEnergyOrb, 'S', ItemSuperconductor, 'M', GT4RBlocks.HIGHLY_ADVANCED_MACHINE_BLOCK), "CLC", "SMS", "CLC");
         provider.addItemRecipe(output, GT4RRef.ID, "muffler_hatch", "hatches", HATCH_MUFFLER.getItem(LV), of('P', AntimatterMaterialTypes.PLATE.getMaterialTag(StainlessSteel), 'G', GEARS_STEELS, 'M', MACHINE_HULLS_ADVANCED, 'C', GTCoreBlocks.REINFORCED_GLASS), "PMP", "GCG", "PCP");
     }
 }
