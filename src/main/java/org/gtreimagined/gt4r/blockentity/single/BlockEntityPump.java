@@ -1,232 +1,197 @@
 package org.gtreimagined.gt4r.blockentity.single;
 
-import com.gtnewhorizon.structurelib.util.PlatformUtils;
 import muramasa.antimatter.blockentity.BlockEntityMachine;
-import muramasa.antimatter.gui.SlotType;
+import muramasa.antimatter.capability.machine.MachineFluidHandler;
 import muramasa.antimatter.machine.MachineState;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.util.FluidUtils;
+import muramasa.antimatter.util.Utils;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
-import tesseract.TesseractGraphWrappers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class BlockEntityPump extends BlockEntityMachine<BlockEntityPump> {
-    Fluid fluid = Fluids.EMPTY;
-    public ArrayList<BlockPos> mPumpList = new ArrayList<BlockPos>();
-    int pumpHeadY = - 1;
+    int nextCheck = 0;
+    byte mDir = 0;
+    public ArrayList<BlockPos> mCheckList = new ArrayList<>();
+    public LinkedList<BlockPos> mPumpList = new LinkedList<>();
+    public Set<BlockPos> mChecked = new HashSet<>();
+    public List<Fluid> mPumpedFluids = new ArrayList<>();
     public BlockEntityPump(Machine<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-    }
-
-    @Override
-    public void onFirstTickServer(Level level, BlockPos pos, BlockState state) {
-        super.onFirstTickServer(level, pos, state);
-        if (this.pumpHeadY < 0) {
-            this.pumpHeadY = worldPosition.getY() - 1;
-        }
+        this.fluidHandler.set(() -> new MachineFluidHandler<>(this, 8000 * (this.getMachineTier().getIntegerId()), 0, 1));
     }
 
     @Override
     public void serverTick(Level level, BlockPos pos, BlockState state) {
         super.serverTick(level, pos, state);
-        if (this.isServerSide() && level.getGameTime()%10==0 && this.machineState != MachineState.DISABLED && this.itemHandler.map(i -> {
-            ItemStack stack = i.getHandler(SlotType.STORAGE).getStackInSlot(0);
-            return stack.isEmpty() || stack.getItem() instanceof BlockItem;
-        }).orElse(false)) {
-            if (fluidHandler.map(f -> f.getOutputTanks().getTank(0).getFluid().getAmount() + 1000 <= f.getOutputTanks().getTank(0).getCapacity()).orElse(false) && energyHandler.map(e -> e.getEnergy() >= 2000).orElse(false)) {
-                boolean tMovedOneDown = false;
-
-                if (level.getGameTime()%100==0) {
-                    tMovedOneDown = moveOneDown();
-                }
-                int x = worldPosition.getX();
-                int z = worldPosition.getZ();
-
-                if (fluid == Fluids.EMPTY) {
-                    getFluidAt(x, getPumpHeadY(), z);
-                    if (fluid == Fluids.EMPTY) {
-                        getFluidAt(x, getPumpHeadY(), z + 1);
-                    }
-                    if (fluid == Fluids.EMPTY) {
-                        getFluidAt(x, getPumpHeadY(), z - 1);
-                    }
-                    if (fluid == Fluids.EMPTY) {
-                        getFluidAt(x + 1, getPumpHeadY(), z);
-                    }
-                    if (fluid == Fluids.EMPTY) {
-                        getFluidAt(x - 1, getPumpHeadY(), z);
-                    }
+        if (getMachineState() == MachineState.DISABLED) return;
+        if (energyHandler.map(e -> e.getEnergy() < getMachineTier().getVoltage() / 2).orElse(false)) {
+            if (getMachineState() == MachineState.ACTIVE) setMachineState(MachineState.IDLE);
+            return;
+        }
+        nextCheck--;
+        if (getMachineState() == MachineState.IDLE) {
+            setMachineState(MachineState.ACTIVE);
+        }
+        exportFluid();
+        if (mCheckList.isEmpty()) {
+            if (nextCheck < 0) {
+                // Reset everything and add the Fluid Block in front of the Pump to the Lists.
+                scanForFluid(getBlockPos().relative(this.getFacing()));
+                // Next Reset should only happen in two and a half Minutes or so.
+                nextCheck = 3000;
+            } else {
+                if (mPumpList.isEmpty()) {
+                    // We are done with this Y-Level, lets scan again in a second!
+                    if (nextCheck > 20) nextCheck = 20;
                 } else {
-                    if (getPumpHeadY() < worldPosition.getY()) {
-                        if (tMovedOneDown || (mPumpList.isEmpty() && level.getGameTime() % 200 == 100) || level.getGameTime() % 72000 == 100) {
-                            mPumpList.clear();
-                            for (int y = worldPosition.getY() - 1; mPumpList.isEmpty() && y >= pumpHeadY; y--) {
-                                scanForFluid(x, y, z, mPumpList, x, z, 64);
-                            }
-                        }
-                        if (!tMovedOneDown && !mPumpList.isEmpty()) {
-                            consumeFluid(mPumpList.get(mPumpList.size()-1).getX(), mPumpList.get(mPumpList.size()-1).getY(), mPumpList.get(mPumpList.size()-1).getZ());
-                            mPumpList.remove(mPumpList.size()-1);
-                        }
+                    if (level.getGameTime() % ((6 - this.getMachineTier().getIntegerId()) * 20L) != 0){
+                        return;
+                    }
+                    Boolean bool = drainFluid(mPumpList.removeLast()); // boxed boolean so I can have 3 values instead of 2
+                    if (bool == null){
+                        if (getMachineState() == MachineState.ACTIVE) setMachineState(MachineState.IDLE);
+                    } else if (!bool){
+                        // Something changed for some reason, lets scan again right away!
+                        nextCheck = 0;
                     }
                 }
             }
-            this.setActive(!mPumpList.isEmpty());
+        } else {
+            // If the List still contains Elements, then scan the next Y Level for more Fluids.
+            scanForFluid(offsetX(), offsetZ());
+            // Next Reset should only happen in two and a half Minutes or so.
+            nextCheck = 3000;
         }
     }
 
-    private void setActive(boolean active){
-        if (this.machineState != MachineState.DISABLED){
-            this.setMachineState(active ? MachineState.ACTIVE : MachineState.IDLE);
+    private Boolean drainFluid(BlockPos aCoords) {
+        FluidState state = level.getFluidState(aCoords);
+        Fluid fluid = state.getType();
+        BlockState blockState = level.getBlockState(aCoords);
+        // Seems like someone removed or replaced a Fluid Block! Scan again!
+        if (!mPumpedFluids.contains(fluid)) return false;
+        // Determine the Fluid that is produced.
+        if (state.isSource()){
+            FluidStack stack = new FluidStack(fluid, 1000);
+            if (fluidHandler.map(f -> f.fillOutput(stack, FluidAction.SIMULATE) != 1000).orElse(false)){
+                return null;
+            }
+            fluidHandler.ifPresent(f -> f.fillOutput(stack, FluidAction.EXECUTE));
+        }
+        BlockState newState = Blocks.AIR.defaultBlockState();
+        if (fluid == Fluids.WATER && blockState.getBlock() != Blocks.WATER && blockState.hasProperty(BlockStateProperties.WATERLOGGED) && blockState.getValue(BlockStateProperties.WATERLOGGED)){
+            newState = blockState.setValue(BlockStateProperties.WATERLOGGED, false);
+        }
+
+        if (!level.setBlock(aCoords, newState, 11)) return false;
+
+        if (this.level instanceof ServerLevel serverLevel) {
+            serverLevel.getFluidTicks().clearArea(BoundingBox.fromCorners(aCoords.offset(-2, -2, -2), aCoords.offset(2, 2, 2)));
+        }
+
+        // Consume Energy based on Fluid Amount absorbed.
+        energyHandler.ifPresent(e -> e.extractEu(getMachineTier().getVoltage() / 2, false));
+        // If there is a Fluid Block above this one, clearly the Y-Level is off due to a recent Blockchange! Scan again!
+        if (mPumpedFluids.contains(level.getFluidState(aCoords).getType())) return false;
+        // Somehow this Block is completely surrounded by pumpable Fluid, this should not be possible unless it is the literal Cornercase! Scan again!
+        return !(
+                mPumpedFluids.contains(level.getFluidState(aCoords.offset(1, 0, 0)).getType()) &&
+                        mPumpedFluids.contains(level.getFluidState(aCoords.offset(-1, 0, 0)).getType()) &&
+                        mPumpedFluids.contains(level.getFluidState(aCoords.offset(0, 0, 1)).getType()) &&
+                        mPumpedFluids.contains(level.getFluidState(aCoords.offset(0, 0, -1)).getType()));
+    }
+
+    public void exportFluid() {
+        if (fluidHandler.map(f -> f.getOutputTanks().isEmpty()).orElse(false)) return;
+        Arrays.stream(Direction.values()).filter(f -> f != this.getFacing()).collect(Collectors.toList()).forEach(this::exportFluidFromMachineToSide);
+    }
+
+    public void exportFluidFromMachineToSide(Direction side){
+        if (fluidHandler.map(f -> f.getOutputTanks().isEmpty()).orElse(false)) return;
+        LazyOptional<IFluidHandler> cap = FluidUtils.getFluidHandler(getLevel(), getBlockPos().relative(side), getCachedBlockEntity(side), side.getOpposite());
+        fluidHandler.ifPresent(f -> cap.ifPresent(other -> Utils.transferFluids(f.getOutputTanks(), other, 1000)));
+    }
+
+    private void scanForFluid(int aX, int aZ) {
+        BlockPos[] tNeedsToBeChecked = mCheckList.toArray(BlockPos[]::new);
+        mCheckList.clear();
+
+        for (BlockPos tPos : tNeedsToBeChecked) {
+            if (mDir != 0 && mPumpedFluids.contains(level.getFluidState(tPos.offset(0, mDir, 0)).getType())) {
+                mPumpList = new LinkedList<>();
+                mCheckList.clear();
+                mChecked.clear();
+                addToList(tPos.getX(), tPos.getY() + mDir, tPos.getZ());
+                return;
+            }
+            if (tPos.getX() < aX + 64) addToList(tPos.getX() + 1, tPos.getY(), tPos.getZ());
+            if (tPos.getX() > aX - 64) addToList(tPos.getX() - 1, tPos.getY(), tPos.getZ());
+            if (tPos.getZ() < aZ + 64) addToList(tPos.getX(), tPos.getY(), tPos.getZ() + 1);
+            if (tPos.getZ() > aZ - 64) addToList(tPos.getX(), tPos.getY(), tPos.getZ() - 1);
         }
     }
 
-    private boolean moveOneDown() {
-        if (pumpHeadY <= 0) return false;
-        BlockState state = level.getBlockState(new BlockPos(worldPosition.getX(), pumpHeadY - 1, worldPosition.getZ()));
-        if (!(state.getBlock() instanceof LiquidBlock) && !state.isAir()) return false;
-        pumpHeadY--;
-        return true;
+    private int offsetX(){
+        return this.getBlockPos().getX() + this.getFacing().getStepX();
     }
 
-    private int getPumpHeadY() {
-        return pumpHeadY;
+    private int offsetZ(){
+        return this.getBlockPos().getZ() + this.getFacing().getStepZ();
     }
 
-    private void scanForFluid(int aX, int aY, int aZ, ArrayList<BlockPos> aList, int mX, int mZ, int mDist) {
-        boolean pX = addIfFluidAndNotAlreadyAdded(aX + 1, aY, aZ, aList),
-                nX = addIfFluidAndNotAlreadyAdded(aX - 1, aY, aZ, aList),
-                pZ = addIfFluidAndNotAlreadyAdded(aX, aY, aZ + 1, aList),
-                nZ = addIfFluidAndNotAlreadyAdded(aX, aY, aZ - 1, aList);
+    private void scanForFluid(BlockPos offset) {
+        mPumpList = new LinkedList<>();
+        mCheckList.clear();
+        mChecked.clear();
 
-        if (pX && aX < mX + mDist) {
-            scanForFluid(aX + 1, aY, aZ, aList, mX, mZ, mDist);
+        mPumpedFluids.clear();
+        FluidState aBlock = this.level.getFluidState(offset);
+        if (!aBlock.isEmpty() && aBlock.getType() instanceof FlowingFluid fluid) {
+            mPumpedFluids.add(fluid.getSource());
+            mPumpedFluids.add(fluid.getFlowing());
+            mDir = (byte)(FluidUtils.isFluidGaseous(aBlock.getType()) ? -1 : +1);
+        } else {
+            energyHandler.ifPresent(e -> {
+                e.extractEu(2, false);
+            });
+            return;
         }
-        if (nX && aX > mX - mDist) {
-            scanForFluid(aX - 1, aY, aZ, aList, mX, mZ, mDist);
-        }
-        if (pZ && aZ < mZ + mDist) {
-            scanForFluid(aX, aY, aZ + 1, aList, mX, mZ, mDist);
-        }
-        if (nZ && aZ > mZ - mDist) {
-            scanForFluid(aX, aY, aZ - 1, aList, mX, mZ, mDist);
-        }
-        if (addIfFluidAndNotAlreadyAdded(aX, aY + 1, aZ, aList) || (aX == mX && aZ == mZ && aY < worldPosition.getY())) {
-            scanForFluid(aX, aY + 1, aZ, aList, mX, mZ, mDist);
-        }
+
+        addToList(offset.getX(), offset.getY(), offset.getZ());
     }
 
-    private boolean addIfFluidAndNotAlreadyAdded(int aX, int aY, int aZ, ArrayList<BlockPos> aList) {
+    private boolean addToList(int aX, int aY, int aZ) {
         BlockPos tCoordinate = new BlockPos(aX, aY, aZ);
-        if (!aList.contains(tCoordinate)) {
-            Fluid fluid = level.getFluidState(new BlockPos(aX, aY, aZ)).getType();
-            if (this.fluid == fluid && fluid != Fluids.EMPTY) {
-                aList.add(tCoordinate);
+        if (mChecked.add(tCoordinate)) {
+            if (mPumpedFluids.contains(level.getFluidState(tCoordinate).getType())) {
+                mPumpList.add(tCoordinate);
+                mCheckList.add(tCoordinate);
                 return true;
             }
         }
         return false;
-    }
-
-    private void getFluidAt(int x, int y, int z) {
-        fluid = level.getFluidState(new BlockPos(x, y, z)).getType();
-        if (fluid == Fluids.WATER && level.getBlockState(new BlockPos(x, y, z)) != Blocks.WATER.defaultBlockState()) fluid = Fluids.EMPTY;
-    }
-
-    private boolean consumeFluid(int x, int y, int z) {
-        BlockPos pos = new BlockPos(x, y, z);
-        FluidState fluidState = level.getFluidState(pos);
-        Fluid fluid = fluidState.getType();
-        if (!(this.itemHandler.map(i -> {
-            ItemStack stack = i.getHandler(SlotType.STORAGE).getStackInSlot(0);
-            return stack.isEmpty() || stack.getItem() instanceof BlockItem;
-        })).orElse(false)){
-            return false;
-        }
-        if (fluid == this.fluid && fluid != Fluids.EMPTY) {
-            // waterlogged block
-            if ((fluid == Fluids.WATER || fluid == Fluids.FLOWING_WATER) && level.getBlockState(pos).getBlock() != Blocks.WATER) {
-                return false;
-            }
-            if (fluid.isSource(fluidState)) {
-                FluidStack stack = new FluidStack(fluid, 1000);
-                if (fluidHandler.map(f -> f.canOutputsFit(new FluidStack[]{stack})).orElse(false) && energyHandler.map(e -> e.getEnergy() >= 1000).orElse(false)){
-                    fluidHandler.ifPresent(f -> f.fillOutput(stack, FluidAction.EXECUTE));
-                    energyHandler.ifPresent(e -> e.extractEu(1000, false));
-                } else {
-                    return false;
-                }
-            } else {
-                energyHandler.ifPresent(e -> e.extractEu(250, false));
-            }
-            Block block = this.itemHandler.map(i -> {
-                ItemStack stack = i.getHandler(SlotType.STORAGE).getStackInSlot(0);
-                if (stack.isEmpty()) return Blocks.AIR;
-                return ((BlockItem)stack.getItem()).getBlock();
-            }).orElse(Blocks.AIR);
-            if (x == this.worldPosition.getX() && z == this.worldPosition.getZ()) block = Blocks.AIR;
-            int flag = block.defaultBlockState().isAir() ? 0 : 3;
-            level.setBlock(pos, block.defaultBlockState(), flag);
-            if (block != Blocks.AIR) itemHandler.ifPresent(i -> i.getHandler(SlotType.STORAGE).extractFromInput(0, 1, false));
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public void saveAdditional(CompoundTag tag) {
-        super.saveAdditional(tag);
-        tag.put("Fluid", new FluidStack(fluid, 1).writeToNBT(new CompoundTag()));
-        tag.putInt("pumpHeadY", pumpHeadY);
-        ListTag nbtTagList = new ListTag();
-        for (int i = 0; i < mPumpList.size(); i++) {
-            CompoundTag itemTag = new CompoundTag();
-            BlockPos pos = mPumpList.get(i);
-            itemTag.putInt("X", pos.getX());
-            itemTag.putInt("Y", pos.getY());
-            itemTag.putInt("Z", pos.getZ());
-            nbtTagList.add(itemTag);
-        }
-        CompoundTag nbt = new CompoundTag();
-        nbt.put("Positions", nbtTagList);
-    }
-
-    @Override
-    public void load(CompoundTag tag) {
-        super.load(tag);
-        mPumpList = new ArrayList<>();
-        ListTag tagList = tag.getList("Positions", Tag.TAG_COMPOUND);
-        for (int i = 0; i < tagList.size(); i++)
-        {
-            CompoundTag itemTags = tagList.getCompound(i);
-            BlockPos pos = new BlockPos(itemTags.getInt("X"), itemTags.getInt("Y"), itemTags.getInt("Z"));
-            mPumpList.add(pos);
-        }
-        this.fluid = FluidUtils.fromTag(tag.getCompound("Fluid")).getFluid();
-        this.pumpHeadY = tag.getInt("pumpHeadY");
-    }
-
-    @Override
-    public List<String> getInfo(boolean simple) {
-        List<String> list = super.getInfo(simple);
-        list.add(mPumpList.toString());
-        return list;
     }
 }
