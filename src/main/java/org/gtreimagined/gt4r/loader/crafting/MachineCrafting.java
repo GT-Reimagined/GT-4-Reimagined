@@ -147,7 +147,7 @@ public class MachineCrafting {
         provider.addItemRecipe(output, "machines", TRANSFORMER.getItem(MV),
                 of('C', GT4RBlocks.CABLE_COPPER.getBlockItem(PipeSize.VTINY), 'H', MACHINE_HULLS_ADVANCED), "C", "H", "C");
         provider.addItemRecipe(output, "machines", TRANSFORMER.getItem(HV),
-                of('C', CIRCUITS_BASIC, 'c', CABLE_GOLD.getBlockItem(PipeSize.VTINY), 'T', TRANSFORMER.getItem(MV), 'B', BatteryMediumLithium), " c ", "CTB", " c ");
+                of('C', CIRCUITS_BASIC, 'c', CABLE_GOLD.getBlockItem(PipeSize.VTINY), 'T', TRANSFORMER.getItem(MV), 'B', EnergyCrystal), " c ", "CTB", " c ");
         provider.addItemRecipe(output, "machines", TRANSFORMER.getItem(EV),
                 of('C', CIRCUITS_ADVANCED, 'T', TRANSFORMER.getItem(HV), 'c', GT4RBlocks.CABLE_STEEL.getBlockItem(PipeSize.VTINY), 'B', LapotronCrystal), " c ", "CTB", " c ");
         provider.addItemRecipe(output, "machines", TRANSFORMER.getItem(IV),

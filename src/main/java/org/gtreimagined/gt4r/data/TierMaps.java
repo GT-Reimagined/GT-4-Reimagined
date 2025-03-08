@@ -14,7 +14,6 @@ public class TierMaps {
     public static final ImmutableMap<Tier, Material> TIER_MATERIALS;
     public static ImmutableMap<Tier, Wire<?>> TIER_WIRES;
     public static ImmutableMap<Tier, Cable<?>> TIER_CABLES;
-    public static ImmutableMap<Tier, Item> TIER_BATTERIES;
 
     static {
         {
@@ -52,16 +51,5 @@ public class TierMaps {
             builder.put(Tier.LUV, GT4RBlocks.WIRE_SUPERCONDUCTOR);
             TIER_CABLES = builder.build();
         }
-        {
-            ImmutableMap.Builder<Tier, Item> builder = ImmutableMap.builder();
-            builder.put(Tier.ULV, GTCoreItems.BatteryRE);
-            builder.put(Tier.LV, GTCoreItems.BatterySmallLithium);
-            builder.put(Tier.MV, GTCoreItems.BatteryMediumLithium);
-            builder.put(Tier.HV, GTCoreItems.BatteryLargeLithium);
-            builder.put(Tier.EV, GTCoreItems.LapotronCrystal);
-            builder.put(Tier.IV, GTCoreItems.BatteryEnergyOrb);
-            TIER_BATTERIES = builder.build();
-        }
-
     }
 }
