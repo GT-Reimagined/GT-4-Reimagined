@@ -11,11 +11,11 @@ import muramasa.antimatter.gui.widget.WidgetSupplier;
 import muramasa.antimatter.integration.jeirei.AntimatterJEIREIPlugin;
 import muramasa.antimatter.mixin.client.AbstractContainerScreenAccessor;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.gtreimagined.gt4r.blockentity.single.BlockEntityCoalBoiler;
-import xyz.wagyourtail.unimined.expect.annotation.Environment;
-import xyz.wagyourtail.unimined.expect.annotation.Environment.EnvType;
 
 public class CoalBoilerFuelWidget extends Widget {
     private int fuel = 0, maxFuel = 0;
@@ -57,7 +57,7 @@ public class CoalBoilerFuelWidget extends Widget {
         renderTooltip(stack,"Fuel: " + fuel, mouseX, mouseY + 10, 0, 10, 18, 18);
     }
 
-    @Environment(EnvType.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     protected void renderTooltip(PoseStack matrixStack, String text, double mouseX, double mouseY, int x, int y, int w, int h) {
         if (isInside(x, y, w, h, mouseX, mouseY)){
             renderTooltip(matrixStack, new TextComponent(text), mouseX, mouseY);

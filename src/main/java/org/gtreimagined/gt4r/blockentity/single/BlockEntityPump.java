@@ -36,8 +36,8 @@ public class BlockEntityPump extends BlockEntityMachine<BlockEntityPump> {
     }
 
     @Override
-    public void onFirstTick() {
-        super.onFirstTick();
+    public void onFirstTickServer(Level level, BlockPos pos, BlockState state) {
+        super.onFirstTickServer(level, pos, state);
         if (this.pumpHeadY < 0) {
             this.pumpHeadY = worldPosition.getY() - 1;
         }

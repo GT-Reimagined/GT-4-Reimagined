@@ -114,7 +114,7 @@ dependencies {
 
     //gt4r deps
     //minecraftRuntimeLibraries(group: 'com.github.Speiger', name: 'Primitive-Collections', version: '[0.8,0.9)')
-    modImplementation(jarJar("org.gt-reimagined:gtcore-forge:${project.gt_core_version}-${project.minecraft_version}"))
+    modImplementation(jarJar("org.gt-reimagined:gtcore:${project.gt_core_version}-${project.minecraft_version}"))
     modRuntimeOnly(jarJar("dev.trinsdar:terraform-wood-api-v1:3.1.5"))
     runtimeOnly("curse.maven:portality-291493:3840074")
     runtimeOnly("curse.maven:titanium-287342:4117991")
