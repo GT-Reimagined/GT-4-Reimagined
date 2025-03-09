@@ -12,9 +12,9 @@ credits="GregoriusTechneticies for his previous versions of GregTech. And the cu
 authors="Trinsdar"
 description='''My remake of GregTech 4'''
 [[dependencies.gt4r]]
-    modId="antimatter"
+    modId="gtlib"
     mandatory=true
-    versionRange="[0.2-rc4,)"
+    versionRange="[0.3-pre.1,)"
     ordering="AFTER"
     side="BOTH"
 [[dependencies.gt4r]]
