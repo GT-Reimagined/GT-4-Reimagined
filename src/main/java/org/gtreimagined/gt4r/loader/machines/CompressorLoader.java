@@ -42,7 +42,7 @@ public class CompressorLoader {
         COMPRESSOR.RB().ii(RecipeIngredient.of(GTCoreItems.CoalBall, 1)).io(new ItemStack(GTCoreItems.CompressedCoalBall)).add("compressed_coal_ball",400, 2);
         COMPRESSOR.RB().ii(RecipeIngredient.of(Items.SAND, 4)).io(new ItemStack(Items.SANDSTONE)).add("sandstone",400, 2);
         COMPRESSOR.RB().ii(RecipeIngredient.of(Items.RED_SAND, 4)).io(new ItemStack(Items.RED_SANDSTONE)).add("red_sandstone",400, 2);
-        COMPRESSOR.RB().ii(DUST.getMaterialIngredient(Wood, 1)).io(PLATE.get(Wood, 1)).add("wood_plate",400, 2);
+        COMPRESSOR.RB().ii(DUST.getMaterialIngredient(Wood, 8)).io(PLATE.get(Wood, 1)).add("wood_plate",400, 2);
         COMPRESSOR.RB().ii(DUST.getMaterialIngredient(Fireclay, 1)).io(new ItemStack(CompressedFireClay)).add("compressed_fireclay",200, 2);
         if (GT4RConfig.HARDER_ENERGY_CRYSTAL.get()) {
             COMPRESSOR.RB().ii(DUST.getMaterialIngredient(Energium, 9)).io(new ItemStack(EnergyCrystal)).add("energy_crystal",400, 2);
