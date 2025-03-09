@@ -73,6 +73,7 @@ public class GT4RItems {
     public static ItemBasic<?> LapotronCrystal = new ItemMultiTextureBattery(GT4RRef.ID, "lapotron_crystal", Tier.HV, 1_000_000, true);
     public static ItemBasic<?> LapotronicEnergyOrb = new ItemMultiTextureBattery(GT4RRef.ID, "lapotronic_energy_orb", Tier.EV, 10_000_000, true);
     public static ItemBasic<?> LapotronicEnergyOrbCluster = new ItemMultiTextureBattery(GT4RRef.ID, "lapotronic_energy_orb_cluster", Tier.IV, 100_000_000, true);
+    public static ItemBasic<?> ZPM = new ItemMultiTextureBattery(GT4RRef.ID, "zpm", Tier.ZPM, 100000000000L, false);
 
     public static ItemElectricTool Drill = new ItemElectricTool("drill", GTCoreTools.DRILL, Steel, 6.0f, 5.5f, 2, 1, b -> !(b instanceof BehaviourAOEBreak));
     public static ItemElectricTool DiamondDrill = new ItemElectricTool("diamond_drill", GTCoreTools.DRILL, Steel, 8.0f, 6.0f, 3, 1, b -> !(b instanceof BehaviourAOEBreak));
@@ -88,8 +89,5 @@ public class GT4RItems {
     public static ItemElectricTool BronzeJackHammer = new ItemElectricTool("bronze_jackhammer", GTCoreTools.JACKHAMMER, Bronze, 6.0f, 5f, 2, 1, b -> !(b instanceof BehaviourAOEBreak));
     public static ItemElectricTool SteelJackHammer = new ItemElectricTool("steel_jackhammer", GTCoreTools.JACKHAMMER, StainlessSteel, 8.0f, 5.5f, 2, 1, b -> !(b instanceof BehaviourAOEBreak));
     public static ItemElectricTool DiamondJackHammer = new ItemElectricTool("diamond_jackhammer", GTCoreTools.JACKHAMMER, AntimatterMaterials.Diamond, 10.0f, 6.0f, 3, 2, b -> true);
-
-    public static ItemBasic<?> ZPM = new ItemMultiTextureBattery(GT4RRef.ID, "zpm", Tier.ZPM, 100000000000L, false);
-    //public static ItemBasic<?> BatteryEnergyOrbCluster = new ItemBasic<>(Ref.ID, "battery_energy_orb_cluster");
 
 }
