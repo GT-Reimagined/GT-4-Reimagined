@@ -4,6 +4,7 @@ import com.google.common.collect.Streams;
 import muramasa.antimatter.Data;
 import muramasa.antimatter.Ref;
 import muramasa.antimatter.capability.energy.ItemEnergyHandler;
+import muramasa.antimatter.integration.curios.CuriosHelper;
 import muramasa.antimatter.item.ItemBattery;
 import muramasa.antimatter.tool.IBasicAntimatterTool;
 import muramasa.antimatter.util.Utils;
@@ -103,7 +104,7 @@ public interface IElectricTool extends IBasicAntimatterTool, IEnergyItem {
 
     default void refillTool(ItemStack stack, Player player){
         if (this.getAntimatterToolType().isPowered()) {
-            Streams.concat(player.getInventory().items.stream(), player.getInventory().offhand.stream()).forEach(s -> {
+            Streams.concat(player.getInventory().items.stream(), player.getInventory().offhand.stream(), CuriosHelper.getCuriosItems(player, "belt", "back")).forEach(s -> {
                 if (this.getCurrentEnergy(stack) < getMaxEnergy(stack)){
                     if (s.getItem() instanceof ItemBattery battery && battery.getTier().getIntegerId() >= this.getEnergyTier()){
                         IEnergyHandlerItem batteryHandler = s.getCapability(TesseractCaps.ENERGY_HANDLER_CAPABILITY_ITEM).resolve().orElse(null);
