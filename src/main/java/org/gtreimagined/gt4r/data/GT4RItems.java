@@ -66,11 +66,10 @@ public class GT4RItems {
     public static ItemBasic<?> MachineParts = new ItemBasic<>(GT4RRef.ID, "machine_parts");
     public static ItemBasic<?> StorageDataOrb = new ItemStorageOrb(GT4RRef.ID, "storage_data_orb").tip("A High Capacity Data Storage");
 
-    public static ItemBasic<?> SmallBatteryHull = new ItemBasic<>(GT4RRef.ID, "small_battery_hull").tip("An empty LV Battery Hull");
-    public static ItemBasic<?> MediumBatteryHull = new ItemBasic<>(GT4RRef.ID, "medium_battery_hull").tip("An empty MV Battery Hull");
-    public static ItemBasic<?> LargeBatteryHull = new ItemBasic<>(GT4RRef.ID, "large_battery_hull").tip("An empty HV Battery Hull");
-    public static ItemBasic<?> REBattery = new ItemMultiTextureBattery(GT4RRef.ID, "re_battery", Tier.LV, 10000, true).tip("Reusable");
+    public static ItemBasic<?> BatteryHull = new ItemBasic<>(GT4RRef.ID, "battery_hull").tip("An empty LV Battery Hull");
+    public static ItemBasic<?> REBattery = new ItemMultiTextureBattery(GT4RRef.ID, "re_battery", Tier.LV, 10000, true);
     public static ItemBasic<?> EnergyCrystal = new ItemMultiTextureBattery(GT4RRef.ID, "energy_crystal", Tier.MV, 100_000, true);
+    public static ItemBasic<?> LithiumBattery = new ItemMultiTextureBattery(GT4RRef.ID, "lithium_battery", Tier.MV, 100_000, true);
     public static ItemBasic<?> LapotronCrystal = new ItemMultiTextureBattery(GT4RRef.ID, "lapotron_crystal", Tier.HV, 1_000_000, true);
     public static ItemBasic<?> LapotronicEnergyOrb = new ItemMultiTextureBattery(GT4RRef.ID, "lapotronic_energy_orb", Tier.EV, 10_000_000, true);
     public static ItemBasic<?> LapotronicEnergyOrbCluster = new ItemMultiTextureBattery(GT4RRef.ID, "lapotronic_energy_orb_cluster", Tier.IV, 100_000_000, true);

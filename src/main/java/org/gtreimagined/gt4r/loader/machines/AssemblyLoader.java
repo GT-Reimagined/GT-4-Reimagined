@@ -104,9 +104,7 @@ public class AssemblyLoader {
         RecipeMaps.ASSEMBLER.RB().ii(of(getTag("minecraft", "planks"), 8), DUST.getMaterialIngredient(Redstone, 1)).io(new ItemStack(Items.NOTE_BLOCK)).add("note_block_1",800, 1);
         RecipeMaps.ASSEMBLER.RB().ii(of(getTag("minecraft", "planks"), 8), GEM.getMaterialIngredient(Diamond, 1)).io(new ItemStack(Items.JUKEBOX)).add("jukebox_1",1600, 1);
         RecipeMaps.ASSEMBLER.RB().ii(of(CompressedCoalBall, 8), of(getForgelikeItemTag("obsidian"), 1)).io(new ItemStack(CoalChunk)).add("coal_chunk_3",400, 4);
-        RecipeMaps.ASSEMBLER.RB().ii(of(GT4RBlocks.CABLE_TIN.getBlockItem(PipeSize.VTINY), 1), PLATE.getMaterialIngredient(BatteryAlloy, 1)).io(new ItemStack(SmallBatteryHull)).add("battery_hull_small",800, 1);
-        RecipeMaps.ASSEMBLER.RB().ii(of(GT4RBlocks.CABLE_COPPER.getBlockItem(PipeSize.VTINY), 2), PLATE.getMaterialIngredient(BatteryAlloy, 3)).io(new ItemStack(MediumBatteryHull)).add("battery_hull_medium",1600, 2);
-        RecipeMaps.ASSEMBLER.RB().ii(of(GT4RBlocks.CABLE_GOLD.getBlockItem(PipeSize.VTINY), 4), PLATE.getMaterialIngredient(BatteryAlloy, 9)).io(new ItemStack(LargeBatteryHull)).add("battery_hull_large",6400, 4);
+        RecipeMaps.ASSEMBLER.RB().ii(of(GT4RBlocks.CABLE_TIN.getBlockItem(PipeSize.VTINY), 1), PLATE.getMaterialIngredient(BatteryAlloy, 1)).io(new ItemStack(BatteryHull)).add("battery_hull_small",800, 1);
         RecipeMaps.ASSEMBLER.RB().ii(PLATE.getMaterialIngredient(Invar, 2), GEM.getMaterialIngredient(Flint, 1)).io(new ItemStack(LighterEmpty)).add("lighter_empty",256, 16);
         RecipeMaps.ASSEMBLER.RB().ii(PLATE.getMaterialIngredient(Zinc, 4), of(CarbonMesh, 4)).io(new ItemStack(ItemFilter)).add("item_filter",1600, 32);
         RecipeMaps.ASSEMBLER.RB().ii(TRANSFORMER.getItem(HV), TransformerUpgrade).io(HVTransformerUpgrade).add("hv_transformer_upgrade", 3200, 4);
