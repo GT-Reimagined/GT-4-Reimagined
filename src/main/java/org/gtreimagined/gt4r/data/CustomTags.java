@@ -30,6 +30,7 @@ public class CustomTags {
     public static TagKey<Item> GEARS_TITAN_TUNGSTEEL = getTag("gears/titantungsteel");
     public static TagKey<Item> DUSTS_LAPIS_LAZ = getTag("dusts/lapislaz");
     public static TagKey<Item> DUSTS_COALS = getTag("dusts/coals");
+    public static TagKey<Item> GEMS_DIAMOND_RUBY = getTag("gems/diamond_ruby");
     public static TagKey<Item> POWER_UNIT_ROCK_CUTTER = getTag("power_units/rock_cutter");
     public static TagKey<Item> DRILL = TagUtils.getItemTag(new ResourceLocation(GT4RRef.ID, "drill"));
 

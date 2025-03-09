@@ -19,6 +19,8 @@ import org.gtreimagined.gtcore.data.GTCoreItems;
 import org.gtreimagined.gt4r.GT4RRef;
 import org.gtreimagined.gt4r.data.GT4RMaterialTags;
 
+import static muramasa.antimatter.data.AntimatterMaterialTypes.GEM;
+import static muramasa.antimatter.data.AntimatterMaterials.Diamond;
 import static muramasa.antimatter.util.Utils.getConventionalMaterialType;
 import static muramasa.antimatter.util.Utils.getConventionalStoneType;
 import static org.gtreimagined.gt4r.data.CustomTags.*;
@@ -55,6 +57,7 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.tag(GEARS_STEELS).addTag(CustomTags.getTag("gears/steel")).addTag(CustomTags.getTag("gears/stainless_steel"));
         this.tag(DUSTS_LAPIS_LAZ).addTag(CustomTags.getTag("dusts/lapis")).addTag(CustomTags.getTag("dusts/lazurite"));
         this.tag(DUSTS_COALS).addTag(CustomTags.getTag("dusts/coal")).addTag(CustomTags.getTag("dusts/charcoal"));
+        this.tag(GEMS_DIAMOND_RUBY).addTag(GEM.getMaterialTag(Diamond)).addTag(GEM.getMaterialTag(Ruby));
 
         this.tag(POWER_UNIT_ROCK_CUTTER).add(RockCutterPowerUnit);
         this.tag(DRILL).add(Drill);

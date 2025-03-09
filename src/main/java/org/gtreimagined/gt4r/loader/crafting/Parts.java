@@ -146,7 +146,7 @@ public class Parts {
                     AntimatterMaterialTypes.DUST.get(Energium, 9), of('R', AntimatterMaterialTypes.DUST.getMaterialTag(AntimatterMaterials.Redstone), 'D', AntimatterMaterialTypes.DUST.getMaterialTag(Ruby)), "RDR", "DRD", "RDR");
         } else {
             provider.addItemRecipe(output, "parts", EnergyCrystal,
-                    of('R', DUST.getMaterialTag(Redstone), 'G', GEM.getMaterialTag(Ruby)), "RRR", "RGR", "RRR");
+                    of('R', DUST.getMaterialTag(Redstone), 'G', GEMS_DIAMOND_RUBY), "RRR", "RGR", "RRR");
         }
 
 
