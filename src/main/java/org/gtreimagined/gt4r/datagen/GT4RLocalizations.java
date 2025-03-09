@@ -93,7 +93,6 @@ public class GT4RLocalizations {
                     }
                 }
             });
-            AntimatterAPI.all(ItemFluidCell.class, domain).forEach(i -> override(i.getDescriptionId(), lowerUnderscoreToUpperSpacedRotated(i.getId())));
         }
 
         @Override
