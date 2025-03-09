@@ -40,15 +40,7 @@ public class MaterialRecipeLoader {
             }
 
         });
-        BLOCK.all().forEach(m -> {
-            if (m.has(INGOT)){
-                provider.addStackRecipe(output, GT4RRef.ID, m.getId() + "_block", "blocks", BLOCK.get().get(m).asStack(), ImmutableMap.of('I', INGOT.getMaterialTag(m)), "III", "III", "III");
-                provider.shapeless(output,"ingot_" + m.getId() + "_from_block", "blocks", INGOT.get(m, 9), BLOCK.getMaterialTag(m));
-            } else if (m.has(GEM)){
-                provider.addStackRecipe(output, GT4RRef.ID, m.getId() + "_block", "blocks", BLOCK.get().get(m).asStack(), ImmutableMap.of('I', GEM.getMaterialTag(m)), "III", "III", "III");
-                provider.shapeless(output,"gem_" + m.getId() + "_from_block", "blocks", GEM.get(m, 9), BLOCK.getMaterialTag(m));
-            }
-        });
+
         if (GT4RConfig.GT5_ELECTRIC_TOOLS.get()) {
             AntimatterMaterialTypes.DRILLBIT.all().forEach(m -> {
                 if (m.has(PLATE) || m.has(GEM)){
