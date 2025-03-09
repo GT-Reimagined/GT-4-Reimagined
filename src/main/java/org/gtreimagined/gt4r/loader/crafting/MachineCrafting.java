@@ -138,9 +138,9 @@ public class MachineCrafting {
 
     private static void loadSimpleMachineRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider){
         provider.addItemRecipe(output, "machines", BATTERY_BUFFER_FOUR.getItem(LV),
-                of('T', GT4RBlocks.CABLE_TIN.getBlockItem(PipeSize.VTINY), 'H', MACHINE_HULLS_BASIC, 'P', PLATES_WROUGHT_ALUMINIUM, 'C', CIRCUITS_BASIC, 'c', Tags.Items.CHESTS), "CcC", "THT", "PTP");
+                of('T', GT4RBlocks.CABLE_TIN.getBlockItem(PipeSize.VTINY), 'H', MACHINE_HULLS_BASIC, 'P', PLATES_WROUGHT_ALUMINIUM, 'C', CIRCUITS_BASIC, 'c', Tags.Items.CHESTS_WOODEN), "CcC", "THT", "PTP");
         provider.addItemRecipe(output, "machines", BATTERY_BUFFER_EIGHT.getItem(LV),
-                of('C', CIRCUITS_BASIC, 'c', Tags.Items.CHESTS, 'B', BATTERY_BUFFER_FOUR.getItem(LV)), "ccc", "cBc", "CCC");
+                of('C', CIRCUITS_BASIC, 'c', Tags.Items.CHESTS_WOODEN, 'B', BATTERY_BUFFER_FOUR.getItem(LV)), "ccc", "cBc", "CCC");
         provider.addItemRecipe(output, "machines", TRANSFORMER.getItem(LV),
                 of('H', MACHINE_HULLS_ADVANCED, 'C', GT4RBlocks.CABLE_TIN.getBlockItem(PipeSize.VTINY), 'c', CopperCoil), " C ", "cHc", " C ");
         provider.addItemRecipe(output, "machines", TRANSFORMER.getItem(MV),
@@ -242,9 +242,9 @@ public class MachineCrafting {
                         of('S', SCREWDRIVER.getTag(), 'w', WIRE_CUTTER.getTag(), 'W', Machine.get(m.getId().replace("charging_", ""), GTCore.ID).map(mch -> mch.getItem(NONE)).orElse(Items.AIR), 'c', CABLE_GOLD.getBlock(PipeSize.SMALL), 'C', CIRCUITS_ADVANCED, 'R', ROD.getMaterialTag(m.getMaterial())), "RCR", "SWw", "ccc");
             }
         });
-        provider.addItemRecipe(output, "item_barrels", GTCoreBlocks.WOOD_ITEM_BARREL.getItem(NONE), of('S', SOFT_HAMMER.getTag(), 'C', Tags.Items.CHESTS, 'R', ROD_LONG.getMaterialTag(Bronze), 'W', ItemTags.PLANKS, 's', SAW.getTag()), "SCs", "WRW", "WRW");
+        provider.addItemRecipe(output, "item_barrels", GTCoreBlocks.WOOD_ITEM_BARREL.getItem(NONE), of('S', SOFT_HAMMER.getTag(), 'C', Tags.Items.CHESTS_WOODEN, 'R', ROD_LONG.getMaterialTag(Bronze), 'W', ItemTags.PLANKS, 's', SAW.getTag()), "SCs", "WRW", "WRW");
         if (GTCoreBlocks.IRONWOOD_ITEM_BARREL != null) {
-            provider.addItemRecipe(output, "item_barrels", GTCoreBlocks.IRONWOOD_ITEM_BARREL.getItem(NONE), of('S', SOFT_HAMMER.getTag(), 'C', Tags.Items.CHESTS, 'R', ROD_LONG.getMaterialTag(Iron), 'W', PLATE.getMaterialTag(GTCoreMaterials.Ironwood), 's', SAW.getTag()), "SCs", "WRW", "WRW");
+            provider.addItemRecipe(output, "item_barrels", GTCoreBlocks.IRONWOOD_ITEM_BARREL.getItem(NONE), of('S', SOFT_HAMMER.getTag(), 'C', Tags.Items.CHESTS_WOODEN, 'R', ROD_LONG.getMaterialTag(Iron), 'W', PLATE.getMaterialTag(GTCoreMaterials.Ironwood), 's', SAW.getTag()), "SCs", "WRW", "WRW");
         }
         provider.addItemRecipe(output, "item_barrels", GTCoreBlocks.PLASTIC_STORAGE_BOX.getItem(NONE),
                 of('P', PLATE.getMaterialTag(Plastic), 'S', SCREW.getMaterialTag(Plastic), 'C', Tags.Items.CHESTS_WOODEN), "SPS", "PCP", "SPS");
