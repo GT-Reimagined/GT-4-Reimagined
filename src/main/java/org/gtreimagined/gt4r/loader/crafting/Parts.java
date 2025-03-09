@@ -20,8 +20,7 @@ import org.gtreimagined.gt4r.data.Machines;
 import java.util.function.Consumer;
 
 import static com.google.common.collect.ImmutableMap.of;
-import static muramasa.antimatter.data.AntimatterMaterialTypes.FOIL;
-import static muramasa.antimatter.data.AntimatterMaterialTypes.PLATE;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
 import static muramasa.antimatter.data.AntimatterMaterials.Iron;
 import static muramasa.antimatter.machine.Tier.MV;
 import static muramasa.antimatter.util.TagUtils.getForgelikeItemTag;
@@ -42,7 +41,7 @@ public class Parts {
         provider.addStackRecipe(output, GT4RRef.ID, "comp_monitor", "parts",
                 new ItemStack(ComputerMonitor, 1), of2('A', AntimatterMaterialTypes.PLATE.getMaterialTag(Aluminium), 'G', Tags.Items.GLASS_PANES, 'g', Tags.Items.DYES_GREEN, 'R', Tags.Items.DYES_RED, 'B', Tags.Items.DYES_BLUE, 'D', AntimatterMaterialTypes.DUST.getMaterialTag(AntimatterMaterials.Glowstone)), "AgA", "RGB", "ADA");
         provider.addStackRecipe(output, GT4RRef.ID, "conv_module", "parts",
-                new ItemStack(ConveyorModule, 1), of('A', PLATES_IRON_ALUMINIUM, 'G', Tags.Items.GLASS, 'B', REBattery, 'C', CIRCUITS_BASIC), "GGG", "AAA", "CBC");
+                new ItemStack(ConveyorModule, 1), of('A', PLATES_IRON_ALUMINIUM, 'G', Tags.Items.GLASS, 'B', BATTERIES_LV, 'C', CIRCUITS_BASIC), "GGG", "AAA", "CBC");
         provider.addStackRecipe(output, GT4RRef.ID, "drain_expensive", "parts",
                 new ItemStack(Drain, 1), of('A', PLATES_IRON_ALUMINIUM, 'B', Items.IRON_BARS), "ABA", "B B", "ABA");
         provider.addStackRecipe(output, GT4RRef.ID, "sawblade", "parts",
@@ -62,10 +61,16 @@ public class Parts {
         provider.shapeless(output, "mesh_carbon", "parts", new ItemStack(CarbonMesh), CarbonFibre, CarbonFibre);
         provider.addItemRecipe(output, GT4RRef.ID, "re_battery", "parts",
                 REBattery, of('T', AntimatterMaterialTypes.PLATE.getMaterialTag(Tin), 'C', GT4RBlocks.CABLE_TIN.getBlockItem(PipeSize.VTINY), 'R', AntimatterMaterialTypes.DUST.getMaterialTag(AntimatterMaterials.Redstone)), " C ", "TRT", "TRT");
+        provider.addStackRecipe(output, GT4RRef.ID, "re_battery_lead_acid", "parts",
+                new ItemStack(REBattery, 2), of('T', PLATE.getMaterialTag(Tin), 'C', GT4RBlocks.CABLE_TIN.getBlockItem(PipeSize.VTINY), 'L', DUST.getMaterialTag(Lead), 'A', SulfuricAcid.getLiquid(1).getFluid().getBucket()), " C ", "TLT", "TAT");
+        provider.addStackRecipe(output, GT4RRef.ID, "re_battery_acid_lead", "parts",
+                new ItemStack(REBattery, 2), of('T', PLATE.getMaterialTag(Tin), 'C', GT4RBlocks.CABLE_TIN.getBlockItem(PipeSize.VTINY), 'L', DUST.getMaterialTag(Lead), 'A', SulfuricAcid.getLiquid(1).getFluid().getBucket()), " C ", "TAT", "TLT");
+        provider.addStackRecipe(output, GT4RRef.ID, "re_battery_alloy_lead_acid", "parts",
+                new ItemStack(REBattery, 3), of('T', PLATE.getMaterialTag(BatteryAlloy), 'C', GT4RBlocks.CABLE_TIN.getBlockItem(PipeSize.VTINY), 'L', DUST.getMaterialTag(Lead), 'A', SulfuricAcid.getLiquid(1).getFluid().getBucket()), " C ", "TLT", "TAT");
+        provider.addStackRecipe(output, GT4RRef.ID, "re_battery_alloy_acid_lead", "parts",
+                new ItemStack(REBattery, 3), of('T', PLATE.getMaterialTag(BatteryAlloy), 'C', GT4RBlocks.CABLE_TIN.getBlockItem(PipeSize.VTINY), 'L', DUST.getMaterialTag(Lead), 'A', SulfuricAcid.getLiquid(1).getFluid().getBucket()), " C ", "TAT", "TLT");
         provider.addItemRecipe(output, GT4RRef.ID, "small_battery_hull", "parts",
-                SmallBatteryHull, of('T', AntimatterMaterialTypes.PLATE.getMaterialTag(BatteryAlloy), 'C', GT4RBlocks.CABLE_TIN.getBlockItem(PipeSize.VTINY)), "C", "T", "T");
-        provider.addItemRecipe(output, GT4RRef.ID, "medium_battery_hull", "parts",
-                MediumBatteryHull, of('T', AntimatterMaterialTypes.PLATE.getMaterialTag(BatteryAlloy), 'C', GT4RBlocks.CABLE_COPPER.getBlockItem(PipeSize.VTINY)), "C C", "TTT", "TTT");
+                BatteryHull, of('T', AntimatterMaterialTypes.PLATE.getMaterialTag(BatteryAlloy), 'C', GT4RBlocks.CABLE_TIN.getBlockItem(PipeSize.VTINY)), "C", "T", "T");
         provider.addItemRecipe(output, GT4RRef.ID, "shape_empty", "parts",
                 EmptyShape, of('F', AntimatterDefaultTools.FILE.getTag(), 'H', AntimatterDefaultTools.HAMMER.getTag(), 'S', AntimatterMaterialTypes.PLATE.getMaterialTag(Steel)), "HF", "SS", "SS");
         provider.addItemRecipe(output, GT4RRef.ID, "plate_mold", "parts",

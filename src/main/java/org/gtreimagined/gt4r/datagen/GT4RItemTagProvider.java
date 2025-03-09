@@ -13,16 +13,18 @@ import muramasa.antimatter.util.TagUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import org.gtreimagined.gt4r.data.CustomTags;
+import org.gtreimagined.gt4r.data.GT4RItems;
 import org.gtreimagined.gtcore.data.GTCoreItems;
 import org.gtreimagined.gt4r.GT4RRef;
 import org.gtreimagined.gt4r.data.GT4RMaterialTags;
 
 import static muramasa.antimatter.util.Utils.getConventionalMaterialType;
 import static muramasa.antimatter.util.Utils.getConventionalStoneType;
-import static org.gtreimagined.gtcore.data.GTCoreTags.PLATES_IRON_ALUMINIUM;
 import static org.gtreimagined.gt4r.data.CustomTags.*;
 import static org.gtreimagined.gt4r.data.GT4RItems.*;
 import static org.gtreimagined.gt4r.data.Materials.*;
+import static org.gtreimagined.gtcore.data.GTCoreTags.*;
 
 public class GT4RItemTagProvider extends AntimatterItemTagProvider {
     public GT4RItemTagProvider(String providerDomain, String providerName, boolean replace, AntimatterBlockTagProvider p) {
@@ -32,11 +34,11 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
     @Override
     public void processTags(String domain) {
         super.processTags(domain);
-        this.tag(PLATES_STEELS).addTag(getTag("plates/steel")).addTag(getTag("plates/stainless_steel"));
-        this.tag(PLATES_INVAR_ALUMINIUM).addTag(getTag("plates/invar")).addTag(getTag("plates/aluminium"));
-        this.tag(PLATES_IRON_ALUMINIUM).addTag(getTag("plates/iron")).addTag(getTag("plates/aluminium"));
-        this.tag(PLATES_WROUGHT_ALUMINIUM).addTag(getTag("plates/wrought_iron")).addTag(getTag("plates/aluminium"));
-        this.tag(PLATES_TITAN_TUNGSTEEL).addTag(getTag("plates/titanium")).addTag(getTag("plates/tungstensteel"));
+        this.tag(PLATES_STEELS).addTag(CustomTags.getTag("plates/steel")).addTag(CustomTags.getTag("plates/stainless_steel"));
+        this.tag(PLATES_INVAR_ALUMINIUM).addTag(CustomTags.getTag("plates/invar")).addTag(CustomTags.getTag("plates/aluminium"));
+        this.tag(PLATES_IRON_ALUMINIUM).addTag(CustomTags.getTag("plates/iron")).addTag(CustomTags.getTag("plates/aluminium"));
+        this.tag(PLATES_WROUGHT_ALUMINIUM).addTag(CustomTags.getTag("plates/wrought_iron")).addTag(CustomTags.getTag("plates/aluminium"));
+        this.tag(PLATES_TITAN_TUNGSTEEL).addTag(CustomTags.getTag("plates/titanium")).addTag(CustomTags.getTag("plates/tungstensteel"));
         this.tag(OVERCLOCKER_UPGRADES).add(OverclockerUpgrade);
         this.tag(TRANSFORMER_UPGRADES).add(TransformerUpgrade);
         this.tag(HV_TRANSFORMER_UPGRADES).add(HVTransformerUpgrade);
@@ -49,13 +51,16 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.tag(MACHINE_HULLS_VERY_ADVANCED).add(GT4RMaterialTags.HULL.get(TungstenSteel), GT4RMaterialTags.HULL.get(Titanium));
         this.tag(GRINDING_HEAD).add(GTCoreItems.DiamondGrindHead, GTCoreItems.TungstenGrindHead);
         this.tag(PISTONS).add(Items.PISTON, Items.STICKY_PISTON);
-        this.tag(GEARS_TITAN_TUNGSTEEL).addTag(getTag("gears/titanium")).addTag(getTag("gears/tungstensteel"));
-        this.tag(GEARS_STEELS).addTag(getTag("gears/steel")).addTag(getTag("gears/stainless_steel"));
-        this.tag(DUSTS_LAPIS_LAZ).addTag(getTag("dusts/lapis")).addTag(getTag("dusts/lazurite"));
-        this.tag(DUSTS_COALS).addTag(getTag("dusts/coal")).addTag(getTag("dusts/charcoal"));
+        this.tag(GEARS_TITAN_TUNGSTEEL).addTag(CustomTags.getTag("gears/titanium")).addTag(CustomTags.getTag("gears/tungstensteel"));
+        this.tag(GEARS_STEELS).addTag(CustomTags.getTag("gears/steel")).addTag(CustomTags.getTag("gears/stainless_steel"));
+        this.tag(DUSTS_LAPIS_LAZ).addTag(CustomTags.getTag("dusts/lapis")).addTag(CustomTags.getTag("dusts/lazurite"));
+        this.tag(DUSTS_COALS).addTag(CustomTags.getTag("dusts/coal")).addTag(CustomTags.getTag("dusts/charcoal"));
 
         this.tag(POWER_UNIT_ROCK_CUTTER).add(RockCutterPowerUnit);
         this.tag(DRILL).add(Drill);
+        this.tag(BATTERIES_LV).add(REBattery);
+        this.tag(BATTERIES_MV).add(LithiumBattery, EnergyCrystal);
+        this.tag(BATTERIES_HV).add(LapotronCrystal);
         this.tag(TagUtils.getForgelikeItemTag("stone_ores/iron")).add(Items.IRON_ORE);
         this.tag(TagUtils.getForgelikeItemTag("stone_ores/gold")).add(Items.GOLD_ORE);
         this.tag(TagUtils.getForgelikeItemTag("stone_ores/coal")).add(Items.COAL_ORE);
@@ -70,8 +75,8 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.tag(TagUtils.getForgelikeItemTag("plates/constantan")).addTag(AntimatterMaterialTypes.PLATE.getMaterialTag(Cupronickel));
         this.tag(TagUtils.getForgelikeItemTag("ingots/constantan")).addTag(AntimatterMaterialTypes.INGOT.getMaterialTag(Cupronickel));
 
-        this.tag(RODS_STEELS).addTag(getTag("rods/steel")).addTag(getTag("rods/stainless_steel"));
-        this.tag(RODS_MAGNETIC).addTag(getTag("rods/magnetic_steel")).addTag(getTag("rods/magnetic_iron"));
+        this.tag(RODS_STEELS).addTag(CustomTags.getTag("rods/steel")).addTag(CustomTags.getTag("rods/stainless_steel"));
+        this.tag(RODS_MAGNETIC).addTag(CustomTags.getTag("rods/magnetic_steel")).addTag(CustomTags.getTag("rods/magnetic_iron"));
         AntimatterTagBuilder<Item> add = this.tag(CORALS);
         String[] corals = {"tube", "brain", "bubble", "fire", "horn"};
         for (String coral : corals){
