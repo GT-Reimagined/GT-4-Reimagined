@@ -296,7 +296,7 @@ public class MachineCrafting {
             if (m.isSmall()){
                 Block block = AntimatterAPI.get(Block.class, m.getMaterial().getId() + "_wall", GT4RRef.ID);
                 if (block == null) return;
-                Material ringMaterial = m.getMaterial() == Wood ? Lead : m.getMaterial();
+                Material ringMaterial = m.getMaterial() == Wood ? Bronze : m.getMaterial();
                 TagKey<Item> hammer = m.getMaterial() == Wood ? SOFT_HAMMER.getTag() : HAMMER.getTag();
                 provider.addItemRecipe(output, GT4RRef.ID, m.getId(), "multiblock_tanks", m.getItem(NONE),
                         of('R', RING.getMaterialTag(ringMaterial), 'S', SAW.getTag(), 'H', hammer, 'W', block.asItem()), " R ", "HWS", " R ");
