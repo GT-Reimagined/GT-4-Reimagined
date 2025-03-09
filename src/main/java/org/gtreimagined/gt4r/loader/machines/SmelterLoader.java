@@ -22,7 +22,7 @@ public class SmelterLoader {
         SMELTER_COILS.RB().ii(RecipeIngredient.of(GT4RItems.CupronickelHeatingCoil, 1)).add("cupronickel_heating_coil",0, 0, 250);
         SMELTER_COILS.RB().ii(RecipeIngredient.of(GT4RItems.KanthalHeatingCoil, 1)).add("kanthal_heating_coil",0, 0, 500);
         SMELTER_COILS.RB().ii(RecipeIngredient.of(GT4RItems.NichromeHeatingCoil, 1)).add("nichrome_heating_coil",0, 0, 750);
-        MaterialTypeItem<?>[] items = new MaterialTypeItem<?>[]{INGOT, NUGGET, PLATE, PLATE_DENSE, ROD, ROD_LONG, RING, FOIL, BOLT, SCREW, GEAR, GEAR_SMALL, WIRE_FINE, ROTOR};
+        MaterialTypeItem<?>[] items = new MaterialTypeItem<?>[]{INGOT, NUGGET, PLATE, PLATE_DENSE, ROD, RING, FOIL, BOLT, SCREW, GEAR, GEAR_SMALL, WIRE_FINE, ROTOR};
         for (MaterialTypeItem<?> item : items) {
             item.all().forEach(m -> {
                 add(m, item, item.getUnitValue());
@@ -33,7 +33,6 @@ public class SmelterLoader {
                 add(m, DUST, DUST.getUnitValue());
             }
         });
-        addLava(Obsidian, ROD_LONG, ROD_LONG.getUnitValue());
         addLava(Obsidian, PLATE, PLATE.getUnitValue());
         addLava(Obsidian, DUST, DUST.getUnitValue());
     }
