@@ -97,7 +97,7 @@ public interface IElectricTool extends IBasicAntimatterTool, IEnergyItem {
     default void onGenericAddInformation(ItemStack stack, List<Component> tooltip, TooltipFlag flag) {
         //TODO change this to object %s system for other lang compat
         if (flag.isAdvanced() && getAntimatterToolType().isPowered())
-            tooltip.add(Utils.translatable("antimatter.tooltip.energy").append(": " + getCurrentEnergy(stack) + " / " + getMaxEnergy(stack)));
+            tooltip.add(Utils.translatable("gtlib.tooltip.energy").append(": " + getCurrentEnergy(stack) + " / " + getMaxEnergy(stack)));
         IBasicAntimatterTool.super.onGenericAddInformation(stack, tooltip, flag);
     }
 
