@@ -106,7 +106,7 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
 
     @Override
     public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> list) {
-        onGenericFillItemGroup(group, list, 100000L * this.energyTier);
+        onGenericFillItemGroup(group, list, (long) (1000L * Math.pow(10, this.energyTier)));
     }
 
     @Override
