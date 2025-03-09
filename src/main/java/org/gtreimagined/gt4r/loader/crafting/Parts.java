@@ -12,6 +12,7 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags;
+import org.gtreimagined.gt4r.GT4RConfig;
 import org.gtreimagined.gtcore.data.GTCoreItems;
 import org.gtreimagined.gt4r.GT4RRef;
 import org.gtreimagined.gt4r.data.GT4RBlocks;
@@ -22,6 +23,7 @@ import java.util.function.Consumer;
 import static com.google.common.collect.ImmutableMap.of;
 import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
 import static muramasa.antimatter.data.AntimatterMaterials.Iron;
+import static muramasa.antimatter.data.AntimatterMaterials.Redstone;
 import static muramasa.antimatter.machine.Tier.MV;
 import static muramasa.antimatter.util.TagUtils.getForgelikeItemTag;
 import static org.gtreimagined.gt4r.data.CustomTags.*;
@@ -137,10 +139,17 @@ public class Parts {
                 ShapeGear, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), "W", " ", "P");
         /*provider.addItemRecipe(output, GT4RRef.ID, "bottle_shape", "parts", "has_wire_cutter", provider.hasSafeItem(AntimatterDefaultTools.WIRE_CUTTER.getTag()),
                 ShapeBottle, of('W', AntimatterDefaultTools.WIRE_CUTTER.getTag(), 'P', EmptyShape), "  W", "P  ");*/
-        provider.addStackRecipe(output, GT4RRef.ID, "energium_dust", "parts",
-                AntimatterMaterialTypes.DUST.get(Energium, 9), of('R', AntimatterMaterialTypes.DUST.getMaterialTag(AntimatterMaterials.Redstone), 'D', AntimatterMaterialTypes.DUST.getMaterialTag(AntimatterMaterials.Diamond)), "RDR", "DRD", "RDR");
-        provider.addStackRecipe(output, GT4RRef.ID, "energium_dust2", "parts",
-                AntimatterMaterialTypes.DUST.get(Energium, 9), of('R', AntimatterMaterialTypes.DUST.getMaterialTag(AntimatterMaterials.Redstone), 'D', AntimatterMaterialTypes.DUST.getMaterialTag(Ruby)), "RDR", "DRD", "RDR");
+        if (GT4RConfig.HARDER_ENERGY_CRYSTAL.get()){
+            provider.addStackRecipe(output, GT4RRef.ID, "energium_dust", "parts",
+                    AntimatterMaterialTypes.DUST.get(Energium, 9), of('R', AntimatterMaterialTypes.DUST.getMaterialTag(AntimatterMaterials.Redstone), 'D', AntimatterMaterialTypes.DUST.getMaterialTag(AntimatterMaterials.Diamond)), "RDR", "DRD", "RDR");
+            provider.addStackRecipe(output, GT4RRef.ID, "energium_dust2", "parts",
+                    AntimatterMaterialTypes.DUST.get(Energium, 9), of('R', AntimatterMaterialTypes.DUST.getMaterialTag(AntimatterMaterials.Redstone), 'D', AntimatterMaterialTypes.DUST.getMaterialTag(Ruby)), "RDR", "DRD", "RDR");
+        } else {
+            provider.addItemRecipe(output, "parts", EnergyCrystal,
+                    of('R', DUST.getMaterialTag(Redstone), 'G', GEM.getMaterialTag(Ruby)), "RRR", "RGR", "RRR");
+        }
+
+
         provider.addItemRecipe(output, GT4RRef.ID, "crystal_lapotron", "parts",
                 LapotronCrystal, of('L', DUSTS_LAPIS_LAZ, 'C', CIRCUITS_ADVANCED, 'E', EnergyCrystal), "LCL", "LEL", "LCL");
         provider.addItemRecipe(output, GT4RRef.ID, "crystal_lapotron2", "parts",

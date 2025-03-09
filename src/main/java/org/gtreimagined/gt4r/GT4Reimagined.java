@@ -51,6 +51,7 @@ import org.gtreimagined.gt4r.material.GT4RMaterialEvent;
 import java.util.Arrays;
 
 import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
+import static org.gtreimagined.gt4r.data.Materials.Energium;
 import static org.gtreimagined.gt4r.data.Materials.Steel;
 
 @Mod(GT4RRef.ID)
@@ -102,6 +103,9 @@ public class GT4Reimagined extends AntimatterMod {
                     l.addAll(Machines.BATTERY_BUFFER_FOUR.getTiers().stream().filter(t -> t != Tier.LV).map(Machines.BATTERY_BUFFER_FOUR::getItem).toList());
                     l.addAll(Machines.BATTERY_BUFFER_EIGHT.getTiers().stream().filter(t -> t != Tier.LV).map(Machines.BATTERY_BUFFER_EIGHT::getItem).toList());
                     l.addAll(Arrays.asList(GT4RItems.AdvancedWrenchAlt, GT4RItems.ElectricWrenchAlt, GTCoreItems.Fertilizer));
+                    if (!GT4RConfig.HARDER_ENERGY_CRYSTAL.get()){
+                        l.add(DUST.get(Energium));
+                    }
                     if (GT4RConfig.GT5_ELECTRIC_TOOLS.get()){
                         l.addAll(Arrays.asList(GT4RItems.Drill, GT4RItems.DiamondDrill, GT4RItems.AdvancedDrill, GT4RItems.Chainsaw, GT4RItems.AdvancedChainsaw,
                                 GT4RItems.ElectricWrench, GT4RItems.AdvancedWrench, GT4RItems.ElectricScrewdriver, GT4RItems.RockCutter));
