@@ -34,6 +34,7 @@ public class CompressorLoader {
                 COMPRESSOR.RB().ii(RecipeIngredient.of(DUST.getMaterialTag(gem), 9)).io(PLATE.get(gem, 1)).add(gem.getId() + "_plate", Math.max(40, gem.getMass() * 2), 16);
             }
         });
+        COMPRESSOR.RB().ii(DUST.getMaterialIngredient(Redstone, 9)).io(Items.REDSTONE_BLOCK).add("redstone_block", 400, 2);
         COMPRESSOR.RB().ii(RecipeIngredient.of(GTCoreItems.CarbonMesh, 1)).io(PLATE.get(Carbon, 1)).add("carbon_plate",400, 2);
         COMPRESSOR.RB().ii(RecipeIngredient.of(GTCoreTags.INGOTS_MIXED_METAL, 1).setIgnoreNbt()).io(new ItemStack(GTCoreItems.AdvancedAlloy)).add("advanced_alloy",400, 2);
         COMPRESSOR.RB().ii(RecipeIngredient.of(Items.SNOWBALL, 1)).io(new ItemStack(Items.SNOW_BLOCK)).add("snow_block",400, 2);
