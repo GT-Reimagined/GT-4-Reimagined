@@ -3,6 +3,7 @@ package org.gtreimagined.gt4r.reactor.components.adapters;
 import java.util.ArrayList;
 
 import net.minecraft.world.item.ItemStack;
+import org.gtreimagined.gt4r.reactor.Config;
 import org.gtreimagined.gt4r.reactor.components.IComponentAdapter;
 import org.gtreimagined.gt4r.reactor.components.IReactorGrid;
 import org.gtreimagined.gt4r.reactor.components.InventoryDirection;
@@ -39,7 +40,7 @@ public class FuelRodAdapter implements IComponentAdapter {
     }
 
     protected double getEUMultiplier() {
-        double mult = 1;//Config.ROD_EU_MULTIPLIER;
+        double mult = Config.ROD_EU_MULTIPLIER;
 
         if (fuelRod.isMox(itemStack)) {
             mult *= 1 + fuelRod.getMoxEUCoefficient(itemStack) * reactor.getHeatRatio();
@@ -49,7 +50,7 @@ public class FuelRodAdapter implements IComponentAdapter {
     }
 
     protected double getHeatMultiplier() {
-        double mult = 1;//Config.ROD_HU_MULTIPLIER;
+        double mult = Config.ROD_HU_MULTIPLIER;
 
         if (fuelRod.isMox(itemStack) && reactor.isFluid() && reactor.getHeatRatio() >= 0.5) {
             mult *= fuelRod.getMoxHeatCoefficient(itemStack);

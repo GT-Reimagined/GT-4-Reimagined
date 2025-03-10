@@ -4,6 +4,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import net.minecraft.world.item.ItemStack;
+import org.gtreimagined.gt4r.reactor.Config;
 
 public interface IBasicFuelRod {
 
@@ -20,7 +21,7 @@ public interface IBasicFuelRod {
     }
 
     public default double getMoxEUCoefficient(@Nonnull ItemStack itemStack) {
-        return 4;//Config.MOX_EU_COEFFICIENT;
+        return Config.MOX_EU_COEFFICIENT;
     }
 
     public int getRemainingHealth(@Nonnull ItemStack itemStack);

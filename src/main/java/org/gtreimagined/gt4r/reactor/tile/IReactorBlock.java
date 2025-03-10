@@ -7,9 +7,9 @@ import javax.annotation.Nullable;
 
 public interface IReactorBlock {
 
-    public @Nullable TileReactorCore getReactor();
+    public @Nullable BlockEntityReactorCore getReactor();
 
-    public void setReactor(TileReactorCore reactor);
+    public void setReactor(BlockEntityReactorCore reactor);
 
     public default void onHeatTick(IReactorGrid reactor) {
 
