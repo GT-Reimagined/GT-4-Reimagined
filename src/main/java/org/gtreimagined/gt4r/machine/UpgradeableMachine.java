@@ -10,6 +10,7 @@ import muramasa.antimatter.gui.widget.MachineStateWidget;
 import muramasa.antimatter.gui.widget.ProgressWidget;
 import muramasa.antimatter.gui.widget.TextWidget;
 import muramasa.antimatter.gui.widget.WidgetSupplier;
+import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.Machine;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -30,6 +31,7 @@ public class UpgradeableMachine extends Machine<UpgradeableMachine> {
 
     public UpgradeableMachine(String domain, String id) {
         super(domain, id);
+        setTiers(Tier.LV);
         baseTexture(Textures.BASE_HANDLER);
         addFlags(BASIC, EU, COVERABLE);
         setTile(BlockEntityUpgradeableMachine::new);
