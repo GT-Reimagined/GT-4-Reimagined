@@ -155,12 +155,8 @@ public class MachineCrafting {
             provider.addItemRecipe(output, GT4RRef.ID, t.getId() + "_transformer", "machines",
                     TRANSFORMER.getItem(t), of( 'C', TierMaps.TIER_CABLES.get(t).getBlockItem(PipeSize.VTINY), 'M', GT4RMaterialTags.HULL.getMaterialTag(TierMaps.TIER_MATERIALS.get(t)), 'c', TierMaps.TIER_CABLES.get(Tier.getTier(t.getVoltage() * 4)).getBlockItem(PipeSize.VTINY))," CC", "cM ", " CC");
         });*/
-        provider.addItemRecipe(output, GT4RRef.ID, "mv_electrolyzer", "machines",
+        provider.addItemRecipe(output, GT4RRef.ID, "electrolyzer", "machines",
                 ELECTROLYZER.getItem(MV), of('C', CIRCUITS_ADVANCED, 'P', PLATES_STEELS, 'E', EXTRACTOR.getItem(LV), 'L', CopperCoil), "PEP", "CLC", "PEP");
-        provider.addItemRecipe(output, GT4RRef.ID, "mv_electrolyzer_upgrade", "machines",
-                ELECTROLYZER.getItem(MV), of('C', CIRCUITS_ADVANCED, 'P', PLATES_STEELS, 'E', ELECTROLYZER.getItem(LV)), " P ", "CEC", " P ");
-        provider.addItemRecipe(output, GT4RRef.ID, "lv_electrolyzer", "machines",
-                ELECTROLYZER.getItem(LV), of('C', CIRCUITS_BASIC, 'P', PLATES_WROUGHT_ALUMINIUM, 'E', EXTRACTOR.getItem(LV), 'L', CopperCoil), "PEP", "CLC", "PEP");
         provider.addItemRecipe(output, GT4RRef.ID, "macerator_1", "machines",
                 MACERATOR.getItem(LV), of('C', CIRCUITS_ADVANCED, 'P', PLATES_STEELS, 'M', MACHINE_HULLS_ADVANCED, 'D', AntimatterMaterialTypes.DUST.getMaterialTag(AntimatterMaterials.Diamond)), "PDP", "DMD", "PCP");
         provider.addItemRecipe(output, GT4RRef.ID, "macerator_2", "machines",

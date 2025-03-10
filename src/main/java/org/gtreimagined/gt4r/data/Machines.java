@@ -84,7 +84,7 @@ public class Machines {
     public static UpgradeableMachine SCANNER = new UpgradeableMachine(GT4RRef.ID, "scanner").setTiers(HV).setMap(RecipeMaps.SCANNER).addFlags(GUI, ITEM, FLUID);
     public static UpgradeableMachine WIRE_MILL = new UpgradeableMachine(GT4RRef.ID, "wire_mill").setMap(RecipeMaps.WIRE_MILL).addFlags(GUI, ITEM).custom();
     public static UpgradeableMachine CENTRIFUGE = new UpgradeableMachine(GT4RRef.ID, "centrifuge").setMap(RecipeMaps.CENTRIFUGE).addFlags(GUI, ITEM, FLUID);
-    public static UpgradeableMachine ELECTROLYZER = new UpgradeableMachine(GT4RRef.ID, "electrolyzer").setTiers(LV, MV).setMap(RecipeMaps.ELECTROLYZER).addFlags(GUI, ITEM, FLUID).setTierSpecificLang();
+    public static UpgradeableMachine ELECTROLYZER = new UpgradeableMachine(GT4RRef.ID, "electrolyzer").setTiers(MV).setMap(RecipeMaps.ELECTROLYZER).addFlags(GUI, ITEM, FLUID).setTierSpecificLang();
     public static UpgradeableMachine CHEMICAL_REACTOR = new UpgradeableMachine(GT4RRef.ID, "chemical_reactor").setTiers(MV).setMap(RecipeMaps.CHEMICAL_REACTOR).addFlags(GUI, ITEM, FLUID);
     public static UpgradeableMachine FLUID_CANNER = new UpgradeableMachine(GT4RRef.ID, "fluid_canner").setMap(RecipeMaps.FLUID_CANNER).addFlags(GUI, ITEM, FLUID);
     public static UpgradeableMachine DISASSEMBLER = new UpgradeableMachine(GT4RRef.ID, "disassembler").setMap(RecipeMaps.DISASSEMBLER).addFlags(GUI, ITEM).custom();

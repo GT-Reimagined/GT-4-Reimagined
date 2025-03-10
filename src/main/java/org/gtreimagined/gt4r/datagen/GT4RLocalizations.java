@@ -87,7 +87,7 @@ public class GT4RLocalizations {
                         override("machine." + i.getId() + ".mv", lowerUnderscoreToUpperSpaced("universal_macerator").concat(" (%s)"));
                     } else {
                         tiers.forEach(t -> {
-                            String id = t == LV ? "basic_electrolyzer" : "industrial_electrolyzer";
+                            String id = "industrial_electrolyzer";
                             override("machine." + i.getId() + "." + t.getId(), lowerUnderscoreToUpperSpaced(id).concat(" (%s)"));
                         });
                     }
