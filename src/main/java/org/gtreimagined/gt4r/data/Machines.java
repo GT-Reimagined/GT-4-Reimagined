@@ -19,6 +19,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.world.level.block.Block;
 import org.gtreimagined.gt4r.block.BlockReactorChamber;
 import org.gtreimagined.gt4r.items.ReactorChamberBlockItem;
+import org.gtreimagined.gt4r.reactor.tile.BlockEntityReactorChamber;
 import org.gtreimagined.gt4r.reactor.tile.BlockEntityReactorCore;
 import org.gtreimagined.gtcore.data.GTCoreBlocks;
 import org.gtreimagined.gtcore.machine.DrumMachine;
@@ -140,7 +141,7 @@ public class Machines {
     public static MultiMachine LARGE_GAS_TURBINE = new MultiMachine(GT4RRef.ID, "large_gas_turbine").setMap(LARGE_GAS_FUELS).setTiers(IV).addFlags(GUI, FLUID, ITEM, EU, GENERATOR).setTile(BlockEntityLargeTurbine::new).custom(Textures.TURBINE);
     public static MultiMachine LARGE_HEAT_EXCHANGER = new MultiMachine(GT4RRef.ID, "large_heat_exchanger").setTiers(EV).addFlags(GUI, FLUID, EU).setTile(BlockEntityLargeHeatExchanger::new);
     public static BasicMultiMachine<?> NUCLEAR_REACTOR_CORE = new BasicMultiMachine<>(GT4RRef.ID, "nuclear_reactor_core").setTiers(NONE).addFlags(GUI, ITEM, FLUID, EU).baseTexture(Textures.BASE_HANDLER).setTile(BlockEntityReactorCore::new).noCovers().setClientTicking();
-    public static BasicMachine REACTOR_CHAMBER = new BasicMachine(GT4RRef.ID, "reactor_chamber").setTiers(NONE).setBlock(BlockReactorChamber::new).setItemBlockClass(() -> BlockReactorChamber.class).setItemBlock(ReactorChamberBlockItem::new).baseTexture(Textures.BASE_HANDLER).overlayTexture((t, s, t2, i) -> {
+    public static BasicMachine REACTOR_CHAMBER = new BasicMachine(GT4RRef.ID, "reactor_chamber").setTiers(NONE).setBlock(BlockReactorChamber::new).setItemBlockClass(() -> BlockReactorChamber.class).setItemBlock(ReactorChamberBlockItem::new).setTile(BlockEntityReactorChamber::new).baseTexture(Textures.BASE_HANDLER).overlayTexture((t, s, t2, i) -> {
         Texture side = new Texture(GT4RRef.ID, "block/machine/overlay/nuclear_reactor_core/top");
         Texture top = new Texture(GT4RRef.ID, "block/machine/empty");
         return new Texture[]{top, top, side, side, side, side};
