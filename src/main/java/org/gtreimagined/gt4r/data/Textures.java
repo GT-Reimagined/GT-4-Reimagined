@@ -9,8 +9,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import org.gtreimagined.gt4r.GT4RRef;
 
-import static muramasa.antimatter.machine.Tier.LV;
-import static muramasa.antimatter.machine.Tier.MV;
+import static muramasa.antimatter.machine.Tier.*;
 
 public class Textures {
 
@@ -20,13 +19,16 @@ public class Textures {
     public static final Texture FUSION_IN = new Texture(GT4RRef.ID, "block/machine/base/fusion_control_computer");
     public static final Texture FUSION_OUT = new Texture(GT4RRef.ID, "block/machine/base/fusion_out");
 
-    public static final ITextureHandler BASE_HANDLER = (m, t, s) -> new Texture[]{
-            new Texture(GT4RRef.ID, "block/machine/base/bottom_" + t.getId()),
-            new Texture(GT4RRef.ID, "block/machine/base/side_" + t.getId()),
-            new Texture(GT4RRef.ID, "block/machine/base/side_" + t.getId()),
-            new Texture(GT4RRef.ID, "block/machine/base/side_" + t.getId()),
-            new Texture(GT4RRef.ID, "block/machine/base/side_" + t.getId()),
-            new Texture(GT4RRef.ID, "block/machine/base/side_" + t.getId()),
+    public static final ITextureHandler BASE_HANDLER = (m, t, s) -> {
+        if (t == NONE) t = LV;
+        return new Texture[]{
+                new Texture(GT4RRef.ID, "block/machine/base/bottom_" + t.getId()),
+                new Texture(GT4RRef.ID, "block/machine/base/side_" + t.getId()),
+                new Texture(GT4RRef.ID, "block/machine/base/side_" + t.getId()),
+                new Texture(GT4RRef.ID, "block/machine/base/side_" + t.getId()),
+                new Texture(GT4RRef.ID, "block/machine/base/side_" + t.getId()),
+                new Texture(GT4RRef.ID, "block/machine/base/side_" + t.getId()),
+        };
     };
 
     public static final ITextureHandler BATBOX_HANDLER = (m, t, s) -> {
