@@ -74,7 +74,7 @@ public class BreederRodAdapter implements IComponentAdapter {
         breederRod.setNeutrons(itemStack, storedNeutrons);
 
         if (storedNeutrons >= max) {
-            reactor.setItem(x, y, ItemStack.copyItemStack(breederRod.getProduct(itemStack)));
+            reactor.setItem(x, y, breederRod.getProduct(itemStack).copy());
         }
     }
 }
