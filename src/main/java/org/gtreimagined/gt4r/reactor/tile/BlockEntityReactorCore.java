@@ -67,7 +67,6 @@ public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEn
 
     private int tickCounter = 0;
 
-    boolean isActive = false;
     boolean isFluid = false;
 
     int storedHeat = 0;
@@ -552,7 +551,7 @@ public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEn
 
     @Override
     public boolean isActive() {
-        return isActive;
+        return getMachineState() == MachineState.ACTIVE;
     }
 
     @Override
