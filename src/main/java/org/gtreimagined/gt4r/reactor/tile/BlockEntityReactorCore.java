@@ -4,12 +4,17 @@ import muramasa.antimatter.blockentity.multi.BlockEntityBasicMultiMachine;
 import muramasa.antimatter.capability.fluid.FluidTanks;
 import muramasa.antimatter.capability.machine.MachineEnergyHandler;
 import muramasa.antimatter.capability.machine.MachineFluidHandler;
+import muramasa.antimatter.gui.GuiInstance;
+import muramasa.antimatter.gui.IGuiElement;
 import muramasa.antimatter.gui.SlotType;
+import muramasa.antimatter.gui.widget.TextureWidget;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.util.FluidUtils;
+import muramasa.antimatter.util.int2;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -23,6 +28,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
+import org.gtreimagined.gt4r.GT4RRef;
 import org.gtreimagined.gt4r.reactor.Config;
 import org.gtreimagined.gt4r.reactor.components.ComponentRegistry;
 import org.gtreimagined.gt4r.reactor.components.IComponentAdapter;
@@ -509,6 +515,21 @@ public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEn
     }
 
     // #endregion
+
+
+    static ResourceLocation MISSING_CHAMBER = new ResourceLocation(GT4RRef.ID, "textures/gui/reactor_missing_chamber.png");
+
+    @Override
+    public void addWidgets(GuiInstance instance, IGuiElement parent) {
+        this.getMachineType().getCallbacks().forEach(t -> t.accept(instance));
+        int missingChambers = 6 - this.chambers;
+        if (missingChambers > 0) {
+            int startX = 169, startY = 25;
+            for (int i = 0; i < missingChambers; i++) {
+                instance.addWidget(TextureWidget.build(MISSING_CHAMBER, new int2(startX - (i * 18), startY), new int2(18, 108), 18, 108));
+            }
+        }
+    }
 
     public static class ReactorFluidHandler extends MachineFluidHandler<BlockEntityReactorCore> {
         public ReactorFluidHandler(BlockEntityReactorCore tile) {
