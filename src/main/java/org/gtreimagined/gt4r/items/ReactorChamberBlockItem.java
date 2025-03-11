@@ -13,6 +13,7 @@ public class ReactorChamberBlockItem extends AntimatterItemBlock {
 
     @Override
     public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
-        return useOn(context);
+        InteractionResult use = useOn(context);
+        return use.consumesAction() ? use : InteractionResult.PASS;
     }
 }
