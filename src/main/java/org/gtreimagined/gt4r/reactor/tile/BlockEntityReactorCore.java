@@ -2,6 +2,7 @@ package org.gtreimagined.gt4r.reactor.tile;
 
 import dev.architectury.networking.NetworkManager;
 import muramasa.antimatter.blockentity.multi.BlockEntityBasicMultiMachine;
+import muramasa.antimatter.capability.IFilterableHandler;
 import muramasa.antimatter.capability.fluid.FluidTanks;
 import muramasa.antimatter.capability.machine.MachineEnergyHandler;
 import muramasa.antimatter.capability.machine.MachineFluidHandler;
@@ -53,7 +54,7 @@ import java.util.Arrays;
 
 import static org.gtreimagined.gt4r.data.Materials.DistilledWater;
 
-public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEntityReactorCore> implements IReactorGrid {
+public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEntityReactorCore> implements IReactorGrid, IFilterableHandler {
     public static final int ROW_COUNT = 6;
     public static final int COL_COUNT = 9;
 
@@ -702,6 +703,12 @@ public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEn
                 instance.addWidget(TextureWidget.build(MISSING_CHAMBER, new int2(startX - (i * 18), startY), new int2(18, 108), 18, 108));
             }
         }
+    }
+
+    @Override
+    public boolean test(SlotType<?> slotType, int slot, ItemStack stack) {
+        int x = slot % COL_COUNT;
+        return x < getColumnCount();
     }
 
     public static class ReactorFluidHandler extends MachineFluidHandler<BlockEntityReactorCore> {
