@@ -1,5 +1,6 @@
 package org.gtreimagined.gt4r.reactor.tile;
 
+import dev.architectury.networking.NetworkManager;
 import muramasa.antimatter.blockentity.multi.BlockEntityBasicMultiMachine;
 import muramasa.antimatter.capability.fluid.FluidTanks;
 import muramasa.antimatter.capability.machine.MachineEnergyHandler;
@@ -8,19 +9,26 @@ import muramasa.antimatter.gui.GuiInstance;
 import muramasa.antimatter.gui.IGuiElement;
 import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.gui.widget.TextureWidget;
+import muramasa.antimatter.machine.MachineState;
+import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.util.FluidUtils;
 import muramasa.antimatter.util.int2;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Explosion.BlockInteraction;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
@@ -29,15 +37,19 @@ import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import org.gtreimagined.gt4r.GT4RRef;
+import org.gtreimagined.gt4r.data.Machines;
 import org.gtreimagined.gt4r.reactor.Config;
 import org.gtreimagined.gt4r.reactor.components.ComponentRegistry;
 import org.gtreimagined.gt4r.reactor.components.IComponentAdapter;
 import org.gtreimagined.gt4r.reactor.components.IReactorGrid;
 import org.gtreimagined.gt4r.reactor.fluids.CoolantRegistry;
 import org.gtreimagined.gt4r.reactor.fluids.CoolantRegistry.Coolant;
+import org.gtreimagined.gt4r.reactor.tile.IReactorBlock.ReactorEnableState;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.gtreimagined.gt4r.data.Materials.DistilledWater;
 
@@ -75,6 +87,162 @@ public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEn
         this.fluidHandler.set(() -> new ReactorFluidHandler(this));
         this.energyHandler.set(() -> new MachineEnergyHandler<>(this, 0L, 4_194_304L, 0L, 0L, 0, 1));
     }
+
+    // #region Tile Entity Logic
+
+    public int getColumnCount() {
+        return chambers + 3;
+    }
+
+    public void setChamberCount(int chambers) {
+        if (chambers == this.chambers) {
+            return;
+        }
+
+        this.chambers = chambers;
+
+        this.openContainers.forEach(c -> c.getPlayerInv().player.closeContainer());
+        for (int row = 0; row < ROW_COUNT; row++) {
+            for (int col = 0; col < COL_COUNT; col++) {
+                if (col >= this.getColumnCount()) {
+                    int finalRow = row, finalCol = col;
+                    ItemStack item = itemHandler.map(i -> i.getHandler(SlotType.STORAGE).getStackInSlot(finalRow * COL_COUNT + finalCol)).orElse(ItemStack.EMPTY);
+                    itemHandler.ifPresent(i -> i.getHandler(SlotType.STORAGE).setStackInSlot(finalRow * COL_COUNT + finalCol, ItemStack.EMPTY));
+                    if (!item.isEmpty() && isServerSide()) {
+                        level.addFreshEntity(new ItemEntity(level,this.getBlockPos().getX(), this.getBlockPos().getY(), this.getBlockPos().getZ(), item));
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public void serverTick(Level level, BlockPos blockPos, BlockState blockState) {
+        this.setChamberCount(getAttachedChambers(level, blockPos));
+
+        this.tickCounter++;
+
+        if (this.tickCounter % REACTOR_TICK_SPEED == 0) {
+            boolean wasActive = getMachineState() == MachineState.ACTIVE;
+
+            boolean isActive = level.hasNeighborSignal(blockPos);
+
+            for (var dir : Direction.values()) {
+                isActive |= level.hasNeighborSignal(blockPos.relative(dir));
+            }
+
+
+            if (this.isFluid) {
+                boolean anyActive = false, anyInhibiting = false;
+
+                for (var block : reactorBlocks) {
+                    var state = block.getEnableState();
+                    anyActive |= state == ReactorEnableState.Active;
+                    anyInhibiting |= state == ReactorEnableState.Inhibiting;
+                }
+
+                isActive |= anyActive;
+
+                if (anyInhibiting) {
+                    isActive = false;
+                }
+            }
+
+            if ((this.tickCounter / REACTOR_TICK_SPEED) % 2 == 0) {
+                this.doHeatTick();
+            } else {
+                this.doEUTick();
+            }
+
+            if (wasActive != isActive) {
+                this.setMachineState(isActive ? MachineState.ACTIVE : MachineState.IDLE);
+            }
+        }
+
+        if (this.tickCounter % REACTOR_STRUCTURE_CHECK_PERIOD == 0) {
+            //doStructureCheck();
+        }
+
+        super.serverTick(level, blockPos, blockState);
+    }
+
+    @Override
+    public void clientTick(Level level, BlockPos pos, BlockState state) {
+        if (heatRatio >= 0.4) {
+            spawnSmoke(pos);
+
+            for (var d : Direction.values()) {
+                BlockPos relativePos = pos.relative(d);
+                if (level.getBlockState(relativePos).getBlock() == Machines.REACTOR_CHAMBER.getBlockState(Tier.NONE)){
+                    spawnSmoke(relativePos);
+                }
+            }
+        }
+    }
+
+    private void spawnSmoke(BlockPos pos) {
+        if (level.getBlockState(pos.relative(Direction.UP)).isCollisionShapeFullBlock(level, pos.relative(Direction.UP))) {
+            return;
+        }
+
+        level.addParticle(
+                ParticleTypes.SMOKE,
+                pos.getX() + Math.random() * 0.8 + 0.1,
+                pos.getY() + 1.1,
+                pos.getZ() + Math.random() * 0.8 + 0.1,
+                0,
+                0.01 * (Math.random() * 0.5 + 1),
+                0);
+    }
+
+    @Override
+    public void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
+        saveNbt(tag);
+    }
+
+    @Override
+    public void load(CompoundTag tag) {
+        super.load(tag);
+        chambers = tag.getInt("chambers");
+        storedHeat = tag.getInt("storedHeat");
+        heatRatio = tag.getDouble("heatRatio");
+        roundedHeat = tag.getInt("roundedHeat");
+        addedHeat = tag.getInt("addedHeat");
+        addedEU = tag.getInt("addedEU");
+        isFluid = tag.getBoolean("isFluid");
+    }
+
+    @Override
+    public @NotNull CompoundTag getUpdateTag() {
+        CompoundTag updateTag = super.getUpdateTag();
+        saveNbt(updateTag);
+        return updateTag;
+    }
+
+    private void saveNbt(CompoundTag updateTag) {
+        updateTag.putInt("chambers", chambers);
+        updateTag.putInt("storedHeat", storedHeat);
+        updateTag.putDouble("heatRatio", heatRatio);
+        updateTag.putInt("roundedHeat", roundedHeat);
+        updateTag.putInt("addedHeat", addedHeat);
+        updateTag.putInt("addedEU", addedEU);
+        updateTag.putBoolean("isFluid", isFluid);
+    }
+
+    public static int getAttachedChambers(Level worldIn, BlockPos pos) {
+        int chamberCount = 0;
+
+        for (var d : Direction.values()) {
+            if (worldIn.getBlockState(pos.relative(d)).getBlock() == Machines.REACTOR_CHAMBER.getBlockState(Tier.NONE)) {
+                chamberCount++;
+            }
+        }
+
+        return chamberCount;
+    }
+
+    // #endregion
 
     // #region Reactor Grid Logic
 

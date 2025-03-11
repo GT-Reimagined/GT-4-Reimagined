@@ -17,6 +17,7 @@ import muramasa.antimatter.texture.Texture;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.level.block.Block;
+import org.gtreimagined.gt4r.reactor.tile.BlockEntityReactorCore;
 import org.gtreimagined.gtcore.data.GTCoreBlocks;
 import org.gtreimagined.gtcore.machine.DrumMachine;
 import org.gtreimagined.gtcore.machine.MultiblockTankMachine;
@@ -136,6 +137,11 @@ public class Machines {
     public static MultiMachine LARGE_STEAM_TURBINE = new MultiMachine(GT4RRef.ID, "large_steam_turbine").setMap(LARGE_STEAM_FUELS).setTiers(EV).addFlags(GUI, FLUID, ITEM, EU, GENERATOR).setTile(BlockEntityLargeTurbine::new).custom(Textures.TURBINE);
     public static MultiMachine LARGE_GAS_TURBINE = new MultiMachine(GT4RRef.ID, "large_gas_turbine").setMap(LARGE_GAS_FUELS).setTiers(IV).addFlags(GUI, FLUID, ITEM, EU, GENERATOR).setTile(BlockEntityLargeTurbine::new).custom(Textures.TURBINE);
     public static MultiMachine LARGE_HEAT_EXCHANGER = new MultiMachine(GT4RRef.ID, "large_heat_exchanger").setTiers(EV).addFlags(GUI, FLUID, EU).setTile(BlockEntityLargeHeatExchanger::new);
+    public static BasicMultiMachine<?> NUCLEAR_REACTOR_CORE = new BasicMultiMachine<>(GT4RRef.ID, "nuclear_reactor_core").setTiers(NONE).addFlags(GUI, ITEM, FLUID, EU).setTile(BlockEntityReactorCore::new).setClientTicking();
+    public static BasicMachine REACTOR_CHAMBER = new BasicMachine(GT4RRef.ID, "reactor_chamber").setTiers(NONE).baseTexture(new Texture(GT4RRef.ID, "block/machine/base/nuclear_reactor_core")).overlayTexture((t, s, t2, i) -> {
+        Texture texture = new Texture(GT4RRef.ID, "block/machine/overlay/nuclear_reactor_core/top");
+        return new Texture[]{texture, texture, texture, texture, texture, texture};
+    });
     public static MultiMachine FUSION_REACTOR = new MultiMachine(GT4RRef.ID, "fusion_control_computer").setMap(FUSION).setTiers(IV).addFlags(GUI, FLUID, EU).setTile(BlockEntityFusionReactor::new);
 
     public static HatchMachine HATCH_ITEM_I = new HatchMachine(GT4RRef.ID, "item_input_hatch", COVERINPUT, "item_input").baseTexture(Textures.BASE_HANDLER).addFlags(GUI, ITEM).setTiers(LV).setVerticalFacingAllowed(false).allowFrontIO();

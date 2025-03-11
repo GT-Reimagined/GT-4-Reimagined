@@ -4,6 +4,7 @@ import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.gui.BarDir;
 import muramasa.antimatter.gui.ButtonOverlay;
 import muramasa.antimatter.gui.GuiData;
+import muramasa.antimatter.gui.SlotType;
 import muramasa.antimatter.gui.slot.ISlotProvider;
 import muramasa.antimatter.gui.widget.ProgressWidget;
 import muramasa.antimatter.gui.widget.WidgetSupplier;
@@ -196,6 +197,13 @@ public class Guis {
         LARGE_GAS_TURBINE.add(STORAGE, 152, 5);
         LARGE_STEAM_TURBINE.add(LARGE_GAS_TURBINE);
         THERMAL_BOILER.add(STORAGE, 152, 5);
+        int startX = 26;
+        int startY = 26;
+        for (int y = 0; y < 6; y++){
+            for (int x = 0; x < 9; x++){
+                NUCLEAR_REACTOR_CORE.add(STORAGE, startX + (x * 18), startY + (y * 18));
+            }
+        }
 
         QUANTUM_CHEST.add(QUANTUM, 80, 35);
 
@@ -267,6 +275,7 @@ public class Guis {
         HEAT_EXCHANGER.getGui().setBackgroundTexture("multiblock");
         DIGITAL_CHEST.getGui().setBackgroundTexture("digital_chest");
         FUSION_REACTOR.getGui().setBackgroundTexture("fusion_control_computer");
+        NUCLEAR_REACTOR_CORE.getGui().setBackgroundTexture("nuclear_reactor").setXSize(212).setYSize(234).setPlayerXOffset(18).setPlayerYOffset(68);
     }
 
     public static void machineData(){
