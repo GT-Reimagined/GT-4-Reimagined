@@ -317,7 +317,7 @@ public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEn
                     String.format("Illegal value for y: %d, must conform to y >= 0, y < %d", y, ROW_COUNT));
         }
 
-        int index = y * COL_COUNT + x;
+        int index = x * ROW_COUNT + y;
 
         var adapter = this.components[index];
         if (adapter != null) {
@@ -345,7 +345,7 @@ public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEn
                     String.format("Illegal value for y: %d, must conform to y >= 0, y < %d", y, ROW_COUNT));
         }
 
-        int index = y * COL_COUNT + x;
+        int index = x * ROW_COUNT + y;
 
         return this.itemHandler.map(i -> i.getHandler(SlotType.STORAGE).getStackInSlot(index)).orElse(ItemStack.EMPTY);
     }
@@ -362,7 +362,7 @@ public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEn
                     String.format("Illegal value for y: %d, must conform to y >= 0, y < %d", y, ROW_COUNT));
         }
 
-        int index = y * COL_COUNT + x;
+        int index = x * ROW_COUNT + y;
 
         this.itemHandler.ifPresent(i -> i.getHandler(SlotType.STORAGE).setStackInSlot(index, item));
         this.components[index] = !item.isEmpty() && ComponentRegistry.isReactorItem(item)
