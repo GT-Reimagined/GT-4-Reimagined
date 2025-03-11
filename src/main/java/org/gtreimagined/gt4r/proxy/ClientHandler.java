@@ -2,6 +2,7 @@ package org.gtreimagined.gt4r.proxy;
 
 import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.client.ModelUtils;
+import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.proxy.IProxyHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
@@ -34,6 +35,7 @@ public class ClientHandler implements IProxyHandler {
             AntimatterAPI.all(BlockCasing.class, t -> ModelUtils.setRenderLayer(t, RenderType.cutout()));
             AntimatterAPI.all(BlockRedstoneMachine.class, b -> ModelUtils.setRenderLayer(b, RenderType.cutout()));
             AntimatterAPI.all(BlockColoredWall.class, b -> ModelUtils.setRenderLayer(b, RenderType.cutout()));
+            ModelUtils.setRenderLayer(Machines.REACTOR_CHAMBER.getBlockState(Tier.NONE), RenderType.cutout());
         });
         copyProgrammerArtIfMissing();
     }

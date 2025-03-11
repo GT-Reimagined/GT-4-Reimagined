@@ -4,6 +4,8 @@ import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.data.AntimatterDefaultTools;
 import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.datagen.providers.AntimatterBlockTagProvider;
+import muramasa.antimatter.machine.Tier;
+import muramasa.antimatter.machine.types.Machine;
 import net.minecraft.tags.BlockTags;
 import org.gtreimagined.gt4r.GT4RRef;
 import org.gtreimagined.gt4r.block.BlockCasing;
@@ -11,6 +13,7 @@ import org.gtreimagined.gt4r.block.BlockColoredWall;
 import org.gtreimagined.gt4r.block.BlockFakeCasing;
 import org.gtreimagined.gt4r.block.BlockNonSolidMachine;
 import org.gtreimagined.gt4r.block.BlockRedstoneMachine;
+import org.gtreimagined.gt4r.data.Machines;
 
 import static org.gtreimagined.gt4r.data.GT4RBlocks.IRIDIUM_REINFORCED_STONE;
 
@@ -35,6 +38,7 @@ public class GT4RBlockTagProvider extends AntimatterBlockTagProvider {
         AntimatterAPI.all(BlockRedstoneMachine.class, GT4RRef.ID, cas -> {
             this.tag(AntimatterDefaultTools.WRENCH.getToolType()).add(cas);
         });
+        this.tag(AntimatterDefaultTools.WRENCH.getToolType()).add(Machines.REACTOR_CHAMBER.getBlockState(Tier.NONE));
         AntimatterAPI.all(BlockColoredWall.class, GT4RRef.ID, cas -> {
             if (cas.getMaterial() == AntimatterMaterials.Wood){
                 this.tag(AntimatterDefaultTools.AXE.getToolType()).add(cas);

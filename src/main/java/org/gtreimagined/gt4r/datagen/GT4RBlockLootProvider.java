@@ -5,6 +5,7 @@ import muramasa.antimatter.data.AntimatterMaterialTypes;
 import muramasa.antimatter.data.AntimatterMaterials;
 import muramasa.antimatter.data.AntimatterStoneTypes;
 import muramasa.antimatter.datagen.providers.AntimatterBlockLootProvider;
+import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.mixin.BlockLootTablesAccessor;
 import muramasa.antimatter.ore.BlockOre;
 import muramasa.antimatter.ore.BlockOreStone;
@@ -22,6 +23,7 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.gtreimagined.gt4r.block.BlockCasing;
 import org.gtreimagined.gt4r.block.BlockFakeCasing;
 import org.gtreimagined.gt4r.block.BlockNonSolidMachine;
+import org.gtreimagined.gt4r.data.Machines;
 
 import java.util.function.Function;
 
@@ -40,6 +42,7 @@ public class GT4RBlockLootProvider extends AntimatterBlockLootProvider {
         AntimatterAPI.all(BlockNonSolidMachine.class, providerDomain, this::add);
         AntimatterAPI.all(BlockCasing.class, providerDomain, this::add);
         AntimatterAPI.all(BlockFakeCasing.class, providerDomain, this::add);
+        this.add(Machines.REACTOR_CHAMBER.getBlockState(Tier.NONE));
         if (!AntimatterAPI.isModLoaded("gt5r")){
             oreDrops();
         }
