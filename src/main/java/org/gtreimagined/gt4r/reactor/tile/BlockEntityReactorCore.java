@@ -114,12 +114,17 @@ public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEn
                 }
             }
         }
+        sidedSync(true);
+    }
+
+    @Override
+    public void onBlockUpdate(BlockPos pos) {
+        super.onBlockUpdate(pos);
+        this.setChamberCount(getAttachedChambers(level, this.getBlockPos()));
     }
 
     @Override
     public void serverTick(Level level, BlockPos blockPos, BlockState blockState) {
-        this.setChamberCount(getAttachedChambers(level, blockPos));
-
         this.tickCounter++;
 
         if (this.tickCounter % REACTOR_TICK_SPEED == 0) {
