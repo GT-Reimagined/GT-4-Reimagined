@@ -1,11 +1,13 @@
 package org.gtreimagined.gt4r.reactor.tile;
 
 import lombok.Getter;
+import muramasa.antimatter.Ref;
 import muramasa.antimatter.blockentity.BlockEntityFakeBlock;
 import muramasa.antimatter.blockentity.BlockEntityMachine;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tool.AntimatterToolType;
+import muramasa.antimatter.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -23,6 +25,10 @@ import net.minecraftforge.network.NetworkHooks;
 import org.gtreimagined.gt4r.data.Machines;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import tesseract.TesseractCapUtils;
+import tesseract.api.gt.IEnergyHandler;
+
+import java.util.Optional;
 
 public class BlockEntityReactorChamber extends BlockEntityMachine<BlockEntityReactorChamber> {
     @Getter
@@ -61,6 +67,23 @@ public class BlockEntityReactorChamber extends BlockEntityMachine<BlockEntityRea
                 }
             }
         }
+    }
+
+    @Override
+    public void serverTick(Level level, BlockPos pos, BlockState state) {
+        super.serverTick(level, pos, state);
+        if (reactor != null && !reactor.isFluid()) {
+            for (Direction dir : Ref.DIRS) {
+                if (dir != reactorSide) {
+                    BlockEntity tile = this.getCachedBlockEntity(dir);
+                    if (tile == null) continue;
+                    Optional<IEnergyHandler> handle = TesseractCapUtils.INSTANCE.getEnergyHandler(tile, dir.getOpposite());
+                    if (handle.map(h -> !h.canInput(dir.getOpposite())).orElse(true)) continue;
+                    handle.ifPresent(eh -> reactor.energyHandler.ifPresent(h -> Utils.transferEnergy(h, eh)));
+                }
+            }
+        }
+
     }
 
     @Override
