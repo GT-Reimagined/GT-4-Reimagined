@@ -42,8 +42,8 @@ public class FuelRodAdapter implements IComponentAdapter {
     protected double getEUMultiplier() {
         double mult = Config.ROD_EU_MULTIPLIER;
 
-        if (fuelRod.isMox(itemStack)) {
-            mult *= 1 + fuelRod.getMoxEUCoefficient(itemStack) * reactor.getHeatRatio();
+        if (fuelRod.getFuelType().isMox()) {
+            mult *= 1 + fuelRod.getFuelType().moxEUCoefficient() * reactor.getHeatRatio();
         }
 
         return mult;
@@ -52,8 +52,8 @@ public class FuelRodAdapter implements IComponentAdapter {
     protected double getHeatMultiplier() {
         double mult = Config.ROD_HU_MULTIPLIER;
 
-        if (fuelRod.isMox(itemStack) && reactor.isFluid() && reactor.getHeatRatio() >= 0.5) {
-            mult *= fuelRod.getMoxHeatCoefficient(itemStack);
+        if (fuelRod.getFuelType().isMox() && reactor.isFluid() && reactor.getHeatRatio() >= 0.5) {
+            mult *= fuelRod.getFuelType().moxHeatCoefficient();
         }
 
         return mult;
@@ -71,7 +71,7 @@ public class FuelRodAdapter implements IComponentAdapter {
         }
 
         int pulses = this.getPulseCount();
-        int heat = (int) (fuelRod.getHeatMult(itemStack) * fuelRod.getRodCount(itemStack)
+        int heat = (int) (fuelRod.getFuelType().heatMult() * fuelRod.getRodCount(itemStack)
             * getHeatMultiplier()
             * pulses
             * (pulses + 1)
@@ -111,7 +111,7 @@ public class FuelRodAdapter implements IComponentAdapter {
         }
 
         int pulses = this.getPulseCount();
-        double energy = fuelRod.getEnergyMult(itemStack) * fuelRod.getRodCount(itemStack) * getEUMultiplier() * pulses;
+        double energy = fuelRod.getFuelType().energyMult() * fuelRod.getRodCount(itemStack) * getEUMultiplier() * pulses;
 
         reactor.addEU(energy);
         fuelRod.applyDamage(itemStack, 1);
@@ -128,7 +128,7 @@ public class FuelRodAdapter implements IComponentAdapter {
     }
 
     private int getPulseCount() {
-        int pulses = 1 + this.getFuelRodCount() / 2;
+        int pulses = (1 + (this.getFuelRodCount() / 2)) * this.fuelRod.getFuelType().pulsesPerTick();
 
         for (var dir : InventoryDirection.values()) {
             int x2 = dir.offsetX(x);

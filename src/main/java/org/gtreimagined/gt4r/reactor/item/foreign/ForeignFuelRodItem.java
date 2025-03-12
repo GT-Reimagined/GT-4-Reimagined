@@ -5,6 +5,7 @@ import javax.annotation.Nullable;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import org.gtreimagined.gt4r.reactor.components.FuelType;
 import org.gtreimagined.gt4r.reactor.components.IComponentAdapter;
 import org.gtreimagined.gt4r.reactor.components.IComponentAdapterFactory;
 import org.gtreimagined.gt4r.reactor.components.IReactorGrid;
@@ -15,22 +16,18 @@ public class ForeignFuelRodItem implements IBasicFuelRod, IComponentAdapterFacto
 
     @Nonnull
     protected final Item item;
-    protected final double energyMult;
-    protected final double heatMult;
+    protected final FuelType fuelType;
     protected final int rodCount;
-    protected final boolean isMox;
     protected final int maxHealth;
 
     @Nullable
     protected ItemStack product;
 
-    public ForeignFuelRodItem(@Nonnull Item item, double energyMult, double heatMult, int rodCount, boolean isMox,
-        int maxHealth) {
+    public ForeignFuelRodItem(@Nonnull Item item, FuelType fuelType, int rodCount,
+                              int maxHealth) {
         this.item = item;
-        this.energyMult = energyMult;
-        this.heatMult = heatMult;
+        this.fuelType = fuelType;
         this.rodCount = rodCount;
-        this.isMox = isMox;
         this.maxHealth = maxHealth;
     }
 
@@ -50,23 +47,13 @@ public class ForeignFuelRodItem implements IBasicFuelRod, IComponentAdapterFacto
     }
 
     @Override
-    public double getEnergyMult(@Nonnull ItemStack itemStack) {
-        return energyMult;
-    }
-
-    @Override
-    public double getHeatMult(@Nonnull ItemStack itemStack) {
-        return heatMult;
+    public FuelType getFuelType() {
+        return fuelType;
     }
 
     @Override
     public int getRodCount(@Nonnull ItemStack itemStack) {
         return rodCount;
-    }
-
-    @Override
-    public boolean isMox(@Nonnull ItemStack itemStack) {
-        return isMox;
     }
 
     @Override

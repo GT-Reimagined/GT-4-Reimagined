@@ -5,29 +5,17 @@ import javax.annotation.Nullable;
 
 import net.minecraft.world.item.ItemStack;
 import org.gtreimagined.gt4r.reactor.Config;
+import org.gtreimagined.gt4r.reactor.components.FuelType;
 
 public interface IBasicFuelRod {
 
-    public double getEnergyMult(@Nonnull ItemStack itemStack);
+    FuelType getFuelType();
 
-    public double getHeatMult(@Nonnull ItemStack itemStack);
+    int getRodCount(@Nonnull ItemStack itemStack);
 
-    public int getRodCount(@Nonnull ItemStack itemStack);
+    int getRemainingHealth(@Nonnull ItemStack itemStack);
 
-    public boolean isMox(@Nonnull ItemStack itemStack);
+    void applyDamage(@Nonnull ItemStack itemStack, int damage);
 
-    public default double getMoxHeatCoefficient(@Nonnull ItemStack itemStack) {
-        return 2.0;
-    }
-
-    public default double getMoxEUCoefficient(@Nonnull ItemStack itemStack) {
-        return Config.MOX_EU_COEFFICIENT;
-    }
-
-    public int getRemainingHealth(@Nonnull ItemStack itemStack);
-
-    public void applyDamage(@Nonnull ItemStack itemStack, int damage);
-
-    public @Nullable ItemStack getProduct(@Nonnull ItemStack itemStack);
-
+    @Nullable ItemStack getProduct(@Nonnull ItemStack itemStack);
 }
