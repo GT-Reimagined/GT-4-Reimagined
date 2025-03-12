@@ -690,6 +690,20 @@ public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEn
 
     // #endregion
 
+    // #region Reactor Structure Logic
+
+    @Override
+    public boolean isStructureValid() {
+        return !isFluid || super.isStructureValid();
+    }
+
+    @Override
+    public MachineState getDefaultMachineState() {
+        if (!isFluid) return MachineState.IDLE;
+        return super.getDefaultMachineState();
+    }
+
+    // #endregion
 
     static ResourceLocation MISSING_CHAMBER = new ResourceLocation(GT4RRef.ID, "textures/gui/reactor_missing_chamber.png");
 
