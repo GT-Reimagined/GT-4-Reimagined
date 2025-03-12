@@ -1,6 +1,5 @@
-package org.gtreimagined.gt4r.reactor.tile;
+package org.gtreimagined.gt4r.blockentity.multi;
 
-import dev.architectury.networking.NetworkManager;
 import muramasa.antimatter.blockentity.multi.BlockEntityBasicMultiMachine;
 import muramasa.antimatter.capability.IFilterableHandler;
 import muramasa.antimatter.capability.fluid.FluidTanks;
@@ -16,9 +15,7 @@ import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.util.FluidUtils;
 import muramasa.antimatter.util.int2;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -31,11 +28,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Explosion.BlockInteraction;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import org.gtreimagined.gt4r.GT4RRef;
@@ -46,12 +41,12 @@ import org.gtreimagined.gt4r.reactor.components.IComponentAdapter;
 import org.gtreimagined.gt4r.reactor.components.IReactorGrid;
 import org.gtreimagined.gt4r.reactor.fluids.CoolantRegistry;
 import org.gtreimagined.gt4r.reactor.fluids.CoolantRegistry.Coolant;
+import org.gtreimagined.gt4r.reactor.tile.IReactorBlock;
 import org.gtreimagined.gt4r.reactor.tile.IReactorBlock.ReactorEnableState;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import static org.gtreimagined.gt4r.data.Materials.DistilledWater;
 

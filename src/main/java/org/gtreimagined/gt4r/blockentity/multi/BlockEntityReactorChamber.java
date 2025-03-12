@@ -1,16 +1,13 @@
-package org.gtreimagined.gt4r.reactor.tile;
+package org.gtreimagined.gt4r.blockentity.multi;
 
 import lombok.Getter;
 import muramasa.antimatter.Ref;
-import muramasa.antimatter.blockentity.BlockEntityFakeBlock;
 import muramasa.antimatter.blockentity.BlockEntityMachine;
-import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.tool.AntimatterToolType;
 import muramasa.antimatter.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -22,7 +19,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.network.NetworkHooks;
-import org.gtreimagined.gt4r.data.Machines;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tesseract.TesseractCapUtils;

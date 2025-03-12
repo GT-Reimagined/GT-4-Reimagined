@@ -1,5 +1,6 @@
 package org.gtreimagined.gt4r.reactor.tile;
 
+import org.gtreimagined.gt4r.blockentity.multi.BlockEntityReactorCore;
 import org.gtreimagined.gt4r.reactor.components.IReactorGrid;
 
 import javax.annotation.Nullable;
