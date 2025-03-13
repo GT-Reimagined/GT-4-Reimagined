@@ -133,7 +133,7 @@ public class FuelRodAdapter implements IComponentAdapter {
     }
 
     private int getPulseCount() {
-        int pulses = (1 + (this.getFuelRodCount() / 2)) * this.fuelRod.getFuelType().pulsesPerTick();
+        int pulses = (1 + (this.getFuelRodCount() >> 1)) * this.fuelRod.getFuelType().pulsesPerTick();
 
         for (var dir : InventoryDirection.values()) {
             int x2 = dir.offsetX(x);
