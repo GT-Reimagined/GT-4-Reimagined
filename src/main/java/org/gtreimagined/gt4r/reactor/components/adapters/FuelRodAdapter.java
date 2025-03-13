@@ -127,6 +127,11 @@ public class FuelRodAdapter implements IComponentAdapter {
         return this.fuelRod.getRodCount(itemStack);
     }
 
+    @Override
+    public double getExplosionRadiusMultiplier() {
+       return this.fuelRod.getFuelType().explosionMult();
+    }
+
     private int getPulseCount() {
         int pulses = (1 + (this.getFuelRodCount() / 2)) * this.fuelRod.getFuelType().pulsesPerTick();
 
