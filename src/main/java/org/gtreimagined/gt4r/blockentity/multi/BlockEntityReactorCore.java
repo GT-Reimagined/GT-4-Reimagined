@@ -266,6 +266,7 @@ public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEn
 
     private void doHeatTick() {
         this.addedHeat = 0;
+        int oldStoredHeat = storedHeat;
 
         // a component could change their hull heat increase each tick, so we have to invalidate this here and not when
         // components change
@@ -284,6 +285,9 @@ public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEn
             reactorBlock.onHeatTick(this);
         }
 
+        if (oldStoredHeat != storedHeat) {
+            sidedSync(true);
+        }
         heatRatio = ((double) storedHeat) / ((double) this.getMaxHullHeat());
 
         doHeatDamage();
@@ -348,7 +352,6 @@ public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEn
 
         // flames
         if (heatRatio >= 0.4) {
-            sidedSync(true);
             for (int i = 0; i < 10; i++) {
                 int x = xCoord + (int) map(Math.random(), 0, 1, -DAMAGE_RADIUS, DAMAGE_RADIUS);
                 int y = yCoord + (int) map(Math.random(), 0, 1, -DAMAGE_RADIUS, DAMAGE_RADIUS);
