@@ -65,10 +65,7 @@ public class FuelRodAdapter implements IComponentAdapter {
             return;
         }
 
-        if (fuelRod.getRemainingHealth(itemStack) <= 0) {
-            reactor.setItem(x, y, fuelRod.getProduct(itemStack).copy());
-            return;
-        }
+
 
         int pulses = this.getPulseCount();
         int heat = (int) (fuelRod.getFuelType().heatMult() * fuelRod.getRodCount(itemStack)
@@ -115,6 +112,9 @@ public class FuelRodAdapter implements IComponentAdapter {
 
         reactor.addEU(energy);
         fuelRod.applyDamage(itemStack, 1);
+        if (fuelRod.getRemainingHealth(itemStack) <= 0) {
+            reactor.setItem(x, y, fuelRod.getProduct(itemStack).copy());
+        }
     }
 
     @Override

@@ -15,6 +15,7 @@ import muramasa.antimatter.gui.widget.WidgetSupplier;
 import muramasa.antimatter.integration.jeirei.renderer.IInfoRenderer;
 import muramasa.antimatter.machine.MachineState;
 import muramasa.antimatter.machine.Tier;
+import muramasa.antimatter.machine.event.IMachineEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.util.FluidUtils;
 import muramasa.antimatter.util.int2;
@@ -124,6 +125,18 @@ public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEn
     public void onBlockUpdate(BlockPos pos) {
         super.onBlockUpdate(pos);
         this.setChamberCount(getAttachedChambers(level, this.getBlockPos()));
+    }
+
+    @Override
+    public void onMachineEvent(IMachineEvent event, Object... data) {
+        if (event == SlotType.STORAGE && data[0] instanceof Integer integer){
+            ItemStack stack = itemHandler.map(i -> i.getHandler(SlotType.STORAGE).getStackInSlot(integer)).orElse(ItemStack.EMPTY);
+            if (components[integer] != null && !stack.is(components[integer].getItemStack().getItem())){
+                components[integer] = null;
+                getComponent(integer % ROW_COUNT, integer / COL_COUNT);
+            }
+        }
+        super.onMachineEvent(event, data);
     }
 
     @Override
