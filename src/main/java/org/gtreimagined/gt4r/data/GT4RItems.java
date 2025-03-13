@@ -11,6 +11,10 @@ import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.tool.behaviour.BehaviourAOEBreak;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
+import org.gtreimagined.gt4r.items.reactor.ItemDepletedRod;
+import org.gtreimagined.gt4r.items.reactor.ItemFuelRod;
+import org.gtreimagined.gt4r.items.reactor.ItemFuelRod.RodSize;
+import org.gtreimagined.gt4r.reactor.components.FuelType;
 import org.gtreimagined.gtcore.data.GTCoreTools;
 import org.gtreimagined.gtcore.item.ItemPowerUnit;
 import org.gtreimagined.gt4r.GT4RRef;
@@ -65,6 +69,13 @@ public class GT4RItems {
 
     public static ItemBasic<?> MachineParts = new ItemBasic<>(GT4RRef.ID, "machine_parts");
     public static ItemBasic<?> StorageDataOrb = new ItemStorageOrb(GT4RRef.ID, "storage_data_orb").tip("A High Capacity Data Storage");
+
+    public static ItemBasic<?> UraniumRod = new ItemFuelRod(Uranium238, RodSize.SINGLE, FuelType.URANIUM, () -> GT4RItems.DepletedUraniumRod);
+    public static ItemBasic<?> DualUraniumRod = new ItemFuelRod(Uranium238, RodSize.DUAL, FuelType.URANIUM, () -> GT4RItems.DepletedDualUraniumRod);
+    public static ItemBasic<?> QuadUraniumRod = new ItemFuelRod(Uranium238, RodSize.QUAD, FuelType.URANIUM, () -> GT4RItems.DepletedQuadUraniumRod);
+    public static ItemBasic<?> DepletedUraniumRod = new ItemDepletedRod(Uranium238, RodSize.SINGLE);
+    public static ItemBasic<?> DepletedDualUraniumRod = new ItemDepletedRod(Uranium238, RodSize.DUAL);
+    public static ItemBasic<?> DepletedQuadUraniumRod = new ItemDepletedRod(Uranium238, RodSize.QUAD);
 
     public static ItemBasic<?> BatteryHull = new ItemBasic<>(GT4RRef.ID, "battery_hull").tip("An empty LV Battery Hull");
     public static ItemBasic<?> REBattery = new ItemMultiTextureBattery(GT4RRef.ID, "re_battery", Tier.LV, 10000, true);
