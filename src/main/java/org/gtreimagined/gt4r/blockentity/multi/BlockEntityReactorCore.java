@@ -1,5 +1,6 @@
 package org.gtreimagined.gt4r.blockentity.multi;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import muramasa.antimatter.blockentity.multi.BlockEntityBasicMultiMachine;
 import muramasa.antimatter.capability.IFilterableHandler;
 import muramasa.antimatter.capability.fluid.FluidTanks;
@@ -8,12 +9,16 @@ import muramasa.antimatter.capability.machine.MachineFluidHandler;
 import muramasa.antimatter.gui.GuiInstance;
 import muramasa.antimatter.gui.IGuiElement;
 import muramasa.antimatter.gui.SlotType;
+import muramasa.antimatter.gui.widget.InfoRenderWidget;
 import muramasa.antimatter.gui.widget.TextureWidget;
+import muramasa.antimatter.gui.widget.WidgetSupplier;
+import muramasa.antimatter.integration.jeirei.renderer.IInfoRenderer;
 import muramasa.antimatter.machine.MachineState;
 import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.util.FluidUtils;
 import muramasa.antimatter.util.int2;
+import net.minecraft.client.gui.Font;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -34,6 +39,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import org.gtreimagined.gt4r.GT4RRef;
+import org.gtreimagined.gt4r.blockentity.multi.BlockEntityReactorCore.ReactorWidget;
 import org.gtreimagined.gt4r.data.Machines;
 import org.gtreimagined.gt4r.reactor.Config;
 import org.gtreimagined.gt4r.reactor.components.ComponentRegistry;
@@ -48,9 +54,10 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 
+import static muramasa.antimatter.gui.ICanSyncData.SyncDirection.SERVER_TO_CLIENT;
 import static org.gtreimagined.gt4r.data.Materials.DistilledWater;
 
-public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEntityReactorCore> implements IReactorGrid, IFilterableHandler {
+public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEntityReactorCore> implements IReactorGrid, IFilterableHandler, IInfoRenderer<ReactorWidget> {
     public static final int ROW_COUNT = 6;
     public static final int COL_COUNT = 9;
 
@@ -718,6 +725,16 @@ public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEn
                 instance.addWidget(TextureWidget.build(MISSING_CHAMBER, new int2(startX - (i * 18), startY), new int2(18, 108), 18, 108));
             }
         }
+        instance.addWidget(ReactorWidget.build());
+    }
+
+
+    @Override
+    public int drawInfo(ReactorWidget instance, PoseStack stack, Font renderer, int left, int top) {
+        renderer.draw(stack, "EU/t: " + (instance.addedEu / 20), left + 22, top + 2, 0x000000);
+        double percent = instance.heatPercentage * 100;
+        renderer.draw(stack, "Core Temp: " + (Math.round(percent * 100.0) / 100.0) + "%", left + 104, top + 2, 0x000000);
+        return 8;
     }
 
     @Override
@@ -745,6 +762,28 @@ public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEn
         @Override
         public boolean canInput() {
             return super.canInput() && tile.isFluid;
+        }
+    }
+
+    public static class ReactorWidget extends InfoRenderWidget<ReactorWidget> {
+        int addedEu;
+        double heatPercentage;
+        protected ReactorWidget(GuiInstance gui, IGuiElement parent, IInfoRenderer<ReactorWidget> renderer) {
+            super(gui, parent, renderer);
+            setX(3);
+            setY(133);
+        }
+
+        @Override
+        public void init() {
+            super.init();
+            BlockEntityReactorCore m = (BlockEntityReactorCore) gui.handler;
+            gui.syncInt(() -> m.addedEU, i -> addedEu = i, SERVER_TO_CLIENT);
+            gui.syncDouble(() -> m.heatRatio, d -> heatPercentage = d, SERVER_TO_CLIENT);
+        }
+
+        public static WidgetSupplier build() {
+            return builder((a, b) -> new ReactorWidget(a, b, (IInfoRenderer) a.handler));
         }
     }
 }
