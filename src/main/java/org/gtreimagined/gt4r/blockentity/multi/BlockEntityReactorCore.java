@@ -62,14 +62,12 @@ public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEn
     public static final int ROW_COUNT = 6;
     public static final int COL_COUNT = 9;
 
-    private static final int REACTOR_TICK_SPEED = 10;
+    private static final int REACTOR_TICK_SPEED = 20;
     private static final int REACTOR_STRUCTURE_CHECK_PERIOD = 10 * 20;
 
 
     private int chambers = 0;
     private IComponentAdapter[] components = new IComponentAdapter[ROW_COUNT * COL_COUNT];
-
-    private int tickCounter = 0;
 
     boolean isFluid = false;
 
@@ -141,9 +139,7 @@ public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEn
 
     @Override
     public void serverTick(Level level, BlockPos blockPos, BlockState blockState) {
-        this.tickCounter++;
-
-        if (this.tickCounter % REACTOR_TICK_SPEED == 0) {
+        if (level.getGameTime() % REACTOR_TICK_SPEED == 0) {
             boolean wasActive = getMachineState() == MachineState.ACTIVE;
 
             boolean isActive = level.hasNeighborSignal(blockPos);
@@ -169,18 +165,15 @@ public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEn
                 }
             }
 
-            if ((this.tickCounter / REACTOR_TICK_SPEED) % 2 == 0) {
-                this.doHeatTick();
-            } else {
-                this.doEUTick();
-            }
+            this.doHeatTick();
+            this.doEUTick();
 
             if (wasActive != isActive) {
                 this.setMachineState(isActive ? MachineState.ACTIVE : MachineState.IDLE);
             }
         }
 
-        if (this.tickCounter % REACTOR_STRUCTURE_CHECK_PERIOD == 0) {
+        if (level.getGameTime() % REACTOR_STRUCTURE_CHECK_PERIOD == 0) {
             //doStructureCheck();
         }
 
