@@ -4,48 +4,48 @@ import net.minecraft.world.item.ItemStack;
 
 public interface IComponentAdapter {
 
-    public int getX();
+    int getX();
 
-    public int getY();
+    int getY();
 
-    public ItemStack getItemStack();
+    ItemStack getItemStack();
 
-    public default boolean containsHeat() {
+    default boolean containsHeat() {
         return false;
     }
 
-    public default int getStoredHeat() {
+    default int getStoredHeat() {
         return 0;
     }
 
     /**
      * @return The amount of heat rejected
      */
-    public default int addHeat(int delta) {
+    default int addHeat(int delta) {
         return delta;
     }
 
-    public default void onHeatTick() {
+    default void onHeatTick(boolean isActive) {
 
     }
 
-    public default void onEnergyTick() {
+    default void onEnergyTick(boolean isActive) {
 
     }
 
-    public default boolean reflectsNeutrons() {
+    default boolean reflectsNeutrons() {
         return false;
     }
 
-    public default int getFuelRodCount() {
+    default int getFuelRodCount() {
         return 0;
     }
 
-    public default int getReactorMaxHeatIncrease() {
+    default int getReactorMaxHeatIncrease() {
         return 0;
     }
 
-    public default double getExplosionRadiusMultiplier() {
+    default double getExplosionRadiusMultiplier() {
         return 1.0;
     }
 

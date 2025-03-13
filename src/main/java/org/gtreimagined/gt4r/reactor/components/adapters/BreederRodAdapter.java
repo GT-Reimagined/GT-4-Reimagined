@@ -38,8 +38,8 @@ public class BreederRodAdapter implements IComponentAdapter {
     }
 
     @Override
-    public void onHeatTick() {
-        if (!reactor.isActive()) {
+    public void onHeatTick(boolean isActive) {
+        if (!isActive) {
             return;
         }
 

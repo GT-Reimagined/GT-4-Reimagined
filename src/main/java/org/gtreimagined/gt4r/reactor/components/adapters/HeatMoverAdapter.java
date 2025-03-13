@@ -74,7 +74,7 @@ public class HeatMoverAdapter implements IComponentAdapter {
     }
 
     @Override
-    public void onHeatTick() {
+    public void onHeatTick(boolean isActive) {
         int fromReactor = getTransferFromReactor();
 
         if (fromReactor != 0) {

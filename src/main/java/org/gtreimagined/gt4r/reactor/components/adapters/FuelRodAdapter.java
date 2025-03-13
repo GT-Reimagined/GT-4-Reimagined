@@ -60,8 +60,8 @@ public class FuelRodAdapter implements IComponentAdapter {
     }
 
     @Override
-    public void onHeatTick() {
-        if (!reactor.isActive()) {
+    public void onHeatTick(boolean isActive) {
+        if (!isActive) {
             return;
         }
 
@@ -98,8 +98,8 @@ public class FuelRodAdapter implements IComponentAdapter {
     }
 
     @Override
-    public void onEnergyTick() {
-        if (!reactor.isActive()) {
+    public void onEnergyTick(boolean isActive) {
+        if (!isActive) {
             return;
         }
 

@@ -165,8 +165,8 @@ public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEn
                 }
             }
 
-            this.doHeatTick();
-            this.doEUTick();
+            this.doHeatTick(isActive);
+            this.doEUTick(isActive);
 
             if (wasActive != isActive) {
                 this.setMachineState(isActive ? MachineState.ACTIVE : MachineState.IDLE);
@@ -264,7 +264,7 @@ public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEn
         this.hullHeatCache = null;
     }
 
-    private void doHeatTick() {
+    private void doHeatTick(boolean isActive) {
         this.addedHeat = 0;
         int oldStoredHeat = storedHeat;
 
@@ -276,7 +276,7 @@ public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEn
             for (int col = 0; col < COL_COUNT; col++) {
                 var component = getComponent(col, row);
                 if (component != null) {
-                    component.onHeatTick();
+                    component.onHeatTick(isActive);
                 }
             }
         }
@@ -293,14 +293,14 @@ public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEn
         doHeatDamage();
     }
 
-    private void doEUTick() {
+    private void doEUTick(boolean isActive) {
         this.addedEU = 0;
 
         for (int row = 0; row < ROW_COUNT; row++) {
             for (int col = 0; col < COL_COUNT; col++) {
                 var component = getComponent(col, row);
                 if (component != null) {
-                    component.onEnergyTick();
+                    component.onEnergyTick(isActive);
                 }
             }
         }
