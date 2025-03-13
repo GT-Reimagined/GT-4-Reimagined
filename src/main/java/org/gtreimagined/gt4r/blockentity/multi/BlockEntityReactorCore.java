@@ -700,6 +700,12 @@ public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEn
 
     // #endregion
 
+
+    @Override
+    protected boolean allowExplosionsInRain() {
+       return false;
+    }
+
     static ResourceLocation MISSING_CHAMBER = new ResourceLocation(GT4RRef.ID, "textures/gui/reactor_missing_chamber.png");
 
     @Override
