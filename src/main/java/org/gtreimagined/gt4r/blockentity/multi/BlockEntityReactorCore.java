@@ -342,6 +342,7 @@ public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEn
 
         // flames
         if (heatRatio >= 0.4) {
+            sidedSync(true);
             for (int i = 0; i < 10; i++) {
                 int x = xCoord + (int) map(Math.random(), 0, 1, -DAMAGE_RADIUS, DAMAGE_RADIUS);
                 int y = yCoord + (int) map(Math.random(), 0, 1, -DAMAGE_RADIUS, DAMAGE_RADIUS);
@@ -367,7 +368,7 @@ public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEn
                 BlockPos pos = new BlockPos(x, y, z);
                 var fluid = level.getFluidState(pos);
 
-                if (FluidUtils.getFluidTemperature(fluid.getType()) < 375){
+                if (!fluid.isEmpty() && fluid.isSource() && FluidUtils.getFluidTemperature(fluid.getType()) < 375){
                     level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
                     level.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 1.0F, 1.0F);
                     break;
