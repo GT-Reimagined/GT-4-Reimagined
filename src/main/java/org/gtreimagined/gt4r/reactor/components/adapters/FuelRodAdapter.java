@@ -159,28 +159,7 @@ public class FuelRodAdapter implements IComponentAdapter {
 
     @Override
     public double getExplosionRadiusMultiplier() {
-       return this.fuelRod.getFuelType().explosionMult();
-    }
-
-    private int getPulseCount() {
-        int pulses = (1 + (this.getFuelRodCount() >> 1)) * this.fuelRod.getFuelType().pulsesPerTick();
-
-        for (var dir : InventoryDirection.values()) {
-            int x2 = dir.offsetX(x);
-            int y2 = dir.offsetY(y);
-
-            if (x2 < 0 || y2 < 0 || x2 >= reactor.getWidth() || y2 >= reactor.getHeight()) {
-                continue;
-            }
-
-            var neighbour = reactor.getComponent(x2, y2);
-
-            if (neighbour != null && neighbour.reflectsNeutrons()) {
-                pulses++;
-            }
-        }
-
-        return pulses;
+       return this.fuelRod.getFuelType().explosionMult() * getFuelRodCount();
     }
 
     private List<IComponentAdapter> getHeatableNeighbours() {
