@@ -38,43 +38,25 @@ public class BreederRodAdapter implements IComponentAdapter {
     }
 
     @Override
-    public void onHeatTick(boolean isActive) {
-        if (!isActive) {
-            return;
-        }
+    public boolean acceptPulse(IComponentAdapter source, boolean heatTick) {
+        if (heatTick) {
+            int heatMultiplier = 1 + reactor.getHullHeat() / breederRod.getFuelType().breedingHeat();
 
-        int neighbouringRods = 0;
+            int storedNeutrons = breederRod.getStoredNeutrons(itemStack);
 
-        for (var dir : InventoryDirection.values()) {
-            int x2 = dir.offsetX(x);
-            int y2 = dir.offsetY(y);
+            storedNeutrons += heatMultiplier;
 
-            if (x2 < 0 || y2 < 0 || x2 >= reactor.getWidth() || y2 >= reactor.getHeight()) {
-                continue;
-            }
+            int max = breederRod.getMaxNeutrons(itemStack);
 
-            var neighbour = reactor.getComponent(x2, y2);
+            storedNeutrons = Math.min(storedNeutrons, max);
 
-            if (neighbour != null) {
-                neighbouringRods += neighbour.getFuelRodCount();
+            breederRod.setNeutrons(itemStack, storedNeutrons);
+
+            if (storedNeutrons >= max) {
+                reactor.setItem(x, y, breederRod.getProduct(itemStack).copy());
             }
         }
-
-        int heatMultiplier = 1 + reactor.getHullHeat() / breederRod.getReactorHeatDivisor(itemStack)
-            * breederRod.getHeatMultiplier(itemStack);
-
-        int storedNeutrons = breederRod.getStoredNeutrons(itemStack);
-
-        storedNeutrons += neighbouringRods * heatMultiplier;
-
-        int max = breederRod.getMaxNeutrons(itemStack);
-
-        storedNeutrons = Math.min(storedNeutrons, max);
-
-        breederRod.setNeutrons(itemStack, storedNeutrons);
-
-        if (storedNeutrons >= max) {
-            reactor.setItem(x, y, breederRod.getProduct(itemStack).copy());
-        }
+        return true;
     }
+
 }

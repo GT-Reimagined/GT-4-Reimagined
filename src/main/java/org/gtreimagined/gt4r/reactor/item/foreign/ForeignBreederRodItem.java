@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import org.gtreimagined.gt4r.reactor.components.FuelType;
 import org.gtreimagined.gt4r.reactor.components.IComponentAdapter;
 import org.gtreimagined.gt4r.reactor.components.IComponentAdapterFactory;
 import org.gtreimagined.gt4r.reactor.components.IReactorGrid;
@@ -16,17 +17,14 @@ public class ForeignBreederRodItem implements IBreederRod, IComponentAdapterFact
 
     @Nonnull
     private final Item item;
-
-    private final int heatDivisor, heatMultiplier, maxNeutrons;
+    private final FuelType fuelType;
 
     @Nullable
     private ItemStack product;
 
-    public ForeignBreederRodItem(@Nonnull Item item, int heatDivisor, int heatMultiplier, int maxNeutrons) {
+    public ForeignBreederRodItem(@Nonnull Item item, FuelType fuelType) {
         this.item = item;
-        this.heatDivisor = heatDivisor;
-        this.heatMultiplier = heatMultiplier;
-        this.maxNeutrons = maxNeutrons;
+        this.fuelType = fuelType;
     }
 
     @Override
@@ -46,8 +44,13 @@ public class ForeignBreederRodItem implements IBreederRod, IComponentAdapterFact
     }
 
     @Override
+    public FuelType getFuelType() {
+        return fuelType;
+    }
+
+    @Override
     public int getMaxNeutrons(@Nonnull ItemStack itemStack) {
-        return maxNeutrons;
+        return fuelType.durability();
     }
 
     @Override
@@ -58,16 +61,6 @@ public class ForeignBreederRodItem implements IBreederRod, IComponentAdapterFact
     @Override
     public void setNeutrons(@Nonnull ItemStack itemStack, int neutrons) {
         itemStack.setDamageValue(neutrons);
-    }
-
-    @Override
-    public int getReactorHeatDivisor(@Nonnull ItemStack itemStack) {
-        return heatDivisor;
-    }
-
-    @Override
-    public int getHeatMultiplier(@Nonnull ItemStack itemStack) {
-        return heatMultiplier;
     }
 
     public void setProduct(@Nullable ItemStack product) {
