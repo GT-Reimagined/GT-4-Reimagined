@@ -418,7 +418,7 @@ public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEn
                 BlockPos pos = new BlockPos(x, y, z);
                 var block = level.getBlockState(pos);
                 if (!block.isAir() && block.getDestroySpeed(level, pos) < 5){
-                    level.setBlock(pos, Blocks.LAVA.defaultBlockState(), 3);
+                    level.setBlock(pos, Blocks.LAVA.defaultBlockState().setValue(LiquidBlock.LEVEL, 7), 3);
                     level.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 1.0F, 1.0F);
                     break;
                 }
