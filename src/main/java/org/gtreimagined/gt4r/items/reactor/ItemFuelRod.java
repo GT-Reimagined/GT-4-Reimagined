@@ -5,8 +5,13 @@ import muramasa.antimatter.item.ItemBasic;
 import muramasa.antimatter.material.Material;
 import muramasa.antimatter.registration.IColorHandler;
 import muramasa.antimatter.texture.Texture;
+import muramasa.antimatter.util.Utils;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import org.gtreimagined.gt4r.GT4RRef;
 import org.gtreimagined.gt4r.reactor.components.ComponentRegistry;
@@ -19,6 +24,7 @@ import org.gtreimagined.gt4r.reactor.item.interfaces.IBasicFuelRod;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 public class ItemFuelRod extends ItemBasic<ItemFuelRod> implements IBasicFuelRod, IColorHandler, IComponentAdapterFactory {
@@ -68,6 +74,14 @@ public class ItemFuelRod extends ItemBasic<ItemFuelRod> implements IBasicFuelRod
     @Override
     public int getItemColor(ItemStack stack, @Nullable Block block, int i) {
         return i == 0 ? material.getRGB() : -1;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
+        super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
+        if (!this.isDamaged(stack)){
+            tooltipComponents.add(Utils.translatable("item.durability", this.getMaxDamage(stack), this.getMaxDamage(stack)));
+        }
     }
 
     @Override
