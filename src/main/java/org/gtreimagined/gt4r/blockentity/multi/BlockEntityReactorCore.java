@@ -578,7 +578,7 @@ public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEn
             return hullHeatCache;
         }
 
-        int maxHeat = 5000;
+        int maxHeat = 10000;
 
         for (int row = 0; row < ROW_COUNT; row++) {
             for (int col = 0; col < COL_COUNT; col++) {
