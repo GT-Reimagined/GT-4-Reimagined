@@ -39,33 +39,16 @@ public class NeutronReflectorAdapter implements IComponentAdapter {
     }
 
     @Override
-    public void onHeatTick(boolean isActive) {
-        if (!isActive) {
-            return;
-        }
+    public boolean acceptPulse(IComponentAdapter source, boolean heatTick) {
+        if(!heatTick) {
+            reactor.addEU(1.0);
+            reflector.applyDamage(itemStack, source.getFuelRodCount());
 
-        int damage = 0;
-
-        for (var dir : InventoryDirection.values()) {
-            int x2 = dir.offsetX(x);
-            int y2 = dir.offsetY(y);
-
-            if (x2 < 0 || y2 < 0 || x2 >= reactor.getWidth() || y2 >= reactor.getHeight()) {
-                continue;
-            }
-
-            var neighbour = reactor.getComponent(x2, y2);
-
-            if (neighbour != null) {
-                damage += neighbour.getFuelRodCount();
+            if (reflector.getRemainingHealth(itemStack) <= 0) {
+                reactor.setItem(x, y, ItemStack.EMPTY);
             }
         }
-
-        reflector.applyDamage(itemStack, damage);
-
-        if (reflector.getRemainingHealth(itemStack) <= 0) {
-            reactor.setItem(x, y, null);
-        }
+        return true;
     }
 
     @Override

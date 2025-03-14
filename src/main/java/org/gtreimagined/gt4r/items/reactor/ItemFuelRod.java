@@ -56,7 +56,7 @@ public class ItemFuelRod extends ItemBasic<ItemFuelRod> implements IBasicFuelRod
     }
 
     @Override
-    public @Nullable ItemStack getProduct(@NotNull ItemStack itemStack) {
+    public @NotNull ItemStack getProduct(@NotNull ItemStack itemStack) {
         return new ItemStack(depleted.get());
     }
 

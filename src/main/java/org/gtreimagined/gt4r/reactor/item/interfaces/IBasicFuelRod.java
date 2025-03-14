@@ -17,5 +17,5 @@ public interface IBasicFuelRod {
 
     void applyDamage(@Nonnull ItemStack itemStack, int damage);
 
-    @Nullable ItemStack getProduct(@Nonnull ItemStack itemStack);
+    @Nonnull ItemStack getProduct(@Nonnull ItemStack itemStack);
 }

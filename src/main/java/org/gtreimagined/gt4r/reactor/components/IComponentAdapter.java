@@ -33,6 +33,10 @@ public interface IComponentAdapter {
 
     }
 
+    default boolean acceptPulse(IComponentAdapter source, boolean heatTick){
+        return false;
+    }
+
     default boolean reflectsNeutrons() {
         return false;
     }

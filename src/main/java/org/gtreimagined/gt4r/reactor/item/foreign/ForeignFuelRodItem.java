@@ -11,6 +11,7 @@ import org.gtreimagined.gt4r.reactor.components.IComponentAdapterFactory;
 import org.gtreimagined.gt4r.reactor.components.IReactorGrid;
 import org.gtreimagined.gt4r.reactor.components.adapters.FuelRodAdapter;
 import org.gtreimagined.gt4r.reactor.item.interfaces.IBasicFuelRod;
+import org.jetbrains.annotations.NotNull;
 
 public class ForeignFuelRodItem implements IBasicFuelRod, IComponentAdapterFactory {
 
@@ -67,7 +68,7 @@ public class ForeignFuelRodItem implements IBasicFuelRod, IComponentAdapterFacto
     }
 
     @Override
-    public @Nullable ItemStack getProduct(@Nonnull ItemStack itemStack) {
+    public @NotNull ItemStack getProduct(@Nonnull ItemStack itemStack) {
         return product;
     }
 }

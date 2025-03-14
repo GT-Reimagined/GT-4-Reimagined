@@ -1,7 +1,9 @@
 package org.gtreimagined.gt4r.reactor.components.adapters;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import muramasa.antimatter.util.int2;
 import net.minecraft.world.item.ItemStack;
 import org.gtreimagined.gt4r.reactor.Config;
 import org.gtreimagined.gt4r.reactor.components.IComponentAdapter;
@@ -103,18 +105,40 @@ public class FuelRodAdapter implements IComponentAdapter {
             return;
         }
 
-        if (fuelRod.getRemainingHealth(itemStack) <= 0) {
-            return;
+        int rodCount = getFuelRodCount();
+        int pulsesPerTick = fuelRod.getFuelType().pulsesPerTick();
+        List<int2> pulseArea = fuelRod.getFuelType().pulseArea();
+        int pulses = (1 + (rodCount >> 1)) * fuelRod.getFuelType().pulsesPerTick();
+        for(int iteration = 0;iteration<rodCount;iteration++) {
+            for(int pulse = 0;pulse<pulses;pulse++) {
+                acceptPulse(this, false);
+            }
+            for(int pulse = 0;pulse<pulsesPerTick;pulse++) {
+                for(int i = 0;i<pulseArea.size();i++) {
+                    int2 offset = pulseArea.get(i);
+                    pulseNeighbor(x + offset.x, y + offset.y, this, false);
+                }
+            }
         }
-
-        int pulses = this.getPulseCount();
-        double energy = fuelRod.getFuelType().energyMult() * fuelRod.getRodCount(itemStack) * getEUMultiplier() * pulses;
-
-        reactor.addEU(energy);
         fuelRod.applyDamage(itemStack, 1);
         if (fuelRod.getRemainingHealth(itemStack) <= 0) {
             reactor.setItem(x, y, fuelRod.getProduct(itemStack).copy());
         }
+    }
+
+    @Override
+    public boolean acceptPulse(IComponentAdapter source, boolean heatTick) {
+        double energy = fuelRod.getFuelType().energyMult() * getEUMultiplier();
+        if(!heatTick) reactor.addEU(energy);
+        return true;
+    }
+
+    protected int pulseNeighbor(int targetX, int targetY, IComponentAdapter source, boolean heatTick) {
+        if (targetX < 0 || targetY < 0 || targetX >= reactor.getWidth() || targetY >= reactor.getHeight()) {
+            return 0;
+        }
+        IComponentAdapter component = reactor.getComponent(targetX, targetY);
+        return component != null && component.acceptPulse(source, heatTick) ? fuelRod.getFuelType().connectivityPulses() : 0;
     }
 
     @Override
