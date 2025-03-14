@@ -72,8 +72,7 @@ public class FuelRodAdapter implements IComponentAdapter {
         for(int iteration = 0;iteration<rodCount;iteration++) {
             int pulses = (1 + (rodCount >> 1)) * fuelRod.getFuelType().pulsesPerTick();
             for(int pulse = 0;pulse<pulsesPerTick;pulse++) {
-                for(int i = 0,m=pulseArea.size();i<m;i++) {
-                    int2 offset = pulseArea.get(i);
+                for (int2 offset : pulseArea) {
                     pulses += pulseNeighbor(x + offset.x, y + offset.y, this, true);
                 }
             }
