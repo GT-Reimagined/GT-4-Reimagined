@@ -66,21 +66,20 @@ public class FuelRodAdapter implements IComponentAdapter {
         if (!isActive) {
             return;
         }
+        int rodCount = getFuelRodCount();
+        int pulsesPerTick = fuelRod.getFuelType().pulsesPerTick();
+        List<int2> pulseArea = fuelRod.getFuelType().pulseArea();
+        for(int iteration = 0;iteration<rodCount;iteration++) {
+            int pulses = (1 + (rodCount >> 1)) * fuelRod.getFuelType().pulsesPerTick();
+            for(int pulse = 0;pulse<pulsesPerTick;pulse++) {
+                for(int i = 0,m=pulseArea.size();i<m;i++) {
+                    int2 offset = pulseArea.get(i);
+                    pulses += pulseNeighbor(x + offset.x, y + offset.y, this, true);
+                }
+            }
+            int heat = (int)(sumUp(pulses) * 4 * fuelRod.getFuelType().heatMult());
+            var heatableNeighbours = this.getHeatableNeighbours();
 
-
-
-        int pulses = this.getPulseCount();
-        int heat = (int) (fuelRod.getFuelType().heatMult() * fuelRod.getRodCount(itemStack)
-            * getHeatMultiplier()
-            * pulses
-            * (pulses + 1)
-            / 2);
-
-        var heatableNeighbours = this.getHeatableNeighbours();
-
-        if (heatableNeighbours.isEmpty()) {
-            reactor.addHullHeat(heat);
-        } else {
             for (int i = 0; i < heatableNeighbours.size(); i++) {
                 int remainingNeighbours = heatableNeighbours.size() - i;
 
@@ -88,7 +87,7 @@ public class FuelRodAdapter implements IComponentAdapter {
                 heat -= heatToTransfer;
 
                 int rejected = heatableNeighbours.get(i)
-                    .addHeat(heatToTransfer);
+                        .addHeat(heatToTransfer);
 
                 heat += rejected;
             }
@@ -97,6 +96,14 @@ public class FuelRodAdapter implements IComponentAdapter {
                 reactor.addHullHeat(heat);
             }
         }
+    }
+
+    public static int sumUp(int base) {
+        int sum = 0;
+        for(int i = 1;i <= base;++i) {
+            sum += i;
+        }
+        return sum;
     }
 
     @Override
@@ -177,12 +184,14 @@ public class FuelRodAdapter implements IComponentAdapter {
         return pulses;
     }
 
-    private ArrayList<IComponentAdapter> getHeatableNeighbours() {
-        ArrayList<IComponentAdapter> neighbours = new ArrayList<>();
+    private List<IComponentAdapter> getHeatableNeighbours() {
+        List<int2> heatArea = fuelRod.getFuelType().heatPulseArea();
 
-        for (var dir : InventoryDirection.values()) {
-            int x2 = dir.offsetX(x);
-            int y2 = dir.offsetY(y);
+        List<IComponentAdapter> neighbours = new ArrayList<>();
+
+        for (var offset : heatArea) {
+            int x2 = x + offset.x;
+            int y2 = y + offset.y;
 
             if (x2 < 0 || y2 < 0 || x2 >= reactor.getWidth() || y2 >= reactor.getHeight()) {
                 continue;
