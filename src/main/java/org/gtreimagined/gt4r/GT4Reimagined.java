@@ -24,6 +24,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.gtreimagined.gt4r.proxy.ClientHandler;
 import org.gtreimagined.gt4r.proxy.ServerHandler;
+import org.gtreimagined.gt4r.reactor.components.ComponentRegistry;
+import org.gtreimagined.gt4r.reactor.item.foreign.ForeignNeutronReflectorItem;
 import org.gtreimagined.gtcore.data.GTCoreItems;
 import org.gtreimagined.gtcore.item.ItemPowerUnit;
 import org.gtreimagined.gt4r.config.OreConfigHandler;
@@ -128,6 +130,7 @@ public class GT4Reimagined extends AntimatterMod {
                 if (AntimatterAPI.isModLoaded(GT4RRef.MOD_BLUEPOWER)) {
                     //GEM.forceOverride(Amethyst, ForgeRegistries.ITEMS.getValue(new ResourceLocation("bluepower", "amethyst_gem")));
                 }
+                ComponentRegistry.registerAdapter(GTCoreItems.IridiumNeutronReflector, new ForeignNeutronReflectorItem(GTCoreItems.IridiumNeutronReflector));
                 GT4RRemapping.init();
                 Structures.init();
                 Structures.initPatterns();
