@@ -22,6 +22,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.gtreimagined.gt4r.loader.LootLoader;
 import org.gtreimagined.gt4r.proxy.ClientHandler;
 import org.gtreimagined.gt4r.proxy.ServerHandler;
 import org.gtreimagined.gtcore.data.GTCoreItems;
@@ -128,6 +129,7 @@ public class GT4Reimagined extends AntimatterMod {
                 if (AntimatterAPI.isModLoaded(GT4RRef.MOD_BLUEPOWER)) {
                     //GEM.forceOverride(Amethyst, ForgeRegistries.ITEMS.getValue(new ResourceLocation("bluepower", "amethyst_gem")));
                 }
+                LootLoader.init();
                 GT4RRemapping.init();
                 Structures.init();
                 Structures.initPatterns();
