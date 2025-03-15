@@ -18,6 +18,7 @@ import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.machine.event.IMachineEvent;
 import muramasa.antimatter.machine.types.Machine;
 import muramasa.antimatter.util.FluidUtils;
+import muramasa.antimatter.util.Utils;
 import muramasa.antimatter.util.int2;
 import net.minecraft.client.gui.Font;
 import net.minecraft.core.BlockPos;
@@ -37,6 +38,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
@@ -432,14 +434,7 @@ public class BlockEntityReactorCore extends BlockEntityBasicMultiMachine<BlockEn
 
         // explosion
         if (heatRatio >= 1) {
-            level.explode(
-                    null,
-                    xCoord + 0.5,
-                    yCoord + 0.5,
-                    zCoord + 0.5,
-                    (float) (30 * getExplosionRadiusMultiplier()),
-                    true,
-                    BlockInteraction.DESTROY);
+            Utils.createExplosion(level, worldPosition, (float) (30 * getExplosionRadiusMultiplier()), BlockInteraction.DESTROY);
         }
     }
 
