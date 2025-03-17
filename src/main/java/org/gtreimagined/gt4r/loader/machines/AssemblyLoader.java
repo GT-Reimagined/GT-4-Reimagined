@@ -64,7 +64,7 @@ public class AssemblyLoader {
         RecipeMaps.ASSEMBLER.RB().ii(PLATE.getMaterialIngredient(Plastic, 1), PLATE.getMaterialIngredient(RedAlloy, 2)).io(new ItemStack(CircuitBoardBasic)).add("circuit_board_basic_2",800, 1);
         RecipeMaps.ASSEMBLER.RB().ii(PLATE.getMaterialIngredient(Plastic, 1), PLATE.getMaterialIngredient(Electrum, 2)).io(new ItemStack(CircuitBoardBasic, 2)).add("circuit_board_basic_3",800, 1);
         RecipeMaps.ASSEMBLER.RB().ii(of(PLATES_IRON_ALUMINIUM, 1), of(Items.IRON_TRAPDOOR, 1)).io(new ItemStack(Shutter, 1)).add("shutter",400, 16);
-        RecipeMaps.ASSEMBLER.RB().ii(PLATE.getMaterialIngredient(Iron, 5), of(Tags.Items.CHESTS, 1)).io(new ItemStack(Items.HOPPER, 1)).add("hopper",800, 2);
+        RecipeMaps.ASSEMBLER.RB().ii(PLATE.getMaterialIngredient(Iron, 5), of(Tags.Items.CHESTS_WOODEN, 1)).io(new ItemStack(Items.HOPPER, 1)).add("hopper",800, 2);
         RecipeMaps.ASSEMBLER.RB().ii(PLATE.getMaterialIngredient(WroughtIron, 2), of(CIRCUITS_BASIC, 1)).io(new ItemStack(MachineParts, 4)).add("machine_parts_2",800, 16);
         RecipeMaps.ASSEMBLER.RB().ii(PLATE.getMaterialIngredient(Plastic, 2), of(CIRCUITS_BASIC, 1)).io(new ItemStack(MachineParts, 2)).add("machine_parts_1",800, 16);
         RecipeMaps.ASSEMBLER.RB().ii(PLATE.getMaterialIngredient(Electrum, 2), of(CIRCUITS_BASIC, 1)).io(new ItemStack(CircuitBoardAdvanced)).add("circuit_board_advanced",1600,2);
