@@ -8,7 +8,7 @@ import static org.gtreimagined.gt4r.data.RecipeMaps.LATHE;
 public class LatheLoader {
     public static void init(){
         ROD.all().stream().filter(m -> m.has(INGOT) || m.has(GEM)).forEach(m -> {
-            long duration = Math.max(m.getMass(), 1) * 80;
+            long duration = Math.max(m.getMass(), 1) * 2;
             RecipeIngredient input = m.has(INGOT) ? INGOT.getMaterialIngredient(m, 1) : GEM.getMaterialIngredient(m , 1);
             LATHE.RB().ii(input).io(ROD.get(m,1), DUST_SMALL.get(m, 2)).add(m.getId() + "_rod", duration, 16);
         });
