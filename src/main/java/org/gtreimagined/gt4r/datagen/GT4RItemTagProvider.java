@@ -8,6 +8,7 @@ import muramasa.antimatter.datagen.builder.AntimatterTagBuilder;
 import muramasa.antimatter.datagen.providers.AntimatterBlockTagProvider;
 import muramasa.antimatter.datagen.providers.AntimatterItemTagProvider;
 import muramasa.antimatter.ore.BlockOre;
+import muramasa.antimatter.ore.StoneType;
 import muramasa.antimatter.util.RegistryUtils;
 import muramasa.antimatter.util.TagUtils;
 import net.minecraft.resources.ResourceLocation;
@@ -19,7 +20,7 @@ import org.gtreimagined.gtcore.data.GTCoreItems;
 import org.gtreimagined.gt4r.GT4RRef;
 import org.gtreimagined.gt4r.data.GT4RMaterialTags;
 
-import static muramasa.antimatter.data.AntimatterMaterialTypes.GEM;
+import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
 import static muramasa.antimatter.data.AntimatterMaterials.Diamond;
 import static muramasa.antimatter.util.Utils.getConventionalMaterialType;
 import static muramasa.antimatter.util.Utils.getConventionalStoneType;
@@ -64,13 +65,6 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.tag(BATTERIES_LV).add(REBattery);
         this.tag(BATTERIES_MV).add(LithiumBattery, EnergyCrystal);
         this.tag(BATTERIES_HV).add(LapotronCrystal);
-        this.tag(TagUtils.getForgelikeItemTag("stone_ores/iron")).add(Items.IRON_ORE);
-        this.tag(TagUtils.getForgelikeItemTag("stone_ores/gold")).add(Items.GOLD_ORE);
-        this.tag(TagUtils.getForgelikeItemTag("stone_ores/coal")).add(Items.COAL_ORE);
-        this.tag(TagUtils.getForgelikeItemTag("stone_ores/lapis")).add(Items.LAPIS_ORE);
-        this.tag(TagUtils.getForgelikeItemTag("stone_ores/diamond")).add(Items.DIAMOND_ORE);
-        this.tag(TagUtils.getForgelikeItemTag("stone_ores/redstone")).add(Items.REDSTONE_ORE);
-        this.tag(TagUtils.getForgelikeItemTag("stone_ores/emerald")).add(Items.EMERALD_ORE);
         if (AntimatterAPI.isModLoaded(GT4RRef.MOD_BLUEPOWER)){
             this.tag(TagUtils.getForgelikeItemTag("stone_ores/amethyst")).add(RegistryUtils.getItemFromID(new ResourceLocation(GT4RRef.MOD_BLUEPOWER, "amethyst_ore")));
         }
@@ -86,10 +80,11 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
             add.add(RegistryUtils.getItemFromID(new ResourceLocation(coral + "_coral")), RegistryUtils.getItemFromID(new ResourceLocation("dead_" + coral + "_coral")), RegistryUtils.getItemFromID(new ResourceLocation(coral + "_coral_fan")), RegistryUtils.getItemFromID(new ResourceLocation("dead_" + coral + "_coral_fan"))).replace(false);
         }
         this.tag(VINES).add(Items.VINE, Items.TWISTING_VINES, Items.WEEPING_VINES);
-        AntimatterAPI.all(BlockOre.class, o -> {
-            if (o.getStoneType() != AntimatterStoneTypes.SAND && o.getStoneType() != AntimatterStoneTypes.SAND_RED && o.getStoneType() != AntimatterStoneTypes.GRAVEL){
-                this.tag(TagUtils.getForgelikeItemTag("sandless_" + getConventionalMaterialType(o.getOreType()) + "/" +  o.getMaterial().getId())).addTag(TagUtils.getForgelikeItemTag(String.join("", getConventionalStoneType(o.getStoneType()), "_", getConventionalMaterialType(o.getOreType()), "/", o.getMaterial().getId()))).replace(false);
-            }
+        ORE.all().forEach(m -> {
+            AntimatterAPI.all(StoneType.class).stream().filter(s -> !s.isSandLike() && s.doesGenerateOre() && s != AntimatterStoneTypes.BEDROCK).forEach(s -> {
+                this.tag(TagUtils.getForgelikeItemTag("sandless_" + getConventionalMaterialType(ORE) + "/" +  m.getId())).addTag(TagUtils.getForgelikeItemTag(String.join("", getConventionalStoneType(s), "_", getConventionalMaterialType(ORE), "/", m.getId())));
+                this.tag(TagUtils.getForgelikeItemTag("sandless_" + getConventionalMaterialType(ORE_SMALL) + "/" +  m.getId())).addTag(TagUtils.getForgelikeItemTag(String.join("", getConventionalStoneType(s), "_", getConventionalMaterialType(ORE_SMALL), "/", m.getId())));
+            });
         });
         AntimatterMaterialTypes.RAW_ORE.all().forEach(m -> {
             this.tag(TagUtils.getForgelikeItemTag("sandless_ores/"+ m.getId())).add(AntimatterMaterialTypes.RAW_ORE.get(m));
