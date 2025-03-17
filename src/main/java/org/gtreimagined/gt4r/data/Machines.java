@@ -95,7 +95,7 @@ public class Machines {
     public static UpgradeableMachine THERMAL_CENTRIFUGE = new UpgradeableMachine(GT4RRef.ID, "thermal_centrifuge").setTiers(MV).setMap(RecipeMaps.THERMAL_CENTRIFUGE).addFlags(GUI, ITEM, FLUID);
     public static UpgradeableMachine FLUID_PRESS = new UpgradeableMachine(GT4RRef.ID, "fluid_press").setMap(RecipeMaps.FLUID_PRESS).addFlags(GUI, ITEM, FLUID);
     public static UpgradeableMachine FLUID_SOLIDIFIER = new UpgradeableMachine(GT4RRef.ID, "fluid_solidifier").setMap(RecipeMaps.FLUID_SOLIDIFIER).addFlags(GUI, ITEM, FLUID);
-    public static BasicMachine PUMP = new BasicMachine(GT4RRef.ID, "pump").addFlags(GUI, ITEM, FLUID).setTile(BlockEntityPump::new).baseTexture(Textures.BASE_HANDLER);
+    public static UpgradeableMachine PUMP = new UpgradeableMachine(GT4RRef.ID, "pump").setUpgrades(CustomTags.BATTERY_UPGRADES, CustomTags.TRANSFORMER_UPGRADES, CustomTags.HV_TRANSFORMER_UPGRADES, CustomTags.STEAM_UPGRADES).addFlags(GUI, ITEM, FLUID).setTile(BlockEntityPump::new);
     public static UpgradeableMachine SIFTER = new UpgradeableMachine(GT4RRef.ID, "sifter").setMap(RecipeMaps.SIFTER).addFlags(GUI, ITEM);
     public static UpgradeableMachine SMELTER = new UpgradeableMachine(GT4RRef.ID, "smelter").setTiers(MV).setMap(RecipeMaps.SMELTER).addFlags(GUI, ITEM, FLUID);
     public static UpgradeableMachine BATH = new UpgradeableMachine(GT4RRef.ID, "bath").setMap(RecipeMaps.BATH).addFlags(GUI, ITEM);
