@@ -46,14 +46,10 @@ public class BlockEntityCokeOven extends BlockEntityBasicMultiMachine<BlockEntit
             for (BlockPos pos1 : positions) {
                 BlockEntity blockEntity = level.getBlockEntity(pos1);
                 if (blockEntity != null){
-                    IItemHandler itemHandler1 = blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.UP).orElse(null);
-                    if (itemHandler1 != null){
-                        itemHandler.ifPresent(i -> Utils.transferItems(i.getHandler(SlotType.IT_OUT), itemHandler1, false));
-                    }
-                    var fluidHandler1 = blockEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, Direction.UP).resolve().orElse(null);
-                    if (fluidHandler1 != null){
-                        fluidHandler.ifPresent(f -> Utils.transferFluids(f.getOutputTanks(), fluidHandler1));
-                    }
+                    blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.UP).ifPresent(itemHandler1 ->
+                            itemHandler.ifPresent(i -> Utils.transferItems(i.getHandler(SlotType.IT_OUT), itemHandler1, false)));
+                    blockEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, Direction.UP).ifPresent(fluidHandler1 ->
+                            fluidHandler.ifPresent(f -> Utils.transferFluids(f.getOutputTanks(), fluidHandler1)));
                 }
             }
         }
