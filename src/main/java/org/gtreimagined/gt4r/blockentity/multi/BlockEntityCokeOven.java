@@ -25,10 +25,10 @@ public class BlockEntityCokeOven extends BlockEntityBasicMultiMachine<BlockEntit
         positions[0] = start.immutable();
         positions[1] = start.left(1).immutable();
         positions[2] = start.left(1).immutable();
-        positions[3] = start.back(1).right(1).immutable();
+        positions[3] = start.back(1).immutable();
         positions[4] = start.right(1).immutable();
         positions[5] = start.right(1).immutable();
-        positions[6] = start.back(1).left(1).immutable();
+        positions[6] = start.back(1).immutable();
         positions[7] = start.left(1).immutable();
         positions[8] = start.left(1).immutable();
     }
