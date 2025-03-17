@@ -2,6 +2,7 @@ package org.gtreimagined.gt4r.loader.machines;
 
 import com.google.common.collect.ImmutableSet;
 import muramasa.antimatter.AntimatterAPI;
+import muramasa.antimatter.machine.Tier;
 import muramasa.antimatter.pipe.PipeSize;
 import muramasa.antimatter.pipe.types.Cable;
 import muramasa.antimatter.pipe.types.Wire;
@@ -16,6 +17,7 @@ import org.gtreimagined.gtcore.data.GTCoreBlocks;
 import org.gtreimagined.gt4r.data.GT4RBlocks;
 import org.gtreimagined.gt4r.data.GT4RMaterialTags;
 import org.gtreimagined.gt4r.data.RecipeMaps;
+import org.gtreimagined.gtcore.machine.HopperMachine;
 
 import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
 import static muramasa.antimatter.data.AntimatterMaterials.*;
@@ -110,6 +112,10 @@ public class AssemblyLoader {
         RecipeMaps.ASSEMBLER.RB().ii(TRANSFORMER.getItem(HV), TransformerUpgrade).io(HVTransformerUpgrade).add("hv_transformer_upgrade", 3200, 4);
         RecipeMaps.ASSEMBLER.RB().ii(of(PLATES_STEELS, 2), of(STEAM_TURBINE.getItem(LV))).io(SteamUpgrade).add("steam_upgrade",1600, 32);
         RecipeMaps.ASSEMBLER.RB().ii(of(PLATES_IRON_ALUMINIUM, 1), of(2, DUST.getMaterialTag(Plastic), DUST.getMaterialTag(Wood))).io(MufflerUpgrade).add("muffler_upgrade",1600, 2);
+        AntimatterAPI.all(HopperMachine.class).forEach(hopper -> {
+            if (!hopper.getMaterial().has(PLATE)) return;
+            RecipeMaps.ASSEMBLER.RB().ii(PLATE.getMaterialIngredient(hopper.getMaterial(), 5), of(Tags.Items.CHESTS_WOODEN)).io(hopper.getItem(NONE)).add(hopper.getId(), 800, 2);
+        });
     }
 
     public static int getRubberAmount(PipeSize size){
