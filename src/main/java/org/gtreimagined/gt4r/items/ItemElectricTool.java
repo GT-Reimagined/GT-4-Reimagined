@@ -6,6 +6,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import muramasa.antimatter.AntimatterAPI;
 import muramasa.antimatter.Ref;
 import muramasa.antimatter.behaviour.IBehaviour;
 import muramasa.antimatter.behaviour.IDestroySpeed;
@@ -78,6 +79,7 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
                 behaviours.put(s, b);
             }
         });
+        AntimatterAPI.register(IElectricTool.class, this);
     }
 
     @Override
