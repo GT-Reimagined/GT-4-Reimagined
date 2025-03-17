@@ -54,7 +54,6 @@ import org.gtreimagined.gt4r.loader.machines.MassFabLoader;
 import org.gtreimagined.gt4r.loader.machines.OreByproducts;
 import org.gtreimagined.gt4r.loader.machines.SiftingLoader;
 import org.gtreimagined.gt4r.loader.machines.SmelterLoader;
-import org.gtreimagined.gt4r.loader.machines.ThermalCentrifuge;
 import org.gtreimagined.gt4r.loader.machines.WasherLoader;
 import org.gtreimagined.gt4r.loader.machines.WiremillLoader;
 import org.gtreimagined.gt4r.loader.machines.generator.FuelBurnHandler;
@@ -112,7 +111,6 @@ public class AntimatterEvents {
         loader.accept("macerating_automatic", MaceratorLoader::initAuto);
         loader.accept("macerating_manual", MaceratorLoader::initManual);
         loader.accept("sifting", SiftingLoader::init);
-        loader.accept("thermal_centrifuge", ThermalCentrifuge::init);
         loader.accept("alloy_smelter", AlloySmelterLoader::init);
         loader.accept("cutter", CutterLoader::init);
         loader.accept("lathe", LatheLoader::init);

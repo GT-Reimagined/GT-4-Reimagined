@@ -83,7 +83,7 @@ public class Machines {
     public static UpgradeableMachine RECYCLER = new UpgradeableMachine(GT4RRef.ID, "recycler").setMap(RecipeMaps.RECYCLER).addFlags(GUI, ITEM);
     public static UpgradeableMachine SCANNER = new UpgradeableMachine(GT4RRef.ID, "scanner").setTiers(HV).setMap(RecipeMaps.SCANNER).addFlags(GUI, ITEM, FLUID);
     public static UpgradeableMachine WIRE_MILL = new UpgradeableMachine(GT4RRef.ID, "wire_mill").setMap(RecipeMaps.WIRE_MILL).addFlags(GUI, ITEM).custom();
-    public static UpgradeableMachine CENTRIFUGE = new UpgradeableMachine(GT4RRef.ID, "centrifuge").setMap(RecipeMaps.CENTRIFUGE).addFlags(GUI, ITEM, FLUID);
+    public static UpgradeableMachine CENTRIFUGE = new UpgradeableMachine(GT4RRef.ID, "centrifuge").setMap(RecipeMaps.CENTRIFUGE).addFlags(GUI, ITEM, FLUID).amps(2);
     public static UpgradeableMachine ELECTROLYZER = new UpgradeableMachine(GT4RRef.ID, "electrolyzer").setTiers(MV).setMap(RecipeMaps.ELECTROLYZER).addFlags(GUI, ITEM, FLUID).setTierSpecificLang();
     public static UpgradeableMachine CHEMICAL_REACTOR = new UpgradeableMachine(GT4RRef.ID, "chemical_reactor").setTiers(MV).setMap(RecipeMaps.CHEMICAL_REACTOR).addFlags(GUI, ITEM, FLUID);
     public static UpgradeableMachine FLUID_CANNER = new UpgradeableMachine(GT4RRef.ID, "fluid_canner").setMap(RecipeMaps.FLUID_CANNER).addFlags(GUI, ITEM, FLUID);
@@ -92,7 +92,6 @@ public class Machines {
     public static UpgradeableMachine REPLICATOR = new UpgradeableMachine(GT4RRef.ID, "replicator").setTiers(EV).setMap(RecipeMaps.REPLICATOR).addFlags(GUI, ITEM, FLUID);
     public static UpgradeableMachine FORGE_HAMMER = new UpgradeableMachine(GT4RRef.ID, "forge_hammer").setMap(RecipeMaps.FORGE_HAMMER).addFlags(GUI, ITEM).setTile(BlockEntityForgeHammer::new);
     public static UpgradeableMachine ORE_WASHER = new UpgradeableMachine(GT4RRef.ID, "ore_washer").setMap(RecipeMaps.ORE_WASHER).addFlags(GUI, ITEM, FLUID);
-    public static UpgradeableMachine THERMAL_CENTRIFUGE = new UpgradeableMachine(GT4RRef.ID, "thermal_centrifuge").setTiers(MV).setMap(RecipeMaps.THERMAL_CENTRIFUGE).addFlags(GUI, ITEM, FLUID);
     public static UpgradeableMachine FLUID_PRESS = new UpgradeableMachine(GT4RRef.ID, "fluid_press").setMap(RecipeMaps.FLUID_PRESS).addFlags(GUI, ITEM, FLUID);
     public static UpgradeableMachine FLUID_SOLIDIFIER = new UpgradeableMachine(GT4RRef.ID, "fluid_solidifier").setMap(RecipeMaps.FLUID_SOLIDIFIER).addFlags(GUI, ITEM, FLUID);
     public static UpgradeableMachine PUMP = new UpgradeableMachine(GT4RRef.ID, "pump").setUpgrades(CustomTags.BATTERY_UPGRADES, CustomTags.TRANSFORMER_UPGRADES, CustomTags.HV_TRANSFORMER_UPGRADES, CustomTags.STEAM_UPGRADES).addFlags(GUI, ITEM, FLUID).setTile(BlockEntityPump::new);

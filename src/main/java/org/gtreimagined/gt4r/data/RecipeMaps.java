@@ -72,7 +72,6 @@ public class RecipeMaps {
     public static RecipeMap<?> SIFTER = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "sifter", new SteamBuilder(STEAM_SIFTER)));
     public static RecipeMap<?> SMELTER = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "smelter", new RecipeBuilder()));
     public static RecipeMap<?> SMELTER_COILS = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "smelter_coils", new RecipeBuilder())).setIcon(() -> GT4RItems.CupronickelHeatingCoil);
-    public static RecipeMap<?> THERMAL_CENTRIFUGE = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "thermal_centrifuge", new RecipeBuilder()));
     public static RecipeMap<?> UNIVERSAL_MACERATOR = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "universal_macerator", new UniversalMaceratorBuilder()).setGuiTier(MV));
     public static RecipeMap<?> WIRE_MILL = AntimatterAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "wire_mill", new RecipeBuilder()));
 

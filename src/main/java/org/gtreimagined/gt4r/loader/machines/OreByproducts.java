@@ -41,7 +41,7 @@ public class OreByproducts {
                 ores.add(macerator);
                 ores.add(RecipeIngredient.of(Machines.CENTRIFUGE.getItem(LV), 1));
                 ores.add(macerator);
-                ores.add(RecipeIngredient.of(Machines.THERMAL_CENTRIFUGE.getItem(MV), 1));
+                ores.add(RecipeIngredient.of(Machines.CENTRIFUGE.getItem(LV), 1));
                 ores.add(RecipeIngredient.of(Machines.CENTRIFUGE.getItem(LV), 1));
                 ores.add(RecipeIngredient.of(1, new ItemStack(Machines.ORE_WASHER.getItem(LV)), new ItemStack(Blocks.CAULDRON)));
                 List<FluidStack> fluids = new ObjectArrayList<>();

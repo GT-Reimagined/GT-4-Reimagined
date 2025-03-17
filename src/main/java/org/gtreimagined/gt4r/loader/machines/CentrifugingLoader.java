@@ -30,13 +30,19 @@ import static org.gtreimagined.gt4r.data.RecipeMaps.CENTRIFUGE;
 public class CentrifugingLoader {
     public static void init() {
         AntimatterMaterialTypes.DUST_IMPURE.all().forEach(dust -> {
-            Material oreByProduct1 = dust.getByProducts().size() > 0 ? dust.getByProducts().get(0) : dust;
+            Material oreByProduct1 = !dust.getByProducts().isEmpty() ? dust.getByProducts().get(0) : dust;
             CENTRIFUGE.RB().ii(of(DUST_IMPURE.get(dust),1)).io(new ItemStack(DUST.get(dust), 1), DUST_TINY.get(oreByProduct1, 1)).add(dust.getId() + "_impure_dust",400, 2);
         });
 
         AntimatterMaterialTypes.DUST_PURE.all().forEach(dust -> {
-            Material oreByProduct = dust.getByProducts().size() > 1 ? dust.getByProducts().get(1) : dust.getByProducts().size() > 0 ? dust.getByProducts().get(0) : dust;
+            Material oreByProduct = dust.getByProducts().size() > 1 ? dust.getByProducts().get(1) : !dust.getByProducts().isEmpty() ? dust.getByProducts().get(0) : dust;
             CENTRIFUGE.RB().ii(of(DUST_PURE.get(dust),1)).io(new ItemStack(DUST.get(dust), 1), DUST_TINY.get(oreByProduct, 1)).add(dust.getId() + "_pure_dust",400, 2);
+        });
+        CRUSHED_PURIFIED.all().forEach(m -> {
+            Material aOreByProduct1 = !m.getByProducts().isEmpty() ? m.getByProducts().get(0) : m;
+            Material aOreByProduct2 = m.getByProducts().size() >= 2 ? m.getByProducts().get(1) : aOreByProduct1;
+
+            CENTRIFUGE.RB().ii(of(CRUSHED_PURIFIED.get(m),1)).io(CRUSHED_REFINED.get(m, 1), DUST_TINY.get(aOreByProduct2, 1)).add(m.getId() + "_purified_ore",500, 16,0,3);
         });
         ItemStack[] itemStacks = AntimatterMaterials.Lava.getProcessInto().stream().filter(t -> t.m.has(AntimatterMaterialTypes.DUST_TINY)).map(t -> new ItemStack(AntimatterMaterialTypes.DUST_TINY.get(t.m), t.s))
                 .toArray(ItemStack[]::new);
