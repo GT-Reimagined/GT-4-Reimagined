@@ -78,7 +78,6 @@ mixin {
     config "gt4r.mixins.json"
     config "antimatter.mixins.json"
     config "antimatter.rei.mixins.json"
-    config "tesseract-forge.mixins.json"
 }
 
 
