@@ -139,7 +139,7 @@ public class Guis {
         SMELTER.add(FLUID_PRESS);
         FLUID_SOLIDIFIER.add(COMPRESSOR).add(FL_IN, 53, 63);
         DISTILLERY.add(FLUID_CANNER);
-        BATH.add(THERMAL_CENTRIFUGE).add(FL_IN, 53, 63);
+        BATH.add(IT_IN, 53, 25).add(IT_OUT, 107, 25).add(IT_OUT, 125, 25).add(IT_OUT, 143, 25).add(FL_IN, 53, 63);
         FORGE_HAMMER.add(FURNACE);
         SIFTER.add(IT_IN, 53, 25)
                 .add(IT_OUT, 107, 16).add(IT_OUT, 125, 16).add(IT_OUT, 143, 16)
