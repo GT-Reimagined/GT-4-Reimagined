@@ -1,6 +1,6 @@
 package org.gtreimagined.gt4r.gui;
 
-import muramasa.antimatter.cover.ICover;
+import org.gtreimagined.gtlib.cover.ICover;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;

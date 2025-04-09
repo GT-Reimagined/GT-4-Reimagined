@@ -1,12 +1,12 @@
 package org.gtreimagined.gt4r.blockentity.single;
 
-import muramasa.antimatter.blockentity.BlockEntityMachine;
-import muramasa.antimatter.capability.machine.MachineEnergyHandler;
-import muramasa.antimatter.cover.IHaveCover;
-import muramasa.antimatter.machine.MachineState;
-import muramasa.antimatter.machine.types.Machine;
-import muramasa.antimatter.tool.AntimatterToolType;
-import muramasa.antimatter.tool.IAntimatterTool;
+import org.gtreimagined.gtlib.blockentity.BlockEntityMachine;
+import org.gtreimagined.gtlib.capability.machine.MachineEnergyHandler;
+import org.gtreimagined.gtlib.cover.IHaveCover;
+import org.gtreimagined.gtlib.machine.MachineState;
+import org.gtreimagined.gtlib.machine.types.Machine;
+import org.gtreimagined.gtlib.tool.GTToolType;
+import org.gtreimagined.gtlib.tool.IGTTool;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -83,9 +83,9 @@ public class BlockEntityPlayerDetector extends BlockEntityMachine<BlockEntityPla
 
     @SuppressWarnings("NoTranslation")
     @Override
-    public InteractionResult onInteractServer(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit, @Nullable AntimatterToolType type) {
+    public InteractionResult onInteractServer(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit, @Nullable GTToolType type) {
         ItemStack stack = player.getItemInHand(hand);
-        if (stack.isEmpty() || !(stack.getItem() instanceof IAntimatterTool || stack.getItem() instanceof IHaveCover)){
+        if (stack.isEmpty() || !(stack.getItem() instanceof IGTTool || stack.getItem() instanceof IHaveCover)){
             this.detectorType = detectorType.next();
             if (!ownerUdid.isEmpty()) {
                 Player owner = world.getPlayerByUUID(UUID.fromString(ownerUdid));

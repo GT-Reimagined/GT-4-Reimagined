@@ -1,7 +1,7 @@
 package org.gtreimagined.gt4r.blockentity.single;
 
-import muramasa.antimatter.blockentity.BlockEntityMachine;
-import muramasa.antimatter.machine.types.Machine;
+import org.gtreimagined.gtlib.blockentity.BlockEntityMachine;
+import org.gtreimagined.gtlib.machine.types.Machine;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 import org.gtreimagined.gt4r.machine.QuantumChestItemHandler;

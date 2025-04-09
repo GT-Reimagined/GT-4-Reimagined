@@ -1,16 +1,16 @@
 package org.gtreimagined.gt4r;
 
-import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.AntimatterMod;
-import muramasa.antimatter.datagen.AntimatterDynamics;
-import muramasa.antimatter.datagen.providers.AntimatterBlockStateProvider;
-import muramasa.antimatter.event.MaterialEvent;
-import muramasa.antimatter.integration.jeirei.AntimatterJEIREIPlugin;
-import muramasa.antimatter.machine.Tier;
-import muramasa.antimatter.proxy.IProxyHandler;
-import muramasa.antimatter.registration.RegistrationEvent;
-import muramasa.antimatter.tool.IAntimatterTool;
-import muramasa.antimatter.tool.IBasicAntimatterTool;
+import org.gtreimagined.gtlib.GTAPI;
+import org.gtreimagined.gtlib.GTMod;
+import org.gtreimagined.gtlib.datagen.GTLibDynamics;
+import org.gtreimagined.gtlib.datagen.providers.GTBlockStateProvider;
+import org.gtreimagined.gtlib.event.MaterialEvent;
+import org.gtreimagined.gtlib.integration.jeirei.AntimatterJEIREIPlugin;
+import org.gtreimagined.gtlib.machine.Tier;
+import org.gtreimagined.gtlib.proxy.IProxyHandler;
+import org.gtreimagined.gtlib.registration.RegistrationEvent;
+import org.gtreimagined.gtlib.tool.IGTTool;
+import org.gtreimagined.gtlib.tool.IBasicGTTool;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -51,12 +51,12 @@ import org.gtreimagined.gt4r.material.GT4RMaterialEvent;
 
 import java.util.Arrays;
 
-import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.*;
 import static org.gtreimagined.gt4r.data.Materials.Energium;
 import static org.gtreimagined.gt4r.data.Materials.Steel;
 
 @Mod(GT4RRef.ID)
-public class GT4Reimagined extends AntimatterMod {
+public class GT4Reimagined extends GTMod {
 
     public static GT4Reimagined INSTANCE;
     public static IProxyHandler PROXY;
@@ -69,9 +69,9 @@ public class GT4Reimagined extends AntimatterMod {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::serverSetup);
-        AntimatterDynamics.clientProvider(GT4RRef.ID, () -> new AntimatterBlockStateProvider(GT4RRef.ID, GT4RRef.NAME + " BlockStates"));
-        AntimatterDynamics.clientProvider(GT4RRef.ID, () -> new GT4RItemModelProvider(GT4RRef.ID, GT4RRef.NAME + " Item Models"));
-        AntimatterDynamics.clientProvider(GT4RRef.ID, GT4RLocalizations.en_US::new);
+        GTLibDynamics.clientProvider(GT4RRef.ID, () -> new GTBlockStateProvider(GT4RRef.ID, GT4RRef.NAME + " BlockStates"));
+        GTLibDynamics.clientProvider(GT4RRef.ID, () -> new GT4RItemModelProvider(GT4RRef.ID, GT4RRef.NAME + " Item Models"));
+        GTLibDynamics.clientProvider(GT4RRef.ID, GT4RLocalizations.en_US::new);
         GT4RConfig.createConfig();
         new GT4RLateRegistrar();
     }
@@ -111,22 +111,22 @@ public class GT4Reimagined extends AntimatterMod {
                         l.addAll(Arrays.asList(GT4RItems.Drill, GT4RItems.DiamondDrill, GT4RItems.AdvancedDrill, GT4RItems.Chainsaw, GT4RItems.AdvancedChainsaw,
                                 GT4RItems.ElectricWrench, GT4RItems.AdvancedWrench, GT4RItems.ElectricScrewdriver, GT4RItems.RockCutter));
                     } else {
-                        if (!AntimatterAPI.isModLoaded("gt5r")){
-                            l.addAll(AntimatterAPI.all(IAntimatterTool.class).stream().filter(i -> i.getAntimatterToolType().isPowered()).map(IBasicAntimatterTool::getItem).toList());
-                            l.addAll(AntimatterAPI.all(ItemPowerUnit.class));
+                        if (!GTAPI.isModLoaded("gt5r")){
+                            l.addAll(GTAPI.all(IGTTool.class).stream().filter(i -> i.getAntimatterToolType().isPowered()).map(IBasicGTTool::getItem).toList());
+                            l.addAll(GTAPI.all(ItemPowerUnit.class));
                             l.addAll(WRENCHBIT.all().stream().map(m -> WRENCHBIT.get(m)).toList());
                             l.addAll(CHAINSAWBIT.all().stream().map(m -> CHAINSAWBIT.get(m)).toList());
                             l.addAll(DRILLBIT.all().stream().map(m -> DRILLBIT.get(m)).toList());
                             l.addAll(BUZZSAW_BLADE.all().stream().filter(m -> m != Steel).map(m -> BUZZSAW_BLADE.get(m)).toList());
                         } else {
                             l.add(GT4RItems.RockCutterPowerUnit);
-                            l.add(AntimatterAPI.get(IAntimatterTool.class, "rock_cutter", GT4RRef.ID).getItem());
+                            l.add(GTAPI.get(IGTTool.class, "rock_cutter", GT4RRef.ID).getItem());
                         }
                     }
                 });
             }
             case DATA_READY -> {
-                if (AntimatterAPI.isModLoaded(GT4RRef.MOD_BLUEPOWER)) {
+                if (GTAPI.isModLoaded(GT4RRef.MOD_BLUEPOWER)) {
                     //GEM.forceOverride(Amethyst, ForgeRegistries.ITEMS.getValue(new ResourceLocation("bluepower", "amethyst_gem")));
                 }
                 LootLoader.init();

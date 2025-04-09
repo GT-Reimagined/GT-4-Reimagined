@@ -1,13 +1,13 @@
 package org.gtreimagined.gt4r.gui.widgets;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import muramasa.antimatter.blockentity.BlockEntityMachine;
-import muramasa.antimatter.gui.GuiInstance;
-import muramasa.antimatter.gui.IGuiElement;
-import muramasa.antimatter.gui.widget.MachineStateWidget;
-import muramasa.antimatter.gui.widget.WidgetSupplier;
-import muramasa.antimatter.machine.MachineState;
-import muramasa.antimatter.util.int2;
+import org.gtreimagined.gtlib.blockentity.BlockEntityMachine;
+import org.gtreimagined.gtlib.gui.GuiInstance;
+import org.gtreimagined.gtlib.gui.IGuiElement;
+import org.gtreimagined.gtlib.gui.widget.MachineStateWidget;
+import org.gtreimagined.gtlib.gui.widget.WidgetSupplier;
+import org.gtreimagined.gtlib.machine.MachineState;
+import org.gtreimagined.gtlib.util.int2;
 
 public class MachineStateWidgetMoved extends MachineStateWidget {
     final int2 location;

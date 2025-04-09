@@ -1,7 +1,7 @@
 package org.gtreimagined.gt4r.loader.multi;
 
-import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
-import muramasa.antimatter.util.RegistryUtils;
+import org.gtreimagined.gtlib.recipe.ingredient.RecipeIngredient;
+import org.gtreimagined.gtlib.util.RegistryUtils;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -12,9 +12,9 @@ import org.gtreimagined.gtcore.data.GTCoreBlocks;
 import org.gtreimagined.gtcore.data.GTCoreItems;
 import org.gtreimagined.gtcore.data.GTCoreTags;
 
-import static muramasa.antimatter.data.AntimatterMaterialTypes.DUST;
-import static muramasa.antimatter.data.AntimatterMaterials.Water;
-import static muramasa.antimatter.data.AntimatterMaterials.Wood;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.DUST;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.Water;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.Wood;
 import static org.gtreimagined.gt4r.data.Materials.DistilledWater;
 import static org.gtreimagined.gt4r.data.Materials.Lubricant;
 import static org.gtreimagined.gt4r.data.RecipeMaps.*;

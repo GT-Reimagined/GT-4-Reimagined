@@ -1,8 +1,8 @@
 package org.gtreimagined.gt4r.machine;
 
-import muramasa.antimatter.capability.fluid.FluidTanks;
-import muramasa.antimatter.capability.machine.MachineFluidHandler;
-import muramasa.antimatter.gui.SlotType;
+import org.gtreimagined.gtlib.capability.fluid.FluidTanks;
+import org.gtreimagined.gtlib.capability.machine.MachineFluidHandler;
+import org.gtreimagined.gtlib.gui.SlotType;
 import org.gtreimagined.gt4r.blockentity.single.BlockEntityCoalBoiler;
 
 public class CoalBoilerFluidHandler extends MachineFluidHandler<BlockEntityCoalBoiler> {

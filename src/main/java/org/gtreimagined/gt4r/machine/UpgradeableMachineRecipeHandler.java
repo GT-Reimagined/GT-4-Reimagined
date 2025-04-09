@@ -1,9 +1,8 @@
 package org.gtreimagined.gt4r.machine;
 
-import muramasa.antimatter.blockentity.BlockEntityMachine;
-import muramasa.antimatter.capability.machine.MachineRecipeHandler;
+import org.gtreimagined.gtlib.blockentity.BlockEntityMachine;
+import org.gtreimagined.gtlib.capability.machine.MachineRecipeHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
-import tesseract.TesseractGraphWrappers;
 import org.gtreimagined.gt4r.data.CustomTags;
 
 import static org.gtreimagined.gt4r.data.Materials.Steam;

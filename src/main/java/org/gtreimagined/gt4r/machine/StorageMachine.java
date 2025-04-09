@@ -1,10 +1,10 @@
 package org.gtreimagined.gt4r.machine;
 
-import muramasa.antimatter.Data;
-import muramasa.antimatter.blockentity.BlockEntityMachine;
-import muramasa.antimatter.machine.types.Machine;
+import org.gtreimagined.gtlib.Data;
+import org.gtreimagined.gtlib.blockentity.BlockEntityMachine;
+import org.gtreimagined.gtlib.machine.types.Machine;
 
-import static muramasa.antimatter.machine.MachineFlag.COVERABLE;
+import static org.gtreimagined.gtlib.machine.MachineFlag.COVERABLE;
 
 public class StorageMachine extends Machine<StorageMachine> {
     public StorageMachine(String domain, String id) {

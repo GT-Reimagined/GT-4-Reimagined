@@ -1,7 +1,7 @@
 package org.gtreimagined.gt4r.machine;
 
 
-import muramasa.antimatter.capability.machine.MachineItemHandler;
+import org.gtreimagined.gtlib.capability.machine.MachineItemHandler;
 import org.gtreimagined.gtcore.data.SlotTypes;
 import org.gtreimagined.gtcore.machine.InfiniteSlotTrackedHandler;
 import org.gtreimagined.gt4r.blockentity.single.BlockEntityQuantumChest;

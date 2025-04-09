@@ -1,9 +1,9 @@
 package org.gtreimagined.gt4r.gui;
 
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-import muramasa.antimatter.capability.IGuiHandler;
-import muramasa.antimatter.gui.GuiInstance;
-import muramasa.antimatter.gui.container.IAntimatterContainer;
+import org.gtreimagined.gtlib.capability.IGuiHandler;
+import org.gtreimagined.gtlib.gui.GuiInstance;
+import org.gtreimagined.gtlib.gui.container.IGTContainer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerLevelAccess;
@@ -11,7 +11,7 @@ import net.minecraft.world.inventory.CraftingMenu;
 
 import java.util.Set;
 
-public class GTWorkbenchContainer extends CraftingMenu implements IAntimatterContainer {
+public class GTWorkbenchContainer extends CraftingMenu implements IGTContainer {
 
     private final GuiInstance instance;
     public final Set<ServerPlayer> listeners = new ObjectOpenHashSet<>();

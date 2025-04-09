@@ -1,70 +1,70 @@
 package org.gtreimagined.gt4r.loader.multi;
 
-import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.data.AntimatterMaterialTypes;
-import muramasa.antimatter.data.AntimatterMaterials;
-import muramasa.antimatter.material.Material;
-import muramasa.antimatter.material.MaterialTags;
-import muramasa.antimatter.material.MaterialTypeItem;
-import muramasa.antimatter.util.RegistryUtils;
-import muramasa.antimatter.util.TagUtils;
+import org.gtreimagined.gtlib.GTAPI;
+import org.gtreimagined.gtlib.data.GTMaterialTypes;
+import org.gtreimagined.gtlib.data.GTLibMaterials;
+import org.gtreimagined.gtlib.material.Material;
+import org.gtreimagined.gtlib.material.MaterialTags;
+import org.gtreimagined.gtlib.material.MaterialTypeItem;
+import org.gtreimagined.gtlib.util.RegistryUtils;
+import org.gtreimagined.gtlib.util.TagUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import org.gtreimagined.gtcore.data.GTCoreBlocks;
 
-import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
-import static muramasa.antimatter.data.AntimatterMaterials.*;
-import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.*;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.*;
+import static org.gtreimagined.gtlib.recipe.ingredient.RecipeIngredient.of;
 import static org.gtreimagined.gt4r.data.Materials.*;
 import static org.gtreimagined.gt4r.data.RecipeMaps.INDUSTRIAL_GRINDING;
 
 public class IndustrialGrinder {
     public static void init(){
-        AntimatterMaterialTypes.CRUSHED_PURIFIED.all().forEach(m -> {
-            if (m == AntimatterMaterials.Diamond || m == AntimatterMaterials.Emerald || m == Olivine || m == AntimatterMaterials.Lapis || m == AntimatterMaterials.Redstone || m == Iridium || m == Platinum){
+        GTMaterialTypes.CRUSHED_PURIFIED.all().forEach(m -> {
+            if (m == GTLibMaterials.Diamond || m == GTLibMaterials.Emerald || m == Olivine || m == GTLibMaterials.Lapis || m == GTLibMaterials.Redstone || m == Iridium || m == Platinum){
                 return;
             }
             if (m == Bauxite){
-                addGrinderRecipe(m, AntimatterMaterials.Water, AntimatterMaterialTypes.CRUSHED_PURIFIED.get(m, 2 * MaterialTags.ORE_MULTI.getInt(m)), AntimatterMaterialTypes.DUST.get(Grossular, 1), AntimatterMaterialTypes.DUST.get(Aluminium, 1));
+                addGrinderRecipe(m, GTLibMaterials.Water, GTMaterialTypes.CRUSHED_PURIFIED.get(m, 2 * MaterialTags.ORE_MULTI.getInt(m)), GTMaterialTypes.DUST.get(Grossular, 1), GTMaterialTypes.DUST.get(Aluminium, 1));
                 return;
             }
             int multiplier = (m == Ruby || m == Sapphire) ? 2 : 1;
-            MaterialTypeItem<?> dustByproduct = AntimatterMaterialTypes.DUST_SMALL;
+            MaterialTypeItem<?> dustByproduct = GTMaterialTypes.DUST_SMALL;
             if (m == Sodalite){
-                dustByproduct = AntimatterMaterialTypes.DUST;
+                dustByproduct = GTMaterialTypes.DUST;
             }
             Material oreByProduct1 = m.getByProducts().size() >= 1 ? m.getByProducts().get(0) : MaterialTags.MACERATE_INTO.getMapping(m);
             Material oreByProduct2 = m.getByProducts().size() >= 2 ? m.getByProducts().get(1) : oreByProduct1;
 
-            addGrinderRecipe(m, AntimatterMaterials.Water, AntimatterMaterialTypes.CRUSHED_PURIFIED.get(m, 2 * MaterialTags.ORE_MULTI.getInt(m)), dustByproduct.get(oreByProduct1, multiplier), dustByproduct.get(oreByProduct2, multiplier));
+            addGrinderRecipe(m, GTLibMaterials.Water, GTMaterialTypes.CRUSHED_PURIFIED.get(m, 2 * MaterialTags.ORE_MULTI.getInt(m)), dustByproduct.get(oreByProduct1, multiplier), dustByproduct.get(oreByProduct2, multiplier));
         });
-        addGrinderRecipe(Platinum, AntimatterMaterials.Water, AntimatterMaterialTypes.CRUSHED_PURIFIED.get(Platinum, 2), AntimatterMaterialTypes.DUST.get(Nickel, 1), AntimatterMaterialTypes.DUST_TINY.get(Iridium, 2));
-        addGrinderRecipe(AntimatterMaterials.Diamond, AntimatterMaterials.Water, AntimatterMaterialTypes.CRUSHED_PURIFIED.get(AntimatterMaterials.Diamond, 2), AntimatterMaterialTypes.DUST_SMALL.get(AntimatterMaterials.Diamond, 2), AntimatterMaterialTypes.DUST.get(AntimatterMaterials.Coal, 1));
-        addGrinderRecipe(Olivine, AntimatterMaterials.Water, AntimatterMaterialTypes.CRUSHED_PURIFIED.get(Olivine, 2), AntimatterMaterialTypes.DUST_SMALL.get(Olivine, 2), AntimatterMaterialTypes.DUST_SMALL.get(Pyrope, 2));
-        addGrinderRecipe(AntimatterMaterials.Emerald, AntimatterMaterials.Water, AntimatterMaterialTypes.CRUSHED_PURIFIED.get(AntimatterMaterials.Emerald, 2), AntimatterMaterialTypes.DUST_SMALL.get(AntimatterMaterials.Emerald, 2), AntimatterMaterialTypes.DUST_SMALL.get(Aluminium, 2));
-        addGrinderRecipe(AntimatterMaterials.Lapis, AntimatterMaterials.Water, AntimatterMaterialTypes.CRUSHED_PURIFIED.get(AntimatterMaterials.Lapis, 12), AntimatterMaterialTypes.DUST.get(Lazurite, 3));
-        addGrinderRecipe(AntimatterMaterials.Redstone, AntimatterMaterials.Water, AntimatterMaterialTypes.CRUSHED_PURIFIED.get(AntimatterMaterials.Redstone, 10), AntimatterMaterialTypes.DUST_SMALL.get(Cinnabar, 1), AntimatterMaterialTypes.DUST_SMALL.get(AntimatterMaterials.Glowstone, 1));
-        addGrinderRecipe(Iridium, AntimatterMaterials.Water, AntimatterMaterialTypes.CRUSHED_PURIFIED.get(Iridium, 2), AntimatterMaterialTypes.DUST_SMALL.get(Iridium, 2), AntimatterMaterialTypes.DUST_SMALL.get(Platinum, 2));
-        addGrinderRecipe(Iridium, Mercury, AntimatterMaterialTypes.CRUSHED_PURIFIED.get(Iridium, 2), AntimatterMaterialTypes.DUST.get(Platinum, 1));
-        addGrinderRecipe(Platinum, Mercury, AntimatterMaterialTypes.CRUSHED_PURIFIED.get(Platinum, 3), AntimatterMaterialTypes.DUST.get(Nickel, 1), AntimatterMaterialTypes.DUST_TINY.get(Iridium, 2));
-        addGrinderRecipe(Galena, Mercury, AntimatterMaterialTypes.CRUSHED_PURIFIED.get(Galena, 2), AntimatterMaterialTypes.DUST_SMALL.get(Sulfur, 1), AntimatterMaterialTypes.DUST.get(Silver, 1));
-        addGrinderRecipe(AntimatterMaterials.Gold, Mercury, AntimatterMaterialTypes.CRUSHED_PURIFIED.get(AntimatterMaterials.Gold, 3), AntimatterMaterialTypes.DUST_SMALL.get(AntimatterMaterials.Copper, 1), AntimatterMaterialTypes.DUST_SMALL.get(Nickel, 1));
-        addGrinderRecipe(AntimatterMaterials.Copper, Mercury, AntimatterMaterialTypes.CRUSHED_PURIFIED.get(AntimatterMaterials.Copper, 2), AntimatterMaterialTypes.DUST_SMALL.get(Nickel, 1), AntimatterMaterialTypes.DUST.get(AntimatterMaterials.Gold, 1));
-        addGrinderRecipe(Uraninite, Mercury, AntimatterMaterialTypes.CRUSHED_PURIFIED.get(Uraninite, 2), AntimatterMaterialTypes.DUST_SMALL.get(Uranium235, 1), AntimatterMaterialTypes.DUST.get(Lead, 1));
-        addGrinderRecipe(AntimatterMaterials.Iron, SodiumPersulfate, AntimatterMaterialTypes.CRUSHED_PURIFIED.get(AntimatterMaterials.Iron, 2), AntimatterMaterialTypes.DUST.get(Nickel, 1), AntimatterMaterialTypes.DUST_SMALL.get(Tin, 1));
-        addGrinderRecipe(Sphalerite, SodiumPersulfate, AntimatterMaterialTypes.CRUSHED_PURIFIED.get(Sphalerite, 2), AntimatterMaterialTypes.DUST.get(Zinc, 1), AntimatterMaterialTypes.DUST_SMALL.get(YellowGarnet, 1));
-        addGrinderRecipe(Tetrahedrite, SodiumPersulfate, AntimatterMaterialTypes.CRUSHED_PURIFIED.get(Tetrahedrite, 3), AntimatterMaterialTypes.DUST_SMALL.get(Zinc, 1), AntimatterMaterialTypes.DUST_SMALL.get(Antimony, 1));
-        addGrinderRecipe(Tin, SodiumPersulfate, AntimatterMaterialTypes.CRUSHED_PURIFIED.get(Tin, 2), AntimatterMaterialTypes.DUST.get(Zinc, 1), AntimatterMaterialTypes.DUST_SMALL.get(AntimatterMaterials.Iron, 1));
-        addGrinderRecipe(AntimatterMaterials.Copper, SodiumPersulfate, AntimatterMaterialTypes.CRUSHED_PURIFIED.get(AntimatterMaterials.Copper, 3), AntimatterMaterialTypes.DUST_SMALL.get(Nickel, 1), AntimatterMaterialTypes.DUST_SMALL.get(AntimatterMaterials.Gold, 1));
-        addGrinderRecipe(AntimatterMaterials.Gold, SodiumPersulfate, AntimatterMaterialTypes.CRUSHED_PURIFIED.get(AntimatterMaterials.Gold, 2), AntimatterMaterialTypes.DUST.get(AntimatterMaterials.Copper, 1), AntimatterMaterialTypes.DUST_SMALL.get(Nickel, 1));
-        addGrinderRecipe(Uraninite, SodiumPersulfate, AntimatterMaterialTypes.CRUSHED_PURIFIED.get(Uraninite, 3), AntimatterMaterialTypes.DUST_SMALL.get(Uranium235, 1), AntimatterMaterialTypes.DUST_SMALL.get(Lead, 1));
-        addGrinderRecipe(Bauxite, SulfuricAcid, AntimatterMaterialTypes.CRUSHED_PURIFIED.get(Bauxite, 4), AntimatterMaterialTypes.DUST.get(Aluminium, 1), AntimatterMaterialTypes.DUST_SMALL.get(Titanium, 1));
-        addGrinderRecipe(Ruby, SulfuricAcid, AntimatterMaterialTypes.GEM.get(Ruby, 2), AntimatterMaterialTypes.DUST_SMALL.get(RedGarnet, 1));
-        addGrinderRecipe(Sapphire, SulfuricAcid, AntimatterMaterialTypes.GEM.get(Sapphire, 2), AntimatterMaterialTypes.DUST_SMALL.get(Aluminium, 1));
-        addGrinderRecipe(AntimatterMaterials.Diamond, SulfuricAcid, new ItemStack(Items.DIAMOND, 2));
-        addGrinderRecipe(AntimatterMaterials.Emerald, SulfuricAcid, new ItemStack(Items.EMERALD, 2), AntimatterMaterialTypes.DUST_SMALL.get(Aluminium, 1));
-        addGrinderRecipe(Olivine, SulfuricAcid, AntimatterMaterialTypes.GEM.get(Olivine, 2), AntimatterMaterialTypes.DUST_SMALL.get(Pyrope, 2));
+        addGrinderRecipe(Platinum, GTLibMaterials.Water, GTMaterialTypes.CRUSHED_PURIFIED.get(Platinum, 2), GTMaterialTypes.DUST.get(Nickel, 1), GTMaterialTypes.DUST_TINY.get(Iridium, 2));
+        addGrinderRecipe(GTLibMaterials.Diamond, GTLibMaterials.Water, GTMaterialTypes.CRUSHED_PURIFIED.get(GTLibMaterials.Diamond, 2), GTMaterialTypes.DUST_SMALL.get(GTLibMaterials.Diamond, 2), GTMaterialTypes.DUST.get(GTLibMaterials.Coal, 1));
+        addGrinderRecipe(Olivine, GTLibMaterials.Water, GTMaterialTypes.CRUSHED_PURIFIED.get(Olivine, 2), GTMaterialTypes.DUST_SMALL.get(Olivine, 2), GTMaterialTypes.DUST_SMALL.get(Pyrope, 2));
+        addGrinderRecipe(GTLibMaterials.Emerald, GTLibMaterials.Water, GTMaterialTypes.CRUSHED_PURIFIED.get(GTLibMaterials.Emerald, 2), GTMaterialTypes.DUST_SMALL.get(GTLibMaterials.Emerald, 2), GTMaterialTypes.DUST_SMALL.get(Aluminium, 2));
+        addGrinderRecipe(GTLibMaterials.Lapis, GTLibMaterials.Water, GTMaterialTypes.CRUSHED_PURIFIED.get(GTLibMaterials.Lapis, 12), GTMaterialTypes.DUST.get(Lazurite, 3));
+        addGrinderRecipe(GTLibMaterials.Redstone, GTLibMaterials.Water, GTMaterialTypes.CRUSHED_PURIFIED.get(GTLibMaterials.Redstone, 10), GTMaterialTypes.DUST_SMALL.get(Cinnabar, 1), GTMaterialTypes.DUST_SMALL.get(GTLibMaterials.Glowstone, 1));
+        addGrinderRecipe(Iridium, GTLibMaterials.Water, GTMaterialTypes.CRUSHED_PURIFIED.get(Iridium, 2), GTMaterialTypes.DUST_SMALL.get(Iridium, 2), GTMaterialTypes.DUST_SMALL.get(Platinum, 2));
+        addGrinderRecipe(Iridium, Mercury, GTMaterialTypes.CRUSHED_PURIFIED.get(Iridium, 2), GTMaterialTypes.DUST.get(Platinum, 1));
+        addGrinderRecipe(Platinum, Mercury, GTMaterialTypes.CRUSHED_PURIFIED.get(Platinum, 3), GTMaterialTypes.DUST.get(Nickel, 1), GTMaterialTypes.DUST_TINY.get(Iridium, 2));
+        addGrinderRecipe(Galena, Mercury, GTMaterialTypes.CRUSHED_PURIFIED.get(Galena, 2), GTMaterialTypes.DUST_SMALL.get(Sulfur, 1), GTMaterialTypes.DUST.get(Silver, 1));
+        addGrinderRecipe(GTLibMaterials.Gold, Mercury, GTMaterialTypes.CRUSHED_PURIFIED.get(GTLibMaterials.Gold, 3), GTMaterialTypes.DUST_SMALL.get(GTLibMaterials.Copper, 1), GTMaterialTypes.DUST_SMALL.get(Nickel, 1));
+        addGrinderRecipe(GTLibMaterials.Copper, Mercury, GTMaterialTypes.CRUSHED_PURIFIED.get(GTLibMaterials.Copper, 2), GTMaterialTypes.DUST_SMALL.get(Nickel, 1), GTMaterialTypes.DUST.get(GTLibMaterials.Gold, 1));
+        addGrinderRecipe(Uraninite, Mercury, GTMaterialTypes.CRUSHED_PURIFIED.get(Uraninite, 2), GTMaterialTypes.DUST_SMALL.get(Uranium235, 1), GTMaterialTypes.DUST.get(Lead, 1));
+        addGrinderRecipe(GTLibMaterials.Iron, SodiumPersulfate, GTMaterialTypes.CRUSHED_PURIFIED.get(GTLibMaterials.Iron, 2), GTMaterialTypes.DUST.get(Nickel, 1), GTMaterialTypes.DUST_SMALL.get(Tin, 1));
+        addGrinderRecipe(Sphalerite, SodiumPersulfate, GTMaterialTypes.CRUSHED_PURIFIED.get(Sphalerite, 2), GTMaterialTypes.DUST.get(Zinc, 1), GTMaterialTypes.DUST_SMALL.get(YellowGarnet, 1));
+        addGrinderRecipe(Tetrahedrite, SodiumPersulfate, GTMaterialTypes.CRUSHED_PURIFIED.get(Tetrahedrite, 3), GTMaterialTypes.DUST_SMALL.get(Zinc, 1), GTMaterialTypes.DUST_SMALL.get(Antimony, 1));
+        addGrinderRecipe(Tin, SodiumPersulfate, GTMaterialTypes.CRUSHED_PURIFIED.get(Tin, 2), GTMaterialTypes.DUST.get(Zinc, 1), GTMaterialTypes.DUST_SMALL.get(GTLibMaterials.Iron, 1));
+        addGrinderRecipe(GTLibMaterials.Copper, SodiumPersulfate, GTMaterialTypes.CRUSHED_PURIFIED.get(GTLibMaterials.Copper, 3), GTMaterialTypes.DUST_SMALL.get(Nickel, 1), GTMaterialTypes.DUST_SMALL.get(GTLibMaterials.Gold, 1));
+        addGrinderRecipe(GTLibMaterials.Gold, SodiumPersulfate, GTMaterialTypes.CRUSHED_PURIFIED.get(GTLibMaterials.Gold, 2), GTMaterialTypes.DUST.get(GTLibMaterials.Copper, 1), GTMaterialTypes.DUST_SMALL.get(Nickel, 1));
+        addGrinderRecipe(Uraninite, SodiumPersulfate, GTMaterialTypes.CRUSHED_PURIFIED.get(Uraninite, 3), GTMaterialTypes.DUST_SMALL.get(Uranium235, 1), GTMaterialTypes.DUST_SMALL.get(Lead, 1));
+        addGrinderRecipe(Bauxite, SulfuricAcid, GTMaterialTypes.CRUSHED_PURIFIED.get(Bauxite, 4), GTMaterialTypes.DUST.get(Aluminium, 1), GTMaterialTypes.DUST_SMALL.get(Titanium, 1));
+        addGrinderRecipe(Ruby, SulfuricAcid, GTMaterialTypes.GEM.get(Ruby, 2), GTMaterialTypes.DUST_SMALL.get(RedGarnet, 1));
+        addGrinderRecipe(Sapphire, SulfuricAcid, GTMaterialTypes.GEM.get(Sapphire, 2), GTMaterialTypes.DUST_SMALL.get(Aluminium, 1));
+        addGrinderRecipe(GTLibMaterials.Diamond, SulfuricAcid, new ItemStack(Items.DIAMOND, 2));
+        addGrinderRecipe(GTLibMaterials.Emerald, SulfuricAcid, new ItemStack(Items.EMERALD, 2), GTMaterialTypes.DUST_SMALL.get(Aluminium, 1));
+        addGrinderRecipe(Olivine, SulfuricAcid, GTMaterialTypes.GEM.get(Olivine, 2), GTMaterialTypes.DUST_SMALL.get(Pyrope, 2));
 
         INDUSTRIAL_GRINDING.RB().ii(of(new ItemStack(GTCoreBlocks.BLACK_GRANITE.getState().getBlock(), 16))).fi(Water.getLiquid(1000)).io(DUST.get(BlackGranite, 16), DUST_SMALL.get(Thorium, 1)).add("black_granite",1600, 120);
         INDUSTRIAL_GRINDING.RB().ii(of(new ItemStack(GTCoreBlocks.RED_GRANITE.getState().getBlock(), 16))).fi(Water.getLiquid(1000)).io(DUST.get(RedGranite, 16), DUST_SMALL.get(Uranium238, 1)).add("red_granite",1600, 120);
@@ -74,7 +74,7 @@ public class IndustrialGrinder {
         INDUSTRIAL_GRINDING.RB().ii(of(Items.TERRACOTTA, 2)).fi(Water.getLiquid(1000)).io(DUST.get(Clay, 2)).add("terracotta",100, 120);
         INDUSTRIAL_GRINDING.RB().ii(of(Items.NETHERRACK, 16)).fi(Water.getLiquid(1000)).io(DUST.get(Netherrack, 16), DUST_TINY.get(Gold, 1)).add("netherrack",1600, 120);
         INDUSTRIAL_GRINDING.RB().ii(of(Items.NETHERRACK, 8)).fi(Mercury.getLiquid(1000)).io(DUST.get(Netherrack, 8), DUST_TINY.get(Gold, 5)).add("netherrack_1",1600, 120);
-        if (AntimatterAPI.isModLoaded("cinderscapes")){
+        if (GTAPI.isModLoaded("cinderscapes")){
             INDUSTRIAL_GRINDING.RB().ii(of(RegistryUtils.getItemFromID(new ResourceLocation("cinderscapes", "rose_quartz_ore")), 1)).fi(Water.getLiquid(1000)).io(new ItemStack(RegistryUtils.getItemFromID(new ResourceLocation("cinderscapes", "rose_quartz")), 4), DUST_SMALL.get(Netherrack, 2)).add("rose_quartz",100, 120);
             INDUSTRIAL_GRINDING.RB().ii(of(RegistryUtils.getItemFromID(new ResourceLocation("cinderscapes", "smoky_quartz_ore")), 1)).fi(Water.getLiquid(1000)).io(new ItemStack(RegistryUtils.getItemFromID(new ResourceLocation("cinderscapes", "smoky_quartz")), 4), DUST_SMALL.get(Netherrack, 2)).add("smoky_quartz",100, 120);
             INDUSTRIAL_GRINDING.RB().ii(of(RegistryUtils.getItemFromID(new ResourceLocation("cinderscapes", "sulfur_quartz_ore")), 1)).fi(Water.getLiquid(1000)).io(new ItemStack(RegistryUtils.getItemFromID(new ResourceLocation("cinderscapes", "sulfur_quartz")), 4), DUST_SMALL.get(Netherrack, 2)).add("sulfur_quartz",100, 120);

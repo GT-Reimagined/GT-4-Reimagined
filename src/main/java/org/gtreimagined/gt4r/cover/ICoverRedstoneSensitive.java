@@ -1,7 +1,7 @@
 package org.gtreimagined.gt4r.cover;
 
-import muramasa.antimatter.capability.ICoverHandlerProvider;
-import muramasa.antimatter.cover.ICover;
+import org.gtreimagined.gtlib.capability.ICoverHandlerProvider;
+import org.gtreimagined.gtlib.cover.ICover;
 import net.minecraft.core.Direction;
 import org.gtreimagined.gt4r.cover.redstone.CoverRedstoneMachineController;
 

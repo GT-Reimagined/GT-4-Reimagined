@@ -1,8 +1,8 @@
 package org.gtreimagined.gt4r.items;
 
-import muramasa.antimatter.Ref;
-import muramasa.antimatter.item.ItemBasic;
-import muramasa.antimatter.texture.Texture;
+import org.gtreimagined.gtlib.Ref;
+import org.gtreimagined.gtlib.item.ItemBasic;
+import org.gtreimagined.gtlib.texture.Texture;
 import net.minecraft.world.item.ItemStack;
 
 public class ItemStorageOrb extends ItemBasic<ItemStorageOrb> {

@@ -1,34 +1,34 @@
 package org.gtreimagined.gt4r.loader;
 
-import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.AntimatterConfig;
-import muramasa.antimatter.data.AntimatterMaterialTypes;
-import muramasa.antimatter.data.AntimatterMaterials;
-import muramasa.antimatter.event.AntimatterWorldGenEvent;
-import muramasa.antimatter.worldgen.object.WorldGenStoneLayerBuilder;
-import muramasa.antimatter.worldgen.smallore.WorldGenSmallOreBuilder;
-import muramasa.antimatter.worldgen.vanillaore.WorldGenVanillaOreBuilder;
+import org.gtreimagined.gtlib.GTAPI;
+import org.gtreimagined.gtlib.GTLibConfig;
+import org.gtreimagined.gtlib.data.GTMaterialTypes;
+import org.gtreimagined.gtlib.data.GTLibMaterials;
+import org.gtreimagined.gtlib.event.GTWorldGenEvent;
+import org.gtreimagined.gtlib.worldgen.object.WorldGenStoneLayerBuilder;
+import org.gtreimagined.gtlib.worldgen.smallore.WorldGenSmallOreBuilder;
+import org.gtreimagined.gtlib.worldgen.vanillaore.WorldGenVanillaOreBuilder;
 import net.minecraft.resources.ResourceLocation;
 import org.gtreimagined.gtcore.data.GTCoreBlocks;
 import org.gtreimagined.gt4r.GT4RConfig;
 import org.gtreimagined.gt4r.GT4RRef;
 
-import static muramasa.antimatter.data.AntimatterMaterials.*;
-import static muramasa.antimatter.data.AntimatterStoneTypes.*;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.*;
+import static org.gtreimagined.gtlib.data.VanillaStoneTypes.*;
 import static org.gtreimagined.gt4r.data.Materials.*;
 import static org.gtreimagined.gtcore.data.GTCoreBlocks.*;
 
 public class WorldGenLoader {
 
 
-    public static void init(AntimatterWorldGenEvent event) {
-        if (AntimatterConfig.STONE_LAYERS.get() && !AntimatterAPI.isModLoaded("gt5r")){
+    public static void init(GTWorldGenEvent event) {
+        if (GTLibConfig.STONE_LAYERS.get() && !GTAPI.isModLoaded("gt5r")){
             initStoneLayers(event);
         }
         initVanillaOres(event);
     }
 
-    private static void initStoneLayers(AntimatterWorldGenEvent ev){
+    private static void initStoneLayers(GTWorldGenEvent ev){
         ev.stoneLayer(new WorldGenStoneLayerBuilder("stone").withStone(STONE).withWeight(6).buildVein());
         ev.stoneLayer(new WorldGenStoneLayerBuilder("black_granite").withStone(GTCoreBlocks.BLACK_GRANITE).withWeight(2).buildVein());
         ev.stoneLayer(new WorldGenStoneLayerBuilder("red_granite").withStone(GTCoreBlocks.RED_GRANITE).withWeight(2).buildVein());
@@ -48,7 +48,7 @@ public class WorldGenLoader {
         ev.stoneLayer(new WorldGenStoneLayerBuilder("tuff").withStone(TUFF).withWeight(3).buildVein());
     }
 
-    private static void initVanillaOres(AntimatterWorldGenEvent event){
+    private static void initVanillaOres(GTWorldGenEvent event){
         event.smallOre(new WorldGenSmallOreBuilder().withMaterial(Ruby).withAmountPerChunk(2).withBiomes(tagged("has_ruby")).buildMaterial());
         event.smallOre(new WorldGenSmallOreBuilder().withMaterial(Sapphire).withAmountPerChunk(2).withBiomes(tagged("has_sapphire")).buildMaterial());
         event.smallOre(new WorldGenSmallOreBuilder().withMaterial(Coal).withAmountPerChunk(8).atHeight(16, 126).buildMaterial());
@@ -63,8 +63,8 @@ public class WorldGenLoader {
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Ruby).atHeight(-16, 32).withWeight(3).withSize(6).withBiomes(tagged("has_ruby")).buildMaterial());
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Sapphire).atHeight(-16, 32).withWeight(3).withSize(6).withBiomes(tagged("has_sapphire")).buildMaterial());
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Iridium).atHeight(-64, 128).withProbability(5).withSize(4).buildMaterial());
-        event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Salt).atHeight(0, 62).withWeight(6).withSize(64).setSpawnOnOceanFloor(true).withMaterialType(AntimatterMaterialTypes.ORE_STONE).withBiomes(tagged("has_salt")).buildMaterial());
-        event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(RockSalt).atHeight(0, 80).withWeight(2).withSize(64).withMaterialType(AntimatterMaterialTypes.ORE_STONE).withBiomes(tagged("has_rock_salt")).buildMaterial());
+        event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Salt).atHeight(0, 62).withWeight(6).withSize(64).setSpawnOnOceanFloor(true).withMaterialType(GTMaterialTypes.ORE_STONE).withBiomes(tagged("has_salt")).buildMaterial());
+        event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(RockSalt).atHeight(0, 80).withWeight(2).withSize(64).withMaterialType(GTMaterialTypes.ORE_STONE).withBiomes(tagged("has_rock_salt")).buildMaterial());
         // GT4R Nether Ores
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Pyrite).atHeight(0, 64).withWeight(8).withSize(16).withDimensions(new ResourceLocation("the_nether")).buildMaterial());
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Sphalerite).atHeight(32, 96).withWeight(8).withSize(16).withDimensions(new ResourceLocation("the_nether")).buildMaterial());
@@ -76,7 +76,7 @@ public class WorldGenLoader {
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Sodalite).atHeight(0, 80).withWeight(6).withSize(16).withDimensions(new ResourceLocation("the_end")).buildMaterial());
         event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Chromite).atHeight(0, 80).withWeight(4).withSize(5).withDimensions(new ResourceLocation("the_end")).buildMaterial());
 
-        if (AntimatterConfig.VANILLA_ORE_GEN.get()){
+        if (GTLibConfig.VANILLA_ORE_GEN.get()){
             event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Coal).withCustomId("coal_upper").atHeight(136, 320).withWeight(30).withSize(17).buildMaterial());
             event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Coal).withCustomId("coal_lower").atHeight(0, 192).withWeight(20).withSize(17).buildMaterial());
             event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Iron).withCustomId("iron_upper").atHeight(80, 384).withWeight(90).withSize(9).withSecondaryMaterial(Tin, 0.02f).withDiscardOnExposureChance(0.5f).buildMaterial());
@@ -87,11 +87,11 @@ public class WorldGenLoader {
             event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Gold).withCustomId("gold_lower").atHeight(-64, -48).withProbability(2).withSize(9).withSecondaryMaterial(Copper, 0.02f).withDiscardOnExposureChance(0.5f).buildMaterial());
             event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Redstone).atHeight(-64, 15).withWeight(4).withSize(8).withSecondaryMaterial(Cinnabar, 0.01f).buildMaterial());
             event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Redstone).withCustomId("redstone_lower").atHeight(-96, -32).withWeight(8).withSize(8).withSecondaryMaterial(Cinnabar, 0.01f).setHasTriangleHeight(true).buildMaterial());
-            event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Diamond).atHeight(-144, 16).withWeight(7).withSize(4).withSecondaryMaterial(Diamond, 0.03f).withSecondaryType(AntimatterMaterialTypes.ORE_SMALL).withDiscardOnExposureChance(0.5f).setHasTriangleHeight(true).buildMaterial());
-            event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Diamond).withCustomId("diamond_large").atHeight(-144, 16).withProbability(9).withSecondaryMaterial(Diamond, 0.03f).withSecondaryType(AntimatterMaterialTypes.ORE_SMALL).withSize(12).withDiscardOnExposureChance(0.7f).setHasTriangleHeight(true).buildMaterial());
-            event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Diamond).withCustomId("diamond_buried").atHeight(-144, 16).withWeight(4).withSecondaryMaterial(Diamond, 0.03f).withSecondaryType(AntimatterMaterialTypes.ORE_SMALL).withSize(8).withDiscardOnExposureChance(1.0f).setHasTriangleHeight(true).buildMaterial());
-            event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(AntimatterMaterials.Lapis).atHeight(-32, 32).withWeight(2).withSize(7).setHasTriangleHeight(true).buildMaterial());
-            event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(AntimatterMaterials.Lapis).withCustomId("lapis_buried").atHeight(-64, 64).withWeight(4).withSize(7).withDiscardOnExposureChance(1.0f).buildMaterial());
+            event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Diamond).atHeight(-144, 16).withWeight(7).withSize(4).withSecondaryMaterial(Diamond, 0.03f).withSecondaryType(GTMaterialTypes.ORE_SMALL).withDiscardOnExposureChance(0.5f).setHasTriangleHeight(true).buildMaterial());
+            event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Diamond).withCustomId("diamond_large").atHeight(-144, 16).withProbability(9).withSecondaryMaterial(Diamond, 0.03f).withSecondaryType(GTMaterialTypes.ORE_SMALL).withSize(12).withDiscardOnExposureChance(0.7f).setHasTriangleHeight(true).buildMaterial());
+            event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Diamond).withCustomId("diamond_buried").atHeight(-144, 16).withWeight(4).withSecondaryMaterial(Diamond, 0.03f).withSecondaryType(GTMaterialTypes.ORE_SMALL).withSize(8).withDiscardOnExposureChance(1.0f).setHasTriangleHeight(true).buildMaterial());
+            event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(GTLibMaterials.Lapis).atHeight(-32, 32).withWeight(2).withSize(7).setHasTriangleHeight(true).buildMaterial());
+            event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(GTLibMaterials.Lapis).withCustomId("lapis_buried").atHeight(-64, 64).withWeight(4).withSize(7).withDiscardOnExposureChance(1.0f).buildMaterial());
             event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Emerald).atHeight(-16, 480).withWeight(100).withSize(3).setHasTriangleHeight(true).withBiomes("#minecraft:is_mountain").buildMaterial());
             int copperWeight = GT4RConfig.NERF_VANILLA_COPPER_GEN.get() ? 8 : 16;
             event.vanillaOre(new WorldGenVanillaOreBuilder().withMaterial(Copper).atHeight(-16, 112).withWeight(copperWeight).withSize(10).withSecondaryMaterial(Gold, 0.02f).setHasTriangleHeight(true).buildMaterial());

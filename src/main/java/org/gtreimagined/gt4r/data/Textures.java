@@ -1,16 +1,16 @@
 package org.gtreimagined.gt4r.data;
 
-import muramasa.antimatter.machine.MachineState;
-import muramasa.antimatter.texture.IOverlayModeler;
-import muramasa.antimatter.texture.IOverlayTexturer;
-import muramasa.antimatter.texture.ITextureHandler;
-import muramasa.antimatter.texture.Texture;
+import org.gtreimagined.gtlib.machine.MachineState;
+import org.gtreimagined.gtlib.texture.IOverlayModeler;
+import org.gtreimagined.gtlib.texture.IOverlayTexturer;
+import org.gtreimagined.gtlib.texture.ITextureHandler;
+import org.gtreimagined.gtlib.texture.Texture;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import org.gtreimagined.gt4r.GT4RRef;
 
-import static muramasa.antimatter.machine.Tier.LV;
-import static muramasa.antimatter.machine.Tier.MV;
+import static org.gtreimagined.gtlib.machine.Tier.LV;
+import static org.gtreimagined.gtlib.machine.Tier.MV;
 
 public class Textures {
 

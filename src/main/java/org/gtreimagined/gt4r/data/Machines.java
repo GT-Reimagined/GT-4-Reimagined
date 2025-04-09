@@ -1,20 +1,20 @@
 package org.gtreimagined.gt4r.data;
 
 
-import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.blockentity.single.BlockEntityDigitalTransformer;
-import muramasa.antimatter.blockentity.single.BlockEntityTransformer;
-import muramasa.antimatter.data.AntimatterMaterials;
-import muramasa.antimatter.machine.Tier;
-import muramasa.antimatter.machine.types.BasicMachine;
-import muramasa.antimatter.machine.types.BasicMultiMachine;
-import muramasa.antimatter.machine.types.GeneratorMachine;
-import muramasa.antimatter.machine.types.HatchMachine;
-import muramasa.antimatter.machine.types.MultiMachine;
-import muramasa.antimatter.machine.types.TankMachine;
-import muramasa.antimatter.material.Material;
-import muramasa.antimatter.texture.Texture;
-import muramasa.antimatter.util.Utils;
+import org.gtreimagined.gtlib.GTAPI;
+import org.gtreimagined.gtlib.blockentity.single.BlockEntityDigitalTransformer;
+import org.gtreimagined.gtlib.blockentity.single.BlockEntityTransformer;
+import org.gtreimagined.gtlib.data.GTLibMaterials;
+import org.gtreimagined.gtlib.machine.Tier;
+import org.gtreimagined.gtlib.machine.types.BasicMachine;
+import org.gtreimagined.gtlib.machine.types.BasicMultiMachine;
+import org.gtreimagined.gtlib.machine.types.GeneratorMachine;
+import org.gtreimagined.gtlib.machine.types.HatchMachine;
+import org.gtreimagined.gtlib.machine.types.MultiMachine;
+import org.gtreimagined.gtlib.machine.types.TankMachine;
+import org.gtreimagined.gtlib.material.Material;
+import org.gtreimagined.gtlib.texture.Texture;
+import org.gtreimagined.gtlib.util.Utils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.level.block.Block;
 import org.gtreimagined.gtcore.data.GTCoreBlocks;
@@ -58,12 +58,12 @@ import org.gtreimagined.gt4r.machine.UpgradeableMachine;
 
 import java.util.function.Supplier;
 
-import static muramasa.antimatter.Data.*;
-import static muramasa.antimatter.cover.ICover.emptyFactory;
-import static muramasa.antimatter.data.AntimatterMaterials.Netherite;
-import static muramasa.antimatter.data.AntimatterMaterials.Wood;
-import static muramasa.antimatter.machine.MachineFlag.*;
-import static muramasa.antimatter.machine.Tier.*;
+import static org.gtreimagined.gtlib.Data.*;
+import static org.gtreimagined.gtlib.cover.ICover.emptyFactory;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.Netherite;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.Wood;
+import static org.gtreimagined.gtlib.machine.MachineFlag.*;
+import static org.gtreimagined.gtlib.machine.Tier.*;
 import static org.gtreimagined.gt4r.data.GT4RCovers.*;
 import static org.gtreimagined.gt4r.data.RecipeMaps.*;
 
@@ -161,7 +161,7 @@ public class Machines {
     public static DrumMachine STAINLESS_STEEL_DRUM = GTCoreBlocks.createDrum(Materials.StainlessSteel, 64000).acidProof();
     public static DrumMachine TUNGSTEN_DRUM = GTCoreBlocks.createDrum(Materials.Tungsten, 256000);
     public static DrumMachine TUNGSTENSTEEL_DRUM = GTCoreBlocks.createDrum(Materials.TungstenSteel, 256000);
-    public static DrumMachine NETHERITE_DRUM = GTCoreBlocks.createDrum(AntimatterMaterials.Netherite, 128000).acidProof();
+    public static DrumMachine NETHERITE_DRUM = GTCoreBlocks.createDrum(GTLibMaterials.Netherite, 128000).acidProof();
 
     public static MultiblockTankMachine WOOD_TANK;
     public static MultiblockTankMachine[] STEEL_TANKS;
@@ -213,7 +213,7 @@ public class Machines {
     }
 
     private static MultiblockTankMachine[] createTankMachine(Material material, int multiplier){
-        Supplier<Block> casing = () -> AntimatterAPI.get(BlockColoredWall.class, material.getId() + "_wall", GT4RRef.ID);
+        Supplier<Block> casing = () -> GTAPI.get(BlockColoredWall.class, material.getId() + "_wall", GT4RRef.ID);
         MultiblockTankMachine[] multiblockTankMachines = {
                 (MultiblockTankMachine) new MultiblockTankMachine(GT4RRef.ID, material, true, 432 * multiplier * 1000, casing).gasProof().baseTexture(new Texture(GT4RRef.ID, "block/casing/wall/metal")),
                 (MultiblockTankMachine) new MultiblockTankMachine(GT4RRef.ID, material, false, 2000 * multiplier * 1000, casing).gasProof().baseTexture(new Texture(GT4RRef.ID, "block/casing/wall/metal"))

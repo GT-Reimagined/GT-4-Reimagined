@@ -1,9 +1,9 @@
 package org.gtreimagined.gt4r.loader.machines;
 
 import com.google.common.collect.ImmutableMap;
-import muramasa.antimatter.data.AntimatterMaterialTypes;
-import muramasa.antimatter.material.Material;
-import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
+import org.gtreimagined.gtlib.data.GTMaterialTypes;
+import org.gtreimagined.gtlib.material.Material;
+import org.gtreimagined.gtlib.recipe.ingredient.RecipeIngredient;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -15,9 +15,9 @@ import org.gtreimagined.gt4r.data.GT4RMaterialTags;
 import java.util.ArrayList;
 import java.util.List;
 
-import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
-import static muramasa.antimatter.data.AntimatterMaterials.*;
-import static muramasa.antimatter.material.MaterialTags.RUBBERTOOLS;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.*;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.*;
+import static org.gtreimagined.gtlib.material.MaterialTags.RUBBERTOOLS;
 import static org.gtreimagined.gt4r.data.Materials.*;
 import static org.gtreimagined.gt4r.data.RecipeMaps.ALLOY_SMELTER;
 
@@ -39,8 +39,8 @@ public class AlloySmelterLoader {
         //ALLOY_SMELTING.RB().ii(DUST.getMaterialIngredient(Nikolite, 4), DUST.getMaterialIngredient(Copper)).io(INGOT.get(BlueAlloy, 1)).add(50, 16);
         //ALLOY_SMELTING.RB().ii(DUST.getMaterialIngredient(Nikolite, 4), INGOT.getMaterialIngredient(Copper)).io(INGOT.get(BlueAlloy, 1)).add(50, 16);
         int ingotCount = GTCoreConfig.LOSSY_PART_CRAFTING.get() ? 2 : 1;
-        AntimatterMaterialTypes.PLATE.all().forEach(m -> {
-            if (!m.has(GT4RMaterialTags.NEEDS_BLAST_FURNACE) && m.has(AntimatterMaterialTypes.INGOT)){
+        GTMaterialTypes.PLATE.all().forEach(m -> {
+            if (!m.has(GT4RMaterialTags.NEEDS_BLAST_FURNACE) && m.has(GTMaterialTypes.INGOT)){
                 int euTick = m.has(RUBBERTOOLS) ? 16 : 32;
                 ALLOY_SMELTER.RB().ii(INGOT.getMaterialIngredient(m, ingotCount), RecipeIngredient.of(GTCoreItems.MoldPlate, 1).setNoConsume()).io(PLATE.get(m, 1)).add(m.getId() + "_plate", m.getMass() * ingotCount, euTick);
                 if (m.has(RUBBERTOOLS) && m.has(DUST)){

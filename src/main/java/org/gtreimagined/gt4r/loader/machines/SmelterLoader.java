@@ -1,18 +1,18 @@
 package org.gtreimagined.gt4r.loader.machines;
 
-import muramasa.antimatter.data.AntimatterMaterialTypes;
-import muramasa.antimatter.material.Material;
-import muramasa.antimatter.material.MaterialTags;
-import muramasa.antimatter.material.MaterialTypeItem;
-import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
+import org.gtreimagined.gtlib.data.GTMaterialTypes;
+import org.gtreimagined.gtlib.material.Material;
+import org.gtreimagined.gtlib.material.MaterialTags;
+import org.gtreimagined.gtlib.material.MaterialTypeItem;
+import org.gtreimagined.gtlib.recipe.ingredient.RecipeIngredient;
 import org.gtreimagined.gt4r.data.GT4RItems;
 import org.gtreimagined.gt4r.data.GT4RMaterialTags;
 
-import static muramasa.antimatter.Ref.L;
-import static muramasa.antimatter.Ref.U;
-import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
-import static muramasa.antimatter.data.AntimatterMaterials.Lava;
-import static muramasa.antimatter.material.MaterialTags.MOLTEN;
+import static org.gtreimagined.gtlib.Ref.L;
+import static org.gtreimagined.gtlib.Ref.U;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.*;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.Lava;
+import static org.gtreimagined.gtlib.material.MaterialTags.MOLTEN;
 import static org.gtreimagined.gt4r.data.Materials.Obsidian;
 import static org.gtreimagined.gt4r.data.RecipeMaps.SMELTER;
 import static org.gtreimagined.gt4r.data.RecipeMaps.SMELTER_COILS;
@@ -38,7 +38,7 @@ public class SmelterLoader {
     }
 
     private static void add(Material m, MaterialTypeItem<?> i, long materialAmount) {
-        if (!m.has(AntimatterMaterialTypes.LIQUID)) return;
+        if (!m.has(GTMaterialTypes.LIQUID)) return;
         int amount = (int) ((L * materialAmount) / U);
         long duration = Math.max(1, (24 * materialAmount) / U);
         SMELTER.RB()

@@ -1,14 +1,14 @@
 package org.gtreimagined.gt4r.data;
 
-import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.Ref;
-import muramasa.antimatter.data.AntimatterMaterials;
-import muramasa.antimatter.item.ItemBasic;
-import muramasa.antimatter.item.ItemCover;
-import muramasa.antimatter.item.ItemFluidCell;
-import muramasa.antimatter.item.ItemMultiTextureBattery;
-import muramasa.antimatter.machine.Tier;
-import muramasa.antimatter.tool.behaviour.BehaviourAOEBreak;
+import org.gtreimagined.gtlib.GTAPI;
+import org.gtreimagined.gtlib.Ref;
+import org.gtreimagined.gtlib.data.GTLibMaterials;
+import org.gtreimagined.gtlib.item.ItemBasic;
+import org.gtreimagined.gtlib.item.ItemCover;
+import org.gtreimagined.gtlib.item.ItemFluidCell;
+import org.gtreimagined.gtlib.item.ItemMultiTextureBattery;
+import org.gtreimagined.gtlib.machine.Tier;
+import org.gtreimagined.gtlib.tool.behaviour.BehaviourAOEBreak;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import org.gtreimagined.gtcore.data.GTCoreTools;
@@ -35,11 +35,11 @@ public class GT4RItems {
     public static ItemPowerUnit RockCutterPowerUnit = new ItemRockCutterUnit(GT4RRef.ID, "rock_cutter_power_unit", Aluminium);
 
     public static ItemBasic<?> ComputerMonitor = new ItemBasic<>(GT4RRef.ID, "computer_monitor").tip("Can be placed on machines as a cover");
-    public static ItemCover ConveyorModule = AntimatterAPI.get(ItemCover.class, GT4RCovers.COVER_CONVEYOR.getId(), GT4RRef.ID);
-    public static ItemCover CraftingModule = AntimatterAPI.get(ItemCraftingModule.class, GT4RCovers.COVER_CRAFTING.getId(), GT4RRef.ID);
-    public static ItemCover Drain = AntimatterAPI.get(ItemCover.class, GT4RCovers.COVER_DRAIN.getId(), GT4RRef.ID);
-    public static ItemCover PumpModule = AntimatterAPI.get(ItemCover.class, GT4RCovers.COVER_PUMP.getId(), GT4RRef.ID);
-    public static ItemCover RedstoneMachineController = AntimatterAPI.get(ItemCover.class, GT4RCovers.COVER_REDSTONE_MACHINE_CONTROLLER.getId(), GT4RRef.ID);
+    public static ItemCover ConveyorModule = GTAPI.get(ItemCover.class, GT4RCovers.COVER_CONVEYOR.getId(), GT4RRef.ID);
+    public static ItemCover CraftingModule = GTAPI.get(ItemCraftingModule.class, GT4RCovers.COVER_CRAFTING.getId(), GT4RRef.ID);
+    public static ItemCover Drain = GTAPI.get(ItemCover.class, GT4RCovers.COVER_DRAIN.getId(), GT4RRef.ID);
+    public static ItemCover PumpModule = GTAPI.get(ItemCover.class, GT4RCovers.COVER_PUMP.getId(), GT4RRef.ID);
+    public static ItemCover RedstoneMachineController = GTAPI.get(ItemCover.class, GT4RCovers.COVER_REDSTONE_MACHINE_CONTROLLER.getId(), GT4RRef.ID);
     public static ItemBasic<?> Shutter = new ItemBasic<>(GT4RRef.ID, "shutter").tip("Can be placed on machines as a cover");
 
     public static ItemBasic<?> SteelUpgrade = new ItemBasic<>(GT4RRef.ID, "steel_upgrade").tip("Can be used to upgrade bronze steam machines to steel steam machines");
@@ -85,9 +85,9 @@ public class GT4RItems {
     public static ItemElectricTool ElectricWrenchAlt = new ItemElectricTool("electric_wrench_alt", GTCoreTools.ELECTRIC_WRENCH_ALT, Steel, 6.0f, 4f, 2, 1, b -> true);
     public static ItemElectricTool AdvancedWrenchAlt = new ItemElectricTool("advanced_wrench_alt", GTCoreTools.ELECTRIC_WRENCH_ALT, TungstenSteel, 10.0f, 7.5f, 4, 2, b -> true);
     public static ItemElectricTool ElectricScrewdriver = new ItemElectricTool("electric_screwdriver", GTCoreTools.ELECTRIC_SCREWDRIVER, Steel, 6.0f, 2.5f, 2, 1, b -> true);
-    public static ItemElectricTool RockCutter = new ItemElectricTool("rock_cutter", ToolTypes.ROCK_CUTTER, AntimatterMaterials.Diamond, 8.0f, 1.0f, 3, 1, b -> true);
+    public static ItemElectricTool RockCutter = new ItemElectricTool("rock_cutter", ToolTypes.ROCK_CUTTER, GTLibMaterials.Diamond, 8.0f, 1.0f, 3, 1, b -> true);
     public static ItemElectricTool BronzeJackHammer = new ItemElectricTool("bronze_jackhammer", GTCoreTools.JACKHAMMER, Bronze, 6.0f, 5f, 2, 1, b -> !(b instanceof BehaviourAOEBreak));
     public static ItemElectricTool SteelJackHammer = new ItemElectricTool("steel_jackhammer", GTCoreTools.JACKHAMMER, StainlessSteel, 8.0f, 5.5f, 2, 1, b -> !(b instanceof BehaviourAOEBreak));
-    public static ItemElectricTool DiamondJackHammer = new ItemElectricTool("diamond_jackhammer", GTCoreTools.JACKHAMMER, AntimatterMaterials.Diamond, 10.0f, 6.0f, 3, 2, b -> true);
+    public static ItemElectricTool DiamondJackHammer = new ItemElectricTool("diamond_jackhammer", GTCoreTools.JACKHAMMER, GTLibMaterials.Diamond, 10.0f, 6.0f, 3, 2, b -> true);
 
 }

@@ -1,10 +1,10 @@
 package org.gtreimagined.gt4r.cover;
 
-import muramasa.antimatter.blockentity.BlockEntityMachine;
-import muramasa.antimatter.capability.ICoverHandler;
-import muramasa.antimatter.cover.BaseCover;
-import muramasa.antimatter.cover.CoverFactory;
-import muramasa.antimatter.machine.Tier;
+import org.gtreimagined.gtlib.blockentity.BlockEntityMachine;
+import org.gtreimagined.gtlib.capability.ICoverHandler;
+import org.gtreimagined.gtlib.cover.BaseCover;
+import org.gtreimagined.gtlib.cover.CoverFactory;
+import org.gtreimagined.gtlib.machine.Tier;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;

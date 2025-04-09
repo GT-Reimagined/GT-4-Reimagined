@@ -1,7 +1,7 @@
 package org.gtreimagined.gt4r;
 
 
-import muramasa.antimatter.Ref;
+import org.gtreimagined.gtlib.Ref;
 import net.minecraft.resources.ResourceLocation;
 
 public class GT4RRef {

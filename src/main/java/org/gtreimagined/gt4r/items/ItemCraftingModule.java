@@ -1,6 +1,6 @@
 package org.gtreimagined.gt4r.items;
 
-import muramasa.antimatter.item.ItemCover;
+import org.gtreimagined.gtlib.item.ItemCover;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;

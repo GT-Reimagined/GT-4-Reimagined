@@ -1,8 +1,8 @@
 package org.gtreimagined.gt4r.block;
 
-import muramasa.antimatter.machine.BlockMachine;
-import muramasa.antimatter.machine.Tier;
-import muramasa.antimatter.machine.types.Machine;
+import org.gtreimagined.gtlib.machine.BlockMachine;
+import org.gtreimagined.gtlib.machine.Tier;
+import org.gtreimagined.gtlib.machine.types.Machine;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;

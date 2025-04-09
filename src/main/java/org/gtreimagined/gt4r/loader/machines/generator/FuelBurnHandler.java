@@ -1,20 +1,19 @@
 package org.gtreimagined.gt4r.loader.machines.generator;
 
-import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.material.Material;
-import muramasa.antimatter.material.MaterialTags;
-import org.gtreimagined.gt4r.data.Materials;
+import org.gtreimagined.gtlib.GTAPI;
+import org.gtreimagined.gtlib.material.Material;
+import org.gtreimagined.gtlib.material.MaterialTags;
 
-import static muramasa.antimatter.data.AntimatterMaterialTypes.GAS;
-import static muramasa.antimatter.data.AntimatterMaterialTypes.LIQUID;
-import static muramasa.antimatter.data.AntimatterMaterials.Lava;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.GAS;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.LIQUID;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.Lava;
 import static org.gtreimagined.gt4r.data.GT4RMaterialTags.SEMIFLUID;
 import static org.gtreimagined.gt4r.data.Materials.*;
 import static org.gtreimagined.gt4r.data.RecipeMaps.*;
 
 public class FuelBurnHandler {
     public static void init() {
-        AntimatterAPI.all(Material.class, mat -> {
+        GTAPI.all(Material.class, mat -> {
             if (mat != Steam && mat.has(MaterialTags.FUEL_POWER) && MaterialTags.FUEL_POWER.getInt(mat) > 0) {
                 if (mat.has(LIQUID)) {
                     int power = 16, ticks = MaterialTags.FUEL_POWER.getInt(mat) / 16;

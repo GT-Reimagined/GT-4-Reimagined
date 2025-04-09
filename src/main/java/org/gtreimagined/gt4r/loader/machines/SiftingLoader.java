@@ -1,12 +1,12 @@
 package org.gtreimagined.gt4r.loader.machines;
 
-import muramasa.antimatter.util.TagUtils;
+import org.gtreimagined.gtlib.util.TagUtils;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
-import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
-import static muramasa.antimatter.data.AntimatterMaterials.*;
-import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.*;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.*;
+import static org.gtreimagined.gtlib.recipe.ingredient.RecipeIngredient.of;
 import static org.gtreimagined.gt4r.data.Materials.*;
 import static org.gtreimagined.gt4r.data.RecipeMaps.SIFTER;
 

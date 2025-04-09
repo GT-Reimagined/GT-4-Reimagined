@@ -7,11 +7,11 @@ import org.gtreimagined.gt4r.GT4RRef;
 
 import java.util.function.Consumer;
 
-import static muramasa.antimatter.data.AntimatterMaterialTypes.GEM;
-import static muramasa.antimatter.data.AntimatterMaterials.Flint;
-import static muramasa.antimatter.datagen.providers.AntimatterAdvancementProvider.buildRootAdvancement;
-import static muramasa.antimatter.datagen.providers.AntimatterAdvancementProvider.getLoc;
-import static muramasa.antimatter.util.Utils.hasItem;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.GEM;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.Flint;
+import static org.gtreimagined.gtlib.datagen.providers.GTAdvancementProvider.buildRootAdvancement;
+import static org.gtreimagined.gtlib.datagen.providers.GTAdvancementProvider.getLoc;
+import static org.gtreimagined.gtlib.util.Utils.hasItem;
 
 public class ProgressionAdvancements implements Consumer<Consumer<Advancement>> {
 

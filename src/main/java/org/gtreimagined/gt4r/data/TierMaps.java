@@ -1,11 +1,10 @@
 package org.gtreimagined.gt4r.data;
 
 import com.google.common.collect.ImmutableMap;
-import muramasa.antimatter.machine.Tier;
-import muramasa.antimatter.material.Material;
-import muramasa.antimatter.pipe.types.Cable;
-import muramasa.antimatter.pipe.types.Wire;
-import net.minecraft.world.item.Item;
+import org.gtreimagined.gtlib.machine.Tier;
+import org.gtreimagined.gtlib.material.Material;
+import org.gtreimagined.gtlib.pipe.types.Cable;
+import org.gtreimagined.gtlib.pipe.types.Wire;
 import org.gtreimagined.gtcore.data.GTCoreItems;
 
 import static org.gtreimagined.gt4r.data.Materials.*;

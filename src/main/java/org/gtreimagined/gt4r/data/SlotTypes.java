@@ -1,6 +1,6 @@
 package org.gtreimagined.gt4r.data;
 
-import muramasa.antimatter.gui.SlotType;
+import org.gtreimagined.gtlib.gui.SlotType;
 import net.minecraftforge.items.wrapper.EmptyHandler;
 import org.gtreimagined.gtcore.data.GTCoreItems;
 import org.gtreimagined.gt4r.gui.slots.SlotCoil;

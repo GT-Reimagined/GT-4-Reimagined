@@ -1,12 +1,12 @@
 package org.gtreimagined.gt4r.loader.machines;
 
-import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.data.AntimatterMaterialTypes;
-import muramasa.antimatter.pipe.PipeSize;
-import muramasa.antimatter.pipe.types.FluidPipe;
-import muramasa.antimatter.pipe.types.ItemPipe;
-import muramasa.antimatter.pipe.types.Wire;
-import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
+import org.gtreimagined.gtlib.GTAPI;
+import org.gtreimagined.gtlib.data.GTMaterialTypes;
+import org.gtreimagined.gtlib.pipe.PipeSize;
+import org.gtreimagined.gtlib.pipe.types.FluidPipe;
+import org.gtreimagined.gtlib.pipe.types.ItemPipe;
+import org.gtreimagined.gtlib.pipe.types.Wire;
+import org.gtreimagined.gtlib.recipe.ingredient.RecipeIngredient;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -15,38 +15,38 @@ import net.minecraft.world.level.ItemLike;
 import org.gtreimagined.gtcore.data.GTCoreItems;
 import org.gtreimagined.gt4r.data.GT4RItems;
 
-import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
-import static muramasa.antimatter.material.MaterialTags.RUBBERTOOLS;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.*;
+import static org.gtreimagined.gtlib.material.MaterialTags.RUBBERTOOLS;
 import static org.gtreimagined.gt4r.data.Materials.*;
 import static org.gtreimagined.gt4r.data.RecipeMaps.EXTRUDER;
 
 public class ExtruderLoader {
     public static void init(){
-        AntimatterMaterialTypes.ROD.all().forEach(m -> {
-            if (!m.has(AntimatterMaterialTypes.INGOT)) return;
+        GTMaterialTypes.ROD.all().forEach(m -> {
+            if (!m.has(GTMaterialTypes.INGOT)) return;
             int euPerTick = m == Rubber ? 32 : 128;
             EXTRUDER.RB().ii(INGOT.getMaterialIngredient(m, 1), getReusable(GTCoreItems.ShapeRod)).io(ROD.get(m, 2)).add(m.getId() + "_rod", (m.getMass() * 2), euPerTick);
             if (m.has(RUBBERTOOLS) && m.has(DUST)){
                 EXTRUDER.RB().ii(DUST.getMaterialIngredient(m, 1), getReusable(GTCoreItems.ShapeRod)).io(ROD.get(m, 2)).add(m.getId() + "_rod_1", m.getMass() * 2, euPerTick);
             }
         });
-        AntimatterMaterialTypes.PLATE.all().forEach(m -> {
-            if (!m.has(AntimatterMaterialTypes.INGOT)) return;
+        GTMaterialTypes.PLATE.all().forEach(m -> {
+            if (!m.has(GTMaterialTypes.INGOT)) return;
             int euPerTick = m == Rubber ? 32 : 128;
             EXTRUDER.RB().ii(INGOT.getMaterialIngredient(m, 1), getReusable(GTCoreItems.ShapePlate)).io(PLATE.get(m, 1)).add(m.getId() + "_plate", m.getMass(), euPerTick);
             if (m.has(RUBBERTOOLS) && m.has(DUST)){
                 EXTRUDER.RB().ii(DUST.getMaterialIngredient(m, 1), getReusable(GTCoreItems.ShapePlate)).io(PLATE.get(m, 1)).add(m.getId() + "_plate_1", m.getMass(), euPerTick);
             }
         });
-        AntimatterAPI.all(Wire.class).forEach(t -> {
-            if (!t.getMaterial().has(AntimatterMaterialTypes.INGOT)) return;
+        GTAPI.all(Wire.class).forEach(t -> {
+            if (!t.getMaterial().has(GTMaterialTypes.INGOT)) return;
             Item wireItem = t.getBlockItem(PipeSize.VTINY);
             ItemStack stack = new ItemStack(wireItem,2);
             EXTRUDER.RB().ii(INGOT.getMaterialIngredient(t.getMaterial(),1), getReusable(GTCoreItems.ShapeWire)).io(stack).add(t.getId() + "_wire", t.getMaterial().getMass()*2,96);
         });
 
-        AntimatterAPI.all(FluidPipe.class).forEach(t -> {
-            if (!t.getMaterial().has(AntimatterMaterialTypes.INGOT)) return;
+        GTAPI.all(FluidPipe.class).forEach(t -> {
+            if (!t.getMaterial().has(GTMaterialTypes.INGOT)) return;
             Item pipeTiny = t.getBlockItem(PipeSize.TINY);
             Item pipeSmall = t.getBlockItem(PipeSize.SMALL);
             Item pipeNormal = t.getBlockItem(PipeSize.NORMAL);
@@ -69,7 +69,7 @@ public class ExtruderLoader {
             }
         });
 
-        AntimatterAPI.all(ItemPipe.class).forEach(t -> {
+        GTAPI.all(ItemPipe.class).forEach(t -> {
             if (!t.getMaterial().has(INGOT)) return;
             Item pipeTiny = t.getBlockItem(PipeSize.TINY);
             Item pipeSmall = t.getBlockItem(PipeSize.SMALL);
@@ -101,16 +101,16 @@ public class ExtruderLoader {
             if (!m.has(INGOT)) return;
             EXTRUDER.RB().ii(INGOT.getMaterialIngredient(m, 4), getReusable(GTCoreItems.ShapeGear)).io(GEAR.get(m, 1)).add(m.getId() + "_gear", (m.getMass() * 5), 128);
         });
-        AntimatterMaterialTypes.RING.all().forEach(m -> {
-            if (!m.has(AntimatterMaterialTypes.INGOT)) return;
+        GTMaterialTypes.RING.all().forEach(m -> {
+            if (!m.has(GTMaterialTypes.INGOT)) return;
             int euPerTick = m == Rubber ? 32 : 128;
             EXTRUDER.RB().ii(INGOT.getMaterialIngredient(m, 1), getReusable(GTCoreItems.ShapeRing)).io(RING.get(m, 4)).add(m.getId() + "_ring", (m.getMass() * 4), euPerTick);
             if (m.has(RUBBERTOOLS) && m.has(DUST)){
                 EXTRUDER.RB().ii(DUST.getMaterialIngredient(m, 1), getReusable(GTCoreItems.ShapeRing)).io(RING.get(m, 4)).add(m.getId() + "_ring_1", m.getMass() * 4, euPerTick);
             }
         });
-        AntimatterMaterialTypes.BOLT.all().forEach(m -> {
-            if (!m.has(AntimatterMaterialTypes.INGOT)) return;
+        GTMaterialTypes.BOLT.all().forEach(m -> {
+            if (!m.has(GTMaterialTypes.INGOT)) return;
             int euPerTick = m == Rubber ? 32 : 128;
             EXTRUDER.RB().ii(INGOT.getMaterialIngredient(m, 1), getReusable(GTCoreItems.ShapeBolt)).io(BOLT.get(m, 8)).add(m.getId() + "_bolt", (m.getMass() * 8), euPerTick);
             if (m.has(RUBBERTOOLS) && m.has(DUST)){

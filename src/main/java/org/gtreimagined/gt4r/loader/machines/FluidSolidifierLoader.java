@@ -1,14 +1,14 @@
 package org.gtreimagined.gt4r.loader.machines;
 
-import muramasa.antimatter.material.Material;
-import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
+import org.gtreimagined.gtlib.material.Material;
+import org.gtreimagined.gtlib.recipe.ingredient.RecipeIngredient;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.gtreimagined.gtcore.data.GTCoreItems;
 
-import static muramasa.antimatter.Ref.L;
-import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
-import static muramasa.antimatter.data.AntimatterMaterials.Lava;
+import static org.gtreimagined.gtlib.Ref.L;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.*;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.Lava;
 import static org.gtreimagined.gt4r.data.Materials.Obsidian;
 import static org.gtreimagined.gt4r.data.RecipeMaps.FLUID_SOLIDIFIER;
 

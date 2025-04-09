@@ -1,7 +1,7 @@
 package org.gtreimagined.gt4r.data;
 
-import muramasa.antimatter.recipe.IRecipe;
-import muramasa.antimatter.recipe.map.RecipeBuilder;
+import org.gtreimagined.gtlib.recipe.IRecipe;
+import org.gtreimagined.gtlib.recipe.map.RecipeBuilder;
 
 public class RecipeBuilders {
 

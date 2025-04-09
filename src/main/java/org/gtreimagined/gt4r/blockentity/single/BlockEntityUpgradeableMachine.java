@@ -2,14 +2,14 @@ package org.gtreimagined.gt4r.blockentity.single;
 
 import com.google.common.collect.ImmutableMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
-import muramasa.antimatter.blockentity.BlockEntityMachine;
-import muramasa.antimatter.capability.machine.MachineRecipeHandler;
-import muramasa.antimatter.client.SoundHelper;
-import muramasa.antimatter.machine.MachineState;
-import muramasa.antimatter.machine.Tier;
-import muramasa.antimatter.tool.AntimatterToolType;
-import muramasa.antimatter.util.TagUtils;
-import muramasa.antimatter.util.Utils;
+import org.gtreimagined.gtlib.blockentity.BlockEntityMachine;
+import org.gtreimagined.gtlib.capability.machine.MachineRecipeHandler;
+import org.gtreimagined.gtlib.client.SoundHelper;
+import org.gtreimagined.gtlib.machine.MachineState;
+import org.gtreimagined.gtlib.machine.Tier;
+import org.gtreimagined.gtlib.tool.GTToolType;
+import org.gtreimagined.gtlib.util.TagUtils;
+import org.gtreimagined.gtlib.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -92,7 +92,7 @@ public class BlockEntityUpgradeableMachine<T extends BlockEntityUpgradeableMachi
     }
 
     @Override
-    public InteractionResult onInteractBoth(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit, @Nullable AntimatterToolType type) {
+    public InteractionResult onInteractBoth(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit, @Nullable GTToolType type) {
         ItemStack stack = player.getItemInHand(hand);
         if (!stack.isEmpty()){
             TagKey<Item> foundUpgrade = null;

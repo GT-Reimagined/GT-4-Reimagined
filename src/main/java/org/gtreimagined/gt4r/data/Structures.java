@@ -2,10 +2,10 @@ package org.gtreimagined.gt4r.data;
 
 import com.gtnewhorizon.structurelib.structure.IStructureElement;
 import com.gtnewhorizon.structurelib.structure.StructureUtility;
-import muramasa.antimatter.blockentity.BlockEntityMachine;
-import muramasa.antimatter.machine.types.Machine;
-import muramasa.antimatter.structure.FakeTileElement;
-import muramasa.antimatter.structure.PatternBuilder;
+import org.gtreimagined.gtlib.blockentity.BlockEntityMachine;
+import org.gtreimagined.gtlib.machine.types.Machine;
+import org.gtreimagined.gtlib.structure.FakeTileElement;
+import org.gtreimagined.gtlib.structure.PatternBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Block;
@@ -26,9 +26,9 @@ import org.gtreimagined.gt4r.blockentity.multi.BlockEntityVacuumFreezer;
 import java.util.function.BiFunction;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
-import static muramasa.antimatter.machine.Tier.LV;
-import static muramasa.antimatter.machine.Tier.NONE;
-import static muramasa.antimatter.structure.AntimatterStructureUtility.ofHatch;
+import static org.gtreimagined.gtlib.machine.Tier.LV;
+import static org.gtreimagined.gtlib.machine.Tier.NONE;
+import static org.gtreimagined.gtlib.structure.GTLibStructureUtility.ofHatch;
 import static org.gtreimagined.gt4r.data.Machines.*;
 
 public class Structures {

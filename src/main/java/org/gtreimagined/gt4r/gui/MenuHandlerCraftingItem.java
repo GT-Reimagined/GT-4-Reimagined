@@ -1,7 +1,7 @@
 package org.gtreimagined.gt4r.gui;
 
-import muramasa.antimatter.capability.IGuiHandler;
-import muramasa.antimatter.gui.MenuHandler;
+import org.gtreimagined.gtlib.capability.IGuiHandler;
+import org.gtreimagined.gtlib.gui.MenuHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerLevelAccess;

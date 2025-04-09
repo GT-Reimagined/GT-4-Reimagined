@@ -1,7 +1,7 @@
 package org.gtreimagined.gt4r.block;
 
-import muramasa.antimatter.block.BlockFakeTile;
-import muramasa.antimatter.texture.Texture;
+import org.gtreimagined.gtlib.block.BlockFakeTile;
+import org.gtreimagined.gtlib.texture.Texture;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.Material;
 

@@ -1,7 +1,7 @@
 package org.gtreimagined.gt4r.events;
 
-import muramasa.antimatter.event.AntimatterCraftingEvent;
-import muramasa.antimatter.event.AntimatterProvidersEvent;
+import org.gtreimagined.gtlib.event.GTCraftingEvent;
+import org.gtreimagined.gtlib.event.GTProvidersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.gtreimagined.gt4r.GT4RRef;
@@ -10,12 +10,12 @@ import org.gtreimagined.gt4r.GT4RRef;
 public class RegistrationEvents {
 
     @SubscribeEvent
-    public static void onProviders(AntimatterProvidersEvent event){
+    public static void onProviders(GTProvidersEvent event){
         AntimatterEvents.onProviders(event);
     }
 
     @SubscribeEvent
-    public static void registerCraftingLoaders(AntimatterCraftingEvent event){
+    public static void registerCraftingLoaders(GTCraftingEvent event){
         AntimatterEvents.registerCraftingLoaders(event);
     }
 }

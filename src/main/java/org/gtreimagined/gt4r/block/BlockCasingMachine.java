@@ -1,6 +1,6 @@
 package org.gtreimagined.gt4r.block;
 
-import muramasa.antimatter.texture.Texture;
+import org.gtreimagined.gtlib.texture.Texture;
 
 public abstract class BlockCasingMachine extends BlockCasing {
     // TODO used for special features for machine casings

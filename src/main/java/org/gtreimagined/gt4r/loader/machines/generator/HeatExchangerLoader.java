@@ -3,11 +3,10 @@ package org.gtreimagined.gt4r.loader.machines.generator;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.fluids.FluidStack;
-import tesseract.TesseractGraphWrappers;
 import org.gtreimagined.gt4r.data.GT4RBlocks;
 
-import static muramasa.antimatter.data.AntimatterMaterialTypes.NUGGET;
-import static muramasa.antimatter.data.AntimatterMaterials.*;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.NUGGET;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.*;
 import static org.gtreimagined.gt4r.data.Materials.*;
 import static org.gtreimagined.gt4r.data.RecipeMaps.HOT_FUELS;
 import static org.gtreimagined.gt4r.data.RecipeMaps.THERMAL_BOILER_FUELS;

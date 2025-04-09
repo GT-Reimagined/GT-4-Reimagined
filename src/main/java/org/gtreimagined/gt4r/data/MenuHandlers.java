@@ -1,8 +1,8 @@
 package org.gtreimagined.gt4r.data;
 
-import muramasa.antimatter.capability.IGuiHandler;
-import muramasa.antimatter.gui.MenuHandlerMachine;
-import muramasa.antimatter.gui.container.ContainerBasicMachine;
+import org.gtreimagined.gtlib.capability.IGuiHandler;
+import org.gtreimagined.gtlib.gui.MenuHandlerMachine;
+import org.gtreimagined.gtlib.gui.container.ContainerBasicMachine;
 import net.minecraft.world.entity.player.Inventory;
 import org.gtreimagined.gt4r.GT4RRef;
 import org.gtreimagined.gt4r.blockentity.single.BlockEntityQuantumChest;

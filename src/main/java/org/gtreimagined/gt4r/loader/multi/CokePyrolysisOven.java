@@ -1,12 +1,12 @@
 package org.gtreimagined.gt4r.loader.multi;
 
-import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
+import org.gtreimagined.gtlib.recipe.ingredient.RecipeIngredient;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
-import static muramasa.antimatter.data.AntimatterMaterialTypes.BLOCK;
-import static muramasa.antimatter.data.AntimatterMaterialTypes.GEM;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.BLOCK;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.GEM;
 import static org.gtreimagined.gt4r.data.Materials.*;
 import static org.gtreimagined.gt4r.data.RecipeMaps.COKING;
 import static org.gtreimagined.gt4r.data.RecipeMaps.PYROLYSING;

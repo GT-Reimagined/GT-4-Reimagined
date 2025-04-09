@@ -4,11 +4,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import org.gtreimagined.gtcore.data.GTCoreItems;
 
-import static muramasa.antimatter.data.AntimatterMaterialTypes.DUST;
-import static muramasa.antimatter.data.AntimatterMaterialTypes.GEM;
-import static muramasa.antimatter.data.AntimatterMaterials.Diamond;
-import static muramasa.antimatter.data.AntimatterMaterials.Emerald;
-import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.DUST;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.GEM;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.Diamond;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.Emerald;
+import static org.gtreimagined.gtlib.recipe.ingredient.RecipeIngredient.of;
 import static org.gtreimagined.gt4r.data.Materials.*;
 import static org.gtreimagined.gt4r.data.RecipeMaps.IMPLOSION_COMPRESSING;
 

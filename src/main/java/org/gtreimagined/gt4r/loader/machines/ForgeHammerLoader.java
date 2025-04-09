@@ -1,31 +1,31 @@
 package org.gtreimagined.gt4r.loader.machines;
 
-import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.data.AntimatterMaterialTypes;
-import muramasa.antimatter.data.AntimatterMaterials;
-import muramasa.antimatter.material.MaterialTags;
-import muramasa.antimatter.ore.CobbleStoneType;
-import muramasa.antimatter.ore.StoneType;
-import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
-import muramasa.antimatter.util.TagUtils;
-import muramasa.antimatter.util.Utils;
+import org.gtreimagined.gtlib.GTAPI;
+import org.gtreimagined.gtlib.data.GTMaterialTypes;
+import org.gtreimagined.gtlib.data.GTLibMaterials;
+import org.gtreimagined.gtlib.material.MaterialTags;
+import org.gtreimagined.gtlib.ore.CobbleStoneType;
+import org.gtreimagined.gtlib.ore.StoneType;
+import org.gtreimagined.gtlib.recipe.ingredient.RecipeIngredient;
+import org.gtreimagined.gtlib.util.TagUtils;
+import org.gtreimagined.gtlib.util.Utils;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags;
 import org.gtreimagined.gt4r.GT4RRef;
 
-import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
-import static muramasa.antimatter.material.MaterialTags.*;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.*;
+import static org.gtreimagined.gtlib.material.MaterialTags.*;
 import static org.gtreimagined.gt4r.data.Materials.Brick;
 import static org.gtreimagined.gt4r.data.RecipeMaps.FORGE_HAMMER;
 
 public class ForgeHammerLoader {
     public static void init(){
-        AntimatterMaterialTypes.CRUSHED.all().forEach(m -> {
-            if (!m.has(AntimatterMaterialTypes.ORE) && m != AntimatterMaterials.Gold && m != AntimatterMaterials.Iron && m != AntimatterMaterials.Diamond && m != AntimatterMaterials.Emerald && m != AntimatterMaterials.Lapis && m != AntimatterMaterials.Redstone) return;
+        GTMaterialTypes.CRUSHED.all().forEach(m -> {
+            if (!m.has(GTMaterialTypes.ORE) && m != GTLibMaterials.Gold && m != GTLibMaterials.Iron && m != GTLibMaterials.Diamond && m != GTLibMaterials.Emerald && m != GTLibMaterials.Lapis && m != GTLibMaterials.Redstone) return;
             int multiplier = 1;
-            RecipeIngredient ore = RecipeIngredient.of(TagUtils.getForgelikeItemTag("sandless_ores/" + m.getId()),1), crushed = AntimatterMaterialTypes.CRUSHED.getIngredient(m, 1);
-            ItemStack crushedStack = AntimatterMaterialTypes.CRUSHED.get(m,1);
+            RecipeIngredient ore = RecipeIngredient.of(TagUtils.getForgelikeItemTag("sandless_ores/" + m.getId()),1), crushed = GTMaterialTypes.CRUSHED.getIngredient(m, 1);
+            ItemStack crushedStack = GTMaterialTypes.CRUSHED.get(m,1);
 
             FORGE_HAMMER.RB().ii(ore).io(Utils.ca(ORE_MULTI.getInt(m) * multiplier, crushedStack)).add(m.getId() + "_ore",16, 10);
             FORGE_HAMMER.RB().ii(crushed).io(DUST_IMPURE.get(MACERATE_INTO.getMapping(m), 1)).add(m.getId() + "_crushed_ore",16, 10);
@@ -37,15 +37,15 @@ public class ForgeHammerLoader {
                 FORGE_HAMMER.RB().ii(RecipeIngredient.of(RAW_ORE.getMaterialTag(m), 1)).io(Utils.ca((ORE_MULTI.getInt(m) * multiplier), crushedStack)).add(m.getId() + "_raw_ore",16, 10);
             }
         });
-        AntimatterMaterialTypes.PLATE.all().stream().filter(m -> m.has(AntimatterMaterialTypes.INGOT) && !m.has(RUBBERTOOLS)).forEach(m -> {
-            int in = 2;//AntimatterConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 3 : 1;
-            int out = 1;//AntimatterConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 2 : 1;
+        GTMaterialTypes.PLATE.all().stream().filter(m -> m.has(GTMaterialTypes.INGOT) && !m.has(RUBBERTOOLS)).forEach(m -> {
+            int in = 2;//GTLibConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 3 : 1;
+            int out = 1;//GTLibConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 2 : 1;
             FORGE_HAMMER.RB().ii(INGOT.getMaterialIngredient(m, in)).io(PLATE.get(m, out)).add(m.getId() + "_plate", m.getMass(), 16);
         });
         ROD_LONG.all().stream().filter(m -> !m.has(MaterialTags.NOSMASH)).forEach(rod -> {
             FORGE_HAMMER.RB().ii(ROD.getMaterialIngredient(rod, 2)).io(ROD_LONG.get(rod, 1)).add("rod_long_" + rod.getId(), rod.getMass(), 16);
         });
-        AntimatterAPI.all(StoneType.class, GT4RRef.ID, s -> {
+        GTAPI.all(StoneType.class, GT4RRef.ID, s -> {
             if (!(s instanceof CobbleStoneType)) return;
             FORGE_HAMMER.RB().ii(RecipeIngredient.of(((CobbleStoneType)s).getBlock(""), 1)).io(new ItemStack(((CobbleStoneType)s).getBlock("cobble"))).add(s.getId() + "_to_cobble",10, 16);
         });

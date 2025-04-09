@@ -1,9 +1,9 @@
 package org.gtreimagined.gt4r.blockentity.single;
 
-import muramasa.antimatter.blockentity.single.BlockEntityBatteryBuffer;
-import muramasa.antimatter.machine.Tier;
-import muramasa.antimatter.machine.types.Machine;
-import muramasa.antimatter.tool.AntimatterToolType;
+import org.gtreimagined.gtlib.blockentity.single.BlockEntityBatteryBuffer;
+import org.gtreimagined.gtlib.machine.Tier;
+import org.gtreimagined.gtlib.machine.types.Machine;
+import org.gtreimagined.gtlib.tool.GTToolType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
@@ -19,7 +19,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 import org.gtreimagined.gt4r.data.CustomTags;
 
-import static muramasa.antimatter.machine.Tier.*;
+import static org.gtreimagined.gtlib.machine.Tier.*;
 
 public class BlockEntityBatteryBox extends BlockEntityBatteryBuffer<BlockEntityBatteryBox> {
     public BlockEntityBatteryBox(Machine<?> type, BlockPos pos, BlockState state) {
@@ -27,7 +27,7 @@ public class BlockEntityBatteryBox extends BlockEntityBatteryBuffer<BlockEntityB
     }
 
     @Override
-    public InteractionResult onInteractServer(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit, @Nullable AntimatterToolType type) {
+    public InteractionResult onInteractServer(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit, @Nullable GTToolType type) {
         ItemStack stack = player.getItemInHand(hand);
         Tier newTier = null;
         if (this.getMachineTier() == LV || this.getMachineTier() == MV){

@@ -2,14 +2,14 @@ package org.gtreimagined.gt4r.loader.crafting;
 
 import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
-import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.data.AntimatterDefaultTools;
-import muramasa.antimatter.data.AntimatterMaterialTypes;
-import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
-import muramasa.antimatter.pipe.PipeSize;
-import muramasa.antimatter.pipe.types.Cable;
-import muramasa.antimatter.pipe.types.Wire;
-import muramasa.antimatter.util.RegistryUtils;
+import org.gtreimagined.gtlib.GTAPI;
+import org.gtreimagined.gtlib.data.GTMaterialTypes;
+import org.gtreimagined.gtlib.data.GTTools;
+import org.gtreimagined.gtlib.datagen.providers.GTRecipeProvider;
+import org.gtreimagined.gtlib.pipe.PipeSize;
+import org.gtreimagined.gtlib.pipe.types.Cable;
+import org.gtreimagined.gtlib.pipe.types.Wire;
+import org.gtreimagined.gtlib.util.RegistryUtils;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -20,16 +20,16 @@ import java.util.Map;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-import static muramasa.antimatter.data.AntimatterMaterialTypes.PLATE;
-import static muramasa.antimatter.pipe.PipeSize.*;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.PLATE;
+import static org.gtreimagined.gtlib.pipe.PipeSize.*;
 import static org.gtreimagined.gt4r.data.Materials.Rubber;
 
 public class ToolCraftingTableRecipes {
     @SuppressWarnings("unchecked")
-    public static void loadRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider) {
-        int wireAmount = 2;//AntimatterConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 1 : 2;
-        AntimatterAPI.all(Wire.class, wire -> {
-            Cable<?> cable = AntimatterAPI.get(Cable.class, "cable" + "_" + wire.getMaterial().getId());
+    public static void loadRecipes(Consumer<FinishedRecipe> output, GTRecipeProvider provider) {
+        int wireAmount = 2;//GTLibConfig.GAMEPLAY.LOSSY_PART_CRAFTING ? 1 : 2;
+        GTAPI.all(Wire.class, wire -> {
+            Cable<?> cable = GTAPI.get(Cable.class, "cable" + "_" + wire.getMaterial().getId());
             ImmutableSet<PipeSize> sizes = wire.getSizes();
             Map<PipeSize, Item> wires = sizes.stream().map(s -> new Pair<>(s, wire.getBlockItem(s))).collect(Collectors.toMap(Pair::getFirst, Pair::getSecond));
             PipeSize[] val = VALUES;
@@ -49,39 +49,39 @@ public class ToolCraftingTableRecipes {
                 }
             }
             if (cable != null){
-                provider.shapeless(output, wire.getId() + "_cable_1x", "cables", new ItemStack(cable.getBlockItem(VTINY)), wire.getBlockItem(VTINY), AntimatterMaterialTypes.PLATE.getMaterialTag(Rubber));
-                provider.shapeless(output, wire.getId() + "_cable_2x", "cables", new ItemStack(cable.getBlockItem(TINY)), wire.getBlockItem(TINY), AntimatterMaterialTypes.PLATE.getMaterialTag(Rubber));
-                provider.shapeless(output, wire.getId() + "_cable_4x", "cables", new ItemStack(cable.getBlockItem(SMALL)), wire.getBlockItem(SMALL), AntimatterMaterialTypes.PLATE.getMaterialTag(Rubber), AntimatterMaterialTypes.PLATE.getMaterialTag(Rubber));
-                provider.shapeless(output, wire.getId() + "_cable_8x", "cables", new ItemStack(cable.getBlockItem(NORMAL)), wire.getBlockItem(NORMAL), AntimatterMaterialTypes.PLATE.getMaterialTag(Rubber), AntimatterMaterialTypes.PLATE.getMaterialTag(Rubber), AntimatterMaterialTypes.PLATE.getMaterialTag(Rubber));
-                provider.shapeless(output, wire.getId() + "_cable_12x", "cables", new ItemStack(cable.getBlockItem(LARGE)), wire.getBlockItem(LARGE), AntimatterMaterialTypes.PLATE.getMaterialTag(Rubber), AntimatterMaterialTypes.PLATE.getMaterialTag(Rubber), AntimatterMaterialTypes.PLATE.getMaterialTag(Rubber), AntimatterMaterialTypes.PLATE.getMaterialTag(Rubber));
-                provider.shapeless(output, wire.getId() + "_cable_16x", "cables", new ItemStack(cable.getBlockItem(HUGE)), wire.getBlockItem(HUGE), AntimatterMaterialTypes.PLATE.getMaterialTag(Rubber), AntimatterMaterialTypes.PLATE.getMaterialTag(Rubber), AntimatterMaterialTypes.PLATE.getMaterialTag(Rubber), AntimatterMaterialTypes.PLATE.getMaterialTag(Rubber), AntimatterMaterialTypes.PLATE.getMaterialTag(Rubber));
+                provider.shapeless(output, wire.getId() + "_cable_1x", "cables", new ItemStack(cable.getBlockItem(VTINY)), wire.getBlockItem(VTINY), GTMaterialTypes.PLATE.getMaterialTag(Rubber));
+                provider.shapeless(output, wire.getId() + "_cable_2x", "cables", new ItemStack(cable.getBlockItem(TINY)), wire.getBlockItem(TINY), GTMaterialTypes.PLATE.getMaterialTag(Rubber));
+                provider.shapeless(output, wire.getId() + "_cable_4x", "cables", new ItemStack(cable.getBlockItem(SMALL)), wire.getBlockItem(SMALL), GTMaterialTypes.PLATE.getMaterialTag(Rubber), GTMaterialTypes.PLATE.getMaterialTag(Rubber));
+                provider.shapeless(output, wire.getId() + "_cable_8x", "cables", new ItemStack(cable.getBlockItem(NORMAL)), wire.getBlockItem(NORMAL), GTMaterialTypes.PLATE.getMaterialTag(Rubber), GTMaterialTypes.PLATE.getMaterialTag(Rubber), GTMaterialTypes.PLATE.getMaterialTag(Rubber));
+                provider.shapeless(output, wire.getId() + "_cable_12x", "cables", new ItemStack(cable.getBlockItem(LARGE)), wire.getBlockItem(LARGE), GTMaterialTypes.PLATE.getMaterialTag(Rubber), GTMaterialTypes.PLATE.getMaterialTag(Rubber), GTMaterialTypes.PLATE.getMaterialTag(Rubber), GTMaterialTypes.PLATE.getMaterialTag(Rubber));
+                provider.shapeless(output, wire.getId() + "_cable_16x", "cables", new ItemStack(cable.getBlockItem(HUGE)), wire.getBlockItem(HUGE), GTMaterialTypes.PLATE.getMaterialTag(Rubber), GTMaterialTypes.PLATE.getMaterialTag(Rubber), GTMaterialTypes.PLATE.getMaterialTag(Rubber), GTMaterialTypes.PLATE.getMaterialTag(Rubber), GTMaterialTypes.PLATE.getMaterialTag(Rubber));
             }
-            if (wire.getMaterial().has(AntimatterMaterialTypes.PLATE)) {
+            if (wire.getMaterial().has(GTMaterialTypes.PLATE)) {
                 provider.shapeless(output, GT4RRef.ID, wire.getMaterial().getId() + "_plate_to_wire","wire",
                         new ItemStack(wires.get(VTINY), wireAmount),
-                        AntimatterDefaultTools.WIRE_CUTTER.getTag(), AntimatterMaterialTypes.PLATE.getMaterialTag(wire.getMaterial()));
+                        GTTools.WIRE_CUTTER.getTag(), GTMaterialTypes.PLATE.getMaterialTag(wire.getMaterial()));
             }
         });
-        AntimatterAPI.all(RedstoneWire.class, wire -> {
+        GTAPI.all(RedstoneWire.class, wire -> {
             if (wire.getMaterial().has(PLATE)) {
                 provider.shapeless(output,  wire.getMaterial().getId() + "_plate_to_wire","wire",
                         new ItemStack(wire.getBlockItem(VTINY), wireAmount),
-                        AntimatterDefaultTools.WIRE_CUTTER.getTag(), PLATE.get(wire.getMaterial()));
+                        GTTools.WIRE_CUTTER.getTag(), PLATE.get(wire.getMaterial()));
             }
         });
     }
 
-    private static void twoToOne(Map<PipeSize, Item> wires, PipeSize from, PipeSize to, Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider) {
+    private static void twoToOne(Map<PipeSize, Item> wires, PipeSize from, PipeSize to, Consumer<FinishedRecipe> output, GTRecipeProvider provider) {
         provider.shapeless(output,"two_to_one_" + RegistryUtils.getIdFromItem(wires.get(to)).getPath(),"wire",
                 new ItemStack(wires.get(to),1),wires.get(from),wires.get(from));
     }
 
-    private static void oneToTwo(Map<PipeSize, Item> wires, PipeSize from, PipeSize to, Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider) {
+    private static void oneToTwo(Map<PipeSize, Item> wires, PipeSize from, PipeSize to, Consumer<FinishedRecipe> output, GTRecipeProvider provider) {
         provider.shapeless(output,"one_to_two_" + RegistryUtils.getIdFromItem(wires.get(to)).getPath(),"wire",
                 new ItemStack(wires.get(to),2),wires.get(from));
     }
 
-    private static void fourToOne(Map<PipeSize, Item> wires, PipeSize from, PipeSize to, Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider) {
+    private static void fourToOne(Map<PipeSize, Item> wires, PipeSize from, PipeSize to, Consumer<FinishedRecipe> output, GTRecipeProvider provider) {
         provider.shapeless(output,"four_to_one_" + RegistryUtils.getIdFromItem(wires.get(to)).getPath(),"wire",
                 new ItemStack(wires.get(to),1),wires.get(from),wires.get(from),wires.get(from),wires.get(from));
     }

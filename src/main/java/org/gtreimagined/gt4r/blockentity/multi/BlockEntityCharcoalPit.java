@@ -1,10 +1,10 @@
 package org.gtreimagined.gt4r.blockentity.multi;
 
-import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.blockentity.multi.BlockEntityMultiMachine;
-import muramasa.antimatter.machine.BlockMultiMachine;
-import muramasa.antimatter.machine.Tier;
-import muramasa.antimatter.machine.types.Machine;
+import org.gtreimagined.gtlib.GTAPI;
+import org.gtreimagined.gtlib.blockentity.multi.BlockEntityMultiMachine;
+import org.gtreimagined.gtlib.machine.BlockMultiMachine;
+import org.gtreimagined.gtlib.machine.Tier;
+import org.gtreimagined.gtlib.machine.types.Machine;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.state.BlockState;
@@ -25,7 +25,7 @@ public class BlockEntityCharcoalPit extends BlockEntityMultiMachine<BlockEntityC
     private boolean isCovered(BlockPos pos) {
         return level.getBlockState(pos).getMaterial() == Material.DIRT
                 || level.getBlockState(pos).getMaterial() == Material.GRASS
-                || level.getBlockState(pos).getBlock() == AntimatterAPI.get(BlockMultiMachine.class,Machines.CHARCOAL_PIT.getId() + "_" + Tier.LV.getId(), GT4RRef.ID) || isLog(pos);
+                || level.getBlockState(pos).getBlock() == GTAPI.get(BlockMultiMachine.class,Machines.CHARCOAL_PIT.getId() + "_" + Tier.LV.getId(), GT4RRef.ID) || isLog(pos);
     }
 
     private boolean isLog(BlockPos pos) {

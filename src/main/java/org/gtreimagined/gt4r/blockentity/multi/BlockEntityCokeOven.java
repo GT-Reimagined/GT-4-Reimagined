@@ -1,10 +1,10 @@
 package org.gtreimagined.gt4r.blockentity.multi;
 
-import muramasa.antimatter.blockentity.multi.BlockEntityBasicMultiMachine;
-import muramasa.antimatter.gui.SlotType;
-import muramasa.antimatter.machine.types.Machine;
-import muramasa.antimatter.util.Utils;
-import muramasa.antimatter.util.int3;
+import org.gtreimagined.gtlib.blockentity.multi.BlockEntityBasicMultiMachine;
+import org.gtreimagined.gtlib.gui.SlotType;
+import org.gtreimagined.gtlib.machine.types.Machine;
+import org.gtreimagined.gtlib.util.Utils;
+import org.gtreimagined.gtlib.util.int3;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
@@ -12,8 +12,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-import tesseract.TesseractCapUtils;
 
 public class BlockEntityCokeOven extends BlockEntityBasicMultiMachine<BlockEntityCokeOven> {
 

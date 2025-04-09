@@ -1,9 +1,9 @@
 package org.gtreimagined.gt4r.gui.slots;
 
-import muramasa.antimatter.capability.IGuiHandler;
-import muramasa.antimatter.gui.SlotType;
-import muramasa.antimatter.gui.slot.AbstractSlot;
-import muramasa.antimatter.gui.slot.IClickableSlot;
+import org.gtreimagined.gtlib.capability.IGuiHandler;
+import org.gtreimagined.gtlib.gui.SlotType;
+import org.gtreimagined.gtlib.gui.slot.AbstractSlot;
+import org.gtreimagined.gtlib.gui.slot.IClickableSlot;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;

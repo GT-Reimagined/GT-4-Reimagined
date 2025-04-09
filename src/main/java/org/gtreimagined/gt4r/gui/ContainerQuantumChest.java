@@ -1,11 +1,11 @@
 package org.gtreimagined.gt4r.gui;
 
-import muramasa.antimatter.capability.item.TrackedItemHandler;
-import muramasa.antimatter.gui.MenuHandlerMachine;
-import muramasa.antimatter.gui.container.ContainerBasicMachine;
-import muramasa.antimatter.gui.container.ContainerMachine;
-import muramasa.antimatter.gui.slot.AbstractSlot;
-import muramasa.antimatter.gui.slot.SlotFake;
+import org.gtreimagined.gtlib.capability.item.TrackedItemHandler;
+import org.gtreimagined.gtlib.gui.MenuHandlerMachine;
+import org.gtreimagined.gtlib.gui.container.ContainerBasicMachine;
+import org.gtreimagined.gtlib.gui.container.ContainerMachine;
+import org.gtreimagined.gtlib.gui.slot.AbstractSlot;
+import org.gtreimagined.gtlib.gui.slot.SlotFake;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;

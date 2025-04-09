@@ -4,9 +4,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import org.gtreimagined.gtcore.data.GTCoreItems;
 
-import static muramasa.antimatter.data.AntimatterMaterialTypes.DUST;
-import static muramasa.antimatter.data.AntimatterMaterialTypes.DUST_TINY;
-import static muramasa.antimatter.data.AntimatterMaterials.Water;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.DUST;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.DUST_TINY;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.Water;
 import static org.gtreimagined.gt4r.data.Materials.*;
 import static org.gtreimagined.gt4r.data.RecipeMaps.CHEMICAL_REACTOR;
 

@@ -1,13 +1,13 @@
 package org.gtreimagined.gt4r.cover;
 
-import muramasa.antimatter.blockentity.pipe.BlockEntityPipe;
-import muramasa.antimatter.capability.ICoverHandler;
-import muramasa.antimatter.cover.BaseCover;
-import muramasa.antimatter.cover.CoverFactory;
-import muramasa.antimatter.data.AntimatterDefaultTools;
-import muramasa.antimatter.machine.Tier;
-import muramasa.antimatter.tool.AntimatterToolType;
-import muramasa.antimatter.util.Utils;
+import org.gtreimagined.gtlib.blockentity.pipe.BlockEntityPipe;
+import org.gtreimagined.gtlib.capability.ICoverHandler;
+import org.gtreimagined.gtlib.cover.BaseCover;
+import org.gtreimagined.gtlib.cover.CoverFactory;
+import org.gtreimagined.gtlib.data.GTTools;
+import org.gtreimagined.gtlib.machine.Tier;
+import org.gtreimagined.gtlib.tool.GTToolType;
+import org.gtreimagined.gtlib.util.Utils;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -52,8 +52,8 @@ public class CoverShutter extends BaseCover implements ICoverRedstoneSensitive {
     }
 
     @Override
-    public InteractionResult onInteract(Player player, InteractionHand hand, Direction side, @Nullable AntimatterToolType type) {
-        if (type != null && type.getTag() == AntimatterDefaultTools.SCREWDRIVER.getTag()){
+    public InteractionResult onInteract(Player player, InteractionHand hand, Direction side, @Nullable GTToolType type) {
+        if (type != null && type.getTag() == GTTools.SCREWDRIVER.getTag()){
             mode = player.isShiftKeyDown() ? mode.cycleBackward() : mode.cycleForward();
             switch (mode){
                 case OPEN_NO_REDSTONE -> {

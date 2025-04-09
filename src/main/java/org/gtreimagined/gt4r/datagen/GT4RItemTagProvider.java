@@ -1,36 +1,34 @@
 package org.gtreimagined.gt4r.datagen;
 
-import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.data.AntimatterMaterialTypes;
-import muramasa.antimatter.data.AntimatterMaterials;
-import muramasa.antimatter.data.AntimatterStoneTypes;
-import muramasa.antimatter.datagen.builder.AntimatterTagBuilder;
-import muramasa.antimatter.datagen.providers.AntimatterBlockTagProvider;
-import muramasa.antimatter.datagen.providers.AntimatterItemTagProvider;
-import muramasa.antimatter.ore.BlockOre;
-import muramasa.antimatter.ore.StoneType;
-import muramasa.antimatter.util.RegistryUtils;
-import muramasa.antimatter.util.TagUtils;
+import org.gtreimagined.gtlib.GTAPI;
+import org.gtreimagined.gtlib.data.GTMaterialTypes;
+import org.gtreimagined.gtlib.data.GTLibMaterials;
+import org.gtreimagined.gtlib.data.VanillaStoneTypes;
+import org.gtreimagined.gtlib.datagen.builder.GTTagBuilder;
+import org.gtreimagined.gtlib.datagen.providers.GTBlockTagProvider;
+import org.gtreimagined.gtlib.datagen.providers.GTItemTagProvider;
+import org.gtreimagined.gtlib.ore.StoneType;
+import org.gtreimagined.gtlib.util.RegistryUtils;
+import org.gtreimagined.gtlib.util.TagUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import org.gtreimagined.gt4r.data.CustomTags;
-import org.gtreimagined.gt4r.data.GT4RItems;
 import org.gtreimagined.gtcore.data.GTCoreItems;
 import org.gtreimagined.gt4r.GT4RRef;
 import org.gtreimagined.gt4r.data.GT4RMaterialTags;
 
-import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
-import static muramasa.antimatter.data.AntimatterMaterials.Diamond;
-import static muramasa.antimatter.util.Utils.getConventionalMaterialType;
-import static muramasa.antimatter.util.Utils.getConventionalStoneType;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.*;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.Diamond;
+import static org.gtreimagined.gtlib.util.Utils.getConventionalMaterialType;
+import static org.gtreimagined.gtlib.util.Utils.getConventionalStoneType;
 import static org.gtreimagined.gt4r.data.CustomTags.*;
 import static org.gtreimagined.gt4r.data.GT4RItems.*;
 import static org.gtreimagined.gt4r.data.Materials.*;
 import static org.gtreimagined.gtcore.data.GTCoreTags.*;
 
-public class GT4RItemTagProvider extends AntimatterItemTagProvider {
-    public GT4RItemTagProvider(String providerDomain, String providerName, boolean replace, AntimatterBlockTagProvider p) {
+public class GT4RItemTagProvider extends GTItemTagProvider {
+    public GT4RItemTagProvider(String providerDomain, String providerName, boolean replace, GTBlockTagProvider p) {
         super(providerDomain, providerName, replace, p);
     }
 
@@ -65,34 +63,34 @@ public class GT4RItemTagProvider extends AntimatterItemTagProvider {
         this.tag(BATTERIES_LV).add(REBattery);
         this.tag(BATTERIES_MV).add(LithiumBattery, EnergyCrystal);
         this.tag(BATTERIES_HV).add(LapotronCrystal);
-        if (AntimatterAPI.isModLoaded(GT4RRef.MOD_BLUEPOWER)){
+        if (GTAPI.isModLoaded(GT4RRef.MOD_BLUEPOWER)){
             this.tag(TagUtils.getForgelikeItemTag("stone_ores/amethyst")).add(RegistryUtils.getItemFromID(new ResourceLocation(GT4RRef.MOD_BLUEPOWER, "amethyst_ore")));
         }
 
-        this.tag(TagUtils.getForgelikeItemTag("plates/constantan")).addTag(AntimatterMaterialTypes.PLATE.getMaterialTag(Cupronickel));
-        this.tag(TagUtils.getForgelikeItemTag("ingots/constantan")).addTag(AntimatterMaterialTypes.INGOT.getMaterialTag(Cupronickel));
+        this.tag(TagUtils.getForgelikeItemTag("plates/constantan")).addTag(GTMaterialTypes.PLATE.getMaterialTag(Cupronickel));
+        this.tag(TagUtils.getForgelikeItemTag("ingots/constantan")).addTag(GTMaterialTypes.INGOT.getMaterialTag(Cupronickel));
 
         this.tag(RODS_STEELS).addTag(CustomTags.getTag("rods/steel")).addTag(CustomTags.getTag("rods/stainless_steel"));
         this.tag(RODS_MAGNETIC).addTag(CustomTags.getTag("rods/magnetic_steel")).addTag(CustomTags.getTag("rods/magnetic_iron"));
-        AntimatterTagBuilder<Item> add = this.tag(CORALS);
+        GTTagBuilder<Item> add = this.tag(CORALS);
         String[] corals = {"tube", "brain", "bubble", "fire", "horn"};
         for (String coral : corals){
             add.add(RegistryUtils.getItemFromID(new ResourceLocation(coral + "_coral")), RegistryUtils.getItemFromID(new ResourceLocation("dead_" + coral + "_coral")), RegistryUtils.getItemFromID(new ResourceLocation(coral + "_coral_fan")), RegistryUtils.getItemFromID(new ResourceLocation("dead_" + coral + "_coral_fan"))).replace(false);
         }
         this.tag(VINES).add(Items.VINE, Items.TWISTING_VINES, Items.WEEPING_VINES);
         ORE.all().forEach(m -> {
-            AntimatterAPI.all(StoneType.class).stream().filter(s -> !s.isSandLike() && s.doesGenerateOre() && s != AntimatterStoneTypes.BEDROCK).forEach(s -> {
+            GTAPI.all(StoneType.class).stream().filter(s -> !s.isSandLike() && s.doesGenerateOre() && s != VanillaStoneTypes.BEDROCK).forEach(s -> {
                 this.tag(TagUtils.getForgelikeItemTag("sandless_" + getConventionalMaterialType(ORE) + "/" +  m.getId())).addTag(TagUtils.getForgelikeItemTag(String.join("", getConventionalStoneType(s), "_", getConventionalMaterialType(ORE), "/", m.getId())));
                 this.tag(TagUtils.getForgelikeItemTag("sandless_" + getConventionalMaterialType(ORE_SMALL) + "/" +  m.getId())).addTag(TagUtils.getForgelikeItemTag(String.join("", getConventionalStoneType(s), "_", getConventionalMaterialType(ORE_SMALL), "/", m.getId())));
             });
         });
-        AntimatterMaterialTypes.RAW_ORE.all().forEach(m -> {
-            this.tag(TagUtils.getForgelikeItemTag("sandless_ores/"+ m.getId())).add(AntimatterMaterialTypes.RAW_ORE.get(m));
+        GTMaterialTypes.RAW_ORE.all().forEach(m -> {
+            this.tag(TagUtils.getForgelikeItemTag("sandless_ores/"+ m.getId())).add(GTMaterialTypes.RAW_ORE.get(m));
         });
-        this.tag(TagUtils.getForgelikeItemTag("sandless_ores/"+ AntimatterMaterials.NetheriteScrap.getId())).add(Items.ANCIENT_DEBRIS);
-        this.tag(TagUtils.getForgelikeItemTag("sandless_ores/coal")).add(AntimatterMaterialTypes.ORE_STONE.get().get(AntimatterMaterials.Coal).asItem());
-        this.tag(TagUtils.getForgelikeItemTag("dyes/black")).add(AntimatterMaterialTypes.DUST.get(DarkAsh));
-        this.tag(TagUtils.getForgelikeItemTag("dyes/gray")).add(AntimatterMaterialTypes.DUST.get(Ash));
+        this.tag(TagUtils.getForgelikeItemTag("sandless_ores/"+ GTLibMaterials.NetheriteScrap.getId())).add(Items.ANCIENT_DEBRIS);
+        this.tag(TagUtils.getForgelikeItemTag("sandless_ores/coal")).add(GTMaterialTypes.ORE_STONE.get().get(GTLibMaterials.Coal).asItem());
+        this.tag(TagUtils.getForgelikeItemTag("dyes/black")).add(GTMaterialTypes.DUST.get(DarkAsh));
+        this.tag(TagUtils.getForgelikeItemTag("dyes/gray")).add(GTMaterialTypes.DUST.get(Ash));
 
     }
 

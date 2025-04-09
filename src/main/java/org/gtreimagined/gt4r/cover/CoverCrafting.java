@@ -1,10 +1,10 @@
 package org.gtreimagined.gt4r.cover;
 
-import muramasa.antimatter.capability.ICoverHandler;
-import muramasa.antimatter.cover.BaseCover;
-import muramasa.antimatter.cover.CoverFactory;
-import muramasa.antimatter.machine.Tier;
-import muramasa.antimatter.tool.AntimatterToolType;
+import org.gtreimagined.gtlib.capability.ICoverHandler;
+import org.gtreimagined.gtlib.cover.BaseCover;
+import org.gtreimagined.gtlib.cover.CoverFactory;
+import org.gtreimagined.gtlib.machine.Tier;
+import org.gtreimagined.gtlib.tool.GTToolType;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -48,7 +48,7 @@ public class CoverCrafting extends BaseCover {
     }
 
     @Override
-    public InteractionResult onInteract(Player player, InteractionHand hand, Direction side, @Nullable AntimatterToolType type) {
+    public InteractionResult onInteract(Player player, InteractionHand hand, Direction side, @Nullable GTToolType type) {
         return openGui(player, side) ? InteractionResult.SUCCESS : InteractionResult.PASS;
     }
 

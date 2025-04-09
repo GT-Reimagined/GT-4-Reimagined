@@ -1,13 +1,13 @@
 package org.gtreimagined.gt4r.loader.machines.generator;
 
-import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
+import org.gtreimagined.gtlib.recipe.ingredient.RecipeIngredient;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags;
 
-import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
-import static muramasa.antimatter.data.AntimatterMaterials.Charcoal;
-import static muramasa.antimatter.data.AntimatterMaterials.Coal;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.*;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.Charcoal;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.Coal;
 import static org.gtreimagined.gt4r.data.Materials.*;
 import static org.gtreimagined.gt4r.data.RecipeMaps.SOLID_FUEL_BOILERS;
 

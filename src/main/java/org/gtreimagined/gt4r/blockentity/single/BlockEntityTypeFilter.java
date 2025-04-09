@@ -1,8 +1,8 @@
 package org.gtreimagined.gt4r.blockentity.single;
 
-import muramasa.antimatter.gui.SlotType;
-import muramasa.antimatter.machine.types.Machine;
-import muramasa.antimatter.util.TagUtils;
+import org.gtreimagined.gtlib.gui.SlotType;
+import org.gtreimagined.gtlib.machine.types.Machine;
+import org.gtreimagined.gtlib.util.TagUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;

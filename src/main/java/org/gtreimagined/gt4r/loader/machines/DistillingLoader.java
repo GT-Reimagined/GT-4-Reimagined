@@ -2,9 +2,9 @@ package org.gtreimagined.gt4r.loader.machines;
 
 import org.gtreimagined.gtcore.data.GTCoreItems;
 
-import static muramasa.antimatter.data.AntimatterMaterialTypes.DUST_SMALL;
-import static muramasa.antimatter.data.AntimatterMaterials.Sugar;
-import static muramasa.antimatter.data.AntimatterMaterials.Water;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.DUST_SMALL;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.Sugar;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.Water;
 import static org.gtreimagined.gt4r.data.Materials.*;
 import static org.gtreimagined.gt4r.data.RecipeMaps.DISTILLERY;
 

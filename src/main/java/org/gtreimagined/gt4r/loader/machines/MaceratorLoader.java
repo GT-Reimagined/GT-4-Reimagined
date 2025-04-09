@@ -1,19 +1,19 @@
 package org.gtreimagined.gt4r.loader.machines;
 
-import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.data.AntimatterMaterialTypes;
-import muramasa.antimatter.data.AntimatterMaterials;
-import muramasa.antimatter.data.AntimatterStoneTypes;
-import muramasa.antimatter.material.Material;
-import muramasa.antimatter.ore.CobbleStoneType;
-import muramasa.antimatter.ore.StoneType;
-import muramasa.antimatter.pipe.PipeSize;
-import muramasa.antimatter.pipe.types.FluidPipe;
-import muramasa.antimatter.pipe.types.ItemPipe;
-import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
-import muramasa.antimatter.recipe.map.RecipeMap;
-import muramasa.antimatter.util.RegistryUtils;
-import muramasa.antimatter.util.Utils;
+import org.gtreimagined.gtlib.GTAPI;
+import org.gtreimagined.gtlib.data.GTMaterialTypes;
+import org.gtreimagined.gtlib.data.GTLibMaterials;
+import org.gtreimagined.gtlib.data.VanillaStoneTypes;
+import org.gtreimagined.gtlib.material.Material;
+import org.gtreimagined.gtlib.ore.CobbleStoneType;
+import org.gtreimagined.gtlib.ore.StoneType;
+import org.gtreimagined.gtlib.pipe.PipeSize;
+import org.gtreimagined.gtlib.pipe.types.FluidPipe;
+import org.gtreimagined.gtlib.pipe.types.ItemPipe;
+import org.gtreimagined.gtlib.recipe.ingredient.RecipeIngredient;
+import org.gtreimagined.gtlib.recipe.map.RecipeMap;
+import org.gtreimagined.gtlib.util.RegistryUtils;
+import org.gtreimagined.gtlib.util.Utils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -26,10 +26,10 @@ import org.gtreimagined.gt4r.GT4RRef;
 import java.util.ArrayList;
 import java.util.List;
 
-import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
-import static muramasa.antimatter.data.AntimatterMaterials.*;
-import static muramasa.antimatter.material.Material.NULL;
-import static muramasa.antimatter.material.MaterialTags.*;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.*;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.*;
+import static org.gtreimagined.gtlib.material.Material.NULL;
+import static org.gtreimagined.gtlib.material.MaterialTags.*;
 import static org.gtreimagined.gt4r.data.Materials.*;
 import static org.gtreimagined.gtcore.data.GTCoreItems.Biochaff;
 import static org.gtreimagined.gtcore.data.GTCoreItems.Plantball;
@@ -49,12 +49,12 @@ public class MaceratorLoader {
         UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(ItemTags.LOGS, 1)).io(DUST.get(Wood, 6)).add("wood_dust",400, 2);
         UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(Items.PRISMARINE, 1)).io(DUST.get(Prismarine, 1)).add("prismarine_dust",400, 2);
         UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(Items.DARK_PRISMARINE, 1)).io(DUST.get(DarkPrismarine, 1)).add("dark_prismarine_dust",400, 2);
-        if (AntimatterAPI.isModLoaded(GT4RRef.MOD_CREATE)){
+        if (GTAPI.isModLoaded(GT4RRef.MOD_CREATE)){
             UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(RegistryUtils.getBlockFromId(new ResourceLocation(GT4RRef.MOD_CREATE, "limestone")), 1)).io(DUST.get(Limestone, 1)).add("limestone_dust",400, 2);
             UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(RegistryUtils.getBlockFromId(new ResourceLocation(GT4RRef.MOD_CREATE, "scoria")), 1)).io(DUST.get(Scoria, 1)).add("scoria_dust",400, 2);
         }
         UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(Items.NETHER_QUARTZ_ORE, 1)).io(new ItemStack(Items.QUARTZ, 2)).add("nether_quartz_ore",200, 2);
-        if (AntimatterAPI.isModLoaded("cinderscapes")){
+        if (GTAPI.isModLoaded("cinderscapes")){
             UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(RegistryUtils.getItemFromID(new ResourceLocation("cinderscapes", "rose_quartz_ore")), 1)).io(new ItemStack(RegistryUtils.getItemFromID(new ResourceLocation("cinderscapes", "rose_quartz")), 2)).add("rose_quartz",200, 2);
             UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(RegistryUtils.getItemFromID(new ResourceLocation("cinderscapes", "smoky_quartz_ore")), 1)).io(new ItemStack(RegistryUtils.getItemFromID(new ResourceLocation("cinderscapes", "smoky_quartz")), 2)).add("smoky_quartz",200, 2);
             UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(RegistryUtils.getItemFromID(new ResourceLocation("cinderscapes", "sulfur_quartz_ore")), 1)).io(new ItemStack(RegistryUtils.getItemFromID(new ResourceLocation("cinderscapes", "sulfur_quartz")), 2)).add("sulfur_quartz",200, 2);
@@ -63,13 +63,13 @@ public class MaceratorLoader {
 
     public static void initAuto() {
         ORE.all().forEach(m -> {
-            AntimatterAPI.all(StoneType.class).stream().filter(StoneType::doesGenerateOre).filter(s -> s != AntimatterStoneTypes.BEDROCK).forEach(s -> {
+            GTAPI.all(StoneType.class).stream().filter(StoneType::doesGenerateOre).filter(s -> s != VanillaStoneTypes.BEDROCK).forEach(s -> {
                 Material sm = s.getMaterial();
-                if (!m.has(AntimatterMaterialTypes.DUST) && !m.has(AntimatterMaterialTypes.CRUSHED)) return;
-                ItemStack stoneDust = sm.has(AntimatterMaterialTypes.DUST) ? AntimatterMaterialTypes.DUST.get(sm, 1) : ItemStack.EMPTY;
+                if (!m.has(GTMaterialTypes.DUST) && !m.has(GTMaterialTypes.CRUSHED)) return;
+                ItemStack stoneDust = sm.has(GTMaterialTypes.DUST) ? GTMaterialTypes.DUST.get(sm, 1) : ItemStack.EMPTY;
                 TagKey<Item> oreTag = ORE.getMaterialTag(m, s);
                 RecipeIngredient ore = RecipeIngredient.of(oreTag,1);
-                ItemStack crushedStack = (m.has(CRUSHED) ? AntimatterMaterialTypes.CRUSHED : DUST).get(m, ORE_MULTI.getInt(m));
+                ItemStack crushedStack = (m.has(CRUSHED) ? GTMaterialTypes.CRUSHED : DUST).get(m, ORE_MULTI.getInt(m));
                 Material oreByProduct1 = m.getByProducts().size() > 0 ? m.getByProducts().get(0) : MACERATE_INTO.getMapping(m);
                 RecipeMap<?> rm = s.isSandLike() ? SIFTER : UNIVERSAL_MACERATOR;
                 List<ItemStack> stacks = new ArrayList<>();
@@ -79,7 +79,7 @@ public class MaceratorLoader {
                     stacks.add(crushedStack);
                     stacks.add(crushedStack);
                 }
-                stacks.add(AntimatterMaterialTypes.DUST.get(oreByProduct1, 1));
+                stacks.add(GTMaterialTypes.DUST.get(oreByProduct1, 1));
                 if (!stoneDust.isEmpty()) stacks.add(stoneDust);
                 ItemStack[] stackArray = stacks.toArray(new ItemStack[0]);
                 List<Double> ints = new ArrayList<>();
@@ -97,13 +97,13 @@ public class MaceratorLoader {
                 rm.RB().ii(ore).io(stackArray).outputChances(chances).add("ore_" + m.getId() + "_" + s.getId(),400, 2);
             });
         });
-        AntimatterMaterialTypes.CRUSHED.all().forEach(m -> {
-            if (!m.has(AntimatterMaterialTypes.ORE) && m != AntimatterMaterials.NetheriteScrap) return;
+        GTMaterialTypes.CRUSHED.all().forEach(m -> {
+            if (!m.has(GTMaterialTypes.ORE) && m != GTLibMaterials.NetheriteScrap) return;
             int multiplier = 1;
-            RecipeIngredient ore = RecipeIngredient.of(AntimatterMaterialTypes.ORE.getMaterialTag(m),1);
-            RecipeIngredient crushed = RecipeIngredient.of(AntimatterMaterialTypes.CRUSHED.getMaterialTag(m), 1);
-            ItemStack crushedStack = AntimatterMaterialTypes.CRUSHED.get(m,1);
-            ItemStack stoneDust = AntimatterMaterialTypes.DUST.get(AntimatterMaterials.Stone, 1);
+            RecipeIngredient ore = RecipeIngredient.of(GTMaterialTypes.ORE.getMaterialTag(m),1);
+            RecipeIngredient crushed = RecipeIngredient.of(GTMaterialTypes.CRUSHED.getMaterialTag(m), 1);
+            ItemStack crushedStack = GTMaterialTypes.CRUSHED.get(m,1);
+            ItemStack stoneDust = GTMaterialTypes.DUST.get(GTLibMaterials.Stone, 1);
 
             //TODO better way to do this
             Material oreByProduct1 = m.getByProducts().size() > 0 ? m.getByProducts().get(0) : MACERATE_INTO.getMapping(m);
@@ -120,21 +120,21 @@ public class MaceratorLoader {
                 UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(RAW_ORE.getMaterialTag(m), 1)).io(Utils.ca((ORE_MULTI.getInt(m) * multiplier) * 2, crushedStack), DUST.get(oreByProduct1, 1)).outputChances(1.0, 0.1 * multiplier * BY_PRODUCT_MULTI.getInt(m)).add(m.getId() + "_raw_ore",400, 2);
             }
         });
-        AntimatterMaterialTypes.DUST.all().forEach(m -> {
-            if (m.has(AntimatterMaterialTypes.PLATE) && m != AntimatterMaterials.Wood){
+        GTMaterialTypes.DUST.all().forEach(m -> {
+            if (m.has(GTMaterialTypes.PLATE) && m != GTLibMaterials.Wood){
                 long duration = m.getMass();
                 UNIVERSAL_MACERATOR.RB().ii(PLATE.getMaterialIngredient(m, 1)).io(DUST.get(m, 1)).add(m.getId() + "_plate", duration, 4);
             }
-            if (m.has(AntimatterMaterialTypes.INGOT)){
+            if (m.has(GTMaterialTypes.INGOT)){
                 long duration = m.getMass();
                 UNIVERSAL_MACERATOR.RB().ii(INGOT.getMaterialIngredient(m, 1)).io(DUST.get(m, 1)).add(m.getId() + "_ingot", duration, 4);
             }
-            if (m.has(AntimatterMaterialTypes.GEM)){
+            if (m.has(GTMaterialTypes.GEM)){
                 long duration = m.getMass();
                 UNIVERSAL_MACERATOR.RB().ii(GEM.getMaterialIngredient(m, 1)).io(DUST.get(m, 1)).add(m.getId() + "_gem", duration, 4);
             }
         });
-        AntimatterAPI.all(StoneType.class, s -> {
+        GTAPI.all(StoneType.class, s -> {
             if (s.getMaterial() == NULL || !s.getMaterial().has(DUST) || s.isSandLike()) return;
             if (s == GTCoreBlocks.KIMBERLITE){
                 UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(s.getState().getBlock().asItem(), 1)).io(DUST.get(s.getMaterial(), 1), GEM.get(Diamond, 1)).outputChances(1.0, 0.0001).hide().add(s.getId() + "_stone_to_" + s.getMaterial().getId() + "_dust_hidden",400, 2);
@@ -146,8 +146,8 @@ public class MaceratorLoader {
                 UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(((CobbleStoneType)s).getBlock("cobble").asItem(), 1)).io(DUST.get(s.getMaterial(), 1)).add("cobbled_" + s.getId() + "_to_" + s.getMaterial().getId() + "_dust",400, 2);
             }
         });
-        AntimatterAPI.all(FluidPipe.class).forEach(t -> {
-            if (!t.getMaterial().has(AntimatterMaterialTypes.DUST) || t.getMaterial() == AntimatterMaterials.Wood) return;
+        GTAPI.all(FluidPipe.class).forEach(t -> {
+            if (!t.getMaterial().has(GTMaterialTypes.DUST) || t.getMaterial() == GTLibMaterials.Wood) return;
             Item pipeTiny = t.getBlockItem(PipeSize.TINY);
             Item pipeSmall = t.getBlockItem(PipeSize.SMALL);
             Item pipeNormal = t.getBlockItem(PipeSize.NORMAL);
@@ -170,7 +170,7 @@ public class MaceratorLoader {
             }
         });
 
-        AntimatterAPI.all(ItemPipe.class).forEach(t -> {
+        GTAPI.all(ItemPipe.class).forEach(t -> {
             if (!t.getMaterial().has(DUST) || t.getMaterial() == Wood) return;
             Item pipeTiny = t.getBlockItem(PipeSize.TINY);
             Item pipeSmall = t.getBlockItem(PipeSize.SMALL);

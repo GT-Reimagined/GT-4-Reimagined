@@ -1,10 +1,10 @@
 package org.gtreimagined.gt4r.loader.machines;
 
-import muramasa.antimatter.data.AntimatterMaterials;
-import muramasa.antimatter.material.Material;
-import muramasa.antimatter.material.MaterialStack;
-import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
-import muramasa.antimatter.recipe.map.RecipeBuilder;
+import org.gtreimagined.gtlib.data.GTLibMaterials;
+import org.gtreimagined.gtlib.material.Material;
+import org.gtreimagined.gtlib.material.MaterialStack;
+import org.gtreimagined.gtlib.recipe.ingredient.RecipeIngredient;
+import org.gtreimagined.gtlib.recipe.map.RecipeBuilder;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
@@ -13,8 +13,8 @@ import org.gtreimagined.gt4r.data.GT4RMaterialTags;
 
 import java.util.List;
 
-import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
-import static muramasa.antimatter.data.AntimatterMaterials.*;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.*;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.*;
 import static org.gtreimagined.gt4r.data.GT4RMaterialTags.ELEC;
 import static org.gtreimagined.gt4r.data.Materials.*;
 import static org.gtreimagined.gt4r.data.RecipeMaps.ELECTROLYZER;
@@ -42,7 +42,7 @@ public class ElectrolyzerLoader {
         ELECTROLYZER.RB().ii(RecipeIngredient.of(DUST.get(Diamond, 1))).io(DUST.get(Carbon, 64), DUST.get(Carbon, 64)).add("diamond_dust",1536,60);
         add(Steel,50, 60, 2600);
         add(DarkAsh, 1, 30, 24);
-        add(AntimatterMaterials.Coal, 1, 30, 24);
+        add(GTLibMaterials.Coal, 1, 30, 24);
         if (breakMethod) return;
 
         add(SodiumPersulfate, 90, 432); //close

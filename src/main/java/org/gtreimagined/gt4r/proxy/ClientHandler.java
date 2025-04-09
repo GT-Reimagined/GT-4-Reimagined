@@ -1,8 +1,8 @@
 package org.gtreimagined.gt4r.proxy;
 
-import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.client.ModelUtils;
-import muramasa.antimatter.proxy.IProxyHandler;
+import org.gtreimagined.gtlib.GTAPI;
+import org.gtreimagined.gtlib.client.ModelUtils;
+import org.gtreimagined.gtlib.proxy.IProxyHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.entity.player.Player;
@@ -20,7 +20,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import static muramasa.antimatter.machine.Tier.LV;
+import static org.gtreimagined.gtlib.machine.Tier.LV;
 
 public class ClientHandler implements IProxyHandler {
 
@@ -29,11 +29,11 @@ public class ClientHandler implements IProxyHandler {
 
     @SuppressWarnings("RedundantTypeArguments")
     public static void setup() {
-        AntimatterAPI.runLaterClient(() -> {
+        GTAPI.runLaterClient(() -> {
             ModelUtils.setRenderLayer(((BlockItem)Machines.DUSTBIN.getItem(LV)).getBlock(), RenderType.cutout());
-            AntimatterAPI.all(BlockCasing.class, t -> ModelUtils.setRenderLayer(t, RenderType.cutout()));
-            AntimatterAPI.all(BlockRedstoneMachine.class, b -> ModelUtils.setRenderLayer(b, RenderType.cutout()));
-            AntimatterAPI.all(BlockColoredWall.class, b -> ModelUtils.setRenderLayer(b, RenderType.cutout()));
+            GTAPI.all(BlockCasing.class, t -> ModelUtils.setRenderLayer(t, RenderType.cutout()));
+            GTAPI.all(BlockRedstoneMachine.class, b -> ModelUtils.setRenderLayer(b, RenderType.cutout()));
+            GTAPI.all(BlockColoredWall.class, b -> ModelUtils.setRenderLayer(b, RenderType.cutout()));
         });
         copyProgrammerArtIfMissing();
     }

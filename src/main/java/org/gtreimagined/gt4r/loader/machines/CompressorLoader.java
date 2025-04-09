@@ -1,6 +1,6 @@
 package org.gtreimagined.gt4r.loader.machines;
 
-import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
+import org.gtreimagined.gtlib.recipe.ingredient.RecipeIngredient;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -9,8 +9,8 @@ import org.gtreimagined.gt4r.GT4RConfig;
 import org.gtreimagined.gtcore.data.GTCoreItems;
 import org.gtreimagined.gtcore.data.GTCoreTags;
 
-import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
-import static muramasa.antimatter.data.AntimatterMaterials.*;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.*;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.*;
 import static org.gtreimagined.gt4r.data.GT4RItems.EnergyCrystal;
 import static org.gtreimagined.gt4r.data.Materials.*;
 import static org.gtreimagined.gtcore.data.GTCoreItems.CompressedFireClay;

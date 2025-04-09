@@ -1,11 +1,11 @@
 package org.gtreimagined.gt4r.blockentity.single;
 
-import muramasa.antimatter.blockentity.BlockEntityMachine;
-import muramasa.antimatter.capability.machine.MachineFluidHandler;
-import muramasa.antimatter.machine.MachineState;
-import muramasa.antimatter.machine.types.Machine;
-import muramasa.antimatter.util.FluidUtils;
-import muramasa.antimatter.util.Utils;
+import org.gtreimagined.gtlib.blockentity.BlockEntityMachine;
+import org.gtreimagined.gtlib.capability.machine.MachineFluidHandler;
+import org.gtreimagined.gtlib.machine.MachineState;
+import org.gtreimagined.gtlib.machine.types.Machine;
+import org.gtreimagined.gtlib.util.FluidUtils;
+import org.gtreimagined.gtlib.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;

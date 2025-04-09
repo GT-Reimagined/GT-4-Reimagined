@@ -1,17 +1,17 @@
 package org.gtreimagined.gt4r.machine;
 
-import muramasa.antimatter.Data;
-import muramasa.antimatter.blockentity.BlockEntityMachine;
-import muramasa.antimatter.blockentity.multi.BlockEntityMultiMachine;
-import muramasa.antimatter.cover.CoverOutput;
-import muramasa.antimatter.gui.screen.AntimatterContainerScreen;
-import muramasa.antimatter.gui.widget.IOWidget;
-import muramasa.antimatter.gui.widget.MachineStateWidget;
-import muramasa.antimatter.gui.widget.ProgressWidget;
-import muramasa.antimatter.gui.widget.TextWidget;
-import muramasa.antimatter.gui.widget.WidgetSupplier;
-import muramasa.antimatter.machine.Tier;
-import muramasa.antimatter.machine.types.Machine;
+import org.gtreimagined.gtlib.Data;
+import org.gtreimagined.gtlib.blockentity.BlockEntityMachine;
+import org.gtreimagined.gtlib.blockentity.multi.BlockEntityMultiMachine;
+import org.gtreimagined.gtlib.cover.CoverOutput;
+import org.gtreimagined.gtlib.gui.screen.GTContainerScreen;
+import org.gtreimagined.gtlib.gui.widget.IOWidget;
+import org.gtreimagined.gtlib.gui.widget.MachineStateWidget;
+import org.gtreimagined.gtlib.gui.widget.ProgressWidget;
+import org.gtreimagined.gtlib.gui.widget.TextWidget;
+import org.gtreimagined.gtlib.gui.widget.WidgetSupplier;
+import org.gtreimagined.gtlib.machine.Tier;
+import org.gtreimagined.gtlib.machine.types.Machine;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -24,7 +24,7 @@ import org.gtreimagined.gt4r.data.Textures;
 import java.util.ArrayList;
 import java.util.List;
 
-import static muramasa.antimatter.machine.MachineFlag.*;
+import static org.gtreimagined.gtlib.machine.MachineFlag.*;
 
 public class UpgradeableMachine extends Machine<UpgradeableMachine> {
     List<TagKey<Item>> allowedUpgrades;
@@ -74,7 +74,7 @@ public class UpgradeableMachine extends Machine<UpgradeableMachine> {
     protected void setupGui() {
         super.setupGui();
         addGuiCallback(t -> {
-            t.addWidget(WidgetSupplier.build((a, b) -> TextWidget.build(((AntimatterContainerScreen<?>) b).getTitle().getString(), 4210752, false).build(a, b)).setPos(9, 5).clientSide());
+            t.addWidget(WidgetSupplier.build((a, b) -> TextWidget.build(((GTContainerScreen<?>) b).getTitle().getString(), 4210752, false).build(a, b)).setPos(9, 5).clientSide());
             if (has(RECIPE)) {
                 t.addWidget(ProgressWidget.build())
                         .addWidget(MachineStateWidget.build());

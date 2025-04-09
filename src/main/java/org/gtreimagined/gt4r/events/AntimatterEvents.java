@@ -1,15 +1,14 @@
 package org.gtreimagined.gt4r.events;
 
-import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.datagen.providers.AntimatterAdvancementProvider;
-import muramasa.antimatter.datagen.providers.AntimatterBlockTagProvider;
-import muramasa.antimatter.datagen.providers.AntimatterFluidTagProvider;
-import muramasa.antimatter.event.AntimatterCraftingEvent;
-import muramasa.antimatter.event.AntimatterLoaderEvent;
-import muramasa.antimatter.event.AntimatterProvidersEvent;
-import muramasa.antimatter.event.AntimatterWorldGenEvent;
-import muramasa.antimatter.recipe.loader.IRecipeRegistrate;
-import muramasa.antimatter.registration.IAntimatterRegistrar;
+import org.gtreimagined.gtlib.GTAPI;
+import org.gtreimagined.gtlib.datagen.providers.GTAdvancementProvider;
+import org.gtreimagined.gtlib.datagen.providers.GTBlockTagProvider;
+import org.gtreimagined.gtlib.datagen.providers.GTFluidTagProvider;
+import org.gtreimagined.gtlib.event.GTCraftingEvent;
+import org.gtreimagined.gtlib.event.GTLoaderEvent;
+import org.gtreimagined.gtlib.event.GTProvidersEvent;
+import org.gtreimagined.gtlib.event.GTWorldGenEvent;
+import org.gtreimagined.gtlib.recipe.loader.IRecipeRegistrate;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.gtreimagined.gt4r.GT4RRef;
@@ -74,12 +73,12 @@ import java.util.function.BiConsumer;
 public class AntimatterEvents {
 
     @SubscribeEvent
-    public static void registerWorldgen(AntimatterWorldGenEvent event){
+    public static void registerWorldgen(GTWorldGenEvent event){
         WorldGenLoader.init(event);
     }
 
     @SubscribeEvent
-    public static void registerRecipeLoaders(AntimatterLoaderEvent event) {
+    public static void registerRecipeLoaders(GTLoaderEvent event) {
         BiConsumer<String, IRecipeRegistrate.IRecipeLoader> loader = (a, b) -> event.registrat.add(GT4RRef.ID, a, b);
         loader.accept("wiremill", WiremillLoader::init);
         loader.accept("washer", WasherLoader::init);
@@ -125,7 +124,7 @@ public class AntimatterEvents {
         loader.accept("fusion", Fusion::init);
     }
 
-    public static void registerCraftingLoaders(AntimatterCraftingEvent event){
+    public static void registerCraftingLoaders(GTCraftingEvent event){
         event.addLoader(Parts::loadRecipes);
         event.addLoader(ToolCraftingTableRecipes::loadRecipes);
         event.addLoader(MachineCrafting::loadRecipes);
@@ -135,21 +134,21 @@ public class AntimatterEvents {
         event.addLoader(ToolCrafting::loadRecipes);
         event.addLoader(VanillaOverrides::loadRecipes);
         event.addLoader(WoodCrafting::loadRecipes);
-        if (AntimatterAPI.isModLoaded(GT4RRef.MOD_IE)){
+        if (GTAPI.isModLoaded(GT4RRef.MOD_IE)){
             event.addLoader(ModCompatRecipes::loadIE);
         }
     }
 
-    public static void onProviders(AntimatterProvidersEvent event){
-        final AntimatterBlockTagProvider[] p = new AntimatterBlockTagProvider[1];
+    public static void onProviders(GTProvidersEvent event){
+        final GTBlockTagProvider[] p = new GTBlockTagProvider[1];
         event.addProvider(() -> {
             p[0] = new GT4RBlockTagProvider(GT4RRef.ID, GT4RRef.NAME.concat(" Block Tags"), false);
             return p[0];
         });
         event.addProvider(() -> new GT4RItemTagProvider(GT4RRef.ID, GT4RRef.NAME.concat(" Item Tags"), false, p[0]));
-        event.addProvider(() -> new AntimatterFluidTagProvider(GT4RRef.ID, GT4RRef.NAME.concat(" Fluid Tags"), false));
+        event.addProvider(() -> new GTFluidTagProvider(GT4RRef.ID, GT4RRef.NAME.concat(" Fluid Tags"), false));
 
-        event.addProvider(() -> new AntimatterAdvancementProvider(GT4RRef.ID, GT4RRef.NAME.concat(" Advancements"), new ProgressionAdvancements()));
+        event.addProvider(() -> new GTAdvancementProvider(GT4RRef.ID, GT4RRef.NAME.concat(" Advancements"), new ProgressionAdvancements()));
 
         event.addProvider(() -> new GT4RBlockLootProvider(GT4RRef.ID, GT4RRef.NAME.concat( " Loot generator")));
     }

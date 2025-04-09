@@ -1,10 +1,9 @@
 package org.gtreimagined.gt4r.machine;
 
-import muramasa.antimatter.capability.FluidHandler;
-import muramasa.antimatter.capability.machine.MachineRecipeHandler;
-import muramasa.antimatter.machine.MachineState;
-import muramasa.antimatter.util.FluidUtils;
-import muramasa.antimatter.util.Utils;
+import org.gtreimagined.gtlib.capability.machine.MachineRecipeHandler;
+import org.gtreimagined.gtlib.machine.MachineState;
+import org.gtreimagined.gtlib.util.FluidUtils;
+import org.gtreimagined.gtlib.util.Utils;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -18,17 +17,14 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
-import tesseract.TesseractCapUtils;
-import tesseract.TesseractGraphWrappers;
 import org.gtreimagined.gt4r.blockentity.single.BlockEntityCoalBoiler;
 
 import java.util.Arrays;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static muramasa.antimatter.machine.MachineState.ACTIVE;
-import static muramasa.antimatter.machine.MachineState.IDLE;
-import static muramasa.antimatter.machine.Tier.BRONZE;
+import static org.gtreimagined.gtlib.machine.MachineState.ACTIVE;
+import static org.gtreimagined.gtlib.machine.MachineState.IDLE;
+import static org.gtreimagined.gtlib.machine.Tier.BRONZE;
 import static org.gtreimagined.gt4r.data.Materials.DistilledWater;
 import static org.gtreimagined.gt4r.data.Materials.Steam;
 

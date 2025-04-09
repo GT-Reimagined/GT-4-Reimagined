@@ -1,7 +1,7 @@
 package org.gtreimagined.gt4r.loader.multi;
 
-import static muramasa.antimatter.data.AntimatterMaterialTypes.DUST;
-import static muramasa.antimatter.data.AntimatterMaterials.Wood;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.DUST;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.Wood;
 import static org.gtreimagined.gt4r.data.Materials.*;
 import static org.gtreimagined.gt4r.data.RecipeMaps.DISTILLING;
 

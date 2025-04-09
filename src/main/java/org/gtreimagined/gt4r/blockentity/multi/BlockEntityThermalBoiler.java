@@ -1,13 +1,13 @@
 package org.gtreimagined.gt4r.blockentity.multi;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import muramasa.antimatter.blockentity.multi.BlockEntityMultiMachine;
-import muramasa.antimatter.capability.IFilterableHandler;
-import muramasa.antimatter.capability.machine.MachineRecipeHandler;
-import muramasa.antimatter.gui.SlotType;
-import muramasa.antimatter.machine.event.MachineEvent;
-import muramasa.antimatter.machine.types.Machine;
-import muramasa.antimatter.recipe.IRecipe;
+import org.gtreimagined.gtlib.blockentity.multi.BlockEntityMultiMachine;
+import org.gtreimagined.gtlib.capability.IFilterableHandler;
+import org.gtreimagined.gtlib.capability.machine.MachineRecipeHandler;
+import org.gtreimagined.gtlib.gui.SlotType;
+import org.gtreimagined.gtlib.machine.event.MachineEvent;
+import org.gtreimagined.gtlib.machine.types.Machine;
+import org.gtreimagined.gtlib.recipe.IRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;

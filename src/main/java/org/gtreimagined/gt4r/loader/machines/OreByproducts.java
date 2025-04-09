@@ -1,10 +1,10 @@
 package org.gtreimagined.gt4r.loader.machines;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import muramasa.antimatter.data.AntimatterMaterialTypes;
-import muramasa.antimatter.material.Material;
-import muramasa.antimatter.material.MaterialTags;
-import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
+import org.gtreimagined.gtlib.data.GTMaterialTypes;
+import org.gtreimagined.gtlib.material.Material;
+import org.gtreimagined.gtlib.material.MaterialTags;
+import org.gtreimagined.gtlib.recipe.ingredient.RecipeIngredient;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -16,17 +16,16 @@ import org.gtreimagined.gt4r.data.Materials;
 
 import java.util.List;
 
-import static muramasa.antimatter.data.AntimatterMaterials.Water;
-import static muramasa.antimatter.machine.Tier.LV;
-import static muramasa.antimatter.machine.Tier.MV;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.Water;
+import static org.gtreimagined.gtlib.machine.Tier.LV;
 import static org.gtreimagined.gt4r.data.RecipeMaps.ORE_BYPRODUCTS;
 
 public class OreByproducts {
     public static void init() {
-        AntimatterMaterialTypes.CRUSHED.all().forEach(m -> {
-            if (!m.has(AntimatterMaterialTypes.ORE)) return;
-            RecipeIngredient ore = AntimatterMaterialTypes.ORE.getMaterialIngredient(m ,1);
-            RecipeIngredient crushed = AntimatterMaterialTypes.CRUSHED.getIngredient(m, 1);
+        GTMaterialTypes.CRUSHED.all().forEach(m -> {
+            if (!m.has(GTMaterialTypes.ORE)) return;
+            RecipeIngredient ore = GTMaterialTypes.ORE.getMaterialIngredient(m ,1);
+            RecipeIngredient crushed = GTMaterialTypes.CRUSHED.getIngredient(m, 1);
             if (m.hasByProducts()) {
                 List<Material> byProducts = m.getByProducts();
                 int byProductsCount = byProducts.size();
@@ -45,14 +44,14 @@ public class OreByproducts {
                 ores.add(RecipeIngredient.of(Machines.CENTRIFUGE.getItem(LV), 1));
                 ores.add(RecipeIngredient.of(1, new ItemStack(Machines.ORE_WASHER.getItem(LV)), new ItemStack(Blocks.CAULDRON)));
                 List<FluidStack> fluids = new ObjectArrayList<>();
-                if (m.has(AntimatterMaterialTypes.ORE)) ores.add(ore);
-                if (m.has(AntimatterMaterialTypes.CRUSHED)) {
-                    ores.add(AntimatterMaterialTypes.CRUSHED.getIngredient(m, 2 * MaterialTags.ORE_MULTI.getInt(m)));
+                if (m.has(GTMaterialTypes.ORE)) ores.add(ore);
+                if (m.has(GTMaterialTypes.CRUSHED)) {
+                    ores.add(GTMaterialTypes.CRUSHED.getIngredient(m, 2 * MaterialTags.ORE_MULTI.getInt(m)));
                     ores.add(crushed);
-                    ores.add(AntimatterMaterialTypes.CRUSHED_PURIFIED.getIngredient(m, 1));
-                    ores.add(AntimatterMaterialTypes.DUST_PURE.getIngredient(m, 1));
-                    ores.add(AntimatterMaterialTypes.DUST_IMPURE.getIngredient(m, 1));
-                    ores.add(AntimatterMaterialTypes.CRUSHED_REFINED.getIngredient(m, 1));
+                    ores.add(GTMaterialTypes.CRUSHED_PURIFIED.getIngredient(m, 1));
+                    ores.add(GTMaterialTypes.DUST_PURE.getIngredient(m, 1));
+                    ores.add(GTMaterialTypes.DUST_IMPURE.getIngredient(m, 1));
+                    ores.add(GTMaterialTypes.CRUSHED_REFINED.getIngredient(m, 1));
                     fluids.add(Water.getLiquid(1000));
                 }
 
@@ -61,28 +60,28 @@ public class OreByproducts {
                 Material oreByProduct3 = m.getByProducts().size() > 2 ? m.getByProducts().get(2) : oreByProduct2;
 
                 List<ItemStack> dusts = new ObjectArrayList<>();
-                if (MaterialTags.SMELT_INTO.getMapping(m).has(AntimatterMaterialTypes.INGOT) && !m.has(GT4RMaterialTags.NEEDS_BLAST_FURNACE)){
-                    dusts.add(AntimatterMaterialTypes.INGOT.get(MaterialTags.SMELT_INTO.getMapping(m), MaterialTags.SMELTING_MULTI.getInt(m)));
+                if (MaterialTags.SMELT_INTO.getMapping(m).has(GTMaterialTypes.INGOT) && !m.has(GT4RMaterialTags.NEEDS_BLAST_FURNACE)){
+                    dusts.add(GTMaterialTypes.INGOT.get(MaterialTags.SMELT_INTO.getMapping(m), MaterialTags.SMELTING_MULTI.getInt(m)));
                 } else {
                     dusts.add(new ItemStack(Items.BARRIER));
                 }
-                dusts.add(AntimatterMaterialTypes.DUST_TINY.get(oreByProduct1, 1));
-                dusts.add(AntimatterMaterialTypes.DUST.get(oreByProduct2, 1));
-                dusts.add(AntimatterMaterialTypes.DUST.get(oreByProduct1, 1));
-                dusts.add(AntimatterMaterialTypes.DUST.get(oreByProduct1, 1));
-                dusts.add(AntimatterMaterialTypes.DUST.get(m, 1));
-                dusts.add(AntimatterMaterialTypes.DUST_TINY.get(oreByProduct1, 1));
-                dusts.add(AntimatterMaterialTypes.DUST.get(m, 1));
-                dusts.add(AntimatterMaterialTypes.DUST.get(oreByProduct3, 1));
-                dusts.add(AntimatterMaterialTypes.DUST_TINY.get(oreByProduct2, 1));
-                dusts.add(AntimatterMaterialTypes.DUST.get(m, 1));
-                dusts.add(AntimatterMaterialTypes.DUST_TINY.get(oreByProduct2, 1));
-                dusts.add(AntimatterMaterialTypes.CRUSHED_PURIFIED.get(m, 1));
-                dusts.add(AntimatterMaterialTypes.DUST_TINY.get(oreByProduct1, 1));
+                dusts.add(GTMaterialTypes.DUST_TINY.get(oreByProduct1, 1));
+                dusts.add(GTMaterialTypes.DUST.get(oreByProduct2, 1));
+                dusts.add(GTMaterialTypes.DUST.get(oreByProduct1, 1));
+                dusts.add(GTMaterialTypes.DUST.get(oreByProduct1, 1));
+                dusts.add(GTMaterialTypes.DUST.get(m, 1));
+                dusts.add(GTMaterialTypes.DUST_TINY.get(oreByProduct1, 1));
+                dusts.add(GTMaterialTypes.DUST.get(m, 1));
+                dusts.add(GTMaterialTypes.DUST.get(oreByProduct3, 1));
+                dusts.add(GTMaterialTypes.DUST_TINY.get(oreByProduct2, 1));
+                dusts.add(GTMaterialTypes.DUST.get(m, 1));
+                dusts.add(GTMaterialTypes.DUST_TINY.get(oreByProduct2, 1));
+                dusts.add(GTMaterialTypes.CRUSHED_PURIFIED.get(m, 1));
+                dusts.add(GTMaterialTypes.DUST_TINY.get(oreByProduct1, 1));
                 if (m.has(GT4RMaterialTags.BATHING_MERCURY) || m.has(GT4RMaterialTags.BATHING_PERSULFATE)){
                     if (m.has(GT4RMaterialTags.BATHING_PERSULFATE)){
-                        ores.add(AntimatterMaterialTypes.CRUSHED_PURIFIED.getIngredient(m, 1));
-                        dusts.add(AntimatterMaterialTypes.DUST.get(GT4RMaterialTags.BATHING_PERSULFATE.getMapping(m), 1));
+                        ores.add(GTMaterialTypes.CRUSHED_PURIFIED.getIngredient(m, 1));
+                        dusts.add(GTMaterialTypes.DUST.get(GT4RMaterialTags.BATHING_PERSULFATE.getMapping(m), 1));
                         fluids.add(Materials.SodiumPersulfate.getLiquid(100));
                         ORE_BYPRODUCTS.RB().ii(ores).fi(fluids).io(dusts.toArray(new ItemStack[0])).outputChances(1.0, 1.0, 0.1, 0.1, 0.1, 1.0, 1.0, 1.0, 0.1, 1.0, 1.0, 1.0, 1.0, 0.5, 0.7).add(m.getId() + "_byproducts");
                         ores.remove(ores.size() - 1);
@@ -90,8 +89,8 @@ public class OreByproducts {
                         fluids.remove(1);
                     }
                     if (m.has(GT4RMaterialTags.BATHING_MERCURY)){
-                        ores.add(AntimatterMaterialTypes.CRUSHED_PURIFIED.getIngredient(m, 1));
-                        dusts.add(AntimatterMaterialTypes.DUST.get(GT4RMaterialTags.BATHING_MERCURY.getMapping(m), 1));
+                        ores.add(GTMaterialTypes.CRUSHED_PURIFIED.getIngredient(m, 1));
+                        dusts.add(GTMaterialTypes.DUST.get(GT4RMaterialTags.BATHING_MERCURY.getMapping(m), 1));
                         fluids.add(Materials.Mercury.getLiquid(100));
                         ORE_BYPRODUCTS.RB().ii(ores).fi(fluids).io(dusts.toArray(new ItemStack[0])).outputChances(1.0, 1.0, 0.1, 0.1, 0.1, 1.0, 1.0, 1.0, 0.1, 1.0, 1.0, 1.0, 1.0, 0.5, 0.7).add(m.getId() + "_byproducts_1");
                     }

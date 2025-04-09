@@ -6,8 +6,8 @@ import org.gtreimagined.gtcore.data.GTCoreBlocks;
 import org.gtreimagined.gtcore.data.GTCoreItems;
 import org.gtreimagined.gtcore.data.GTCoreTags;
 
-import static muramasa.antimatter.data.AntimatterMaterialTypes.DUST;
-import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.DUST;
+import static org.gtreimagined.gtlib.recipe.ingredient.RecipeIngredient.of;
 import static org.gtreimagined.gt4r.data.Materials.Rubber;
 import static org.gtreimagined.gt4r.data.RecipeMaps.EXTRACTOR;
 

@@ -1,9 +1,9 @@
 package org.gtreimagined.gt4r.blockentity.single;
 
-import muramasa.antimatter.blockentity.BlockEntityMachine;
-import muramasa.antimatter.machine.Tier;
-import muramasa.antimatter.machine.types.Machine;
-import muramasa.antimatter.tool.AntimatterToolType;
+import org.gtreimagined.gtlib.blockentity.BlockEntityMachine;
+import org.gtreimagined.gtlib.machine.Tier;
+import org.gtreimagined.gtlib.machine.types.Machine;
+import org.gtreimagined.gtlib.tool.GTToolType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
@@ -62,7 +62,7 @@ public class BlockEntityCoalBoiler extends BlockEntityMachine<BlockEntityCoalBoi
     }
 
     @Override
-    public InteractionResult onInteractServer(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit, @Nullable AntimatterToolType type) {
+    public InteractionResult onInteractServer(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit, @Nullable GTToolType type) {
         if (player.getItemInHand(hand).getItem() == GT4RItems.SteelUpgrade){
             CompoundTag nbt = new CompoundTag();
             this.saveAdditional(nbt);

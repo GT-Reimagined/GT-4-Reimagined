@@ -1,12 +1,12 @@
 package org.gtreimagined.gt4r.material;
 
-import muramasa.antimatter.data.AntimatterMaterialTypes;
-import muramasa.antimatter.event.MaterialEvent;
-import muramasa.antimatter.material.IMaterialTag;
+import org.gtreimagined.gtlib.data.GTMaterialTypes;
+import org.gtreimagined.gtlib.event.MaterialEvent;
+import org.gtreimagined.gtlib.material.IMaterialTag;
 import org.gtreimagined.gt4r.data.GT4RMaterialTags;
 
-import static muramasa.antimatter.material.MaterialTags.HAS_CUSTOM_SMELTING;
-import static muramasa.antimatter.material.MaterialTags.METAL;
+import static org.gtreimagined.gtlib.material.MaterialTags.HAS_CUSTOM_SMELTING;
+import static org.gtreimagined.gtlib.material.MaterialTags.METAL;
 
 public class GT4RMaterialEvent extends MaterialEvent<GT4RMaterialEvent> {
     public GT4RMaterialEvent asSolid(int meltingPoint, int blastFurnaceTemp, IMaterialTag... tags) {
@@ -16,7 +16,7 @@ public class GT4RMaterialEvent extends MaterialEvent<GT4RMaterialEvent> {
             flags(GT4RMaterialTags.NEEDS_BLAST_FURNACE, HAS_CUSTOM_SMELTING);
         }
         if (blastFurnaceTemp > 1750) {
-            flags(AntimatterMaterialTypes.INGOT_HOT);
+            flags(GTMaterialTypes.INGOT_HOT);
         }
         return this;
     }

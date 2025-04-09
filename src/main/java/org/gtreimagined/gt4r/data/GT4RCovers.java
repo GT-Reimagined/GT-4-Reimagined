@@ -1,8 +1,8 @@
 package org.gtreimagined.gt4r.data;
 
-import muramasa.antimatter.cover.CoverFactory;
-import muramasa.antimatter.item.ItemCover;
-import muramasa.antimatter.texture.Texture;
+import org.gtreimagined.gtlib.cover.CoverFactory;
+import org.gtreimagined.gtlib.item.ItemCover;
+import org.gtreimagined.gtlib.texture.Texture;
 import org.gtreimagined.gt4r.GT4RRef;
 import org.gtreimagined.gt4r.cover.CoverConveyor;
 import org.gtreimagined.gt4r.cover.CoverCrafting;

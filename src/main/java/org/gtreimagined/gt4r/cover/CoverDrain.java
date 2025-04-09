@@ -1,13 +1,12 @@
 package org.gtreimagined.gt4r.cover;
 
-import muramasa.antimatter.blockentity.pipe.BlockEntityFluidPipe;
-import muramasa.antimatter.capability.FluidHandler;
-import muramasa.antimatter.capability.ICoverHandler;
-import muramasa.antimatter.cover.BaseCover;
-import muramasa.antimatter.cover.CoverFactory;
-import muramasa.antimatter.machine.Tier;
-import muramasa.antimatter.util.FluidUtils;
-import muramasa.antimatter.util.Utils;
+import org.gtreimagined.gtlib.blockentity.pipe.BlockEntityFluidPipe;
+import org.gtreimagined.gtlib.capability.ICoverHandler;
+import org.gtreimagined.gtlib.cover.BaseCover;
+import org.gtreimagined.gtlib.cover.CoverFactory;
+import org.gtreimagined.gtlib.machine.Tier;
+import org.gtreimagined.gtlib.util.FluidUtils;
+import org.gtreimagined.gtlib.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -30,10 +29,7 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import org.jetbrains.annotations.Nullable;
-import tesseract.TesseractGraphWrappers;
 import org.gtreimagined.gt4r.GT4RRef;
-
-import java.util.Optional;
 
 public class CoverDrain extends BaseCover {
     public static String ID = "drain";

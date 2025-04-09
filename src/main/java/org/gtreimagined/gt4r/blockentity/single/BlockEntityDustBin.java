@@ -1,8 +1,8 @@
 package org.gtreimagined.gt4r.blockentity.single;
 
-import muramasa.antimatter.blockentity.BlockEntityMachine;
-import muramasa.antimatter.machine.types.Machine;
-import muramasa.antimatter.util.Utils;
+import org.gtreimagined.gtlib.blockentity.BlockEntityMachine;
+import org.gtreimagined.gtlib.machine.types.Machine;
+import org.gtreimagined.gtlib.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -11,7 +11,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.CapabilityItemHandler;
-import tesseract.TesseractCapUtils;
 
 import static net.minecraft.core.Direction.DOWN;
 

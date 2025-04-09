@@ -1,13 +1,13 @@
 package org.gtreimagined.gt4r.blockentity.single;
 
-import muramasa.antimatter.blockentity.single.BlockEntityGenerator;
-import muramasa.antimatter.capability.machine.MachineEnergyHandler;
-import muramasa.antimatter.machine.types.Machine;
+import org.gtreimagined.gtlib.blockentity.single.BlockEntityGenerator;
+import org.gtreimagined.gtlib.capability.machine.MachineEnergyHandler;
+import org.gtreimagined.gtlib.machine.types.Machine;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
 
-import static muramasa.antimatter.machine.MachineFlag.GENERATOR;
+import static org.gtreimagined.gtlib.machine.MachineFlag.GENERATOR;
 
 public class BlockEntityWatermill extends BlockEntityGenerator<BlockEntityWatermill> {
     public BlockEntityWatermill(Machine<?> type, BlockPos pos, BlockState state) {

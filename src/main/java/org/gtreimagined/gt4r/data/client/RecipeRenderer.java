@@ -1,10 +1,10 @@
 package org.gtreimagined.gt4r.data.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import muramasa.antimatter.integration.jeirei.renderer.IRecipeInfoRenderer;
-import muramasa.antimatter.integration.jeirei.renderer.InfoRenderers;
-import muramasa.antimatter.machine.Tier;
-import muramasa.antimatter.recipe.IRecipe;
+import org.gtreimagined.gtlib.integration.jeirei.renderer.IRecipeInfoRenderer;
+import org.gtreimagined.gtlib.integration.jeirei.renderer.InfoRenderers;
+import org.gtreimagined.gtlib.machine.Tier;
+import org.gtreimagined.gtlib.recipe.IRecipe;
 import net.minecraft.client.gui.Font;
 import org.gtreimagined.gt4r.data.RecipeMaps;
 

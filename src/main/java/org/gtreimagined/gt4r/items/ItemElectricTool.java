@@ -6,18 +6,18 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.Ref;
-import muramasa.antimatter.behaviour.IBehaviour;
-import muramasa.antimatter.behaviour.IDestroySpeed;
-import muramasa.antimatter.capability.energy.ItemEnergyHandler;
-import muramasa.antimatter.data.AntimatterDefaultTools;
-import muramasa.antimatter.item.ItemBasic;
-import muramasa.antimatter.material.Material;
-import muramasa.antimatter.texture.Texture;
-import muramasa.antimatter.tool.AntimatterToolType;
-import muramasa.antimatter.tool.IBasicAntimatterTool;
-import muramasa.antimatter.util.Utils;
+import org.gtreimagined.gtlib.GTAPI;
+import org.gtreimagined.gtlib.Ref;
+import org.gtreimagined.gtlib.behaviour.IBehaviour;
+import org.gtreimagined.gtlib.behaviour.IDestroySpeed;
+import org.gtreimagined.gtlib.capability.energy.ItemEnergyHandler;
+import org.gtreimagined.gtlib.data.GTTools;
+import org.gtreimagined.gtlib.item.ItemBasic;
+import org.gtreimagined.gtlib.material.Material;
+import org.gtreimagined.gtlib.texture.Texture;
+import org.gtreimagined.gtlib.tool.GTToolType;
+import org.gtreimagined.gtlib.tool.IBasicGTTool;
+import org.gtreimagined.gtlib.util.Utils;
 import net.minecraft.client.Camera;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -62,12 +62,12 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IElectricTool {
-    final AntimatterToolType type;
+    final GTToolType type;
     private final Material baseMaterial;
     int energyTier;
     final Tier itemTier;
-    final Object2ObjectMap<String, IBehaviour<IBasicAntimatterTool>> behaviours;
-    public ItemElectricTool(String id, AntimatterToolType base, Material baseMaterial, float miningSpeed, float attackDamage, int quality, int energyTier, Predicate<IBehaviour<?>> behaviourFilter) {
+    final Object2ObjectMap<String, IBehaviour<IBasicGTTool>> behaviours;
+    public ItemElectricTool(String id, GTToolType base, Material baseMaterial, float miningSpeed, float attackDamage, int quality, int energyTier, Predicate<IBehaviour<?>> behaviourFilter) {
         super(GT4RRef.ID, id, new Item.Properties().tab(Ref.TAB_ITEMS).setNoRepair().durability(1));
         type = base;
         this.baseMaterial = baseMaterial;
@@ -79,11 +79,11 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
                 behaviours.put(s, b);
             }
         });
-        AntimatterAPI.register(IElectricTool.class, this);
+        GTAPI.register(IElectricTool.class, this);
     }
 
     @Override
-    public AntimatterToolType getAntimatterToolType() {
+    public GTToolType getAntimatterToolType() {
         return type;
     }
 
@@ -98,7 +98,7 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
     }
 
     @Override
-    public Object2ObjectMap<String, IBehaviour<IBasicAntimatterTool>> getBehaviours(){
+    public Object2ObjectMap<String, IBehaviour<IBasicGTTool>> getBehaviours(){
         return behaviours;
     }
 
@@ -128,7 +128,7 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
     }
 
     public boolean doesSneakBypassUse(ItemStack stack, LevelReader world, BlockPos pos, Player player) {
-        return Utils.doesStackHaveToolTypes(stack, AntimatterDefaultTools.WRENCH, AntimatterDefaultTools.SCREWDRIVER, AntimatterDefaultTools.CROWBAR, AntimatterDefaultTools.WIRE_CUTTER); // ???
+        return Utils.doesStackHaveToolTypes(stack, GTTools.WRENCH, GTTools.SCREWDRIVER, GTTools.CROWBAR, GTTools.WIRE_CUTTER); // ???
     }
 
     //fabric method
@@ -173,7 +173,7 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
         if (type.isPowered() && !hasEnoughDurability(stack, 1, true)){
             destroySpeed = 0.0f;
         }
-        for (Map.Entry<String, IBehaviour<IBasicAntimatterTool>> e : getBehaviours().entrySet()) {
+        for (Map.Entry<String, IBehaviour<IBasicGTTool>> e : getBehaviours().entrySet()) {
             IBehaviour<?> b = e.getValue();
             if (!(b instanceof IDestroySpeed destroySpeed1)) continue;
             float i = destroySpeed1.getDestroySpeed(this, destroySpeed, stack, state);

@@ -1,15 +1,15 @@
 package org.gtreimagined.gt4r.blockentity.single;
 
-import muramasa.antimatter.blockentity.BlockEntityMachine;
-import muramasa.antimatter.capability.machine.MachineFluidHandler;
-import muramasa.antimatter.capability.machine.MachineRecipeHandler;
-import muramasa.antimatter.machine.MachineFlag;
-import muramasa.antimatter.machine.MachineState;
-import muramasa.antimatter.machine.Tier;
-import muramasa.antimatter.machine.types.Machine;
-import muramasa.antimatter.recipe.IRecipe;
-import muramasa.antimatter.tool.AntimatterToolType;
-import muramasa.antimatter.util.TagUtils;
+import org.gtreimagined.gtlib.blockentity.BlockEntityMachine;
+import org.gtreimagined.gtlib.capability.machine.MachineFluidHandler;
+import org.gtreimagined.gtlib.capability.machine.MachineRecipeHandler;
+import org.gtreimagined.gtlib.machine.MachineFlag;
+import org.gtreimagined.gtlib.machine.MachineState;
+import org.gtreimagined.gtlib.machine.Tier;
+import org.gtreimagined.gtlib.machine.types.Machine;
+import org.gtreimagined.gtlib.recipe.IRecipe;
+import org.gtreimagined.gtlib.tool.GTToolType;
+import org.gtreimagined.gtlib.util.TagUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.tags.TagKey;
@@ -23,10 +23,9 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.Nullable;
-import tesseract.TesseractGraphWrappers;
 import org.gtreimagined.gt4r.data.GT4RItems;
 
-import static muramasa.antimatter.machine.Tier.BRONZE;
+import static org.gtreimagined.gtlib.machine.Tier.BRONZE;
 import static org.gtreimagined.gt4r.data.Machines.STEAM_FORGE_HAMMER;
 
 public class BlockEntitySteamMachine extends BlockEntityMachine<BlockEntitySteamMachine> {
@@ -45,7 +44,7 @@ public class BlockEntitySteamMachine extends BlockEntityMachine<BlockEntitySteam
     }
 
     @Override
-    public InteractionResult onInteractServer(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit, @Nullable AntimatterToolType type) {
+    public InteractionResult onInteractServer(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit, @Nullable GTToolType type) {
         if (player.getItemInHand(hand).getItem() == GT4RItems.SteelUpgrade){
             CompoundTag nbt = new CompoundTag();
             this.saveAdditional(nbt);

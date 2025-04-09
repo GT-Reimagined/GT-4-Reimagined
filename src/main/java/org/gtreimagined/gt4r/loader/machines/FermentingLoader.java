@@ -1,9 +1,9 @@
 package org.gtreimagined.gt4r.loader.machines;
 
-import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
+import org.gtreimagined.gtlib.recipe.ingredient.RecipeIngredient;
 import org.gtreimagined.gtcore.data.GTCoreItems;
 
-import static muramasa.antimatter.data.AntimatterMaterials.Water;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.Water;
 import static org.gtreimagined.gt4r.data.Materials.*;
 import static org.gtreimagined.gt4r.data.RecipeMaps.FERMENTER;
 

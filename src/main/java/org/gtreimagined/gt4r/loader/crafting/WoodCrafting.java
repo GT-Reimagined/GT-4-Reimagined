@@ -1,9 +1,9 @@
 package org.gtreimagined.gt4r.loader.crafting;
 
-import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
-import muramasa.antimatter.util.RegistryUtils;
-import muramasa.antimatter.util.TagUtils;
+import org.gtreimagined.gtlib.GTAPI;
+import org.gtreimagined.gtlib.datagen.providers.GTRecipeProvider;
+import org.gtreimagined.gtlib.util.RegistryUtils;
+import org.gtreimagined.gtlib.util.TagUtils;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -15,26 +15,26 @@ import org.gtreimagined.gt4r.GT4RRef;
 import java.util.function.Consumer;
 
 import static com.google.common.collect.ImmutableMap.of;
-import static muramasa.antimatter.data.AntimatterDefaultTools.SAW;
+import static org.gtreimagined.gtlib.data.GTTools.SAW;
 
 public class WoodCrafting {
 
-    public static void loadRecipes(Consumer<FinishedRecipe> consumer, AntimatterRecipeProvider provider) {
-        if (AntimatterAPI.isModLoaded(GT4RRef.MOD_TERRESTRIA)){
+    public static void loadRecipes(Consumer<FinishedRecipe> consumer, GTRecipeProvider provider) {
+        if (GTAPI.isModLoaded(GT4RRef.MOD_TERRESTRIA)){
             String[] woodTypes = {"cypress", "hemlock", "japanese_maple", "rainbow_eucalyptus", "redwood", "rubber", "sakura", "willow", "yucca_palm"};
             for (String woodType : woodTypes) {
                 addWoodRecipe(consumer, provider, GT4RRef.MOD_TERRESTRIA, TagUtils.getItemTag(new ResourceLocation(GT4RRef.MOD_TERRESTRIA, woodType + "_logs")), RegistryUtils.getItemFromID(new ResourceLocation(GT4RRef.MOD_TERRESTRIA, woodType + "_planks")));
             }
 
         }
-        if (AntimatterAPI.isModLoaded(GT4RRef.MOD_CINDERSCAPES)){
+        if (GTAPI.isModLoaded(GT4RRef.MOD_CINDERSCAPES)){
             String[] woodTypes = {"scorched", "umbral"};
             for (String woodType : woodTypes) {
                 addWoodRecipe(consumer, provider, GT4RRef.MOD_CINDERSCAPES, TagUtils.getItemTag(new ResourceLocation(GT4RRef.MOD_CINDERSCAPES, woodType + "_stems")), RegistryUtils.getItemFromID(new ResourceLocation(GT4RRef.MOD_CINDERSCAPES, woodType + "_planks")));
             }
 
         }
-        if (AntimatterAPI.isModLoaded(GT4RRef.MOD_TERRESTRIA)){
+        if (GTAPI.isModLoaded(GT4RRef.MOD_TERRESTRIA)){
             String[] woodTypes = {"cypress", "hemlock", "japanese_maple", "rainbow_eucalyptus", "redwood", "rubber", "sakura", "willow", "yucca_palm"};
             for (String woodType : woodTypes) {
                 ResourceLocation name = new ResourceLocation(GT4RRef.MOD_TERRESTRIA,woodType + "_planks");
@@ -43,7 +43,7 @@ public class WoodCrafting {
             }
 
         }
-        if (AntimatterAPI.isModLoaded(GT4RRef.MOD_CINDERSCAPES)){
+        if (GTAPI.isModLoaded(GT4RRef.MOD_CINDERSCAPES)){
             String[] woodTypes = {"scorched", "umbral"};
             for (String woodType : woodTypes) {
                 ResourceLocation name = new ResourceLocation(GT4RRef.MOD_CINDERSCAPES,woodType + "_planks");
@@ -53,7 +53,7 @@ public class WoodCrafting {
         }
     }
 
-    public static void addWoodRecipe(Consumer<FinishedRecipe> consumer, AntimatterRecipeProvider provider, String domain, TagKey<Item> log, Item plank){
+    public static void addWoodRecipe(Consumer<FinishedRecipe> consumer, GTRecipeProvider provider, String domain, TagKey<Item> log, Item plank){
         if (GTCoreConfig.HARDER_WOOD.get()){
             provider.shapeless(consumer, domain, "", "planks", new ItemStack(plank, 2), log);
             provider.addStackRecipe(consumer, domain, plank.getRegistryName().getPath() + "_4", "planks", new ItemStack(plank, 4), of('S', SAW.getTag(), 'P', log), "S", "P");

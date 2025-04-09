@@ -1,8 +1,8 @@
 package org.gtreimagined.gt4r.items;
 
-import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.material.Material;
-import muramasa.antimatter.texture.Texture;
+import org.gtreimagined.gtlib.GTAPI;
+import org.gtreimagined.gtlib.material.Material;
+import org.gtreimagined.gtlib.texture.Texture;
 import org.gtreimagined.gtcore.item.ItemPowerUnit;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import static org.gtreimagined.gt4r.data.GT4RItems.RockCutterPowerUnit;
 public class ItemRockCutterUnit extends ItemPowerUnit {
     public ItemRockCutterUnit(String domain, String id, Material material) {
         super(domain, id, material);
-        AntimatterAPI.register(ItemPowerUnit.class, this);
+        GTAPI.register(ItemPowerUnit.class, this);
     }
 
     @Override

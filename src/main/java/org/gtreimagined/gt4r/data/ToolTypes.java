@@ -1,15 +1,15 @@
 package org.gtreimagined.gt4r.data;
 
 import com.google.common.collect.ImmutableMap;
-import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.Ref;
-import muramasa.antimatter.data.AntimatterDefaultTools;
-import muramasa.antimatter.item.ItemBattery;
-import muramasa.antimatter.material.Material;
-import muramasa.antimatter.recipe.ingredient.PropertyIngredient;
-import muramasa.antimatter.recipe.material.MaterialRecipe;
-import muramasa.antimatter.tool.AntimatterToolType;
-import muramasa.antimatter.tool.IAntimatterTool;
+import org.gtreimagined.gtlib.GTAPI;
+import org.gtreimagined.gtlib.Ref;
+import org.gtreimagined.gtlib.data.GTTools;
+import org.gtreimagined.gtlib.item.ItemBattery;
+import org.gtreimagined.gtlib.material.Material;
+import org.gtreimagined.gtlib.recipe.ingredient.PropertyIngredient;
+import org.gtreimagined.gtlib.recipe.material.MaterialRecipe;
+import org.gtreimagined.gtlib.tool.GTToolType;
+import org.gtreimagined.gtlib.tool.IGTTool;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.inventory.CraftingContainer;
@@ -19,7 +19,6 @@ import org.gtreimagined.gtcore.GTCore;
 import org.gtreimagined.gtcore.data.GTCoreTags;
 import org.gtreimagined.gtcore.item.ItemPowerUnit;
 import org.jetbrains.annotations.NotNull;
-import tesseract.TesseractCapUtils;
 import tesseract.api.forge.TesseractCaps;
 import tesseract.api.gt.IEnergyHandlerItem;
 import tesseract.api.gt.IGTNode;
@@ -29,7 +28,7 @@ import org.gtreimagined.gt4r.items.MaterialRockCutter;
 
 import java.util.Map;
 
-import static muramasa.antimatter.material.Material.NULL;
+import static org.gtreimagined.gtlib.material.Material.NULL;
 import static net.minecraft.world.level.material.Material.*;
 import static org.gtreimagined.gt4r.data.GT4RItems.RockCutterPowerUnit;
 
@@ -41,15 +40,15 @@ public class ToolTypes {
             Material m = (Material) mats.mats.get("secondary");
             Tuple<Long, Long> battery = (Tuple<Long, Long>) mats.mats.get("battery");
             String domain = id.equals(ROCK_CUTTER.getId()) ? GT4RRef.ID : GTCore.ID;
-            IAntimatterTool type = AntimatterAPI.get(IAntimatterTool.class, id.replace('-', '_'), domain);
+            IGTTool type = GTAPI.get(IGTTool.class, id.replace('-', '_'), domain);
             return type.resolveStack((Material) mats.mats.get("primary"), m == null ? NULL : m, battery.getA(), battery.getB());
         }
 
         @Override
         public Map<String, Object> getFromResult(@NotNull ItemStack stack) {
             CompoundTag nbt = stack.getTag().getCompound(Ref.TAG_TOOL_DATA);
-            Material primary = AntimatterAPI.get(Material.class, nbt.getString(Ref.KEY_TOOL_DATA_PRIMARY_MATERIAL));
-            Material secondary = AntimatterAPI.get(Material.class, nbt.getString(Ref.KEY_TOOL_DATA_SECONDARY_MATERIAL));
+            Material primary = GTAPI.get(Material.class, nbt.getString(Ref.KEY_TOOL_DATA_PRIMARY_MATERIAL));
+            Material secondary = GTAPI.get(Material.class, nbt.getString(Ref.KEY_TOOL_DATA_SECONDARY_MATERIAL));
             return ImmutableMap.of("primary", primary, "secondary", secondary, "energy", getEnergy(stack).getA(), "maxEnergy", getEnergy(stack).getB());
         }
     });
@@ -59,7 +58,7 @@ public class ToolTypes {
         @Override
         public ItemStack build(CraftingContainer inv, MaterialRecipe.Result mats) {
             Tuple<Long, Long> battery = (Tuple<Long, Long>) mats.mats.get("battery");
-            IElectricTool type = AntimatterAPI.get(IElectricTool.class, id.replace('-', '_'), GT4RRef.ID);
+            IElectricTool type = GTAPI.get(IElectricTool.class, id.replace('-', '_'), GT4RRef.ID);
             return type.resolveStack(battery.getA(), battery.getB());
         }
 
@@ -75,7 +74,7 @@ public class ToolTypes {
         public ItemStack build(CraftingContainer inv, MaterialRecipe.Result mats) {
             Tuple<Long, Tuple<Long, Material>> t = (Tuple<Long, Tuple<Long, Material>>) mats.mats.get("secondary");
             String domain = id.contains(ROCK_CUTTER.getId()) ? GT4RRef.ID : GTCore.ID;
-            IAntimatterTool type = AntimatterAPI.get(IAntimatterTool.class, id.replace('-', '_'), domain);
+            IGTTool type = GTAPI.get(IGTTool.class, id.replace('-', '_'), domain);
             t.getB().getB();
             return type.resolveStack((Material) mats.mats.get("primary"), t.getB().getB(), t.getA(), t.getB().getA());
         }
@@ -83,12 +82,12 @@ public class ToolTypes {
         @Override
         public Map<String, Object> getFromResult(@NotNull ItemStack stack) {
             CompoundTag nbt = stack.getTag().getCompound(Ref.TAG_TOOL_DATA);
-            Material primary = AntimatterAPI.get(Material.class, nbt.getString(Ref.KEY_TOOL_DATA_PRIMARY_MATERIAL));
-            Material secondary = AntimatterAPI.get(Material.class, nbt.getString(Ref.KEY_TOOL_DATA_SECONDARY_MATERIAL));
+            Material primary = GTAPI.get(Material.class, nbt.getString(Ref.KEY_TOOL_DATA_PRIMARY_MATERIAL));
+            Material secondary = GTAPI.get(Material.class, nbt.getString(Ref.KEY_TOOL_DATA_SECONDARY_MATERIAL));
             return ImmutableMap.of("primary", primary, "secondary", secondary, "energy", getEnergy(stack).getA(), "maxEnergy", getEnergy(stack).getB());
         }
     });
-    public static AntimatterToolType ROCK_CUTTER = AntimatterAPI.register(AntimatterToolType.class, new AntimatterToolType(GT4RRef.ID, "rock_cutter", 1, 1, 1, -1.0F, -3.0F, false)).setPowered(100000L, 1).setRepairable(false).setOverlayLayers(2).addEffectiveMaterials(ICE_SOLID, METAL, STONE, HEAVY_METAL, PISTON).setBrokenItems(ImmutableMap.of("rock_cutter", i -> getBrokenItem(i, RockCutterPowerUnit))).setType(AntimatterDefaultTools.PICKAXE).setToolSpeedMultiplier(0.25f).setToolSupplier((domain, toolType, tier, properties) -> new MaterialRockCutter(domain, toolType, properties, 1));
+    public static GTToolType ROCK_CUTTER = GTAPI.register(GTToolType.class, new GTToolType(GT4RRef.ID, "rock_cutter", 1, 1, 1, -1.0F, -3.0F, false)).setPowered(100000L, 1).setRepairable(false).setOverlayLayers(2).addEffectiveMaterials(ICE_SOLID, METAL, STONE, HEAVY_METAL, PISTON).setBrokenItems(ImmutableMap.of("rock_cutter", i -> getBrokenItem(i, RockCutterPowerUnit))).setType(GTTools.PICKAXE).setToolSpeedMultiplier(0.25f).setToolSupplier((domain, toolType, tier, properties) -> new MaterialRockCutter(domain, toolType, properties, 1));
 
     static {
         PropertyIngredient.addGetter(GTCoreTags.BATTERIES_LV.location(), ToolTypes::getEnergy);
@@ -127,7 +126,7 @@ public class ToolTypes {
             long maxEnergy = stack.getCapability(TesseractCaps.ENERGY_HANDLER_CAPABILITY_ITEM).map(IGTNode::getCapacity).orElse(battery.getCapacity());
             return new Tuple<>(energy, maxEnergy);
         }
-        if (stack.getItem() instanceof IAntimatterTool tool){
+        if (stack.getItem() instanceof IGTTool tool){
             if (tool.getAntimatterToolType().isPowered()){
                 long currentEnergy = tool.getCurrentEnergy(stack);
                 long maxEnergy = tool.getMaxEnergy(stack);

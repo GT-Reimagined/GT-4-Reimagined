@@ -1,8 +1,8 @@
 package org.gtreimagined.gt4r.gui.slots;
 
-import muramasa.antimatter.capability.IGuiHandler;
-import muramasa.antimatter.gui.SlotType;
-import muramasa.antimatter.gui.slot.SlotFake;
+import org.gtreimagined.gtlib.capability.IGuiHandler;
+import org.gtreimagined.gtlib.gui.SlotType;
+import org.gtreimagined.gtlib.gui.slot.SlotFake;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ClickType;

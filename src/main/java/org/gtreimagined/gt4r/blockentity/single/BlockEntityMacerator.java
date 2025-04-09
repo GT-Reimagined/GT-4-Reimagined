@@ -1,13 +1,13 @@
 package org.gtreimagined.gt4r.blockentity.single;
 
-import muramasa.antimatter.capability.machine.MachineRecipeHandler;
-import muramasa.antimatter.recipe.map.IRecipeMap;
+import org.gtreimagined.gtlib.capability.machine.MachineRecipeHandler;
+import org.gtreimagined.gtlib.recipe.map.IRecipeMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 import org.gtreimagined.gt4r.data.RecipeMaps;
 import org.gtreimagined.gt4r.machine.UpgradeableMachine;
 
-import static muramasa.antimatter.machine.Tier.LV;
+import static org.gtreimagined.gtlib.machine.Tier.LV;
 
 public class BlockEntityMacerator extends BlockEntityUpgradeableMachine<BlockEntityMacerator> {
     public BlockEntityMacerator(UpgradeableMachine type, BlockPos pos, BlockState state) {

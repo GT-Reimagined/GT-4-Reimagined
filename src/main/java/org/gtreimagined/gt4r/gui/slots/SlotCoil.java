@@ -1,10 +1,10 @@
 package org.gtreimagined.gt4r.gui.slots;
 
-import muramasa.antimatter.blockentity.BlockEntityMachine;
-import muramasa.antimatter.capability.IGuiHandler;
-import muramasa.antimatter.capability.IMachineHandler;
-import muramasa.antimatter.gui.SlotType;
-import muramasa.antimatter.gui.slot.AbstractSlot;
+import org.gtreimagined.gtlib.blockentity.BlockEntityMachine;
+import org.gtreimagined.gtlib.capability.IGuiHandler;
+import org.gtreimagined.gtlib.capability.IMachineHandler;
+import org.gtreimagined.gtlib.gui.SlotType;
+import org.gtreimagined.gtlib.gui.slot.AbstractSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;

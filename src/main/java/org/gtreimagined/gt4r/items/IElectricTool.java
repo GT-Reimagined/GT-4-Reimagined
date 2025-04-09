@@ -1,13 +1,13 @@
 package org.gtreimagined.gt4r.items;
 
 import com.google.common.collect.Streams;
-import muramasa.antimatter.Data;
-import muramasa.antimatter.Ref;
-import muramasa.antimatter.capability.energy.ItemEnergyHandler;
-import muramasa.antimatter.integration.curios.CuriosHelper;
-import muramasa.antimatter.item.ItemBattery;
-import muramasa.antimatter.tool.IBasicAntimatterTool;
-import muramasa.antimatter.util.Utils;
+import org.gtreimagined.gtlib.Data;
+import org.gtreimagined.gtlib.Ref;
+import org.gtreimagined.gtlib.capability.energy.ItemEnergyHandler;
+import org.gtreimagined.gtlib.integration.curios.CuriosHelper;
+import org.gtreimagined.gtlib.item.ItemBattery;
+import org.gtreimagined.gtlib.tool.IBasicGTTool;
+import org.gtreimagined.gtlib.util.Utils;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -18,7 +18,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import tesseract.TesseractCapUtils;
 import tesseract.api.context.TesseractItemContext;
 import tesseract.api.forge.TesseractCaps;
 import tesseract.api.gt.IEnergyHandlerItem;
@@ -27,7 +26,7 @@ import tesseract.api.gt.IEnergyItem;
 import java.util.List;
 import java.util.Map;
 
-public interface IElectricTool extends IBasicAntimatterTool, IEnergyItem {
+public interface IElectricTool extends IBasicGTTool, IEnergyItem {
     default int getPoweredBarColor(ItemStack stack){
         return 0x00BFFF;
     }
@@ -99,7 +98,7 @@ public interface IElectricTool extends IBasicAntimatterTool, IEnergyItem {
         //TODO change this to object %s system for other lang compat
         if (flag.isAdvanced() && getAntimatterToolType().isPowered())
             tooltip.add(Utils.translatable("gtlib.tooltip.energy").append(": " + getCurrentEnergy(stack) + " / " + getMaxEnergy(stack)));
-        IBasicAntimatterTool.super.onGenericAddInformation(stack, tooltip, flag);
+        IBasicGTTool.super.onGenericAddInformation(stack, tooltip, flag);
     }
 
     default void refillTool(ItemStack stack, Player player){

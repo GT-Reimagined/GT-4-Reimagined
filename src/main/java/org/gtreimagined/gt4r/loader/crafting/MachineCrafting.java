@@ -1,16 +1,16 @@
 package org.gtreimagined.gt4r.loader.crafting;
 
 import com.google.common.collect.ImmutableMap;
-import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.data.AntimatterDefaultTools;
-import muramasa.antimatter.data.AntimatterMaterialTypes;
-import muramasa.antimatter.data.AntimatterMaterials;
-import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
-import muramasa.antimatter.machine.Tier;
-import muramasa.antimatter.machine.types.Machine;
-import muramasa.antimatter.material.Material;
-import muramasa.antimatter.material.MaterialTags;
-import muramasa.antimatter.pipe.PipeSize;
+import org.gtreimagined.gtlib.GTAPI;
+import org.gtreimagined.gtlib.data.GTMaterialTypes;
+import org.gtreimagined.gtlib.data.GTTools;
+import org.gtreimagined.gtlib.data.GTLibMaterials;
+import org.gtreimagined.gtlib.datagen.providers.GTRecipeProvider;
+import org.gtreimagined.gtlib.machine.Tier;
+import org.gtreimagined.gtlib.machine.types.Machine;
+import org.gtreimagined.gtlib.material.Material;
+import org.gtreimagined.gtlib.material.MaterialTags;
+import org.gtreimagined.gtlib.pipe.PipeSize;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -35,12 +35,12 @@ import org.gtreimagined.gt4r.data.TierMaps;
 import java.util.function.Consumer;
 
 import static com.google.common.collect.ImmutableMap.of;
-import static muramasa.antimatter.data.AntimatterDefaultTools.*;
-import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
-import static muramasa.antimatter.data.AntimatterMaterials.Iron;
-import static muramasa.antimatter.data.AntimatterMaterials.Wood;
-import static muramasa.antimatter.machine.Tier.*;
-import static muramasa.antimatter.util.TagUtils.getForgelikeItemTag;
+import static org.gtreimagined.gtlib.data.GTTools.*;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.*;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.Iron;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.Wood;
+import static org.gtreimagined.gtlib.machine.Tier.*;
+import static org.gtreimagined.gtlib.util.TagUtils.getForgelikeItemTag;
 import static org.gtreimagined.gt4r.data.CustomTags.*;
 import static org.gtreimagined.gt4r.data.GT4RItems.*;
 import static org.gtreimagined.gt4r.data.Machines.*;
@@ -51,7 +51,7 @@ import static org.gtreimagined.gt4r.data.GT4RBlocks.CABLE_GOLD;
 import static org.gtreimagined.gt4r.loader.crafting.CraftingHelper.of2;
 
 public class MachineCrafting {
-    public static void loadRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider) {
+    public static void loadRecipes(Consumer<FinishedRecipe> output, GTRecipeProvider provider) {
         loadSteamMachineRecipes(output, provider);
         loadSimpleMachineRecipes(output, provider);
         loadGeneratorRecipes(output, provider);
@@ -60,9 +60,9 @@ public class MachineCrafting {
         loadUtilityBlockRecipes(output, provider);
     }
 
-    private static void loadMultiblockRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider){
+    private static void loadMultiblockRecipes(Consumer<FinishedRecipe> output, GTRecipeProvider provider){
         provider.addItemRecipe(output, GT4RRef.ID, "", "machines",
-                PRIMITIVE_BLAST_FURNACE.getItem(NONE), of('B', FireBrick, 'I', AntimatterMaterialTypes.PLATE.getMaterialTag(AntimatterMaterials.Iron)), "BBB", "BIB", "BBB");
+                PRIMITIVE_BLAST_FURNACE.getItem(NONE), of('B', FireBrick, 'I', GTMaterialTypes.PLATE.getMaterialTag(GTLibMaterials.Iron)), "BBB", "BIB", "BBB");
         provider.addItemRecipe(output, GT4RRef.ID, "", "machines",
                 COKE_OVEN.getItem(NONE), of('B', FireBrick), "BBB", "B B", "BBB");
         provider.addItemRecipe(output, GT4RRef.ID,"large_gas_turbine","machines",
@@ -82,7 +82,7 @@ public class MachineCrafting {
         provider.addItemRecipe(output, GT4RRef.ID, "industrial_sawmill", "machines",
                 INDUSTRIAL_SAWMILL.getItem(MV), of('C', CIRCUITS_ADVANCED, 'M', MACHINE_HULLS_ADVANCED, 'P', PUMP.getItem(LV), 'S', DiamondSawBlade), "PCP", "SSS", "CMC");
         provider.addItemRecipe(output, GT4RRef.ID, "vacuum_freezer", "machines",
-                VACUUM_FREEZER.getItem(LV), of('C', CIRCUITS_BASIC, 'G', GTCoreBlocks.REINFORCED_GLASS, 'P', PUMP.getItem(LV), 'A', AntimatterMaterialTypes.PLATE.getMaterialTag(Aluminium)), "APA", "CGC", "APA");
+                VACUUM_FREEZER.getItem(LV), of('C', CIRCUITS_BASIC, 'G', GTCoreBlocks.REINFORCED_GLASS, 'P', PUMP.getItem(LV), 'A', GTMaterialTypes.PLATE.getMaterialTag(Aluminium)), "APA", "CGC", "APA");
         provider.addItemRecipe(output, GT4RRef.ID, "chemical_reactor", "machines",
                 CHEMICAL_REACTOR.getItem(MV), of('C', CIRCUITS_ADVANCED, 'P', PLATES_INVAR_ALUMINIUM, 'E', EXTRACTOR.getItem(LV), 'L', CopperCoil, 'c', COMPRESSOR.getItem(LV)), "PLP", "CcC", "PEP");
         provider.addItemRecipe(output, GT4RRef.ID, "distillation_tower", "machines",
@@ -91,7 +91,7 @@ public class MachineCrafting {
                 FUSION_REACTOR.getItem(IV), of('C', CIRCUITS_MASTER, 'c', COMPUTER_CUBE.getItem(LV), 'F', GT4RBlocks.FUSION_COIL), "CCC", "cFc", "CCC");
     }
 
-    private static void loadGeneratorRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider){
+    private static void loadGeneratorRecipes(Consumer<FinishedRecipe> output, GTRecipeProvider provider){
         provider.addItemRecipe(output, GT4RRef.ID, "diesel_generator", "machines",
                 DIESEL_GENERATOR.getItem(LV), of('P', PLATES_WROUGHT_ALUMINIUM, 'B', REBattery, 'C', CIRCUITS_BASIC, 'M', MACHINE_HULLS_ADVANCED), "PBP", "P P", "CMC");
         provider.addItemRecipe(output, GT4RRef.ID, "semifluid_generator", "machines",
@@ -104,30 +104,30 @@ public class MachineCrafting {
                 of('I', PLATE.getMaterialTag(Invar), 'C', CIRCUITS_BASIC, 'G', GTCoreBlocks.REINFORCED_GLASS, 'M', MACHINE_HULLS_ADVANCED, 'B', REBattery), "IBI", "IGI", "CMC");
     }
 
-    private static void loadSteamMachineRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider){
+    private static void loadSteamMachineRecipes(Consumer<FinishedRecipe> output, GTRecipeProvider provider){
         for (Tier tier : getSteam()) {
             TagKey<Item> plate = tier == BRONZE ? PLATE.getMaterialTag(Bronze) : PLATES_STEELS;
             TagKey<Item> gear = tier == BRONZE ? GEAR.getMaterialTag(Bronze) : GEARS_STEELS;
             TagKey<Item> hull = tier == BRONZE ? MACHINE_HULLS_CHEAP : MACHINE_HULLS_BASIC;
             String prefix = tier == BRONZE ? "high_pressure_" : "";
             provider.addItemRecipe(output, GT4RRef.ID,prefix + "solid_fuel_boiler","machines",
-                    SOLID_FUEL_BOILER.getItem(tier), of( 'P',  plate, 'W', AntimatterDefaultTools.WRENCH.getTag(), 'B', Items.BRICKS, 'F', Items.FURNACE), "PPP", "PWP", "BFB");
+                    SOLID_FUEL_BOILER.getItem(tier), of( 'P',  plate, 'W', GTTools.WRENCH.getTag(), 'B', Items.BRICKS, 'F', Items.FURNACE), "PPP", "PWP", "BFB");
             provider.addItemRecipe(output, GT4RRef.ID,prefix + "steam_macerator","machines",
-                    STEAM_MACERATOR.getItem(tier), of2( 'P',  plate, 'W', AntimatterDefaultTools.WRENCH.getTag(), 'H', AntimatterDefaultTools.HAMMER.getTag(), 'D', AntimatterMaterialTypes.GEM.getMaterialTag(AntimatterMaterials.Diamond), 'M', hull, 'p', PISTONS, 'G', gear), "WDH", "GMG", "PpP");
+                    STEAM_MACERATOR.getItem(tier), of2( 'P',  plate, 'W', GTTools.WRENCH.getTag(), 'H', GTTools.HAMMER.getTag(), 'D', GTMaterialTypes.GEM.getMaterialTag(GTLibMaterials.Diamond), 'M', hull, 'p', PISTONS, 'G', gear), "WDH", "GMG", "PpP");
             provider.addItemRecipe(output, GT4RRef.ID,prefix + "steam_furnace","machines",
-                    STEAM_FURNACE.getItem(tier), of( 'P',  plate, 'W', AntimatterDefaultTools.WRENCH.getTag(), 'B', Items.BRICKS, 'F', Items.FURNACE, 'M', hull), "PWP", "PFP", "BMB");
+                    STEAM_FURNACE.getItem(tier), of( 'P',  plate, 'W', GTTools.WRENCH.getTag(), 'B', Items.BRICKS, 'F', Items.FURNACE, 'M', hull), "PWP", "PFP", "BMB");
             provider.addItemRecipe(output, GT4RRef.ID,prefix + "steam_alloy_smelter","machines",
-                    STEAM_ALLOY_SMELTER.getItem(tier), of( 'P',  plate, 'W', AntimatterDefaultTools.WRENCH.getTag(), 'B', Items.BRICKS, 'F', STEAM_FURNACE.getItem(tier)), "PPP", "FWF", "BBB");
+                    STEAM_ALLOY_SMELTER.getItem(tier), of( 'P',  plate, 'W', GTTools.WRENCH.getTag(), 'B', Items.BRICKS, 'F', STEAM_FURNACE.getItem(tier)), "PPP", "FWF", "BBB");
             provider.addItemRecipe(output, GT4RRef.ID,prefix + "steam_forge_hammer","machines",
                     STEAM_FORGE_HAMMER.getItem(tier), of( 'B', plate, 'P', PISTONS, 'M', hull, 'A', Items.ANVIL), "BPB", "BMB", "BAB");
             provider.addItemRecipe(output, GT4RRef.ID,prefix + "steam_compressor","machines",
-                    STEAM_COMPRESSOR.getItem(tier), of( 'B',  plate, 'W', AntimatterDefaultTools.WRENCH.getTag(), 'G', gear, 'P', PISTONS, 'M', hull), "BGB", "PWP", "BMB");
+                    STEAM_COMPRESSOR.getItem(tier), of( 'B',  plate, 'W', GTTools.WRENCH.getTag(), 'G', gear, 'P', PISTONS, 'M', hull), "BGB", "PWP", "BMB");
             provider.addItemRecipe(output, GT4RRef.ID,prefix + "steam_extractor","machines",
-                    STEAM_EXTRACTOR.getItem(tier), of( 'B',  plate, 'W', AntimatterDefaultTools.WRENCH.getTag(),'P', PISTONS, 'M', hull), "BBB", "PWP", "BMB");
+                    STEAM_EXTRACTOR.getItem(tier), of( 'B',  plate, 'W', GTTools.WRENCH.getTag(),'P', PISTONS, 'M', hull), "BBB", "PWP", "BMB");
             provider.addItemRecipe(output, GT4RRef.ID,prefix + "steam_cutter","machines",
-                    STEAM_CUTTER.getItem(tier), of( 'B',  plate, 'W', AntimatterDefaultTools.WRENCH.getTag(),'P', PISTONS, 'M', hull, 'C', BUZZSAW_BLADE.getMaterialTag(Steel)), "BCB", "PWP", "BMB");
+                    STEAM_CUTTER.getItem(tier), of( 'B',  plate, 'W', GTTools.WRENCH.getTag(),'P', PISTONS, 'M', hull, 'C', BUZZSAW_BLADE.getMaterialTag(Steel)), "BCB", "PWP", "BMB");
             provider.addItemRecipe(output, GT4RRef.ID,prefix + "steam_sifter","machines",
-                    STEAM_SIFTER.getItem(tier), of( 'B',  plate, 'C', GT4RBlocks.WIRE_STEEL.getBlock(PipeSize.VTINY), 'W', AntimatterDefaultTools.WRENCH.getTag(),'P', PISTONS, 'M', hull), "CCC", "PWP", "BMB");
+                    STEAM_SIFTER.getItem(tier), of( 'B',  plate, 'C', GT4RBlocks.WIRE_STEEL.getBlock(PipeSize.VTINY), 'W', GTTools.WRENCH.getTag(),'P', PISTONS, 'M', hull), "CCC", "PWP", "BMB");
 
         }
         provider.addItemRecipe(output, GT4RRef.ID,"high_pressure_solid_fuel_boiler_upgrade","machines",
@@ -136,7 +136,7 @@ public class MachineCrafting {
                 STEAM_FURNACE.getItem(STEEL), of( 'P',  PLATES_STEELS, 'C', STEAM_FURNACE.getItem(BRONZE)), "PPP", "PCP");
     }
 
-    private static void loadSimpleMachineRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider){
+    private static void loadSimpleMachineRecipes(Consumer<FinishedRecipe> output, GTRecipeProvider provider){
         provider.addItemRecipe(output, "machines", BATTERY_BUFFER_FOUR.getItem(LV),
                 of('T', GT4RBlocks.CABLE_TIN.getBlockItem(PipeSize.VTINY), 'H', MACHINE_HULLS_BASIC, 'P', PLATES_WROUGHT_ALUMINIUM, 'C', CIRCUITS_BASIC, 'c', Tags.Items.CHESTS_WOODEN), "CcC", "THT", "PTP");
         provider.addItemRecipe(output, "machines", BATTERY_BUFFER_EIGHT.getItem(LV),
@@ -158,7 +158,7 @@ public class MachineCrafting {
         provider.addItemRecipe(output, GT4RRef.ID, "electrolyzer", "machines",
                 ELECTROLYZER.getItem(MV), of('C', CIRCUITS_ADVANCED, 'P', PLATES_STEELS, 'E', EXTRACTOR.getItem(LV), 'L', CopperCoil), "PEP", "CLC", "PEP");
         provider.addItemRecipe(output, GT4RRef.ID, "macerator_1", "machines",
-                MACERATOR.getItem(LV), of('C', CIRCUITS_ADVANCED, 'P', PLATES_STEELS, 'M', MACHINE_HULLS_ADVANCED, 'D', AntimatterMaterialTypes.DUST.getMaterialTag(AntimatterMaterials.Diamond)), "PDP", "DMD", "PCP");
+                MACERATOR.getItem(LV), of('C', CIRCUITS_ADVANCED, 'P', PLATES_STEELS, 'M', MACHINE_HULLS_ADVANCED, 'D', GTMaterialTypes.DUST.getMaterialTag(GTLibMaterials.Diamond)), "PDP", "DMD", "PCP");
         provider.addItemRecipe(output, GT4RRef.ID, "macerator_2", "machines",
                 MACERATOR.getItem(LV), of('C', CIRCUITS_BASIC, 'P', PLATES_STEELS, 'M', MACHINE_HULLS_ADVANCED, 'D', GRINDING_HEAD), "PDP", "CMC", "PCP");
         provider.addItemRecipe(output, GT4RRef.ID,"extractor","machines",
@@ -168,13 +168,13 @@ public class MachineCrafting {
         provider.addItemRecipe(output, GT4RRef.ID,"forge_hammer","machines",
                 FORGE_HAMMER.getItem(LV), of('C', CIRCUITS_BASIC, 'P', PISTONS, 'M', MACHINE_HULLS_ADVANCED, 'A', Items.ANVIL), " P ", "CMC", " A ");
         provider.addItemRecipe(output, GT4RRef.ID,"e_furnace","machines",
-                FURNACE.getItem(LV), of('C', CIRCUITS_BASIC, 'S', STEAM_FURNACE.getItem(STEEL), 'R', AntimatterMaterialTypes.DUST.getMaterialTag(AntimatterMaterials.Redstone)), " C ", "RSR");
+                FURNACE.getItem(LV), of('C', CIRCUITS_BASIC, 'S', STEAM_FURNACE.getItem(STEEL), 'R', GTMaterialTypes.DUST.getMaterialTag(GTLibMaterials.Redstone)), " C ", "RSR");
         provider.addItemRecipe(output, GT4RRef.ID,"wiremill","machines",
-                WIRE_MILL.getItem(LV), of('C', CIRCUITS_BASIC, 'c', ConveyorModule, 'M', MACHINE_HULLS_ADVANCED, 'D', AntimatterMaterialTypes.GEM.getMaterialTag(AntimatterMaterials.Diamond), 'B', AntimatterMaterialTypes.PLATE.getMaterialTag(Brass)), "BDB", "CMC", "BcB");
+                WIRE_MILL.getItem(LV), of('C', CIRCUITS_BASIC, 'c', ConveyorModule, 'M', MACHINE_HULLS_ADVANCED, 'D', GTMaterialTypes.GEM.getMaterialTag(GTLibMaterials.Diamond), 'B', GTMaterialTypes.PLATE.getMaterialTag(Brass)), "BDB", "CMC", "BcB");
         provider.addItemRecipe(output, GT4RRef.ID,"alloy_smelter","machines",
-                ALLOY_SMELTER.getItem(LV), of('C', CIRCUITS_BASIC, 'c', ConveyorModule, 'M', FURNACE.getItem(LV), 'D', CupronickelHeatingCoil, 'B', AntimatterMaterialTypes.PLATE.getMaterialTag(Invar)), "BDB", "CMC", "BcB");
+                ALLOY_SMELTER.getItem(LV), of('C', CIRCUITS_BASIC, 'c', ConveyorModule, 'M', FURNACE.getItem(LV), 'D', CupronickelHeatingCoil, 'B', GTMaterialTypes.PLATE.getMaterialTag(Invar)), "BDB", "CMC", "BcB");
         provider.addItemRecipe(output, GT4RRef.ID,"canner","machines",
-                CANNER.getItem(LV), of('C', CIRCUITS_BASIC, 'c', ConveyorModule, 'M', MACHINE_HULLS_ADVANCED, 'T', AntimatterMaterialTypes.PLATE.getMaterialTag(Tin)), "TCT", "TMT", "TcT");
+                CANNER.getItem(LV), of('C', CIRCUITS_BASIC, 'c', ConveyorModule, 'M', MACHINE_HULLS_ADVANCED, 'T', GTMaterialTypes.PLATE.getMaterialTag(Tin)), "TCT", "TMT", "TcT");
         provider.addItemRecipe(output, GT4RRef.ID,"plate_bender","machines",
                 BENDER.getItem(LV), of('C', CIRCUITS_BASIC, 'c', ConveyorModule, 'M', COMPRESSOR.getItem(LV), 'P', PISTONS), "PCP", "McM", "PCP");
         provider.addItemRecipe(output, GT4RRef.ID,"assembler","machines",
@@ -184,7 +184,7 @@ public class MachineCrafting {
         provider.addItemRecipe(output, GT4RRef.ID,"centrifuge","machines",
                 CENTRIFUGE.getItem(LV), of('C', CIRCUITS_ADVANCED, 'E', EXTRACTOR.getItem(LV), 'S', PLATES_STEELS, 'M', MACHINE_HULLS_ADVANCED), "SCS", "MEM", "SCS");
         provider.addItemRecipe(output, GT4RRef.ID,"universal_macerator","machines",
-                MACERATOR.getItem(MV), of('D', GRINDING_HEAD, 'M', MACERATOR.getItem(LV), 'S', AntimatterMaterialTypes.PLATE.getMaterialTag(Titanium), 'H', MACHINE_HULLS_ADVANCED), "SDS", "SMS", "SHS");
+                MACERATOR.getItem(MV), of('D', GRINDING_HEAD, 'M', MACERATOR.getItem(LV), 'S', GTMaterialTypes.PLATE.getMaterialTag(Titanium), 'H', MACHINE_HULLS_ADVANCED), "SDS", "SMS", "SHS");
         provider.addItemRecipe(output, GT4RRef.ID,"fluid_canner","machines",
                 FLUID_CANNER.getItem(LV), of('C', CIRCUITS_BASIC, 'c', CANNER.getItem(LV), 'T', getForgelikeItemTag("plates/tin"), 'P', GT4RBlocks.FLUID_PIPE_BRONZE.getBlockItem(PipeSize.SMALL), 'E', CellTin), " C ", "EcE", "TPT");
         provider.addItemRecipe(output, GT4RRef.ID,"lathe","machines",
@@ -198,19 +198,19 @@ public class MachineCrafting {
         provider.addItemRecipe(output, GT4RRef.ID, "pump", "machines",
                 PUMP.getItem(LV), of('c', CellTin, 'C', CIRCUITS_BASIC, 'M', MACHINE_HULLS_ADVANCED, 'P', GT4RBlocks.FLUID_PIPE_BRONZE.getBlockItem(PipeSize.SMALL)),"cCc", "cMc", "PPP");
         provider.addItemRecipe(output, GT4RRef.ID, "ore_washer", "machines",
-                ORE_WASHER.getItem(LV), of('m', MotorLV, 'C', CIRCUITS_BASIC, 'M', MACHINE_HULLS_ADVANCED, 'P', AntimatterMaterialTypes.PLATE.getMaterialTag(AntimatterMaterials.Iron), 'B', Items.BUCKET),"PPP", "BMB", "mCm");
+                ORE_WASHER.getItem(LV), of('m', MotorLV, 'C', CIRCUITS_BASIC, 'M', MACHINE_HULLS_ADVANCED, 'P', GTMaterialTypes.PLATE.getMaterialTag(GTLibMaterials.Iron), 'B', Items.BUCKET),"PPP", "BMB", "mCm");
         provider.addItemRecipe(output, GT4RRef.ID, "watermill", "machines",
-                WATERMILL.getItem(ULV), of('M', MACHINE_HULLS_ADVANCED, 'P', AntimatterMaterialTypes.PLATE.getMaterialTag(Steel), 'T', GT4RMaterialTags.TURBINE_BLADE.getMaterialTag(Bronze), 'C', CopperCoil),"PTP", "CMC", "PTP");
+                WATERMILL.getItem(ULV), of('M', MACHINE_HULLS_ADVANCED, 'P', GTMaterialTypes.PLATE.getMaterialTag(Steel), 'T', GT4RMaterialTags.TURBINE_BLADE.getMaterialTag(Bronze), 'C', CopperCoil),"PTP", "CMC", "PTP");
         provider.addItemRecipe(output, GT4RRef.ID, "bath", "machines",
-                BATH.getItem(LV), of('S', AntimatterMaterialTypes.PLATE.getMaterialTag(StainlessSteel), 'M', MACHINE_HULLS_ADVANCED), "SSS", "S S", "SMS");
+                BATH.getItem(LV), of('S', GTMaterialTypes.PLATE.getMaterialTag(StainlessSteel), 'M', MACHINE_HULLS_ADVANCED), "SSS", "S S", "SMS");
         provider.addItemRecipe(output, GT4RRef.ID, "sifter", "machines",
                 SIFTER.getItem(LV), of('I', ItemFilter, 'M', MACHINE_HULLS_ADVANCED, 'P', PISTONS, 'C', CIRCUITS_BASIC), " I ", "PMP", "CIC");
         provider.addItemRecipe(output, GT4RRef.ID, "recycler", "machines",
-                RECYCLER.getItem(LV), of('G', AntimatterMaterialTypes.DUST.getMaterialTag(AntimatterMaterials.Glowstone), 'C', COMPRESSOR.getItem(LV), 'D', Items.DIRT, 'S', PLATES_STEELS), " G ", "DCD", "SDS");
+                RECYCLER.getItem(LV), of('G', GTMaterialTypes.DUST.getMaterialTag(GTLibMaterials.Glowstone), 'C', COMPRESSOR.getItem(LV), 'D', Items.DIRT, 'S', PLATES_STEELS), " G ", "DCD", "SDS");
         provider.addItemRecipe(output, GT4RRef.ID, "heat_exchanger", "machines",
-                HEAT_EXCHANGER.getItem(LV), of('I', AntimatterMaterialTypes.PLATE.getMaterialTag(Invar), 'C', CopperCoil, 'P', GT4RBlocks.FLUID_PIPE_INVAR.getBlock(PipeSize.SMALL), 'M', MACHINE_HULLS_ADVANCED), "ICI", "PMP", "ICI");
+                HEAT_EXCHANGER.getItem(LV), of('I', GTMaterialTypes.PLATE.getMaterialTag(Invar), 'C', CopperCoil, 'P', GT4RBlocks.FLUID_PIPE_INVAR.getBlock(PipeSize.SMALL), 'M', MACHINE_HULLS_ADVANCED), "ICI", "PMP", "ICI");
         provider.addItemRecipe(output, GT4RRef.ID, "fermenter", "machines", FERMENTER.getItem(LV), of('C', CIRCUITS_BASIC, 'G', Tags.Items.GLASS, 'M', MACHINE_HULLS_ADVANCED, 'P', PumpModule), " P ", "GMG", " C ");
-        provider.addItemRecipe(output, GT4RRef.ID, "distillery", "machines", DISTILLERY.getItem(LV), of('C', CIRCUITS_BASIC, 'G', Tags.Items.GLASS, 'M', MACHINE_HULLS_ADVANCED, 'P', PumpModule, 'B', ROD.getMaterialTag(AntimatterMaterials.Blaze)), " B ", "CMC", "GPG");
+        provider.addItemRecipe(output, GT4RRef.ID, "distillery", "machines", DISTILLERY.getItem(LV), of('C', CIRCUITS_BASIC, 'G', Tags.Items.GLASS, 'M', MACHINE_HULLS_ADVANCED, 'P', PumpModule, 'B', ROD.getMaterialTag(GTLibMaterials.Blaze)), " B ", "CMC", "GPG");
         provider.addItemRecipe(output, GT4RRef.ID, "mass_fabricator", "machines",
                 MASS_FABRICATOR.getItem(EV), of('C', CIRCUITS_MASTER, 'F', GT4RBlocks.FUSION_COIL, 'L', LapotronicEnergyOrb, 'T', TELEPORTER.getItem(HV)), "CTC", "FLF", "CTC");
         provider.addItemRecipe(output, GT4RRef.ID, "replicator", "machines",
@@ -226,8 +226,8 @@ public class MachineCrafting {
                 'B', Items.BRICKS,
                 'C', CIRCUITS_ELITE), "P P", "SHS", "BCB");
     }
-    private static void loadUtilityBlockRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider){
-        AntimatterAPI.all(WorkbenchMachine.class).forEach(m -> {
+    private static void loadUtilityBlockRecipes(Consumer<FinishedRecipe> output, GTRecipeProvider provider){
+        GTAPI.all(WorkbenchMachine.class).forEach(m -> {
             if (!m.getId().contains("charging")) {
                 provider.addItemRecipe(output, GT4RRef.ID, m.getId(), "machines", m.getItem(NONE),
                         of('P', PLATE.getMaterialTag(m.getMaterial()), 'C', Tags.Items.CHESTS_WOODEN, 'c', Items.CRAFTING_TABLE, 'S', SCREWDRIVER.getTag()), "PSP", "PcP", "PCP");
@@ -243,11 +243,11 @@ public class MachineCrafting {
         provider.addItemRecipe(output, "item_barrels", GTCoreBlocks.PLASTIC_STORAGE_BOX.getItem(NONE),
                 of('P', PLATE.getMaterialTag(Plastic), 'S', SCREW.getMaterialTag(Plastic), 'C', Tags.Items.CHESTS_WOODEN), "SPS", "PCP", "SPS");
         provider.addItemRecipe(output, GT4RRef.ID, "dustbin", "machines",
-                DUSTBIN.getItem(LV), of2('H', AntimatterDefaultTools.HAMMER.getTag(), 'W', AntimatterDefaultTools.WRENCH.getTag(), 'S', AntimatterDefaultTools.SAW.getTag(), 'P', PLATES_STEELS, 'h', Items.HOPPER, 'R', RODS_STEELS), "HWS", "PhP", "RPR");
+                DUSTBIN.getItem(LV), of2('H', GTTools.HAMMER.getTag(), 'W', GTTools.WRENCH.getTag(), 'S', GTTools.SAW.getTag(), 'P', PLATES_STEELS, 'h', Items.HOPPER, 'R', RODS_STEELS), "HWS", "PhP", "RPR");
         provider.addItemRecipe(output, GT4RRef.ID, "electric_item_translocator", "machines",
-                ELECTRIC_ITEM_TRANSLOCATOR.getItem(LV), of('B', REBattery, 'E', AntimatterMaterialTypes.PLATE.getMaterialTag(Electrum), 'C', CIRCUITS_BASIC, 'c', ConveyorModule, 'M', MACHINE_HULLS_BASIC), "EBE", "CcC", "EME");
+                ELECTRIC_ITEM_TRANSLOCATOR.getItem(LV), of('B', REBattery, 'E', GTMaterialTypes.PLATE.getMaterialTag(Electrum), 'C', CIRCUITS_BASIC, 'c', ConveyorModule, 'M', MACHINE_HULLS_BASIC), "EBE", "CcC", "EME");
         provider.addItemRecipe(output, GT4RRef.ID, "electric_fluid_translocator", "machines",
-                ELECTRIC_FLUID_TRANSLOCATOR.getItem(LV), of('B', REBattery, 'E', AntimatterMaterialTypes.PLATE.getMaterialTag(Electrum), 'C', CIRCUITS_BASIC, 'c', Drain, 'M', MACHINE_HULLS_BASIC), "EBE", "CcC", "EME");
+                ELECTRIC_FLUID_TRANSLOCATOR.getItem(LV), of('B', REBattery, 'E', GTMaterialTypes.PLATE.getMaterialTag(Electrum), 'C', CIRCUITS_BASIC, 'c', Drain, 'M', MACHINE_HULLS_BASIC), "EBE", "CcC", "EME");
         provider.addItemRecipe(output, GT4RRef.ID, "electric_item_filter", "machines",
                 ELECTRIC_ITEM_FILTER.getItem(LV), of2('B', ItemFilter, 'E', PLATES_IRON_ALUMINIUM, 'C', CIRCUITS_BASIC, 'c', ConveyorModule, 'M', MACHINE_HULLS_BASIC, 'h', Tags.Items.CHESTS_WOODEN), "EBE", "hMc", "ECE");
         provider.addItemRecipe(output, GT4RRef.ID, "electric_type_filter", "machines",
@@ -255,55 +255,55 @@ public class MachineCrafting {
         provider.addItemRecipe(output, GT4RRef.ID, "digital_tank", "machines",
                 DIGITAL_TANK.getItem(LV), of('S', PLATES_STEELS, 'D', DataOrb, 'C', ComputerMonitor), "SSS", "SDS", "SCS");
         provider.addItemRecipe(output, GT4RRef.ID, "digital_chest", "machines",
-                DIGITAL_CHEST.getItem(LV), of('P', AntimatterMaterialTypes.PLATE.getMaterialTag(Platinum), 'D', DataOrb, 'C', ComputerMonitor, 'S', CIRCUITS_ELITE), "PPP", "SDS", "PCP");
+                DIGITAL_CHEST.getItem(LV), of('P', GTMaterialTypes.PLATE.getMaterialTag(Platinum), 'D', DataOrb, 'C', ComputerMonitor, 'S', CIRCUITS_ELITE), "PPP", "SDS", "PCP");
         provider.addItemRecipe(output, GT4RRef.ID, "quantum_tank", "machines",
-                QUANTUM_TANK.getItem(MAX), of('P', AntimatterMaterialTypes.PLATE.getMaterialTag(Platinum), 'Q', QUANTUM_CHEST.getItem(MAX), 'C', CIRCUITS_MASTER), "CPC", "PQP", "CPC");
+                QUANTUM_TANK.getItem(MAX), of('P', GTMaterialTypes.PLATE.getMaterialTag(Platinum), 'Q', QUANTUM_CHEST.getItem(MAX), 'C', CIRCUITS_MASTER), "CPC", "PQP", "CPC");
         provider.addItemRecipe(output, GT4RRef.ID, "quantum_chest", "machines",
                 QUANTUM_CHEST.getItem(MAX), ImmutableMap.<Character, Object>builder().put('D', DataOrb).put('C', ComputerMonitor).put('H', GT4RBlocks.HIGHLY_ADVANCED_MACHINE_BLOCK).put('T', TELEPORTER.getItem(HV)).put('d', DIGITAL_CHEST.getItem(LV)).build(), "DCD", "HTH", "DdD");
         provider.addItemRecipe(output, GT4RRef.ID, "computer_cube", "machines",
                 COMPUTER_CUBE.getItem(LV), of('C', CIRCUITS_MASTER, 'c', ComputerMonitor, 'B', MACHINE_HULLS_ADVANCED, 'D', CIRCUITS_ULTIMATE), "DcC", "cBc", "CcD");
-        AntimatterAPI.all(ChestMachine.class).forEach(m -> {
+        GTAPI.all(ChestMachine.class).forEach(m -> {
             Material material = m.getMaterial();
             if (material.has(ROD) && material.has(PLATE)){
                 provider.addItemRecipe(output, GT4RRef.ID, m.getId(), "machines", m.getItem(NONE),
-                        of('P', AntimatterMaterialTypes.PLATE.getMaterialTag(material), 'C', Tags.Items.CHESTS_WOODEN, 'R', ROD.getMaterialTag(material), 'S', AntimatterDefaultTools.SAW.getTag(), 'W', AntimatterDefaultTools.WRENCH.getTag()), "SPW", "RCR", "PPP");
+                        of('P', GTMaterialTypes.PLATE.getMaterialTag(material), 'C', Tags.Items.CHESTS_WOODEN, 'R', ROD.getMaterialTag(material), 'S', GTTools.SAW.getTag(), 'W', GTTools.WRENCH.getTag()), "SPW", "RCR", "PPP");
             }
         });
-        AntimatterAPI.all(BarrelMachine.class).forEach(m -> {
+        GTAPI.all(BarrelMachine.class).forEach(m -> {
             Material material = m.getMaterial();
             if (material.has(ROD) && material.has(PLATE)){
                 provider.addItemRecipe(output, GT4RRef.ID, m.getId(), "machines", m.getItem(NONE),
-                        of('P', AntimatterMaterialTypes.PLATE.getMaterialTag(material), 'C', Items.BARREL, 'R', ROD.getMaterialTag(material), 'S', AntimatterDefaultTools.SAW.getTag(), 'W', AntimatterDefaultTools.WRENCH.getTag()), "PRP", "SCW", "PRP");
+                        of('P', GTMaterialTypes.PLATE.getMaterialTag(material), 'C', Items.BARREL, 'R', ROD.getMaterialTag(material), 'S', GTTools.SAW.getTag(), 'W', GTTools.WRENCH.getTag()), "PRP", "SCW", "PRP");
             }
         });
 
-        AntimatterAPI.all(MassStorageMachine.class).forEach(m -> {
+        GTAPI.all(MassStorageMachine.class).forEach(m -> {
             Material material = m.getMaterial();
-            ChestMachine chest = AntimatterAPI.get(ChestMachine.class, material.getId() + "_chest", GTCore.ID);
+            ChestMachine chest = GTAPI.get(ChestMachine.class, material.getId() + "_chest", GTCore.ID);
             if (material.has(SCREW) && material.has(PLATE) && !material.has(MaterialTags.WOOD) && chest != null){
                 provider.addItemRecipe(output, GT4RRef.ID, m.getId(), "machines", m.getItem(NONE),
                         of('C', chest.getItem(NONE), 'S', SCREW.getMaterialTag(material), 'c', MACHINE_HULLS_ADVANCED, 's', SCREWDRIVER.getTag(), 'W', WRENCH.getTag()), "SCS", "Wcs", "SCS");
             }
         });
 
-        AntimatterAPI.all(MultiblockTankMachine.class, GT4RRef.ID).forEach(m -> {
+        GTAPI.all(MultiblockTankMachine.class, GT4RRef.ID).forEach(m -> {
             if (m.isSmall()){
-                Block block = AntimatterAPI.get(Block.class, m.getMaterial().getId() + "_wall", GT4RRef.ID);
+                Block block = GTAPI.get(Block.class, m.getMaterial().getId() + "_wall", GT4RRef.ID);
                 if (block == null) return;
                 Material ringMaterial = m.getMaterial() == Wood ? Bronze : m.getMaterial();
                 TagKey<Item> hammer = m.getMaterial() == Wood ? SOFT_HAMMER.getTag() : HAMMER.getTag();
                 provider.addItemRecipe(output, GT4RRef.ID, m.getId(), "multiblock_tanks", m.getItem(NONE),
                         of('R', RING.getMaterialTag(ringMaterial), 'S', SAW.getTag(), 'H', hammer, 'W', block.asItem()), " R ", "HWS", " R ");
             } else {
-                Block block = AntimatterAPI.get(Block.class, m.getId().replace("large", "small"), GT4RRef.ID);
+                Block block = GTAPI.get(Block.class, m.getId().replace("large", "small"), GT4RRef.ID);
                 if (block == null) return;
                 provider.addItemRecipe(output, GT4RRef.ID, m.getId(), "multiblock_tanks", m.getItem(NONE),
                         of('P', PLATE.getMaterialTag(m.getMaterial()), 'S', SAW.getTag(), 'H', HAMMER.getTag(), 'W', block.asItem()), "PPP", "HWS", "PPP");
             }
         });
-        AntimatterAPI.all(LockerMachine.class).forEach(m -> {
+        GTAPI.all(LockerMachine.class).forEach(m -> {
             if (!m.getId().contains("charging")) {
-                ChestMachine chest = AntimatterAPI.get(ChestMachine.class, m.getMaterial().getId() + "_chest", GTCore.ID);
+                ChestMachine chest = GTAPI.get(ChestMachine.class, m.getMaterial().getId() + "_chest", GTCore.ID);
                 if (chest == null) return;
                 provider.addItemRecipe(output, GT4RRef.ID, m.getId(), "machines", m.getItem(NONE),
                         of('P', PLATE.getMaterialTag(m.getMaterial()), 'R', ROD.getMaterialTag(m.getMaterial()), 'L', Items.LEATHER, 'C', chest.getItem(NONE), 'M', MACHINE_HULLS_ADVANCED), "RLR", "LCL", "PMP");
@@ -313,25 +313,25 @@ public class MachineCrafting {
             }
         });
 
-        provider.addItemRecipe(output, GT4RRef.ID, "hv_teleporter", "machines", TELEPORTER.getItem(HV), of('C', CIRCUITS_ADVANCED, 'S', MACHINE_HULLS_STABILIZED, 'D', AntimatterMaterialTypes.GEM.getMaterialTag(AntimatterMaterials.Diamond), 'c', GT4RBlocks.CABLE_ELECTRUM.getBlock(PipeSize.TINY), 'f', FrequencyTransmitter), "CfC", "cSc", "CDC");
+        provider.addItemRecipe(output, GT4RRef.ID, "hv_teleporter", "machines", TELEPORTER.getItem(HV), of('C', CIRCUITS_ADVANCED, 'S', MACHINE_HULLS_STABILIZED, 'D', GTMaterialTypes.GEM.getMaterialTag(GTLibMaterials.Diamond), 'c', GT4RBlocks.CABLE_ELECTRUM.getBlock(PipeSize.TINY), 'f', FrequencyTransmitter), "CfC", "cSc", "CDC");
         provider.addItemRecipe(output, GT4RRef.ID, "luv_teleporter", "machines", TELEPORTER.getItem(LUV), of('T', TELEPORTER.getItem(HV), 'M', GT4RBlocks.HIGHLY_ADVANCED_MACHINE_BLOCK, 'L', LapotronicEnergyOrb, 'C', CIRCUITS_MASTER), "CTC", "TMT", "CLC");
         provider.addItemRecipe(output, "trash_bin", GTCoreBlocks.ENDER_GARBAGE_BIN.getItem(NONE),
                 of('O', PLATE.getMaterialTag(Obsidian), 'I', PLATE.getMaterialTag(Iron), 'E', Items.ENDER_EYE), "OOO", "OEO", "III");
     }
 
-    private static void loadHatchRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider){
-        provider.addItemRecipe(output, GT4RRef.ID, "item_input_hatch", "hatches", HATCH_ITEM_I.getItem(LV), of('P', AntimatterMaterialTypes.PLATE.getMaterialTag(StainlessSteel), 'G', GEARS_STEELS, 'M', MACHINE_HULLS_ADVANCED, 'C', Tags.Items.CHESTS_WOODEN), "PCP", "GMG", "PPP");
-        provider.addItemRecipe(output, GT4RRef.ID, "item_output_hatch", "hatches", HATCH_ITEM_O.getItem(LV), of('P', AntimatterMaterialTypes.PLATE.getMaterialTag(StainlessSteel), 'G', GEARS_STEELS, 'M', MACHINE_HULLS_ADVANCED, 'C', Tags.Items.CHESTS_WOODEN), "PPP", "GMG", "PCP");
-        provider.addItemRecipe(output, GT4RRef.ID, "fluid_input_hatch", "hatches", HATCH_FLUID_I.getItem(LV), of('P', AntimatterMaterialTypes.PLATE.getMaterialTag(StainlessSteel), 'G', GEARS_STEELS, 'M', MACHINE_HULLS_ADVANCED, 'C', Tags.Items.GLASS), "PCP", "GMG", "PPP");
-        provider.addItemRecipe(output, GT4RRef.ID, "fluid_output_hatch", "hatches", HATCH_FLUID_O.getItem(LV), of('P', AntimatterMaterialTypes.PLATE.getMaterialTag(StainlessSteel), 'G', GEARS_STEELS, 'M', MACHINE_HULLS_ADVANCED, 'C', Tags.Items.GLASS), "PPP", "GMG", "PCP");
-        provider.addItemRecipe(output, GT4RRef.ID, "ev_dynamo_hatch", "hatches", HATCH_DYNAMO.getItem(EV), of('P', AntimatterMaterialTypes.PLATE.getMaterialTag(StainlessSteel), 'G', GEARS_STEELS, 'M', MACHINE_HULLS_ADVANCED, 'C', TierMaps.TIER_CABLES.get(EV).getBlock(PipeSize.VTINY)), "PPP", "GMG", "PCP");
-        provider.addItemRecipe(output, GT4RRef.ID, "iv_dynamo_hatch", "hatches", HATCH_DYNAMO.getItem(IV), of('P', AntimatterMaterialTypes.PLATE.getMaterialTag(StainlessSteel), 'G', GEARS_STEELS, 'M', MACHINE_HULLS_ADVANCED, 'C', TierMaps.TIER_CABLES.get(IV).getBlock(PipeSize.VTINY)), "PPP", "GMG", "PCP");
+    private static void loadHatchRecipes(Consumer<FinishedRecipe> output, GTRecipeProvider provider){
+        provider.addItemRecipe(output, GT4RRef.ID, "item_input_hatch", "hatches", HATCH_ITEM_I.getItem(LV), of('P', GTMaterialTypes.PLATE.getMaterialTag(StainlessSteel), 'G', GEARS_STEELS, 'M', MACHINE_HULLS_ADVANCED, 'C', Tags.Items.CHESTS_WOODEN), "PCP", "GMG", "PPP");
+        provider.addItemRecipe(output, GT4RRef.ID, "item_output_hatch", "hatches", HATCH_ITEM_O.getItem(LV), of('P', GTMaterialTypes.PLATE.getMaterialTag(StainlessSteel), 'G', GEARS_STEELS, 'M', MACHINE_HULLS_ADVANCED, 'C', Tags.Items.CHESTS_WOODEN), "PPP", "GMG", "PCP");
+        provider.addItemRecipe(output, GT4RRef.ID, "fluid_input_hatch", "hatches", HATCH_FLUID_I.getItem(LV), of('P', GTMaterialTypes.PLATE.getMaterialTag(StainlessSteel), 'G', GEARS_STEELS, 'M', MACHINE_HULLS_ADVANCED, 'C', Tags.Items.GLASS), "PCP", "GMG", "PPP");
+        provider.addItemRecipe(output, GT4RRef.ID, "fluid_output_hatch", "hatches", HATCH_FLUID_O.getItem(LV), of('P', GTMaterialTypes.PLATE.getMaterialTag(StainlessSteel), 'G', GEARS_STEELS, 'M', MACHINE_HULLS_ADVANCED, 'C', Tags.Items.GLASS), "PPP", "GMG", "PCP");
+        provider.addItemRecipe(output, GT4RRef.ID, "ev_dynamo_hatch", "hatches", HATCH_DYNAMO.getItem(EV), of('P', GTMaterialTypes.PLATE.getMaterialTag(StainlessSteel), 'G', GEARS_STEELS, 'M', MACHINE_HULLS_ADVANCED, 'C', TierMaps.TIER_CABLES.get(EV).getBlock(PipeSize.VTINY)), "PPP", "GMG", "PCP");
+        provider.addItemRecipe(output, GT4RRef.ID, "iv_dynamo_hatch", "hatches", HATCH_DYNAMO.getItem(IV), of('P', GTMaterialTypes.PLATE.getMaterialTag(StainlessSteel), 'G', GEARS_STEELS, 'M', MACHINE_HULLS_ADVANCED, 'C', TierMaps.TIER_CABLES.get(IV).getBlock(PipeSize.VTINY)), "PPP", "GMG", "PCP");
         provider.addItemRecipe(output, GT4RRef.ID, "fusion_item_injector", "hatches", FUSION_ITEM_INJECTOR.getItem(LV), of('P', ConveyorModule, 'c', CIRCUITS_MASTER, 'M', GT4RBlocks.HIGHLY_ADVANCED_MACHINE_BLOCK, 'C', Tags.Items.CHESTS_WOODEN), "PCP", "cMc", "PcP");
         provider.addItemRecipe(output, GT4RRef.ID, "fusion_item_extractor", "hatches", FUSION_ITEM_EXTRACTOR.getItem(LV), of('P', ConveyorModule, 'c', CIRCUITS_MASTER, 'M', GT4RBlocks.HIGHLY_ADVANCED_MACHINE_BLOCK, 'C', Tags.Items.CHESTS_WOODEN), "PcP", "cMc", "PCP");
         provider.addItemRecipe(output, GT4RRef.ID, "fusion_fluid_injector", "hatches", FUSION_FLUID_INJECTOR.getItem(LV), of('P', PumpModule, 'c', CIRCUITS_MASTER, 'M', GT4RBlocks.HIGHLY_ADVANCED_MACHINE_BLOCK, 'C', Tags.Items.GLASS), "PCP", "cMc", "PcP");
         provider.addItemRecipe(output, GT4RRef.ID, "fusion_fluid_extractor", "hatches", FUSION_FLUID_EXTRACTOR.getItem(LV), of('P', PumpModule, 'c', CIRCUITS_MASTER, 'M', GT4RBlocks.HIGHLY_ADVANCED_MACHINE_BLOCK, 'C', Tags.Items.GLASS), "PcP", "cMc", "PCP");
         provider.addItemRecipe(output, GT4RRef.ID, "fusion_energy_injector", "hatches", FUSION_ENERGY_INJECTOR.getItem(IV), of('S', ItemSuperconductor, 'C', CIRCUITS_MASTER, 'T', SUPERCONDENSATOR.getItem(LUV)), "SCS", "CTC", "SCS");
         provider.addItemRecipe(output, GT4RRef.ID, "supercondensator", "machines", SUPERCONDENSATOR.getItem(LUV), of('C', CIRCUITS_MASTER, 'L', LapotronicEnergyOrb, 'S', ItemSuperconductor, 'M', GT4RBlocks.HIGHLY_ADVANCED_MACHINE_BLOCK), "CLC", "SMS", "CLC");
-        provider.addItemRecipe(output, GT4RRef.ID, "muffler_hatch", "hatches", HATCH_MUFFLER.getItem(LV), of('P', AntimatterMaterialTypes.PLATE.getMaterialTag(StainlessSteel), 'G', GEARS_STEELS, 'M', MACHINE_HULLS_ADVANCED, 'C', GTCoreBlocks.REINFORCED_GLASS), "PMP", "GCG", "PCP");
+        provider.addItemRecipe(output, GT4RRef.ID, "muffler_hatch", "hatches", HATCH_MUFFLER.getItem(LV), of('P', GTMaterialTypes.PLATE.getMaterialTag(StainlessSteel), 'G', GEARS_STEELS, 'M', MACHINE_HULLS_ADVANCED, 'C', GTCoreBlocks.REINFORCED_GLASS), "PMP", "GCG", "PCP");
     }
 }

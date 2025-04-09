@@ -1,25 +1,24 @@
 package org.gtreimagined.gt4r.loader.machines;
 
-import muramasa.antimatter.data.AntimatterMaterialTypes;
-import muramasa.antimatter.data.AntimatterMaterials;
-import muramasa.antimatter.material.Material;
-import muramasa.antimatter.material.MaterialStack;
-import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
-import muramasa.antimatter.recipe.map.RecipeBuilder;
-import muramasa.antimatter.util.RegistryUtils;
+import org.gtreimagined.gtlib.data.GTMaterialTypes;
+import org.gtreimagined.gtlib.data.GTLibMaterials;
+import org.gtreimagined.gtlib.material.Material;
+import org.gtreimagined.gtlib.material.MaterialStack;
+import org.gtreimagined.gtlib.recipe.ingredient.RecipeIngredient;
+import org.gtreimagined.gtlib.recipe.map.RecipeBuilder;
+import org.gtreimagined.gtlib.util.RegistryUtils;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.fluids.FluidStack;
 import org.gtreimagined.gtcore.data.GTCoreTags;
-import tesseract.TesseractGraphWrappers;
 import org.gtreimagined.gt4r.data.GT4RBlocks;
 
 import java.util.List;
 
-import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
-import static muramasa.antimatter.data.AntimatterMaterials.*;
-import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.*;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.*;
+import static org.gtreimagined.gtlib.recipe.ingredient.RecipeIngredient.of;
 import static net.minecraft.world.item.Items.*;
 import static net.minecraft.world.level.block.Blocks.GRASS_BLOCK;
 import static org.gtreimagined.gt4r.data.Materials.*;
@@ -29,12 +28,12 @@ import static org.gtreimagined.gt4r.data.RecipeMaps.CENTRIFUGE;
 
 public class CentrifugingLoader {
     public static void init() {
-        AntimatterMaterialTypes.DUST_IMPURE.all().forEach(dust -> {
+        GTMaterialTypes.DUST_IMPURE.all().forEach(dust -> {
             Material oreByProduct1 = !dust.getByProducts().isEmpty() ? dust.getByProducts().get(0) : dust;
             CENTRIFUGE.RB().ii(of(DUST_IMPURE.get(dust),1)).io(new ItemStack(DUST.get(dust), 1), DUST_TINY.get(oreByProduct1, 1)).add(dust.getId() + "_impure_dust",400, 2);
         });
 
-        AntimatterMaterialTypes.DUST_PURE.all().forEach(dust -> {
+        GTMaterialTypes.DUST_PURE.all().forEach(dust -> {
             Material oreByProduct = dust.getByProducts().size() > 1 ? dust.getByProducts().get(1) : !dust.getByProducts().isEmpty() ? dust.getByProducts().get(0) : dust;
             CENTRIFUGE.RB().ii(of(DUST_PURE.get(dust),1)).io(new ItemStack(DUST.get(dust), 1), DUST_TINY.get(oreByProduct, 1)).add(dust.getId() + "_pure_dust",400, 2);
         });
@@ -44,7 +43,7 @@ public class CentrifugingLoader {
 
             CENTRIFUGE.RB().ii(of(CRUSHED_PURIFIED.get(m),1)).io(CRUSHED_REFINED.get(m, 1), DUST_TINY.get(aOreByProduct2, 1)).add(m.getId() + "_purified_ore",500, 16,0,3);
         });
-        ItemStack[] itemStacks = AntimatterMaterials.Lava.getProcessInto().stream().filter(t -> t.m.has(AntimatterMaterialTypes.DUST_TINY)).map(t -> new ItemStack(AntimatterMaterialTypes.DUST_TINY.get(t.m), t.s))
+        ItemStack[] itemStacks = GTLibMaterials.Lava.getProcessInto().stream().filter(t -> t.m.has(GTMaterialTypes.DUST_TINY)).map(t -> new ItemStack(GTMaterialTypes.DUST_TINY.get(t.m), t.s))
                 .toArray(ItemStack[]::new);
         CENTRIFUGE.RB().fi(Lava.getLiquid(100)).io(itemStacks).outputChances(0.2, 0.1, 0.025, 0.025, 0.01).add("lava",200, 16);
         CENTRIFUGE.RB().fi(new FluidStack(GT4RBlocks.PAHOEHOE_LAVA.getFluid(), 100)).io(itemStacks).outputChances(0.2, 0.1, 0.025, 0.025, 0.01).add("pahoehoe_lava", 200, 8);
@@ -119,7 +118,7 @@ public class CentrifugingLoader {
         CENTRIFUGE.RB().ii(of(DUST.getMaterialTag(DarkAsh), 2)).io(DUST.get(Ash, 2)).add("dark_ash",78, 16);
         //add(RedRock, 16, 2400); // 8 calcite, 4 flint, 4 clay
         add(Marble, 16, 329);
-        add(AntimatterMaterials.Basalt, 16, 1500);
+        add(GTLibMaterials.Basalt, 16, 1500);
         add(Cinnabar, 16, 1840);
         add(Tetrahedrite, 16, 3640);
         add(BlackGranite, 5, 800);
@@ -141,16 +140,16 @@ public class CentrifugingLoader {
 
     private static void add(Material dust, int count, long euT, int duration) {
         List<MaterialStack> stacks = dust.getProcessInto();
-        List<FluidStack> fluidStacks = stacks.stream().filter(t -> (t.m.has(AntimatterMaterialTypes.LIQUID) || t.m.has(AntimatterMaterialTypes.GAS)) && !t.m.has(AntimatterMaterialTypes.DUST)).map(t -> {
-            return t.m.has(AntimatterMaterialTypes.LIQUID) ? t.m.getLiquid(t.s * 1000) : t.m.getGas(t.s * 1000);
+        List<FluidStack> fluidStacks = stacks.stream().filter(t -> (t.m.has(GTMaterialTypes.LIQUID) || t.m.has(GTMaterialTypes.GAS)) && !t.m.has(GTMaterialTypes.DUST)).map(t -> {
+            return t.m.has(GTMaterialTypes.LIQUID) ? t.m.getLiquid(t.s * 1000) : t.m.getGas(t.s * 1000);
         }).toList();
-        List<ItemStack> itemStacks = dust.getProcessInto().stream().filter(t -> t.m.has(AntimatterMaterialTypes.DUST)).map(t -> new ItemStack(AntimatterMaterialTypes.DUST.get(t.m), t.s))
+        List<ItemStack> itemStacks = dust.getProcessInto().stream().filter(t -> t.m.has(GTMaterialTypes.DUST)).map(t -> new ItemStack(GTMaterialTypes.DUST.get(t.m), t.s))
                 .toList();
         RecipeBuilder rb = CENTRIFUGE.RB();
-        if ((dust.has(AntimatterMaterialTypes.LIQUID) || dust.has(AntimatterMaterialTypes.GAS)) && !dust.has(AntimatterMaterialTypes.DUST)){
+        if ((dust.has(GTMaterialTypes.LIQUID) || dust.has(GTMaterialTypes.GAS)) && !dust.has(GTMaterialTypes.DUST)){
             rb.fi(getFluid(dust,count * 1000));
         } else {
-            rb.ii(RecipeIngredient.of(AntimatterMaterialTypes.DUST.get(dust), count));
+            rb.ii(RecipeIngredient.of(GTMaterialTypes.DUST.get(dust), count));
         }
         if (!itemStacks.isEmpty()) rb.io(itemStacks.toArray(new ItemStack[0]));
         if (!fluidStacks.isEmpty()) rb.fo(fluidStacks.toArray(new FluidStack[0]));
@@ -158,7 +157,7 @@ public class CentrifugingLoader {
     }
 
     private static FluidStack getFluid(Material mat, int amount){
-        if (mat.has(AntimatterMaterialTypes.GAS)){
+        if (mat.has(GTMaterialTypes.GAS)){
             return mat.getGas(amount);
         } else {
             return mat.getLiquid(amount);

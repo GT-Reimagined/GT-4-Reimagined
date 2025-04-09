@@ -1,18 +1,18 @@
 package org.gtreimagined.gt4r.loader.crafting;
 
 import com.google.common.collect.ImmutableMap;
-import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
+import org.gtreimagined.gtlib.datagen.providers.GTRecipeProvider;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 
 public class CraftingHelper {
-    public static CriterionTriggerInstance criterion(ItemLike item, AntimatterRecipeProvider provider){
+    public static CriterionTriggerInstance criterion(ItemLike item, GTRecipeProvider provider){
         return provider.hasSafeItem(item);
     }
 
-    public static CriterionTriggerInstance criterion(TagKey<Item> item, AntimatterRecipeProvider provider){
+    public static CriterionTriggerInstance criterion(TagKey<Item> item, GTRecipeProvider provider){
         return provider.hasSafeItem(item);
     }
 

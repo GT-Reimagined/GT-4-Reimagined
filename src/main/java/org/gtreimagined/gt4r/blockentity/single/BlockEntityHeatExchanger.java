@@ -1,17 +1,16 @@
 package org.gtreimagined.gt4r.blockentity.single;
 
-import muramasa.antimatter.blockentity.BlockEntityMachine;
-import muramasa.antimatter.capability.CoverHandler;
-import muramasa.antimatter.capability.FluidHandler;
-import muramasa.antimatter.capability.fluid.FluidHandlerSidedWrapper;
-import muramasa.antimatter.capability.fluid.FluidTanks;
-import muramasa.antimatter.capability.machine.MachineFluidHandler;
-import muramasa.antimatter.capability.machine.MachineRecipeHandler;
-import muramasa.antimatter.gui.SlotType;
-import muramasa.antimatter.machine.event.MachineEvent;
-import muramasa.antimatter.machine.types.Machine;
-import muramasa.antimatter.util.FluidUtils;
-import muramasa.antimatter.util.Utils;
+import org.gtreimagined.gtlib.blockentity.BlockEntityMachine;
+import org.gtreimagined.gtlib.capability.CoverHandler;
+import org.gtreimagined.gtlib.capability.fluid.FluidHandlerSidedWrapper;
+import org.gtreimagined.gtlib.capability.fluid.FluidTanks;
+import org.gtreimagined.gtlib.capability.machine.MachineFluidHandler;
+import org.gtreimagined.gtlib.capability.machine.MachineRecipeHandler;
+import org.gtreimagined.gtlib.gui.SlotType;
+import org.gtreimagined.gtlib.machine.event.MachineEvent;
+import org.gtreimagined.gtlib.machine.types.Machine;
+import org.gtreimagined.gtlib.util.FluidUtils;
+import org.gtreimagined.gtlib.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -24,13 +23,10 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import org.jetbrains.annotations.NotNull;
-import tesseract.TesseractCapUtils;
-import tesseract.TesseractGraphWrappers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Predicate;
 
 import static net.minecraft.core.Direction.DOWN;

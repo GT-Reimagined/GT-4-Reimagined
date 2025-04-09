@@ -1,12 +1,11 @@
 package org.gtreimagined.gt4r.datagen;
 
 
-import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.datagen.providers.AntimatterLanguageProvider;
-import muramasa.antimatter.item.ItemFluidCell;
-import muramasa.antimatter.machine.Tier;
-import muramasa.antimatter.machine.types.Machine;
-import muramasa.antimatter.tool.IAntimatterTool;
+import org.gtreimagined.gtlib.GTAPI;
+import org.gtreimagined.gtlib.datagen.providers.GTLanguageProvider;
+import org.gtreimagined.gtlib.machine.Tier;
+import org.gtreimagined.gtlib.machine.types.Machine;
+import org.gtreimagined.gtlib.tool.IGTTool;
 import org.gtreimagined.gt4r.GT4RRef;
 import org.gtreimagined.gt4r.block.BlockCasing;
 import org.gtreimagined.gt4r.block.BlockColoredWall;
@@ -17,9 +16,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import static muramasa.antimatter.machine.Tier.LV;
-import static muramasa.antimatter.util.Utils.lowerUnderscoreToUpperSpaced;
-import static muramasa.antimatter.util.Utils.lowerUnderscoreToUpperSpacedRotated;
+import static org.gtreimagined.gtlib.util.Utils.lowerUnderscoreToUpperSpaced;
 import static org.gtreimagined.gt4r.data.GT4RMaterialTags.BROKEN_TURBINE_ROTOR;
 import static org.gtreimagined.gt4r.data.GT4RMaterialTags.TURBINE_ROTOR;
 import static org.gtreimagined.gt4r.data.Machines.ELECTROLYZER;
@@ -27,7 +24,7 @@ import static org.gtreimagined.gt4r.data.Machines.MACERATOR;
 
 public class GT4RLocalizations {
 
-    public static class en_US extends AntimatterLanguageProvider {
+    public static class en_US extends GTLanguageProvider {
 
         public en_US() {
             this("en_us");
@@ -70,12 +67,12 @@ public class GT4RLocalizations {
         @Override
         protected void english(String domain, String locale) {
             super.english(domain, locale);
-            AntimatterAPI.all(BlockCasing.class, domain).forEach(i -> add(i, lowerUnderscoreToUpperSpaced(i.getId())));
-            AntimatterAPI.all(BlockFakeCasing.class, domain).forEach(i -> add(i, lowerUnderscoreToUpperSpaced(i.getId())));
-            AntimatterAPI.all(BlockColoredWall.class, domain).forEach(i -> add(i, lowerUnderscoreToUpperSpaced(i.getId())));
-            override(AntimatterAPI.get(IAntimatterTool.class, "rock_cutter_lv", GT4RRef.ID).getItem().getDescriptionId(), "Rock Cutter");
+            GTAPI.all(BlockCasing.class, domain).forEach(i -> add(i, lowerUnderscoreToUpperSpaced(i.getId())));
+            GTAPI.all(BlockFakeCasing.class, domain).forEach(i -> add(i, lowerUnderscoreToUpperSpaced(i.getId())));
+            GTAPI.all(BlockColoredWall.class, domain).forEach(i -> add(i, lowerUnderscoreToUpperSpaced(i.getId())));
+            override(GTAPI.get(IGTTool.class, "rock_cutter_lv", GT4RRef.ID).getItem().getDescriptionId(), "Rock Cutter");
             override(GT4RItems.StorageDataOrb.getDescriptionId(), "Data Orb");
-            AntimatterAPI.all(Machine.class, domain).forEach(i -> {
+            GTAPI.all(Machine.class, domain).forEach(i -> {
                 Collection<Tier> tiers =  i.getTiers();
                 String value = i.getLang(locale).concat(" (%s)");
                 if (i.getId().contains("battery_buffer")){

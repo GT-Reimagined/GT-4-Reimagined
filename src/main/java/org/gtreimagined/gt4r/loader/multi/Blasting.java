@@ -1,6 +1,6 @@
 package org.gtreimagined.gt4r.loader.multi;
 
-import muramasa.antimatter.util.TagUtils;
+import org.gtreimagined.gtlib.util.TagUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -8,10 +8,10 @@ import org.gtreimagined.gtcore.data.GTCoreItems;
 import org.gtreimagined.gt4r.GT4RRef;
 import org.gtreimagined.gt4r.data.GT4RMaterialTags;
 
-import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
-import static muramasa.antimatter.data.AntimatterMaterials.*;
-import static muramasa.antimatter.material.MaterialTags.DIRECT_SMELT_INTO;
-import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.*;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.*;
+import static org.gtreimagined.gtlib.material.MaterialTags.DIRECT_SMELT_INTO;
+import static org.gtreimagined.gtlib.recipe.ingredient.RecipeIngredient.of;
 import static org.gtreimagined.gt4r.data.CustomTags.DUSTS_COALS;
 import static org.gtreimagined.gt4r.data.Materials.*;
 import static org.gtreimagined.gt4r.data.RecipeMaps.BASIC_BLASTING;

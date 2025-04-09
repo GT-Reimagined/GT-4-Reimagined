@@ -2,9 +2,9 @@ package org.gtreimagined.gt4r.loader.machines;
 
 import net.minecraft.world.item.ItemStack;
 
-import static muramasa.antimatter.data.AntimatterMaterialTypes.DUST;
-import static muramasa.antimatter.data.AntimatterMaterials.Redstone;
-import static muramasa.antimatter.recipe.ingredient.RecipeIngredient.of;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.DUST;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.Redstone;
+import static org.gtreimagined.gtlib.recipe.ingredient.RecipeIngredient.of;
 import static org.gtreimagined.gt4r.data.GT4RItems.*;
 import static org.gtreimagined.gt4r.data.Materials.Lithium;
 import static org.gtreimagined.gt4r.data.RecipeMaps.CANNER;

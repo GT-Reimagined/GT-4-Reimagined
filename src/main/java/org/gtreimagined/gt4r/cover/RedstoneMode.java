@@ -1,6 +1,6 @@
 package org.gtreimagined.gt4r.cover;
 
-import muramasa.antimatter.cover.ICoverMode;
+import org.gtreimagined.gtlib.cover.ICoverMode;
 
 public enum RedstoneMode implements ICoverMode {
     NORMAL("Normal", 60, 33),

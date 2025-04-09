@@ -1,10 +1,10 @@
 package org.gtreimagined.gt4r.blockentity.single;
 
-import muramasa.antimatter.blockentity.BlockEntityMachine;
-import muramasa.antimatter.capability.machine.MachineRecipeHandler;
-import muramasa.antimatter.machine.event.IMachineEvent;
-import muramasa.antimatter.machine.types.Machine;
-import muramasa.antimatter.recipe.IRecipe;
+import org.gtreimagined.gtlib.blockentity.BlockEntityMachine;
+import org.gtreimagined.gtlib.capability.machine.MachineRecipeHandler;
+import org.gtreimagined.gtlib.machine.event.IMachineEvent;
+import org.gtreimagined.gtlib.machine.types.Machine;
+import org.gtreimagined.gtlib.recipe.IRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;

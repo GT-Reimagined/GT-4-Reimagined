@@ -1,8 +1,8 @@
 package org.gtreimagined.gt4r.gui.screen;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import muramasa.antimatter.gui.container.ContainerMultiMachine;
-import muramasa.antimatter.gui.screen.ScreenMultiMachine;
+import org.gtreimagined.gtlib.gui.container.ContainerMultiMachine;
+import org.gtreimagined.gtlib.gui.screen.ScreenMultiMachine;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import org.gtreimagined.gt4r.blockentity.multi.BlockEntityFusionReactor;

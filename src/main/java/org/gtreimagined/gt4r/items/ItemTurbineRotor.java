@@ -1,8 +1,8 @@
 package org.gtreimagined.gt4r.items;
 
-import muramasa.antimatter.material.Material;
-import muramasa.antimatter.material.MaterialItem;
-import muramasa.antimatter.material.MaterialType;
+import org.gtreimagined.gtlib.material.Material;
+import org.gtreimagined.gtlib.material.MaterialItem;
+import org.gtreimagined.gtlib.material.MaterialType;
 
 import static org.gtreimagined.gt4r.data.Materials.*;
 

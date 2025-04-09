@@ -1,8 +1,8 @@
 package org.gtreimagined.gt4r.blockentity.single;
 
-import muramasa.antimatter.blockentity.single.BlockEntityTransformer;
-import muramasa.antimatter.capability.machine.MachineEnergyHandler;
-import muramasa.antimatter.machine.types.Machine;
+import org.gtreimagined.gtlib.blockentity.single.BlockEntityTransformer;
+import org.gtreimagined.gtlib.capability.machine.MachineEnergyHandler;
+import org.gtreimagined.gtlib.machine.types.Machine;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;

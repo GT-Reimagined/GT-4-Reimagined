@@ -1,7 +1,7 @@
 package org.gtreimagined.gt4r.loader.crafting;
 
-import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.datagen.providers.AntimatterRecipeProvider;
+import org.gtreimagined.gtlib.GTAPI;
+import org.gtreimagined.gtlib.datagen.providers.GTRecipeProvider;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
@@ -14,9 +14,9 @@ import org.gtreimagined.gt4r.data.GT4RBlocks;
 import java.util.function.Consumer;
 
 import static com.google.common.collect.ImmutableMap.of;
-import static muramasa.antimatter.data.AntimatterDefaultTools.*;
-import static muramasa.antimatter.data.AntimatterMaterialTypes.PLATE;
-import static muramasa.antimatter.data.AntimatterMaterials.Wood;
+import static org.gtreimagined.gtlib.data.GTTools.*;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.PLATE;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.Wood;
 import static org.gtreimagined.gt4r.data.CustomTags.*;
 import static org.gtreimagined.gt4r.data.Materials.*;
 import static org.gtreimagined.gtcore.data.GTCoreTags.*;
@@ -24,7 +24,7 @@ import static org.gtreimagined.gt4r.data.GT4RItems.ItemSuperconductor;
 import static org.gtreimagined.gt4r.data.GT4RItems.NichromeHeatingCoil;
 
 public class BlockCrafting {
-    public static void loadRecipes(Consumer<FinishedRecipe> output, AntimatterRecipeProvider provider) {
+    public static void loadRecipes(Consumer<FinishedRecipe> output, GTRecipeProvider provider) {
         provider.addStackRecipe(output, GT4RRef.ID, "firebricks", "blocks",
                 new ItemStack(GT4RBlocks.FIRE_BRICKS), of('F', GTCoreItems.FireBrick), "FF", "FF");
         provider.addStackRecipe(output, GT4RRef.ID, "standard_machine", "blocks",
@@ -36,7 +36,7 @@ public class BlockCrafting {
         provider.addStackRecipe(output, GT4RRef.ID, "highly_advanced_machine", "blocks",
                 new ItemStack(GT4RBlocks.HIGHLY_ADVANCED_MACHINE_BLOCK, 1), of('T', PLATE.getMaterialTag(Titanium), 'C', PLATE.getMaterialTag(Chromium), 'M', MACHINE_HULLS_ADVANCED), "CTC", "TMT", "CTC");
         provider.addItemRecipe(output, GT4RRef.ID, "coil_fusion", "blocks", GT4RBlocks.FUSION_COIL, of('C', CIRCUITS_MASTER, 'S', ItemSuperconductor, 'N', NichromeHeatingCoil, 'H', GT4RBlocks.HIGHLY_ADVANCED_MACHINE_BLOCK, 'I', GTCoreItems.IridiumNeutronReflector), "CSC", "NHN", "CIC");
-        AntimatterAPI.all(BlockColoredWall.class, b -> {
+        GTAPI.all(BlockColoredWall.class, b -> {
             if (b.getMaterial() == Wood){
                 provider.addItemRecipe(output, "walls", b.asItem(),
                         of('P', PLATE.getMaterialTag(Bronze), 'H', HAMMER.getTag(), 'S', SAW.getTag(), 'W', ItemTags.PLANKS), "W W", "SPH", "W W");

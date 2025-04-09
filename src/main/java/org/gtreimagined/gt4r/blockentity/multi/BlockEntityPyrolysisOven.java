@@ -1,7 +1,7 @@
 package org.gtreimagined.gt4r.blockentity.multi;
 
-import muramasa.antimatter.machine.event.IMachineEvent;
-import muramasa.antimatter.machine.types.Machine;
+import org.gtreimagined.gtlib.machine.event.IMachineEvent;
+import org.gtreimagined.gtlib.machine.types.Machine;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;

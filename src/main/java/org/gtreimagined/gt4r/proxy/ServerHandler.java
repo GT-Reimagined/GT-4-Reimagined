@@ -1,6 +1,6 @@
 package org.gtreimagined.gt4r.proxy;
 
-import muramasa.antimatter.proxy.IProxyHandler;
+import org.gtreimagined.gtlib.proxy.IProxyHandler;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 

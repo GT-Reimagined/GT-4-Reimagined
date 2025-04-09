@@ -1,10 +1,10 @@
 package org.gtreimagined.gt4r.blockentity.multi;
 
-import muramasa.antimatter.blockentity.multi.BlockEntityMultiMachine;
-import muramasa.antimatter.capability.machine.MultiMachineEnergyHandler;
-import muramasa.antimatter.gui.event.GuiEvents;
-import muramasa.antimatter.gui.event.IGuiEvent;
-import muramasa.antimatter.machine.types.Machine;
+import org.gtreimagined.gtlib.blockentity.multi.BlockEntityMultiMachine;
+import org.gtreimagined.gtlib.capability.machine.MultiMachineEnergyHandler;
+import org.gtreimagined.gtlib.gui.event.GuiEvents;
+import org.gtreimagined.gtlib.gui.event.IGuiEvent;
+import org.gtreimagined.gtlib.machine.types.Machine;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;

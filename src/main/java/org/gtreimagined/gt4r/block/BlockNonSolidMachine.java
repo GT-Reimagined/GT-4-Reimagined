@@ -1,11 +1,11 @@
 package org.gtreimagined.gt4r.block;
 
-import muramasa.antimatter.machine.BlockMachine;
-import muramasa.antimatter.machine.Tier;
-import muramasa.antimatter.machine.types.Machine;
+import org.gtreimagined.gtlib.machine.BlockMachine;
+import org.gtreimagined.gtlib.machine.Tier;
+import org.gtreimagined.gtlib.machine.types.Machine;
 import net.minecraft.world.level.block.SoundType;
 
-import static muramasa.antimatter.Data.WRENCH_MATERIAL;
+import static org.gtreimagined.gtlib.Data.WRENCH_MATERIAL;
 
 public class BlockNonSolidMachine extends BlockMachine {
     public BlockNonSolidMachine(Machine<?> type, Tier tier) {

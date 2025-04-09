@@ -1,24 +1,24 @@
 package org.gtreimagined.gt4r.loader.machines;
 
-import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.pipe.PipeSize;
-import muramasa.antimatter.pipe.types.Wire;
-import muramasa.antimatter.recipe.ingredient.RecipeIngredient;
+import org.gtreimagined.gtlib.GTAPI;
+import org.gtreimagined.gtlib.pipe.PipeSize;
+import org.gtreimagined.gtlib.pipe.types.Wire;
+import org.gtreimagined.gtlib.recipe.ingredient.RecipeIngredient;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.gtreimagined.gtcore.data.GTCoreItems;
 import org.gtreimagined.gt4r.data.GT4RItems;
 
-import static muramasa.antimatter.data.AntimatterMaterialTypes.DUST;
-import static muramasa.antimatter.data.AntimatterMaterialTypes.INGOT;
-import static muramasa.antimatter.data.AntimatterMaterials.Charcoal;
-import static muramasa.antimatter.data.AntimatterMaterials.Coal;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.DUST;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.INGOT;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.Charcoal;
+import static org.gtreimagined.gtlib.data.GTLibMaterials.Coal;
 import static org.gtreimagined.gt4r.data.Materials.*;
 import static org.gtreimagined.gt4r.data.RecipeMaps.WIRE_MILL;
 
 public class WiremillLoader {
     public static void init() {
-        AntimatterAPI.all(Wire.class).forEach(t -> {
+        GTAPI.all(Wire.class).forEach(t -> {
             Item wireItem = t.getBlockItem(PipeSize.VTINY);
             ItemStack stack = new ItemStack(wireItem,2);
             if (t.getMaterial().has(INGOT)){

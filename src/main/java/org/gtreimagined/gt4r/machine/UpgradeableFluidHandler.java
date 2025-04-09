@@ -1,13 +1,13 @@
 package org.gtreimagined.gt4r.machine;
 
-import muramasa.antimatter.blockentity.BlockEntityMachine;
-import muramasa.antimatter.capability.fluid.FluidTanks;
-import muramasa.antimatter.capability.machine.MachineFluidHandler;
-import muramasa.antimatter.gui.SlotType;
-import muramasa.antimatter.util.TagUtils;
+import org.gtreimagined.gtlib.blockentity.BlockEntityMachine;
+import org.gtreimagined.gtlib.capability.fluid.FluidTanks;
+import org.gtreimagined.gtlib.capability.machine.MachineFluidHandler;
+import org.gtreimagined.gtlib.gui.SlotType;
+import org.gtreimagined.gtlib.util.TagUtils;
 import org.gtreimagined.gt4r.data.CustomTags;
 
-import static muramasa.antimatter.machine.MachineFlag.GUI;
+import static org.gtreimagined.gtlib.machine.MachineFlag.GUI;
 
 public class UpgradeableFluidHandler<T extends BlockEntityMachine<T> & IUpgradeProvider> extends MachineFluidHandler<T> {
     public UpgradeableFluidHandler(T tile, int capacity) {

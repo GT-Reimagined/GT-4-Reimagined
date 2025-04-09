@@ -1,6 +1,6 @@
 package org.gtreimagined.gt4r.loader.machines;
 
-import static muramasa.antimatter.data.AntimatterMaterialTypes.*;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.*;
 import static org.gtreimagined.gt4r.data.RecipeMaps.DUSTBIN;
 
 public class DustbinLoader {

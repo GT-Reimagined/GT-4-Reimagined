@@ -1,13 +1,13 @@
 package org.gtreimagined.gt4r.data;
 
-import muramasa.antimatter.AntimatterAPI;
-import muramasa.antimatter.gui.BarDir;
-import muramasa.antimatter.gui.ButtonOverlay;
-import muramasa.antimatter.gui.GuiData;
-import muramasa.antimatter.gui.slot.ISlotProvider;
-import muramasa.antimatter.gui.widget.ProgressWidget;
-import muramasa.antimatter.gui.widget.WidgetSupplier;
-import muramasa.antimatter.machine.Tier;
+import org.gtreimagined.gtlib.GTAPI;
+import org.gtreimagined.gtlib.gui.BarDir;
+import org.gtreimagined.gtlib.gui.ButtonOverlay;
+import org.gtreimagined.gtlib.gui.GuiData;
+import org.gtreimagined.gtlib.gui.slot.ISlotProvider;
+import org.gtreimagined.gtlib.gui.widget.ProgressWidget;
+import org.gtreimagined.gtlib.gui.widget.WidgetSupplier;
+import org.gtreimagined.gtlib.machine.Tier;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import org.gtreimagined.gt4r.GT4RRef;
@@ -17,11 +17,11 @@ import org.gtreimagined.gt4r.gui.widgets.FusionButtonWidget;
 
 import java.util.function.BiFunction;
 
-import static muramasa.antimatter.gui.ButtonOverlay.*;
-import static muramasa.antimatter.gui.SlotType.*;
-import static muramasa.antimatter.gui.Widget.builder;
-import static muramasa.antimatter.machine.Tier.LV;
-import static muramasa.antimatter.machine.Tier.MV;
+import static org.gtreimagined.gtlib.gui.ButtonOverlay.*;
+import static org.gtreimagined.gtlib.gui.SlotType.*;
+import static org.gtreimagined.gtlib.gui.Widget.builder;
+import static org.gtreimagined.gtlib.machine.Tier.LV;
+import static org.gtreimagined.gtlib.machine.Tier.MV;
 import static org.gtreimagined.gt4r.data.Machines.*;
 import static org.gtreimagined.gt4r.data.SlotTypes.DATA;
 import static org.gtreimagined.gt4r.data.SlotTypes.QUANTUM;
@@ -62,9 +62,9 @@ public class Guis {
 
     public static void init(Dist side) {
 
-        AntimatterAPI.registerJEICategory(RecipeMaps.ORE_BYPRODUCTS, Guis.ORE_BYPRODUCTS);
-        AntimatterAPI.registerJEICategory(RecipeMaps.INT_CIRCUITS, Guis.ORE_BYPRODUCTS_OLD);
-        AntimatterAPI.registerJEICategory(RecipeMaps.SMELTER_COILS, Guis.ORE_BYPRODUCTS_OLD);
+        GTAPI.registerJEICategory(RecipeMaps.ORE_BYPRODUCTS, Guis.ORE_BYPRODUCTS);
+        GTAPI.registerJEICategory(RecipeMaps.INT_CIRCUITS, Guis.ORE_BYPRODUCTS_OLD);
+        GTAPI.registerJEICategory(RecipeMaps.SMELTER_COILS, Guis.ORE_BYPRODUCTS_OLD);
 
         //TODO changing slots of a machine in world, will crash from GTItemHandler.validateSlot()
 

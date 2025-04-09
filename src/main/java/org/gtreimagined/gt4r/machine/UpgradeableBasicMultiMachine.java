@@ -1,6 +1,6 @@
 package org.gtreimagined.gt4r.machine;
 
-import muramasa.antimatter.machine.types.BasicMultiMachine;
+import org.gtreimagined.gtlib.machine.types.BasicMultiMachine;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.TranslatableComponent;
