@@ -10,12 +10,9 @@ import net.minecraft.resources.ResourceLocation;
 import org.gtreimagined.gtcore.data.GTCoreBlocks;
 import org.gtreimagined.gt4r.GT4RConfig;
 import org.gtreimagined.gt4r.GT4RRef;
-import org.gtreimagined.gtlib.worldgen.object.WorldGenStoneLayerBuilder;
 import org.gtreimagined.gtlib.worldgen.smallore.SmallOreBuilder;
-import org.gtreimagined.gtlib.worldgen.smallore.WorldGenSmallOreBuilder;
 import org.gtreimagined.gtlib.worldgen.stonelayer.StoneLayerBuilder;
 import org.gtreimagined.gtlib.worldgen.vanillaore.VanillaVeinBuilder;
-import org.gtreimagined.gtlib.worldgen.vanillaore.WorldGenVanillaOreBuilder;
 
 import static org.gtreimagined.gtlib.data.GTLibMaterials.*;
 import static org.gtreimagined.gtlib.data.VanillaStoneTypes.*;
