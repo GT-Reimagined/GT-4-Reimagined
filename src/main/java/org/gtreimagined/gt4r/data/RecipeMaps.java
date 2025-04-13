@@ -59,7 +59,7 @@ public class RecipeMaps {
     public static RecipeMap<?> FLUID_PRESS = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "fluid_press", new RecipeBuilder()));
     public static RecipeMap<?> FLUID_SOLIDIFIER = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "fluid_solidifier", new RecipeBuilder()));
     public static RecipeMap<?> FORGE_HAMMER = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "forge_hammer", new SteamBuilder(STEAM_FORGE_HAMMER)));
-    public static RecipeMap<?> FURNACE = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "furnace", new RecipeBuilder()).setProxy(RecipeProxies.FURNACE_PROXY.apply(4, 60)));
+    public static RecipeMap<?> FURNACE = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "furnace", new RecipeBuilder()).setProxy(RecipeProxies.FURNACE_PROXY.apply(4, 80)));
     public static RecipeMap<?> LATHE = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "lathe", new RecipeBuilder()));
     public static RecipeMap<?> MACERATOR = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "macerator", new SteamBuilder(STEAM_MACERATOR)));
     public static RecipeMap<?> MASS_FABRICATOR = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "mass_fabricator", new RecipeBuilder()));
