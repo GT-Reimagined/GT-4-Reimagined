@@ -211,6 +211,8 @@ public class Machines {
     public static void init() {
         HEAT_EXCHANGER.removeFlags(EU);
         DUSTBIN.removeFlags(EU);
+        GTAPI.registerJEICategoryWorkstation(UNIVERSAL_MACERATOR, STEAM_MACERATOR, BRONZE);
+        GTAPI.registerJEICategoryWorkstation(UNIVERSAL_MACERATOR, STEAM_MACERATOR, STEEL);
     }
 
     private static MultiblockTankMachine[] createTankMachine(Material material, int multiplier){
