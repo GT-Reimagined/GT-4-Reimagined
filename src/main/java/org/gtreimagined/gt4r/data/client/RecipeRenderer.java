@@ -78,9 +78,8 @@ public class RecipeRenderer {
             renderString(stack, amps, fontRenderer, 5, 20, guiOffsetX, guiOffsetY);
             renderString(stack, total, fontRenderer, 5, 30, guiOffsetX, guiOffsetY);
             if (steamPower <= Tier.LV.getVoltage()){
-                renderString(stack, "Steam Info:", fontRenderer, 5, 40, guiOffsetX, guiOffsetY);
-                renderString(stack, steamT, fontRenderer, 5, 50, guiOffsetX, guiOffsetY);
-                renderString(stack, steamLength, fontRenderer, 5, 60, guiOffsetX, guiOffsetY);
+                renderString(stack, steamT, fontRenderer, 5, 40, guiOffsetX, guiOffsetY);
+                renderString(stack, steamLength, fontRenderer, 5, 50, guiOffsetX, guiOffsetY);
             } else {
                 renderString(stack, "Not runnable in Steam machines", fontRenderer, 5, 40, guiOffsetX, guiOffsetY);
             }
@@ -88,7 +87,7 @@ public class RecipeRenderer {
 
         @Override
         public int getRows() {
-            return 7;
+            return 6;
         }
     };
 
@@ -107,18 +106,11 @@ public class RecipeRenderer {
         RecipeMaps.THERMAL_FUELS.setInfoRenderer(InfoRenderers.FUEL_RENDERER);
 
         RecipeMaps.BLASTING.setInfoRenderer(InfoRenderers.BLASTING_RENDERER);
-        RecipeMaps.STEAM_FURNACE.setInfoRenderer(InfoRenderers.STEAM_RENDERER);
-        RecipeMaps.STEAM_COMPRESSOR.setInfoRenderer(InfoRenderers.STEAM_RENDERER);
-        RecipeMaps.STEAM_ALLOY_SMELTER.setInfoRenderer(InfoRenderers.STEAM_RENDERER);
-        RecipeMaps.STEAM_EXTRACTOR.setInfoRenderer(InfoRenderers.STEAM_RENDERER);
-        RecipeMaps.STEAM_MACERATOR.setInfoRenderer(InfoRenderers.STEAM_RENDERER);
-        RecipeMaps.STEAM_CUTTER.setInfoRenderer(InfoRenderers.STEAM_RENDERER);
-        RecipeMaps.STEAM_SIFTER.setInfoRenderer(InfoRenderers.STEAM_RENDERER);
-        RecipeMaps.STEAM_FORGE_HAMMER.setInfoRenderer(InfoRenderers.STEAM_RENDERER);
+        RecipeMaps.FURNACE.setInfoRenderer(STEAM_RENDERER);
         RecipeMaps.COMPRESSOR.setInfoRenderer(STEAM_RENDERER);
         RecipeMaps.ALLOY_SMELTER.setInfoRenderer(STEAM_RENDERER);
         RecipeMaps.EXTRACTOR.setInfoRenderer(STEAM_RENDERER);
-        RecipeMaps.MACERATOR.setInfoRenderer(STEAM_RENDERER);
+        RecipeMaps.UNIVERSAL_MACERATOR.setInfoRenderer(STEAM_RENDERER);
         RecipeMaps.PLATE_CUTTER.setInfoRenderer(STEAM_RENDERER);
         RecipeMaps.SIFTER.setInfoRenderer(STEAM_RENDERER);
         RecipeMaps.FORGE_HAMMER.setInfoRenderer(STEAM_RENDERER);
