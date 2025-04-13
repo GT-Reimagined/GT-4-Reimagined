@@ -11,7 +11,6 @@ import org.gtreimagined.gt4r.cover.CoverDynamoOld;
 import org.gtreimagined.gt4r.cover.CoverFusionInput;
 import org.gtreimagined.gt4r.cover.CoverFusionOutput;
 import org.gtreimagined.gt4r.cover.CoverPump;
-import org.gtreimagined.gt4r.cover.CoverSteamVent;
 import org.gtreimagined.gt4r.cover.redstone.CoverRedstoneMachineController;
 import org.gtreimagined.gt4r.items.ItemCraftingModule;
 
@@ -28,8 +27,6 @@ public class GT4RCovers {
             .addTextures(new Texture(GT4RRef.ID, "block/cover/dynamo")).build(GT4RRef.ID, "dynamo_old");
     public static final CoverFactory COVER_DRAIN = CoverFactory.builder(CoverDrain::new).item((a, b) ->
             new ItemCover(GT4RRef.ID, "drain").tip("Can be placed on machines as a cover")).addTextures(new Texture(GT4RRef.ID, "block/cover/drain")).build(GT4RRef.ID, "drain");
-    public static final CoverFactory COVER_STEAM_VENT = CoverFactory.builder(CoverSteamVent::new)
-            .addTextures(new Texture(GT4RRef.ID, "block/cover/output")).build(GT4RRef.ID, "steam_vent");
     public static final CoverFactory COVER_CRAFTING = CoverFactory.builder(CoverCrafting::new).gui().item((a, b) ->
             new ItemCraftingModule().tip("Can be placed on machines as a cover")).setMenuHandler(MenuHandlers.COVER_CRAFTING_HANDLER).addTextures(new Texture(GT4RRef.ID, "block/cover/crafting_module")).build(GT4RRef.ID, "crafting_module");
     public static final CoverFactory COVER_REDSTONE_MACHINE_CONTROLLER = CoverFactory.builder(CoverRedstoneMachineController::new).gui().item((a, b) ->

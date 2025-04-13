@@ -29,39 +29,30 @@ public class RecipeMaps {
     public static RecipeMap<?> THERMAL_FUELS = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "thermal_fuels", new RecipeBuilder()));
     public static RecipeMap<?> THERMAL_BOILER_FUELS = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "thermal_boiler_fuels", new RecipeBuilder()));
 
-    public static RecipeMap<?> STEAM_FURNACE = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "steam_furnace", new RecipeBuilder()).setProxy(RecipeProxies.FURNACE_PROXY.apply(8, 180)));
-    public static RecipeMap<?> STEAM_MACERATOR = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "steam_macerator", new RecipeBuilder()));
-    public static RecipeMap<?> STEAM_EXTRACTOR = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "steam_extractor", new RecipeBuilder()));
-    public static RecipeMap<?> STEAM_FORGE_HAMMER = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "steam_forge_hammer", new RecipeBuilder()));
-    public static RecipeMap<?> STEAM_COMPRESSOR = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "steam_compressor", new RecipeBuilder()));
-    public static RecipeMap<?> STEAM_ALLOY_SMELTER = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "steam_alloy_smelter", new RecipeBuilder()));
-    public static RecipeMap<?> STEAM_CUTTER = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "steam_cutter", new RecipeBuilder()));
-    public static RecipeMap<?> STEAM_SIFTER = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "steam_sifter", new RecipeBuilder()));
-
     public static RecipeMap<?> SOLID_FUEL_BOILERS = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "solid_fuel_boilers", new RecipeBuilder()));
 
-    public static RecipeMap<?> ALLOY_SMELTER = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "alloy_smelter", new SteamBuilder(STEAM_ALLOY_SMELTER)));
+    public static RecipeMap<?> ALLOY_SMELTER = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "alloy_smelter", new RecipeBuilder()));
     public static RecipeMap<?> ASSEMBLER = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "assembler", new RecipeBuilder()));
     public static RecipeMap<?> AUTOCLAVE = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "autoclave", new RecipeBuilder()));
     public static RecipeMap<?> BATH = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "bath", new RecipeBuilder()));
     public static RecipeMap<?> CANNER = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "canner", new RecipeBuilder()));
     public static RecipeMap<?> CENTRIFUGE = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "centrifuge", new RecipeBuilder()));
     public static RecipeMap<?> CHEMICAL_REACTOR = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "chemical_reactor", new RecipeBuilder()));
-    public static RecipeMap<?> COMPRESSOR = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "compressor", new SteamBuilder(STEAM_COMPRESSOR)));
+    public static RecipeMap<?> COMPRESSOR = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "compressor", new RecipeBuilder()));
     public static RecipeMap<?> DISASSEMBLER = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "disassembler", new RecipeBuilder()));
     public static RecipeMap<?> DISTILLERY = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "distillery", new RecipeBuilder()));
     public static RecipeMap<?> DUSTBIN = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "dustbin", new RecipeBuilder()));
     public static RecipeMap<?> ELECTROLYZER = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "electrolyzer", new RecipeBuilder()));
-    public static RecipeMap<?> EXTRACTOR = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "extractor", new SteamBuilder(STEAM_EXTRACTOR)));
+    public static RecipeMap<?> EXTRACTOR = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "extractor", new RecipeBuilder()));
     public static RecipeMap<?> EXTRUDER = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "extruder", new RecipeBuilder()));
     public static RecipeMap<?> FERMENTER = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "fermenter", new RecipeBuilder()));
     public static RecipeMap<?> FLUID_CANNER = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "fluid_canner", new RecipeBuilder()));
     public static RecipeMap<?> FLUID_PRESS = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "fluid_press", new RecipeBuilder()));
     public static RecipeMap<?> FLUID_SOLIDIFIER = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "fluid_solidifier", new RecipeBuilder()));
-    public static RecipeMap<?> FORGE_HAMMER = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "forge_hammer", new SteamBuilder(STEAM_FORGE_HAMMER)));
+    public static RecipeMap<?> FORGE_HAMMER = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "forge_hammer", new RecipeBuilder()));
     public static RecipeMap<?> FURNACE = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "furnace", new RecipeBuilder()).setProxy(RecipeProxies.FURNACE_PROXY.apply(4, 80)));
     public static RecipeMap<?> LATHE = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "lathe", new RecipeBuilder()));
-    public static RecipeMap<?> MACERATOR = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "macerator", new SteamBuilder(STEAM_MACERATOR)));
+    public static RecipeMap<?> MACERATOR = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "macerator", new RecipeBuilder()));
     public static RecipeMap<?> MASS_FABRICATOR = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "mass_fabricator", new RecipeBuilder()));
     public static RecipeMap<?> ORE_WASHER = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "ore_washer", new RecipeBuilder()));
     public static RecipeMap<?> PLATE_BENDER = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "plate_bender", new RecipeBuilder()));
@@ -69,7 +60,7 @@ public class RecipeMaps {
     public static RecipeMap<?> RECYCLER = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "recycler", new RecipeBuilder()));
     public static RecipeMap<?> REPLICATOR = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "replicator", new RecipeBuilder()));
     public static RecipeMap<?> SCANNER = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "scanner", new RecipeBuilder()));
-    public static RecipeMap<?> SIFTER = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "sifter", new SteamBuilder(STEAM_SIFTER)));
+    public static RecipeMap<?> SIFTER = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "sifter", new RecipeBuilder()));
     public static RecipeMap<?> SMELTER = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "smelter", new RecipeBuilder()));
     public static RecipeMap<?> SMELTER_COILS = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "smelter_coils", new RecipeBuilder())).setIcon(() -> GT4RItems.CupronickelHeatingCoil);
     public static RecipeMap<?> UNIVERSAL_MACERATOR = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "universal_macerator", new UniversalMaceratorBuilder()).setGuiTier(MV));

@@ -17,5 +17,6 @@ public class GT4RRemapping {
         GTRemapping.remap(new ResourceLocation(GTCore.ID, "small_lithium_battery"), new ResourceLocation(GT4RRef.ID, "lithium_battery"));
         GTRemapping.remap(new ResourceLocation(GTCore.ID, "lapotron_crystal"), new ResourceLocation(GT4RRef.ID, "lapotron_crystal"));
         GTRemapping.remap(new ResourceLocation(GTCore.ID, "lapotronic_energy_orb"), new ResourceLocation(GT4RRef.ID, "lapotronic_energy_orb"));
+        GTRemapping.remapCover(new ResourceLocation(GT4RRef.ID, "steam_vent"), new ResourceLocation(GTCore.ID, "steam_vent"));
     }
 }

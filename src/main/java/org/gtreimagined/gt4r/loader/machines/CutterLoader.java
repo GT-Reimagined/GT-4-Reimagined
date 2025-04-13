@@ -8,7 +8,6 @@ import net.minecraft.world.item.Items;
 
 import static org.gtreimagined.gtlib.data.GTMaterialTypes.*;
 import static org.gtreimagined.gt4r.data.RecipeMaps.PLATE_CUTTER;
-import static org.gtreimagined.gt4r.data.RecipeMaps.STEAM_CUTTER;
 
 public class CutterLoader {
     public static void init(){
@@ -20,7 +19,6 @@ public class CutterLoader {
                 multiplier = 5;
             int count = t.has(MaterialTags.QUARTZ_LIKE_BLOCKS) ? 4 : 9;
             PLATE_CUTTER.RB().ii(RecipeIngredient.of(BLOCK.getMaterialTag(t), 1)).fi(GTLibMaterials.Water.getLiquid(3)).io(PLATE.get(t,count)).add(t.getId() + "_plate",duration * 8 * multiplier, 30);
-            STEAM_CUTTER.RB().ii(BLOCK.getMaterialIngredient(t, 1)).fi(GTLibMaterials.Water.getLiquid(3)).io(PLATE.get(t, count)).add(t.getId() + "_plate", duration * 8 * multiplier * 4, 30);
         });
         BOLT.all().forEach(t -> {
             if (!t.has(ROD)) return;

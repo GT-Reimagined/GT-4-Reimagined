@@ -41,7 +41,6 @@ public class IndustrialSawmill {
         INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(log, 1)).fi(Lubricant.getLiquid(10)).io(new ItemStack(wood, 6), DUST.get(Wood, 1)).add(woodID + "_log_1",100, 30);
         INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(log, 1)).fi(DistilledWater.getLiquid(30)).io(new ItemStack(wood, 6), DUST.get(Wood, 1)).add(woodID + "_log_2",200, 30);
         PLATE_CUTTER.RB().ii(RecipeIngredient.of(log, 1)).fi(Water.getLiquid(3)).io(new ItemStack(wood, 4), DUST.get(Wood, 1)).add(woodID + "_log",200, 30);
-        STEAM_CUTTER.RB().ii(RecipeIngredient.of(log, 1)).fi(Water.getLiquid(3)).io(new ItemStack(wood, 4), DUST.get(Wood, 1)).add(woodID + "_log", 800, 30);
     }
 
     private static void addWoodRecipe(TagKey<Item> log, ItemLike wood, ItemStack output){
@@ -50,6 +49,5 @@ public class IndustrialSawmill {
         INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(log, 1)).fi(Lubricant.getLiquid(10)).io(new ItemStack(wood, 6), DUST.get(Wood, 1), output).add(woodID + "_log_1",100, 30);
         INDUSTRIAL_SAWMILLING.RB().ii(RecipeIngredient.of(log, 1)).fi(DistilledWater.getLiquid(30)).io(new ItemStack(wood, 6), DUST.get(Wood, 1), output).add(woodID + "_log_2",200, 30);
         PLATE_CUTTER.RB().ii(RecipeIngredient.of(log, 1)).fi(Water.getLiquid(3)).io(new ItemStack(wood, 4), DUST.get(Wood, 1)).add(woodID + "_log",200, 30);
-        STEAM_CUTTER.RB().ii(RecipeIngredient.of(log, 1)).fi(Water.getLiquid(3)).io(new ItemStack(wood, 4), DUST.get(Wood, 1)).add(woodID + "_log", 800, 30);
     }
 }

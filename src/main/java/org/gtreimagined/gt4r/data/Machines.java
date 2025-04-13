@@ -1,6 +1,8 @@
 package org.gtreimagined.gt4r.data;
 
 
+import org.gtreimagined.gtcore.data.GTCoreCovers;
+import org.gtreimagined.gtcore.machine.SteamMachine;
 import org.gtreimagined.gtlib.GTAPI;
 import org.gtreimagined.gtlib.blockentity.single.BlockEntityDigitalTransformer;
 import org.gtreimagined.gtlib.blockentity.single.BlockEntityTransformer;
@@ -51,7 +53,6 @@ import org.gtreimagined.gt4r.blockentity.single.BlockEntityTranslocator;
 import org.gtreimagined.gt4r.blockentity.single.BlockEntityTypeFilter;
 import org.gtreimagined.gt4r.blockentity.single.BlockEntityWatermill;
 import org.gtreimagined.gt4r.machine.NonSolidMachine;
-import org.gtreimagined.gt4r.machine.SteamMachine;
 import org.gtreimagined.gt4r.machine.StorageMachine;
 import org.gtreimagined.gt4r.machine.UpgradeableBasicMultiMachine;
 import org.gtreimagined.gt4r.machine.UpgradeableMachine;
@@ -103,14 +104,14 @@ public class Machines {
     public static NonSolidMachine DUSTBIN = new NonSolidMachine(GT4RRef.ID, "dustbin").setTiers(LV).setMap(RecipeMaps.DUSTBIN).addFlags(GUI, ITEM).custom().baseTexture(Textures.DUSTBIN_HANDLER).covers(emptyFactory).frontCovers().setTile(BlockEntityDustBin::new);
 
     public static SteamMachine SOLID_FUEL_BOILER = new SteamMachine(GT4RRef.ID, "solid_fuel_boiler").setMap(SOLID_FUEL_BOILERS).setTiers(BRONZE, STEEL).addFlags(GUI, STEAM, ITEM, FLUID, CELL).baseTexture(Textures.BOILER_HANDLER).setTile(BlockEntityCoalBoiler::new).noCovers();
-    public static SteamMachine STEAM_FURNACE = new SteamMachine(GT4RRef.ID, "steam_furnace").setTiers(BRONZE, STEEL).addFlags(GUI, STEAM, ITEM, FLUID).setMap(RecipeMaps.STEAM_FURNACE).baseTexture(Textures.BRICKED_HANDLER).covers(COVER_STEAM_VENT);
-    public static SteamMachine STEAM_MACERATOR = new SteamMachine(GT4RRef.ID, "steam_macerator").setTiers(BRONZE, STEEL).addFlags(GUI, STEAM, ITEM, FLUID).setMap(RecipeMaps.STEAM_MACERATOR).covers(COVER_STEAM_VENT);
-    public static SteamMachine STEAM_EXTRACTOR = new SteamMachine(GT4RRef.ID, "steam_extractor").setTiers(BRONZE, STEEL).addFlags(GUI, STEAM, ITEM, FLUID).setMap(RecipeMaps.STEAM_EXTRACTOR).covers(COVER_STEAM_VENT);
-    public static SteamMachine STEAM_FORGE_HAMMER = new SteamMachine(GT4RRef.ID, "steam_forge_hammer").setTiers(BRONZE, STEEL).addFlags(GUI, STEAM, ITEM, FLUID).setMap(RecipeMaps.STEAM_FORGE_HAMMER).covers(COVER_STEAM_VENT);
-    public static SteamMachine STEAM_COMPRESSOR = new SteamMachine(GT4RRef.ID, "steam_compressor").setTiers(BRONZE, STEEL).addFlags(GUI, STEAM, ITEM, FLUID).setMap(RecipeMaps.STEAM_COMPRESSOR).covers(COVER_STEAM_VENT);
-    public static SteamMachine STEAM_ALLOY_SMELTER = new SteamMachine(GT4RRef.ID, "steam_alloy_smelter").setTiers(BRONZE, STEEL).addFlags(GUI, STEAM, ITEM, FLUID).setMap(RecipeMaps.STEAM_ALLOY_SMELTER).baseTexture(Textures.BRICKED_HANDLER).covers(COVER_STEAM_VENT);
-    public static SteamMachine STEAM_CUTTER = new SteamMachine(GT4RRef.ID, "steam_cutter").setTiers(BRONZE, STEEL).addFlags(GUI, STEAM, ITEM, FLUID).setMap(RecipeMaps.STEAM_CUTTER).covers(COVER_STEAM_VENT);
-    public static SteamMachine STEAM_SIFTER = new SteamMachine(GT4RRef.ID, "steam_sifter").setTiers(BRONZE, STEEL).addFlags(GUI, STEAM, ITEM, FLUID).setMap(RecipeMaps.STEAM_SIFTER).covers(COVER_STEAM_VENT);
+    public static SteamMachine STEAM_FURNACE = new SteamMachine(GT4RRef.ID, "steam_furnace").setTiers(BRONZE, STEEL).addFlags(GUI, STEAM, ITEM, FLUID).setMap(RecipeMaps.FURNACE).baseTexture(Textures.BRICKED_HANDLER).covers(GTCoreCovers.COVER_STEAM_VENT);
+    public static SteamMachine STEAM_MACERATOR = new SteamMachine(GT4RRef.ID, "steam_macerator").setTiers(BRONZE, STEEL).addFlags(GUI, STEAM, ITEM, FLUID).setMap(RecipeMaps.MACERATOR).covers(GTCoreCovers.COVER_STEAM_VENT);
+    public static SteamMachine STEAM_EXTRACTOR = new SteamMachine(GT4RRef.ID, "steam_extractor").setTiers(BRONZE, STEEL).addFlags(GUI, STEAM, ITEM, FLUID).setMap(RecipeMaps.EXTRACTOR).covers(GTCoreCovers.COVER_STEAM_VENT);
+    public static SteamMachine STEAM_FORGE_HAMMER = new SteamMachine(GT4RRef.ID, "steam_forge_hammer").setTiers(BRONZE, STEEL).addFlags(GUI, STEAM, ITEM, FLUID).setMap(RecipeMaps.FORGE_HAMMER).covers(GTCoreCovers.COVER_STEAM_VENT);
+    public static SteamMachine STEAM_COMPRESSOR = new SteamMachine(GT4RRef.ID, "steam_compressor").setTiers(BRONZE, STEEL).addFlags(GUI, STEAM, ITEM, FLUID).setMap(RecipeMaps.COMPRESSOR).covers(GTCoreCovers.COVER_STEAM_VENT);
+    public static SteamMachine STEAM_ALLOY_SMELTER = new SteamMachine(GT4RRef.ID, "steam_alloy_smelter").setTiers(BRONZE, STEEL).addFlags(GUI, STEAM, ITEM, FLUID).setMap(RecipeMaps.ALLOY_SMELTER).baseTexture(Textures.BRICKED_HANDLER).covers(GTCoreCovers.COVER_STEAM_VENT);
+    public static SteamMachine STEAM_CUTTER = new SteamMachine(GT4RRef.ID, "steam_cutter").setDurationMultiplier(2).setEuMultiplier(1).setTiers(BRONZE, STEEL).addFlags(GUI, STEAM, ITEM, FLUID).setMap(PLATE_CUTTER).covers(GTCoreCovers.COVER_STEAM_VENT);
+    public static SteamMachine STEAM_SIFTER = new SteamMachine(GT4RRef.ID, "steam_sifter").setTiers(BRONZE, STEEL).addFlags(GUI, STEAM, ITEM, FLUID).setMap(RecipeMaps.SIFTER).covers(GTCoreCovers.COVER_STEAM_VENT);
 
     public static BasicMachine TELEPORTER = new BasicMachine(GT4RRef.ID, "teleporter").baseTexture(Textures.BASE_HANDLER).setTiers(HV, LUV).setTile(BlockEntityTeleporter::new).overlayTexture(Textures.TIER_SPECIFIC_OVERLAY_HANDLER);
     public static BasicMachine COMPUTER_CUBE = new BasicMachine(GT4RRef.ID, "computer_cube").baseTexture(Textures.BASE_HANDLER).setTiers(LV).overlayTexture(Textures.SIMPLE_SIDED).noCovers();
