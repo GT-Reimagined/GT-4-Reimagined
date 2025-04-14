@@ -1,8 +1,8 @@
 package org.gtreimagined.gt4r.data.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import org.gtreimagined.gtlib.integration.jeirei.renderer.IRecipeInfoRenderer;
-import org.gtreimagined.gtlib.integration.jeirei.renderer.InfoRenderers;
+import org.gtreimagined.gtlib.integration.xei.renderer.IRecipeInfoRenderer;
+import org.gtreimagined.gtlib.integration.xei.renderer.InfoRenderers;
 import org.gtreimagined.gtlib.machine.Tier;
 import org.gtreimagined.gtlib.recipe.IRecipe;
 import net.minecraft.client.gui.Font;

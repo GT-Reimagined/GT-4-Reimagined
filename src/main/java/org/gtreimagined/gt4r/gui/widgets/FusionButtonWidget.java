@@ -5,7 +5,7 @@ import org.gtreimagined.gtlib.gui.GuiInstance;
 import org.gtreimagined.gtlib.gui.IGuiElement;
 import org.gtreimagined.gtlib.gui.Widget;
 import org.gtreimagined.gtlib.gui.widget.WidgetSupplier;
-import org.gtreimagined.gtlib.integration.jeirei.AntimatterJEIREIPlugin;
+import org.gtreimagined.gtlib.integration.xei.GTLibXEIPlugin;
 import org.gtreimagined.gtlib.machine.MachineFlag;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -39,7 +39,7 @@ public class FusionButtonWidget extends Widget {
     @Override
     public void onClick(double mouseX, double mouseY, int button) {
         super.onClick(mouseX, mouseY, button);
-        AntimatterJEIREIPlugin.showCategory(getTile().getMachineType(), getTile().getMachineTier());
+        GTLibXEIPlugin.showCategory(getTile().getMachineType(), getTile().getMachineTier());
     }
 
     public static WidgetSupplier build() {

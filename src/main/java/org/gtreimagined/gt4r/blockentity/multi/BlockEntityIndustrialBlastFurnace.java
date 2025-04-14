@@ -1,12 +1,13 @@
 package org.gtreimagined.gt4r.blockentity.multi;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import org.gtreimagined.gt4r.blockentity.multi.BlockEntityIndustrialBlastFurnace.IBFWidget;
 import org.gtreimagined.gtlib.gui.GuiInstance;
 import org.gtreimagined.gtlib.gui.ICanSyncData;
 import org.gtreimagined.gtlib.gui.IGuiElement;
 import org.gtreimagined.gtlib.gui.widget.InfoRenderWidget;
 import org.gtreimagined.gtlib.gui.widget.WidgetSupplier;
-import org.gtreimagined.gtlib.integration.jeirei.renderer.IInfoRenderer;
+import org.gtreimagined.gtlib.integration.xei.renderer.IInfoRenderer;
 import org.gtreimagined.gtlib.machine.event.IMachineEvent;
 import org.gtreimagined.gtlib.machine.types.Machine;
 import org.gtreimagined.gtlib.recipe.IRecipe;
@@ -23,7 +24,7 @@ import org.gtreimagined.gt4r.machine.UpgradeableMachineRecipeHandler;
 
 import java.awt.Color;
 
-public class BlockEntityIndustrialBlastFurnace extends BlockEntityUpgradeableBasicMultiblock<BlockEntityIndustrialBlastFurnace> implements IInfoRenderer<BlockEntityIndustrialBlastFurnace.IBFWidget> {
+public class BlockEntityIndustrialBlastFurnace extends BlockEntityUpgradeableBasicMultiblock<BlockEntityIndustrialBlastFurnace> implements IInfoRenderer<IBFWidget> {
 
     private int heatingCapacity;
     private int baseHeatingCapacity;

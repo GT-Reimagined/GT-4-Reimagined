@@ -56,7 +56,7 @@ public interface IElectricTool extends IBasicGTTool, IEnergyItem {
 
     @Override
     default boolean canCreate(TesseractItemContext context) {
-        return getAntimatterToolType().isPowered();
+        return getGTToolType().isPowered();
     }
 
     int getEnergyTier();
@@ -80,7 +80,7 @@ public interface IElectricTool extends IBasicGTTool, IEnergyItem {
 
     default void onGenericFillItemGroup(CreativeModeTab group, NonNullList<ItemStack> list, long maxEnergy) {
         if (group != Ref.TAB_ITEMS) return;
-        if (getAntimatterToolType().isPowered()) {
+        if (getGTToolType().isPowered()) {
             ItemStack stack = this.getItem().getDefaultInstance();
             IEnergyHandlerItem h = stack.getCapability(TesseractCaps.ENERGY_HANDLER_CAPABILITY_ITEM).resolve().orElse(null);
             if (h != null){
@@ -96,13 +96,13 @@ public interface IElectricTool extends IBasicGTTool, IEnergyItem {
     @SuppressWarnings({"unchecked", "rawtypes"})
     default void onGenericAddInformation(ItemStack stack, List<Component> tooltip, TooltipFlag flag) {
         //TODO change this to object %s system for other lang compat
-        if (flag.isAdvanced() && getAntimatterToolType().isPowered())
+        if (flag.isAdvanced() && getGTToolType().isPowered())
             tooltip.add(Utils.translatable("gtlib.tooltip.energy").append(": " + getCurrentEnergy(stack) + " / " + getMaxEnergy(stack)));
         IBasicGTTool.super.onGenericAddInformation(stack, tooltip, flag);
     }
 
     default void refillTool(ItemStack stack, Player player){
-        if (this.getAntimatterToolType().isPowered()) {
+        if (this.getGTToolType().isPowered()) {
             Streams.concat(player.getInventory().items.stream(), player.getInventory().offhand.stream(), CuriosHelper.getCuriosItems(player, "belt", "back")).forEach(s -> {
                 if (this.getCurrentEnergy(stack) < getMaxEnergy(stack)){
                     if (s.getItem() instanceof ItemBattery battery && battery.getTier().getIntegerId() >= this.getEnergyTier()){
@@ -125,7 +125,7 @@ public interface IElectricTool extends IBasicGTTool, IEnergyItem {
 
     default ItemStack getGenericContainerItem(final ItemStack oldStack) {
         ItemStack stack = oldStack.copy();
-        damage(stack, getAntimatterToolType().getCraftingDurability());
+        damage(stack, getGTToolType().getCraftingDurability());
         return stack;
     }
 
@@ -134,7 +134,7 @@ public interface IElectricTool extends IBasicGTTool, IEnergyItem {
     }
 
     default int damage(ItemStack stack, int amount) {
-        if (!getAntimatterToolType().isPowered()) return amount;
+        if (!getGTToolType().isPowered()) return amount;
         IEnergyHandlerItem h = stack.getCapability(TesseractCaps.ENERGY_HANDLER_CAPABILITY_ITEM).resolve().orElse(null);
         if (!(h instanceof ItemEnergyHandler)) {
             return amount;

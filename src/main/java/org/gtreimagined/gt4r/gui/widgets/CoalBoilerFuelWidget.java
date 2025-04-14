@@ -8,7 +8,7 @@ import org.gtreimagined.gtlib.gui.IGuiElement;
 import org.gtreimagined.gtlib.gui.Widget;
 import org.gtreimagined.gtlib.gui.container.ContainerMachine;
 import org.gtreimagined.gtlib.gui.widget.WidgetSupplier;
-import org.gtreimagined.gtlib.integration.jeirei.AntimatterJEIREIPlugin;
+import org.gtreimagined.gtlib.integration.xei.GTLibXEIPlugin;
 import org.gtreimagined.gtlib.mixin.client.AbstractContainerScreenAccessor;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.api.distmarker.Dist;
@@ -75,7 +75,7 @@ public class CoalBoilerFuelWidget extends Widget {
     public void onClick(double mouseX, double mouseY, int button) {
         super.onClick(mouseX, mouseY, button);
         if (this.gui.handler instanceof BlockEntityMachine<?> machine) {
-            AntimatterJEIREIPlugin.showCategory(machine.getMachineType(), machine.getMachineTier());
+            GTLibXEIPlugin.showCategory(machine.getMachineType(), machine.getMachineTier());
         }
     }
 }

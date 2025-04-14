@@ -5,7 +5,7 @@ import org.gtreimagined.gtlib.GTMod;
 import org.gtreimagined.gtlib.datagen.GTLibDynamics;
 import org.gtreimagined.gtlib.datagen.providers.GTBlockStateProvider;
 import org.gtreimagined.gtlib.event.MaterialEvent;
-import org.gtreimagined.gtlib.integration.jeirei.AntimatterJEIREIPlugin;
+import org.gtreimagined.gtlib.integration.xei.GTLibXEIPlugin;
 import org.gtreimagined.gtlib.machine.Tier;
 import org.gtreimagined.gtlib.proxy.IProxyHandler;
 import org.gtreimagined.gtlib.registration.RegistrationEvent;
@@ -95,7 +95,7 @@ public class GT4Reimagined extends GTMod {
                 Models.init();
                 Registry.register(Registry.LOOT_FUNCTION_TYPE, new ResourceLocation(GT4RRef.ID, "random_drop_bonus"), GT4RRandomDropBonus.RANDOM_DROP_BONUS);
                 TierMaps.buildTierMaps();
-                AntimatterJEIREIPlugin.addItemsToHide(l -> {
+                GTLibXEIPlugin.addItemsToHide(l -> {
                     l.addAll(Arrays.asList(GTCoreItems.NandChip, GTCoreItems.EtchedWiringMV, GTCoreItems.EtchedWiringHV,
                             GTCoreItems.EtchedWiringEV, GTCoreItems.EngravedCrystalChip, GTCoreItems.EngravedLapotronChip,
                             GTCoreItems.CircuitBoardEmpty, GTCoreItems.CircuitBoardProcessorEmpty, GTCoreItems.CircuitGood,
@@ -112,7 +112,7 @@ public class GT4Reimagined extends GTMod {
                                 GT4RItems.ElectricWrench, GT4RItems.AdvancedWrench, GT4RItems.ElectricScrewdriver, GT4RItems.RockCutter));
                     } else {
                         if (!GTAPI.isModLoaded("gt5r")){
-                            l.addAll(GTAPI.all(IGTTool.class).stream().filter(i -> i.getAntimatterToolType().isPowered()).map(IBasicGTTool::getItem).toList());
+                            l.addAll(GTAPI.all(IGTTool.class).stream().filter(i -> i.getGTToolType().isPowered()).map(IBasicGTTool::getItem).toList());
                             l.addAll(GTAPI.all(ItemPowerUnit.class));
                             l.addAll(WRENCHBIT.all().stream().map(m -> WRENCHBIT.get(m)).toList());
                             l.addAll(CHAINSAWBIT.all().stream().map(m -> CHAINSAWBIT.get(m)).toList());

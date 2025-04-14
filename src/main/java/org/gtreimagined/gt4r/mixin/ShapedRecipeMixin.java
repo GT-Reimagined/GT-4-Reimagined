@@ -21,7 +21,7 @@ public class ShapedRecipeMixin {
         ItemStack stack = craftingInventory.getItem(i + j * craftingInventory.getWidth());
         if (stack.getItem() instanceof ItemElectricTool tool){
             if (ingredient.test(stack)){
-                if (!tool.hasEnoughDurability(stack, tool.getAntimatterToolType().getCraftingDurability(), true)){
+                if (!tool.hasEnoughDurability(stack, tool.getGTToolType().getCraftingDurability(), true)){
                     cir.setReturnValue(false);
                 }
             }

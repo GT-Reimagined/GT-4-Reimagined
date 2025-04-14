@@ -83,7 +83,7 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
     }
 
     @Override
-    public GTToolType getAntimatterToolType() {
+    public GTToolType getGTToolType() {
         return type;
     }
 
@@ -315,13 +315,13 @@ public class ItemElectricTool extends ItemBasic<ItemElectricTool> implements IEl
     @Override
     public Texture[] getTextures() {
         List<Texture> textures = new ObjectArrayList<>();
-        int layers = this == GT4RItems.AdvancedDrill || this == GT4RItems.DiamondDrill ? 2 : getAntimatterToolType().getOverlayLayers();
-        textures.add(new Texture(getTextureDomain(), "item/tool/".concat(getAntimatterToolType().getId())));
+        int layers = this == GT4RItems.AdvancedDrill || this == GT4RItems.DiamondDrill ? 2 : getGTToolType().getOverlayLayers();
+        textures.add(new Texture(getTextureDomain(), "item/tool/".concat(getGTToolType().getId())));
         if (layers == 1)
-            textures.add(new Texture(getTextureDomain(), "item/tool/overlay/".concat(getAntimatterToolType().getId())));
+            textures.add(new Texture(getTextureDomain(), "item/tool/overlay/".concat(getGTToolType().getId())));
         if (layers > 1) {
             for (int i = 1; i <= layers; i++) {
-                textures.add(new Texture(getTextureDomain(), String.join("", "item/tool/overlay/", getAntimatterToolType().getId(), "_", Integer.toString(i))));
+                textures.add(new Texture(getTextureDomain(), String.join("", "item/tool/overlay/", getGTToolType().getId(), "_", Integer.toString(i))));
             }
         }
         return textures.toArray(new Texture[textures.size()]);

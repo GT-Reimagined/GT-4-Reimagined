@@ -27,7 +27,7 @@ public class ForgeEventBusEvents {
         InteractionHand hand = event.getHand();
         boolean server = !event.getWorld().isClientSide;
         if (hand == InteractionHand.OFF_HAND && server){
-            if (player.getMainHandItem().getItem() instanceof IGTTool && (((IGTTool)player.getMainHandItem().getItem()).getAntimatterToolType() == PICKAXE || ((IGTTool)player.getMainHandItem().getItem()).getAntimatterToolType() == DRILL) && (player.getOffhandItem().getItem() == Items.TORCH || player.getOffhandItem().getItem() == Items.SOUL_TORCH)){
+            if (player.getMainHandItem().getItem() instanceof IGTTool && (((IGTTool)player.getMainHandItem().getItem()).getGTToolType() == PICKAXE || ((IGTTool)player.getMainHandItem().getItem()).getGTToolType() == DRILL) && (player.getOffhandItem().getItem() == Items.TORCH || player.getOffhandItem().getItem() == Items.SOUL_TORCH)){
                 player.sendMessage(new TranslatableComponent("message.gt4r.pickaxe_torch_right_click"), player.getUUID());
             }
         }
