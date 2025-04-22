@@ -7,7 +7,6 @@ import org.gtreimagined.gtlib.recipe.map.RecipeBuilder;
 import org.gtreimagined.gtlib.recipe.map.RecipeMap;
 import net.minecraft.world.item.Items;
 import org.gtreimagined.gtcore.data.GTCoreItems;
-import org.gtreimagined.gtcore.data.RecipeBuilders.SteamBuilder;
 import org.gtreimagined.gt4r.GT4RRef;
 
 import static org.gtreimagined.gtlib.machine.Tier.MV;
