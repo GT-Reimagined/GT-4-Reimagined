@@ -1,5 +1,6 @@
 package org.gtreimagined.gt4r.loader.crafting;
 
+import com.google.common.collect.ImmutableMap;
 import org.gtreimagined.gtlib.data.GTMaterialTypes;
 import org.gtreimagined.gtlib.data.GTTools;
 import org.gtreimagined.gtlib.data.GTLibMaterials;
@@ -177,12 +178,18 @@ public class Parts {
                 SELECTOR_TAG_ITEMS.get(0), of('R', GTMaterialTypes.ROD.getMaterialTag(GTLibMaterials.Iron), 'P', GTMaterialTypes.PLATE.getMaterialTag(GTLibMaterials.Iron), 'H', GTTools.HAMMER.getTag(), 'W', GTTools.WRENCH.getTag()), "PHP", "RRR", "PWP");
         provider.addItemRecipe(output, GT4RRef.ID, "selector_tag_1", "parts",
                 SELECTOR_TAG_ITEMS.get(0), of('R', GTMaterialTypes.ROD.getMaterialTag(WroughtIron), 'P', GTMaterialTypes.PLATE.getMaterialTag(WroughtIron), 'H', GTTools.HAMMER.getTag(), 'W', GTTools.WRENCH.getTag()), "PHP", "RRR", "PWP");
-        provider.addItemRecipe(output, GT4RRef.ID, "motor_lv", "parts",
-                MotorLV, of('T', GT4RBlocks.CABLE_TIN.getBlockItem(PipeSize.VTINY), 'C', GT4RBlocks.WIRE_COPPER.getBlockItem(PipeSize.VTINY), 'I', GTMaterialTypes.ROD.getMaterialTag(Steel), 'M', RODS_MAGNETIC), "TCI", "CMC", "ICT");
-        provider.addItemRecipe(output, GT4RRef.ID, "motor_mv", "parts",
-                MotorMV, of('T', GT4RBlocks.CABLE_COPPER.getBlockItem(PipeSize.VTINY), 'C', GT4RBlocks.WIRE_COPPER.getBlockItem(PipeSize.TINY), 'I', GTMaterialTypes.ROD.getMaterialTag(Aluminium), 'M', RODS_MAGNETIC), "TCI", "CMC", "ICT");
-        provider.addItemRecipe(output, GT4RRef.ID, "motor_hv", "parts",
-                MotorHV, of('T', GT4RBlocks.CABLE_GOLD.getBlockItem(PipeSize.VTINY), 'C', GT4RBlocks.WIRE_COPPER.getBlockItem(PipeSize.SMALL), 'I', GTMaterialTypes.ROD.getMaterialTag(StainlessSteel), 'M', RODS_MAGNETIC), "TCI", "CMC", "ICT");
+        if (GT4RConfig.GT5_ELECTRIC_TOOLS.get()){
+            provider.addItemRecipe(output, GT4RRef.ID, "motor_lv", "parts",
+                    MotorLV, of('T', GT4RBlocks.CABLE_TIN.getBlockItem(PipeSize.VTINY), 'C', GT4RBlocks.WIRE_COPPER.getBlockItem(PipeSize.VTINY), 'I', GTMaterialTypes.ROD.getMaterialTag(Steel), 'M', RODS_MAGNETIC), "TCI", "CMC", "ICT");
+            provider.addItemRecipe(output, GT4RRef.ID, "motor_mv", "parts",
+                    MotorMV, of('T', GT4RBlocks.CABLE_COPPER.getBlockItem(PipeSize.VTINY), 'C', GT4RBlocks.WIRE_COPPER.getBlockItem(PipeSize.TINY), 'I', GTMaterialTypes.ROD.getMaterialTag(Aluminium), 'M', RODS_MAGNETIC), "TCI", "CMC", "ICT");
+            provider.addItemRecipe(output, GT4RRef.ID, "motor_hv", "parts",
+                    MotorHV, of('T', GT4RBlocks.CABLE_GOLD.getBlockItem(PipeSize.VTINY), 'C', GT4RBlocks.WIRE_COPPER.getBlockItem(PipeSize.SMALL), 'I', GTMaterialTypes.ROD.getMaterialTag(StainlessSteel), 'M', RODS_MAGNETIC), "TCI", "CMC", "ICT");
+        } else {
+            ImmutableMap<Character, Object> map = of('C', CopperCoil, 'T', PLATE.getMaterialTag(Tin), 'I', INGOT.getMaterialTag(Iron));
+            provider.addItemRecipe(output, GT4RRef.ID, "motor", "parts", MotorLV, map, " T ", "CIC", " T ");
+            provider.addItemRecipe(output, GT4RRef.ID, "motor_alt", "parts", MotorLV, map, " C ", "TIT", " C ");
+        }
         provider.shapeless(output, "match_r", "parts", new ItemStack(Match, 4), GTMaterialTypes.DUST.getMaterialTag(Phosphor), getForgelikeItemTag("rods/wooden"));
         provider.addStackRecipe(output, GT4RRef.ID, "fluid_cell", "parts",
                 new ItemStack(CellTin, 2), of('T', GTMaterialTypes.PLATE.getMaterialTag(Tin)), " T ", "T T", " T ");
