@@ -3,7 +3,7 @@ plugins {
     id "idea"
     // Adds the Kotlin Gradle plugin
     id "io.freefair.lombok" version "8.10.2" apply false
-    id "net.neoforged.moddev.legacyforge" version "2.0.78" apply false
+    id "net.neoforged.moddev.legacyforge" version "${mdg_version}" apply false
 }
 apply plugin: "net.neoforged.moddev.legacyforge"
 
@@ -100,8 +100,10 @@ dependencies {
     modImplementation("org.gt-reimagined:structurelib-forge:${project.structurelib_version}-${project.minecraft_version}")
     modImplementation("com.teamresourceful.resourcefullib:resourcefullib-forge-1.18.2:${project.resourcefullib_version}")
     modImplementation("maven.modrinth:carbon-config:${project.carbon_config_forge_version}")
-    modImplementation("dev.latvian.mods:kubejs-forge:${project.kubejs_version}")
-    modImplementation("dev.latvian.mods:rhino-forge:${project.rhino_version}")
+    modImplementation("curse.maven:kubejs-238086:4377177")
+    modImplementation("curse.maven:rhino-416294:4069880")
+    //modImplementation("dev.latvian.mods:kubejs-forge:${project.kubejs_version}")
+    //modImplementation("dev.latvian.mods:rhino-forge:${project.rhino_version}")
     modImplementation("dev.architectury:architectury-forge:${project.architectury_version}")
     modRuntimeOnly("com.blamejared.crafttweaker:CraftTweaker-forge-1.18.2:${project.crafttweaker_version}")
     modImplementation("curse.maven:the-one-probe-245211:${project.top_forge_file}")

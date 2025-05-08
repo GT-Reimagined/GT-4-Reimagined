@@ -15,6 +15,7 @@ import org.gtreimagined.gt4r.material.GT4RMaterialEvent;
 import java.util.List;
 
 import static com.google.common.collect.ImmutableMap.of;
+import static org.gtreimagined.gtcore.data.GTCoreMaterials.Basalt;
 import static org.gtreimagined.gtlib.data.GTMaterialTypes.*;
 import static org.gtreimagined.gtlib.data.GTLibMaterials.*;
 import static org.gtreimagined.gtlib.material.MaterialTags.NOSMASH;

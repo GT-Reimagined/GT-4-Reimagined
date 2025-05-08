@@ -1,5 +1,6 @@
 package org.gtreimagined.gt4r.loader.machines;
 
+import org.gtreimagined.gtcore.data.GTCoreMaterials;
 import org.gtreimagined.gtlib.data.GTMaterialTypes;
 import org.gtreimagined.gtlib.data.GTLibMaterials;
 import org.gtreimagined.gtlib.material.Material;
@@ -118,7 +119,7 @@ public class CentrifugingLoader {
         CENTRIFUGE.RB().ii(of(DUST.getMaterialTag(DarkAsh), 2)).io(DUST.get(Ash, 2)).add("dark_ash",78, 16);
         //add(RedRock, 16, 2400); // 8 calcite, 4 flint, 4 clay
         add(Marble, 16, 329);
-        add(GTLibMaterials.Basalt, 16, 1500);
+        add(GTCoreMaterials.Basalt, 16, 1500);
         add(Cinnabar, 16, 1840);
         add(Tetrahedrite, 16, 3640);
         add(BlackGranite, 5, 800);

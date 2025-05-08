@@ -75,7 +75,6 @@ public class GT4RBlockLootProvider extends GTBlockLootProvider {
         tables.put(Blocks.ANDESITE, b -> createSingleItemTableWithSilkTouch(Blocks.ANDESITE, ((CobbleStoneType) VanillaStoneTypes.ANDESITE).getBlock("cobble")));
         tables.put(Blocks.DIORITE, b -> createSingleItemTableWithSilkTouch(Blocks.DIORITE, ((CobbleStoneType) VanillaStoneTypes.DIORITE).getBlock("cobble")));
         tables.put(Blocks.GRANITE, b -> createSingleItemTableWithSilkTouch(Blocks.GRANITE, ((CobbleStoneType) VanillaStoneTypes.GRANITE).getBlock("cobble")));
-        tables.put(Blocks.BASALT, b -> createSingleItemTableWithSilkTouch(Blocks.BASALT, ((CobbleStoneType) VanillaStoneTypes.BASALT).getBlock("cobble")));
         /*if (GTAPI.isModLoaded(Ref.MOD_AE)){
             tables.put(AppliedEnergisticsRegistrar.getAe2Block("quartz_ore"), b -> createOreDrop(b, RAW_ORE.get(Materials.CertusQuartz)));
             tables.put(AppliedEnergisticsRegistrar.getAe2Block("deepslate_quartz_ore"), b -> createOreDrop(b, RAW_ORE.get(Materials.CertusQuartz)));
