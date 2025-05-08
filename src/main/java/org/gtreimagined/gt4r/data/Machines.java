@@ -25,7 +25,6 @@ import org.gtreimagined.gtcore.machine.MultiblockTankMachine;
 import org.gtreimagined.gt4r.GT4RRef;
 import org.gtreimagined.gt4r.block.BlockColoredWall;
 import org.gtreimagined.gt4r.block.BlockRedstoneMachine;
-import org.gtreimagined.gt4r.blockentity.multi.BlockEntityCharcoalPit;
 import org.gtreimagined.gt4r.blockentity.multi.BlockEntityCokeOven;
 import org.gtreimagined.gt4r.blockentity.multi.BlockEntityFusionReactor;
 import org.gtreimagined.gt4r.blockentity.multi.BlockEntityIndustrialBlastFurnace;
@@ -124,7 +123,6 @@ public class Machines {
 
     public static BasicMultiMachine<?> COKE_OVEN = new BasicMultiMachine<>(GT4RRef.ID, "coke_oven").setTiers(NONE).setMap(COKING).addFlags(GUI, ITEM, FLUID).setTile(BlockEntityCokeOven::new);
     public static BasicMultiMachine<?> PRIMITIVE_BLAST_FURNACE = new BasicMultiMachine<>(GT4RRef.ID, "primitive_blast_furnace").setTiers(NONE).setMap(BASIC_BLASTING).addFlags(GUI, ITEM).setTile(BlockEntityPrimitiveBlastFurnace::new);
-    public static MultiMachine CHARCOAL_PIT = new MultiMachine(GT4RRef.ID, "charcoal_pit").setTiers(LV).setTile(BlockEntityCharcoalPit::new);
     public static BasicMultiMachine<?> BLAST_FURNACE = new UpgradeableBasicMultiMachine(GT4RRef.ID, "industrial_blast_furnace").setTiers(MV).setMap(BLASTING).addFlags(GUI, ITEM, EU).setTile(BlockEntityIndustrialBlastFurnace::new);
     public static BasicMultiMachine<?> IMPLOSION_COMPRESSOR = new UpgradeableBasicMultiMachine(GT4RRef.ID, "implosion_compressor").setTiers(LV).setMap(IMPLOSION_COMPRESSING).addFlags(GUI, ITEM, EU);
     public static BasicMultiMachine<?> INDUSTRIAL_GRINDER = new UpgradeableBasicMultiMachine(GT4RRef.ID, "industrial_grinder").setTiers(MV).setMap(INDUSTRIAL_GRINDING).addFlags(GUI, ITEM, EU, FLUID);
