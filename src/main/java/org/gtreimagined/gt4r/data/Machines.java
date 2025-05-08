@@ -122,21 +122,21 @@ public class Machines {
 
     public static BasicMachine PLAYER_DETECTOR = new BasicMachine(GT4RRef.ID, "player_detector").baseTexture(Textures.BASE_HANDLER).setTiers(LV).setTile(BlockEntityPlayerDetector::new).setBlock(BlockRedstoneMachine::new).setItemBlockClass(() -> BlockRedstoneMachine.class).frontCovers().noCovers().allowFrontIO().overlayTexture(Textures.SIMPLE_ACTIVE_SIDED);
 
-    public static BasicMultiMachine<?> COKE_OVEN = new BasicMultiMachine<>(GT4RRef.ID, "coke_oven").setMap(COKING).setTiers(NONE).addFlags(GUI, ITEM, FLUID).setTile(BlockEntityCokeOven::new);
-    public static BasicMultiMachine<?> PRIMITIVE_BLAST_FURNACE = new BasicMultiMachine<>(GT4RRef.ID, "primitive_blast_furnace").setMap(BASIC_BLASTING).setTiers(NONE).addFlags(GUI, ITEM).setTile(BlockEntityPrimitiveBlastFurnace::new);
+    public static BasicMultiMachine<?> COKE_OVEN = new BasicMultiMachine<>(GT4RRef.ID, "coke_oven").setTiers(NONE).setMap(COKING).addFlags(GUI, ITEM, FLUID).setTile(BlockEntityCokeOven::new);
+    public static BasicMultiMachine<?> PRIMITIVE_BLAST_FURNACE = new BasicMultiMachine<>(GT4RRef.ID, "primitive_blast_furnace").setTiers(NONE).setMap(BASIC_BLASTING).addFlags(GUI, ITEM).setTile(BlockEntityPrimitiveBlastFurnace::new);
     public static MultiMachine CHARCOAL_PIT = new MultiMachine(GT4RRef.ID, "charcoal_pit").setTiers(LV).setTile(BlockEntityCharcoalPit::new);
-    public static BasicMultiMachine<?> BLAST_FURNACE = new UpgradeableBasicMultiMachine(GT4RRef.ID, "industrial_blast_furnace").setMap(BLASTING).setTiers(MV).addFlags(GUI, ITEM, EU).setTile(BlockEntityIndustrialBlastFurnace::new);
-    public static BasicMultiMachine<?> IMPLOSION_COMPRESSOR = new UpgradeableBasicMultiMachine(GT4RRef.ID, "implosion_compressor").setMap(IMPLOSION_COMPRESSING).setTiers(LV).addFlags(GUI, ITEM, EU);
-    public static BasicMultiMachine<?> INDUSTRIAL_GRINDER = new UpgradeableBasicMultiMachine(GT4RRef.ID, "industrial_grinder").setMap(INDUSTRIAL_GRINDING).setTiers(MV).addFlags(GUI, ITEM, EU, FLUID);
-    public static BasicMultiMachine<?> INDUSTRIAL_SAWMILL = new UpgradeableBasicMultiMachine(GT4RRef.ID, "industrial_sawmill").setMap(INDUSTRIAL_SAWMILLING).setTiers(MV).addFlags(GUI, ITEM, EU, FLUID);
-    public static BasicMultiMachine<?> DISTILLATION_TOWER = new UpgradeableBasicMultiMachine(GT4RRef.ID, "distillation_tower").setMap(DISTILLING).setTiers(MV).addFlags(GUI, ITEM, EU, FLUID);
-    public static BasicMultiMachine<?> VACUUM_FREEZER = new UpgradeableBasicMultiMachine(GT4RRef.ID, "vacuum_freezer").setMap(VACUUM_FREEZING).setTiers(LV).addFlags(GUI, ITEM, FLUID, EU);
+    public static BasicMultiMachine<?> BLAST_FURNACE = new UpgradeableBasicMultiMachine(GT4RRef.ID, "industrial_blast_furnace").setTiers(MV).setMap(BLASTING).addFlags(GUI, ITEM, EU).setTile(BlockEntityIndustrialBlastFurnace::new);
+    public static BasicMultiMachine<?> IMPLOSION_COMPRESSOR = new UpgradeableBasicMultiMachine(GT4RRef.ID, "implosion_compressor").setTiers(LV).setMap(IMPLOSION_COMPRESSING).addFlags(GUI, ITEM, EU);
+    public static BasicMultiMachine<?> INDUSTRIAL_GRINDER = new UpgradeableBasicMultiMachine(GT4RRef.ID, "industrial_grinder").setTiers(MV).setMap(INDUSTRIAL_GRINDING).addFlags(GUI, ITEM, EU, FLUID);
+    public static BasicMultiMachine<?> INDUSTRIAL_SAWMILL = new UpgradeableBasicMultiMachine(GT4RRef.ID, "industrial_sawmill").setTiers(MV).setMap(INDUSTRIAL_SAWMILLING).addFlags(GUI, ITEM, EU, FLUID);
+    public static BasicMultiMachine<?> DISTILLATION_TOWER = new UpgradeableBasicMultiMachine(GT4RRef.ID, "distillation_tower").setTiers(MV).setMap(DISTILLING).addFlags(GUI, ITEM, EU, FLUID);
+    public static BasicMultiMachine<?> VACUUM_FREEZER = new UpgradeableBasicMultiMachine(GT4RRef.ID, "vacuum_freezer").setTiers(LV).setMap(VACUUM_FREEZING).addFlags(GUI, ITEM, FLUID, EU);
     public static BasicMultiMachine<?> PYROLYSIS_OVEN = new UpgradeableBasicMultiMachine(GT4RRef.ID, "pyrolysis_oven").setTiers(LV).addFlags(GUI, ITEM, FLUID, EU).setTile(BlockEntityPyrolysisOven::new);
-    public static MultiMachine THERMAL_BOILER = new MultiMachine(GT4RRef.ID, "thermal_boiler").setMap(THERMAL_BOILER_FUELS).setTiers(LV).addFlags(GUI, ITEM, FLUID).setTile(BlockEntityThermalBoiler::new);
-    public static MultiMachine LARGE_STEAM_TURBINE = new MultiMachine(GT4RRef.ID, "large_steam_turbine").setMap(LARGE_STEAM_FUELS).setTiers(EV).addFlags(GUI, FLUID, ITEM, EU, GENERATOR).setTile(BlockEntityLargeTurbine::new).custom(Textures.TURBINE);
-    public static MultiMachine LARGE_GAS_TURBINE = new MultiMachine(GT4RRef.ID, "large_gas_turbine").setMap(LARGE_GAS_FUELS).setTiers(IV).addFlags(GUI, FLUID, ITEM, EU, GENERATOR).setTile(BlockEntityLargeTurbine::new).custom(Textures.TURBINE);
+    public static MultiMachine THERMAL_BOILER = new MultiMachine(GT4RRef.ID, "thermal_boiler").setTiers(LV).setMap(THERMAL_BOILER_FUELS).addFlags(GUI, ITEM, FLUID).setTile(BlockEntityThermalBoiler::new);
+    public static MultiMachine LARGE_STEAM_TURBINE = new MultiMachine(GT4RRef.ID, "large_steam_turbine").setTiers(EV).setMap(LARGE_STEAM_FUELS).addFlags(GUI, FLUID, ITEM, EU, GENERATOR).setTile(BlockEntityLargeTurbine::new).custom(Textures.TURBINE);
+    public static MultiMachine LARGE_GAS_TURBINE = new MultiMachine(GT4RRef.ID, "large_gas_turbine").setTiers(IV).setMap(LARGE_GAS_FUELS).addFlags(GUI, FLUID, ITEM, EU, GENERATOR).setTile(BlockEntityLargeTurbine::new).custom(Textures.TURBINE);
     public static MultiMachine LARGE_HEAT_EXCHANGER = new MultiMachine(GT4RRef.ID, "large_heat_exchanger").setTiers(EV).addFlags(GUI, FLUID, EU).setTile(BlockEntityLargeHeatExchanger::new);
-    public static MultiMachine FUSION_REACTOR = new MultiMachine(GT4RRef.ID, "fusion_control_computer").setMap(FUSION).setTiers(IV).addFlags(GUI, FLUID, EU).setTile(BlockEntityFusionReactor::new);
+    public static MultiMachine FUSION_REACTOR = new MultiMachine(GT4RRef.ID, "fusion_control_computer").setTiers(IV).setMap(FUSION).addFlags(GUI, FLUID, EU).setTile(BlockEntityFusionReactor::new);
 
     public static HatchMachine HATCH_ITEM_I = new HatchMachine(GT4RRef.ID, "item_input_hatch", COVERINPUT, "item_input").baseTexture(Textures.BASE_HANDLER).addFlags(GUI, ITEM).setTiers(LV).setVerticalFacingAllowed(false).allowFrontIO();
     public static HatchMachine HATCH_ITEM_O = new HatchMachine(GT4RRef.ID, "item_output_hatch", COVEROUTPUT, "item_output").baseTexture(Textures.BASE_HANDLER).addFlags(GUI, ITEM).setTiers(LV).setVerticalFacingAllowed(false).allowFrontIO();
