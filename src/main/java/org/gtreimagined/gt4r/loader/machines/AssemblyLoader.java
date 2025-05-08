@@ -1,6 +1,7 @@
 package org.gtreimagined.gt4r.loader.machines;
 
 import com.google.common.collect.ImmutableSet;
+import org.gtreimagined.gtcore.machine.ChestMachine;
 import org.gtreimagined.gtlib.GTAPI;
 import org.gtreimagined.gtlib.pipe.PipeSize;
 import org.gtreimagined.gtlib.pipe.types.Cable;
@@ -113,7 +114,11 @@ public class AssemblyLoader {
         RecipeMaps.ASSEMBLER.RB().ii(of(PLATES_IRON_ALUMINIUM, 1), of(2, DUST.getMaterialTag(Plastic), DUST.getMaterialTag(Wood))).io(MufflerUpgrade).add("muffler_upgrade",1600, 2);
         GTAPI.all(HopperMachine.class).forEach(hopper -> {
             if (!hopper.getMaterial().has(PLATE)) return;
-            RecipeMaps.ASSEMBLER.RB().ii(PLATE.getMaterialIngredient(hopper.getMaterial(), 5), of(Tags.Items.CHESTS_WOODEN)).io(hopper.getItem(NONE)).add(hopper.getId(), 800, 2);
+            RecipeMaps.ASSEMBLER.RB().ii(PLATE.getMaterialIngredient(hopper.getMaterial(), 5), of(Tags.Items.CHESTS_WOODEN), SELECTOR_TAG_INGREDIENTS.get(5)).io(hopper.getItem(NONE)).add(hopper.getId(), 800, 2);
+        });
+        GTAPI.all(ChestMachine.class).forEach(chest -> {
+            if (!chest.getMaterial().has(PLATE) || !chest.getMaterial().has(ROD)) return;
+            RecipeMaps.ASSEMBLER.RB().ii(PLATE.getMaterialIngredient(chest.getMaterial(), 4), ROD.getMaterialIngredient(chest.getMaterial(), 2), of(Tags.Items.CHESTS_WOODEN)).io(chest.getItem(NONE)).add(chest.getId(), 800, 2);
         });
     }
 
