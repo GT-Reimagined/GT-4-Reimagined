@@ -9,9 +9,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.gtreimagined.gt4r.data.GT4RItems;
 import org.gtreimagined.gt4r.machine.UpgradeableMachineRecipeHandler;
 
-public class BlockEntityPyrolysisOven extends BlockEntityUpgradeableBasicMultiblock<BlockEntityPyrolysisOven> {
+public class BlockEntityPyrolyseOven extends BlockEntityUpgradeableBasicMultiblock<BlockEntityPyrolyseOven> {
 
-    public BlockEntityPyrolysisOven(Machine<?> type, BlockPos pos, BlockState state) {
+    public BlockEntityPyrolyseOven(Machine<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
         recipeHandler.set(() -> new PyrolysisRecipeHandler(this));
     }
@@ -47,9 +47,9 @@ public class BlockEntityPyrolysisOven extends BlockEntityUpgradeableBasicMultibl
         });
     }
 */
-    public static class PyrolysisRecipeHandler extends UpgradeableMachineRecipeHandler<BlockEntityPyrolysisOven> {
+    public static class PyrolysisRecipeHandler extends UpgradeableMachineRecipeHandler<BlockEntityPyrolyseOven> {
         private int heatingCapacity;
-        public PyrolysisRecipeHandler(BlockEntityPyrolysisOven tile) {
+        public PyrolysisRecipeHandler(BlockEntityPyrolyseOven tile) {
             super(tile);
         }
 

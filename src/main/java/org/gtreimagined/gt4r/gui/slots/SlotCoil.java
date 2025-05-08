@@ -26,7 +26,7 @@ public class SlotCoil extends AbstractSlot<SlotCoil> {
             return RecipeMaps.SMELTER_COILS.acceptsItem(stack);
         }
         BlockEntityMachine<?> m = (BlockEntityMachine<?>) holder;
-        return stack.getItem() == GT4RItems.KanthalHeatingCoil || stack.getItem() == GT4RItems.NichromeHeatingCoil || (m.getMachineType() == Machines.PYROLYSIS_OVEN && stack.getItem() == GT4RItems.CupronickelHeatingCoil);
+        return stack.getItem() == GT4RItems.KanthalHeatingCoil || stack.getItem() == GT4RItems.NichromeHeatingCoil || (m.getMachineType() == Machines.PYROLYSE_OVEN && stack.getItem() == GT4RItems.CupronickelHeatingCoil);
     }
 
     @Override

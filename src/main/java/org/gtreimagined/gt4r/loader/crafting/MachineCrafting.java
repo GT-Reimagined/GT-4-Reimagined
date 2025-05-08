@@ -76,7 +76,7 @@ public class MachineCrafting {
         provider.addItemRecipe(output, GT4RRef.ID, "industrial_blast_furnace", "machines",
                 BLAST_FURNACE.getItem(MV), of('C', CIRCUITS_BASIC, 'M', MACHINE_HULLS_ADVANCED, 'H', CupronickelHeatingCoil, 'F', FURNACE.getItem(LV)), "CHC", "HMH", "FHF");
         provider.addItemRecipe(output, GT4RRef.ID, "pyrolysis_oven", "machines",
-                PYROLYSIS_OVEN.getItem(LV), of('C', CIRCUITS_BASIC, 'M', MACHINE_HULLS_ADVANCED, 'p', PumpModule, 'P', PISTONS, 'F', FURNACE.getItem(LV)), "PCP", "CMC", "FpF");
+                PYROLYSE_OVEN.getItem(LV), of('C', CIRCUITS_BASIC, 'M', MACHINE_HULLS_ADVANCED, 'p', PumpModule, 'P', PISTONS, 'F', FURNACE.getItem(LV)), "PCP", "CMC", "FpF");
         provider.addItemRecipe(output, GT4RRef.ID, "implosion_compressor", "machines",
                 IMPLOSION_COMPRESSOR.getItem(LV), of('C', CIRCUITS_BASIC, 'M', MACHINE_HULLS_ADVANCED, 'c', COMPRESSOR.getItem(LV), 'A', AdvancedAlloy), "AMA", "CcC", "AMA");
         provider.addItemRecipe(output, GT4RRef.ID, "industrial_sawmill", "machines",

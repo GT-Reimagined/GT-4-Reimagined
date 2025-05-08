@@ -66,7 +66,7 @@ public class RecipeMaps {
     public static RecipeMap<?> WIRE_MILL = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "wire_mill", new RecipeBuilder()));
 
     public static RecipeMap<?> COKING = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "coke_oven", new RecipeBuilder()));
-    public static RecipeMap<?> PYROLYSING = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "pyrolysis_oven", new RecipeBuilder()));
+    public static RecipeMap<?> PYROLYSING = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "pyrolyse_oven", new RecipeBuilder()));
     public static RecipeMap<?> DISTILLING = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "distillation_tower", new RecipeBuilder()));
     public static RecipeMap<?> BASIC_BLASTING = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "primitive_blast_furnace", new RecipeBuilder()));
     public static RecipeMap<?> BLASTING = GTAPI.register(RecipeMap.class, new RecipeMap<>(GT4RRef.ID, "industrial_blast_furnace", new RecipeBuilder()));

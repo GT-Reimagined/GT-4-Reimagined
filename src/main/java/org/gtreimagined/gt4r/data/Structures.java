@@ -19,7 +19,7 @@ import org.gtreimagined.gt4r.blockentity.multi.BlockEntityIndustrialGrinder;
 import org.gtreimagined.gt4r.blockentity.multi.BlockEntityIndustrialSawmill;
 import org.gtreimagined.gt4r.blockentity.multi.BlockEntityLargeTurbine;
 import org.gtreimagined.gt4r.blockentity.multi.BlockEntityPrimitiveBlastFurnace;
-import org.gtreimagined.gt4r.blockentity.multi.BlockEntityPyrolysisOven;
+import org.gtreimagined.gt4r.blockentity.multi.BlockEntityPyrolyseOven;
 import org.gtreimagined.gt4r.blockentity.multi.BlockEntityThermalBoiler;
 import org.gtreimagined.gt4r.blockentity.multi.BlockEntityVacuumFreezer;
 
@@ -41,7 +41,7 @@ public class Structures {
 
 
     public static FakeTileElement<BlockEntityCokeOven> BRICK = new FakeTileElement<>(GT4RBlocks.FIRE_BRICKS);
-    public static FakeTileElement<BlockEntityPyrolysisOven> CASING = new FakeTileElement<>(GT4RBlocks.STANDARD_MACHINE_CASING);
+    public static FakeTileElement<BlockEntityPyrolyseOven> CASING = new FakeTileElement<>(GT4RBlocks.STANDARD_MACHINE_CASING);
 
     public static void initPatterns() {
         //TODO after patterns are fixed
@@ -52,8 +52,8 @@ public class Structures {
                 .build()
         );
         PatternBuilder builder = new PatternBuilder().of("CCC ", "CCM", "CCC ").of("CCC ", "CLC ", "CCC ").of("CCC ", "CCC ", "CCC ")
-                .at("M", PYROLYSIS_OVEN, PYROLYSIS_OVEN.getFirstTier(), Direction.SOUTH).at("C", GT4RBlocks.STANDARD_MACHINE_CASING.defaultBlockState());
-        PYROLYSIS_OVEN.setStructurePattern(
+                .at("M", PYROLYSE_OVEN, PYROLYSE_OVEN.getFirstTier(), Direction.SOUTH).at("C", GT4RBlocks.STANDARD_MACHINE_CASING.defaultBlockState());
+        PYROLYSE_OVEN.setStructurePattern(
                 builder.at("L", Blocks.LAVA.defaultBlockState()).description(Blocks.LAVA.getDescriptionId()).build()
         );
         builder = new PatternBuilder().of("CCC", "CCC", "CCC").of("CCC", "CBM", "CCC").of("CCC", "CBC", "CCC").of(2)
@@ -165,7 +165,7 @@ public class Structures {
             .at('C', BRICK)
                 .offset(1, 1, 0).build()
         );
-        PYROLYSIS_OVEN.setStructure(BlockEntityPyrolysisOven.class, b -> b.part("main")
+        PYROLYSE_OVEN.setStructure(BlockEntityPyrolyseOven.class, b -> b.part("main")
                 .of("CCC", "CCC", "CCC").of("CCC", "CLC", "CCC").of("CCC", "C~C", "CCC").build()
                 .at('C', CASING).at('L', AIR_OR_LAVA)
                 .offset(1, 2, 0).build()

@@ -31,7 +31,7 @@ import org.gtreimagined.gt4r.blockentity.multi.BlockEntityIndustrialBlastFurnace
 import org.gtreimagined.gt4r.blockentity.multi.BlockEntityLargeHeatExchanger;
 import org.gtreimagined.gt4r.blockentity.multi.BlockEntityLargeTurbine;
 import org.gtreimagined.gt4r.blockentity.multi.BlockEntityPrimitiveBlastFurnace;
-import org.gtreimagined.gt4r.blockentity.multi.BlockEntityPyrolysisOven;
+import org.gtreimagined.gt4r.blockentity.multi.BlockEntityPyrolyseOven;
 import org.gtreimagined.gt4r.blockentity.multi.BlockEntityThermalBoiler;
 import org.gtreimagined.gt4r.blockentity.single.BlockEntityBatteryBox;
 import org.gtreimagined.gt4r.blockentity.single.BlockEntityCoalBoiler;
@@ -129,7 +129,7 @@ public class Machines {
     public static BasicMultiMachine<?> INDUSTRIAL_SAWMILL = new UpgradeableBasicMultiMachine(GT4RRef.ID, "industrial_sawmill").setTiers(MV).setMap(INDUSTRIAL_SAWMILLING).addFlags(GUI, ITEM, EU, FLUID);
     public static BasicMultiMachine<?> DISTILLATION_TOWER = new UpgradeableBasicMultiMachine(GT4RRef.ID, "distillation_tower").setTiers(MV).setMap(DISTILLING).addFlags(GUI, ITEM, EU, FLUID);
     public static BasicMultiMachine<?> VACUUM_FREEZER = new UpgradeableBasicMultiMachine(GT4RRef.ID, "vacuum_freezer").setTiers(LV).setMap(VACUUM_FREEZING).addFlags(GUI, ITEM, FLUID, EU);
-    public static BasicMultiMachine<?> PYROLYSIS_OVEN = new UpgradeableBasicMultiMachine(GT4RRef.ID, "pyrolysis_oven").setTiers(LV).addFlags(GUI, ITEM, FLUID, EU).setTile(BlockEntityPyrolysisOven::new);
+    public static BasicMultiMachine<?> PYROLYSE_OVEN = new UpgradeableBasicMultiMachine(GT4RRef.ID, "pyrolyse_oven").setTiers(LV).setMap(PYROLYSING).addFlags(GUI, ITEM, FLUID, EU).setTile(BlockEntityPyrolyseOven::new);
     public static MultiMachine THERMAL_BOILER = new MultiMachine(GT4RRef.ID, "thermal_boiler").setTiers(LV).setMap(THERMAL_BOILER_FUELS).addFlags(GUI, ITEM, FLUID).setTile(BlockEntityThermalBoiler::new);
     public static MultiMachine LARGE_STEAM_TURBINE = new MultiMachine(GT4RRef.ID, "large_steam_turbine").setTiers(EV).setMap(LARGE_STEAM_FUELS).addFlags(GUI, FLUID, ITEM, EU, GENERATOR).setTile(BlockEntityLargeTurbine::new).custom(Textures.TURBINE);
     public static MultiMachine LARGE_GAS_TURBINE = new MultiMachine(GT4RRef.ID, "large_gas_turbine").setTiers(IV).setMap(LARGE_GAS_FUELS).addFlags(GUI, FLUID, ITEM, EU, GENERATOR).setTile(BlockEntityLargeTurbine::new).custom(Textures.TURBINE);
