@@ -15,7 +15,6 @@ import static org.gtreimagined.gtlib.data.GTMaterialTypes.DUST;
 import static org.gtreimagined.gtlib.data.GTLibMaterials.Emerald;
 import static org.gtreimagined.gtlib.data.GTLibMaterials.Flint;
 import static org.gtreimagined.gt4r.data.Materials.*;
-import static org.gtreimagined.gtcore.data.GTCoreMaterials.GreenSapphire;
 
 public class LootLoader {
     public static void init(){

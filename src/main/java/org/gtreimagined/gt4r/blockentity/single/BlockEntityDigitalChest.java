@@ -50,7 +50,7 @@ public class BlockEntityDigitalChest extends BlockEntityMachine<BlockEntityDigit
                                             playerEntity.sendMessage(new TranslatableComponent("message.gt4r.digital_chest_inventory"), playerEntity.getUUID());
                                             return;
                                         }
-                                        ItemStack newStack = new ItemStack(GTCoreItems.DataOrb);
+                                        ItemStack newStack = new ItemStack(GT4RItems.DataOrb);
                                         for (int j = 0; j < tagList.size(); j++)
                                         {
                                             CompoundTag itemTags = tagList.getCompound(j);
@@ -73,7 +73,7 @@ public class BlockEntityDigitalChest extends BlockEntityMachine<BlockEntityDigit
                 });
             } else if (data[1] == 1){
                 itemHandler.ifPresent(i -> {
-                    if (i.getHandler(SlotTypes.DATA).getStackInSlot(0).getItem() == GTCoreItems.DataOrb){
+                    if (i.getHandler(SlotTypes.DATA).getStackInSlot(0).getItem() == GT4RItems.DataOrb){
                         ITrackedHandler storage = i.getHandler(SlotType.STORAGE);
                         if (!isInventoryEmpty(storage)){
                             CompoundTag nbt = storage.serializeNBT();

@@ -38,9 +38,9 @@ public class Parts {
 
     public static void loadRecipes(Consumer<FinishedRecipe> output, GTRecipeProvider provider) {
         provider.addStackRecipe(output, GT4RRef.ID, "circuit_energy_flow", "parts",
-                new ItemStack(CircuitEnergyFlow, 4), of('C', CIRCUITS_ADVANCED, 'T', GTMaterialTypes.PLATE.getMaterialTag(Tungsten), 'L', LapotronCrystal, 'P', IridiumReinforcedPlate), "CTC", "LPL", "CTC");
+                new ItemStack(EnergyFlowCircuit, 4), of('C', CIRCUITS_ADVANCED, 'T', GTMaterialTypes.PLATE.getMaterialTag(Tungsten), 'L', LapotronCrystal, 'P', IridiumReinforcedPlate), "CTC", "LPL", "CTC");
         provider.addStackRecipe(output, GT4RRef.ID, "circuit_data_control", "parts",
-                new ItemStack(CircuitDataControl, 4), of('C', CIRCUITS_ADVANCED, 'c', CIRCUITS_DATA, 'P', IridiumReinforcedPlate), "CcC", "cPc", "CcC");
+                new ItemStack(DataControlCircuit, 4), of('C', CIRCUITS_ADVANCED, 'c', CIRCUITS_DATA, 'P', IridiumReinforcedPlate), "CcC", "cPc", "CcC");
         provider.addStackRecipe(output, GT4RRef.ID, "comp_monitor", "parts",
                 new ItemStack(ComputerMonitor, 1), of2('A', GTMaterialTypes.PLATE.getMaterialTag(Aluminium), 'G', Tags.Items.GLASS_PANES, 'g', Tags.Items.DYES_GREEN, 'R', Tags.Items.DYES_RED, 'B', Tags.Items.DYES_BLUE, 'D', GTMaterialTypes.DUST.getMaterialTag(GTLibMaterials.Glowstone)), "AgA", "RGB", "ADA");
         provider.addStackRecipe(output, GT4RRef.ID, "conv_module", "parts",
@@ -54,13 +54,13 @@ public class Parts {
         provider.addStackRecipe(output, GT4RRef.ID, "w_grindhead", "parts",
                 new ItemStack(TungstenGrindHead, 4), of('S', PLATES_STEELS, 'T', GTMaterialTypes.PLATE.getMaterialTag(Tungsten), 'B', GTMaterialTypes.BLOCK.getMaterialTag(Steel)), "TST", "SBS", "TST");
         provider.addStackRecipe(output, GT4RRef.ID, "circuit_basic_h", "parts",
-                new ItemStack(CircuitBasic, 1), of('C', GT4RBlocks.CABLE_COPPER.getBlockItem(PipeSize.VTINY), 'R', GTMaterialTypes.PLATE.getMaterialTag(RedAlloy), 'I', GTMaterialTypes.PLATE.getMaterialTag(WroughtIron)), "CCC", "RIR", "CCC");
+                new ItemStack(BasicCircuit, 1), of('C', GT4RBlocks.CABLE_COPPER.getBlockItem(PipeSize.VTINY), 'R', GTMaterialTypes.PLATE.getMaterialTag(RedAlloy), 'I', GTMaterialTypes.PLATE.getMaterialTag(WroughtIron)), "CCC", "RIR", "CCC");
         provider.addStackRecipe(output, GT4RRef.ID, "circuit_basic_v", "parts",
-                new ItemStack(CircuitBasic, 1), of('C', GT4RBlocks.CABLE_COPPER.getBlockItem(PipeSize.VTINY), 'R', GTMaterialTypes.PLATE.getMaterialTag(RedAlloy), 'I', GTMaterialTypes.PLATE.getMaterialTag(WroughtIron)), "CRC", "CIC", "CRC");
+                new ItemStack(BasicCircuit, 1), of('C', GT4RBlocks.CABLE_COPPER.getBlockItem(PipeSize.VTINY), 'R', GTMaterialTypes.PLATE.getMaterialTag(RedAlloy), 'I', GTMaterialTypes.PLATE.getMaterialTag(WroughtIron)), "CRC", "CIC", "CRC");
         provider.addStackRecipe(output, GT4RRef.ID, "circuit_advanced_h", "parts",
-                new ItemStack(CircuitAdv, 1), of('C', CIRCUITS_BASIC, 'R', GTMaterialTypes.PLATE.getMaterialTag(RedAlloy), 'L', getForgelikeItemTag("dusts/lapislaz"), 'G', GTMaterialTypes.DUST.getMaterialTag(GTLibMaterials.Glowstone)), "RGR", "LCL", "RGR");
+                new ItemStack(AdvancedCircuit, 1), of('C', CIRCUITS_BASIC, 'R', GTMaterialTypes.PLATE.getMaterialTag(RedAlloy), 'L', getForgelikeItemTag("dusts/lapislaz"), 'G', GTMaterialTypes.DUST.getMaterialTag(GTLibMaterials.Glowstone)), "RGR", "LCL", "RGR");
         provider.addStackRecipe(output, GT4RRef.ID, "circuit_advanced_v", "parts",
-                new ItemStack(CircuitAdv, 1), of('C', CIRCUITS_BASIC, 'R', GTMaterialTypes.PLATE.getMaterialTag(RedAlloy), 'L', getForgelikeItemTag("dusts/lapislaz"), 'G', GTMaterialTypes.DUST.getMaterialTag(GTLibMaterials.Glowstone)), "RLR", "GCG", "RLR");
+                new ItemStack(AdvancedCircuit, 1), of('C', CIRCUITS_BASIC, 'R', GTMaterialTypes.PLATE.getMaterialTag(RedAlloy), 'L', getForgelikeItemTag("dusts/lapislaz"), 'G', GTMaterialTypes.DUST.getMaterialTag(GTLibMaterials.Glowstone)), "RLR", "GCG", "RLR");
         provider.shapeless(output, "mesh_carbon", "parts", new ItemStack(CarbonMesh), CarbonFibre, CarbonFibre);
         provider.addItemRecipe(output, GT4RRef.ID, "re_battery", "parts",
                 REBattery, of('T', GTMaterialTypes.PLATE.getMaterialTag(Tin), 'C', GT4RBlocks.CABLE_TIN.getBlockItem(PipeSize.VTINY), 'R', GTMaterialTypes.DUST.getMaterialTag(GTLibMaterials.Redstone)), " C ", "TRT", "TRT");

@@ -62,7 +62,7 @@ public class BlockEntityDigitalTank extends BlockEntityTank<BlockEntityDigitalTa
                                     playerEntity.sendMessage(new TranslatableComponent("message.gt4r.digital_tank_inventory"), playerEntity.getUUID());
                                     return;
                                 }
-                                ItemStack newStack = new ItemStack(GTCoreItems.DataOrb);
+                                ItemStack newStack = new ItemStack(GT4RItems.DataOrb);
 
 
                                 f.fill(fluidStack, FluidAction.EXECUTE);
@@ -75,7 +75,7 @@ public class BlockEntityDigitalTank extends BlockEntityTank<BlockEntityDigitalTa
             } else if (data[1] == 1){
                 fluidHandler.ifPresent(f -> {
                     ItemStack orb = itemHandler.map(i -> i.getHandler(SlotTypes.DATA).getStackInSlot(0)).orElse(ItemStack.EMPTY);
-                    if (orb.getItem() == GTCoreItems.DataOrb){
+                    if (orb.getItem() == GT4RItems.DataOrb){
                         if (f.getInputTanks().getTank(0).getFluid().getAmount() > 0){
                             ItemStack newStack = new ItemStack(GT4RItems.StorageDataOrb);
                             CompoundTag nbt = f.getInputTanks().getTank(0).getFluid().writeToNBT(new CompoundTag());

@@ -261,7 +261,7 @@ public class MachineCrafting {
         provider.addItemRecipe(output, GT4RRef.ID, "quantum_chest", "machines",
                 QUANTUM_CHEST.getItem(MAX), ImmutableMap.<Character, Object>builder().put('D', DataOrb).put('C', ComputerMonitor).put('H', GT4RBlocks.HIGHLY_ADVANCED_MACHINE_BLOCK).put('T', TELEPORTER.getItem(HV)).put('d', DIGITAL_CHEST.getItem(LV)).build(), "DCD", "HTH", "DdD");
         provider.addItemRecipe(output, GT4RRef.ID, "computer_cube", "machines",
-                COMPUTER_CUBE.getItem(LV), of('C', CIRCUITS_MASTER, 'c', ComputerMonitor, 'B', MACHINE_HULLS_ADVANCED, 'D', CIRCUITS_ULTIMATE), "DcC", "cBc", "CcD");
+                COMPUTER_CUBE.getItem(LV), of('C', CIRCUITS_MASTER, 'c', ComputerMonitor, 'B', MACHINE_HULLS_ADVANCED, 'D', CIRCUITS_DATA_ORB), "DcC", "cBc", "CcD");
         GTAPI.all(ChestMachine.class).forEach(m -> {
             Material material = m.getMaterial();
             if (material.has(ROD) && material.has(PLATE)){

@@ -65,6 +65,17 @@ public class GT4RItems {
     public static ItemBasic<?> LavaFilter = new ItemBasic<>(GT4RRef.ID, "lava_filter", new Item.Properties().tab(Ref.TAB_ITEMS).defaultDurability(100));
 
     public static ItemBasic<?> MachineParts = new ItemBasic<>(GT4RRef.ID, "machine_parts");
+    public static ItemBasic<?> AdvancedCircuitParts = new ItemBasic<>(GT4RRef.ID, "advanced_circuit_parts", "circuits/");
+    public static ItemBasic<?> BasicCircuitBoard = new ItemBasic<>(GT4RRef.ID, "basic_circuit_board", "circuits/");
+    public static ItemBasic<?> AdvancedCircuitBoard = new ItemBasic<>(GT4RRef.ID, "advanced_circuit_board", "circuits/");
+    public static ItemBasic<?> ProcessorCircuitBoard = new ItemBasic<>(GT4RRef.ID, "processor_circuit_board", "circuits/");
+
+    public static ItemBasic<?> BasicCircuit = new ItemBasic<>(GT4RRef.ID, "basic_circuit", "circuits/").tip("A Basic Circuit");
+    public static ItemBasic<?> AdvancedCircuit = new ItemBasic<>(GT4RRef.ID, "advanced_circuit", "circuits/").tip("An Advanced Circuit");
+    public static ItemBasic<?> DataStorageCircuit = new ItemBasic<>(GT4RRef.ID, "data_storage_circuit", "circuits/");
+    public static ItemBasic<?> DataControlCircuit = new ItemBasic<>(GT4RRef.ID, "data_control_circuit", "circuits/").tip("An Elite Circuit"); //could be considered BIO
+    public static ItemBasic<?> EnergyFlowCircuit = new ItemBasic<>(GT4RRef.ID, "energy_flow_circuit", "circuits/").tip("A Master Circuit"); //maybe name futuristic
+    public static ItemBasic<?> DataOrb = new ItemBasic<>(GT4RRef.ID, "data_orb", "circuits/");
     public static ItemBasic<?> StorageDataOrb = new ItemStorageOrb(GT4RRef.ID, "storage_data_orb").tip("A High Capacity Data Storage");
 
     public static ItemBasic<?> BatteryHull = new ItemBasic<>(GT4RRef.ID, "battery_hull").tip("An empty LV Battery Hull");

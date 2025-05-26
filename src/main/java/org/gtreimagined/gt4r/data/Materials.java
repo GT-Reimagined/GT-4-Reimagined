@@ -191,6 +191,7 @@ public class Materials {
     public static Material Sapphire = GTAPI.register(Material.class, new Material(GT4RRef.ID, "sapphire", 0x6464c8, GEM_V));
     public static Material Sodalite = GTAPI.register(Material.class, new Material(GT4RRef.ID, "sodalite", 0x1414ff, LAPIS));
     //public static Material Glass = GTAPI.register(Material.class, new Material(Ref.ID, "glass", 0xfafafa, SHINY)).asDust(PLATE, LENS).mats(of(SiliconDioxide, 1));
+    public static Material GreenSapphire = GTAPI.register(Material.class, new Material(GT4RRef.ID, "green_sapphire", 0x64c882, GEM_H));
     public static Material Olivine = GTAPI.register(Material.class, new Material(GT4RRef.ID, "olivine", 0x96ff96, RUBY));
     //public static Material Phosphorus = GTAPI.register(Material.class, new Material(Ref.ID, "phosphorus", 0xffff00, FLINT).asDust().mats(of(Calcium, 3, Phosphate, 2));
     public static Material RedGarnet = GTAPI.register(Material.class, new Material(GT4RRef.ID, "red_garnet", 0xc85050, GARNET));

@@ -58,6 +58,13 @@ public class GT4RItemTagProvider extends GTItemTagProvider {
         this.tag(DUSTS_COALS).addTag(CustomTags.getTag("dusts/coal")).addTag(CustomTags.getTag("dusts/charcoal"));
         this.tag(GEMS_DIAMOND_RUBY).addTag(GEM.getMaterialTag(Diamond)).addTag(GEM.getMaterialTag(Ruby));
 
+        this.tag(CIRCUITS_BASIC).add(BasicCircuit);
+        this.tag(CIRCUITS_ADVANCED).add(AdvancedCircuit);
+        this.tag(CIRCUITS_DATA).add(DataStorageCircuit);
+        this.tag(CIRCUITS_ELITE).add(DataControlCircuit);
+        this.tag(CIRCUITS_MASTER).add(EnergyFlowCircuit);
+        this.tag(CIRCUITS_DATA_ORB).add(DataOrb);
+
         this.tag(POWER_UNIT_ROCK_CUTTER).add(RockCutterPowerUnit);
         this.tag(DRILL).add(Drill);
         this.tag(BATTERIES_LV).add(REBattery);
