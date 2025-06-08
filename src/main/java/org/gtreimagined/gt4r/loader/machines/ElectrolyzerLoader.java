@@ -38,7 +38,7 @@ public class ElectrolyzerLoader {
         ELECTROLYZER.RB().fi(Water.getLiquid(3000)).fo(Hydrogen.getGas(2000), Oxygen.getGas(1000)).add("water",2000, 30);
         ELECTROLYZER.RB().ii(RecipeIngredient.of(new ItemStack(Items.BONE_MEAL, 3))).io(DUST.get(Calcium, 1)).add("bone_meal",24, 106);
         ELECTROLYZER.RB().ii(RecipeIngredient.of(new ItemStack(Blocks.SAND, 8))).io(DUST.get(SiliconDioxide, 1)).add("sand",500, 25);
-        ELECTROLYZER.RB().ii(RecipeIngredient.of(new ItemStack(Blocks.RED_SAND, 8))).io(DUST.get(SiliconDioxide, 1), DUST_TINY.get(Iron, 1)).add("red_sand",500, 25);
+        ELECTROLYZER.RB().ii(RecipeIngredient.of(new ItemStack(Blocks.RED_SAND, 8))).io(DUST.get(SiliconDioxide, 1), TINY_DUST.get(Iron, 1)).add("red_sand",500, 25);
         ELECTROLYZER.RB().ii(RecipeIngredient.of(DUST.get(Diamond, 1))).io(DUST.get(Carbon, 64), DUST.get(Carbon, 64)).add("diamond_dust",1536,60);
         add(Steel,50, 60, 2600);
         add(DarkAsh, 1, 30, 24);

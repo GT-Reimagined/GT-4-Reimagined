@@ -88,7 +88,7 @@ public class GT4RItemTagProvider extends GTItemTagProvider {
         ORE.all().forEach(m -> {
             GTAPI.all(StoneType.class).stream().filter(s -> !s.isSandLike() && s.doesGenerateOre() && s != VanillaStoneTypes.BEDROCK).forEach(s -> {
                 this.tag(TagUtils.getForgelikeItemTag("sandless_" + getConventionalMaterialType(ORE) + "/" +  m.getId())).addTag(TagUtils.getForgelikeItemTag(String.join("", getConventionalStoneType(s), "_", getConventionalMaterialType(ORE), "/", m.getId())));
-                this.tag(TagUtils.getForgelikeItemTag("sandless_" + getConventionalMaterialType(ORE_SMALL) + "/" +  m.getId())).addTag(TagUtils.getForgelikeItemTag(String.join("", getConventionalStoneType(s), "_", getConventionalMaterialType(ORE_SMALL), "/", m.getId())));
+                this.tag(TagUtils.getForgelikeItemTag("sandless_" + getConventionalMaterialType(SMALL_ORE) + "/" +  m.getId())).addTag(TagUtils.getForgelikeItemTag(String.join("", getConventionalStoneType(s), "_", getConventionalMaterialType(SMALL_ORE), "/", m.getId())));
             });
         });
         GTMaterialTypes.RAW_ORE.all().forEach(m -> {

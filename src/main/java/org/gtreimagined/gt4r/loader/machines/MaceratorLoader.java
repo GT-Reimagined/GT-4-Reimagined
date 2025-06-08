@@ -39,8 +39,8 @@ import static org.gtreimagined.gt4r.data.RecipeMaps.UNIVERSAL_MACERATOR;
 public class MaceratorLoader {
     public static void initManual(){
         UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(Items.STONE, 1)).io(new ItemStack(Items.GRAVEL)).add("gravel",400, 2);
-        UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(Items.BRICK, 1)).io(DUST_SMALL.get(Brick, 1)).add("brick_dust_small",25, 2);
-        UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(Items.CLAY_BALL, 1)).io(DUST_SMALL.get(Clay, 2)).add("clay_dust_small",16, 4);
+        UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(Items.BRICK, 1)).io(SMALL_DUST.get(Brick, 1)).add("brick_dust_small",25, 2);
+        UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(Items.CLAY_BALL, 1)).io(SMALL_DUST.get(Clay, 2)).add("clay_dust_small",16, 4);
         UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(Plantball, 1)).io(new ItemStack(Biochaff, 1)).add("biochaff",300, 2);
         UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(Biochaff, 1)).io(new ItemStack(Items.DIRT, 1)).add("dirt",300, 2);
         UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(Items.CLAY, 1)).io(DUST.get(Clay, 2)).add("clay_dust",30, 4);
@@ -65,11 +65,11 @@ public class MaceratorLoader {
         ORE.all().forEach(m -> {
             GTAPI.all(StoneType.class).stream().filter(StoneType::doesGenerateOre).filter(s -> s != VanillaStoneTypes.BEDROCK).forEach(s -> {
                 Material sm = s.getMaterial();
-                if (!m.has(GTMaterialTypes.DUST) && !m.has(GTMaterialTypes.CRUSHED)) return;
+                if (!m.has(GTMaterialTypes.DUST) && !m.has(GTMaterialTypes.CRUSHED_ORE)) return;
                 ItemStack stoneDust = sm.has(GTMaterialTypes.DUST) ? GTMaterialTypes.DUST.get(sm, 1) : ItemStack.EMPTY;
                 TagKey<Item> oreTag = ORE.getMaterialTag(m, s);
                 RecipeIngredient ore = RecipeIngredient.of(oreTag,1);
-                ItemStack crushedStack = (m.has(CRUSHED) ? GTMaterialTypes.CRUSHED : DUST).get(m, ORE_MULTI.getInt(m));
+                ItemStack crushedStack = (m.has(CRUSHED_ORE) ? GTMaterialTypes.CRUSHED_ORE : DUST).get(m, ORE_MULTI.getInt(m));
                 Material oreByProduct1 = m.getByProducts().size() > 0 ? m.getByProducts().get(0) : MACERATE_INTO.getMapping(m);
                 RecipeMap<?> rm = s.isSandLike() ? SIFTER : UNIVERSAL_MACERATOR;
                 List<ItemStack> stacks = new ArrayList<>();
@@ -97,12 +97,12 @@ public class MaceratorLoader {
                 rm.RB().ii(ore).io(stackArray).outputChances(chances).add("ore_" + m.getId() + "_" + s.getId(),400, 2);
             });
         });
-        GTMaterialTypes.CRUSHED.all().forEach(m -> {
+        GTMaterialTypes.CRUSHED_ORE.all().forEach(m -> {
             if (!m.has(GTMaterialTypes.ORE) && m != GTLibMaterials.NetheriteScrap) return;
             int multiplier = 1;
             RecipeIngredient ore = RecipeIngredient.of(GTMaterialTypes.ORE.getMaterialTag(m),1);
-            RecipeIngredient crushed = RecipeIngredient.of(GTMaterialTypes.CRUSHED.getMaterialTag(m), 1);
-            ItemStack crushedStack = GTMaterialTypes.CRUSHED.get(m,1);
+            RecipeIngredient crushed = RecipeIngredient.of(GTMaterialTypes.CRUSHED_ORE.getMaterialTag(m), 1);
+            ItemStack crushedStack = GTMaterialTypes.CRUSHED_ORE.get(m,1);
             ItemStack stoneDust = GTMaterialTypes.DUST.get(GTLibMaterials.Stone, 1);
 
             //TODO better way to do this
@@ -113,9 +113,9 @@ public class MaceratorLoader {
             if (m == NetheriteScrap){
                 UNIVERSAL_MACERATOR.RB().ii(ore).io(Utils.ca((ORE_MULTI.getInt(m) * multiplier) * 2, crushedStack), DUST.get(oreByProduct1, 1), DUST.get(Netherrack, 1)).outputChances(1.0, 0.1 * multiplier * BY_PRODUCT_MULTI.getInt(m), 0.5).add("ancient_debris",400, 2);
             }
-            UNIVERSAL_MACERATOR.RB().ii(crushed).io(DUST_IMPURE.get(MACERATE_INTO.getMapping(m), 1), DUST.get(oreByProduct1, 1)).outputChances(1.0, 0.1).add(m.getId() + "_crushed_ore",400, 2);
-            UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(CRUSHED_PURIFIED.getMaterialTag(m), 1)).io(DUST_PURE.get(MACERATE_INTO.getMapping(m), 1), DUST.get(oreByProduct2, 1)).outputChances(1.0, 0.1).add(m.getId() + "_purified_ore",400, 2);
-            UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(CRUSHED_REFINED.getMaterialTag(m), 1)).io(DUST.get(MACERATE_INTO.getMapping(m), 1), DUST.get(oreByProduct3, 1)).outputChances(1.0, 0.1).add(m.getId() + "_centrifuged_ore",400, 2);
+            UNIVERSAL_MACERATOR.RB().ii(crushed).io(IMPURE_DUST.get(MACERATE_INTO.getMapping(m), 1), DUST.get(oreByProduct1, 1)).outputChances(1.0, 0.1).add(m.getId() + "_crushed_ore",400, 2);
+            UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(PURIFIED_ORE.getMaterialTag(m), 1)).io(PURE_DUST.get(MACERATE_INTO.getMapping(m), 1), DUST.get(oreByProduct2, 1)).outputChances(1.0, 0.1).add(m.getId() + "_purified_ore",400, 2);
+            UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(REFINED_ORE.getMaterialTag(m), 1)).io(DUST.get(MACERATE_INTO.getMapping(m), 1), DUST.get(oreByProduct3, 1)).outputChances(1.0, 0.1).add(m.getId() + "_centrifuged_ore",400, 2);
             if (m.has(RAW_ORE)){
                 UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(RAW_ORE.getMaterialTag(m), 1)).io(Utils.ca((ORE_MULTI.getInt(m) * multiplier) * 2, crushedStack), DUST.get(oreByProduct1, 1)).outputChances(1.0, 0.1 * multiplier * BY_PRODUCT_MULTI.getInt(m)).add(m.getId() + "_raw_ore",400, 2);
             }
@@ -154,7 +154,7 @@ public class MaceratorLoader {
             Item pipeLarge = t.getBlockItem(PipeSize.LARGE);
             Item pipeHuge = t.getBlockItem(PipeSize.HUGE);
             if (t.getSizes().contains(PipeSize.TINY)) {
-                UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(pipeTiny, 1)).io(DUST_SMALL.get(t.getMaterial(), 2)).add(t.getMaterial().getId() + "_fluid_pipe_tiny",t.getMaterial().getMass()/2,128);
+                UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(pipeTiny, 1)).io(SMALL_DUST.get(t.getMaterial(), 2)).add(t.getMaterial().getId() + "_fluid_pipe_tiny",t.getMaterial().getMass()/2,128);
             }
             if (t.getSizes().contains(PipeSize.SMALL)) {
                 UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(pipeSmall, 1)).io(DUST.get(t.getMaterial(), 1)).add(t.getMaterial().getId() + "_fluid_pipe_small",t.getMaterial().getMass(),128);
@@ -178,7 +178,7 @@ public class MaceratorLoader {
             Item pipeLarge = t.getBlockItem(PipeSize.LARGE);
             Item pipeHuge = t.getBlockItem(PipeSize.HUGE);
             if (t.getSizes().contains(PipeSize.TINY)) {
-                UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(pipeTiny, 1)).io(DUST_SMALL.get(t.getMaterial(), 2)).add(t.getMaterial().getId() + "_item_pipe_tiny",t.getMaterial().getMass()/2,128);
+                UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(pipeTiny, 1)).io(SMALL_DUST.get(t.getMaterial(), 2)).add(t.getMaterial().getId() + "_item_pipe_tiny",t.getMaterial().getMass()/2,128);
             }
             if (t.getSizes().contains(PipeSize.SMALL)) {
                 UNIVERSAL_MACERATOR.RB().ii(RecipeIngredient.of(pipeSmall, 1)).io(DUST.get(t.getMaterial(), 1)).add(t.getMaterial().getId() + "_item_pipe_small",t.getMaterial().getMass(),128);

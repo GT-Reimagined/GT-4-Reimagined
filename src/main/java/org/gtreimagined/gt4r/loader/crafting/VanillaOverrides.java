@@ -57,7 +57,7 @@ public class VanillaOverrides {
         /*provider.shapeless(consumer, "dust_brick", "mortar_recipes", GTMaterialTypes.DUST_SMALL.get(Brick, 1), GTTools.MORTAR.getTag(), Items.BRICK);
         provider.shapeless(consumer, "dust_clay", "mortar_recipes", GTMaterialTypes.DUST_SMALL.get(Clay, 2), GTTools.MORTAR.getTag(), Items.CLAY_BALL);*/
         provider.addStackRecipe(consumer, GT4RRef.ID, "torch_from_coal", "torches", new ItemStack(Items.TORCH, 4),
-                of('C', Ingredient.of(RAW_ORE.get(Coal), DUST.get(Coal), DUST_IMPURE.get(Coal), DUST_PURE.get(Coal), CRUSHED.get(Coal),CRUSHED_PURIFIED.get(Coal), CRUSHED_REFINED.get(Coal)), 'S', Items.STICK), "C", "S");
+                of('C', Ingredient.of(RAW_ORE.get(Coal), DUST.get(Coal), IMPURE_DUST.get(Coal), PURE_DUST.get(Coal), CRUSHED_ORE.get(Coal), PURIFIED_ORE.get(Coal), REFINED_ORE.get(Coal)), 'S', Items.STICK), "C", "S");
         provider.addStackRecipe(consumer, GT4RRef.ID, "torch_from_creosote", "torches", new ItemStack(Items.TORCH, 6),
                 of('W', ItemTags.WOOL, 'C', Creosote.getLiquid().getBucket(), 'S', Items.STICK), "C", "W", "S");
         provider.addItemRecipe(consumer, "overrides", Items.SHEARS,

@@ -13,13 +13,13 @@ import static org.gtreimagined.gt4r.data.RecipeMaps.ORE_WASHER;
 
 public class WasherLoader {
     public static void init() {
-        GTMaterialTypes.CRUSHED.all().forEach(m -> {
-            if (!m.has(GTMaterialTypes.CRUSHED_PURIFIED)) return;
+        GTMaterialTypes.CRUSHED_ORE.all().forEach(m -> {
+            if (!m.has(GTMaterialTypes.PURIFIED_ORE)) return;
             ItemStack stoneDust = GTMaterialTypes.DUST.get(GTLibMaterials.Stone, 1);
 
             Material aOreByProduct1 = m.getByProducts().size() >= 1 ? m.getByProducts().get(0) : MaterialTags.MACERATE_INTO.getMapping(m);
             //Material aOreByProduct2 = m.getByProducts().size() >= 2 ? m.getByProducts().get(1) : aOreByProduct1;
-            ORE_WASHER.RB().fi(Water.getLiquid(1000)).ii(of(CRUSHED.get(m,1))).io(CRUSHED_PURIFIED.get(m,1), DUST_TINY.get(aOreByProduct1,1), stoneDust).add(m.getId() + "_crushed_ore",200, 24);
+            ORE_WASHER.RB().fi(Water.getLiquid(1000)).ii(of(CRUSHED_ORE.get(m,1))).io(PURIFIED_ORE.get(m,1), TINY_DUST.get(aOreByProduct1,1), stoneDust).add(m.getId() + "_crushed_ore",200, 24);
         });
     }
 }

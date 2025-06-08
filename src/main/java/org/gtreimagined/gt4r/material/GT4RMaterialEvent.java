@@ -16,7 +16,7 @@ public class GT4RMaterialEvent extends MaterialEvent<GT4RMaterialEvent> {
             flags(GT4RMaterialTags.NEEDS_BLAST_FURNACE, HAS_CUSTOM_SMELTING);
         }
         if (blastFurnaceTemp > 1750) {
-            flags(GTMaterialTypes.INGOT_HOT);
+            flags(GTMaterialTypes.HOT_INGOT);
         }
         return this;
     }

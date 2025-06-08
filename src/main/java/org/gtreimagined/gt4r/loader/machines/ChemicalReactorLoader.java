@@ -5,7 +5,7 @@ import net.minecraft.world.item.Items;
 import org.gtreimagined.gtcore.data.GTCoreItems;
 
 import static org.gtreimagined.gtlib.data.GTMaterialTypes.DUST;
-import static org.gtreimagined.gtlib.data.GTMaterialTypes.DUST_TINY;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.TINY_DUST;
 import static org.gtreimagined.gtlib.data.GTLibMaterials.Water;
 import static org.gtreimagined.gt4r.data.Materials.*;
 import static org.gtreimagined.gt4r.data.RecipeMaps.CHEMICAL_REACTOR;
@@ -34,8 +34,8 @@ public class ChemicalReactorLoader {
         CHEMICAL_REACTOR.RB().ii(DUST.getMaterialIngredient(Silicon, 1)).fi(Oxygen.getGas(2000)).io(DUST.get(SiliconDioxide, 3)).add("silicon_dioxide",50,30);
         CHEMICAL_REACTOR.RB().fi(NitricOxide.getGas(1000), Oxygen.getGas(1000)).fo(NitrogenDioxide.getGas(1000)).add("nitrogen_dioxide_2",20, 30);
         CHEMICAL_REACTOR.RB().fi(Oxygen.getGas(500), Hydrogen.getGas(1000)).fo(DistilledWater.getLiquid(1500)).add("distilled_water",5, 30);
-        CHEMICAL_REACTOR.RB().fi(FishOil.getLiquid(6000), Ethanol.getLiquid(1000)).ii(DUST_TINY.getMaterialIngredient(SodiumHydroxide, 1)).fo(BioDiesel.getLiquid(6000), Glycerol.getLiquid(1000)).add("biodiesel",600, 30);
-        CHEMICAL_REACTOR.RB().fi(SeedOil.getLiquid(6000), Ethanol.getLiquid(1000)).ii(DUST_TINY.getMaterialIngredient(SodiumHydroxide, 1)).fo(BioDiesel.getLiquid(6000), Glycerol.getLiquid(1000)).add("biodiesel_1",600, 30);
+        CHEMICAL_REACTOR.RB().fi(FishOil.getLiquid(6000), Ethanol.getLiquid(1000)).ii(TINY_DUST.getMaterialIngredient(SodiumHydroxide, 1)).fo(BioDiesel.getLiquid(6000), Glycerol.getLiquid(1000)).add("biodiesel",600, 30);
+        CHEMICAL_REACTOR.RB().fi(SeedOil.getLiquid(6000), Ethanol.getLiquid(1000)).ii(TINY_DUST.getMaterialIngredient(SodiumHydroxide, 1)).fo(BioDiesel.getLiquid(6000), Glycerol.getLiquid(1000)).add("biodiesel_1",600, 30);
         CHEMICAL_REACTOR.RB().fi(Water.getLiquid(3000)).ii(DUST.getMaterialIngredient(Sodium, 1)).fo(Hydrogen.getGas(1000)).io(DUST.get(SodiumHydroxide, 3)).add("sodium_hydroxide",600, 30);
     }
 }

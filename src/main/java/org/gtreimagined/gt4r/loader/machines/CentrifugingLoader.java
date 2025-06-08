@@ -29,22 +29,22 @@ import static org.gtreimagined.gt4r.data.RecipeMaps.CENTRIFUGE;
 
 public class CentrifugingLoader {
     public static void init() {
-        GTMaterialTypes.DUST_IMPURE.all().forEach(dust -> {
+        GTMaterialTypes.IMPURE_DUST.all().forEach(dust -> {
             Material oreByProduct1 = !dust.getByProducts().isEmpty() ? dust.getByProducts().get(0) : dust;
-            CENTRIFUGE.RB().ii(of(DUST_IMPURE.get(dust),1)).io(new ItemStack(DUST.get(dust), 1), DUST_TINY.get(oreByProduct1, 1)).add(dust.getId() + "_impure_dust",400, 2);
+            CENTRIFUGE.RB().ii(of(IMPURE_DUST.get(dust),1)).io(new ItemStack(DUST.get(dust), 1), TINY_DUST.get(oreByProduct1, 1)).add(dust.getId() + "_impure_dust",400, 2);
         });
 
-        GTMaterialTypes.DUST_PURE.all().forEach(dust -> {
+        GTMaterialTypes.PURE_DUST.all().forEach(dust -> {
             Material oreByProduct = dust.getByProducts().size() > 1 ? dust.getByProducts().get(1) : !dust.getByProducts().isEmpty() ? dust.getByProducts().get(0) : dust;
-            CENTRIFUGE.RB().ii(of(DUST_PURE.get(dust),1)).io(new ItemStack(DUST.get(dust), 1), DUST_TINY.get(oreByProduct, 1)).add(dust.getId() + "_pure_dust",400, 2);
+            CENTRIFUGE.RB().ii(of(PURE_DUST.get(dust),1)).io(new ItemStack(DUST.get(dust), 1), TINY_DUST.get(oreByProduct, 1)).add(dust.getId() + "_pure_dust",400, 2);
         });
-        CRUSHED_PURIFIED.all().forEach(m -> {
+        PURIFIED_ORE.all().forEach(m -> {
             Material aOreByProduct1 = !m.getByProducts().isEmpty() ? m.getByProducts().get(0) : m;
             Material aOreByProduct2 = m.getByProducts().size() >= 2 ? m.getByProducts().get(1) : aOreByProduct1;
 
-            CENTRIFUGE.RB().ii(of(CRUSHED_PURIFIED.get(m),1)).io(CRUSHED_REFINED.get(m, 1), DUST_TINY.get(aOreByProduct2, 1)).add(m.getId() + "_purified_ore",500, 16,0,3);
+            CENTRIFUGE.RB().ii(of(PURIFIED_ORE.get(m),1)).io(REFINED_ORE.get(m, 1), TINY_DUST.get(aOreByProduct2, 1)).add(m.getId() + "_purified_ore",500, 16,0,3);
         });
-        ItemStack[] itemStacks = GTLibMaterials.Lava.getProcessInto().stream().filter(t -> t.m.has(GTMaterialTypes.DUST_TINY)).map(t -> new ItemStack(GTMaterialTypes.DUST_TINY.get(t.m), t.s))
+        ItemStack[] itemStacks = GTLibMaterials.Lava.getProcessInto().stream().filter(t -> t.m.has(GTMaterialTypes.TINY_DUST)).map(t -> new ItemStack(GTMaterialTypes.TINY_DUST.get(t.m), t.s))
                 .toArray(ItemStack[]::new);
         CENTRIFUGE.RB().fi(Lava.getLiquid(100)).io(itemStacks).outputChances(0.2, 0.1, 0.025, 0.025, 0.01).add("lava",200, 16);
         CENTRIFUGE.RB().fi(new FluidStack(GT4RBlocks.PAHOEHOE_LAVA.getFluid(), 100)).io(itemStacks).outputChances(0.2, 0.1, 0.025, 0.025, 0.01).add("pahoehoe_lava", 200, 8);

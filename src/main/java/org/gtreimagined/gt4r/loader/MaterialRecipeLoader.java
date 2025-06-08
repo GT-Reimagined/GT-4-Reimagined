@@ -42,22 +42,22 @@ public class MaterialRecipeLoader {
         });
 
         if (GT4RConfig.GT5_ELECTRIC_TOOLS.get()) {
-            GTMaterialTypes.DRILLBIT.all().forEach(m -> {
+            GTMaterialTypes.DRILL_BIT.all().forEach(m -> {
                 if (m.has(PLATE) || m.has(GEM)){
                     TagKey<?> plate = m.has(PLATE) ? PLATE.getMaterialTag(m) : GEM.getMaterialTag(m);
-                    provider.addItemRecipe(output, GT4RRef.ID, m.getId() + "_drillbit", "drillbits", GTMaterialTypes.DRILLBIT.get(m), ImmutableMap.of('H', GTTools.HAMMER.getTag(), 'P', plate, 'S', PLATE.getMaterialTag(Steel)), "PSP", "PSP", "SHS");
+                    provider.addItemRecipe(output, GT4RRef.ID, m.getId() + "_drillbit", "drillbits", GTMaterialTypes.DRILL_BIT.get(m), ImmutableMap.of('H', GTTools.HAMMER.getTag(), 'P', plate, 'S', PLATE.getMaterialTag(Steel)), "PSP", "PSP", "SHS");
                 }
             });
-            GTMaterialTypes.CHAINSAWBIT.all().forEach(m -> {
+            GTMaterialTypes.CHAINSAW_BIT.all().forEach(m -> {
                 if (m.has(PLATE) || m.has(GEM)){
                     TagKey<?> plate = m.has(PLATE) ? PLATE.getMaterialTag(m) : GEM.getMaterialTag(m);
-                    provider.addItemRecipe(output, GT4RRef.ID, m.getId() + "_chainsawbit", "chainsawbits", GTMaterialTypes.CHAINSAWBIT.get(m), ImmutableMap.of('H', GTTools.HAMMER.getTag(), 'P', plate, 'S', PLATE.getMaterialTag(Steel), 'R', GTMaterialTypes.RING.getMaterialTag(Steel)), "SRS", "PHP", "SRS");
+                    provider.addItemRecipe(output, GT4RRef.ID, m.getId() + "_chainsawbit", "chainsawbits", GTMaterialTypes.CHAINSAW_BIT.get(m), ImmutableMap.of('H', GTTools.HAMMER.getTag(), 'P', plate, 'S', PLATE.getMaterialTag(Steel), 'R', GTMaterialTypes.RING.getMaterialTag(Steel)), "SRS", "PHP", "SRS");
                 }
             });
-            GTMaterialTypes.WRENCHBIT.all().forEach(m -> {
+            GTMaterialTypes.WRENCH_BIT.all().forEach(m -> {
                 if (m.has(PLATE) || m.has(GEM)){
                     TagKey<?> plate = m.has(PLATE) ? PLATE.getMaterialTag(m) : GEM.getMaterialTag(m);
-                    provider.addItemRecipe(output, GT4RRef.ID, m.getId() + "_wrenchbit", "wrenchbits", GTMaterialTypes.WRENCHBIT.get(m), ImmutableMap.of('H', GTTools.HAMMER.getTag(), 'P', plate, 'S', GTMaterialTypes.SCREW.getMaterialTag(Steel), 'R', GTMaterialTypes.RING.getMaterialTag(Steel), 's', GTTools.SCREWDRIVER.getTag()), "HPS", "PRP", "SPs");
+                    provider.addItemRecipe(output, GT4RRef.ID, m.getId() + "_wrenchbit", "wrenchbits", GTMaterialTypes.WRENCH_BIT.get(m), ImmutableMap.of('H', GTTools.HAMMER.getTag(), 'P', plate, 'S', GTMaterialTypes.SCREW.getMaterialTag(Steel), 'R', GTMaterialTypes.RING.getMaterialTag(Steel), 's', GTTools.SCREWDRIVER.getTag()), "HPS", "PRP", "SPs");
                 }
             });
         }

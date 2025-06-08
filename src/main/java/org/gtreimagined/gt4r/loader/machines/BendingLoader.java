@@ -20,10 +20,10 @@ public class BendingLoader {
             if (!t.has(INGOT)) return;
             PLATE_BENDER.RB().ii(INGOT.getMaterialIngredient(t,1), GTCoreItems.SELECTOR_TAG_INGREDIENTS.get(1)).io(PLATE.get(t,1)).add(t.getId() + "_plate", duration, 24);
         });
-        GTMaterialTypes.PLATE_DENSE.all().forEach(t -> {
+        GTMaterialTypes.DENSE_PLATE.all().forEach(t -> {
             long duration = Math.max(t.getMass(), 1);
             if (!t.has(INGOT)) return;
-            PLATE_BENDER.RB().ii(INGOT.getMaterialIngredient(t,9), GTCoreItems.SELECTOR_TAG_INGREDIENTS.get(9)).io(PLATE_DENSE.get(t,1)).add(t.getId() + "_dense_plate", duration, 24);
+            PLATE_BENDER.RB().ii(INGOT.getMaterialIngredient(t,9), GTCoreItems.SELECTOR_TAG_INGREDIENTS.get(9)).io(DENSE_PLATE.get(t,1)).add(t.getId() + "_dense_plate", duration, 24);
         });
         GTMaterialTypes.RING.all().forEach(m -> {
             long duration = Math.max(m.getMass(), 1);

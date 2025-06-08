@@ -109,9 +109,9 @@ public class GT4Reimagined extends GTMod {
                         if (!GTAPI.isModLoaded("gt5r")){
                             l.addAll(GTAPI.all(IGTTool.class).stream().filter(i -> i.getGTToolType().isPowered()).map(IBasicGTTool::getItem).toList());
                             l.addAll(GTAPI.all(ItemPowerUnit.class));
-                            l.addAll(WRENCHBIT.all().stream().map(m -> WRENCHBIT.get(m)).toList());
-                            l.addAll(CHAINSAWBIT.all().stream().map(m -> CHAINSAWBIT.get(m)).toList());
-                            l.addAll(DRILLBIT.all().stream().map(m -> DRILLBIT.get(m)).toList());
+                            l.addAll(WRENCH_BIT.all().stream().map(m -> WRENCH_BIT.get(m)).toList());
+                            l.addAll(CHAINSAW_BIT.all().stream().map(m -> CHAINSAW_BIT.get(m)).toList());
+                            l.addAll(DRILL_BIT.all().stream().map(m -> DRILL_BIT.get(m)).toList());
                             l.addAll(BUZZSAW_BLADE.all().stream().filter(m -> m != Steel).map(m -> BUZZSAW_BLADE.get(m)).toList());
                         } else {
                             l.add(GT4RItems.RockCutterPowerUnit);

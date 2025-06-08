@@ -20,10 +20,10 @@ public class BathingLoader {
     public static void init(){
         ItemStack stoneDust = GTMaterialTypes.DUST.get(GTLibMaterials.Stone, 1);
         GT4RMaterialTags.BATHING_PERSULFATE.all().forEach(m -> {
-            addBathRecipe(m, SodiumPersulfate, i(1.0, 0.7, 0.4), GTMaterialTypes.CRUSHED_PURIFIED.get(m, 1), GTMaterialTypes.DUST.get(GT4RMaterialTags.BATHING_PERSULFATE.getMapping(m), 1), stoneDust);
+            addBathRecipe(m, SodiumPersulfate, i(1.0, 0.7, 0.4), GTMaterialTypes.PURIFIED_ORE.get(m, 1), GTMaterialTypes.DUST.get(GT4RMaterialTags.BATHING_PERSULFATE.getMapping(m), 1), stoneDust);
         });
         GT4RMaterialTags.BATHING_MERCURY.all().forEach(m -> {
-            addBathRecipe(m, Mercury, i(1.0, 0.7, 0.4), GTMaterialTypes.CRUSHED_PURIFIED.get(m, 1), GTMaterialTypes.DUST.get(GT4RMaterialTags.BATHING_MERCURY.getMapping(m), 1), stoneDust);
+            addBathRecipe(m, Mercury, i(1.0, 0.7, 0.4), GTMaterialTypes.PURIFIED_ORE.get(m, 1), GTMaterialTypes.DUST.get(GT4RMaterialTags.BATHING_MERCURY.getMapping(m), 1), stoneDust);
         });
         //addBathRecipe(Zinc, SodiumPersulfate, i(100, 70, 40), CRUSHED_PURIFIED.get(Zinc, 1), DUST.get(Zinc, 1), stoneDust);
         BATH.RB().ii(RecipeIngredient.of(DUST.getMaterialTag(Wood), 1)).fi(Water.getLiquid(100)).io(new ItemStack(Items.PAPER)).outputChances(1.0).add("paper",200);
@@ -37,6 +37,6 @@ public class BathingLoader {
     }
 
     private static void addBathRecipe(Material input, Material liquid, double[] chances, ItemStack... outputs){
-        BATH.RB().ii(RecipeIngredient.of(CRUSHED.getMaterialTag(input), 1)).fi(liquid.getLiquid(1000)).io(outputs).outputChances(chances).add(input.getId() + "_in_" + liquid.getId(),800);
+        BATH.RB().ii(RecipeIngredient.of(CRUSHED_ORE.getMaterialTag(input), 1)).fi(liquid.getLiquid(1000)).io(outputs).outputChances(chances).add(input.getId() + "_in_" + liquid.getId(),800);
     }
 }

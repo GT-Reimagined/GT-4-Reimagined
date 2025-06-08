@@ -2,7 +2,7 @@ package org.gtreimagined.gt4r.loader.machines;
 
 import org.gtreimagined.gtcore.data.GTCoreItems;
 
-import static org.gtreimagined.gtlib.data.GTMaterialTypes.DUST_SMALL;
+import static org.gtreimagined.gtlib.data.GTMaterialTypes.SMALL_DUST;
 import static org.gtreimagined.gtlib.data.GTLibMaterials.Sugar;
 import static org.gtreimagined.gtlib.data.GTLibMaterials.Water;
 import static org.gtreimagined.gt4r.data.Materials.*;
@@ -16,6 +16,6 @@ public class DistillingLoader {
         DISTILLERY.RB().fi(Oil.getLiquid(80)).ii(GTCoreItems.SELECTOR_TAG_INGREDIENTS.get(0)).fo(Diesel.getLiquid(20), Lubricant.getLiquid(20)).add("oil",32, 16);
         DISTILLERY.RB().fi(Oil.getLiquid(80)).ii(GTCoreItems.SELECTOR_TAG_INGREDIENTS.get(1)).fo(Naphtha.getLiquid(20), Lubricant.getLiquid(20)).add("oil_1",32, 16);
         DISTILLERY.RB().fi(Oil.getLiquid(80)).ii(GTCoreItems.SELECTOR_TAG_INGREDIENTS.get(2)).fo(SulfuricAcid.getLiquid(20), Lubricant.getLiquid(20)).add("oil_2",32, 16);
-        DISTILLERY.RB().fi(Honey.getLiquid(100)).ii(GTCoreItems.SELECTOR_TAG_INGREDIENTS.get(0)).fo(DistilledWater.getLiquid(10)).io(DUST_SMALL.get(Sugar, 2)).add("honey",16, 16);
+        DISTILLERY.RB().fi(Honey.getLiquid(100)).ii(GTCoreItems.SELECTOR_TAG_INGREDIENTS.get(0)).fo(DistilledWater.getLiquid(10)).io(SMALL_DUST.get(Sugar, 2)).add("honey",16, 16);
     }
 }

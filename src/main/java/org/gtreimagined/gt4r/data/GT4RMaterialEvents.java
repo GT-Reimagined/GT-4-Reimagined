@@ -39,7 +39,7 @@ public class GT4RMaterialEvents {
         event.setMaterial(Carbon).asMetal(3800, 1000, PLATE);
         event.setMaterial(Chromium).asMetal(2180, 1700, PLATE);
         event.setMaterial(Iridium).asMetal(2719, 3000, PLATE).asOre(3, 7, false).harvestLevel(3);
-        event.setMaterial(Lead).asMetal(600, 0, PLATE, PLATE_DENSE, ROD, RING).harvestLevel(2);
+        event.setMaterial(Lead).asMetal(600, 0, PLATE, DENSE_PLATE, ROD, RING).harvestLevel(2);
         event.setMaterial(Manganese).asMetal(1519, 0);
         event.setMaterial(Nickel).asMetal(1728, 0, PLATE).asOre(false);
         event.setMaterial(Osmium).asMetal(3306, 3306, PLATE, ROD);
