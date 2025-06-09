@@ -244,59 +244,59 @@ public class Guis {
     }
 
     public static void backgroundTextures(){
-        MACERATOR.getGui().setBackgroundTexture("machine_macerator");
-        FORGE_HAMMER.getGui().setBackgroundTexture("machine_forge_hammer");
-        CENTRIFUGE.getGui().setBackgroundTexture("centrifuge");
-        ELECTROLYZER.getGui().setBackgroundTexture("centrifuge");
-        COKE_OVEN.getGui().setBackgroundTexture("coke_oven");
-        PRIMITIVE_BLAST_FURNACE.getGui().setBackgroundTexture("primitive_blast_furnace");
-        COKE_OVEN.getGui().setBackgroundTexture("coke_oven");
-        STEAM_TURBINE.getGui().setBackgroundTexture("basic_tank");
-        GAS_TURBINE.getGui().setBackgroundTexture("basic_tank");
-        DIESEL_GENERATOR.getGui().setBackgroundTexture("basic_tank");
-        SEMIFLUID_GENERATOR.getGui().setBackgroundTexture("basic_tank");
-        QUANTUM_TANK.getGui().setBackgroundTexture("basic_tank");
-        ELECTRIC_ITEM_FILTER.getGui().setBackgroundTexture("electric_item_filter");
-        ELECTRIC_TYPE_FILTER.getGui().setBackgroundTexture("electric_type_filter");
-        ELECTRIC_ITEM_TRANSLOCATOR.getGui().setBackgroundTexture("electric_item_translocator");
-        ELECTRIC_FLUID_TRANSLOCATOR.getGui().setBackgroundTexture("electric_fluid_translocator");
-        LARGE_GAS_TURBINE.getGui().setBackgroundTexture("multiblock");
-        LARGE_STEAM_TURBINE.getGui().setBackgroundTexture("multiblock");
-        THERMAL_BOILER.getGui().setBackgroundTexture("multiblock");
-        HEAT_EXCHANGER.getGui().setBackgroundTexture("multiblock");
-        DIGITAL_CHEST.getGui().setBackgroundTexture("digital_chest");
-        FUSION_REACTOR.getGui().setBackgroundTexture("fusion_control_computer");
+        MACERATOR.getGuiData().setBackgroundTexture("machine_macerator");
+        FORGE_HAMMER.getGuiData().setBackgroundTexture("machine_forge_hammer");
+        CENTRIFUGE.getGuiData().setBackgroundTexture("centrifuge");
+        ELECTROLYZER.getGuiData().setBackgroundTexture("centrifuge");
+        COKE_OVEN.getGuiData().setBackgroundTexture("coke_oven");
+        PRIMITIVE_BLAST_FURNACE.getGuiData().setBackgroundTexture("primitive_blast_furnace");
+        COKE_OVEN.getGuiData().setBackgroundTexture("coke_oven");
+        STEAM_TURBINE.getGuiData().setBackgroundTexture("basic_tank");
+        GAS_TURBINE.getGuiData().setBackgroundTexture("basic_tank");
+        DIESEL_GENERATOR.getGuiData().setBackgroundTexture("basic_tank");
+        SEMIFLUID_GENERATOR.getGuiData().setBackgroundTexture("basic_tank");
+        QUANTUM_TANK.getGuiData().setBackgroundTexture("basic_tank");
+        ELECTRIC_ITEM_FILTER.getGuiData().setBackgroundTexture("electric_item_filter");
+        ELECTRIC_TYPE_FILTER.getGuiData().setBackgroundTexture("electric_type_filter");
+        ELECTRIC_ITEM_TRANSLOCATOR.getGuiData().setBackgroundTexture("electric_item_translocator");
+        ELECTRIC_FLUID_TRANSLOCATOR.getGuiData().setBackgroundTexture("electric_fluid_translocator");
+        LARGE_GAS_TURBINE.getGuiData().setBackgroundTexture("multiblock");
+        LARGE_STEAM_TURBINE.getGuiData().setBackgroundTexture("multiblock");
+        THERMAL_BOILER.getGuiData().setBackgroundTexture("multiblock");
+        HEAT_EXCHANGER.getGuiData().setBackgroundTexture("multiblock");
+        DIGITAL_CHEST.getGuiData().setBackgroundTexture("digital_chest");
+        FUSION_REACTOR.getGuiData().setBackgroundTexture("fusion_control_computer");
     }
 
     public static void machineData(){
-        ASSEMBLER.getGui().getMachineData().setProgressLocation("assembler");
-        CANNER.getGui().getMachineData().setProgressLocation("canner");
-        COMPRESSOR.getGui().getMachineData().setProgressLocation("compressor");
-        CUTTER.getGui().getMachineData().setProgressLocation("cutter");
-        EXTRACTOR.getGui().getMachineData().setProgressLocation("extractor");
-        EXTRUDER.getGui().getMachineData().setProgressLocation("extruder");
-        LATHE.getGui().getMachineData().setProgressLocation("lathe");
-        MACERATOR.getGui().getMachineData().setProgressLocation("macerator");
-        WIRE_MILL.getGui().getMachineData().setProgressLocation("wiremill");
-        CENTRIFUGE.getGui().getMachineData().setProgressLocation("extractor");
-        ELECTROLYZER.getGui().getMachineData().setProgressLocation("extractor");
-        ORE_WASHER.getGui().getMachineData().setProgressLocation("ore_washer");
-        CHEMICAL_REACTOR.getGui().getMachineData().setProgressLocation("chemical_reactor");
-        FLUID_CANNER.getGui().getMachineData().setProgressLocation("canner");
-        FERMENTER.getGui().getMachineData().setProgressLocation("chemical_reactor");
-        FLUID_PRESS.getGui().getMachineData().setProgressLocation("extractor");
-        DISTILLERY.getGui().getMachineData().setProgressLocation("chemical_reactor");
-        BATH.getGui().getMachineData().setProgressLocation("ore_washer");
-        SIFTER.getGui().getMachineData().setProgressLocation("sifter");
-        COKE_OVEN.getGui().getMachineData().setProgressLocation("coke_oven");
-        PRIMITIVE_BLAST_FURNACE.getGui().getMachineData().setProgressLocation("coke_oven");
-        FORGE_HAMMER.setGuiProgressBarForJEI(BarDir.BOTTOM, false).getGui().getMachineData().setMachineStatePos(84, 46).setProgressLocation("forge_hammer");
-        STEAM_FORGE_HAMMER.setGuiProgressBarForJEI(BarDir.BOTTOM, false).getGui().getMachineData().setMachineStatePos(80, 50);
+        ASSEMBLER.getGuiData().getMachineData().setProgressLocation("assembler");
+        CANNER.getGuiData().getMachineData().setProgressLocation("canner");
+        COMPRESSOR.getGuiData().getMachineData().setProgressLocation("compressor");
+        CUTTER.getGuiData().getMachineData().setProgressLocation("cutter");
+        EXTRACTOR.getGuiData().getMachineData().setProgressLocation("extractor");
+        EXTRUDER.getGuiData().getMachineData().setProgressLocation("extruder");
+        LATHE.getGuiData().getMachineData().setProgressLocation("lathe");
+        MACERATOR.getGuiData().getMachineData().setProgressLocation("macerator");
+        WIRE_MILL.getGuiData().getMachineData().setProgressLocation("wiremill");
+        CENTRIFUGE.getGuiData().getMachineData().setProgressLocation("extractor");
+        ELECTROLYZER.getGuiData().getMachineData().setProgressLocation("extractor");
+        ORE_WASHER.getGuiData().getMachineData().setProgressLocation("ore_washer");
+        CHEMICAL_REACTOR.getGuiData().getMachineData().setProgressLocation("chemical_reactor");
+        FLUID_CANNER.getGuiData().getMachineData().setProgressLocation("canner");
+        FERMENTER.getGuiData().getMachineData().setProgressLocation("chemical_reactor");
+        FLUID_PRESS.getGuiData().getMachineData().setProgressLocation("extractor");
+        DISTILLERY.getGuiData().getMachineData().setProgressLocation("chemical_reactor");
+        BATH.getGuiData().getMachineData().setProgressLocation("ore_washer");
+        SIFTER.getGuiData().getMachineData().setProgressLocation("sifter");
+        COKE_OVEN.getGuiData().getMachineData().setProgressLocation("coke_oven");
+        PRIMITIVE_BLAST_FURNACE.getGuiData().getMachineData().setProgressLocation("coke_oven");
+        FORGE_HAMMER.setGuiProgressBarForJEI(BarDir.BOTTOM, false).getGuiData().getMachineData().setMachineStatePos(84, 46).setProgressLocation("forge_hammer");
+        STEAM_FORGE_HAMMER.setGuiProgressBarForJEI(BarDir.BOTTOM, false).getGuiData().getMachineData().setMachineStatePos(80, 50);
         DISTILLATION_TOWER.setGuiProgressBarForJEI(BarDir.TOP, true);
-        DISTILLATION_TOWER.getGui().getMachineData().setProgressLocation("distillation_tower")
+        DISTILLATION_TOWER.getGuiData().getMachineData().setProgressLocation("distillation_tower")
                 .setProgressSize(16, 72).setProgressPos(80, 4).setMachineStatePos(65, 25);
-        DIGITAL_CHEST.getGui().setYSize(221).setPlayerYOffset(56);
-        FUSION_REACTOR.getGui().setYSize(182).setTitleDrawingAllowed(false).setEnablePlayerSlots(false)
+        DIGITAL_CHEST.getGuiData().setYSize(221).setPlayerYOffset(56);
+        FUSION_REACTOR.getGuiData().setYSize(182).setTitleDrawingAllowed(false).setEnablePlayerSlots(false)
                 .getMachineData().setProgressLocation("fusion_reactor").setProgressPos(163, 4).setProgressSize(149, 16);
     }
 

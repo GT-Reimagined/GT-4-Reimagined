@@ -32,7 +32,7 @@ public class UpgradeableMachine extends Machine<UpgradeableMachine> {
     public UpgradeableMachine(String domain, String id) {
         super(domain, id);
         setTiers(Tier.LV);
-        baseTexture(Textures.BASE_HANDLER);
+        setBaseTexture(Textures.BASE_HANDLER);
         addFlags(BASIC, EU, COVERABLE);
         setTile(BlockEntityUpgradeableMachine::new);
         setGUI(Data.BASIC_MENU_HANDLER);

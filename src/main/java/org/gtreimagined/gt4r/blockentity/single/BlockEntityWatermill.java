@@ -12,7 +12,7 @@ import static org.gtreimagined.gtlib.machine.MachineFlag.GENERATOR;
 public class BlockEntityWatermill extends BlockEntityGenerator<BlockEntityWatermill> {
     public BlockEntityWatermill(Machine<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-        energyHandler.set(() -> new MachineEnergyHandler<>(this, type.amps(), type.has(GENERATOR)) {
+        energyHandler.set(() -> new MachineEnergyHandler<>(this, type.getAmps(), type.has(GENERATOR)) {
             @Override
             public boolean canOutput(Direction direction) {
                 return super.canOutput(direction) && (direction == tile.getFacing().getClockWise() || direction == tile.getFacing().getCounterClockWise());
