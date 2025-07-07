@@ -15,9 +15,9 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import org.gtreimagined.gtcore.data.GTCoreTools;
+import org.gtreimagined.tesseract.api.eu.IEnergyHandlerItem;
+import org.gtreimagined.tesseract.api.forge.TesseractCaps;
 import org.jetbrains.annotations.Nullable;
-import tesseract.api.forge.TesseractCaps;
-import tesseract.api.gt.IEnergyHandlerItem;
 
 import java.util.List;
 import java.util.Map;

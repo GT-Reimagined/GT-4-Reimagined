@@ -27,5 +27,7 @@ include 'tesseract-common'
 project(':tesseract-common').setProjectDir(new File("GT-Lib/TesseractAPI/common"))
 include 'tesseract-fabric'
 project(':tesseract-fabric').setProjectDir(new File("GT-Lib/TesseractAPI/fabric"))
+include 'tesseract-graph'
+project(':tesseract-graph').setProjectDir(new File("GT-Lib/TesseractAPI/graph"))
 include("GT-Lib")
 

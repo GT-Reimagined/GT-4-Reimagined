@@ -11,7 +11,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.gtreimagined.gt4r.data.RecipeMaps;
-import tesseract.api.forge.TesseractCaps;
+import org.gtreimagined.tesseract.api.forge.TesseractCaps;
 
 import static org.gtreimagined.gtlib.recipe.ingredient.RecipeIngredient.of;
 import static org.gtreimagined.gt4r.data.Materials.*;
