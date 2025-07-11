@@ -42,6 +42,11 @@ public class BlockEntityBatteryBox extends BlockEntityBatteryBuffer<BlockEntityB
         }
         if (newTier != null){
             CompoundTag nbt = new CompoundTag();
+            Tier finalNewTier = newTier;
+            this.energyHandler.ifPresent(e -> {
+                e.setInputVoltage(finalNewTier.getVoltage());
+                e.setOutputVoltage(finalNewTier.getVoltage());
+            });
             this.saveAdditional(nbt);
             world.setBlock(pos, this.getMachineType().getBlockState(newTier).defaultBlockState().setValue(BlockStateProperties.FACING, this.getFacing()), 3);
             world.getBlockEntity(pos).load(nbt);
