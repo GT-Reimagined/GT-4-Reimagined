@@ -85,6 +85,7 @@ dependencies {
     //subprojects
     implementation(project(path: ":tesseract-forge"))
     compileOnly(project(path: ":tesseract-common"))
+    compileOnly(project(path: ":tesseract-graph"))
     implementation(project(path: ":GT-Lib"))
     //antimatter deps
     implementation 'org.apache.commons:commons-collections4:4.4'
