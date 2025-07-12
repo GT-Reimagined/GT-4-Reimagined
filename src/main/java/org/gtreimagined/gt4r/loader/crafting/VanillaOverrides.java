@@ -60,8 +60,6 @@ public class VanillaOverrides {
                 of('C', Ingredient.of(RAW_ORE.get(Coal), DUST.get(Coal), IMPURE_DUST.get(Coal), PURE_DUST.get(Coal), CRUSHED_ORE.get(Coal), PURIFIED_ORE.get(Coal), REFINED_ORE.get(Coal)), 'S', Items.STICK), "C", "S");
         provider.addStackRecipe(consumer, GT4RRef.ID, "torch_from_creosote", "torches", new ItemStack(Items.TORCH, 6),
                 of('W', ItemTags.WOOL, 'C', Creosote.getLiquid().getBucket(), 'S', Items.STICK), "C", "W", "S");
-        provider.addItemRecipe(consumer, "overrides", Items.SHEARS,
-                of('P', PLATE.getMaterialTag(Iron), 'H', GTTools.HAMMER.getTag()), " P", "PH");
         Material[] mats = new Material[]{Bronze, WroughtIron, Aluminium, Steel, Titanium};
         for (Material m : mats){
             provider.addItemRecipe(consumer, GT4RRef.ID, "piston_" + m.getId(), "pistons",
