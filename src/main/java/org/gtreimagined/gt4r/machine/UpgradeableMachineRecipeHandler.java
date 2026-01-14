@@ -13,7 +13,7 @@ public class UpgradeableMachineRecipeHandler<T extends BlockEntityMachine<T> & I
     }
 
     @Override
-    public boolean consumeResourceForRecipe(boolean simulate) {
+    public boolean consumePower(boolean simulate) {
         if (tile.getUpgrades().containsKey(CustomTags.STEAM_UPGRADES) && !generator){
             if (activeRecipe.getPower() > 0) {
                 if (tile.fluidHandler.isPresent()) {
@@ -23,7 +23,7 @@ public class UpgradeableMachineRecipeHandler<T extends BlockEntityMachine<T> & I
                 }
             }
         }
-        return super.consumeResourceForRecipe(simulate);
+        return super.consumePower(simulate);
     }
 
     @Override

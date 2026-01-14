@@ -52,7 +52,7 @@ public class BlockEntityLargeTurbine extends BlockEntityMultiMachine<BlockEntity
                 }
 
                 @Override
-                protected boolean consumeGeneratorResources(boolean simulate) {
+                public boolean consumeGeneratorInputs(boolean simulate) {
                     if (!activeRecipe.hasInputFluids()) {
                         throw new RuntimeException("Missing fuel in active generator recipe!");
                     }
